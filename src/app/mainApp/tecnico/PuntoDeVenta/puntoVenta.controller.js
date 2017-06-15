@@ -577,7 +577,6 @@
                     responseSuccess.piso=parseInt(responseSuccess.piso);
                     vm.puntoVenta=responseSuccess;
                 }).catch(function(responseError){
-                    console.log(responseError);
                     notifyError(responseError.status);
                 });
                 return;
