@@ -4,9 +4,48 @@
 <md-card class="card1">
     <div flex="" layout="row" layout-align="center center">
         <div flex="100" layout="column" tri-wizard="" class="md-whiteframe-z1" layout-fill>
-            <md-toolbar class="md-primary" layout-fill>
+            <md-toolbar class="md-primary" layout-fill layout="column">
+                <div flex
+                     class="white-background"
+                     layout-gt-sm="row"
+                     layout="column"
+                     layout-fill
+                     layout-padding>
+                    <div layout="row"
+                         layout-fill
+                         flex-gt-sm="50"
+                         flex="100"
+                         layout-padding>
+                        <md-input-container flex layout-fill>
+                            <label>{{'PUNTOVENTA.FOLIO'|translate}}</label>
+                            <input numbers-only
+                                   aria-label="service folio"
+                                   ng-model="vm.puntoVenta.id"
+                                   type="text">
+                        </md-input-container>
+                        <md-button class="md-icon-button"
+                                   aria-label="search folio"
+                                   ng-click="vm.getById()">
+                            <md-icon md-font-icon="fa fa-search"></md-icon>
+                        </md-button>
+                    </div>
+                    <md-input-container flex layout-fill>
+                        <md-select ng-model="vm.selectedSearchType" md-on-close="vm.search()">
+                            <md-option ng-repeat="option in vm.fieldServiceTypes" value="{{option.id}}">
+                                {{option.text}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex layout-fill>
+                        <md-select ng-model="vm.puntoVenta">
+                            <md-option ng-repeat="option in vm.puntosVenta" value="{{option.id}}">
+                                {{option.id}} {{option.fecha}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
                 <div flex layout="column" class="md-toolbar-tools">
-                    <div flex layout="column">
+                    <div flex layout="column" layout-fill>
                         <div flex layout="row" flex="100" layout-sm="row" layout-fill="true"
                              layout-align="space-between center">
                             <div layout="row" flex="100" layout-fill>
@@ -362,7 +401,7 @@
                                             <form name="insumoPuntoVenta">
                                                 <div layout="row" layout-sm="column" layout-xs="column" flex
                                                      layout-md="column" ng-if="vm.puntoVenta && vm.mostrarCompresor">
-                                                    <md-switch ng-model="inputDisabled" >
+                                                    <md-switch ng-model="inputDisabled">
                                                         <span translate>ETAPA_SERVICIO.ADD_MICRO</span>
                                                     </md-switch>
                                                     <md-input-container flex

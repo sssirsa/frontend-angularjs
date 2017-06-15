@@ -9,34 +9,49 @@
         .factory('PuntoDeVenta', PuntoDeVenta);
 
     function PuntoDeVenta(Restangular) {
-        var baseURL=Restangular.all('servicio_punto_venta');
+        var baseURL = Restangular.all('servicio_punto_venta');
 
         var service = {
             list: list,
+            getById: getById,
+            getClosed:getClosed,
+            getOpen:getOpen,
             modify: modify,
             create: create,
             remove: remove,
-            listObject:listObject
+            listObject: listObject
         };
+
+        function getById(id) {
+            return baseURL.all(id).get();
+        }
+
+        function getClosed(){
+            return baseURL.all('cerrado').getList().$object;
+        }
+
+        function getOpen(){
+            return baseURL.all('abierto').getList().$object;
+        }
 
         function listObject() {
             return baseURL.getList();
         }
 
-        function list(){
+        function list() {
             return baseURL.getList().$object;
         }
 
-        function modify(object){
+        function modify(object) {
             return baseURL.all(object.id).customPUT(object);
         }
 
-        function create(object){
+        function create(object) {
             return baseURL.post(object);
         }
 
-        function remove(object){
-            return baseURL.customDELETE(object.id,null,{'content-type':'application/json'});
+        function remove(object) {
+            return baseURL.customDELETE(object.id, null, {'content-type': 'application/json'});
         }
 
         return service;

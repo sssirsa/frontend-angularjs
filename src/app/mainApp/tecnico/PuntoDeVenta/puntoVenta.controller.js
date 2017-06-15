@@ -10,27 +10,28 @@
         .module('app.mainApp.tecnico')
         .controller('PuntoVentaController', PuntoVentaController);
 
-    function PuntoVentaController( Helper, Servicios,PuntoDeVenta, MarcaCabinet, $mdDialog, $scope, Translate, toastr) {
+    function PuntoVentaController(Helper, Servicios, PuntoDeVenta, MarcaCabinet, $mdDialog, $scope, Translate, toastr, OPTIONS) {
         var vm = this;
         vm.activate = activate();
+
         //Inicializando Variables
         $scope.form = {};
-        vm.reporte={
-            fecha:moment().format('YYYY-MM-DD'),
-            hora:moment(new Date(),'HH:mm:ss').toDate()
+        vm.reporte = {
+            fecha: moment().format('YYYY-MM-DD'),
+            hora: moment(new Date(), 'HH:mm:ss').toDate()
 
         };
-        vm.completed=0;
-        vm.servicio={
-            fecha:moment().format('YYYY-MM-DD'),
-            hora:moment(new Date(),'HH:mm:ss').toDate()
+        vm.completed = 0;
+        vm.servicio = {
+            fecha: moment().format('YYYY-MM-DD'),
+            hora: moment(new Date(), 'HH:mm:ss').toDate()
 
         };
-        vm.recepcion={
-            hora:moment(new Date(),'HH:mm:ss').toDate()
+        vm.recepcion = {
+            hora: moment(new Date(), 'HH:mm:ss').toDate()
         };
         vm.etapa = {};
-        vm.formato="DD-MM-YYYY";
+        vm.formato = "DD-MM-YYYY";
         vm.tiposTrabajo = [
             {value: 'Mayor'},
             {value: 'Medio'},
@@ -39,13 +40,16 @@
             {value: 'Otro'}
 
         ];
+        vm.fieldServiceTypes = OPTIONS.fieldServiceTypes;
+        vm.selectedSearchType = "all";
+        vm.puntosVenta=PuntoDeVenta.list();
 
         vm.showInsumosSection = true;
         vm.catalogoInsumos = null;//array con todos los caatalogos de insumo disponibles de la etapa
         vm.catalogoSelected = {};//Elemento del tipo Catalogo de Insumo del insumo que se deseará agregar
         vm.editable = true;
         vm.showInsumo = false;
-        vm.insumos=[];
+        vm.insumos = [];
         vm.insumosToArray = [];
         vm.cabinet = null;// Informacion general del cabinet al cual se le asignara una nueva etapa
         vm.cabinetid = null;
@@ -60,10 +64,10 @@
         vm.insumoLote = {};
         vm.insumos_loteUsados = [];//Arreglo que ya posee el arreglo como es necesario para agregar los insumos al formato de arreglo para agregarlos a la etapa
         vm.insumos_sinStock = [];
-        vm.puntoVenta = {insumos:[]};
-        vm.insumoUnicoData=[];
-        vm.mostrarCompresor=false;
-        vm.inputDisabled=false;
+        vm.puntoVenta = {insumos: []};
+        vm.insumoUnicoData = [];
+        vm.mostrarCompresor = false;
+        vm.inputDisabled = false;
 
         //Declaracion de Funciones
 
@@ -78,19 +82,20 @@
         vm.DeleteInsumoArray = DeleteInsumoArray;
         vm.filterModels = filterModels;
         vm.checkFinished = checkFinished;
-        vm.next=next;
-        vm.prev=prev;
-        vm.validaMax=validaMax;
-
+        vm.next = next;
+        vm.prev = prev;
+        vm.validaMax = validaMax;
+        vm.search = search;
+        vm.getById = getById;
 
         // Funciones
         function checkFinished() {
             var completed = 0;
-            if (vm.puntoVenta.semana != null )
+            if (vm.puntoVenta.semana != null)
                 completed += 1;
             if (vm.recepcion.hora != null)
                 completed += 1;
-            if (vm.puntoVenta.km != null )
+            if (vm.puntoVenta.km != null)
                 completed += 1;
             if (vm.puntoVenta.nombre_establecimiento != null)
                 completed += 1;
@@ -98,47 +103,47 @@
                 completed += 1;
             if (vm.reporte.fecha != null)
                 completed += 1;
-            if (vm.reporte.hora != null )
+            if (vm.reporte.hora != null)
                 completed += 1;
-            if (vm.servicio.fecha != null )
+            if (vm.servicio.fecha != null)
                 completed += 1;
-            if (vm.servicio.hora != null )
+            if (vm.servicio.hora != null)
                 completed += 1;
             if (vm.puntoVenta.activo != null)
                 completed += 1;
-            if (vm.puntoVenta.serie != null )
+            if (vm.puntoVenta.serie != null)
                 completed += 1;
-            if (vm.marca != null )
+            if (vm.marca != null)
                 completed += 1;
-            if (vm.modelo != null )
+            if (vm.modelo != null)
                 completed += 1;
-            if (vm.puntoVenta.descripcion_trabajo != null )
+            if (vm.puntoVenta.descripcion_trabajo != null)
                 completed += 1;
-            if (vm.puntoVenta.observaciones_cliente != null )
+            if (vm.puntoVenta.observaciones_cliente != null)
                 completed += 1;
-            if (vm.puntoVenta.observaciones_tecnicas!= null)
+            if (vm.puntoVenta.observaciones_tecnicas != null)
                 completed += 1;
             completed = (completed / 16) * 100;
             completed = completed.toFixed(0);
-            vm.completed=completed;
+            vm.completed = completed;
             return completed;
         }
 
 
-
-        function next(){
+        function next() {
             $scope.triWizard.nextStep();
             vm.checkFinished();
         }
-        function prev(){
+
+        function prev() {
             $scope.triWizard.prevStep();
             vm.checkFinished();
         }
 
 
-        function buscaPuntoDeVenta(){
-            if (vm.etapas!=null){
-                vm.etapa=_.findWhere(vm.etapas, {nombre: 'E7'});
+        function buscaPuntoDeVenta() {
+            if (vm.etapas != null) {
+                vm.etapa = _.findWhere(vm.etapas, {nombre: 'E7'});
             }
 
         }
@@ -164,7 +169,7 @@
         //Funcion Activate al iniciar la vista
         function activate() {
             vm.marca = null;
-            vm.puntoVenta={};
+            vm.puntoVenta = {};
             MarcaCabinet.listObject().then(function (res) {
                 vm.marcas = Helper.filterDeleted(res, true);
             }).catch(function () {
@@ -172,21 +177,21 @@
                 vm.marcas = [];
             });
 
-            if( vm.puntoVenta.hora_recepcion != null) {
-                vm.recepcion.hora=moment(vm.puntoVenta.hora_recepcion,"HH:mm:ss").toDate();
+            if (vm.puntoVenta.hora_recepcion != null) {
+                vm.recepcion.hora = moment(vm.puntoVenta.hora_recepcion, "HH:mm:ss").toDate();
             }
 
-            if( vm.puntoVenta.fecha_reporte != null) {
-                vm.reporte.fecha=moment(vm.puntoVenta.fecha_reporte,"YYYY-MM-DD").toDate();
-                vm.reporte.hora=moment(vm.puntoVenta.fecha_reporte,"HH:mm:ss").toDate();
+            if (vm.puntoVenta.fecha_reporte != null) {
+                vm.reporte.fecha = moment(vm.puntoVenta.fecha_reporte, "YYYY-MM-DD").toDate();
+                vm.reporte.hora = moment(vm.puntoVenta.fecha_reporte, "HH:mm:ss").toDate();
             }
 
-            if( vm.puntoVenta.fecha_servicio != null) {
-                vm.servicio.fecha=moment(vm.puntoVenta.fecha_servicio,"YYYY-MM-DD").toDate();
-                vm.servicio.hora=moment(vm.puntoVenta.fecha_servicio,"HH:mm:ss").toDate();
+            if (vm.puntoVenta.fecha_servicio != null) {
+                vm.servicio.fecha = moment(vm.puntoVenta.fecha_servicio, "YYYY-MM-DD").toDate();
+                vm.servicio.hora = moment(vm.puntoVenta.fecha_servicio, "HH:mm:ss").toDate();
             }
             vm.modelos = [];
-            vm.modelo={};
+            vm.modelo = {};
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
             vm.notInsumos = Translate.translate('MAIN.MSG.ERROR_NOTINSUMOSTITLE');
@@ -216,12 +221,12 @@
 
 
         function eliminaNoSeleccionados() {
-            vm.puntoVenta.insumos_lote =  _.where(vm.insumos_loteUsados, {agregar: true});
+            vm.puntoVenta.insumos_lote = _.where(vm.insumos_loteUsados, {agregar: true});
         }
 
 
         function getInsumosLote() {
-            vm.insumos_loteUsados=[];
+            vm.insumos_loteUsados = [];
             buscaPuntoDeVenta();
             var data = {
                 idTipo: '',
@@ -243,14 +248,14 @@
                 vm.insumosLote = Helper.sortByAttribute(vm.insumosLote, 'descripcion');
                 transformArrayCatalogoInsumos();
             }).catch(function (res) {
-               // notifyError(res.status);
+                // notifyError(res.status);
             })
         }
 
         //function filter para determinar las cantidades adecuadas del catalogo insumos porq endpoint regresa los valores para todos los tipo de equipo
 
         function filterInsumosLotebyType(tipos_equipo) {
-           return _.findWhere(tipos_equipo, {tipo_equipo: vm.modelo.tipo});
+            return _.findWhere(tipos_equipo, {tipo_equipo: vm.modelo.tipo});
         }
 
         function transformArrayCatalogoInsumos() {
@@ -263,23 +268,23 @@
 
                 vm.insumoLote.cantidad = elemento.cantidad;
                 vm.insumoLote.cantidadMax = elemento.cantidad;
-                vm.insumoLote.error=false;
+                vm.insumoLote.error = false;
                 vm.insumoLote.nombre = insulote.descripcion;
                 vm.insumoLote.notas = elemento.descripcion;
                 vm.insumoLote.agregar = false;
-                vm.insumoLote.tipo=insulote.tipo;
+                vm.insumoLote.tipo = insulote.tipo;
                 if (parseFloat(insulote.cantidad) >= parseFloat(vm.insumoLote.cantidad)) {
 
                     //vm.insumos_loteUsados.push(vm.insumoLote);
                     //Verificar porque no se manda el tipo de insumo en el promise
-                   
-                    if(vm.insumoLote.tipo==='L'||vm.insumoLote.tipo==='l'){
+
+                    if (vm.insumoLote.tipo === 'L' || vm.insumoLote.tipo === 'l') {
                         vm.insumos_loteUsados.push(vm.insumoLote);
                     }
-                    if(vm.insumoLote.tipo==='U'||vm.insumoLote.tipo==='u'){
+                    if (vm.insumoLote.tipo === 'U' || vm.insumoLote.tipo === 'u') {
 
-                        vm.insumoUnicoData[0]=vm.insumoLote;
-                        vm.mostrarCompresor=true;
+                        vm.insumoUnicoData[0] = vm.insumoLote;
+                        vm.mostrarCompresor = true;
                     }
                     vm.insumoLote = null;
                     vm.insumoLote = {};
@@ -349,8 +354,8 @@
             vm.showInsumo = true;
             if (vm.puntoVenta.insumos[0].no_serie != null) {
                 vm.puntoVenta.insumos[0].cantidad = 1;
-                vm.puntoVenta.insumos[0].catalogo=vm.insumoUnicoData[0].catalogo_insumos;
-                vm.puntoVenta.insumos[0].agregar=true;
+                vm.puntoVenta.insumos[0].catalogo = vm.insumoUnicoData[0].catalogo_insumos;
+                vm.puntoVenta.insumos[0].agregar = true;
                 notifyError(1001);
             }
             vm.showInsumo = true;
@@ -364,17 +369,12 @@
 
 
         function cancel() {
-            vm.reporte={
-            };
-            vm.servicio={
-
-            };
-            vm.recepcion={
-
-            };
-             vm.filtradoNoSelected=[];
+            vm.reporte = {};
+            vm.servicio = {};
+            vm.recepcion = {};
+            vm.filtradoNoSelected = [];
             vm.etapa = {};
-            vm.formato="DD-MM-YYYY";
+            vm.formato = "DD-MM-YYYY";
             vm.tiposTrabajo = [
                 {value: 'Mayor'},
                 {value: 'Medio'},
@@ -383,9 +383,9 @@
                 {value: 'Otro'}
 
             ];
-            vm.completed=0;
-            vm.marca=null;
-            vm.modelo=null;
+            vm.completed = 0;
+            vm.marca = null;
+            vm.modelo = null;
             vm.showInsumosSection = true;
             vm.catalogoInsumos = null;//array con todos los caatalogos de insumo disponibles de la etapa
             vm.catalogoSelected = {};//Elemento del tipo Catalogo de Insumo del insumo que se deseará agregar
@@ -405,9 +405,9 @@
             vm.insumoLote = {};
             vm.insumos_loteUsados = [];//Arreglo que ya posee el arreglo como es necesario para agregar los insumos al formato de arreglo para agregarlos a la etapa
             vm.insumos_sinStock = [];
-            vm.puntoVenta = {insumos:[]};
-            vm.insumoUnicoData=[];
-            vm.mostrarCompresor=false;
+            vm.puntoVenta = {insumos: []};
+            vm.insumoUnicoData = [];
+            vm.mostrarCompresor = false;
             $scope.generalInfo.$setPristine();
             $scope.generalInfo.$setUntouched();
             $scope.localData.$setPristine();
@@ -451,23 +451,23 @@
 
 
         function crearPuntodeVenta() {
-            var fecha=null;
-            var hora=null;
-            var promise=null;
+            var fecha = null;
+            var hora = null;
+            var promise = null;
 
-            vm.filtradoNoSelected=_.where(vm.insumos_loteUsados,{agregar:true});
-            vm.puntoVenta.insumos_lote =vm.filtradoNoSelected;
-            vm.puntoVenta.modelo=vm.modelo.id;
-            if(vm.puntoVenta.insumos==undefined){
-                vm.puntoVenta.insumos=[];
+            vm.filtradoNoSelected = _.where(vm.insumos_loteUsados, {agregar: true});
+            vm.puntoVenta.insumos_lote = vm.filtradoNoSelected;
+            vm.puntoVenta.modelo = vm.modelo.id;
+            if (vm.puntoVenta.insumos == undefined) {
+                vm.puntoVenta.insumos = [];
             }
-            if( vm.puntoVenta.insumos.length!=0 && vm.puntoVenta.insumos[0].agregar==false){
+            if (vm.puntoVenta.insumos.length != 0 && vm.puntoVenta.insumos[0].agregar == false) {
 
-                vm.puntoVenta.insumos=[];
+                vm.puntoVenta.insumos = [];
             }
-            if (vm.reporte!=null) {
-                 fecha = moment(vm.reporte.fecha).subtract(1,"day");
-                 hora = moment(vm.reporte.hora);
+            if (vm.reporte != null) {
+                fecha = moment(vm.reporte.fecha).subtract(1, "day");
+                hora = moment(vm.reporte.hora);
                 fecha.set({
                     hour: hora.get('hour'),
                     minute: hora.get('minute'),
@@ -476,8 +476,8 @@
                 });
                 vm.puntoVenta.fecha_reporte = fecha.toISOString();
             }
-            if (vm.servicio!=null) {
-                 fecha = moment(vm.servicio.fecha).subtract(1,"day");
+            if (vm.servicio != null) {
+                fecha = moment(vm.servicio.fecha).subtract(1, "day");
                 hora = moment(vm.servicio.hora);
                 fecha.set({
                     hour: hora.get('hour'),
@@ -487,23 +487,23 @@
                 });
                 vm.puntoVenta.fecha_servicio = fecha.toISOString();
             }
-            if (vm.recepcion!=null) {
+            if (vm.recepcion != null) {
                 vm.puntoVenta.hora_recepcion = moment(vm.reporte.hora).format('HH:mm:ss')
             }
             if (vm.puntoVenta.id == null) {
 
                 eliminaNoSeleccionados();
-                vm.filtradoNoSelected=_.where(vm.insumos_loteUsados,{agregar:true});
+                vm.filtradoNoSelected = _.where(vm.insumos_loteUsados, {agregar: true});
                 vm.puntoVenta.insumos_lote = vm.filtradoNoSelected;
-                if(vm.puntoVenta.insumos==undefined){
-                    vm.puntoVenta.insumos=[];
+                if (vm.puntoVenta.insumos == undefined) {
+                    vm.puntoVenta.insumos = [];
                 }
-                if( vm.puntoVenta.insumos.length!=0 && vm.puntoVenta.insumos[0].agregar==false){
+                if (vm.puntoVenta.insumos.length != 0 && vm.puntoVenta.insumos[0].agregar == false) {
 
-                    vm.puntoVenta.insumos=[];
+                    vm.puntoVenta.insumos = [];
                 }
 
-                 promise = PuntoDeVenta.create(vm.puntoVenta);
+                promise = PuntoDeVenta.create(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successCreateMessage);
                     vm.puntoVenta = res;
@@ -512,7 +512,7 @@
                 }).catch(function (res) {
 
 
-                    vm.error=res.data.errors[0].message;
+                    vm.error = res.data.errors[0].message;
 
                     notifyError(res.status);
 
@@ -521,15 +521,15 @@
             }
             else {
                 eliminaNoSeleccionados();
-                 promise = PuntoDeVenta.modify(vm.puntoVenta);
+                promise = PuntoDeVenta.modify(vm.puntoVenta);
                 promise.then(function (res) {
 
                     toastr.success(vm.successTitle, vm.successUpdateMessage);
                     vm.puntoVenta = res;
                     vm.cancel();
-                }).catch(function (res){
-                    if(res.status==400){
-                        vm.errorMessage=res.data.errors[0].message;// checar condicion de campo de res
+                }).catch(function (res) {
+                    if (res.status == 400) {
+                        vm.errorMessage = res.data.errors[0].message;// checar condicion de campo de res
 
                     }
                     notifyError(res.status);
@@ -538,17 +538,36 @@
             }
             vm.cancel();
         }
+
         function validaMax(index) {
-            if (parseFloat(vm.insumos_loteUsados[index].cantidad) > parseFloat(vm.insumos_loteUsados[index].cantidadMax)){
+            if (parseFloat(vm.insumos_loteUsados[index].cantidad) > parseFloat(vm.insumos_loteUsados[index].cantidadMax)) {
 
                 vm.insumos_loteUsados[index].agregar = false;
                 vm.insumos_loteUsados[index].error = true;
 
             }
-            else{
+            else {
                 vm.insumos_loteUsados[index].error = false;
 
             }
+
+        }
+
+        function search() {
+            switch(vm.selectedSearchType.id){
+                case "all":
+                    vm.puntosVenta=PuntoDeVenta.list();
+                    break;
+                case "open":
+                    vm.puntosVenta=PuntoDeVenta.getOpen();
+                    break;
+                case "closed":
+                    vm.puntosVenta=PuntoDeVenta.getClosed();
+                    break;
+            }
+        }
+
+        function getById() {
 
         }
     }

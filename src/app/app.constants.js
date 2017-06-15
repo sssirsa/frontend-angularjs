@@ -298,7 +298,8 @@
             formats: [
                 {value: "xlsx"},
                 {value: "csv"}
-            ],types: [
+            ],
+            types: [
                 {
                     id: 'CharField',
                     text: 'Texto'
@@ -377,6 +378,20 @@
                 {
                     id:"Garantia",
                     text:"Garantias"
+                }
+            ],
+            fieldServiceTypes:[
+                {
+                    id:"all",
+                    text:"Todos"
+                },
+                {
+                    id:"open",
+                    text:"Abiertos"
+                },
+                {
+                    id:"close",
+                    text:"Cerrados"
                 }
             ]
 
