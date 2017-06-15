@@ -16,18 +16,20 @@
                          flex-gt-sm="50"
                          flex="100"
                          layout-padding>
-                        <md-input-container flex layout-fill>
-                            <label>{{'PUNTOVENTA.FOLIO'|translate}}</label>
-                            <input numbers-only
-                                   aria-label="service folio"
-                                   ng-model="vm.puntoVenta.id"
-                                   type="text">
-                        </md-input-container>
-                        <md-button class="md-icon-button"
-                                   aria-label="search folio"
-                                   ng-click="vm.getById()">
-                            <md-icon md-font-icon="fa fa-search"></md-icon>
-                        </md-button>
+                        <form flex layout-fill ng-submit="vm.getId(vm.id)">
+                            <md-input-container flex layout-fill>
+                                <label>{{'PUNTOVENTA.FOLIO'|translate}}</label>
+                                <input numbers-only
+                                       aria-label="service folio"
+                                       ng-model="vm.id"
+                                       type="text">
+                            </md-input-container>
+                            <md-button class="md-icon-button"
+                                       aria-label="search folio"
+                                       ng-click="vm.getId(vm.id)">
+                                <md-icon md-font-icon="fa fa-search"></md-icon>
+                            </md-button>
+                        </form>
                     </div>
                     <md-input-container flex layout-fill>
                         <md-select ng-model="vm.selectedSearchType" md-on-close="vm.search()">
@@ -37,9 +39,9 @@
                         </md-select>
                     </md-input-container>
                     <md-input-container flex layout-fill>
-                        <md-select ng-model="vm.puntoVenta">
+                        <md-select ng-model="vm.id" md-on-close="vm.getId(vm.id)">
                             <md-option ng-repeat="option in vm.puntosVenta" value="{{option.id}}">
-                                {{option.id}} {{option.fecha}}
+                                <strong>{{option.id}}</strong> {{option.fecha}}
                             </md-option>
                         </md-select>
                     </md-input-container>

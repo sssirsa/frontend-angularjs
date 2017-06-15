@@ -43,6 +43,7 @@
         vm.fieldServiceTypes = OPTIONS.fieldServiceTypes;
         vm.selectedSearchType = "all";
         vm.puntosVenta=PuntoDeVenta.list();
+        vm.id=null;
 
         vm.showInsumosSection = true;
         vm.catalogoInsumos = null;//array con todos los caatalogos de insumo disponibles de la etapa
@@ -86,7 +87,7 @@
         vm.prev = prev;
         vm.validaMax = validaMax;
         vm.search = search;
-        vm.getById = getById;
+        vm.getId = getId;
 
         // Funciones
         function checkFinished() {
@@ -554,21 +555,33 @@
         }
 
         function search() {
-            switch(vm.selectedSearchType.id){
+            vm.puntosVenta=null;
+            switch(vm.selectedSearchType){
                 case "all":
                     vm.puntosVenta=PuntoDeVenta.list();
                     break;
                 case "open":
                     vm.puntosVenta=PuntoDeVenta.getOpen();
                     break;
-                case "closed":
+                case "close":
                     vm.puntosVenta=PuntoDeVenta.getClosed();
                     break;
             }
+            return;
         }
 
-        function getById() {
-
+        function getId(id) {
+            if(id){
+                PuntoDeVenta.getById(id).then(function(responseSuccess){
+                    responseSuccess.semana=parseInt(responseSuccess.semana);
+                    responseSuccess.piso=parseInt(responseSuccess.piso);
+                    vm.puntoVenta=responseSuccess;
+                }).catch(function(responseError){
+                    console.log(responseError);
+                    notifyError(responseError.status);
+                });
+                return;
+            }
         }
     }
 

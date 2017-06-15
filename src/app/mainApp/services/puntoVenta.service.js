@@ -23,7 +23,7 @@
         };
 
         function getById(id) {
-            return baseURL.all(id).get();
+            return baseURL.all(id).customGET();
         }
 
         function getClosed(){

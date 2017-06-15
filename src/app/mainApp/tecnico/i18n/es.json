@@ -328,6 +328,9 @@
     "NEXT": "Siguiente",
     "PREVIOUS": "Anterior",
     "FOLIO":"Número de folio",
-    "SEARCH_TYPE":"Elementos a mostrar"
+    "SEARCH_TYPE":"Elementos a mostrar",
+    "TOASTR":{
+      "NOT_FOUND":"No se encontró ningun servicio con el folio proporcionado"
+    }
   }
 }
