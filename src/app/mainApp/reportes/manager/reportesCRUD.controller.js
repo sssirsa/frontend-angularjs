@@ -8,7 +8,7 @@
         .module('app.mainApp.reportes')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams,OPTIONS, $mdDialog, Reportes, Translate, $state) {
+    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate, $state) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
@@ -17,6 +17,12 @@
         vm.formato = "DD-MM-YYYY";
         vm.filterType = OPTIONS.filter;
         vm.days = OPTIONS.days;
+        vm.searchParameter = "";
+
+        vm.filterTypeDate = OPTIONS.filterDate;
+        vm.filterTypeChar = OPTIONS.filterChar;
+        vm.filterInt = OPTIONS.filterInt;
+        vm.fieldQueries = OPTIONS.field_types;
 
         //Function parse
         vm.selected = selected;
@@ -30,23 +36,32 @@
         vm.onTabPreview = onTabPreview;
         vm.editReport = editReport;
         vm.clear = clear;
-        vm.exportar=exportar;
+        vm.exportar = exportar;
+        vm.getValidFilters = getValidFilters;
 
-        vm.tableFilterHeaders = [
-            Translate.translate('REPORTS.MODIFY.TABLE'),
-            Translate.translate('REPORTS.TABLE_FILTER.NAME'),
-            Translate.translate('REPORTS.TABLE_FILTER.FILTER_TYPE'),
-            Translate.translate('REPORTS.TABLE_FILTER.VALUE'),
-            Translate.translate('REPORTS.TABLE_FILTER.EXCLUDE')
-        ];
         vm.tableDisplayHeaders = [
             Translate.translate('REPORTS.MODIFY.TABLE'),
             Translate.translate('REPORTS.MODIFY.FIELD_NAME'),
             Translate.translate('REPORTS.MODIFY.FIELD_VERBOSE'),
             Translate.translate('REPORTS.MODIFY.FIELD_TYPE'),
-            Translate.translate('REPORTS.MODIFY.FIELD_QUERY')
+            Translate.translate('REPORTS.MODIFY.FIELD_QUERY'),
+            Translate.translate('REPORTS.MODIFY.GROUP'),
+            Translate.translate('REPORTS.MODIFY.TOTALS'),
+            Translate.translate('REPORTS.MODIFY.DELETE')
         ];
-        vm.fieldQueries=OPTIONS.field_types;
+
+        vm.tableFilterHeaders = [
+            Translate.translate('REPORTS.MODIFY.TABLE'),
+            Translate.translate('REPORTS.MODIFY.FIELD_NAME'),
+            Translate.translate('REPORTS.MODIFY.FIELD_VERBOSE'),
+            Translate.translate('REPORTS.MODIFY.FIELD_TYPE'),
+            Translate.translate('REPORTS.TABLE_FILTER.FILTER_TYPE'),
+            Translate.translate('REPORTS.MODIFY.VALUE'),
+            Translate.translate('REPORTS.MODIFY.EXCLUDE'),
+            Translate.translate('REPORTS.MODIFY.DELETE')
+        ];
+
+        vm.fieldQueries = OPTIONS.field_types;
         //Translates
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
@@ -70,14 +85,14 @@
 
         activate();
         function activate() {
-            vm.loadingPromise=Reportes.getPartialReports().then(function (res) {
-                    vm.reports = res;
-                    vm.reports = _.sortBy(vm.reports, 'name');
+            vm.loadingPromise = Reportes.getPartialReports().then(function (res) {
+                vm.reports = res;
+                vm.reports = _.sortBy(vm.reports, 'name');
 
             });
-            if($stateParams.id!=null){
-                var obj={
-                    id:$stateParams.id
+            if ($stateParams.id != null) {
+                var obj = {
+                    id: $stateParams.id
                 };
                 selected(obj);
             }
@@ -88,11 +103,11 @@
             return query ? lookup(query) : vm.reports;
 
         }
-        function onTabPreview() {
-            vm.preview=null;
-            vm.loadingPromisePreview=Reportes.generatePreviewPaginator(vm.report.id,1).then(function (res) {
-                vm.preview = res;
 
+        function onTabPreview() {
+            vm.preview = null;
+            vm.loadingPromisePreview = Reportes.generatePreviewPaginator(vm.report.id, 1).then(function (res) {
+                vm.preview = res;
             }).catch(function () {
                 toastr.warning(vm.errorPreview, vm.errorTitle);
             });
@@ -100,19 +115,20 @@
 
         function selectedItemChange(item) {
             if (item != null) {
-                vm.selectedReport=angular.copy(item);
-                vm.loadingPromiseReport=Reportes.getReportObject(item.id).then(function (res) {
-                    vm.report =res;
-                    Reportes.getModel(res.root_model).then(function(res){
+                vm.selectedReport = angular.copy(item);
+                vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
+                    vm.report = res;
+                    Reportes.getModel(res.root_model).then(function (res) {
                         vm.rootModel = res.name;
                     }).catch();
                 });
 
-                vm.selectedTab=0;
+                vm.selectedTab = 0;
             } else {
                 //cancel();
             }
         }
+
         function exportar() {
             $mdDialog.show({
                 controller: 'GenerateReportModalController',
@@ -134,8 +150,9 @@
         }
 
         function clear() {
-            vm.report=null;
-            vm.selectedReport =null;
+            vm.report = null;
+            vm.selectedReport = null;
+            vm.searchParameter = "";
         }
 
         function update() {
@@ -195,11 +212,11 @@
         }
 
         function selected(item) {
-            vm.selectedTabs=0;
+            vm.selectedTabs = 0;
             vm.selectedReport = item;
-            vm.loadingPromiseReport=Reportes.getReportObject(item.id).then(function (res) {
-                vm.report =res;
-                Reportes.getModel(res.root_model).then(function(res){
+            vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
+                vm.report = res;
+                Reportes.getModel(res.root_model).then(function (res) {
                     vm.rootModel = res.name;
                 }).catch();
             });
@@ -246,5 +263,25 @@
         };
     }
 
+    function getValidFilters(fieldType) {
+        switch (fieldType) {
+            case 'CharField':
+                return vm.filterTypeChar;
+                break;
+            case 'DateTimeField':
+                return vm.filterTypeDate;
+                break;
+            case 'DateField':
+                return vm.filterTypeDate;
+                break;
+            case 'DecimalField':
+                return vm.filterInt;
+            case 'IntegerField':
+                return vm.filterInt;
+            default:
+                return vm.filterType;
+                break;
+        }
+    }
 
 })();

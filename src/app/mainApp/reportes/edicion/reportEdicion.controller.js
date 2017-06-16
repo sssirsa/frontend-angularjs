@@ -17,9 +17,9 @@
         vm.filterTypeDate = OPTIONS.filterDate;
         vm.filterTypeChar = OPTIONS.filterChar;
         vm.filterInt = OPTIONS.filterInt;
-        vm.days = OPTIONS.days;
         vm.fieldQueries = OPTIONS.field_types;
         vm.rootModel = "";
+        vm.days = OPTIONS.days;
 
         //Function parse
         vm.removeField = removeField;
