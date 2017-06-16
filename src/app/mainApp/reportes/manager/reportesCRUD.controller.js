@@ -88,11 +88,11 @@
             return query ? lookup(query) : vm.reports;
 
         }
+        
         function onTabPreview() {
             vm.preview=null;
             vm.loadingPromisePreview=Reportes.generatePreviewPaginator(vm.report.id,1).then(function (res) {
                 vm.preview = res;
-
             }).catch(function () {
                 toastr.warning(vm.errorPreview, vm.errorTitle);
             });
