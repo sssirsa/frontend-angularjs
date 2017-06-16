@@ -329,6 +329,8 @@
     "PREVIOUS": "Anterior",
     "FOLIO":"Número de folio",
     "SEARCH_TYPE":"Elementos a mostrar",
+    "FINISHED":"Servicio cerrado",
+    "UNFINISHED":"Servicio abierto",
     "TOASTR":{
       "NOT_FOUND":"No se encontró ningun servicio con el folio proporcionado"
     }

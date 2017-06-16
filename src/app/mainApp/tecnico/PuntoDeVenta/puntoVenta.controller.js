@@ -521,7 +521,9 @@
                 });
             }
             else {
+                var previousJSON = JSON.stringify(vm.puntoVenta);
                 eliminaNoSeleccionados();
+
                 promise = PuntoDeVenta.modify(vm.puntoVenta);
                 promise.then(function (res) {
 

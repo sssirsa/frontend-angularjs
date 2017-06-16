@@ -538,6 +538,13 @@
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
+                                    <md-switch ng-model="vm.puntoVenta.cerrado"
+                                               ng-disabled="vm.puntoVenta.id && vm.puntoVenta.cerrado"
+                                               aria-label="Closed service">
+                                        <p ng-if="vm.puntoVenta.cerrado">{{'PUNTOVENTA.FINISHED'|translate}}</p>
+                                        <p ng-if="!vm.puntoVenta.cerrado">{{'PUNTOVENTA.UNFINISHED'|translate}}</p>
+
+                                    </md-switch>
 
                                 </div>
                             </form>
@@ -556,8 +563,7 @@
                 </md-button>
                 <md-button ng-click="vm.crearPuntodeVenta()" aria-label="Crear punto de venta"
                            class="md-fab md-mini md-scale"
-                           ng-show="vm.completed == 100"
-                           ng-hide="vm.completed != 100"
+                           ng-hide="vm.puntoVenta.cerrado && vm.puntoVenta.id"
                            translate="">
                     <md-icon md-font-icon="fa fa-save"></md-icon>
                 </md-button>
