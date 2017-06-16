@@ -5,7 +5,9 @@
                 REPORTS.TITLE
             </h2>
 
-            <md-fab-speed-dial ng-hide="vm.hidden" md-open="vm.isOpen" md-direction="down" ng-class="{ 'md-hover-full': vm.hover }" ng-mouseover="vm.isOpen=true" ng-mouseleave="vm.isOpen=false" class="md-scale md-fab-top-right">
+            <md-fab-speed-dial ng-hide="vm.hidden" md-open="vm.isOpen" md-direction="down"
+                               ng-class="{ 'md-hover-full': vm.hover }" ng-mouseover="vm.isOpen=true"
+                               ng-mouseleave="vm.isOpen=false" class="md-scale md-fab-top-right">
                 <md-fab-trigger>
                     <md-button aria-label="menu" class="md-fab md-warn md-fab-principal">
                         <md-icon md-font-icon="fa fa-bars" ng-style="{color: 'white'}"></md-icon>
@@ -14,66 +16,62 @@
                 <md-fab-actions>
                     <md-button aria-label="Nuevo" ng-click="vm.createReport()" class="md-fab md-raised md-mini">
                         <md-icon md-font-icon="fa fa-file-o">
-                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible ">{{'REPORTS.TOOLTIP.NEW'|translate }}</md-tooltip>
+                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible ">
+                                {{'REPORTS.TOOLTIP.NEW'|translate }}
+                            </md-tooltip>
                         </md-icon>
                     </md-button>
-                    <md-button ng-if="vm.report.id!=null" aria-label="Duplicar" ng-click="vm.duplicateReport()" class="md-fab md-raised md-mini">
+                    <md-button ng-if="vm.report.id!=null" aria-label="Duplicar" ng-click="vm.duplicateReport()"
+                               class="md-fab md-raised md-mini">
                         <md-icon md-font-icon="fa fa-files-o">
-                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">{{'REPORTS.TOOLTIP.CLONE'|translate }}</md-tooltip>
+                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">
+                                {{'REPORTS.TOOLTIP.CLONE'|translate }}
+                            </md-tooltip>
                         </md-icon>
                     </md-button>
-                    <md-button ng-if="vm.report.id!=null" aria-label="Editar" ng-click="vm.editReport()" class="md-fab md-raised md-mini">
+                    <md-button ng-if="vm.report.id!=null" aria-label="Editar" ng-click="vm.editReport()"
+                               class="md-fab md-raised md-mini">
                         <md-icon md-font-icon="fa fa-pencil">
-                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">{{'REPORTS.TOOLTIP.EDIT'|translate }}</md-tooltip>
+                            <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">
+                                {{'REPORTS.TOOLTIP.EDIT'|translate }}
+                            </md-tooltip>
                         </md-icon>
                     </md-button>
                 </md-fab-actions>
             </md-fab-speed-dial>
 
         </div>
-        <div layout-gt-sm="row" layout="column">
-            <div layout="column" layout-align="space-between stretch" flex-lg="25" flex-gt-lg="25" flex-xl="25" flex-gt-sm="100" flex-md="100">
-                <md-autocomplete
+        <div layout="column">
+
+            <md-autocomplete
                     md-items="item in vm.querySearch(vm.searchParameter)"
                     md-selected-item="vm.reportSelected"
                     md-selected-item-change="vm.selectedItemChange(vm.reportSelected)"
                     md-search-text-change="vm.lookup(vm.searchParameter)"
                     md-search-text="vm.searchParameter"
                     md-item-text="item.name"
-                    md-min-length="1"
+                    md-min-length="0"
                     md-floating-label="{{'REPORTS.FIELDS.SEARCH'|translate}}">
-                    <span md-highlight-text="vm.searchParameter" md-highlight-flags="^i">{{item.name}}</span>
-                    <md-item-template>
+                <span md-highlight-text="vm.searchParameter" md-highlight-flags="^i">{{item.name}}</span>
+                <md-item-template>
                          <span class="item-title">
                             <md-icon md-font-icon="fa fa-file-text-o"></md-icon>
-                            <span>&nbsp; {{item.name}}</span>
+                            <strong>&nbsp; {{item.name}}</strong>
                         </span>
-                    </md-item-template>
-                    <md-not-found><span translate="REPORTS.ERROR.NOT_FOUND"></span></md-not-found>
-                </md-autocomplete>
-
-                <md-virtual-repeat-container flex="100"
-                                             hide-xs="hide-xs"
-                                             hide-sm="hide-sm"
-                                             layout-fill
-                                             class="vr-min-height">
-                    <md-list flex="flex" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-                        <md-list-item flex="flex" layout="column" ng-repeat="item in vm.reports | reportSearch:vm.searchParameter">
-                            <md-button
-                                style="width: 100%"
-                                ng-click="vm.selected(item)"
-                                ng-class="{'selected':item.id == vm.selectedReport.id}">
-                                <img ng-src="assets/images/report.png" class="avatar-reports"/>
-                                <span>{{item.name}}</span>
-                            </md-button>
-                            <md-divider></md-divider>
-                        </md-list-item>
-                    </md-list>
-                </md-virtual-repeat-container>
-            </div>
+                        <span class="item-metadata">
+                            <span class="item-metastat">
+                                {{item.modified}}
+                            </span>
+                        </span>
+                    <md-divider></md-divider>
+                </md-item-template>
+                <md-not-found><span translate="REPORTS.ERROR.NOT_FOUND"></span></md-not-found>
+            </md-autocomplete>
             <!--Content div-->
-            <div layout="column" flex-lg="75" flex-gt-lg="75" flex-xl="75" flex-gt-sm="100" flex-md="100">
-                <md-tabs ng-if="vm.report.id!=null" layout-padding="true" md-dynamic-height="100" md-border-bottom="100" md-selected="vm.selectedTabs"
+            <div layout="column" flex="100">
+                <p ng-if="!vm.report.id">{{'REPORTS.MESSAGES.NO_REPORT'|translate}}</p>
+                <md-tabs layout-padding="true" ng-if="vm.report.id" md-dynamic-height="100" md-border-bottom="100"
+                         md-selected="vm.selectedTabs"
                          cg-busy="{promise:vm.loadingPromiseReport,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                     <md-tab label={{'REPORTS.TAB.INFORMATION'|translate}}>
                         <md-content layout-padding="">
@@ -85,7 +83,8 @@
                                 <h2>{{'REPORTS.FIELDS.INFORMATION'|translate}}</h2>
                                 <form name="formReport" novalidate>
                                     <div layout="row" layout-gt-sm="column" layout-xs="column" layout-sm="column">
-                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100"
+                                                            flex-sm="100">
                                             <label>{{'REPORTS.FIELDS.NAME'|translate}}</label>
                                             <input name="ProjectName" type="text" required="" md-no-asterisk=""
                                                    ng-model="vm.report.name">
@@ -94,7 +93,8 @@
                                             </div>
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100"
+                                                            flex-sm="100">
                                             <label>{{'REPORTS.FIELDS.DESCRIPTION'|translate}}</label>
                                             <input name="ProjectDescription"
                                                    type="text"
@@ -106,7 +106,8 @@
                                             </div>
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100"
+                                                            flex-sm="100">
                                             <label>{{'REPORTS.FIELDS.MODIFIED'|translate}}</label>
                                             <input name="ProjectModified" type="text" required="" md-no-asterisk=""
                                                    mo-date-input="{{vm.formato}}"
@@ -117,7 +118,8 @@
                                             </div>
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                                        <md-input-container class="md-block" flex="100" flex-gt-sm="100" flex-xs="100"
+                                                            flex-sm="100">
                                             <label>{{'REPORTS.FIELDS.ROOT_MODEL'|translate}}</label>
                                             <input name="ProjectModel" type="text" required="" md-no-asterisk=""
                                                    disabled
@@ -143,7 +145,8 @@
 
                                     <div class="table-responsive-vertical shadow-z-1">
                                         <!-- Table starts here -->
-                                        <table id="tableFiltros" class="table table-hover table-mc-light-blue" layout-align="center center">
+                                        <table id="tableFiltros" class="table table-hover table-mc-light-blue"
+                                               layout-align="center center">
                                             <thead>
                                             <tr>
                                                 <th ng-repeat="header in vm.tableDisplayHeaders">{{header}}</th>
@@ -177,7 +180,8 @@
                                                     <md-select name="selectQueryType"
                                                                aria-label="Tipo"
                                                                ng-model="field.aggregate">
-                                                        <md-option ng-repeat="option in vm.fieldQueries" value="{{option.id}}">
+                                                        <md-option ng-repeat="option in vm.fieldQueries"
+                                                                   value="{{option.id}}">
                                                             {{option.text}}
                                                         </md-option>
                                                     </md-select>
@@ -203,7 +207,8 @@
 
                                     <div class="table-responsive-vertical shadow-z-1">
                                         <!-- Table starts here -->
-                                        <table id="tableFiltros" class="table table-hover table-mc-light-blue" layout-align="center center">
+                                        <table id="tableFiltros" class="table table-hover table-mc-light-blue"
+                                               layout-align="center center">
                                             <thead>
                                             <tr>
                                                 <th ng-repeat="header in vm.tableFilterHeaders">{{header}}</th>
@@ -215,21 +220,27 @@
                                                     <span ng-if="data.path_verbose!='' ">{{data.path_verbose}}</span>
                                                     <span ng-if="data.path_verbose=='' ">{{vm.rootModel}}</span>
                                                 </td>
-                                                <td data-title="{{'REPORTS.TABLE_FILTER.NAME'|translate}}"><span>{{data.field_verbose}}</span></td>
+                                                <td data-title="{{'REPORTS.TABLE_FILTER.NAME'|translate}}"><span>{{data.field_verbose}}</span>
+                                                </td>
                                                 <td data-title="{{'REPORTS.TABLE_FILTER.FILTER_TYPE'|translate}}">
 
-                                                    <md-select aria-label="tipo" ng-model="data.filter_type" disabled="" layout-align="space-around start">
-                                                        <md-option ng-repeat="filtro in  vm.filterType" ng-value="filtro.id">
+                                                    <md-select aria-label="tipo" ng-model="data.filter_type" disabled=""
+                                                               layout-align="space-around start">
+                                                        <md-option ng-repeat="filtro in  vm.filterType"
+                                                                   ng-value="filtro.id">
                                                             {{filtro.value}}
                                                         </md-option>
                                                     </md-select>
                                                 </td>
                                                 <td data-title="{{'REPORTS.TABLE_FILTER.VALUE'|translate}}">
-                                                    <div aria-label="maximo" ng-if="data.filter_type=='max' || data.filter_type=='min'">
+                                                    <div aria-label="maximo"
+                                                         ng-if="data.filter_type=='max' || data.filter_type=='min'">
                                                         <md-checkbox ng-model="data.filter_value"></md-checkbox>
                                                     </div>
                                                     <div ng-if="data.filter_type=='week_day'">
-                                                        <md-select aria-label="dia de la semana" ng-model="data.filter_value" layout-align="space-around start">
+                                                        <md-select aria-label="dia de la semana"
+                                                                   ng-model="data.filter_value"
+                                                                   layout-align="space-around start">
                                                             <md-option ng-repeat="dia in  vm.days" ng-value="dia.id">
                                                                 {{dia.value}}
                                                             </md-option>
@@ -237,12 +248,14 @@
                                                     </div>
                                                     <div ng-if="data.filter_type=='range'">
                                                         <md-input-container>
-                                                            <input type="text" aria-label="Fecha start" ng-model="data.filter_value" mdp-date-picker
+                                                            <input type="text" aria-label="Fecha start"
+                                                                   ng-model="data.filter_value" mdp-date-picker
                                                                    mdp-format="{{vm.formato}}"
                                                                    mo-date-input="{{vm.formato}}" name="fecha_start"/>
                                                         </md-input-container>
                                                         <md-input-container>
-                                                            <input type="text" aria-label="Fecha end" ng-model="data.filter_value2" mdp-date-picker
+                                                            <input type="text" aria-label="Fecha end"
+                                                                   ng-model="data.filter_value2" mdp-date-picker
                                                                    mdp-format="{{vm.formato}}"
                                                                    mo-date-input="{{vm.formato}}" name="fecha_end"/>
                                                         </md-input-container>
@@ -259,13 +272,15 @@
                                                     </div>
                                                     <div ng-if="data.filter_type!='range' && data.filter_type!='week_day' && data.filter_type!='max' && data.filter_type!='min' ">
                                                         <md-input-container>
-                                                            <input type="text" aria-label="Fecha start" ng-model="data.filter_value"
+                                                            <input type="text" aria-label="Fecha start"
+                                                                   ng-model="data.filter_value"
                                                                    name="filtro"/>
                                                         </md-input-container>
                                                     </div>
                                                 </td>
                                                 <td data-title="{{'REPORTS.TABLE_FILTER.EXCLUDE'|translate}}">
-                                                    <md-checkbox aria-label="exclude" ng-model="data.exclude"></md-checkbox>
+                                                    <md-checkbox aria-label="exclude"
+                                                                 ng-model="data.exclude"></md-checkbox>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -285,18 +300,22 @@
                                                          layout-align="center center"
                                                          class="vr-min-height">
                                 <div class="tabla" layout-align="center center">
-                                    <div class="table-responsive-vertical shadow-z-1" layout-align="space-around center">
+                                    <div class="table-responsive-vertical shadow-z-1"
+                                         layout-align="space-around center">
                                         <!-- Table starts here -->
-                                        <table id="tables" class="table table-hover table-mc-light-blue" layout-align="center center">
+                                        <table id="tables" class="table table-hover table-mc-light-blue"
+                                               layout-align="center center">
                                             <thead>
-                                                <tr>
-                                                    <th ng-repeat="meta in vm.preview.meta.titles">{{meta}}</th>
-                                                </tr>
+                                            <tr>
+                                                <th ng-repeat="meta in vm.preview.meta.titles">{{meta}}</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="data in vm.preview.data">
-                                                    <td data-title="{{vm.preview.meta.titles[$index]}}" ng-repeat="datos in data track by $index">{{datos}}</td>
-                                                </tr>
+                                            <tr ng-repeat="data in vm.preview.data">
+                                                <td data-title="{{vm.preview.meta.titles[$index]}}"
+                                                    ng-repeat="datos in data track by $index">{{datos}}
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>

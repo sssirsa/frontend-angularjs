@@ -17,6 +17,7 @@
         vm.formato = "DD-MM-YYYY";
         vm.filterType = OPTIONS.filter;
         vm.days = OPTIONS.days;
+        vm.searchParameter="";
 
         //Function parse
         vm.selected = selected;
@@ -136,6 +137,7 @@
         function clear() {
             vm.report=null;
             vm.selectedReport =null;
+            vm.searchParameter="";
         }
 
         function update() {
