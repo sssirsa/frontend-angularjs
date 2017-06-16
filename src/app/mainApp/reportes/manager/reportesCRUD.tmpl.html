@@ -69,8 +69,11 @@
             </md-autocomplete>
             <!--Content div-->
             <div layout="column" flex="100">
-                <p ng-if="!vm.report.id">{{'REPORTS.MESSAGES.NO_REPORT'|translate}}</p>
-                <md-tabs layout-padding="true" ng-if="vm.report.id" md-dynamic-height="100" md-border-bottom="100"
+                <p ng-if="!vm.reportSelected">{{'REPORTS.MESSAGES.NO_REPORT'|translate}}</p>
+                <md-tabs layout-padding="true"
+                         ng-if="vm.reportSelected"
+                         md-dynamic-height="100"
+                         md-border-bottom="100"
                          md-selected="vm.selectedTabs"
                          cg-busy="{promise:vm.loadingPromiseReport,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                     <md-tab label={{'REPORTS.TAB.INFORMATION'|translate}}>
@@ -136,13 +139,12 @@
                         </md-content>
                     </md-tab>
                     <md-tab label={{'REPORTS.TAB.FIELDS'|translate}}>
-                        <md-content layout-padding="">
                             <md-virtual-repeat-container flex="100"
                                                          layout="column"
+                                                         layout-fill
                                                          layout-align="center center"
                                                          class="vr-min-height">
-                                <div class="tabla" layout-align="center center">
-                                    <div layout="column" flex="100" layout-align="start stretch" >
+                                    <div layout-fill layout="column" flex="100" layout-align="start stretch" >
                                         <md-content flex="100"
                                                     layout="row"
                                                     layout-align="center center"
@@ -211,9 +213,7 @@
                                             </div>
                                         </md-content>
                                     </div>
-                                </div>
                             </md-virtual-repeat-container>
-                        </md-content>
                     </md-tab>
                     <md-tab label={{'REPORTS.TAB.FILTERS'|translate}}>
                         <md-content layout-padding="">
@@ -221,90 +221,7 @@
                                                          layout="column"
                                                          layout-align="center center"
                                                          class="vr-min-height">
-                                <div class="tabla" layout-align="center center">
-
-                                    <!--<div class="table-responsive-vertical shadow-z-1">
-                                        &lt;!&ndash; Table starts here &ndash;&gt;
-                                        <table id="tableFiltros" class="table table-hover table-mc-light-blue"
-                                               layout-align="center center">
-                                            <thead>
-                                            <tr>
-                                                <th ng-repeat="header in vm.tableFilterHeaders">{{header}}</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr ng-repeat="data in vm.report.filterfield_set">
-                                                <td data-title="{{'REPORTS.MODIFY.TABLE'|translate}}">
-                                                    <span ng-if="data.path_verbose!='' ">{{data.path_verbose}}</span>
-                                                    <span ng-if="data.path_verbose=='' ">{{vm.rootModel}}</span>
-                                                </td>
-                                                <td data-title="{{'REPORTS.TABLE_FILTER.NAME'|translate}}"><span>{{data.field_verbose}}</span>
-                                                </td>
-                                                <td data-title="{{'REPORTS.TABLE_FILTER.FILTER_TYPE'|translate}}">
-
-                                                    <md-select aria-label="tipo" ng-model="data.filter_type" disabled=""
-                                                               layout-align="space-around start">
-                                                        <md-option ng-repeat="filtro in  vm.filterType"
-                                                                   ng-value="filtro.id">
-                                                            {{filtro.value}}
-                                                        </md-option>
-                                                    </md-select>
-                                                </td>
-                                                <td data-title="{{'REPORTS.TABLE_FILTER.VALUE'|translate}}">
-                                                    <div aria-label="maximo"
-                                                         ng-if="data.filter_type=='max' || data.filter_type=='min'">
-                                                        <md-checkbox ng-model="data.filter_value"></md-checkbox>
-                                                    </div>
-                                                    <div ng-if="data.filter_type=='week_day'">
-                                                        <md-select aria-label="dia de la semana"
-                                                                   ng-model="data.filter_value"
-                                                                   layout-align="space-around start">
-                                                            <md-option ng-repeat="dia in  vm.days" ng-value="dia.id">
-                                                                {{dia.value}}
-                                                            </md-option>
-                                                        </md-select>
-                                                    </div>
-                                                    <div ng-if="data.filter_type=='range'">
-                                                        <md-input-container>
-                                                            <input type="text" aria-label="Fecha start"
-                                                                   ng-model="data.filter_value" mdp-date-picker
-                                                                   mdp-format="{{vm.formato}}"
-                                                                   mo-date-input="{{vm.formato}}" name="fecha_start"/>
-                                                        </md-input-container>
-                                                        <md-input-container>
-                                                            <input type="text" aria-label="Fecha end"
-                                                                   ng-model="data.filter_value2" mdp-date-picker
-                                                                   mdp-format="{{vm.formato}}"
-                                                                   mo-date-input="{{vm.formato}}" name="fecha_end"/>
-                                                        </md-input-container>
-                                                    </div>
-                                                    <div ng-if="data.filter_type=='gt' || field.filter_type=='gte' || field.filter_type=='lt' || field.filter_type=='lte' "
-                                                    >
-                                                        <md-input-container>
-                                                            <input type="text"
-                                                                   numbers-only
-                                                                   aria-label="text filter"
-                                                                   ng-model="data.filter_value"
-                                                                   name="textFilter"/>
-                                                        </md-input-container>
-                                                    </div>
-                                                    <div ng-if="data.filter_type!='range' && data.filter_type!='week_day' && data.filter_type!='max' && data.filter_type!='min' ">
-                                                        <md-input-container>
-                                                            <input type="text" aria-label="Fecha start"
-                                                                   ng-model="data.filter_value"
-                                                                   name="filtro"/>
-                                                        </md-input-container>
-                                                    </div>
-                                                </td>
-                                                <td data-title="{{'REPORTS.TABLE_FILTER.EXCLUDE'|translate}}">
-                                                    <md-checkbox aria-label="exclude"
-                                                                 ng-model="data.exclude"></md-checkbox>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>-->
-                                    <div class="table-responsive-vertical shadow-z-1" layout-align="space-around center">
+                                    <div layout-fill class="table-responsive-vertical shadow-z-1" layout-align="space-around center">
                                         <table id="table" class="table table-hover table-mc-light-blue"
                                                layout-align="center center">
                                             <thead>
@@ -435,7 +352,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
                             </md-virtual-repeat-container>
                         </md-content>
 
