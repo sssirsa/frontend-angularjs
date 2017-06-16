@@ -92,12 +92,12 @@
         }
 
         function initDates(field) {
-            if(field.filter_type==='range') {
-                if(field.filter_value2==="") {
+            if (field.filter_type === 'range') {
+                if (field.filter_value2 === "") {
                     field.filter_value = moment();
                     field.filter_value2 = moment();
                 }
-            }else if(field.filter_type==='week_day'){
+            } else if (field.filter_type === 'week_day') {
                 field.filter_value = "";
                 field.filter_value2 = "";
             }
@@ -153,11 +153,11 @@
         }
 
         function update() {
-            _.each(vm.report.filterfield_set, function(element, index) {
-                if(element.filter_type==='range') {
-                    var date_start=moment(element.filter_value).format('YYYY-MM-DD');
-                    var date_end=moment(element.filter_value2).format('YYYY-MM-DD');
-                    _.extend(element, {filter_value:date_start,filter_value2:date_end});
+            _.each(vm.report.filterfield_set, function (element, index) {
+                if (element.filter_type === 'range') {
+                    var date_start = moment(element.filter_value).format('YYYY-MM-DD');
+                    var date_end = moment(element.filter_value2).format('YYYY-MM-DD');
+                    _.extend(element, {filter_value: date_start, filter_value2: date_end});
                 }
             });
             Reportes.updateReport(vm.report).then(function () {

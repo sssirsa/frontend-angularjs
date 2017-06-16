@@ -2,7 +2,8 @@
     <md-card class="md-padding-card1" flex-gt-sm="90" flex="100" layout="column">
         <md-toolbar layout-padding>
             <div layout="row" flex="" layout-align="space-around stretch">
-                <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right md-fab-principal" ng-click="vm.clear()">
+                <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right md-fab-principal"
+                           ng-click="vm.clear()">
                     <md-icon md-font-icon="fa fa-plus" ng-style="{color: 'white'}">
 
                     </md-icon>
@@ -10,7 +11,8 @@
                 <h2 flex="70" flex-sm="100" flex-gt-xs="100" class="md-headline-1 text-center" translate="">
                     REPORTS.MODIFY.TITLE
                 </h2>
-                <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right md-fab-principal" ng-click="vm.showEditionFields(ev)">
+                <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right md-fab-principal"
+                           ng-click="vm.showEditionFields(ev)">
                     <md-icon md-font-icon="fa fa-plus" ng-style="{color: 'white'}">
 
                     </md-icon>
@@ -24,7 +26,7 @@
                  md-selected="vm.selectedTab"
                  cg-busy="{promise:vm.reportPromise,message:'Cargando reportes...',templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
             <md-tab label={{'REPORTS.MODIFY.FIELDS'|translate}}>
-                <div layout="column" flex="100" layout-align="start stretch" >
+                <div layout="column" flex="100" layout-align="start stretch">
                     <md-content flex="100"
                                 layout="row"
                                 layout-align="center center"
@@ -138,11 +140,11 @@
                                                        ng-model="field.filter_type"
                                                        ng-change="vm.initDates(field)"
                                                        layout-align="space-around start"
->
+                                            >
                                                 <div ng-init="filters = vm.getValidFilters(field.field_type)">
                                                     <md-option
-                                                        ng-repeat="filtro in  filters"
-                                                        ng-value="filtro.id"
+                                                            ng-repeat="filtro in  filters"
+                                                            ng-value="filtro.id"
 
                                                     >
                                                         {{filtro.value}}
@@ -167,7 +169,7 @@
                                                     </md-option>
                                                 </md-select>
                                             </div>
-                                            <div ng-if="field.filter_type=='range'" >
+                                            <div ng-if="field.filter_type=='range'">
                                                 <md-input-container>
                                                     <input type="text"
                                                            aria-label="start date"

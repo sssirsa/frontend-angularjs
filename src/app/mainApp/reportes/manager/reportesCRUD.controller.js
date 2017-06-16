@@ -25,7 +25,6 @@
         vm.fieldQueries = OPTIONS.field_types;
 
         //Function parse
-        vm.selected = selected;
         vm.lookup = lookup;
         vm.querySearch = querySearch;
         vm.selectedItemChange = selectedItemChange;
@@ -38,6 +37,10 @@
         vm.clear = clear;
         vm.exportar = exportar;
         vm.getValidFilters = getValidFilters;
+        vm.initDates = initDates;
+        vm.removeField = removeField;
+        vm.removeFilter = removeFilter;
+        vm.showEditionFields = showEditionFields;
 
         vm.tableDisplayHeaders = [
             Translate.translate('REPORTS.MODIFY.TABLE'),
@@ -117,7 +120,11 @@
             if (item != null) {
                 vm.selectedReport = angular.copy(item);
                 vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
-                    vm.report = res;
+                    vm.report = angular.copy(res);
+                    if (res.displayfield_set != null)
+                        vm.report.displayfield_set = reorganizeFieldIndexes(res.displayfield_set);
+                    if (res.filterfield_set != null)
+                        vm.report.filterfield_set = reorganizeFieldIndexes(res.filterfield_set);
                     Reportes.getModel(res.root_model).then(function (res) {
                         vm.rootModel = res.name;
                     }).catch();
@@ -211,17 +218,6 @@
             });
         }
 
-        function selected(item) {
-            vm.selectedTabs = 0;
-            vm.selectedReport = item;
-            vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
-                vm.report = res;
-                Reportes.getModel(res.root_model).then(function (res) {
-                    vm.rootModel = res.name;
-                }).catch();
-            });
-        }
-
         function remove() {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
@@ -282,6 +278,59 @@
                 return vm.filterType;
                 break;
         }
+    }
+
+    function initDates(field) {
+        if (field.filter_type === 'range') {
+            if (field.filter_value2 === "") {
+                field.filter_value = moment();
+                field.filter_value2 = moment();
+            }
+        } else if (field.filter_type === 'week_day') {
+            field.filter_value = "";
+            field.filter_value2 = "";
+        }
+    }
+
+    function removeField(id) {
+        vm.report.displayfield_set.splice(id, 1);
+        vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+    }
+
+    function removeFilter(id) {
+        vm.report.filterfield_set.splice(id, 1);
+        vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+    }
+
+    function reorganizeFieldIndexes(fields) {
+        for (i = 0; i < fields.length; i++) {
+            fields[i].position = i;
+        }
+        return fields;
+    }
+
+    function showEditionFields(ev) {
+        $mdDialog.show({
+            controller: 'ModelsReportModalController',
+            controllerAs: 'vm',
+            templateUrl: 'app/mainApp/reportes/edicion/modal/models.modal.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            fullscreen: true,
+            clickOutsideToClose: true,
+            locals: {
+                reporte: vm.report
+            }
+        }).then(function (res) {
+            Array.prototype.push.apply(vm.report.displayfield_set, res.fields);
+            vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+            Array.prototype.push.apply(vm.report.filterfield_set, res.filters);
+            vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+        }).catch(function (err) {
+            if (err != null) {
+                toastr.warning(vm.errorMessage, vm.errorTitle);
+            }
+        });
     }
 
 })();
