@@ -71,6 +71,12 @@
                                             </md-select>
                                         </td>
                                         <td data-title="{{vm.tableDisplayHeaders[5]}}">
+                                            <md-switch ng-model="field.group"></md-switch>
+                                        </td>
+                                        <td data-title="{{vm.tableDisplayHeaders[6]}}">
+                                            <md-switch ng-model="field.total"></md-switch>
+                                        </td>
+                                        <td data-title="{{vm.tableDisplayHeaders[7]}}">
                                             <md-button aria-label="fab button"
                                                        class="md-fab md-scale md-mini"
                                                        md-colors="{background: 'RED'}"
@@ -213,6 +219,9 @@
                                             </div>
                                         </td>
                                         <td data-title="{{vm.tableFilterHeaders[6]}}">
+                                            <md-switch ng-model="field.exclude"></md-switch>
+                                        </td>
+                                        <td data-title="{{vm.tableFilterHeaders[7]}}">
                                             <md-button aria-label="fab button"
                                                        class="md-fab md-scale md-mini  md-ink-ripple"
                                                        md-colors="{background: 'RED'}"
