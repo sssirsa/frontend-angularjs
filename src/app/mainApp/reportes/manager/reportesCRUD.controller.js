@@ -33,7 +33,6 @@
         vm.remove = remove;
         vm.update = update;
         vm.onTabPreview = onTabPreview;
-        vm.editReport = editReport;
         vm.clear = clear;
         vm.exportar = exportar;
         vm.getValidFilters = getValidFilters;
@@ -208,9 +207,14 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true
-            }).then(function () {
-
-                toastr.success(vm.successCreate, vm.successTitle);
+            }).then(function (reportCreatedSuccess) {
+                Reportes.getReportObject(reportCreatedSuccess.id).then(function(reportObtainedSuccess){
+                    clear();
+                    vm.searchParameter=reportObtainedSuccess.name;
+                    vm.report=angular.copy(reportObtainedSuccess);
+                    vm.selectedReport=angular.copy(reportObtainedSuccess);
+                    toastr.success(vm.successCreate, vm.successTitle);
+                })
             }).catch(function (err) {
                 if (err != null) {
                     toastr.error(vm.errorCreate, vm.errorTitle);
@@ -237,11 +241,6 @@
             });
 
 
-        }
-
-
-        function editReport() {
-            $state.go('triangular.admin-default.reportModify', {id: vm.report.id});
         }
 
         function reportSearch() {
