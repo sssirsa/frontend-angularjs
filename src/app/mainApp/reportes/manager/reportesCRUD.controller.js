@@ -8,7 +8,7 @@
         .module('app.mainApp.reportes')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate, $state) {
+    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
@@ -243,19 +243,6 @@
 
         }
 
-        function reportSearch() {
-            return function (input, text) {
-                if (!angular.isString(text) || text === '') {
-                    return input;
-                }
-
-                return _.filter(input, function (item) {
-                    return item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0;
-                });
-
-            };
-        }
-
         function getValidFilters(fieldType) {
             switch (fieldType) {
                 case 'CharField':
@@ -329,6 +316,19 @@
                 }
             });
         }
+    }
+
+    function reportSearch() {
+        return function (input, text) {
+            if (!angular.isString(text) || text === '') {
+                return input;
+            }
+
+            return _.filter(input, function (item) {
+                return item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0;
+            });
+
+        };
     }
 
 })();
