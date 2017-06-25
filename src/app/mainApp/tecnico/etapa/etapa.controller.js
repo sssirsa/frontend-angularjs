@@ -24,7 +24,7 @@
 
         };
         vm.disabledBuscar = false;
-        vm.diagnosticoEntrada = {}
+        vm.diagnosticoEntrada = {};
         vm.showInsumosSection = true;
         vm.catalogoInsumos = null;//array con todos los caatalogos de insumo disponibles de la etapa
         vm.catalogoSelected = {};//Elemento del tipo Catalogo de Insumo del insumo que se deseará agregar
@@ -367,9 +367,35 @@
 
         function showPreCheckDialog(ev) {
             vm.cabinetid = vm.idCabinet;
+            
             if (vm.etapaActual.actual_etapa.nombre == 'E4') {
                 vm.diagnostico.tipo = 'salida';
                 vm.diagnostico.isSalida = true;
+                //Para mandar la etapa para guardar una vez hecho el prechecklist de salida
+                var sigetapa, etapaactual;
+                vm.etapaActual.diagnostico = vm.diagnostico.id;
+                etapaactual = vm.etapaActual.actual_etapa.id;
+                sigetapa = vm.etapaActual.siguiente_etapa.id;
+                vm.etapaActual.actual_etapa = null;
+                vm.etapaActual.siguiente_etapa = null;
+                vm.etapaActual.actual_etapa = etapaactual;
+                vm.etapaActual.siguiente_etapa = sigetapa;
+                if (vm.etapaActual.id == null) {
+
+                    eliminaNoSeleccionados();
+
+
+                    vm.filtradoNoSelected = _.where(vm.insumos_loteUsados, {agregar: true});
+                    vm.etapaActual.insumos_lote = vm.filtradoNoSelected;
+                    if(vm.etapaActual.insumos==undefined){
+                        vm.etapaActual.insumos=[];
+                    }
+                    if( vm.etapaActual.insumos.length!=0 && vm.etapaActual.insumos[0].agregar==false){
+
+                        vm.etapaActual.insumos=[];
+                    }
+                }
+                //Termina el adendum para guardar etapa al hacer Precheck
             }
             $mdDialog.show({
                 controller: 'checklistController',
@@ -380,6 +406,7 @@
                 fullscreen: true,
 
                 locals: {
+                    etapaActual:vm.etapaActual,
                     cabinet: vm.idCabinet,
                     diagnosticoEtapa: vm.diagnostico
                 }
@@ -569,7 +596,7 @@
                 actual_etapa: '',
                 siguiente_etapa: ''
 
-            }
+            };
             vm.filtradoNoSelected = [];
             vm.showInsumo = false;
             vm.compresor = {
