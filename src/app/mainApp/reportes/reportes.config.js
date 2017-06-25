@@ -44,7 +44,19 @@
             templateUrl: 'app/mainApp/reportes/list/listReports.tmpl.html',
             controller: 'ListReportsController',
             controllerAs: 'vm'
-        });
+        })
+            .state('triangular.admin-default.reporteProduccion', {
+                url: '/reporte',
+                data: {
+                    roles: ['Administrador']
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/reportes/reporteInsumos/reporteProduccion.tmpl.html',
+                controller: 'reporteProduccionController',
+                controllerAs: 'vm'
+            });
 
     }
 })();
