@@ -570,7 +570,6 @@
                 });
 
             }
-            vm.cancel();
         }
 
         function validaMax(index) {
