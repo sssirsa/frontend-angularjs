@@ -5,7 +5,7 @@
     "use strict";
     angular.module("app.mainApp.tecnico").controller("reporteProduccionController", reporteProduccionController);
 
-    function reporteProduccionController(CONFIGS,MarcaCabinet, TipoEquipo,$window, Servicios, Helper, toastr, Sucursal, Reporte) {
+    function reporteProduccionController(CONFIGS,MarcaCabinet,Translate,TipoEquipo,$window, Servicios, Helper, toastr, Sucursal, Reporte) {
         var vm = this;
         vm.reporte = {
             fecha: ""
@@ -18,10 +18,11 @@
         vm.saveReporte = saveReporte;
         vm.appendElement = appendElement;
         vm.filterModels=filterModels;
+        activate();
         getFecha();
         getEtapasList();
         getSucursal();
-        activate();
+
         ////////////////
         function getEtapasList() {
             var promise = Servicios.etapaList();
@@ -32,11 +33,15 @@
                     notifyError(1000);
                 }
             }).catch(function (res) {
-                notifyError(res.status);
+                toastr.error(vm.errorMessage,vm.errorTitle);
             });
         }
 
         function activate(){
+            vm.errorTitle=Translate.translate('MAIN.MSG.ERROR_TITLE');
+            vm.errorMessage=Translate.translate('MAIN.MSG.ERROR_CATALOG');
+            vm.notFoundMessage = Translate.translate('MAIN.MSG.NOT_FOUND');
+            vm.notGenerateMessage = Translate.translate('REPORTS.ERRORS.NOT_GENERATE');
             vm.marca=null;
             MarcaCabinet.listObject().then(function(res){
                 vm.marcas=Helper.filterDeleted(res,true);
@@ -49,11 +54,13 @@
             TipoEquipo.listWitout().then(function (res) {
                 vm.tiposEquipo=Helper.filterDeleted(res,true);
                 vm.tiposEquipo=_.sortBy(vm.tiposEquipo, 'nombre');
+            }).catch(function(err){
+                toastr.error(vm.errorMessage,vm.errorTitle);
             });
         }
 
         function filterModels(){
-            if(vm.marca!=null) {
+            if(vm.marca) {
                 vm.modelos = MarcaCabinet.getModels(vm.marca).then(function(res){
                     if(res.length>0) {
                         vm.modelos = Helper.filterDeleted(res,true);
@@ -88,20 +95,37 @@
             var CurrentDate = new Date();
             vm.day = CurrentDate.getDate();
             vm.month = CurrentDate.getMonth();
-            vm.anioActual = CurrentDate.getFullYear();
+            vm.anioActual =CurrentDate.getFullYear();
         }
 
         function saveReporte() {
-            //vm.reporte.fecha = vm.meses.indexOf(vm.mes) + '-' + vm.anio;
-            vm.reporte.fecha = vm.meses.indexOf(vm.mes) + '-2017';
-            var promise = Reporte.reporteInsumos(vm.reporte);
-            promise.then(function (res) {
+            vm.reporte.fecha = vm.meses.indexOf(vm.mes) + '-' + vm.anio;
+            vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function (res) {
                 $window.open(res.url, '_blank', '');
             }).catch(function (res) {
-                console.log(res);
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                if(res.status === 404){
+                    toastr.warning(vm.notGenerateMessage, vm.errorTitle);
+                }else {
+                    toastr.error(vm.errorMessage, vm.errorTitle);
+                }
             });
 
+        }
+
+        function notifyError(status) {
+            switch (status) {
+                case 400:
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    break;
+                case 1000:
+                    toastr.warning(vm.notFoundMessage, vm.errorTitle);
+                    break;
+                case 500:
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    break;
+
+
+            }
         }
     }
 })();

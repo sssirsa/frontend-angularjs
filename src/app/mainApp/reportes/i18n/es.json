@@ -38,7 +38,9 @@
         },
         "ERRORS": {
             "NOT_FOUND": "No se encontró ningun reporte",
-            "REQUIRED": "El campo es requerido"
+            "REQUIRED": "El campo es requerido",
+            "YEAR":"El año mínimo a elegir es 2016 y máximo",
+            "NOT_GENERATE":"No se obtuvieron resultados con estos filtros"
         },
         "DIALOG": {
             "CREATE": {

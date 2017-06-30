@@ -1,5 +1,5 @@
 <div ng-cloak>
-    <md-card layout-padding="">
+    <md-card layout-padding="" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
         <h2 class="md-headline-1 text-center">
             {{'REPORTS.TITLES.PRODUCTION'|translate}}</h2>
         <form name="formReport" ng-submit="vm.generateReport()">
@@ -91,24 +91,15 @@
                         </div>
                     </md-input-container>
                 </md-input-container>
-                <div flex="33">
-                    <md-input-container>
-                        <label>{{'REPORTS.FIELDS.YEAR'|translate}}</label>
-                        <div range-spinner
-                             range-min="2016"
-                             range-step="1"
-                             range-max="vm.anioActual"
-                             range-default-value="vm.anioActual"
-                             range-decimal-precision="1"
-                             range-model="vm.anio"
-                             accept-decimal="false"
-                             id-of-field="rangeFieldId"
-                            >
-                        </div>
+                <md-input-container flex="33">
+                    <label>{{'REPORTS.FIELDS.YEAR'|translate}}</label>
 
-
-                    </md-input-container>
-                </div>
+                    <input type="number" ng-model="vm.anio" name="anio" min="2016" max="vm.anioActual" required="required"/>
+                    <div ng-messages="formReport.anio.$error">
+                        <div ng-message="min">{{'REPORTS.ERRORS.YEAR'|translate}} {{vm.anioActual}}</div>
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
             </div>
             <div layout="row" flex="100">
                 <div flex="80">
