@@ -37,7 +37,7 @@
         $rootScope.$on(AUTH_EVENTS.sessionRestore, function (event) {
 
             //authorization.authorize();
-            Helper.getNotificationsByUser();
+            //Helper.getNotificationsByUser();
 
         });
         $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
@@ -46,14 +46,14 @@
                 if (dfs.id !== Session.userInformation.id) {
                     if (Session.userRole === 'Administrador') {
                         Helper.showNotification('El usuario ' + dfs.usuario + " creo una solicitud ", "Nueva solicitud de " + dfs.solicitud + " !!!", null);
-                        Helper.getNotificationsByUser();
+                        //Helper.getNotificationsByUser();
 
                     }
                 }
             });
             canal[1].bind('success_create', function (dfs) {
                 Helper.showNotification('El reporte ' + dfs.name + " creo exitosamente ", "Reporte terminado!!!", dfs.link);
-                Helper.getNotificationsByUser();
+                //Helper.getNotificationsByUser();
             });
         });
 
