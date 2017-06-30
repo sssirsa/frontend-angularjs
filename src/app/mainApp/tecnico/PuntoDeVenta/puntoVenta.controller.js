@@ -267,7 +267,6 @@
 
             }
             else {
-
                 notifyError(407);
             }
 
@@ -490,8 +489,10 @@
 
             vm.filtradoNoSelected = _.where(vm.insumos_loteUsados, {agregar: true});
             vm.puntoVenta.insumos_lote = vm.filtradoNoSelected;
-            vm.puntoVenta.modelo = vm.modelo.id;
-            if (vm.puntoVenta.insumos == undefined) {
+            if(vm.modelo.id) {
+                vm.puntoVenta.modelo = vm.modelo.id;
+            }
+            if (!vm.puntoVenta.insumos) {
                 vm.puntoVenta.insumos = [];
             }
             if (vm.puntoVenta.insumos.length != 0 && vm.puntoVenta.insumos[0].agregar == false) {
@@ -535,7 +536,7 @@
 
                     vm.puntoVenta.insumos = [];
                 }
-
+                console.log(vm.puntoVenta);
                 promise = PuntoDeVenta.create(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successCreateMessage);
@@ -543,31 +544,31 @@
                     vm.cancel();
 
                 }).catch(function (res) {
-
-
-                    vm.error = res.data.errors[0].message;
-
-                    notifyError(res.status);
-
-
+                    //vm.error = res.data.errors[0].message;
+                    if(res) {
+                        notifyError(res.status);
+                    }
+                    else{
+                        notifyError(-1);
+                    }
                 });
             }
             else {
                 var previousJSON = JSON.stringify(vm.puntoVenta);
                 eliminaNoSeleccionados();
-
+                console.log(vm.puntoVenta);
                 promise = PuntoDeVenta.modify(vm.puntoVenta);
                 promise.then(function (res) {
-
                     toastr.success(vm.successTitle, vm.successUpdateMessage);
                     vm.puntoVenta = res;
                     vm.cancel();
                 }).catch(function (res) {
-                    if (res.status == 400) {
-                        vm.errorMessage = res.data.errors[0].message;// checar condicion de campo de res
-
+                    if(res) {
+                        notifyError(res.status);
                     }
-                    notifyError(res.status);
+                    else{
+                        notifyError(-1);
+                    }
                 });
 
             }
