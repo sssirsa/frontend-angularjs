@@ -374,8 +374,9 @@
                 case 500:
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                     break;
-
-
+                default:
+                    toastr.error(vm.errorMessage, vm.errorTitle);
+                    break;
             }
         }
 
