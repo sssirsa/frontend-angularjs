@@ -67,7 +67,7 @@
         vm.insumoLote = {};
         vm.insumos_loteUsados = [];//Arreglo que ya posee el arreglo como es necesario para agregar los insumos al formato de arreglo para agregarlos a la etapa
         vm.insumos_sinStock = [];
-        vm.puntoVenta = {insumos: []};
+        //vm.puntoVenta = null;
         vm.insumoUnicoData = [];
         vm.mostrarCompresor = false;
         vm.inputDisabled = false;
@@ -172,7 +172,30 @@
         //Funcion Activate al iniciar la vista
         function activate() {
             vm.marca = null;
-            vm.puntoVenta = {};
+            vm.puntoVenta = {
+                insumos: [],
+                insumos_lote: [],
+                persona: null,
+                semana: null,
+                hora_recepcion: null,
+                piso: null,
+                campo: null,
+                movimiento: null,
+                entrega: null,
+                km: null,
+                tipo_trabajo: null,
+                nombre_establecimiento: null,
+                direccion: null,
+                activo: null,
+                serie: null,
+                fecha_reporte: null,
+                fecha_servicio: null,
+                descripcion_trabajo: null,
+                observaciones_cliente: null,
+                observaciones_tecnicas: null,
+                modelo: null,
+                cerrado:false
+            };
             MarcaCabinet.listObject().then(function (res) {
                 vm.marcas = Helper.filterDeleted(res, true);
             }).catch(function () {
@@ -221,29 +244,28 @@
             vm.messageNotTipoEquipo = Translate.translate('MAIN.MSG.NOTTIPOEQUIPO');
 
             vm.puntoVenta = {
-                "insumos": [],
-                "insumos_lote": [],
-                "persona": null,
-                "semana": null,
-                "hora_recepcion": null,
-                "fecha": null,
-                "piso": null,
-                "campo": null,
-                "movimiento": null,
-                "entrega": null,
-                "km": null,
-                "tipo_trabajo": null,
-                "nombre_establecimiento": null,
-                "direccion": null,
-                "activo": null,
-                "serie": null,
-                "fecha_reporte": null,
-                "fecha_servicio": null,
-                "descripcion_trabajo": null,
-                "observaciones_cliente": null,
-                "observaciones_tecnicas": null,
-                "modelo": null,
-                "cerrado":false
+                insumos: [],
+                insumos_lote: [],
+                persona: null,
+                semana: null,
+                hora_recepcion: null,
+                piso: null,
+                campo: null,
+                movimiento: null,
+                entrega: null,
+                km: null,
+                tipo_trabajo: null,
+                nombre_establecimiento: null,
+                direccion: null,
+                activo: null,
+                serie: null,
+                fecha_reporte: null,
+                fecha_servicio: null,
+                descripcion_trabajo: null,
+                observaciones_cliente: null,
+                observaciones_tecnicas: null,
+                modelo: null,
+                cerrado:false
             };
 
         }
@@ -536,7 +558,7 @@
 
                     vm.puntoVenta.insumos = [];
                 }
-                console.log(vm.puntoVenta);
+                console.log(JSON.stringify(vm.puntoVenta));
                 promise = PuntoDeVenta.create(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successCreateMessage);
@@ -554,9 +576,8 @@
                 });
             }
             else {
-                var previousJSON = JSON.stringify(vm.puntoVenta);
                 eliminaNoSeleccionados();
-                console.log(vm.puntoVenta);
+                console.log(JSON.stringify(vm.puntoVenta));
                 promise = PuntoDeVenta.modify(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successUpdateMessage);
