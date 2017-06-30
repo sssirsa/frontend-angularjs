@@ -558,7 +558,6 @@
 
                     vm.puntoVenta.insumos = [];
                 }
-                console.log(JSON.stringify(vm.puntoVenta));
                 promise = PuntoDeVenta.create(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successCreateMessage);
@@ -577,7 +576,6 @@
             }
             else {
                 eliminaNoSeleccionados();
-                console.log(JSON.stringify(vm.puntoVenta));
                 promise = PuntoDeVenta.modify(vm.puntoVenta);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successUpdateMessage);
