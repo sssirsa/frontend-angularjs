@@ -272,7 +272,7 @@
 
                     //vm.insumos_loteUsados.push(vm.insumoLote);
                     //Verificar porque no se manda el tipo de insumo en el promise
-                   
+
                     if(vm.insumoLote.tipo==='L'||vm.insumoLote.tipo==='l'){
                         vm.insumos_loteUsados.push(vm.insumoLote);
                     }
@@ -340,8 +340,9 @@
                 case 500:
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                     break;
-
-
+                default:
+                    toastr.error(vm.errorMessage, vm.errorTitle);
+                    break;
             }
         }
 
@@ -510,13 +511,10 @@
                     vm.cancel();
 
                 }).catch(function (res) {
-
-
-                    vm.error=res.data.errors[0].message;
-
+                    if(res.status !== 500) {
+                        vm.error = res.data.errors[0].message;
+                    }
                     notifyError(res.status);
-
-
                 });
             }
             else {
@@ -536,7 +534,6 @@
                 });
 
             }
-            vm.cancel();
         }
         function validaMax(index) {
             if (parseFloat(vm.insumos_loteUsados[index].cantidad) > parseFloat(vm.insumos_loteUsados[index].cantidadMax)){

@@ -375,8 +375,14 @@
                                             </md-input-container>
                                             <md-input-container class="md-block">
                                                 <label>{{'CREATE_REQUEST.FORM.LABEL.STATUS'|translate}}</label>
-                                                <textarea ng-model="vm.requisitoVenta.status" name="status"
-                                                          ng-required="vm.tipo_solicitud==2"></textarea>
+                                                <md-select ng-model="vm.requisitoVenta.status"
+                                                           name="status"
+                                                           placeholder="{{'TECNICO.FORM.LABEL.STATUS'|translate}}"
+                                                           ng-required="vm.tipo_solicitud==2">
+                                                    <md-option ng-repeat="status in vm.status" ng-value="status.value">{{status.value}}
+                                                    </md-option>
+
+                                                </md-select>
                                                 <div ng-messages="solicitudForm.status.$error">
                                                     <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                                 </div>
