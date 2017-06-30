@@ -1,0 +1,140 @@
+<div ng-cloak>
+    <md-card layout-padding="">
+        <h2 class="md-headline-1 text-center">
+            {{'REPORTS.TITLES.PRODUCTION'|translate}}</h2>
+        <form name="formReport" ng-submit="vm.generateReport()">
+            <div layout="row">
+                <md-input-container flex="50">
+                    <md-input-container layout="column" layout-fill="true" flex="100">
+                        <label translate>{{'REPORTS.FIELDS.STAGE'|translate}}</label>
+                        <md-select ng-model="vm.etapa" name="select"
+                                   ng-change="vm.appendElement('etapa',vm.etapa)"
+                                   ng-required="">
+                            <md-option ng-repeat="etap in vm.etapas" ng-value="etap.nombre">{{etap.nombre}} :
+                                {{etap.descripcion}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="formReport.select.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>{{'INPUT.Subsidiary'|translate}}</label>
+                    <md-select name="selectSubsidiary"
+                               ng-model="vm.sucursal"
+                               ng-disabled="vm.sucursal!=null"
+                               ng-change="vm.appendElement('sucursal',vm.sucursal)"
+                               md-no-asterisk="">
+                        <md-option ng-repeat="sucursal in vm.Sucursales" value="{{sucursal.id}}">
+                            {{sucursal.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectSubsidiary.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex="50" class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Brand'|translate}}</label>
+                    <md-select name="selectBrand"
+                               ng-model="vm.marca"
+                               md-on-close="vm.filterModels()"
+                               md-no-asterisk="">
+                        <md-option ng-repeat="marca in vm.marcas"
+                                   value="{{marca.id}}">{{marca.descripcion}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectBrand.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="50" class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Model'|translate}}</label>
+                    <md-select name="selectModel"
+                               ng-model="vm.modelo"
+                               ng-required="vm.marca!=null"
+                               ng-change="vm.appendElement('modelo',vm.modelo)"
+                               ng-disabled="vm.marca==null || vm.modelos.length == 0"
+                               md-no-asterisk="">
+                        <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">{{modelo.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectModel.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex="33">
+                    <label>{{'MODAL_REQUEST.FORM.LABEL.TYPE_EQUIPMENT'|translate}}</label>
+                    <md-select ng-model="vm.tipo_equipo" name="equipment"
+                               ng-change="vm.appendElement('tipo_equipo',vm.tipo_equipo)"
+                               placeholder="{{'REPORTS.FIELDS.TYPE_EQUIPMENT'|translate}}">
+                        <md-option ng-repeat="tipoEquipo in vm.tiposEquipo" ng-value="tipoEquipo.id">{{tipoEquipo.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.equipment.$error">
+                        <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="33">
+                    <md-input-container layout="column" layout-fill="true" flex="100">
+                        <label translate>{{'REPORTS.FIELDS.MONTH'|translate}}</label>
+                        <md-select ng-model="vm.mes" name="month" required="">
+                            <md-option ng-repeat="mes in vm.meses" ng-value="mes">{{mes}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="formReport.month.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </md-input-container>
+                <div flex="33">
+                    <md-input-container>
+                        <label>{{'REPORTS.FIELDS.YEAR'|translate}}</label>
+                        <div range-spinner
+                             range-min="2016"
+                             range-step="1"
+                             range-max="vm.anioActual"
+                             range-default-value="vm.anioActual"
+                             range-decimal-precision="1"
+                             range-model="vm.anio"
+                             accept-decimal="false"
+                             id-of-field="rangeFieldId"
+                            >
+                        </div>
+
+
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" flex="100">
+                <div flex="80">
+                    <div class="chipsdemoCustomInputs" layout-fill="">
+                        <label>{{'REPORTS.FIELDS.CABINET_LIST'|translate}}</label>
+                        <md-chips ng-model="vm.cabinet"
+                                  md-on-add="vm.appendElement('economico',$chip)"
+                                  md-removable="vm.removable"
+                                  delete-button-label="Remove Tag">
+                            <input type="text" only-digits ng-model="vm.cabinetBuffer"
+                                   placeholder="{{'REPORTS.FIELDS.ECONOMIC'|translate}}">
+                        </md-chips>
+                    </div>
+                </div>
+                <div flex="20">
+                    <md-button class="md-primary md-raised"
+                               aria-label="Imprimir"
+                               ng-click="vm.saveReporte()"
+                               ng-disabled="formReport.$invalid">
+                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                    </md-button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </md-card>
+</div>

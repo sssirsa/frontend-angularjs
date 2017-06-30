@@ -4,13 +4,22 @@
         "TITLE_LIST":"Listado de reportes solicitados",
         "INFORMATION": "Información del reporte",
         "FIELD_SET": "Campos",
+        "TITLES":{
+          "PRODUCTION":"Reporte de producción"
+        },
         "FIELDS": {
             "SEARCH": "Busqueda de reportes",
             "INFORMATION": "Información del reporte",
             "NAME": "Nombre",
             "MODIFIED": "Fecha de modificación",
             "DESCRIPTION": "Descripción",
-            "ROOT_MODEL": "Modelo raíz"
+            "ROOT_MODEL": "Modelo raíz",
+            "YEAR": "Año",
+            "MONTH": "Mes",
+            "STAGE":"Etapa",
+            "CABINET_LIST":"Lista de Cabinets",
+            "ECONOMIC":"Económico",
+            "TYPE_EQUIPMENT":"Tipo de Equipo"
         },
         "TABLE": {
             "MODEL": "Modelo",

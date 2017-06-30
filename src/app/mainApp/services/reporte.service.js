@@ -3,25 +3,21 @@
  */
 
 (function () {
-    'use strict';
+    "use strict";
 
     angular
-        .module('app')
-        .factory('Reporte', Reporte);
+        .module("app")
+        .factory("Reporte", Reporte);
 
     /* @ngInject */
-    function Reporte($q, Restangular) {
-        var path=Restangular.all('reports/insumos');
+    function Reporte(Restangular) {
+        var path = Restangular.all("reports/insumos");
 
         return {
-
-            reporteInsumos: reporteInsumos,
+            reporteInsumos: reporteInsumos
         };
-
-
-        function reporteInsumos(object){
+        function reporteInsumos(object) {
             return path.post(object);
         }
-
     }
 })();
