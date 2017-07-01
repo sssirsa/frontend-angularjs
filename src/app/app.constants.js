@@ -345,8 +345,8 @@
                 }],
             field_types:[
                 {
-                    id:"None",
-                    text:""
+                    id:"",
+                    text:"Normal"
                 },
                 {
                     id:"Sum",
