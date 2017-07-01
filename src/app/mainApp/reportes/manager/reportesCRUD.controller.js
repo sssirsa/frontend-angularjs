@@ -2,13 +2,13 @@
  * Created by Emmanuel on 16/10/2016.
  */
 (function () {
-    'use_strict';
+    "use strict";
 
     angular
         .module('app.mainApp.reportes')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate, $state) {
+    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
@@ -25,7 +25,6 @@
         vm.fieldQueries = OPTIONS.field_types;
 
         //Function parse
-        vm.selected = selected;
         vm.lookup = lookup;
         vm.querySearch = querySearch;
         vm.selectedItemChange = selectedItemChange;
@@ -34,10 +33,13 @@
         vm.remove = remove;
         vm.update = update;
         vm.onTabPreview = onTabPreview;
-        vm.editReport = editReport;
         vm.clear = clear;
         vm.exportar = exportar;
         vm.getValidFilters = getValidFilters;
+        vm.initDates = initDates;
+        vm.removeField = removeField;
+        vm.removeFilter = removeFilter;
+        vm.showEditionFields = showEditionFields;
 
         vm.tableDisplayHeaders = [
             Translate.translate('REPORTS.MODIFY.TABLE'),
@@ -90,7 +92,7 @@
                 vm.reports = _.sortBy(vm.reports, 'name');
 
             });
-            if ($stateParams.id != null) {
+            if ($stateParams.id !== null) {
                 var obj = {
                     id: $stateParams.id
                 };
@@ -114,10 +116,14 @@
         }
 
         function selectedItemChange(item) {
-            if (item != null) {
+            if (item !== null) {
                 vm.selectedReport = angular.copy(item);
                 vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
-                    vm.report = res;
+                    vm.report = angular.copy(res);
+                    if (res.displayfield_set !== null)
+                        vm.report.displayfield_set = reorganizeFieldIndexes(res.displayfield_set);
+                    if (res.filterfield_set !== null)
+                        vm.report.filterfield_set = reorganizeFieldIndexes(res.filterfield_set);
                     Reportes.getModel(res.root_model).then(function (res) {
                         vm.rootModel = res.name;
                     }).catch();
@@ -143,7 +149,7 @@
             }).then(function () {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorExport, vm.errorTitle);
                 }
             });
@@ -156,10 +162,10 @@
         }
 
         function update() {
-            Reportes.updateReport(vm.report).then(function (res) {
+            Reportes.updateReport(vm.report).then(function () {
                 toastr.success(vm.successUpdate, vm.successTitle);
                 activate();
-            }).catch(function (res) {
+            }).catch(function () {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             });
         }
@@ -186,7 +192,7 @@
                 activate();
                 toastr.success(vm.successClone, vm.successTitle);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorClone, vm.errorTitle);
                 }
             });
@@ -201,24 +207,18 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true
-            }).then(function () {
-
-                toastr.success(vm.successCreate, vm.successTitle);
+            }).then(function (reportCreatedSuccess) {
+                Reportes.getReportObject(reportCreatedSuccess.id).then(function(reportObtainedSuccess){
+                    clear();
+                    vm.searchParameter=reportObtainedSuccess.name;
+                    vm.report=angular.copy(reportObtainedSuccess);
+                    vm.selectedReport=angular.copy(reportObtainedSuccess);
+                    toastr.success(vm.successCreate, vm.successTitle);
+                })
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorCreate, vm.errorTitle);
                 }
-            });
-        }
-
-        function selected(item) {
-            vm.selectedTabs = 0;
-            vm.selectedReport = item;
-            vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
-                vm.report = res;
-                Reportes.getModel(res.root_model).then(function (res) {
-                    vm.rootModel = res.name;
-                }).catch();
             });
         }
 
@@ -243,11 +243,79 @@
 
         }
 
-
-        function editReport() {
-            $state.go('triangular.admin-default.reportModify', {id: vm.report.id});
+        function getValidFilters(fieldType) {
+            switch (fieldType) {
+                case 'CharField':
+                    return vm.filterTypeChar;
+                    break;
+                case 'DateTimeField':
+                    return vm.filterTypeDate;
+                    break;
+                case 'DateField':
+                    return vm.filterTypeDate;
+                    break;
+                case 'DecimalField':
+                    return vm.filterInt;
+                case 'IntegerField':
+                    return vm.filterInt;
+                default:
+                    return vm.filterType;
+                    break;
+            }
         }
 
+        function initDates(field) {
+            if (field.filter_type === 'range') {
+                if (field.filter_value2 === "") {
+                    field.filter_value = moment();
+                    field.filter_value2 = moment();
+                }
+            } else if (field.filter_type === 'week_day') {
+                field.filter_value = "";
+                field.filter_value2 = "";
+            }
+        }
+
+        function removeField(id) {
+            vm.report.displayfield_set.splice(id, 1);
+            vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+        }
+
+        function removeFilter(id) {
+            vm.report.filterfield_set.splice(id, 1);
+            vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+        }
+
+        function reorganizeFieldIndexes(fields) {
+            for (i = 0; i < fields.length; i++) {
+                fields[i].position = i;
+            }
+            return fields;
+        }
+
+        function showEditionFields(ev) {
+            $mdDialog.show({
+                controller: 'ModelsReportModalController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/reportes/edicion/modal/models.modal.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                fullscreen: true,
+                clickOutsideToClose: true,
+                locals: {
+                    reporte: vm.report
+                }
+            }).then(function (res) {
+                Array.prototype.push.apply(vm.report.displayfield_set, res.fields);
+                vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+                Array.prototype.push.apply(vm.report.filterfield_set, res.filters);
+                vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+            }).catch(function (err) {
+                if (err !== null) {
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                }
+            });
+        }
     }
 
     function reportSearch() {
@@ -261,27 +329,6 @@
             });
 
         };
-    }
-
-    function getValidFilters(fieldType) {
-        switch (fieldType) {
-            case 'CharField':
-                return vm.filterTypeChar;
-                break;
-            case 'DateTimeField':
-                return vm.filterTypeDate;
-                break;
-            case 'DateField':
-                return vm.filterTypeDate;
-                break;
-            case 'DecimalField':
-                return vm.filterInt;
-            case 'IntegerField':
-                return vm.filterInt;
-            default:
-                return vm.filterType;
-                break;
-        }
     }
 
 })();
