@@ -2,7 +2,7 @@
  * Created by Emmanuel on 16/10/2016.
  */
 (function () {
-    'use_strict';
+    "use strict";
 
     angular
         .module('app.mainApp.reportes')
@@ -92,7 +92,7 @@
                 vm.reports = _.sortBy(vm.reports, 'name');
 
             });
-            if ($stateParams.id != null) {
+            if ($stateParams.id !== null) {
                 var obj = {
                     id: $stateParams.id
                 };
@@ -116,13 +116,13 @@
         }
 
         function selectedItemChange(item) {
-            if (item != null) {
+            if (item !== null) {
                 vm.selectedReport = angular.copy(item);
                 vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
                     vm.report = angular.copy(res);
-                    if (res.displayfield_set != null)
+                    if (res.displayfield_set !== null)
                         vm.report.displayfield_set = reorganizeFieldIndexes(res.displayfield_set);
-                    if (res.filterfield_set != null)
+                    if (res.filterfield_set !== null)
                         vm.report.filterfield_set = reorganizeFieldIndexes(res.filterfield_set);
                     Reportes.getModel(res.root_model).then(function (res) {
                         vm.rootModel = res.name;
@@ -149,7 +149,7 @@
             }).then(function () {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorExport, vm.errorTitle);
                 }
             });
@@ -162,10 +162,10 @@
         }
 
         function update() {
-            Reportes.updateReport(vm.report).then(function (res) {
+            Reportes.updateReport(vm.report).then(function () {
                 toastr.success(vm.successUpdate, vm.successTitle);
                 activate();
-            }).catch(function (res) {
+            }).catch(function () {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             });
         }
@@ -192,7 +192,7 @@
                 activate();
                 toastr.success(vm.successClone, vm.successTitle);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorClone, vm.errorTitle);
                 }
             });
@@ -216,7 +216,7 @@
                     toastr.success(vm.successCreate, vm.successTitle);
                 })
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorCreate, vm.errorTitle);
                 }
             });
@@ -311,7 +311,7 @@
                 Array.prototype.push.apply(vm.report.filterfield_set, res.filters);
                 vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 }
             });
