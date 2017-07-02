@@ -37,7 +37,7 @@
             {value: 'Medio'},
             {value: 'Menor'},
             {value: 'Cambio de Equipo'},
-            {value: 'Entrega'},
+            {value: 'Entrega de equipo'},
             {value: 'Retiro de equipo'},
             {value: 'Otro'}
 
