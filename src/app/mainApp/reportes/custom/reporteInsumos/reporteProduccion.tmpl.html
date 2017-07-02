@@ -3,8 +3,8 @@
         <h2 class="md-headline-1 text-center">
             {{'REPORTS.TITLES.PRODUCTION'|translate}}</h2>
         <form name="formReport" ng-submit="vm.generateReport()">
-            <div layout="row">
-                <md-input-container flex="50">
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100">
                     <md-input-container layout="column" layout-fill="true" flex="100">
                         <label translate>{{'REPORTS.FIELDS.STAGE'|translate}}</label>
                         <md-select ng-model="vm.etapa" name="select"
@@ -19,7 +19,7 @@
                         </div>
                     </md-input-container>
                 </md-input-container>
-                <md-input-container flex="50">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100">
                     <label>{{'INPUT.Subsidiary'|translate}}</label>
                     <md-select name="selectSubsidiary"
                                ng-model="vm.sucursal"
@@ -35,8 +35,8 @@
                     </div>
                 </md-input-container>
             </div>
-            <div layout="row">
-                <md-input-container flex="50" class="md-block">
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100" class="md-block">
                     <label>{{'INPUT.Dialogs.Cabinet.Brand'|translate}}</label>
                     <md-select name="selectBrand"
                                ng-model="vm.marca"
@@ -50,7 +50,7 @@
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
                 </md-input-container>
-                <md-input-container flex="50" class="md-block">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100" class="md-block">
                     <label>{{'INPUT.Dialogs.Cabinet.Model'|translate}}</label>
                     <md-select name="selectModel"
                                ng-model="vm.modelo"
@@ -66,8 +66,8 @@
                     </div>
                 </md-input-container>
             </div>
-            <div layout="row">
-                <md-input-container flex="33">
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="33" flex-sm="100" flex-xs="100">
                     <label>{{'MODAL_REQUEST.FORM.LABEL.TYPE_EQUIPMENT'|translate}}</label>
                     <md-select ng-model="vm.tipo_equipo" name="equipment"
                                ng-change="vm.appendElement('tipo_equipo',vm.tipo_equipo)"
@@ -79,10 +79,11 @@
                         <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                     </div>
                 </md-input-container>
-                <md-input-container flex="33">
+                <md-input-container flex="33" flex-sm="100" flex-xs="100">
                     <md-input-container layout="column" layout-fill="true" flex="100">
                         <label translate>{{'REPORTS.FIELDS.MONTH'|translate}}</label>
-                        <md-select ng-model="vm.mes" name="month" required="">
+                        <md-select ng-model="vm.mes" name="month"
+                                   ng-required="vm.reporte.economico==undefined || vm.reporte.economico.length==0">
                             <md-option ng-repeat="mes in vm.meses" ng-value="mes">{{mes}}
                             </md-option>
                         </md-select>
@@ -91,22 +92,25 @@
                         </div>
                     </md-input-container>
                 </md-input-container>
-                <md-input-container flex="33">
+                <md-input-container flex="33" flex-sm="100" flex-xs="100">
                     <label>{{'REPORTS.FIELDS.YEAR'|translate}}</label>
-
-                    <input type="number" ng-model="vm.anio" name="anio" min="2016" max="vm.anioActual" required="required"/>
+                    <md-select ng-model="vm.anio" name="anio"
+                               ng-required="vm.reporte.economico==undefined || vm.reporte.economico.length==0">
+                        <md-option ng-repeat="anio in vm.anios" ng-value="anio">{{anio}}
+                        </md-option>
+                    </md-select>
                     <div ng-messages="formReport.anio.$error">
-                        <div ng-message="min">{{'REPORTS.ERRORS.YEAR'|translate}} {{vm.anioActual}}</div>
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
             </div>
-            <div layout="row" flex="100">
-                <div flex="80">
+            <div  layout="row" flex="100" layout-sm="column" layout-xs="column">
+                <div flex="80" flex-sm="100" flex-xs="100">
                     <div class="chipsdemoCustomInputs" layout-fill="">
                         <label>{{'REPORTS.FIELDS.CABINET_LIST'|translate}}</label>
                         <md-chips ng-model="vm.cabinet"
                                   md-on-add="vm.appendElement('economico',$chip)"
+                                  md-on-remove="vm.deleteElement($chip)"
                                   md-removable="vm.removable"
                                   delete-button-label="Remove Tag">
                             <input type="text" only-digits ng-model="vm.cabinetBuffer"
@@ -114,7 +118,7 @@
                         </md-chips>
                     </div>
                 </div>
-                <div flex="20">
+                <div flex="20" flex-sm="100" flex-xs="100" >
                     <md-button class="md-primary md-raised"
                                aria-label="Imprimir"
                                ng-click="vm.saveReporte()"

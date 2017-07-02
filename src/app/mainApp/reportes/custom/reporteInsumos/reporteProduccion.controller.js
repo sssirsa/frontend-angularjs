@@ -5,19 +5,20 @@
     "use strict";
     angular.module("app.mainApp.tecnico").controller("reporteProduccionController", reporteProduccionController);
 
-    function reporteProduccionController(CONFIGS,MarcaCabinet,Translate,TipoEquipo,$window, Servicios, Helper, toastr, Sucursal, Reporte) {
+    function reporteProduccionController(CONFIGS, MarcaCabinet, Translate, TipoEquipo, $window, Servicios, Helper, toastr, Sucursal, Reporte) {
         var vm = this;
         vm.reporte = {
             fecha: ""
         };
         vm.cabinetBuffer = "";
-        vm.cabinet=[];
+        vm.cabinet = [];
         vm.mes = null;
         vm.anio = null;
         vm.meses = CONFIGS.ADTConfig.monthsNames;
         vm.saveReporte = saveReporte;
         vm.appendElement = appendElement;
-        vm.filterModels=filterModels;
+        vm.deleteElement = deleteElement;
+        vm.filterModels = filterModels;
         activate();
         getFecha();
         getEtapasList();
@@ -33,40 +34,43 @@
                     notifyError(1000);
                 }
             }).catch(function (res) {
-                toastr.error(vm.errorMessage,vm.errorTitle);
+                toastr.error(vm.errorMessage, vm.errorTitle);
             });
         }
 
-        function activate(){
-            vm.errorTitle=Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.errorMessage=Translate.translate('MAIN.MSG.ERROR_CATALOG');
+        function activate() {
+            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
             vm.notFoundMessage = Translate.translate('MAIN.MSG.NOT_FOUND');
             vm.notGenerateMessage = Translate.translate('REPORTS.ERRORS.NOT_GENERATE');
-            vm.marca=null;
-            MarcaCabinet.listObject().then(function(res){
-                vm.marcas=Helper.filterDeleted(res,true);
+            vm.successTitleExport = Translate.translate('REPORTS.MESSAGES.REPORT_EXPORT_TITLE_SUCCESS');
+            vm.successExport = Translate.translate('REPORTS.MESSAGES.REPORT_EXPORT_MSG_SUCCESS');
+            vm.marca = null;
+            MarcaCabinet.listObject().then(function (res) {
+                vm.marcas = Helper.filterDeleted(res, true);
                 vm.marcas = Helper.sortByAttribute(vm.marcas, 'descripcion');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-                vm.marcas=[];
+            }).catch(function (err) {
+                toastr.error(vm.errorMessage, vm.errorTitle);
+                vm.marcas = [];
             });
-            vm.modelos=[];
+            vm.modelos = [];
             TipoEquipo.listWitout().then(function (res) {
-                vm.tiposEquipo=Helper.filterDeleted(res,true);
-                vm.tiposEquipo=_.sortBy(vm.tiposEquipo, 'nombre');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
+                vm.tiposEquipo = Helper.filterDeleted(res, true);
+                vm.tiposEquipo = _.sortBy(vm.tiposEquipo, 'nombre');
+            }).catch(function (err) {
+                toastr.error(vm.errorMessage, vm.errorTitle);
             });
+
         }
 
-        function filterModels(){
-            if(vm.marca) {
-                vm.modelos = MarcaCabinet.getModels(vm.marca).then(function(res){
-                    if(res.length>0) {
-                        vm.modelos = Helper.filterDeleted(res,true);
+        function filterModels() {
+            if (vm.marca) {
+                vm.modelos = MarcaCabinet.getModels(vm.marca).then(function (res) {
+                    if (res.length > 0) {
+                        vm.modelos = Helper.filterDeleted(res, true);
                     }
-                }).catch(function(){
-                    vm.modelos=[];
+                }).catch(function () {
+                    vm.modelos = [];
                 });
             }
         }
@@ -91,21 +95,32 @@
             }
         }
 
+        function deleteElement(value) {
+            var index = vm.reporte.economico.indexOf(value);
+            if (index > -1) {
+                vm.reporte.economico.splice(index, 1);
+            }
+        }
+
         function getFecha() {
             var CurrentDate = new Date();
             vm.day = CurrentDate.getDate();
             vm.month = CurrentDate.getMonth();
-            vm.anioActual =CurrentDate.getFullYear();
+            vm.anioActual = CurrentDate.getFullYear();
+            vm.anios = [];
+            for (i = 2016; i <= vm.anioActual; i++) {
+                vm.anios.push(''+i);
+            } 
         }
 
         function saveReporte() {
             vm.reporte.fecha = vm.meses.indexOf(vm.mes) + '-' + vm.anio;
             vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function (res) {
-                $window.open(res.url, '_blank', '');
+                toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (res) {
-                if(res.status === 404){
+                if (res.status === 404) {
                     toastr.warning(vm.notGenerateMessage, vm.errorTitle);
-                }else {
+                } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
             });
