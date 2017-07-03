@@ -24,7 +24,13 @@
             "id": null,
             "razon_social": null,
             "nombre_negocio": null,
-            "direccion": null,
+            "calle": null,
+            "entre_calle": null,
+            "y_calle": null,
+            "colonia": null,
+            "municipio": null,
+            "ciudad": null,
+            "cp": null,
             "telefono": null,
             "contacto_negocio": null,
             "fecha_atencion": new Date(),
@@ -203,7 +209,7 @@
             vm.udn=vm.udnObject.id;
             vm.requisito.fecha_inicio = moment(vm.requisito.fecha_inicio).format('YYYY-MM-DD');
             vm.requisito.fecha_termino = moment(vm.requisito.fecha_termino).format('YYYY-MM-DD');
-            vm.requisito.fecha_atendida = moment(vm.requisito.fecha_atendida).format('YYYY-MM-DD HH:mm'); 
+            vm.requisito.fecha_atendida = moment(vm.requisito.fecha_atendida).format('YYYY-MM-DD HH:mm');
             vm.requisito.udn = vm.udn;
             vm.requisito.persona = vm.persona;
             vm.requisito.tipo_solicitud=OPTIONS.type_request[vm.tipo_solicitud].value_id;
