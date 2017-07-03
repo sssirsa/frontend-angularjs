@@ -323,7 +323,7 @@
 
                     }
                     if(vm.insumoLote.tipo==='U'||vm.insumoLote.tipo==='u'){
-                       
+
                         vm.insumoUnicoData[0]=vm.insumoLote;
                     }
                     vm.insumoLote = null;
@@ -367,7 +367,7 @@
 
         function showPreCheckDialog(ev) {
             vm.cabinetid = vm.idCabinet;
-            
+
             if (vm.etapaActual.actual_etapa.nombre == 'E4') {
                 vm.diagnostico.tipo = 'salida';
                 vm.diagnostico.isSalida = true;
@@ -375,7 +375,9 @@
                 var sigetapa, etapaactual;
                 vm.etapaActual.diagnostico = vm.diagnostico.id;
                 etapaactual = vm.etapaActual.actual_etapa.id;
-                sigetapa = vm.etapaActual.siguiente_etapa.id;
+                if (vm.diagnostico.tipo !=='salida') {
+                    sigetapa = vm.etapaActual.siguiente_etapa.id;
+                }
                 vm.etapaActual.actual_etapa = null;
                 vm.etapaActual.siguiente_etapa = null;
                 vm.etapaActual.actual_etapa = etapaactual;
@@ -741,7 +743,7 @@
                 }).catch(function (res) {
                     if(res.status==400){
                         vm.errorMessage=res.data.errors[0].message;// checar condicion de campo de res
-                       
+
                     }
                     notifyError(res.status);
                 });
