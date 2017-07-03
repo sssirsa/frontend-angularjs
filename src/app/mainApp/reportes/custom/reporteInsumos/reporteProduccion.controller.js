@@ -5,7 +5,7 @@
     "use strict";
     angular.module("app.mainApp.tecnico").controller("reporteProduccionController", reporteProduccionController);
 
-    function reporteProduccionController(CONFIGS, MarcaCabinet, Translate, TipoEquipo, $window, Servicios, Helper, toastr, Sucursal, Reporte) {
+    function reporteProduccionController(CONFIGS,Persona, MarcaCabinet, Translate, TipoEquipo,  Servicios, Helper, toastr, Sucursal, Reporte) {
         var vm = this;
         vm.reporte = {
             fecha: ""
@@ -23,6 +23,7 @@
         getFecha();
         getEtapasList();
         getSucursal();
+        getInformationUser();
 
         ////////////////
         function getEtapasList() {
@@ -61,6 +62,16 @@
                 toastr.error(vm.errorMessage, vm.errorTitle);
             });
 
+        }
+
+        function getInformationUser() {
+            Persona.listProfile().then(function (res) {
+                if (res.sucursal !== null) {
+                    vm.sucursal = res.sucursal;
+                }
+            }).catch(function () {
+                toastr.error(vm.errorMessage, vm.errorTitle);
+            });
         }
 
         function filterModels() {
@@ -110,7 +121,7 @@
             vm.anios = [];
             for (i = 2016; i <= vm.anioActual; i++) {
                 vm.anios.push(''+i);
-            } 
+            }
         }
 
         function saveReporte() {

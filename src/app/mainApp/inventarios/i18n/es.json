@@ -17,7 +17,8 @@
     "SHOW_ECONOMIC_SEARCH":"Búsqueda por económico",
     "SEARCH":"Buscar",
     "DOORS":"Puertas",
-    "GAS":"Gas"
+    "GAS":"Gas",
+    "OFFICE":"Sucursal"
   },
   "SUPPLIES":{
     "HEADER":"Inventario de Insumos",
