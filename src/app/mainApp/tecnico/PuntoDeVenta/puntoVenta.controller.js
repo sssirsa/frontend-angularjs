@@ -44,9 +44,8 @@
         ];
         vm.fieldServiceTypes = OPTIONS.fieldServiceTypes;
         vm.selectedSearchType = "all";
-        vm.puntosVenta=PuntoDeVenta.list();
-        vm.id=null;
-
+        vm.puntosVenta = PuntoDeVenta.list();
+        vm.id = null;
         vm.showInsumosSection = true;
         vm.catalogoInsumos = null;//array con todos los caatalogos de insumo disponibles de la etapa
         vm.catalogoSelected = {};//Elemento del tipo Catalogo de Insumo del insumo que se deseará agregar
@@ -67,14 +66,38 @@
         vm.insumoLote = {};
         vm.insumos_loteUsados = [];//Arreglo que ya posee el arreglo como es necesario para agregar los insumos al formato de arreglo para agregarlos a la etapa
         vm.insumos_sinStock = [];
-        //vm.puntoVenta = null;
         vm.insumoUnicoData = [];
         vm.mostrarCompresor = false;
         vm.inputDisabled = false;
 
+        //Translates
+        vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.notInsumos = Translate.translate('MAIN.MSG.ERROR_NOTINSUMOSTITLE');
+        vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
+        vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
+        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
+        vm.notFoundMessage = Translate.translate('MAIN.MSG.NOT_FOUND');
+        vm.notFoundInput = Translate.translate('MAIN.MSG.NOT_FOUND_INPUT');
+        vm.notAllow = Translate.translate('MAIN.MSG.NOT_ALLOWED');
+        vm.confirmDelete = Translate.translate('ETAPA_SERVICIO.ARE_U_SURE');
+        vm.delete = Translate.translate('ETAPA_SERVICIO.DELETE');
+        vm.cancelar = Translate.translate('ETAPA_SERVICIO.CANCEL');
+        vm.accepted = Translate.translate('ETAPA_SERVICIO.ACCEPT');
+        vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
+        vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
+        vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
+        vm.notStepsMessage = Translate.translate('MAIN.DIALOG.NOT_STEPS');
+        vm.cabinetDeleted = Translate.translate('MAIN.MSG.ERROR_DISABLED_CABINET');
+        vm.errorNotInsumos = Translate.translate('MAIN.MSG.NOT_INSUMOS');
+        vm.errorNotpuntoVenta = Translate.translate('MAIN.MSG.NOT_STEPCREATED');
+        vm.successAddInsumo = Translate.translate('MAIN.MSG.INSUMOADDED');
+        vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
+        vm.messageNotEntrada = Translate.translate('MAIN.MSG.MSGNOTENTRADA');
+        vm.messageNotTipoEquipo = Translate.translate('MAIN.MSG.NOTTIPOEQUIPO');
+        vm.errorLocation = Translate.translate('PUNTOVENTA.TOASTR.UNSUPPORTED_GEOLOCATION');
+
         //Declaracion de Funciones
-
-
         vm.crearPuntodeVenta = crearPuntodeVenta; //Crea una nueva etapa de servicio
         vm.cancel = cancel;//Limpiar campos
         vm.eliminarEtapaServicio = eliminarEtapaServicio;//
@@ -172,6 +195,8 @@
         //Funcion Activate al iniciar la vista
         function activate() {
             vm.marca = null;
+            console.log("Getting location");
+            geoLocate();
             vm.puntoVenta = {
                 insumos: [],
                 insumos_lote: [],
@@ -194,7 +219,9 @@
                 observaciones_cliente: null,
                 observaciones_tecnicas: null,
                 modelo: null,
-                cerrado:false
+                latitud: null,
+                longitud: null,
+                cerrado: false
             };
             MarcaCabinet.listObject().then(function (res) {
                 vm.marcas = Helper.filterDeleted(res, true);
@@ -218,55 +245,6 @@
             }
             vm.modelos = [];
             vm.modelo = {};
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.notInsumos = Translate.translate('MAIN.MSG.ERROR_NOTINSUMOSTITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.notFoundMessage = Translate.translate('MAIN.MSG.NOT_FOUND');
-            vm.notFoundInput = Translate.translate('MAIN.MSG.NOT_FOUND_INPUT');
-            vm.notAllow = Translate.translate('MAIN.MSG.NOT_ALLOWED');
-            vm.confirmDelete = Translate.translate('ETAPA_SERVICIO.ARE_U_SURE');
-            vm.delete = Translate.translate('ETAPA_SERVICIO.DELETE');
-            vm.cancelar = Translate.translate('ETAPA_SERVICIO.CANCEL');
-            vm.accepted = Translate.translate('ETAPA_SERVICIO.ACCEPT');
-            vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.notStepsMessage = Translate.translate('MAIN.DIALOG.NOT_STEPS');
-            vm.cabinetDeleted = Translate.translate('MAIN.MSG.ERROR_DISABLED_CABINET');
-            vm.errorNotInsumos = Translate.translate('MAIN.MSG.NOT_INSUMOS');
-            vm.errorNotpuntoVenta = Translate.translate('MAIN.MSG.NOT_STEPCREATED');
-            vm.successAddInsumo = Translate.translate('MAIN.MSG.INSUMOADDED');
-            vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-            vm.messageNotEntrada = Translate.translate('MAIN.MSG.MSGNOTENTRADA');
-            vm.messageNotTipoEquipo = Translate.translate('MAIN.MSG.NOTTIPOEQUIPO');
-
-            vm.puntoVenta = {
-                insumos: [],
-                insumos_lote: [],
-                persona: null,
-                semana: null,
-                hora_recepcion: null,
-                piso: null,
-                campo: null,
-                movimiento: null,
-                entrega: null,
-                km: null,
-                tipo_trabajo: null,
-                nombre_establecimiento: null,
-                direccion: null,
-                activo: null,
-                serie: null,
-                fecha_reporte: null,
-                fecha_servicio: null,
-                descripcion_trabajo: null,
-                observaciones_cliente: null,
-                observaciones_tecnicas: null,
-                modelo: null,
-                cerrado:false
-            };
 
         }
 
@@ -274,7 +252,6 @@
         function eliminaNoSeleccionados() {
             vm.puntoVenta.insumos_lote = _.where(vm.insumos_loteUsados, {agregar: true});
         }
-
 
         function getInsumosLote() {
             vm.insumos_loteUsados = [];
@@ -357,7 +334,6 @@
             }
         }
 
-
         function notifyError(status) {
             switch (status) {
                 case 400:
@@ -418,7 +394,6 @@
             vm.showInsumo = false;
         }
 
-
         function cancel() {
             vm.reporte = {};
             vm.servicio = {};
@@ -456,7 +431,6 @@
             vm.insumoLote = {};
             vm.insumos_loteUsados = [];//Arreglo que ya posee el arreglo como es necesario para agregar los insumos al formato de arreglo para agregarlos a la etapa
             vm.insumos_sinStock = [];
-            //vm.puntoVenta = {insumos: []};
             vm.insumoUnicoData = [];
             vm.mostrarCompresor = false;
 
@@ -473,7 +447,6 @@
 
 
         }
-
 
         function eliminarEtapaServicio(ev) {
             if (vm.puntoVenta != null) {
@@ -503,7 +476,6 @@
             }
         }
 
-
         function crearPuntodeVenta() {
             var fecha = null;
             var hora = null;
@@ -511,7 +483,7 @@
 
             vm.filtradoNoSelected = _.where(vm.insumos_loteUsados, {agregar: true});
             vm.puntoVenta.insumos_lote = vm.filtradoNoSelected;
-            if(vm.modelo.id) {
+            if (vm.modelo.id) {
                 vm.puntoVenta.modelo = vm.modelo.id;
             }
             if (!vm.puntoVenta.insumos) {
@@ -566,10 +538,10 @@
 
                 }).catch(function (res) {
                     //vm.error = res.data.errors[0].message;
-                    if(res) {
+                    if (res) {
                         notifyError(res.status);
                     }
-                    else{
+                    else {
                         notifyError(-1);
                     }
                 });
@@ -582,10 +554,10 @@
                     vm.puntoVenta = res;
                     vm.cancel();
                 }).catch(function (res) {
-                    if(res) {
+                    if (res) {
                         notifyError(res.status);
                     }
-                    else{
+                    else {
                         notifyError(-1);
                     }
                 });
@@ -608,33 +580,48 @@
         }
 
         function search() {
-            vm.puntosVenta=null;
-            switch(vm.selectedSearchType){
+            vm.puntosVenta = null;
+            switch (vm.selectedSearchType) {
                 case "all":
-                    vm.puntosVenta=PuntoDeVenta.list();
+                    vm.puntosVenta = PuntoDeVenta.list();
                     break;
                 case "open":
-                    vm.puntosVenta=PuntoDeVenta.getOpen();
+                    vm.puntosVenta = PuntoDeVenta.getOpen();
                     break;
                 case "close":
-                    vm.puntosVenta=PuntoDeVenta.getClosed();
+                    vm.puntosVenta = PuntoDeVenta.getClosed();
                     break;
             }
             return;
         }
 
         function getId(id) {
-            if(id){
-                PuntoDeVenta.getById(id).then(function(responseSuccess){
-                    responseSuccess.semana=parseInt(responseSuccess.semana);
-                    responseSuccess.piso=parseInt(responseSuccess.piso);
-                    vm.puntoVenta=responseSuccess;
-                }).catch(function(responseError){
+            if (id) {
+                PuntoDeVenta.getById(id).then(function (responseSuccess) {
+                    responseSuccess.semana = parseInt(responseSuccess.semana);
+                    responseSuccess.piso = parseInt(responseSuccess.piso);
+                    vm.puntoVenta = responseSuccess;
+                }).catch(function (responseError) {
                     notifyError(responseError.status);
                 });
                 return;
             }
         }
+
+        function geoLocate(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(position){
+                    console.log("Latitude: " + position.coords.latitude +
+                        " Longitude: " + position.coords.longitude);
+                    vm.puntoVenta.latitud = position.coords.latitude;
+                    vm.puntoVenta.longitud = position.coords.longitude;
+                });
+            }
+            else{
+                toastr.error(vm.errorLocation, vm.errorTitle);
+            }
+        }
+
     }
 
 })();

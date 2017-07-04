@@ -331,8 +331,11 @@
     "SEARCH_TYPE":"Elementos a mostrar",
     "FINISHED":"Servicio cerrado",
     "UNFINISHED":"Servicio abierto",
+    "LATITUDE":"Latitud",
+    "LONGITUDE":"Longitud",
     "TOASTR":{
-      "NOT_FOUND":"No se encontró ningun servicio con el folio proporcionado"
+      "NOT_FOUND":"No se encontró ningun servicio con el folio proporcionado",
+      "UNSUPPORTED_GEOLOCATION":"Error al obtener la localización GPS del dispositivo"
     }
   }
 }

@@ -191,6 +191,23 @@
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
+                                    <div layout-gt-xs="row"
+                                         layout="column"
+                                         layout-fill
+                                         layout-align="space-around center">
+                                        <md-input-container flex layout-fill>
+                                            <label translate>PUNTOVENTA.LATITUDE</label>
+                                            <input type="text"
+                                                   ng-model="vm.puntoVenta.latitud"
+                                                   ng-disabled="true">
+                                        </md-input-container>
+                                        <md-input-container flex layout-fill>
+                                            <label translate>PUNTOVENTA.LONGITUDE</label>
+                                            <input type="text"
+                                                   ng-model="vm.puntoVenta.longitud"
+                                                   ng-disabled="true">
+                                        </md-input-container>
+                                    </div>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.ADDRESS</label>
                                         <textarea name="direccion"
