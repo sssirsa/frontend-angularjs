@@ -10,7 +10,8 @@
         .module('app.mainApp.tecnico')
         .controller('PuntoVentaController', PuntoVentaController);
 
-    function PuntoVentaController(Helper, Servicios, PuntoDeVenta, MarcaCabinet, $mdDialog, $scope, Translate, toastr, OPTIONS) {
+    function PuntoVentaController(Helper, Servicios, PuntoDeVenta, MarcaCabinet, $mdDialog, $scope, Translate, toastr,
+                                  OPTIONS, URLS, $window) {
         var vm = this;
         vm.activate = activate();
 
@@ -113,6 +114,7 @@
         vm.validaMax = validaMax;
         vm.search = search;
         vm.getId = getId;
+        vm.locateInGoogle = locateInGoogle;
 
         // Funciones
         function checkFinished() {
@@ -608,16 +610,23 @@
             }
         }
 
-        function geoLocate(){
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(function(position){
-                    console.log("Latitude: " + position.coords.latitude +
-                        " Longitude: " + position.coords.longitude);
+        function geoLocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     vm.puntoVenta.latitud = position.coords.latitude;
                     vm.puntoVenta.longitud = position.coords.longitude;
                 });
             }
-            else{
+            else {
+                toastr.error(vm.errorLocation, vm.errorTitle);
+            }
+        }
+
+        function locateInGoogle(){
+            if(vm.puntoVenta.latitud && vm.puntoVenta.longitud) {
+                $window.open(URLS.geoLocation + vm.puntoVenta.latitud + "," + vm.puntoVenta.longitud, '_blank');
+            }
+            else {
                 toastr.error(vm.errorLocation, vm.errorTitle);
             }
         }

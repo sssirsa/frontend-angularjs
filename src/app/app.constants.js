@@ -396,6 +396,9 @@
             ]
 
         })
+        .constant('URLS',{
+            geoLocation:"http://www.google.com.mx/maps/search/"
+        })
         .constant('CONFIGS',{
             ADTConfig:{
                 calType: 'gregorian',

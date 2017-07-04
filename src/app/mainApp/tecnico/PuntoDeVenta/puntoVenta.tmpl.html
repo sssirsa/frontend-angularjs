@@ -93,7 +93,8 @@
                                     </md-input-container>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.RECEPTIONHOUR</label>
-                                        <input ng-disabled="vm.puntoVenta.cerrado" type="time" ng-model="vm.recepcion.hora" mdp-time-picker
+                                        <input ng-disabled="vm.puntoVenta.cerrado" type="time"
+                                               ng-model="vm.recepcion.hora" mdp-time-picker
                                                name="hora_recepcion"
                                                required=""/>
                                         <div ng-messages="generalInfo.hora_recepcion.$error">
@@ -151,7 +152,8 @@
                     </md-tab-body>
                 </md-tab>
                 <md-tab id="2" ng-click="vm.checkFinished()">
-                    <md-tab-label><span class="oxy-step-label">2</span><span translate="" hide-xs>PUNTOVENTA.LOCALDATA</span>
+                    <md-tab-label><span class="oxy-step-label">2</span><span translate=""
+                                                                             hide-xs>PUNTOVENTA.LOCALDATA</span>
                     </md-tab-label>
                     <md-tab-body>
                         <div class="wizard layout-padding">
@@ -207,6 +209,12 @@
                                                    ng-model="vm.puntoVenta.longitud"
                                                    ng-disabled="true">
                                         </md-input-container>
+                                        <md-button aria-label="Google maps"
+                                                   ng-if="vm.puntoVenta.latitud && vm.puntoVenta.longitud"
+                                                   ng-click="vm.locateInGoogle()"
+                                                   class="md-fab md-mini md-scale">
+                                            <md-icon md-font-icon="zmdi zmdi-google-maps"></md-icon>
+                                        </md-button>
                                     </div>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.ADDRESS</label>
@@ -431,7 +439,8 @@
                                             <form name="insumoPuntoVenta">
                                                 <div layout="row" layout-sm="column" layout-xs="column" flex
                                                      layout-md="column" ng-if="vm.puntoVenta && vm.mostrarCompresor">
-                                                    <md-switch ng-model="inputDisabled" ng-disabled="vm.puntoVenta.cerrado">
+                                                    <md-switch ng-model="inputDisabled"
+                                                               ng-disabled="vm.puntoVenta.cerrado">
                                                         <span translate>ETAPA_SERVICIO.ADD_MICRO</span>
                                                     </md-switch>
                                                     <md-input-container flex
@@ -451,7 +460,7 @@
                                                     </md-input-container>
                                                     <md-input-container flex ng-if="inputDisabled">
                                                         <label><span translate>ETAPA_SERVICIO.CANTITY</span></label>
-                                                        <input type="number" value="1" ng-disabled="true" >
+                                                        <input type="number" value="1" ng-disabled="true">
                                                     </md-input-container>
                                                     <md-input-container ng-if="inputDisabled" flex="10">
                                                         <md-button class="md-primary md-raised"
