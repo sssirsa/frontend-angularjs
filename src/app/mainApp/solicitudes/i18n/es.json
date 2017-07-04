@@ -33,7 +33,7 @@
                 "COMMENT": "Comentario",
                 "RAZON": "Razón social",
                 "BUSINESS_NAME": "Nombre del negocio",
-                "ADDRESS": "Dirección",
+
                 "PHONE": "Teléfono",
                 "BUSINESS_CONTACT": "Contacto del negocio",
                 "STATUS": "Estatus",
@@ -45,7 +45,18 @@
                 "CARGASOL": "Carga de Solicitudes",
                 "INVALIDUDN": "La UDN es invalida",
                 "NOTFOUNDUDN": "La UDN no se encuentra",
-                "TYPE":"Tipo"
+                "TYPE":"Tipo",
+                "ADDRESS":{
+                    "STREET":"Calle y No.",
+                    "BETWEEN_STREET":"Entre calle",
+                    "AND_STREET":"Y calle",
+                    "COLONIA":"Colonia",
+                    "MUNICIPALITY":"Municipio",
+                    "CITY":"Ciudad",
+                    "CP":"Código Postal"
+                },
+                "SAVE":"Salvar",
+                "ERASE":"Borrar"
             },
             "TAB": {
                 "REQUEST": "Carga de solicitudes",
