@@ -92,6 +92,8 @@
         vm.filterUDNs= null;
         vm.searchText = "";
         vm.isValid=false;
+        vm.serviceKinds = OPTIONS.jobKinds;
+        
         activate();
         function activate() {
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
