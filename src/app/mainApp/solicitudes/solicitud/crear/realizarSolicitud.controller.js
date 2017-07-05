@@ -35,8 +35,7 @@
             "contacto_negocio": null,
             "fecha_atencion": new Date(),
             "udn": null,
-            "created_at": new Date(),
-            "updated_at": new Date()
+            
         };
 
         var entrada = {

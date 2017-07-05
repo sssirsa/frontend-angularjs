@@ -56,7 +56,8 @@
                     "CP":"Código Postal"
                 },
                 "SAVE":"Salvar",
-                "ERASE":"Borrar"
+                "ERASE":"Borrar",
+                "SERVICE_KIND":"Tipo servicio"
             },
             "TAB": {
                 "REQUEST": "Carga de solicitudes",

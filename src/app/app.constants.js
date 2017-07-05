@@ -14,7 +14,7 @@
             notFound: 'not-found',
             notFount_select: 'not-found-select',
             load_fields: 'load-data-fields',
-            bind_channels:'bind-channels'
+            bind_channels: 'bind-channels'
         })
         .constant('OPTIONS', {
             status: [
@@ -261,7 +261,7 @@
                 {id: 'max', value: "Máximo"},
                 {id: 'min', value: "Mínimo"}
             ],
-            filterInt:[
+            filterInt: [
                 {id: 'gt', value: "Mayor que"},
                 {id: 'gte', value: "Mayor igual que"},
                 {id: 'lt', value: "Menor que"},
@@ -269,22 +269,22 @@
                 {id: 'exact', value: "Igual"},
                 {id: 'iexact', value: "Igual (Exacto)"}
             ],
-            filterChar:[
-                {id:'exact',value:"Igual"},
-                {id:'iexact',value:"Igual (Exacto)"},
-                {id:'contains',value:"Contiene"},
-                {id:'icontains',value:"Contine (Exacto)"},
-                {id:'in',value:"Lista de valores"},
-                {id:'startswith',value:"Comienza con"},
-                {id:'istartswith',value:"Comienza con (Exacto)"},
-                {id:'endswith',value:"Termina con"},
-                {id:'iendswith',value:"Termina con (Exacto)"},
-                {id:'isnull',value:"Es vacio"}
+            filterChar: [
+                {id: 'exact', value: "Igual"},
+                {id: 'iexact', value: "Igual (Exacto)"},
+                {id: 'contains', value: "Contiene"},
+                {id: 'icontains', value: "Contine (Exacto)"},
+                {id: 'in', value: "Lista de valores"},
+                {id: 'startswith', value: "Comienza con"},
+                {id: 'istartswith', value: "Comienza con (Exacto)"},
+                {id: 'endswith', value: "Termina con"},
+                {id: 'iendswith', value: "Termina con (Exacto)"},
+                {id: 'isnull', value: "Es vacio"}
             ],
-            filterDate:[
-                {id:'range',value:"Rango de fecha"},
-                {id:'week_day',value:"Día de la semana"},
-                {id:'isnull',value:"Es vacio"}
+            filterDate: [
+                {id: 'range', value: "Rango de fecha"},
+                {id: 'week_day', value: "Día de la semana"},
+                {id: 'isnull', value: "Es vacio"}
             ],
             days: [
                 {id: 2, value: "Lunes"},
@@ -344,102 +344,111 @@
                     id: 'DecimalField',
                     text: 'Decimal'
                 }],
-            field_types:[
+            field_types: [
                 {
-                    id:"",
-                    text:"Normal"
+                    id: "",
+                    text: "Normal"
                 },
                 {
-                    id:"Sum",
-                    text:"Suma"
+                    id: "Sum",
+                    text: "Suma"
                 },
                 {
-                    id:"Count",
-                    text:"Contar"
+                    id: "Count",
+                    text: "Contar"
                 },
                 {
-                    id:"Avg",
-                    text:"Promedio"
+                    id: "Avg",
+                    text: "Promedio"
                 },
                 {
-                    id:"Max",
-                    text:"Máximo"
+                    id: "Max",
+                    text: "Máximo"
                 },
                 {
-                    id:"Min",
-                    text:"Minimo"
+                    id: "Min",
+                    text: "Minimo"
                 }
             ],
-            input_types:[
+            input_types: [
                 {
-                    id:"Nuevo",
-                    text:"Nuevos"
+                    id: "Nuevo",
+                    text: "Nuevos"
                 },
                 {
-                    id:"Garantia",
-                    text:"Garantias"
+                    id: "Garantia",
+                    text: "Garantias"
                 }
             ],
-            fieldServiceTypes:[
+            fieldServiceTypes: [
                 {
-                    id:"all",
-                    text:"Todos"
+                    id: "all",
+                    text: "Todos"
                 },
                 {
-                    id:"open",
-                    text:"Abiertos"
+                    id: "open",
+                    text: "Abiertos"
                 },
                 {
-                    id:"close",
-                    text:"Cerrados"
+                    id: "close",
+                    text: "Cerrados"
                 }
-            ]
+            ],
+            jobKinds: [
+                {value: 'Mayor'},
+                {value: 'Medio'},
+                {value: 'Menor'},
+                {value: 'Cambio de Equipo'},
+                {value: 'Entrega de equipo'},
+                {value: 'Retiro de equipo'},
+                {value: 'Otro'}
 
+            ]
         })
-        .constant('URLS',{
-            geoLocation:"http://www.google.com.mx/maps/search/"
+        .constant('URLS', {
+            geoLocation: "http://www.google.com.mx/maps/search/"
         })
-        .constant('CONFIGS',{
-            ADTConfig:{
+        .constant('CONFIGS', {
+            ADTConfig: {
                 calType: 'gregorian',
-                dtpType:'date',
+                dtpType: 'date',
                 format: 'DD/MM/YYYY',
                 default: 'today',
-                autoClose:true,
-                multiple:false,
-                todayStr:'Hoy',
-                hideTimeSelector:true,
-                position:'top',
-                isReadOnly:true,
-                daysNames:['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-                monthsNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                autoClose: true,
+                multiple: false,
+                todayStr: 'Hoy',
+                hideTimeSelector: true,
+                position: 'top',
+                isReadOnly: true,
+                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
             },
-            ADTConfigBottom:{
+            ADTConfigBottom: {
                 calType: 'gregorian',
-                dtpType:'date',
+                dtpType: 'date',
                 format: 'DD/MM/YYYY',
                 default: 'today',
-                autoClose:true,
-                multiple:false,
-                todayStr:'Hoy',
-                hideTimeSelector:true,
-                position:'Bottom',
-                isReadOnly:true,
-                daysNames:['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-                monthsNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                autoClose: true,
+                multiple: false,
+                todayStr: 'Hoy',
+                hideTimeSelector: true,
+                position: 'Bottom',
+                isReadOnly: true,
+                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
             },
-            ADTConfigTime:{
+            ADTConfigTime: {
                 calType: 'gregorian',
-                dtpType:'date&time',
+                dtpType: 'date&time',
                 format: 'DD/MM/YYYY hh:mm',
                 default: 'today',
-                autoClose:true,
-                multiple:false,
-                isReadOnly:true,
-                todayStr:'Hoy',
-                position:'top',
-                daysNames:['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-                monthsNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                autoClose: true,
+                multiple: false,
+                isReadOnly: true,
+                todayStr: 'Hoy',
+                position: 'top',
+                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
             }
         });
 })();

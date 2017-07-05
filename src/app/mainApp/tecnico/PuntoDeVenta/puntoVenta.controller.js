@@ -33,16 +33,7 @@
         };
         vm.etapa = {};
         vm.formato = "DD-MM-YYYY";
-        vm.tiposTrabajo = [
-            {value: 'Mayor'},
-            {value: 'Medio'},
-            {value: 'Menor'},
-            {value: 'Cambio de Equipo'},
-            {value: 'Entrega de equipo'},
-            {value: 'Retiro de equipo'},
-            {value: 'Otro'}
-
-        ];
+        vm.tiposTrabajo = OPTIONS.jobKinds;
         vm.fieldServiceTypes = OPTIONS.fieldServiceTypes;
         vm.selectedSearchType = "all";
         vm.puntosVenta = PuntoDeVenta.list();
