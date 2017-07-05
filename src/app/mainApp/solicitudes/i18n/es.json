@@ -57,7 +57,9 @@
                 },
                 "SAVE":"Salvar",
                 "ERASE":"Borrar",
-                "SERVICE_KIND":"Tipo servicio"
+                "SERVICE_KIND":"Tipo servicio",
+                "LATITUDE":"Latitud",
+                "LONGITUDE":"Longitud"
             },
             "TAB": {
                 "REQUEST": "Carga de solicitudes",

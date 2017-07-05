@@ -436,7 +436,6 @@
                                                            ng-required="vm.tipo_solicitud==2">
                                                     <md-option ng-repeat="status in vm.status" ng-value="status.value">{{status.value}}
                                                     </md-option>
-
                                                 </md-select>
                                                 <div ng-messages="solicitudForm.status.$error">
                                                     <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
@@ -450,12 +449,34 @@
                                                            ng-required="vm.tipo_solicitud==2">
                                                     <md-option ng-repeat="kind in vm.serviceKinds" ng-value="kind.value">{{kind.value}}
                                                     </md-option>
-
                                                 </md-select>
                                                 <div ng-messages="solicitudForm.status.$error">
                                                     <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                                 </div>
                                             </md-input-container>
+                                            <div layout-gt-xs="row"
+                                                 layout="column"
+                                                 layout-fill
+                                                 layout-align="space-around center">
+                                                <md-input-container flex layout-fill>
+                                                    <label translate>CREATE_REQUEST.FORM.LABEL.LATITUDE</label>
+                                                    <input type="text"
+                                                           ng-model="vm.requisitoVenta.latitud"
+                                                           ng-disabled="true">
+                                                </md-input-container>
+                                                <md-input-container flex layout-fill>
+                                                    <label translate>CREATE_REQUEST.FORM.LABEL.LONGITUDE</label>
+                                                    <input type="text"
+                                                           ng-model="vm.requisitoVenta.longitud"
+                                                           ng-disabled="true">
+                                                </md-input-container>
+                                                <md-button aria-label="Google maps"
+                                                           ng-if="vm.requisitoVenta.latitud && vm.requisitoVenta.longitud"
+                                                           ng-click="vm.locateInGoogle()"
+                                                           class="md-fab md-mini md-scale">
+                                                    <md-icon md-font-icon="zmdi zmdi-google-maps"></md-icon>
+                                                </md-button>
+                                            </div>
                                             <div layout="row" layout-align="end end">
                                                 <md-button class="md-raised md-primary" aria-label="{{'CREATE_REQUEST.FORM.LABEL.ERASE'|translate}}"
                                                            ng-click="vm.cancel()">

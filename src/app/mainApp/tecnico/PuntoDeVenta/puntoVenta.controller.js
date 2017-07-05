@@ -188,7 +188,6 @@
         //Funcion Activate al iniciar la vista
         function activate() {
             vm.marca = null;
-            console.log("Getting location");
             geoLocate();
             vm.puntoVenta = {
                 insumos: [],
