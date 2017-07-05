@@ -94,9 +94,9 @@
                     <label>{{'INPUT.Subsidiary'|translate}}</label>
                     <md-select
                         name="selectSubsidiary"
-                        ng-model="vm.sucursal"
+                        ng-model="vm.sucursalchoice"
                         ng-disabled="vm.sucursal!=null"
-                        ng-change="vm.appendElement('sucursal',vm.sucursal)"
+                        ng-change="vm.appendElement('sucursal',vm.sucursalchoice)"
                         md-no-asterisk="">
                         <md-option ng-repeat="sucursal in vm.Sucursales" value="{{sucursal.id}}">
                             {{sucursal.nombre}}
