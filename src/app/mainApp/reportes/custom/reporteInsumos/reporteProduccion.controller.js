@@ -125,7 +125,7 @@
         }
 
         function saveReporte() {
-            vm.reporte.fecha = vm.meses.indexOf(vm.mes) + '-' + vm.anio;
+            vm.reporte.fecha = (vm.meses.indexOf(vm.mes)+1) + '-' + vm.anio; 
             vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function (res) {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (res) {
