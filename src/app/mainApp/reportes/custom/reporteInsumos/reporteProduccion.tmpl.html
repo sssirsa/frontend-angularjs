@@ -22,8 +22,8 @@
                 <md-input-container
                     flex="50" flex-sm="100" flex-xs="100">
                     <label>{{'MODAL_REQUEST.FORM.LABEL.TYPE_EQUIPMENT'|translate}}</label>
-                    <md-select ng-model="vm.tipo_equipo" name="equipment"
-                               ng-change="vm.appendElement('tipo_equipo',vm.tipo_equipo)"
+                    <md-select ng-model="vm.tipo_cabinet" name="equipment"
+                               ng-change="vm.appendElement('tipo_cabinet',vm.tipo_cabinet)"
                                placeholder="{{'REPORTS.FIELDS.TYPE_EQUIPMENT'|translate}}">
                         <md-option ng-repeat="tipoEquipo in vm.tiposEquipo" ng-value="tipoEquipo.id">{{tipoEquipo.nombre}}
                         </md-option>
