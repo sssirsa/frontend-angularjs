@@ -35,13 +35,14 @@
                     notifyError(1000);
                 }
             }).catch(function (res) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
         }
 
         function activate() {
             vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
+            vm.errorMessageCatalog = Translate.translate('MAIN.MSG.ERROR_CATALOG');
+            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
             vm.notFoundMessage = Translate.translate('MAIN.MSG.NOT_FOUND');
             vm.notGenerateMessage = Translate.translate('REPORTS.ERRORS.NOT_GENERATE');
             vm.successTitleExport = Translate.translate('REPORTS.MESSAGES.REPORT_EXPORT_TITLE_SUCCESS');
@@ -51,7 +52,7 @@
                 vm.marcas = Helper.filterDeleted(res, true);
                 vm.marcas = Helper.sortByAttribute(vm.marcas, 'descripcion');
             }).catch(function (err) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                toastr.error(vm.errorMessageCatalog, vm.errorTitle);
                 vm.marcas = [];
             });
             vm.modelos = [];
@@ -59,7 +60,7 @@
                 vm.tiposEquipo = Helper.filterDeleted(res, true);
                 vm.tiposEquipo = _.sortBy(vm.tiposEquipo, 'nombre');
             }).catch(function (err) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
 
         }
@@ -70,7 +71,7 @@
                     vm.sucursal = res.sucursal;
                 }
             }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
         }
 
@@ -91,7 +92,7 @@
                 vm.Sucursales = Helper.filterDeleted(res, true);
                 vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
             }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
+                toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
         }
 
@@ -125,7 +126,7 @@
         }
 
         function saveReporte() {
-            vm.reporte.fecha = (vm.meses.indexOf(vm.mes)+1) + '-' + vm.anio; 
+            vm.reporte.fecha = (vm.meses.indexOf(vm.mes)+1) + '-' + vm.anio;
             vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function (res) {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (res) {
