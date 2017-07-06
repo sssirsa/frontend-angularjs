@@ -1,0 +1,138 @@
+<div ng-cloak>
+    <md-card layout-padding="" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+        <h2 class="md-headline-1 text-center">
+            {{'REPORTS.TITLES.PRODUCTION'|translate}}</h2>
+        <form name="formReport" ng-submit="vm.generateReport()">
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100">
+                    <md-input-container layout="column" layout-fill="true" flex="100">
+                        <label translate>{{'REPORTS.FIELDS.STAGE'|translate}}</label>
+                        <md-select ng-model="vm.etapa" name="select"
+                                   ng-change="vm.appendElement('etapa',vm.etapa)"
+                                   ng-required="">
+                            <md-option ng-repeat="etap in vm.etapas" ng-value="etap.nombre">{{etap.nombre}} :
+                                {{etap.descripcion}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="formReport.select.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </md-input-container>
+                <md-input-container
+                    flex="50" flex-sm="100" flex-xs="100">
+                    <label>{{'MODAL_REQUEST.FORM.LABEL.TYPE_EQUIPMENT'|translate}}</label>
+                    <md-select ng-model="vm.tipo_cabinet" name="equipment"
+                               ng-change="vm.appendElement('tipo_cabinet',vm.tipo_cabinet)"
+                               placeholder="{{'REPORTS.FIELDS.TYPE_EQUIPMENT'|translate}}">
+                        <md-option ng-repeat="tipoEquipo in vm.tiposEquipo" ng-value="tipoEquipo.id">{{tipoEquipo.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.equipment.$error">
+                        <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="50" flex-sm="100" flex-xs="100" class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Brand'|translate}}</label>
+                    <md-select name="selectBrand"
+                               ng-model="vm.marca"
+                               md-on-close="vm.filterModels()"
+                               md-no-asterisk="">
+                        <md-option ng-repeat="marca in vm.marcas"
+                                   value="{{marca.id}}">{{marca.descripcion}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectBrand.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="50" flex-sm="100" flex-xs="100" class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Model'|translate}}</label>
+                    <md-select name="selectModel"
+                               ng-model="vm.modelo"
+                               ng-required="vm.marca!=null"
+                               ng-change="vm.appendElement('modelo',vm.modelo)"
+                               ng-disabled="vm.marca==null || vm.modelos.length == 0"
+                               md-no-asterisk="">
+                        <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">{{modelo.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectModel.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <md-input-container flex="33" flex-sm="100" flex-xs="100">
+                    <md-input-container layout="column" layout-fill="true" flex="100">
+                        <label translate>{{'REPORTS.FIELDS.MONTH'|translate}}</label>
+                        <md-select ng-model="vm.mes" name="month"
+                                   ng-required="vm.reporte.economico==undefined || vm.reporte.economico.length==0">
+                            <md-option ng-repeat="mes in vm.meses" ng-value="mes">{{mes}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="formReport.month.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </md-input-container>
+                <md-input-container flex="33" flex-sm="100" flex-xs="100">
+                    <label>{{'REPORTS.FIELDS.YEAR'|translate}}</label>
+                    <md-select ng-model="vm.anio" name="anio"
+                               ng-required="vm.reporte.economico==undefined || vm.reporte.economico.length==0">
+                        <md-option ng-repeat="anio in vm.anios" ng-value="anio">{{anio}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.anio.$error">
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="33" flex-sm="100" flex-xs="100"
+                                    ng-if="vm.sucursal==null">
+                    <label>{{'INPUT.Subsidiary'|translate}}</label>
+                    <md-select
+                        name="selectSubsidiary"
+                        ng-model="vm.sucursalchoice"
+                        ng-disabled="vm.sucursal!=null"
+                        ng-change="vm.appendElement('sucursal',vm.sucursalchoice)"
+                        md-no-asterisk="">
+                        <md-option ng-repeat="sucursal in vm.Sucursales" value="{{sucursal.id}}">
+                            {{sucursal.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formReport.selectSubsidiary.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div  layout="row" flex="100" layout-sm="column" layout-xs="column">
+                <div flex="80" flex-sm="100" flex-xs="100">
+                    <div class="chipsdemoCustomInputs" layout-fill="">
+                        <label>{{'REPORTS.FIELDS.CABINET_LIST'|translate}}</label>
+                        <md-chips ng-model="vm.cabinet"
+                                  md-on-add="vm.appendElement('economico',$chip)"
+                                  md-on-remove="vm.deleteElement($chip)"
+                                  md-removable="vm.removable"
+                                  delete-button-label="Remove Tag">
+                            <input type="text" only-digits ng-model="vm.cabinetBuffer"
+                                   placeholder="{{'REPORTS.FIELDS.ECONOMIC'|translate}}">
+                        </md-chips>
+                    </div>
+                </div>
+                <div flex="20" flex-sm="100" flex-xs="100" >
+                    <md-button class="md-primary md-raised"
+                               aria-label="Imprimir"
+                               ng-click="vm.saveReporte()"
+                               ng-disabled="formReport.$invalid">
+                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                    </md-button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </md-card>
+</div>

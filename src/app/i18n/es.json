@@ -40,7 +40,11 @@
       "REPORTS": {
         "TITLE": "Reportes",
         "ADMIN": "Gestión",
-        "LIST": "Listado de Reportes"
+        "LIST": "Listado de Reportes",
+        "CUSTOM": {
+            "TITLE":"Personalizados",
+            "PRODUCTION":"Producción"
+        }
       },
       "CATEGORY_INSUMS": "Categoria de Insumos",
       "BOOK_INSUMS": "Cátalogo de Insumos",

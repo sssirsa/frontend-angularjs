@@ -9,7 +9,7 @@
         .module('app.mainApp.tecnico')
         .controller('checklistController', checklistController);
 
-    function checklistController($mdDialog, Cabinet, $scope, ModeloCabinet, diagnosticoEtapa, cabinet, toastr, Translate, Helper, Upload, EnvironmentConfig, OAuthToken, MarcaCabinet, CabinetEntradaSalida) {
+    function checklistController($mdDialog, Cabinet, $scope, ModeloCabinet,etapaActual, diagnosticoEtapa, cabinet, toastr, Translate, Helper, Upload, EnvironmentConfig, OAuthToken, MarcaCabinet, CabinetEntradaSalida, Servicios) {
         var vm = this;
         vm.diagnostico = {};
         vm.cabinets = null;
@@ -24,6 +24,87 @@
         vm.a="";
         activate();
         vm.picFile2;
+        // ---Inician Funciones para Guardar etapa de Servicio
+
+        function guardarEtapa(){
+            if (vm.etapaActual.id == null) {
+                var promise = Servicios.crearEtapaServicio(vm.etapaActual);
+                promise.then(function (res) {
+                    toastr.success(vm.successTitle, vm.successCreateMessage);
+                    vm.etapaActual = res;
+                    vm.cancel();
+
+                }).catch(function (res) {
+
+
+                    notifyError(res.status);
+                });
+            }
+            else {
+                var promise = Servicios.editarEtapaServicio(vm.etapaActual);
+                promise.then(function (res) {
+
+                    toastr.success(vm.successTitle, vm.successUpdateMessage);
+                    vm.etapaActual = res;
+                    vm.cancel();
+                }).catch(function (res) {
+                    if(res.status==400){
+                        vm.errorMessage=res.data.errors[0].message;// checar condicion de campo de res
+
+                    }
+                    notifyError(res.status);
+                });
+            }
+
+        }
+        function notifyError(status) {
+            switch (status) {
+                case 400:
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    break;
+                case 404:
+                    toastr.info(vm.notFoundMessage, vm.errorTitle);
+                    cancel();
+                    break;
+                case 405:
+                    toastr.warning(vm.notAllow, vm.errorTitle);
+                    break;
+                case 406:
+                    toastr.warning(vm.messageNotEntrada, vm.errorTitle);
+                    cancel();
+                    break;
+                case 407:
+                    toastr.warning(vm.messageNotTipoEquipo, vm.errorTitle);
+                    break;
+                case 444:
+                    toastr.warning(vm.notAllow, vm.errorNotEtapaActual);
+                    break;
+                case 555:
+                    toastr.warning(vm.notAllow, vm.errorNotDeleteFirstStep);
+                    break;
+                case 900:
+                    toastr.warning(vm.notInsumos, vm.errorMessage);
+                    break;
+                case 998:
+                    toastr.warning(vm.errorMessage, vm.errorNotInsumos);
+                    break;
+                case 999:
+                    toastr.warning(vm.cabinetDeleted, vm.errorMessage);
+                    break;
+                case 1000:
+                    toastr.warning(vm.notFoundMessage, vm.notStepsMessage);
+                    break;
+                case 1001:
+                    toastr.success(vm.successCreateMessage, vm.successAddInsumo);
+                    break;
+                case 500:
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    break;
+
+
+            }
+        }
+        ///Finalizan funciones para guardar etapa de Servicio
 
 
         function change() {
@@ -54,6 +135,11 @@
                     method: 'POST',
                     data: vm.diagnostico
                 }).then(function (res) {
+                    //cambio Para guardar Etapa
+                    if (vm.etapaActual){
+                        guardarEtapa()
+                    }
+                    //Finaliza Cambio para Guardar Etapa
                     vm.status = 'idle';
                     vm.cabinet = null;
                     vm.picFile = null;
@@ -90,6 +176,11 @@
                     method: 'PUT',
                     data: vm.diagnostico
                 }).then(function (res) {
+                    //cambio Para guardar Etapa
+                    if (vm.etapaActual){
+                        guardarEtapa()
+                    }
+                    //Finaliza Cambio para Guardar Etapa
                     vm.status = 'idle';
                     vm.cabinet = null;
                     vm.picFile = null;
@@ -139,6 +230,9 @@
                     var diagnostico = _.clone(diagnosticoEtapa);
 
                 }
+                    if(etapaActual){
+                        vm.etapaActual=etapaActual;
+                    }
                 else {
                     var diagnostico = {
                         tipo: 'entrada',

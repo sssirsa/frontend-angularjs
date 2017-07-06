@@ -12,7 +12,7 @@
                 "SwitchCase": 1
             }
         ],
-
+        "linebreak-style": 0,
 
         "semi": [
             2,

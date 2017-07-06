@@ -4,9 +4,13 @@
         .module('app.mainApp.solicitudes')
         .controller('realizarSolicitudController', realizarSolicitudController);
 
-    function realizarSolicitudController(OPTIONS, udn,TipoEquipo,Helper,$mdEditDialog, $mdDialog, Translate,toastr, Solicitudes, Solicitud_Servicio, Solicitudes_Admin, PersonaCapturista, Session,$scope) {
+    function realizarSolicitudController(OPTIONS, URLS, udn,TipoEquipo,Helper,$mdEditDialog, $mdDialog, Translate,toastr,
+                                         Solicitudes, Solicitud_Servicio, Solicitudes_Admin, PersonaCapturista,
+                                         Session,$scope, $window)
+    {
         var vm = this;
 
+        //Variable declaration
         var requisito = {
             "id": null,
             "udn": null,
@@ -24,15 +28,19 @@
             "id": null,
             "razon_social": null,
             "nombre_negocio": null,
-            "direccion": null,
+            "calle": null,
+            "entre_calle": null,
+            "y_calle": null,
+            "colonia": null,
+            "municipio": null,
+            "ciudad": null,
+            "cp": null,
             "telefono": null,
             "contacto_negocio": null,
             "fecha_atencion": new Date(),
             "udn": null,
-            "created_at": new Date(),
-            "updated_at": new Date()
+            
         };
-
         var entrada = {
             "id": null,
             "razon_social": null,
@@ -46,7 +54,6 @@
             "updated_at": new Date(),
             "file":null
         };
-
         vm.query = {
             order: 'id',
             limit: 5,
@@ -69,6 +76,14 @@
         vm.requisitoVenta = angular.copy(requisitoVenta);
         vm.entrada = angular.copy(entrada);
         vm.requisito = angular.copy(requisito);
+        vm.isValid=false;
+        vm.udnObject=null;
+        vm.filterUDNs= null;
+        vm.searchText = "";
+        vm.isValid=false;
+        vm.serviceKinds = OPTIONS.jobKinds;
+
+        //Function declaration
         vm.showCreateDialog = showCreateDialog;
         vm.cancel = cancel;
         vm.eliminar = eliminar;
@@ -82,21 +97,23 @@
         vm.guardar=guardar;
         vm.search=search;
         vm.selectedItemChange=selectedItemChange;
-        vm.isValid=false;
-        vm.udnObject=null;
-        vm.filterUDNs= null;
-        vm.searchText = "";
-        vm.isValid=false;
+        vm.locateInGoogle=locateInGoogle;
+
+        //Translates
+        vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
+        vm.sucessMassive=Translate.translate('INPUT.Messages.SuccessMassive');
+        vm.errorMassive=Translate.translate('INPUT.Messages.ErrorMassive');
+        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
+        vm.errorDuplicado = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORDUPLICADO');
+        vm.erroNumSolConf = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORNUMSOLCONF');
+        vm.errorLocation = Translate.translate('PUNTOVENTA.TOASTR.UNSUPPORTED_GEOLOCATION');
+        
         activate();
         function activate() {
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.sucessMassive=Translate.translate('INPUT.Messages.SuccessMassive');
-            vm.errorMassive=Translate.translate('INPUT.Messages.ErrorMassive');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.errorDuplicado = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORDUPLICADO');
-            vm.erroNumSolConf = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORNUMSOLCONF');
+            geoLocate();
+
             udn.listObject().then(function (res) {
                 vm.udns=Helper.filterDeleted(res,true);
                 vm.udns=_.sortBy(vm.udns, 'agencia');
@@ -203,7 +220,7 @@
             vm.udn=vm.udnObject.id;
             vm.requisito.fecha_inicio = moment(vm.requisito.fecha_inicio).format('YYYY-MM-DD');
             vm.requisito.fecha_termino = moment(vm.requisito.fecha_termino).format('YYYY-MM-DD');
-            vm.requisito.fecha_atendida = moment(vm.requisito.fecha_atendida).format('YYYY-MM-DD HH:mm'); 
+            vm.requisito.fecha_atendida = moment(vm.requisito.fecha_atendida).format('YYYY-MM-DD HH:mm');
             vm.requisito.udn = vm.udn;
             vm.requisito.persona = vm.persona;
             vm.requisito.tipo_solicitud=OPTIONS.type_request[vm.tipo_solicitud].value_id;
@@ -303,6 +320,27 @@
 
         function selectedItemChange(item) {
             vm.isValid =angular.isObject(item);
+        }
+
+        function geoLocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    vm.requisitoVenta.latitud = position.coords.latitude;
+                    vm.requisitoVenta.longitud = position.coords.longitude;
+                });
+            }
+            else {
+                toastr.error(vm.errorLocation, vm.errorTitle);
+            }
+        }
+
+        function locateInGoogle(){
+            if(vm.requisitoVenta.latitud && vm.requisitoVenta.longitud) {
+                $window.open(URLS.geoLocation + vm.requisitoVenta.latitud + "," + vm.requisitoVenta.longitud, '_blank');
+            }
+            else {
+                toastr.error(vm.errorLocation, vm.errorTitle);
+            }
         }
 
     }

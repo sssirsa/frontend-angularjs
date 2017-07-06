@@ -390,7 +390,8 @@
                 templateUrl: 'app/mainApp/tecnico/entrada/dialogs/marca.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
-                focusOnOpen: true
+                focusOnOpen: true,
+                parameter: "lalalalala"
             }).then(function (res) {
 
             }).catch(function (err) {

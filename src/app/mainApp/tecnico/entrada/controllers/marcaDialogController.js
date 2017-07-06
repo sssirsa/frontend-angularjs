@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp.tecnico')
         .controller('MarcaDialogController',MarcaDialogController);
-    function MarcaDialogController($mdDialog, MarcaCabinet, Translate, toastr){
+    function MarcaDialogController($mdDialog, MarcaCabinet, Translate, toastr, parameter){
         var vm = this;
 
         //Functions

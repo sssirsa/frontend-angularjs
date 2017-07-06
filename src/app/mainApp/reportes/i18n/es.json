@@ -4,13 +4,22 @@
         "TITLE_LIST":"Listado de reportes solicitados",
         "INFORMATION": "Información del reporte",
         "FIELD_SET": "Campos",
+        "TITLES":{
+          "PRODUCTION":"Reporte de producción"
+        },
         "FIELDS": {
             "SEARCH": "Busqueda de reportes",
             "INFORMATION": "Información del reporte",
             "NAME": "Nombre",
             "MODIFIED": "Fecha de modificación",
             "DESCRIPTION": "Descripción",
-            "ROOT_MODEL": "Modelo raíz"
+            "ROOT_MODEL": "Modelo raíz",
+            "YEAR": "Año",
+            "MONTH": "Mes",
+            "STAGE":"Etapa",
+            "CABINET_LIST":"Lista de Cabinets",
+            "ECONOMIC":"Económico",
+            "TYPE_EQUIPMENT":"Tipo de Equipo"
         },
         "TABLE": {
             "MODEL": "Modelo",
@@ -29,7 +38,9 @@
         },
         "ERRORS": {
             "NOT_FOUND": "No se encontró ningun reporte",
-            "REQUIRED": "El campo es requerido"
+            "REQUIRED": "El campo es requerido",
+            "YEAR":"El año mínimo a elegir es 2016 y máximo",
+            "NOT_GENERATE":"No se obtuvieron resultados con estos filtros"
         },
         "DIALOG": {
             "CREATE": {
@@ -64,8 +75,9 @@
             "REPORT_CLONE_ERROR":"Error al clonar el reporte",
             "REPORT_DELETE_ERROR":"Error al eliminar el reporte",
             "REPORT_EXPORT_ERROR":"Error al exportar el reporte",
-            "REPORT_PREVIEW_ERROR":"No se pudo obtener el preview para este reporte"
-
+            "REPORT_PREVIEW_ERROR":"No se pudo obtener el preview para este reporte",
+            "NO_RESULTS":"El reporte no ha generado ningún resultado",
+            "NO_REPORT":"No ha seleccionado ningún reporte"
         },
         "MODIFY":{
             "TITLE":"Edición de reporte",
@@ -80,7 +92,10 @@
             "FIELD_FILTER":"Filtro:",
             "FIELD_FIELDS":"Reporte:",
             "DELETE":"Eliminar",
-            "TABLE":"Tabla"
+            "TABLE":"Tabla",
+            "GROUP":"Agrupar",
+            "TOTALS":"Calcular total",
+            "EXCLUDE":"Excluir"
         },
         "TAB":{
             "PREVIEW":"Vista previa",

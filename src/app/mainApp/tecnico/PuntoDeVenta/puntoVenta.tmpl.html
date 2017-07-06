@@ -4,9 +4,50 @@
 <md-card class="card1">
     <div flex="" layout="row" layout-align="center center">
         <div flex="100" layout="column" tri-wizard="" class="md-whiteframe-z1" layout-fill>
-            <md-toolbar class="md-primary" layout-fill>
+            <md-toolbar class="md-primary" layout-fill layout="column">
+                <div flex
+                     class="white-background"
+                     layout-gt-sm="row"
+                     layout="column"
+                     layout-fill
+                     layout-padding>
+                    <div layout="row"
+                         layout-fill
+                         flex-gt-sm="50"
+                         flex="100"
+                         layout-padding>
+                        <form flex layout="row" layout-fill ng-submit="vm.getId(vm.id)">
+                            <md-input-container flex layout-fill>
+                                <label>{{'PUNTOVENTA.FOLIO'|translate}}</label>
+                                <input numbers-only
+                                       aria-label="service folio"
+                                       ng-model="vm.id"
+                                       type="text">
+                            </md-input-container>
+                            <md-button class="md-icon-button"
+                                       aria-label="search folio"
+                                       ng-click="vm.getId(vm.id)">
+                                <md-icon md-font-icon="fa fa-search"></md-icon>
+                            </md-button>
+                        </form>
+                    </div>
+                    <md-input-container flex layout-fill>
+                        <md-select ng-model="vm.selectedSearchType" md-on-close="vm.search()">
+                            <md-option ng-repeat="option in vm.fieldServiceTypes" value="{{option.id}}">
+                                {{option.text}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex layout-fill>
+                        <md-select ng-model="vm.id" md-on-close="vm.getId(vm.id)">
+                            <md-option ng-repeat="option in vm.puntosVenta" value="{{option.id}}">
+                                <strong>{{option.id}}</strong> {{option.fecha}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
                 <div flex layout="column" class="md-toolbar-tools">
-                    <div flex layout="column">
+                    <div flex layout="column" layout-fill>
                         <div flex layout="row" flex="100" layout-sm="row" layout-fill="true"
                              layout-align="space-between center">
                             <div layout="row" flex="100" layout-fill>
@@ -39,7 +80,7 @@
                                 <div layout="column" flex="">
                                     <md-input-container flex="100">
                                         <label translate="">PUNTOVENTA.WEEK</label>
-                                        <input type="number" name="week" required=""
+                                        <input ng-disabled="vm.puntoVenta.cerrado" type="number" name="week" required=""
                                                ng-model="vm.puntoVenta.semana" min="1" step="1" max="52">
                                         <div ng-messages="generalInfo.week.$error">
                                             <div ng-message="required"><span translate>MAIN.LABEL.REQUIRED</span></div>
@@ -52,7 +93,8 @@
                                     </md-input-container>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.RECEPTIONHOUR</label>
-                                        <input type="time" ng-model="vm.recepcion.hora" mdp-time-picker
+                                        <input ng-disabled="vm.puntoVenta.cerrado" type="time"
+                                               ng-model="vm.recepcion.hora" mdp-time-picker
                                                name="hora_recepcion"
                                                required=""/>
                                         <div ng-messages="generalInfo.hora_recepcion.$error">
@@ -62,7 +104,7 @@
                                     </md-input-container>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.FLOOR</label>
-                                        <input type="number" name="floor"
+                                        <input ng-disabled="vm.puntoVenta.cerrado" type="number" name="floor"
                                                ng-model="vm.puntoVenta.piso" min="0" max="100">
                                         <div ng-messages="generalInfo.floor.$error">
                                             <div ng-message="max">{{'MAIN.GENERAL.MAX_NUMBER' | translate}} 100</div>
@@ -73,6 +115,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.FIELD</label>
                                         <textarea name="campo"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   ng-model="vm.puntoVenta.campo"
                                                   is-aplhanumeric
                                                   md-maxlength="45"></textarea>
@@ -84,6 +127,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.MOVEMENT</label>
                                         <textarea name="movimiento"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   ng-model="vm.puntoVenta.movimiento"
                                                   is-alphanumeric
                                                   md-maxlength="100"></textarea>
@@ -94,6 +138,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.DELIVERY</label>
                                         <textarea name="entrega"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   ng-model="vm.puntoVenta.entrega"
                                                   is-alphanumeric
                                                   md-maxlength="100"></textarea>
@@ -106,8 +151,7 @@
                         </div>
                     </md-tab-body>
                 </md-tab>
-                <md-tab id="2" ng-disabled="generalInfo.$invalid" ng-click="vm.checkFinished()"
-                        ng-disabled="projectInfo.$invalid">
+                <md-tab id="2" ng-click="vm.checkFinished()">
                     <md-tab-label><span class="oxy-step-label">2</span><span translate=""
                                                                              hide-xs>PUNTOVENTA.LOCALDATA</span>
                     </md-tab-label>
@@ -117,7 +161,7 @@
                                 <div flex="" layout="column" layout-wrap="">
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.KM</label>
-                                        <input type="number" name="km" required=""
+                                        <input type="number" name="km" required="" ng-disabled="vm.puntoVenta.cerrado"
                                                ng-model="vm.puntoVenta.km" min="0" max="1000000">
                                         <div ng-messages="localData.km.$error">
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
@@ -128,7 +172,9 @@
                                     </md-input-container>
                                     <md-input-container>
                                         <label translate>PUNTOVENTA.TYPEOFJOB</label>
-                                        <md-select ng-model="vm.puntoVenta.tipo_trabajo" name="tipo_trabajo"
+                                        <md-select ng-model="vm.puntoVenta.tipo_trabajo"
+                                                   name="tipo_trabajo"
+                                                   ng-disabled="vm.puntoVenta.cerrado"
                                                    required="">
                                             <md-option ng-repeat="tipo in vm.tiposTrabajo" ng-value="tipo.value">
                                                 {{tipo.value}}
@@ -138,6 +184,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.STABLISHED</label>
                                         <textarea name="nombre_establecimiento"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   required=""
                                                   ng-model="vm.puntoVenta.nombre_establecimiento"
                                                   is-alphanumeric
@@ -146,9 +193,33 @@
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
+                                    <div layout-gt-xs="row"
+                                         layout="column"
+                                         layout-fill
+                                         layout-align="space-around center">
+                                        <md-input-container flex layout-fill>
+                                            <label translate>PUNTOVENTA.LATITUDE</label>
+                                            <input type="text"
+                                                   ng-model="vm.puntoVenta.latitud"
+                                                   ng-disabled="true">
+                                        </md-input-container>
+                                        <md-input-container flex layout-fill>
+                                            <label translate>PUNTOVENTA.LONGITUDE</label>
+                                            <input type="text"
+                                                   ng-model="vm.puntoVenta.longitud"
+                                                   ng-disabled="true">
+                                        </md-input-container>
+                                        <md-button aria-label="Google maps"
+                                                   ng-if="vm.puntoVenta.latitud && vm.puntoVenta.longitud"
+                                                   ng-click="vm.locateInGoogle()"
+                                                   class="md-fab md-mini md-scale">
+                                            <md-icon md-font-icon="zmdi zmdi-google-maps"></md-icon>
+                                        </md-button>
+                                    </div>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.ADDRESS</label>
                                         <textarea name="direccion"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   required=""
                                                   ng-model="vm.puntoVenta.direccion"
                                                   is-alphanumeric
@@ -160,18 +231,19 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.DATEREPORT</label>
                                         <input aria-label="fecha_reporte" type="text"
+                                               ng-disabled="vm.puntoVenta.cerrado"
                                                ng-model="vm.reporte.fecha" mdp-date-picker
                                                mdp-format="{{vm.formato}}" mo-date-input="{{vm.formato}}"
                                                name="fecha_reporte"
                                                required=""/>
                                         <div ng-messages="localData.fecha_reporte.$error">
-
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.REPORTHOUR</label>
                                         <input type="time" ng-model="vm.reporte.hora" mdp-time-picker
+                                               ng-disabled="vm.puntoVenta.cerrado"
                                                name="hora_reporte"
                                                required=""/>
                                         <div ng-messages="generalInfo.hora_reporte.$error">
@@ -183,11 +255,11 @@
                                         <label translate="">PUNTOVENTA.DATESERVICE</label>
                                         <input aria-label="fecha_reporte" type="text"
                                                ng-model="vm.servicio.fecha" mdp-date-picker
+                                               ng-disabled="vm.puntoVenta.cerrado"
                                                mdp-format="{{vm.formato}}" mo-date-input="{{vm.formato}}"
                                                name="fecha_servicio"
                                                required=""/>
                                         <div ng-messages="localData.fecha_servicio.$error">
-
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
@@ -195,9 +267,9 @@
                                         <label translate="">PUNTOVENTA.SERVICEHOUR</label>
                                         <input type="time" ng-model="vm.servicio.hora" mdp-time-picker
                                                name="hora_servicio"
+                                               ng-disabled="vm.puntoVenta.cerrado"
                                                required=""/>
                                         <div ng-messages="generalInfo.hora_servicio.$error">
-
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
@@ -206,8 +278,8 @@
                         </div>
                     </md-tab-body>
                 </md-tab>
-                <md-tab id="3" ng-disabled="generalInfo.$invalid || localData.$invalid" ng-click="vm.checkFinished()"
-                        ng-disabled="projectInfo.$invalid">
+                <md-tab id="3"
+                        ng-click="vm.checkFinished()">
                     <md-tab-label><span class="oxy-step-label">3</span><span translate=""
                                                                              hide-xs>PUNTOVENTA.CABINETDATA</span>
                     </md-tab-label>
@@ -218,6 +290,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.ACTIVE</label>
                                         <textarea name="activo"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   required=""
                                                   ng-model="vm.puntoVenta.activo"
                                                   is-alphanumeric
@@ -229,6 +302,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.SERIE</label>
                                         <textarea name="serie" required=""
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   ng-model="vm.puntoVenta.serie"
                                                   is-alphanumeric
                                                   md-maxlength="100"></textarea>
@@ -239,6 +313,7 @@
                                     <md-input-container flex="100" class="md-block">
                                         <label>{{'INPUT.Dialogs.Cabinet.Brand'|translate}}</label>
                                         <md-select name="selectBrand"
+                                                   ng-disabled="vm.puntoVenta.cerrado"
                                                    ng-model="vm.marca"
                                                    required=""
                                                    md-on-close="vm.filterModels()"
@@ -254,6 +329,7 @@
                                     <md-input-container flex="100" class="md-block">
                                         <label>{{'INPUT.Dialogs.Cabinet.Model'|translate}}</label>
                                         <md-select name="selectModel"
+                                                   ng-disabled="vm.puntoVenta.cerrado"
                                                    ng-model="vm.modelo"
                                                    required=""
                                                    md-on-close="vm.getInsumosLote()"
@@ -274,14 +350,13 @@
 
                     </md-tab-body>
                 </md-tab>
-                <md-tab id="4" ng-disabled="generalInfo.$invalid || localData.$invalid || cabinetInfo.$invalid"
-                        ng-click="vm.checkFinished()" ng-disabled="projectInfo.$invalid">
+                <md-tab id="4"
+                        ng-click="vm.checkFinished()">
                     <md-tab-label><span class="oxy-step-label">4</span><span
                             translate="" hide-xs>PUNTOVENTA.USEDINSUM</span>
                     </md-tab-label>
                     <md-tab-body>
                         <div class="wizard layout-padding" layout="column">
-
                             <div flex="" layout="column" layout-wrap="">
                                 <form name="form2.insumosValidation">
                                     <div layout="row" layout-md="row" layout-sm="row" layout-xs="column"
@@ -295,6 +370,7 @@
                                                 <div layout="row" layout-align="center center">
                                                     <div flex="20">
                                                         <md-switch flex class="md-primary"
+                                                                   ng-disabled="vm.puntoVenta.cerrado"
                                                                    ng-disabled="insu.error"
                                                                    ng-model="vm.insumos_loteUsados[$index].agregar"
                                                                    aria-label="Primary Switch">
@@ -308,6 +384,7 @@
                                                         <md-input-container ng-if="insu.cantidadMax > 1">
                                                             <label>No. de {{insu.nombre}}</label>
                                                             <div range-spinner
+                                                                 ng-disabled="vm.puntoVenta.cerrado"
                                                                  range-min="1"
                                                                  range-step="1"
                                                                  range-max="100"
@@ -362,28 +439,34 @@
                                             <form name="insumoPuntoVenta">
                                                 <div layout="row" layout-sm="column" layout-xs="column" flex
                                                      layout-md="column" ng-if="vm.puntoVenta && vm.mostrarCompresor">
-                                                    <md-switch ng-model="inputDisabled" >
+                                                    <md-switch ng-model="inputDisabled"
+                                                               ng-disabled="vm.puntoVenta.cerrado">
                                                         <span translate>ETAPA_SERVICIO.ADD_MICRO</span>
                                                     </md-switch>
                                                     <md-input-container flex
                                                                         ng-if="inputDisabled">
                                                         <label><span translate>ETAPA_SERVICIO.SCAN</span></label>
-                                                        <input type="text" ng-model="vm.puntoVenta.insumos[0].no_serie"
+                                                        <input type="text"
+                                                               ng-disabled="vm.puntoVenta.cerrado"
+                                                               ng-model="vm.puntoVenta.insumos[0].no_serie"
                                                                ng-required="vm.puntoVenta.insumos[0].no_serie==null">
 
                                                     </md-input-container>
                                                     <md-input-container flex ng-if="inputDisabled">
                                                         <label><span translate>ETAPA_SERVICIO.NOTES</span></label>
-                                                        <input type="text" ng-model="vm.puntoVenta.insumos[0].notas">
+                                                        <input type="text"
+                                                               ng-disabled="vm.puntoVenta.cerrado"
+                                                               ng-model="vm.puntoVenta.insumos[0].notas">
                                                     </md-input-container>
                                                     <md-input-container flex ng-if="inputDisabled">
                                                         <label><span translate>ETAPA_SERVICIO.CANTITY</span></label>
-                                                        <input type="number" value="1" disabled>
+                                                        <input type="number" value="1" ng-disabled="true">
                                                     </md-input-container>
                                                     <md-input-container ng-if="inputDisabled" flex="10">
                                                         <md-button class="md-primary md-raised"
+                                                                   ng-disabled="vm.puntoVenta.cerrado"
                                                                    aria-label="raised button"
-                                                                   ng-disabled="insumoPuntoVenta.$invalid || angular.isUndefined(vm.puntoVenta.insumos[0].no_serie) || vm.puntoVenta.insumos[0].no_serie==null"
+                                                                   ng-disabled="vm.puntoVenta.cerrado || insumoPuntoVenta.$invalid || angular.isUndefined(vm.puntoVenta.insumos[0].no_serie) || vm.puntoVenta.insumos[0].no_serie==null"
                                                                    ng-click='vm.AddInsumoArray()'>
                                                             <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
                                                         </md-button>
@@ -416,7 +499,9 @@
                                                 <md-input-container flex-xs flex-sm flex-md="10" flex-lg="10"
                                                                     flex-xl="10"
                                                                     ng-if=" vm.puntoVenta.insumos[0].notas!=null">
-                                                    <md-button class="md-warn md-raised" aria-label="raised button"
+                                                    <md-button class="md-warn md-raised"
+                                                               ng-disabled="vm.puntoVenta.cerrado"
+                                                               aria-label="raised button"
                                                                ng-click='vm.DeleteInsumoArray()'>
                                                         <md-icon md-font-icon="fa fa-trash"></md-icon>
                                                     </md-button>
@@ -433,8 +518,7 @@
                     </md-tab-body>
                 </md-tab>
                 <md-tab id="5"
-                        ng-disabled="generalInfo.$invalid || localData.$invalid || cabinetInfo.$invalid||form2.insumosValidation.$invalid"
-                        ng-click="vm.checkFinished()" ng-disabled="projectInfo.$invalid">
+                        ng-click="vm.checkFinished()">
                     <md-tab-label><span class="oxy-step-label">5</span><span
                             translate="" hide-xs>PUNTOVENTA.SERVICEOBSERVATION</span>
                     </md-tab-label>
@@ -445,6 +529,7 @@
                                     <md-input-container>
                                         <label translate="">PUNTOVENTA.DESCRIPTION</label>
                                         <textarea name="descripcion_trabajo"
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   required=""
                                                   is-alphanumeric
                                                   ng-model="vm.puntoVenta.descripcion_trabajo"
@@ -457,6 +542,7 @@
                                         <label translate="">PUNTOVENTA.CLIENTOBSERVATION</label>
                                         <textarea name="observaciones_cliente"
                                                   required=""
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   is-alphanumeric
                                                   ng-model="vm.puntoVenta.observaciones_cliente"
                                                   md-maxlength="500"></textarea>
@@ -468,6 +554,7 @@
                                         <label translate="">PUNTOVENTA.TECHNICALOBSERVATIONS</label>
                                         <textarea name="observaciones_tecnicas"
                                                   required=""
+                                                  ng-disabled="vm.puntoVenta.cerrado"
                                                   is-alphanumeric
                                                   ng-model="vm.puntoVenta.observaciones_tecnicas"
                                                   ng-change="vm.checkFinished()"
@@ -476,6 +563,13 @@
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
                                     </md-input-container>
+                                    <md-switch ng-model="vm.puntoVenta.cerrado"
+                                               ng-disabled="vm.puntoVenta.id && vm.puntoVenta.cerrado"
+                                               aria-label="Closed service">
+                                        <p ng-if="vm.puntoVenta.cerrado">{{'PUNTOVENTA.FINISHED'|translate}}</p>
+                                        <p ng-if="!vm.puntoVenta.cerrado">{{'PUNTOVENTA.UNFINISHED'|translate}}</p>
+
+                                    </md-switch>
 
                                 </div>
                             </form>
@@ -485,20 +579,16 @@
             </md-tabs>
             <div class="card1" layout="row" layout-align="end center" flex class="wizard-navbar">
                 <md-button ng-click="vm.prev()" aria-label="Paso previo" class="md-fab md-mini md-scale"
-                           ng-hide="triWizard.currentStep > 5"
-                           ng-disabled="triWizard.prevStepDisabled()">
+                           ng-hide="triWizard.currentStep > 5">
                     <md-icon md-font-icon="fa fa-hand-o-left"></md-icon>
                 </md-button>
                 <md-button ng-click="vm.next()" aria-label="Paso siguiente" class="md-fab md-mini md-scale"
-                           ng-hide="vm.completed == 100 && triWizard.currentStep >= 5"
-                           ng-disabled="triWizard.nextStepDisabled()">
+                           ng-hide="vm.completed == 100 && triWizard.currentStep >= 5">
                     <md-icon md-font-icon="fa fa-hand-o-right"></md-icon>
                 </md-button>
                 <md-button ng-click="vm.crearPuntodeVenta()" aria-label="Crear punto de venta"
                            class="md-fab md-mini md-scale"
-                           ng-show="vm.completed == 100"
-                           ng-hide="vm.completed != 100"
-                           ng-disabled="generalInfo.$invalid || localData.$invalid || cabinetInfo.$invalid || observationsData.$invalid || form2.insumosValidation.$invalid"
+                           ng-hide="vm.puntoVenta.cerrado && vm.puntoVenta.id"
                            translate="">
                     <md-icon md-font-icon="fa fa-save"></md-icon>
                 </md-button>

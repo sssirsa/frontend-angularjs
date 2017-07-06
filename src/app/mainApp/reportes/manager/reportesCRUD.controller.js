@@ -2,13 +2,13 @@
  * Created by Emmanuel on 16/10/2016.
  */
 (function () {
-    'use_strict';
+    "use strict";
 
     angular
         .module('app.mainApp.reportes')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams,OPTIONS, $mdDialog, Reportes, Translate, $state) {
+    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
@@ -17,9 +17,14 @@
         vm.formato = "DD-MM-YYYY";
         vm.filterType = OPTIONS.filter;
         vm.days = OPTIONS.days;
+        vm.searchParameter = "";
+
+        vm.filterTypeDate = OPTIONS.filterDate;
+        vm.filterTypeChar = OPTIONS.filterChar;
+        vm.filterInt = OPTIONS.filterInt;
+        vm.fieldQueries = OPTIONS.field_types;
 
         //Function parse
-        vm.selected = selected;
         vm.lookup = lookup;
         vm.querySearch = querySearch;
         vm.selectedItemChange = selectedItemChange;
@@ -28,25 +33,37 @@
         vm.remove = remove;
         vm.update = update;
         vm.onTabPreview = onTabPreview;
-        vm.editReport = editReport;
         vm.clear = clear;
-        vm.exportar=exportar;
+        vm.exportar = exportar;
+        vm.getValidFilters = getValidFilters;
+        vm.initDates = initDates;
+        vm.removeField = removeField;
+        vm.removeFilter = removeFilter;
+        vm.showEditionFields = showEditionFields;
 
-        vm.tableFilterHeaders = [
-            Translate.translate('REPORTS.MODIFY.TABLE'),
-            Translate.translate('REPORTS.TABLE_FILTER.NAME'),
-            Translate.translate('REPORTS.TABLE_FILTER.FILTER_TYPE'),
-            Translate.translate('REPORTS.TABLE_FILTER.VALUE'),
-            Translate.translate('REPORTS.TABLE_FILTER.EXCLUDE')
-        ];
         vm.tableDisplayHeaders = [
             Translate.translate('REPORTS.MODIFY.TABLE'),
             Translate.translate('REPORTS.MODIFY.FIELD_NAME'),
             Translate.translate('REPORTS.MODIFY.FIELD_VERBOSE'),
             Translate.translate('REPORTS.MODIFY.FIELD_TYPE'),
-            Translate.translate('REPORTS.MODIFY.FIELD_QUERY')
+            Translate.translate('REPORTS.MODIFY.FIELD_QUERY'),
+            Translate.translate('REPORTS.MODIFY.GROUP'),
+            Translate.translate('REPORTS.MODIFY.TOTALS'),
+            Translate.translate('REPORTS.MODIFY.DELETE')
         ];
-        vm.fieldQueries=OPTIONS.field_types;
+
+        vm.tableFilterHeaders = [
+            Translate.translate('REPORTS.MODIFY.TABLE'),
+            Translate.translate('REPORTS.MODIFY.FIELD_NAME'),
+            Translate.translate('REPORTS.MODIFY.FIELD_VERBOSE'),
+            Translate.translate('REPORTS.MODIFY.FIELD_TYPE'),
+            Translate.translate('REPORTS.TABLE_FILTER.FILTER_TYPE'),
+            Translate.translate('REPORTS.MODIFY.VALUE'),
+            Translate.translate('REPORTS.MODIFY.EXCLUDE'),
+            Translate.translate('REPORTS.MODIFY.DELETE')
+        ];
+
+        vm.fieldQueries = OPTIONS.field_types;
         //Translates
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
@@ -70,14 +87,14 @@
 
         activate();
         function activate() {
-            vm.loadingPromise=Reportes.getPartialReports().then(function (res) {
-                    vm.reports = res;
-                    vm.reports = _.sortBy(vm.reports, 'name');
+            vm.loadingPromise = Reportes.getPartialReports().then(function (res) {
+                vm.reports = res;
+                vm.reports = _.sortBy(vm.reports, 'name');
 
             });
-            if($stateParams.id!=null){
-                var obj={
-                    id:$stateParams.id
+            if ($stateParams.id !== null) {
+                var obj = {
+                    id: $stateParams.id
                 };
                 selected(obj);
             }
@@ -88,31 +105,36 @@
             return query ? lookup(query) : vm.reports;
 
         }
-        function onTabPreview() {
-            vm.preview=null;
-            vm.loadingPromisePreview=Reportes.generatePreviewPaginator(vm.report.id,1).then(function (res) {
-                vm.preview = res;
 
+        function onTabPreview() {
+            vm.preview = null;
+            vm.loadingPromisePreview = Reportes.generatePreviewPaginator(vm.report.id, 1).then(function (res) {
+                vm.preview = res;
             }).catch(function () {
                 toastr.warning(vm.errorPreview, vm.errorTitle);
             });
         }
 
         function selectedItemChange(item) {
-            if (item != null) {
-                vm.selectedReport=angular.copy(item);
-                vm.loadingPromiseReport=Reportes.getReportObject(item.id).then(function (res) {
-                    vm.report =res;
-                    Reportes.getModel(res.root_model).then(function(res){
+            if (item !== null) {
+                vm.selectedReport = angular.copy(item);
+                vm.loadingPromiseReport = Reportes.getReportObject(item.id).then(function (res) {
+                    vm.report = angular.copy(res);
+                    if (res.displayfield_set !== null)
+                        vm.report.displayfield_set = reorganizeFieldIndexes(res.displayfield_set);
+                    if (res.filterfield_set !== null)
+                        vm.report.filterfield_set = reorganizeFieldIndexes(res.filterfield_set);
+                    Reportes.getModel(res.root_model).then(function (res) {
                         vm.rootModel = res.name;
                     }).catch();
                 });
 
-                vm.selectedTab=0;
+                vm.selectedTab = 0;
             } else {
                 //cancel();
             }
         }
+
         function exportar() {
             $mdDialog.show({
                 controller: 'GenerateReportModalController',
@@ -127,22 +149,23 @@
             }).then(function () {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorExport, vm.errorTitle);
                 }
             });
         }
 
         function clear() {
-            vm.report=null;
-            vm.selectedReport =null;
+            vm.report = null;
+            vm.selectedReport = null;
+            vm.searchParameter = "";
         }
 
         function update() {
-            Reportes.updateReport(vm.report).then(function (res) {
+            Reportes.updateReport(vm.report).then(function () {
                 toastr.success(vm.successUpdate, vm.successTitle);
                 activate();
-            }).catch(function (res) {
+            }).catch(function () {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             });
         }
@@ -169,7 +192,7 @@
                 activate();
                 toastr.success(vm.successClone, vm.successTitle);
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorClone, vm.errorTitle);
                 }
             });
@@ -184,24 +207,18 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true
-            }).then(function () {
-
-                toastr.success(vm.successCreate, vm.successTitle);
+            }).then(function (reportCreatedSuccess) {
+                Reportes.getReportObject(reportCreatedSuccess.id).then(function(reportObtainedSuccess){
+                    clear();
+                    vm.searchParameter=reportObtainedSuccess.name;
+                    vm.report=angular.copy(reportObtainedSuccess);
+                    vm.selectedReport=angular.copy(reportObtainedSuccess);
+                    toastr.success(vm.successCreate, vm.successTitle);
+                })
             }).catch(function (err) {
-                if (err != null) {
+                if (err !== null) {
                     toastr.error(vm.errorCreate, vm.errorTitle);
                 }
-            });
-        }
-
-        function selected(item) {
-            vm.selectedTabs=0;
-            vm.selectedReport = item;
-            vm.loadingPromiseReport=Reportes.getReportObject(item.id).then(function (res) {
-                vm.report =res;
-                Reportes.getModel(res.root_model).then(function(res){
-                    vm.rootModel = res.name;
-                }).catch();
             });
         }
 
@@ -226,11 +243,79 @@
 
         }
 
-
-        function editReport() {
-            $state.go('triangular.admin-default.reportModify', {id: vm.report.id});
+        function getValidFilters(fieldType) {
+            switch (fieldType) {
+                case 'CharField':
+                    return vm.filterTypeChar;
+                    break;
+                case 'DateTimeField':
+                    return vm.filterTypeDate;
+                    break;
+                case 'DateField':
+                    return vm.filterTypeDate;
+                    break;
+                case 'DecimalField':
+                    return vm.filterInt;
+                case 'IntegerField':
+                    return vm.filterInt;
+                default:
+                    return vm.filterType;
+                    break;
+            }
         }
 
+        function initDates(field) {
+            if (field.filter_type === 'range') {
+                if (field.filter_value2 === "") {
+                    field.filter_value = moment();
+                    field.filter_value2 = moment();
+                }
+            } else if (field.filter_type === 'week_day') {
+                field.filter_value = "";
+                field.filter_value2 = "";
+            }
+        }
+
+        function removeField(id) {
+            vm.report.displayfield_set.splice(id, 1);
+            vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+        }
+
+        function removeFilter(id) {
+            vm.report.filterfield_set.splice(id, 1);
+            vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+        }
+
+        function reorganizeFieldIndexes(fields) {
+            for (i = 0; i < fields.length; i++) {
+                fields[i].position = i;
+            }
+            return fields;
+        }
+
+        function showEditionFields(ev) {
+            $mdDialog.show({
+                controller: 'ModelsReportModalController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/reportes/edicion/modal/models.modal.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                fullscreen: true,
+                clickOutsideToClose: true,
+                locals: {
+                    reporte: vm.report
+                }
+            }).then(function (res) {
+                Array.prototype.push.apply(vm.report.displayfield_set, res.fields);
+                vm.report.displayfield_set = reorganizeFieldIndexes(vm.report.displayfield_set);
+                Array.prototype.push.apply(vm.report.filterfield_set, res.filters);
+                vm.report.filterfield_set = reorganizeFieldIndexes(vm.report.filterfield_set);
+            }).catch(function (err) {
+                if (err !== null) {
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                }
+            });
+        }
     }
 
     function reportSearch() {
@@ -245,6 +330,5 @@
 
         };
     }
-
 
 })();
