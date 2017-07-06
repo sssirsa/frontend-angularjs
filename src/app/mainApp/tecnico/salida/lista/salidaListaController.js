@@ -123,8 +123,8 @@
                 EntradaSalida.getRemision(vm.selectedSalidaList.id).then(function (res) {
                     col.content[0].table.body[1][0].stack[2].text = res.udn.agencia + "\n" + res.udn.direccion;//Direccion UDN
                     col.content[0].table.body[1][1].stack[2].text = res.sucursal.nombre + "\n " + res.sucursal.direccion;//Almacen general
-                    col.content[0].table.body[2][0].stack[2].text = res.cliente == null ? "No tiene" : res.cliente;//Datos del cliente
-                    col.content[0].table.body[2][1].stack[2].text = moment(res.fecha, "YYYY-MM-DD").format("DD-MM-YYYY HH:mm:ss");//Fecha de envio
+                    col.content[0].table.body[2][0].stack[2].text = res.cliente === null ? "No tiene" : res.cliente;//Datos del cliente
+                    col.content[0].table.body[2][1].stack[2].text = moment(res.fecha).format("DD-MM-YYYY HH:mm:ss");//Fecha de envio
                     col.content[0].table.body[2][2].stack[2].text = res.id.toString();//Remisión No.
                     col.content[4].table.body[1][4].text = "Sello de recepción " + res.udn.agencia + "\n \n \n \n \n \n \n \n \n \n";  //add cabinets
                     if (res.ife_chofer != null) {
