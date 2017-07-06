@@ -8,7 +8,7 @@
         .module('app.mainApp.inventario')
         .controller('cabinetController', cabinetController);
 
-    function cabinetController(Translate, OPTIONS, MarcaCabinet, ModeloCabinet, udn, Cabinet, toastr, $scope, EntradaSalida, Helper, $mdDialog) {
+    function cabinetController(Translate, OPTIONS, Sucursal, MarcaCabinet, ModeloCabinet, udn, Cabinet, toastr, $scope, EntradaSalida, Helper, $mdDialog) {
         var vm = this;
         vm.newCabinet = true;
         vm.marcas_cabinet = null;
@@ -30,6 +30,7 @@
             economico: null,
             status: null,
             activo: false,
+            sucursal: null,
             capitalizado: false,
             no_serie: null,
             tipo_entrada: 'manual',
@@ -100,7 +101,12 @@
 
             loadMarcas();
             loadMarcasChoiceFiltered();
-
+            Sucursal.listObject().then(function (res) {
+                vm.Sucursales = Helper.filterDeleted(res, true);
+                vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
+            }).catch(function () {
+                toastr.error(vm.errorMessage, vm.errorTitle);
+            });
 
         }
 

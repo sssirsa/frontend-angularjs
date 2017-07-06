@@ -263,6 +263,18 @@
                             name: 'MAIN.MENU.REPORTS.LIST',
                             state: 'triangular.admin-default.list',
                             type: 'link'
+                        },
+                        {
+                            name: 'MAIN.MENU.REPORTS.CUSTOM.TITLE',
+                            icon: 'fa fa-cogs',
+                            type: 'dropdown',
+                            children: [
+                                {
+                                    name: 'MAIN.MENU.REPORTS.CUSTOM.PRODUCTION',
+                                    state: 'triangular.admin-default.reporteProduccion',
+                                    type: 'link'
+                                }
+                            ]
                         }
                     ]
                 }

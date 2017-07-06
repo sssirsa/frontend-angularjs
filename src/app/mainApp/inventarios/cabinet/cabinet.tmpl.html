@@ -88,6 +88,14 @@ Created by lockonDaniel on 9/11/16.
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
+                            <label>{{'CABINET_CRUD.OFFICE' | translate}}</label>
+                            <md-select ng-model="vm.selected_cabinet.sucursal" ng-disabled="vm.selected_cabinet.deleted" multiple="false">
+                                <md-option ng-repeat="sucursal in vm.Sucursales" value="{{sucursal.id}}">
+                                    {{sucursal.nombre}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block">
                             <label>{{ 'CABINET_CRUD.SERIAL_NUMBER' | translate }}</label>
                             <input type="text" name="no_serie" ng-model="vm.selected_cabinet.no_serie" ng-required="true" ng-disabled="vm.selected_cabinet.deleted"/>
                             <div ng-messages="inputForm.no_serie.$error">
