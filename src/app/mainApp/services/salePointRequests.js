@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .factory('salePointRequests',salePointRequests);
+        .factory('SalePointRequests',SalePointRequests);
 
-    function salePointsRequests(){
+    function SalePointRequests(){
         var api = 'http://genesis-mobile-dev.sssirsa.com:8000';
-        var baseUrl = Restangular.allUrl('',api);
+        //var baseUrl = Restangular.allUrl('',api);
 
         var objects = [
             {
@@ -981,12 +981,17 @@
         ];
 
         var service = {
-            getByID:getByID
+            getByID:getByID,
+            getAll:getAll
         };
 
         function getByID(id){
             //return baseUrl.one('solicitud',id);
             return _.where(objects, {id: id});
+        }
+
+        function getAll(){
+            return objects;
         }
 
         return service;

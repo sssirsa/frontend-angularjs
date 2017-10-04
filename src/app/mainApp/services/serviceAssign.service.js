@@ -7,7 +7,7 @@
 
     function ServiceAssign (Restangular){
         var api = 'http://genesis-mobile-dev.sssirsa.com:8000';
-        var baseUrl = Restangular.allUrl('',api);
+        //var baseUrl = Restangular.allUrl('',api);
 
         var objects = [
             {
@@ -109,11 +109,11 @@
         }
 
         function listAttendedServices() {
-            return baseUrl.all('list_atendido_pv');
+            //return baseUrl.all('list_atendido_pv');
         }
 
         function assignToPerson(personID, serviceID) {
-            return baseUrl.all('asignar_pv').all(serviceID).customPUT({persona:personID});
+            //return baseUrl.all('asignar_pv').all(serviceID).customPUT({persona:personID});
         }
 
         return service;
