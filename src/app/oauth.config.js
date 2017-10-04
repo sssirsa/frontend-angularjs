@@ -11,7 +11,7 @@
 
     function OauthConfig(OAuthProvider,EnvironmentConfig){
         OAuthProvider.configure({
-            baseUrl: EnvironmentConfig.site.rest.api+'oauth/',
+            baseUrl: EnvironmentConfig.site.rest.api+'mobile-dev/oauth/',
             clientId: EnvironmentConfig.site.oauth.clientId,
             clientSecret: EnvironmentConfig.site.oauth.clientSecret,
             grantPath: 'token/',
