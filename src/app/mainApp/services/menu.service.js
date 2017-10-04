@@ -166,7 +166,7 @@
                             type: 'link'
                         },
                         {
-                            name: 'MAIN.MENU.SERVICE.ASSING',
+                            name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
                             state:'triangular.admin-default.serviceAssing',
                             type: 'link'
                         }

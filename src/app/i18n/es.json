@@ -73,7 +73,7 @@
         "CONSUMABLE_CATEGORY": "Categoría de Insumos",
         "PROVIDER": "Proveedor"
       },
-      "SERVICES":{
+      "SERVICE_ASSIGN":{
           "ASSIGN":"Asignación de servicio"
       }
     },
