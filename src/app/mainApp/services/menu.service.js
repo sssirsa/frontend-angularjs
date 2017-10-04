@@ -164,6 +164,11 @@
                             name: 'MAIN.MENU.SERVICEAWAY',
                             state: 'triangular.admin-default.puntoVenta',
                             type: 'link'
+                        },
+                        {
+                            name: 'MAIN.MENU.SERVICE.ASSING',
+                            state:'triangular.admin-default.serviceAssing',
+                            type: 'link'
                         }
                     ]
                 }, {

@@ -72,6 +72,9 @@
         "CONSUMABLE_CATALOG": "Catálogo de Insumos",
         "CONSUMABLE_CATEGORY": "Categoría de Insumos",
         "PROVIDER": "Proveedor"
+      },
+      "SERVICES":{
+          "ASSIGN":"Asignación de servicio"
       }
     },
     "COMPONENTS": {
