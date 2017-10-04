@@ -5,9 +5,22 @@
         .module('app')
         .factory('SalePoint',SalePoint);
 
-    function SalePoint (Restangular){
-        //var api = 'http://genesis-mobile-dev.sssirsa.com:8000';
-        var baseUrl = Restangular.all('mobile');
+    function SalePoint (Restangular, EnvironmentConfig, URLS){
+        var baseUrl = null;
+        switch(EnvironmentConfig.environment){
+            case 'development':
+                baseUrl=Restangular.all(URLS.environment.mobile_dev);
+                break;
+            case 'staging':
+                baseUrl=Restangular.all(URLS.environment.mobile_stg);
+                break;
+            case 'production':
+                baseUrl=Restangular.all(URLS.environment.mobile);
+                break;
+            case 'local':
+                baseUrl=Restangular.all(URLS.environment.mobile_local);
+                break;
+        }
 
         var service ={
             listUnasignedServices:listUnasignedServices,

@@ -3,9 +3,9 @@
 
     angular
         .module('app')
-        .factory('SalePointRequests', SalePointRequests, EnvironmentConfig);
+        .factory('SalePointRequests', SalePointRequests);
 
-    function SalePointRequests(Restangular, $window, URLS){
+    function SalePointRequests(Restangular, $window, URLS, EnvironmentConfig){
         var baseUrl = null;
         switch(EnvironmentConfig.environment){
             case 'development':
@@ -21,7 +21,6 @@
                 baseUrl=Restangular.all(URLS.environment.mobile_local);
                 break;
         }
-
 
         var service = {
             getByID:getByID,
