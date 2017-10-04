@@ -84,7 +84,15 @@
                 controller: 'salidaListadoController',
                 controllerAs: 'vm'
             })
-
+            .state('triangular.admin-default.serviceAssing', {
+                url: '/asignarServicio',
+                data: {
+                    roles: ['Administrador']
+                },
+                templateUrl: 'app/mainApp/tecnico/asignacionServicio/asignacionServicio.tmpl.html',
+                controller: 'asignacionServicioController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.puntoVenta', {
                 url: '/puntoVenta',
                 data: {
