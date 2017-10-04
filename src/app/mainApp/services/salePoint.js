@@ -1,32 +1,32 @@
-(function(){
+(function () {
     'use strict';
 
     angular
         .module('app')
-        .factory('SalePoint',SalePoint);
+        .factory('SalePoint', SalePoint);
 
-    function SalePoint (Restangular, EnvironmentConfig, URLS){
+    function SalePoint(Restangular, EnvironmentConfig, URLS) {
         var baseUrl = null;
-        switch(EnvironmentConfig.environment){
+        switch (EnvironmentConfig.environment) {
             case 'development':
-                baseUrl=Restangular.all(URLS.environment.mobile_dev);
+                baseUrl = Restangular.all(URLS.environment.mobile_dev);
                 break;
             case 'staging':
-                baseUrl=Restangular.all(URLS.environment.mobile_stg);
+                baseUrl = Restangular.all(URLS.environment.mobile_stg);
                 break;
             case 'production':
-                baseUrl=Restangular.all(URLS.environment.mobile);
+                baseUrl = Restangular.all(URLS.environment.mobile);
                 break;
             case 'local':
-                baseUrl=Restangular.all(URLS.environment.mobile_local);
+                baseUrl = Restangular.all(URLS.environment.mobile_local);
                 break;
         }
 
-        var service ={
-            listUnasignedServices:listUnasignedServices,
-            listAttendedServices:listAttendedServices,
-            assignToPerson:assignToPerson,
-            assignedTo:assignedTo
+        var service = {
+            listUnasignedServices: listUnasignedServices,
+            listAttendedServices: listAttendedServices,
+            assignToPerson: assignToPerson,
+            assignedTo: assignedTo
         };
 
         function listUnasignedServices() {
@@ -38,11 +38,11 @@
         }
 
         function assignToPerson(personID, serviceID) {
-            return baseUrl.all('asignar_pv').all(serviceID).customPUT({persona:personID});
+            return baseUrl.all('asignar_pv').all(serviceID).customPUT({persona: personID});
         }
 
-        function assignedTo(personID){
-            return baseUrl.one('list_atencion',personID).getList();
+        function assignedTo(personID) {
+            return baseUrl.one('list_atencion', personID).getList();
         }
 
         return service;
