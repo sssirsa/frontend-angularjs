@@ -356,6 +356,7 @@
             "PERSON": "Persona",
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
+            "REQUESTED_CABINETS":"Cabinets solicitados",
             "LABEL": {
                 "STORE_NAME": "Nombre del establecimiento",
                 "OWNER": "Encargado",
@@ -366,7 +367,7 @@
                 "NUMBER": "Número",
                 "PHONE": "Teléfono",
                 "LOCALITY": "Localidad",
-                "ROUTE": "Ruta "
+                "ROUTE": "Ruta"
             }
         }
     }

@@ -19,6 +19,7 @@
         vm.selectedPersonChange = selectedPersonChange;
         vm.searchPerson = searchPerson;
         vm.showStoreLocation = showStoreLocation;
+        vm.showRequestLocation = showRequestLocation;
 
         activate();
 
@@ -108,6 +109,10 @@
 
         function showStoreLocation(){
             SalePointRequests.locate(vm.store.latitud, vm.store.longitud);
+        }
+
+        function showRequestLocation(){
+            SalePointRequests.locate(vm.request.latitud, vm.request.longitud);
         }
 
     }
