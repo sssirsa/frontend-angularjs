@@ -6,11 +6,27 @@
 
     angular.module('app.mainApp').factory('groups',groups);
     function groups(Restangular){
+        var urlbase = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase = Restangular.all(URLS.environment.genesis_dev).all('groups');
+                break;
+            case 'staging':
+                urlbase = Restangular.all(URLS.environment.genesis_stg).all('groups');
+                break;
+            case 'production':
+                urlbase = Restangular.all(URLS.environment.genesis).all('groups');
+                break;
+            case 'local':
+                urlbase = Restangular.all(URLS.environment.genesis_local).all('groups');
+                break;
+        }
+
         return {
             list:list
         };
         function list(){
-            return Restangular.all('groups').customGET();//prueba
+            return urlbase.customGET();//prueba
         }
     }
 })();
