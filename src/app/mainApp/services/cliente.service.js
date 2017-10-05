@@ -11,7 +11,7 @@
         .module('app.mainApp.catalogos')
         .factory('Clientes', Clientes);
 
-    function Clientes(Restangular) {
+    function Clientes(Restangular, EnvironmentConfig, URLS) {
         var service = {
             list: list,
             listObject: listObject,
@@ -21,7 +21,22 @@
             getClienteId: getClienteId
         };
 
-        var baseURL=Restangular.all('persona_capturista');
+        //var baseURL=Restangular.all('persona_capturista');
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('persona_capturista');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('persona_capturista');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('persona_capturista');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('persona_capturista');
+                break;
+        }
 
         function list(){
             return baseURL.getList().$object;
