@@ -8,8 +8,7 @@
         .module('app.mainApp')
         .factory('Categoria',Categoria);
 
-    function Categoria(Restangular, EnvironmentConfig, URLS)
-    {
+    function Categoria(Restangular, EnvironmentConfig, URLS){
         //var baseCategoria = Restangular.all('categoria');
         var baseCategoria = null;
         switch (EnvironmentConfig.environment) {
@@ -54,11 +53,6 @@
         function remove(object) {
             return baseCategoria.customDELETE(object.id,null,{'content-type':'application/json'});
         }
-
-
-
-
-
 
         return service;
     }
