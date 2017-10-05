@@ -4,7 +4,7 @@
         .controller('detalleAsignacionController', detalleAsignacionController);
 
     function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin,
-                                         Persona) {
+                                         Persona, $state) {
         var vm = this;
         //Variables
         vm.salePoint = null;
@@ -20,6 +20,7 @@
         vm.searchPerson = searchPerson;
         vm.showStoreLocation = showStoreLocation;
         vm.showRequestLocation = showRequestLocation;
+        vm.assign = assign;
 
         activate();
 
@@ -113,6 +114,24 @@
 
         function showRequestLocation(){
             SalePointRequests.locate(vm.request.latitud, vm.request.longitud);
+        }
+
+        function assign(){
+            SalePoint.assignedTo(vm.assignedPerson.id)
+                .then(function(){
+                    toastr.success(
+                        Translate.translate('MAIN.MSG.SUCCESS_MESSAGE'),
+                        Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS')
+                    );
+                    $state.go('triangular.admin-default.serviceAssing');
+                })
+                .catch(function (error){
+                    console.log(error);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
         }
 
     }
