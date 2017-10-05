@@ -9,21 +9,21 @@
         .module('app.mainApp')
         .factory('CabinetEntradaSalida', CabinetEntradaSalida);
 
-    function CabinetEntradaSalida( Restangular) {
+    function CabinetEntradaSalida(Restangular, URLS, EnvironmentConfig) {
         //var baseURL = Restangular.all('cabinet_entrada_salida');
-        var urlbase = null;
+        var baseURL = null;
         switch (EnvironmentConfig.environment) {
             case 'development':
-                urlbase = Restangular.all(URLS.environment.genesis_dev);
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('cabinet_entrada_salida');
                 break;
             case 'staging':
-                urlbase = Restangular.all(URLS.environment.genesis_stg);
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('cabinet_entrada_salida');
                 break;
             case 'production':
-                urlbase = Restangular.all(URLS.environment.genesis);
+                baseURL = Restangular.all(URLS.environment.genesis).all('cabinet_entrada_salida');
                 break;
             case 'local':
-                urlbase = Restangular.all(URLS.environment.genesis_local);
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('cabinet_entrada_salida');
                 break;
         }
 
