@@ -23,11 +23,16 @@
         }
 
         var service = {
+            getByID:getByID,
             listUnasignedServices: listUnasignedServices,
             listAttendedServices: listAttendedServices,
             assignToPerson: assignToPerson,
             assignedTo: assignedTo
         };
+
+        function getByID (id){
+            return baseUrl.one('atencion_pv',id);
+        }
 
         function listUnasignedServices() {
             return baseUrl.all('list_atencion').getList();

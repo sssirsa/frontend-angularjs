@@ -27,8 +27,8 @@
                             .catch(function (salePointsError) {
                                 console.log(salePointsError);
                                 toastr.error(
-                                    Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                                    Translate.translate('MAIN.MSG.ERROR_TITLE')
                                 );
                             });
                         break;
