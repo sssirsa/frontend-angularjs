@@ -403,6 +403,10 @@
                 {value: 'Retiro de equipo'},
                 {value: 'Otro'}
 
+            ],
+            salePointAssignKind:[
+                {id:'pending',value:'Pendientes'},
+                {id:'attended',value:'Atendidas'}
             ]
         })
         .constant('URLS', {
