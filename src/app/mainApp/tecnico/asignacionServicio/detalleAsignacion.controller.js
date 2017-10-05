@@ -32,8 +32,8 @@
                             console.log(requestError);
                             vm.request = null;
                             toastr.error(
-                                Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                                Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                                Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                                Translate.translate('MAIN.MSG.ERROR_TITLE')
                             );
                         });
                 })
@@ -41,8 +41,8 @@
                     console.log(salePointError);
                     vm.salePoint = null;
                     toastr.error(
-                        Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
                     );
                 });
             Persona.listProfile()
@@ -53,14 +53,14 @@
                     console.log(profileError);
                     vm.profile = null;
                     toastr.error(
-                        Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
                     );
                 });
         }
 
         function loadUsers() {
-            return Persona.listPromise()
+            return Persona_Admin.listPromise()
                 .then(function (userListSuccess) {
                     vm.personList = userListSuccess;
                     return userListSuccess;
@@ -68,8 +68,8 @@
                 .catch(function (userListError) {
                     console.log(userListError);
                     toastr.error(
-                        Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
                     );
                 });
         }
