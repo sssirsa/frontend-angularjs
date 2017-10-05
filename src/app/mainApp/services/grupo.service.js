@@ -5,7 +5,7 @@
     'use_strict';//
 
     angular.module('app.mainApp').factory('groups',groups);
-    function groups(Restangular){
+    function groups(Restangular, EnvironmentConfig, URLS){
         var urlbase = null;
         switch (EnvironmentConfig.environment) {
             case 'development':
