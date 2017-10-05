@@ -31,7 +31,7 @@
         };
 
         function getByID (id){
-            return baseUrl.one('atencion_pv',id);
+            return baseUrl.one('atencion_pv',id).customGET();
         }
 
         function listUnasignedServices() {
