@@ -10,7 +10,23 @@
         .factory('CabinetEntradaSalida', CabinetEntradaSalida);
 
     function CabinetEntradaSalida( Restangular) {
-        var baseURL = Restangular.all('cabinet_entrada_salida');
+        //var baseURL = Restangular.all('cabinet_entrada_salida');
+        var urlbase = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase = Restangular.all(URLS.environment.genesis_dev);
+                break;
+            case 'staging':
+                urlbase = Restangular.all(URLS.environment.genesis_stg);
+                break;
+            case 'production':
+                urlbase = Restangular.all(URLS.environment.genesis);
+                break;
+            case 'local':
+                urlbase = Restangular.all(URLS.environment.genesis_local);
+                break;
+        }
+
         return {
             getLastEntradaByCabinet: getLastEntradaByCabinet,
             create:create,

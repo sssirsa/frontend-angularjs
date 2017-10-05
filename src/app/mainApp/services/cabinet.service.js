@@ -13,32 +13,32 @@
         var urlbase = null;
         switch (EnvironmentConfig.environment) {
             case 'development':
-                urlbase = Restangular.all(URLS.environment.genesis_dev);
+                urlbase = Restangular.all(URLS.environment.genesis_dev).all('cabinet');
                 break;
             case 'staging':
-                urlbase = Restangular.all(URLS.environment.genesis_stg);
+                urlbase = Restangular.all(URLS.environment.genesis_stg).all('cabinet');
                 break;
             case 'production':
-                urlbase = Restangular.all(URLS.environment.genesis);
+                urlbase = Restangular.all(URLS.environment.genesis).all('cabinet');
                 break;
             case 'local':
-                urlbase = Restangular.all(URLS.environment.genesis_local);
+                urlbase = Restangular.all(URLS.environment.genesis_local).all('cabinet');
                 break;
         }
 
         var urlbase_clean = null;
         switch (EnvironmentConfig.environment) {
             case 'development':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_dev);
+                urlbase_clean = Restangular.all(URLS.environment.genesis_dev).all('cabinet_clean');
                 break;
             case 'staging':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_stg);
+                urlbase_clean = Restangular.all(URLS.environment.genesis_stg).all('cabinet_clean');
                 break;
             case 'production':
-                urlbase_clean = Restangular.all(URLS.environment.genesis);
+                urlbase_clean = Restangular.all(URLS.environment.genesis).all('cabinet_clean');
                 break;
             case 'local':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_local);
+                urlbase_clean = Restangular.all(URLS.environment.genesis_local).all('cabinet_clean');
                 break;
         }
 
