@@ -357,7 +357,7 @@
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
             "REQUESTED_CABINETS":"Cabinets solicitados",
-            "TOASTR_SUCCESS":"Usuario asignado correctamente a Servicio Punto de Venta"
+            "TOASTR_SUCCESS":"Usuario asignado correctamente a Servicio Punto de Venta",
             "LABEL": {
                 "STORE_NAME": "Nombre del establecimiento",
                 "OWNER": "Encargado",

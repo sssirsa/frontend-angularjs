@@ -6,9 +6,42 @@
         .factory('Cabinet', Cabinet);
 
     /* @ngInject */
-    function Cabinet($q, Restangular) {
-        var urlbase=Restangular.all("cabinet");
-        var urlbase_clean=Restangular.all("cabinet_clean");
+    function Cabinet($q, Restangular, EnvironmentConfig, URLS) {
+        //var urlbase=Restangular.all("cabinet");
+        //var urlbase_clean=Restangular.all("cabinet_clean");
+
+        var urlbase = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase = Restangular.all(URLS.environment.genesis_dev);
+                break;
+            case 'staging':
+                urlbase = Restangular.all(URLS.environment.genesis_stg);
+                break;
+            case 'production':
+                urlbase = Restangular.all(URLS.environment.genesis);
+                break;
+            case 'local':
+                urlbase = Restangular.all(URLS.environment.genesis_local);
+                break;
+        }
+
+        var urlbase_clean = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase_clean = Restangular.all(URLS.environment.genesis_dev);
+                break;
+            case 'staging':
+                urlbase_clean = Restangular.all(URLS.environment.genesis_stg);
+                break;
+            case 'production':
+                urlbase_clean = Restangular.all(URLS.environment.genesis);
+                break;
+            case 'local':
+                urlbase_clean = Restangular.all(URLS.environment.genesis_local);
+                break;
+        }
+
         return {
             create: create,
             createClean:createClean,
