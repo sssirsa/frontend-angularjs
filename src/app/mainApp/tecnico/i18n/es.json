@@ -354,8 +354,20 @@
             "STORE": "Establecimiento",
             "REQUEST": "Solicitud",
             "PERSON": "Persona",
-            "PERSON_ASSIGN":"Persona a asignar",
-            "NO_RESULTS": "No se encontraron resultados para"
+            "PERSON_ASSIGN": "Persona a asignar",
+            "NO_RESULTS": "No se encontraron resultados para",
+            "LABEL": {
+                "STORE_NAME": "Nombre del establecimiento",
+                "OWNER": "Encargado",
+                "STREET": "Calle",
+                "BETWEEN_1": "Entre calle",
+                "BETWEEN_2": "Y calle",
+                "ZIP_CODE": "CP",
+                "NUMBER": "Número",
+                "PHONE": "Teléfono",
+                "LOCALITY": "Localidad",
+                "ROUTE": "Ruta "
+            }
         }
     }
 }

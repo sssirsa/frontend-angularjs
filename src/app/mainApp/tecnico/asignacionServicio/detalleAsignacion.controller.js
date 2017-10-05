@@ -13,10 +13,12 @@
         vm.assignedPerson = null;
         vm.personSearchText = null;
         vm.personList = null;
+        vm.store = null;
         //Functions
         vm.loadUsers = loadUsers;
         vm.selectedPersonChange = selectedPersonChange;
         vm.searchPerson = searchPerson;
+        vm.showStoreLocation = showStoreLocation;
 
         activate();
 
@@ -27,6 +29,17 @@
                     SalePointRequests.getBiID(vm.salepoint.solicitud)
                         .then(function (requestSuccess) {
                             vm.request = requestSuccess;
+                            SalePoint.getStore(requestSuccess.establecimiento)
+                                .then(function(storeSuccess){
+                                    vm.store = storeSuccess;
+                                })
+                                .catch(function(storeError){
+                                    console.log(storeError);
+                                    toastr.error(
+                                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                                    );
+                                });
                         })
                         .catch(function (requestError) {
                             console.log(requestError);
@@ -91,6 +104,10 @@
 
                 });
             }
+        }
+
+        function showStoreLocation(){
+            SalePointRequests.locate(vm.store.latitud, vm.store.longitud);
         }
 
     }

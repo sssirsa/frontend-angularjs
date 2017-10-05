@@ -23,15 +23,16 @@
         }
 
         var service = {
-            getByID:getByID,
+            getByID: getByID,
             listUnasignedServices: listUnasignedServices,
             listAttendedServices: listAttendedServices,
             assignToPerson: assignToPerson,
-            assignedTo: assignedTo
+            assignedTo: assignedTo,
+            getStore: getStore
         };
 
-        function getByID (id){
-            return baseUrl.one('atencion_pv',id).customGET();
+        function getByID(id) {
+            return baseUrl.one('atencion_pv', id).customGET();
         }
 
         function listUnasignedServices() {
@@ -48,6 +49,10 @@
 
         function assignedTo(personID) {
             return baseUrl.one('list_atencion', personID).getList();
+        }
+
+        function getStore(id) {
+            return baseUrl.one('establecimiento', id).customGET();
         }
 
         return service;
