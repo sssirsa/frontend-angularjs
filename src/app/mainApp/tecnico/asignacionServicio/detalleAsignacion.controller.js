@@ -1,41 +1,96 @@
-(function(){
+(function () {
     angular
         .module('app.mainApp.tecnico')
         .controller('detalleAsignacionController', detalleAsignacionController);
 
-    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate){
+    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin,
+                                         Persona) {
         var vm = this;
-
-        vm.salePoint=null;
-        vm.request=null;
+        //Variables
+        vm.salePoint = null;
+        vm.request = null;
+        vm.profile = null;
+        vm.assignedPerson = null;
+        vm.personSearchText = null;
+        vm.personList = null;
+        //Functions
+        vm.loadUsers = loadUsers;
+        vm.selectedPersonChange = selectedPersonChange;
+        vm.searchPerson = searchPerson;
 
         activate();
 
-        function activate(){
+        function activate() {
             SalePoint.getByID($stateParams.id)
-                .then(function(salePointSuccess){
+                .then(function (salePointSuccess) {
                     vm.salePoint = salePointSuccess;
-                    SAlePointRequests.getBiID(vm.salepoint.solicitud)
-                        .then(function(requestSuccess){
-                            vm.request=requestSuccess;
+                    SalePointRequests.getBiID(vm.salepoint.solicitud)
+                        .then(function (requestSuccess) {
+                            vm.request = requestSuccess;
                         })
-                        .catch(function(requestError){
+                        .catch(function (requestError) {
                             console.log(requestError);
-                            vm.request=null;
+                            vm.request = null;
                             toastr.error(
                                 Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
                                 Translate.translate('MAIN.MSG.ERROR_MESSAGE')
                             );
                         });
                 })
-                .catch(function(salePointError){
+                .catch(function (salePointError) {
                     console.log(salePointError);
-                    vm.salePoint=null;
+                    vm.salePoint = null;
                     toastr.error(
                         Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE')
                     );
                 });
+            Persona.listProfile()
+                .then(function (profileSuccess) {
+                    vm.profile = profileSuccess;
+                })
+                .catch(function (profileError) {
+                    console.log(profileError);
+                    vm.profile = null;
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
+        }
+
+        function loadUsers() {
+            return Persona.listPromise()
+                .then(function (userListSuccess) {
+                    vm.personList = userListSuccess;
+                    return userListSuccess;
+                })
+                .catch(function (userListError) {
+                    console.log(userListError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
+        }
+
+        function selectedPersonChange(user) {
+            vm.assignedPerson = user;
+        }
+
+        function searchPerson() {
+            if(!vm.personSearchText){
+                return vm.personList;
+            }
+            else{
+                return _.filter(vm.personList, function (item){
+                    return item.user.username.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                    || item.nombre.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                    || item.apellido_paterno.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                    || item.apellido_materno.toLowerCase().includes(vm.personSearchText.toLowerCase());
+
+                });
+            }
         }
 
     }

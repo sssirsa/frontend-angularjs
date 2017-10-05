@@ -1,3 +1,45 @@
 <div layout="column">
-
+    <md-card layout="column">
+        <h2 translate>TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.TITLE</h2>
+    </md-card>
+    <md-card layout="column">
+        <h2 translate>TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE</h2>
+    </md-card>
+    <md-card layout="column">
+        <h2 translate>TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.REQUEST</h2>
+    </md-card>
+    <md-card layout="column">
+        <h2 translate>TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON</h2>
+        <md-autocomplete md-input-name="persona"
+                         md-no-cache="true"
+                         ng-disabled="false"
+                         md-min-length="0"
+                         md-selected-item="vm.assignedPerson"
+                         md-selected-item-change="vm.selectedPersonChange()"
+                         md-search-text="vm.personSearchText"
+                         md-items="item in vm.searchPerson()"
+                         md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
+                         md-floating-label="{{'TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
+                         md-menu-class="autocomplete-custom-template"
+                         required>
+            <md-item-template>
+                <span class="item-title" title="{{item.nombre}}">
+                    <md-icon md-font-icon="fa fa-id-card-o"></md-icon>
+                    <span>
+                        <b>{{item.user.username}}</b>
+                    </span>
+                </span>
+                <span class="md-caption">
+                    {{item.nombre}} +' '+ {{item.apellido_paterno}} +' '+ {{item.apellido_paterno}}
+                </span>
+            </md-item-template>
+            <md-not-found>
+                <span class="item-title">
+                    <span>
+                        {{'TECNICO.SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.units.searchText}}"
+                    </span>
+                </span>
+            </md-not-found>
+        </md-autocomplete>
+    </md-card>
 </div>

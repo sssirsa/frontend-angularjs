@@ -19,9 +19,10 @@
             createObject:createObject,
             get:get,
             deleteData: remove,
-            modify:modify
+            modify:modify,
+            listPromise:listPromise
         };
-        
+
         function createObject(data){
             var form_data = new FormData();
 
@@ -74,6 +75,9 @@
             return Restangular.one('persona_admin',object.id).customPUT(object,null,{'content-type':'application/json'});
         }
 
+        function listPromise(){
+            return Restangular.all('persona_admin').getList();
+        }
 
     }
 })();
