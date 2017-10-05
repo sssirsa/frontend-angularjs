@@ -2,7 +2,9 @@
     <md-card layout="column" layout-align="center center">
         <h2 translate>SALEPOINT_REQUEST.ASSIGN.TITLE</h2>
     </md-card>
-    <md-card layout="column" layout-align="center center">
+    <md-card layout="column"
+             cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+             layout-align="center center">
         <md-input-container flex="100" flex-gt-md="50" class="md-block">
             <label translate>SALEPOINT_REQUEST.ASSIGN.LABELS.KIND</label>
             <md-select name="selectSalePointType"
@@ -30,11 +32,11 @@
 
         <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
         <div layout="column" layout-align="center center">
-            <h3>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
+            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
             <span>{{salePoint.solicitud}}</span>
         </div>
         <div layout="column" layout-align="center center">
-            <h3>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
+            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
             <span>{{salePoint.tipo_trabajo}}</span>
         </div>
 

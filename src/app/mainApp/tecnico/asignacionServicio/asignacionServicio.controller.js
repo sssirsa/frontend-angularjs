@@ -20,7 +20,7 @@
             if (vm.selectedKind) {
                 switch (vm.selectedKind) {
                     case 'pending':
-                        SalePoint.listUnasignedServices()
+                        vm.loadingPromise = SalePoint.listUnasignedServices()
                             .then(function (salePointsSuccess) {
                                 vm.salePoints = salePointsSuccess;
                             })
@@ -33,7 +33,7 @@
                             });
                         break;
                     case 'attended':
-                        SalePoint.listAttendedServices()
+                        vm.loadingPromise = SalePoint.listAttendedServices()
                             .then(function (salePointsSuccess) {
                                 if (salePointsSuccess.length > 0) {
                                     vm.salePoints = salePointsSuccess;
