@@ -23,22 +23,24 @@
             </div>
         </md-input-container>
     </md-card>
-    <md-card
-        layout="row"
-        layout-align="space-around center"
-        ng-if="vm.salePoints"
-        ng-click="vm.selectSalePoint(salePoint)"
-        ng-repeat="salePoint in vm.salePoints">
+    <div
+        ng-click="vm.selectSalePoint(salePoint)">
+        <md-card
+            layout="row"
+            layout-align="space-around center"
+            ng-if="vm.salePoints"
+            ng-repeat="salePoint in vm.salePoints">
 
-        <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
-        <div layout="column" layout-align="center center">
-            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
-            <span>{{salePoint.solicitud}}</span>
-        </div>
-        <div layout="column" layout-align="center center">
-            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
-            <span>{{salePoint.tipo_trabajo}}</span>
-        </div>
+            <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
+            <div layout="column" layout-align="center center">
+                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
+                <span>{{salePoint.solicitud}}</span>
+            </div>
+            <div layout="column" layout-align="center center">
+                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
+                <span>{{salePoint.tipo_trabajo}}</span>
+            </div>
 
-    </md-card>
+        </md-card>
+    </div>
 </div>
