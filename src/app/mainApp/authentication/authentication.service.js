@@ -113,11 +113,11 @@
         function logout() {
             var deferred = $q.defer();
             OAuth.revokeToken().then(function () {
-                Notification.unsubscribePresenceChannel(Session.userInformation.id.toString());
-                Notification.unsubscribePresenceChannel('administrador');
+                //Notification.unsubscribePresenceChannel(Session.userInformation.id.toString());
+                //Notification.unsubscribePresenceChannel('administrador');
 
                 Session.destroy();
-                PusherClient.destroy();
+                //PusherClient.destroy();
                 Channel.clear();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 

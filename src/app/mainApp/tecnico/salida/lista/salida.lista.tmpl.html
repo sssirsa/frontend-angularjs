@@ -59,11 +59,11 @@
                                      layout-align="center stretch">
                                     <md-input-container flex="50" class="md-block">
                                         <label>{{'OUTPUT.FORM.LABEL.UDN'|translate}}</label>
-                                        <md-select name="selectSubsidiary" ng-model="vm.selectedSalidaList.sucursal"
+                                        <md-select name="selectSubsidiary" ng-model="vm.selectedSalidaList.udn"
                                                    disabled=""
                                                    md-no-asterisk="">
-                                            <md-option ng-repeat="sucursal in vm.Sucursales" ng-value="sucursal.id">
-                                                {{sucursal.nombre}}
+                                            <md-option ng-repeat="udn in vm.udns" ng-value="udn.id">
+                                                {{udn.zona}} - {{udn.agencia}}
                                             </md-option>
                                         </md-select>
                                     </md-input-container>
