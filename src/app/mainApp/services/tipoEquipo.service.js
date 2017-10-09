@@ -8,7 +8,7 @@
         .module('app.mainApp')
         .factory('TipoEquipo',TipoEquipo);
 
-    function TipoEquipo(Restangular, Environmentconfig, URLS){
+    function TipoEquipo(Restangular, EnvironmentConfig, URLS){
         // var baseURL=Restangular.all('tipo_equipo');
         var baseURL = null;
         switch (EnvironmentConfig.environment) {
