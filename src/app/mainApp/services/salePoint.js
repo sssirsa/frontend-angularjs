@@ -36,11 +36,11 @@
         }
 
         function listUnasignedServices() {
-            return baseUrl.all('list_atencion').all('').getList();
+            return baseUrl.all('list_atencion').getList();
         }
 
         function listAttendedServices() {
-            return baseUrl.all('list_atendido_pv').all('').getList();
+            return baseUrl.all('list_atendido_pv').getList();
         }
 
         function assignToPerson(personID, serviceID) {
