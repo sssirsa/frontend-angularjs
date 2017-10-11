@@ -1,7 +1,7 @@
 <div layout="column">
     <md-card layout="column" layout-align="center stretch" layout-gt-sm="row" layout-align-gt-sm="space-around center" layout-padding>
         <h2 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.TITLE</h2>
-        <h2>{{vm.store.tipo_trabajo}}</h2>
+        <h2>{{vm.salePoint.tipo_trabajo}}</h2>
     </md-card>
     <md-card
         layout="column"
@@ -121,18 +121,20 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
-            <md-button aria-label="geolocate" ng-click="vm.showRequestLocation()" class="md-raised md-primary">
+            <md-button aria-label="geolocate request" ng-click="vm.showRequestLocation()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
             </md-button>
         </div>
     </md-card>
-    <md-card layout="column" layout-align="center stretch" layout-padding>
+    <md-card layout="column" layout-align="center stretch" layout-padding
+             cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON</h3>
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
+                         ng-if="!vm.salePoint.persona"
                          ng-disabled="false"
                          md-min-length="0"
-                         md-selected-item="vm.assignedPerson"
+                         md-selected-item="vm.salePoint.persona"
                          md-selected-item-change="vm.selectedPersonChange()"
                          md-search-text-change="vm.searchPerson()"
                          md-search-text="vm.personSearchText"
@@ -166,7 +168,7 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
-            <md-button aria-label="geolocate" ng-click="vm.assign()" class="md-raised md-primary">
+            <md-button aria-label="assign" ng-click="vm.assign()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>
             </md-button>
         </div>

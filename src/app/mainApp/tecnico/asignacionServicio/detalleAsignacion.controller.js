@@ -28,6 +28,17 @@
             SalePoint.getByID($stateParams.id)
                 .then(function (salePoint) {
                     vm.salePoint = salePoint;
+                    if(salePoint.persona) {
+                        vm.personLoading = Persona_Admin.get(salePoint.persona)
+                            .then(function(personaSuccess){
+                                vm.assignedPerson=personaSuccess;
+                                console.log(personaSuccess);
+                            })
+                            .catch(function(personaError){
+                                vm.assignedPerson=null;
+                                console.log(personaError);
+                            });
+                    }
                     SalePointRequests.getByID(salePoint.solicitud)
                         .then(function (requestSuccess) {
                             vm.request = requestSuccess;
@@ -54,7 +65,7 @@
                         });
                 }).catch(function (salePointError) {
                 console.log(salePointError);
-            });
+                });
             Persona.listProfile()
                 .then(function (profileSuccess) {
                     vm.profile = profileSuccess;
@@ -85,7 +96,7 @@
         }
 
         function selectedPersonChange(user) {
-            vm.assignedPerson = user;
+            vm.salePoint.persona = user;
         }
 
         function searchPerson() {
