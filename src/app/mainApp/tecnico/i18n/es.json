@@ -369,7 +369,8 @@
                 "NUMBER": "Número",
                 "PHONE": "Teléfono",
                 "LOCALITY": "Localidad",
-                "ROUTE": "Ruta"
+                "ROUTE": "Ruta",
+                "REQUESTED_CABINETS": "Cabinets solicitados"
             }
         }
     }

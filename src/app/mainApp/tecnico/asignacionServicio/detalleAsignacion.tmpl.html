@@ -3,7 +3,11 @@
         <h2 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.TITLE</h2>
         <h2>{{vm.store.tipo_trabajo}}</h2>
     </md-card>
-    <md-card layout="column" layout-align="center stretch" layout-padding>
+    <md-card
+        layout="column"
+        layout-align="center stretch"
+        cg-busy="{promise:vm.storeLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+        layout-padding>
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE</h3>
         <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
@@ -98,18 +102,18 @@
     </md-card>
     <md-card layout="column" layout-align="center stretch" layout-padding>
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.REQUEST</h3>
-        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch" ng-if="vm.request.solicitudes_cabinet">
+        <div flex layout="column" layout-align"center stretch" ng-if="vm.request.solicitudes_cabinet">
             <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.REQUESTED_CABINETS</h3>
             <div layout="row" layout-align="space-around center" ng-repeat="cabinet in vm.request.solicitudes_cabinet">
-                <h3>{{cabinet.tipo}}</h3>
                 <h3>{{cabinet.cantidad}}</h3>
+                <h3>{{cabinet.tipo}}</h3>
             </div>
         </div>
-        <div layout="column" layout-gt-sm="row" layout-align="center center" layout-align-gt-sm=" space-around center">
-            <img ngf-src="vm.request.ine_front" class="thumb"/>
-            <img ngf-src="vm.request.ine_back" class="thumb"/>
-            <img ngf-src="vm.request.foto_local" class="thumb"/>
-            <img ngf-src="vm.request.comprobante_local" class="thumb"/>
+        <div layout="column" layout-gt-xs="row" layout-align="space-around center">
+            <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
         </div>
         <div layout="row"
              layout-align="end end"

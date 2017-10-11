@@ -31,7 +31,7 @@
                     SalePointRequests.getByID(salePoint.solicitud)
                         .then(function (requestSuccess) {
                             vm.request = requestSuccess;
-                            SalePoint.getStore(requestSuccess.establecimiento)
+                            vm.storeLoading = SalePoint.getStore(requestSuccess.establecimiento)
                                 .then(function (storeSuccess) {
                                     vm.store = storeSuccess;
                                 })
