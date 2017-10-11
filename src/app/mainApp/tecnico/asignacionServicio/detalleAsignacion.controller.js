@@ -28,7 +28,7 @@
             SalePoint.getByID($stateParams.id)
                 .then(function (salePointSuccess) {
                     vm.salePoint = salePointSuccess;
-                    SalePointRequests.getBiID(vm.salepoint.solicitud)
+                    SalePointRequests.getByID(vm.salePoint.solicitud)
                         .then(function (requestSuccess) {
                             vm.request = requestSuccess;
                             SalePoint.getStore(requestSuccess.establecimiento)
