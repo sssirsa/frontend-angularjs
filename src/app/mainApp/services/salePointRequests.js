@@ -29,11 +29,11 @@
         };
 
         function getByID(id) {
-            return baseUrl.one('atencion_pv', id).customGET();
+            return baseUrl.one('solicitud', id).customGET();
         }
 
         function getAll() {
-            return baseUrl.all('atencion_pv').getList();
+            return baseUrl.all('solicitud').getList();
         }
 
         function locate(latitude, longitude) {
