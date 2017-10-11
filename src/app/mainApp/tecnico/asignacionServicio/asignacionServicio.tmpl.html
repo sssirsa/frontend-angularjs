@@ -24,13 +24,13 @@
         </md-input-container>
     </md-card>
     <div
-        ng-click="vm.selectSalePoint(salePoint)">
+        ng-if="vm.salePoints">
         <md-card
-            layout="row"
-            layout-align="space-around center"
-            ng-if="vm.salePoints"
-            ng-repeat="salePoint in vm.salePoints">
-
+            layout="column"
+            ng-repeat="salePoint in vm.salePoints"
+            layout-gt-xs="row"
+            ng-click="vm.selectSalePoint(salePoint)"
+            layout-align="space-around center">
             <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
             <div layout="column" layout-align="center center">
                 <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
@@ -40,7 +40,6 @@
                 <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
                 <span>{{salePoint.tipo_trabajo}}</span>
             </div>
-
         </md-card>
     </div>
 </div>

@@ -56,7 +56,8 @@
         }
 
         function selectSalePoint(salePoint) {
-            $state.go('triangular.admin-default.serviceAssing', {id: salePoint.folio});
+            console.log(salePoint);
+            $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio});
         }
 
     }

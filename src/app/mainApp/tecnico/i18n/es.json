@@ -346,7 +346,8 @@
             "LABELS": {
                 "KIND": "Tipo de servicio",
                 "FOLIO": "Folio",
-                "JOB_KIND": "Tipo de trabajo"
+                "JOB_KIND": "Tipo de trabajo",
+                "DETAIL": "Detalle"
             }
         },
         "ASSIGN_DETAIL": {
