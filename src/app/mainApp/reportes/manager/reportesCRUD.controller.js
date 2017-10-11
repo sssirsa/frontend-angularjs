@@ -136,6 +136,7 @@
         }
 
         function exportar() {
+
             $mdDialog.show({
                 controller: 'GenerateReportModalController',
                 controllerAs: 'vm',
@@ -162,6 +163,13 @@
         }
 
         function update() {
+            vm.report.report_file_creation=moment(vm.report.report_file_creation,vm.formato).format('YYYY-MM-DD');
+            vm.report.report_file_creation=moment(vm.report.report_file_creation,vm.formato).format('YYYY-MM-DD');
+            angular.forEach(vm.report.filterfield_set, function(value, key) {
+                if(value.field_type === "DateField"){
+                    value.filter_value2=moment(value.filter_value2,vm.formato).format('YYYY-MM-DD');
+                }
+            });
             Reportes.updateReport(vm.report).then(function () {
                 toastr.success(vm.successUpdate, vm.successTitle);
                 activate();
