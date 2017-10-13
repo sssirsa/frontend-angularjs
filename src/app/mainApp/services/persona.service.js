@@ -16,12 +16,8 @@
             listProfile: listProfile,
             modify: modify,
             remove: remove,
-            create: create,
-            logInPusher: logInPusher
+            create: create
         };
-        function logInPusher(request) {
-            return Restangular.all('log_in').post(request);
-        }
 
 
         function list() {

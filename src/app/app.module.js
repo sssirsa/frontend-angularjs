@@ -10,7 +10,7 @@
             'angularMoment','pascalprecht.translate','tmh.dynamicLocale', 'textAngular', 'hljs', 'md.data.table','ngMdIcons',
             'vAccordion', 'ngMaterialDatePicker','mdPickers','cgBusy','ADM-dateTimePicker',
 
-            angularDragula(angular), 'ngFileUpload','pusher-angular','checklist-model',
+            angularDragula(angular), 'ngFileUpload', 'checklist-model',
 
 
             // 'seed-module'

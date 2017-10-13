@@ -4,7 +4,7 @@
         .module('app.mainApp')
         .factory('AuthService', AuthService);
     /* @ngInject */
-    function AuthService(Session, $q, Restangular, PusherClient, Channel, OAuth, EVENTS_GENERAL, $rootScope, Notification, AUTH_EVENTS, OAuthToken) {
+    function AuthService(Session, $q, Restangular, Channel, OAuth, EVENTS_GENERAL, $rootScope, Notification, AUTH_EVENTS, OAuthToken) {
         var authService = {
             isAuthenticated: isAuthenticated,
             login: login,
@@ -54,7 +54,7 @@
             var deferred = $q.defer();
 
             OAuth.getAccessToken(credentials).then(function (res) {
-                PusherClient.create();
+                //PusherClient.create();
                 deferred.resolve();
             }).catch(function (response) {
                 if (response.status == 401) {
@@ -106,7 +106,7 @@
                 user.userInformation = res;
                 getRole().then(function (res) {
                     Session.create(user.userInformation, res[0].name);
-
+                    /*
                     if (angular.isArray(res) && res[0].name === 'Administrador') {
                         if (Channel.all().length == 0) {
                             if (angular.isUndefined(PusherClient.pusher)) {
@@ -118,6 +118,7 @@
 
                         }
                     }
+                    */
                     $rootScope.$broadcast(AUTH_EVENTS.sessionRestore);
                     deferred.resolve(res[0].name);
 
