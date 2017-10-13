@@ -71,7 +71,7 @@
         }
 
         function listCanonico(){
-            return Restangular.all('persona_admin').customGET();//prueba
+            return baseModelo.customGET();//prueba
         }
 
         function update(object)
@@ -88,11 +88,11 @@
         }
 
         function modify(object){
-            return Restangular.one('persona_admin',object.id).customPUT(object,null,{'content-type':'application/json'});
+            return baseModelo.all(object.id).customPUT(object,null,{'content-type':'application/json'});
         }
 
         function listPromise(){
-            return Restangular.all('persona_admin').getList();
+            return baseModelo.getList();
         }
 
     }

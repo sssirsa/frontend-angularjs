@@ -94,7 +94,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.serviceAssignDetail', {
-                url:'/detalleServicio/:id',
+                url:'/detalleServicio/:tipo/:id',
                 templateUrl: 'app/mainApp/tecnico/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller:'detalleAsignacionController',
                 controllerAs:'vm',

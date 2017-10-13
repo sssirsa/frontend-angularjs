@@ -6,14 +6,16 @@
     function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin,
                                          Persona, $state) {
         var vm = this;
+
         //Variables
         vm.salePoint = null;
         vm.request = null;
-        vm.profile = null;
         vm.assignedPerson = null;
         vm.personSearchText = null;
         vm.personList = null;
         vm.store = null;
+        vm.requestKind = null;
+
         //Functions
         vm.loadUsers = loadUsers;
         vm.selectedPersonChange = selectedPersonChange;
@@ -25,6 +27,7 @@
         activate();
 
         function activate() {
+            vm.requestKind = $stateParams.tipo;
             SalePoint.getByID($stateParams.id)
                 .then(function (salePoint) {
                     vm.salePoint = salePoint;
@@ -66,36 +69,31 @@
                 }).catch(function (salePointError) {
                 console.log(salePointError);
                 });
-            Persona.listProfile()
-                .then(function (profileSuccess) {
-                    vm.profile = profileSuccess;
-                })
-                .catch(function (profileError) {
-                    console.log(profileError);
-                    vm.profile = null;
-                    toastr.error(
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                        Translate.translate('MAIN.MSG.ERROR_TITLE')
-                    );
-                });
         }
 
         function loadUsers() {
-            return Persona_Admin.listPromise()
-                .then(function (userListSuccess) {
-                    vm.personList = userListSuccess;
-                    return userListSuccess;
-                })
-                .catch(function (userListError) {
-                    console.log(userListError);
-                    toastr.error(
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                        Translate.translate('MAIN.MSG.ERROR_TITLE')
-                    );
-                });
+            if(vm.personList){
+                return vm.personList;
+            }
+            else {
+                return Persona_Admin.listPromise()
+                    .then(function (userListSuccess) {
+                        vm.personList = userListSuccess;
+                        return userListSuccess;
+                    })
+                    .catch(function (userListError) {
+                        console.log(userListError);
+                        console.log("Error al obtener personas");
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                            Translate.translate('MAIN.MSG.ERROR_TITLE')
+                        );
+                    });
+            }
         }
 
         function selectedPersonChange(user) {
+            console.log(user);
             vm.salePoint.persona = user;
         }
 

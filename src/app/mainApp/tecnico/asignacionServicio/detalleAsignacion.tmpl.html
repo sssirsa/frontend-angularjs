@@ -126,12 +126,12 @@
             </md-button>
         </div>
     </md-card>
-    <md-card layout="column" layout-align="center stretch" layout-padding
+    <md-card layout="column" layout-align="center center" layout-padding
              cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON</h3>
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
-                         ng-if="!vm.salePoint.persona"
+                         ng-if="vm.requestKind=='pending'"
                          ng-disabled="false"
                          md-min-length="0"
                          md-selected-item="vm.salePoint.persona"
@@ -162,6 +162,49 @@
                 </span>
             </md-not-found>
         </md-autocomplete>
+        <div
+            ng-if="vm.requestKind=='attended' || vm.salePoint.persona"
+            layout="column"
+            layout-gt-xs="row">
+            <div layout="column" flex="100">
+                <md-input-container class="md-block">
+                    <label>{{'PROFILE.PROPERTY.USERNAME' | translate}}</label>
+                    <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                    <input
+                        type="text"
+                        ng-disabled="true"
+                        ng-model="vm.assignedPerson.user.username"
+                        name="username" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{'PROFILE.PROPERTY.NOMBRE' | translate}}</label>
+                    <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                    <input
+                        type="text"
+                        ng-disabled="true"
+                        ng-model="vm.assignedPerson.nombre"
+                        name="nombre" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{'PROFILE.PROPERTY.AP_PATERNO' | translate}}</label>
+                    <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                    <input
+                        type="text"
+                        ng-disabled="true"
+                        ng-model="vm.assignedPerson.apellido_paterno"
+                        name="apellido_paterno"/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{'PROFILE.PROPERTY.AP_MATERNO' | translate}}</label>
+                    <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                    <input
+                        type="text"
+                        ng-disabled="true"
+                        ng-model="vm.assignedPerson.apellido_materno"
+                        name="apellido_materno" />
+                </md-input-container>
+            </div>
+        </div>
         <div layout="row"
              layout-align="end end"
              layout-sm="column"
