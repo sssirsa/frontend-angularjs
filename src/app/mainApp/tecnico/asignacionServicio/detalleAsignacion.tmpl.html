@@ -131,14 +131,13 @@
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON</h3>
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
+                         flex="100"
                          ng-if="vm.requestKind=='pending'"
-                         ng-disabled="false"
                          md-min-length="0"
-                         md-selected-item="vm.salePoint.persona"
+                         md-selected-item="vm.assignedPerson"
                          md-selected-item-change="vm.selectedPersonChange()"
-                         md-search-text-change="vm.searchPerson()"
                          md-search-text="vm.personSearchText"
-                         md-items="item in vm.loadUsers()"
+                         md-items="item in vm.searchPerson(item)"
                          md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
                          md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
                          md-menu-class="autocomplete-custom-template"
@@ -151,7 +150,7 @@
                     </span>
                 </span>
                 <span class="md-caption">
-                    {{item.nombre}} +' '+ {{item.apellido_paterno}} +' '+ {{item.apellido_paterno}}
+                    {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_paterno}}
                 </span>
             </md-item-template>
             <md-not-found>

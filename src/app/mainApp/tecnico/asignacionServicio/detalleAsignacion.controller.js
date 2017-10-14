@@ -3,8 +3,7 @@
         .module('app.mainApp.tecnico')
         .controller('detalleAsignacionController', detalleAsignacionController);
 
-    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin,
-                                         Persona, $state) {
+    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin, $state) {
         var vm = this;
 
         //Variables
@@ -17,7 +16,6 @@
         vm.requestKind = null;
 
         //Functions
-        vm.loadUsers = loadUsers;
         vm.selectedPersonChange = selectedPersonChange;
         vm.searchPerson = searchPerson;
         vm.showStoreLocation = showStoreLocation;
@@ -31,14 +29,14 @@
             SalePoint.getByID($stateParams.id)
                 .then(function (salePoint) {
                     vm.salePoint = salePoint;
-                    if(salePoint.persona) {
+                    if (salePoint.persona) {
                         vm.personLoading = Persona_Admin.get(salePoint.persona)
-                            .then(function(personaSuccess){
-                                vm.assignedPerson=personaSuccess;
+                            .then(function (personaSuccess) {
+                                vm.assignedPerson = personaSuccess;
                                 console.log(personaSuccess);
                             })
-                            .catch(function(personaError){
-                                vm.assignedPerson=null;
+                            .catch(function (personaError) {
+                                vm.assignedPerson = null;
                                 console.log(personaError);
                             });
                     }
@@ -68,20 +66,26 @@
                         });
                 }).catch(function (salePointError) {
                 console.log(salePointError);
-                });
+                toastr.error(
+                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                    Translate.translate('MAIN.MSG.ERROR_TITLE')
+                );
+            });
         }
 
-        function loadUsers() {
-            if(vm.personList){
-                return vm.personList;
-            }
-            else {
+        function selectedPersonChange() {
+            vm.salePoint.persona = vm.assignedPerson.id;
+        }
+
+        function searchPerson() {
+            if (!vm.personList) {
                 return Persona_Admin.listPromise()
                     .then(function (userListSuccess) {
                         vm.personList = userListSuccess;
-                        return userListSuccess;
+                        return searchPersonCollection();
                     })
                     .catch(function (userListError) {
+                        vm.personList = null;
                         console.log(userListError);
                         console.log("Error al obtener personas");
                         toastr.error(
@@ -90,14 +94,13 @@
                         );
                     });
             }
+            else{
+                return searchPersonCollection();
+            }
+
         }
 
-        function selectedPersonChange(user) {
-            console.log(user);
-            vm.salePoint.persona = user;
-        }
-
-        function searchPerson() {
+        function searchPersonCollection() {
             if (!vm.personSearchText) {
                 return vm.personList;
             }
@@ -124,8 +127,8 @@
             SalePoint.assignedTo(vm.assignedPerson.id)
                 .then(function () {
                     toastr.success(
-                        Translate.translate('MAIN.MSG.SUCCESS_MESSAGE'),
-                        Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS')
+                        Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
+                        Translate.translate('MAIN.MSG.SUCCESS_TITLE')
                     );
                     $state.go('triangular.admin-default.serviceAssing');
                 })
