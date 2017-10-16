@@ -8,8 +8,24 @@
         .module('app.mainApp')
         .factory('Solicitud_Servicio_Admin', Solicitud_Servicio_Admin);
 
-    function Solicitud_Servicio_Admin($q, Restangular) {
-        var base = Restangular.all('solicitud_servicio_admin');
+    function Solicitud_Servicio_Admin($q, Restangular, EnvironmentConfig, URLS) {
+        // var base = Restangular.all('solicitud_servicio_admin');
+        var base = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                base = Restangular.all(URLS.environment.genesis_dev).all('solicitud_servicio_admin');
+                break;
+            case 'staging':
+                base = Restangular.all(URLS.environment.genesis_stg).all('solicitud_servicio_admin');
+                break;
+            case 'production':
+                base = Restangular.all(URLS.environment.genesis).all('solicitud_servicio_admin');
+                break;
+            case 'local':
+                base = Restangular.all(URLS.environment.genesis_local).all('solicitud_servicio_admin');
+                break;
+        }
+
         return {
             create: create,
             list: list,

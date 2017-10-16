@@ -6,9 +6,23 @@
         .factory('ModeloCabinet', ModeloCabinet);
 
     /* @ngInject */
-    function ModeloCabinet( Restangular) {
-
-        var baseModelo = Restangular.all('modelo_cabinet');
+    function ModeloCabinet(Restangular, EnvironmentConfig, URLS) {
+        // var baseModelo = Restangular.all('modelo_cabinet');
+        var baseModelo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('modelo_cabinet');
+                break;
+            case 'staging':
+                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('modelo_cabinet');
+                break;
+            case 'production':
+                baseModelo = Restangular.all(URLS.environment.genesis).all('modelo_cabinet');
+                break;
+            case 'local':
+                baseModelo = Restangular.all(URLS.environment.genesis_local).all('modelo_cabinet');
+                break;
+        }
 
         return {
             list:list,

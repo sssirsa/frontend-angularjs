@@ -8,8 +8,24 @@
         .module('app.mainApp')
         .factory('Persona_Admin',Persona_Admin);
 
-    function Persona_Admin($q, Restangular){
-        var baseModelo = Restangular.all('persona_admin');
+    function Persona_Admin(Restangular, EnvironmentConfig, URLS){
+        // var baseModelo = Restangular.all('persona_admin');
+
+        var baseModelo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('persona_admin');
+                break;
+            case 'staging':
+                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('persona_admin');
+                break;
+            case 'production':
+                baseModelo = Restangular.all(URLS.environment.genesis).all('persona_admin');
+                break;
+            case 'local':
+                baseModelo = Restangular.all(URLS.environment.genesis_local).all('persona_admin');
+                break;
+        }
 
         return {
             list:list,
@@ -19,9 +35,10 @@
             createObject:createObject,
             get:get,
             deleteData: remove,
-            modify:modify
+            modify:modify,
+            listPromise:listPromise
         };
-        
+
         function createObject(data){
             var form_data = new FormData();
 
@@ -54,7 +71,7 @@
         }
 
         function listCanonico(){
-            return Restangular.all('persona_admin').customGET();//prueba
+            return baseModelo.customGET();//prueba
         }
 
         function update(object)
@@ -71,9 +88,12 @@
         }
 
         function modify(object){
-            return Restangular.one('persona_admin',object.id).customPUT(object,null,{'content-type':'application/json'});
+            return baseModelo.all(object.id).customPUT(object,null,{'content-type':'application/json'});
         }
 
+        function listPromise(){
+            return baseModelo.getList();
+        }
 
     }
 })();

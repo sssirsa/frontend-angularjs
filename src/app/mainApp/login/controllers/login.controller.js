@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .controller('loginController', loginController);
 
     /* @ngInject */
-    function loginController($state, toastr, triSettings,$mdDialog,AuthService) {
+    function loginController($state, toastr, triSettings, $mdDialog, AuthService) {
         var vm = this;
 
         vm.loginClick = loginClick;
@@ -14,7 +14,7 @@
         vm.newDialog = {
             title: 'Login por TAG',
             content: 'Coloque su tarjeta cerca del lector',
-            holder:'ID Tarjeta',
+            holder: 'ID Tarjeta',
             ok: 'OK',
             cancel: 'Cancelar'
         };
@@ -27,16 +27,19 @@
         };
 
         function loginClick() {
-            AuthService.login(vm.user).then(function(res){
-                $state.go('triangular.admin-default.bienvenida');
-            }).catch(function(err){
-                toastr.error('Usuario o Contraseña incorrectos','Error',err.error);
-            });
+            AuthService.login(vm.user)
+                .then(function (res) {
+                    $state.go('triangular.admin-default.bienvenida');
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    toastr.error('Usuario o Contraseña incorrectos', 'Error', err.error);
+                });
 
         }
 
-        function loginTagClick($event,dialog){
-            var confirm=$mdDialog.prompt()
+        function loginTagClick($event, dialog) {
+            var confirm = $mdDialog.prompt()
                 .title(dialog.title)
                 .clickOutsideToClose(true)
                 .textContent(dialog.content)
@@ -44,14 +47,14 @@
                 .ok(dialog.ok)
                 .cancel(dialog.cancel)
                 .targetEvent($event);
-            $mdDialog.show(confirm).then(function(result){
-                var resp=result.split("$");
-                vm.user.username=resp[0];
-                vm.user.password=resp[1];
-                AuthService.login(vm.user).then(function(res){
+            $mdDialog.show(confirm).then(function (result) {
+                var resp = result.split("$");
+                vm.user.username = resp[0];
+                vm.user.password = resp[1];
+                AuthService.login(vm.user).then(function (res) {
                     $state.go('triangular.admin-default.bienvenida');
-                }).catch(function(err){
-                    toastr.error('Usuario o Contraseña incorrectos','Error',err.error);
+                }).catch(function (err) {
+                    toastr.error('Usuario o Contraseña incorrectos', 'Error', err.error);
                 });
             });
 

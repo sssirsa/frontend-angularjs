@@ -8,14 +8,29 @@
         .module('app.mainApp')
         .factory('TipoEquipo',TipoEquipo);
 
-    function TipoEquipo(Restangular){
-        var baseURL=Restangular.all('tipo_equipo');
-         return {
+    function TipoEquipo(Restangular, EnvironmentConfig, URLS){
+        // var baseURL=Restangular.all('tipo_equipo');
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('tipo_equipo');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('tipo_equipo');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('tipo_equipo');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('tipo_equipo');
+                break;
+        }
+        return {
             list: list,
             update: update,
             create: create,
             remove: remove,
-             listWitout:listWitout
+            listWitout:listWitout
         };
 
 
@@ -39,5 +54,5 @@
             return baseURL.customDELETE(object.id,null,{'content-type':'application/json'});
         }
 
-    } 
+    }
 })();

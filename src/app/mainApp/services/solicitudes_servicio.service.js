@@ -8,8 +8,23 @@
         .module('app.mainApp')
         .factory('Solicitud_Servicio',Solicitud_Servicio);
 
-    function Solicitud_Servicio($q, Restangular){
-        var baseURL = Restangular.all('solicitud_servicio');
+    function Solicitud_Servicio($q, Restangular, EnvironmentConfig, URLS){
+        // var baseURL = Restangular.all('solicitud_servicio');
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('solicitud_servicio');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('solicitud_servicio');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('solicitud_servicio');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('solicitud_servicio');
+                break;
+        }
         return{
             create:create,
             list:list,

@@ -9,8 +9,23 @@
         .module('app.mainApp')
         .factory('PersonaCapturista',PersonaCapturista);
 
-    function PersonaCapturista($q, Restangular){
-        var baseModelo=Restangular.all('persona_capturista');
+    function PersonaCapturista(Restangular, EnvironmentConfig, URLS){
+        // var baseModelo=Restangular.all('persona_capturista');
+        var baseModelo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('persona_capturista');
+                break;
+            case 'staging':
+                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('persona_capturista');
+                break;
+            case 'production':
+                baseModelo = Restangular.all(URLS.environment.genesis).all('persona_capturista');
+                break;
+            case 'local':
+                baseModelo = Restangular.all(URLS.environment.genesis_local).all('persona_capturista');
+                break;
+        }
 
         return{
             list:list,
