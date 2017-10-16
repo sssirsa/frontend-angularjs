@@ -124,7 +124,7 @@
         }
 
         function assign() {
-            SalePoint.assignedTo(vm.assignedPerson.id)
+            SalePoint.assignToPerson(vm.assignedPerson.id, vm.salePoint.folio)
                 .then(function () {
                     toastr.success(
                         Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
