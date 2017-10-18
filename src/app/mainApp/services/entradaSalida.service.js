@@ -9,8 +9,24 @@
         .module('app.mainApp')
         .factory('EntradaSalida', EntradaSalida);
 
-    function EntradaSalida($q, Restangular, toastr) {
-        var baseURL = Restangular.all('entrada_salida');
+    function EntradaSalida($q, Restangular, EnvironmentConfig, URLS) {
+        // var baseURL = Restangular.all('entrada_salida');
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('entrada_salida');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('entrada_salida');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('entrada_salida');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('entrada_salida');
+                break;
+        }
+
         return {
             postEntrada: postEntrada,
             postEntradaMasiva: postEntradaMasiva,

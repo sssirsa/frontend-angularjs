@@ -1,6 +1,7 @@
 {
   "PROFILE": {
     "PROPERTY": {
+      "USERNAME": "Nombre de usuario",
       "PERFIL": "Perfil del Usuario",
       "DATOS_PERSONALES": "Datos Personales",
       "NOMBRE": "Nombre",

@@ -8,9 +8,41 @@
         .module('app.mainApp.reportes')
         .factory('Reportes',Reportes);
 
-    function Reportes(Restangular){
-        var path= Restangular.all('report_builder').all('api');
-        var pathReport= Restangular.all('report_builder').all('report');
+    function Reportes(Restangular, EnvironmentConfig, URLS){
+        // var path= Restangular.all('report_builder').all('api');
+        // var pathReport= Restangular.all('report_builder').all('report');
+        var path = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                path = Restangular.all(URLS.environment.genesis_dev).all('report_builder/api');
+                break;
+            case 'staging':
+                path = Restangular.all(URLS.environment.genesis_stg).all('report_builder/api');
+                break;
+            case 'production':
+                path = Restangular.all(URLS.environment.genesis).all('report_builder/api');
+                break;
+            case 'local':
+                path = Restangular.all(URLS.environment.genesis_local).all('report_builder/api');
+                break;
+        }
+
+        var pathReport = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                pathReport = Restangular.all(URLS.environment.genesis_dev).all('report_builder/report');
+                break;
+            case 'staging':
+                pathReport = Restangular.all(URLS.environment.genesis_stg).all('report_builder/report');
+                break;
+            case 'production':
+                pathReport = Restangular.all(URLS.environment.genesis).all('report_builder/report');
+                break;
+            case 'local':
+                pathReport = Restangular.all(URLS.environment.genesis_local).all('report_builder/report');
+                break;
+        }
+
         return {
             getPartialReports:getPartialReports,
             getPartialReport:getPartialReport,

@@ -9,9 +9,24 @@
         .factory('Insumo', Insumo);
 
     /* @ngInject */
-    function Insumo($q, Restangular) {
-        var path=Restangular.all('insumo');
+    function Insumo($q, Restangular, EnvironmentConfig, URLS) {
+        // var path=Restangular.all('insumo');
 
+        var path = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                path = Restangular.all(URLS.environment.genesis_dev).all('insumo');
+                break;
+            case 'staging':
+                path = Restangular.all(URLS.environment.genesis_stg).all('insumo');
+                break;
+            case 'production':
+                path = Restangular.all(URLS.environment.genesis).all('insumo');
+                break;
+            case 'local':
+                path = Restangular.all(URLS.environment.genesis_local).all('insumo');
+                break;
+        }
         return {
 
             getInsumosByCatalogo: getInsumosByCatalogo,

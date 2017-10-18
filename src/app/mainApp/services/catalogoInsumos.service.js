@@ -10,8 +10,23 @@
         .factory('CatalogoInsumo', CatalogoInsumo);
 
     /* @ngInject */
-    function CatalogoInsumo($q, Restangular) {
-        var baseCatalogoInsumo = Restangular.all('catalogo_insumos');
+    function CatalogoInsumo($q, Restangular, EnvironmentConfig, URLS) {
+        //var baseCatalogoInsumo = Restangular.all('catalogo_insumos');
+        var baseCatalogoInsumo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_dev).all('catalogo_insumo');
+                break;
+            case 'staging':
+                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_stg).all('catalogo_insumo');
+                break;
+            case 'production':
+                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis).all('catalogo_insumo');
+                break;
+            case 'local':
+                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_local).all('catalogo_insumo');
+                break;
+        }
 
         return {
 

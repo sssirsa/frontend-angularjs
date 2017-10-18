@@ -4,7 +4,9 @@
         .module('app.mainApp')
         .factory('AuthService', AuthService);
     /* @ngInject */
-    function AuthService(Session, $q, Restangular, Channel, OAuth, EVENTS_GENERAL, $rootScope, Notification, AUTH_EVENTS, OAuthToken) {
+    function AuthService(Session, $q, Restangular, PusherClient, Channel, OAuth, EVENTS_GENERAL, $rootScope,
+                         Notification, AUTH_EVENTS, OAuthToken, EnvironmentConfig, URLS) {
+
         var authService = {
             isAuthenticated: isAuthenticated,
             login: login,
@@ -38,23 +40,52 @@
         }
 
         function getPersona() {
-            return Restangular.all('persona').customGET();
+            var baseUrl = null;
+            switch (EnvironmentConfig.environment) {
+                case 'development':
+                    baseUrl = Restangular.all(URLS.environment.genesis_dev).all('persona');
+                    break;
+                case 'staging':
+                    baseUrl = Restangular.all(URLS.environment.genesis_stg).all('persona');
+                    break;
+                case 'production':
+                    baseUrl = Restangular.all(URLS.environment.genesis).all('persona');
+                    break;
+                case 'local':
+                    baseUrl = Restangular.all(URLS.environment.genesis_local).all('persona');
+                    break;
+            }
+            return baseUrl.customGET();
         }
 
         function isIdentityResolved() {
-
             return angular.isDefined(Session.userInformation);
         }
 
         function getRole() {
-            return Restangular.all('my_groups').getList();
+            var baseUrl = null;
+            switch (EnvironmentConfig.environment) {
+                case 'development':
+                    baseUrl = Restangular.all(URLS.environment.genesis_dev).all('my_groups');
+                    break;
+                case 'staging':
+                    baseUrl = Restangular.all(URLS.environment.genesis_stg).all('my_groups');
+                    break;
+                case 'production':
+                    baseUrl = Restangular.all(URLS.environment.genesis).all('my_groups');
+                    break;
+                case 'local':
+                    baseUrl = Restangular.all(URLS.environment.genesis_local).all('my_groups');
+                    break;
+            }
+            return baseUrl.getList();
         }
 
         function login(credentials) {
             var deferred = $q.defer();
 
             OAuth.getAccessToken(credentials).then(function (res) {
-                //PusherClient.create();
+                PusherClient.create();
                 deferred.resolve();
             }).catch(function (response) {
                 if (response.status == 401) {
@@ -106,7 +137,7 @@
                 user.userInformation = res;
                 getRole().then(function (res) {
                     Session.create(user.userInformation, res[0].name);
-                    /*
+
                     if (angular.isArray(res) && res[0].name === 'Administrador') {
                         if (Channel.all().length == 0) {
                             if (angular.isUndefined(PusherClient.pusher)) {
@@ -118,7 +149,6 @@
 
                         }
                     }
-                    */
                     $rootScope.$broadcast(AUTH_EVENTS.sessionRestore);
                     deferred.resolve(res[0].name);
 

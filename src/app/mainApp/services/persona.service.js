@@ -8,8 +8,23 @@
         .module('app.mainApp')
         .factory('Persona', Persona);
 
-    function Persona($q, Restangular) {
-        var baseModelo = Restangular.all('persona');
+    function Persona($q, Restangular, EnvironmentConfig, URLS) {
+        //var baseUrl = Restangular.all('persona');
+        var baseUrl = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseUrl = Restangular.all(URLS.environment.genesis_dev).all('persona');
+                break;
+            case 'staging':
+                baseUrl = Restangular.all(URLS.environment.genesis_stg).all('persona');
+                break;
+            case 'production':
+                baseUrl = Restangular.all(URLS.environment.genesis).all('persona');
+                break;
+            case 'local':
+                baseUrl = Restangular.all(URLS.environment.genesis_local).all('persona');
+                break;
+        }
 
         return {
             list: list,
@@ -21,11 +36,11 @@
 
 
         function list() {
-            return baseModelo.get().$object;
+            return baseUrl.get().$object;
         }
 
         function listProfile() {
-            return baseModelo.customGET();
+            return baseUrl.customGET();
         }
 
         function modify(data) {
@@ -56,11 +71,11 @@
         }
 
         function remove(object) {
-            return baseModelo.customDELETE(object.id, null, {'content-type': 'application/json'});
+            return baseUrl.customDELETE(object.id, null, {'content-type': 'application/json'});
         }
 
         function create(object) {
-            return baseModelo.post(object);
+            return baseUrl.post(object);
         }
 
 

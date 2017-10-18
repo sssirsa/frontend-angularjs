@@ -8,8 +8,24 @@
         .module('app.mainApp.tecnico')
         .factory('PuntoDeVenta', PuntoDeVenta);
 
-    function PuntoDeVenta(Restangular) {
-        var baseURL = Restangular.all('servicio_punto_venta');
+    function PuntoDeVenta(Restangular, EnvironmentConfig, URLS) {
+        // var baseURL = Restangular.all('servicio_punto_venta');
+
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('servicio_punto_venta');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('servicio_punto_venta');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('servicio_punto_venta');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('servicio_punto_venta');
+                break;
+        }
 
         var service = {
             list: list,
