@@ -8,8 +8,24 @@
         .module('app.mainApp.catalogos')
         .factory('Proyectos', Proyectos);
 
-    function Proyectos(Restangular) {
-        var baseURL=Restangular.all('proyecto');
+    function Proyectos(Restangular, EnvironmentConfig, URLS) {
+        // var baseURL=Restangular.all('proyecto');
+
+        var baseURL = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseURL = Restangular.all(URLS.environment.genesis_dev).all('proyecto');
+                break;
+            case 'staging':
+                baseURL = Restangular.all(URLS.environment.genesis_stg).all('proyecto');
+                break;
+            case 'production':
+                baseURL = Restangular.all(URLS.environment.genesis).all('proyecto');
+                break;
+            case 'local':
+                baseURL = Restangular.all(URLS.environment.genesis_local).all('proyecto');
+                break;
+        }
 
         var service = {
             list: list,
@@ -18,7 +34,7 @@
             remove: remove,
             listObject:listObject
         };
-        
+
         function listObject() {
             return baseURL.getList();
         }

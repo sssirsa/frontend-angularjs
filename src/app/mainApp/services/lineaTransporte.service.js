@@ -6,9 +6,24 @@
         .factory('LineaTransporte', LineaTransporte);
 
     /* @ngInject */
-    function LineaTransporte(Restangular) {
+    function LineaTransporte(Restangular, EnvironmentConfig, URLS) {
 
-        var baseModelo = Restangular.all('linea_transporte');
+        // var baseModelo = Restangular.all('linea_transporte');
+        var baseModelo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('linea_transporte');
+                break;
+            case 'staging':
+                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('linea_transporte');
+                break;
+            case 'production':
+                baseModelo = Restangular.all(URLS.environment.genesis).all('linea_transporte');
+                break;
+            case 'local':
+                baseModelo = Restangular.all(URLS.environment.genesis_local).all('linea_transporte');
+                break;
+        }
 
         return {
             list:list,

@@ -6,8 +6,23 @@
         .factory('MarcaCabinet', MarcaCabinet);
 
     /* @ngInject */
-    function MarcaCabinet(Restangular) {
-        var baseMarca = Restangular.all('marca_cabinet');
+    function MarcaCabinet(Restangular, EnvironmentConfig, URLS) {
+        // var baseMarca = Restangular.all('marca_cabinet');
+        var baseMarca = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseMarca = Restangular.all(URLS.environment.genesis_dev).all('marca_cabinet');
+                break;
+            case 'staging':
+                baseMarca = Restangular.all(URLS.environment.genesis_stg).all('marca_cabinet');
+                break;
+            case 'production':
+                baseMarca = Restangular.all(URLS.environment.genesis).all('marca_cabinet');
+                break;
+            case 'local':
+                baseMarca = Restangular.all(URLS.environment.genesis_local).all('marca_cabinet');
+                break;
+        }
 
         return {
             list:list,

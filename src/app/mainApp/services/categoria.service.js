@@ -8,9 +8,23 @@
         .module('app.mainApp')
         .factory('Categoria',Categoria);
 
-    function Categoria(Restangular)
-    {
-        var baseCategoria = Restangular.all('categoria');
+    function Categoria(Restangular, EnvironmentConfig, URLS){
+        //var baseCategoria = Restangular.all('categoria');
+        var baseCategoria = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseCategoria = Restangular.all(URLS.environment.genesis_dev).all('categoria');
+                break;
+            case 'staging':
+                baseCategoria = Restangular.all(URLS.environment.genesis_stg).all('categoria');
+                break;
+            case 'production':
+                baseCategoria = Restangular.all(URLS.environment.genesis).all('categoria');
+                break;
+            case 'local':
+                baseCategoria = Restangular.all(URLS.environment.genesis_local).all('categoria');
+                break;
+        }
 
         var service = {
             list:list,
@@ -39,11 +53,6 @@
         function remove(object) {
             return baseCategoria.customDELETE(object.id,null,{'content-type':'application/json'});
         }
-
-
-
-
-
 
         return service;
     }

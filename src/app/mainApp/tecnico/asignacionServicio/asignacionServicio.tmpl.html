@@ -1,0 +1,45 @@
+<div layout="column">
+    <md-card layout="column" layout-align="center center">
+        <h2 translate>SALEPOINT_REQUEST.ASSIGN.TITLE</h2>
+    </md-card>
+    <md-card layout="column"
+             cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+             layout-align="center center">
+        <md-input-container flex="100" flex-gt-md="50" class="md-block">
+            <label translate>SALEPOINT_REQUEST.ASSIGN.LABELS.KIND</label>
+            <md-select name="selectSalePointType"
+                       md-on-close="vm.listSalePoints()"
+                       ng-model="vm.selectedKind">
+                <md-option ng-repeat="option in vm.salePointKinds"
+                           value="{{option.id}}">
+                    {{option.value}}
+                </md-option>
+            </md-select>
+            <div ng-if="!vm.selectedKind">
+                <span translate>SALEPOINT_REQUEST.ASSIGN.NO_SELECTION</span>
+            </div>
+            <div ng-if="vm.selectedKind && !vm.salePoints">
+                <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
+            </div>
+        </md-input-container>
+    </md-card>
+    <div
+        ng-if="vm.salePoints">
+        <md-card
+            layout="column"
+            ng-repeat="salePoint in vm.salePoints"
+            layout-gt-xs="row"
+            ng-click="vm.selectSalePoint(salePoint)"
+            layout-align="space-around center">
+            <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
+            <div layout="column" layout-align="center center">
+                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
+                <span>{{salePoint.folio}}</span>
+            </div>
+            <div layout="column" layout-align="center center">
+                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
+                <span>{{salePoint.tipo_trabajo}}</span>
+            </div>
+        </md-card>
+    </div>
+</div>

@@ -9,9 +9,25 @@
         .module('app.mainApp')
         .factory('Sucursal',Sucursal);
 
-    function Sucursal(Restangular)
+    function Sucursal(Restangular, EnvironmentConfig, URLS)
     {
-        var baseSucursal = Restangular.all('sucursal');
+        // var baseSucursal = Restangular.all('sucursal');
+
+        var baseSucursal = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseSucursal = Restangular.all(URLS.environment.genesis_dev).all('sucursal');
+                break;
+            case 'staging':
+                baseSucursal = Restangular.all(URLS.environment.genesis_stg).all('sucursal');
+                break;
+            case 'production':
+                baseSucursal = Restangular.all(URLS.environment.genesis).all('sucursal');
+                break;
+            case 'local':
+                baseSucursal = Restangular.all(URLS.environment.genesis_local).all('sucursal');
+                break;
+        }
 
         return {
             list:list,

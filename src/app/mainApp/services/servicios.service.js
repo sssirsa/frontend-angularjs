@@ -12,7 +12,7 @@
         .factory('Servicios', Servicios);
 
     /* @ngInject */
-    function Servicios($q, Restangular) {
+    function Servicios($q, Restangular, EnvironmentConfig, URLS) {
         var service = {
             crearEtapaServicio: crearEtapaServicio,
             editarEtapaServicio: editarEtapaServicio,
@@ -37,8 +37,23 @@
             consultarSalidaServicioDiagnostico : consultarSalidaServicioDiagnostico
 
         };
-        var baseModelo = Restangular.all('etapa_servicio');
+        // var baseModelo = Restangular.all('etapa_servicio');
 
+        var baseModelo = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('etapa_servicio');
+                break;
+            case 'staging':
+                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('etapa_servicio');
+                break;
+            case 'production':
+                baseModelo = Restangular.all(URLS.environment.genesis).all('etapa_servicio');
+                break;
+            case 'local':
+                baseModelo = Restangular.all(URLS.environment.genesis_local).all('etapa_servicio');
+                break;
+        }
 
         function crearEtapaServicio(etapa) {
             var deferred = $q.defer();
