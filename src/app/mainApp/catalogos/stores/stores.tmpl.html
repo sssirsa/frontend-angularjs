@@ -50,9 +50,9 @@
                         <md-list>
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
-                                           ng-class="{'selected' : linea.id == vm.transport.id }">
+                                           ng-class="{'selected' : linea.id == vm.store.id }">
                                     <md-icon md-svg-icon="assets/images/transport.svg" class="avatar"></md-icon>
-                                    <span flex="flex">{{linea.razon_social }}</span>
+                                    <span flex="flex">{{linea.nombre_establecimiento }}</span>
                                 </md-button>
                                 <md-divider></md-divider>
 
@@ -67,78 +67,107 @@
                     <h2 class="md-headline-1 text-center">
                         {{'TRANSPORT_LINE.FORM.LABEL.INFO_TRANSPORT_LINE'|translate}}</h2>
                     <form name="TransportForm">
-                        <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.BUSINESS_NAME'|translate}}</label>
-                            <input ng-required='true'
-                                   type="text"
-                                   name="razon"
-                                   ng-disabled="vm.transport.deleted"
-                                   is-alphanumeric
-                                   ng-model="vm.transport.razon_social"/>
-                            <div ng-messages="TransportForm.razon.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.ADDRESS'|translate}}</label>
-                            <input md-no-asterisk=""
-                                   required=""
-                                   type="text"
-                                   name="address"
-                                   ng-disabled="vm.transport.deleted"
-                                   is-alphanumeric
-                                   ng-model="vm.transport.direccion"/>
-                            <div ng-messages="TransportForm.address.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
-                        <div class="chipsdemoCustomInputs">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.PHONE'|translate}}</label>
-                            <md-chips ng-model="vm.transport.telefonos"
-                                      md-removable="vm.removable"
-                                      delete-button-label="Remove Tag"
-                                      readonly="vm.transport.deleted"
-                            >
-                                <input type="text" only-digits ng-model="vm.numberBuffer"
-                                       placeholder="{{'TRANSPORT_LINE.FORM.LABEL.PLUS-PHONE'|translate}}">
-                            </md-chips>
-
-
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STORE_NAME'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.nombre_establecimiento"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.OWNER'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.nombre_encargado"/>
+                            </md-input-container>
                         </div>
-                        <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.RESPONSABLE'|translate}}</label>
-                            <input md-no-asterisk=""
-                                   required=""
-                                   type="text"
-                                   name="responsable"
-                                   ng-disabled="vm.transport.deleted"
-                                   only-text
-                                   ng-model="vm.transport.responsable"/>
-                            <div ng-messages="TransportForm.responsable.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STREET'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.calle"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.NUMBER'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.numero"/>
+                            </md-input-container>
+                        </div>
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.BETWEEN_1'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.entre_calle1"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.BETWEEN_2'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.entre_calle2"/>
+                            </md-input-container>
+                        </div>
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.ZIP_CODE'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.cp"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.PHONE'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.telefono_encargado"/>
+                            </md-input-container>
+                        </div>
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.LOCALITY'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.localidad.nombre"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.ROUTE'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="true"
+                                    ng-model="vm.store.localidad.ruta"/>
+                            </md-input-container>
+                        </div>
                     </form>
                     <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
                         <md-button aria-label="fab button" ng-click="vm.cancel()" class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id!=null && vm.transport.id!=undefined && !vm.transport.deleted"
+                                   ng-if="vm.store.id!=null && vm.store.id!=undefined && !vm.store.deleted"
                                    ng-click="vm.remove($event)" class="md-raised md-warn">
                             <md-icon md-font-icon="fa fa-trash"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id!=null && vm.transport.id!=undefined && !vm.transport.deleted"
+                                   ng-if="vm.store.id!=null && vm.store.id!=undefined && !vm.store.deleted"
                                    ng-disabled="TransportForm.$invalid" ng-click="vm.update()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-pencil"></md-icon>
                         </md-button>
-                        <md-button ng-if="vm.transport.id!=null && vm.transport.id!=undefined && vm.transport.deleted" ng-click="vm.restore()" class="md-raised md-warn">
+                        <md-button ng-if="vm.store.id!=null && vm.store.id!=undefined && vm.store.deleted" ng-click="vm.restore()" class="md-raised md-warn">
                             <md-icon md-font-icon="zmdi zmdi-time-restore"></md-icon >
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id==null || vm.transport.id==undefined"
+                                   ng-if="vm.store.id==null || vm.store.id==undefined"
                                    ng-disabled="TransportForm.$invalid" ng-click="vm.create()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-save"></md-icon>
