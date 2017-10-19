@@ -72,9 +72,9 @@
                             <input ng-required='true'
                                    type="text"
                                    name="razon"
-                                   ng-disabled="vm.transport.deleted"
+                                   ng-disabled="vm.route.deleted"
                                    is-alphanumeric
-                                   ng-model="vm.transport.nombre"/>
+                                   ng-model="vm.route.nombre"/>
                             <div ng-messages="TransportForm.razon.$error">
                                 <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                             </div>
@@ -86,21 +86,21 @@
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id!=null && vm.transport.id!=undefined && !vm.transport.deleted"
+                                   ng-if="vm.route.id!=null && vm.route.id!=undefined && !vm.route.deleted"
                                    ng-click="vm.remove($event)" class="md-raised md-warn">
                             <md-icon md-font-icon="fa fa-trash"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id!=null && vm.transport.id!=undefined && !vm.transport.deleted"
+                                   ng-if="vm.route.id!=null && vm.route.id!=undefined && !vm.route.deleted"
                                    ng-disabled="TransportForm.$invalid" ng-click="vm.update()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-pencil"></md-icon>
                         </md-button>
-                        <md-button ng-if="vm.transport.id!=null && vm.transport.id!=undefined && vm.transport.deleted" ng-click="vm.restore()" class="md-raised md-warn">
+                        <md-button ng-if="vm.route.id!=null && vm.route.id!=undefined && vm.route.deleted" ng-click="vm.restore()" class="md-raised md-warn">
                             <md-icon md-font-icon="zmdi zmdi-time-restore"></md-icon >
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.transport.id==null || vm.transport.id==undefined"
+                                   ng-if="vm.route.id==null || vm.route.id==undefined"
                                    ng-disabled="TransportForm.$invalid" ng-click="vm.create()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-save"></md-icon>

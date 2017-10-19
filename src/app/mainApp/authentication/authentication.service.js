@@ -140,9 +140,9 @@
 
                     if (angular.isArray(res) && res[0].name === 'Administrador') {
                         if (Channel.all().length == 0) {
-                            if (angular.isUndefined(PusherClient.pusher)) {
-                                PusherClient.create();
-                            }
+                            /*if (angular.isUndefined(PusherClient.pusher)) {
+                                //PusherClient.create();
+                            }*/
                             Channel.add(Notification.subscribePresenceChannel('administrador'));
                             Channel.add(Notification.subscribePresenceChannel(Session.userInformation.id.toString()));
                             $rootScope.$broadcast(EVENTS_GENERAL.bind_channels);

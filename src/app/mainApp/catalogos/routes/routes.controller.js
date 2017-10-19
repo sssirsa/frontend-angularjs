@@ -71,7 +71,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Routes.remove(vm.route).then(function (res) {
+                Routes.remove(vm.route.id).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -145,7 +145,7 @@
         }
 
         function listlineas() {
-            vm.loadingPromise = Routes.listObject().then(function (res) {
+            vm.loadingPromise = Routes.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
                 vm.lineas = _.sortBy(vm.lineas, 'razon_social');
             }).catch(function (err) {
