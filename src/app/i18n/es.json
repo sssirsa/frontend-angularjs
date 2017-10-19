@@ -63,7 +63,10 @@
         "CONSUMABLE_CATEGORY": "Categoría de Insumos",
         "CLIENT": "Cliente",
         "EQUIPMENT_TYPE": "Tipo de Equipo",
-        "STAGE": "Etapas"
+        "STAGE": "Etapas",
+          "ROUTES":"Rutas",
+          "LOCALITIES":"Localidades",
+          "STORES":"Establecimientos"
       },
       "INVENTORY": {
         "TITLE": "Inventarios",
