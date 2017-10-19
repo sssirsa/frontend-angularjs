@@ -7,16 +7,16 @@
         var baseURL = null;
         switch (EnvironmentConfig.environment) {
             case 'development':
-                baseURL = Restangular.all(URLS.environment.mobile_dev).all('report_builder/api');
+                baseURL = Restangular.all(URLS.environment.mobile_dev).all('localidad');
                 break;
             case 'staging':
-                baseURL = Restangular.all(URLS.environment.mobile_stg).all('report_builder/api');
+                baseURL = Restangular.all(URLS.environment.mobile_stg).all('localidad');
                 break;
             case 'production':
-                baseURL = Restangular.all(URLS.environment.mobile).all('report_builder/api');
+                baseURL = Restangular.all(URLS.environment.mobile).all('localidad');
                 break;
             case 'local':
-                baseURL = Restangular.all(URLS.environment.mobile_local).all('report_builder/api');
+                baseURL = Restangular.all(URLS.environment.mobile_local).all('localidad');
                 break;
         }
     }
@@ -30,15 +30,15 @@
     }
 
     function list() {
-        return baseURL.all('localidad').getList();
+        return baseURL.getList();
     }
 
     function getByID(id) {
-        return baseURL.one('localidad', id).customGET();
+        return baseURL.all(id).customGET();
     }
 
     function create(object) {
-        return baseURL.all('localidad').customPOST(object);
+        return baseURL.customPOST(object);
     }
 
     function remove(id) {
