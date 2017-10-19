@@ -50,9 +50,9 @@
                         <md-list>
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
-                                           ng-class="{'selected' : linea.id == vm.transport.id }">
+                                           ng-class="{'selected' : linea.id == vm.route.id }">
                                     <md-icon md-svg-icon="assets/images/transport.svg" class="avatar"></md-icon>
-                                    <span flex="flex">{{linea.razon_social }}</span>
+                                    <span flex="flex">{{linea.nombre }}</span>
                                 </md-button>
                                 <md-divider></md-divider>
 
@@ -65,59 +65,21 @@
                 <div layout="column" flex-lg="60" flex-gt-lg="65" flex-xl="65" flex-gt-sm="100" flex-md="100"
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
                     <h2 class="md-headline-1 text-center">
-                        {{'TRANSPORT_LINE.FORM.LABEL.INFO_TRANSPORT_LINE'|translate}}</h2>
+                        {{'ROUTES.LABELS.TITLE'|translate}}</h2>
                     <form name="TransportForm">
                         <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.BUSINESS_NAME'|translate}}</label>
+                            <label>{{'ROUTES.LABELS.NAME'|translate}}</label>
                             <input ng-required='true'
                                    type="text"
                                    name="razon"
                                    ng-disabled="vm.transport.deleted"
                                    is-alphanumeric
-                                   ng-model="vm.transport.razon_social"/>
+                                   ng-model="vm.transport.nombre"/>
                             <div ng-messages="TransportForm.razon.$error">
                                 <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                             </div>
                         </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.ADDRESS'|translate}}</label>
-                            <input md-no-asterisk=""
-                                   required=""
-                                   type="text"
-                                   name="address"
-                                   ng-disabled="vm.transport.deleted"
-                                   is-alphanumeric
-                                   ng-model="vm.transport.direccion"/>
-                            <div ng-messages="TransportForm.address.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
-                        <div class="chipsdemoCustomInputs">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.PHONE'|translate}}</label>
-                            <md-chips ng-model="vm.transport.telefonos"
-                                      md-removable="vm.removable"
-                                      delete-button-label="Remove Tag"
-                                      readonly="vm.transport.deleted"
-                            >
-                                <input type="text" only-digits ng-model="vm.numberBuffer"
-                                       placeholder="{{'TRANSPORT_LINE.FORM.LABEL.PLUS-PHONE'|translate}}">
-                            </md-chips>
 
-
-                        </div>
-                        <md-input-container class="md-block">
-                            <label>{{'TRANSPORT_LINE.FORM.LABEL.RESPONSABLE'|translate}}</label>
-                            <input md-no-asterisk=""
-                                   required=""
-                                   type="text"
-                                   name="responsable"
-                                   ng-disabled="vm.transport.deleted"
-                                   only-text
-                                   ng-model="vm.transport.responsable"/>
-                            <div ng-messages="TransportForm.responsable.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
                     </form>
                     <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
                         <md-button aria-label="fab button" ng-click="vm.cancel()" class="md-raised md-primary">

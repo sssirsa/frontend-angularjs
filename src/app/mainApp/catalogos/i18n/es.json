@@ -291,7 +291,8 @@
     },
     "ROUTES":{
         "LABELS":{
-
+            "TITLE":"Catálogo de Rutas",
+            "NAME":"Nombre"
         }
     },
     "LOCALITIES":{

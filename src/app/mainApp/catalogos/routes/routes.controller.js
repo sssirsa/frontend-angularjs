@@ -23,13 +23,10 @@
         vm.update = update;
         vm.search_items = [];
         vm.searchText = '';
-        var transport = {
-            razon_social: null,
-            direccion: null,
-            telefonos: [],
-            responsable: null
+        var route = {
+            nombre: null
         };
-        vm.transport = angular.copy(transport);
+        vm.route = angular.copy(route);
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
@@ -74,7 +71,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Routes.remove(vm.transport).then(function (res) {
+                Routes.remove(vm.route).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -87,7 +84,7 @@
         }
 
         function update() {
-            Routes.update(vm.transport).then(function (res) {
+            Routes.update(vm.route).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
@@ -101,9 +98,9 @@
         }
 
         function create() {
-            Routes.create(vm.transport).then(function (res) {
+            Routes.create(vm.route).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
-                vm.transport = angular.copy(transport);
+                vm.route = angular.copy(route);
                 cancel();
                 activate();
             }).catch(function (err) {
@@ -123,13 +120,13 @@
                 .ok(vm.restoreButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                vm.transport.deleted = false;
-                Routes.update(vm.transport).then(function (res) {
+                vm.route.deleted = false;
+                Routes.update(vm.route).then(function (res) {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();
                 }).catch(function (res) {
-                    vm.transport.deleted = true;
+                    vm.route.deleted = true;
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
             }, function () {
@@ -141,7 +138,7 @@
         function cancel() {
             $scope.TransportForm.$setPristine();
             $scope.TransportForm.$setUntouched();
-            vm.transport = angular.copy(transport);
+            vm.route = angular.copy(route);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
@@ -158,7 +155,7 @@
 
         function selectedItemChange(item) {
             if (item != null) {
-                vm.transport = angular.copy(item);
+                vm.route = angular.copy(item);
 
             } else {
                 cancel();
@@ -167,7 +164,7 @@
 
         function selectedLineas(project) {
             vm.selectedLineaList = project;
-            vm.transport = angular.copy(project);
+            vm.route = angular.copy(project);
         }
 
         function querySearch(query) {
@@ -178,7 +175,7 @@
 
         function lookup(search_text) {
             vm.search_items = _.filter(vm.lineas, function (item) {
-                return item.razon_social.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
+                return item.nombre.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
             });
             return vm.search_items;
         }
@@ -192,7 +189,7 @@
             }
 
             return _.filter(input, function (item) {
-                return item.razon_social.toLowerCase().indexOf(text.toLowerCase()) >= 0;
+                return item.nombre.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });
 
         };
