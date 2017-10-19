@@ -291,15 +291,19 @@
     },
     "ROUTES":{
         "LABELS":{
-            "TITLE":"Catálogo de Rutas",
-            "NAME":"Nombre"
+            "TITLE":"Rutas",
+            "SUBTITLE":"Información de ruta",
+            "NAME":"Nombre",
+            "SEARCH":"Búsqueda de rutas"
         }
     },
     "LOCALITIES":{
         "LABELS":{
-            "TITLE":"Catálogo de Localidades",
+            "TITLE":"Localidades",
+            "SUBTITLE":"Información de localidad",
             "NAME":"Nombre",
-            "ROUTE":"Ruta"
+            "ROUTE":"Ruta",
+            "SEARCH":"Búsqueda de localidades"
         }
     },
     "STORES":{
