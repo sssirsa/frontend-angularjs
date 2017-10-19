@@ -288,5 +288,20 @@
                 "EXISTING_ELEMENT":"Existe un cliente con el mismo nombre de usuario"
             }
         }
+    },
+    "ROUTES":{
+        "LABELS":{
+
+        }
+    },
+    "LOCALITIES":{
+        "LABELS":{
+
+        }
+    },
+    "STORES":{
+        "LABELS":{
+
+        }
     }
 }
