@@ -147,7 +147,7 @@
         function listlineas() {
             vm.loadingPromise = Routes.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.lineas = _.sortBy(vm.lineas, 'razon_social');
+                vm.lineas = _.sortBy(vm.lineas, 'nombre');
             }).catch(function (err) {
 
             });

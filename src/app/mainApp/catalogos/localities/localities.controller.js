@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function localitiesController(Localities, Helper, $scope, toastr, Translate, $mdDialog) {
+    function localitiesController(Localities, Routes, Helper, $scope, toastr, Translate, $mdDialog) {
 
         var vm = this;
 
@@ -23,17 +23,17 @@
         vm.update = update;
         vm.search_items = [];
         vm.searchText = '';
-        var transport = {
-            razon_social: null,
-            direccion: null,
-            telefonos: [],
-            responsable: null
+        vm.lineas = null;
+        var locality = {
+            nombre: null,
+            ruta: null
         };
-        vm.transport = angular.copy(transport);
+        vm.locality = angular.copy(locality);
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
+        vm.localityRoute = null;
 
         activate();
         init();
@@ -54,6 +54,14 @@
             vm.dialogRestoreMessage = Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
             vm.restoreButton = Translate.translate('MAIN.BUTTONS.RESTORE');
             vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
+            Routes.list().then(function (res) {
+                vm.allRoutes = res;
+                vm.routes = Helper.filterDeleted(res, true);
+                vm.routes = _.sortBy(vm.routes, 'nombre');
+                console.log(vm.routes);
+            }).catch(function (err) {
+                console.log(err);
+            });
         }
 
 
@@ -74,7 +82,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Localities.remove(vm.transport).then(function (res) {
+                Localities.remove(vm.locality.id).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -87,7 +95,8 @@
         }
 
         function update() {
-            Localities.update(vm.transport).then(function (res) {
+            vm.locality['ruta_id'] = vm.localityRoute;
+            Localities.update(vm.locality).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
@@ -97,13 +106,15 @@
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
+                console.log(err);
             });
         }
 
         function create() {
-            Localities.create(vm.transport).then(function (res) {
+            vm.locality['ruta_id'] = vm.localityRoute;
+            Localities.create(vm.locality).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
-                vm.transport = angular.copy(transport);
+                vm.locality = angular.copy(locality);
                 cancel();
                 activate();
             }).catch(function (err) {
@@ -112,6 +123,7 @@
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
+                console.log(err);
             });
         }
 
@@ -123,14 +135,16 @@
                 .ok(vm.restoreButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                vm.transport.deleted = false;
-                Localities.update(vm.transport).then(function (res) {
+                vm.locality.deleted = false;
+                vm.locality.ruta_id = vm.localityRoute;
+                Localities.update(vm.locality).then(function (res) {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();
                 }).catch(function (res) {
-                    vm.transport.deleted = true;
+                    vm.locality.deleted = true;
                     toastr.warning(vm.errorMessage, vm.errorTitle);
+                    console.log(err);
                 });
             }, function () {
 
@@ -141,14 +155,15 @@
         function cancel() {
             $scope.TransportForm.$setPristine();
             $scope.TransportForm.$setUntouched();
-            vm.transport = angular.copy(transport);
+            vm.locality = angular.copy(locality);
+            vm.localityRoute=null;
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
         }
 
         function listlineas() {
-            vm.loadingPromise = Localities.listObject().then(function (res) {
+            vm.loadingPromise = Localities.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
                 vm.lineas = _.sortBy(vm.lineas, 'razon_social');
             }).catch(function (err) {
@@ -158,8 +173,8 @@
 
         function selectedItemChange(item) {
             if (item != null) {
-                vm.transport = angular.copy(item);
-
+                vm.locality = angular.copy(item);
+                vm.localityRoute = _.where(vm.allRoutes, {nombre: item.ruta})[0].id;
             } else {
                 cancel();
             }
@@ -167,18 +182,19 @@
 
         function selectedLineas(project) {
             vm.selectedLineaList = project;
-            vm.transport = angular.copy(project);
+            vm.locality = angular.copy(project);
+            vm.localityRoute = _.where(vm.allRoutes, {nombre: project.ruta})[0].id;
         }
 
         function querySearch(query) {
             var results = query ? lookup(query) : vm.lineas;
             return results;
-
         }
+
 
         function lookup(search_text) {
             vm.search_items = _.filter(vm.lineas, function (item) {
-                return item.razon_social.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
+                return item.nombre.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
             });
             return vm.search_items;
         }
@@ -192,11 +208,10 @@
             }
 
             return _.filter(input, function (item) {
-                return item.razon_social.toLowerCase().indexOf(text.toLowerCase()) >= 0;
+                return item.nombre.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });
 
         };
-
-
     }
+
 })();

@@ -297,7 +297,9 @@
     },
     "LOCALITIES":{
         "LABELS":{
-
+            "TITLE":"Catálogo de Localidades",
+            "NAME":"Nombre",
+            "ROUTE":"Ruta"
         }
     },
     "STORES":{

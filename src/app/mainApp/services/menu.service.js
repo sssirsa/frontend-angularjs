@@ -230,7 +230,7 @@
                             type: 'link'
                         },{
                             name: 'MAIN.MENU.CATALOGS.LOCALITIES',
-                            state: 'triangular.admin-default.catalogo-localides',
+                            state: 'triangular.admin-default.catalogo-localidades',
                             type: 'link'
                         },{
                             name: 'MAIN.MENU.CATALOGS.STORES',
