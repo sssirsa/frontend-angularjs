@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Routes, Helper, $scope, toastr, Translate, $mdDialog) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog) {
 
         var vm = this;
 

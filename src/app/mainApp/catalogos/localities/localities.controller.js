@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function localitiesController(Routes, Helper, $scope, toastr, Translate, $mdDialog) {
+    function localitiesController(Localities, Helper, $scope, toastr, Translate, $mdDialog) {
 
         var vm = this;
 
