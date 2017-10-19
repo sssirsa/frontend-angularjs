@@ -3,7 +3,7 @@
         <md-card-content>
             <div layout="row" flex="" layout-align="space-around stretch" id="cabecera">
                 <h2 flex="70" flex-sm="100" flex-gt-xs="100" translate=""
-                    class="md-headline-1 text-center">TRANSPORT_LINE.FORM.LABEL.TRANSPORT_LINE</h2>
+                    class="md-headline-1 text-center">STORES.LABELS.TITLE</h2>
                 <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right" ng-click="vm.cancel()">
                     <md-icon md-font-icon="fa fa-plus" ng-style="{color: 'white'}">
 
@@ -23,7 +23,7 @@
                                      md-search-text-change="vm.search(vm.searchText)"
                                      md-search-text="vm.searchText"
                                      md-menu-class="autocomplete-custom-template"
-                                     md-floating-label="{{'TRANSPORT_LINE.FORM.PLACEHOLDER.SEARCH_TRANSPORT_LINE'| translate }}">
+                                     md-floating-label="{{'STORES.LABELS.SEARCH'| translate }}">
                         <span
                             md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.razon_social}}</span>
                         <md-item-template>
@@ -37,7 +37,7 @@
                             </span>
                         </span>
                         </md-item-template>
-                        <md-not-found><span translate="TRANSPORT_LINE.FORM.PLACEHOLDER.NOT_FOUND"></span></md-not-found>
+                        <md-not-found><span translate="STORES.LABELS.NOT_FOUND"></span></md-not-found>
                     </md-autocomplete>
                     <md-switch ng-model="vm.toggleDeleted" ng-change="vm.toggleDeletedFunction()">
                         <span ng-if="vm.toggleDeleted" hide-xs hide-sm>{{'MAIN.MODEL.SHOW_ACTIVE' | translate}}</span>
@@ -65,7 +65,7 @@
                 <div layout="column" flex-lg="60" flex-gt-lg="65" flex-xl="65" flex-gt-sm="100" flex-md="100"
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
                     <h2 class="md-headline-1 text-center">
-                        {{'TRANSPORT_LINE.FORM.LABEL.INFO_TRANSPORT_LINE'|translate}}</h2>
+                        {{'STORES.LABELS.SUBTITLE'|translate}}</h2>
                     <form name="TransportForm">
                         <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
