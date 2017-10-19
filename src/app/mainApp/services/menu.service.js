@@ -224,6 +224,18 @@
                             name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATALOG',
                             state: 'triangular.admin-default.catalogo-insumo',
                             type: 'link'
+                        },{
+                            name: 'MAIN.MENU.CATALOGS.ROUTES',
+                            state: 'triangular.admin-default.catalogo-rutas',
+                            type: 'link'
+                        },{
+                            name: 'MAIN.MENU.CATALOGS.LOCALITIES',
+                            state: 'triangular.admin-default.catalogo-localidades',
+                            type: 'link'
+                        },{
+                            name: 'MAIN.MENU.CATALOGS.STORES',
+                            state: 'triangular.admin-default.catalogo-establecimientos',
+                            type: 'link'
                         }
 
 

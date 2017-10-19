@@ -288,5 +288,30 @@
                 "EXISTING_ELEMENT":"Existe un cliente con el mismo nombre de usuario"
             }
         }
+    },
+    "ROUTES":{
+        "LABELS":{
+            "TITLE":"Rutas",
+            "SUBTITLE":"Información de ruta",
+            "NAME":"Nombre",
+            "SEARCH":"Búsqueda de rutas"
+        }
+    },
+    "LOCALITIES":{
+        "LABELS":{
+            "TITLE":"Localidades",
+            "SUBTITLE":"Información de localidad",
+            "NAME":"Nombre",
+            "ROUTE":"Ruta",
+            "SEARCH":"Búsqueda de localidades"
+        }
+    },
+    "STORES":{
+        "LABELS":{
+            "TITLE":"Establecimiento",
+            "SUBTITLE":"Información de Establecimiento",
+            "SEARCH":"Búsqueda de establecimientos",
+            "NOT_FOUND":"No se encontró el establecimiento"
+        }
     }
 }

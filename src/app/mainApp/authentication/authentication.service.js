@@ -4,7 +4,7 @@
         .module('app.mainApp')
         .factory('AuthService', AuthService);
     /* @ngInject */
-    function AuthService(Session, $q, Restangular, PusherClient, Channel, OAuth, EVENTS_GENERAL, $rootScope,
+    function AuthService(Session, $q, Restangular, /*PusherClient,*/ Channel, OAuth, EVENTS_GENERAL, $rootScope,
                          Notification, AUTH_EVENTS, OAuthToken, EnvironmentConfig, URLS) {
 
         var authService = {
@@ -85,7 +85,7 @@
             var deferred = $q.defer();
 
             OAuth.getAccessToken(credentials).then(function (res) {
-                PusherClient.create();
+                //PusherClient.create();
                 deferred.resolve();
             }).catch(function (response) {
                 if (response.status == 401) {
@@ -140,9 +140,9 @@
 
                     if (angular.isArray(res) && res[0].name === 'Administrador') {
                         if (Channel.all().length == 0) {
-                            if (angular.isUndefined(PusherClient.pusher)) {
-                                PusherClient.create();
-                            }
+                            /*if (angular.isUndefined(PusherClient.pusher)) {
+                                //PusherClient.create();
+                            }*/
                             Channel.add(Notification.subscribePresenceChannel('administrador'));
                             Channel.add(Notification.subscribePresenceChannel(Session.userInformation.id.toString()));
                             $rootScope.$broadcast(EVENTS_GENERAL.bind_channels);
