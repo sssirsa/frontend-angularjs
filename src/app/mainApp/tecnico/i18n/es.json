@@ -346,6 +346,7 @@
             "LABELS": {
                 "KIND": "Tipo de servicio",
                 "FOLIO": "Folio",
+                "DATE": "Fecha",
                 "JOB_KIND": "Tipo de trabajo",
                 "DETAIL": "Detalle"
             }
