@@ -134,8 +134,8 @@
         }
 
         function cancel() {
-            $scope.TransportForm.$setPristine();
-            $scope.TransportForm.$setUntouched();
+            $scope.StoreForm.$setPristine();
+            $scope.StoreForm.$setUntouched();
             vm.store = angular.copy(store);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
