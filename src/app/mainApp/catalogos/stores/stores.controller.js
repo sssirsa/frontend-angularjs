@@ -36,7 +36,7 @@
         function init() {
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCESSS_CREATE');
+            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
             vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
             vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
             vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
