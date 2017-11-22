@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, Localities) {
 
         var vm = this;
 
@@ -36,7 +36,7 @@
         function init() {
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.SUCESSS_TRANSPORTE_MESSAGE');
+            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
             vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
             vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
             vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
@@ -54,6 +54,7 @@
 
         function activate() {
             listlineas();
+            listLocalities();
         }
 
         function toggleDeletedFunction() {
@@ -69,7 +70,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Stores.remove(vm.store).then(function (res) {
+                Stores.remove(vm.store.id).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -82,11 +83,13 @@
         }
 
         function update() {
+            vm.store.localidad_id=vm.store.localidad.id;
             Stores.update(vm.store).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
+                console.log(err);
                 if (err.status == 400 && err.data.razon_social != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
@@ -96,12 +99,14 @@
         }
 
         function create() {
+            vm.store.localidad_id=vm.store.localidad.id;
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
                 cancel();
                 activate();
             }).catch(function (err) {
+                console.log(err);
                 if (err.status == 400 && err.data.razon_social != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
@@ -134,8 +139,8 @@
         }
 
         function cancel() {
-            $scope.TransportForm.$setPristine();
-            $scope.TransportForm.$setUntouched();
+            $scope.StoreForm.$setPristine();
+            $scope.StoreForm.$setUntouched();
             vm.store = angular.copy(store);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
@@ -178,6 +183,15 @@
             return vm.search_items;
         }
 
+        function listLocalities(){
+            vm.localitiesPromise = Localities.list().then(function (res) {
+                vm.localities = Helper.filterDeleted(res, vm.toggleDeleted);
+                vm.localities = _.sortBy(vm.localities, 'nombre');
+            }).catch(function (err) {
+
+            });
+        }
+
     }
 
     function custom() {
@@ -191,7 +205,6 @@
             });
 
         };
-
-
     }
+
 })();
