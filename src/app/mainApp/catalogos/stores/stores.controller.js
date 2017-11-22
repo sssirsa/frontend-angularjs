@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, Localities) {
 
         var vm = this;
 
@@ -54,6 +54,7 @@
 
         function activate() {
             listlineas();
+            listLocalities();
         }
 
         function toggleDeletedFunction() {
@@ -82,11 +83,13 @@
         }
 
         function update() {
+            vm.store.localidad_id=vm.store.localidad.id;
             Stores.update(vm.store).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
+                console.log(err);
                 if (err.status == 400 && err.data.razon_social != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
@@ -96,12 +99,14 @@
         }
 
         function create() {
+            vm.store.localidad_id=vm.store.localidad.id;
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
                 cancel();
                 activate();
             }).catch(function (err) {
+                console.log(err);
                 if (err.status == 400 && err.data.razon_social != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
@@ -178,6 +183,15 @@
             return vm.search_items;
         }
 
+        function listLocalities(){
+            vm.localitiesPromise = Localities.list().then(function (res) {
+                vm.localities = Helper.filterDeleted(res, vm.toggleDeleted);
+                vm.localities = _.sortBy(vm.localities, 'nombre');
+            }).catch(function (err) {
+
+            });
+        }
+
     }
 
     function custom() {
@@ -191,7 +205,6 @@
             });
 
         };
-
-
     }
+
 })();
