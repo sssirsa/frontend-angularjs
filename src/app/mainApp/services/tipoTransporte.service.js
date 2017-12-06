@@ -8,9 +8,24 @@
         .module('app.mainApp')
         .factory('TipoTransporte',TipoTransporte);
 
-    function TipoTransporte(Restangular,Helper, $mdDialog)
+    function TipoTransporte(Restangular, EnvironmentConfig, URLS)
     {
-        var baseTipoTransporte = Restangular.all('tipo_transporte');
+        //var baseTipoTransporte = Restangular.all('tipo_transporte');
+        var baseTipoTransporte = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                baseTipoTransporte = Restangular.all(URLS.environment.genesis_dev).all('tipo_transporte');
+                break;
+            case 'staging':
+                baseTipoTransporte = Restangular.all(URLS.environment.genesis_stg).all('tipo_transporte');
+                break;
+            case 'production':
+                baseTipoTransporte = Restangular.all(URLS.environment.genesis).all('tipo_transporte');
+                break;
+            case 'local':
+                baseTipoTransporte = Restangular.all(URLS.environment.genesis_local).all('tipo_transporte');
+                break;
+        }
 
         var service = {
             list:list,

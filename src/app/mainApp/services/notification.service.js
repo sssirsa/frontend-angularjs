@@ -9,7 +9,7 @@
         .factory('Notification', Notification);
 
     /* @ngInject */
-    function Notification(PusherClient,$q) {
+    function Notification($q) {
         return {
             subscribePrivateChannel: subscribePrivateChannel,
             unsubscribePrivateChannel:unsubscribePrivateChannel,
@@ -17,20 +17,20 @@
             unsubscribePresenceChannel:unsubscribePresenceChannel
         };
         function subscribePrivateChannel(channel) {
-            var deferred = $q.defer();
+            /*var deferred = $q.defer();
             var canal = PusherClient.pusher.subscribe('private-' + channel);
             deferred.resolve(canal);
-            return deferred.promise;
+            return deferred.promise;*/
         }
         function unsubscribePrivateChannel(channelName) {
-            PusherClient.pusher.unsubscribe('private-'+channelName);
+            //PusherClient.pusher.unsubscribe('private-'+channelName);
         }
         function subscribePresenceChannel(channel) {
-            return PusherClient.pusher.subscribe('presence-' + channel);
+            //return PusherClient.pusher.subscribe('presence-' + channel);
 
         }
         function unsubscribePresenceChannel(channelName) {
-            PusherClient.pusher.unsubscribe('presence-'+channelName);
+            //PusherClient.pusher.unsubscribe('presence-'+channelName);
         }
     }
 

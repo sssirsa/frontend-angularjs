@@ -14,7 +14,7 @@
             .state('triangular.admin-default.bienvenida', {
                 url: '/bienvenida',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente','Tecnico A','Tecnico B','Tecnico C','Tecnico D','Tecnico E']
+                    roles: ['Administrador','Capturista','Cliente','Tecnico A','Tecnico B','Tecnico C','Tecnico D','Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/bienvenida/index.tmpl.html',
                 controller: 'bienvenidaController',
