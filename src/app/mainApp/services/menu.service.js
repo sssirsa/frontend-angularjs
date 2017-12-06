@@ -44,6 +44,9 @@
                 case "Tecnico E":
                     loadTecnicoMenu();
                     break;
+                case "Tultitlan":
+                    loadTultitlanMenu();
+                    break;
                 default:
                     triMenu.menu = [];
             }
@@ -55,15 +58,10 @@
                 {
                     name: 'MAIN.MENU.WELCOME',
                     icon: 'zmdi zmdi-home',
-                    type: 'dropdown',
+                    type: 'link',
                     priority: 1,
-                    children: [
-                        {
-                            name: 'MAIN.MENU.START',
-                            state: 'triangular.admin-default.bienvenida',
-                            type: 'link'
-                        }
-                    ]
+                    state: 'triangular.admin-default.bienvenida'
+
                 },
                 {
                     name: 'MAIN.MENU.CRUD_USER',
@@ -305,15 +303,10 @@
                 {
                     name: 'MAIN.MENU.WELCOME',
                     icon: 'zmdi zmdi-home',
-                    type: 'dropdown',
+                    type: 'link',
                     priority: 1,
-                    children: [
-                        {
-                            name: 'MAIN.MENU.START',
-                            state: 'triangular.admin-default.bienvenida',
-                            type: 'link'
-                        }
-                    ]
+                    state: 'triangular.admin-default.bienvenida'
+
                 },
                 {
                     name: 'MAIN.MENU.SOLICITUD',
@@ -368,15 +361,9 @@
                 {
                     name: 'MAIN.MENU.WELCOME',
                     icon: 'zmdi zmdi-home',
-                    type: 'dropdown',
-                    priority: 1,
-                    children: [
-                        {
-                            name: 'MAIN.MENU.START',
-                            state: 'triangular.admin-default.bienvenida',
-                            type: 'link'
-                        }
-                    ]
+                    type: 'link',
+                    priority: 1, state: 'triangular.admin-default.bienvenida'
+
                 },
                 {
                     name: 'MAIN.MENU.SOLICITUD',
@@ -406,15 +393,10 @@
                 {
                     name: 'MAIN.MENU.WELCOME',
                     icon: 'zmdi zmdi-home',
-                    type: 'dropdown',
+                    type: 'link',
                     priority: 1,
-                    children: [
-                        {
-                            name: 'MAIN.MENU.START',
-                            state: 'triangular.admin-default.bienvenida',
-                            type: 'link'
-                        }
-                    ]
+                    state: 'triangular.admin-default.bienvenida'
+
                 },
                 {
                     name: 'MAIN.MENU.SERVICES',
@@ -459,6 +441,75 @@
                 }
             ];
             triMenu.menu = tecnicoMenu;
+        }
+
+        function loadTultitlanMenu() {
+            triMenu.menu = [];
+            var adminMenu = [
+                {
+                    name: 'MAIN.MENU.WELCOME',
+                    icon: 'zmdi zmdi-home',
+                    type: 'link',
+                    priority: 1,
+                    state: 'triangular.admin-default.bienvenida'
+
+                },
+                {
+                    name: 'MAIN.MENU.SOLICITUD',
+                    icon: 'zmdi zmdi-bookmark',
+                    type: 'dropdown',
+                    priority: 3,
+                    children: [
+                        {
+                            name: 'MAIN.MENU.SEARCH_SOLICITUD',
+                            state: 'triangular.admin-default.buscarSolicitud',
+                            type: 'link'
+                        },
+                        {
+                            name: 'MAIN.MENU.CREATES_SOLICITUD',
+                            state: 'triangular.admin-default.realizarSolicitud',
+                            type: 'link'
+                        },
+                        {
+                            name: 'MAIN.MENU.CALENDAR',
+                            state: 'triangular.admin-default.calendar',
+                            type: 'link'
+
+                        }
+                    ]
+                },
+                {
+                    name: 'MAIN.MENU.SERVICES',
+                    icon: 'fa fa-wrench',
+                    type: 'dropdown',
+                    priority: 4,
+                    children: [
+                        {
+                            name: 'MAIN.MENU.IN',
+                            state: 'triangular.admin-default.entrada',
+                            type: 'link'
+                        }, {
+                            name: 'MAIN.MENU.OUT.TITLE',
+                            type: 'dropdown',
+                            children: [{
+                                name: 'MAIN.MENU.OUT.NEW',
+                                type: 'link',
+                                state: 'triangular.admin-default.salida-crear'
+                            }, {
+                                name: 'MAIN.MENU.OUT.LIST',
+                                type: 'link',
+                                state: 'triangular.admin-default.salida-list'
+                            }]
+                        },
+                        {
+                            name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
+                            state:'triangular.admin-default.serviceAssing',
+                            type: 'link'
+                        }
+                    ]
+                }
+            ];
+            triMenu.menu = adminMenu;
         }
 
     }
