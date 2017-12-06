@@ -60,7 +60,7 @@
             .state('triangular.admin-default.entrada', {
                 url: '/entrada',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
@@ -69,7 +69,7 @@
             .state('triangular.admin-default.salida-crear', {
                 url: '/crear',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
@@ -78,7 +78,7 @@
             .state('triangular.admin-default.salida-list', {
                 url: '/listado',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
@@ -87,7 +87,7 @@
             .state('triangular.admin-default.serviceAssing', {
                 url: '/asignarServicio',
                 data: {
-                    roles: ['Administrador']
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },
                 templateUrl: 'app/mainApp/tecnico/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',

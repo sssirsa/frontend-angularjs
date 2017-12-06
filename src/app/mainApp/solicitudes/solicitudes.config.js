@@ -12,7 +12,7 @@
             .state('triangular.admin-default.realizarSolicitud', {
                 url: '/realizarSolicitudes',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente']
+                    roles: ['Administrador','Capturista','Cliente', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/crear/realizarSolicitud.tmpl.html',
                 controller: 'realizarSolicitudController',
@@ -21,7 +21,7 @@
             .state('triangular.admin-default.buscarSolicitud', {
                 url: '/buscarSolicitud',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente']
+                    roles: ['Administrador','Capturista','Cliente', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/buscar/buscarSolicitud.html',
                 controller: 'buscarSolicitudController',
