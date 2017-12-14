@@ -1,0 +1,105 @@
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+services:
+- docker:dind
+
+stages:
+- dep
+- configuration
+- deploy
+
+
+configuration:
+  stage: configuration
+  image: python:latest
+  script:
+    - pip install awscli
+    - mkdir -p config
+    - aws s3 cp s3://file-production/deploy/${CI_PROJECT_NAMESPACE}_${CI_PROJECT_NAME}/config/config.json config/config.json
+    - aws s3 cp s3://file-production/deploy/${CI_PROJECT_NAMESPACE}_${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
+  cache:
+    untracked: true
+    paths:
+     - config/
+     - gulp/deploy.js
+  artifacts:
+    paths:
+     - config/
+     - gulp/deploy.js
+  only:
+    - staging
+    - master
+
+deploy:
+  stage: deploy
+  image: node:4.8.4
+  before_script:
+    - npm install gulp
+  script:
+    - rm -rf dist/
+    - ./node_modules/.bin/gulp buildAppConfig --env ${CI_COMMIT_REF_NAME}
+    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+  dependencies:
+    - npm
+    - bower
+    - configuration
+  cache:
+    untracked: true
+    paths:
+     - dist/
+     - node_modules/
+  artifacts:
+    paths:
+     - dist/
+     - node_modules/
+  only:
+    - development
+    - staging
+    - master
+
+npm:
+  stage: dep
+  image: node:4.8.4
+  before_script:
+    - apt-get update
+    - apt-get install build-essential -y
+  script:
+    - npm install -g npm@latest
+    - npm install
+    - ls
+  cache:
+    untracked: true
+    paths:
+     - node_modules/
+  artifacts:
+    paths:
+     - node_modules/
+  only:
+    - development
+    - master
+    - staging
+
+bower:
+  stage: dep
+  image: node:6.11.2
+  variables:
+    BOWER_VERSION: 1.8.0
+  script:
+    - ls
+    - npm install -g bower@$BOWER_VERSION --silent
+    - bower install --allow-root --silent
+
+  cache:
+    untracked: true
+    paths:
+     - bower_components/
+  artifacts:
+    paths:
+     - bower_components/
+  only:
+    - development
+    - master
+    - staging
