@@ -30,6 +30,7 @@ configuration:
      - config/
      - gulp/deploy.js
   only:
+    - development
     - staging
     - master
 
@@ -45,6 +46,7 @@ deploy:
   dependencies:
     - npm
     - bower
+    - configuration
   only:
     - development
     - staging
