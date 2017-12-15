@@ -36,7 +36,7 @@ configuration:
 
 deploy:
   stage: deploy
-  image: node:6.10.1
+  image: node:4.8.4
   before_script:
     - npm install gulp
   script:
@@ -54,7 +54,7 @@ deploy:
 
 npm:
   stage: dep
-  image: node:6.10.1
+  image: node:4.8.4
   before_script:
     - apt-get update
     - apt-get install build-essential -y
