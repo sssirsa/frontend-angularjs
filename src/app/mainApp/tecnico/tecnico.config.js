@@ -60,7 +60,7 @@
             .state('triangular.admin-default.entrada', {
                 url: '/entrada',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
@@ -69,7 +69,7 @@
             .state('triangular.admin-default.salida-crear', {
                 url: '/crear',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
@@ -78,13 +78,30 @@
             .state('triangular.admin-default.salida-list', {
                 url: '/listado',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
                 templateUrl: 'app/mainApp/tecnico/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
                 controllerAs: 'vm'
             })
-
+            .state('triangular.admin-default.serviceAssing', {
+                url: '/asignarServicio',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                },
+                templateUrl: 'app/mainApp/tecnico/asignacionServicio/asignacionServicio.tmpl.html',
+                controller: 'asignacionServicioController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.serviceAssignDetail', {
+                url:'/detalleServicio/:tipo/:id',
+                templateUrl: 'app/mainApp/tecnico/asignacionServicio/detalleAsignacion.tmpl.html',
+                controller:'detalleAsignacionController',
+                controllerAs:'vm',
+                params:{
+                    id:null
+                }
+            })
             .state('triangular.admin-default.puntoVenta', {
                 url: '/puntoVenta',
                 data: {

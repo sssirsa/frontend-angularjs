@@ -8,13 +8,29 @@
         .module('app.mainApp')
         .factory('Tecnico',Tecnico);
 
-    function Tecnico($q,Restangular){
+    function Tecnico(Restangular, EnvironmentConfig, URLS){
+        var urlbase = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase = Restangular.all(URLS.environment.genesis_dev).all('my_groups');
+                break;
+            case 'staging':
+                urlbase = Restangular.all(URLS.environment.genesis_stg).all('my_groups');
+                break;
+            case 'production':
+                urlbase = Restangular.all(URLS.environment.genesis).all('my_groups');
+                break;
+            case 'local':
+                urlbase = Restangular.all(URLS.environment.genesis_local).all('my_groups');
+                break;
+        }
+
         return{
             getRole:getRole
         };
 
         function getRole(){
-            return Restangular.all('my_groups').customGET().then(function(res){
+            return urlbase.customGET().then(function(res){
                 return res;
             }).catch(function(err){
                 console.log(err);

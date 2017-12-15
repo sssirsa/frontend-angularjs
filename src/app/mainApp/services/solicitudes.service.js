@@ -8,7 +8,23 @@
         .module('app.mainApp')
         .factory('Solicitudes',Solicitudes);
 
-    function Solicitudes($q, Restangular){
+    function Solicitudes($q, Restangular, EnvironmentConfig, URLS){
+        var urlbase = null;
+        switch (EnvironmentConfig.environment) {
+            case 'development':
+                urlbase = Restangular.all(URLS.environment.genesis_dev).all('solicitud');
+                break;
+            case 'staging':
+                urlbase = Restangular.all(URLS.environment.genesis_stg).all('solicitud');
+                break;
+            case 'production':
+                urlbase = Restangular.all(URLS.environment.genesis).all('solicitud');
+                break;
+            case 'local':
+                urlbase = Restangular.all(URLS.environment.genesis_local).all('solicitud');
+                break;
+        }
+
         return{
             create:create,
             list:list,
@@ -17,28 +33,31 @@
         };
 
         function create(object){
-            var deferred=$q.defer();
-
-            Restangular.all('solicitud').customPOST(object).then(function(rest){
-                deferred.resolve(rest);
-            }).catch(function(error){
-                deferred.reject(error);
-            });
-            return deferred.promise;
+            // var deferred=$q.defer();
+            //
+            // Restangular.all('solicitud').customPOST(object).then(function(rest){
+            //     deferred.resolve(rest);
+            // }).catch(function(error){
+            //     deferred.reject(error);
+            // });
+            // return deferred.promise;
+            return urlbase.customPOST(object);
         }
 
         function list(){
-            return Restangular.all('solicitud').customGET();
+            // return Restangular.all('solicitud').customGET();
+            return urlbase.customGET();
         }
 
         function modify(object){
-            var deferred=$q.defer();//Genera la promesa
-            Restangular.one('solicitud',object.id).customPUT(object).then(function(resp){
-                deferred.resolve(resp);
-            }).catch(function(error){
-                deferred.reject(error);
-            });
-            return deferred.promise;
+            // var deferred=$q.defer();//Genera la promesa
+            // Restangular.one('solicitud',object.id).customPUT(object).then(function(resp){
+            //     deferred.resolve(resp);
+            // }).catch(function(error){
+            //     deferred.reject(error);
+            // });
+            // return deferred.promise;
+            return urlbase.all(object.id).customPUT(object);
         }
 
         function consultaEsp(object) {
@@ -54,7 +73,8 @@
                     tipoConsulta = "canceled";
                     break;
             }
-            return Restangular.one('solicitud', tipoConsulta).customGET();
+            // return Restangular.one('solicitud', tipoConsulta).customGET();
+            return urlbase.all(tipoConsulta).customGET();
         }
 
     }
