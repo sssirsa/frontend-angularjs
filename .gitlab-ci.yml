@@ -41,7 +41,6 @@ deploy:
     - npm install gulp
   script:
     - rm -rf dist/
-    - ./node_modules/.bin/gulp buildAppConfig --env ${CI_COMMIT_REF_NAME}
     - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
   dependencies:
     - npm
