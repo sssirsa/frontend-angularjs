@@ -14,16 +14,16 @@
         switch (EnvironmentConfig.environment) {
             case 'development':
                 //EnvironmentConfig.site.rest.api+'mobile-dev/oauth/'
-                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.mobile_dev + /oauth/;
+                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis_dev + /oauth/;
                 break;
             case 'staging':
-                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.mobile_stg + /oauth/;
+                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis_stg + /oauth/;
                 break;
             case 'production':
-                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.mobile + /oauth/;
+                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis + /oauth/;
                 break;
             case 'local':
-                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.mobile_local + /oauth/;
+                baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis_local + /oauth/;
                 break;
         }
         OAuthProvider.configure({
