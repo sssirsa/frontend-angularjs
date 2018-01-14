@@ -33,12 +33,9 @@
     }
 
     /* @ngInject */
-    function triMenuController(triMenu,dynamicMenu,$rootScope,AUTH_EVENTS) {
+    function triMenuController(triMenu) {
         var triMenuController = this;
-        $rootScope.$on(AUTH_EVENTS.sessionRestore, function() {
-            dynamicMenu.loadMenu();
-            triMenuController.menu = triMenu.menu;
-        });
+        triMenuController.menu = triMenu.menu;
 
     }
 })();
