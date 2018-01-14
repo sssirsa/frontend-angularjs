@@ -6,7 +6,7 @@
         .module('app.mainApp.solicitudes')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider) {
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/solicitudes');
         $stateProvider
             .state('triangular.admin-default.realizarSolicitud', {
@@ -36,6 +36,37 @@
                 controller: 'CalendarController',
                 controllerAs: 'vm'
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.SOLICITUD',
+                icon: 'zmdi zmdi-bookmark',
+                type: 'dropdown',
+                permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                priority: 3,
+                children: [
+                    {
+                        name: 'MAIN.MENU.SEARCH_SOLICITUD',
+                        state: 'triangular.admin-default.buscarSolicitud',
+                        permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CREATES_SOLICITUD',
+                        state: 'triangular.admin-default.realizarSolicitud',
+                        permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CALENDAR',
+                        state: 'triangular.admin-default.calendar',
+                        permission: ['Administrador', 'Tultitlan'],
+                        type: 'link'
+
+                    }
+                ]
+            }
+        );
 
     }
 
