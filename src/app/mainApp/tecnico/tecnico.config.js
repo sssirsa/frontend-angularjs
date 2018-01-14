@@ -6,7 +6,7 @@
         .module('app.mainApp.tecnico')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider) {
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/tecnico');
         $stateProvider
             .state('triangular.admin-default.tecnico', {
@@ -95,6 +95,9 @@
             })
             .state('triangular.admin-default.serviceAssignDetail', {
                 url:'/detalleServicio/:tipo/:id',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                },
                 templateUrl: 'app/mainApp/tecnico/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller:'detalleAsignacionController',
                 controllerAs:'vm',
@@ -112,6 +115,66 @@
                 controller: 'PuntoVentaController',
                 controllerAs: 'vm'
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.SERVICES',
+                icon: 'fa fa-wrench',
+                type: 'dropdown',
+                permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan'],
+                priority: 4,
+                children: [
+                    {
+                        name: 'MAIN.MENU.START',
+                        state: 'triangular.admin-default.tecnico',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.IN',
+                        state: 'triangular.admin-default.entrada',
+                        permission: ['Administrador', 'Tultitlan'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.OUT.TITLE',
+                        type: 'dropdown',
+                        permission: ['Administrador', 'Tultitlan'],
+                        children: [{
+                            name: 'MAIN.MENU.OUT.NEW',
+                            type: 'link',
+                            state: 'triangular.admin-default.salida-crear'
+                        }, {
+                            name: 'MAIN.MENU.OUT.LIST',
+                            type: 'link',
+                            state: 'triangular.admin-default.salida-list'
+                        }]
+                    },
+                    {
+                        name: 'MAIN.MENU.REGISTER_STEP',
+                        state: 'triangular.admin-default.etapa',
+                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.LINE',
+                        state: 'triangular.admin-default.asignacionLinea',
+                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.SERVICEAWAY',
+                        state: 'triangular.admin-default.puntoVenta',
+                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
+                        state:'triangular.admin-default.serviceAssing',
+                        permission: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                        type: 'link'
+                    }
+                ]
+            }
+        );
 
     }
 })();
