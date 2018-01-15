@@ -8,7 +8,7 @@
         .module('app.mainApp.reportes')
         .factory('Reportes',Reportes);
 
-    function Reportes(Restangular, EnvironmentConfig, URLS){
+    function Reportes(Restangular, EnvironmentConfig, URLS, ReportList){
         // var path= Restangular.all('report_builder').all('api');
         // var pathReport= Restangular.all('report_builder').all('report');
         var path = null;
@@ -185,7 +185,7 @@
             return path.one("report",id).one("download_file",format).all("").customGET();
         }
         function getReportsGenerated() {
-            return Restangular.all("report_builder").all("reports").all("download").all("").getList();
+            return ReportList.all('report_builder').all("reports").all("download").all("").getList();
         }
         //Obtiene la información completa de un reporte en específico usando un promise
         function getReportObject(id){
