@@ -6,7 +6,7 @@
         .module("app.mainApp.reportes")
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider) {
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart("app/mainApp/reportes");
         $stateProvider
             .state("triangular.admin-default.reportes", {
@@ -57,6 +57,40 @@
                 controller: "reporteProduccionController",
                 controllerAs: "vm"
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.REPORTS.TITLE',
+                icon: 'fa fa-line-chart',
+                type: 'dropdown',
+                permission: ["Administrador"],
+                priority: 7,
+                children: [
+                    {
+                        name: 'MAIN.MENU.REPORTS.ADMIN',
+                        state: 'triangular.admin-default.reportes',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.REPORTS.LIST',
+                        state: 'triangular.admin-default.list',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.REPORTS.CUSTOM.TITLE',
+                        icon: 'fa fa-cogs',
+                        type: 'dropdown',
+                        children: [
+                            {
+                                name: 'MAIN.MENU.REPORTS.CUSTOM.PRODUCTION',
+                                state: 'triangular.admin-default.reporteProduccion',
+                                type: 'link'
+                            }
+                        ]
+                    }
+                ]
+            }
+        );
 
     }
 })();
