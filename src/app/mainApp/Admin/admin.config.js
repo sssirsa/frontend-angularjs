@@ -8,7 +8,7 @@
         .module('app.mainApp.admin')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider){
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider){
         $translatePartialLoaderProvider.addPart('app/mainApp/Admin');
         $stateProvider
             .state('triangular.admin-default.gestion_user', { //Nombre del state
@@ -31,6 +31,28 @@
                 controller: 'admin_userController',
                 controllerAs: 'vm'
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.CRUD_USER',
+                icon: 'zmdi zmdi-account',
+                type: 'dropdown',
+                permission: ['Administrador'],
+                priority: 2,
+                children: [
+                    {
+                        name: 'MAIN.MENU.NEW_USER',
+                        state: 'triangular.admin-default.gestion_user',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.ADMIN_USER',
+                        state: 'triangular.admin-default.admin_user',
+                        type: 'link'
+                    }
+                ]
+            }
+        );
 
     }
 
