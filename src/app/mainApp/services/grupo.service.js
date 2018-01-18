@@ -4,29 +4,19 @@
 (function(){
     'use_strict';//
 
-    angular.module('app.mainApp').factory('groups',groups);
-    function groups(Restangular, EnvironmentConfig, URLS){
-        var urlbase = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                urlbase = Restangular.all(URLS.environment.genesis_dev).all('groups');
-                break;
-            case 'staging':
-                urlbase = Restangular.all(URLS.environment.genesis_stg).all('groups');
-                break;
-            case 'production':
-                urlbase = Restangular.all(URLS.environment.genesis).all('groups');
-                break;
-            case 'local':
-                urlbase = Restangular.all(URLS.environment.genesis_local).all('groups');
-                break;
-        }
+    angular
+        .module('app.mainApp')
+        .factory('groups',groups);
+    function groups(WebRestangular, URLS){
+        var urlbase = WebRestangular.all(URLS.grupos);
 
         return {
             list:list
         };
+
         function list(){
-            return urlbase.customGET();//prueba
+            return urlbase.customGET();
         }
+
     }
 })();

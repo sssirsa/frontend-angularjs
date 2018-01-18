@@ -430,7 +430,8 @@
             entrada_masiva:'mass_upload',
             salida_masiva:'mass_exit',
             udn:'udn',
-            etapa:'etapa'
+            etapa:'etapa',
+            grupos:'grupos'
         })
         .constant('CONFIGS', {
             ADTConfig: {
