@@ -444,7 +444,8 @@
             reporte_insumos: 'reports/insumos',
             rutas: 'ruta',
             solicitud_pv: 'solicitud',
-            etapa_servicio: 'etapa_servicio'
+            etapa_servicio: 'etapa_servicio',
+            insumo_usado:'insumo_usado'
         })
         .constant('CONFIGS', {
             ADTConfig: {

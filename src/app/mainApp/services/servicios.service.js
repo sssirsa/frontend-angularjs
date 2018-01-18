@@ -41,94 +41,39 @@
         var baseModelo = WebRestangular.all(URLS.etapa_servicio);
 
         function crearEtapaServicio(etapa) {
-            var deferred = $q.defer();
-            //checar rutas :D
-            WebRestangular.all(URLS.etapa_servicio).customPOST(etapa).then(function (res) {
-
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(false);
-            });
-
-            return deferred.promise;
+            baseModelo.customPOST(etapa);
         }
 
 
         function editarEtapaServicio(etapa) {
-
-            var deferred = $q.defer();
-            WebRestangular.one(URLS.etapa_servicio, etapa.id).customPUT(etapa).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-
-            });
-
-
-            return deferred.promise;
+            baseModelo.all(etapa.id).customPUT(etapa);
         }
 
 
         function eliminarEtapaServicio(object) {
-
             return baseModelo.customDELETE(object.id, null, {'content-type': 'application/json'});
-
-
         }
 
         function consultarAllEtapaServicioDiagnostico(etapa) {
-            var deferred = $q.defer();
-
-            WebRestangular.all(URLS.etapa_servicio).one('diagnostic', etapa.id).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-
-
-            return deferred.promise;
+            baseModelo.one('diagnostic', etapa.id).customGET();
         }
 
         function consultarEtapaServicioDiagnostico(diagnostico) {
-            var deferred = $q.defer();
-
-            WebRestangular.all(URLS.etapa_servicio).all('diagnostic').one('latest', diagnostico.id).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-
-            return deferred.promise;
+            baseModelo.all('diagnostic').one('latest', diagnostico.id).customGET();
         }
         function consultarSalidaServicioDiagnostico(diagnostico) {
-            var deferred = $q.defer();
-
-            WebRestangular.all(URLS.etapa_servicio).all('diagnostic').one('latest', diagnostico.id).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-
-            return deferred.promise;
+            baseModelo.all('diagnostic').one('latest', diagnostico.id).customGET();
         }
 
         function consultarAllInsumosCabinetEtapa(etapa) {
-            var deferred = $q.defer();
-            WebRestangular.all(URLS.etapa_servicio).one('insumos', etapa.id).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-
-            });
-
-            return deferred.promise;
+            baseModelo.one('insumos', etapa.id).customGET();
         }
 
 
         function getEtapaValidable(idCabinet) {
             var defer = $q.defer();
             getDiagnosticoFromCabinet(idCabinet).then(function (resp) {
-                WebRestangular.all(URLS.etapa_servicio).all('diagnostic').all('latest').one('can_validate', resp.id).customGET().then(function (res) {
+                baseModelo.all('diagnostic').all('latest').one('can_validate', resp.id).customGET().then(function (res) {
                     defer.resolve(res);
                 }).catch(function (err) {
                     defer.reject(err);
@@ -142,142 +87,61 @@
         }
 
         function getDiagnosticoFromCabinet(idCabinet) {
-            var defer = $q.defer();
-            WebRestangular.all('diagnostico').all('latest').one(idCabinet).customGET().then(function (res) {
-                defer.resolve(res);
-            }).catch(function (err) {
-                defer.reject(err);
-            });
-            //console.log(defer.promise);
-            return defer.promise;
+            WebRestangular.all(URLS.diagnostico).all('latest').one(idCabinet).customGET();
         }
 
         function anadirInsumo(insumo) {
-            var defer = $q.defer();
-            WebRestangular.all('insumo_usado').customPOST(insumo).then(function (res) {
-                defer.resolve(res);
-            }).catch(function (err) {
-                defer.reject(err);
-            })
+            WebRestangular.all(URLS.insumo_usado).customPOST(insumo);
         }
 
         function modificarInsumo(insumo) {
-            var defer = $q.defer();
-            WebRestangular.all('insumo_usado').one('', insumo.id).customPUT(insumo).then(function (res) {
-                defer.resolve(res);
-            }).catch(function (err) {
-                defer.reject(err);
-            })
+            WebRestangular.all(URLS.insumo_usado).one('', insumo.id).customPUT(insumo);
         }
 
         function eliminarInsumo(insumo) {
-            var defer = $q.defer();
-            WebRestangular.all('insumo_usado').one('', insumo.id).customDELETE(insumo.id, null, {'content-type': 'application/json'}).then(function (res) {
-                defer.resolve(res);
-            }).catch(function (err) {
-                defer.reject(err);
-            })
+            WebRestangular.all(URLS.insumo_usado).one('', insumo.id).customDELETE(insumo.id, null, {'content-type': 'application/json'});
         }
 
         function consultarInfoCabinet(idcabinet) {
-            var deferred = $q.defer();
-            //checar rutas :D
-            WebRestangular.one('cabinet', idcabinet).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-
-
-            return deferred.promise;
+            WebRestangular.one(URLS.cabinet, idcabinet).customGET();
         }
 
         function consultarInsumobyNombre(cadena) {
-            WebRestangular.all('catalogo_insumos').one('lookup', cadena).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            })
+            WebRestangular.all(URLS.catalogo_insumos).one('lookup', cadena).customGET();
 
         }
 
         function getCatalogoInsumoById(catalogo) {
-            var deferred = $q.defer();
-            WebRestangular.one('catalogo_insumos', catalogo.id).customGet().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            })
+            WebRestangular.one(URLS.catalogo_insumos, catalogo.id).customGET();
 
         }
 
         function consultarInsumosEtapa(etapa) {
-            var deferred = $q.defer();
-            //checar rutas :D
-            WebRestangular.one('Insumos', etapa.actual_etapa).customGET(etapa).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-
-
-            return deferred.promise;
+            WebRestangular.one('Insumos', etapa.actual_etapa).customGET(etapa);
         }
 
         //Nuevos Endpoints por nuevos requerimentos y reeconstruccion Etapa Servicio
         function BusquedaCatalogoTypeStep(data) {
-            var deferred = $q.defer();
-            WebRestangular.all('catalogo_insumos').one('tipo', data.idTipo).all('etapa').customGET(data.idEtapa).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-
-            });
-            return deferred.promise;
+            WebRestangular.all(URLS.catalogo_insumos).one('tipo', data.idTipo).all('etapa').customGET(data.idEtapa);
         }
 
         function BusquedaInsumosTypeStep(data) {
-            var deferred = $q.defer();
-            WebRestangular.all('insumo').one('tipo', data.idTipo).one('etapa', data.idEtapa).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-
-            });
-            return deferred.promise;
+            WebRestangular.all(URLS.insumo).one('tipo', data.idTipo).one('etapa', data.idEtapa).customGET();
 
         }
 
         function etapaList() {
-            var deferred = $q.defer();
-            WebRestangular.all('etapa').customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
+            WebRestangular.all(URLS.etapa).customGET();
         }
 
         function cabinetByEconomic(economico) {
-            var deferred = $q.defer();
-            WebRestangular.all('model').one('cabinet', economico).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
+            WebRestangular.all('model').one('cabinet', economico).customGET();
 
         }
 
         // /etapa_servicio/first/
         function firstStepByDiagnostic(diagnostico) {
-            var deferred = $q.defer();
-            WebRestangular.all(URLS.etapa_servicio).one('first', diagnostico.id).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            })
-            return deferred.promise;
+            baseModelo.one('first', diagnostico.id).customGET();
         }
 
 
