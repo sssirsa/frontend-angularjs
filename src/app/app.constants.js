@@ -451,7 +451,8 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            establecimiento:'establecimiento'
+            establecimiento:'establecimiento',
+            sucursal:'sucursal'
         })
         .constant('CONFIGS', {
             ADTConfig: {
