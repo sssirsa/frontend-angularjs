@@ -442,7 +442,8 @@
             proyecto:'proyecto',
             report_builder:'report_builder',
             reporte_insumos:'reports/insumos',
-            rutas:'ruta'
+            rutas:'ruta',
+            solicitud_pv:'solicitud'
         })
         .constant('CONFIGS', {
             ADTConfig: {
