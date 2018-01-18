@@ -438,7 +438,8 @@
             marca:'marca_cabinet',
             persona: 'persona',
             persona_admin:'persona_admin',
-            proveedor:'proveedor'
+            proveedor:'proveedor',
+            proyecto:'proyecto'
         })
         .constant('CONFIGS', {
             ADTConfig: {
