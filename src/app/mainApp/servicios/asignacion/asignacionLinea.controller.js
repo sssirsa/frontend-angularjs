@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('asignacionLineaController', asignacionLineaController);
 
     function asignacionLineaController(Cabinet, toastr, Translate, ModeloCabinet, $scope, $mdDialog) {
@@ -167,8 +167,8 @@
 
         }
 
-        
-        
+
+
         vm.verInfo = function () {
             $mdDialog.show({
                 locals: {parent: vm},

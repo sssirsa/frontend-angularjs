@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {

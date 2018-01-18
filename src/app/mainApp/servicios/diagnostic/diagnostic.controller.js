@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('DiagnosticController', DiagnosticController);
 
     function DiagnosticController(Cabinet, cabinet, OPTIONS, toastr, $scope, Translate, $mdDialog, Helper, Upload, EnvironmentConfig, OAuthToken) {
@@ -90,7 +90,7 @@
         }
 
         function activate() {
-          
+
             if (cabinet != null) {
                 vm.cabinet = cabinet;
                 vm.searchCabinet();

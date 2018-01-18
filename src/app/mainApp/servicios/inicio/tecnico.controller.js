@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('tecnicoController', tecnicoController);
 
     function tecnicoController( $scope,$rootScope,AUTH_EVENTS) {

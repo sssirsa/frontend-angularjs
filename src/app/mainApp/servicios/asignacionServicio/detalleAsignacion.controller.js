@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('detalleAsignacionController', detalleAsignacionController);
 
     function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin, $state) {

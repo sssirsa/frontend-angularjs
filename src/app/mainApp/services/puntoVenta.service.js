@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .factory('PuntoDeVenta', PuntoDeVenta);
 
     function PuntoDeVenta(Restangular, EnvironmentConfig, URLS) {
