@@ -453,7 +453,8 @@
             },
             establecimiento:'establecimiento',
             sucursal:'sucursal',
-            tipo_equipo:'tipo_equipo'
+            tipo_equipo:'tipo_equipo',
+            tipo_transporte:'tipo_transporte'
         })
         .constant('CONFIGS', {
             ADTConfig: {
