@@ -452,7 +452,8 @@
                 servicio_admin: 'solicitud_servicio_admin'
             },
             establecimiento:'establecimiento',
-            sucursal:'sucursal'
+            sucursal:'sucursal',
+            tipo_equipo:'tipo_equipo'
         })
         .constant('CONFIGS', {
             ADTConfig: {
