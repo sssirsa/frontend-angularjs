@@ -8,23 +8,8 @@
         .module('app.mainApp')
         .factory('Categoria',Categoria);
 
-    function Categoria(Restangular, EnvironmentConfig, URLS){
-        //var baseCategoria = Restangular.all('categoria');
-        var baseCategoria = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseCategoria = Restangular.all(URLS.environment.genesis_dev).all('categoria');
-                break;
-            case 'staging':
-                baseCategoria = Restangular.all(URLS.environment.genesis_stg).all('categoria');
-                break;
-            case 'production':
-                baseCategoria = Restangular.all(URLS.environment.genesis).all('categoria');
-                break;
-            case 'local':
-                baseCategoria = Restangular.all(URLS.environment.genesis_local).all('categoria');
-                break;
-        }
+    function Categoria(WebRestangular, EnvironmentConfig, URLS){
+        var baseCategoria = WebRestangular.all(URLS.categoria);
 
         var service = {
             list:list,

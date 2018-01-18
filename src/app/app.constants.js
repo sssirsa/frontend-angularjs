@@ -414,7 +414,8 @@
             cabinet:'cabinet',
             cabinet_clean:'cabinet_clean',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
-            catalogo_insumos:'catalogo_insumos'
+            catalogo_insumos:'catalogo_insumos',
+            categoria:'categoria'
         })
         .constant('CONFIGS', {
             ADTConfig: {
