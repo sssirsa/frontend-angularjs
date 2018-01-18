@@ -411,16 +411,8 @@
         })
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
-            environment: {
-                mobile_dev: 'mobile-dev',
-                mobile: 'mobile',
-                mobile_stg: 'mobile-stg',
-                mobile_local: "mobile",
-                genesis_dev: 'genesis-dev',
-                genesis: 'genesis',
-                genesis_stg: 'genesis-stg',
-                genesis_local: "genesis"
-            }
+            cabinet:'cabinet',
+            cabinet_clean:'cabinet_clean'
         })
         .constant('CONFIGS', {
             ADTConfig: {
