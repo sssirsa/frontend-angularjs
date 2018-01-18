@@ -104,16 +104,6 @@
                 params:{
                     id:null
                 }
-            })
-            .state('triangular.admin-default.puntoVenta', {
-                url: '/puntoVenta',
-                data: {
-
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
-                },
-                templateUrl: 'app/mainApp/tecnico/PuntoDeVenta/puntoVenta.tmpl.html',
-                controller: 'PuntoVentaController',
-                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -157,12 +147,6 @@
                     {
                         name: 'MAIN.MENU.LINE',
                         state: 'triangular.admin-default.asignacionLinea',
-                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
-                        type: 'link'
-                    },
-                    {
-                        name: 'MAIN.MENU.SERVICEAWAY',
-                        state: 'triangular.admin-default.puntoVenta',
                         permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
                         type: 'link'
                     },
