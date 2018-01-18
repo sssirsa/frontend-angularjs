@@ -413,7 +413,8 @@
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             cabinet:'cabinet',
             cabinet_clean:'cabinet_clean',
-            cabinet_entrada_salida: 'cabinet_entrada_salida'
+            cabinet_entrada_salida: 'cabinet_entrada_salida',
+            catalogo_insumos:'catalogo_insumos'
         })
         .constant('CONFIGS', {
             ADTConfig: {
