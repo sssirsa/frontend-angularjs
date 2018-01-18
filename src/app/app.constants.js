@@ -433,7 +433,8 @@
             etapa:'etapa',
             grupos:'grupos',
             insumo:'insumo',
-            linea_transporte:'linea_transporte'
+            linea_transporte:'linea_transporte',
+            localidad:'localidad'
         })
         .constant('CONFIGS', {
             ADTConfig: {
