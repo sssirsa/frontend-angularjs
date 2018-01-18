@@ -432,7 +432,8 @@
             udn:'udn',
             etapa:'etapa',
             grupos:'grupos',
-            insumo:'insumo'
+            insumo:'insumo',
+            linea_transporte:'linea_transporte'
         })
         .constant('CONFIGS', {
             ADTConfig: {
