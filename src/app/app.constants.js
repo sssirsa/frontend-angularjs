@@ -454,7 +454,8 @@
             establecimiento:'establecimiento',
             sucursal:'sucursal',
             tipo_equipo:'tipo_equipo',
-            tipo_transporte:'tipo_transporte'
+            tipo_transporte:'tipo_transporte',
+            udn:'udn'
         })
         .constant('CONFIGS', {
             ADTConfig: {
