@@ -439,7 +439,8 @@
             persona: 'persona',
             persona_admin:'persona_admin',
             proveedor:'proveedor',
-            proyecto:'proyecto'
+            proyecto:'proyecto',
+            report_builder:'report_builder'
         })
         .constant('CONFIGS', {
             ADTConfig: {
