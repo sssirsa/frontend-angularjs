@@ -416,7 +416,9 @@
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos:'catalogo_insumos',
             categoria:'categoria',
-            checklist:'CheckList'
+            checklist:'CheckList',
+            cliente:'persona_capturista',
+            cliente_grupos:'cliente_groups'
         })
         .constant('CONFIGS', {
             ADTConfig: {
