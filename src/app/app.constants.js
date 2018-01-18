@@ -429,7 +429,8 @@
             normalize_cabinets:'normalize',
             entrada_masiva:'mass_upload',
             salida_masiva:'mass_exit',
-            udn:'udn'
+            udn:'udn',
+            etapa:'etapa'
         })
         .constant('CONFIGS', {
             ADTConfig: {
