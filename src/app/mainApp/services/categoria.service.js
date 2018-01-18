@@ -8,7 +8,7 @@
         .module('app.mainApp')
         .factory('Categoria',Categoria);
 
-    function Categoria(WebRestangular, EnvironmentConfig, URLS){
+    function Categoria(WebRestangular, URLS){
         var baseCategoria = WebRestangular.all(URLS.categoria);
 
         var service = {
