@@ -9,23 +9,8 @@
         .module('app.mainApp')
         .factory('EntradaSalida', EntradaSalida);
 
-    function EntradaSalida($q, Restangular, EnvironmentConfig, URLS) {
-        // var baseURL = Restangular.all('entrada_salida');
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.genesis_dev).all('entrada_salida');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.genesis_stg).all('entrada_salida');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.genesis).all('entrada_salida');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.genesis_local).all('entrada_salida');
-                break;
-        }
+    function EntradaSalida(WebRestangular, URLS) {
+        var baseURL = WebRestangular.all(URLS.entrada_salida);
 
         return {
             postEntrada: postEntrada,
@@ -34,30 +19,35 @@
             putEntradaMasiva: putEntradaMasiva,
             getLastEntradaByCabinet: getLastEntradaByCabinet,
             byUdn: byUdn,
-            byUdnObject:byUdnObject,
+            byUdnObject: byUdnObject,
             getCabinetsEntrada: getCabinetsEntrada,
-            normalizeCabinets:normalizeCabinets,
-            getRemision:getRemision,
-            getAll:getAll,
-            getSalidas:getSalidas,
-            getCabinetsEntradaSalida:getCabinetsEntradaSalida
+            normalizeCabinets: normalizeCabinets,
+            getRemision: getRemision,
+            getAll: getAll,
+            getSalidas: getSalidas,
+            getCabinetsEntradaSalida: getCabinetsEntradaSalida
         };
+
         function getSalidas() {
-            return baseURL.all('exit').getList();
+            return baseURL.all(URLS.salida).getList();
         }
+
         function getAll() {
             return baseURL.getList().$object;
         }
+
         function getRemision(idEntradaSalida) {
-            return baseURL.one('remision').customGET(idEntradaSalida);
+            return baseURL.one(URLS.remision).customGET(idEntradaSalida);
         }
+
         function normalizeCabinets(idEntradaSalida) {
             //one('normalize',idEntradaSalida)
-            return baseURL.one("normalize",idEntradaSalida).put();
+            return baseURL.one(URLS.normalize_cabinets, idEntradaSalida).put();
 
         }
+
         function getLastEntradaByCabinet(idCabinet) {
-            return baseURL.one('cabinet').customGET(idCabinet);
+            return baseURL.one(URLS.cabinet).customGET(idCabinet);
         }
 
         //entrada_salida
@@ -67,31 +57,32 @@
 
         //entrada_salida/mass_upload
         function postEntradaMasiva(data) {
-            return baseURL.all('mass_upload').withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
+            return baseURL.all(URLS.entrada_masiva).withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
         }
 
         //entrada_salida/mass_upload
         function putEntradaMasiva(data, pk) {
-            return baseURL.one('mass_upload',pk).withHttpConfig({transformRequest: angular.identity}).customPUT(data, "", {}, {'Content-type': undefined});
+            return baseURL.one(URLS.entrada_masiva, pk).withHttpConfig({transformRequest: angular.identity}).customPUT(data, "", {}, {'Content-type': undefined});
         }
 
         function postSalidaMasiva(data) {
-            return baseURL.all('mass_exit').withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
+            return baseURL.all(URLS.salida_masiva).withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
         }
 
         function byUdn(id) {
-            return baseURL.one('udn', id).getList().$object;
+            return baseURL.one(URLS.udn, id).getList().$object;
         }
 
         function byUdnObject(id) {
-            return baseURL.one('udn', id).getList();
+            return baseURL.one(URLS.udn, id).getList();
         }
 
         function getCabinetsEntrada() {
-            return baseURL.all('cabinet_input').getList();
+            return baseURL.all(URLS.cabinet_entrada).getList();
         }
+
         function getCabinetsEntradaSalida(id) {
-            return baseURL.one('cabinets',id).getList();
+            return baseURL.one(URLS.cabinets, id).getList();
         }
     }
 })();

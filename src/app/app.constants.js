@@ -412,7 +412,9 @@
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             cabinet:'cabinet',
+            cabineets:'cabinets',
             cabinet_clean:'cabinet_clean',
+            cabinet_entrada:'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos:'catalogo_insumos',
             categoria:'categoria',
@@ -420,7 +422,14 @@
             cliente:'persona_capturista',
             cliente_grupos:'cliente_groups',
             diagnostico:'diagnostico',
-            diagnostico_cabinet:'diagnostico_cabinet'
+            diagnostico_cabinet:'diagnostico_cabinet',
+            entrada_salida:'entrada_salida',
+            salida:'exit',
+            remision:'remision',
+            normalize_cabinets:'normalize',
+            entrada_masiva:'mass_upload',
+            salida_masiva:'mass_exit',
+            udn:'udn'
         })
         .constant('CONFIGS', {
             ADTConfig: {
