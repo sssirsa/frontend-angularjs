@@ -9,24 +9,9 @@
         .factory('Insumo', Insumo);
 
     /* @ngInject */
-    function Insumo($q, Restangular, EnvironmentConfig, URLS) {
-        // var path=Restangular.all('insumo');
+    function Insumo(WebRestangular, URLS) {
+        var path = WebRestangular.all(URLS.insumo);
 
-        var path = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                path = Restangular.all(URLS.environment.genesis_dev).all('insumo');
-                break;
-            case 'staging':
-                path = Restangular.all(URLS.environment.genesis_stg).all('insumo');
-                break;
-            case 'production':
-                path = Restangular.all(URLS.environment.genesis).all('insumo');
-                break;
-            case 'local':
-                path = Restangular.all(URLS.environment.genesis_local).all('insumo');
-                break;
-        }
         return {
 
             getInsumosByCatalogo: getInsumosByCatalogo,
@@ -37,43 +22,19 @@
         };
 
         function getInsumosByCatalogo(catalogo) {
-            var deferred = $q.defer();
-            Restangular.all('insumo').one('catalog', catalogo).customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(false);
-            });
-            return deferred.promise;
+            return path.one('catalog', catalogo).customGET();
         }
 
         function getUsedInsumos() {
-            var deferred = $q.defer();
-            Restangular.all('insumo').all('used').customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(res);
-            });
-            return deferred.promise;
+            return path.all('used').customGET();
         }
 
         function getNotUsedInsumos() {
-            var deferred = $q.defer();
-            Restangular.all('insumo').all('used').customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(res);
-            });
-            return deferred.promise;
+            return path.all('used').customGET();
         }
 
         function getAllInsumos() {
-            var deferred = $q.defer();
-            Restangular.all('insumo').customGET().then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(res);
-            });
-            return deferred.promise;
+            return path.customGET();
         }
 
         function create(object){

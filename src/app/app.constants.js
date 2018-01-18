@@ -431,7 +431,8 @@
             salida_masiva:'mass_exit',
             udn:'udn',
             etapa:'etapa',
-            grupos:'grupos'
+            grupos:'grupos',
+            insumo:'insumo'
         })
         .constant('CONFIGS', {
             ADTConfig: {
