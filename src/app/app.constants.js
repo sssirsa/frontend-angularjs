@@ -441,7 +441,8 @@
             proveedor:'proveedor',
             proyecto:'proyecto',
             report_builder:'report_builder',
-            reporte_insumos:'reports/insumos'
+            reporte_insumos:'reports/insumos',
+            rutas:'ruta'
         })
         .constant('CONFIGS', {
             ADTConfig: {
