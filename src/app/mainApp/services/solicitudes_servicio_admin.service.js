@@ -8,23 +8,9 @@
         .module('app.mainApp')
         .factory('Solicitud_Servicio_Admin', Solicitud_Servicio_Admin);
 
-    function Solicitud_Servicio_Admin($q, Restangular, EnvironmentConfig, URLS) {
-        // var base = Restangular.all('solicitud_servicio_admin');
-        var base = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                base = Restangular.all(URLS.environment.genesis_dev).all('solicitud_servicio_admin');
-                break;
-            case 'staging':
-                base = Restangular.all(URLS.environment.genesis_stg).all('solicitud_servicio_admin');
-                break;
-            case 'production':
-                base = Restangular.all(URLS.environment.genesis).all('solicitud_servicio_admin');
-                break;
-            case 'local':
-                base = Restangular.all(URLS.environment.genesis_local).all('solicitud_servicio_admin');
-                break;
-        }
+    function Solicitud_Servicio_Admin(WebRestangular, URLS) {
+        // var base = base;
+        var base =  WebRestangular.all(URLS.solicitudes.servicio_admin);
 
         return {
             create: create,
@@ -35,18 +21,11 @@
         };
 
         function create(object) {
-            //Forma canonica
-            var deferred = $q.defer();
-            Restangular.all('solicitud_servicio_admin').customPOST(object).then(function (rest) {
-                deferred.resolve(rest);
-            }).catch(function (error) {
-                deferred.reject(error);
-            });
-            return deferred.promise;
+            return base.customPOST(object);
         }
 
         function list() {
-            return Restangular.all('solicitud_servicio_admin').customGET();
+            return base.customGET();
         }
 
         function getOne(id) {
@@ -54,20 +33,11 @@
         }
 
         function borrarSolVenta(object) {
-            return Restangular.one("solicitud_servicio_admin", object).customDELETE(undefined, undefined, {'Content-Type': 'application/json'}).then(function (resp) {
-                return resp;
-            }).catch(function (error) {
-            })
+            return base.all(object).customDELETE(undefined, undefined, {'Content-Type': 'application/json'});
         }
 
         function updateSolicitud(request) {
-            var deferred = $q.defer();
-            Restangular.one('solicitud_servicio_admin', request.id).customPUT(request).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
+            return base.all(request.id).customPUT(request);
         }
 
     }

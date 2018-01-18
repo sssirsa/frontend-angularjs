@@ -445,7 +445,12 @@
             rutas: 'ruta',
             solicitud_pv: 'solicitud',
             etapa_servicio: 'etapa_servicio',
-            insumo_usado:'insumo_usado'
+            insumo_usado: 'insumo_usado',
+            solicitudes: {
+                admin: 'solicitud_admin',
+                servicio: 'solicitud_servicio',
+                servicio_admin: 'solicitud_servicio_admin'
+            }
         })
         .constant('CONFIGS', {
             ADTConfig: {
