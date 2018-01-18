@@ -437,7 +437,8 @@
             localidad:'localidad',
             marca:'marca_cabinet',
             persona: 'persona',
-            persona_admin:'persona_admin'
+            persona_admin:'persona_admin',
+            proveedor:'proveedor'
         })
         .constant('CONFIGS', {
             ADTConfig: {
