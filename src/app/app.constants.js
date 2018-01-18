@@ -418,7 +418,9 @@
             categoria:'categoria',
             checklist:'CheckList',
             cliente:'persona_capturista',
-            cliente_grupos:'cliente_groups'
+            cliente_grupos:'cliente_groups',
+            diagnostico:'diagnostico',
+            diagnostico_cabinet:'diagnostico_cabinet'
         })
         .constant('CONFIGS', {
             ADTConfig: {
