@@ -434,7 +434,8 @@
             grupos:'grupos',
             insumo:'insumo',
             linea_transporte:'linea_transporte',
-            localidad:'localidad'
+            localidad:'localidad',
+            marca:'marca_cabinet'
         })
         .constant('CONFIGS', {
             ADTConfig: {
