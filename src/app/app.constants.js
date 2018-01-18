@@ -450,7 +450,8 @@
                 admin: 'solicitud_admin',
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
-            }
+            },
+            establecimiento:'establecimiento'
         })
         .constant('CONFIGS', {
             ADTConfig: {

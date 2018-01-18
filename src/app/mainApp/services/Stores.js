@@ -3,23 +3,8 @@
         .module('app.mainApp')
         .factory('Stores', Stores);
 
-    function Stores(Restangular, EnvironmentConfig, URLS) {
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.mobile_dev).all('establecimiento');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.mobile_stg).all('establecimiento');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.mobile).all('establecimiento');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.mobile_local).all('establecimiento');
-                break;
-        }
-
+    function Stores(MobileRestangular, URLS) {
+        var baseURL = MobileRestangular.all(URLS.establecimiento);
 
         function list() {
             return baseURL.getList();
