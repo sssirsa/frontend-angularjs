@@ -6,7 +6,7 @@
         .factory('SalePoint', SalePoint);
 
     function SalePoint(MobileRestangular, URLS) {
-        var baseUrl = MobileRestangular.all();
+        var baseUrl = MobileRestangular;
 
         var service = {
             getByID: getByID,
