@@ -82,7 +82,7 @@
         }
 
         function getCabinetsEntradaSalida(id) {
-            return baseURL.one(URLS.cabinets, id).getList();
+            return baseURL.all(URLS.cabinets).all(id).getList();
         }
     }
 })();

@@ -412,7 +412,7 @@
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             cabinet: 'cabinet',
-            cabineets: 'cabinets',
+            cabinets: 'cabinets',
             cabinet_clean: 'cabinet_clean',
             cabinet_entrada: 'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
