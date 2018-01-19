@@ -5,7 +5,7 @@
 
     function MobileRestangular(Restangular, EnvironmentConfig) {
         return Restangular.withConfig(function(RestangularConfigurer){
-            RestangularConfigurer.setBaseUrl(EnvironmentConfig.site.rest['mobile-api']);
+            RestangularConfigurer.setBaseUrl(EnvironmentConfig.site.rest.mobile_api);
         });
     }
 

@@ -10,6 +10,7 @@
         .config(tokenConfig);
 
     function OauthConfig(OAuthProvider, EnvironmentConfig) {
+        console.log(EnvironmentConfig.site.rest);
         var baseUrl = EnvironmentConfig.site.rest.web_api+'/oauth/';
         /*switch (EnvironmentConfig.environment) {
             case 'development':
