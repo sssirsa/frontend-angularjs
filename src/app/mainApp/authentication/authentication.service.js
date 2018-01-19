@@ -4,7 +4,7 @@
         .module('app.mainApp')
         .factory('AuthService', AuthService);
     /* @ngInject */
-    function AuthService(Session, $q, Restangular, /*PusherClient,*/ Channel, OAuth, EVENTS_GENERAL, $rootScope,
+    function AuthService(Session, $q, WebRestangular, /*PusherClient,*/ Channel, OAuth, EVENTS_GENERAL, $rootScope,
                          Notification, AUTH_EVENTS, OAuthToken, EnvironmentConfig, URLS) {
 
         var authService = {
@@ -40,21 +40,22 @@
         }
 
         function getPersona() {
-            var baseUrl = null;
+            var baseUrl = WebRestangular.all('persona');
+            /*
             switch (EnvironmentConfig.environment) {
                 case 'development':
-                    baseUrl = Restangular.all(URLS.environment.genesis_dev).all('persona');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_dev).all('persona');
                     break;
                 case 'staging':
-                    baseUrl = Restangular.all(URLS.environment.genesis_stg).all('persona');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_stg).all('persona');
                     break;
                 case 'production':
-                    baseUrl = Restangular.all(URLS.environment.genesis).all('persona');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis).all('persona');
                     break;
                 case 'local':
-                    baseUrl = Restangular.all(URLS.environment.genesis_local).all('persona');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_local).all('persona');
                     break;
-            }
+            }*/
             return baseUrl.customGET();
         }
 
@@ -63,21 +64,21 @@
         }
 
         function getRole() {
-            var baseUrl = null;
-            switch (EnvironmentConfig.environment) {
+            var baseUrl = WebRestangular.all('my_groups');
+            /*switch (EnvironmentConfig.environment) {
                 case 'development':
-                    baseUrl = Restangular.all(URLS.environment.genesis_dev).all('my_groups');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_dev).all('my_groups');
                     break;
                 case 'staging':
-                    baseUrl = Restangular.all(URLS.environment.genesis_stg).all('my_groups');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_stg).all('my_groups');
                     break;
                 case 'production':
-                    baseUrl = Restangular.all(URLS.environment.genesis).all('my_groups');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis).all('my_groups');
                     break;
                 case 'local':
-                    baseUrl = Restangular.all(URLS.environment.genesis_local).all('my_groups');
+                    baseUrl = WebRestangular.all(URLS.environment.genesis_local).all('my_groups');
                     break;
-            }
+            }*/
             return baseUrl.getList();
         }
 
