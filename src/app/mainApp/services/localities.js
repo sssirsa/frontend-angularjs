@@ -3,8 +3,8 @@
         .module('app.mainApp')
         .factory('Localities', Localities);
 
-    function Localities(WebRestangular, URLS) {
-        var baseURL = WebRestangular.all(URLS.localidad);
+    function Localities(MobileRestangular, URLS) {
+        var baseURL = MobileRestangular.all(URLS.localidad);
 
         function list() {
             return baseURL.getList();

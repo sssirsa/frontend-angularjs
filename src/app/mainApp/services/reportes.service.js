@@ -155,6 +155,8 @@
         }
         function getReportsGenerated() {
             return ReportList.all(URLS.report_builder).all("reports").all("download").all("").getList();
+            //return path.all("reports").all("download").all("").getList();
+
         }
         //Obtiene la información completa de un reporte en específico usando un promise
         function getReportObject(id){
