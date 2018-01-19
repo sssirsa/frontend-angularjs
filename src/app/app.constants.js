@@ -455,7 +455,8 @@
             sucursal:'sucursal',
             tipo_equipo:'tipo_equipo',
             tipo_transporte:'tipo_transporte',
-            unidad:'unidad'
+            unidad:'unidad',
+            modelo_cabinet:'modelo_cabinet'
         })
         .constant('CONFIGS', {
             ADTConfig: {
