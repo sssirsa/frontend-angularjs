@@ -4,7 +4,7 @@
     <md-virtual-repeat-container class="full-height">
         <div>
             <md-card layout="column" layout-align="center center">
-                <h2 translate>Listado de solicitudes</h2>
+                <h2 translate>REQUESTS.LIST.TITLE</h2>
             </md-card>
             <md-card layout="column"
                      layout-padding
@@ -14,27 +14,27 @@
                      layout-align-xs="center stretch"
                      layout-xs="column">
                     <div layout="column">
-                        <span>Abierta</span>
+                        <span translate>REQUESTS.LIST.OPEN</span>
                         <div ng-click="vm.listRequests('Abierta')"
                              class="Abierta"></div>
                     </div>
                     <div layout="column">
-                        <span>En proceso</span>
+                        <span translate>REQUESTS.LIST.IN_PROCESS</span>
                         <div ng-click="vm.listRequests('En_proceso')"
                              class="En_proceso"></div>
                     </div>
                     <div layout="column">
-                        <span>Atendida</span>
+                        <span translate>REQUESTS.LIST.ATTENDED</span>
                         <div ng-click="vm.listRequests('Atendida')"
                              class="Atendida"></div>
                     </div>
                     <div layout="column">
-                        <span>Cancelada</span>
+                        <span translate>REQUESTS.LIST.CANCELLED</span>
                         <div ng-click="vm.listRequests('Cancelada')"
                              class="Cancelada"></div>
                     </div>
                     <div layout="column">
-                        <span>Cerrada</span>
+                        <span translate>REQUESTS.LIST.CLOSED</span>
                         <div ng-click="vm.listRequests('Cerrada')"
                              class="Cerrada"></div>
                     </div>
@@ -50,17 +50,17 @@
                 ng-click="vm.selectRequest(request)"
                 layout-align="space-around center">
                 <div layout="column" layout-align="center center">
-                    <h3 translate>Folio</h3>
+                    <h3 translate>REQUESTS.LIST.FOLIO</h3>
                     <span>{{request.folio}}</span>
                 </div>
                 <div layout="column" layout-align="center center">
-                    <h3 translate>Estatus</h3>
+                    <h3 translate>REQUESTS.LIST.STATUS</h3>
                     <div class="{{request.estado}}">
                         <span>{{request.estado}}</span>
                     </div>
                 </div>
                 <div layout="column" layout-align="center center">
-                    <h3 translate>Fecha</h3>
+                    <h3 translate>REQUESTS.LIST.DATE</h3>
                     <span>{{request.fecha}}</span>
                 </div>
             </md-card>

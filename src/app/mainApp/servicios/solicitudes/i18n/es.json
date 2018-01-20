@@ -1,0 +1,22 @@
+{
+    "REQUESTS": {
+        "LIST": {
+            "TOASTR": {
+                "ERROR": "Ocurrió un error al cargar el listado de solicitudes"
+            },
+            "TITLE":"Listado de solicitudes",
+            "OPEN":"Abierta",
+            "ATTENDED":"Atendida",
+            "IN_PROCESS":"En proceso",
+            "CANCELED":"Cancelada",
+            "CLOSED":"Cerrada",
+            "FOLIO":"Folio",
+            "STATUS":"Estado",
+            "DATE":"Fecha"
+        },
+        "DETAIL": {
+        },
+        "NEW": {
+        }
+    }
+}
