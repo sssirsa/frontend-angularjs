@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('requests')
+        .module('app.mainApp.servicios')
         .controller('DetailRequestPageController', DetailRequestPageController);
 
     /* @ngInject */
