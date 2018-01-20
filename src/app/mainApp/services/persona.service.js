@@ -8,23 +8,8 @@
         .module('app.mainApp')
         .factory('Persona', Persona);
 
-    function Persona($q, Restangular, EnvironmentConfig, URLS) {
-        //var baseUrl = Restangular.all('persona');
-        var baseUrl = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseUrl = Restangular.all(URLS.environment.genesis_dev).all('persona');
-                break;
-            case 'staging':
-                baseUrl = Restangular.all(URLS.environment.genesis_stg).all('persona');
-                break;
-            case 'production':
-                baseUrl = Restangular.all(URLS.environment.genesis).all('persona');
-                break;
-            case 'local':
-                baseUrl = Restangular.all(URLS.environment.genesis_local).all('persona');
-                break;
-        }
+    function Persona(WebRestangular, URLS) {
+        var baseUrl = WebRestangular.all(URLS.persona);
 
         return {
             list: list,
@@ -61,7 +46,7 @@
 
 
             var defer = $q.defer();
-            Restangular.one('persona', data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data, "", {}, {'Content-Type': undefined}).then(function (res) {
+            WebRestangular.one(URLS.persona, data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data, "", {}, {'Content-Type': undefined}).then(function (res) {
                 defer.resolve(res);
             }).catch(function (err) {
                 defer.reject(err);

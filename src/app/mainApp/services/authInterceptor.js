@@ -9,7 +9,7 @@
         .service('AuthInterceptor', AuthInterceptor);
 
     /* @ngInject */
-    function AuthInterceptor($injector, $q,EnvironmentConfig) {
+    function AuthInterceptor($injector, $q, EnvironmentConfig) {
         var inFlightGet = null;
         var inFlightRefresh = null;
         return {

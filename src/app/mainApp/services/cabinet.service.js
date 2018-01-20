@@ -6,41 +6,10 @@
         .factory('Cabinet', Cabinet);
 
     /* @ngInject */
-    function Cabinet($q, Restangular, EnvironmentConfig, URLS) {
-        //var urlbase=Restangular.all("cabinet");
-        //var urlbase_clean=Restangular.all("cabinet_clean");
+    function Cabinet($q, WebRestangular, URLS) {
 
-        var urlbase = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                urlbase = Restangular.all(URLS.environment.genesis_dev).all('cabinet');
-                break;
-            case 'staging':
-                urlbase = Restangular.all(URLS.environment.genesis_stg).all('cabinet');
-                break;
-            case 'production':
-                urlbase = Restangular.all(URLS.environment.genesis).all('cabinet');
-                break;
-            case 'local':
-                urlbase = Restangular.all(URLS.environment.genesis_local).all('cabinet');
-                break;
-        }
-
-        var urlbase_clean = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_dev).all('cabinet_clean');
-                break;
-            case 'staging':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_stg).all('cabinet_clean');
-                break;
-            case 'production':
-                urlbase_clean = Restangular.all(URLS.environment.genesis).all('cabinet_clean');
-                break;
-            case 'local':
-                urlbase_clean = Restangular.all(URLS.environment.genesis_local).all('cabinet_clean');
-                break;
-        }
+        var urlbase = WebRestangular.all(URLS.cabinet);
+        var urlbase_clean = WebRestangular.all(URLS.cabinet_clean);
 
         return {
             create: create,
@@ -84,7 +53,7 @@
 
         function get(no_serie) {
             var deferred = $q.defer();
-            Restangular.one('cabinet', no_serie).customGET().then(function (res) {
+            WebRestangular.one(URLS.cabinet, no_serie).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -108,7 +77,7 @@
 
         function modify(cabinet) {
             var deferred = $q.defer();
-            Restangular.one('cabinet', cabinet.economico).customPUT(cabinet).then(function (res) {
+            WebRestangular.one(URLS.cabinet, cabinet.economico).customPUT(cabinet).then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -117,7 +86,7 @@
         }
         function modifyclear(cabinet) {
             var deferred = $q.defer();
-            Restangular.one('cabinet_clean', cabinet.economico).customPUT(cabinet).then(function (res) {
+            WebRestangular.one(URLS.cabinet_clean, cabinet.economico).customPUT(cabinet).then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);

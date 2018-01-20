@@ -404,23 +404,59 @@
                 {value: 'Otro'}
 
             ],
-            salePointAssignKind:[
-                {id:'pending',value:'Pendientes'},
-                {id:'attended',value:'Atendidas'}
+            salePointAssignKind: [
+                {id: 'pending', value: 'Pendientes'},
+                {id: 'attended', value: 'Atendidas'}
             ]
         })
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
-            environment: {
-                mobile_dev: 'mobile-dev',
-                mobile: 'mobile',
-                mobile_stg: 'mobile-stg',
-                mobile_local: "mobile",
-                genesis_dev: 'genesis-dev',
-                genesis: 'genesis',
-                genesis_stg: 'genesis-stg',
-                genesis_local: "genesis"
-            }
+            cabinet: 'cabinet',
+            cabinets: 'cabinets',
+            cabinet_clean: 'cabinet_clean',
+            cabinet_entrada: 'cabinet_input',
+            cabinet_entrada_salida: 'cabinet_entrada_salida',
+            catalogo_insumos: 'catalogo_insumos',
+            categoria: 'categoria',
+            checklist: 'CheckList',
+            cliente: 'persona_capturista',
+            cliente_grupos: 'cliente_groups',
+            diagnostico: 'diagnostico',
+            diagnostico_cabinet: 'diagnostico_cabinet',
+            entrada_salida: 'entrada_salida',
+            salida: 'exit',
+            remision: 'remision',
+            normalize_cabinets: 'normalize',
+            entrada_masiva: 'mass_upload',
+            salida_masiva: 'mass_exit',
+            udn: 'udn',
+            etapa: 'etapa',
+            grupos: 'grupos',
+            insumo: 'insumo',
+            linea_transporte: 'linea_transporte',
+            localidad: 'localidad',
+            marca: 'marca_cabinet',
+            persona: 'persona',
+            persona_admin: 'persona_admin',
+            proveedor: 'proveedor',
+            proyecto: 'proyecto',
+            report_builder: 'report_builder',
+            reporte_insumos: 'reports/insumos',
+            rutas: 'ruta',
+            solicitud_pv: 'solicitud',
+            etapa_servicio: 'etapa_servicio',
+            insumo_usado: 'insumo_usado',
+            solicitudes: {
+                admin: 'solicitud_admin',
+                servicio: 'solicitud_servicio',
+                servicio_admin: 'solicitud_servicio_admin'
+            },
+            establecimiento:'establecimiento',
+            sucursal:'sucursal',
+            tipo_equipo:'tipo_equipo',
+            tipo_transporte:'tipo_transporte',
+            unidad:'unidad',
+            modelo_cabinet:'modelo_cabinet'
         })
         .constant('CONFIGS', {
             ADTConfig: {
