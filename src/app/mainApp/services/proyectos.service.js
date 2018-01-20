@@ -8,24 +8,9 @@
         .module('app.mainApp.catalogos')
         .factory('Proyectos', Proyectos);
 
-    function Proyectos(Restangular, EnvironmentConfig, URLS) {
-        // var baseURL=Restangular.all('proyecto');
+    function Proyectos(WebRestangular, URLS) {
 
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.genesis_dev).all('proyecto');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.genesis_stg).all('proyecto');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.genesis).all('proyecto');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.genesis_local).all('proyecto');
-                break;
-        }
+        var baseURL = WebRestangular.all(URLS.proyecto);
 
         var service = {
             list: list,

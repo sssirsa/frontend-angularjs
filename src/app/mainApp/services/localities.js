@@ -3,22 +3,8 @@
         .module('app.mainApp')
         .factory('Localities', Localities);
 
-    function Localities(Restangular, EnvironmentConfig, URLS) {
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.mobile_dev).all('localidad');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.mobile_stg).all('localidad');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.mobile).all('localidad');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.mobile_local).all('localidad');
-                break;
-        }
+    function Localities(MobileRestangular, URLS) {
+        var baseURL = MobileRestangular.all(URLS.localidad);
 
         function list() {
             return baseURL.getList();

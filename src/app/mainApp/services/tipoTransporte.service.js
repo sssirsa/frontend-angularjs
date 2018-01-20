@@ -8,24 +8,10 @@
         .module('app.mainApp')
         .factory('TipoTransporte',TipoTransporte);
 
-    function TipoTransporte(Restangular, EnvironmentConfig, URLS)
+    function TipoTransporte(WebRestangular, URLS)
     {
         //var baseTipoTransporte = Restangular.all('tipo_transporte');
-        var baseTipoTransporte = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseTipoTransporte = Restangular.all(URLS.environment.genesis_dev).all('tipo_transporte');
-                break;
-            case 'staging':
-                baseTipoTransporte = Restangular.all(URLS.environment.genesis_stg).all('tipo_transporte');
-                break;
-            case 'production':
-                baseTipoTransporte = Restangular.all(URLS.environment.genesis).all('tipo_transporte');
-                break;
-            case 'local':
-                baseTipoTransporte = Restangular.all(URLS.environment.genesis_local).all('tipo_transporte');
-                break;
-        }
+        var baseTipoTransporte = WebRestangular.all(URLS.tipo_transporte);
 
         var service = {
             list:list,
