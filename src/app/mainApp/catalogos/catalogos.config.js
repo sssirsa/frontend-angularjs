@@ -6,7 +6,7 @@
         .config(moduleConfig);
 
     /* @ngInject */
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider) {
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/catalogos');
         $stateProvider
 
@@ -175,6 +175,102 @@
                 controller: 'storesController',
                 controllerAs:'vm'
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.CATALOGS.TITLE',
+                icon: 'fa fa-book',
+                type: 'dropdown',
+                permission: ['Administrador', 'Capturista'],
+                priority: 5,
+                children: [
+
+                    {
+                        name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
+                        state: 'triangular.admin-default.linea-transporte',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.TRANSPORT_TYPE',
+                        state: 'triangular.admin-default.tipo-transporte',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.UDN',
+                        state: 'triangular.admin-default.udn-catalog',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.SUBSIDIARY',
+                        state: 'triangular.admin-default.sucursal',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.CABINET_BRAND',
+                        state: 'triangular.admin-default.marca-cabinet',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.CABINET_MODEL',
+                        state: 'triangular.admin-default.model-cabinet',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.PROJECTS',
+                        state: 'triangular.admin-default.proyectos',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.CLIENT',
+                        state: 'triangular.admin-default.clientes',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.EQUIPMENT_TYPE',
+                        state: 'triangular.admin-default.catalogo-tipo-equipo',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.STAGE',
+                        state: 'triangular.admin-default.catalogo-etapas',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATALOG',
+                        state: 'triangular.admin-default.catalogo-insumo',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
+                        state: 'triangular.admin-default.categoria',
+                        permission: ['Administrador', 'Capturista'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.PROVIDER',
+                        state: 'triangular.admin-default.proveedor',
+                        permission: ['Administrador', 'Capturista'],
+                        type: 'link'
+                    }, {
+                        name: 'MAIN.MENU.CATALOGS.ROUTES',
+                        state: 'triangular.admin-default.catalogo-rutas',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.LOCALITIES',
+                        state: 'triangular.admin-default.catalogo-localidades',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.STORES',
+                        state: 'triangular.admin-default.catalogo-establecimientos',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    }
+                ]
+            }
+        );
 
     }
 })();
