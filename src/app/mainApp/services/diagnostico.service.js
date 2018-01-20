@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .factory('Diagnostico', Diagnostico);
+        .factory('Diagnostico', ['WebRestangular', Diagnostico]);
 
     /* @ngInject */
     function Diagnostico(WebRestangular, URLS) {

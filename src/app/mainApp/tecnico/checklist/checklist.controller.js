@@ -130,7 +130,7 @@
                     vm.diagnostico = _.omit(vm.diagnostico, 'foto');
                 }
                 Upload.upload({
-                    url: EnvironmentConfig.site.rest.api + 'diagnostico_cabinet',
+                    url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet',
                     headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
                     method: 'POST',
                     data: vm.diagnostico
@@ -171,7 +171,7 @@
                     vm.diagnostico = _.omit(vm.diagnostico, 'foto');
                 }
                 Upload.upload({
-                    url: EnvironmentConfig.site.rest.api + 'diagnostico_cabinet/' + vm.diagnostico.id,
+                    url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet/' + vm.diagnostico.id,
                     headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
                     method: 'PUT',
                     data: vm.diagnostico
@@ -188,7 +188,7 @@
                     toastr.success(vm.successCreateMessage, vm.successTitle);
                     cerrarDialog();
                 }, function (resp) {
-                   
+
                     vm.status = 'idle';
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                     cerrarDialog();
