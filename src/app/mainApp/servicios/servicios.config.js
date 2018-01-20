@@ -14,7 +14,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/inicio/tecnico.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/inicio/tecnico.tmpl.html',
                 controller: 'tecnicoController',
                 controllerAs: 'vm'
             })
@@ -23,7 +23,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/checklist/checklist.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/checklist/checklist.tmpl.html',
                 controller: 'checklistController',
                 controllerAs: 'vm'
             })
@@ -32,7 +32,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/diagnostic/diagnostic.tpl.html',
+                templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.tpl.html',
                 controller: 'DiagnosticController',
                 controllerAs: 'vm'
             })
@@ -44,7 +44,7 @@
                         sideMenuSize: 'icon'
                     }
                 },
-                templateUrl: 'app/mainApp/tecnico/etapa/etapa.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/etapa/etapa.tmpl.html',
                 controller: 'etapaController',
                 controllerAs: 'vm'
             })
@@ -53,7 +53,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacion/asignacionLinea.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
                 controllerAs: 'vm'
             })
@@ -62,7 +62,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/entrada/entrada.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
                 controllerAs: 'vm'
             })
@@ -71,7 +71,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/salida/crear/salida.crear.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
                 controllerAs: 'vm'
             })
@@ -80,7 +80,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/salida/lista/salida.lista.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
                 controllerAs: 'vm'
             })
@@ -89,7 +89,7 @@
                 data: {
                     roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacionServicio/asignacionServicio.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',
                 controllerAs: 'vm'
             })
@@ -98,7 +98,7 @@
                 data: {
                     roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacionServicio/detalleAsignacion.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller:'detalleAsignacionController',
                 controllerAs:'vm',
                 params:{
