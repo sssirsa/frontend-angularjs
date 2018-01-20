@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .directive('inputClear', inputClear);
     function inputClear() {
         return {

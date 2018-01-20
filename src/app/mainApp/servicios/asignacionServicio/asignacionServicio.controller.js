@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('asignacionServicioController', asignacionServicioController);
 
     function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state) {

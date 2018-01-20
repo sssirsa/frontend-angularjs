@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('checklistController', checklistController);
 
     function checklistController($mdDialog, Cabinet, $scope, ModeloCabinet,etapaActual, diagnosticoEtapa, cabinet, toastr, Translate, Helper, Upload, EnvironmentConfig, OAuthToken, MarcaCabinet, CabinetEntradaSalida, Servicios) {

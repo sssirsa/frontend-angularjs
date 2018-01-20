@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('ListReportsController', ListReportsController);
 
     function ListReportsController(Reportes, toastr, Translate,$window) {

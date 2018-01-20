@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.tecnico')
+        .module('app.mainApp.servicios')
         .controller('MarcaDialogController',MarcaDialogController);
     function MarcaDialogController($mdDialog, MarcaCabinet, Translate, toastr, parameter){
         var vm = this;
@@ -13,7 +13,7 @@
         //Functions
         vm.create=create;
         vm.cancel=cancelClick;
-        
+
         //Translates
         vm.succesTitle=Translate.translate('MAIN.MSG.SUCCESS_TITLE');
         vm.successMessage=Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
