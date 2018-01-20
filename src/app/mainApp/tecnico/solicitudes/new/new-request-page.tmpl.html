@@ -1,0 +1,133 @@
+<md-content class="bg-clouds full-height"
+            layout="column"
+            layout-align="center stretch">
+    <md-card layout="column"
+             layout-align="space-around stretch">
+        <div layout="column"
+             layout-align="center center">
+            <h2>Solicitud de Servicio</h2>
+        </div>
+    </md-card>
+    <md-card layout="column"
+             layout-padding
+             layout-margin
+             layout-align="space-around stretch">
+        <form name="newRequestForm">
+            <div layout="row"
+                 class="full-width"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <md-input-container class="md-block full-width">
+                    <label>Folio</label>
+                    <input name="folio"
+                           ng-model="vm.request.folio"
+                           md-maxlength="14"
+                           md-minlength="14"
+                           required>
+                    <div ng-messages="newRequestForm.folio.$error">
+                        <div ng-message when="required"><span>El folio es requerido</span></div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block full-width">
+                    <label>Obra</label>
+                    <input name="work"
+                           ng-model="vm.request.work"
+                           required>
+                    <div ng-messages="newRequestForm.work.$error">
+                        <div ng-message when="required"><span>El nombre de la obra es requerido</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row"
+                 class="full-width"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <md-input-container class="md-block full-width">
+                    <label>Ubicación</label>
+                    <input name="locationName"
+                           ng-model="vm.request.location.name"
+                           required>
+                    <div ng-messages="newRequestForm.locationName.$error">
+                        <div ng-message when="required"><span>El nombre de la ubicación es requerido</span></div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block full-width">
+                    <label>Encargado</label>
+                    <input name="responsibleName"
+                           ng-model="vm.request.responsible.name"
+                           required>
+                    <div ng-messages="newRequestForm.responsibleName.$error">
+                        <div ng-message when="required"><span>El nombre del encargado es requerido</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row"
+                 class="full-width"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <md-input-container class="md-block full-width">
+                    <label>Teléfono</label>
+                    <input name="responsiblePhone"
+                           ng-model="vm.request.responsible.phone"
+                           required>
+                    <div ng-messages="newRequestForm.responsiblePhone.$error">
+                        <div ng-message when="required"><span>El teléfono del encargado es requerido</span></div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block full-width">
+                    <label>E-Mail</label>
+                    <input name="responsibleMail"
+                           ng-model="vm.request.responsible.email"
+                           required>
+                    <div ng-messages="newRequestForm.responsibleMail.$error">
+                        <div ng-message when="required"><span>El E-Mail del encargado es requerido</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row"
+                 class="full-width"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <md-input-container class="md-block full-width">
+                    <label>Partida</label>
+                    <input name="workKind"
+                           ng-model="vm.request.workKind">
+                </md-input-container>
+                <md-input-container class="md-block full-width">
+                    <label>Especificación</label>
+                    <input name="responsibleMail"
+                           ng-model="vm.request.responsible.email">
+                </md-input-container>
+            </div>
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <md-input-container class="md-block full-width">
+                    <label>Descripción</label>
+                    <textarea name="description"
+                              rows="5"
+                              ng-model="vm.request.description"
+                              md-maxlength="500"></textarea>
+                    <div ng-messages="newRequestForm.description.$error">
+                        <div ng-message when="required"><span>El folio es requerido</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column"
+                 layout-align-sm="start stretch" layout-align-xs="start stretch">
+                <md-button aria-label="save"
+                           ng-click="vm.save()"
+                           ng-disabled="newRequestForm.$invalid"
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-save"></md-icon>
+                    Guardar
+                </md-button>
+            </div>
+        </form>
+    </md-card>
+</md-content>
