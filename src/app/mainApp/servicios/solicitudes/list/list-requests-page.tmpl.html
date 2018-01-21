@@ -1,7 +1,10 @@
 <md-content class="mb-bg-fb-08 full-height"
             layout="column"
             layout-align="center stretch">
-    <md-virtual-repeat-container class="full-height">
+    <md-virtual-repeat-container
+        class="full-height"
+        cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+    >
         <div>
             <md-card layout="column" layout-align="center center">
                 <h2 translate>REQUESTS.LIST.TITLE</h2>
@@ -50,7 +53,7 @@
             ng-if="vm.requests">
             <md-card
                 layout="column"
-                ng-repeat="request in vm.requests"
+                ng-repeat="request in (vm.requests | orderBy:'-fecha')"
                 layout-gt-xs="row"
                 ng-click="vm.selectRequest(request)"
                 layout-align="space-around center">
@@ -65,7 +68,7 @@
                 </div>
                 <div layout="column" layout-align="center center">
                     <h3 translate>REQUESTS.LIST.DATE</h3>
-                    <span>{{request.fecha}}</span>
+                    <span>{{request.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</span>
                 </div>
             </md-card>
         </div>

@@ -20,9 +20,9 @@
         activate();
 
         function activate() {
-            SalePointRequests.getAll()
+            vm.loadingPromise = SalePointRequests.getAll()
                 .then(function (listRequestsSuccess) {
-                    vm.allRequests = _.sortBy(listRequestsSuccess, 'fecha');
+                    vm.allRequests = listRequestsSuccess;
                     vm.requests = vm.allRequests;
                 })
                 .catch(function (listRequestsError) {
