@@ -406,7 +406,7 @@
             ],
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
-                {id: 'attended', value: 'Atendidas'}
+                {id: 'attended', value: 'Atendidos'}
             ]
         })
         .constant('URLS', {

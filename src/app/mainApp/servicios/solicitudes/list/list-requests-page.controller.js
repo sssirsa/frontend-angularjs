@@ -42,8 +42,7 @@
         }
 
         function selectRequest(request) {
-            $state.go('triangular.admin-default.serviceAssignDetail', {id: request.folio});
-            //$state.go('triangular.admin-default.detailRequest', {id: request.folio});
+            $state.go('triangular.admin-default.detailRequest', {id: request.id});
         }
 
     }
