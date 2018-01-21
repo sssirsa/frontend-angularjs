@@ -23,7 +23,6 @@
             SalePointRequests.getAll()
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
-                    $log.debug(listRequestsSuccess);
                 })
                 .catch(function (listRequestsError) {
                     $log.error(listRequestsError);
@@ -32,7 +31,8 @@
         }
 
         function listRequests(requestKind) {
-            vm.requests = _.findWhere(vm.requests, {status: requestKind});
+            vm.requests = _.where(vm.allRequests, {status: requestKind});
+            $log.debug(vm.requests);
         }
 
         function selectRequest(request) {
