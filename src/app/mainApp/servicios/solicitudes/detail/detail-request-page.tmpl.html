@@ -88,11 +88,11 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                    <tr md-row
-                        ng-repeat="cabinet in vm.request.solicitudes_cabinet">
-                        <td md-cell>{{cabinet.tipo}}</td>
-                        <td md-cell>{{cabinet.cantidad}}</td>
-                    </tr>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -225,7 +225,77 @@
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
-        <h3 translate>REQUESTS.DETAIL.USER</h3>
+        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
+
+        <div
+            layout="column"
+            layout-gt-xs="row"
+            layout-align="space-around center">
+
+            <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
+
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <h3 translate>REQUESTS.DETAIL.USER.TITLE</h3>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.USERNAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.username"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.nombre"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.MIDDLE_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_paterno"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.LAST_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_materno"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.PHONE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.telefono"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.EMAIL</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.email"/>
+            </md-input-container>
+        </div>
     </md-card>
 
 </div>

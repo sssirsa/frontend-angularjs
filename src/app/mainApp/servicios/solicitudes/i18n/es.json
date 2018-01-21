@@ -38,7 +38,15 @@
                 "SEGMENTATION":"Segmentación"
             },
             "INFO":"Información de la solicitud",
-            "USER":"Persona",
+            "USER": {
+                "TITLE": "Persona",
+                "USERNAME":"Nombre de usuario",
+                "NAME":"Nombre",
+                "MIDDLE_NAME":"Apellido paterno",
+                "LAST_NAME":"Apellido materno",
+                "EMAIL":"Correo electrónico",
+                "PHONE":"Teléfono"
+            },
             "CABINET":"Económico del cabinet",
             "CABINETS":{
                 "TITLE":"Solicitudes de cabinet",
@@ -48,7 +56,8 @@
             "CLIENT_COMMENTS":"Observaciones del cliente",
             "WORKER_COMMENTS": "Observaciones del personal",
             "SCORE":"Calificación del servicio",
-            "ROUTE":"Ruta"
+            "ROUTE":"Ruta",
+            "EVIDENCES":"Evidencias"
         },
         "NEW": {
         }
