@@ -30,7 +30,7 @@
                 .then(function(requestSuccess){
                     $log.debug(requestSuccess);
                     vm.request = requestSuccess;
-                    Stores.getByID(requestSuccess.establecimiento)
+                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento)
                         .then(function(storeSuccess){
                             $log.debug(storeSuccess);
                             vm.store=storeSuccess;
@@ -39,7 +39,7 @@
                             $log.error(storeError);
                             toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_STORE'));
                         });
-                    Persona_Admin.get(requestSuccess.persona)
+                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona)
                         .then(function(userSuccess){
                             $log.debug(userSuccess);
                             vm.user=userSuccess;

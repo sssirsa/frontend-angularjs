@@ -1,4 +1,5 @@
 <div class="mb-bg-fb-08"
+     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
      layout="column">
 
     <md-card layout="row"
@@ -100,6 +101,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
+             cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
              layout-padding>
         <h3 translate>REQUESTS.DETAIL.STORE.TITLE</h3>
         <div flex
@@ -243,6 +245,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
+             cg-busy="{promise:vm.personaPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
              layout-padding>
         <h3 translate>REQUESTS.DETAIL.USER.TITLE</h3>
         <div flex
