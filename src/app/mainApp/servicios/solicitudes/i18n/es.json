@@ -47,7 +47,8 @@
             },
             "CLIENT_COMMENTS":"Observaciones del cliente",
             "WORKER_COMMENTS": "Observaciones del personal",
-            "SCORE":"Calificación del servicio"
+            "SCORE":"Calificación del servicio",
+            "ROUTE":"Ruta"
         },
         "NEW": {
         }

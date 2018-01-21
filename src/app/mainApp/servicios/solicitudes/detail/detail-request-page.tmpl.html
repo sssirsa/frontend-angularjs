@@ -48,12 +48,6 @@
              layout="column"
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
-            <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
-                <label translate>REQUESTS.DETAIL.CABINET</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.request.cabinet"/>
-            </md-input-container>
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.DETAIL.SCORE</label>
                 <md-select
@@ -66,7 +60,20 @@
                     </md-option>
                 </md-select>
             </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.ROUTE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.ruta.nombre">
+                </input>
+            </md-input-container>
         </div>
+        <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
+            <label translate>REQUESTS.DETAIL.CABINET</label>
+            <input
+                ng-disabled="true"
+                ng-model="vm.request.cabinet"/>
+        </md-input-container>
         <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
             <span translate>REQUESTS.DETAIL.CABINETS.TITLE</span>
             <table md-table flex>
