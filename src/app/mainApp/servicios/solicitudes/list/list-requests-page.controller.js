@@ -22,7 +22,8 @@
         function activate() {
             SalePointRequests.getAll()
                 .then(function (listRequestsSuccess) {
-                    vm.allRequests = listRequestsSuccess;
+                    vm.allRequests = _.sortBy(listRequestsSuccess, 'fecha');
+                    vm.requests = vm.allRequests;
                 })
                 .catch(function (listRequestsError) {
                     $log.error(listRequestsError);
@@ -31,8 +32,12 @@
         }
 
         function listRequests(requestKind) {
-            vm.requests = _.where(vm.allRequests, {status: requestKind});
-            $log.debug(vm.requests);
+            if (requestKind !== 'Todo') {
+                vm.requests = _.where(vm.allRequests, {status: requestKind});
+            }
+            else {
+                vm.requests = vm.allRequests;
+            }
         }
 
         function selectRequest(request) {

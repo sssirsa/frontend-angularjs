@@ -12,7 +12,8 @@
             "CLOSED":"Cerrada",
             "FOLIO":"Folio",
             "STATUS":"Estado",
-            "DATE":"Fecha"
+            "DATE":"Fecha",
+            "ALL":"Todas"
         },
         "DETAIL": {
         },
