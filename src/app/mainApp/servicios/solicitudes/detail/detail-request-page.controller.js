@@ -7,10 +7,11 @@
 
     /* @ngInject */
     function DetailRequestPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
-                                         Persona_Admin) {
+                                         Persona_Admin, Geolocation) {
         var vm = this;
 
         //Function mapping
+        vm.showStoreLocation = showStoreLocation;
 
         //Variable declaration
         vm.id=$stateParams.id;
@@ -27,6 +28,7 @@
                     vm.request = requestSuccess;
                     Stores.getByID(requestSuccess.establecimiento)
                         .then(function(storeSuccess){
+                            $log.debug(storeSuccess);
                             vm.store=storeSuccess;
                         })
                         .catch(function(storeError){
@@ -35,6 +37,7 @@
                         });
                     Persona_Admin.get(requestSuccess.persona)
                         .then(function(userSuccess){
+                            $log.debug(userSuccess);
                             vm.user=userSuccess;
                         })
                         .catch(function(userError){
@@ -46,6 +49,10 @@
                     $log.error(errorRequest);
                     toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_PV'));
                 });
+        }
+
+        function showStoreLocation() {
+            Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }
 
     }

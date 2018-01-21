@@ -139,10 +139,7 @@
                     id:null
                 },
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
-                    layout: {
-                        contentClass: 'layout-column'
-                    }
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 }
             });
 

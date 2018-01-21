@@ -20,7 +20,23 @@
                 "ERROR_PV":"Ocurrió un error al cargar la solicitud",
                 "ERROR_STORE":"Ocurrió un error al cargar el establecimiento",
                 "ERROR_USER":"Ocurrió un error al cargar el usuario"
-            }
+            },
+            "TITLE":"Detalle de solicitud",
+            "STORE":{
+                "TITLE":"Establecimiento",
+                "NAME":"Nombre del establecimiento",
+                "MANAGER":"Nombre del encargado",
+                "STREET":"Calle",
+                "NUMBER":"Número",
+                "BETWEEN1":"Entre calle",
+                "BETWEEN2":"Y entre calle",
+                "STATE":"Estado",
+                "CITY":"Municipio",
+                "LOCALITY":"Localidad",
+                "ZIP_CODE":"Código postal"
+            },
+            "INFO":"Información de la solicitud",
+            "USER":"Persona"
         },
         "NEW": {
         }
