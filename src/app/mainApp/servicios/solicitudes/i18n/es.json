@@ -16,6 +16,11 @@
             "ALL":"Todas"
         },
         "DETAIL": {
+            "TOASTR":{
+                "ERROR_PV":"Ocurrió un error al cargar la solicitud",
+                "ERROR_STORE":"Ocurrió un error al cargar el establecimiento",
+                "ERROR_USER":"Ocurrió un error al cargar el usuario"
+            }
         },
         "NEW": {
         }

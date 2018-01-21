@@ -3,7 +3,8 @@
         .module('app.mainApp.servicios')
         .controller('detalleAsignacionController', detalleAsignacionController);
 
-    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate, Persona_Admin, $state) {
+    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate,
+                                         Persona_Admin, $state) {
         var vm = this;
 
         //Variables

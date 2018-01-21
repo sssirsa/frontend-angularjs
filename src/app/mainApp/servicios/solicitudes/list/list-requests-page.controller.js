@@ -22,7 +22,6 @@
         function activate() {
             vm.loadingPromise = SalePointRequests.getAll()
                 .then(function (listRequestsSuccess) {
-                    $log.debug(listRequestsSuccess);
                     vm.allRequests = listRequestsSuccess;
                     vm.requests = vm.allRequests;
                 })
