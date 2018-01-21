@@ -6,7 +6,7 @@
         .factory('SalePointRequests', SalePointRequests);
 
     function SalePointRequests(MobileRestangular, $window, URLS) {
-        var baseUrl = MobileRestangular.all();
+        var baseUrl=MobileRestangular;
 
         var service = {
             getByID: getByID,

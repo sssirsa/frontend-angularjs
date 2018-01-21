@@ -7,7 +7,8 @@
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/tecnico');
+        $translatePartialLoaderProvider.addPart('app/mainApp/servicios');
+        $translatePartialLoaderProvider.addPart('app/mainApp/servicios/solicitudes');
         $stateProvider
             .state('triangular.admin-default.tecnico', {
                 url: '/tecnico',
@@ -104,6 +105,45 @@
                 params:{
                     id:null
                 }
+            })
+            .state('triangular.admin-default.newRequest', {
+                url: '/request/new',
+                templateUrl: 'app/mainApp/servicios/solicitudes/new/new-request-page.tmpl.html',
+                controller: 'NewRequestPageController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                    layout: {
+                        contentClass: 'layout-column'
+                    }
+                }
+            })
+            .state('triangular.admin-default.listRequest', {
+                url: '/request/list',
+                templateUrl: 'app/mainApp/servicios/solicitudes/list/list-requests-page.tmpl.html',
+                controller: 'ListRequestPageController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                    layout: {
+                        contentClass: 'layout-column'
+                    }
+                }
+            })
+            .state('triangular.admin-default.detailRequest', {
+                url: '/request/detail/:id',
+                templateUrl: 'app/mainApp/servicios/solicitudes/detail/detail-request-page.tmpl.html',
+                controller: 'DetailRequestPageController',
+                controllerAs: 'vm',
+                params:{
+                    id:null
+                },
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                    layout: {
+                        contentClass: 'layout-column'
+                    }
+                }
             });
 
         triMenuProvider.addMenu(
@@ -155,6 +195,19 @@
                         state:'triangular.admin-default.serviceAssing',
                         permission: ['Administrador', 'Tultitlan', 'Tecnico E'],
                         type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.REQUESTS.TITLE',
+                        type: 'dropdown',
+                        children: [{
+                            name: 'MAIN.MENU.REQUESTS.NEW',
+                            state: 'triangular.admin-default.newRequest',
+                            type: 'link'
+                        },{
+                            name: 'MAIN.MENU.REQUESTS.LIST',
+                            state: 'triangular.admin-default.listRequest',
+                            type: 'link'
+                        }]
                     }
                 ]
             }

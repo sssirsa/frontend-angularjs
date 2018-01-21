@@ -78,6 +78,11 @@
       },
       "SERVICE_ASSIGN":{
           "ASSIGN":"Asignación de servicio"
+      },
+      "REQUESTS":{
+          "TITLE":"Solicitudes",
+          "NEW":"Nueva",
+          "LIST":"Listado"
       }
     },
     "COMPONENTS": {
