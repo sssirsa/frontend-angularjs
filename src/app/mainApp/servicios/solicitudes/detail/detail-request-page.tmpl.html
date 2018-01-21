@@ -1,5 +1,6 @@
 <div class="mb-bg-fb-08"
      layout="column">
+
     <md-card layout="row"
              layout-align-xs="center stretch"
              layout-xs="column"
@@ -11,6 +12,7 @@
                 {{vm.request.status}}
             </div>
     </md-card>
+
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
@@ -26,10 +28,33 @@
                     ng-model="vm.store.nombre_establecimiento"/>
             </md-input-container>
             <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.STORE.SEGMENTATION</label>
+                <md-select
+                    ng-disabled="true"
+                    ng-model="vm.store.segmentacion">
+                    <md-option
+                        ng-repeat="segment in vm.storeSegmentation"
+                        ng-value="segment.value">
+                        {{segment.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
                 <label translate>REQUESTS.DETAIL.STORE.MANAGER</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.store.nombre_encargado"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.STORE.MANAGER_PHONE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.telefono_encargado"/>
             </md-input-container>
         </div>
         <div flex
@@ -111,15 +136,18 @@
             </md-button>
         </div>
     </md-card>
+
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
         <h3 translate>REQUESTS.DETAIL.INFO</h3>
 
     </md-card>
+
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
             <h3 translate>REQUESTS.DETAIL.USER</h3>
     </md-card>
+
 </div>

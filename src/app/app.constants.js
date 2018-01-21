@@ -451,12 +451,12 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            establecimiento:'establecimiento',
-            sucursal:'sucursal',
-            tipo_equipo:'tipo_equipo',
-            tipo_transporte:'tipo_transporte',
-            unidad:'unidad',
-            modelo_cabinet:'modelo_cabinet'
+            establecimiento: 'establecimiento',
+            sucursal: 'sucursal',
+            tipo_equipo: 'tipo_equipo',
+            tipo_transporte: 'tipo_transporte',
+            unidad: 'unidad',
+            modelo_cabinet: 'modelo_cabinet'
         })
         .constant('CONFIGS', {
             ADTConfig: {
@@ -500,5 +500,32 @@
                 daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
                 monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
             }
-        });
+        })
+        .constant('STORE_SEGMENTATION',
+            [
+                {
+                    value: 0,
+                    label: 'Rojo'
+                },
+                {
+                    value: 1,
+                    label: 'Bajo Bronce'
+                },
+                {
+                    value: 2,
+                    label: 'Bronce'
+                },
+                {
+                    value: 3,
+                    label: 'Plata'
+                },
+                {
+                    value: 4,
+                    label: 'Oro'
+                },
+                {
+                    value: 5,
+                    label: 'Platino'
+                }]
+        );
 })();

@@ -26,6 +26,7 @@
                 "TITLE":"Establecimiento",
                 "NAME":"Nombre del establecimiento",
                 "MANAGER":"Nombre del encargado",
+                "MANAGER_PHONE":"Teléfono encargado",
                 "STREET":"Calle",
                 "NUMBER":"Número",
                 "BETWEEN1":"Entre calle",
@@ -33,7 +34,8 @@
                 "STATE":"Estado",
                 "CITY":"Municipio",
                 "LOCALITY":"Localidad",
-                "ZIP_CODE":"Código postal"
+                "ZIP_CODE":"Código postal",
+                "SEGMENTATION":"Segmentación"
             },
             "INFO":"Información de la solicitud",
             "USER":"Persona"
