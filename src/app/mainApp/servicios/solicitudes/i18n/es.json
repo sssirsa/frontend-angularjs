@@ -38,7 +38,16 @@
                 "SEGMENTATION":"Segmentación"
             },
             "INFO":"Información de la solicitud",
-            "USER":"Persona"
+            "USER":"Persona",
+            "CABINET":"Económico del cabinet",
+            "CABINETS":{
+                "TITLE":"Solicitudes de cabinet",
+                "QUANTITY":"Cantidad",
+                "KIND":"Tipo de cabinet"
+            },
+            "CLIENT_COMMENTS":"Observaciones del cliente",
+            "WORKER_COMMENTS": "Observaciones del personal",
+            "SCORE":"Calificación del servicio"
         },
         "NEW": {
         }

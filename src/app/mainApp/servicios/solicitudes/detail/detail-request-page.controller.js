@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function DetailRequestPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
-                                         Persona_Admin, Geolocation, STORE_SEGMENTATION) {
+                                         Persona_Admin, Geolocation, STORE_SEGMENTATION, SCORES) {
         var vm = this;
 
         //Function mapping
@@ -18,7 +18,10 @@
         vm.user=null;
         vm.request=null;
         vm.store=null;
+
+        //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.scores = SCORES;
 
         activate();
 

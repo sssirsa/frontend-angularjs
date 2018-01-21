@@ -6,11 +6,89 @@
              layout-xs="column"
              layout-align="space-around center"
              layout-padding>
-            <h2 translate>REQUESTS.DETAIL.TITLE</h2>
-            <h2>{{vm.request.id}}</h2>
-            <div class="{{vm.request.status}}">
-                {{vm.request.status}}
-            </div>
+        <h2 translate>REQUESTS.DETAIL.TITLE</h2>
+        <h2>{{vm.request.id}}</h2>
+        <div class="{{vm.request.status}}">
+            {{vm.request.status}}
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.DETAIL.INFO</h3>
+            <h3>{{vm.request.tipo}}</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.CLIENT_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_cliente"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.WORKER_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_tecnico"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
+                <label translate>REQUESTS.DETAIL.CABINET</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.cabinet"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.SCORE</label>
+                <md-select
+                    ng-disabled="true"
+                    ng-model="vm.request.calificacion">
+                    <md-option
+                        ng-repeat="score in vm.scores"
+                        ng-value="score.value">
+                        {{score.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <span translate>REQUESTS.DETAIL.CABINETS.TITLE</span>
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUESTS.DETAIL.CABINETS.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUESTS.DETAIL.CABINETS.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                        <td md-cell>{{cabinet.tipo}}</td>
+                        <td md-cell>{{cabinet.cantidad}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </md-card>
 
     <md-card layout-align="center stretch"
@@ -140,14 +218,7 @@
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
-        <h3 translate>REQUESTS.DETAIL.INFO</h3>
-
-    </md-card>
-
-    <md-card layout-align="center stretch"
-             layout="column"
-             layout-padding>
-            <h3 translate>REQUESTS.DETAIL.USER</h3>
+        <h3 translate>REQUESTS.DETAIL.USER</h3>
     </md-card>
 
 </div>
