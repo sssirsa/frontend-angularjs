@@ -13,7 +13,6 @@
         vm.personSearchText = null;
         vm.personList = null;
         vm.store = null;
-        vm.requestKind = null;
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
@@ -25,15 +24,14 @@
         activate();
 
         function activate() {
-            vm.requestKind = $stateParams.tipo;
             SalePoint.getByID($stateParams.id)
                 .then(function (salePoint) {
+                    console.log(salePoint);
                     vm.salePoint = salePoint;
                     if (salePoint.persona) {
                         vm.personLoading = Persona_Admin.get(salePoint.persona)
                             .then(function (personaSuccess) {
                                 vm.assignedPerson = personaSuccess;
-                                console.log(personaSuccess);
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;

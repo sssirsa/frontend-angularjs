@@ -95,7 +95,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.serviceAssignDetail', {
-                url:'/detalleServicio/:tipo/:id',
+                url:'/detalleServicio/:id',
                 data: {
                     roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },

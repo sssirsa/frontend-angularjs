@@ -22,6 +22,7 @@
         function activate() {
             vm.loadingPromise = SalePointRequests.getAll()
                 .then(function (listRequestsSuccess) {
+                    $log.debug(listRequestsSuccess);
                     vm.allRequests = listRequestsSuccess;
                     vm.requests = vm.allRequests;
                 })
@@ -41,7 +42,8 @@
         }
 
         function selectRequest(request) {
-            $state.go('triangular.detailRequest', {id: request.folio});
+            $state.go('triangular.admin-default.serviceAssignDetail', {id: request.folio});
+            //$state.go('triangular.admin-default.detailRequest', {id: request.folio});
         }
 
     }
