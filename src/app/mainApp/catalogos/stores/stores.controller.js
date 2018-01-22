@@ -25,7 +25,7 @@
         vm.listCities = listCities;
         vm.listLocalities = listLocalities;
         vm.selectState = selectState;
-        vm.selectCity = selectCity;
+        vm.selectLocality = selectLocality;
 
         vm.search_items = [];
         vm.searchText = '';
@@ -35,10 +35,14 @@
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
+
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
         vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.state = null;
+        vm.city = null;
+        vm.zip_code = null;
 
         activate();
         init();
@@ -93,7 +97,6 @@
         }
 
         function update() {
-            vm.store.localidad_id=vm.store.localidad.id;
             Stores.update(vm.store, vm.store.id).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
@@ -109,7 +112,6 @@
         }
 
         function create() {
-            vm.store.localidad_id=vm.store.localidad.id;
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
@@ -153,6 +155,9 @@
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
+
+            vm.state = null;
+            vm.city = null;
 
             $scope.StoreForm.$setPristine();
             $scope.StoreForm.$setUntouched();
@@ -221,7 +226,7 @@
             else {
                 return Cities.list()
                     .then(function (citiesList) {
-                        vm.cities = Helper.filterDeleted(citiesList,true);
+                        vm.cities = Helper.filterDeleted(citiesList, true);
                     })
                     .catch(function (citiesListError) {
                         $log.error(citiesListError);
@@ -229,7 +234,7 @@
             }
         }
 
-        function listLocalities(city){
+        function listLocalities(city) {
             if (city) {
                 return Localities.getByCity(city)
                     .then(function (localitiesList) {
@@ -242,7 +247,7 @@
             else {
                 return Localities.list()
                     .then(function (localitiesList) {
-                        vm.cities = Helper.filterDeleted(localitiesList,true);
+                        vm.cities = Helper.filterDeleted(localitiesList, true);
                     })
                     .catch(function (localitiesListError) {
                         $log.error(localitiesListError);
@@ -251,15 +256,17 @@
         }
 
         function selectState() {
-            vm.locality.municipio_id = null;
+            vm.city = null;
+            vm.store.localidad_id = null;
         }
 
-        function selectCity(city) {
-            vm.state = city.estado.id;
+        function selectLocality(locality) {
+            vm.zip_code = locality.codigo_postal;
         }
 
     }
 
+//Outside the controller
     function custom() {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {

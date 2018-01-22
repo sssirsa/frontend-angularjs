@@ -37,7 +37,10 @@
             list()
                 .then(function (localitiesList) {
                     var localities = Helper.filterDeleted(localitiesList.filter(function (locality) {
-                        return locality.estado.municipio.id === cityID;
+                        if(locality.municipio) {
+                            return locality.municipio.id === cityID;
+                        }
+                        return false;
                     }),true);
                     defer.resolve(localities);
                 })

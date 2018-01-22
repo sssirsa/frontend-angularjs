@@ -147,15 +147,75 @@
                              layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
                                 <label translate>REQUESTS.DETAIL.STORE.STATE</label>
-                                <input
+                                <md-select
+                                    ng-model="vm.state"
+                                    md-on-close="vm.selectState(city)"
                                     ng-disabled="vm.store.deleted"
-                                    ng-model="vm.store.localidad.municipio.estado.nombre"/>
+                                >
+                                    <md-option
+                                        ng-repeat="state in vm.states"
+                                        ng-value="state.id"
+                                    >
+                                        {{state.nombre}}
+                                    </md-option>
+                                </md-select>
                             </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.CITY</label>
+                                <md-select
+                                    ng-model="vm.city"
+                                    md-on-open="vm.listCities(vm.state)"
+                                    ng-disabled="vm.store.deleted || !vm.state"
+                                >
+                                    <md-option
+                                        ng-repeat="city in vm.cities"
+                                        ng-value="city.id"
+                                    >
+                                        {{city.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <!--
                             <md-input-container flex class="md-block">
                                 <label translate>REQUESTS.DETAIL.STORE.CITY</label>
                                 <input
                                     ng-disabled="vm.store.deleted"
                                     ng-model="vm.store.localidad.municipio.nombre"/>
+                            </md-input-container>-->
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
+                                <md-select
+                                    ng-model="vm.store.localidad_id"
+                                    md-on-open="vm.listLocalities(vm.city)"
+                                    md-on-close="vm.selectLocality(locality)"
+                                    ng-disabled="vm.locality.deleted || !vm.city"
+                                >
+                                    <md-option
+                                        ng-repeat="locality in vm.localities"
+                                        ng-value="locality.id"
+                                    >
+                                        {{locality.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <!--
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.localidad.nombre"/>
+                            </md-input-container>-->
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.ZIP_CODE</label>
+                                <input
+                                    ng-disabled="true"
+                                    ng-model="vm.zip_code"/>
                             </md-input-container>
                         </div>
                         <div flex
@@ -163,16 +223,16 @@
                              layout-gt-sm="row"
                              layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
-                                <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
+                                <label translate>STORES.LABELS.LATITUDE</label>
                                 <input
                                     ng-disabled="vm.store.deleted"
-                                    ng-model="vm.store.localidad.nombre"/>
+                                    ng-model="vm.store.latitud"/>
                             </md-input-container>
                             <md-input-container flex class="md-block">
-                                <label translate>REQUESTS.DETAIL.STORE.ZIP_CODE</label>
+                                <label translate>STORES.LABELS.LONGITUDE</label>
                                 <input
                                     ng-disabled="vm.store.deleted"
-                                    ng-model="vm.store.localidad.codigo_postal"/>
+                                    ng-model="vm.store.longitud"/>
                             </md-input-container>
                         </div>
                         <div layout="row"
