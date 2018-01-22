@@ -183,6 +183,15 @@
                 templateUrl:'app/mainApp/catalogos/states/states.tmpl.html',
                 controller: 'statesController',
                 controllerAs:'vm'
+            })
+            .state('triangular.admin-default.catalogo-municipios',{
+                url:'/municipios',
+                data:{
+                    roles:['Administrador']
+                },
+                templateUrl:'app/mainApp/catalogos/cities/cities.tmpl.html',
+                controller: 'citiesController',
+                controllerAs:'vm'
             });
 
         triMenuProvider.addMenu(
@@ -272,13 +281,18 @@
                         permission: ['Administrador'],
                         type: 'link'
                     },{
-                        name: 'MAIN.MENU.CATALOGS.STORES',
-                        state: 'triangular.admin-default.catalogo-establecimientos',
+                        name: 'MAIN.MENU.CATALOGS.STATES',
+                        state: 'triangular.admin-default.catalogo-estados',
                         permission: ['Administrador'],
                         type: 'link'
                     },{
-                        name: 'MAIN.MENU.CATALOGS.STATES',
-                        state: 'triangular.admin-default.catalogo-estados',
+                        name: 'MAIN.MENU.CATALOGS.CITIES',
+                        state: 'triangular.admin-default.catalogo-municipios',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.STORES',
+                        state: 'triangular.admin-default.catalogo-establecimientos',
                         permission: ['Administrador'],
                         type: 'link'
                     }
