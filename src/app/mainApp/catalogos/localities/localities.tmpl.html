@@ -18,7 +18,7 @@
                     <md-autocomplete md-selected-item="vm.selectedLinea"
                                      md-selected-item-change="vm.selectedItemChange(vm.selectedLinea)"
                                      md-items="item in vm.querySearch(vm.searchText)"
-                                     md-item-text="item.razon_social"
+                                     md-item-text="item.nombre"
                                      md-min-length="0"
                                      md-search-text-change="vm.search(vm.searchText)"
                                      md-search-text="vm.searchText"
@@ -29,11 +29,11 @@
                         <md-item-template>
                         <span class="item-title">
                             <md-icon md-font-icon="fa fa-briefcase"></md-icon>
-                            <span>&nbsp; {{item.nombre}}</span>
+                            <strong>&nbsp; {{item.nombre}}</strong>
                         </span>
-                            <span class="item-metadata">
+                        <span class="item-metadata">
                             <span class="item-metastat">
-                                <strong>{{item.ruta}}</strong>
+                                <span>{{item.municipio.nombre}} - {{item.municipio.estado.nombre}}</span>
                             </span>
                         </span>
                         </md-item-template>
