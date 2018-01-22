@@ -90,7 +90,7 @@
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre_establecimiento != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -107,7 +107,7 @@
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre_establecimiento != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -150,7 +150,7 @@
         function listlineas() {
             vm.loadingPromise = Stores.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.lineas = _.sortBy(vm.lineas, 'razon_social');
+                vm.lineas = _.sortBy(vm.lineas, 'nombre_establecimiento');
             }).catch(function (err) {
 
             });
@@ -178,7 +178,7 @@
 
         function lookup(search_text) {
             vm.search_items = _.filter(vm.lineas, function (item) {
-                return item.razon_social.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
+                return item.nombre_establecimiento.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
             });
             return vm.search_items;
         }
@@ -201,7 +201,7 @@
             }
 
             return _.filter(input, function (item) {
-                return item.razon_social.toLowerCase().indexOf(text.toLowerCase()) >= 0;
+                return item.nombre_establecimiento.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });
 
         };
