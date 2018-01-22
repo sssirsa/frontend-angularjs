@@ -7,7 +7,8 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities, $log) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities, $log,
+                              STORE_SEGMENTATION) {
 
         var vm = this;
 
@@ -37,6 +38,7 @@
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
+        vm.storeSegmentation = STORE_SEGMENTATION;
 
         activate();
         init();
