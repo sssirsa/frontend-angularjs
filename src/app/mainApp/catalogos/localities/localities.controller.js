@@ -224,7 +224,7 @@
             else {
                 return Cities.list()
                     .then(function (citiesList) {
-                        vm.cities = citiesList;
+                        vm.cities = Helper.filterDeleted(citiesList,true);
                     })
                     .catch(function (citiesListError) {
                         $log.error(citiesListError);
