@@ -80,6 +80,7 @@
                                 <label>{{'CITIES.LABELS.STATE'|translate}}</label>
                                 <md-select
                                     ng-model="vm.city.estado.id"
+                                    ng-disabled="vm.city.deleted"
                                 >
                                     <md-option
                                         ng-repeat="state in vm.states"
