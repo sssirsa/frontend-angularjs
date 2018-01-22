@@ -1,24 +1,17 @@
-<div class="full-height full-image-background mb-bg-26" layout="column" layout-fill layout-align="space-around center">
-    <div layout="row" flex class="full-width" layout-align="center center">
-        <div flex="50" flex-sm="90" layout="row">
-            <div flex>
-                <img src="assets/images/font/material-font-4.png">
-            </div>
-            <div flex>
-                <img src="assets/images/font/material-font-0.png">
-            </div>
-            <div flex>
-                <img src="assets/images/font/material-font-4.png">
-            </div>
+<div class="full-image-background bg-01" layout="column" flex layout-align="center center">
+
+    <div layout="row">
+        <div flex>
+            <img src="assets/images/errors/404.png">
         </div>
     </div>
-    <div layout="row" flex class="full-width" layout-align="center center">
-        <md-card flex="50" flex-sm="90">
-            <md-card-content class="text-center">
-                <h1 class="md-display-1" translate>Error 404</h1>
-                <p translate>Ups, página no encontrada o en construcción</p>
-                <md-button class="md-primary md-raised"  onclick=location='/#/login' translate="Regresar al sistema"></md-button>
-            </md-card-content>
-        </md-card>
-    </div>
+
+    <md-card>
+        <md-card-content class="text-center">
+            <h1 class="md-display-1" translate>Página no encontrada</h1>
+            <p translate>No pudimos encontrar la página que solicitaste</p>
+            <md-button class="md-primary md-raised" ng-click="vm.goHome()" translate aria-label="Go Home">Volver a inicio</md-button>
+        </md-card-content>
+    </md-card>
+
 </div>

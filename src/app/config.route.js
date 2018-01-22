@@ -9,8 +9,20 @@
     function routeConfig($stateProvider, $urlRouterProvider) {
         // Setup the apps routes
 
-        // 404 & 500 pages
+        // 401, 404 & 500 pages
         $stateProvider
+        .state('401', {
+            url: '/401',
+            templateUrl: '401.tmpl.html',
+            controllerAs: 'vm',
+            controller: function($state) {
+                var vm = this;
+                vm.goHome = function() {
+                    $state.go('login');
+                };
+            }
+        })
+
         .state('404', {
             url: '/404',
             templateUrl: '404.tmpl.html',
@@ -18,7 +30,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('triangular.admin-default.dashboard-analytics');
+                    $state.go('login');
                 };
             }
         })
@@ -30,7 +42,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('triangular.admin-default.dashboard-analytics');
+                    $state.go('login');
                 };
             }
         });
