@@ -84,7 +84,7 @@
 
         function update() {
             vm.store.localidad_id=vm.store.localidad.id;
-            Stores.update(vm.store).then(function (res) {
+            Stores.update(vm.store, vm.store.id).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
@@ -139,12 +139,13 @@
         }
 
         function cancel() {
-            $scope.StoreForm.$setPristine();
-            $scope.StoreForm.$setUntouched();
             vm.store = angular.copy(store);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
+
+            $scope.StoreForm.$setPristine();
+            $scope.StoreForm.$setUntouched();
         }
 
         function listlineas() {
