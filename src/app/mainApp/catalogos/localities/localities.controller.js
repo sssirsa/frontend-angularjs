@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function localitiesController(Localities, Routes, Helper, $scope, toastr, Translate, $mdDialog) {
+    function localitiesController(Localities, Cities, States, Helper, $scope, toastr, Translate, $mdDialog, $log) {
 
         var vm = this;
 
@@ -21,19 +21,23 @@
         vm.restore = restore;
         vm.remove = remove;
         vm.update = update;
+        vm.listCities = listCities;
+        vm.selectState = selectState;
+        vm.selectCity = selectCity;
+
         vm.search_items = [];
         vm.searchText = '';
         vm.lineas = null;
-        var locality = {
-            nombre: null,
-            ruta: null
-        };
+        var locality = null;
         vm.locality = angular.copy(locality);
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
         vm.localityRoute = null;
+        vm.states = null;
+        vm.cities = null;
+        vm.state = null;
 
         activate();
         init();
@@ -54,19 +58,12 @@
             vm.dialogRestoreMessage = Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
             vm.restoreButton = Translate.translate('MAIN.BUTTONS.RESTORE');
             vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
-            Routes.list().then(function (res) {
-                vm.allRoutes = res;
-                vm.routes = Helper.filterDeleted(res, true);
-                vm.routes = _.sortBy(vm.routes, 'nombre');
-                console.log(vm.routes);
-            }).catch(function (err) {
-                console.log(err);
-            });
         }
 
 
         function activate() {
             listlineas();
+            listStates();
         }
 
         function toggleDeletedFunction() {
@@ -153,13 +150,14 @@
         }
 
         function cancel() {
-            $scope.TransportForm.$setPristine();
-            $scope.TransportForm.$setUntouched();
+            $scope.LocalityForm.$setPristine();
+            $scope.LocalityForm.$setUntouched();
             vm.locality = angular.copy(locality);
-            vm.localityRoute=null;
+            vm.localityRoute = null;
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
+            vm.state = null;
         }
 
         function listlineas() {
@@ -174,7 +172,7 @@
         function selectedItemChange(item) {
             if (item != null) {
                 vm.locality = angular.copy(item);
-                vm.localityRoute = _.where(vm.allRoutes, {nombre: item.ruta})[0].id;
+                vm.state = item.municipio.estado.id;
             } else {
                 cancel();
             }
@@ -183,7 +181,7 @@
         function selectedLineas(project) {
             vm.selectedLineaList = project;
             vm.locality = angular.copy(project);
-            vm.localityRoute = _.where(vm.allRoutes, {nombre: project.ruta})[0].id;
+            vm.state = project.municipio.estado.id;
         }
 
         function querySearch(query) {
@@ -199,8 +197,52 @@
             return vm.search_items;
         }
 
+        function listStates() {
+            if (!vm.states) {
+                States.list()
+                    .then(function (stateList) {
+                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
+                    })
+                    .catch(function (stateListError) {
+                        $log.error(stateListError);
+                        vm.states = null;
+                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
+                    });
+            }
+        }
+
+        function listCities(state) {
+            if (state) {
+                return Cities.getByState(state)
+                    .then(function (citiesList) {
+                        vm.cities = citiesList;
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+            else {
+                return Cities.list()
+                    .then(function (citiesList) {
+                        vm.cities = citiesList;
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+        }
+
+        function selectState() {
+            vm.locality.municipio_id = null;
+        }
+
+        function selectCity(city) {
+            vm.state = city.estado.id;
+        }
+
     }
 
+//Outside the controller
     function custom() {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {

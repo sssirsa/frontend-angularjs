@@ -66,36 +66,63 @@
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
                     <h2 class="md-headline-1 text-center">
                         {{'LOCALITIES.LABELS.SUBTITLE'|translate}}</h2>
-                    <form name="TransportForm">
-                        <md-input-container class="md-block">
-                            <label>{{'LOCALITIES.LABELS.NAME'|translate}}</label>
-                            <input ng-required='true'
-                                   type="text"
-                                   name="razon"
-                                   ng-disabled="vm.locality.deleted"
-                                   is-alphanumeric
-                                   ng-model="vm.locality.nombre"/>
-                            <div ng-messages="TransportForm.razon.$error">
-                                <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container
-                            class="md-block">
-                            <label>{{'LOCALITIES.LABELS.ROUTE'|translate}}</label>
-                            <md-select name="selectLocality"
-                                       ng-model="vm.localityRoute"
-                                       required=""
-                                       md-no-asterisk="">
-                                <md-option ng-repeat="route in vm.routes" value="{{route.id}}">
-                                    {{route.nombre}}
-                                </md-option>
-                            </md-select>
-                            <div ng-messages="TransportForm.selectProject.$error">
-                                <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                            </div>
-                        </md-input-container>
 
+                    <form name="LocalityForm">
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'LOCALITIES.LABELS.NAME'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="vm.locality.deleted"
+                                    required=""
+                                    ng-model="vm.locality.nombre"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'LOCALITIES.LABELS.ZIP_CODE'|translate}}</label>
+                                <input
+                                    type="text"
+                                    ng-disabled="vm.locality.deleted"
+                                    required=""
+                                    md-minlength="5"
+                                    md-maxlength="5"
+                                    ng-model="vm.locality.codigo_postal"/>
+                            </md-input-container>
+                        </div>
+                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label>{{'LOCALITIES.LABELS.STATE'|translate}}</label>
+                                <md-select
+                                    ng-model="vm.state"
+                                    md-on-close="vm.selectState()"
+                                    ng-disabled="vm.locality.deleted"
+                                >
+                                    <md-option
+                                        ng-repeat="state in vm.states"
+                                        ng-value="state.id"
+                                    >
+                                        {{state.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label>{{'LOCALITIES.LABELS.CITY'|translate}}</label>
+                                <md-select
+                                    ng-model="vm.locality.municipio_id"
+                                    md-on-close="vm.selectCity(city)"
+                                    md-on-open="vm.listCities(vm.state)"
+                                    ng-disabled="vm.locality.deleted"
+                                >
+                                    <md-option
+                                        ng-repeat="city in vm.cities"
+                                        ng-value="city.id"
+                                    >
+                                        {{city.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
                     </form>
+
                     <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
                         <md-button aria-label="fab button" ng-click="vm.cancel()" class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
@@ -107,7 +134,7 @@
                         </md-button>
                         <md-button aria-label="fab button"
                                    ng-if="vm.locality.id!=null && vm.locality.id!=undefined && !vm.locality.deleted"
-                                   ng-disabled="TransportForm.$invalid" ng-click="vm.update()"
+                                   ng-disabled="LocalityForm.$invalid" ng-click="vm.update()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-pencil"></md-icon>
                         </md-button>
@@ -116,7 +143,7 @@
                         </md-button>
                         <md-button aria-label="fab button"
                                    ng-if="vm.locality.id==null || vm.locality.id==undefined"
-                                   ng-disabled="TransportForm.$invalid" ng-click="vm.create()"
+                                   ng-disabled="LocalityForm.$invalid" ng-click="vm.create()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-save"></md-icon>
                         </md-button>

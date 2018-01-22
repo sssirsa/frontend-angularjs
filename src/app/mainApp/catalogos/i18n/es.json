@@ -302,8 +302,10 @@
             "TITLE":"Localidades",
             "SUBTITLE":"Información de localidad",
             "NAME":"Nombre",
-            "ROUTE":"Ruta",
-            "SEARCH":"Búsqueda de localidades"
+            "SEARCH":"Búsqueda de localidades",
+            "STATE":"Estado",
+            "CITY":"Municipio",
+            "ZIP_CODE":"Código Postal"
         }
     },
     "STORES":{

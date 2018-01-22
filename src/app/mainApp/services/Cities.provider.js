@@ -3,7 +3,7 @@
         .module('app.mainApp')
         .factory('Cities', Cities);
 
-    function Cities(MobileRestangular, URLS, $q) {
+    function Cities(MobileRestangular, URLS, $q, Helper) {
         var baseURL = MobileRestangular.all(URLS.municipio);
 
         function list() {
@@ -36,9 +36,9 @@
 
             list()
                 .then(function (citiesList) {
-                    var cities = citiesList.filter(function (city) {
+                    var cities = Helper.filterDeleted(citiesList.filter(function (city) {
                         return city.estado.id === stateID;
-                    });
+                    }),true);
                     defer.resolve(cities);
                 })
                 .catch(function (citiesListError) {
