@@ -195,7 +195,7 @@
             if(!vm.states) {
                 States.list()
                     .then(function (stateList) {
-                        vm.states = Helper.filterDeleted(stateList, true);
+                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true),'nombre');
                     })
                     .catch(function (stateListError) {
                         $log.error(stateListError);
