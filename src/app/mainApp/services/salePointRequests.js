@@ -5,22 +5,8 @@
         .module('app')
         .factory('SalePointRequests', SalePointRequests);
 
-    function SalePointRequests(Restangular, $window, URLS, EnvironmentConfig) {
-        var baseUrl = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseUrl = Restangular.all(URLS.environment.mobile_dev);
-                break;
-            case 'staging':
-                baseUrl = Restangular.all(URLS.environment.mobile_stg);
-                break;
-            case 'production':
-                baseUrl = Restangular.all(URLS.environment.mobile);
-                break;
-            case 'local':
-                baseUrl = Restangular.all(URLS.environment.mobile_local);
-                break;
-        }
+    function SalePointRequests(MobileRestangular, $window, URLS) {
+        var baseUrl=MobileRestangular;
 
         var service = {
             getByID: getByID,
@@ -29,11 +15,11 @@
         };
 
         function getByID(id) {
-            return baseUrl.one('solicitud', id).customGET();
+            return baseUrl.one(URLS.solicitud_pv, id).customGET();
         }
 
         function getAll() {
-            return baseUrl.all('solicitud').getList();
+            return baseUrl.all(URLS.solicitud_pv).getList();
         }
 
         function locate(latitude, longitude) {

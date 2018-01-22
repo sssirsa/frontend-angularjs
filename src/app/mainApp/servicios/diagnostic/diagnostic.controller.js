@@ -34,7 +34,7 @@
             vm.cabinets.id_unilever = !vm.cabinets.capitalizado ? null : vm.cabinets.id_unilever;
             vm.cabinets.status = !vm.cabinets.capitalizado ? "N/A" : vm.cabinets.status;
             Upload.upload({
-                url: EnvironmentConfig.site.rest.api + 'cabinet/' + vm.cabinet,
+                url: EnvironmentConfig.site.rest.web_api + '/cabinet/' + vm.cabinet,
                 headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
                 method: 'PUT',
                 data: vm.cabinets

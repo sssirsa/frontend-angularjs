@@ -7,14 +7,15 @@
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/tecnico');
+        $translatePartialLoaderProvider.addPart('app/mainApp/servicios');
+        $translatePartialLoaderProvider.addPart('app/mainApp/servicios/solicitudes');
         $stateProvider
             .state('triangular.admin-default.tecnico', {
                 url: '/tecnico',
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/inicio/tecnico.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/inicio/tecnico.tmpl.html',
                 controller: 'tecnicoController',
                 controllerAs: 'vm'
             })
@@ -23,7 +24,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/checklist/checklist.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/checklist/checklist.tmpl.html',
                 controller: 'checklistController',
                 controllerAs: 'vm'
             })
@@ -32,7 +33,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/diagnostic/diagnostic.tpl.html',
+                templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.tpl.html',
                 controller: 'DiagnosticController',
                 controllerAs: 'vm'
             })
@@ -44,7 +45,7 @@
                         sideMenuSize: 'icon'
                     }
                 },
-                templateUrl: 'app/mainApp/tecnico/etapa/etapa.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/etapa/etapa.tmpl.html',
                 controller: 'etapaController',
                 controllerAs: 'vm'
             })
@@ -53,7 +54,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacion/asignacionLinea.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
                 controllerAs: 'vm'
             })
@@ -62,7 +63,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/entrada/entrada.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
                 controllerAs: 'vm'
             })
@@ -71,7 +72,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/salida/crear/salida.crear.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
                 controllerAs: 'vm'
             })
@@ -80,7 +81,7 @@
                 data: {
                     roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
                 },
-                templateUrl: 'app/mainApp/tecnico/salida/lista/salida.lista.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
                 controllerAs: 'vm'
             })
@@ -89,20 +90,56 @@
                 data: {
                     roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacionServicio/asignacionServicio.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.serviceAssignDetail', {
-                url:'/detalleServicio/:tipo/:id',
+                url:'/detalleServicio/:id',
                 data: {
                     roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 },
-                templateUrl: 'app/mainApp/tecnico/asignacionServicio/detalleAsignacion.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller:'detalleAsignacionController',
                 controllerAs:'vm',
                 params:{
                     id:null
+                }
+            })
+            .state('triangular.admin-default.newRequest', {
+                url: '/request/new',
+                templateUrl: 'app/mainApp/servicios/solicitudes/new/new-request-page.tmpl.html',
+                controller: 'NewRequestPageController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                    layout: {
+                        contentClass: 'layout-column'
+                    }
+                }
+            })
+            .state('triangular.admin-default.listRequest', {
+                url: '/request/list',
+                templateUrl: 'app/mainApp/servicios/solicitudes/list/list-requests-page.tmpl.html',
+                controller: 'ListRequestPageController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                    layout: {
+                        contentClass: 'layout-column'
+                    }
+                }
+            })
+            .state('triangular.admin-default.detailRequest', {
+                url: '/request/detail/:id',
+                templateUrl: 'app/mainApp/servicios/solicitudes/detail/detail-request-page.tmpl.html',
+                controller: 'DetailRequestPageController',
+                controllerAs: 'vm',
+                params:{
+                    id:null
+                },
+                data: {
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 }
             });
 
@@ -155,6 +192,19 @@
                         state:'triangular.admin-default.serviceAssing',
                         permission: ['Administrador', 'Tultitlan', 'Tecnico E'],
                         type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.REQUESTS.TITLE',
+                        type: 'dropdown',
+                        children: [{
+                            name: 'MAIN.MENU.REQUESTS.NEW',
+                            state: 'triangular.admin-default.newRequest',
+                            type: 'link'
+                        },{
+                            name: 'MAIN.MENU.REQUESTS.LIST',
+                            state: 'triangular.admin-default.listRequest',
+                            type: 'link'
+                        }]
                     }
                 ]
             }

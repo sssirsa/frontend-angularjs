@@ -17,18 +17,18 @@
                     <md-autocomplete md-selected-item="vm.selectedLinea"
                                      md-selected-item-change="vm.selectedItemChange(vm.selectedLinea)"
                                      md-items="item in vm.querySearch(vm.searchText)"
-                                     md-item-text="item.razon_social"
+                                     md-item-text="item.nombre_establecimiento"
                                      md-min-length="0"
                                      md-search-text-change="vm.search(vm.searchText)"
                                      md-search-text="vm.searchText"
                                      md-menu-class="autocomplete-custom-template"
                                      md-floating-label="{{'STORES.LABELS.SEARCH'| translate }}">
                         <span
-                            md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.razon_social}}</span>
+                            md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nombre_establecimiento}}</span>
                         <md-item-template>
                         <span class="item-title">
                             <md-icon md-font-icon="fa fa-briefcase"></md-icon>
-                            <span>&nbsp; {{item.razon_social}}</span>
+                            <span>&nbsp; {{item.nombre_establecimiento}}</span>
                         </span>
                         <span class="item-metadata">
                             <span class="item-metastat">
@@ -50,7 +50,7 @@
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.store.id }">
-                                    <md-icon md-svg-icon="assets/images/transport.svg" class="avatar"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/store.svg" class="avatar"></md-icon>
                                     <span flex="flex">{{linea.nombre_establecimiento }}</span>
                                 </md-button>
                                 <md-divider></md-divider>

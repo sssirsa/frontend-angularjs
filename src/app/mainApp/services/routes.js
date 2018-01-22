@@ -3,22 +3,8 @@
         .module('app.mainApp')
         .factory('Routes', Routes);
 
-    function Routes(Restangular, EnvironmentConfig, URLS) {
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.mobile_dev).all('ruta');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.mobile_stg).all('ruta');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.mobile).all('ruta');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.mobile_local).all('ruta');
-                break;
-        }
+    function Routes(MobileRestangular, URLS) {
+        var baseURL = MobileRestangular.all(URLS.rutas);
 
         function list() {
             return baseURL.getList();

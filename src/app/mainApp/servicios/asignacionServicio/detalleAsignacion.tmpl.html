@@ -132,7 +132,7 @@
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
                          flex="100"
-                         ng-if="vm.requestKind=='pending'"
+                         ng-if="vm.salePoint.status=='Abierta' || vm.salePoint.status=='En_proceso'"
                          md-min-length="0"
                          md-selected-item="vm.assignedPerson"
                          md-selected-item-change="vm.selectedPersonChange()"
@@ -162,7 +162,7 @@
             </md-not-found>
         </md-autocomplete>
         <div
-            ng-if="vm.requestKind=='attended' || vm.salePoint.persona"
+            ng-if="vm.salePoint.status=='Atendida' || vm.salePoint.status=='Cerrada' || vm.salePoint.status=='Cancelada'"
             layout="column"
             layout-gt-xs="row">
             <div layout="column" flex="100">
@@ -210,7 +210,9 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
-            <md-button aria-label="assign" ng-click="vm.assign()" class="md-raised md-primary">
+            <md-button ng-if="vm.salePoint.status=='Abierta' || vm.salePoint.status=='En_proceso'"
+                       aria-label="assign" ng-click="vm.assign()"
+                       class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>
             </md-button>
         </div>

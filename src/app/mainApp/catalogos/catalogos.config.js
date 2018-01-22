@@ -151,7 +151,7 @@
             .state('triangular.admin-default.catalogo-rutas',{
                 url:'/rutas',
                 data:{
-                    roles:['Administrador']
+                    roles:['Administrador', 'Tecnico E']
                 },
                 templateUrl:'app/mainApp/catalogos/routes/routes.tmpl.html',
                 controller: 'routesController',
@@ -160,7 +160,7 @@
             .state('triangular.admin-default.catalogo-localidades',{
                 url:'/localidades',
                 data:{
-                    roles:['Administrador']
+                    roles:['Administrador', 'Tecnico E']
                 },
                 templateUrl:'app/mainApp/catalogos/localities/localities.tmpl.html',
                 controller: 'localitiesController',
@@ -169,10 +169,28 @@
             .state('triangular.admin-default.catalogo-establecimientos',{
                 url:'/establecimientos',
                 data:{
-                    roles:['Administrador']
+                    roles:['Administrador', 'Tecnico E']
                 },
                 templateUrl:'app/mainApp/catalogos/stores/stores.tmpl.html',
                 controller: 'storesController',
+                controllerAs:'vm'
+            })
+            .state('triangular.admin-default.catalogo-estados',{
+                url:'/estados',
+                data:{
+                    roles:['Administrador', 'Tecnico E']
+                },
+                templateUrl:'app/mainApp/catalogos/states/states.tmpl.html',
+                controller: 'statesController',
+                controllerAs:'vm'
+            })
+            .state('triangular.admin-default.catalogo-municipios',{
+                url:'/municipios',
+                data:{
+                    roles:['Administrador', 'Tecnico E']
+                },
+                templateUrl:'app/mainApp/catalogos/cities/cities.tmpl.html',
+                controller: 'citiesController',
                 controllerAs:'vm'
             });
 
@@ -181,7 +199,7 @@
                 name: 'MAIN.MENU.CATALOGS.TITLE',
                 icon: 'fa fa-book',
                 type: 'dropdown',
-                permission: ['Administrador', 'Capturista'],
+                permission: ['Administrador', 'Capturista', 'Tecnico E'],
                 priority: 5,
                 children: [
 
@@ -255,17 +273,27 @@
                     }, {
                         name: 'MAIN.MENU.CATALOGS.ROUTES',
                         state: 'triangular.admin-default.catalogo-rutas',
-                        permission: ['Administrador'],
+                        permission: ['Administrador', 'Tecnico E'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.STATES',
+                        state: 'triangular.admin-default.catalogo-estados',
+                        permission: ['Administrador', 'Tecnico E'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.CITIES',
+                        state: 'triangular.admin-default.catalogo-municipios',
+                        permission: ['Administrador', 'Tecnico E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.LOCALITIES',
                         state: 'triangular.admin-default.catalogo-localidades',
-                        permission: ['Administrador'],
+                        permission: ['Administrador', 'Tecnico E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
-                        permission: ['Administrador'],
+                        permission: ['Administrador', 'Tecnico E'],
                         type: 'link'
                     }
                 ]

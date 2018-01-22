@@ -8,23 +8,10 @@
         .module('app.mainApp')
         .factory('Solicitudes_Admin', Solicitudes_Admin);
 
-    function Solicitudes_Admin(Restangular,$q, EnvironmentConfig, URLS) {
+    function Solicitudes_Admin(WebRestangular, URLS) {
         // var base=Restangular.all('solicitud_admin');
-        var base = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                base = Restangular.all(URLS.environment.genesis_dev).all('solicitud_admin');
-                break;
-            case 'staging':
-                base = Restangular.all(URLS.environment.genesis_stg).all('solicitud_admin');
-                break;
-            case 'production':
-                base = Restangular.all(URLS.environment.genesis).all('solicitud_admin');
-                break;
-            case 'local':
-                base = Restangular.all(URLS.environment.genesis_local).all('solicitud_admin');
-                break;
-        }
+        var base = WebRestangular.all(URLS.solicitudes.admin);
+
         return {
             list: list,
             consultaEsp: consultaEsp,
@@ -34,14 +21,9 @@
             borrarSol:borrarSol,
             getOne:getOne
         };
+
         function updateSolicitud(request) {
-            var deferred = $q.defer();
-            Restangular.one('solicitud_admin', request.id).customPUT(request).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
+            return base.all(request.id).customPUT(request);
         }
 
         function consultaEsp(object) {
@@ -60,32 +42,23 @@
                     tipoConsulta = "closed";
                     break;
             }
-            return Restangular.one('solicitud_admin', tipoConsulta).customGET();
+            return base.all(tipoConsulta).customGET();
         }
 
         function consultaEspUnconfirmed() {
-            return Restangular.one('solicitud_admin', "unconfirmed").customGET();
+            return base.all("unconfirmed").customGET();
         }
 
         function create(object){
-            var deferred=$q.defer();
-            Restangular.all('solicitud_admin').customPOST(object).then(function(rest){
-                deferred.resolve(rest);
-            }).catch(function(error){
-                deferred.reject(error);
-            });
-            return deferred.promise;
+            return base.customPOST(object);
         }
 
         function list(){
-            return Restangular.all('solicitud_admin').customGET();
+            return base.customGET();
         }
 
         function borrarSol(object){
-            return Restangular.one("solicitud_admin",object).customDELETE(undefined,undefined,{'Content-Type': 'application/json'}).then(function(resp){
-                return resp;
-            }).catch(function(error){
-            })
+            return base.all(object).customDELETE(undefined,undefined,{'Content-Type': 'application/json'});
         }
         function getOne(id) {
             return base.all(id).customGET();
