@@ -88,7 +88,7 @@
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -149,7 +149,7 @@
         function listlineas() {
             vm.loadingPromise = States.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.lineas = _.sortBy(vm.lineas, 'razon_social');
+                vm.lineas = _.sortBy(vm.lineas, 'nombre');
             }).catch(function (err) {
 
             });
