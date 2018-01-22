@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function citiesController(States, Cities, Helper, $scope, toastr, Translate, $mdDialog) {
+    function citiesController(Cities, States, Helper, $scope, toastr, Translate, $mdDialog, $log) {
 
         var vm = this;
 
@@ -21,14 +21,16 @@
         vm.restore = restore;
         vm.remove = remove;
         vm.update = update;
+
         vm.search_items = [];
         vm.searchText = '';
         var store = null;
-        vm.state = angular.copy(store);
+        vm.city = angular.copy(store);
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
+        vm.states = null;
 
         activate();
         init();
@@ -69,7 +71,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                States.remove(vm.state.id).then(function (res) {
+                Cities.remove(vm.city.id).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -82,13 +84,15 @@
         }
 
         function update() {
-            States.update(vm.state, vm.state.id).then(function (res) {
+            vm.city.estado_id = vm.city.estado.id;
+            delete vm.city.estado;
+            Cities.update(vm.city, vm.city.id).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -97,9 +101,11 @@
         }
 
         function create() {
-            States.create(vm.state).then(function (res) {
+            vm.city.estado_id = vm.city.estado.id;
+            delete vm.city.estado;
+            Cities.create(vm.city).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
-                vm.state = angular.copy(store);
+                vm.city = angular.copy(store);
                 cancel();
                 activate();
             }).catch(function (err) {
@@ -120,13 +126,13 @@
                 .ok(vm.restoreButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                vm.state.deleted = false;
-                States.update(vm.state).then(function (res) {
+                vm.city.deleted = false;
+                Cities.update(vm.city).then(function (res) {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();
                 }).catch(function (res) {
-                    vm.state.deleted = true;
+                    vm.city.deleted = true;
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
             }, function () {
@@ -136,28 +142,31 @@
         }
 
         function cancel() {
-            vm.state = angular.copy(store);
+            vm.city = angular.copy(store);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
 
 
-            $scope.StateForm.$setPristine();
-            $scope.StateForm.$setUntouched();
+            $scope.CityForm.$setPristine();
+            $scope.CityForm.$setUntouched();
         }
 
         function listlineas() {
-            vm.loadingPromise = States.list().then(function (res) {
-                vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.lineas = _.sortBy(vm.lineas, 'razon_social');
-            }).catch(function (err) {
+            vm.loadingPromise = Cities.list()
+                .then(function (res) {
+                    vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
+                    vm.lineas = _.sortBy(vm.lineas, 'nombre');
+                    listStates();
+                })
+                .catch(function (err) {
 
-            });
+                });
         }
 
         function selectedItemChange(item) {
             if (item != null) {
-                vm.state = angular.copy(item);
+                vm.city = angular.copy(item);
 
             } else {
                 cancel();
@@ -166,7 +175,7 @@
 
         function selectedLineas(project) {
             vm.selectedLineaList = project;
-            vm.state = angular.copy(project);
+            vm.city = angular.copy(project);
         }
 
         function querySearch(query) {
@@ -182,8 +191,23 @@
             return vm.search_items;
         }
 
+        function listStates() {
+            if(!vm.states) {
+                States.list()
+                    .then(function (stateList) {
+                        vm.states = Helper.filterDeleted(stateList, true);
+                    })
+                    .catch(function (stateListError) {
+                        $log.error(stateListError);
+                        vm.states=null;
+                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
+                    });
+            }
+        }
+
     }
 
+//Outside the controller
     function custom() {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {

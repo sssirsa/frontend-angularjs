@@ -3,7 +3,7 @@
         <md-card-content>
             <div layout="row" flex="" layout-align="space-around stretch" id="cabecera">
                 <h2 flex="70" flex-sm="100" flex-gt-xs="100" translate=""
-                    class="md-headline-1 text-center">STATES.LABELS.TITLE</h2>
+                    class="md-headline-1 text-center">CITIES.LABELS.TITLE</h2>
                 <md-button aria-label="fab button" class="md-fab md-scale md-fab-top-right" ng-click="vm.cancel()">
                     <md-icon md-font-icon="fa fa-plus" ng-style="{color: 'white'}">
                     </md-icon>
@@ -28,11 +28,11 @@
                         <md-item-template>
                         <span class="item-title">
                             <md-icon md-font-icon="fa fa-university"></md-icon>
-                            <span>&nbsp; {{item.codigo_estado}}</span>
+                            <span>&nbsp; {{item.nombre}}</span>
                         </span>
                         <span class="item-metadata">
                             <span class="item-metastat">
-                                <strong>{{item.nombre }}</strong>
+                                <strong>{{item.estado.nombre }}</strong>
                             </span>
                         </span>
                         </md-item-template>
@@ -49,7 +49,7 @@
                         <md-list>
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
-                                           ng-class="{'selected' : linea.id == vm.state.id }">
+                                           ng-class="{'selected' : linea.id == vm.city.id }">
                                     <md-icon md-svg-icon="assets/images/states.svg" class="avatar"></md-icon>
                                     <span flex="flex">{{linea.nombre}}</span>
                                 </md-button>
@@ -64,48 +64,55 @@
                 <div layout="column" flex-lg="60" flex-gt-lg="65" flex-xl="65" flex-gt-sm="100" flex-md="100"
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
                     <h2 class="md-headline-1 text-center">
-                        {{'STATES.LABELS.SUBTITLE'|translate}}</h2>
-                    <form name="StateForm">
+                        {{'CITIES.LABELS.SUBTITLE'|translate}}</h2>
+
+                    <form name="CityForm">
                         <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
-                                <label>{{'STATES.LABELS.NAME'|translate}}</label>
+                                <label>{{'CITIES.LABELS.NAME'|translate}}</label>
                                 <input
                                     type="text"
-                                    ng-disabled="vm.state.deleted"
+                                    ng-disabled="vm.city.deleted"
                                     required=""
-                                    ng-model="vm.state.nombre"/>
+                                    ng-model="vm.city.nombre"/>
                             </md-input-container>
                             <md-input-container flex class="md-block">
-                                <label>{{'STATES.LABELS.CODE'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.state.deleted"
-                                    required=""
-                                    ng-model="vm.state.codigo_estado"/>
+                                <label>{{'CITIES.LABELS.STATE'|translate}}</label>
+                                <md-select
+                                    ng-model="vm.city.estado.id"
+                                >
+                                    <md-option
+                                        ng-repeat="state in vm.states"
+                                        ng-value="state.id"
+                                        >
+                                        {{state.nombre}}
+                                    </md-option>
+                                </md-select>
                             </md-input-container>
                         </div>
                     </form>
+
                     <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
                         <md-button aria-label="fab button" ng-click="vm.cancel()" class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.state.id!=null && vm.state.id!=undefined && !vm.state.deleted"
+                                   ng-if="vm.city.id!=null && vm.city.id!=undefined && !vm.city.deleted"
                                    ng-click="vm.remove($event)" class="md-raised md-warn">
                             <md-icon md-font-icon="fa fa-trash"></md-icon>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.state.id!=null && vm.state.id!=undefined && !vm.state.deleted"
-                                   ng-disabled="StateForm.$invalid" ng-click="vm.update()"
+                                   ng-if="vm.city.id!=null && vm.city.id!=undefined && !vm.city.deleted"
+                                   ng-disabled="CityForm.$invalid" ng-click="vm.update()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-pencil"></md-icon>
                         </md-button>
-                        <md-button ng-if="vm.state.id!=null && vm.state.id!=undefined && vm.state.deleted" ng-click="vm.restore()" class="md-raised md-warn">
+                        <md-button ng-if="vm.city.id!=null && vm.city.id!=undefined && vm.city.deleted" ng-click="vm.restore()" class="md-raised md-warn">
                             <md-icon md-font-icon="zmdi zmdi-time-restore"></md-icon >
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.state.id==null || vm.state.id==undefined"
-                                   ng-disabled="StateForm.$invalid" ng-click="vm.create()"
+                                   ng-if="vm.city.id==null || vm.city.id==undefined"
+                                   ng-disabled="CityForm.$invalid" ng-click="vm.create()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-save"></md-icon>
                         </md-button>

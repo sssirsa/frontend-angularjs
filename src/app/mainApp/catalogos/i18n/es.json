@@ -323,5 +323,16 @@
             "NAME":"Nombre",
             "CODE":"Código del estado"
         }
+    },
+    "CITIES":{
+        "LABELS":{
+            "TITLE":"Municipios",
+            "SUBTITLE":"Información de municipio",
+            "NAME":"Nombre",
+            "STATE":"Estado"
+        },
+        "TOASTR":{
+            "ERROR_STATE_LIST":"Error al cargar la lista de estados"
+        }
     }
 }
