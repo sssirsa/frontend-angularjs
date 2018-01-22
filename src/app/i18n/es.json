@@ -66,7 +66,9 @@
         "STAGE": "Etapas",
           "ROUTES":"Rutas",
           "LOCALITIES":"Localidades",
-          "STORES":"Establecimientos"
+          "STORES":"Establecimientos",
+          "STATES":"Estados",
+          "CITIES":"Municipios"
       },
       "INVENTORY": {
         "TITLE": "Inventarios",

@@ -174,6 +174,15 @@
                 templateUrl:'app/mainApp/catalogos/stores/stores.tmpl.html',
                 controller: 'storesController',
                 controllerAs:'vm'
+            })
+            .state('triangular.admin-default.catalogo-estados',{
+                url:'/estados',
+                data:{
+                    roles:['Administrador']
+                },
+                templateUrl:'app/mainApp/catalogos/states/states.tmpl.html',
+                controller: 'statesController',
+                controllerAs:'vm'
             });
 
         triMenuProvider.addMenu(
@@ -265,6 +274,11 @@
                     },{
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
+                        permission: ['Administrador'],
+                        type: 'link'
+                    },{
+                        name: 'MAIN.MENU.CATALOGS.STATES',
+                        state: 'triangular.admin-default.catalogo-estados',
                         permission: ['Administrador'],
                         type: 'link'
                     }

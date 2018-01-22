@@ -456,7 +456,9 @@
             tipo_equipo: 'tipo_equipo',
             tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
-            modelo_cabinet: 'modelo_cabinet'
+            modelo_cabinet: 'modelo_cabinet',
+            estado:'estado',
+            municipio:'municipio'
         })
         .constant('CONFIGS', {
             ADTConfig: {

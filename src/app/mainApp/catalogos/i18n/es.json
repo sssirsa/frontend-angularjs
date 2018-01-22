@@ -315,5 +315,13 @@
             "LATITUDE": "Latidud",
             "LONGITUDE": "Longitud"
         }
+    },
+    "STATES":{
+        "LABELS":{
+            "TITLE":"Estados",
+            "SUBTITLE":"Información de Estado",
+            "NAME":"Nombre",
+            "CODE":"Código del estado"
+        }
     }
 }
