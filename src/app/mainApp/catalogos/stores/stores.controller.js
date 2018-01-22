@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities, $log) {
 
         var vm = this;
 
@@ -21,6 +21,10 @@
         vm.restore = restore;
         vm.remove = remove;
         vm.update = update;
+        vm.listCities = listCities;
+        vm.listLocalities = listLocalities;
+        vm.selectState = selectState;
+        vm.selectCity = selectCity;
 
         vm.search_items = [];
         vm.searchText = '';
@@ -30,6 +34,9 @@
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
+        vm.states = null;
+        vm.cities = null;
+        vm.localities = null;
 
         activate();
         init();
@@ -55,7 +62,7 @@
 
         function activate() {
             listlineas();
-            listLocalities();
+            listStates();
         }
 
         function toggleDeletedFunction() {
@@ -212,7 +219,7 @@
             else {
                 return Cities.list()
                     .then(function (citiesList) {
-                        vm.cities = citiesList;
+                        vm.cities = Helper.filterDeleted(citiesList,true);
                     })
                     .catch(function (citiesListError) {
                         $log.error(citiesListError);
@@ -220,13 +227,25 @@
             }
         }
 
-        function listLocalities(){
-            vm.localitiesPromise = Localities.list().then(function (res) {
-                vm.localities = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.localities = _.sortBy(vm.localities, 'nombre');
-            }).catch(function (err) {
-
-            });
+        function listLocalities(city){
+            if (city) {
+                return Localities.getByCity(city)
+                    .then(function (localitiesList) {
+                        vm.localities = localitiesList;
+                    })
+                    .catch(function (localitiesListError) {
+                        $log.error(localitiesListError);
+                    });
+            }
+            else {
+                return Localities.list()
+                    .then(function (localitiesList) {
+                        vm.cities = Helper.filterDeleted(localitiesList,true);
+                    })
+                    .catch(function (localitiesListError) {
+                        $log.error(localitiesListError);
+                    });
+            }
         }
 
         function selectState() {
