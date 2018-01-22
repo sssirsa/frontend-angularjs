@@ -407,6 +407,28 @@
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
                 {id: 'attended', value: 'Atendidos'}
+            ],
+            requestKinds: [
+                {
+                    id: 'new',
+                    label: 'Nuevos'
+                },
+                {
+                    id: 'increment',
+                    label: 'Incremental'
+                },
+                {
+                    id: 'remove',
+                    label: 'Retiro'
+                },
+                {
+                    id: 'change',
+                    label: 'Cambio'
+                },
+                {
+                    id: 'service',
+                    label: 'Soporte técnico'
+                }
             ]
         })
         .constant('URLS', {
@@ -457,8 +479,8 @@
             tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
             modelo_cabinet: 'modelo_cabinet',
-            estado:'estado',
-            municipio:'municipio'
+            estado: 'estado',
+            municipio: 'municipio'
         })
         .constant('CONFIGS', {
             ADTConfig: {

@@ -8,22 +8,34 @@
              layout-align="space-around center"
              layout-padding>
         <h2 translate>REQUESTS.NEW.TITLE</h2>
+        <md-input-container class="md-block" flex>
+            <label translate>REQUESTS.NEW.KIND</label>
+            <md-select
+                ng-model="vm.selectedKind">
+                <md-option
+                    ng-repeat="kind in vm.requestKinds"
+                    ng-value="kind.id">
+                    {{kind.label}}
+                </md-option>
+            </md-select>
+        </md-input-container>
     </md-card>
 
     <md-card layout-align="center stretch"
              layout="column"
+             ng-if="vm.selectedKind"
              cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
              layout-padding>
         <h3 translate>REQUESTS.NEW.STORE.TITLE</h3>
 
-        <md-autocomplete md-input-name="persona"
+        <md-autocomplete md-input-name="establecimiento"
                          md-no-cache="true"
                          flex="100"
                          md-min-length="0"
-                         md-selected-item="vm.assignedPerson"
-                         md-selected-item-change="vm.selectedPersonChange()"
-                         md-search-text="vm.personSearchText"
-                         md-items="item in vm.searchPerson(item)"
+                         md-selected-item="vm.assignedStore"
+                         md-selected-item-change="vm.selectedStoreChange()"
+                         md-search-text="vm.storeSearchText"
+                         md-items="item in vm.searchStore(item)"
                          md-item-text="item.nombre_establecimiento"
                          md-floating-label="{{'REQUESTS.NEW.STORE.SEARCH'|translate}}"
                          md-menu-class="autocomplete-custom-template"
@@ -42,7 +54,7 @@
             <md-not-found>
                 <span class="item-title">
                     <span>
-                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.units.searchText}}"
+                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.storeSearchText}}"
                     </span>
                 </span>
             </md-not-found>
@@ -170,6 +182,47 @@
 
     <md-card layout-align="center stretch"
              layout="column"
+             ng-if="vm.selectedKind === 'new' || vm.selectedKind === 'increment' || vm.selectedKind === 'change'"
+             layout-padding>
+        <h3 translate>REQUESTS.NEW.CABINETS.TITLE</h3>
+
+        <md-autocomplete md-input-name="tipo_equipo"
+                         md-no-cache="true"
+                         flex="100"
+                         md-min-length="0"
+                         md-selected-item="vm.assignedEquipmentKind"
+                         md-selected-item-change="vm.selectedEquipmentKindChange()"
+                         md-search-text="vm.equipmentKindSearchText"
+                         md-items="item in vm.searchEquipmentKind(item)"
+                         md-item-text="item.nombre"
+                         md-floating-label="{{'REQUESTS.NEW.EQUIPMENT.SEARCH'|translate}}"
+                         md-menu-class="autocomplete-custom-template"
+                         required>
+            <md-item-template>
+                <span class="item-title" title="{{item.nombre}}">
+                    <md-icon md-font-icon="fa fa-university"></md-icon>
+                    <span>
+                        <b>{{item.nombre}}</b>
+                    </span>
+                </span>
+                <span class="md-caption">
+                    {{item.descripcion}}
+                </span>
+            </md-item-template>
+            <md-not-found>
+                <span class="item-title">
+                    <span>
+                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.equipmentKindSearchText}}"
+                    </span>
+                </span>
+            </md-not-found>
+        </md-autocomplete>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.selectedKind"
              layout-padding>
         <div flex
              layout="row"
@@ -251,9 +304,10 @@
             </table>
         </div>
     </md-card>
-
+<!--
     <md-card layout-align="center stretch"
              layout="column"
+             ng-if="vm.selectedKind"
              layout-padding>
         <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
 
@@ -269,63 +323,5 @@
 
         </div>
 
-    </md-card>
-
-    <md-card layout-align="center stretch"
-             layout="column"
-             cg-busy="{promise:vm.personaPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
-             layout-padding>
-        <h3 translate>REQUESTS.NEW.USER.TITLE</h3>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.USERNAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.user.username"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.NAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.nombre"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.MIDDLE_NAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.apellido_paterno"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.LAST_NAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.apellido_materno"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.PHONE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.telefono"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.USER.EMAIL</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.user.user.email"/>
-            </md-input-container>
-        </div>
-    </md-card>
+    </md-card>-->
 </div>

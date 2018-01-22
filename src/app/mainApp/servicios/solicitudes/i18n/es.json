@@ -102,7 +102,11 @@
             "WORKER_COMMENTS": "Observaciones del personal",
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
-            "EVIDENCES":"Evidencias"
+            "EVIDENCES":"Evidencias",
+            "KIND":"Tipo de solicitud",
+            "EQUIPMENT":{
+                "SEARCH":"Tipo de equipo a asignar"
+            }
         }
     }
 }
