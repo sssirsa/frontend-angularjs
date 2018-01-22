@@ -11,7 +11,7 @@
         <md-input-container class="md-block" flex>
             <label translate>REQUESTS.NEW.KIND</label>
             <md-select
-                ng-model="vm.selectedKind">
+                ng-model="vm.request.tipo">
                 <md-option
                     ng-repeat="kind in vm.requestKinds"
                     ng-value="kind.id">
@@ -19,11 +19,24 @@
                 </md-option>
             </md-select>
         </md-input-container>
+        <md-input-container class="md-block" flex>
+            <label translate>REQUESTS.NEW.SUCURSAL</label>
+            <md-select
+                ng-if="!vmNode.currentUser.sucursal"
+                md-on-open ="vm.loadSucursales()"
+                ng-model="vm.request.sucursal">
+                <md-option
+                    ng-repeat="sucursal in vm.sucursales"
+                    ng-value="sucursal.id">
+                    {{sucursal.nombre}}
+                </md-option>
+            </md-select>
+        </md-input-container>
     </md-card>
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.selectedKind"
+             ng-if="vm.request.tipo"
              cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
              layout-padding>
         <h3 translate>REQUESTS.NEW.STORE.TITLE</h3>
@@ -182,7 +195,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.selectedKind === 'new' || vm.selectedKind === 'increment' || vm.selectedKind === 'change'"
+             ng-if="vm.request.tipo === 'Nuevos' || vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio'"
              layout-padding>
         <h3 translate>REQUESTS.NEW.CABINETS.TITLE</h3>
 
@@ -222,7 +235,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.selectedKind"
+             ng-if="vm.request.tipo"
              layout-padding>
         <div flex
              layout="row"
@@ -236,7 +249,6 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.CLIENT_COMMENTS</label>
                 <input
-                    ng-disabled="true"
                     ng-model="vm.request.observaciones_cliente"/>
             </md-input-container>
         </div>
@@ -247,7 +259,6 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.WORKER_COMMENTS</label>
                 <input
-                    ng-disabled="true"
                     ng-model="vm.request.observaciones_tecnico"/>
             </md-input-container>
         </div>
@@ -258,7 +269,6 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.SCORE</label>
                 <md-select
-                    ng-disabled="true"
                     ng-model="vm.request.calificacion">
                     <md-option
                         ng-repeat="score in vm.scores"
@@ -269,16 +279,20 @@
             </md-input-container>
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.ROUTE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.request.ruta.nombre">
-                </input>
+                <md-select
+                    md-on-open="vm.loadRoutes()"
+                    ng-model="vm.request.ruta_id">
+                    <md-option
+                        ng-repeat="route in vm.routes"
+                        ng-value="route.id">
+                        {{route.nombre}}
+                    </md-option>
+                </md-select>
             </md-input-container>
         </div>
         <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
             <label translate>REQUESTS.NEW.CABINET</label>
             <input
-                ng-disabled="true"
                 ng-model="vm.request.cabinet"/>
         </md-input-container>
         <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
@@ -303,25 +317,39 @@
                 </tbody>
             </table>
         </div>
-    </md-card>
-<!--
-    <md-card layout-align="center stretch"
-             layout="column"
-             ng-if="vm.selectedKind"
-             layout-padding>
-        <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
 
-        <div
-            layout="column"
-            layout-gt-xs="row"
-            layout-align="space-around center">
-
-            <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
-
+        <div layout="row"
+             layout-align="end end"
+             layout-sm="column"
+             layout-xs="column"
+             layout-align-sm="start stretch"
+             layout-align-xs="start stretch">
+            <md-button
+                aria-label="assign" ng-click="vm.save()"
+                class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+            </md-button>
         </div>
 
-    </md-card>-->
+    </md-card>
+    <!--
+        <md-card layout-align="center stretch"
+                 layout="column"
+                 ng-if="vm.request.tipo"
+                 layout-padding>
+            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+
+            <div
+                layout="column"
+                layout-gt-xs="row"
+                layout-align="space-around center">
+
+                <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
+                <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
+                <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
+                <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
+
+            </div>
+
+        </md-card>-->
 </div>

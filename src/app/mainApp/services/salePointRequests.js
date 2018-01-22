@@ -6,20 +6,21 @@
         .factory('SalePointRequests', SalePointRequests);
 
     function SalePointRequests(MobileRestangular, $window, URLS) {
-        var baseUrl=MobileRestangular;
+        var baseUrl=MobileRestangular.all(URLS.solicitud_pv);
 
         var service = {
             getByID: getByID,
             getAll: getAll,
-            locate: locate
+            locate: locate,
+            create:create
         };
 
         function getByID(id) {
-            return baseUrl.one(URLS.solicitud_pv, id).customGET();
+            return baseUrl.all(id).customGET();
         }
 
         function getAll() {
-            return baseUrl.all(URLS.solicitud_pv).getList();
+            return baseUrl.getList();
         }
 
         function locate(latitude, longitude) {
@@ -27,6 +28,10 @@
             var target = '_blank';
 
             $window.open(url, target);
+        }
+
+        function create (element){
+            return baseUrl.post(element);
         }
 
         return service;

@@ -410,24 +410,24 @@
             ],
             requestKinds: [
                 {
-                    id: 'new',
+                    id: 'Nuevos',
                     label: 'Nuevos'
                 },
                 {
-                    id: 'increment',
+                    id: 'Incremental',
                     label: 'Incremental'
                 },
                 {
-                    id: 'remove',
+                    id: 'Retiro',
                     label: 'Retiro'
                 },
                 {
-                    id: 'change',
+                    id: 'Cambio',
                     label: 'Cambio'
                 },
                 {
-                    id: 'service',
-                    label: 'Soporte técnico'
+                    id: 'Servicio Técnico',
+                    label: 'Servicio técnico'
                 }
             ]
         })

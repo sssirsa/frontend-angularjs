@@ -7,25 +7,34 @@
 
     /* @ngInject */
     function NewRequestPageController($log, $state, toastr, Translate, Stores, Geolocation, STORE_SEGMENTATION, SCORES,
-                                      TipoEquipo, OPTIONS) {
+                                      TipoEquipo, OPTIONS, Routes, SalePointRequests, Sucursal, Helper) {
         var vm = this;
 
         //Function mapping
         vm.selectedStoreChange = selectedStoreChange;
         vm.searchStore = searchStore;
+
         vm.selectedEquipmentKindChange = selectedEquipmentKindChange;
         vm.searchEquipmentKind = searchEquipmentKind;
 
+        vm.save = save;
+
         vm.showStoreLocation = showStoreLocation;
+
+        vm.loadRoutes = loadRoutes;
+        vm.loadSucursales = loadSucursales;
 
         //Variable declaration
         vm.request = {};
         vm.store = null;
-        vm.selectedKind = null;
 
         vm.stores = null;
         vm.equipmentKinds = null;
+        vm.routes = null;
+        vm.sucursales = null;
+
         vm.storeSearchText = null;
+        vm.equipmentKindSearchText = null;
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
@@ -39,12 +48,22 @@
         }
 
         function loadEquipmentKinds() {
-            vm.equipmentKinds = TipoEquipo.listWitout()
+            return TipoEquipo.listWitout()
                 .then(function (equipmentKindList) {
                     vm.equipmentKinds = equipmentKindList;
                 })
                 .catch(function (equipmentKindListError) {
                     $log.error(equipmentKindListError);
+                });
+        }
+
+        function loadSucursales() {
+            return Sucursal.listObject()
+                .then(function (sucursalList) {
+                    vm.sucursales = Helper.filterDeleted(sucursalList,true);
+                })
+                .catch(function (sucursalListError) {
+                    $log.error(sucursalListError);
                 });
         }
 
@@ -61,7 +80,7 @@
             if (!vm.stores) {
                 return Stores.list()
                     .then(function (userListSuccess) {
-                        vm.stores = userListSuccess;
+                        vm.stores = Helper.filterDeleted(userListSuccess,true);
                         return searchStoreCollection();
                     })
                     .catch(function (userListError) {
@@ -94,19 +113,20 @@
         function selectedEquipmentKindChange() {
             vm.equipmentKind = vm.assignedEquipmentKind;
             //Remove any previos assignment
-            vm.request.solocitudes_cabinet = {};
+            vm.request.solicitudes_cabinet = [];
             //Assign new kind
-            vm.request.solocitudes_cabinet = {
+            vm.request.solicitudes_cabinet = [{
                 id_tipo: vm.equipmentKind.id,
+                tipo: vm.equipmentKind.nombre,
                 cantidad: 1
-            };
+            }];
         }
 
         function searchEquipmentKind() {
             if (!vm.equipmentKinds) {
                 return TipoEquipo.list()
                     .then(function (userListSuccess) {
-                        vm.equipmentKinds = userListSuccess;
+                        vm.equipmentKinds = Helper.filterDeleted(userListSuccess,true);
                         return searchEquipmentKindCollection();
                     })
                     .catch(function (userListError) {
@@ -134,6 +154,31 @@
 
                 });
             }
+        }
+
+        function loadRoutes() {
+            return Routes.list()
+                .then(function (routeList) {
+                    vm.routes = routeList;
+                })
+                .catch(function (routeListError) {
+                    $log.error(routeListError);
+                });
+        }
+
+        function save() {
+            SalePointRequests.create(vm.request)
+                .then(function () {
+                    toastr.success(
+                        Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE')
+                    );
+                })
+                .catch(function (requestSuccessError) {
+                    $log.error(requestSuccessError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
         }
 
     }
