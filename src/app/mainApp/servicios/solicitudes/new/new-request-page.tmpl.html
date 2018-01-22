@@ -1,133 +1,331 @@
-<md-content class="mb-bg-fb-08 full-height"
-            layout="column"
-            layout-align="center stretch">
-    <md-card layout="column"
-             layout-align="space-around stretch">
-        <div layout="column"
-             layout-align="center center">
-            <h2>Solicitud de Servicio</h2>
+<div class="bg-01"
+     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     layout="column">
+
+    <md-card layout="row"
+             layout-align-xs="center stretch"
+             layout-xs="column"
+             layout-align="space-around center"
+             layout-padding>
+        <h2 translate>REQUESTS.NEW.TITLE</h2>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+             layout-padding>
+        <h3 translate>REQUESTS.NEW.STORE.TITLE</h3>
+
+        <md-autocomplete md-input-name="persona"
+                         md-no-cache="true"
+                         flex="100"
+                         md-min-length="0"
+                         md-selected-item="vm.assignedPerson"
+                         md-selected-item-change="vm.selectedPersonChange()"
+                         md-search-text="vm.personSearchText"
+                         md-items="item in vm.searchPerson(item)"
+                         md-item-text="item.nombre_establecimiento"
+                         md-floating-label="{{'REQUESTS.NEW.STORE.SEARCH'|translate}}"
+                         md-menu-class="autocomplete-custom-template"
+                         required>
+            <md-item-template>
+                <span class="item-title" title="{{item.nombre}}">
+                    <md-icon md-font-icon="fa fa-university"></md-icon>
+                    <span>
+                        <b>{{item.nombre_establecimiento}}</b>
+                    </span>
+                </span>
+                <span class="md-caption">
+                    {{item.nombre_encargado}}
+                </span>
+            </md-item-template>
+            <md-not-found>
+                <span class="item-title">
+                    <span>
+                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.units.searchText}}"
+                    </span>
+                </span>
+            </md-not-found>
+        </md-autocomplete>
+
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.nombre_establecimiento"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.SEGMENTATION</label>
+                <md-select
+                    ng-disabled="true"
+                    ng-model="vm.store.segmentacion">
+                    <md-option
+                        ng-repeat="segment in vm.storeSegmentation"
+                        ng-value="segment.value">
+                        {{segment.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.MANAGER</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.nombre_encargado"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.MANAGER_PHONE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.telefono_encargado"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.STREET</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.calle"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.NUMBER</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.numero"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.BETWEEN1</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.entre_calle1"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.BETWEEN2</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.entre_calle2"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.STATE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.localidad.municipio.estado.nombre"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.CITY</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.localidad.municipio.nombre"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.LOCALITY</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.localidad.nombre"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.STORE.ZIP_CODE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.store.localidad.codigo_postal"/>
+            </md-input-container>
+        </div>
+        <div layout="row"
+             layout-align="end end"
+             layout-sm="column"
+             layout-xs="column"
+             layout-align-sm="start stretch"
+             layout-align-xs="start stretch">
+            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+            </md-button>
         </div>
     </md-card>
-    <md-card layout="column"
-             layout-padding
-             layout-margin
-             layout-align="space-around stretch">
-        <form name="newRequestForm">
-            <div layout="row"
-                 class="full-width"
-                 layout-align="space-around center"
-                 layout-align-xs="center stretch"
-                 layout-xs="column">
-                <md-input-container class="md-block full-width">
-                    <label>Folio</label>
-                    <input name="folio"
-                           ng-model="vm.request.folio"
-                           md-maxlength="14"
-                           md-minlength="14"
-                           required>
-                    <div ng-messages="newRequestForm.folio.$error">
-                        <div ng-message when="required"><span>El folio es requerido</span></div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block full-width">
-                    <label>Obra</label>
-                    <input name="work"
-                           ng-model="vm.request.work"
-                           required>
-                    <div ng-messages="newRequestForm.work.$error">
-                        <div ng-message when="required"><span>El nombre de la obra es requerido</span></div>
-                    </div>
-                </md-input-container>
-            </div>
-            <div layout="row"
-                 class="full-width"
-                 layout-align="space-around center"
-                 layout-align-xs="center stretch"
-                 layout-xs="column">
-                <md-input-container class="md-block full-width">
-                    <label>Ubicación</label>
-                    <input name="locationName"
-                           ng-model="vm.request.location.name"
-                           required>
-                    <div ng-messages="newRequestForm.locationName.$error">
-                        <div ng-message when="required"><span>El nombre de la ubicación es requerido</span></div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block full-width">
-                    <label>Encargado</label>
-                    <input name="responsibleName"
-                           ng-model="vm.request.responsible.name"
-                           required>
-                    <div ng-messages="newRequestForm.responsibleName.$error">
-                        <div ng-message when="required"><span>El nombre del encargado es requerido</span></div>
-                    </div>
-                </md-input-container>
-            </div>
-            <div layout="row"
-                 class="full-width"
-                 layout-align="space-around center"
-                 layout-align-xs="center stretch"
-                 layout-xs="column">
-                <md-input-container class="md-block full-width">
-                    <label>Teléfono</label>
-                    <input name="responsiblePhone"
-                           ng-model="vm.request.responsible.phone"
-                           required>
-                    <div ng-messages="newRequestForm.responsiblePhone.$error">
-                        <div ng-message when="required"><span>El teléfono del encargado es requerido</span></div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block full-width">
-                    <label>E-Mail</label>
-                    <input name="responsibleMail"
-                           ng-model="vm.request.responsible.email"
-                           required>
-                    <div ng-messages="newRequestForm.responsibleMail.$error">
-                        <div ng-message when="required"><span>El E-Mail del encargado es requerido</span></div>
-                    </div>
-                </md-input-container>
-            </div>
-            <div layout="row"
-                 class="full-width"
-                 layout-align="space-around center"
-                 layout-align-xs="center stretch"
-                 layout-xs="column">
-                <md-input-container class="md-block full-width">
-                    <label>Partida</label>
-                    <input name="workKind"
-                           ng-model="vm.request.workKind">
-                </md-input-container>
-                <md-input-container class="md-block full-width">
-                    <label>Especificación</label>
-                    <input name="responsibleMail"
-                           ng-model="vm.request.responsible.email">
-                </md-input-container>
-            </div>
-            <div layout="row"
-                 layout-align="space-around center"
-                 layout-align-xs="center stretch"
-                 layout-xs="column">
-                <md-input-container class="md-block full-width">
-                    <label>Descripción</label>
-                    <textarea name="description"
-                              rows="5"
-                              ng-model="vm.request.description"
-                              md-maxlength="500"></textarea>
-                    <div ng-messages="newRequestForm.description.$error">
-                        <div ng-message when="required"><span>El folio es requerido</span></div>
-                    </div>
-                </md-input-container>
-            </div>
-            <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column"
-                 layout-align-sm="start stretch" layout-align-xs="start stretch">
-                <md-button aria-label="save"
-                           ng-click="vm.save()"
-                           ng-disabled="newRequestForm.$invalid"
-                           class="md-raised md-primary">
-                    <md-icon md-font-icon="fa fa-save"></md-icon>
-                    Guardar
-                </md-button>
-            </div>
-        </form>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.INFO</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.CLIENT_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_cliente"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.WORKER_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_tecnico"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.SCORE</label>
+                <md-select
+                    ng-disabled="true"
+                    ng-model="vm.request.calificacion">
+                    <md-option
+                        ng-repeat="score in vm.scores"
+                        ng-value="score.value">
+                        {{score.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.ROUTE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.ruta.nombre">
+                </input>
+            </md-input-container>
+        </div>
+        <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
+            <label translate>REQUESTS.NEW.CABINET</label>
+            <input
+                ng-disabled="true"
+                ng-model="vm.request.cabinet"/>
+        </md-input-container>
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <span translate>REQUESTS.NEW.CABINETS.TITLE</span>
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUESTS.NEW.CABINETS.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUESTS.NEW.CABINETS.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </md-card>
-</md-content>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+
+        <div
+            layout="column"
+            layout-gt-xs="row"
+            layout-align="space-around center">
+
+            <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
+            <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
+
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             cg-busy="{promise:vm.personaPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+             layout-padding>
+        <h3 translate>REQUESTS.NEW.USER.TITLE</h3>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.USERNAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.username"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.nombre"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.MIDDLE_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_paterno"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.LAST_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_materno"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.PHONE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.telefono"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.USER.EMAIL</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.email"/>
+            </md-input-container>
+        </div>
+    </md-card>
+</div>
