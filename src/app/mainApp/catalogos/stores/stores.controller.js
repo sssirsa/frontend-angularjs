@@ -7,7 +7,7 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, Localities) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities) {
 
         var vm = this;
 
@@ -21,6 +21,7 @@
         vm.restore = restore;
         vm.remove = remove;
         vm.update = update;
+
         vm.search_items = [];
         vm.searchText = '';
         var store = null;
@@ -184,6 +185,41 @@
             return vm.search_items;
         }
 
+        function listStates() {
+            if (!vm.states) {
+                States.list()
+                    .then(function (stateList) {
+                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
+                    })
+                    .catch(function (stateListError) {
+                        $log.error(stateListError);
+                        vm.states = null;
+                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
+                    });
+            }
+        }
+
+        function listCities(state) {
+            if (state) {
+                return Cities.getByState(state)
+                    .then(function (citiesList) {
+                        vm.cities = citiesList;
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+            else {
+                return Cities.list()
+                    .then(function (citiesList) {
+                        vm.cities = citiesList;
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+        }
+
         function listLocalities(){
             vm.localitiesPromise = Localities.list().then(function (res) {
                 vm.localities = Helper.filterDeleted(res, vm.toggleDeleted);
@@ -191,6 +227,14 @@
             }).catch(function (err) {
 
             });
+        }
+
+        function selectState() {
+            vm.locality.municipio_id = null;
+        }
+
+        function selectCity(city) {
+            vm.state = city.estado.id;
         }
 
     }
