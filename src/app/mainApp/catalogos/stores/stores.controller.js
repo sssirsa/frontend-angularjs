@@ -8,7 +8,7 @@
 
     /* @ngInject */
     function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities, $log,
-                              STORE_SEGMENTATION) {
+                              STORE_SEGMENTATION, Geolocation) {
 
         var vm = this;
 
@@ -26,6 +26,7 @@
         vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectLocality = selectLocality;
+        vm.showStoreLocation = showStoreLocation;
 
         vm.search_items = [];
         vm.searchText = '';
@@ -262,6 +263,10 @@
 
         function selectLocality(locality) {
             vm.zip_code = locality.codigo_postal;
+        }
+
+        function showStoreLocation() {
+            Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }
 
     }
