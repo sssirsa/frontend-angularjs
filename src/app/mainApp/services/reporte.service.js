@@ -10,28 +10,13 @@
         .factory("Reporte", Reporte);
 
     /* @ngInject */
-    function Reporte(Restangular, EnvironmentConfig, URLS) {
-        //var path = Restangular.all("reports/insumos");
-
-        var path = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                path = Restangular.all(URLS.environment.genesis_dev).all('reports/insumos');
-                break;
-            case 'staging':
-                path = Restangular.all(URLS.environment.genesis_stg).all('reports/insumos');
-                break;
-            case 'production':
-                path = Restangular.all(URLS.environment.genesis).all('reports/insumos');
-                break;
-            case 'local':
-                path = Restangular.all(URLS.environment.genesis_local).all('reports/insumos');
-                break;
-        }
+    function Reporte(WebRestangular, URLS) {
+        var path = WebRestangular.all(URLS.reporte_insumos);
 
         return {
             reporteInsumos: reporteInsumos
         };
+
         function reporteInsumos(object) {
             return path.post(object);
         }

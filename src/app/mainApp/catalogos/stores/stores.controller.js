@@ -7,7 +7,8 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, Localities) {
+    function storesController(Stores, Helper, $scope, toastr, Translate, $mdDialog, States, Cities, Localities, $log,
+                              STORE_SEGMENTATION, Geolocation) {
 
         var vm = this;
 
@@ -21,6 +22,12 @@
         vm.restore = restore;
         vm.remove = remove;
         vm.update = update;
+        vm.listCities = listCities;
+        vm.listLocalities = listLocalities;
+        vm.selectState = selectState;
+        vm.selectLocality = selectLocality;
+        vm.showStoreLocation = showStoreLocation;
+
         vm.search_items = [];
         vm.searchText = '';
         var store = null;
@@ -29,6 +36,14 @@
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
+
+        vm.states = null;
+        vm.cities = null;
+        vm.localities = null;
+        vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.state = null;
+        vm.city = null;
+        vm.zip_code = null;
 
         activate();
         init();
@@ -54,7 +69,7 @@
 
         function activate() {
             listlineas();
-            listLocalities();
+            listStates();
         }
 
         function toggleDeletedFunction() {
@@ -83,14 +98,13 @@
         }
 
         function update() {
-            vm.store.localidad_id=vm.store.localidad.id;
-            Stores.update(vm.store).then(function (res) {
+            Stores.update(vm.store, vm.store.id).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre_establecimiento != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -99,7 +113,6 @@
         }
 
         function create() {
-            vm.store.localidad_id=vm.store.localidad.id;
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
@@ -107,7 +120,7 @@
                 activate();
             }).catch(function (err) {
                 console.log(err);
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && err.data.nombre_establecimiento != undefined) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -139,18 +152,22 @@
         }
 
         function cancel() {
-            $scope.StoreForm.$setPristine();
-            $scope.StoreForm.$setUntouched();
             vm.store = angular.copy(store);
             vm.selectedLineaList = null;
             vm.numberBuffer = null;
             vm.searchText = null;
+
+            vm.state = null;
+            vm.city = null;
+
+            $scope.StoreForm.$setPristine();
+            $scope.StoreForm.$setUntouched();
         }
 
         function listlineas() {
             vm.loadingPromise = Stores.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.lineas = _.sortBy(vm.lineas, 'razon_social');
+                vm.lineas = _.sortBy(vm.lineas, 'nombre_establecimiento');
             }).catch(function (err) {
 
             });
@@ -178,22 +195,83 @@
 
         function lookup(search_text) {
             vm.search_items = _.filter(vm.lineas, function (item) {
-                return item.razon_social.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
+                return item.nombre_establecimiento.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
             });
             return vm.search_items;
         }
 
-        function listLocalities(){
-            vm.localitiesPromise = Localities.list().then(function (res) {
-                vm.localities = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.localities = _.sortBy(vm.localities, 'nombre');
-            }).catch(function (err) {
+        function listStates() {
+            if (!vm.states) {
+                States.list()
+                    .then(function (stateList) {
+                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
+                    })
+                    .catch(function (stateListError) {
+                        $log.error(stateListError);
+                        vm.states = null;
+                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
+                    });
+            }
+        }
 
-            });
+        function listCities(state) {
+            if (state) {
+                return Cities.getByState(state)
+                    .then(function (citiesList) {
+                        vm.cities = citiesList;
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+            else {
+                return Cities.list()
+                    .then(function (citiesList) {
+                        vm.cities = Helper.filterDeleted(citiesList, true);
+                    })
+                    .catch(function (citiesListError) {
+                        $log.error(citiesListError);
+                    });
+            }
+        }
+
+        function listLocalities(city) {
+            if (city) {
+                return Localities.getByCity(city)
+                    .then(function (localitiesList) {
+                        vm.localities = localitiesList;
+                    })
+                    .catch(function (localitiesListError) {
+                        $log.error(localitiesListError);
+                    });
+            }
+            else {
+                return Localities.list()
+                    .then(function (localitiesList) {
+                        vm.cities = Helper.filterDeleted(localitiesList, true);
+                    })
+                    .catch(function (localitiesListError) {
+                        $log.error(localitiesListError);
+                    });
+            }
+        }
+
+        function selectState() {
+            vm.city = null;
+            vm.store.localidad_id = null;
+        }
+
+        function selectLocality(locality) {
+            vm.zip_code = locality.codigo_postal;
+        }
+
+        function showStoreLocation() {
+            Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }
 
     }
 
+//Outside the controller
     function custom() {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
@@ -201,7 +279,7 @@
             }
 
             return _.filter(input, function (item) {
-                return item.razon_social.toLowerCase().indexOf(text.toLowerCase()) >= 0;
+                return item.nombre_establecimiento.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });
 
         };

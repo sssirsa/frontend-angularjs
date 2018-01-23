@@ -1,0 +1,81 @@
+<div class="bg-01"
+     layout="column"
+     layout-align="center stretch">
+
+    <div
+        cg-busy="{promise:vm.loadingPromise, templaeUrl:'app/mainApp/directives/loading_repeater.tmpl.html', wrapperClass:'cg-busy cg-busy-animation'}"
+    >
+    </div>
+        <md-card layout="column" layout-align="center center">
+            <h2 translate>REQUESTS.LIST.TITLE</h2>
+        </md-card>
+
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div ng-click="vm.listRequests('Abierta')"
+                         class="Abierta"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div ng-click="vm.listRequests('En_proceso')"
+                         class="En_proceso"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div ng-click="vm.listRequests('Atendida')"
+                         class="Atendida"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.CANCELED</span>
+                    <div ng-click="vm.listRequests('Cancelada')"
+                         class="Cancelada"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.CLOSED</span>
+                    <div ng-click="vm.listRequests('Cerrada')"
+                         class="Cerrada"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div ng-click="vm.listRequests('Todo')"
+                         class="Todo"></div>
+                </div>
+            </div>
+        </md-card>
+
+        <div
+            ng-if="vm.requests">
+
+            <md-card
+                layout="column"
+                ng-repeat="request in (vm.requests | orderBy:'-fecha')"
+                layout-gt-xs="row"
+                ng-click="vm.selectRequest(request)"
+                layout-align="space-around center">
+                <div layout="column" layout-align="center center">
+                    <h3 translate>REQUESTS.LIST.FOLIO</h3>
+                    <span>{{request.id}}</span>
+                </div>
+                <div layout="column" layout-align="center center">
+                    <h3 translate>REQUESTS.LIST.STATUS</h3>
+                    <div class="{{request.status}}">
+                    </div>
+                </div>
+                <div layout="column" layout-align="center center">
+                    <h3 translate>REQUESTS.LIST.DATE</h3>
+                    <span>{{request.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</span>
+                </div>
+            </md-card>
+
+        </div>
+
+</div>

@@ -7,13 +7,13 @@
         .module('app.mainApp.inventario')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider){
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/inventarios');
         $stateProvider
             .state('triangular.admin-default.cabinets', { //Nombre del state
                 url: '/cabinets', //Nombre que quiero en mi url
                 data: {
-                    roles: ['Administrador','Capturista']
+                    roles: ['Administrador', 'Capturista']
                 },
                 templateUrl: 'app/mainApp/inventarios/cabinet/cabinet.tmpl.html', //Dirección del archivo a usar
                 controller: 'cabinetController', //nombre del controlador
@@ -22,12 +22,33 @@
             .state('triangular.admin-default.insumos', { //Nombre del state
                 url: '/insumos', //Nombre que quiero en mi url
                 data: {
-                    roles: ['Administrador','Capturista']
+                    roles: ['Administrador', 'Capturista']
                 },
                 templateUrl: 'app/mainApp/inventarios/insumo/insumo.tmpl.html', //Dirección del archivo a usar
                 controller: 'insumoController', //nombre del controlador
                 controllerAs: 'vm' //se renombra al scope
             });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.INVENTORY.TITLE',
+                icon: 'fa fa-archive',
+                type: 'dropdown',
+                permission: ['Administrador', 'Capturista'],
+                priority: 6,
+                children: [{
+                    name: 'MAIN.MENU.INVENTORY.CABINETS',
+                    state: 'triangular.admin-default.cabinets',
+                    type: 'link'
+                }, {
+                    name: 'MAIN.MENU.INVENTORY.CONSUMABLES',
+                    state: 'triangular.admin-default.insumos',
+                    type: 'link'
+                }
+                ]
+            }
+        );
+
     }
 
-} )();
+})();

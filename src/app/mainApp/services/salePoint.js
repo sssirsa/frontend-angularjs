@@ -5,22 +5,8 @@
         .module('app')
         .factory('SalePoint', SalePoint);
 
-    function SalePoint(Restangular, EnvironmentConfig, URLS) {
-        var baseUrl = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseUrl = Restangular.all(URLS.environment.mobile_dev);
-                break;
-            case 'staging':
-                baseUrl = Restangular.all(URLS.environment.mobile_stg);
-                break;
-            case 'production':
-                baseUrl = Restangular.all(URLS.environment.mobile);
-                break;
-            case 'local':
-                baseUrl = Restangular.all(URLS.environment.mobile_local);
-                break;
-        }
+    function SalePoint(MobileRestangular, URLS) {
+        var baseUrl = MobileRestangular;
 
         var service = {
             getByID: getByID,

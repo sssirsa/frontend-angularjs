@@ -10,23 +10,8 @@
         .factory('CatalogoInsumo', CatalogoInsumo);
 
     /* @ngInject */
-    function CatalogoInsumo($q, Restangular, EnvironmentConfig, URLS) {
-        //var baseCatalogoInsumo = Restangular.all('catalogo_insumos');
-        var baseCatalogoInsumo = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_dev).all('catalogo_insumo');
-                break;
-            case 'staging':
-                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_stg).all('catalogo_insumo');
-                break;
-            case 'production':
-                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis).all('catalogo_insumo');
-                break;
-            case 'local':
-                baseCatalogoInsumo = Restangular.all(URLS.environment.genesis_local).all('catalogo_insumo');
-                break;
-        }
+    function CatalogoInsumo($q, WebRestangular, URLS) {
+        var baseCatalogoInsumo = WebRestangular.all(URLS.catalogo_insumos);
 
         return {
 
@@ -44,7 +29,7 @@
 
         function getCatalogoInsumo(catalogo) {
             var deferred = $q.defer();
-            Restangular.one('catalogo_insumos', catalogo).customGET().then(function (res) {
+            WebRestangular.one(URLS.catalogo_insumos, catalogo).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (res) {
                 deferred.reject(res);
@@ -56,7 +41,7 @@
         function getCatalogoByZone(etapa) {
             var deferred = $q.defer();
 
-            Restangular.all('catalogo_insumos').one('zone', etapa).customGET().then(function (res) {
+            WebRestangular.all(URLS.catalogo_insumos).one('zone', etapa).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -67,7 +52,7 @@
 
         function getCatalogoByWord(word) {
             var deferred = $q.defer();
-            Restangular.all('catalogo_insumos').one('lookup',word).customGET().then(function (res) {
+            WebRestangular.all(URLS.catalogo_insumos).one('lookup',word).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(res);
@@ -77,7 +62,7 @@
 
         function getAllCatalogoInsumos() {
             var deferred = $q.defer();
-            Restangular.all('catalogo_insumos').customGET().then(function (res) {
+            WebRestangular.all(URLS.catalogo_insumos).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(res);

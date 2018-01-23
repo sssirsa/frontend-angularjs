@@ -8,23 +8,10 @@
         .module('app.mainApp')
         .factory('Solicitud_Servicio',Solicitud_Servicio);
 
-    function Solicitud_Servicio($q, Restangular, EnvironmentConfig, URLS){
-        // var baseURL = Restangular.all('solicitud_servicio');
-        var baseURL = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseURL = Restangular.all(URLS.environment.genesis_dev).all('solicitud_servicio');
-                break;
-            case 'staging':
-                baseURL = Restangular.all(URLS.environment.genesis_stg).all('solicitud_servicio');
-                break;
-            case 'production':
-                baseURL = Restangular.all(URLS.environment.genesis).all('solicitud_servicio');
-                break;
-            case 'local':
-                baseURL = Restangular.all(URLS.environment.genesis_local).all('solicitud_servicio');
-                break;
-        }
+    function Solicitud_Servicio(WebRestangular, URLS){
+        // var baseURL = baseURL;
+        var baseURL =  WebRestangular.all(URLS.solicitudes.servicio);
+
         return{
             create:create,
             list:list,
@@ -34,40 +21,24 @@
         };
 
         function postEntradaMasiva(data) {
-            return baseURL.all('mass_upload').withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
+            return baseURL.all(URLS.mass_upload).withHttpConfig({transformRequest: angular.identity}).customPOST(data, "", {}, {'Content-type': undefined});
         }
 
         function create(object){
-            //Forma canonica
-            var deferred=$q.defer();
-            Restangular.all('solicitud_servicio').customPOST(object).then(function(rest){
-                deferred.resolve(rest);
-            }).catch(function(error){
-                deferred.reject(error);
-            });
-            return deferred.promise;
+            return baseURL.customPOST(object);
         }
 
         function list(){
-            return Restangular.all('solicitud_servicio').customGET();
+            return baseURL.customGET();
         }
 
 
         function borrarSolVenta(object){
-            return Restangular.one("solicitud_servicio",object).customDELETE(undefined,undefined,{'Content-Type': 'application/json'}).then(function(resp){
-                return resp;
-            }).catch(function(error){
-            })
+            return baseURL.all(object).customDELETE(undefined,undefined,{'Content-Type': 'application/json'});
         }
 
         function updateSolicitud(request) {
-            var deferred = $q.defer();
-            Restangular.one('solicitud_servicio', request.id).customPUT(request).then(function (res) {
-                deferred.resolve(res);
-            }).catch(function (err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
+            return baseURL.all(request.id).customPUT(request);
         }
 
     }

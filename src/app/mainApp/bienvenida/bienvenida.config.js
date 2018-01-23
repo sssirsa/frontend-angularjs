@@ -7,7 +7,7 @@
         .module('app.mainApp.bienvenida')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider,$translatePartialLoaderProvider){
+    function moduleConfig($stateProvider,$translatePartialLoaderProvider, triMenuProvider){
         $translatePartialLoaderProvider.addPart('app/mainApp/bienvenida');
         $stateProvider
 
@@ -25,7 +25,20 @@
                         return AuthService.getUser();
                     }*/
                 }
-            })
+            });
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.WELCOME',
+                icon: 'zmdi zmdi-home',
+                type: 'link',
+                permission: ['Administrador','Capturista','Cliente','Tecnico A','Tecnico B','Tecnico C','Tecnico D','Tecnico E', 'Tultitlan'],
+                priority: 1,
+                state: 'triangular.admin-default.bienvenida'
+
+            }
+        );
+
     }
 
 } )();

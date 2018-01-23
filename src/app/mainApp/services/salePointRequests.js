@@ -5,35 +5,22 @@
         .module('app')
         .factory('SalePointRequests', SalePointRequests);
 
-    function SalePointRequests(Restangular, $window, URLS, EnvironmentConfig) {
-        var baseUrl = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseUrl = Restangular.all(URLS.environment.mobile_dev);
-                break;
-            case 'staging':
-                baseUrl = Restangular.all(URLS.environment.mobile_stg);
-                break;
-            case 'production':
-                baseUrl = Restangular.all(URLS.environment.mobile);
-                break;
-            case 'local':
-                baseUrl = Restangular.all(URLS.environment.mobile_local);
-                break;
-        }
+    function SalePointRequests(MobileRestangular, $window, URLS) {
+        var baseUrl=MobileRestangular.all(URLS.solicitud_pv);
 
         var service = {
             getByID: getByID,
             getAll: getAll,
-            locate: locate
+            locate: locate,
+            create:create
         };
 
         function getByID(id) {
-            return baseUrl.one('solicitud', id).customGET();
+            return baseUrl.all(id).customGET();
         }
 
         function getAll() {
-            return baseUrl.all('solicitud').getList();
+            return baseUrl.getList();
         }
 
         function locate(latitude, longitude) {
@@ -41,6 +28,10 @@
             var target = '_blank';
 
             $window.open(url, target);
+        }
+
+        function create (element){
+            return baseUrl.post(element);
         }
 
         return service;

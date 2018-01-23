@@ -302,8 +302,10 @@
             "TITLE":"Localidades",
             "SUBTITLE":"Información de localidad",
             "NAME":"Nombre",
-            "ROUTE":"Ruta",
-            "SEARCH":"Búsqueda de localidades"
+            "SEARCH":"Búsqueda de localidades",
+            "STATE":"Estado",
+            "CITY":"Municipio",
+            "ZIP_CODE":"Código Postal"
         }
     },
     "STORES":{
@@ -314,6 +316,25 @@
             "NOT_FOUND":"No se encontró el establecimiento",
             "LATITUDE": "Latidud",
             "LONGITUDE": "Longitud"
+        }
+    },
+    "STATES":{
+        "LABELS":{
+            "TITLE":"Estados",
+            "SUBTITLE":"Información de Estado",
+            "NAME":"Nombre",
+            "CODE":"Código del estado"
+        }
+    },
+    "CITIES":{
+        "LABELS":{
+            "TITLE":"Municipios",
+            "SUBTITLE":"Información de municipio",
+            "NAME":"Nombre",
+            "STATE":"Estado"
+        },
+        "TOASTR":{
+            "ERROR_STATE_LIST":"Error al cargar la lista de estados"
         }
     }
 }

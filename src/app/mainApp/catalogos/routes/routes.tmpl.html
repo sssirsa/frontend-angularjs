@@ -46,7 +46,7 @@
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.route.id }">
-                                    <md-icon md-svg-icon="assets/images/transport.svg" class="avatar"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/route.svg" class="avatar"></md-icon>
                                     <span flex="flex">{{linea.nombre }}</span>
                                 </md-button>
                                 <md-divider></md-divider>

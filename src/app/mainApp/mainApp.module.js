@@ -8,7 +8,7 @@
         'app.mainApp.login',
         'app.mainApp.admin',
         'app.mainApp.bienvenida',
-        'app.mainApp.tecnico',
+        'app.mainApp.servicios',
         'app.mainApp.inventario',
         'app.mainApp.catalogos',
         'app.mainApp.profile',
