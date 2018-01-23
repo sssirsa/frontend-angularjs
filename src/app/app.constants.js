@@ -406,7 +406,29 @@
             ],
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
-                {id: 'attended', value: 'Atendidas'}
+                {id: 'attended', value: 'Atendidos'}
+            ],
+            requestKinds: [
+                {
+                    id: 'Nuevos',
+                    label: 'Nuevos'
+                },
+                {
+                    id: 'Incremental',
+                    label: 'Incremental'
+                },
+                {
+                    id: 'Retiro',
+                    label: 'Retiro'
+                },
+                {
+                    id: 'Cambio',
+                    label: 'Cambio'
+                },
+                {
+                    id: 'Servicio Técnico',
+                    label: 'Servicio técnico'
+                }
             ]
         })
         .constant('URLS', {
@@ -451,12 +473,14 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            establecimiento:'establecimiento',
-            sucursal:'sucursal',
-            tipo_equipo:'tipo_equipo',
-            tipo_transporte:'tipo_transporte',
-            unidad:'unidad',
-            modelo_cabinet:'modelo_cabinet'
+            establecimiento: 'establecimiento',
+            sucursal: 'sucursal',
+            tipo_equipo: 'tipo_equipo',
+            tipo_transporte: 'tipo_transporte',
+            unidad: 'unidad',
+            modelo_cabinet: 'modelo_cabinet',
+            estado: 'estado',
+            municipio: 'municipio'
         })
         .constant('CONFIGS', {
             ADTConfig: {
@@ -500,5 +524,59 @@
                 daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
                 monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
             }
-        });
+        })
+        .constant('SCORES',
+            [
+                {
+                    value: 0,
+                    label: '☆☆☆☆☆'
+                },
+                {
+                    value: 1,
+                    label: '★☆☆☆☆'
+                },
+                {
+                    value: 2,
+                    label: '★★☆☆☆'
+                },
+                {
+                    value: 3,
+                    label: '★★★☆☆'
+                },
+                {
+                    value: 4,
+                    label: '★★★★☆'
+                },
+                {
+                    value: 5,
+                    label: '★★★★★'
+                }]
+        )
+        .constant('STORE_SEGMENTATION',
+            [
+                {
+                    value: 0,
+                    label: 'Rojo'
+                },
+                {
+                    value: 1,
+                    label: 'Bajo Bronce'
+                },
+                {
+                    value: 2,
+                    label: 'Bronce'
+                },
+                {
+                    value: 3,
+                    label: 'Plata'
+                },
+                {
+                    value: 4,
+                    label: 'Oro'
+                },
+                {
+                    value: 5,
+                    label: 'Platino'
+                }]
+        );
 })();

@@ -9,7 +9,7 @@
         .module('app.mainApp')
         .factory('Sucursal',Sucursal);
 
-    function Sucursal(WebRestangular, EnvironmentConfig, URLS){
+    function Sucursal(WebRestangular, URLS){
         var baseSucursal = WebRestangular.all(URLS.sucursal);
 
         return {
@@ -19,10 +19,10 @@
             remove:remove,
             listObject:listObject
         };
+
         function listObject() {
             return baseSucursal.getList();
         }
-
 
         function list(){
             return baseSucursal.getList().$object;

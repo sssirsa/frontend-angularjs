@@ -17,18 +17,18 @@
                     <md-autocomplete md-selected-item="vm.selectedLinea"
                                      md-selected-item-change="vm.selectedItemChange(vm.selectedLinea)"
                                      md-items="item in vm.querySearch(vm.searchText)"
-                                     md-item-text="item.razon_social"
+                                     md-item-text="item.nombre_establecimiento"
                                      md-min-length="0"
                                      md-search-text-change="vm.search(vm.searchText)"
                                      md-search-text="vm.searchText"
                                      md-menu-class="autocomplete-custom-template"
                                      md-floating-label="{{'STORES.LABELS.SEARCH'| translate }}">
                         <span
-                            md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.razon_social}}</span>
+                            md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.nombre_establecimiento}}</span>
                         <md-item-template>
                         <span class="item-title">
                             <md-icon md-font-icon="fa fa-briefcase"></md-icon>
-                            <span>&nbsp; {{item.razon_social}}</span>
+                            <span>&nbsp; {{item.nombre_establecimiento}}</span>
                         </span>
                         <span class="item-metadata">
                             <span class="item-metastat">
@@ -50,7 +50,7 @@
                             <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.store.id }">
-                                    <md-icon md-svg-icon="assets/images/transport.svg" class="avatar"></md-icon>
+                                    <md-icon md-svg-icon="assets/images/store.svg" class="avatar"></md-icon>
                                     <span flex="flex">{{linea.nombre_establecimiento }}</span>
                                 </md-button>
                                 <md-divider></md-divider>
@@ -65,111 +65,188 @@
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
                     <h2 class="md-headline-1 text-center">
                         {{'STORES.LABELS.SUBTITLE'|translate}}</h2>
+
                     <form name="StoreForm">
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STORE_NAME'|translate}}</label>
+                                <label translate>REQUESTS.DETAIL.STORE.NAME</label>
                                 <input
-                                    type="text"
                                     ng-disabled="vm.store.deleted"
-                                    required=""
                                     ng-model="vm.store.nombre_establecimiento"/>
                             </md-input-container>
                             <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.OWNER'|translate}}</label>
-                                <input
-                                    type="text"
+                                <label translate>REQUESTS.DETAIL.STORE.SEGMENTATION</label>
+                                <md-select
                                     ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.nombre_encargado"/>
-                            </md-input-container>
-                        </div>
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STREET'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.calle"/>
-                            </md-input-container>
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.NUMBER'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.numero"/>
-                            </md-input-container>
-                        </div>
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.BETWEEN_1'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.entre_calle1"/>
-                            </md-input-container>
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.BETWEEN_2'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.entre_calle2"/>
-                            </md-input-container>
-                        </div>
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.ZIP_CODE'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.cp"/>
-                            </md-input-container>
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.PHONE'|translate}}</label>
-                                <input
-                                    type="text"
-                                    ng-disabled="vm.store.deleted"
-                                    required=""
-                                    ng-model="vm.store.telefono_encargado"/>
-                            </md-input-container>
-                        </div>
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                            <md-input-container flex class="md-block">
-                                <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.LOCALITY'|translate}}</label>
-                                <md-select name="selectLocality"
-                                           ng-model="vm.store.localidad.id"
-                                           required=""
-                                           md-no-asterisk="">
-                                    <md-option ng-repeat="locality in vm.localities" value="{{locality.id}}">
-                                        {{locality.nombre}} - {{locality.ruta}}
+                                    ng-model="vm.store.segmentacion">
+                                    <md-option
+                                        ng-repeat="segment in vm.storeSegmentation"
+                                        ng-value="segment.value">
+                                        {{segment.label}}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
-                        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
                             <md-input-container flex class="md-block">
-                                <label>{{'STORES.LABELS.LATITUDE'|translate}}</label>
+                                <label translate>REQUESTS.DETAIL.STORE.MANAGER</label>
                                 <input
-                                    type="text"
                                     ng-disabled="vm.store.deleted"
-                                    required=""
+                                    ng-model="vm.store.nombre_encargado"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.MANAGER_PHONE</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.telefono_encargado"/>
+                            </md-input-container>
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.STREET</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.calle"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.NUMBER</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.numero"/>
+                            </md-input-container>
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.BETWEEN1</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.entre_calle1"/>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.BETWEEN2</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.entre_calle2"/>
+                            </md-input-container>
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.STATE</label>
+                                <md-select
+                                    ng-model="vm.state"
+                                    md-on-close="vm.selectState(city)"
+                                    ng-disabled="vm.store.deleted"
+                                >
+                                    <md-option
+                                        ng-repeat="state in vm.states"
+                                        ng-value="state.id"
+                                    >
+                                        {{state.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.CITY</label>
+                                <md-select
+                                    ng-model="vm.city"
+                                    md-on-open="vm.listCities(vm.state)"
+                                    ng-disabled="vm.store.deleted || !vm.state"
+                                >
+                                    <md-option
+                                        ng-repeat="city in vm.cities"
+                                        ng-value="city.id"
+                                    >
+                                        {{city.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <!--
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.CITY</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.localidad.municipio.nombre"/>
+                            </md-input-container>-->
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
+                                <md-select
+                                    ng-model="vm.store.localidad_id"
+                                    md-on-open="vm.listLocalities(vm.city)"
+                                    md-on-close="vm.selectLocality(locality)"
+                                    ng-disabled="vm.locality.deleted || !vm.city"
+                                >
+                                    <md-option
+                                        ng-repeat="locality in vm.localities"
+                                        ng-value="locality.id"
+                                    >
+                                        {{locality.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <!--
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
+                                    ng-model="vm.store.localidad.nombre"/>
+                            </md-input-container>-->
+                            <md-input-container flex class="md-block">
+                                <label translate>REQUESTS.DETAIL.STORE.ZIP_CODE</label>
+                                <input
+                                    ng-disabled="true"
+                                    ng-model="vm.zip_code"/>
+                            </md-input-container>
+                        </div>
+                        <div flex
+                             layout="column"
+                             layout-gt-sm="row"
+                             layout-align-gt-sm="center stretch">
+                            <md-input-container flex class="md-block">
+                                <label translate>STORES.LABELS.LATITUDE</label>
+                                <input
+                                    ng-disabled="vm.store.deleted"
                                     ng-model="vm.store.latitud"/>
                             </md-input-container>
                             <md-input-container flex class="md-block">
-                                <label>{{'STORES.LABELS.LONGITUDE'|translate}}</label>
+                                <label translate>STORES.LABELS.LONGITUDE</label>
                                 <input
-                                    type="text"
                                     ng-disabled="vm.store.deleted"
-                                    required=""
                                     ng-model="vm.store.longitud"/>
                             </md-input-container>
                         </div>
+                        <div layout="row"
+                             layout-align="end end"
+                             layout-sm="column"
+                             layout-xs="column"
+                             layout-align-sm="start stretch"
+                             layout-align-xs="start stretch">
+                            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
+                                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+                            </md-button>
+                        </div>
                     </form>
+
                     <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
                         <md-button aria-label="fab button" ng-click="vm.cancel()" class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
