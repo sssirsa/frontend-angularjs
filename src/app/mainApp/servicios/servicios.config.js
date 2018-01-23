@@ -121,10 +121,7 @@
                 controller: 'ListRequestPageController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E'],
-                    layout: {
-                        contentClass: 'layout-column'
-                    }
+                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
                 }
             })
             .state('triangular.admin-default.detailRequest', {
