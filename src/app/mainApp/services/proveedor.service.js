@@ -8,24 +8,8 @@
         .module('app.mainApp')
         .factory('Proveedor',Proveedor);
 
-    function Proveedor(Restangular, EnvironmentConfig, URLS)
-    {
-        // var baseProveedor = Restangular.all('proveedor');
-        var baseProveedor = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseProveedor = Restangular.all(URLS.environment.genesis_dev).all('proveedor');
-                break;
-            case 'staging':
-                baseProveedor = Restangular.all(URLS.environment.genesis_stg).all('proveedor');
-                break;
-            case 'production':
-                baseProveedor = Restangular.all(URLS.environment.genesis).all('proveedor');
-                break;
-            case 'local':
-                baseProveedor = Restangular.all(URLS.environment.genesis_local).all('proveedor');
-                break;
-        }
+    function Proveedor(WebRestangular, URLS){
+        var baseProveedor = WebRestangular.all(URLS.proveedor);
 
         var service = {
             list:list,

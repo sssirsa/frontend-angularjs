@@ -1,0 +1,113 @@
+{
+    "REQUESTS": {
+        "LIST": {
+            "TOASTR": {
+                "ERROR": "Ocurrió un error al cargar el listado de solicitudes"
+            },
+            "TITLE":"Listado de solicitudes",
+            "OPEN":"Abierta",
+            "ATTENDED":"Atendida",
+            "IN_PROCESS":"En proceso",
+            "CANCELED":"Cancelada",
+            "CLOSED":"Cerrada",
+            "FOLIO":"Folio",
+            "STATUS":"Estado",
+            "DATE":"Fecha",
+            "ALL":"Todas"
+        },
+        "DETAIL": {
+            "TOASTR":{
+                "ERROR_PV":"Ocurrió un error al cargar la solicitud",
+                "ERROR_STORE":"Ocurrió un error al cargar el establecimiento",
+                "ERROR_USER":"Ocurrió un error al cargar el usuario"
+            },
+            "TITLE":"Detalle de solicitud",
+            "STORE":{
+                "TITLE":"Establecimiento",
+                "NAME":"Nombre del establecimiento",
+                "MANAGER":"Nombre del encargado",
+                "MANAGER_PHONE":"Teléfono encargado",
+                "STREET":"Calle",
+                "NUMBER":"Número",
+                "BETWEEN1":"Entre calle",
+                "BETWEEN2":"Y entre calle",
+                "STATE":"Estado",
+                "CITY":"Municipio",
+                "LOCALITY":"Localidad",
+                "ZIP_CODE":"Código postal",
+                "SEGMENTATION":"Segmentación"
+            },
+            "INFO":"Información de la solicitud",
+            "USER": {
+                "TITLE": "Persona",
+                "USERNAME":"Nombre de usuario",
+                "NAME":"Nombre",
+                "MIDDLE_NAME":"Apellido paterno",
+                "LAST_NAME":"Apellido materno",
+                "EMAIL":"Correo electrónico",
+                "PHONE":"Teléfono"
+            },
+            "CABINET":"Económico del cabinet",
+            "CABINETS":{
+                "TITLE":"Solicitudes de cabinet",
+                "QUANTITY":"Cantidad",
+                "KIND":"Tipo de cabinet"
+            },
+            "CLIENT_COMMENTS":"Observaciones del cliente",
+            "WORKER_COMMENTS": "Observaciones del personal",
+            "SCORE":"Calificación del servicio",
+            "ROUTE":"Ruta",
+            "EVIDENCES":"Evidencias"
+        },
+        "NEW": {
+            "TOASTR":{
+                "ERROR_PV":"Ocurrió un error al cargar la solicitud",
+                "ERROR_STORE":"Ocurrió un error al cargar establecimientos",
+                "ERROR_USER":"Ocurrió un error al cargar usuarios"
+            },
+            "TITLE":"Creación de solicitud",
+            "STORE":{
+                "TITLE":"Establecimiento",
+                "NAME":"Nombre del establecimiento",
+                "MANAGER":"Nombre del encargado",
+                "MANAGER_PHONE":"Teléfono encargado",
+                "STREET":"Calle",
+                "NUMBER":"Número",
+                "BETWEEN1":"Entre calle",
+                "BETWEEN2":"Y entre calle",
+                "STATE":"Estado",
+                "CITY":"Municipio",
+                "LOCALITY":"Localidad",
+                "ZIP_CODE":"Código postal",
+                "SEGMENTATION":"Segmentación",
+                "SEARCH":"Establecimiento a asignar"
+            },
+            "INFO":"Información de la solicitud",
+            "USER": {
+                "TITLE": "Persona",
+                "USERNAME":"Nombre de usuario",
+                "NAME":"Nombre",
+                "MIDDLE_NAME":"Apellido paterno",
+                "LAST_NAME":"Apellido materno",
+                "EMAIL":"Correo electrónico",
+                "PHONE":"Teléfono"
+            },
+            "CABINET":"Económico del cabinet",
+            "CABINETS":{
+                "TITLE":"Solicitudes de cabinet",
+                "QUANTITY":"Cantidad",
+                "KIND":"Tipo de cabinet"
+            },
+            "CLIENT_COMMENTS":"Observaciones del cliente",
+            "WORKER_COMMENTS": "Observaciones del personal",
+            "SCORE":"Calificación del servicio",
+            "ROUTE":"Ruta",
+            "EVIDENCES":"Evidencias",
+            "KIND":"Tipo de solicitud",
+            "EQUIPMENT":{
+                "SEARCH":"Tipo de equipo a asignar"
+            },
+            "SUCURSAL":"Sucursal"
+        }
+    }
+}

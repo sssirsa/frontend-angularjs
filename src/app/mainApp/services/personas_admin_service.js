@@ -8,24 +8,9 @@
         .module('app.mainApp')
         .factory('Persona_Admin',Persona_Admin);
 
-    function Persona_Admin(Restangular, EnvironmentConfig, URLS){
-        // var baseModelo = Restangular.all('persona_admin');
+    function Persona_Admin(WebRestangular, URLS){
 
-        var baseModelo = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('persona_admin');
-                break;
-            case 'staging':
-                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('persona_admin');
-                break;
-            case 'production':
-                baseModelo = Restangular.all(URLS.environment.genesis).all('persona_admin');
-                break;
-            case 'local':
-                baseModelo = Restangular.all(URLS.environment.genesis_local).all('persona_admin');
-                break;
-        }
+        var baseModelo = WebRestangular.all(URLS.persona_admin);
 
         return {
             list:list,
@@ -55,7 +40,7 @@
 
 
             var defer= $q.defer();
-            Restangular.all('persona_admin').withHttpConfig({transformRequest: angular.identity}).customPOST(form_data,"",{},{'Content-Type':undefined}).then(function(res){
+            WebRestangular.all(URLS.persona_admin).withHttpConfig({transformRequest: angular.identity}).customPOST(form_data,"",{},{'Content-Type':undefined}).then(function(res){
                 defer.resolve(res);
             }).catch(function(err){
                 defer.reject(err);

@@ -8,40 +8,9 @@
         .module('app.mainApp.reportes')
         .factory('Reportes',Reportes);
 
-    function Reportes(Restangular, EnvironmentConfig, URLS, ReportList){
-        // var path= Restangular.all('report_builder').all('api');
-        // var pathReport= Restangular.all('report_builder').all('report');
-        var path = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                path = Restangular.all(URLS.environment.genesis_dev).all('report_builder/api');
-                break;
-            case 'staging':
-                path = Restangular.all(URLS.environment.genesis_stg).all('report_builder/api');
-                break;
-            case 'production':
-                path = Restangular.all(URLS.environment.genesis).all('report_builder/api');
-                break;
-            case 'local':
-                path = Restangular.all(URLS.environment.genesis_local).all('report_builder/api');
-                break;
-        }
-
-        var pathReport = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                pathReport = Restangular.all(URLS.environment.genesis_dev).all('report_builder/report');
-                break;
-            case 'staging':
-                pathReport = Restangular.all(URLS.environment.genesis_stg).all('report_builder/report');
-                break;
-            case 'production':
-                pathReport = Restangular.all(URLS.environment.genesis).all('report_builder/report');
-                break;
-            case 'local':
-                pathReport = Restangular.all(URLS.environment.genesis_local).all('report_builder/report');
-                break;
-        }
+    function Reportes(WebRestangular, URLS, ReportList){
+        var path= WebRestangular.all(URLS.report_builder).all('api');
+        var pathReport= WebRestangular.all(URLS.report_builder).all('report');
 
         return {
             getPartialReports:getPartialReports,
@@ -185,7 +154,9 @@
             return path.one("report",id).one("download_file",format).all("").customGET();
         }
         function getReportsGenerated() {
-            return ReportList.all('report_builder').all("reports").all("download").all("").getList();
+            return ReportList.all(URLS.report_builder).all("reports").all("download").all("").getList();
+            //return path.all("reports").all("download").all("").getList();
+
         }
         //Obtiene la información completa de un reporte en específico usando un promise
         function getReportObject(id){

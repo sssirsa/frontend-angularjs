@@ -8,24 +8,10 @@
     angular
         .module('app.mainApp')
         .factory('unidad',unidad);
-    function unidad(Restangular, EnvironmentConfig, URLS){
+    function unidad(WebRestangular, URLS){
 
         // var baseUdn = Restangular.all('unidad');
-        var baseUdn = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseUdn = Restangular.all(URLS.environment.genesis_dev).all('unidad');
-                break;
-            case 'staging':
-                baseUdn = Restangular.all(URLS.environment.genesis_stg).all('unidad');
-                break;
-            case 'production':
-                baseUdn = Restangular.all(URLS.environment.genesis).all('unidad');
-                break;
-            case 'local':
-                baseUdn = Restangular.all(URLS.environment.genesis_local).all('unidad');
-                break;
-        }
+        var baseUdn = WebRestangular.all(URLS.unidad);
 
         return {
             list:list,

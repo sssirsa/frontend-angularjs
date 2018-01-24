@@ -9,23 +9,9 @@
         .module('app.mainApp')
         .factory('PersonaCapturista',PersonaCapturista);
 
-    function PersonaCapturista(Restangular, EnvironmentConfig, URLS){
+    function PersonaCapturista(WebRestangular, URLS){
         // var baseModelo=Restangular.all('persona_capturista');
-        var baseModelo = null;
-        switch (EnvironmentConfig.environment) {
-            case 'development':
-                baseModelo = Restangular.all(URLS.environment.genesis_dev).all('persona_capturista');
-                break;
-            case 'staging':
-                baseModelo = Restangular.all(URLS.environment.genesis_stg).all('persona_capturista');
-                break;
-            case 'production':
-                baseModelo = Restangular.all(URLS.environment.genesis).all('persona_capturista');
-                break;
-            case 'local':
-                baseModelo = Restangular.all(URLS.environment.genesis_local).all('persona_capturista');
-                break;
-        }
+        var baseModelo = WebRestangular.all(URLS.cliente);
 
         return{
             list:list,
@@ -58,7 +44,7 @@
 
 
             var defer= $q.defer();
-            Restangular.one('persona_capturista',data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data,"",{},{'Content-Type':undefined}).then(function(res){
+            WebRestangular.one(URLS.cliente,data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data,"",{},{'Content-Type':undefined}).then(function(res){
                 defer.resolve(res);
             }).catch(function(err){
                 defer.reject(err);
