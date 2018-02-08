@@ -56,6 +56,8 @@
                             //Folio de la solicitud
                             formato.content[0].columns[1].stack[3].text=reporte.id;
                             //Información de la solicitud
+                            //Titulo
+                            formato.content[1].text = 'Información de la solicitud'
                             //Estatus
                             formato.content[2].stack[0].columns[1].text=reporte.status;
                             //Tipo
@@ -96,6 +98,11 @@
                             formato.content[12].columns[0].stack[1].text = reporte.observaciones_tecnico;
                             //Cliente
                             formato.content[12].columns[1].stack[1].text = reporte.observaciones_cliente;
+                            //Firmas
+                            //Trabajador
+                            formato.content[14].columns[0].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
+                            //Cliente
+                            formato.content[14].columns[1].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
 
                         })
                         .catch();
