@@ -104,6 +104,12 @@
                             //Cliente
                             formato.content[14].columns[1].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
 
+                            //Evidencias
+                            reporte.evidencia.forEach(function(evidence){
+                                var image = {image:'data:image/png;base64,'+evidence.foto};
+                                formato.content.push(image);
+                            });
+
                         })
                         .catch();
                 })
