@@ -74,6 +74,13 @@
                     <h3 translate>REQUESTS.LIST.DATE</h3>
                     <span>{{request.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</span>
                 </div>
+                <div layout="column" layout-align="center center">
+                    <md-button aria-label="fab button"
+                               ng-click="vm.downloadReport(request.id); $event.stopPropagation();"
+                               class="md-raised md-primary">
+                        <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                    </md-button>
+                </div>
             </md-card>
 
         </div>

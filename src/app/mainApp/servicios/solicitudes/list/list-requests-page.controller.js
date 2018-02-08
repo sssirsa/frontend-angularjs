@@ -12,6 +12,7 @@
         //Function mapping
         vm.listRequests = listRequests;
         vm.selectRequest = selectRequest;
+        vm.downloadReport = downloadReport;
 
         //Variable declaration
         vm.selectedKind = null;
@@ -42,6 +43,10 @@
 
         function selectRequest(request) {
             $state.go('triangular.admin-default.detailRequest', {id: request.id});
+        }
+
+        function downloadReport(requestID){
+
         }
 
     }
