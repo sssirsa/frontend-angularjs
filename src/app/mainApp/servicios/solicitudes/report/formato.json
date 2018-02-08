@@ -52,7 +52,11 @@
                         },
                         {
                             style:'mid_title',
-                            text:'Reporte de Solicitud'
+                            text:'Reporte de '
+                        },
+                        {
+                            style:'mid_title',
+                            text:'folio'
                         }
                     ]
                 }
@@ -103,6 +107,28 @@
                         },
                         {
                             text:'dd/MM/aaaa hh:mm:ss'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            stack:[
+                {
+                    columns:[
+                        {
+                            style:'data_label',
+                            text:'Sucursal:'
+                        },
+                        {
+                            text:'Tenayuca'
+                        },
+                        {
+                            style:'data_label',
+                            text:'Calificación:'
+                        },
+                        {
+                            text:'0'
                         }
                     ]
                 }
