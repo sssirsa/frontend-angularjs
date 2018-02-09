@@ -92,19 +92,19 @@
                             //Municipio
                             formato.content[10].stack[0].columns[3].text = reporte.establecimiento.municipio;
                             //Localidad
-                            formato.content[10].stack[0].columns[1].text = reporte.establecimiento.localidad;
+                            formato.content[11].stack[0].columns[1].text = reporte.establecimiento.localidad;
                             //CP
-                            formato.content[10].stack[0].columns[3].text = reporte.establecimiento.cp;
+                            formato.content[11].stack[0].columns[3].text = reporte.establecimiento.cp;
                             //Observaciones
                             //Técnicas
-                            formato.content[12].columns[0].stack[1].text = reporte.observaciones_tecnico;
+                            formato.content[13].columns[0].stack[1].text = reporte.observaciones_tecnico;
                             //Cliente
-                            formato.content[12].columns[1].stack[1].text = reporte.observaciones_cliente;
+                            formato.content[13].columns[1].stack[1].text = reporte.observaciones_cliente;
                             //Firmas
                             //Trabajador
-                            formato.content[14].columns[0].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
+                            formato.content[15].columns[0].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
                             //Cliente
-                            formato.content[14].columns[1].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
+                            formato.content[15].columns[1].stack[1].image = 'data:image/png;base64,'+reporte.firma_cliente;
 
                             //Evidencias
                             reporte.evidencia.forEach(function(evidence){
