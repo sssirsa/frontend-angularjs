@@ -121,13 +121,11 @@
 
                         })
                         .catch(function(reporteError){
-                            //TODO:Error handling
                             $log.error(reporteError);
                             toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.REPORT_ERROR'));
                         });
                 })
                 .catch(function(JSONError){
-                    //TODO: Error handling
                     $log.error(JSONError);
                     toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.JSON_REPORT_ERROR'));
                 });
