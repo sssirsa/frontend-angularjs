@@ -2,7 +2,9 @@
     "REQUESTS": {
         "LIST": {
             "TOASTR": {
-                "ERROR": "Ocurrió un error al cargar el listado de solicitudes"
+                "ERROR": "Ocurrió un error al cargar el listado de solicitudes",
+                "REPORT_ERROR": "Error al obtener la información para generar el reporte",
+                "JSON_REPORT_ERROR":"Error al obtener la plantilla del reporte"
             },
             "TITLE":"Listado de solicitudes",
             "OPEN":"Abierta",
