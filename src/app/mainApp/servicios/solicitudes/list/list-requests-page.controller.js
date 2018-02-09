@@ -49,7 +49,7 @@
 
             $http.get('app/mainApp/servicios/solicitudes/report/formato.json')
                 .success(function(formato){
-                    Solicitudes.report(requestID)
+                    vm.getReportPromise=Solicitudes.report(requestID)
                         .then(function(reporte){
                             $log.debug(reporte);
                             //Encabezado
@@ -67,7 +67,7 @@
                             //Atendió
                             formato.content[3].stack[0].columns[1].text=reporte.persona;
                             //Fecha
-                            formato.content[3].stack[0].columns[3].text=moment(reporte.fecha, 'DD/MM/YYYY HH:mm:SS');
+                            formato.content[3].stack[0].columns[3].text=moment(reporte.fecha, 'DD/MM/YYYY hh:mm:ss');
                             //Sucursal
                             formato.content[4].stack[0].columns[1].text=reporte.sucursal;
                             //Calificación

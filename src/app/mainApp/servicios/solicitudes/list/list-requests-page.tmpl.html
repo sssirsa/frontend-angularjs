@@ -1,11 +1,8 @@
 <div class="bg-01"
      layout="column"
-     layout-align="center stretch">
+     layout-align="center stretch"
+     cg-busy="{promise:vm.loadingPromise, message:'Cargando solicitudes...'}">
 
-    <div
-        cg-busy="{promise:vm.loadingPromise, templaeUrl:'app/mainApp/directives/loading_repeater.tmpl.html', wrapperClass:'cg-busy cg-busy-animation'}"
-    >
-    </div>
         <md-card layout="column" layout-align="center center">
             <h2 translate>REQUESTS.LIST.TITLE</h2>
         </md-card>
@@ -48,6 +45,7 @@
         </md-card>
 
         <div
+            cg-busy="{promise:vm.getReportPromise, message:'Generando reporte...'}"
             ng-if="vm.requests">
 
             <md-card
