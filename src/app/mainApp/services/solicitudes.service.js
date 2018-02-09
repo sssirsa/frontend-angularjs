@@ -15,7 +15,8 @@
             create:create,
             list:list,
             modify:modify,
-            consultaEsp:consultaEsp
+            consultaEsp:consultaEsp,
+            report:report
         };
 
         function create(object){
@@ -44,6 +45,10 @@
                     break;
             }
             return urlbase.all(tipoConsulta).customGET();
+        }
+
+        function report(id){
+            return urlbase.one('report',id).get();
         }
 
     }
