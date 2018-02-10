@@ -180,7 +180,18 @@
 
         function selectedItemChange(item) {
             if (item != null) {
+                if(item.localidad.municipio) {
+                    vm.state = item.localidad.municipio.estado.id;
+                    listCities(vm.state);
+                    vm.city = item.localidad.municipio.id;
+                    //TODO: Verify the loading of localities
+                    listLocalities(vm.city);
+                }
+                vm.locality = item.localidad;
+                selectLocality();
                 vm.store = angular.copy(item);
+                vm.store.latitud = Number(vm.store.latitud);
+                vm.store.longitud = Number(vm.store.longitud);
 
             } else {
                 cancel();
@@ -188,8 +199,19 @@
         }
 
         function selectedLineas(project) {
+            if(project.localidad.municipio) {
+                vm.state = project.localidad.municipio.estado.id;
+                listCities(vm.state);
+                vm.city = project.localidad.municipio.id;
+                //TODO: Verify the loading of localities
+                listLocalities(vm.city);
+            }
+            vm.locality = project.localidad;
+            selectLocality();
             vm.selectedLineaList = project;
             vm.store = angular.copy(project);
+            vm.store.latitud = Number(vm.store.latitud);
+            vm.store.longitud = Number(vm.store.longitud);
         }
 
         function querySearch(query) {

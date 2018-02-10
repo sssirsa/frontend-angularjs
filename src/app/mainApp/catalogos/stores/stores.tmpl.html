@@ -47,7 +47,7 @@
                     </md-switch>
                     <md-virtual-repeat-container class="vertical-container" ng-style='vm.myStyle' flex="flex" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                         <md-list>
-                            <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
+                            <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText|limitTo:'20'">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.store.id }">
                                     <md-icon md-svg-icon="assets/images/store.svg" class="avatar"></md-icon>
