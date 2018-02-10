@@ -31,7 +31,7 @@
         vm.search_items = [];
         vm.searchText = '';
         var store = null;
-        vm.store = angular.copy(store);
+        vm.store = {};
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
@@ -43,6 +43,7 @@
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.state = null;
         vm.city = null;
+        vm.locality = null;
         vm.zip_code = null;
 
         activate();
@@ -113,6 +114,8 @@
         }
 
         function create() {
+            vm.locality.latitud.toFixed(6);
+            vm.locality.longitud.toFixed(6);
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
@@ -258,11 +261,16 @@
 
         function selectState() {
             vm.city = null;
-            vm.store.localidad_id = null;
+            if(vm.store) {
+                vm.store.localidad_id = null;
+            }
         }
 
-        function selectLocality(locality) {
-            vm.zip_code = locality.codigo_postal;
+        function selectLocality() {
+            if(vm.locality) {
+                vm.store['localidad_id'] = vm.locality.id;
+                vm.zip_code = vm.locality.codigo_postal;
+            }
         }
 
         function showStoreLocation() {

@@ -191,14 +191,14 @@
                             <md-input-container flex class="md-block">
                                 <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
                                 <md-select
-                                    ng-model="vm.store.localidad_id"
+                                    ng-model="vm.locality"
                                     md-on-open="vm.listLocalities(vm.city)"
-                                    md-on-close="vm.selectLocality(locality)"
+                                    md-on-close="vm.selectLocality()"
                                     ng-disabled="vm.locality.deleted || !vm.city"
                                 >
                                     <md-option
                                         ng-repeat="locality in vm.localities"
-                                        ng-value="locality.id"
+                                        ng-value="locality"
                                     >
                                         {{locality.nombre}}
                                     </md-option>
