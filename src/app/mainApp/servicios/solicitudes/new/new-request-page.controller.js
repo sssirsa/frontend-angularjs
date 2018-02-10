@@ -1,3 +1,5 @@
+//TODO: Añadir campo economico en las solicitudes de retiro y cambio
+
 (function () {
     'use strict';
 
@@ -169,6 +171,7 @@
         function save() {
             SalePointRequests.create(vm.request)
                 .then(function () {
+                    $state.go('triangular.admin-default.listRequest');
                     toastr.success(
                         Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE')
                     );
