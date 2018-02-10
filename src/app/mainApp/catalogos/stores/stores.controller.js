@@ -114,8 +114,8 @@
         }
 
         function create() {
-            vm.locality.latitud.toFixed(6);
-            vm.locality.longitud.toFixed(6);
+            vm.store.latitud = vm.store.latitud.toFixed(6);
+            vm.store.longitud = vm.store.longitud.toFixed(6);
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
@@ -162,6 +162,8 @@
 
             vm.state = null;
             vm.city = null;
+            vm.locality = null;
+            vm.zip_code = null;
 
             $scope.StoreForm.$setPristine();
             $scope.StoreForm.$setUntouched();
@@ -261,13 +263,13 @@
 
         function selectState() {
             vm.city = null;
-            if(vm.store) {
+            if (vm.store) {
                 vm.store.localidad_id = null;
             }
         }
 
         function selectLocality() {
-            if(vm.locality) {
+            if (vm.locality) {
                 vm.store['localidad_id'] = vm.locality.id;
                 vm.zip_code = vm.locality.codigo_postal;
             }
