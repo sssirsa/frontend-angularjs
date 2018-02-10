@@ -174,7 +174,7 @@
                 listCities(item.municipio.estado.id);
                 vm.locality = angular.copy(item);
                 vm.state = item.municipio.estado.id;
-                vm.locality.municipio_id = vm.locality.municipio.estado.id;
+                vm.locality.municipio_id = vm.locality.municipio.id;
             } else {
                 cancel();
             }
@@ -185,7 +185,7 @@
             vm.selectedLineaList = project;
             vm.locality = angular.copy(project);
             vm.state = project.municipio.estado.id;
-            vm.locality.municipio_id = vm.locality.municipio.estado.id;
+            vm.locality.municipio_id = vm.locality.municipio.id;
         }
 
         function querySearch(query) {
