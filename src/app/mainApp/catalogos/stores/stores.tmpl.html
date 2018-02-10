@@ -47,7 +47,7 @@
                     </md-switch>
                     <md-virtual-repeat-container class="vertical-container" ng-style='vm.myStyle' flex="flex" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                         <md-list>
-                            <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
+                            <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText|limitTo:'20'">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.store.id }">
                                     <md-icon md-svg-icon="assets/images/store.svg" class="avatar"></md-icon>
@@ -191,14 +191,14 @@
                             <md-input-container flex class="md-block">
                                 <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
                                 <md-select
-                                    ng-model="vm.store.localidad_id"
+                                    ng-model="vm.locality"
                                     md-on-open="vm.listLocalities(vm.city)"
-                                    md-on-close="vm.selectLocality(locality)"
+                                    md-on-close="vm.selectLocality()"
                                     ng-disabled="vm.locality.deleted || !vm.city"
                                 >
                                     <md-option
                                         ng-repeat="locality in vm.localities"
-                                        ng-value="locality.id"
+                                        ng-value="locality"
                                     >
                                         {{locality.nombre}}
                                     </md-option>
@@ -225,12 +225,14 @@
                             <md-input-container flex class="md-block">
                                 <label translate>STORES.LABELS.LATITUDE</label>
                                 <input
+                                    type="number"
                                     ng-disabled="vm.store.deleted"
                                     ng-model="vm.store.latitud"/>
                             </md-input-container>
                             <md-input-container flex class="md-block">
                                 <label translate>STORES.LABELS.LONGITUDE</label>
                                 <input
+                                    type="number"
                                     ng-disabled="vm.store.deleted"
                                     ng-model="vm.store.longitud"/>
                             </md-input-container>

@@ -31,7 +31,7 @@
         vm.search_items = [];
         vm.searchText = '';
         var store = null;
-        vm.store = angular.copy(store);
+        vm.store = {};
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
@@ -43,6 +43,7 @@
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.state = null;
         vm.city = null;
+        vm.locality = null;
         vm.zip_code = null;
 
         activate();
@@ -113,6 +114,8 @@
         }
 
         function create() {
+            vm.store.latitud = vm.store.latitud.toFixed(6);
+            vm.store.longitud = vm.store.longitud.toFixed(6);
             Stores.create(vm.store).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.store = angular.copy(store);
@@ -159,6 +162,8 @@
 
             vm.state = null;
             vm.city = null;
+            vm.locality = null;
+            vm.zip_code = null;
 
             $scope.StoreForm.$setPristine();
             $scope.StoreForm.$setUntouched();
@@ -175,7 +180,18 @@
 
         function selectedItemChange(item) {
             if (item != null) {
+                if(item.localidad.municipio) {
+                    vm.state = item.localidad.municipio.estado.id;
+                    listCities(vm.state);
+                    vm.city = item.localidad.municipio.id;
+                    //TODO: Verify the loading of localities
+                    listLocalities(vm.city);
+                }
+                vm.locality = item.localidad;
+                selectLocality();
                 vm.store = angular.copy(item);
+                vm.store.latitud = Number(vm.store.latitud);
+                vm.store.longitud = Number(vm.store.longitud);
 
             } else {
                 cancel();
@@ -183,8 +199,19 @@
         }
 
         function selectedLineas(project) {
+            if(project.localidad.municipio) {
+                vm.state = project.localidad.municipio.estado.id;
+                listCities(vm.state);
+                vm.city = project.localidad.municipio.id;
+                //TODO: Verify the loading of localities
+                listLocalities(vm.city);
+            }
+            vm.locality = project.localidad;
+            selectLocality();
             vm.selectedLineaList = project;
             vm.store = angular.copy(project);
+            vm.store.latitud = Number(vm.store.latitud);
+            vm.store.longitud = Number(vm.store.longitud);
         }
 
         function querySearch(query) {
@@ -258,11 +285,16 @@
 
         function selectState() {
             vm.city = null;
-            vm.store.localidad_id = null;
+            if (vm.store) {
+                vm.store.localidad_id = null;
+            }
         }
 
-        function selectLocality(locality) {
-            vm.zip_code = locality.codigo_postal;
+        function selectLocality() {
+            if (vm.locality) {
+                vm.store['localidad_id'] = vm.locality.id;
+                vm.zip_code = vm.locality.codigo_postal;
+            }
         }
 
         function showStoreLocation() {
