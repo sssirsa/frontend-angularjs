@@ -171,17 +171,21 @@
 
         function selectedItemChange(item) {
             if (item != null) {
+                listCities(item.municipio.estado.id);
                 vm.locality = angular.copy(item);
                 vm.state = item.municipio.estado.id;
+                vm.locality.municipio_id = vm.locality.municipio.estado.id;
             } else {
                 cancel();
             }
         }
 
         function selectedLineas(project) {
+            listCities(project.municipio.estado.id);
             vm.selectedLineaList = project;
             vm.locality = angular.copy(project);
             vm.state = project.municipio.estado.id;
+            vm.locality.municipio_id = vm.locality.municipio.estado.id;
         }
 
         function querySearch(query) {
