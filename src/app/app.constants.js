@@ -453,7 +453,7 @@
             salida_masiva: 'mass_exit',
             udn: 'udn',
             etapa: 'etapa',
-            grupos: 'grupos',
+            grupos: 'groups',
             insumo: 'insumo',
             linea_transporte: 'linea_transporte',
             localidad: 'localidad',
