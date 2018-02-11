@@ -59,7 +59,7 @@ gulp.task('config:dev', function () {
 gulp.task('config:build', function () {
   gulp.src(path.join(conf.paths.src, '../config/config.json'))
     .pipe(gulpNgConfig('sssirsa.config', {
-      environment: 'master'
+      environment: 'production'
     }))
     .pipe(gulp.dest(path.join(conf.paths.src, '/app/')))
 });

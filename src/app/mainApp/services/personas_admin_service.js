@@ -30,7 +30,9 @@
             form_data.append('user',angular.toJson(data.user));
             form_data.append('nombre',data.nombre);
             form_data.append('apellido_paterno',data.apellido_paterno);
-            form_data.append('apellido_materno',data.apellido_materno);
+            if(data.apellido_materno) {
+                form_data.append('apellido_materno', data.apellido_materno);
+            }
             form_data.append('direccion',data.direccion);
             form_data.append('telefono',data.telefono);
             form_data.append('ife',data.ife);
@@ -39,13 +41,16 @@
                 form_data.append('sucursal',data.sucursal);
 
 
-            var defer= $q.defer();
-            WebRestangular.all(URLS.persona_admin).withHttpConfig({transformRequest: angular.identity}).customPOST(form_data,"",{},{'Content-Type':undefined}).then(function(res){
-                defer.resolve(res);
-            }).catch(function(err){
-                defer.reject(err);
-            });
-            return defer.promise;
+            //var defer= $q.defer();
+            return baseModelo
+                .withHttpConfig({transformRequest: angular.identity})
+                .customPOST(form_data,"",{},{'Content-Type':undefined});
+            //.then(function(res){
+            //    defer.resolve(res);
+            //}).catch(function(err){
+            //    defer.reject(err);
+            //});
+            //return defer.promise;
         }
 
         function get(id) {

@@ -66,10 +66,9 @@
                 <md-input-container class="md-block">
                     <label>{{'ADMIN_PERSONA.PROPERTY.AP_MATERNO'|translate}}</label>
                     <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
-                    <input type="text" ng-model="vm.user_ini.apellido_materno" name="apellido_materno" ng-required="true" ng-pattern="/^[A-Za-zsáéíóúÁÉÍÓÚÑñ ]*$/"/>
+                    <input type="text" ng-model="vm.user_ini.apellido_materno" name="apellido_materno" ng-pattern="/^[A-Za-zsáéíóúÁÉÍÓÚÑñ ]*$/"/>
                     <div ng-messages="objectForm.apellido_materno.$error">
                         <div ng-message="pattern">{{'ADMIN_PERSONA.ERROR_MESSAGE.AP_MATERNO'|translate}}</div>
-                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block">
