@@ -39,13 +39,16 @@
                 form_data.append('sucursal',data.sucursal);
 
 
-            var defer= $q.defer();
-            WebRestangular.all(URLS.persona_admin).withHttpConfig({transformRequest: angular.identity}).customPOST(form_data,"",{},{'Content-Type':undefined}).then(function(res){
-                defer.resolve(res);
-            }).catch(function(err){
-                defer.reject(err);
-            });
-            return defer.promise;
+            //var defer= $q.defer();
+            return baseModelo
+                .withHttpConfig({transformRequest: angular.identity})
+                .customPOST(form_data,"",{},{'Content-Type':undefined});
+            //.then(function(res){
+            //    defer.resolve(res);
+            //}).catch(function(err){
+            //    defer.reject(err);
+            //});
+            //return defer.promise;
         }
 
         function get(id) {
