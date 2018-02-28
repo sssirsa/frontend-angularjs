@@ -50,7 +50,7 @@
             },
             "nombre": "",
             "apellido_paterno": "",
-            "apellido_materno": "",
+            "apellido_materno": null,
             "direccion": "",
             "telefono": "",
             "ife": null,
@@ -61,11 +61,12 @@
             "user": {
                 "username": "",
                 "email": "",
+                "password": "",
                 "role": ""
             },
             "nombre": "",
             "apellido_paterno": "",
-            "apellido_materno": "",
+            "apellido_materno": null,
             "direccion": "",
             "telefono": "",
             "ife": null,
@@ -74,15 +75,7 @@
 
 
         function clean() {
-            vm.user = {
-                user: "",
-                password: "",
-                confirm: "",
-                mail: "",
-                tipo: ""
-
-            };
-            vm.cpassword = '';
+            cancel();
         }
 
         function enviar() {
@@ -111,6 +104,8 @@
             if (vm.user_ini.sucursal == null)
                 delete vm.user_ini['sucursal'];
             Persona_Admin.createObject(vm.user_ini).then(function (res) {
+                toastr.success(vm.successCreateMessage);
+                clean();
                 var grupo=_.findWhere(vm.grupos,{name:"Administrador"});
                 var role=null;
                 if(vm.user_ini.user.role==grupo.id && vm.user_ini.sucursal!=null ){
@@ -124,13 +119,13 @@
                     office:vm.user_ini.sucursal,
                     profile:role
                 };
-                NotificationPanel.createUser(request).then(function () {
-                    toastr.success(vm.successCreateMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (error) {
-                    toastr.error(error, vm.errorTitle);
-                });
+                // NotificationPanel.createUser(request).then(function () {
+                //     toastr.success(vm.successCreateMessage, vm.successTitle);
+                //     cancel();
+                //     activate();
+                // }).catch(function (error) {
+                //     toastr.error(error, vm.errorTitle);
+                // });
             }).catch(function (err) {
                 if(err.status==400 && err.data.message=="El usuario ya existe")
                 {
@@ -150,21 +145,7 @@
             vm.picIFE = null;
             vm.ifeByPass = null
             vm.fotoByPass = null;
-            vm.user_ini = {
-                "user": {
-                    "username": null,
-                    "email": "",
-                    "password": "",
-                    "role": ""
-                },
-                "nombre": "",
-                "apellido_paterno": "",
-                "apellido_materno": "",
-                "direccion": "",
-                "telefono": "",
-                "ife": null,
-                "foto": null
-            };
+
             vm.cpassword = ''
         }
 
