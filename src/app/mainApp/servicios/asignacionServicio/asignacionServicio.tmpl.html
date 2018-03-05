@@ -32,18 +32,125 @@
             ng-click="vm.selectSalePoint(salePoint)"
             layout-align="space-around center">
             <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
-            <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
-                <span>{{salePoint.folio}}</span>
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.folio}}</h4>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.route}}</h4>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STATE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.MUN</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.route}}</h4>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.LOCAL</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.CP</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                    </div>
+                </div>
             </div>
             <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</h3>
-                <span>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</span>
+                <md-button aria-label="fab button"
+                           ng-click= $event.stopPropagation();
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                </md-button>
             </div>
-            <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
-                <span>{{salePoint.tipo_trabajo}}</span>
-            </div>
+
+
         </md-card>
     </div>
 </div>

@@ -23,6 +23,7 @@
                         vm.loadingPromise = SalePoint.listUnasignedServices()
                             .then(function (salePointsSuccess) {
                                 vm.salePoints = salePointsSuccess;
+                                console.log(vm.salePoints);
                             })
                             .catch(function (salePointsError) {
                                 console.log(salePointsError);
@@ -37,6 +38,8 @@
                             .then(function (salePointsSuccess) {
                                 if (salePointsSuccess.length > 0) {
                                     vm.salePoints = salePointsSuccess;
+                                    console.log(vm.salePoints);
+
                                 }
                                 else {
                                     vm.salePoints = null;
