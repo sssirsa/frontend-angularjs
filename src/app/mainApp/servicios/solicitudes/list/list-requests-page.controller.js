@@ -45,33 +45,34 @@
             $state.go('triangular.admin-default.detailRequest', {id: request.id});
         }
 
-        function downloadReport(requestID){
+        function downloadReport(requestID) {
 
             $http.get('app/mainApp/servicios/solicitudes/report/formato.json')
-                .success(function(formato){
-                    vm.getReportPromise=Solicitudes.report(requestID)
-                        .then(function(reporte){
+                .success(function (formato) {
+                    vm.getReportPromise = Solicitudes.report(requestID)
+                        .then(function (reporte) {
                             $log.debug(reporte);
+                            var fecha = moment(reporte.fecha, 'DD/MM/YYYY hh:mm:ss');
                             //Encabezado
                             //Titulo
-                            formato.content[0].columns[1].stack[2].text='Reporte de Solicitud';
+                            formato.content[0].columns[1].stack[2].text = 'Reporte de Solicitud';
                             //Folio de la solicitud
-                            formato.content[0].columns[1].stack[3].text=reporte.id;
+                            formato.content[0].columns[1].stack[3].text = reporte.id;
                             //Información de la solicitud
                             //Titulo
                             formato.content[1].text = 'Información de la solicitud'
                             //Estatus
-                            formato.content[2].stack[0].columns[1].text=reporte.status;
+                            formato.content[2].stack[0].columns[1].text = reporte.status;
                             //Tipo
-                            formato.content[2].stack[0].columns[3].text=reporte.tipo;
+                            formato.content[2].stack[0].columns[3].text = reporte.tipo;
                             //Atendió
-                            formato.content[3].stack[0].columns[1].text=reporte.persona;
+                            formato.content[3].stack[0].columns[1].text = reporte.persona;
                             //Fecha
-                            formato.content[3].stack[0].columns[3].text=moment(reporte.fecha, 'DD/MM/YYYY hh:mm:ss');
+                            formato.content[3].stack[0].columns[3].text = fecha;
                             //Sucursal
-                            formato.content[4].stack[0].columns[1].text=reporte.sucursal;
+                            formato.content[4].stack[0].columns[1].text = reporte.sucursal;
                             //Calificación
-                            formato.content[4].stack[0].columns[3].text=reporte.calificacion;
+                            formato.content[4].stack[0].columns[3].text = reporte.calificacion;
                             //Información del establecimiento
                             //Nombre establecimiento
                             formato.content[6].stack[0].columns[0].text = reporte.establecimiento.nombre_establecimiento;
@@ -102,16 +103,20 @@
                             formato.content[13].columns[1].stack[1].text = reporte.observaciones_cliente;
                             //Firmas
                             //Trabajador
-                            formato.content[15].columns[0].stack[1].image = 'data:image/png;base64,'+reporte.firma_prospectador;
+                            if (reporte.firma_prospectador) {
+                                formato.content[15].columns[0].stack[1].image = 'data:image/png;base64,' + reporte.firma_prospectador;
+                            }
                             //Cliente
-                            formato.content[15].columns[1].stack[1].image = 'data:image/png;base64,'+reporte.firma_cliente;
+                            if (reporte.firma_cliente) {
+                                formato.content[15].columns[1].stack[1].image = 'data:image/png;base64,' + reporte.firma_cliente;
+                            }
 
                             //Evidencias
-                            reporte.evidencia.forEach(function(evidence){
+                            reporte.evidencia.forEach(function (evidence) {
                                 var image = {
-                                    image:'data:image/png;base64,'+evidence.foto,
+                                    image: 'data:image/png;base64,' + evidence.foto,
                                     width: 500,
-                                    alignment:'center'
+                                    alignment: 'center'
                                 };
                                 formato.content.push(image);
                             });
@@ -120,12 +125,12 @@
                             pdfMake.createPdf(formato).download("Reporte-Solicitud-" + reporte.id.toString() + ".pdf");
 
                         })
-                        .catch(function(reporteError){
+                        .catch(function (reporteError) {
                             $log.error(reporteError);
                             toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.REPORT_ERROR'));
                         });
                 })
-                .catch(function(JSONError){
+                .catch(function (JSONError) {
                     $log.error(JSONError);
                     toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.JSON_REPORT_ERROR'));
                 });
