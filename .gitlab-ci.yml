@@ -2,6 +2,7 @@ image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
+  PROJECT_BASE: "sssirsa/genesis"
 
 services:
 - docker:dind
@@ -18,8 +19,8 @@ configuration:
   script:
     - pip install awscli
     - mkdir -p config
-    - aws s3 cp s3://file-production/deploy/${CI_PROJECT_NAMESPACE}_${CI_PROJECT_NAME}/config/config.json config/config.json
-    - aws s3 cp s3://file-production/deploy/${CI_PROJECT_NAMESPACE}_${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
+    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
+    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
   cache:
     untracked: true
     paths:
