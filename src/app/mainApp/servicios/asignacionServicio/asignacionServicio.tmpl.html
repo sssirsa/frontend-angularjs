@@ -29,6 +29,7 @@
             layout="column"
             ng-repeat="salePoint in vm.salePoints"
             layout-gt-xs="row"
+            layout-sm = "row"
             ng-click="vm.selectSalePoint(salePoint)"
             layout-align="space-around center">
             <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
@@ -89,7 +90,7 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                        <h4>{{salePoint.establecimiento_info.nombre_establecimiento}}</h4>
                     </div>
                 </div>
 
@@ -101,7 +102,8 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.estado}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
                     </div>
                 </div>
             </div>
@@ -115,7 +117,9 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4>{{salePoint.route}}</h4>
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+
                     </div>
                 </div>
                 <div layout="row">
@@ -126,7 +130,7 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                        <h4>{{salePoint.establecimiento_info.localidad.nombre}}</h4>
                     </div>
                 </div>
 
@@ -138,13 +142,14 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">{{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No Asignado</h4>
                     </div>
                 </div>
             </div>
-            <div layout="column" layout-align="center center">
+            <div layout="column" layout-align="center center" ng-if="vm.selectedKind == 'pending' ">
                 <md-button aria-label="fab button"
-                           ng-click= $event.stopPropagation();
+                           ng-click= "vm.Assign($event); $event.stopPropagation();"
                            class="md-raised md-primary">
                     <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
                 </md-button>

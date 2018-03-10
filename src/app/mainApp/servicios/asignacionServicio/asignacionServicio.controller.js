@@ -5,12 +5,27 @@
         .module('app.mainApp.servicios')
         .controller('asignacionServicioController', asignacionServicioController);
 
-    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state) {
+    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
         var vm = this;
 
         vm.selectedKind = null;
         vm.salePoints = null;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
+
+        vm.Assing = function (ev) {
+            $mdDialog.show({
+                controller: dialogAsignacionTecnicoController,
+                templateUrl: 'dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+
+            })
+                .then(function(answer){
+
+                });
+
+        };
 
         //Function mapping
         vm.listSalePoints = listSalePoints;
