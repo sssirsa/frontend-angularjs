@@ -11,21 +11,26 @@
         vm.selectedKind = null;
         vm.salePoints = null;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
+        vm.Assing = Assing;
 
-        vm.Assing = function (ev) {
+        function Assing (salePoint) {
+            console.log(salePoint);
             $mdDialog.show({
-                controller: dialogAsignacionTecnicoController,
-                templateUrl: 'dialogAsignacionTecnico.tmpl.html',
+                controller: 'dialogAsignacionTecnicoController',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
                 parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    salePoint: salePoint
+                }
             })
-                .then(function(answer){
-
+                .then(function(){
+                    $mdDialog.hide();
                 });
 
-        };
+        }
 
         //Function mapping
         vm.listSalePoints = listSalePoints;

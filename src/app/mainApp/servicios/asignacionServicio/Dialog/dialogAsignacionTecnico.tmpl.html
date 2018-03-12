@@ -3,10 +3,10 @@
     <md-card layout="column" layout-align="center center" layout-padding
              cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON</h3>
+
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
                          flex="100"
-                         ng-if="vm.salePoint.status=='Abierta' || vm.salePoint.status=='En_proceso'"
                          md-min-length="0"
                          md-selected-item="vm.assignedPerson"
                          md-selected-item-change="vm.selectedPersonChange()"
@@ -42,7 +42,7 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
-            <md-button ng-if="vm.salePoint.status=='Abierta' || vm.salePoint.status=='En_proceso'"
+            <md-button
                        aria-label="assign" ng-click="vm.assign()"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>

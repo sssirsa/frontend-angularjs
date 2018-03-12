@@ -147,14 +147,14 @@
                     </div>
                 </div>
             </div>
+
             <div layout="column" layout-align="center center" ng-if="vm.selectedKind == 'pending' ">
                 <md-button aria-label="fab button"
-                           ng-click= "vm.Assign($event); $event.stopPropagation();"
+                           ng-click= "$event.stopPropagation(); vm.Assing(salePoint)"
                            class="md-raised md-primary">
                     <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
                 </md-button>
             </div>
-
 
         </md-card>
     </div>

@@ -1,19 +1,20 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('app.mainApp.servicios')
         .controller('dialogAsignacionTecnicoController', dialogAsignacionTecnicoController);
 
-    function dialogAsignacionTecnicoController(SalePointRequests, SalePoint, $stateParams, toastr, Translate,
-                                         Persona_Admin, $state) {
+    function dialogAsignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
+                                         Persona_Admin, $state,salePoint ) {
         var vm = this;
 
         //Variables
-        vm.salePoint = null;
         vm.request = null;
         vm.assignedPerson = null;
         vm.personSearchText = null;
         vm.personList = null;
         vm.store = null;
+
+
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
@@ -22,15 +23,16 @@
         vm.showRequestLocation = showRequestLocation;
         vm.assign = assign;
 
+        console.log(salePoint);
+
         activate();
 
         function activate() {
-            SalePoint.getByID($stateParams.id)
-                .then(function (salePoint) {
-                    console.log(salePoint);
-                    vm.salePoint = salePoint;
-                    if (salePoint.persona) {
-                        vm.personLoading = Persona_Admin.get(salePoint.persona)
+            SalePoint.getByID(salePoint.folio)
+                .then(function (salePointp) {
+                    vm.salePoint = salePointp;
+                    if (salePointp.persona) {
+                        vm.personLoading = Persona_Admin.get(salePointp.persona)
                             .then(function (personaSuccess) {
                                 vm.assignedPerson = personaSuccess;
                             })
