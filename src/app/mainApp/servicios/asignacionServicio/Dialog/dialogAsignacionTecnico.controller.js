@@ -23,7 +23,7 @@
         vm.showRequestLocation = showRequestLocation;
         vm.assign = assign;
 
-        console.log(salePoint);
+        console.log(salePoint.folio);
 
         activate();
 

@@ -3,7 +3,9 @@
 
     <md-card layout="column" layout-align="center center" layout-padding
              cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-        <h3 translate>SALEPOINT_REQUEST.ASSIGN.FOLIO   {{salepoint.folio}}</h3>
+        <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO </h3>
+        {{vm.salePoint.folio}}
+
 
         <md-autocomplete md-input-name="persona"
                          md-no-cache="true"
