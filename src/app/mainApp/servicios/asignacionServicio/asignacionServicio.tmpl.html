@@ -27,7 +27,7 @@
         ng-if="vm.salePoints">
         <md-card
             layout="column"
-            ng-repeat="salePoint in vm.salePoints"
+            ng-repeat="salePoint in vm.salePoints|orderBy:'-fecha_creacion' "
             layout-gt-md="row"
             ng-click="vm.selectSalePoint(salePoint)"
             layout-align="space-around center">
