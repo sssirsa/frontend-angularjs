@@ -5,12 +5,32 @@
         .module('app.mainApp.servicios')
         .controller('asignacionServicioController', asignacionServicioController);
 
-    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state) {
+    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
         var vm = this;
 
         vm.selectedKind = null;
         vm.salePoints = null;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
+        vm.Assing = Assing;
+
+        function Assing (salePoint) {
+            console.log(salePoint);
+            $mdDialog.show({
+                controller: 'dialogAsignacionTecnicoController',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element(document.body),
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    salePoint: salePoint
+                }
+            })
+                .then(function(){
+                    $mdDialog.hide();
+                });
+
+        }
 
         //Function mapping
         vm.listSalePoints = listSalePoints;
@@ -23,6 +43,7 @@
                         vm.loadingPromise = SalePoint.listUnasignedServices()
                             .then(function (salePointsSuccess) {
                                 vm.salePoints = salePointsSuccess;
+                                console.log(vm.salePoints);
                             })
                             .catch(function (salePointsError) {
                                 console.log(salePointsError);
@@ -37,6 +58,8 @@
                             .then(function (salePointsSuccess) {
                                 if (salePointsSuccess.length > 0) {
                                     vm.salePoints = salePointsSuccess;
+                                    console.log(vm.salePoints);
+
                                 }
                                 else {
                                     vm.salePoints = null;
