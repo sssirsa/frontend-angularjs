@@ -1,10 +1,19 @@
 <md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO </h3>
+            : {{vm.salePoint.folio}}
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
 <div layout="column">
 
     <md-card layout="column" layout-align="center center" layout-padding
              cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-        <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO </h3>
-        {{vm.salePoint.folio}}
+
 
 
         <md-autocomplete md-input-name="persona"

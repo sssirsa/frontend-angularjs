@@ -4,7 +4,7 @@
         .controller('dialogAsignacionTecnicoController', dialogAsignacionTecnicoController);
 
     function dialogAsignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
-                                         Persona_Admin, $state,salePoint ) {
+                                         Persona_Admin, $state,salePoint, $mdDialog ) {
         var vm = this;
 
         //Variables
@@ -22,6 +22,7 @@
         vm.showStoreLocation = showStoreLocation;
         vm.showRequestLocation = showRequestLocation;
         vm.assign = assign;
+        vm.cancel = cancel;
 
         console.log(salePoint.folio);
 
@@ -140,6 +141,10 @@
                         Translate.translate('MAIN.MSG.ERROR_TITLE')
                     );
                 });
+        }
+
+        function cancel(){
+            $mdDialog.cancel();
         }
 
     }
