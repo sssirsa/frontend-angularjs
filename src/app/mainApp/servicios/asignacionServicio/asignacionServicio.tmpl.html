@@ -28,8 +28,7 @@
         <md-card
             layout="column"
             ng-repeat="salePoint in vm.salePoints"
-            layout-gt-xs="row"
-            layout-sm = "row"
+            layout-gt-sm="row"
             ng-click="vm.selectSalePoint(salePoint)"
             layout-align="space-around center">
             <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
@@ -102,7 +101,7 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.estado}}</h4>
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.estado.nombre}}</h4>
                         <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
                     </div>
                 </div>
@@ -117,7 +116,7 @@
                         <h4 translate>:</h4>
                     </div>
                     <div layout="column" layout-align="center center">
-                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio}}</h4>
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.nombre}}</h4>
                         <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
 
                     </div>
