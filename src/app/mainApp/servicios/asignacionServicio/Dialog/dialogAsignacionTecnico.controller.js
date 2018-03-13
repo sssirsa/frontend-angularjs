@@ -25,7 +25,7 @@
         vm.cancel = cancel;
 
         console.log(salePoint.folio);
-
+        vm.id = salePoint.folio;
         activate();
 
         function activate() {
