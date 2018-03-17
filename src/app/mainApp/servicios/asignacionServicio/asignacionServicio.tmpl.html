@@ -27,23 +27,134 @@
         ng-if="vm.salePoints">
         <md-card
             layout="column"
-            ng-repeat="salePoint in vm.salePoints"
-            layout-gt-xs="row"
+            ng-repeat="salePoint in vm.salePoints|orderBy:'-fecha_creacion' "
+            layout-gt-md="row"
             ng-click="vm.selectSalePoint(salePoint)"
             layout-align="space-around center">
             <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
-            <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h3>
-                <span>{{salePoint.folio}}</span>
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.folio}}</h4>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.tipo_trabajo}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                    </div>
+                </div>
             </div>
-            <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</h3>
-                <span>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</span>
+
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.route}}</h4>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.establecimiento_info.nombre_establecimiento}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STATE</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.estado.nombre}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                    </div>
+                </div>
             </div>
-            <div layout="column" layout-align="center center">
-                <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</h3>
-                <span>{{salePoint.tipo_trabajo}}</span>
+
+            <div layout="column" >
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.MUN</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">{{salePoint.establecimiento_info.localidad.municipio.nombre}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+
+                    </div>
+                </div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.LOCAL</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4>{{salePoint.establecimiento_info.localidad.nombre}}</h4>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.CP</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 translate>:</h4>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">{{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
+                        <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No Asignado</h4>
+                    </div>
+                </div>
             </div>
+
+            <div layout="column" layout-align="center center" ng-if="vm.selectedKind == 'pending' ">
+                <md-button aria-label="fab button"
+                           ng-click= "$event.stopPropagation(); vm.Assing(salePoint)"
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                </md-button>
+            </div>
+
         </md-card>
     </div>
 </div>

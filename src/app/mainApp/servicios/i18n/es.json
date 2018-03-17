@@ -348,7 +348,14 @@
                 "FOLIO": "Folio",
                 "DATE": "Fecha",
                 "JOB_KIND": "Tipo de trabajo",
-                "DETAIL": "Detalle"
+                "DETAIL": "Detalle",
+                "STATE": "Estado",
+                "ROUTE": "Ruta",
+                "STORE": "Establecimiento",
+                "MUN": "Municipio",
+                "LOCAL": "Localidad",
+                "CP": "Código Postal"
+
             }
         },
         "ASSIGN_DETAIL": {
