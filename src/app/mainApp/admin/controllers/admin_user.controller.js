@@ -19,6 +19,7 @@
         vm.update = update;
         vm.getPersonaAdmin = getPersonaAdmin;
         vm.addGroup = addGroup;
+        vm.removeGroup = removeGroup;
 
         vm.loadGrupo = loadGroup;
         vm.selectedIndex = 0;
@@ -70,6 +71,7 @@
             vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
             vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
             vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
+            vm.dialogDeleteGroupMessage = Translate.translate('ADMIN_PERSONA.MESSAGE.DELETE_GROUP');
         }
 
         function activate() {
@@ -105,6 +107,26 @@
                     cancel();
                     activate();
                 }).catch(function (res) {
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                });
+            }, function () {
+
+            });
+
+        }
+
+        function removeGroup(grupo) {
+            var confirm = $mdDialog.confirm()
+                .title(vm.dialogTitle)
+                .textContent(vm.dialogDeleteGroupMessage)
+                .ariaLabel('Confirmar eliminación')
+                .ok(vm.deleteButton)
+                .cancel(vm.cancelButton);
+            $mdDialog.show(confirm).then(function () {
+                Administration.deleteGroup(grupo).then(function () {
+                    loadGroup(vm.persona.user);
+                    toastr.success(vm.successDeleteMessage, vm.successTitle);
+                }).catch(function () {
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
             }, function () {

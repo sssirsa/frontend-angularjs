@@ -53,7 +53,8 @@
     },
       "MESSAGE":
       {
-          "SUCCESS_GROUP_ADD": "Se agregaron grupo(s) exitosamente"
+          "SUCCESS_GROUP_ADD": "Se agregaron grupo(s) exitosamente",
+          "DELETE_GROUP": "¿Esta seguro de eliminar el siguiente grupo?, Una vez hecho esto no podrá recibir notificaciones"
       }
   }
 

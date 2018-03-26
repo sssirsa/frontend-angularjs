@@ -16,19 +16,23 @@
         return {
             getGroups:getGroups,
             allGroups:allGroups,
-            createGroup:createGroup
+            createGroup:createGroup,
+            deleteGroup:deleteGroup
         };
 
 
         function getGroups(username){
-            return baseModelo.all(username).getList();
-        }
+            return baseModelo.all('user').all(username).getList();
+        } 
         function allGroups() {
             return baseModeloGroups.getList()
 
         }
         function createGroup(object) {
             return baseModelo.customPOST(object);
+        }
+        function deleteGroup(id) {
+            return baseModelo.customDELETE(id,null,{'content-type':'application/json'});
         }
 
 
