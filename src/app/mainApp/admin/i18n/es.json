@@ -30,6 +30,9 @@
     "PERSONA": {
 
     },
+      "GROUP":{
+          "NOT_FOUND":"No tiene grupos asignados"
+      },
     "ERROR_MESSAGE": {
       "NOMBRE": "El nombre solo puede contener letras",
       "AP_PATERNO": "El apellido paterno solo puede contener letras",

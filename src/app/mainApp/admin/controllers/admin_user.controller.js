@@ -6,7 +6,7 @@
         .controller('admin_userController', admin_userController)
         .filter('personaSearch', personaSearch);
 
-    function admin_userController( $scope, toastr, Translate, $mdDialog,Persona_Admin,Persona) {
+    function admin_userController( $scope, toastr, Translate, $mdDialog,Persona_Admin,Administration,Persona) {
 
         var vm = this;
         vm.lookup = lookup;
@@ -18,7 +18,8 @@
         vm.remove=remove;
         vm.update=update;
         vm.getPersonaAdmin=getPersonaAdmin;
-
+        vm.loadGrupo = loadGroup;
+        vm.selectedIndex=0;
         vm.picFoto="assets/images/modelo.svg";
         vm.search_items = [];
         vm.searchText = '';
@@ -46,6 +47,7 @@
             "telefono": ""
         };
         vm.persona = angular.copy(persona);
+        vm.diabled=true;
         activate();
         init();
         function init() {
@@ -67,7 +69,7 @@
 
         function getPersonaAdmin()
         {
-            Persona_Admin.listCanonico().then(function(rest){
+            vm.loadingPromise=Persona_Admin.listCanonico().then(function(rest){
                 vm.personas_admin=rest;
                 Persona.listProfile().then(function(rest){
                     vm.user_ini=rest;
@@ -101,6 +103,11 @@
 
             });
 
+        }
+        function loadGroup(usuario) {
+            vm.loadingPromiseGroup=Administration.getGroups(usuario.username).then(function (groups_response) {
+                vm.grupo_user = groups_response;
+            });
         }
         function update() {
             vm.personaUpdate.id = vm.persona.id;
@@ -158,8 +165,10 @@
         }
 
         function selectedPersonas(project) {
+            vm.selectedIndex=0;
             vm.selectedPersonaList = project;
             vm.persona = angular.copy(project);
+            vm.diabled=false;
         }
 
         function selectedItemChange(item){
