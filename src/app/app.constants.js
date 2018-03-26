@@ -469,6 +469,7 @@
             etapa_servicio: 'etapa_servicio',
             insumo_usado: 'insumo_usado',
             grupo_persona: 'grupo_persona',
+            group_employee: 'grupo',
             solicitudes: {
                 admin: 'solicitud_admin',
                 servicio: 'solicitud_servicio',

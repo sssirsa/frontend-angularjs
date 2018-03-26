@@ -155,6 +155,12 @@
                         </md-tab>
                         <md-tab label="Grupos" md-on-select="vm.loadGrupo(vm.persona.user)" ng-disabled="vm.diabled">
                             <md-content class="md-padding card1">
+                                <div layout="row" layout-align="end end">
+                                    <md-button aria-label="fab button"
+                                               ng-click="vm.addGroup($event)" class="md-raised">
+                                        {{'ADMIN_PERSONA.GROUP.ADD'|translate}}
+                                    </md-button>
+                                </div>
                                 <md-virtual-repeat-container class="vertical-container" layout-fill="" hide-xs="hide-xs"
                                                              ng-if="vm.grupo_user.length>0"
                                                              cg-busy="{promise:vm.loadingPromiseGroup,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
@@ -172,7 +178,7 @@
                                 </md-list-item>
                                     </md-list><!---->
                                 </md-virtual-repeat-container>
-                                    <div flex id="notFound" ui-view layout="column" layout-align="start center"+
+                                    <div flex id="notFound" layout="column" layout-align="start center"+
                                          ng-if="vm.grupo_user.length==0"
                                          class="overflow-auto full-width">
                                         <div flex class="inbox-no-email-selected" layout="column" layout-align="center">

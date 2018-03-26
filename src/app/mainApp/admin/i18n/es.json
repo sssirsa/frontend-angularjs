@@ -31,7 +31,10 @@
 
     },
       "GROUP":{
-          "NOT_FOUND":"No tiene grupos asignados"
+          "NOT_FOUND":"No tiene grupos asignados",
+          "MANAGE":"Manejo de Grupos",
+          "ADD":"Agregar Grupo",
+          "SEARCH":"Búsqueda de grupos"
       },
     "ERROR_MESSAGE": {
       "NOMBRE": "El nombre solo puede contener letras",
@@ -47,7 +50,11 @@
       "ERRORNUMSOLCONF":"El usuario ya existe",
       "MINLENGTH":"El telefono no tienen un mínimo de 8 números",
       "USERNAME":"El Usuario no puede comenzar con un digito y solo puede usar caracteres validos"
-    }
+    },
+      "MESSAGE":
+      {
+          "SUCCESS_GROUP_ADD": "Se agregaron grupo(s) exitosamente"
+      }
   }
 
 
