@@ -34,7 +34,7 @@
         function getByCity(cityID){
             var defer = $q.defer();
 
-            MobileRestangular.all(URLS.localidad + QUERIES.city.by_state + cityID)
+            MobileRestangular.all(URLS.localidad + QUERIES.locality.by_city + cityID)
                 .getList()
                 .then(function (citiesList) {
                     var cities = Helper.filterDeleted(citiesList,true);
