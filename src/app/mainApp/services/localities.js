@@ -35,6 +35,7 @@
             var defer = $q.defer();
 
             MobileRestangular.all(URLS.localidad + QUERIES.city.by_state + cityID)
+                .getList()
                 .then(function (citiesList) {
                     var cities = Helper.filterDeleted(citiesList,true);
                     defer.resolve(cities);
