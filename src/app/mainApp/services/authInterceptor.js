@@ -19,24 +19,16 @@
         };
 
         function request(config) {
-            //var $state = $injector.get('$state');
             var deferred=$q.defer();
-            if ((config.url.indexOf(EnvironmentConfig.site.rest.api) !== -1) && (config.url.indexOf('token') == -1)){
-
-                if(!inFlightGet){
-                    inFlightGet=$injector.get('AuthService').getToken();
+            if ((config.url.indexOf(EnvironmentConfig.site.rest.api) !== -1) && (config.url.indexOf('oauth') === -1)){
+                if (!inFlightGet) {
+                    inFlightGet = $injector.get('AuthService').getToken();
+                    config.headers.Authorization = 'Bearer ' + inFlightGet;
+                    inFlightGet = null;
                 }
-                inFlightGet.then(function (token) {
-                    config.headers.Authorization='Bearer '+token;
-                    inFlightGet=null;
-                    deferred.resolve(config);
-                });
-
-            }else{
-                deferred.resolve(config);
             }
+            deferred.resolve(config);
             return deferred.promise;
-            /*return config;*/
         }
 
         function response(res) {
@@ -44,15 +36,21 @@
         }
 
         function responseError(response) {
-            if (response.status === 401 && response.data.error!=='invalid_grant') {
+            console.log(response);
+            if (response.status === 401 && response.statusText === 'Unauthorized') {
+                console.log("Entro");
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
+                    console.log("refresh");
                     inFlightRefresh = $injector.get('AuthService').refreshToken();
                 }
                 inFlightRefresh.then(function() {
                     inFlightRefresh = null;
+                    console.log("solicito token");
                     $http(response.config).then(deferred.resolve, deferred.reject);
+                }).catch(function (err) {
+                    console.log(err);
                 });
                 return deferred.promise
             }

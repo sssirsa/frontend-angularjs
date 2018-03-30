@@ -19,16 +19,8 @@
             revokeToken: revokeToken
         };
 
-        function getToken() {
-            var deferred = $q.defer();
-            if (isAuthenticated()) {
-                deferred.resolve(OAuthToken.getAccessToken());
-            } else {
-                this.refreshToken().then(function (data) {
-                    deferred.resolve();
-                });
-            }
-            return deferred.promise;
+        function getToken(){
+            return OAuthToken.getAccessToken();
         }
 
         function revokeToken() {
