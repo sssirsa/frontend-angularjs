@@ -482,6 +482,22 @@
             estado: 'estado',
             municipio: 'municipio'
         })
+        .constant('QUERIES', {
+            store:{
+                by_state:'?localidad__municipio__estado_id=',
+                by_city:'?localidad__municipio_id=',
+                by_locality:'?localidad_id=',
+                by_postal_code:'?localidad__codigo_postal=',
+                by_economic:'/lookup/'
+            },
+            city: {
+                by_state: '?estado_id='
+            },
+            locality: {
+                by_state: '?municipio__estado_id=',
+                by_city: '?municipio_id='
+            }
+        })
         .constant('CONFIGS', {
             ADTConfig: {
                 calType: 'gregorian',
