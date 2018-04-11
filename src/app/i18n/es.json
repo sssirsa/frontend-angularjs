@@ -91,12 +91,29 @@
             "PROFILE": "Perfil",
             "LOGOUT": "Cerrar Sesión",
             "STORE_MANAGER": {
-                "SEARCH":"Buscar establecimiento",
-                "CREATE":"Crear establecimiento",
-                "MODIFY":"Modificar establecimiento",
-                "DELETE":"Eliminar establecimiento",
-                "TITLE":"Establecimiento",
-                "GEOLOCATION":"Geolocalizar"
+                "SEARCH": "Buscar establecimiento",
+                "CREATE": "Crear establecimiento",
+                "MODIFY": "Modificar establecimiento",
+                "DELETE": "Eliminar establecimiento",
+                "TITLE": "Establecimiento",
+                "SUBTITLE": "Información de Establecimiento",
+                "GEOLOCATION": "Geolocalizar",
+                "LABELS": {
+                    "LATITUDE": "Latidud",
+                    "LONGITUDE": "Longitud",
+                    "NAME":"Nombre del establecimiento",
+                    "MANAGER":"Nombre del encargado",
+                    "MANAGER_PHONE":"Teléfono encargado",
+                    "STREET":"Calle",
+                    "NUMBER":"Número",
+                    "BETWEEN1":"Entre calle",
+                    "BETWEEN2":"Y entre calle",
+                    "STATE":"Estado",
+                    "CITY":"Municipio",
+                    "LOCALITY":"Localidad",
+                    "ZIP_CODE":"Código postal",
+                    "SEGMENTATION":"Segmentación"
+                }
             }
         },
         "LABEL": {

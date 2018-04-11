@@ -1,5 +1,4 @@
 (function () {
-    'use strict';
 
     angular
         .module('app.mainApp')
@@ -21,7 +20,7 @@
         var vm = this;
 
         //Variable declaration
-        vm.store = this.store;
+        vm.storeSegmentation = STORE_SEGMENTATION;
 
         //Function Parsing
         vm.searchStore = searchStore;
