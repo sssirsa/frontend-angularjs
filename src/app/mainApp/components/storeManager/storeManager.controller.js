@@ -17,8 +17,35 @@
         });
 
     /* @ngInject */
-    function storeManagerController() {
-        var ctrl = this;
+    function storeManagerController(Translate, toastr, $log, STORE_SEGMENTATION, Geolocation, $mdDialog) {
+        var vm = this;
+
+        //Variable declaration
+        vm.store = this.store;
+
+        //Function Parsing
+        vm.searchStore = searchStore;
+        vm.createStore = createStore;
+        vm.modifyStore = modifyStore;
+        vm.deleteStore = deleteStore;
+
+
+        function searchStore(){
+
+        }
+
+        function createStore(){
+
+        }
+
+        function modifyStore(){
+
+        }
+
+        function deleteStore(){
+
+        }
+
     }
 
 })();
