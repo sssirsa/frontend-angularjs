@@ -27,6 +27,7 @@
         vm.createStore = createStore;
         vm.modifyStore = modifyStore;
         vm.deleteStore = deleteStore;
+        vm.showStoreLocation = showStoreLocation;
 
 
         function searchStore(){
@@ -43,6 +44,10 @@
 
         function deleteStore(){
 
+        }
+
+        function showStoreLocation() {
+            Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }
 
     }
