@@ -34,10 +34,11 @@
         function searchStore() {
             $mdDialog.show({
                 controller: 'searchStoreController',
-                controllerAs: vm,
+                controllerAs: 'vm',
                 templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
                 fullscreen: true,
-                clickOutsideToClose: true
+                clickOutsideToClose: true,
+                focusOnOpen: true
             })
                 .then(function (store) {
                     vm.store = store;
