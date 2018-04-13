@@ -138,6 +138,7 @@
                                     })
                                     .catch(function(storeListError){
                                         $log.error(storeListError);
+                                        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                     });
                             }
                             else{
@@ -148,6 +149,7 @@
                                     })
                                     .catch(function(storeListError){
                                         $log.error(storeListError);
+                                        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                     });
                             }
                         }
@@ -159,6 +161,7 @@
                                 })
                                 .catch(function(storeListError){
                                     $log.error(storeListError);
+                                    toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                 });
                         }
                     }
@@ -170,6 +173,7 @@
                         })
                         .catch(function(storeListError){
                             $log.error(storeListError);
+                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                         });
                     break;
                 case 2:
@@ -179,10 +183,10 @@
                         })
                         .catch(function(storeListError){
                             $log.error(storeListError);
+                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                         });
                     break;
             }
-            $log.debug(vm.stores);
         }
 
         function changeTab() {
