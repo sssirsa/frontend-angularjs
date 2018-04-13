@@ -21,6 +21,7 @@
 
         //Variable declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.store = null;
 
         //Function Parsing
         vm.searchStore = searchStore;
@@ -30,19 +31,33 @@
         vm.showStoreLocation = showStoreLocation;
 
 
-        function searchStore(){
+        function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: vm,
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true
+            })
+                .then(function (store) {
+                    vm.store = store;
+                })
+                .catch(function(storeError){
+                    if(storeError){
+                        //TODO: Error handling
+                    }
+                });
+        }
+
+        function createStore() {
 
         }
 
-        function createStore(){
+        function modifyStore() {
 
         }
 
-        function modifyStore(){
-
-        }
-
-        function deleteStore(){
+        function deleteStore() {
 
         }
 

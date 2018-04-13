@@ -113,6 +113,20 @@
                     "LOCALITY":"Localidad",
                     "ZIP_CODE":"Código postal",
                     "SEGMENTATION":"Segmentación"
+                },
+                "MODALS":{
+                    "SEARCH":{
+                        "TITLE":"Búsqueda de establecimiento",
+                        "BY_ECONOMIC":"Por económico",
+                        "BY_POSTAL_CODE":"Por código postal",
+                        "BY_ADDRESS":"Por dirección"
+                    },
+                    "NEW":{
+                        "TITLE":"Nuevo establecimiento"
+                    },
+                    "MODIFY":{
+                        "TITLE":"Editar establecimiento"
+                    }
                 }
             }
         },
