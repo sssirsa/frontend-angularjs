@@ -1,4 +1,4 @@
-<md-dialog fullWidth>
+<md-dialog>
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.TITLE'|translate}}</h2>
@@ -13,17 +13,26 @@
         layout-align="center stretch"
         layout-padding
     >
-        <md-tabs>
-            <md-tab label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}">
-                <md-input-container flex class="md-block">
+        <md-tabs
+            md-dynamic-height="true"
+            md-selected="vm.selectedTab"
+            cg-busy="{promise:vm.loadingPromise, message:'Buscando establecimientos...'}"
+        >
+            <md-tab
+                layout="row"
+                layout-align="center stretch"
+                md-on-select="vm.changeTab()"
+                label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}"
+            >
+                <md-input-container flex class="md-block" >
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
                     <md-select
                         ng-model="vm.state"
-                        md-on-close="vm.selectState(city)"
+                        md-on-close="vm.selectState()"
                     >
                         <md-option
                             ng-repeat="state in vm.states"
-                            ng-value="state.id"
+                            ng-value="{{state.id}}"
                         >
                             {{state.nombre}}
                         </md-option>
@@ -61,12 +70,71 @@
                     </md-select>
                 </md-input-container>
             </md-tab>
-            <md-tab label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_POSTAL_CODE'|translate}}">
-
+            <md-tab
+                md-on-select="vm.changeTab()"
+                label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_POSTAL_CODE'|translate}}"
+            >
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ZIP_CODE</label>
+                    <input
+                        ng-model="vm.postal_code"
+                        md-maxlength="5">
+                    <div class="hint" translate>MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.HINTS.ZIP_CODE</div>
+                </md-input-container>
             </md-tab>
-            <md-tab label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ECONOMIC'|translate}}">
-
+            <md-tab
+                md-on-select="vm.changeTab()"
+                label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ECONOMIC'|translate}}"
+            >
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ECONOMIC</label>
+                    <input
+                        ng-model="vm.economic"
+                        md-maxlength="10">
+                    <div class="hint" translate>MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.HINTS.ECONOMIC</div>
+                </md-input-container>
             </md-tab>
         </md-tabs>
+
+        <md-actions
+            layout="row"
+            layout-align="end center">
+            <md-button
+                ng-disabled="!vm.state && !vm.postal_code && !vm.economic"
+                ng-click="vm.search()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-search"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BUTTON'|translate}}
+            </md-button>
+        </md-actions>
+
+        <div
+            ng-if="vm.stores.length===0"
+            translate
+        >
+            MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS
+        </div>
+
+        <md-card
+            layout-gt-sm="row"
+            layout="column"
+            layout-align-gt-sm="space-around center"
+            layout-align="center stretch"
+            layout-wrap
+            ng-repeat="store in vm.store">
+            <div>
+                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</h3>
+                {{store.nombre_establecimiento}}
+            </div>
+            <div>
+                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</h3>
+                {{store.nombre_encargado}}
+            </div>
+            <div>
+                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</h3>
+                {{store.telefono_encargado}}
+            </div>
+        </md-card>
+
     </md-content>
 </md-dialog>

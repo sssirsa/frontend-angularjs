@@ -1,4 +1,5 @@
 (function () {
+    'use_strict';
     angular
         .module('app.mainApp')
         .controller('searchStoreController', searchStoreController);
@@ -18,13 +19,16 @@
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
         vm.store = null;
-        vm.state = null;
+        vm.states = null;
         vm.cities = null;
         vm.localities = null;
         vm.state = null;
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
+        vm.economic = null;
+        vm.selectedTab = 0;
+        vm.stores = null;
 
         //Functions
         vm.accept = accept;
@@ -34,6 +38,8 @@
         vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectCity = selectCity;
+        vm.search = search;
+        vm.changeTab = changeTab;
 
         activate();
 
@@ -116,6 +122,75 @@
         function selectCity() {
             vm.locality = null;
             vm.localities = null;
+        }
+
+        function search() {
+            vm.stores=null;
+            switch (vm.selectedTab) {
+                case 0:
+                    if(vm.state){
+                        if(vm.city){
+                            if(vm.locality){
+                                //Look up by locality
+                                vm.loadingPromise = Stores.getByLocality(vm.locality)
+                                    .then(function(storeList){
+                                        vm.stores=Helper.filterDeleted(storeList, true);
+                                    })
+                                    .catch(function(storeListError){
+                                        $log.error(storeListError);
+                                    });
+                            }
+                            else{
+                                //Look up by city
+                                vm.loadingPromise = Stores.getByCity(vm.city)
+                                    .then(function(storeList){
+                                        vm.stores=Helper.filterDeleted(storeList, true);
+                                    })
+                                    .catch(function(storeListError){
+                                        $log.error(storeListError);
+                                    });
+                            }
+                        }
+                        else{
+                            //Look up by state
+                            vm.loadingPromise = Stores.getByState(vm.state)
+                                .then(function(storeList){
+                                    vm.stores=Helper.filterDeleted(storeList, true);
+                                })
+                                .catch(function(storeListError){
+                                    $log.error(storeListError);
+                                });
+                        }
+                    }
+                    break;
+                case 1:
+                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code)
+                        .then(function(storeList){
+                            vm.stores=Helper.filterDeleted(storeList, true);
+                        })
+                        .catch(function(storeListError){
+                            $log.error(storeListError);
+                        });
+                    break;
+                case 2:
+                    vm.loadingPromise = Stores.getByEconomic(vm.economic)
+                        .then(function(storeList){
+                            vm.stores=Helper.filterDeleted(storeList, true);
+                        })
+                        .catch(function(storeListError){
+                            $log.error(storeListError);
+                        });
+                    break;
+            }
+            $log.debug(vm.stores);
+        }
+
+        function changeTab() {
+            vm.state = null;
+            vm.city = null;
+            vm.locality = null;
+            vm.postal_code = null;
+            vm.economic = null;
         }
 
     }
