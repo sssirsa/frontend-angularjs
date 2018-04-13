@@ -32,23 +32,23 @@
         }
 
         function getByLocality(LocalityID){
-            return querySearch(URLS.store + QUERIES.store.by_locality + LocalityID);
+            return querySearch(URLS.establecimiento + QUERIES.store.by_locality + LocalityID);
         }
 
         function getByCity(cityID){
-            return querySearch(URLS.store + QUERIES.store.by_city + cityID);
+            return querySearch(URLS.establecimiento + QUERIES.store.by_city + cityID);
         }
 
         function getByState(stateID){
-            return querySearch(URLS.store + QUERIES.store.by_state + stateID);
+            return querySearch(URLS.establecimiento + QUERIES.store.by_state + stateID);
         }
 
         function getByPostalCode(postalCode){
-            return querySearch(URLS.store + QUERIES.store.by_postal_code + postalCode);
+            return querySearch(URLS.establecimiento + QUERIES.store.by_postal_code + postalCode);
         }
 
         function getByEconomic(economic){
-            return querySearch(URLS.store + QUERIES.store.by_economic + economic);
+            return querySearch(URLS.establecimiento + QUERIES.store.by_economic + economic);
         }
 
         function querySearch(query){
