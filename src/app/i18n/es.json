@@ -137,6 +137,10 @@
                     "MODIFY":{
                         "TITLE":"Editar establecimiento"
                     }
+                },
+                "TOASTR":{
+                    "DELETE_SUCCESS":"Establecimiento eliminado correctamente",
+                    "DELETE_ERROR":"Error al eliminar establecimiento"
                 }
             }
         },

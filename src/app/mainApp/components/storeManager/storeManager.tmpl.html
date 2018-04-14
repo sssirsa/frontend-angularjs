@@ -33,6 +33,7 @@
             </md-button>
             <md-button
                 ng-if="$ctrl.store && $ctrl.canDelete"
+                ng-click="$ctrl.deleteStore()"
                 class="md-warn md-raised">
                 <md-icon md-font-icon="fa fa-trash"></md-icon>
                 {{'MAIN.COMPONENTS.STORE_MANAGER.DELETE'|translate}}
@@ -153,7 +154,7 @@
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ZIP_CODE</label>
                     <input
                         ng-disabled="true"
-                        ng-model="$ctrl.zip_code"/>
+                        ng-model="$ctrl.store.localidad.codigo_postal"/>
                 </md-input-container>
             </div>
             <div flex
@@ -163,14 +164,12 @@
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LATITUDE</label>
                     <input
-                        type="number"
                         ng-disabled="true"
                         ng-model="$ctrl.store.latitud"/>
                 </md-input-container>
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LONGITUDE</label>
                     <input
-                        type="number"
                         ng-disabled="true"
                         ng-model="$ctrl.store.longitud"/>
                 </md-input-container>

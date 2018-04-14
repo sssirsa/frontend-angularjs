@@ -16,7 +16,15 @@
         });
 
     /* @ngInject */
-    function storeManagerController(Translate, toastr, $log, STORE_SEGMENTATION, Geolocation, $mdDialog) {
+    function storeManagerController(
+        Translate,
+        toastr,
+        $log,
+        STORE_SEGMENTATION,
+        Geolocation,
+        $mdDialog,
+        Stores
+    ) {
         var vm = this;
 
         //Variable declaration
@@ -59,6 +67,24 @@
         }
 
         function deleteStore() {
+            var confirm = $mdDialog.confirm()
+                .title('Confirmar eliminación')
+                .textContent('Confirma la eliminación del establecimiento')
+                .ariaLabel('Delete store')
+                .ok('Eliminar')
+                .cancel('Cancelar');
+
+            $mdDialog.show(confirm)
+                .then(function(){
+                    Stores.remove(vm.store.id)
+                        .then(function(){
+                            vm.store=null;
+                            toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));
+                        })
+                        .catch(function(){
+                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_ERROR'));
+                        });
+                });
 
         }
 
