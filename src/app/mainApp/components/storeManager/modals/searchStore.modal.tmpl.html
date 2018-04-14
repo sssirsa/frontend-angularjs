@@ -1,4 +1,4 @@
-<md-dialog>
+<div>
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.TITLE'|translate}}</h2>
@@ -24,7 +24,7 @@
                 md-on-select="vm.changeTab()"
                 label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}"
             >
-                <md-input-container flex class="md-block" >
+                <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
                     <md-select
                         ng-model="vm.state"
@@ -114,27 +114,56 @@
         >
             MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS
         </div>
-
-        <md-card
-            layout-gt-sm="row"
-            layout="column"
-            layout-align-gt-sm="space-around center"
-            layout-align="center stretch"
-            layout-wrap
-            ng-repeat="store in vm.store">
-            <div>
-                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</h3>
-                {{store.nombre_establecimiento}}
-            </div>
-            <div>
-                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</h3>
-                {{store.nombre_encargado}}
-            </div>
-            <div>
-                <h3 translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</h3>
-                {{store.telefono_encargado}}
-            </div>
-        </md-card>
-
+        <div
+            ng-if="vm.selectedTab===0||vm.selectedTab===1"
+        >
+            <md-card
+                layout-gt-sm="row"
+                layout="column"
+                layout-align-gt-sm="space-around center"
+                layout-align="center stretch"
+                layout-wrap
+                ng-click="vm.accept(store)"
+                ng-repeat="store in vm.stores">
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</strong>
+                    {{store.nombre_establecimiento}}
+                </div>
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</strong>
+                    {{store.nombre_encargado}}
+                </div>
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</strong>
+                    {{store.telefono_encargado}}
+                </div>
+            </md-card>
+        </div>
+        <div
+            ng-if="vm.selectedTab===2"
+        >
+            <md-card
+                layout-gt-sm="row"
+                layout="column"
+                layout-align-gt-sm="space-around center"
+                layout-align="center stretch"
+                layout-wrap
+                ng-click="vm.accept(store.establecimiento)"
+                ng-if="!store.fecha_salida"
+                ng-repeat="store in vm.stores">
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</strong>
+                    {{store.establecimiento.nombre_establecimiento}}
+                </div>
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</strong>
+                    {{store.establecimiento.nombre_encargado}}
+                </div>
+                <div layout="column" layout-padding>
+                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</strong>
+                    {{store.establecimiento.telefono_encargado}}
+                </div>
+            </md-card>
+        </div>
     </md-content>
-</md-dialog>
+</div>

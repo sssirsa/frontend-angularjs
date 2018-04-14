@@ -18,7 +18,6 @@
 
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
-        vm.store = null;
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
@@ -48,8 +47,8 @@
         }
 
 
-        function accept() {
-            $mdDialog.hide(vm.store);
+        function accept(store) {
+            $mdDialog.hide(store);
         }
 
         function cancel() {
@@ -195,6 +194,7 @@
             vm.locality = null;
             vm.postal_code = null;
             vm.economic = null;
+            vm.stores=null;
         }
 
     }
