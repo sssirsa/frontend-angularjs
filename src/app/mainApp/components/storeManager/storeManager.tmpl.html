@@ -21,6 +21,7 @@
             </md-button>
             <md-button
                 ng-if="$ctrl.canCreate"
+                ng-click="$ctrl.createStore()"
                 class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 {{'MAIN.COMPONENTS.STORE_MANAGER.CREATE'|translate}}

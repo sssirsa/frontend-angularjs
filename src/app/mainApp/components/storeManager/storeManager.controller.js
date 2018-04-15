@@ -59,7 +59,22 @@
         }
 
         function createStore() {
-
+            $mdDialog.show({
+                controller: 'createStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/createStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    vm.store = store;
+                })
+                .catch(function(storeError){
+                    if(storeError){
+                        //TODO: Error handling
+                    }
+                });
         }
 
         function modifyStore() {

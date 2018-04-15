@@ -13,11 +13,12 @@
                                    $log,
                                    States,
                                    Cities,
+                                   STORE_SEGMENTATION,
                                    Localities) {
         var vm = this;
 
         //Variables
-        vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
+        vm.storeSegmentation = STORE_SEGMENTATION;
         vm.store = null;
         vm.states = null;
         vm.cities = null;
@@ -47,7 +48,16 @@
 
 
         function accept() {
-            $mdDialog.hide(vm.store);
+            vm.store.localidad_id = vm.locality.id;
+            Stores.create(vm.store)
+                .then(function(){
+                    toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
+                    $mdDialog.hide();
+                })
+                .catch(function(errorCreateStore){
+                    $log.error(errorCreateStore);
+                    toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_ERROR'));
+                });
         }
 
         function cancel() {

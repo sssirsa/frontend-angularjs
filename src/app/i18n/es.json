@@ -132,7 +132,16 @@
                         }
                     },
                     "NEW":{
-                        "TITLE":"Nuevo establecimiento"
+                        "TITLE":"Nuevo establecimiento",
+                        "BUTTON":"Guardar",
+                        "ERRORS":{
+                            "LATITUDE":"Formato invalido de latitud",
+                            "LONGITUDE":"Formato invalido de longitud"
+                        },
+                        "HINTS":{
+                            "LATITUDE":"El rango de la latitud es de -90 a 90",
+                            "LONGITUDE":"El rango de la longitud es de -180 a 180"
+                        }
                     },
                     "MODIFY":{
                         "TITLE":"Editar establecimiento"
@@ -140,7 +149,9 @@
                 },
                 "TOASTR":{
                     "DELETE_SUCCESS":"Establecimiento eliminado correctamente",
-                    "DELETE_ERROR":"Error al eliminar establecimiento"
+                    "DELETE_ERROR":"Error al eliminar establecimiento",
+                    "CREATE_SUCCESS":"Establecimiento creado correctamente",
+                    "CREATE_ERROR":"Error al eliminar establecimiento"
                 }
             }
         },
