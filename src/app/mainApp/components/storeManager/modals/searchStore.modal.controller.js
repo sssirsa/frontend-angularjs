@@ -124,41 +124,41 @@
         }
 
         function search() {
-            vm.stores=null;
+            vm.stores = null;
             switch (vm.selectedTab) {
                 case 0:
-                    if(vm.state){
-                        if(vm.city){
-                            if(vm.locality){
+                    if (vm.state) {
+                        if (vm.city) {
+                            if (vm.locality) {
                                 //Look up by locality
                                 vm.loadingPromise = Stores.getByLocality(vm.locality)
-                                    .then(function(storeList){
-                                        vm.stores=Helper.filterDeleted(storeList, true);
+                                    .then(function (storeList) {
+                                        vm.stores = Helper.filterDeleted(storeList, true);
                                     })
-                                    .catch(function(storeListError){
+                                    .catch(function (storeListError) {
                                         $log.error(storeListError);
                                         toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                     });
                             }
-                            else{
+                            else {
                                 //Look up by city
                                 vm.loadingPromise = Stores.getByCity(vm.city)
-                                    .then(function(storeList){
-                                        vm.stores=Helper.filterDeleted(storeList, true);
+                                    .then(function (storeList) {
+                                        vm.stores = Helper.filterDeleted(storeList, true);
                                     })
-                                    .catch(function(storeListError){
+                                    .catch(function (storeListError) {
                                         $log.error(storeListError);
                                         toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                     });
                             }
                         }
-                        else{
+                        else {
                             //Look up by state
                             vm.loadingPromise = Stores.getByState(vm.state)
-                                .then(function(storeList){
-                                    vm.stores=Helper.filterDeleted(storeList, true);
+                                .then(function (storeList) {
+                                    vm.stores = Helper.filterDeleted(storeList, true);
                                 })
-                                .catch(function(storeListError){
+                                .catch(function (storeListError) {
                                     $log.error(storeListError);
                                     toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                                 });
@@ -167,20 +167,25 @@
                     break;
                 case 1:
                     vm.loadingPromise = Stores.getByPostalCode(vm.postal_code)
-                        .then(function(storeList){
-                            vm.stores=Helper.filterDeleted(storeList, true);
+                        .then(function (storeList) {
+                            vm.stores = Helper.filterDeleted(storeList, true);
                         })
-                        .catch(function(storeListError){
+                        .catch(function (storeListError) {
                             $log.error(storeListError);
                             toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                         });
                     break;
                 case 2:
                     vm.loadingPromise = Stores.getByEconomic(vm.economic)
-                        .then(function(storeList){
-                            vm.stores=Helper.filterDeleted(storeList, true);
+                        .then(function (storeList) {
+                            var justStores = [];
+                            angular.forEach(storeList, function (item) {
+                                if(!item.fecha_salida)
+                                justStores.push(item.establecimiento);
+                            });
+                            vm.stores = Helper.filterDeleted(justStores, true);
                         })
-                        .catch(function(storeListError){
+                        .catch(function (storeListError) {
                             $log.error(storeListError);
                             toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                         });
@@ -194,7 +199,7 @@
             vm.locality = null;
             vm.postal_code = null;
             vm.economic = null;
-            vm.stores=null;
+            vm.stores = null;
         }
 
     }

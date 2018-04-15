@@ -148,20 +148,20 @@
                 layout-align-gt-sm="space-around center"
                 layout-align="center stretch"
                 layout-wrap
-                ng-click="vm.accept(store.establecimiento)"
+                ng-click="vm.accept(store)"
                 ng-if="!store.fecha_salida"
                 ng-repeat="store in vm.stores">
                 <div layout="column" layout-padding>
                     <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</strong>
-                    {{store.establecimiento.nombre_establecimiento}}
+                    {{store.nombre_establecimiento}}
                 </div>
                 <div layout="column" layout-padding>
                     <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</strong>
-                    {{store.establecimiento.nombre_encargado}}
+                    {{store.nombre_encargado}}
                 </div>
                 <div layout="column" layout-padding>
                     <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</strong>
-                    {{store.establecimiento.telefono_encargado}}
+                    {{store.telefono_encargado}}
                 </div>
             </md-card>
         </div>
