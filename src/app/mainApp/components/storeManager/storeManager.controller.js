@@ -91,7 +91,7 @@
 
             $mdDialog.show(confirm)
                 .then(function(){
-                    Stores.remove(vm.store.id)
+                    vm.deletingStore = Stores.remove(vm.store.id)
                         .then(function(){
                             vm.store=null;
                             toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));

@@ -32,13 +32,16 @@
                 <md-icon md-font-icon="fa fa-edit"></md-icon>
                 {{'MAIN.COMPONENTS.STORE_MANAGER.MODIFY'|translate}}
             </md-button>
-            <md-button
+            <div
                 ng-if="$ctrl.store && $ctrl.canDelete"
-                ng-click="$ctrl.deleteStore()"
-                class="md-warn md-raised">
-                <md-icon md-font-icon="fa fa-trash"></md-icon>
-                {{'MAIN.COMPONENTS.STORE_MANAGER.DELETE'|translate}}
-            </md-button>
+                cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
+                <md-button
+                    ng-click="$ctrl.deleteStore()"
+                    class="md-warn md-raised">
+                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.DELETE'|translate}}
+                </md-button>
+            </div>
         </div>
         <div
             layout-padding
