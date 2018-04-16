@@ -50,9 +50,9 @@
         function accept() {
             vm.store.localidad_id = vm.locality.id;
             vm.loadingPromise = Stores.create(vm.store)
-                .then(function(){
+                .then(function(createdStore){
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
-                    $mdDialog.hide();
+                    $mdDialog.hide(createdStore);
                 })
                 .catch(function(errorCreateStore){
                     $log.error(errorCreateStore);
