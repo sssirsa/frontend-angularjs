@@ -110,7 +110,7 @@
                  layout="column"
                  layout-gt-sm="row"
                  layout-align-gt-sm="center stretch">
-                <md-input-container flex class="md-block">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
                     <md-select
                         ng-model="vm.state"
@@ -125,11 +125,10 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container flex class="md-block">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingCities, message:'Cargando municipios...'}">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
                     <md-select
                         ng-model="vm.city"
-                        md-on-open="vm.listCities(vm.state)"
                         md-on-close="vm.selectCity()"
                         ng-disabled="!vm.state"
                         required
@@ -147,11 +146,10 @@
                  layout="column"
                  layout-gt-sm="row"
                  layout-align-gt-sm="center stretch">
-                <md-input-container flex class="md-block">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingLocalities, message:'Cargando localidades...'}">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
                     <md-select
                         ng-model="vm.locality"
-                        md-on-open="vm.listLocalities(vm.city)"
                         ng-disabled="!vm.city"
                         required
                     >

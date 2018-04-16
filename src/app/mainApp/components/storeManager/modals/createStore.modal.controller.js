@@ -66,7 +66,7 @@
 
         function listStates() {
             if (!vm.states) {
-                States.list()
+                vm.loadingStates = States.list()
                     .then(function (stateList) {
                         vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
                     })
@@ -80,7 +80,7 @@
 
         function listCities(state) {
             if (state) {
-                return Cities.getByState(state)
+                vm.loadingCities = Cities.getByState(state)
                     .then(function (citiesList) {
                         vm.cities = _.sortBy(Helper.filterDeleted(citiesList, true), 'nombre');
                     })
@@ -89,7 +89,7 @@
                     });
             }
             else {
-                return Cities.list()
+                vm.loadingCities = Cities.list()
                     .then(function (citiesList) {
                         vm.cities = Helper.filterDeleted(citiesList, true);
                     })
@@ -101,7 +101,7 @@
 
         function listLocalities(city) {
             if (city) {
-                return Localities.getByCity(city)
+                vm.loadingLocalities = Localities.getByCity(city)
                     .then(function (localitiesList) {
                         vm.localities = _.sortBy(Helper.filterDeleted(localitiesList, true), 'nombre');
                     })
@@ -110,7 +110,7 @@
                     });
             }
             else {
-                return Localities.list()
+                vm.loadingLocalities = Localities.list()
                     .then(function (localitiesList) {
                         vm.cities = Helper.filterDeleted(localitiesList, true);
                     })
@@ -121,6 +121,7 @@
         }
 
         function selectState() {
+            listCities(vm.state);
             vm.city = null;
             vm.locality = null;
             vm.cities = null;
@@ -128,6 +129,7 @@
         }
 
         function selectCity() {
+            listLocalities(vm.city);
             vm.locality = null;
             vm.localities = null;
         }
