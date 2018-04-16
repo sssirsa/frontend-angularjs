@@ -34,163 +34,21 @@
         </md-input-container>
     </md-card>
 
-    <md-card layout-align="center stretch"
-             layout="column"
-             ng-if="vm.request.tipo"
-             cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
-             layout-padding>
-        <h3 translate>REQUESTS.NEW.STORE.TITLE</h3>
+    <md-card
+        ng-if="vm.request.tipo">
+        <div
+            layout="column"
+            layout-align="center center">
+            <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.TITLE'|translate}}</h2>
+        </div>
 
-        <md-autocomplete md-input-name="establecimiento"
-                         md-no-cache="true"
-                         flex="100"
-                         md-min-length="0"
-                         md-selected-item="vm.assignedStore"
-                         md-selected-item-change="vm.selectedStoreChange()"
-                         md-search-text="vm.storeSearchText"
-                         md-items="item in vm.searchStore(item)"
-                         md-item-text="item.nombre_establecimiento"
-                         md-floating-label="{{'REQUESTS.NEW.STORE.SEARCH'|translate}}"
-                         md-menu-class="autocomplete-custom-template"
-                         required>
-            <md-item-template>
-                <span class="item-title" title="{{item.nombre}}">
-                    <md-icon md-font-icon="fa fa-university"></md-icon>
-                    <span>
-                        <b>{{item.nombre_establecimiento}}</b>
-                    </span>
-                </span>
-                <span class="md-caption">
-                    {{item.nombre_encargado}}
-                </span>
-            </md-item-template>
-            <md-not-found>
-                <span class="item-title">
-                    <span>
-                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.storeSearchText}}"
-                    </span>
-                </span>
-            </md-not-found>
-        </md-autocomplete>
+        <store-manager
+            can-create="vm.request.tipo === 'Nuevos'"
+            can-modify="vm.request.tipo"
+            can-search="vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Retiro' || vm.request.tipo === 'Servicio Técnico'"
+            store-selected="vm.storeSelected(store)"
+        ></store-manager>
 
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.NAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.nombre_establecimiento"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.SEGMENTATION</label>
-                <md-select
-                    ng-disabled="true"
-                    ng-model="vm.store.segmentacion">
-                    <md-option
-                        ng-repeat="segment in vm.storeSegmentation"
-                        ng-value="segment.value">
-                        {{segment.label}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.MANAGER</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.nombre_encargado"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.MANAGER_PHONE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.telefono_encargado"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.STREET</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.calle"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.NUMBER</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.numero"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.BETWEEN1</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.entre_calle1"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.BETWEEN2</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.entre_calle2"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.STATE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.municipio.estado.nombre"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.CITY</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.municipio.nombre"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.LOCALITY</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.nombre"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.ZIP_CODE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.codigo_postal"/>
-            </md-input-container>
-        </div>
-        <div layout="row"
-             layout-align="end end"
-             layout-sm="column"
-             layout-xs="column"
-             layout-align-sm="start stretch"
-             layout-align-xs="start stretch">
-            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
-            </md-button>
-        </div>
     </md-card>
 
     <md-card layout-align="center stretch"
