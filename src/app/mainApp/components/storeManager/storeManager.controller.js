@@ -54,7 +54,7 @@
                 })
                 .catch(function(storeError){
                     if(storeError){
-                        //TODO: Error handling
+                        $log.error(storeError);
                     }
                 });
         }
@@ -74,7 +74,7 @@
                 })
                 .catch(function(storeError){
                     if(storeError){
-                        //TODO: Error handling
+                        $log.error(storeError);
                     }
                 });
         }
@@ -95,8 +95,10 @@
                     vm.store = store;
                     this.storeSelected({store:store});
                 })
-                .catch(function(){
-
+                .catch(function(storeError){
+                    if(storeError){
+                        $log.error(storeError);
+                    }
                 });
 
         }
