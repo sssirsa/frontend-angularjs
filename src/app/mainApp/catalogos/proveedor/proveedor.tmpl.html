@@ -69,7 +69,7 @@
                     <md-input-container class="md-block">
                         <label>{{ 'Provider.phone' | translate }}</label>
                         <input type="text" name="telefono"
-                               numbers-only
+                               digits-only
                                ng-model="vm.selected_proveedor.telefono" ng-required="true" ng-disabled="vm.selected_proveedor.deleted"/>
                         <div ng-messages="inputForm.telefono.$error">
                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD' | translate}}</div>

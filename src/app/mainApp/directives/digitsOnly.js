@@ -5,7 +5,7 @@
     'use strict';
     angular
         .module('app.mainApp')
-        .directive('numbersOnly',numbersOnly);
+        .directive('digitsOnly',numbersOnly);
 
     function numbersOnly(){
         return {
