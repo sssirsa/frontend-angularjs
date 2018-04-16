@@ -485,12 +485,12 @@
             municipio: 'municipio'
         })
         .constant('QUERIES', {
-            store:{
-                by_state:'?localidad__municipio__estado_id=',
-                by_city:'?localidad__municipio_id=',
-                by_locality:'?localidad_id=',
-                by_postal_code:'?localidad__codigo_postal=',
-                by_economic:'/lookup/'
+            store: {
+                by_state: '?localidad__municipio__estado_id=',
+                by_city: '?localidad__municipio_id=',
+                by_locality: '?localidad_id=',
+                by_postal_code: '?localidad__codigo_postal=',
+                by_economic: '/lookup/'
             },
             city: {
                 by_state: '?estado_id='
@@ -573,28 +573,34 @@
         .constant('STORE_SEGMENTATION',
             [
                 {
-                    value: 0,
-                    label: 'Rojo'
-                },
-                {
-                    value: 1,
-                    label: 'Bajo Bronce'
-                },
-                {
-                    value: 2,
-                    label: 'Bronce'
-                },
-                {
-                    value: 3,
-                    label: 'Plata'
+                    value: 5,
+                    label: 'Platino',
+                    class:'store_platinum'
                 },
                 {
                     value: 4,
-                    label: 'Oro'
+                    label: 'Oro',
+                    class:'store_gold'
                 },
                 {
-                    value: 5,
-                    label: 'Platino'
+                    value: 3,
+                    label: 'Plata',
+                    class:'store_silver'
+                },
+                {
+                    value: 2,
+                    label: 'Bronce',
+                    class:'store_bronze'
+                },
+                {
+                    value: 1,
+                    label: 'Bajo Bronce',
+                    class:'store_low_bronze'
+                },
+                {
+                    value: 0,
+                    label: 'Rojo',
+                    class:'store_red'
                 }]
         );
 })();

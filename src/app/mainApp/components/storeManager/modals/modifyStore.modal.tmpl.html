@@ -36,6 +36,7 @@
                         ng-model="vm.store.segmentacion">
                         <md-option
                             ng-repeat="segment in vm.storeSegmentation"
+                            class="{{segment.class}}"
                             ng-value="segment.value">
                             {{segment.label}}
                         </md-option>
