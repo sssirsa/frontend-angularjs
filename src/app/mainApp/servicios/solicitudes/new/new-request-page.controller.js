@@ -1,5 +1,3 @@
-//TODO: Añadir campo economico en las solicitudes de retiro y cambio
-
 (function () {
     'use strict';
 
