@@ -79,7 +79,10 @@
                 "EMAIL":"Correo electrónico",
                 "PHONE":"Teléfono"
             },
-            "CABINET":"Económico del cabinet",
+            "CABINET":{
+                "TITLE":"Cabinet a retirar",
+                "FIELD":"Económico"
+            },
             "CABINETS":{
                 "TITLE":"Solicitudes de cabinet",
                 "QUANTITY":"Cantidad",
