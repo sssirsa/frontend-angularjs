@@ -1,0 +1,225 @@
+<div
+    cg-busy="{promise:vm.loadingPromise, message:'Guardando establecimiento...'}">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.TITLE'|translate}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+        <form
+            name="storeFrom">
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</label>
+                    <input
+                        name="nombre_establecimiento"
+                        required
+                        md-maxlength="50"
+                        ng-model="vm.store.nombre_establecimiento"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
+                    <md-select
+                        name="segmentacion"
+                        required
+                        ng-model="vm.store.segmentacion">
+                        <md-option
+                            ng-repeat="segment in vm.storeSegmentation"
+                            ng-value="segment.value">
+                            {{segment.label}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</label>
+                    <input
+                        name="nombre_encargado"
+                        required
+                        md-maxlength="50"
+                        ng-model="vm.store.nombre_encargado"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</label>
+                    <input
+                        name="telefono_encargado"
+                        required
+                        digits-only
+                        md-maxlength="10"
+                        ng-model="vm.store.telefono_encargado"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STREET</label>
+                    <input
+                        name="calle"
+                        required
+                        md-maxlength="50"
+                        ng-model="vm.store.calle"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NUMBER</label>
+                    <input
+                        name="numero"
+                        required
+                        md-maxlength="10"
+                        ng-model="vm.store.numero"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.BETWEEN1</label>
+                    <input
+                        name="entre_calle_1"
+                        required
+                        md-maxlength="50"
+                        ng-model="vm.store.entre_calle1"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.BETWEEN2</label>
+                    <input
+                        name="entre_calle_2"
+                        required
+                        md-maxlength="50"
+                        ng-model="vm.store.entre_calle2"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
+                    <md-select
+                        ng-model="vm.state"
+                        required
+                        md-on-close="vm.selectState()"
+                    >
+                        <md-option
+                            ng-repeat="state in vm.states"
+                            ng-value="{{state.id}}"
+                        >
+                            {{state.nombre}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingCities, message:'Cargando municipios...'}">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
+                    <md-select
+                        ng-model="vm.city"
+                        md-on-close="vm.selectCity()"
+                        ng-disabled="!vm.state"
+                        required
+                    >
+                        <md-option
+                            ng-repeat="city in vm.cities"
+                            ng-value="city.id"
+                        >
+                            {{city.nombre}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingLocalities, message:'Cargando localidades...'}">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
+                    <md-select
+                        ng-model="vm.locality"
+                        ng-disabled="!vm.city"
+                        required
+                    >
+                        <md-option
+                            ng-repeat="locality in vm.localities"
+                            ng-value="locality"
+                        >
+                            {{locality.nombre}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ZIP_CODE</label>
+                    <input
+                        name="codigo_postal"
+                        ng-disabled="true"
+                        ng-model="vm.locality.codigo_postal"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LATITUDE</label>
+                    <input
+                        name="latitud"
+                        required
+                        type="number"
+                        min="-90"
+                        max="90"
+                        ng-model="vm.store.latitud"
+                        ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
+                    <div ng-messages="storeForm.latitud.$error">
+                        <div ng-message="pattern">
+                            {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.ERRORS.LATITUDE'|translate}}
+                        </div>
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LONGITUDE</label>
+                    <input
+                        name="longitud"
+                        required
+                        type="number"
+                        min="-180"
+                        max="180"
+                        ng-model="vm.store.longitud"
+                        ng-pattern="/^-?(180|1[0-7][0-9]|[1-9][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
+                    <div ng-messages="storeForm.longitud.$error">
+                        <div ng-message="pattern">
+                            {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.ERRORS.LONGITUDE'|translate}}
+                        </div>
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </form>
+
+        <md-actions
+            layout="row"
+            layout-align="end center">
+            <md-button
+                ng-disabled="storeFrom.$invalid"
+                ng-click="vm.accept()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-search"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.BUTTON'|translate}}
+            </md-button>
+        </md-actions>
+    </md-content>
+</div>

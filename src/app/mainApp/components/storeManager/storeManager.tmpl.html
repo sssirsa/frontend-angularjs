@@ -28,6 +28,7 @@
             </md-button>
             <md-button
                 ng-if="$ctrl.store && $ctrl.canModify"
+                ng-click="$ctrl.modifyStore()"
                 class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-edit"></md-icon>
                 {{'MAIN.COMPONENTS.STORE_MANAGER.MODIFY'|translate}}

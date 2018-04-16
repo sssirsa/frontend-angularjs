@@ -78,6 +78,25 @@
         }
 
         function modifyStore() {
+            $mdDialog.show({
+                controller: 'modifyStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/modifyStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    store:vm.store
+                }
+            })
+                .then(function (store) {
+                    vm.store = store;
+                })
+                .catch(function(storeError){
+                    if(storeError){
+                        //TODO: Error handling
+                    }
+                });
 
         }
 
