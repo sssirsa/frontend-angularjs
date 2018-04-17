@@ -5,7 +5,7 @@
         .factory('authorization', authorization);
     /* @ngInject */
     function authorization($rootScope, $state, AuthService, toastr, Translate) {
-
+/*
         return {
             authorize: authorize
         };
@@ -28,6 +28,6 @@
                     }
                 }
             });
-        }
+        }*/
     }
 })();

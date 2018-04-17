@@ -83,9 +83,13 @@
         }
 
         function revokeToken(){
+            var request = $q.defer();
+
             $cookies.remove('token');
             $cookies.remove('refresh_token');
             $cookies.remove('expiration');
+
+            request.resolve();
         }
 
         function compareDates() {
