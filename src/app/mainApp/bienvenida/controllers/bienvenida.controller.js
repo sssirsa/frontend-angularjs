@@ -6,17 +6,14 @@
         .module('app.mainApp')
         .controller('bienvenidaController',bienvenidaController);
 
-    function bienvenidaController( $scope,$rootScope,AUTH_EVENTS){
+    function bienvenidaController($scope,$rootScope){
         var vm = this;
 
         vm.capturista=false;
         vm.tecnico=false;
         vm.cliente=false;
         vm.Admin=false;
-        $rootScope.$on(AUTH_EVENTS.sessionRestore, function(event) {
-            vm.role=$scope.vmNode.currentUser.userRole;
-            showButtons();
-        });
+
         function showButtons(){
             if (vm.role==="Administrador"){
                 vm.capturista=true;

@@ -7,7 +7,14 @@
     angular
         .module('app')
         .run(Run);
-    function Run($rootScope, Channel, amMoment, AUTH_EVENTS, Helper, EVENTS_GENERAL, OAuth, AuthService, $window) {
+    function Run($rootScope,
+                 Channel,
+                 amMoment,
+                 Helper,
+                 EVENTS_GENERAL,
+                 OAuth,
+                 AuthService,
+                 $window) {
         amMoment.changeLocale('es');
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if (toState.name != 'login') {
@@ -33,12 +40,6 @@
                 return OAuth.getRefreshToken();
             }
             return $window.location.href = '/login';
-        });
-        $rootScope.$on(AUTH_EVENTS.sessionRestore, function (event) {
-
-            //authorization.authorize();
-            //Helper.getNotificationsByUser();
-
         });
         $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
             var canal = Channel.all();

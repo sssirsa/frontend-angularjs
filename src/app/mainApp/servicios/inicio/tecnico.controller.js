@@ -8,7 +8,7 @@
         .module('app.mainApp.servicios')
         .controller('tecnicoController', tecnicoController);
 
-    function tecnicoController( $scope,$rootScope,AUTH_EVENTS) {
+    function tecnicoController($scope,$rootScope) {
         var vm = this;
         vm.tecnicoAVisibility = false;
         vm.tecnicoBVisibility = false;
@@ -17,7 +17,7 @@
         vm.tecnicoEVisibility = false;
 
 
-        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
+       /* $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
             vm.role=$scope.vmNode.currentUser.userRole;
             showButtons();
         });
@@ -70,7 +70,7 @@
                     }
                 }
             }
-        }
+        }*/
     }
 
 
