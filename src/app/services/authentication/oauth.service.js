@@ -1,13 +1,14 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'Restangular', '$q', '$cookieStore', 'RoleStore', 'URLS', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, Restangular, $q, $cookieStore, RoleStore, URLS) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, $q, $cookies, RoleStore, $log) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
-            isValidToken:isValidToken
+            isValidToken: isValidToken,
+            revokeToken: revokeToken
         };
 
         function getToken(userName, password) {
@@ -22,23 +23,27 @@
 
             var request = $q.defer();
 
-            Restangular.all('oauth').all('token').customPOST({'content-type': 'application/json'}, null, data)
+            WebRestangular.all('oauth').all('token')
+                .customPOST({'content-type': 'application/json'}, null, data)
                 .then(function (loginResponse) {
-                    $cookieStore.put('token', loginResponse.value);
-                    $cookieStore.put('refreshToken', loginResponse.refreshToken.value);
-                    $cookieStore.put('expiration', loginResponse.expiration);
-                    Restangular.setDefaultHeaders({authorization: 'bearer ' + $cookieStore.get('token')});
+                    $cookies.put('token', loginResponse.access_token);
+                    $cookies.put('refreshToken', loginResponse.refreshToken);
+                    var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');
+                    var expiration = now.add(loginResponse.expires_in, 'seconds');
+                    $log.debug('Expiration date' + expiration.toString());
+                    $cookies.put('expiration', expiration);
+                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.get('token')});
 
-                    Restangular.all(URLS.PROFILE).all('profile').customGET()
-                        .then(function(profile){
+                    WebRestangular.all('my_groups').customGET()
+                        .then(function (profile) {
                             var roles = {};
 
-                            angular.forEach(profile.authorities,function(roleName){
-                                roles[roleName.name.toUpperCase()]=[];
+                            angular.forEach(profile, function (roleName) {
+                                roles[roleName.name.toUpperCase()] = [];
                             });
 
                             RoleStore.defineManyRoles(roles);
-                            console.log(RoleStore.getStore());
+                            $log.debug(RoleStore.getStore());
 
                             request.resolve();
                         });
@@ -57,16 +62,17 @@
                 grant_type: 'refresh_token',
                 client_id: EnvironmentConfig.site.oauth.clientId,
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
-                refresh_token: $cookieStore.get('refreshToken')
+                refresh_token: $cookies.get('refreshToken')
             };
-            return Restangular.all('oauth').all('token').customPOST({'content-type': 'application/json'}, null, data);
+            return WebRestangular.all('oauth').all('token')
+                .customPOST({'content-type': 'application/json'}, null, data);
 
         }
 
-        function isValidToken(){
-            if ($cookieStore.get('expiration')!== null){
-                if (compareDates()){
-                    $cookieStore.remove('token');
+        function isValidToken() {
+            if ($cookies.get('expiration') !== null) {
+                if (compareDates()) {
+                    $cookies.remove('token');
                     return false;
                 }
                 return true;
@@ -76,11 +82,17 @@
             }
         }
 
+        function revokeToken(){
+            $cookies.remove('token');
+            $cookies.remove('refresh_token');
+            $cookies.remove('expiration');
+        }
+
         function compareDates() {
-            var date_expiration=$cookieStore.get('expiration');
+            var date_expiration = $cookies.get('expiration');
             moment.locale('en');
-            var now=moment((moment().format('MMM D YYYY H:m:s A')),'MMM D YYYY H:m:s A');
-            var expiration=moment(date_expiration,'MMM D YYYY H:m:s A');
+            var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');
+            var expiration = moment(date_expiration, 'MMM D YYYY H:m:s A');
             return now > expiration;
         }
 

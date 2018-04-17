@@ -1,6 +1,5 @@
-/**
- * Created by Emmanuel on 15/07/2016.
- */
+/*
+
 (function () {
     'use strict';
 
@@ -12,7 +11,7 @@
     function OauthConfig(OAuthProvider, EnvironmentConfig) {
         console.log(EnvironmentConfig.site.rest);
         var baseUrl = EnvironmentConfig.site.rest.web_api+'/oauth/';
-        /*switch (EnvironmentConfig.environment) {
+        /!*switch (EnvironmentConfig.environment) {
             case 'development':
                 //EnvironmentConfig.site.rest.api+'mobile-dev/oauth/'
                 baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis_dev + /oauth/;
@@ -26,7 +25,7 @@
             case 'local':
                 baseUrl = EnvironmentConfig.site.rest.api + '/' + URLS.environment.genesis_local + /oauth/;
                 break;
-        }*/
+        }*!/
         OAuthProvider.configure({
             baseUrl: baseUrl,
             clientId: EnvironmentConfig.site.oauth.clientId,
@@ -41,3 +40,4 @@
     }
 
 })();
+*/
