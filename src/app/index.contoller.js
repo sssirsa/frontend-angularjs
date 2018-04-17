@@ -6,7 +6,7 @@
         .module('app')
         .controller('homeController',homeController);
 
-    function homeController(Session,$rootScope,AUTH_EVENTS){
+    function homeController(Session,$rootScope){
         //TODO: Change login and permissions functionality
         var vmNode=this;
         vmNode.currentUser = {};
