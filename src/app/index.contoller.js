@@ -6,24 +6,8 @@
         .module('app')
         .controller('homeController',homeController);
 
-    function homeController(Session,$rootScope){
-        //TODO: Change login and permissions functionality
-        var vmNode=this;
-        vmNode.currentUser = {};
+    function homeController(){
 
-        vmNode.setCurrentUser = setCurrentUser;
-        function setCurrentUser() {
-            vmNode.currentUser.userInformation = Session.userInformation;
-            vmNode.currentUser.userName = Session.userName;
-            vmNode.currentUser.userRole = Session.userRole;
-        }
-        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
-            vmNode.currentUser={};
-        });
-        $rootScope.$on(AUTH_EVENTS.sessionRestore, function(event) {
-            vmNode.setCurrentUser();
-
-        });
     }
 
 })();
