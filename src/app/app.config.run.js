@@ -7,7 +7,7 @@
     angular
         .module('app')
         .run(Run);
-    function Run($rootScope, Channel, amMoment, Session, AUTH_EVENTS, Helper, EVENTS_GENERAL, OAuth, AuthService, $window) {
+    function Run($rootScope, Channel, amMoment, AUTH_EVENTS, Helper, EVENTS_GENERAL, OAuth, AuthService, $window) {
         amMoment.changeLocale('es');
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if (toState.name != 'login') {
@@ -43,12 +43,12 @@
         $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
             var canal = Channel.all();
             canal[0].bind('create', function (dfs) {
-                if (dfs.id !== Session.userInformation.id) {
+                /*if (dfs.id !== Session.userInformation.id) {
                     if (Session.userRole === 'Administrador') {
                         Helper.showNotification('El usuario ' + dfs.usuario + " creo una solicitud ", "Nueva solicitud de " + dfs.solicitud + " !!!", null);
 
                     }
-                }
+                }*/
             });
             canal[1].bind('success_create', function (dfs) {
                 Helper.showNotification('El reporte ' + dfs.name + " creo exitosamente ", "Reporte terminado!!!", dfs.link);

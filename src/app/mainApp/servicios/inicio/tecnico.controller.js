@@ -24,11 +24,8 @@
         $rootScope.$on(AUTH_EVENTS.sessionRestore, function(event) {
             vm.role=$scope.vmNode.currentUser.userRole;
             showButtons();
-
-
         });
         function showButtons(){
-            console.log(vm.role);
             if(vm.role==="Administrador"){
                 vm.tecnicoAVisibility = true;
                 vm.tecnicoBVisibility = true;
