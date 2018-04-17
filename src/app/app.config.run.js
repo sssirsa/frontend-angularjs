@@ -7,12 +7,12 @@
     angular
         .module('app')
         .run(Run);
-    function Run($rootScope, Channel, amMoment, Session, AUTH_EVENTS, NotificationPanel, Helper, EVENTS_GENERAL, OAuth, AuthService, authorization, _, $window, Solicitudes_Admin) {
+    function Run($rootScope, Channel, amMoment, Session, AUTH_EVENTS, Helper, EVENTS_GENERAL, OAuth, AuthService, $window) {
         amMoment.changeLocale('es');
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if (toState.name != 'login') {
                 if (AuthService.isAuthenticated()) {
-                    AuthService.getUser();
+                    //AuthService.getUser();
                 }
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;
@@ -46,7 +46,6 @@
                 if (dfs.id !== Session.userInformation.id) {
                     if (Session.userRole === 'Administrador') {
                         Helper.showNotification('El usuario ' + dfs.usuario + " creo una solicitud ", "Nueva solicitud de " + dfs.solicitud + " !!!", null);
-                        //Helper.getNotificationsByUser();
 
                     }
                 }
