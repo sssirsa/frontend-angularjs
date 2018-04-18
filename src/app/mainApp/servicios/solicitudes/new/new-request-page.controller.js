@@ -16,9 +16,11 @@
                                       Routes,
                                       SalePointRequests,
                                       Sucursal,
-                                      Helper) {
+                                      Helper,
+                                      User) {
 
         var vm = this;
+        vm.user=User.getUser();
 
         //Function mapping
         vm.storeSelected = storeSelected;
