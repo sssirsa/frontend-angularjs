@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', '$log', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, $q, $cookies, RoleStore, $log) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, $q, $cookies, RoleStore, User) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -26,16 +26,15 @@
             WebRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, data)
                 .then(function (loginResponse) {
-                    $log.debug('Correctly obtained token');
                     $cookies.put('token', loginResponse.access_token);
                     $cookies.put('refreshToken', loginResponse.refreshToken);
                     var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');
                     var expiration = now.add(loginResponse.expires_in, 'seconds');
-                    $log.debug('Expiration date' + expiration.toString());
                     $cookies.put('expiration', expiration);
                     WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.get('token')});
 
-                    WebRestangular.all('my_groups').customGET()
+                    WebRestangular.all('my_groups')
+                        .customGET()
                         .then(function (profile) {
                             var roles = {};
 
@@ -44,9 +43,17 @@
                             });
 
                             RoleStore.defineManyRoles(roles);
-                            $log.debug(RoleStore.getStore());
 
-                            request.resolve();
+                            WebRestangular.all('persona')
+                                .customGET()
+                                .then(function(user){
+                                    request.resolve();
+                                    User.setUser(user);
+                                })
+                                .catch(function(errorUser){
+                                    request.reject(errorUser);
+                                });
+
                         });
 
 
