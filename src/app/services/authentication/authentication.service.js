@@ -19,7 +19,7 @@
         }
 
         function login(credentials) {
-            return OAuth.getAccessToken(credentials.username, credentials.password);
+            return OAuth.getToken(credentials.username, credentials.password);
         }
 
         function getToken() {

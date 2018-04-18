@@ -21,9 +21,11 @@
         function loginClick() {
             vm.loginPromise = AuthService.login(vm.user)
                 .then(function () {
+                    $log.debug('SuccessLogin');
                     $state.go('triangular.admin-default.bienvenida');
                 })
                 .catch(function (loginError) {
+                    $log.error('Error login');
                     $log.error(loginError);
                     toastr.error('Error al iniciar sesión');
                 });

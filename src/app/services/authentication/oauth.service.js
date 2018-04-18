@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', '$log', OAuthProvider]);
 
     function OAuthProvider(EnvironmentConfig, WebRestangular, $q, $cookies, RoleStore, $log) {
         return {
@@ -20,12 +20,22 @@
                 username: userName,
                 password: password
             };
+            var params =
+                "grant_type=password&client_id=" +
+                EnvironmentConfig.site.oauth.clientId +
+                "&client_secret=" +
+                EnvironmentConfig.site.oauth.clientSecret +
+                "&username=" +
+                userName +
+                "&password=" +
+                password;
 
             var request = $q.defer();
 
-            WebRestangular.all('oauth').all('token')
+            WebRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, data)
                 .then(function (loginResponse) {
+                    $log.debug('Correctly obtained token');
                     $cookies.put('token', loginResponse.access_token);
                     $cookies.put('refreshToken', loginResponse.refreshToken);
                     var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');

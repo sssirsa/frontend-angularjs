@@ -4,6 +4,7 @@
     angular
         .module('app', ['sssirsa.config',
             'triangular',
+            'permission',
             'ngAnimate', 'ngCookies', 'ngSanitize', 'ngMessages', 'ngMaterial',
             'ui.router', 'googlechart', 'chart.js', 'linkify', 'ui.calendar',
 
