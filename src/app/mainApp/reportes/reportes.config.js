@@ -12,7 +12,9 @@
             .state("triangular.admin-default.reportes", {
                 url: "/reportes",
                 data: {
-                    roles: ["Administrador"]
+                    permissions: {
+                        only: ["ADMINISTRADOR"]
+                    }
                 },
                 params: {
                     id: null
@@ -24,7 +26,9 @@
             .state("triangular.admin-default.reportModify", {
                 url: "/reportesCrear/:id/",
                 data: {
-                    roles: ["Administrador"]
+                    permissions: {
+                        only: ["ADMINISTRADOR"]
+                    }
                 },
                 params: {
                     id: null
@@ -36,7 +40,9 @@
             .state("triangular.admin-default.list", {
                 url: "/list",
                 data: {
-                    roles: ["Administrador"]
+                    permissions: {
+                        only: ["ADMINISTRADOR"]
+                    }
                 },
                 params: {
                     id: null
@@ -48,7 +54,9 @@
             .state("triangular.admin-default.reporteProduccion", {
                 url: "/reporte",
                 data: {
-                    roles: ["Administrador"]
+                    permissions: {
+                        only: ["ADMINISTRADOR"]
+                    }
                 },
                 params: {
                     id: null
@@ -63,7 +71,7 @@
                 name: 'MAIN.MENU.REPORTS.TITLE',
                 icon: 'fa fa-line-chart',
                 type: 'dropdown',
-                permission: ["Administrador"],
+                permission: ["ADMINISTRADOR"],
                 priority: 7,
                 children: [
                     {
