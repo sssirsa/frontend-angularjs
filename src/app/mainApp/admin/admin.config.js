@@ -8,22 +8,27 @@
         .module('app.mainApp.admin')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider){
+    function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/admin');
         $stateProvider
             .state('triangular.admin-default.gestion_user', { //Nombre del state
                 url: '/gestion_user', //Nombre que quiero en mi url
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/admin/register_user.tmpl.html', //Dirección del archivo a usar
                 controller: 'gestion_userController', //nombre del controlador
                 controllerAs: 'vm' //se renombra al scope
-            }).state('triangular.admin-default.admin_user', {
+            })
+            .state('triangular.admin-default.admin_user', {
                 // set the url of this page
                 url: '/admin_user',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/admin/admin_user.tmpl.html',
@@ -37,7 +42,7 @@
                 name: 'MAIN.MENU.CRUD_USER',
                 icon: 'zmdi zmdi-account',
                 type: 'dropdown',
-                permission: ['Administrador'],
+                permission: ['ADMINISTRADOR'],
                 priority: 2,
                 children: [
                     {
@@ -56,4 +61,4 @@
 
     }
 
-} )();
+})();
