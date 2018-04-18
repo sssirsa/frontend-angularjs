@@ -20,15 +20,6 @@
                 username: userName,
                 password: password
             };
-            var params =
-                "grant_type=password&client_id=" +
-                EnvironmentConfig.site.oauth.clientId +
-                "&client_secret=" +
-                EnvironmentConfig.site.oauth.clientSecret +
-                "&username=" +
-                userName +
-                "&password=" +
-                password;
 
             var request = $q.defer();
 
