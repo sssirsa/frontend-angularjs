@@ -43,7 +43,7 @@
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
                     console.log("refresh");
-                    inFlightRefresh = $injector.get('AuthService').refreshToken();
+                    inFlightRefresh = $injector.get('OAuth').refreshToken();
                 }
                 inFlightRefresh.then(function() {
                     inFlightRefresh = null;

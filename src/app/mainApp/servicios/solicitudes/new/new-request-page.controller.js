@@ -1,5 +1,3 @@
-//TODO: Añadir campo economico en las solicitudes de retiro y cambio
-
 (function () {
     'use strict';
 
@@ -18,9 +16,11 @@
                                       Routes,
                                       SalePointRequests,
                                       Sucursal,
-                                      Helper) {
+                                      Helper,
+                                      User) {
 
         var vm = this;
+        vm.user=User.getUser();
 
         //Function mapping
         vm.storeSelected = storeSelected;

@@ -6,7 +6,14 @@
         .module('app.mainApp.admin')
         .controller('gestion_userController', gestion_userController);
 
-    function gestion_userController(groups, NotificationPanel, Persona_Admin, Session,toastr, Helper, Translate, $scope, Sucursal) {
+    function gestion_userController(groups,
+                                    NotificationPanel,
+                                    Persona_Admin,
+                                    toastr,
+                                    Helper,
+                                    Translate,
+                                    $scope,
+                                    Sucursal) {
         var vm = this;
         vm.isClient = true;
         activate();

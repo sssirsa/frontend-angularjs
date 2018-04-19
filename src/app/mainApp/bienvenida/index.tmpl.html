@@ -3,17 +3,17 @@
      style="background: url(assets/images/backgrounds/material-backgrounds/mb-bg-02.jpg) no-repeat; background-size: cover;">
     <div class="margin-right-20">
         <img class="make-round"
-             src="{{vmNode.currentUser.userInformation.foto!=null?vmNode.currentUser.userInformation.foto:'assets/images/user.png'}}"
+             src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"
              width="100" height="100"/>
     </div>
     <div class="text-light">
-        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vmNode.currentUser.userInformation.nombre}}
-            {{vmNode.currentUser.userInformation.apellido_paterno}}
-            {{vmNode.currentUser.userInformation.apellido_materno}}</h3>
-        <p class="font-weight-300 margin-top-0 margin-bottom-0">{{vmNode.currentUser.userRole}}</p>
-        <p class="margin-top-0" ng-if="vmNode.currentUser.sucursal">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vm.user.nombre}}
+            {{vm.user.apellido_paterno}}
+            {{vm.user.apellido_materno}}</h3>
+        <p class="font-weight-300 margin-top-0 margin-bottom-0" ng-repeat="role in vm.roles">{{role}}</p>
+        <p class="margin-top-0" ng-if="vm.user.sucursal">
             <md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon>
-            {{vmNode.currentUser.sucursal}}
+            {{vm.user.sucursal}}
         </p>
     </div>
 </div>

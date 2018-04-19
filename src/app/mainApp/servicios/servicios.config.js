@@ -13,7 +13,7 @@
             .state('triangular.admin-default.tecnico', {
                 url: '/tecnico',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/inicio/tecnico.tmpl.html',
                 controller: 'tecnicoController',
@@ -22,7 +22,7 @@
             .state('triangular.admin-default.checklist', {
                 url: '/checklist',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/checklist/checklist.tmpl.html',
                 controller: 'checklistController',
@@ -31,7 +31,7 @@
             .state('triangular.admin-default.diagnostic', {
                 url: '/diagnostic',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.tpl.html',
                 controller: 'DiagnosticController',
@@ -40,7 +40,7 @@
             .state('triangular.admin-default.etapa', {
                 url: '/etapa',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                     layout: {
                         sideMenuSize: 'icon'
                     }
@@ -52,7 +52,7 @@
             .state('triangular.admin-default.asignacionLinea', {
                 url: '/asignacionLinea',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
@@ -61,7 +61,7 @@
             .state('triangular.admin-default.entrada', {
                 url: '/entrada',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                 },
                 templateUrl: 'app/mainApp/servicios/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
@@ -70,7 +70,7 @@
             .state('triangular.admin-default.salida-crear', {
                 url: '/crear',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                 },
                 templateUrl: 'app/mainApp/servicios/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
@@ -79,7 +79,7 @@
             .state('triangular.admin-default.salida-list', {
                 url: '/listado',
                 data: {
-                    roles: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan']
+                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                 },
                 templateUrl: 'app/mainApp/servicios/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
@@ -88,7 +88,7 @@
             .state('triangular.admin-default.serviceAssing', {
                 url: '/asignarServicio',
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',
@@ -97,7 +97,7 @@
             .state('triangular.admin-default.serviceAssignDetail', {
                 url:'/detalleServicio/:id',
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller:'detalleAsignacionController',
@@ -112,7 +112,7 @@
                 controller: 'NewRequestPageController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
             })
             .state('triangular.admin-default.listRequest', {
@@ -121,7 +121,7 @@
                 controller: 'ListRequestPageController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
             })
             .state('triangular.admin-default.detailRequest', {
@@ -133,7 +133,7 @@
                     id:null
                 },
                 data: {
-                    roles: ['Administrador', 'Tultitlan', 'Tecnico E']
+                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
             });
 
@@ -142,7 +142,7 @@
                 name: 'MAIN.MENU.SERVICES',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
-                permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E', 'Tultitlan'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {
@@ -153,12 +153,12 @@
                     {
                         name: 'MAIN.MENU.IN',
                         state: 'triangular.admin-default.entrada',
-                        permission: ['Administrador', 'Tultitlan'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.OUT.TITLE',
                         type: 'dropdown',
-                        permission: ['Administrador', 'Tultitlan'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         children: [{
                             name: 'MAIN.MENU.OUT.NEW',
                             type: 'link',
@@ -172,19 +172,19 @@
                     {
                         name: 'MAIN.MENU.REGISTER_STEP',
                         state: 'triangular.admin-default.etapa',
-                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.LINE',
                         state: 'triangular.admin-default.asignacionLinea',
-                        permission: ['Administrador', 'Tecnico A', 'Tecnico B', 'Tecnico C', 'Tecnico D', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
                         state:'triangular.admin-default.serviceAssing',
-                        permission: ['Administrador', 'Tultitlan', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
                         type: 'link'
                     },
                     {
