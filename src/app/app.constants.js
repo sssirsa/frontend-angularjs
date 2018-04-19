@@ -467,6 +467,7 @@
                 servicio_admin: 'solicitud_servicio_admin'
             },
             establecimiento: 'establecimiento',
+            establecimiento_template:'https://goo.gl/kAQrxt',
             sucursal: 'sucursal',
             tipo_equipo: 'tipo_equipo',
             tipo_transporte: 'tipo_transporte',
