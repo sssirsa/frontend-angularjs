@@ -24,7 +24,7 @@
                 md-on-select="vm.changeTab()"
                 label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}"
             >
-                <md-input-container flex class="md-block">
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
                     <md-select
                         ng-model="vm.state"

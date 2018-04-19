@@ -57,7 +57,7 @@
 
         function listStates() {
             if (!vm.states) {
-                States.list()
+                vm.loadingStates = States.list()
                     .then(function (stateList) {
                         vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
                     })
