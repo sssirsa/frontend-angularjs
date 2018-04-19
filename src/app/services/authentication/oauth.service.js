@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, $q, $cookies, RoleStore, User) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookies, RoleStore, User) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -32,6 +32,7 @@
                     var expiration = now.add(loginResponse.expires_in, 'seconds');
                     $cookies.put('expiration', expiration);
                     WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.get('token')});
+                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.get('token')});
 
                     WebRestangular.all('my_groups')
                         .customGET()
