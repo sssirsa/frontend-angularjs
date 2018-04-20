@@ -14,7 +14,8 @@
                 maxDuration: '<', //Max duration for videos
                 multipleFiles: '<', //Allow multiple files
                 allowFolders: '<', //Allow directory uploading
-                maxFiles: '<' //Max number of files allowed
+                maxFiles: '<', //Max number of files allowed
+                keep:'<' //true, false or distinct
             }
         });
 
@@ -22,7 +23,20 @@
     function fileUploaderController($scope, Upload, $timeout) {
         var vm = this;
 
-        vm.files = null;
+        vm.selectFiles = selectFiles;
+        vm.dropFiles = dropFiles;
+        vm.files = [];
+
+        function selectFiles(files) {
+            console.log(files);
+            vm.files = files;
+        }
+
+        function dropFiles(files){
+            console.log(files);
+            vm.files = files;
+        }
+
     }
 
 })();

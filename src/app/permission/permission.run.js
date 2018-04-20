@@ -10,7 +10,7 @@
 
         // default redirect if access is denied
         function accessDenied() {
-            $state.go('401');
+            $state.go('404');
         }
 
         // redirect all denied permissions to 401

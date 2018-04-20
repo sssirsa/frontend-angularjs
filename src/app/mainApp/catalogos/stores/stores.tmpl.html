@@ -28,9 +28,13 @@
                 {{'INPUT.Format'|translate}}
             </md-button>
         </div>
-        <store-manager
-            file-formats="'.xlsx, application/vnd.ms-excel'"
-        ></store-manager>
+        <div
+            layout="column"
+            layout-align="center center">
+            <file-uploader
+                file-formats="'.xlsx, application/vnd.ms-excel'"
+            ></file-uploader>
+        </div>
 
     </md-card>
     <store-manager

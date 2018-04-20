@@ -162,7 +162,7 @@
             "FILE_UPLOADER": {
                 "LABELS": {
                     "SINGLE_FILE": "Arrastra archivo aquí",
-                    "MULTIPLE_FILEs": "Arrastra archivos aquí"
+                    "MULTIPLE_FILES": "Arrastra archivos aquí"
                 },
                 "BUTTONS": {
                     "SINGLE_FILE": "Selecciona archivo",
