@@ -23,7 +23,7 @@
 
             var request = $q.defer();
 
-            WebRestangular.all('oauth').all('token/')
+            MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, data)
                 .then(function (loginResponse) {
                     $cookies.put('token', loginResponse.access_token);
