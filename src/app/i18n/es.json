@@ -97,61 +97,76 @@
                 "DELETE": "Eliminar establecimiento",
                 "TITLE": "Establecimiento",
                 "SUBTITLE": "Información de Establecimiento",
+                "MASSIVE_UPLOAD": {
+                    "TITLE": "Carga masiva",
+                    "BROWSE": "Examinar",
+                    "TEMPLATE": "Plantilla"
+                },
                 "GEOLOCATION": "Geolocalizar",
                 "LABELS": {
                     "LATITUDE": "Latidud",
                     "LONGITUDE": "Longitud",
-                    "NAME":"Nombre del establecimiento",
-                    "MANAGER":"Nombre del encargado",
-                    "MANAGER_PHONE":"Teléfono encargado",
-                    "STREET":"Calle",
-                    "NUMBER":"Número",
-                    "BETWEEN1":"Entre calle",
-                    "BETWEEN2":"Y entre calle",
-                    "STATE":"Estado",
-                    "CITY":"Municipio",
-                    "LOCALITY":"Localidad",
-                    "ZIP_CODE":"Código postal",
-                    "SEGMENTATION":"Segmentación",
-                    "ECONOMIC":"Económico"
+                    "NAME": "Nombre del establecimiento",
+                    "MANAGER": "Nombre del encargado",
+                    "MANAGER_PHONE": "Teléfono encargado",
+                    "STREET": "Calle",
+                    "NUMBER": "Número",
+                    "BETWEEN1": "Entre calle",
+                    "BETWEEN2": "Y entre calle",
+                    "STATE": "Estado",
+                    "CITY": "Municipio",
+                    "LOCALITY": "Localidad",
+                    "ZIP_CODE": "Código postal",
+                    "SEGMENTATION": "Segmentación",
+                    "ECONOMIC": "Económico"
                 },
-                "MODALS":{
-                    "SEARCH":{
-                        "TITLE":"Búsqueda de establecimiento",
-                        "BY_ECONOMIC":"Por económico",
-                        "BY_POSTAL_CODE":"Por código postal",
-                        "BY_ADDRESS":"Por dirección",
-                        "BUTTON":"Buscar",
-                        "HINTS":{
-                            "ECONOMIC":"Ingrese un económico de cabinet",
-                            "ZIP_CODE":"Ingrese un código postal"
+                "MODALS": {
+                    "SEARCH": {
+                        "TITLE": "Búsqueda de establecimiento",
+                        "BY_ECONOMIC": "Por económico",
+                        "BY_POSTAL_CODE": "Por código postal",
+                        "BY_ADDRESS": "Por dirección",
+                        "BUTTON": "Buscar",
+                        "HINTS": {
+                            "ECONOMIC": "Ingrese un económico de cabinet",
+                            "ZIP_CODE": "Ingrese un código postal"
                         },
-                        "ERRORS":{
-                            "NO_RESULTS":"No se encontraron establecimientos",
-                            "GENERIC":"Error al obtener establecimientos"
+                        "ERRORS": {
+                            "NO_RESULTS": "No se encontraron establecimientos",
+                            "GENERIC": "Error al obtener establecimientos"
                         }
                     },
-                    "NEW":{
-                        "TITLE":"Nuevo establecimiento",
-                        "BUTTON":"Guardar",
-                        "ERRORS":{
-                            "LATITUDE":"Formato invalido de latitud",
-                            "LONGITUDE":"Formato invalido de longitud"
+                    "NEW": {
+                        "TITLE": "Nuevo establecimiento",
+                        "BUTTON": "Guardar",
+                        "ERRORS": {
+                            "LATITUDE": "Formato invalido de latitud",
+                            "LONGITUDE": "Formato invalido de longitud"
                         },
-                        "HINTS":{
-                            "LATITUDE":"El rango de la latitud es de -90 a 90",
-                            "LONGITUDE":"El rango de la longitud es de -180 a 180"
+                        "HINTS": {
+                            "LATITUDE": "El rango de la latitud es de -90 a 90",
+                            "LONGITUDE": "El rango de la longitud es de -180 a 180"
                         }
                     },
-                    "MODIFY":{
-                        "TITLE":"Editar establecimiento"
+                    "MODIFY": {
+                        "TITLE": "Editar establecimiento"
                     }
                 },
-                "TOASTR":{
-                    "DELETE_SUCCESS":"Establecimiento eliminado correctamente",
-                    "DELETE_ERROR":"Error al eliminar establecimiento",
-                    "CREATE_SUCCESS":"Establecimiento creado correctamente",
-                    "CREATE_ERROR":"Error al eliminar establecimiento"
+                "TOASTR": {
+                    "DELETE_SUCCESS": "Establecimiento eliminado correctamente",
+                    "DELETE_ERROR": "Error al eliminar establecimiento",
+                    "CREATE_SUCCESS": "Establecimiento creado correctamente",
+                    "CREATE_ERROR": "Error al eliminar establecimiento"
+                }
+            },
+            "FILE_UPLOADER": {
+                "LABELS": {
+                    "SINGLE_FILE": "Arrastra archivo aquí",
+                    "MULTIPLE_FILEs": "Arrastra archivos aquí"
+                },
+                "BUTTONS": {
+                    "SINGLE_FILE": "Selecciona archivo",
+                    "MULTIPLE_FILES": "Selecciona archivos"
                 }
             }
         },

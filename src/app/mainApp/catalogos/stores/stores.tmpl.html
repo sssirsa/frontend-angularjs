@@ -1,10 +1,37 @@
-<div layout="column" flex="100" layout-padding layout-fill>
-    <md-card>
+<div layout="column" flex="100" layout-fill>
+    <md-card layout-padding>
         <div
             layout="column"
             layout-align="center center">
             <h1>{{'MAIN.COMPONENTS.STORE_MANAGER.TITLE'|translate}}</h1>
         </div>
+    </md-card>
+    <md-card
+        layout-padding
+        layout="column"
+        layout-align="center stretch"
+        flex="100">
+        <div
+            layout="column"
+            layout-align="center center">
+            <h3>{{'MAIN.COMPONENTS.STORE_MANAGER.MASSIVE_UPLOAD.TITLE'|translate}}</h3>
+        </div>
+        <div
+            layout-gt-sm="row"
+            layout="column"
+            layout-align-gt-sm="space-around center"
+            layout-align="center stretch">
+            <md-button
+                class="md-raised"
+                ng-href="{{vm.templateUrl}}"
+                target="_blank">
+                {{'INPUT.Format'|translate}}
+            </md-button>
+        </div>
+        <store-manager
+            file-formats="'.xlsx, application/vnd.ms-excel'"
+        ></store-manager>
+
     </md-card>
     <store-manager
         can-create="true"

@@ -1,0 +1,51 @@
+<div>
+    <div
+        class="drop-box"
+        ngf-select
+        ng-model="$ctrl.files"
+        ngf-drop
+        ngf-drag-over-class="'dragover'"
+        accept="$ctrl.fileFormats"
+        ngf-pattern="$ctrl.fileFormats"
+        ngf-validate="$ctrl.validations"
+        ngf-resize="$ctrl.resize"
+        ngf-resize-if="$ctrl.resizeIf"
+        ngf-dimensions="$ctrl.maxDimensions"
+        ngf-duration="$ctrl.maxDuration"
+        ngf-max-files="$ctrl.maxFiles"
+        ngf-multiple="$multipleFiles"
+        ngf-allow-dir="$ctrl.allowFolders">
+
+        <span ng-if="$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.MULTIPLE_FILES'|translate}}</span>
+        <span ng-if="!$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.SINGLE_FILE'|translate}}</span>
+
+    </div>
+    <div layout="column" layout-align="center stretch">
+        <md-button
+            ng-if="$ctrl.multipleFiles"
+            ng-model="$ctrl.files"
+            accept="$ctrl.fileFormats"
+            ngf-pattern="$ctrl.fileFormats"
+            ngf-validate="$ctrl.validations"
+            ngf-resize="$ctrl.resize"
+            ngf-resize-if="$ctrl.resizeIf"
+            ngf-dimensions="$ctrl.maxDimensions"
+            ngf-duration="$ctrl.maxDuration"
+            ngf-max-files="$ctrl.maxFiles"
+            ngf-multiple="$multipleFiles"
+            ngf-allow-dir="$ctrl.allowFolders"
+            class="md-primary md-raised">
+            <md-icon md-font-icon="fa fa-upload"></md-icon>
+            <span ng-if="$ctrl.multipleFiles">
+            {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.MULTIPLE_FILES'|translate}}
+            </span>
+            <span ng-if="!$ctrl.multipleFiles">
+            {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.SINGLE_FILE'|translate}}
+            </span>
+        </md-button>
+    </div>
+    Files:
+    <ul>
+        <li ng-repeat="f in $ctrl.files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+    </ul>
+</div>

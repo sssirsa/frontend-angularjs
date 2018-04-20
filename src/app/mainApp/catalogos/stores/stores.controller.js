@@ -6,12 +6,10 @@
         .controller('storesController', storesController);
 
     /* @ngInject */
-    function storesController(Stores,
-                              toastr,
-                              Translate,
-                              $mdDialog,
-                              $log) {
+    function storesController(URLS) {
         var vm = this;
+
+        vm.templateUrl = URLS.establecimiento_template;
 
     }
 
