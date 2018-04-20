@@ -166,7 +166,8 @@
                 },
                 "BUTTONS": {
                     "SINGLE_FILE": "Selecciona archivo",
-                    "MULTIPLE_FILES": "Selecciona archivos"
+                    "MULTIPLE_FILES": "Selecciona archivos",
+                    "REMOVE":"Eliminar archivo"
                 }
             }
         },

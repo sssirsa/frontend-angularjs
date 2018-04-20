@@ -19,4 +19,16 @@
   width:200px;
   max-height:200px;
   max-width:200px;
+  box-shadow: 0px 0px 5px #000000
+}
+.file-thumb{
+  max-height:80px;
+  width:auto;
+}
+.file-name{
+  white-space: nowrap;
+  width:200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }

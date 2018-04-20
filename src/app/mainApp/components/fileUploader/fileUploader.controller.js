@@ -25,6 +25,8 @@
 
         vm.selectFiles = selectFiles;
         vm.dropFiles = dropFiles;
+        vm.removeFile=removeFile;
+
         vm.files = [];
 
         function selectFiles(files) {
@@ -35,6 +37,10 @@
         function dropFiles(files){
             console.log(files);
             vm.files = files;
+        }
+
+        function removeFile(){
+
         }
 
     }
