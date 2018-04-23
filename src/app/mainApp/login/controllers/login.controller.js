@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.login')
-        .controller('loginController', loginController);
+        .controller('loginController', ['$state', 'toastr', '$log', 'AuthService', loginController]);
 
     /* @ngInject */
     function loginController($state, toastr, $log, AuthService) {
