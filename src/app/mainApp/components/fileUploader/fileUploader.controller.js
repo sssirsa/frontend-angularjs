@@ -15,32 +15,38 @@
                 multipleFiles: '<', //Allow multiple files
                 allowFolders: '<', //Allow directory uploading
                 maxFiles: '<', //Max number of files allowed
-                keep:'<' //true, false or distinct
+                keep: '<', //true, false or distinct,
+                filesSelected: '&'
             }
         });
 
     /* @ngInject */
-    function fileUploaderController($scope, Upload, $timeout) {
+    function fileUploaderController() {
         var vm = this;
 
         vm.selectFiles = selectFiles;
         vm.dropFiles = dropFiles;
-        vm.removeFile=removeFile;
+        vm.removeFile = removeFile;
 
         vm.files = [];
 
         function selectFiles(files) {
-            console.log(files);
             vm.files = files;
+            filesSelected();
         }
 
-        function dropFiles(files){
-            console.log(files);
+        function dropFiles(files) {
             vm.files = files;
+            filesSelected();
         }
 
-        function removeFile(){
+        function removeFile(index) {
+            vm.files.splice(index, 1);
+            filesSelected();
+        }
 
+        function filesSelected(){
+            vm.filesSelected({files:vm.files});
         }
 
     }

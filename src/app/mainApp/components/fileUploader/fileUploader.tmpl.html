@@ -73,7 +73,7 @@
             src="{{file.$ngfBlobUrl}}">
 
         <md-button
-            ng-click="$ctrl.removeFile()"
+            ng-click="$ctrl.removeFile($index)"
             class="md-raised md-warn">
             <md-icon md-font-icon="fa fa-close"></md-icon>
             {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.REMOVE'|translate}}
