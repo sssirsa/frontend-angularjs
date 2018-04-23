@@ -17,7 +17,8 @@
             update:update,
             create:create,
             remove:remove,
-            listObject:listObject
+            listObject:listObject,
+            getByID: getByID
         };
 
         function listObject() {
@@ -39,6 +40,10 @@
 
         function remove(object) {
             return baseSucursal.customDELETE(object.id,null,{'content-type':'application/json'});
+        }
+
+        function getByID(id) {
+            return baseSucursal.all(id).customGET();
         }
     }
 

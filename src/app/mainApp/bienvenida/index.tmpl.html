@@ -11,12 +11,14 @@
             {{vm.user.apellido_paterno}}
             {{vm.user.apellido_materno}}</h3>
         <p class="font-weight-300 margin-top-0 margin-bottom-0" ng-repeat="role in vm.roles">{{role}}</p>
-        <p class="margin-top-0" ng-if="vm.user.sucursal">
+        <p class="margin-top-0" ng-if="vm.sucursal">
             <md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon>
-            {{vm.user.sucursal}}
+            {{vm.sucursal.nombre}}
         </p>
     </div>
 </div>
+<!--
+
 <div align="column">
     <div align="row">
         <div class="drag-container" layout="row" layout-xs="column" layout-margin>
@@ -77,7 +79,7 @@
             </tri-widget>
         </div>
     </div>
-    <!--Menu de Opciones de admin -->
+    &lt;!&ndash;Menu de Opciones de admin &ndash;&gt;
     <div align="row">
         <div class="drag-container" layout="row" layout-xs="column" layout-margin>
             <tri-widget ng-show=vm.admin palette-background="deep-orange:500" content-layout="row"
@@ -125,3 +127,4 @@
         </div>
     </div>
 </div>
+-->
