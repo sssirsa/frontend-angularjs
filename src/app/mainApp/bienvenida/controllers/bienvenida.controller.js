@@ -4,25 +4,27 @@
 (function () {
     angular
         .module('app.mainApp')
-        .controller('bienvenidaController',bienvenidaController);
+        .controller('bienvenidaController', bienvenidaController);
 
-    function bienvenidaController(User, RoleStore, Sucursal, $log){
+    function bienvenidaController(User, RoleStore, Sucursal, $log) {
         var vm = this;
 
         vm.user = User.getUser();
         vm.roles = _.keys(RoleStore.getStore());
-        vm.sucursal=null;
+        vm.sucursal = null;
 
         activate();
 
-        function activate(){
-            Sucursal.getByID(vm.user.sucursal)
-                .then(function(sucursal){
-                    vm.sucursal=sucursal;
-                })
-                .catch(function (errorSucursal){
-                    $log.error(errorSucursal);
-                });
+        function activate() {
+            if (vm.user.sucursal) {
+                Sucursal.getByID(vm.user.sucursal)
+                    .then(function (sucursal) {
+                        vm.sucursal = sucursal;
+                    })
+                    .catch(function (errorSucursal) {
+                        $log.error(errorSucursal);
+                    });
+            }
         }
 
     }
