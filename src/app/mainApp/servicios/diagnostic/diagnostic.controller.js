@@ -19,7 +19,7 @@
                                   Helper,
                                   Upload,
                                   EnvironmentConfig,
-                                  $cookies) {
+                                  $cookieStore) {
         var vm = this;
         vm.diagnostico = {};
         vm.cabinets = null;
@@ -45,7 +45,7 @@
             vm.cabinets.status = !vm.cabinets.capitalizado ? "N/A" : vm.cabinets.status;
             Upload.upload({
                 url: EnvironmentConfig.site.rest.web_api + '/cabinet/' + vm.cabinet,
-                headers: {'Authorization': $cookies.get('token')},
+                headers: {'Authorization': $cookieStore.get('token')},
                 method: 'PUT',
                 data: vm.cabinets
             }).then(function () {

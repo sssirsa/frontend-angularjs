@@ -9,7 +9,7 @@
     function storesController(URLS,
                               Upload,
                               EnvironmentConfig,
-                              $cookies,
+                              $cookieStore,
                               toastr,
                               $log,
                               Translate) {
@@ -30,7 +30,7 @@
             if (vm.files.length > 0) {
                 vm.uploadPromise = Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/' + URLS.massive.store,
-                    headers: {'Authorization': $cookies.get('token')},
+                    headers: {'Authorization': $cookieStore.get('token')},
                     method: 'POST',
                     data: vm.files
                 })

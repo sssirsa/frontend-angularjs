@@ -21,7 +21,7 @@
                                  Helper,
                                  Upload,
                                  EnvironmentConfig,
-                                 $cookies,
+                                 $cookieStore,
                                  MarcaCabinet,
                                  CabinetEntradaSalida,
                                  Servicios) {
@@ -146,7 +146,7 @@
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet',
-                    headers: {'Authorization': $cookies.get('token')},
+                    headers: {'Authorization': $cookieStore.get('token')},
                     method: 'POST',
                     data: vm.diagnostico
                 }).then(function (res) {
@@ -187,7 +187,7 @@
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet/' + vm.diagnostico.id,
-                    headers: {'Authorization': $cookies.get('token')},
+                    headers: {'Authorization': $cookieStore.get('token')},
                     method: 'PUT',
                     data: vm.diagnostico
                 }).then(function (res) {
