@@ -31,9 +31,22 @@
         <div
             layout="column"
             layout-align="center center">
-            <file-uploader></file-uploader>
+            <file-uploader
+                files-selected="vm.selectFiles(files)"
+                file-formats="'.xlsx, application/vnd.ms-excel'"
+            ></file-uploader>
         </div>
-
+        <div
+            layout="row"
+            layout-align="end center">
+            <md-button
+                class="md-primary md-raised"
+                ng-click="vm.uploadTemplate()"
+            >
+                <md-icon md-font-icon="fa fa-upload"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.LOAD'|translate}}
+            </md-button>
+        </div>
     </md-card>
     <store-manager
         can-create="true"

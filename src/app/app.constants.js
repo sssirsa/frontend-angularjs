@@ -474,7 +474,10 @@
             unidad: 'unidad',
             modelo_cabinet: 'modelo_cabinet',
             estado: 'estado',
-            municipio: 'municipio'
+            municipio: 'municipio',
+            massive:{
+                store:'massive/store'
+            }
         })
         .constant('QUERIES', {
             store: {

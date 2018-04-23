@@ -97,6 +97,7 @@
                 "DELETE": "Eliminar establecimiento",
                 "TITLE": "Establecimiento",
                 "SUBTITLE": "Información de Establecimiento",
+                "LOAD":"Cargar",
                 "MASSIVE_UPLOAD": {
                     "TITLE": "Carga masiva",
                     "BROWSE": "Examinar",
@@ -156,7 +157,9 @@
                     "DELETE_SUCCESS": "Establecimiento eliminado correctamente",
                     "DELETE_ERROR": "Error al eliminar establecimiento",
                     "CREATE_SUCCESS": "Establecimiento creado correctamente",
-                    "CREATE_ERROR": "Error al eliminar establecimiento"
+                    "CREATE_ERROR": "Error al eliminar establecimiento",
+                    "MASSIVE_ERROR":"Error en la carga masiva de establecimientos",
+                    "MASSIVE_SUCCESS":"Carga masiva de establecimientos realizada corectamente"
                 }
             },
             "FILE_UPLOADER": {
