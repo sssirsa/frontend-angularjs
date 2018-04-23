@@ -10,7 +10,7 @@
 
     function tecnicoController(User, RoleStore) {
         var vm = this;
-        vm.user = User.getUSer();
+        vm.user = User.getUser();
         vm.roles = _.keys(RoleStore.getStore());
     }
 
