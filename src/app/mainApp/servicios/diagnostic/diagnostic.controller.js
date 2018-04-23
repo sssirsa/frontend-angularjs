@@ -9,7 +9,17 @@
         .module('app.mainApp.servicios')
         .controller('DiagnosticController', DiagnosticController);
 
-    function DiagnosticController(Cabinet, cabinet, OPTIONS, toastr, $scope, Translate, $mdDialog, Helper, Upload, EnvironmentConfig, OAuthToken) {
+    function DiagnosticController(Cabinet,
+                                  cabinet,
+                                  OPTIONS,
+                                  toastr,
+                                  $scope,
+                                  Translate,
+                                  $mdDialog,
+                                  Helper,
+                                  Upload,
+                                  EnvironmentConfig,
+                                  $cookies) {
         var vm = this;
         vm.diagnostico = {};
         vm.cabinets = null;
@@ -35,7 +45,7 @@
             vm.cabinets.status = !vm.cabinets.capitalizado ? "N/A" : vm.cabinets.status;
             Upload.upload({
                 url: EnvironmentConfig.site.rest.web_api + '/cabinet/' + vm.cabinet,
-                headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
+                headers: {'Authorization': $cookies.get('token')},
                 method: 'PUT',
                 data: vm.cabinets
             }).then(function () {

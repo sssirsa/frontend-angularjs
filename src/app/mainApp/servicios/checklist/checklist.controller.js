@@ -9,7 +9,22 @@
         .module('app.mainApp.servicios')
         .controller('checklistController', checklistController);
 
-    function checklistController($mdDialog, Cabinet, $scope, ModeloCabinet,etapaActual, diagnosticoEtapa, cabinet, toastr, Translate, Helper, Upload, EnvironmentConfig, OAuthToken, MarcaCabinet, CabinetEntradaSalida, Servicios) {
+    function checklistController($mdDialog,
+                                 Cabinet,
+                                 $scope,
+                                 ModeloCabinet,
+                                 etapaActual,
+                                 diagnosticoEtapa,
+                                 cabinet,
+                                 toastr,
+                                 Translate,
+                                 Helper,
+                                 Upload,
+                                 EnvironmentConfig,
+                                 $cookies,
+                                 MarcaCabinet,
+                                 CabinetEntradaSalida,
+                                 Servicios) {
         var vm = this;
         vm.diagnostico = {};
         vm.cabinets = null;
@@ -131,13 +146,13 @@
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet',
-                    headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
+                    headers: {'Authorization': $cookies.get('token')},
                     method: 'POST',
                     data: vm.diagnostico
                 }).then(function (res) {
                     //cambio Para guardar Etapa
                     if (vm.etapaActual){
-                        guardarEtapa()
+                        guardarEtapa();
                     }
                     //Finaliza Cambio para Guardar Etapa
                     vm.status = 'idle';
@@ -172,13 +187,13 @@
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet/' + vm.diagnostico.id,
-                    headers: {'Authorization': OAuthToken.getAuthorizationHeader()},
+                    headers: {'Authorization': $cookies.get('token')},
                     method: 'PUT',
                     data: vm.diagnostico
                 }).then(function (res) {
                     //cambio Para guardar Etapa
                     if (vm.etapaActual){
-                        guardarEtapa()
+                        guardarEtapa();
                     }
                     //Finaliza Cambio para Guardar Etapa
                     vm.status = 'idle';
