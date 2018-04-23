@@ -28,8 +28,8 @@
 
         function uploadTemplate() {
             if (vm.files.length > 0) {
-                Upload.upload({
-                    url: EnvironmentConfig.site.rest.web_api + URLS.massive.store,
+                vm.uploadPromise = Upload.upload({
+                    url: EnvironmentConfig.site.rest.web_api + '/' + URLS.massive.store,
                     headers: {'Authorization': $cookies.get('token')},
                     method: 'POST',
                     data: vm.files
