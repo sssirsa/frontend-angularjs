@@ -55,6 +55,9 @@
                                     request.reject(errorUser);
                                 });
 
+                        })
+                        .catch(function(profileError){
+                            request.reject(profileError);
                         });
 
 
