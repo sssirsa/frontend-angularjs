@@ -52,7 +52,7 @@
         <store-manager
             can-create="vm.request.tipo === 'Nuevos'"
             can-modify="vm.request.tipo"
-            can-search="vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Retiro' || vm.request.tipo === 'Servicio Técnico'"
+            can-search="vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Recolección' || vm.request.tipo === 'Servicio Técnico'"
             store-selected="vm.storeSelected(store)"
         ></store-manager>
 
@@ -123,7 +123,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.request.tipo === 'Retiro' || vm.request.tipo === 'Cambio'"
+             ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'"
              layout-padding>
         <div flex
              layout="row"
