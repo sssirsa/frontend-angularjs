@@ -32,7 +32,7 @@
                 var file ={file:vm.files[0]};
                 vm.uploadPromise = Upload.upload({
                     url: EnvironmentConfig.site.rest.mobile_api + '/' + URLS.massive.store,
-                    headers: {'Authorization': "Bearer "+$cookieStore.get('token')},
+                    headers: {'Authorization': "Bearer " + $cookieStore.get('token')},
                     method: 'POST',
                     data: file
                 })
