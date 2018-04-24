@@ -12,6 +12,7 @@
                               $cookieStore,
                               toastr,
                               $log,
+                              $state,
                               Translate) {
         var vm = this;
 
@@ -37,6 +38,9 @@
                 })
                     .then(function () {
                         toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.MASSIVE_SUCCESS'));
+
+                        //TODO: Change to the massive upload screen when it exists
+                        $state.go('triangular.admin-default.bienvenida');
                     })
                     .catch(function (errorUpload) {
                         $log.error(errorUpload);
