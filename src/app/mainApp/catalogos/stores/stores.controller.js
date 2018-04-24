@@ -28,12 +28,12 @@
 
         function uploadTemplate() {
             if (vm.files.length > 0) {
-                console.log($cookieStore.get('token'));
+                var file ={file:vm.files[0]};
                 vm.uploadPromise = Upload.upload({
                     url: EnvironmentConfig.site.rest.mobile_api + '/' + URLS.massive.store,
                     headers: {'Authorization': "Bearer "+$cookieStore.get('token')},
                     method: 'POST',
-                    data: vm.files
+                    data: file
                 })
                     .then(function () {
                         toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.MASSIVE_SUCCESS'));
