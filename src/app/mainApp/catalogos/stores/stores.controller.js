@@ -28,9 +28,10 @@
 
         function uploadTemplate() {
             if (vm.files.length > 0) {
+                console.log($cookieStore.get('token'));
                 vm.uploadPromise = Upload.upload({
-                    url: EnvironmentConfig.site.rest.web_api + '/' + URLS.massive.store,
-                    headers: {'Authorization': $cookieStore.get('token')},
+                    url: EnvironmentConfig.site.rest.mobile_api + '/' + URLS.massive.store,
+                    headers: {'Authorization': "Bearer "+$cookieStore.get('token')},
                     method: 'POST',
                     data: vm.files
                 })

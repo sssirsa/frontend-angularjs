@@ -45,7 +45,7 @@
             vm.cabinets.status = !vm.cabinets.capitalizado ? "N/A" : vm.cabinets.status;
             Upload.upload({
                 url: EnvironmentConfig.site.rest.web_api + '/cabinet/' + vm.cabinet,
-                headers: {'Authorization': $cookieStore.get('token')},
+                headers: {'Authorization':"Bearer "+ $cookieStore.get('token')},
                 method: 'PUT',
                 data: vm.cabinets
             }).then(function () {
