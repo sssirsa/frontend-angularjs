@@ -409,7 +409,7 @@
                     label: 'Incremental'
                 },
                 {
-                    id: 'Retiro',
+                    id: 'Recolección',
                     label: 'Retiro'
                 },
                 {
