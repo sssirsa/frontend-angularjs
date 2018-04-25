@@ -24,24 +24,19 @@
 
         //Function mapping
         vm.storeSelected = storeSelected;
-
         vm.selectedEquipmentKindChange = selectedEquipmentKindChange;
         vm.searchEquipmentKind = searchEquipmentKind;
-
         vm.save = save;
-
         vm.loadRoutes = loadRoutes;
         vm.loadSucursales = loadSucursales;
         vm.filesSelected = filesSelected;
 
         //Variable declaration
         vm.request = {};
-
         vm.equipmentKinds = null;
         vm.routes = null;
         vm.sucursales = null;
-
-        vm.storeSearchText = null;
+        vm.store = null;
         vm.equipmentKindSearchText = null;
 
         //Constants declaration
@@ -81,7 +76,7 @@
         }
 
         function storeSelected(store) {
-            $log.debug(store);
+            vm.store = store;
             vm.request.establecimiento = store.id;
         }
 

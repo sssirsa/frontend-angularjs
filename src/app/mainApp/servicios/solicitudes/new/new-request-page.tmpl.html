@@ -136,8 +136,14 @@
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.CABINET.FIELD</label>
-                <input
-                    ng-model="vm.request.cabinet"/>
+                <md-select
+                    ng-model="vm.request.cabinet">
+                    <md-option
+                        ng-repeat="cabinet in vm.store.cabinets"
+                        ng-value="cabinet.economico">
+                        {{cabinet.economico}} - {{cabinet.modelo}}
+                    </md-option>
+                </md-select>
             </md-input-container>
         </div>
     </md-card>
@@ -218,11 +224,6 @@
                 </md-select>
             </md-input-container>
         </div>
-        <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
-            <label translate>REQUESTS.NEW.CABINET</label>
-            <input
-                ng-model="vm.request.cabinet"/>
-        </md-input-container>
 
         <div layout="row"
              layout-align="end end"
