@@ -60,7 +60,6 @@ npm:
     - apt-get install build-essential -y
   script:
     - npm install -g npm@latest
-    - npm i process-nextick-args util-deprecate
     - npm install
   cache:
     untracked: true
