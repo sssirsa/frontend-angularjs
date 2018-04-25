@@ -32,6 +32,7 @@
 
         vm.loadRoutes = loadRoutes;
         vm.loadSucursales = loadSucursales;
+        vm.filesSelected = filesSelected;
 
         //Variable declaration
         vm.request = {};
@@ -46,6 +47,12 @@
         //Constants declaration
         vm.scores = SCORES;
         vm.requestKinds = OPTIONS.requestKinds;
+        vm.fileValidations = {
+            size:{
+                max:'5MB',
+                min:'10B'
+            }
+        };
 
         activate();
 
@@ -148,6 +155,19 @@
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE')
                     );
                 });
+        }
+
+        function filesSelected(files){
+            vm.request.evidencia=[];
+            angular.forEach(files,function(image){
+                var base64Image=null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.request.evidencia.push({foto:base64Image});
+                };
+            });
         }
 
     }

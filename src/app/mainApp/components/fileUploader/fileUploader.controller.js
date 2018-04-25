@@ -16,7 +16,7 @@
                 allowFolders: '<', //Allow directory uploading
                 maxFiles: '<', //Max number of files allowed
                 keep: '<', //true, false or distinct,
-                filesSelected: '&'
+                filesSelected: '&'// {files:vm.files}
             }
         });
 

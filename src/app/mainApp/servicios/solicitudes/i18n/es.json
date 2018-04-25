@@ -97,7 +97,8 @@
             "EQUIPMENT":{
                 "SEARCH":"Tipo de equipo a asignar"
             },
-            "SUCURSAL":"Sucursal"
+            "SUCURSAL":"Sucursal",
+            "EVIDENCES":"Evidencias"
         }
     }
 }

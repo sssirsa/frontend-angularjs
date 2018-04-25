@@ -149,6 +149,25 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="true"
+                       max-files="5"
+                       multiple-files="true"
+                       keep="true"
+                       files-selected="vm.filesSelected(files)"
+        ></file-uploader>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
             <h3 translate>REQUESTS.NEW.INFO</h3>
         </div>
         <div flex
