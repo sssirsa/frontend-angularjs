@@ -13,7 +13,9 @@
             .state('triangular.admin-default.cabinets', { //Nombre del state
                 url: '/cabinets', //Nombre que quiero en mi url
                 data: {
-                    roles: ['Administrador', 'Capturista']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                    }
                 },
                 templateUrl: 'app/mainApp/inventarios/cabinet/cabinet.tmpl.html', //Dirección del archivo a usar
                 controller: 'cabinetController', //nombre del controlador
@@ -22,7 +24,9 @@
             .state('triangular.admin-default.insumos', { //Nombre del state
                 url: '/insumos', //Nombre que quiero en mi url
                 data: {
-                    roles: ['Administrador', 'Capturista']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                    }
                 },
                 templateUrl: 'app/mainApp/inventarios/insumo/insumo.tmpl.html', //Dirección del archivo a usar
                 controller: 'insumoController', //nombre del controlador
@@ -34,7 +38,7 @@
                 name: 'MAIN.MENU.INVENTORY.TITLE',
                 icon: 'fa fa-archive',
                 type: 'dropdown',
-                permission: ['Administrador', 'Capturista'],
+                permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                 priority: 6,
                 children: [{
                     name: 'MAIN.MENU.INVENTORY.CABINETS',

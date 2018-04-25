@@ -4,40 +4,29 @@
 (function () {
     angular
         .module('app.mainApp')
-        .controller('bienvenidaController',bienvenidaController);
+        .controller('bienvenidaController', bienvenidaController);
 
-    function bienvenidaController( $scope,$rootScope,AUTH_EVENTS){
+    function bienvenidaController(User, RoleStore, Sucursal, $log) {
         var vm = this;
 
-        vm.capturista=false;
-        vm.tecnico=false;
-        vm.cliente=false;
-        vm.Admin=false;
-        $rootScope.$on(AUTH_EVENTS.sessionRestore, function(event) {
-            vm.role=$scope.vmNode.currentUser.userRole;
-            showButtons();
-        });
-        function showButtons(){
-            if (vm.role==="Administrador"){
-                vm.capturista=true;
-                vm.tecnico=true;
-                vm.cliente=true;
-                vm.admin=true;
-            }
-            else{
-                if(vm.role==="Capturista"){
-                    vm.capturista=true;
-                    vm.cliente=true;
-                }
-                else{
-                    if(vm.role==="Cliente"){
-                    vm.cliente=true;
-                }
-                    else
-                        vm.tecnico=true;
-                }
+        vm.user = User.getUser();
+        vm.roles = _.keys(RoleStore.getStore());
+        vm.sucursal = null;
+
+        activate();
+
+        function activate() {
+            if (vm.user.sucursal) {
+                Sucursal.getByID(vm.user.sucursal)
+                    .then(function (sucursal) {
+                        vm.sucursal = sucursal;
+                    })
+                    .catch(function (errorSucursal) {
+                        $log.error(errorSucursal);
+                    });
             }
         }
+
     }
 
 })();

@@ -2,203 +2,69 @@
      cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
      layout="column">
 
-    <md-card layout="row"
+    <md-card layout="column">
+        <div
+            layout="column"
+            layout-align="center center"
+        >
+            <h2 translate>REQUESTS.NEW.TITLE</h2>
+        </div>
+        <div layout="row"
              layout-align-xs="center stretch"
              layout-xs="column"
              layout-align="space-around center"
              layout-padding>
-        <h2 translate>REQUESTS.NEW.TITLE</h2>
-        <md-input-container class="md-block" flex>
-            <label translate>REQUESTS.NEW.KIND</label>
-            <md-select
-                ng-model="vm.request.tipo">
-                <md-option
-                    ng-repeat="kind in vm.requestKinds"
-                    ng-value="kind.id">
-                    {{kind.label}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-            <label translate>REQUESTS.NEW.SUCURSAL</label>
-            <md-select
-                ng-if="!vmNode.currentUser.sucursal"
-                md-on-open ="vm.loadSucursales()"
-                ng-model="vm.request.sucursal">
-                <md-option
-                    ng-repeat="sucursal in vm.sucursales"
-                    ng-value="sucursal.id">
-                    {{sucursal.nombre}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </md-card>
-
-    <md-card layout-align="center stretch"
-             layout="column"
-             ng-if="vm.request.tipo"
-             cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
-             layout-padding>
-        <h3 translate>REQUESTS.NEW.STORE.TITLE</h3>
-
-        <md-autocomplete md-input-name="establecimiento"
-                         md-no-cache="true"
-                         flex="100"
-                         md-min-length="0"
-                         md-selected-item="vm.assignedStore"
-                         md-selected-item-change="vm.selectedStoreChange()"
-                         md-search-text="vm.storeSearchText"
-                         md-items="item in vm.searchStore(item)"
-                         md-item-text="item.nombre_establecimiento"
-                         md-floating-label="{{'REQUESTS.NEW.STORE.SEARCH'|translate}}"
-                         md-menu-class="autocomplete-custom-template"
-                         required>
-            <md-item-template>
-                <span class="item-title" title="{{item.nombre}}">
-                    <md-icon md-font-icon="fa fa-university"></md-icon>
-                    <span>
-                        <b>{{item.nombre_establecimiento}}</b>
-                    </span>
-                </span>
-                <span class="md-caption">
-                    {{item.nombre_encargado}}
-                </span>
-            </md-item-template>
-            <md-not-found>
-                <span class="item-title">
-                    <span>
-                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.storeSearchText}}"
-                    </span>
-                </span>
-            </md-not-found>
-        </md-autocomplete>
-
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.NAME</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.nombre_establecimiento"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.SEGMENTATION</label>
+            <md-input-container class="md-block" flex>
+                <label translate>REQUESTS.NEW.KIND</label>
                 <md-select
-                    ng-disabled="true"
-                    ng-model="vm.store.segmentacion">
+                    ng-model="vm.request.tipo">
                     <md-option
-                        ng-repeat="segment in vm.storeSegmentation"
-                        ng-value="segment.value">
-                        {{segment.label}}
+                        ng-repeat="kind in vm.requestKinds"
+                        ng-value="kind.id">
+                        {{kind.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label translate>REQUESTS.NEW.SUCURSAL</label>
+                <md-select
+                    ng-if="!vm.user.sucursal"
+                    md-on-open="vm.loadSucursales()"
+                    ng-model="vm.request.sucursal">
+                    <md-option
+                        ng-repeat="sucursal in vm.sucursales"
+                        ng-value="sucursal.id">
+                        {{sucursal.nombre}}
                     </md-option>
                 </md-select>
             </md-input-container>
         </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.MANAGER</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.nombre_encargado"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.MANAGER_PHONE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.telefono_encargado"/>
-            </md-input-container>
+    </md-card>
+
+    <md-card
+        ng-if="vm.request.tipo">
+        <div
+            layout="column"
+            layout-align="center center">
+            <h3>{{'MAIN.COMPONENTS.STORE_MANAGER.TITLE'|translate}}</h3>
         </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.STREET</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.calle"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.NUMBER</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.numero"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.BETWEEN1</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.entre_calle1"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.BETWEEN2</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.entre_calle2"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.STATE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.municipio.estado.nombre"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.CITY</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.municipio.nombre"/>
-            </md-input-container>
-        </div>
-        <div flex
-             layout="column"
-             layout-gt-sm="row"
-             layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.LOCALITY</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.nombre"/>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.STORE.ZIP_CODE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.store.localidad.codigo_postal"/>
-            </md-input-container>
-        </div>
-        <div layout="row"
-             layout-align="end end"
-             layout-sm="column"
-             layout-xs="column"
-             layout-align-sm="start stretch"
-             layout-align-xs="start stretch">
-            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
-            </md-button>
-        </div>
+
+        <store-manager
+            can-create="vm.request.tipo === 'Nuevos'"
+            can-modify="vm.request.tipo"
+            can-search="vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Recolección' || vm.request.tipo === 'Servicio Técnico'"
+            store-selected="vm.storeSelected(store)"
+        ></store-manager>
+
     </md-card>
 
     <md-card layout-align="center stretch"
              layout="column"
              ng-if="vm.request.tipo === 'Nuevos' || vm.request.tipo === 'Incremental' || vm.request.tipo === 'Cambio'"
              layout-padding>
-        <h3 translate>REQUESTS.NEW.CABINETS.TITLE</h3>
-
+        <div layout="column" layout-align="center center">
+            <h3 translate>REQUESTS.NEW.CABINETS.TITLE</h3>
+        </div>
         <md-autocomplete md-input-name="tipo_equipo"
                          md-no-cache="true"
                          flex="100"
@@ -231,6 +97,74 @@
             </md-not-found>
         </md-autocomplete>
 
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUESTS.NEW.CABINETS.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUESTS.NEW.CABINETS.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.CABINET.TITLE</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.CABINET.FIELD</label>
+                <md-select
+                    ng-model="vm.request.cabinet">
+                    <md-option
+                        ng-repeat="cabinet in vm.store.cabinets"
+                        ng-value="cabinet">
+                        {{cabinet}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="true"
+                       max-files="5"
+                       multiple-files="true"
+                       keep="true"
+                       files-selected="vm.filesSelected(files)"
+        ></file-uploader>
     </md-card>
 
     <md-card layout-align="center stretch"
@@ -290,33 +224,6 @@
                 </md-select>
             </md-input-container>
         </div>
-        <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
-            <label translate>REQUESTS.NEW.CABINET</label>
-            <input
-                ng-model="vm.request.cabinet"/>
-        </md-input-container>
-        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
-            <span translate>REQUESTS.NEW.CABINETS.TITLE</span>
-            <table md-table flex>
-                <thead md-head>
-                <tr md-row>
-                    <th md-column>
-                        <span translate>REQUESTS.NEW.CABINETS.KIND</span>
-                    </th>
-                    <th md-column>
-                        <span translate>REQUESTS.NEW.CABINETS.QUANTITY</span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody md-body>
-                <tr md-row
-                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
-                    <td md-cell>{{cabinet.tipo}}</td>
-                    <td md-cell>{{cabinet.cantidad}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
         <div layout="row"
              layout-align="end end"
@@ -332,24 +239,5 @@
         </div>
 
     </md-card>
-    <!--
-        <md-card layout-align="center stretch"
-                 layout="column"
-                 ng-if="vm.request.tipo"
-                 layout-padding>
-            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
 
-            <div
-                layout="column"
-                layout-gt-xs="row"
-                layout-align="space-around center">
-
-                <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
-                <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
-                <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
-                <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
-
-            </div>
-
-        </md-card>-->
 </div>

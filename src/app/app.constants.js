@@ -1,15 +1,6 @@
 (function () {
     angular
         .module('app')
-        .constant('AUTH_EVENTS', {
-            loginSuccess: 'auth-login-success',
-            loginFailed: 'auth-login-failed',
-            logoutSuccess: 'auth-logout-success',
-            sessionTimeout: 'auth-session-timeout',
-            notAuthenticated: 'auth-not-authenticated',
-            notAuthorized: 'auth-not-authorized',
-            sessionRestore: 'auth-session-restored'
-        })
         .constant('EVENTS_GENERAL', {
             notFound: 'not-found',
             notFount_select: 'not-found-select',
@@ -418,7 +409,7 @@
                     label: 'Incremental'
                 },
                 {
-                    id: 'Retiro',
+                    id: 'Recolección',
                     label: 'Retiro'
                 },
                 {
@@ -476,21 +467,25 @@
                 servicio_admin: 'solicitud_servicio_admin'
             },
             establecimiento: 'establecimiento',
+            establecimiento_template:'https://goo.gl/kAQrxt',
             sucursal: 'sucursal',
             tipo_equipo: 'tipo_equipo',
             tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
             modelo_cabinet: 'modelo_cabinet',
             estado: 'estado',
-            municipio: 'municipio'
+            municipio: 'municipio',
+            massive:{
+                store:'massive/store'
+            }
         })
         .constant('QUERIES', {
-            store:{
-                by_state:'?localidad__municipio__estado_id=',
-                by_city:'?localidad__municipio_id=',
-                by_locality:'?localidad_id=',
-                by_postal_code:'?localidad__codigo_postal=',
-                by_economic:'/lookup/'
+            store: {
+                by_state: '?localidad__municipio__estado_id=',
+                by_city: '?localidad__municipio_id=',
+                by_locality: '?localidad_id=',
+                by_postal_code: '?localidad__codigo_postal=',
+                by_economic: '/lookup/'
             },
             city: {
                 by_state: '?estado_id='
@@ -573,28 +568,34 @@
         .constant('STORE_SEGMENTATION',
             [
                 {
-                    value: 0,
-                    label: 'Rojo'
-                },
-                {
-                    value: 1,
-                    label: 'Bajo Bronce'
-                },
-                {
-                    value: 2,
-                    label: 'Bronce'
-                },
-                {
-                    value: 3,
-                    label: 'Plata'
+                    value: 5,
+                    label: 'Platino',
+                    class:'store_platinum'
                 },
                 {
                     value: 4,
-                    label: 'Oro'
+                    label: 'Oro',
+                    class:'store_gold'
                 },
                 {
-                    value: 5,
-                    label: 'Platino'
+                    value: 3,
+                    label: 'Plata',
+                    class:'store_silver'
+                },
+                {
+                    value: 2,
+                    label: 'Bronce',
+                    class:'store_bronze'
+                },
+                {
+                    value: 1,
+                    label: 'Bajo Bronce',
+                    class:'store_low_bronze'
+                },
+                {
+                    value: 0,
+                    label: 'Rojo',
+                    class:'store_red'
                 }]
         );
 })();

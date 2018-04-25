@@ -308,16 +308,6 @@
             "ZIP_CODE":"Código Postal"
         }
     },
-    "STORES":{
-        "LABELS":{
-            "TITLE":"Establecimiento",
-            "SUBTITLE":"Información de Establecimiento",
-            "SEARCH":"Búsqueda de establecimientos",
-            "NOT_FOUND":"No se encontró el establecimiento",
-            "LATITUDE": "Latidud",
-            "LONGITUDE": "Longitud"
-        }
-    },
     "STATES":{
         "LABELS":{
             "TITLE":"Estados",

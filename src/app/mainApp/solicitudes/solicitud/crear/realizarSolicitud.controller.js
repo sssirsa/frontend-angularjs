@@ -4,9 +4,21 @@
         .module('app.mainApp.solicitudes')
         .controller('realizarSolicitudController', realizarSolicitudController);
 
-    function realizarSolicitudController(OPTIONS, URLS, udn,TipoEquipo,Helper,$mdEditDialog, $mdDialog, Translate,toastr,
-                                         Solicitudes, Solicitud_Servicio, Solicitudes_Admin, PersonaCapturista,
-                                         Session,$scope, $window)
+    function realizarSolicitudController(OPTIONS,
+                                         URLS,
+                                         udn,
+                                         TipoEquipo,
+                                         Helper,
+                                         $mdEditDialog,
+                                         $mdDialog,
+                                         Translate,
+                                         toastr,
+                                         Solicitudes,
+                                         Solicitud_Servicio,
+                                         Solicitudes_Admin,
+                                         PersonaCapturista,
+                                         $scope,
+                                         $window)
     {
         var vm = this;
 
@@ -39,7 +51,7 @@
             "contacto_negocio": null,
             "fecha_atencion": new Date(),
             "udn": null,
-            
+
         };
         var entrada = {
             "id": null,
@@ -109,7 +121,7 @@
         vm.errorDuplicado = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORDUPLICADO');
         vm.erroNumSolConf = Translate.translate('CREATE_REQUEST.FORM.ERROR.ERRORNUMSOLCONF');
         vm.errorLocation = Translate.translate('PUNTOVENTA.TOASTR.UNSUPPORTED_GEOLOCATION');
-        
+
         activate();
         function activate() {
             geoLocate();
@@ -124,7 +136,7 @@
                 vm.tiposEquipo=Helper.filterDeleted(res,true);
                 vm.tiposEquipo=_.sortBy(vm.tiposEquipo, 'nombre');
             });
-            vm.isClient = Session.userRole === 'Cliente';
+            //vm.isClient = Session.userRole === 'Cliente';
             vm.requisitoVenta.fecha_atencion=moment();
         }
 
@@ -209,7 +221,7 @@
             $scope.solicitudForm.$setUntouched();
             vm.udn = null;
             vm.persona = null;
-            vm.isClient = Session.userRole === 'Cliente';
+            //vm.isClient = Session.userRole === 'Cliente';
             vm.requisitoVenta.fecha_atencion=moment();
             vm.entrada = angular.copy(entrada);
             vm.udnObject=null;

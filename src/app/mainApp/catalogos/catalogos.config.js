@@ -14,7 +14,9 @@
                 // set the url of this page
                 url: '/proveedor',
                 data: {
-                    roles: ['Administrador', 'Capturista']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/proveedor/proveedor.tmpl.html',
@@ -26,7 +28,9 @@
                 // set the url of this page
                 url: '/lineaTransporte',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/lineaTransporte/lineaTransporte.tmpl.html',
@@ -38,7 +42,9 @@
                 // set the url of this page
                 url: '/tipoTransporte',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/tipoTransporte/tipoTransporte.tmpl.html',
@@ -50,7 +56,9 @@
                 // set the url of this page
                 url: '/udn',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/udn/udn.tmpl.html',
@@ -62,7 +70,9 @@
                 // set the url of this page
                 url: '/sucursal',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/sucursal/sucursal.tmpl.html',
@@ -74,7 +84,9 @@
                 // set the url of this page
                 url: '/modelCabinet',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/modeloCabinet/modeloCabinet.tmpl.html',
@@ -86,7 +98,9 @@
                 // set the url of this page
                 url: '/marcaCabinet',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 // set the html template to show on this page
                 templateUrl: 'app/mainApp/catalogos/marcaCabinet/marcaCabinet.tmpl.html',
@@ -97,7 +111,9 @@
             .state('triangular.admin-default.proyectos', {
                 url: '/proyectos',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/proyectos/proyectos.tmpl.html',
                 controller: 'proyectosController',
@@ -106,7 +122,9 @@
             .state('triangular.admin-default.clientes', {
                 url: '/clientes',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/clientes/cliente.tmpl.html',
                 controller: 'clienteController',
@@ -115,7 +133,9 @@
             .state('triangular.admin-default.categoria', {
                 url: '/categoria',
                 data: {
-                    roles: ['Administrador', 'Capturista']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/categoria/categoria.tmpl.html',
                 controller: 'CategoriaController',
@@ -124,7 +144,9 @@
             .state('triangular.admin-default.catalogo-insumo', {
                 url: '/catalogo-insumo',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/catalogo_insumo/catalogo_insumo.tmpl.html',
                 controller: 'CatalogoInsumoController',
@@ -133,7 +155,9 @@
             .state('triangular.admin-default.catalogo-tipo-equipo', {
                 url: '/catalogo-tipo-equipo',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/tipoEquipo/tipoEquipo.tmpl.html',
                 controller: 'TipoEquipoController',
@@ -142,7 +166,9 @@
             .state('triangular.admin-default.catalogo-etapas', {
                 url: '/catalogo-etapas',
                 data: {
-                    roles: ['Administrador']
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
                 },
                 templateUrl: 'app/mainApp/catalogos/etapas/etapas.tmpl.html',
                 controller: 'EtapasController',
@@ -151,7 +177,9 @@
             .state('triangular.admin-default.catalogo-rutas',{
                 url:'/rutas',
                 data:{
-                    roles:['Administrador', 'Tecnico E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
                 },
                 templateUrl:'app/mainApp/catalogos/routes/routes.tmpl.html',
                 controller: 'routesController',
@@ -160,7 +188,9 @@
             .state('triangular.admin-default.catalogo-localidades',{
                 url:'/localidades',
                 data:{
-                    roles:['Administrador', 'Tecnico E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
                 },
                 templateUrl:'app/mainApp/catalogos/localities/localities.tmpl.html',
                 controller: 'localitiesController',
@@ -169,7 +199,9 @@
             .state('triangular.admin-default.catalogo-establecimientos',{
                 url:'/establecimientos',
                 data:{
-                    roles:['Administrador', 'Tecnico E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
                 },
                 templateUrl:'app/mainApp/catalogos/stores/stores.tmpl.html',
                 controller: 'storesController',
@@ -178,7 +210,9 @@
             .state('triangular.admin-default.catalogo-estados',{
                 url:'/estados',
                 data:{
-                    roles:['Administrador', 'Tecnico E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
                 },
                 templateUrl:'app/mainApp/catalogos/states/states.tmpl.html',
                 controller: 'statesController',
@@ -187,7 +221,9 @@
             .state('triangular.admin-default.catalogo-municipios',{
                 url:'/municipios',
                 data:{
-                    roles:['Administrador', 'Tecnico E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
                 },
                 templateUrl:'app/mainApp/catalogos/cities/cities.tmpl.html',
                 controller: 'citiesController',
@@ -199,101 +235,101 @@
                 name: 'MAIN.MENU.CATALOGS.TITLE',
                 icon: 'fa fa-book',
                 type: 'dropdown',
-                permission: ['Administrador', 'Capturista', 'Tecnico E'],
+                permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
                 priority: 5,
                 children: [
 
                     {
                         name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                         state: 'triangular.admin-default.linea-transporte',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.TRANSPORT_TYPE',
                         state: 'triangular.admin-default.tipo-transporte',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.UDN',
                         state: 'triangular.admin-default.udn-catalog',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.SUBSIDIARY',
                         state: 'triangular.admin-default.sucursal',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.CABINET_BRAND',
                         state: 'triangular.admin-default.marca-cabinet',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.CABINET_MODEL',
                         state: 'triangular.admin-default.model-cabinet',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.PROJECTS',
                         state: 'triangular.admin-default.proyectos',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CATALOGS.CLIENT',
                         state: 'triangular.admin-default.clientes',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CATALOGS.EQUIPMENT_TYPE',
                         state: 'triangular.admin-default.catalogo-tipo-equipo',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.STAGE',
                         state: 'triangular.admin-default.catalogo-etapas',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATALOG',
                         state: 'triangular.admin-default.catalogo-insumo',
-                        permission: ['Administrador'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
                         state: 'triangular.admin-default.categoria',
-                        permission: ['Administrador', 'Capturista'],
+                        permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.PROVIDER',
                         state: 'triangular.admin-default.proveedor',
-                        permission: ['Administrador', 'Capturista'],
+                        permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                         type: 'link'
                     }, {
                         name: 'MAIN.MENU.CATALOGS.ROUTES',
                         state: 'triangular.admin-default.catalogo-rutas',
-                        permission: ['Administrador', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.STATES',
                         state: 'triangular.admin-default.catalogo-estados',
-                        permission: ['Administrador', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.CITIES',
                         state: 'triangular.admin-default.catalogo-municipios',
-                        permission: ['Administrador', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.LOCALITIES',
                         state: 'triangular.admin-default.catalogo-localidades',
-                        permission: ['Administrador', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },{
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
-                        permission: ['Administrador', 'Tecnico E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     }
                 ]
