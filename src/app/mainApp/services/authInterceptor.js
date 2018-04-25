@@ -19,16 +19,23 @@
         };
 
         function request(config) {
-            var deferred=$q.defer();
-            if ((config.url.indexOf(EnvironmentConfig.site.rest.api) !== -1) && (config.url.indexOf('oauth') === -1)){
-                if (!inFlightGet) {
-                    inFlightGet = $injector.get('AuthService').getToken();
-                    config.headers.Authorization = 'Bearer ' + inFlightGet;
-                    inFlightGet = null;
+            var deferred = $q.defer();
+            if (config.url.indexOf(EnvironmentConfig.site.rest.mobile_api) !== -1 ||
+                config.url.indexOf(EnvironmentConfig.site.rest.api_reports) !== -1 ||
+                config.url.indexOf(EnvironmentConfig.site.rest.web_api) !== -1) {
+                if(config.url.indexOf('oauth') === -1)
+                {
+                    if (!inFlightGet) {
+                        console.log("Entro");
+                        inFlightGet = $injector.get('AuthService').getToken();
+                        config.headers.Authorization = 'Bearer ' + inFlightGet;
+                        inFlightGet = null;
+                    }
                 }
             }
             deferred.resolve(config);
             return deferred.promise;
+
         }
 
         function response(res) {
@@ -36,26 +43,19 @@
         }
 
         function responseError(response) {
-            console.log(response);
             if (response.status === 401 && response.statusText === 'Unauthorized') {
-                console.log("Entro");
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
-                    console.log("refresh");
                     inFlightRefresh = $injector.get('OAuth').refreshToken();
                 }
-                inFlightRefresh.then(function() {
+                inFlightRefresh.then(function () {
                     inFlightRefresh = null;
-                    console.log("solicito token");
                     $http(response.config).then(deferred.resolve, deferred.reject);
-                }).catch(function (err) {
-                    console.log(err);
                 });
-                return deferred.promise
+                return deferred.promise;
             }
             return $q.reject(response);
         }
-
     }
 })();

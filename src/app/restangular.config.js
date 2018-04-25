@@ -7,7 +7,7 @@
         .config(config);
 
     function config($httpProvider) {
-        //$httpProvider.interceptors.push('AuthInterceptor');
+        $httpProvider.interceptors.push('AuthInterceptor');
 
     }
 })();

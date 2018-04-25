@@ -76,7 +76,7 @@
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 refresh_token: $cookieStore.get('refreshToken')
             };
-            return WebRestangular.all('oauth').all('token')
+            return MobileRestangular.all('oauth').all('token')
                 .customPOST({'content-type': 'application/json'}, null, data);
 
         }
