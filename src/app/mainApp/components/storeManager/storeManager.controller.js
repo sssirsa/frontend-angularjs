@@ -70,7 +70,7 @@
             })
                 .then(function (store) {
                     vm.store = store;
-                    this.storeSelected({store:store});
+                    vm.storeSelected({store:store});
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -93,7 +93,7 @@
             })
                 .then(function (store) {
                     vm.store = store;
-                    this.storeSelected({store:store});
+                    vm.storeSelected({store:store});
                 })
                 .catch(function(storeError){
                     if(storeError){
