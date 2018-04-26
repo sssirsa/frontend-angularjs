@@ -77,8 +77,9 @@
 
         function storeSelected(store) {
             vm.store = store;
-            console.log(vm.store);
-            vm.request.cabinet = null;
+            if(vm.request.cabinet) {
+                vm.request.cabinet = null;
+            }
             vm.request.establecimiento = store.id;
         }
 
