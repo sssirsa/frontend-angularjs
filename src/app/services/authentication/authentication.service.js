@@ -5,7 +5,7 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $cookieStore) {
+    function AuthService(OAuth, $cookies) {
 
         var authService = {
             isAuthenticated: isAuthenticated,
@@ -23,7 +23,7 @@
         }
 
         function getToken() {
-            return $cookieStore.get('token');
+            return $cookies.getObject('token');
         }
 
         function logout() {

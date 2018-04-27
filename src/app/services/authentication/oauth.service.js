@@ -1,12 +1,12 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$cookieStore', 'RoleStore', 'User', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookieStore, RoleStore, User) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookies, RoleStore, User) {
         return {
             getToken: getToken,
-            refreshToken: refreshToken,
+            refreshTokenFunction: refreshTokenFunction,
             isValidToken: isValidToken,
             revokeToken: revokeToken
         };
@@ -26,13 +26,13 @@
             MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, data)
                 .then(function (loginResponse) {
-                    $cookieStore.put('token', loginResponse.access_token);
-                    $cookieStore.put('refreshToken', loginResponse.refreshToken);
-                    var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');
-                    var expiration = now.add(loginResponse.expires_in, 'seconds');
-                    $cookieStore.put('expiration', expiration);
-                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookieStore.get('token')});
-                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookieStore.get('token')});
+                    $cookies.putObject('token', loginResponse.access_token);
+                    $cookies.putObject('refreshToken', loginResponse.refresh_token);
+                    var expiration = new Date();
+                    expiration.setSeconds(expiration.getSeconds()+loginResponse.expires_in);
+                    $cookies.putObject('expiration', expiration);
+                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
+                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
 
                     WebRestangular.all('my_groups')
                         .customGET()
@@ -69,12 +69,12 @@
             return request.promise;
         }
 
-        function refreshToken() {
+        function refreshTokenFunction() {
             var data = {
                 grant_type: 'refresh_token',
                 client_id: EnvironmentConfig.site.oauth.clientId,
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
-                refresh_token: $cookieStore.get('refreshToken')
+                refresh_token: $cookies.getObject('refreshToken')
             };
             return MobileRestangular.all('oauth').all('token')
                 .customPOST({'content-type': 'application/json'}, null, data);
@@ -82,9 +82,9 @@
         }
 
         function isValidToken() {
-            if ($cookieStore.get('expiration') !== null) {
+            if ($cookies.getObject('expiration')) {
                 if (compareDates()) {
-                    $cookieStore.remove('token');
+                    $cookies.remove('token');
                     return false;
                 }
                 return true;
@@ -95,16 +95,15 @@
         }
 
         function revokeToken(){
-            $cookieStore.remove('token');
-            $cookieStore.remove('refresh_token');
-            $cookieStore.remove('expiration');
+            $cookies.remove('token');
+            $cookies.remove('refresh_token');
+            $cookies.remove('expiration');
         }
 
         function compareDates() {
-            var date_expiration = $cookieStore.get('expiration');
-            moment.locale('en');
-            var now = moment((moment().format('MMM D YYYY H:m:s A')), 'MMM D YYYY H:m:s A');
-            var expiration = moment(date_expiration, 'MMM D YYYY H:m:s A');
+            var date_expiration = $cookies.getObject('expiration');
+            var now = new Date();
+            var expiration = new Date(date_expiration);
             return now > expiration;
         }
 
