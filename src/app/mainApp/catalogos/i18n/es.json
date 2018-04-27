@@ -335,6 +335,9 @@
             "COLOR":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selección de color",
             "NAME":"Nombre",
             "DESCRIPTION":"Descripcíon"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
         }
     }
 }
