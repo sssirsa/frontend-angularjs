@@ -46,7 +46,7 @@
                     </md-switch>
                     <md-virtual-repeat-container class="vertical-container" ng-style='vm.myStyle' flex="flex" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                         <md-list class="md-dense">
-                            <md-list-item ng-repeat="linea in vm.lineas | lineaSearch:vm.searchText">
+                            <md-list-item ng-repeat="linea in vm.lineas | lineaSegmentationSearch:vm.searchText">
                                 <md-button ng-click="vm.selectedLineas(linea)"
                                            ng-class="{'selected' : linea.id == vm.segmentation.id }">
                                     <div layout="row" layout-align="start center">
@@ -104,21 +104,21 @@
                                    ng-click="vm.cancel()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-eraser"></md-icon>
-                            <md-tooltip>Cancel</md-tooltip>
+                            <md-tooltip>{{'MAIN.BUTTONS.CLEAR_FIELDS'|translate}}</md-tooltip>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="vm.delete_or_edit"
+                                   ng-if="!vm.delete_or_edit && vm.segmentation.id"
                                    ng-click="vm.remove($event)"
                                    class="md-raised md-warn">
                             <md-icon md-font-icon="fa fa-trash"></md-icon>
-                            <md-tooltip>Borrar</md-tooltip>
+                            <md-tooltip>{{'MAIN.BUTTONS.DELETE'|translate}}</md-tooltip>
                         </md-button>
                         <md-button aria-label="fab button"
-                                   ng-if="!vm.delete_or_edit"
+                                   ng-if="vm.delete_or_edit && vm.segmentation.id"
                                    ng-click="vm.restore()"
                                    class="md-raised md-warn">
                             <md-icon md-font-icon="zmdi zmdi-time-restore"></md-icon >
-                            <md-tooltip>Restaurar</md-tooltip>
+                            <md-tooltip>{{'MAIN.BUTTONS.RESTORE'|translate}}</md-tooltip>
                         </md-button>
                         <md-button aria-label="fab button"
                                    ng-if="vm.segmentation.id"
@@ -126,7 +126,7 @@
                                    ng-click="vm.update()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-pencil"></md-icon>
-                            <md-tooltip>Actualizar</md-tooltip>
+                            <md-tooltip>{{'MAIN.BUTTONS.UPDATE'|translate}}</md-tooltip>
                         </md-button>
                         <md-button aria-label="fab button"
                                    ng-if="!vm.segmentation.id"
@@ -134,7 +134,7 @@
                                    ng-click="vm.create()"
                                    class="md-raised md-primary">
                             <md-icon md-font-icon="fa fa-save"></md-icon>
-                            <md-tooltip>Guardar</md-tooltip>
+                            <md-tooltip>{{'MAIN.BUTTONS.SUBMIT'|translate}}</md-tooltip>
                         </md-button>
                     </div>
                 </div>

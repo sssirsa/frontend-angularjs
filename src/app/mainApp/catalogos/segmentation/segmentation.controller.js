@@ -4,7 +4,7 @@
     angular
         .module('app.mainApp.catalogos')
         .controller('segmentationController', segmentationController)
-        .filter('lineaSearch', custom);
+        .filter('lineaSegmentationSearch', custom);
 
     /* @ngInject */
     function segmentationController(Segmentation, Helper, $scope, toastr, Translate, $mdDialog) {
@@ -83,81 +83,76 @@
         }
 
         function remove(ev) {
-            console.log('Aqui elimino la esta madre ficticiamente jajajaja');
-            // var confirm = $mdDialog.confirm()
-            //     .title(vm.dialogTitle)
-            //     .textContent(vm.dialogMessage)
-            //     .ariaLabel('Confirmar eliminación')
-            //     .ok(vm.deleteButton)
-            //     .cancel(vm.cancelButton);
-            // $mdDialog.show(confirm).then(function () {
-            //     States.remove(vm.segmentation.id).then(function (res) {
-            //         toastr.success(vm.successDeleteMessage, vm.successTitle);
-            //         cancel();
-            //         activate();
-            //     }).catch(function (res) {
-            //         toastr.warning(vm.errorMessage, vm.errorTitle);
-            //     });
-            // }, function () {
-            //
-            // });
+            var confirm = $mdDialog.confirm()
+                .title(vm.dialogTitle)
+                .textContent(vm.dialogMessage)
+                .ariaLabel('Confirmar eliminación')
+                .ok(vm.deleteButton)
+                .cancel(vm.cancelButton);
+            $mdDialog.show(confirm).then(function () {
+                Segmentation.remove(vm.segmentation.id).then(function (res) {
+                    toastr.success(vm.successDeleteMessage, vm.successTitle);
+                    cancel();
+                    activate();
+                }).catch(function (res) {
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                });
+            }, function () {
+
+            });
         }
 
         function update() {
-            console.log('Aqui debo actualizar la información asi bien chingon');
-            // States.update(vm.segmentation, vm.segmentation.id).then(function (res) {
-            //     toastr.success(vm.successUpdateMessage, vm.successTitle);
-            //     cancel();
-            //     activate();
-            // }).catch(function (err) {
-            //     console.log(err);
-            //     if (err.status == 400 && err.data.nombre != undefined) {
-            //         toastr.error(vm.duplicateMessage, vm.errorTitle);
-            //     } else {
-            //         toastr.error(vm.errorMessage, vm.errorTitle);
-            //     }
-            // });
+            Segmentation.update(vm.segmentation, vm.segmentation.id).then(function (res) {
+                toastr.success(vm.successUpdateMessage, vm.successTitle);
+                cancel();
+                activate();
+            }).catch(function (err) {
+                console.log(err);
+                if (err.status == 400 && err.data.nombre != undefined) {
+                    toastr.error(vm.duplicateMessage, vm.errorTitle);
+                } else {
+                    toastr.error(vm.errorMessage, vm.errorTitle);
+                }
+            });
         }
 
         function create() {
-            console.log('Aqui debo crear el nuevo segmento bien vergas');
-            // States.create(vm.segmentation).then(function (res) {
-            //     toastr.success(vm.successCreateMessage, vm.successTitle);
-            //     vm.segmentation = angular.copy(segmentationLocal);
-            //     cancel();
-            //     activate();
-            // }).catch(function (err) {
-            //     console.log(err);
-            //     if (err.status == 400 && err.data.codigo_estado != undefined) {
-            //         toastr.error(vm.duplicateMessage, vm.errorTitle);
-            //     } else {
-            //         toastr.error(vm.errorMessage, vm.errorTitle);
-            //     }
-            // });
+            Segmentation.create(vm.segmentation).then(function (res) {
+                toastr.success(vm.successCreateMessage, vm.successTitle);
+                vm.segmentation = angular.copy(segmentationLocal);
+                cancel();
+                activate();
+            }).catch(function (err) {
+                console.log(err);
+                if (err.status == 400 && err.data.codigo_estado != undefined) {
+                    toastr.error(vm.duplicateMessage, vm.errorTitle);
+                } else {
+                    toastr.error(vm.errorMessage, vm.errorTitle);
+                }
+            });
         }
 
         function restore() {
-            console.log('En esta funcion se la mamaron, no se ni que pedo');
-            // var confirm = $mdDialog.confirm()
-            //     .title(vm.dialogRestoreTitle)
-            //     .textContent(vm.dialogRestoreMessage)
-            //     .ariaLabel('Confirmar restauración')
-            //     .ok(vm.restoreButton)
-            //     .cancel(vm.cancelButton);
-            // $mdDialog.show(confirm).then(function () {
-            //     vm.segmentation.deleted = false;
-            //     States.update(vm.segmentation).then(function (res) {
-            //         toastr.success(vm.successRestoreMessage, vm.successTitle);
-            //         cancel();
-            //         activate();
-            //     }).catch(function (res) {
-            //         vm.segmentation.deleted = true;
-            //         toastr.warning(vm.errorMessage, vm.errorTitle);
-            //     });
-            // }, function () {
-            //
-            // });
+            var confirm = $mdDialog.confirm()
+                .title(vm.dialogRestoreTitle)
+                .textContent(vm.dialogRestoreMessage)
+                .ariaLabel('Confirmar restauración')
+                .ok(vm.restoreButton)
+                .cancel(vm.cancelButton);
+            $mdDialog.show(confirm).then(function () {
+                vm.segmentation.deleted = false;
+                Segmentation.update(vm.segmentation).then(function (res) {
+                    toastr.success(vm.successRestoreMessage, vm.successTitle);
+                    cancel();
+                    activate();
+                }).catch(function (res) {
+                    vm.segmentation.deleted = true;
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                });
+            }, function () {
 
+            });
         }
 
         function cancel() {
@@ -177,7 +172,7 @@
         function selectedItemChange(item) {
             if (item != null) {
                 vm.segmentation = angular.copy(item);
-                vm.delete_or_edit = vm.segmentation.deleted || vm.segmentation.id;
+                vm.delete_or_edit = vm.segmentation.deleted;
             } else {
                 cancel();
             }
@@ -186,7 +181,7 @@
         function selectedLineas(project) {
             vm.selectedLineaList = project;
             vm.segmentation = angular.copy(project);
-            vm.delete_or_edit = vm.segmentation.deleted || vm.segmentation.id;
+            vm.delete_or_edit = vm.segmentation.deleted;
         }
 
         function querySearch(query) {
