@@ -228,6 +228,17 @@
                 templateUrl:'app/mainApp/catalogos/cities/cities.tmpl.html',
                 controller: 'citiesController',
                 controllerAs:'vm'
+            })
+            .state('triangular.admin-default.catalogue-segmentation',{
+                url:'/catalogue/segmentation',
+                data:{
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl:'app/mainApp/catalogos/segmentation/segmentation.tmpl.html',
+                controller: 'segmentationController',
+                controllerAs:'vm'
             });
 
         triMenuProvider.addMenu(
@@ -238,7 +249,12 @@
                 permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
                 priority: 5,
                 children: [
-
+                    {
+                        name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
+                        state: 'triangular.admin-default.catalogue-segmentation',
+                        permission: ['ADMINISTRADOR'],
+                        type: 'link'
+                    },
                     {
                         name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                         state: 'triangular.admin-default.linea-transporte',
