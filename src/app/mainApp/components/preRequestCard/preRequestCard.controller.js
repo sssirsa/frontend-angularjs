@@ -11,9 +11,14 @@
         });
 
     /* @ngInject */
-    function preRequestItemController() {
-        var vm = this;
-        console.log(vm.pre);
+    function preRequestItemController($state) {
+        var ctrl = this;
+
+        ctrl.statusDetail=statusDetail;
+
+        function statusDetail() {
+            $state.go('triangular.admin-default.preRequestDetail', {idPreRequest: ctrl.pre.id});
+        }
 
     }
 

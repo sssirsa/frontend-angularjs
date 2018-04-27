@@ -143,6 +143,17 @@
                 controller: 'preRequestListController',
                 controllerAs: 'vm'
 
+            })
+
+            .state('triangular.admin-default.preRequestDetail', {
+                url: '/prerequest-detail:idPreRequest/',
+                templateUrl: 'app/mainApp/servicios/preRequests/preRequest-detail.tmpl.html',
+                controller: 'preRequestDetailController',
+                controllerAs: 'vm',
+                params: {
+                    idPreRequest: null
+                }
+
             });
 
         triMenuProvider.addMenu(
