@@ -26,7 +26,6 @@
                 if(config.url.indexOf('oauth') === -1)
                 {
                     if (!inFlightGet) {
-                        console.log("Entro");
                         inFlightGet = $injector.get('AuthService').getToken();
                         config.headers.Authorization = 'Bearer ' + inFlightGet;
                         inFlightGet = null;
@@ -47,7 +46,7 @@
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
-                    inFlightRefresh = $injector.get('OAuth').refreshToken();
+                    inFlightRefresh = $injector.get('OAuth').refreshTokenFunction();
                 }
                 inFlightRefresh.then(function () {
                     inFlightRefresh = null;

@@ -68,7 +68,8 @@
                 "LOCALITIES": "Localidades",
                 "STORES": "Establecimientos",
                 "STATES": "Estados",
-                "CITIES": "Municipios"
+                "CITIES": "Municipios",
+                "SEGMENTATION": "Segmentación"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",

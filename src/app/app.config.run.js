@@ -26,7 +26,7 @@
 
             } else {
                 if (AuthService.isAuthenticated()) {
-                    AuthService.revokeToken();
+                    AuthService.logout();
                 }
             }
         });
