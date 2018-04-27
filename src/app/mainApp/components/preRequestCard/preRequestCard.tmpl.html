@@ -21,14 +21,18 @@
         </div>
         <div layout="column">
             <b>
-                {{$ctrl.pre.establecimiento.nombre_establecimiento}}--{{$ctrl.pre.cabinet}}
+                {{$ctrl.pre.establecimiento.nombre_establecimiento}}-{{$ctrl.pre.cabinet}}
             </b>
 
             <b>
                 {{$ctrl.pre.establecimiento.localidad.nombre}}-{{$ctrl.pre.establecimiento.localidad.codigo_postal}}
             </b>
         </div>
-        <div layout="column" layout-align="center center" >
+        <div layout="column">
+            <span >{{$ctrl.pre.estatus}}</span>
+            <div class="{{$ctrl.pre.estatus}}"></div>
+        </div>
+        <div layout="column" layout-align="center center" ng-if="$ctrl.pre.estatus=='Abierta'" >
             <md-button aria-label="fab button"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="zmdi zmdi-open-in-new"></md-icon>

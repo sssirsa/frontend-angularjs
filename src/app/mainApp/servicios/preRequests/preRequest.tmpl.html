@@ -1,6 +1,42 @@
-<div layout="column">
-    <div layout="row" flex="100" layout-align="center center" ng-repeat="item in vm.list">
-        <pre-request-item pre="item">
+<div layout="column" layout-padding="">
+    <md-card layout="column"
+             layout-padding
+             layout-align="center stretch">
+
+        <div layout="row"
+             layout-align="space-around center"
+             layout-align-xs="center stretch"
+             layout-xs="column">
+
+            <div layout="column">
+                <span translate>REQUESTS.LIST.OPEN</span>
+                <div ng-click="vm.listFilteredpreRequests('Abierta')"
+                     class="Abierta"></div>
+            </div>
+            <div layout="column">
+                <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                <div ng-click="vm.listFilteredpreRequests('En_proceso')"
+                     class="En_proceso"></div>
+            </div>
+            <div layout="column">
+                <span translate>REQUESTS.LIST.ATTENDED</span>
+                <div ng-click="vm.listFilteredpreRequests('Atendida')"
+                     class="Atendida"></div>
+            </div>
+            <div layout="column">
+                <span translate>REQUESTS.LIST.CANCELED</span>
+                <div ng-click="vm.listFilteredpreRequests('Cancelada')"
+                     class="Cancelada"></div>
+            </div>
+            <div layout="column">
+                <span translate>REQUESTS.LIST.ALL</span>
+                <div ng-click="vm.listFilteredpreRequests('Todo')"
+                     class="Todo"></div>
+            </div>
+        </div>
+    </md-card>
+    <div layout="row" flex="100" layout-align="center center" ng-repeat="item in vm.requests">
+        <pre-request-item pre="item" flex="100">
 
         </pre-request-item>
 
