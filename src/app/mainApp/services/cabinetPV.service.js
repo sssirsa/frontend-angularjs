@@ -12,7 +12,9 @@
 
         return {
             create: create,
-            list: list
+            list: list,
+            update: update,
+            dlete: dlete
         };
 
         function create(data){
@@ -21,6 +23,14 @@
 
         function list(){
             return urlbase.getList();
+        }
+
+        function update(economico, data) {
+            return urlbase.all(economico).customPUT(data);
+        }
+
+        function dlete(economico) {
+            return urlbase.customDELETE(economico,null,{'content-type':'application/json'});
         }
     }
 })();
