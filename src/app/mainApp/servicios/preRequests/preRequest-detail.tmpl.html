@@ -1,0 +1,41 @@
+<div>
+
+    <md-card layout="column">
+        <md-toolbar class="toolbar-default margin-bottom-30">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>{{vm.preRequest.id}}</span>
+                </h2>
+            </div>
+        </md-toolbar>
+        <div layout="row">
+        <div flex="50" layout-fill="" layout-padding="">
+            <ng-image-gallery
+                images="vm.photos"
+                thumbnails="true"
+                thumb-size="80"
+                inline="true"
+                bubbles="true"
+                bubble-size="5"
+                img-bubbles="true"
+                bg-close="false"
+                piracy="false"
+                img-anim="fadeup"
+            ></ng-image-gallery>
+        </div>
+        <div flex-gt-md="50" layout-fill="" layout="column" layout-padding="" layout-align="center center">
+
+            <div layout-fill="" layout-align="center center">
+                <span translate="">PREREQUEST_TRANSLATE.STORE_NAME</span> &nbsp; : &nbsp;
+                <b translate="">{{vm.preRequest.establecimiento.nombre_establecimiento}}</b>
+            </div>
+        </div>
+        </div>
+
+
+
+    </md-card>
+    <div flex="50">
+        <span>{{vm.preRequest}}</span>
+    </div>
+</div>

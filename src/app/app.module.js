@@ -26,7 +26,11 @@
             // comment out or remove the 'app.translate', line above
             //'app.examples',
             'app.permission',
-            'app.mainApp'
+            'app.mainApp',
+
+            //galeria de imagenes
+            'thatisuday.ng-image-gallery'
+
         ])
 
         // set a constant for the API we are connecting to
