@@ -477,7 +477,8 @@
             municipio: 'municipio',
             massive:{
                 store:'massive/store'
-            }
+            },
+            segmentation: 'segmentacion'
         })
         .constant('QUERIES', {
             store: {
