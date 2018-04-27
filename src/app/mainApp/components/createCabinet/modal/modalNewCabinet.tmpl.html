@@ -11,7 +11,7 @@
     <md-card-title>
         <md-card-title-media>
             <div class="md-media-xl card-media">
-                <img src="{{vm.imagePath}}" class="md-card-image" alt="QR">
+                <img ng-src="{{vm.urlQR}}" class="md-card-image" alt="QR">
             </div>
         </md-card-title-media>
     </md-card-title>
@@ -20,7 +20,7 @@
         layout-align="end center">
         <md-button ng-click="vm.download()" class="md-primary md-raised">
             <md-icon md-font-icon="fa fa-download"></md-icon>
-            <a href="{{vm.imagePath}}" download="QR.png" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
+            <a href="{{vm.urlQR}}" download="QR.png" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
         </md-button>
 
         <md-button

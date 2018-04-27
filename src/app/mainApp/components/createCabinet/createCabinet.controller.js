@@ -10,7 +10,7 @@
         });
 
     /* @ngInject */
-    function createCabinetController (ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog) {
+    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog) {
         var vm = this;
 
         vm.economico = null;
@@ -59,20 +59,47 @@
 
         vm.accept = accept;
         function accept() {
-            $mdDialog.show({
-                controller: 'newCabinetPreController',
-                controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/createCabinet/modal/modalNewCabinet.tmpl.html',
-                fullscreen: true,
-                clickOutsideToClose: true,
-                focusOnOpen: true
-            })
-                .then(function () {
+            var cabinetCreated = null;
+            var aux = {
+                economico: vm.economico,
+                modelo_id: parseInt(vm.modelo_id),
+                no_serie: vm.no_serie.toUpperCase(),
+                antiguedad: vm.antiguedad.toUpperCase()
+            }
+            console.log("objeto final", aux);
+
+            cabinetPV.create(aux)
+                .then(function (res) {
+                    cabinetCreated = res;
+                    vm.economico = null;
+                    vm.marca = null;
+                    vm.modelo_id = null;
+                    vm.no_serie = null;
+                    vm.antiguedad = null;
+
+                    $mdDialog.show({
+                        controller: 'newCabinetPreController',
+                        controllerAs: 'vm',
+                        templateUrl: 'app/mainApp/components/createCabinet/modal/modalNewCabinet.tmpl.html',
+                        fullscreen: true,
+                        clickOutsideToClose: true,
+                        focusOnOpen: true,
+                        locals: {
+                            data: cabinetCreated
+                        }
+                    })
+                        .then(function () {
+
+                        })
+                        .catch(function(){
+
+                        });
 
                 })
-                .catch(function(){
+                .catch(function (err) {
+                    console.log("Error", err);
+                })
 
-                });
         }
 
     }

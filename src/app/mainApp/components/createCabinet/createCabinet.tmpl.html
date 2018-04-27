@@ -23,7 +23,7 @@
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
                     <input name="serial" maxlength="25"
-                           ng-pattern="/^[A-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
+                           ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
                     <div ng-messages="newcabinetFrom.serial.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
