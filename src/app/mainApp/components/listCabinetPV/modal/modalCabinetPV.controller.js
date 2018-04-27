@@ -16,6 +16,8 @@
         vm.urlQR = vm.info.qr_code;
         vm.activo = "Activo";
 
+        vm.eco = vm.info.economico;
+
         vm.marcas = null;
         vm.modelos = null;
         vm.loadingPromise = null;
@@ -78,7 +80,7 @@
         function accept() {
             var aux = {
                 economico: vm.info.economico,
-                modelo_id: parseInt(vm.modelo),
+                modelo_id: vm.modelo,
                 activo: vm.info.activo,
                 no_serie: vm.info.no_serie.toUpperCase(),
                 no_incidencias: vm.info.no_incidencias,
@@ -103,8 +105,7 @@
         }
 
         function acceptConfirm() {
-            console.log(vm.info.economico);
-            cabinetPV.dlete(vm.info.economico)
+            cabinetPV.dlete(vm.eco)
                 .then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     $mdDialog.hide(null);
