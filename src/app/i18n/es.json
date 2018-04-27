@@ -182,7 +182,7 @@
             "CABINET":{
                 "TITLE": "Información del cabinet",
                 "TRADEMARK": "Marca",
-                "ECONOMIC": "Economico",
+                "ECONOMIC": "Económico",
                 "ACTIVE": "Activo",
                 "SERIAL": "Número de serie",
                 "INCIDENCE": "Incidencias",
@@ -190,7 +190,9 @@
                 "ANTIQUITY": "Antiguedad",
                 "QR_CODE": "Código QR",
                 "CREATE": "Crear cabinet",
-                "UPDATE": "Actualizar"
+                "UPDATE": "Actualizar",
+                "SEARCH": "Buscar por económico",
+                "DELETE": "Borrar"
             }
         },
         "LABEL": {
