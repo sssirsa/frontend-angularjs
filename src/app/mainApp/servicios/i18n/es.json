@@ -380,5 +380,18 @@
                 "REQUESTED_CABINETS": "Cabinets solicitados"
             }
         }
+    },
+    "PREREQUEST_TRANSLATE":{
+        "PREREQUESTS":"Pre solicitudes.",
+        "FOLIO":"Folio.",
+        "STORE":"Establecimiento.",
+        "STORE_NAME":"Nombre del establecimiento",
+        "LOCALITY":"lOCALIDAD",
+        "CABINET":"Cabinet.",
+        "DATE":"Fecha de Solicitud.",
+        "CLIENT_COMMENTS":"Observaciones del Cliente.",
+        "PHOTOS":"Evidencias Fotograficas"
+
+
     }
 }

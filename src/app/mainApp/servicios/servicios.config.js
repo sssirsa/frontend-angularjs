@@ -95,15 +95,15 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.serviceAssignDetail', {
-                url:'/detalleServicio/:id',
+                url: '/detalleServicio/:id',
                 data: {
                     roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
-                controller:'detalleAsignacionController',
-                controllerAs:'vm',
-                params:{
-                    id:null
+                controller: 'detalleAsignacionController',
+                controllerAs: 'vm',
+                params: {
+                    id: null
                 }
             })
             .state('triangular.admin-default.newRequest', {
@@ -129,12 +129,20 @@
                 templateUrl: 'app/mainApp/servicios/solicitudes/detail/detail-request-page.tmpl.html',
                 controller: 'DetailRequestPageController',
                 controllerAs: 'vm',
-                params:{
-                    id:null
+                params: {
+                    id: null
                 },
                 data: {
                     roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
+            })
+
+            .state('triangular.admin-default.preRequest', {
+                url: '/prerequest/list',
+                templateUrl: 'app/mainApp/servicios/preRequests/preRequest.tmpl.html',
+                controller: 'preRequestListController',
+                controllerAs: 'vm'
+
             });
 
         triMenuProvider.addMenu(
@@ -183,7 +191,7 @@
                     },
                     {
                         name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
-                        state:'triangular.admin-default.serviceAssing',
+                        state: 'triangular.admin-default.serviceAssing',
                         permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
                         type: 'link'
                     },
@@ -194,11 +202,16 @@
                             name: 'MAIN.MENU.REQUESTS.NEW',
                             state: 'triangular.admin-default.newRequest',
                             type: 'link'
-                        },{
+                        }, {
                             name: 'MAIN.MENU.REQUESTS.LIST',
                             state: 'triangular.admin-default.listRequest',
                             type: 'link'
-                        }]
+                        }, {
+                            name: 'MAIN.MENU.REQUESTS.LIST',
+                            state: 'triangular.admin-default.listRequest',
+                            type: 'link'
+                        }
+                        ]
                     }
                 ]
             }
