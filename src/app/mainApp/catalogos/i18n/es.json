@@ -326,5 +326,15 @@
         "TOASTR":{
             "ERROR_STATE_LIST":"Error al cargar la lista de estados"
         }
+    },
+    "SEGMENTATION":{
+        "LABELS":{
+            "TITLE":"Segmentación",
+            "SEARCH":"Busca tu segmentación",
+            "SUBTITLE":"Información de segmentación",
+            "COLOR":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selección de color",
+            "NAME":"Nombre",
+            "DESCRIPTION":"Descripcíon"
+        }
     }
 }
