@@ -6,7 +6,7 @@
         .module('app.mainApp')
         .controller('cabinetPVController',cabinetPVController);
 
-    function cabinetPVController(cabinetPV, MarcaCabinet, ModeloCabinet, Helper, $mdDialog, data)
+    function cabinetPVController(cabinetPV, MarcaCabinet, ModeloCabinet, Helper, $mdDialog, data, $scope, toastr, Translate)
     {
         var vm = this;
 
@@ -20,6 +20,13 @@
         vm.modelos = null;
         vm.loadingPromise = null;
 
+        vm.confirmation = "";
+
+        vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
+        vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
+
         var models = null;
 
         //functions
@@ -30,6 +37,8 @@
         vm.cerrar = cerrar;
         vm.accept = accept;
         vm.remove = remove;
+        vm.acceptConfirm = acceptConfirm;
+        vm.cancelConfirm = cancelConfirm;
 
         listMarcas();
         listModelos();
@@ -90,13 +99,24 @@
         }
 
         function remove() {
-            cabinetPV.dlete(parseInt(vm.info.economico))
+            vm.confirmation = "confirma";
+        }
+
+        function acceptConfirm() {
+            console.log(vm.info.economico);
+            cabinetPV.dlete(vm.info.economico)
                 .then(function (res) {
-                    $mdDialog.hide();
+                    toastr.success(vm.successDeleteMessage, vm.successTitle);
+                    $mdDialog.hide(null);
                 })
                 .catch(function (err) {
-
+                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    $mdDialog.hide(null);
                 });
+        }
+
+        function cancelConfirm() {
+            $mdDialog.cancel(null);
         }
 
 
