@@ -13,22 +13,31 @@
         <div>
             <md-autocomplete md-selected-item="$ctrl.cabinet"
                              md-selected-item-change="$ctrl.selectedItemChange($ctrl.cabinet)"
-                             md-items="item in $ctrl.search_items"
-                             md-item-text="item.economico"
+                             md-items="item in $ctrl.querySearch($ctrl.searchText)"
+                             md-item-text="item.nombre"
                              md-min-length="0"
-                             md-search-text-change="$ctrl.lookup($ctrl.searchText)" md-search-text="$ctrl.searchText" md-menu-class="autocomplete-custom-template"
-                             md-floating-label="Economico">
-                <md-item-template><span class="item-title">
-                        <md-icon md-font-icon="zmdi zmdi-truck"></md-icon><span>{{item.economico}}</span></span>
+                             md-search-text-change="$ctrl.search($ctrl.searchText)"
+                             md-search-text="$ctrl.searchText"
+                             md-menu-class="autocomplete-custom-template"
+                             md-floating-label="{{'MAIN.COMPONENTS.CABINET.SEARCH'| translate }}">
+                <md-item-template>
+                        <span class="item-title">
+                            <span>&nbsp;{{item.economico}}</span>
+                        </span>
                 </md-item-template>
+                <md-not-found><span translate="SEGMENTATION.ERRORS.NOT_FOUND"></span></md-not-found>
             </md-autocomplete>
         </div>
 
+        <div ng-if="!$ctrl.todos">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+
         <div>
-            <md-list-item class="md-3-line" ng-repeat="item in $ctrl.search_items" ng-click="$ctrl.info(item)">
-                <img ng-src="{{item.qr_code}}" class="md-avatar" alt="{{item.economico}}" />
+            <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos | cabinetPVFilter:$ctrl.searchText" ng-click="$ctrl.info(item)">
+                <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
                 <div class="md-list-item-text" layout="column">
-                    <h2>Economico: {{ item.economico }}</h2>
+                    <h2>Económico: {{ item.economico }}</h2>
                     <h3>Modelo: {{ item.modelo.nombre }}</h3>
                     <h4>Número de Serie: {{ item.no_serie }}</h4>
                     <p>Activo: {{ item.activo }}</p>

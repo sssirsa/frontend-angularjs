@@ -7,7 +7,8 @@
         .component('listCabinet', {
             templateUrl: 'app/mainApp/components/listCabinetPV/listCabinets.tmpl.html',
             controller: listCabinetController
-        });
+        })
+        .filter('cabinetPVFilter', custom);
 
     /* @ngInject */
     function listCabinetController (cabinetPV, Helper, Translate, toastr, $log, $mdDialog) {
@@ -46,7 +47,8 @@
                 }
             })
                 .then(function () {
-
+                    vm.todos = null;
+                    listcabinets();
                 })
                 .catch(function(){
 
@@ -57,16 +59,21 @@
 
         vm.searchText = '';
         vm.search_items = [];
-        vm.cabinet = null;
 
 
         vm.lookup = lookup;
         vm.selectedItemChange = selectedItemChange;
-        vm.clickRepeater = clickRepeater;
+        vm.querySearch = querySearch;
 
-        function lookup(search_text){
-            vm.search_items = _.filter(vm.todos,function(item){
-                return item.economico.includes(search_text);
+        function querySearch(query) {
+            var results = query ? lookup(query) : vm.lineas;
+            return results;
+
+        }
+
+        function lookup(search_text) {
+            vm.search_items = _.filter(vm.todos, function (item) {
+                return item.economico.indexOf(search_text) >= 0;
             });
             return vm.search_items;
         }
@@ -76,10 +83,19 @@
             info(item);
         }
 
-        function clickRepeater(item){
-            vm.cabinet = item.clone();
-        }
+    }
 
+    function custom() {
+        return function (input, text) {
+            if (!angular.isString(text) || text === '') {
+                return input;
+            }
+
+            return _.filter(input, function (item) {
+                return item.economico.indexOf(text) >= 0;
+            });
+
+        };
     }
 
 })();
