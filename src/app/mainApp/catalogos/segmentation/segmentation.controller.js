@@ -7,24 +7,28 @@
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function segmentationController(States, Helper, $scope, toastr, Translate, $mdDialog) {
+    function segmentationController(Segmentation, Helper, $scope, toastr, Translate, $mdDialog) {
 
         var vm = this;
+
+        vm.cancel = cancel;
+        vm.create = create;
+        vm.restore = restore;
+        vm.remove = remove;
+        vm.update = update;
 
         vm.lookup = lookup;
         vm.querySearch = querySearch;
         vm.selectedLineas = selectedLineas;
         vm.selectedItemChange = selectedItemChange;
         vm.toggleDeletedFunction = toggleDeletedFunction;
-        vm.cancel = cancel;
-        vm.create = create;
-        vm.restore = restore;
-        vm.remove = remove;
-        vm.update = update;
+
+        var segmentationLocal = null;
+
         vm.search_items = [];
         vm.searchText = '';
-        var store = null;
-        vm.state = angular.copy(store);
+        vm.segmentation = angular.copy(segmentationLocal);
+        vm.delete_or_edit = false;
         vm.numberBuffer = '';
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
@@ -35,6 +39,8 @@
             letterCase: 'uppercase',
             position: 'bottom left'
         };
+
+
 
         activate();
         init();
@@ -67,93 +73,8 @@
             cancel();
         }
 
-        function remove(ev) {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                States.remove(vm.state.id).then(function (res) {
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function () {
-
-            });
-        }
-
-        function update() {
-            States.update(vm.state, vm.state.id).then(function (res) {
-                toastr.success(vm.successUpdateMessage, vm.successTitle);
-                cancel();
-                activate();
-            }).catch(function (err) {
-                console.log(err);
-                if (err.status == 400 && err.data.nombre != undefined) {
-                    toastr.error(vm.duplicateMessage, vm.errorTitle);
-                } else {
-                    toastr.error(vm.errorMessage, vm.errorTitle);
-                }
-            });
-        }
-
-        function create() {
-            States.create(vm.state).then(function (res) {
-                toastr.success(vm.successCreateMessage, vm.successTitle);
-                vm.state = angular.copy(store);
-                cancel();
-                activate();
-            }).catch(function (err) {
-                console.log(err);
-                if (err.status == 400 && err.data.codigo_estado != undefined) {
-                    toastr.error(vm.duplicateMessage, vm.errorTitle);
-                } else {
-                    toastr.error(vm.errorMessage, vm.errorTitle);
-                }
-            });
-        }
-
-        function restore() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogRestoreTitle)
-                .textContent(vm.dialogRestoreMessage)
-                .ariaLabel('Confirmar restauración')
-                .ok(vm.restoreButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                vm.state.deleted = false;
-                States.update(vm.state).then(function (res) {
-                    toastr.success(vm.successRestoreMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    vm.state.deleted = true;
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function () {
-
-            });
-
-        }
-
-        function cancel() {
-            vm.state = angular.copy(store);
-            vm.selectedLineaList = null;
-            vm.numberBuffer = null;
-            vm.searchText = null;
-
-
-            $scope.StateForm.$setPristine();
-            $scope.StateForm.$setUntouched();
-        }
-
         function listlineas() {
-            vm.loadingPromise = States.list().then(function (res) {
+            vm.loadingPromise = Segmentation.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
                 vm.lineas = _.sortBy(vm.lineas, 'nombre');
             }).catch(function (err) {
@@ -161,10 +82,102 @@
             });
         }
 
+        function remove(ev) {
+            console.log('Aqui elimino la esta madre ficticiamente jajajaja');
+            // var confirm = $mdDialog.confirm()
+            //     .title(vm.dialogTitle)
+            //     .textContent(vm.dialogMessage)
+            //     .ariaLabel('Confirmar eliminación')
+            //     .ok(vm.deleteButton)
+            //     .cancel(vm.cancelButton);
+            // $mdDialog.show(confirm).then(function () {
+            //     States.remove(vm.segmentation.id).then(function (res) {
+            //         toastr.success(vm.successDeleteMessage, vm.successTitle);
+            //         cancel();
+            //         activate();
+            //     }).catch(function (res) {
+            //         toastr.warning(vm.errorMessage, vm.errorTitle);
+            //     });
+            // }, function () {
+            //
+            // });
+        }
+
+        function update() {
+            console.log('Aqui debo actualizar la información asi bien chingon');
+            // States.update(vm.segmentation, vm.segmentation.id).then(function (res) {
+            //     toastr.success(vm.successUpdateMessage, vm.successTitle);
+            //     cancel();
+            //     activate();
+            // }).catch(function (err) {
+            //     console.log(err);
+            //     if (err.status == 400 && err.data.nombre != undefined) {
+            //         toastr.error(vm.duplicateMessage, vm.errorTitle);
+            //     } else {
+            //         toastr.error(vm.errorMessage, vm.errorTitle);
+            //     }
+            // });
+        }
+
+        function create() {
+            console.log('Aqui debo crear el nuevo segmento bien vergas');
+            // States.create(vm.segmentation).then(function (res) {
+            //     toastr.success(vm.successCreateMessage, vm.successTitle);
+            //     vm.segmentation = angular.copy(segmentationLocal);
+            //     cancel();
+            //     activate();
+            // }).catch(function (err) {
+            //     console.log(err);
+            //     if (err.status == 400 && err.data.codigo_estado != undefined) {
+            //         toastr.error(vm.duplicateMessage, vm.errorTitle);
+            //     } else {
+            //         toastr.error(vm.errorMessage, vm.errorTitle);
+            //     }
+            // });
+        }
+
+        function restore() {
+            console.log('En esta funcion se la mamaron, no se ni que pedo');
+            // var confirm = $mdDialog.confirm()
+            //     .title(vm.dialogRestoreTitle)
+            //     .textContent(vm.dialogRestoreMessage)
+            //     .ariaLabel('Confirmar restauración')
+            //     .ok(vm.restoreButton)
+            //     .cancel(vm.cancelButton);
+            // $mdDialog.show(confirm).then(function () {
+            //     vm.segmentation.deleted = false;
+            //     States.update(vm.segmentation).then(function (res) {
+            //         toastr.success(vm.successRestoreMessage, vm.successTitle);
+            //         cancel();
+            //         activate();
+            //     }).catch(function (res) {
+            //         vm.segmentation.deleted = true;
+            //         toastr.warning(vm.errorMessage, vm.errorTitle);
+            //     });
+            // }, function () {
+            //
+            // });
+
+        }
+
+        function cancel() {
+            vm.segmentation = angular.copy(segmentationLocal);
+            vm.delete_or_edit = false;
+            vm.selectedLineaList = null;
+            vm.numberBuffer = null;
+            vm.searchText = null;
+
+
+            $scope.SegmentationForm.$setPristine();
+            $scope.SegmentationForm.$setUntouched();
+        }
+
+
+
         function selectedItemChange(item) {
             if (item != null) {
-                vm.state = angular.copy(item);
-
+                vm.segmentation = angular.copy(item);
+                vm.delete_or_edit = vm.segmentation.deleted || vm.segmentation.id;
             } else {
                 cancel();
             }
@@ -172,7 +185,8 @@
 
         function selectedLineas(project) {
             vm.selectedLineaList = project;
-            vm.state = angular.copy(project);
+            vm.segmentation = angular.copy(project);
+            vm.delete_or_edit = vm.segmentation.deleted || vm.segmentation.id;
         }
 
         function querySearch(query) {
