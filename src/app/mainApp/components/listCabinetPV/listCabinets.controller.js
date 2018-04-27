@@ -53,6 +53,33 @@
                 });
         }
 
+
+
+        vm.searchText = '';
+        vm.search_items = [];
+        vm.cabinet = null;
+
+
+        vm.lookup = lookup;
+        vm.selectedItemChange = selectedItemChange;
+        vm.clickRepeater = clickRepeater;
+
+        function lookup(search_text){
+            vm.search_items = _.filter(vm.todos,function(item){
+                return item.economico.includes(search_text);
+            });
+            return vm.search_items;
+        }
+
+        function selectedItemChange(item)
+        {
+            info(item);
+        }
+
+        function clickRepeater(item){
+            vm.cabinet = item.clone();
+        }
+
     }
 
 })();
