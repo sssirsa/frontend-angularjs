@@ -12,7 +12,6 @@
 
         vm.info = data;
         vm.urlQR = vm.info.qr_code;
-        console.log("url", vm.urlQR);
 
         vm.cerrar = cerrar;
         vm.submit = submit;
