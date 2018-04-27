@@ -210,6 +210,10 @@
                             name: 'MAIN.MENU.REQUESTS.LIST',
                             state: 'triangular.admin-default.listRequest',
                             type: 'link'
+                        },{
+                            name: 'MAIN.MENU.REQUESTS.PREREQUEST',
+                            state: 'triangular.admin-default.preRequest',
+                            type: 'link'
                         }
                         ]
                     }

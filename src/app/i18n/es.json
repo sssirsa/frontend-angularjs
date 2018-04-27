@@ -84,7 +84,8 @@
             "REQUESTS": {
                 "TITLE": "Solicitudes",
                 "NEW": "Nueva",
-                "LIST": "Listado"
+                "LIST": "Listado",
+                "PREREQUEST":"Pre solicitudes"
             }
         },
         "COMPONENTS": {

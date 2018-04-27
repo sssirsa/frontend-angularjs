@@ -1,38 +1,37 @@
-<div>
+<div  flex="100">
+    {{$ctrl.preRequest}}
     <md-card
+        flex="100"
         layout="column"
         layout-gt-md="row"
-        layout-align="space-around center">
-        <md-icon md-svg-icon="assets/images/request.png" class="avatar"></md-icon>
+        layout-align="space-around center" layout-padding="">
+        <img src="assets/images/request.png" class="avatar">
         <div layout="column" >
-            <div layout="row">
-                <div layout="column" layout-align="center center">
+            <div layout="column">
+                <div layout="row" layout-align="center center">
                     <h4 translate>PREREQUEST_TRANSLATE.FOLIO</h4>
-                </div>
-                <div layout="column" layout-align="center center">
                     <h4 translate>:</h4>
+                    <h4>{{$ctrl.pre.id}}</h4>
                 </div>
-                <div layout="column" layout-align="center center">
-                    <h4>{{$ctrl.preRequest.folio}}</h4>
-                    <span>{{$ctrl.preRequest.fecha}}</span>
+
+                    <div layout="column" layout-align="center center">
+                    <span>{{$ctrl.pre.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</span>
                 </div>
             </div>
         </div>
         <div layout="column">
-
-            <h2 translate="">PREREQUEST_TRANSLATE.STORE</h2>
-
-            <h3>
-                {{$ctrl.preRequest.establecimiento.nombre_establecimiento}}--{{$ctrl.preRequest.cabinet}}
-            </h3>
+            <b>
+                {{$ctrl.pre.establecimiento.nombre_establecimiento}}--{{$ctrl.pre.cabinet}}
+            </b>
 
             <b>
-                {{$ctrl.preRequest.establecimiento.localidad.nombre}}-{{$ctrl.preRequest.establecimiento.localidad.codigo_postal}}
+                {{$ctrl.pre.establecimiento.localidad.nombre}}-{{$ctrl.pre.establecimiento.localidad.codigo_postal}}
             </b>
         </div>
         <div layout="column" layout-align="center center" >
             <md-button aria-label="fab button"
-                <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                       class="md-raised md-primary">
+                <md-icon md-font-icon="zmdi zmdi-open-in-new"></md-icon>
             </md-button>
         </div>
 

@@ -2,22 +2,18 @@
 
     angular
         .module('app.mainApp')
-        .component('storeManager', {
-            templateUrl: 'app/mainApp/components/storeManager/storeManager.tmpl.html',
-            controller: storeManagerController,
+        .component('preRequestItem', {
+            templateUrl: 'app/mainApp/components/preRequestCard/preRequestCard.tmpl.html',
+            controller: preRequestItemController,
             bindings: {
-                preRequest: '<',
-                preRequestOpen: '&'
+                pre: '<'
             }
         });
 
     /* @ngInject */
-    function storeManagerController(
-    ) {
+    function preRequestItemController() {
         var vm = this;
-
-
-
+        console.log(vm.pre);
     }
 
 })();

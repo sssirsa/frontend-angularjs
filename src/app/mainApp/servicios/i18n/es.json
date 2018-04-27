@@ -383,7 +383,7 @@
     },
     "PREREQUEST_TRANSLATE":{
         "PREREQUESTS":"Pre solicitudes.",
-        "FOLIO":"Folio.",
+        "FOLIO":"Folio",
         "STORE":"Establecimiento.",
         "STORE_NAME":"Nombre del establecimiento",
         "LOCALITY":"lOCALIDAD",
