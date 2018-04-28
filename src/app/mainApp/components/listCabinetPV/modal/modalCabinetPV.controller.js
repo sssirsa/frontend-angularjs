@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.info = data;
-        vm.modelo = vm.info.modelo_id;
+        vm.modelo = vm.info.modelo.id;
         vm.marca = vm.info.modelo.marca;
         vm.urlQR = vm.info.qr_code;
         vm.activo = "Activo";

@@ -6,11 +6,15 @@
         .module('app.mainApp')
         .component('createCabinet', {
             templateUrl: 'app/mainApp/components/createCabinet/createCabinet.tmpl.html',
-            controller: createCabinetController
+            controller: createCabinetController,
+            controllerAs: '$ctrl',
+            bindings:{
+                toRefresh: '&'
+            }
         });
 
     /* @ngInject */
-    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog) {
+    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog, $scope) {
         var vm = this;
 
         vm.economico = null;
@@ -76,6 +80,10 @@
                     vm.modelo_id = null;
                     vm.no_serie = null;
                     vm.antiguedad = null;
+                    vm.toRefresh();
+
+                    $scope.newcabinetFrom.$setPristine();
+                    $scope.newcabinetFrom.$setUntouched();
 
                     $mdDialog.show({
                         controller: 'newCabinetPreController',
@@ -89,10 +97,10 @@
                         }
                     })
                         .then(function () {
-
+                            //vm.toRefresh();
                         })
                         .catch(function(){
-
+                            //vm.toRefresh();
                         });
 
                 })

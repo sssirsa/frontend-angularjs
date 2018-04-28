@@ -1,19 +1,18 @@
-<md-card layout="column" layout-align="center center">
-    <h2 translate>MAIN.MENU.PREREQUESTS.NEWCABINET</h2>
-</md-card>
-
-<div layout="row" flex layout-padding layout-fill layout-align="center center">
-</div>
-
 <md-card>
     <div>
-        <create-cabinet></create-cabinet>
+        <create-cabinet to-refresh="vm.aRefresh()"></create-cabinet>
     </div>
 </md-card>
 
-<md-card>
+<md-card ng-if="!vm.todosprev">
     <div>
-        <list-cabinet></list-cabinet>
+        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+    </div>
+</md-card>
+
+<md-card ng-if="vm.todosprev">
+    <div id="list">
+        <list-cabinet todosex="vm.todos" up="vm.aRefresh()" todosprev2="vm.todosprev"></list-cabinet>
     </div>
 </md-card>
 
