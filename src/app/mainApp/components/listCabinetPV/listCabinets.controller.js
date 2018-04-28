@@ -29,7 +29,7 @@
 
         vm.info = info;
 
-
+        //Todo: pendiente reviar modal sin cerrar.
 
         function info(item) {
             $mdDialog.show({
