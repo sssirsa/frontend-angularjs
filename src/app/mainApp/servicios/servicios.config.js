@@ -223,6 +223,15 @@
                             type: 'link'
                         }
                         ]
+                    },
+                    {
+                        name: 'MAIN.MENU.PREREQUESTS.TITLE',
+                        type: 'dropdown',
+                        children: [{
+                            name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
+                            state: 'triangular.admin-default.PreRequest',
+                            type: 'link'
+                        }]
                     }
                 ]
             }
