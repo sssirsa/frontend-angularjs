@@ -4,30 +4,37 @@
     angular
         .module('app.mainApp.servicios')
         .controller('preRequestDetailController',preRequestDetailController);
-    function preRequestDetailController(preRequests, $stateParams) {
+    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate) {
 
         var vm = this;
         //Listado de Variables
 
         vm.preRequest={};
+        vm.photos=[];
+        vm.images = [];
+        vm.errorMessage='';
+        vm.showCabinet=false;
+        vm.cabinet=[];
+        //listado de constantes
+
+        vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.cabinetNotFound=Translate.translate('PREREQUEST_TRANSLATE.MSG.CABINET_NOT_FOUND');
+        vm.unexpected=Translate.translate('PREREQUEST_TRANSLATE.MSG.UNEXPECTED');
+        vm.creationsuccess=Translate.translate('PREREQUEST_TRANSLATE.MSG.CREATION_SUCCESFULL');
+        vm.cancelationsuccess=Translate.translate('PREREQUEST_TRANSLATE.MSG.CANCELATION_SUCCESFULL');
+        vm.preRequestnotFound=Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND');
+
+
 
         //Listado de funciones
-        vm.images = [
-            {
-                id : 1,
-                url : 'https://sssirsa-mobile-dev-documents.s3.amazonaws.com:443/evidencia/f2cb858e-464.jpg?Signature=XvG2l3OGqh9zdo4YregFg%2BSp3NI%3D&Expires=1524856670&AWSAccessKeyId=AKIAIITVBJH7HAF5W5XA',
-                deletable : true,
-            },
-            {
-                id : 2,
-                thumbUrl : 'https://pixabay.com/static/uploads/photo/2016/04/11/18/53/aviator-1322701__340.jpg',
-                url : 'https://pixabay.com/static/uploads/photo/2016/04/11/18/53/aviator-1322701_960_720.jpg'
-            }
-        ];
-
         vm.getinfo=getinfo;
-        vm.photos=[];
+
+
+
+
         getinfo();
+
 
         function getinfo() {
             var promiseGetInfoPreRequest=preRequests.getByID($stateParams.idPreRequest);
@@ -36,8 +43,24 @@
 
                 console.log(vm.preRequest);
                 conditioninGallery();
+                getinfoCabinet(vm.preRequest.cabinet);
             }).catch(function (errCarga) {
                 console.log(errCarga);
+                toastr.warning(vm.preRequestnotFound, vm.errorTitle);
+
+            });
+
+        }
+        function getinfoCabinet(id){
+            var promiseGetInfoPreRequestCabinet=cabinetPV.getByID(id);
+            promiseGetInfoPreRequestCabinet.then(function(cabinetPrerequest){
+                vm.cabinet.push(cabinetPrerequest);
+                console.log(vm.cabinet);
+                conditioninGallery();
+            }).catch(function (err) {
+                console.log(err);
+                vm.showCabine=false;
+                toastr.warning(vm.cabinetNotFound, vm.errorTitle);
 
             });
 
@@ -53,7 +76,10 @@
                 vm.photos.push(fototmp);
             });
             console.log(vm.photos);
+            toastr.warning(vm.unexpected, vm.errorTitle);
+
         }
+        
 
 
 
