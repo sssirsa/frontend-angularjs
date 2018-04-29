@@ -135,6 +135,15 @@
                 data: {
                     roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
+            })
+            .state('triangular.admin-default.PreRequest', {
+                url: '/prerequest/new',
+                templateUrl: 'app/mainApp/servicios/preRequestA/new-prerequest-cabinet.tmpl.html',
+                controller: 'NewCabinetPrerequestController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['ADMINISTRADOR']
+                }
             });
 
         triMenuProvider.addMenu(
@@ -197,6 +206,15 @@
                         },{
                             name: 'MAIN.MENU.REQUESTS.LIST',
                             state: 'triangular.admin-default.listRequest',
+                            type: 'link'
+                        }]
+                    },
+                    {
+                        name: 'MAIN.MENU.PREREQUESTS.TITLE',
+                        type: 'dropdown',
+                        children: [{
+                            name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
+                            state: 'triangular.admin-default.PreRequest',
                             type: 'link'
                         }]
                     }

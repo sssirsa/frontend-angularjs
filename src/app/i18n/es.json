@@ -12,6 +12,12 @@
             "CREATES_SOLICITUD": "Crear Solicitud",
             "CALENDAR": "Calendario",
             "SERVICES": "Servicios",
+            "PREREQUESTS":{
+                "TITLE": "Pre Solicitudes",
+                "NEWCABINET": "Alta cabinet",
+                "LISTPV": "Cabinets PV",
+                "INFOPV": "Información del cabinet PV"
+            },
             "SERVICEAWAY": "Punto de Venta",
             "IN": "Entradas",
             "OUT": {
@@ -84,8 +90,7 @@
             },
             "REQUESTS": {
                 "TITLE": "Solicitudes",
-                "NEW": "Nueva",
-                "LIST": "Listado"
+                "NEW": "Nueva"
             }
         },
         "COMPONENTS": {
@@ -173,11 +178,27 @@
                     "MULTIPLE_FILES": "Selecciona archivos",
                     "REMOVE":"Eliminar archivo"
                 }
+            },
+            "CABINET":{
+                "TITLE": "Información del cabinet",
+                "TRADEMARK": "Marca",
+                "ECONOMIC": "Económico",
+                "ACTIVE": "Activo",
+                "SERIAL": "Número de serie",
+                "INCIDENCE": "Incidencias",
+                "MODEL": "Modelo",
+                "ANTIQUITY": "Antiguedad",
+                "QR_CODE": "Código QR",
+                "CREATE": "Crear cabinet",
+                "UPDATE": "Actualizar",
+                "SEARCH": "Buscar por económico",
+                "DELETE": "Borrar"
             }
         },
         "LABEL": {
             "REQUIRED": "Campo requerido",
-            "ALFANUMERICONLY": "Solo son aceptados Caractéres Alfanúmericos, espacios y guiones"
+            "ALFANUMERICONLY": "Solo son aceptados Caractéres Alfanúmericos, espacios y guiones",
+            "ALFANUMERIC": "Solo son aceptados Caractéres Alfanúmericos"
         },
         "MSG": {
             "LOADING": "Cargando ...",
@@ -229,7 +250,8 @@
             "CANCEL": "Cancelar",
             "DELETE": "Eliminar",
             "RESTORE": "Restaurar",
-            "CLEAR_FIELDS": "Limpiar campos"
+            "CLEAR_FIELDS": "Limpiar campos",
+            "DOWNLOAD": "Descargar"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",
