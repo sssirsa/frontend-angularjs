@@ -4,7 +4,7 @@
     angular
         .module('app.mainApp.servicios')
         .controller('preRequestDetailController',preRequestDetailController);
-    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate) {
+    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate,Geolocation,Helper) {
 
         var vm = this;
         //Listado de Variables
@@ -29,13 +29,22 @@
 
         //Listado de funciones
         vm.getinfo=getinfo;
-
-
-
-
+        vm.showStoreLocation=showStoreLocation;
         getinfo();
+        //funciones para usar lo de alex
+        vm.aRefresh = aRefresh;
+        //Variables para usar lo de alex
+        vm.todosprev = null;
+        vm.loadingPromise = null;
 
 
+        function aRefresh() {
+            vm.todosprev = null;
+            vm.cabinet = [];
+            getinfoCabinet(vm.preRequest.cabinet);
+
+        }
+//aqui empieza lo mio
         function getinfo() {
             var promiseGetInfoPreRequest=preRequests.getByID($stateParams.idPreRequest);
             promiseGetInfoPreRequest.then(function(elementPreRequest){
@@ -56,10 +65,11 @@
             promiseGetInfoPreRequestCabinet.then(function(cabinetPrerequest){
                 vm.cabinet.push(cabinetPrerequest);
                 console.log(vm.cabinet);
-                conditioninGallery();
+                vm.todosprev = Helper.filterDeleted(vm.cabinet, true);
+                vm.showCabinet=true;
             }).catch(function (err) {
                 console.log(err);
-                vm.showCabine=false;
+                vm.showCabinet=false;
                 toastr.warning(vm.cabinetNotFound, vm.errorTitle);
 
             });
@@ -68,6 +78,7 @@
 
         //vm.photos=vm.preRequest.fotos;
         function conditioninGallery(){
+            if(vm.preRequest.fotos.length>0){
             vm.preRequest.fotos.forEach(function (foto, index) {
                 var fototmp={
                     id:index+1,
@@ -75,11 +86,16 @@
                 };
                 vm.photos.push(fototmp);
             });
+            }
             console.log(vm.photos);
-            toastr.warning(vm.unexpected, vm.errorTitle);
 
         }
-        
+        function showStoreLocation() {
+            Geolocation.locate(vm.preRequest.establecimiento.latitud, vm.preRequest.establecimiento.longitud);
+        }
+
+
+
 
 
 

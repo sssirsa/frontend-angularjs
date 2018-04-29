@@ -79,7 +79,7 @@
 
         function accept() {
             var aux = {
-                economico: vm.info.economico,
+                economico: vm.eco,
                 modelo_id: vm.modelo,
                 activo: vm.info.activo,
                 no_serie: vm.info.no_serie.toUpperCase(),
@@ -87,7 +87,7 @@
                 antiguedad: vm.info.antiguedad.toUpperCase()
             };
 
-            cabinetPV.update(parseInt(vm.info.economico), aux)
+            cabinetPV.update(parseInt(vm.eco), aux)
                 .then(function (res) {
                     $mdDialog.hide();
                 })

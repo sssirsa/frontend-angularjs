@@ -6,6 +6,7 @@
                 <h2>
                     <span>{{vm.preRequest.id}}</span>
                 </h2>
+                <b>Económico: {{vm.preRequest.cabinet}}</b>
                 <h2>
                     <span>{{vm.preRequest.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</span>
                 </h2>
@@ -76,6 +77,36 @@
 
                 </div>
             </div>
+        </div>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}
+            </md-button>
+            <md-button aria-label="cancel" ng-click="vm.cancelPreRequest()" class="md-raised md-warn">
+                <md-icon md-font-icon="zmdi zmdi-close-circle"></md-icon>
+                {{'PREREQUEST_TRANSLATE.CANCEL_PREREQUEST'|translate}}
+            </md-button>
+            <md-button aria-label="send" ng-if="vm.showCabinet" ng-click="vm.createRequest()" class="md-raised md-primary">
+                <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                {{'PREREQUEST_TRANSLATE.CREATE_REQUEST'|translate}}
+            </md-button>
+
+        </md-card-actions>
+    </md-card>
+    <md-card ng-if="!vm.showCabinet">
+        <div>
+            <create-cabinet to-refresh="vm.aRefresh()"></create-cabinet>
+        </div>
+    </md-card>
+    <md-card ng-if="!vm.showCabinet">
+        <div>
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+    </md-card>
+    <md-card ng-if="vm.showCabinet">
+        <div id="list">
+            <list-cabinet todosex="vm.cabinet" up="vm.aRefresh()" todosprev2="vm.todosprev"></list-cabinet>
         </div>
     </md-card>
 </div>

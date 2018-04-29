@@ -12,7 +12,7 @@
     >
         <div>
             <md-autocomplete md-selected-item="$ctrl.cabinet"
-                             md-selected-item-change="$ctrl.selectedItemChange($ctrl.cabinet)"
+                             md-selected-item-change="$ctrl.info($ctrl.cabinet)"
                              md-items="item in $ctrl.querySearch($ctrl.searchText)"
                              md-item-text="item.nombre"
                              md-min-length="0"

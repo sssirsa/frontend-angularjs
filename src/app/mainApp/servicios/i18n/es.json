@@ -402,6 +402,8 @@
         "DATE":"Fecha de Solicitud.",
         "CLIENT_COMMENTS":"Observaciones del Cliente.",
         "PHOTOS":"Evidencias Fotograficas",
+        "CREATE_REQUEST":"Levantar Solicitud",
+        "CANCEL_PREREQUEST":"Cancelar pre solicitud",
         "MSG":{
             "CABINET_NOT_FOUND":"Cabinet No registrado, es necesaria creación de Cabinet",
             "UNEXPECTED":"Error inesperado, intente mas tarde",
