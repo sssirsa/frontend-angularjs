@@ -154,7 +154,20 @@
                     idPreRequest: null
                 }
 
+
+            })
+
+
+            .state('triangular.admin-default.cabinetPV', {
+                url: '/prerequest/new',
+                templateUrl: 'app/mainApp/servicios/cabinetPV/pv-cabinet.tmpl.html',
+                controller: 'NewCabinetPrerequestController',
+                controllerAs: 'vm',
+                data: {
+                    roles: ['ADMINISTRADOR']
+                }
             });
+
 
         triMenuProvider.addMenu(
             {
@@ -220,19 +233,18 @@
                         },{
                             name: 'MAIN.MENU.REQUESTS.PREREQUEST',
                             state: 'triangular.admin-default.preRequest',
+                            permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                             type: 'link'
                         }
                         ]
                     },
                     {
-                        name: 'MAIN.MENU.PREREQUESTS.TITLE',
-                        type: 'dropdown',
-                        children: [{
-                            name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
-                            state: 'triangular.admin-default.PreRequest',
-                            type: 'link'
-                        }]
+                        name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
+                        state: 'triangular.admin-default.cabinetPV',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
                     }
+
                 ]
             }
         );

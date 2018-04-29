@@ -12,6 +12,7 @@
 
         return {
             create: create,
+            getByID:getByID,
             list: list,
             update: update,
             dlete: dlete
@@ -21,6 +22,9 @@
             return urlbase.customPOST(data);
         }
 
+        function getByID(id) {
+            return urlbase.all(id).customGET();
+        }
         function list(){
             return urlbase.getList();
         }

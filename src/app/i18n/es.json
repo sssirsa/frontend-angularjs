@@ -14,7 +14,7 @@
             "SERVICES": "Servicios",
             "PREREQUESTS":{
                 "TITLE": "Pre Solicitudes",
-                "NEWCABINET": "Alta cabinet",
+                "NEWCABINET": "Gestión cabinet PV",
                 "LISTPV": "Cabinets PV",
                 "INFOPV": "Información del cabinet PV"
             },
