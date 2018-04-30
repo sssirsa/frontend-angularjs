@@ -87,7 +87,8 @@
                 <md-icon md-font-icon="zmdi zmdi-close-circle"></md-icon>
                 {{'PREREQUEST_TRANSLATE.CANCEL_PREREQUEST'|translate}}
             </md-button>
-            <md-button aria-label="send" ng-if="vm.showCabinet" ng-click="vm.createRequest()" class="md-raised md-primary">
+            <md-button aria-label="send" ng-if="vm.showCabinet" ng-click="vm.createRequest()"
+                       class="md-raised md-primary">
                 <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
                 {{'PREREQUEST_TRANSLATE.CREATE_REQUEST'|translate}}
             </md-button>
@@ -109,4 +110,10 @@
             <list-cabinet todosex="vm.cabinet" up="vm.aRefresh()" todosprev2="vm.todosprev"></list-cabinet>
         </div>
     </md-card>
+    <div flex="100" full-width layout="row" layout-align="end center" layout-padding="">
+        <md-button class="md-raised md-primary" aria-label="back" ng-click="vm.back()">
+            <md-icon layout-align="center center" md-font-icon="zmdi zmdi-replay"></md-icon
+        </md-button>
+
+    </div>
 </div>

@@ -7,7 +7,6 @@
 
     function preRequests(MobileRestangular, $window, URLS) {
         var baseUrl=MobileRestangular.all(URLS.preRequest);
-        var baseUrlRequestClient=MobileRestangular.all(URLS.requestClient);
         var service = {
             getByID: getByID,
             getAll: getAll,
@@ -25,13 +24,13 @@
         }
 
         function createRequest (element){
-            return baseUrlRequestClient.post(element);
+            return baseUrl.all('solicitud').post(element);
         }
         function create (element){
             return baseUrl.post(element);
         }
-        function update (element){
-            return baseUrl.all(element.id).put(element);
+        function update(element) {
+            return baseUrl.all(element.id).customPUT(element);
         }
 
         return service;
