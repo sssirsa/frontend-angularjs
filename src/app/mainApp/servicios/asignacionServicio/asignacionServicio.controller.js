@@ -38,6 +38,7 @@
 
         function listSalePoints() {
             if (vm.selectedKind) {
+                vm.salePoints = null;
                 switch (vm.selectedKind) {
                     case 'pending':
                         vm.loadingPromise = SalePoint.listUnasignedServices()
