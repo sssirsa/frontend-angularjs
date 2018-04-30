@@ -191,9 +191,9 @@
                     {{'MAIN.COMPONENTS.STORE_MANAGER.CREDENTIAL'|translate}}
                 </md-button>
 
-                <md-button aria-label="pdf" ng-click="$ctrl.showPDF()" class="md-raised md-primary">
+                <md-button ng-click="$ctrl.showPDF()" class="md-primary md-raised">
                     <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
-                    {{'MAIN.COMPONENTS.STORE_MANAGER.PDF'|translate}}
+                    <a href="{{$ctrl.urlArchivo}}" download="{{$ctrl.no_cliente}}.pdf" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
                 </md-button>
                 <!--Aquí termina lo que agrego Alex-->
 

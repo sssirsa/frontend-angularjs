@@ -30,6 +30,8 @@
         //Variable declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.store = null;
+        vm.urlArchivo = null;
+        vm.no_cliente = null;
 
         //Function Parsing
         vm.searchStore = searchStore;
@@ -148,15 +150,21 @@
                 }
             })
                 .then(function () {
-                    //vm.toRefresh();
                 })
                 .catch(function(){
-                    //vm.toRefresh();
                 });
         }
 
         function showPDF() {
-            console.log("PDF");
+            vm.no_cliente = angular.copy(vm.store.no_cliente);
+            vm.urlPDF = Stores.getPDF(vm.no_cliente)
+                .then(function (res) {
+                    console.log("res", res);
+                    vm.urlArchivo = res;
+                })
+                .catch(function (err) {
+                    console.log("err", err);
+                })
         }
 
     }

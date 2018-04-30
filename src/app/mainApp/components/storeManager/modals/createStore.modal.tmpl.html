@@ -28,7 +28,23 @@
                         md-maxlength="50"
                         ng-model="vm.store.nombre_establecimiento"/>
                 </md-input-container>
-                <md-input-container flex class="md-block">
+
+                <md-input-container flex class="md-block" cg-busy="{promise:vm.storeSegmentation, message:'Cargando segmentaciones...'}">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
+                    <md-select
+                        ng-model="vm.segmentationSelect"
+                        required
+                    >
+                        <md-option
+                            ng-repeat="segmentation in vm.storeSegmentation"
+                            ng-value="segmentation.id"
+                        >
+                            {{segmentation.nombre}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <!--<md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
                     <md-select
                         name="segmentacion"
@@ -41,7 +57,7 @@
                             {{segment.label}}
                         </md-option>
                     </md-select>
-                </md-input-container>
+                </md-input-container>-->
             </div>
             <div flex
                  layout="column"

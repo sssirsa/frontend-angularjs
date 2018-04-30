@@ -481,7 +481,8 @@
             massive:{
                 store:'massive/store'
             },
-            segmentation: 'segmentacion'
+            segmentation: 'segmentacion',
+            credentials: 'credenciales'
         })
         .constant('QUERIES', {
             store: {
