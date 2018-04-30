@@ -29,8 +29,8 @@
         function create (element){
             return baseUrl.post(element);
         }
-        function update (element){
-            return baseUrl.all(element.id).put(element);
+        function update(element) {
+            return baseUrl.all(element.id).customPUT(element);
         }
 
         return service;

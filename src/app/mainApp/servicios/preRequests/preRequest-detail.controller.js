@@ -17,8 +17,8 @@
         vm.cabinet=[];
         vm.request={
             id: "",
-            cabinet: "",
-        }
+            cabinet: ""
+        };
         //listado de constantes
 
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
@@ -59,7 +59,7 @@
             promiseGetInfoPreRequest.then(function(elementPreRequest){
                 vm.preRequest=elementPreRequest;
 
-                console.log(vm.preRequest);
+                //console.log(vm.preRequest);
                 conditioninGallery();
                 getinfoCabinet(vm.preRequest.cabinet);
             }).catch(function (errCarga) {
@@ -73,7 +73,7 @@
             var promiseGetInfoPreRequestCabinet=cabinetPV.getByID(id);
             promiseGetInfoPreRequestCabinet.then(function(cabinetPrerequest){
                 vm.cabinet.push(cabinetPrerequest);
-                console.log(vm.cabinet);
+               // console.log(vm.cabinet);
                 vm.todosprev = Helper.filterDeleted(vm.cabinet, true);
                 vm.showCabinet=true;
             }).catch(function (err) {
@@ -96,7 +96,7 @@
                 vm.photos.push(fototmp);
             });
             }
-            console.log(vm.photos);
+            //console.log(vm.photos);
 
         }
         function showStoreLocation() {
@@ -109,7 +109,7 @@
             var promiseCreateRequest=preRequests.createRequest(vm.request);
             promiseCreateRequest.then(function (requestCreada) {
                 toastr.success(vm.creationsuccess, vm.successTitle);
-                console.log(requestCreada);
+              //  console.log(requestCreada);
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
@@ -120,6 +120,20 @@
 
         }
         function cancelPreRequest(){
+            vm.preRequest.cancelacion=true;
+            vm.preRequest.establecimiento_id=vm.preRequest.establecimiento.no_cliente;
+            var prereqSinFoto=_.omit(vm.preRequest,'fotos');
+            console.log(JSON.stringify(vm.preRequest));
+            var promiseCancelPreRequest=preRequests.update(prereqSinFoto);
+            promiseCancelPreRequest.then(function (requestCancel) {
+                toastr.success(vm.cancelationsuccess, vm.successTitle);
+               // console.log(requestCancel);
+                $state.go('triangular.admin-default.preRequest');
+
+            }).catch(function (err) {
+                toastr.warning(vm.unexpected, vm.errorTitle);
+                console.log(err);
+            });
 
         }
 
