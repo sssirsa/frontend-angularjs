@@ -66,7 +66,7 @@
             var cabinetCreated = null;
             var aux = {
                 economico: vm.economico,
-                modelo_id: parseInt(vm.modelo_id),
+                modelo_id: vm.modelo_id,
                 no_serie: vm.no_serie.toUpperCase(),
                 antiguedad: vm.antiguedad.toUpperCase()
             }
