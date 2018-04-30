@@ -34,6 +34,9 @@
         vm.selectedTab = 0;
         vm.stores = null;
 
+        vm.estado_nombre = null;
+        vm.municipio_nombre = null;
+
         //Functions
         vm.accept = accept;
         vm.cancel = cancel;
@@ -54,7 +57,15 @@
 
         function accept() {
             vm.store.localidad_id = vm.locality.id;
-            vm.loadingPromise = Stores.create(vm.store)
+            vm.store.localidad_nombre = vm.locality.nombre;
+            vm.store.estado_nombre = vm.estado_nombre;
+            vm.store.municipio_nombre = vm.municipio_nombre;
+            vm.store.segmentacion_id = vm.segmentationSelect;
+            vm.store.localidad_cp = vm.locality.codigo_postal;
+
+            console.log("vm.store", vm.store);
+
+            /*vm.loadingPromise = Stores.create(vm.store)
                 .then(function(createdStore){
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
@@ -62,7 +73,7 @@
                 .catch(function(errorCreateStore){
                     $log.error(errorCreateStore);
                     toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_ERROR'));
-                });
+                });*/
         }
 
         function cancel() {
@@ -88,6 +99,12 @@
                 vm.loadingCities = Cities.getByState(state)
                     .then(function (citiesList) {
                         vm.cities = _.sortBy(Helper.filterDeleted(citiesList, true), 'nombre');
+
+                        angular.forEach(vm.states, function (stado) {
+                            if(stado.id == state){
+                                vm.estado_nombre = stado.nombre;
+                            }
+                        });
                     })
                     .catch(function (citiesListError) {
                         $log.error(citiesListError);
@@ -109,6 +126,12 @@
                 vm.loadingLocalities = Localities.getByCity(city)
                     .then(function (localitiesList) {
                         vm.localities = _.sortBy(Helper.filterDeleted(localitiesList, true), 'nombre');
+
+                        angular.forEach(vm.cities, function (ciudad) {
+                            if(ciudad.id == city){
+                                vm.municipio_nombre = ciudad.nombre;
+                            }
+                        });
                     })
                     .catch(function (localitiesListError) {
                         $log.error(localitiesListError);

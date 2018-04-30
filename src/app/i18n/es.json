@@ -129,7 +129,8 @@
                     "LOCALITY": "Localidad",
                     "ZIP_CODE": "Código postal",
                     "SEGMENTATION": "Segmentación",
-                    "ECONOMIC": "Económico"
+                    "ECONOMIC": "Económico",
+                    "CLIENT": "Número de cliente"
                 },
                 "MODALS": {
                     "SEARCH": {

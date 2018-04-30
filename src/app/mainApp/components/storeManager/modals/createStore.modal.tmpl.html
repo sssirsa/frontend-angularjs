@@ -16,6 +16,21 @@
     >
         <form
             name="storeFrom">
+
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CLIENT</label>
+                    <input
+                        name="numero_cliente"
+                        required
+                        maxlength="20"
+                        ng-model="vm.store.no_cliente"/>
+                </md-input-container>
+            </div>
+
             <div flex
                  layout="column"
                  layout-gt-sm="row"
@@ -25,7 +40,7 @@
                     <input
                         name="nombre_establecimiento"
                         required
-                        md-maxlength="50"
+                        maxlength="50"
                         ng-model="vm.store.nombre_establecimiento"/>
                 </md-input-container>
 
@@ -43,21 +58,6 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-
-                <!--<md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
-                    <md-select
-                        name="segmentacion"
-                        required
-                        ng-model="vm.store.segmentacion">
-                        <md-option
-                            ng-repeat="segment in vm.storeSegmentation"
-                            class="{{segment.class}}"
-                            ng-value="segment.value">
-                            {{segment.label}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>-->
             </div>
             <div flex
                  layout="column"
@@ -68,7 +68,7 @@
                     <input
                         name="nombre_encargado"
                         required
-                        md-maxlength="50"
+                        maxlength="50"
                         ng-model="vm.store.nombre_encargado"/>
                 </md-input-container>
                 <md-input-container flex class="md-block">
@@ -77,7 +77,7 @@
                         name="telefono_encargado"
                         required
                         digits-only
-                        md-maxlength="10"
+                        maxlength="10"
                         ng-model="vm.store.telefono_encargado"/>
                 </md-input-container>
             </div>
@@ -90,7 +90,7 @@
                     <input
                         name="calle"
                         required
-                        md-maxlength="50"
+                        maxlength="50"
                         ng-model="vm.store.calle"/>
                 </md-input-container>
                 <md-input-container flex class="md-block">
@@ -98,7 +98,7 @@
                     <input
                         name="numero"
                         required
-                        md-maxlength="10"
+                        maxlength="10"
                         ng-model="vm.store.numero"/>
                 </md-input-container>
             </div>
@@ -111,7 +111,7 @@
                     <input
                         name="entre_calle_1"
                         required
-                        md-maxlength="50"
+                        maxlength="50"
                         ng-model="vm.store.entre_calle1"/>
                 </md-input-container>
                 <md-input-container flex class="md-block">
@@ -119,7 +119,7 @@
                     <input
                         name="entre_calle_2"
                         required
-                        md-maxlength="50"
+                        maxlength="50"
                         ng-model="vm.store.entre_calle2"/>
                 </md-input-container>
             </div>
@@ -136,7 +136,7 @@
                     >
                         <md-option
                             ng-repeat="state in vm.states"
-                            ng-value="{{state.id}}"
+                            ng-value="state.id"
                         >
                             {{state.nombre}}
                         </md-option>
@@ -234,8 +234,8 @@
                 ng-disabled="storeFrom.$invalid"
                 ng-click="vm.accept()"
                 class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-search"></md-icon>
-                {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.BUTTON'|translate}}
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.CREATE'|translate}}
             </md-button>
         </md-actions>
     </md-content>
