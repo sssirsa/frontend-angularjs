@@ -1,21 +1,22 @@
-(function(){
+(function () {
     'use strict';
 
     angular
         .module('app.mainApp.servicios')
-        .controller('preRequestDetailController',preRequestDetailController);
-    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate,Geolocation,Helper,$state) {
+        .controller('preRequestDetailController', preRequestDetailController);
+
+    function preRequestDetailController(preRequests, $stateParams, cabinetPV, toastr, Translate, Geolocation, Helper, $state) {
 
         var vm = this;
         //Listado de Variables
 
-        vm.preRequest={};
-        vm.photos=[];
+        vm.preRequest = {};
+        vm.photos = [];
         vm.images = [];
-        vm.errorMessage='';
-        vm.showCabinet=false;
-        vm.cabinet=[];
-        vm.request={
+        vm.errorMessage = '';
+        vm.showCabinet = false;
+        vm.cabinet = [];
+        vm.request = {
             id: "",
             cabinet: ""
         };
@@ -23,19 +24,19 @@
 
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-        vm.cabinetNotFound=Translate.translate('PREREQUEST_TRANSLATE.MSG.CABINET_NOT_FOUND');
-        vm.unexpected=Translate.translate('PREREQUEST_TRANSLATE.MSG.UNEXPECTED');
-        vm.creationsuccess=Translate.translate('PREREQUEST_TRANSLATE.MSG.CREATION_SUCCESFULL');
-        vm.cancelationsuccess=Translate.translate('PREREQUEST_TRANSLATE.MSG.CANCELATION_SUCCESFULL');
-        vm.preRequestnotFound=Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND');
-
+        vm.cabinetNotFound = Translate.translate('PREREQUEST_TRANSLATE.MSG.CABINET_NOT_FOUND');
+        vm.unexpected = Translate.translate('PREREQUEST_TRANSLATE.MSG.UNEXPECTED');
+        vm.creationsuccess = Translate.translate('PREREQUEST_TRANSLATE.MSG.CREATION_SUCCESFULL');
+        vm.cancelationsuccess = Translate.translate('PREREQUEST_TRANSLATE.MSG.CANCELATION_SUCCESFULL');
+        vm.preRequestnotFound = Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND');
 
 
         //Listado de funciones
-        vm.getinfo=getinfo;
-        vm.showStoreLocation=showStoreLocation;
-        vm.cancelPreRequest=cancelPreRequest;
-        vm.createRequest=createRequest;
+        vm.getinfo = getinfo;
+        vm.showStoreLocation = showStoreLocation;
+        vm.cancelPreRequest = cancelPreRequest;
+        vm.createRequest = createRequest;
+        vm.back = back;
 
 
         getinfo();
@@ -49,15 +50,15 @@
         function aRefresh() {
             vm.todosprev = null;
             vm.cabinet = [];
-            vm.showCabinet=false;
+            vm.showCabinet = false;
             getinfoCabinet(vm.preRequest.cabinet);
 
         }
 
         function getinfo() {
-            var promiseGetInfoPreRequest=preRequests.getByID($stateParams.idPreRequest);
-            promiseGetInfoPreRequest.then(function(elementPreRequest){
-                vm.preRequest=elementPreRequest;
+            var promiseGetInfoPreRequest = preRequests.getByID($stateParams.idPreRequest);
+            promiseGetInfoPreRequest.then(function (elementPreRequest) {
+                vm.preRequest = elementPreRequest;
 
                 //console.log(vm.preRequest);
                 conditioninGallery();
@@ -69,16 +70,17 @@
             });
 
         }
-        function getinfoCabinet(id){
-            var promiseGetInfoPreRequestCabinet=cabinetPV.getByID(id);
-            promiseGetInfoPreRequestCabinet.then(function(cabinetPrerequest){
+
+        function getinfoCabinet(id) {
+            var promiseGetInfoPreRequestCabinet = cabinetPV.getByID(id);
+            promiseGetInfoPreRequestCabinet.then(function (cabinetPrerequest) {
                 vm.cabinet.push(cabinetPrerequest);
-               // console.log(vm.cabinet);
+                // console.log(vm.cabinet);
                 vm.todosprev = Helper.filterDeleted(vm.cabinet, true);
-                vm.showCabinet=true;
+                vm.showCabinet = true;
             }).catch(function (err) {
                 console.log(err);
-                vm.showCabinet=false;
+                vm.showCabinet = false;
                 toastr.warning(vm.cabinetNotFound, vm.errorTitle);
 
             });
@@ -86,30 +88,32 @@
         }
 
         //vm.photos=vm.preRequest.fotos;
-        function conditioninGallery(){
-            if(vm.preRequest.fotos.length>0){
-            vm.preRequest.fotos.forEach(function (foto, index) {
-                var fototmp={
-                    id:index+1,
-                    url:foto.foto
-                };
-                vm.photos.push(fototmp);
-            });
+        function conditioninGallery() {
+            if (vm.preRequest.fotos.length > 0) {
+                vm.preRequest.fotos.forEach(function (foto, index) {
+                    var fototmp = {
+                        id: index + 1,
+                        url: foto.foto
+                    };
+                    vm.photos.push(fototmp);
+                });
             }
             //console.log(vm.photos);
 
         }
+
         function showStoreLocation() {
             Geolocation.locate(vm.preRequest.establecimiento.latitud, vm.preRequest.establecimiento.longitud);
         }
-        function createRequest(){
 
-            vm.request.id=vm.preRequest.id;
-            vm.request.cabinet=vm.preRequest.cabinet;
-            var promiseCreateRequest=preRequests.createRequest(vm.request);
+        function createRequest() {
+
+            vm.request.id = vm.preRequest.id;
+            vm.request.cabinet = vm.preRequest.cabinet;
+            var promiseCreateRequest = preRequests.createRequest(vm.request);
             promiseCreateRequest.then(function (requestCreada) {
                 toastr.success(vm.creationsuccess, vm.successTitle);
-              //  console.log(requestCreada);
+                //  console.log(requestCreada);
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
@@ -119,15 +123,16 @@
 
 
         }
-        function cancelPreRequest(){
-            vm.preRequest.cancelacion=true;
-            vm.preRequest.establecimiento_id=vm.preRequest.establecimiento.no_cliente;
-            var prereqSinFoto=_.omit(vm.preRequest,'fotos');
+
+        function cancelPreRequest() {
+            vm.preRequest.cancelacion = true;
+            vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
+            var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
             console.log(JSON.stringify(vm.preRequest));
-            var promiseCancelPreRequest=preRequests.update(prereqSinFoto);
+            var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
             promiseCancelPreRequest.then(function (requestCancel) {
                 toastr.success(vm.cancelationsuccess, vm.successTitle);
-               // console.log(requestCancel);
+                // console.log(requestCancel);
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
@@ -137,10 +142,9 @@
 
         }
 
-
-
-
-
+        function back() {
+            $state.go('triangular.admin-default.preRequest');
+        }
 
 
     }
