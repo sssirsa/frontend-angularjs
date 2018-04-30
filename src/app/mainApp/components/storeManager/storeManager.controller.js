@@ -38,6 +38,10 @@
         vm.deleteStore = deleteStore;
         vm.showStoreLocation = showStoreLocation;
 
+        //edit by Alex
+        vm.showCredential = showCredential;
+        vm.showPDF = showPDF;
+
 
         function searchStore() {
             $mdDialog.show({
@@ -127,6 +131,32 @@
 
         function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
+        }
+
+        function showCredential() {
+            var credential = angular.copy(vm.store.qr_code);
+            console.log("credencial", vm.credential);
+            $mdDialog.show({
+                controller: 'credentialStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/credentialStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    data: credential
+                }
+            })
+                .then(function () {
+                    //vm.toRefresh();
+                })
+                .catch(function(){
+                    //vm.toRefresh();
+                });
+        }
+
+        function showPDF() {
+            console.log("PDF");
         }
 
     }

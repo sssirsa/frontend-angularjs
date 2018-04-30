@@ -112,6 +112,8 @@
                     "TEMPLATE": "Plantilla"
                 },
                 "GEOLOCATION": "Geolocalizar",
+                "CREDENTIAL": "Credencial",
+                "PDF": "PDF Establecimiento",
                 "LABELS": {
                     "LATITUDE": "Latidud",
                     "LONGITUDE": "Longitud",
