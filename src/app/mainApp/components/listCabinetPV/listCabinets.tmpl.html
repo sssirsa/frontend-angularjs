@@ -10,23 +10,16 @@
         layout-align="center stretch"
         layout-padding
     >
-        <div>
-            <md-autocomplete md-selected-item="$ctrl.cabinet"
-                             md-selected-item-change="$ctrl.selectedItemChange($ctrl.cabinet)"
-                             md-items="item in $ctrl.querySearch($ctrl.searchText)"
-                             md-item-text="item.nombre"
-                             md-min-length="0"
-                             md-search-text-change="$ctrl.search($ctrl.searchText)"
-                             md-search-text="$ctrl.searchText"
-                             md-menu-class="autocomplete-custom-template"
-                             md-floating-label="{{'MAIN.COMPONENTS.CABINET.SEARCH'| translate }}">
-                <md-item-template>
-                        <span class="item-title">
-                            <span>&nbsp;{{item.economico}}</span>
-                        </span>
-                </md-item-template>
-                <md-not-found><span translate="SEGMENTATION.ERRORS.NOT_FOUND"></span></md-not-found>
-            </md-autocomplete>
+
+        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="$ctrl.todos.length>1">
+            <md-input-container
+                flex="80"
+                class="md-block">
+                <input
+                    placeholder="Búsqueda por economico"
+                    ng-model="$ctrl.searchText">
+            </md-input-container>
+
         </div>
 
         <div>

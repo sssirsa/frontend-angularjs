@@ -63,7 +63,6 @@
 
                         vm.todos.push(cabinetPreview);
                     });
-                    console.log("vm.todos", vm.todos);
                 })
                 .catch(function (err) {
 

@@ -467,6 +467,8 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
+            preRequest:'pre_solicitud',
+            requestClient:'technical_request',
             establecimiento: 'establecimiento',
             establecimiento_template:'https://goo.gl/kAQrxt',
             sucursal: 'sucursal',

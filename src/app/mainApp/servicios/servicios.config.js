@@ -95,15 +95,15 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.serviceAssignDetail', {
-                url:'/detalleServicio/:id',
+                url: '/detalleServicio/:id',
                 data: {
                     roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
-                controller:'detalleAsignacionController',
-                controllerAs:'vm',
-                params:{
-                    id:null
+                controller: 'detalleAsignacionController',
+                controllerAs: 'vm',
+                params: {
+                    id: null
                 }
             })
             .state('triangular.admin-default.newRequest', {
@@ -129,22 +129,45 @@
                 templateUrl: 'app/mainApp/servicios/solicitudes/detail/detail-request-page.tmpl.html',
                 controller: 'DetailRequestPageController',
                 controllerAs: 'vm',
-                params:{
-                    id:null
+                params: {
+                    id: null
                 },
                 data: {
                     roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                 }
             })
-            .state('triangular.admin-default.PreRequest', {
+
+            .state('triangular.admin-default.preRequest', {
+                url: '/prerequest/list',
+                templateUrl: 'app/mainApp/servicios/preRequests/preRequest.tmpl.html',
+                controller: 'preRequestListController',
+                controllerAs: 'vm'
+
+            })
+
+            .state('triangular.admin-default.preRequestDetail', {
+                url: '/prerequest-detail:idPreRequest/',
+                templateUrl: 'app/mainApp/servicios/preRequests/preRequest-detail.tmpl.html',
+                controller: 'preRequestDetailController',
+                controllerAs: 'vm',
+                params: {
+                    idPreRequest: null
+                }
+
+
+            })
+
+
+            .state('triangular.admin-default.cabinetPV', {
                 url: '/prerequest/new',
-                templateUrl: 'app/mainApp/servicios/preRequestA/new-prerequest-cabinet.tmpl.html',
+                templateUrl: 'app/mainApp/servicios/cabinetPV/pv-cabinet.tmpl.html',
                 controller: 'NewCabinetPrerequestController',
                 controllerAs: 'vm',
                 data: {
                     roles: ['ADMINISTRADOR']
                 }
             });
+
 
         triMenuProvider.addMenu(
             {
@@ -192,7 +215,7 @@
                     },
                     {
                         name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
-                        state:'triangular.admin-default.serviceAssing',
+                        state: 'triangular.admin-default.serviceAssing',
                         permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
                         type: 'link'
                     },
@@ -203,21 +226,25 @@
                             name: 'MAIN.MENU.REQUESTS.NEW',
                             state: 'triangular.admin-default.newRequest',
                             type: 'link'
-                        },{
+                        }, {
                             name: 'MAIN.MENU.REQUESTS.LIST',
                             state: 'triangular.admin-default.listRequest',
                             type: 'link'
-                        }]
+                        },{
+                            name: 'MAIN.MENU.REQUESTS.PREREQUEST',
+                            state: 'triangular.admin-default.preRequest',
+                            permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                            type: 'link'
+                        }
+                        ]
                     },
                     {
-                        name: 'MAIN.MENU.PREREQUESTS.TITLE',
-                        type: 'dropdown',
-                        children: [{
-                            name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
-                            state: 'triangular.admin-default.PreRequest',
-                            type: 'link'
-                        }]
+                        name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
+                        state: 'triangular.admin-default.cabinetPV',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
                     }
+
                 ]
             }
         );
