@@ -14,6 +14,7 @@
         <md-card layout="column" layout-align="center center" layout-padding
                  cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
 
+            <form name="modalFormAssigned">
 
             <md-content>
                 <div>
@@ -72,14 +73,22 @@
                         <label>Hora inicio</label>
                         <input type="time"
                                ng-model="vm.horainicio"
-                               placeholder="HH:mm:ss" min="{{vm.horamin}}" max="{{vm.horamax}}" required />
+                               placeholder="HH:mm:ss"
+                               min="{{vm.horamin}}"
+                               max="{{vm.horamax}}"
+                               required />
+                        <span>hora minima: {{vm.horamin}}</span>
                     </md-input-container>
 
                     <md-input-container>
                         <label>Hora fin</label>
                         <input type="time"
                                ng-model="vm.horafin"
-                               placeholder="HH:mm:ss" min="{{vm.horamin}}" max="{{vm.horamax}}" required />
+                               placeholder="HH:mm:ss"
+                               min="{{vm.horamin}}"
+                               max="{{vm.horamax}}"
+                               required />
+                        <span>hora maxima: {{vm.horamax}}</span>
                     </md-input-container>
                 </div>
             </md-content>
@@ -93,11 +102,13 @@
                      layout-align-xs="start stretch">
                     <md-button
                         aria-label="assign" ng-click="vm.assign()"
-                        class="md-raised md-primary">
+                        class="md-raised md-primary" ng-disabled="modalFormAssigned.$invalid">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                     </md-button>
                 </div>
             </md-content>
+
+            </form>
         </md-card>
     </div>
 </md-dialog>
