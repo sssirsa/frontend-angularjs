@@ -87,12 +87,12 @@
                 antiguedad: vm.info.antiguedad.toUpperCase()
             };
 
-            cabinetPV.update(parseInt(vm.eco), aux)
+            cabinetPV.update(vm.eco, aux)
                 .then(function (res) {
                     $mdDialog.hide();
                 })
                 .catch(function (err) {
-
+                    $mdDialog.hide();
                 });
         }
 

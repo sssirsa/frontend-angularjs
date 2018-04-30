@@ -24,14 +24,16 @@
         vm.todos = vm.todosex;
         vm.loadingPromise = null;
         vm.toModel = null;
+        vm.searchText = '';
 
         //functions
 
         vm.info = info;
 
-        //Todo: pendiente reviar modal sin cerrar.
-
         function info(item) {
+            //vm.toModel = item.clone();
+
+            vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'cabinetPVController',
                 controllerAs: 'vm',
@@ -40,7 +42,7 @@
                 clickOutsideToClose: true,
                 focusOnOpen: true,
                 locals:{
-                    data: item
+                    data: vm.toModel
                 }
             })
                 .then(function () {
@@ -52,36 +54,6 @@
 
                 });
         }
-
-
-
-        vm.searchText = '';
-        vm.search_items = [];
-
-
-        vm.lookup = lookup;
-        vm.selectedItemChange = selectedItemChange;
-        vm.querySearch = querySearch;
-
-        function querySearch(query) {
-            var results = query ? lookup(query) : vm.lineas;
-            return results;
-
-        }
-
-        function lookup(search_text) {
-            vm.search_items = _.filter(vm.todos, function (item) {
-                return item.economico.indexOf(search_text) >= 0;
-            });
-            return vm.search_items;
-        }
-
-        function selectedItemChange(item)
-        {
-            vm.toModel = angular.copy(item);
-            info(vm.toModel);
-        }
-
     }
 
     function custom() {
@@ -91,10 +63,11 @@
             }
 
             return _.filter(input, function (item) {
-                return item.economico.indexOf(text) >= 0;
+                return item.economico.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });
 
         };
     }
+
 
 })();

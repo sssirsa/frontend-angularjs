@@ -184,6 +184,19 @@
                  layout-gt-sm="row"
                  layout-align="start stretch"
             >
+
+                <!--Aquí empieza lo que agrego Alex-->
+                <md-button aria-label="credencial" ng-click="$ctrl.showCredential()" class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-clone"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.CREDENTIAL'|translate}}
+                </md-button>
+
+                <md-button aria-label="pdf" ng-click="$ctrl.showPDF()" class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.PDF'|translate}}
+                </md-button>
+                <!--Aquí termina lo que agrego Alex-->
+
                 <md-button aria-label="geolocate" ng-click="$ctrl.showStoreLocation()" class="md-raised md-primary">
                     <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
                     {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}

@@ -4,12 +4,12 @@
     </div>
 </md-card>
 
-<md-card ng-if="vm.todosprev.length==0">
+<md-card ng-if="!vm.todosprev">
     <div>
         <md-progress-linear md-mode="indeterminate"></md-progress-linear>
     </div>
 </md-card>
-<md-card ng-if="vm.todosprev.length>0">
+<md-card ng-if="vm.todosprev.length">
     <div id="list">
         <list-cabinet todosex="vm.todos" up="vm.aRefresh()" todosprev2="vm.todosprev"></list-cabinet>
     </div>
