@@ -142,7 +142,15 @@
         }
 
         function assign() {
-            prepareObjectSend();
+
+            if (prepareObjectSend()){
+                //todo: cambiar mensaje por translate
+                toastr.error(
+                    'La hora inicio debe ser menor a la hora fin',
+                    Translate.translate('MAIN.MSG.ERROR_TITLE')
+                );
+                return;
+            }
 
             console.log('asignedPerson: ', vm.toAsigned);
 
@@ -157,10 +165,22 @@
                 })
                 .catch(function (error) {
                     console.log(error);
-                    toastr.error(
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                        Translate.translate('MAIN.MSG.ERROR_TITLE')
-                    );
+                    if(error.status == 500) {
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                            Translate.translate('MAIN.MSG.ERROR_TITLE')
+                        );
+                    }
+                    else{
+                        angular.forEach(error.data.message, function (item) {
+                            var t = 'ERRORS.' + item;
+                            toastr.error(
+                                Translate.translate(t),
+                                Translate.translate('MAIN.MSG.ERROR_TITLE')
+                            );
+                        });
+                    }
+
                 });
         }
 
@@ -169,6 +189,10 @@
             var hora2Num = vm.horafin.getHours();
             var min1Num = vm.horainicio.getMinutes();
             var min2Num = vm.horafin.getMinutes();
+
+            if(vm.horainicio>=vm.horafin){
+                return true;
+            }
 
             var hora1 = hora1Num < 10 ? '0' + hora1Num.toString() : hora1Num.toString();
             var hora2 = hora2Num < 10 ? '0' + hora2Num.toString() : hora2Num.toString();
@@ -181,6 +205,8 @@
             vm.toAsigned.hora_inicio = hora1+':'+min1+':00';
             vm.toAsigned.hora_fin = hora2+':'+min2+':00';
             vm.toAsigned.persona = vm.assignedPerson.id;
+
+            return false;
         }
 
         function setLimitHours(){
