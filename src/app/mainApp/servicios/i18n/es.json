@@ -354,7 +354,10 @@
                 "STORE": "Establecimiento",
                 "MUN": "Municipio",
                 "LOCAL": "Localidad",
-                "CP": "Código Postal"
+                "CP": "Código Postal",
+                "HOURATEND": "Horarios de atencion",
+                "HOURSTART": "Hora inicial",
+                "HOUREND": "Hora final"
             }
         },
         "ASSIGN_DETAIL": {
