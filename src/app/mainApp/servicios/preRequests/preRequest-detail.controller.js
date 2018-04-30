@@ -4,7 +4,7 @@
     angular
         .module('app.mainApp.servicios')
         .controller('preRequestDetailController',preRequestDetailController);
-    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate,Geolocation,Helper) {
+    function preRequestDetailController(preRequests, $stateParams,cabinetPV,toastr,Translate,Geolocation,Helper,$state) {
 
         var vm = this;
         //Listado de Variables
@@ -15,6 +15,10 @@
         vm.errorMessage='';
         vm.showCabinet=false;
         vm.cabinet=[];
+        vm.request={
+            id: "",
+            cabinet: "",
+        }
         //listado de constantes
 
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
@@ -30,6 +34,10 @@
         //Listado de funciones
         vm.getinfo=getinfo;
         vm.showStoreLocation=showStoreLocation;
+        vm.cancelPreRequest=cancelPreRequest;
+        vm.createRequest=createRequest;
+
+
         getinfo();
         //funciones para usar lo de alex
         vm.aRefresh = aRefresh;
@@ -41,10 +49,11 @@
         function aRefresh() {
             vm.todosprev = null;
             vm.cabinet = [];
+            vm.showCabinet=false;
             getinfoCabinet(vm.preRequest.cabinet);
 
         }
-//aqui empieza lo mio
+
         function getinfo() {
             var promiseGetInfoPreRequest=preRequests.getByID($stateParams.idPreRequest);
             promiseGetInfoPreRequest.then(function(elementPreRequest){
@@ -92,6 +101,26 @@
         }
         function showStoreLocation() {
             Geolocation.locate(vm.preRequest.establecimiento.latitud, vm.preRequest.establecimiento.longitud);
+        }
+        function createRequest(){
+
+            vm.request.id=vm.preRequest.id;
+            vm.request.cabinet=vm.preRequest.cabinet;
+            var promiseCreateRequest=preRequests.createRequest(vm.request);
+            promiseCreateRequest.then(function (requestCreada) {
+                toastr.success(vm.creationsuccess, vm.successTitle);
+                console.log(requestCreada);
+                $state.go('triangular.admin-default.preRequest');
+
+            }).catch(function (err) {
+                toastr.warning(vm.unexpected, vm.errorTitle);
+                console.log(err);
+            });
+
+
+        }
+        function cancelPreRequest(){
+
         }
 
 
