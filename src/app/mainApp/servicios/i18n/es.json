@@ -364,7 +364,7 @@
             "TITLE": "Detalle de Servicio",
             "STORE": "Establecimiento",
             "REQUEST": "Solicitud",
-            "PERSON": "Persona",
+            "PERSON": "Asigna persona",
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
             "REQUESTED_CABINETS":"Cabinets solicitados",

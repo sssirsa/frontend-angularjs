@@ -4,7 +4,7 @@
         .controller('detalleAsignacionController', detalleAsignacionController);
 
     function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate,
-                                         Persona_Admin, $state) {
+                                         Persona_Admin, $mdDialog) {
         var vm = this;
 
         //Variables
@@ -123,20 +123,36 @@
         }
 
         function assign() {
-            SalePoint.assignToPerson(vm.assignedPerson.id, vm.salePoint.folio)
-                .then(function () {
-                    toastr.success(
-                        Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
-                        Translate.translate('MAIN.MSG.SUCCESS_TITLE')
-                    );
-                    $state.go('triangular.admin-default.serviceAssing');
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    toastr.error(
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                        Translate.translate('MAIN.MSG.ERROR_TITLE')
-                    );
+            // SalePoint.assignToPerson(vm.assignedPerson.id, vm.salePoint.folio)
+            //     .then(function () {
+            //         toastr.success(
+            //             Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
+            //             Translate.translate('MAIN.MSG.SUCCESS_TITLE')
+            //         );
+            //         $state.go('triangular.admin-default.serviceAssing');
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //         toastr.error(
+            //             Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+            //             Translate.translate('MAIN.MSG.ERROR_TITLE')
+            //         );
+            //     });
+
+            console.log(vm.salePoint);
+            $mdDialog.show({
+                controller: 'dialogAsignacionTecnicoController',
+                templateUrl: 'app/mainApp/servicios/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element(document.body),
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    salePoint: vm.salePoint
+                }
+            })
+                .then(function(){
+                    $mdDialog.hide();
                 });
         }
 
