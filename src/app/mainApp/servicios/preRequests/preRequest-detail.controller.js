@@ -128,7 +128,6 @@
             vm.preRequest.cancelacion = true;
             vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
-            console.log(JSON.stringify(vm.preRequest));
             var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
             promiseCancelPreRequest.then(function (requestCancel) {
                 toastr.success(vm.cancelationsuccess, vm.successTitle);
