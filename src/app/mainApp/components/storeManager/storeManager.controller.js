@@ -30,6 +30,8 @@
         //Variable declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.store = null;
+        vm.urlArchivo = null;
+        vm.no_cliente = null;
 
         //Function Parsing
         vm.searchStore = searchStore;
@@ -37,6 +39,10 @@
         vm.modifyStore = modifyStore;
         vm.deleteStore = deleteStore;
         vm.showStoreLocation = showStoreLocation;
+
+        //edit by Alex
+        vm.showCredential = showCredential;
+        vm.showPDF = showPDF;
 
 
         function searchStore() {
@@ -127,6 +133,38 @@
 
         function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
+        }
+
+        function showCredential() {
+            var credential = angular.copy(vm.store.qr_code);
+            console.log("credencial", vm.credential);
+            $mdDialog.show({
+                controller: 'credentialStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/credentialStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    data: credential
+                }
+            })
+                .then(function () {
+                })
+                .catch(function(){
+                });
+        }
+
+        function showPDF() {
+            vm.no_cliente = angular.copy(vm.store.no_cliente);
+            vm.urlPDF = Stores.getPDF(vm.no_cliente)
+                .then(function (res) {
+                    console.log("res", res);
+                    vm.urlArchivo = res;
+                })
+                .catch(function (err) {
+                    console.log("err", err);
+                })
         }
 
     }

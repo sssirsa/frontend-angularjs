@@ -14,11 +14,14 @@
                                    States,
                                    Cities,
                                    STORE_SEGMENTATION,
-                                   Localities) {
+                                   Localities,
+                                   Segmentation) {
         var vm = this;
 
         //Variables
-        vm.storeSegmentation = STORE_SEGMENTATION;
+        //vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.storeSegmentation = null;
+        vm.segmentationSelect = null;
         vm.store = null;
         vm.states = null;
         vm.cities = null;
@@ -39,11 +42,13 @@
         vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectCity = selectCity;
+        vm.selectSegmentation = selectSegmentation;
 
         activate();
 
         function activate() {
             listStates();
+            selectSegmentation();
         }
 
 
@@ -132,6 +137,16 @@
             listLocalities(vm.city);
             vm.locality = null;
             vm.localities = null;
+        }
+
+        function selectSegmentation() {
+            Segmentation.list()
+                .then(function (res) {
+                    vm.storeSegmentation = res;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         }
 
     }
