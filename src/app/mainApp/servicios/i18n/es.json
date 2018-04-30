@@ -428,7 +428,7 @@
         "E041":"No se puede crear el código qr debido a que el establecimiento ya cuenta con uno",
         "E042":"No se puede levantar una solicitud fuera del horario permitido, el cual es de 9:00 am a 18:00pm",
         "E043":"No se puede crear un establecimiento sin agregar los campos mínimos “Nombre establecimiento”, “Calle”, “Nombre de Encargado”.",
-        "E044":"No se puede asignar este cabinet debido a que está asignado en otro cabinet",
+        "E044":"No se puede asignar este cabinet debido a que está asignado en otro cabinet"
 
     },
     "PREREQUEST_TRANSLATE":{
