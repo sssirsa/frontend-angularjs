@@ -34,6 +34,7 @@ configuration:
     - development
     - staging
     - master
+    - hotfix/CorrectionGitCli
 
 deploy:
   stage: deploy
@@ -42,7 +43,7 @@ deploy:
     - npm install gulp
   script:
     - rm -rf dist/
-    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+    - ./node_modules/.bin/gulp deploy --env development
   dependencies:
     - npm
     - bower
@@ -60,6 +61,7 @@ npm:
     - apt-get install build-essential -y
   script:
     - npm install -g npm@latest
+    - npm install --save-dev core-util-is
     - npm install
   cache:
     untracked: true
@@ -72,6 +74,7 @@ npm:
     - development
     - master
     - staging
+    - hotfix/CorrectionGitCli
 
 bower:
   stage: dep
@@ -94,3 +97,4 @@ bower:
     - development
     - master
     - staging
+    - hotfix/CorrectionGitCli
