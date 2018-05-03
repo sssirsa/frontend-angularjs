@@ -1,0 +1,227 @@
+<div
+    layout="column"
+    layout-align="center stretch"
+>
+    <md-card
+        layout="column"
+        layout-align="center stretch"
+    >
+        <div
+            layout="column"
+            layout-gt-sm="row"
+            layout-align="center center"
+            layout-wrap
+            layout-align-gt-md="space-around center">
+            <md-button
+                ng-if="$ctrl.canSearch"
+                ng-click="$ctrl.searchStore()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-search"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.SEARCH'|translate}}
+            </md-button>
+            <md-button
+                ng-if="$ctrl.canCreate"
+                ng-click="$ctrl.createStore()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.CREATE'|translate}}
+            </md-button>
+            <md-button
+                ng-if="$ctrl.store && $ctrl.canModify"
+                ng-click="$ctrl.modifyStore()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                {{'MAIN.COMPONENTS.STORE_MANAGER.MODIFY'|translate}}
+            </md-button>
+            <div
+                ng-if="$ctrl.store && $ctrl.canDelete"
+                cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
+                <md-button
+                    ng-click="$ctrl.deleteStore()"
+                    class="md-warn md-raised">
+                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.DELETE'|translate}}
+                </md-button>
+            </div>
+        </div>
+        <div
+            layout-padding
+            ng-if="$ctrl.store"
+        >
+            <div
+                layout="column"
+                layout-align="center center">
+                <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.SUBTITLE'|translate}}</h2>
+            </div>
+
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CLIENT</label>
+                    <input
+                        readonly
+                        name="numero_cliente"
+                        ng-disabled="true"
+                        maxlength="20"
+                        ng-model="$ctrl.store.no_cliente"/>
+                </md-input-container>
+            </div>
+
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.nombre_establecimiento"/>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
+                    <md-select
+                        ng-model="$ctrl.segmentationSelect"
+                        required
+                        ng-disabled="true"
+                    >
+                        <md-option
+                            ng-repeat="segmentation in $ctrl.storeSegmentation"
+                            ng-value="segmentation.id"
+                        >
+                            {{segmentation.nombre}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.nombre_encargado"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.telefono_encargado"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STREET</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.calle"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NUMBER</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.numero"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.BETWEEN1</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.entre_calle1"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.BETWEEN2</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.entre_calle2"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.localidad.municipio.estado.nombre"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.localidad.municipio.nombre"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.localidad.nombre"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ZIP_CODE</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.localidad.codigo_postal"/>
+                </md-input-container>
+            </div>
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LATITUDE</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.latitud"/>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LONGITUDE</label>
+                    <input
+                        ng-disabled="true"
+                        ng-model="$ctrl.store.longitud"/>
+                </md-input-container>
+            </div>
+            <div layout="column"
+                 layout-align-gt-sm="end end"
+                 layout-gt-sm="row"
+                 layout-align="start stretch"
+            >
+
+                <!--Aquí empieza lo que agrego Alex-->
+                <md-button aria-label="credencial" ng-click="$ctrl.showCredential()" class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-card"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.CREDENTIAL'|translate}}
+                </md-button>
+
+                <md-button class="md-primary md-raised">
+                    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                    <a href="{{$ctrl.urlPDF.url}}" download="{{$ctrl.no_cliente}}.pdf" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
+                </md-button>
+                <!--Aquí termina lo que agrego Alex-->
+
+                <md-button aria-label="geolocate" ng-click="$ctrl.showStoreLocation()" class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}
+                </md-button>
+            </div>
+        </div>
+    </md-card>
+</div>

@@ -29,8 +29,8 @@
             return baseUrl.all('list_atendido_pv').getList();
         }
 
-        function assignToPerson(personID, serviceID) {
-            return baseUrl.all('asignar_pv').all(serviceID).customPUT({persona: personID});
+        function assignToPerson(object, serviceID) {
+            return baseUrl.all('asignar_pv').all(serviceID).customPUT(object);
         }
 
         function assignedTo(personID) {

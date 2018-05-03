@@ -354,15 +354,17 @@
                 "STORE": "Establecimiento",
                 "MUN": "Municipio",
                 "LOCAL": "Localidad",
-                "CP": "Código Postal"
-
+                "CP": "Código Postal",
+                "HOURATEND": "Horarios de atencion",
+                "HOURSTART": "Hora inicial",
+                "HOUREND": "Hora final"
             }
         },
         "ASSIGN_DETAIL": {
             "TITLE": "Detalle de Servicio",
             "STORE": "Establecimiento",
             "REQUEST": "Solicitud",
-            "PERSON": "Persona",
+            "PERSON": "Asigna persona",
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
             "REQUESTED_CABINETS":"Cabinets solicitados",
@@ -381,5 +383,39 @@
                 "REQUESTED_CABINETS": "Cabinets solicitados"
             }
         }
+    },
+
+    "PREREQUEST_TRANSLATE":{
+        "PREREQUESTS":"Pre solicitudes.",
+        "FOLIO":"Folio",
+        "STORE":"Establecimiento.",
+        "STORE_NAME":"Nombre del establecimiento. ",
+        "STREET":"Calle",
+        "OWNER":"Nombre del Encargado. ",
+        "OWNER_PHONE":"Teléfono del Encargado",
+        "FIND_STORE":"Localiza la Tienda",
+        "CREATION_DATE":"Fecha de Creación",
+        "TIME_SCHEDULING":"Horario de Atención deseado",
+        "OBSERVATIONS":"Observaciones del Cliente",
+        "NUMBER":"No. ",
+        "STREET_NEAR":"Entre calle ",
+        "STREET_NEAR2":"Y calle ",
+        "LOCALITY":"Localidad",
+        "STATE":"Estado.",
+        "CABINET":"Cabinet.",
+        "DATE":"Fecha de Solicitud.",
+        "CLIENT_COMMENTS":"Observaciones del Cliente.",
+        "PHOTOS":"Evidencias Fotograficas",
+        "CREATE_REQUEST":"Levantar Solicitud",
+        "CANCEL_PREREQUEST":"Cancelar pre solicitud",
+        "MSG":{
+            "CABINET_NOT_FOUND":"Cabinet No registrado, es necesaria creación de Cabinet",
+            "UNEXPECTED":"Error inesperado, intente mas tarde",
+            "CREATION_SUCCESFULL":"Creación de la Solicitud exitosa",
+            "CANCELATION_SUCCESFULL":"Cancelación Exitosa",
+            "PREREQUESTNOTFOUND":"Pre solicitud no Encontrada"
+        }
+
+
     }
 }

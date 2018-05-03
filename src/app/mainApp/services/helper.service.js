@@ -4,11 +4,16 @@
     angular
         .module('app.mainApp')
         .factory('Helper', Helper);
+
     /**
      * @author Christian Adan Israel Amezcua Aguilar <amezcua9205@gmail.com>
      * @constructor
      */
-    function Helper($rootScope, $log,$window,NotificationPanel,Session) {
+    function Helper($rootScope,
+                    $log,
+                    $window,
+                    NotificationPanel) {
+
         var acceptFileTypes = /(jpe?g|png|bmp|vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.ms-excel)$/i;
         return {
             acceptFile: acceptFile,
@@ -16,7 +21,7 @@
             filterDeleted: filterDeleted,
             searchByField: searchByField,
             sortByAttribute: sortByAttribute,
-            getNotificationsByUser:getNotificationsByUser
+            getNotificationsByUser: getNotificationsByUser
         };
 
         /**
@@ -30,7 +35,6 @@
                 return obj[attribute]
             });
         }
-
 
 
         /**
@@ -71,7 +75,7 @@
          * @description Se encarga de mostrar una notificación al usuario.
          * @property {Object} info Un objeto con la información para la notificación.
          */
-        function showNotification(info,title,url) {
+        function showNotification(info, title, url) {
             if (!("Notification" in window)) {
                 $log.info("Este navegador no soporta notificaciones de escritorio");
             }
@@ -87,12 +91,12 @@
                 };
                 new Notification("SSSIRSA", options);*/
                 Push.create(title, {
-                    body:info,
+                    body: info,
                     icon: 'https://resources-sssirsa.s3.amazonaws.com/logo_icon_32.png',
                     timeout: 10000,
                     onClick: function () {
                         window.focus();
-                        if(url!=null) {
+                        if (url != null) {
                             $window.open(url, '_blank', '');
                         }
                         this.close();
@@ -101,11 +105,12 @@
 
             }
         }
+
         /**
          * @description Se encarga de solicitar las notificaciones del usuario de la sesion
          */
         function getNotificationsByUser() {
-            NotificationPanel.getNotificationByUser(Session.userInformation.username).then(function (res) {
+            /*NotificationPanel.getNotificationByUser(Session.userInformation.username).then(function (res) {
                 var notifications = _.sortBy(res.data.notifications, function (obj) {
                     return obj.notification.date;
                 }).reverse();
@@ -119,7 +124,7 @@
                 $rootScope.notifications.view = _.filter(notifications, function (value) {
                     return value.read == true;
                 });
-            });
+            });*/
         }
 
     }

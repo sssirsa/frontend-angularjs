@@ -69,7 +69,7 @@
                                name="centro"
                                ng-model="vm.selected_udn.centro"
                                ng-required="true"
-                               numbers-only=""
+                               digits-only=""
                                ng-disabled="vm.selected_udn.deleted"/>
                         <div ng-messages="inputForm.centro.$error">
                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD' | translate}}</div>
@@ -93,7 +93,7 @@
                                name="telefono"
                                ng-model="vm.selected_udn.telefono"
                                ng-required="true"
-                               numbers-only
+                               digits-only
                                ng-disabled="vm.selected_udn.deleted"/>
                         <div ng-messages="inputForm.telefono.$error">
                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD' | translate}}</div>

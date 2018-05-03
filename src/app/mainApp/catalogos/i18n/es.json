@@ -308,16 +308,6 @@
             "ZIP_CODE":"Código Postal"
         }
     },
-    "STORES":{
-        "LABELS":{
-            "TITLE":"Establecimiento",
-            "SUBTITLE":"Información de Establecimiento",
-            "SEARCH":"Búsqueda de establecimientos",
-            "NOT_FOUND":"No se encontró el establecimiento",
-            "LATITUDE": "Latidud",
-            "LONGITUDE": "Longitud"
-        }
-    },
     "STATES":{
         "LABELS":{
             "TITLE":"Estados",
@@ -335,6 +325,19 @@
         },
         "TOASTR":{
             "ERROR_STATE_LIST":"Error al cargar la lista de estados"
+        }
+    },
+    "SEGMENTATION":{
+        "LABELS":{
+            "TITLE":"Segmentación",
+            "SEARCH":"Busca tu segmentación",
+            "SUBTITLE":"Información de segmentación",
+            "COLOR":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selección de color",
+            "NAME":"Nombre",
+            "DESCRIPTION":"Descripcíon"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
         }
     }
 }

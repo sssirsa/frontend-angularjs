@@ -2,13 +2,13 @@
      layout-align="start center"
      style="background: url(assets/images/backgrounds/material-backgrounds/mb-bg-02.jpg) no-repeat; background-size: cover;">
     <div class="margin-right-20">
-        <img class="make-round" src="{{vmNode.currentUser.userInformation.foto!=null?vmNode.currentUser.userInformation.foto:'assets/images/user.png'}}"  width="100" height="100"/>
+        <img class="make-round" src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"  width="100" height="100"/>
     </div>
     <div class="text-light">
-        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vmNode.currentUser.userInformation.nombre}}
-            {{vmNode.currentUser.userInformation.apellido_paterno}}
-            {{vmNode.currentUser.userInformation.apellido_materno}}</h3>
-        <p class="font-weight-300 margin-top-0 margin-bottom-0">{{vmNode.currentUser.userRole}}</p>
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{vm.user.nombre}}
+            {{vm.user.apellido_paterno}}
+            {{vm.user.apellido_materno}}</h3>
+        <p ng-repeat="role in vm.roles" class="font-weight-300 margin-top-0 margin-bottom-0">{{role}}</p>
 
     </div>
 </div>
@@ -18,7 +18,7 @@
         <!-- Tecnico A Section -->
         <!-- In order to allow position changes, add dragula='"drag-analytics-container"' to the main div of each section -->
         <div class="drag-container" layout="row" layout-xs="column" layout-margin
-             ng-show=vm.tecnicoAVisibility>
+             permission permission-only="['TECNICO A']">
 
             <tri-widget palette-background="cyan:700" content-layout="row"
                         content-layout-align="center center" content-padding flex>
@@ -52,7 +52,7 @@
 
         <!-- Tecnico C Section -->
         <div class="drag-container" layout="row" layout-xs="column" layout-margin
-             ng-show="vm.tecnicoCVisibility">
+             permission permission-only="['TECNICO C']">
             <tri-widget palette-background="amber:900" content-layout="row"
                         content-layout-align="center center"
                         content-padding>
@@ -70,7 +70,7 @@
         <!-- Tecnico D Section -->
 
         <div class="drag-container" layout="row" layout-xs="column" layout-margin
-             ng-show="vm.tecnicoDVisibility">
+             permission permission-only="['TECNICO D']">
             <tri-widget palette-background="green:700" content-layout="row" content-layout-align="center center"
                         content-padding>
                 <a ng-href="#/asignacionLinea">
@@ -88,7 +88,7 @@
         <!-- Tecnico E Section -->
 
         <div class="drag-container" layout="row" layout-xs="column" layout-margin
-             ng-show="vm.tecnicoDVisibility">
+             permission permission-only="['TECNICO E']">
             <tri-widget palette-background="lime:900" content-layout="row"
                         content-layout-align="center center" content-padding flex>
                 <a ng-href="#/entrada">

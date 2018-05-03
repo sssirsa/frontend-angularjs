@@ -1,9 +1,12 @@
-<div class="full-height full-image-background bg-01" layout="row" flex layout-padding layout-fill layout-align="center center">
+<div class="full-height full-image-background bg-01" layout="row" flex layout-padding layout-fill
+     layout-align="center center">
     <div flex="40" flex-lg="50" flex-md="70" flex-sm="100" flex-xs="100">
-        <md-card>
+        <md-card
+            cg-busy="{promise:vm.loginPromise, message:'Iniciando sesión...'}"
+        >
             <md-toolbar class="padding-20">
                 <div flex layout="row" layout-align="center center">
-                    <img style="max-width:100px; max-height:130px" ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
+                    <img style="max-width:100px; max-height:130px" ng-src="assets/images/logo.svg">
                 </div>
                 <div layout="row" layout-align="center center">
                     <h1 class="md-headline">Inicio de Sesión</h1>
@@ -22,17 +25,18 @@
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label for="password">Contraseña</label>
-                        <input  id="password" name="password" type="password" ng-model="vm.user.password" required/>
-                        <div ng-messages for="login.password.$error" md-auto-hide="false" ng-show="login.password.$touched">
+                        <input id="password" name="password" type="password" ng-model="vm.user.password" required/>
+                        <div ng-messages for="login.password.$error" md-auto-hide="false"
+                             ng-show="login.password.$touched">
                             <div ng-message when="required"><span>Campo requerido</span></div>
                         </div>
                     </md-input-container>
 
-                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"  type="submit" ng-disabled="login.$invalid">Aceptar</md-button>
-                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10 padding-top-20 padding-bottom-20" ng-click="vm.loginTagClick($event,vm.newDialog)">Inicio con TAG</md-button>
-                    <!--
-                    <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/signup" translate="Don't have an account? Create one now" aria-label="{{'Don\'t have an account? Create one now' | triTranslate}}"></md-button>
-                    -->
+                    <md-button
+                        class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
+                        type="submit" ng-disabled="login.$invalid">
+                        Aceptar
+                    </md-button>
                 </form>
             </md-content>
         </md-card>
