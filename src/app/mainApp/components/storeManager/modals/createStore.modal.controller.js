@@ -62,10 +62,11 @@
             vm.store.municipio_nombre = vm.municipio_nombre;
             vm.store.segmentacion_id = vm.segmentationSelect;
             vm.store.localidad_cp = vm.locality.codigo_postal;
+            vm.store.cp = vm.locality.codigo_postal;
 
-            console.log("vm.store", vm.store);
+            console.log("store", vm.store);
 
-            /*vm.loadingPromise = Stores.create(vm.store)
+            vm.loadingPromise = Stores.create(vm.store)
                 .then(function(createdStore){
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
@@ -73,7 +74,7 @@
                 .catch(function(errorCreateStore){
                     $log.error(errorCreateStore);
                     toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_ERROR'));
-                });*/
+                });
         }
 
         function cancel() {

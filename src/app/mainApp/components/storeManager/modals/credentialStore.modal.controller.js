@@ -13,7 +13,7 @@
         vm.urlQR = data;
 
         if(!vm.urlQR){
-            vm.urlQR = 'assets/images/errors/pikachuError.png';
+            vm.urlQR = 'assets/images/errors/errorCredential.png';
         }
 
         vm.cerrar = cerrar;

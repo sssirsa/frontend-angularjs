@@ -169,6 +169,8 @@
                     "DELETE_ERROR": "Error al eliminar establecimiento",
                     "CREATE_SUCCESS": "Establecimiento creado correctamente",
                     "CREATE_ERROR": "Error al eliminar establecimiento",
+                    "UPDATE_SUCCESS": "Establecimiento modificado correctamente",
+                    "UPDATE_ERROR": "Error al modificar establecimiento",
                     "MASSIVE_ERROR":"Error en la carga masiva de establecimientos",
                     "MASSIVE_SUCCESS":"Carga masiva de establecimientos realizada corectamente"
                 }
