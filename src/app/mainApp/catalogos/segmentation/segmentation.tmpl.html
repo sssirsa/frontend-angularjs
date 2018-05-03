@@ -67,7 +67,12 @@
                 </div>
 
                 <!-- Div de creacion, edicion y eliminado -->
-                <div layout="column" flex-gt-sm="50" flex="100" layout-align="start stretch" layout-padding>
+                <div layout="column"
+                     flex-gt-sm="50"
+                     flex="100"
+                     layout-align="start stretch"
+                     cg-busy="{promise:vm.formLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+                     layout-padding>
                     <h2 class="md-headline-1 text-center">
                         {{'SEGMENTATION.LABELS.SUBTITLE'|translate}}</h2>
                     <form name="SegmentationForm">

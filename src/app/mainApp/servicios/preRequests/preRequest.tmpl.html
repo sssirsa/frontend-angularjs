@@ -24,15 +24,15 @@
                      class="Atendida"></div>
             </div>
             <div layout="column">
-                <span translate>REQUESTS.LIST.CANCELED</span>
-                <div ng-click="vm.listFilteredpreRequests('Cancelada')"
-                     class="Cancelada"></div>
-            </div>
-            <div layout="column">
                 <span translate>REQUESTS.LIST.ALL</span>
                 <div ng-click="vm.listFilteredpreRequests('Todo')"
                      class="Todo"></div>
             </div>
+        </div>
+    </md-card>
+    <md-card ng-if="!vm.requests">
+        <div>
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
         </div>
     </md-card>
     <div layout="row" flex="100" layout-align="center center" ng-repeat="item in vm.requests">

@@ -354,14 +354,17 @@
                 "STORE": "Establecimiento",
                 "MUN": "Municipio",
                 "LOCAL": "Localidad",
-                "CP": "Código Postal"
+                "CP": "Código Postal",
+                "HOURATEND": "Horarios de atencion",
+                "HOURSTART": "Hora inicial",
+                "HOUREND": "Hora final"
             }
         },
         "ASSIGN_DETAIL": {
             "TITLE": "Detalle de Servicio",
             "STORE": "Establecimiento",
             "REQUEST": "Solicitud",
-            "PERSON": "Persona",
+            "PERSON": "Asigna persona",
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
             "REQUESTED_CABINETS":"Cabinets solicitados",
@@ -381,6 +384,7 @@
             }
         }
     },
+
     "PREREQUEST_TRANSLATE":{
         "PREREQUESTS":"Pre solicitudes.",
         "FOLIO":"Folio",
