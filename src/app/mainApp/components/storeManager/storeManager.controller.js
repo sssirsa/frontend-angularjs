@@ -23,8 +23,8 @@
         STORE_SEGMENTATION,
         Geolocation,
         $mdDialog,
-        Stores
-    ) {
+        Stores,
+        Segmentation) {
         var vm = this;
 
         //Variable declaration
@@ -43,6 +43,7 @@
         //edit by Alex
         vm.showCredential = showCredential;
         vm.showPDF = showPDF;
+        vm.selectSegmentation = selectSegmentation;
 
 
         function searchStore() {
@@ -58,6 +59,7 @@
                     vm.store = store;
                     vm.storeSelected({store:store});
                     showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -79,6 +81,7 @@
                     vm.store = store;
                     vm.storeSelected({store:store});
                     showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -103,6 +106,7 @@
                     vm.store = store;
                     vm.storeSelected({store:store});
                     showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -165,6 +169,17 @@
                 })
                 .catch(function (err) {
                 })
+        }
+
+        function selectSegmentation() {
+            Segmentation.list()
+                .then(function (res) {
+                    vm.storeSegmentation = res;
+                    vm.segmentationSelect = vm.store.segmentacion.id;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         }
 
     }

@@ -63,15 +63,19 @@
                         ng-disabled="true"
                         ng-model="$ctrl.store.nombre_establecimiento"/>
                 </md-input-container>
+
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
                     <md-select
+                        ng-model="$ctrl.segmentationSelect"
+                        required
                         ng-disabled="true"
-                        ng-model="$ctrl.store.segmentacion">
+                    >
                         <md-option
-                            ng-repeat="segment in $ctrl.storeSegmentation"
-                            ng-value="segment.value">
-                            {{segment.label}}
+                            ng-repeat="segmentation in $ctrl.storeSegmentation"
+                            ng-value="segmentation.id"
+                        >
+                            {{segmentation.nombre}}
                         </md-option>
                     </md-select>
                 </md-input-container>
