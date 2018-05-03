@@ -55,7 +55,8 @@
                             ng-repeat="segmentation in vm.storeSegmentation"
                             ng-value="segmentation.id"
                         >
-                            {{segmentation.nombre}}
+                            <span style="background-color: {{segmentation.color}};" class="square-color"></span>
+                            <b>&nbsp;{{segmentation.nombre}} </b>
                         </md-option>
                     </md-select>
                 </md-input-container>
