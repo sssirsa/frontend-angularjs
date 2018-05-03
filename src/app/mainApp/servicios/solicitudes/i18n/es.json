@@ -24,21 +24,6 @@
                 "ERROR_USER":"Ocurrió un error al cargar el usuario"
             },
             "TITLE":"Detalle de solicitud",
-            "STORE":{
-                "TITLE":"Establecimiento",
-                "NAME":"Nombre del establecimiento",
-                "MANAGER":"Nombre del encargado",
-                "MANAGER_PHONE":"Teléfono encargado",
-                "STREET":"Calle",
-                "NUMBER":"Número",
-                "BETWEEN1":"Entre calle",
-                "BETWEEN2":"Y entre calle",
-                "STATE":"Estado",
-                "CITY":"Municipio",
-                "LOCALITY":"Localidad",
-                "ZIP_CODE":"Código postal",
-                "SEGMENTATION":"Segmentación"
-            },
             "INFO":"Información de la solicitud",
             "USER": {
                 "TITLE": "Persona",
@@ -94,7 +79,10 @@
                 "EMAIL":"Correo electrónico",
                 "PHONE":"Teléfono"
             },
-            "CABINET":"Económico del cabinet",
+            "CABINET":{
+                "TITLE":"Cabinet a retirar",
+                "FIELD":"Económico"
+            },
             "CABINETS":{
                 "TITLE":"Solicitudes de cabinet",
                 "QUANTITY":"Cantidad",
@@ -109,7 +97,8 @@
             "EQUIPMENT":{
                 "SEARCH":"Tipo de equipo a asignar"
             },
-            "SUCURSAL":"Sucursal"
+            "SUCURSAL":"Sucursal",
+            "EVIDENCES":"Evidencias"
         }
     }
 }

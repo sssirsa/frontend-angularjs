@@ -22,11 +22,6 @@
             })
             .state('triangular.admin-default', {
                 abstract: true,
-                resolve: {
-                    authorize: function (authorization) {
-                        return authorization.authorize();
-                    }
-                },
                 views: {
                     sidebarLeft: {
                         templateProvider: function ($templateRequest, triLayout) {

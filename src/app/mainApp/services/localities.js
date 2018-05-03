@@ -3,7 +3,7 @@
         .module('app.mainApp')
         .factory('Localities', Localities);
 
-    function Localities(MobileRestangular, URLS, $q, Helper) {
+    function Localities(MobileRestangular, URLS, $q, Helper, QUERIES) {
         var baseURL = MobileRestangular.all(URLS.localidad);
 
         function list() {
@@ -34,19 +34,16 @@
         function getByCity(cityID){
             var defer = $q.defer();
 
-            list()
-                .then(function (localitiesList) {
-                    var localities = Helper.filterDeleted(localitiesList.filter(function (locality) {
-                        if(locality.municipio) {
-                            return locality.municipio.id === cityID;
-                        }
-                        return false;
-                    }),true);
-                    defer.resolve(localities);
+            MobileRestangular.all(URLS.localidad + QUERIES.locality.by_city + cityID)
+                .getList()
+                .then(function (citiesList) {
+                    var cities = Helper.filterDeleted(citiesList,true);
+                    defer.resolve(cities);
                 })
-                .catch(function (localitiesListError) {
-                    defer.reject(localitiesListError);
+                .catch(function (citiesListError) {
+                    defer.reject(citiesListError);
                 });
+
 
             return defer.promise;
         }

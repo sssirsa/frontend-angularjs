@@ -1,0 +1,38 @@
+<div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'MAIN.MENU.PREREQUESTS.LISTPV'|translate}}</h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+
+        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="$ctrl.todos.length>1">
+            <md-input-container
+                flex="80"
+                class="md-block">
+                <input
+                    placeholder="Búsqueda por economico"
+                    ng-model="$ctrl.searchText">
+            </md-input-container>
+
+        </div>
+
+        <div>
+            <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos | cabinetPVFilter:$ctrl.searchText" ng-click="$ctrl.info(item)">
+                <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
+                <div class="md-list-item-text" layout="column">
+                    <h2>Económico: {{ item.economico }}</h2>
+                    <h3>Modelo: {{ item.modelo.nombre }}</h3>
+                    <h4>Número de Serie: {{ item.no_serie }}</h4>
+                    <p>Estado: {{ item.estado }}</p>
+                </div>
+            </md-list-item>
+        </div>
+
+    </md-content>
+</div>

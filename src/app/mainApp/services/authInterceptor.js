@@ -19,24 +19,22 @@
         };
 
         function request(config) {
-            //var $state = $injector.get('$state');
-            var deferred=$q.defer();
-            if ((config.url.indexOf(EnvironmentConfig.site.rest.api) !== -1) && (config.url.indexOf('token') == -1)){
-
-                if(!inFlightGet){
-                    inFlightGet=$injector.get('AuthService').getToken();
+            var deferred = $q.defer();
+            if (config.url.indexOf(EnvironmentConfig.site.rest.mobile_api) !== -1 ||
+                config.url.indexOf(EnvironmentConfig.site.rest.api_reports) !== -1 ||
+                config.url.indexOf(EnvironmentConfig.site.rest.web_api) !== -1) {
+                if(config.url.indexOf('oauth') === -1)
+                {
+                    if (!inFlightGet) {
+                        inFlightGet = $injector.get('AuthService').getToken();
+                        config.headers.Authorization = 'Bearer ' + inFlightGet;
+                        inFlightGet = null;
+                    }
                 }
-                inFlightGet.then(function (token) {
-                    config.headers.Authorization='Bearer '+token;
-                    inFlightGet=null;
-                    deferred.resolve(config);
-                });
-
-            }else{
-                deferred.resolve(config);
             }
+            deferred.resolve(config);
             return deferred.promise;
-            /*return config;*/
+
         }
 
         function response(res) {
@@ -44,17 +42,17 @@
         }
 
         function responseError(response) {
-            if (response.status === 401 && response.data.error!=='invalid_grant') {
+            if (response.status === 401 && response.statusText === 'Unauthorized') {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
-                    inFlightRefresh = $injector.get('AuthService').refreshToken();
+                    inFlightRefresh = $injector.get('OAuth').refreshTokenFunction();
                 }
-                inFlightRefresh.then(function() {
+                inFlightRefresh.then(function () {
                     inFlightRefresh = null;
                     $http(response.config).then(deferred.resolve, deferred.reject);
                 });
-                return deferred.promise
+                return deferred.promise;
             }
             return $q.reject(response);
         }

@@ -13,30 +13,16 @@
     <md-button class="md-icon-button toolbar-button" ng-click="vm.toggleFullScreen()" aria-label="toggle fullscreen">
         <md-icon md-font-icon ng-class="vm.fullScreenIcon"></md-icon>
     </md-button>
-<!--
-    <md-menu ng-show="vm.languages.length > 0">
-        <md-button class="md-icon-button" aria-label="language" ng-click="$mdOpenMenu()" aria-label="change language">
-            <md-icon md-font-icon="zmdi zmdi-globe-alt"></md-icon>
-        </md-button>
-        <md-menu-content width="3">
-            <md-menu-item ng-repeat="language in ::vm.languages">
-                <md-button ng-click="vm.switchLanguage(language.key)" translate="{{::language.name}}" aria-label="{{::language.name}}"></md-button>
-            </md-menu-item>
-        </md-menu-content>
-    </md-menu>
--->
 
-
-
-    <md-button class="md-icon-button toolbar-button" aria-label="tab" ng-click="vm.toggleNotificationsTab(1)" ng-if="vmNode.currentUser.userRole==='Administrador'">
+    <md-button class="md-icon-button toolbar-button" aria-label="tab" ng-click="vm.toggleNotificationsTab(1)" permission permission-only="['ADMINISTRADOR']">
         <md-icon md-font-icon="fa fa-bell-o"></md-icon>
         <span class="toolbar-button-badge" theme-background="accent">{{$root.notifications.notView.length}}</span>
     </md-button>
 
     <md-menu>
         <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
-            <img class="toolbar-user-avatar" src="{{vmNode.currentUser.userInformation.foto!=null?vmNode.currentUser.userInformation.foto:'assets/images/user.png'}}" >
-            {{vmNode.currentUser.userInformation.nombre}}
+            <img class="toolbar-user-avatar" src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}" >
+            {{vm.user.username}}
         </md-button>
         <md-menu-content width="4">
 

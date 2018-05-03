@@ -6,7 +6,17 @@
         .module('app.mainApp.solicitudes')
         .controller('buscarSolicitudController', buscarSolicitudController);
 
-    function buscarSolicitudController(Translate, $mdEditDialog, Solicitudes, Solicitudes_Admin, udn, Persona, ModeloCabinet, Solicitud_Servicio, Solicitud_Servicio_Admin, Session, OPTIONS, toastr, $mdDialog) {
+    function buscarSolicitudController(Translate,
+                                       $mdEditDialog,
+                                       Solicitudes,
+                                       Solicitudes_Admin,
+                                       udn,
+                                       ModeloCabinet,
+                                       Solicitud_Servicio,
+                                       Solicitud_Servicio_Admin,
+                                       OPTIONS,
+                                       toastr,
+                                       $mdDialog) {
         var vm = this;
         vm.flag = 0;
         vm.query = {
@@ -84,7 +94,7 @@
             vm.udns = udn.list();
 
             vm.tiposEquipo = ModeloCabinet.list();
-            vm.isClient = Session.userRole == 'Cliente';
+            //vm.isClient = Session.userRole == 'Cliente';
 
         }
 

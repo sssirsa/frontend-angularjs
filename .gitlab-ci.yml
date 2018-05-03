@@ -54,13 +54,12 @@ deploy:
 
 npm:
   stage: dep
-  image: node:4.8.4
+  image: node:7.4
   before_script:
     - apt-get update
     - apt-get install build-essential -y
   script:
     - npm install -g npm@latest
-    - npm i process-nextick-args util-deprecate
     - npm install
   cache:
     untracked: true

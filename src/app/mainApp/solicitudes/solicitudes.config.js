@@ -12,7 +12,7 @@
             .state('triangular.admin-default.realizarSolicitud', {
                 url: '/realizarSolicitudes',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente', 'Tultitlan']
+                    roles: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/crear/realizarSolicitud.tmpl.html',
                 controller: 'realizarSolicitudController',
@@ -21,7 +21,7 @@
             .state('triangular.admin-default.buscarSolicitud', {
                 url: '/buscarSolicitud',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente', 'Tultitlan']
+                    roles: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/buscar/buscarSolicitud.html',
                 controller: 'buscarSolicitudController',
@@ -30,7 +30,7 @@
             .state('triangular.admin-default.calendar', {
                 url: '/calendar',
                 data: {
-                    roles: ['Administrador']
+                    roles: ['ADMINISTRADOR']
                 },
                 templateUrl: 'app/mainApp/solicitudes/calendario/calendar.tmpl.html',
                 controller: 'CalendarController',
@@ -42,25 +42,25 @@
                 name: 'MAIN.MENU.SOLICITUD',
                 icon: 'zmdi zmdi-bookmark',
                 type: 'dropdown',
-                permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
                 priority: 3,
                 children: [
                     {
                         name: 'MAIN.MENU.SEARCH_SOLICITUD',
                         state: 'triangular.admin-default.buscarSolicitud',
-                        permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                        permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CREATES_SOLICITUD',
                         state: 'triangular.admin-default.realizarSolicitud',
-                        permission: ['Administrador','Capturista','Cliente', 'Tultitlan'],
+                        permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CALENDAR',
                         state: 'triangular.admin-default.calendar',
-                        permission: ['Administrador', 'Tultitlan'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         type: 'link'
 
                     }

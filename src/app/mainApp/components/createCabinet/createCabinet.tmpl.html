@@ -1,0 +1,81 @@
+<div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+        <form name="newcabinetFrom">
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                    <input name="economico" required digits-only MAXLENGTH="20" ng-model="$ctrl.economico"/>
+                    <div ng-messages="newcabinetFrom.serial.$error">
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                    <input name="serial" maxlength="25"
+                           ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
+                    <div ng-messages="newcabinetFrom.serial.$error">
+                        <div ng-message="pattern">
+                            {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                        </div>
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
+                    <md-select ng-model="$ctrl.marca" required ng-change="$ctrl.changeTrademark()">
+                        <md-option ng-repeat="marca in $ctrl.marcas" value="{{marca.id}}">
+                            {{marca.descripcion}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="newcabinetFrom.serial.$error">
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
+                    <md-select ng-model="$ctrl.modelo_id" required ng-disabled="!$ctrl.modelos">
+                        <md-option ng-repeat="modelo in $ctrl.modelos" value="{{modelo.id}}">
+                            {{modelo.nombre}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="newcabinetFrom.serial.$error">
+                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+               <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
+                    <input name="antiguedad" maxlength="1" only-text ng-model="$ctrl.antiguedad"/>
+                </md-input-container>
+            </div>
+        </form>
+
+        <md-actions
+            layout="row"
+            layout-align="end center">
+            <md-button
+                ng-click="$ctrl.accept()"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}
+            </md-button>
+        </md-actions>
+    </md-content>
+</div>

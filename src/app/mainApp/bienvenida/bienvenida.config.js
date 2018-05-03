@@ -14,17 +14,13 @@
             .state('triangular.admin-default.bienvenida', {
                 url: '/bienvenida',
                 data: {
-                    roles: ['Administrador','Capturista','Cliente','Tecnico A','Tecnico B','Tecnico C','Tecnico D','Tecnico E', 'Tultitlan']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'CAPTURISTA', 'CLIENTE', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
                 },
                 templateUrl: 'app/mainApp/bienvenida/index.tmpl.html',
                 controller: 'bienvenidaController',
-                controllerAs: 'vm',
-                resolve:{
-                    /*promiseObj:function (AuthService,Socket) {
-
-                        return AuthService.getUser();
-                    }*/
-                }
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -32,10 +28,8 @@
                 name: 'MAIN.MENU.WELCOME',
                 icon: 'zmdi zmdi-home',
                 type: 'link',
-                permission: ['Administrador','Capturista','Cliente','Tecnico A','Tecnico B','Tecnico C','Tecnico D','Tecnico E', 'Tultitlan'],
                 priority: 1,
                 state: 'triangular.admin-default.bienvenida'
-
             }
         );
 

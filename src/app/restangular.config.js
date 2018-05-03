@@ -6,10 +6,7 @@
         .module('app')
         .config(config);
 
-    function config(RestangularProvider, EnvironmentConfig, $httpProvider) {
-        var baseUrl = EnvironmentConfig.site.rest.web_api;
-
-        RestangularProvider.setBaseUrl(baseUrl);
+    function config($httpProvider) {
         $httpProvider.interceptors.push('AuthInterceptor');
 
     }
