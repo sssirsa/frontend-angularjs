@@ -53,10 +53,9 @@
             var unexpectederror = Translate.translate('ERRORS.UNEXPECTED');
             var errorsession = Translate.translate('ERRORS.SESSION_EXPIRED');
             var translatemsg = '';
-            console.log(response);
-            console.log('errorHandler')
+
             if (response) {
-                console.log(response);
+
                 switch (response.status) {
                     case -1:
                         toastr.warning(unexpectederror, errorTitle);
@@ -65,18 +64,16 @@
                     case 400:
                         if (response.data) {
                             if (response.data.message){
-                                console.log('error bad request',);
                                 var temporal="ERRORS."+response.data.message[0];
-                                console.log(temporal);
+
                                 translatemsg = Translate.translate(temporal);
-                                console.log(translatemsg);
+
                                 toastr.error(translatemsg, errorTitle);
 
                             }
                             else{
                                 angular.forEach(response.data, function(value, key) {
-                                    console.log(value)
-                                    console.log(key)
+
                                     var tmp =key + ': ' + value;
                                     toastr.error(tmp, errorTitle);
                                 });
@@ -94,7 +91,6 @@
                         toastr.error('El recurso solicitado no existe.', errorTitle);
                         break;
                     case 500:
-                        console.log(unexpectederror)
                         toastr.error(unexpectederror, errorTitle);
                         break;
                     default:
