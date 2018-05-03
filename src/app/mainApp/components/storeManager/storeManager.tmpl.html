@@ -53,6 +53,22 @@
                 layout-align="center center">
                 <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.SUBTITLE'|translate}}</h2>
             </div>
+
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CLIENT</label>
+                    <input
+                        readonly
+                        name="numero_cliente"
+                        ng-disabled="true"
+                        maxlength="20"
+                        ng-model="$ctrl.store.no_cliente"/>
+                </md-input-container>
+            </div>
+
             <div flex
                  layout="column"
                  layout-gt-sm="row"
