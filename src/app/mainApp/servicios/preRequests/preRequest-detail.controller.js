@@ -5,7 +5,7 @@
         .module('app.mainApp.servicios')
         .controller('preRequestDetailController', preRequestDetailController);
 
-    function preRequestDetailController(preRequests, $stateParams, cabinetPV, toastr, Translate, Geolocation, Helper, $state) {
+    function preRequestDetailController(preRequests, $stateParams, cabinetPV, toastr, Translate, Geolocation, Helper, $state,ErrorHandler) {
 
         var vm = this;
         //Listado de Variables
@@ -81,7 +81,7 @@
             }).catch(function (err) {
                 console.log(err);
                 vm.showCabinet = false;
-                toastr.warning(vm.cabinetNotFound, vm.errorTitle);
+                ErrorHandler.errortranslate(err);
 
             });
 
@@ -112,12 +112,14 @@
             vm.request.cabinet = vm.preRequest.cabinet;
             var promiseCreateRequest = preRequests.createRequest(vm.request);
             promiseCreateRequest.then(function (requestCreada) {
-                toastr.success(vm.creationsuccess, vm.successTitle);
+                //toastr.success(vm.creationsuccess, vm.successTitle);
+                ErrorHandler.succcesCreation();
                 //  console.log(requestCreada);
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
-                toastr.warning(vm.unexpected, vm.errorTitle);
+                //toastr.warning(vm.unexpected, vm.errorTitle);
+                ErrorHandler.errortranslate(err);
                 console.log(err);
             });
 
@@ -130,13 +132,14 @@
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
             var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
             promiseCancelPreRequest.then(function (requestCancel) {
-                toastr.success(vm.cancelationsuccess, vm.successTitle);
+                ErrorHandler.succcesCancel();
+                //toastr.success(vm.cancelationsuccess, vm.successTitle);
                 // console.log(requestCancel);
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
-                toastr.warning(vm.unexpected, vm.errorTitle);
-                console.log(err);
+                ErrorHandler.errortranslate(err);
+
             });
 
         }
