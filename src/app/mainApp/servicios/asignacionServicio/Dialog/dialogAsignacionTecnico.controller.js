@@ -144,7 +144,6 @@
         function assign() {
 
             if (prepareObjectSend()){
-                //todo: cambiar mensaje por translate
                 toastr.error(
                     'La hora inicio debe ser menor a la hora fin',
                     Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -154,7 +153,7 @@
 
             console.log('asignedPerson: ', vm.toAsigned);
 
-            SalePoint.assignToPerson(vm.toAsigned, vm.salePoint.folio)
+            vm.personLoading = SalePoint.assignToPerson(vm.toAsigned, vm.salePoint.folio)
                 .then(function () {
                     toastr.success(
                         Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),

@@ -13,7 +13,9 @@
             .state('triangular.admin-default.tecnico', {
                 url: '/tecnico',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/inicio/tecnico.tmpl.html',
                 controller: 'tecnicoController',
@@ -22,7 +24,9 @@
             .state('triangular.admin-default.checklist', {
                 url: '/checklist',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/checklist/checklist.tmpl.html',
                 controller: 'checklistController',
@@ -31,7 +35,9 @@
             .state('triangular.admin-default.diagnostic', {
                 url: '/diagnostic',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.tpl.html',
                 controller: 'DiagnosticController',
@@ -40,7 +46,9 @@
             .state('triangular.admin-default.etapa', {
                 url: '/etapa',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    },
                     layout: {
                         sideMenuSize: 'icon'
                     }
@@ -52,7 +60,9 @@
             .state('triangular.admin-default.asignacionLinea', {
                 url: '/asignacionLinea',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
@@ -61,7 +71,9 @@
             .state('triangular.admin-default.entrada', {
                 url: '/entrada',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/entrada/entrada.tmpl.html',
                 controller: 'entradaController',
@@ -70,7 +82,9 @@
             .state('triangular.admin-default.salida-crear', {
                 url: '/crear',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/salida/crear/salida.crear.tmpl.html',
                 controller: 'salidaCrearController',
@@ -79,7 +93,9 @@
             .state('triangular.admin-default.salida-list', {
                 url: '/listado',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/salida/lista/salida.lista.tmpl.html',
                 controller: 'salidaListadoController',
@@ -88,7 +104,9 @@
             .state('triangular.admin-default.serviceAssing', {
                 url: '/asignarServicio',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',
@@ -97,7 +115,9 @@
             .state('triangular.admin-default.serviceAssignDetail', {
                 url: '/detalleServicio/:id',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 },
                 templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller: 'detalleAsignacionController',
@@ -112,7 +132,9 @@
                 controller: 'NewRequestPageController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 }
             })
             .state('triangular.admin-default.listRequest', {
@@ -121,7 +143,9 @@
                 controller: 'ListRequestPageController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 }
             })
             .state('triangular.admin-default.detailRequest', {
@@ -133,16 +157,21 @@
                     id: null
                 },
                 data: {
-                    roles: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 }
             })
-
             .state('triangular.admin-default.preRequest', {
                 url: '/prerequest/list',
                 templateUrl: 'app/mainApp/servicios/preRequests/preRequest.tmpl.html',
                 controller: 'preRequestListController',
-                controllerAs: 'vm'
-
+                controllerAs: 'vm',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                }
             })
 
             .state('triangular.admin-default.preRequestDetail', {
@@ -152,9 +181,12 @@
                 controllerAs: 'vm',
                 params: {
                     idPreRequest: null
+                },
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 }
-
-
             })
 
 
@@ -164,7 +196,9 @@
                 controller: 'NewCabinetPrerequestController',
                 controllerAs: 'vm',
                 data: {
-                    roles: ['ADMINISTRADOR']
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
                 }
             });
 
