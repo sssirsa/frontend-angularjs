@@ -23,8 +23,8 @@
         STORE_SEGMENTATION,
         Geolocation,
         $mdDialog,
-        Stores
-    ) {
+        Stores,
+        Segmentation) {
         var vm = this;
 
         //Variable declaration
@@ -43,6 +43,7 @@
         //edit by Alex
         vm.showCredential = showCredential;
         vm.showPDF = showPDF;
+        vm.selectSegmentation = selectSegmentation;
 
 
         function searchStore() {
@@ -57,6 +58,8 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store:store});
+                    showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -77,6 +80,8 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store:store});
+                    showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -100,6 +105,8 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store:store});
+                    showPDF();
+                    selectSegmentation();
                 })
                 .catch(function(storeError){
                     if(storeError){
@@ -119,7 +126,7 @@
 
             $mdDialog.show(confirm)
                 .then(function(){
-                    vm.deletingStore = Stores.remove(vm.store.id)
+                    vm.deletingStore = Stores.remove(vm.store.no_cliente)
                         .then(function(){
                             vm.store=null;
                             toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));
@@ -137,7 +144,6 @@
 
         function showCredential() {
             var credential = angular.copy(vm.store.qr_code);
-            console.log("credencial", vm.credential);
             $mdDialog.show({
                 controller: 'credentialStoreController',
                 controllerAs: 'vm',
@@ -157,14 +163,23 @@
 
         function showPDF() {
             vm.no_cliente = angular.copy(vm.store.no_cliente);
-            vm.urlPDF = Stores.getPDF(vm.no_cliente)
+            Stores.getPDF(vm.no_cliente)
                 .then(function (res) {
-                    console.log("res", res);
-                    vm.urlArchivo = res;
+                    vm.urlPDF = res;
                 })
                 .catch(function (err) {
-                    console.log("err", err);
                 })
+        }
+
+        function selectSegmentation() {
+            Segmentation.list()
+                .then(function (res) {
+                    vm.storeSegmentation = res;
+                    vm.segmentationSelect = vm.store.segmentacion.id;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         }
 
     }
