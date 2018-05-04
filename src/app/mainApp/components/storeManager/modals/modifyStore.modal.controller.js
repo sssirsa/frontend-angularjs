@@ -27,6 +27,7 @@
         vm.store.latitud= parseFloat(vm.store.latitud);
         vm.store.longitud= parseFloat(vm.store.longitud);
         vm.store.no_cliente = vm.store.no_cliente;
+
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
@@ -34,9 +35,6 @@
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
-
-        vm.estado_nombre = vm.store.localidad.municipio.estado.nombre;
-        vm.municipio_nombre = vm.store.localidad.municipio.nombre;
 
         //Functions
         vm.accept = accept;
@@ -58,10 +56,11 @@
 
         function accept() {
             vm.store.segmentacion_id = vm.segmentationSelect;
+            console.debug(vm.store);
 
             var data = {
                 no_cliente: vm.store.no_cliente,
-                localidad_id: vm.store.localidad_id,
+                localidad_id: vm.store.localidad.id,
                 nombre_establecimiento: vm.store.nombre_establecimiento,
                 calle: vm.store.calle,
                 numero: vm.store.numero,
