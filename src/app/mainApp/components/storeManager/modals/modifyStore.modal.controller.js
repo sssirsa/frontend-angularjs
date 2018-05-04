@@ -57,32 +57,22 @@
 
 
         function accept() {
-            vm.store.estado_nombre = vm.estado_nombre;
-            vm.store.municipio_nombre = vm.municipio_nombre;
             vm.store.segmentacion_id = vm.segmentationSelect;
 
             angular.forEach(vm.localities, function (local) {
                 if(local.id == vm.locality){
                     vm.store.localidad_id = local.id;
-                    vm.store.localidad_nombre = local.nombre;
-                    vm.store.localidad_cp = local.codigo_postal;
-                    vm.store.cp = local.codigo_postal;
                 }
             });
 
             var data = {
                 no_cliente: vm.store.no_cliente,
                 localidad_id: vm.store.localidad_id,
-                estado_nombre: vm.store.estado_nombre,
-                municipio_nombre: vm.store.municipio_nombre,
-                localidad_nombre: vm.store.localidad_nombre,
-                localidad_cp: vm.store.localidad_cp,
                 nombre_establecimiento: vm.store.nombre_establecimiento,
                 calle: vm.store.calle,
                 numero: vm.store.numero,
                 entre_calle1: vm.store.entre_calle1,
                 entre_calle2: vm.store.entre_calle2,
-                cp: vm.store.cp,
                 latitud: vm.store.latitud,
                 longitud: vm.store.longitud,
                 nombre_encargado: vm.store.nombre_encargado,
@@ -211,7 +201,7 @@
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
                 .catch(function (err) {
-                    console.log(err);
+                    console.error(err);
                 });
         }
 

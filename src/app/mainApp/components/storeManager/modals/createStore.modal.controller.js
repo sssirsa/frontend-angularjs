@@ -57,14 +57,7 @@
 
         function accept() {
             vm.store.localidad_id = vm.locality.id;
-            vm.store.localidad_nombre = vm.locality.nombre;
-            vm.store.estado_nombre = vm.estado_nombre;
-            vm.store.municipio_nombre = vm.municipio_nombre;
             vm.store.segmentacion_id = vm.segmentationSelect;
-            vm.store.localidad_cp = vm.locality.codigo_postal;
-            vm.store.cp = vm.locality.codigo_postal;
-
-            console.log("store", vm.store);
 
             vm.loadingPromise = Stores.create(vm.store)
                 .then(function(createdStore){
@@ -169,7 +162,7 @@
                     vm.storeSegmentation = res;
                 })
                 .catch(function (err) {
-                    console.log(err);
+                    console.error(err);
                 });
         }
 
