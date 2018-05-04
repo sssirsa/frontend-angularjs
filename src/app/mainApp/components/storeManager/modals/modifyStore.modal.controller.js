@@ -59,12 +59,6 @@
         function accept() {
             vm.store.segmentacion_id = vm.segmentationSelect;
 
-            angular.forEach(vm.localities, function (local) {
-                if(local.id == vm.locality){
-                    vm.store.localidad_id = local.id;
-                }
-            });
-
             var data = {
                 no_cliente: vm.store.no_cliente,
                 localidad_id: vm.store.localidad_id,
