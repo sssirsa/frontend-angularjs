@@ -344,7 +344,7 @@
         "E045":"No se puede asignar esta solicitud debido a que la solicitud no posee toda la información necesaria",
         "E046":"Existe un establecimiento con el número de cliente que se envío.",
         "E047":"No existe esta segmentación",
-        "E048":"No existe el municipio",
+        "E048":"No existe el municipio"
 
     }
 }
