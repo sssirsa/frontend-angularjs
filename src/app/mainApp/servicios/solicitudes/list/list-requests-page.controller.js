@@ -45,7 +45,9 @@
             $state.go('triangular.admin-default.detailRequest', {id: request.id});
         }
 
-        function downloadReport(requestID) {
+        function downloadReport(requestID, event) {
+
+            event.stopPropagation();
 
             $http.get('app/mainApp/servicios/solicitudes/report/formato.json')
                 .success(function (formato) {
