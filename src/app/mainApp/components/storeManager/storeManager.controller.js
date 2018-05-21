@@ -24,7 +24,8 @@
         Geolocation,
         $mdDialog,
         Stores,
-        Segmentation) {
+        Segmentation,
+        ErrorHandler) {
         var vm = this;
 
         //Variable declaration
@@ -131,8 +132,8 @@
                             vm.store=null;
                             toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));
                         })
-                        .catch(function(){
-                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_ERROR'));
+                        .catch(function(errorDeleteStore){
+                            ErrorHandler.errortranslate(errorDeleteStore);
                         });
                 });
 
@@ -164,21 +165,22 @@
         function showPDF() {
             vm.no_cliente = angular.copy(vm.store.no_cliente);
             Stores.getPDF(vm.no_cliente)
-                .then(function (res) {
-                    vm.urlPDF = res;
+                .then(function (pdfFile) {
+                    vm.urlPDF = pdfFile;
                 })
-                .catch(function (err) {
+                .catch(function (pdfFileError) {
+                    ErrorHandler.errortranslate(pdfFileError);
                 })
         }
 
         function selectSegmentation() {
             Segmentation.list()
-                .then(function (res) {
-                    vm.storeSegmentation = res;
+                .then(function (segmentations) {
+                    vm.storeSegmentation = segmentations;
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
-                .catch(function (err) {
-                    console.log(err);
+                .catch(function (errorSegmentations) {
+                    ErrorHandler.errortranslate(errorSegmentations);
                 });
         }
 

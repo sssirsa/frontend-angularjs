@@ -5,7 +5,7 @@
         .module('app.mainApp')
         .factory('ErrorHandler', ErrorHandler);
 
-    function ErrorHandler(toastr, Translate) {
+    function ErrorHandler(toastr, Translate, $log) {
         return {
             succcesCreation: succcesCreation,
             succcesUpdate: succcesUpdate,
@@ -49,6 +49,7 @@
         }
 
         function errortranslate(response) {
+            $log.error(response);
             var errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
             var unexpectederror = Translate.translate('ERRORS.UNEXPECTED');
             var errorsession = Translate.translate('ERRORS.SESSION_EXPIRED');
