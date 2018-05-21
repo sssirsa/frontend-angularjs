@@ -13,10 +13,10 @@
                                    $log,
                                    States,
                                    Cities,
-                                   STORE_SEGMENTATION,
                                    store,
                                    Localities,
-                                   Segmentation) {
+                                   Segmentation,
+                                   ErrorHandler) {
         var vm = this;
 
         //Variables
@@ -24,8 +24,8 @@
         activate();
 
         vm.store = store;
-        vm.store.latitud= parseFloat(vm.store.latitud);
-        vm.store.longitud= parseFloat(vm.store.longitud);
+        vm.store.latitud = parseFloat(vm.store.latitud);
+        vm.store.longitud = parseFloat(vm.store.longitud);
         vm.store.no_cliente = vm.store.no_cliente;
 
         vm.states = null;
@@ -74,7 +74,7 @@
             };
 
             vm.loadingPromise = Stores.update(data, vm.store.no_cliente)
-                .then(function(createdStore){
+                .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
 
@@ -89,8 +89,8 @@
                     vm.estado_nombre = null;
                     vm.municipio_nombre = null;
                 })
-                .catch(function(errorCreateStore){
-                    toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_ERROR'));
+                .catch(function (errorCreateStore) {
+                    ErrorHandler.errortranslate(errorCreateStore);
                 });
         }
 
@@ -107,9 +107,8 @@
                         listCities(vm.state);
                     })
                     .catch(function (stateListError) {
-                        $log.error(stateListError);
+                        ErrorHandler.errortranslate(stateListError);
                         vm.states = null;
-                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
                     });
             }
         }
@@ -122,23 +121,15 @@
                         vm.city = vm.store.localidad.municipio.id;
 
                         angular.forEach(vm.states, function (stado) {
-                            if(stado.id == state){
+                            if (stado.id == state) {
                                 vm.estado_nombre = stado.nombre;
                             }
                         });
                         listLocalities(vm.city);
                     })
                     .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-            else {
-                vm.loadingCities = Cities.list()
-                    .then(function (citiesList) {
-                        vm.cities = Helper.filterDeleted(citiesList, true);
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
+                        ErrorHandler.errortranslate(citiesListError);
+                        vm.cities = null;
                     });
             }
         }
@@ -152,23 +143,15 @@
                         vm.codigo_postal = vm.store.localidad.codigo_postal;
 
                         angular.forEach(vm.cities, function (ciudad) {
-                            if(ciudad.id == city){
+                            if (ciudad.id == city) {
                                 vm.municipio_nombre = ciudad.nombre;
                             }
                         });
 
                     })
                     .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-            else {
-                vm.loadingLocalities = Localities.list()
-                    .then(function (localitiesList) {
-                        vm.cities = Helper.filterDeleted(localitiesList, true);
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
+                        ErrorHandler.errortranslate(localitiesListError);
+                        vm.localities = null;
                     });
             }
         }
@@ -189,12 +172,12 @@
 
         function selectSegmentation() {
             Segmentation.list()
-                .then(function (res) {
-                    vm.storeSegmentation = res;
+                .then(function (listSegments) {
+                    vm.storeSegmentation = listSegments;
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
-                .catch(function (err) {
-                    console.error(err);
+                .catch(function (errorListSegments) {
+                    ErrorHandler.errortranslate(errorListSegments);
                 });
         }
 

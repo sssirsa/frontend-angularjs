@@ -16,20 +16,17 @@
         });
 
     /* @ngInject */
-    function storeManagerController(
-        Translate,
-        toastr,
-        $log,
-        STORE_SEGMENTATION,
-        Geolocation,
-        $mdDialog,
-        Stores,
-        Segmentation,
-        ErrorHandler) {
+    function storeManagerController(Translate,
+                                    toastr,
+                                    $log,
+                                    Geolocation,
+                                    $mdDialog,
+                                    Stores,
+                                    Segmentation,
+                                    ErrorHandler) {
         var vm = this;
 
         //Variable declaration
-        vm.storeSegmentation = STORE_SEGMENTATION;
         vm.store = null;
         vm.urlArchivo = null;
         vm.no_cliente = null;
@@ -58,12 +55,12 @@
             })
                 .then(function (store) {
                     vm.store = store;
-                    vm.storeSelected({store:store});
+                    vm.storeSelected({store: store});
                     showPDF();
                     selectSegmentation();
                 })
-                .catch(function(storeError){
-                    if(storeError){
+                .catch(function (storeError) {
+                    if (storeError) {
                         $log.error(storeError);
                     }
                 });
@@ -80,12 +77,12 @@
             })
                 .then(function (store) {
                     vm.store = store;
-                    vm.storeSelected({store:store});
+                    vm.storeSelected({store: store});
                     showPDF();
                     selectSegmentation();
                 })
-                .catch(function(storeError){
-                    if(storeError){
+                .catch(function (storeError) {
+                    if (storeError) {
                         $log.error(storeError);
                     }
                 });
@@ -99,18 +96,18 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
-                locals:{
-                    store:vm.store
+                locals: {
+                    store: vm.store
                 }
             })
                 .then(function (store) {
                     vm.store = store;
-                    vm.storeSelected({store:store});
+                    vm.storeSelected({store: store});
                     showPDF();
                     selectSegmentation();
                 })
-                .catch(function(storeError){
-                    if(storeError){
+                .catch(function (storeError) {
+                    if (storeError) {
                         $log.error(storeError);
                     }
                 });
@@ -126,13 +123,13 @@
                 .cancel('Cancelar');
 
             $mdDialog.show(confirm)
-                .then(function(){
+                .then(function () {
                     vm.deletingStore = Stores.remove(vm.store.no_cliente)
-                        .then(function(){
-                            vm.store=null;
+                        .then(function () {
+                            vm.store = null;
                             toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));
                         })
-                        .catch(function(errorDeleteStore){
+                        .catch(function (errorDeleteStore) {
                             ErrorHandler.errortranslate(errorDeleteStore);
                         });
                 });
@@ -158,7 +155,7 @@
             })
                 .then(function () {
                 })
-                .catch(function(){
+                .catch(function () {
                 });
         }
 
