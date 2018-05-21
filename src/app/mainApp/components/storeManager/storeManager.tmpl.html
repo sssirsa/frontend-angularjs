@@ -199,6 +199,9 @@
                         ng-model="$ctrl.store.longitud"/>
                 </md-input-container>
             </div>
+
+            <img ng-if="vm.image" ngf-src="{{vm.image}}">
+
             <div layout="column"
                  layout-align-gt-sm="end end"
                  layout-gt-sm="row"
