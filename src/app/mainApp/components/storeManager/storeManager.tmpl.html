@@ -200,7 +200,11 @@
                 </md-input-container>
             </div>
 
-            <img ng-if="vm.image" ngf-src="{{vm.image}}">
+            <div latout="column"
+                 layout-align="center center">
+            <img ng-if="$ctrl.store.mapa"
+                ngf-src="$ctrl.store.mapa">
+            </div>
 
             <div layout="column"
                  layout-align-gt-sm="end end"

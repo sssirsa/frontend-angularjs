@@ -137,25 +137,7 @@
         }
 
         function showStoreLocation() {
-            //Geolocation.locate(vm.store.latitud, vm.store.longitud);
-            Geolocation.getMap(vm.store.latitud, vm.store.longitud)
-                .then( function (mapThumbnail){
-                    vm.image='data:image/png;base64,'+_arrayBufferToBase64(mapThumbnail.data);
-                    console.debug(vm.image);
-                })
-                .catch(function(errorMapThumbnail){
-                    console.error(errorMapThumbnail);
-                });
-        }
-
-        function _arrayBufferToBase64(buffer) {
-            var binary = '';
-            var bytes = new Uint8Array(buffer);
-            var len = bytes.byteLength;
-            for (var i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return window.btoa(binary);
+            Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }
 
         function showCredential() {
