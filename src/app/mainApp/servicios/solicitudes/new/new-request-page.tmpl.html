@@ -211,18 +211,6 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.ROUTE</label>
-                <md-select
-                    md-on-open="vm.loadRoutes()"
-                    ng-model="vm.request.ruta_id">
-                    <md-option
-                        ng-repeat="route in vm.routes"
-                        ng-value="route.id">
-                        {{route.nombre}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
         </div>
 
         <div layout="row"

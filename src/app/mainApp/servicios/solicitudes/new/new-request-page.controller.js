@@ -13,7 +13,6 @@
                                       SCORES,
                                       TipoEquipo,
                                       OPTIONS,
-                                      Routes,
                                       SalePointRequests,
                                       Sucursal,
                                       Helper,
@@ -27,7 +26,6 @@
         vm.selectedEquipmentKindChange = selectedEquipmentKindChange;
         vm.searchEquipmentKind = searchEquipmentKind;
         vm.save = save;
-        vm.loadRoutes = loadRoutes;
         vm.loadSucursales = loadSucursales;
         vm.filesSelected = filesSelected;
 
@@ -66,13 +64,15 @@
         }
 
         function loadSucursales() {
-            return Sucursal.listObject()
-                .then(function (sucursalList) {
-                    vm.sucursales = Helper.filterDeleted(sucursalList, true);
-                })
-                .catch(function (sucursalListError) {
-                    $log.error(sucursalListError);
-                });
+            if(!vm.sucursales) {
+                return Sucursal.listObject()
+                    .then(function (sucursalList) {
+                        vm.sucursales = Helper.filterDeleted(sucursalList, true);
+                    })
+                    .catch(function (sucursalListError) {
+                        $log.error(sucursalListError);
+                    });
+            }
         }
 
         function storeSelected(store) {
@@ -80,7 +80,7 @@
             if(vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.id;
+            vm.request.establecimiento = store.no_cliente;
         }
 
         function selectedEquipmentKindChange() {
@@ -127,16 +127,6 @@
 
                 });
             }
-        }
-
-        function loadRoutes() {
-            return Routes.list()
-                .then(function (routeList) {
-                    vm.routes = routeList;
-                })
-                .catch(function (routeListError) {
-                    $log.error(routeListError);
-                });
         }
 
         function save() {
