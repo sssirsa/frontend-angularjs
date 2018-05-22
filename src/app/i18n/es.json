@@ -172,7 +172,8 @@
                     "UPDATE_SUCCESS": "Establecimiento modificado correctamente",
                     "UPDATE_ERROR": "Error al modificar establecimiento",
                     "MASSIVE_ERROR":"Error en la carga masiva de establecimientos",
-                    "MASSIVE_SUCCESS":"Carga masiva de establecimientos realizada corectamente"
+                    "MASSIVE_SUCCESS":"Carga masiva de establecimientos realizada corectamente",
+                    "WARNING_IMAGE":"Ocurrió un error al obtener el mapa, el establecimiento se guardará sin imagen"
                 }
             },
             "FILE_UPLOADER": {

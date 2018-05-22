@@ -14,7 +14,8 @@
                                    Cities,
                                    Localities,
                                    Segmentation,
-                                   ErrorHandler) {
+                                   ErrorHandler,
+                                   Geolocation) {
         var vm = this;
 
         //Variables
@@ -58,6 +59,21 @@
             vm.store.localidad_id = vm.locality.id;
             vm.store.segmentacion_id = vm.segmentationSelect;
 
+            vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
+                .then( function (mapThumbnail){
+                    vm.store.mapa = 'data:image/png;base64,'+_arrayBufferToBase64(mapThumbnail.data);
+                    createStore();
+                })
+                .catch(function(errorMapThumbnail){
+                    console.error(errorMapThumbnail);
+                    toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
+                    createStore();
+                });
+
+
+        }
+
+        function createStore(){
             vm.loadingPromise = Stores.create(vm.store)
                 .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
@@ -145,6 +161,16 @@
                 .catch(function (errorListSegments) {
                     ErrorHandler.errortranslate(errorListSegments);
                 });
+        }
+
+        function _arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
         }
 
     }
