@@ -16,17 +16,13 @@
                                    store,
                                    Localities,
                                    Segmentation,
-                                   ErrorHandler) {
+                                   ErrorHandler,
+                                   Geolocation) {
         var vm = this;
 
         //Variables
         //vm.storeSegmentation = STORE_SEGMENTATION;
         activate();
-
-        vm.store = store;
-        vm.store.latitud = parseFloat(vm.store.latitud);
-        vm.store.longitud = parseFloat(vm.store.longitud);
-        vm.store.no_cliente = vm.store.no_cliente;
 
         vm.states = null;
         vm.cities = null;
@@ -35,6 +31,9 @@
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
+
+        //Control variables
+        vm.changedLocation = null;
 
         //Functions
         vm.accept = accept;
@@ -45,20 +44,41 @@
         vm.selectState = selectState;
         vm.selectCity = selectCity;
         vm.selectSegmentation = selectSegmentation;
+        vm.changeLocation = changeLocation;
 
         activate();
 
         function activate() {
+            vm.store = store;
+            vm.store.latitud = parseFloat(vm.store.latitud);
+            vm.store.longitud = parseFloat(vm.store.longitud);
             listStates();
             selectSegmentation();
         }
 
 
         function accept() {
-            vm.store.segmentacion_id = vm.segmentationSelect;
-            console.debug(vm.store);
+            if (vm.changedLocation || !vm.store.mapa) {
+                vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
+                    .then(function (mapThumbnail) {
+                        vm.store.mapa = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
+                        modifyStore();
+                    })
+                    .catch(function (errorMapThumbnail) {
+                        $log.error(errorMapThumbnail);
+                        toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
+                        modifyStore();
+                    });
+            }
+            else {
+                modifyStore();
+            }
+        }
 
-            var data = {
+        function modifyStore() {
+            vm.store.segmentacion_id = vm.segmentationSelect;
+
+            var storeToSend = {
                 no_cliente: vm.store.no_cliente,
                 localidad_id: vm.store.localidad.id,
                 nombre_establecimiento: vm.store.nombre_establecimiento,
@@ -73,21 +93,10 @@
                 segmentacion_id: vm.store.segmentacion_id
             };
 
-            vm.loadingPromise = Stores.update(data, vm.store.no_cliente)
+            vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
                 .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
-
-                    data = null;
-                    vm.store = null;
-                    vm.cities = null;
-                    vm.localities = null;
-                    vm.state = null;
-                    vm.city = null;
-                    vm.locality = null;
-                    vm.postal_code = null;
-                    vm.estado_nombre = null;
-                    vm.municipio_nombre = null;
                 })
                 .catch(function (errorCreateStore) {
                     ErrorHandler.errortranslate(errorCreateStore);
@@ -179,6 +188,20 @@
                 .catch(function (errorListSegments) {
                     ErrorHandler.errortranslate(errorListSegments);
                 });
+        }
+
+        function changeLocation() {
+            vm.changedLocation = true;
+        }
+
+        function _arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
         }
 
     }

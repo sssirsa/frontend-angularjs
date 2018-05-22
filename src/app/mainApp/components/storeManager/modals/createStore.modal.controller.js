@@ -15,7 +15,8 @@
                                    Localities,
                                    Segmentation,
                                    ErrorHandler,
-                                   Geolocation) {
+                                   Geolocation,
+                                   $log) {
         var vm = this;
 
         //Variables
@@ -56,8 +57,6 @@
 
 
         function accept() {
-            vm.store.localidad_id = vm.locality.id;
-            vm.store.segmentacion_id = vm.segmentationSelect;
 
             vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
                 .then( function (mapThumbnail){
@@ -65,7 +64,7 @@
                     createStore();
                 })
                 .catch(function(errorMapThumbnail){
-                    console.error(errorMapThumbnail);
+                    $log.error(errorMapThumbnail);
                     toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
                     createStore();
                 });
@@ -74,6 +73,9 @@
         }
 
         function createStore(){
+            vm.store.localidad_id = vm.locality.id;
+            vm.store.segmentacion_id = vm.segmentationSelect;
+
             vm.loadingPromise = Stores.create(vm.store)
                 .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
