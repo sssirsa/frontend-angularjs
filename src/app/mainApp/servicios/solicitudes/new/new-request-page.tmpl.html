@@ -201,6 +201,29 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.START_HOUR</label>
+                <input type="time"
+                       ng-model="vm.startHour"
+                       placeholder="HH:mm:ss"
+                       min="{{vm.minimalHour}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUESTS.NEW.MINIMAL_START_HOUR'|translate}}: {{vm.minimalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.END_HOUR</label>
+                <input type="time"
+                       ng-model="vm.endHour"
+                       placeholder="HH:mm:ss"
+                       ng-disabled="!vm.startHour"
+                       min="{{vm.startHour | moment:'HH:mm:ss'}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUESTS.NEW.MAXIMAL_END_HOUR'|translate}}: {{vm.maximalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.SCORE</label>
                 <md-select
                     ng-model="vm.request.calificacion">
@@ -220,6 +243,7 @@
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
             <md-button
+                cg-busy="{promise:vm.savingPromise, message:''}"
                 aria-label="assign" ng-click="vm.save()"
                 class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>

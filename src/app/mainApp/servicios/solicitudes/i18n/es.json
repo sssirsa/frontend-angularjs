@@ -98,7 +98,11 @@
                 "SEARCH":"Tipo de equipo a asignar"
             },
             "SUCURSAL":"Sucursal",
-            "EVIDENCES":"Evidencias"
+            "EVIDENCES":"Evidencias",
+            "START_HOUR": "Hora inicio",
+            "MINIMAL_START_HOUR": "Hora mínima de inicio",
+            "END_HOUR": "Hora término",
+            "MAXIMAL_END_HOUR": "Hora máxima término"
         }
     }
 }
