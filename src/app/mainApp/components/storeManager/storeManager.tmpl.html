@@ -199,6 +199,13 @@
                         ng-model="$ctrl.store.longitud"/>
                 </md-input-container>
             </div>
+
+            <div latout="column"
+                 layout-align="center center">
+            <img ng-if="$ctrl.store.mapa"
+                ngf-src="$ctrl.store.mapa">
+            </div>
+
             <div layout="column"
                  layout-align-gt-sm="end end"
                  layout-gt-sm="row"
