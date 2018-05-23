@@ -201,6 +201,7 @@
                         min="-90"
                         max="90"
                         ng-model="vm.store.latitud"
+                        ng-change="vm.changeLocation()"
                         ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
                     <div ng-messages="storeForm.latitud.$error">
                         <div ng-message="pattern">
@@ -218,6 +219,7 @@
                         min="-180"
                         max="180"
                         ng-model="vm.store.longitud"
+                        ng-change="vm.changeLocation()"
                         ng-pattern="/^-?(180|1[0-7][0-9]|[1-9][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
                     <div ng-messages="storeForm.longitud.$error">
                         <div ng-message="pattern">
