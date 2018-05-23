@@ -83,6 +83,7 @@
 
         function storeSelected(store) {
             vm.store = store;
+            console.debug(store);
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }

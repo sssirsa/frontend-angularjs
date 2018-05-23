@@ -81,7 +81,9 @@
             },
             "CABINET":{
                 "TITLE":"Cabinet a retirar",
-                "FIELD":"Económico"
+                "TITLE2":"Cabinet a reparar",
+                "FIELD":"Económico",
+                "EMPTY":"Establecimiento sin cabinets"
             },
             "CABINETS":{
                 "TITLE":"Solicitudes de cabinet",

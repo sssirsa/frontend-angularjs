@@ -123,18 +123,21 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'"
+             ng-if="(vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Servicio Técnico') && vm.store"
              layout-padding>
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.NEW.CABINET.TITLE</h3>
+            <h3 ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'" translate>
+                REQUESTS.NEW.CABINET.TITLE</h3>
+            <h3 ng-if="vm.request.tipo === 'Servicio Técnico'" translate>REQUESTS.NEW.CABINET.TITLE2</h3>
         </div>
         <div flex
              layout="column"
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
+            <h3 ng-if="!vm.store.cabinets || vm.store.cabinets.length == 0">{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
+            <md-input-container ng-if="vm.store.cabinets || vm.store.cabinets.length > 0" flex class="md-block">
                 <label translate>REQUESTS.NEW.CABINET.FIELD</label>
                 <md-select
                     ng-model="vm.request.cabinet">
