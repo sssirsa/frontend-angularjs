@@ -61,7 +61,7 @@
             if (vm.changedLocation || !vm.store.mapa) {
                 vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
                     .then(function (mapThumbnail) {
-                        vm.store.mapa = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
+                        vm.store.mapa_img = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
                         modifyStore();
                     })
                     .catch(function (errorMapThumbnail) {
@@ -92,6 +92,10 @@
                 telefono_encargado: vm.store.telefono_encargado,
                 segmentacion_id: vm.store.segmentacion_id
             };
+
+            if(vm.store.mapa_img){
+                storeToSend.mapa_img= vm.store.mapa_img;
+            }
 
             vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
                 .then(function (createdStore) {
