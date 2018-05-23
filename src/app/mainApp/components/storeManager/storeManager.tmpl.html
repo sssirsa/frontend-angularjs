@@ -202,8 +202,11 @@
 
             <div latout="column"
                  layout-align="center center">
-            <img ng-if="$ctrl.store.mapa"
-                ngf-src="$ctrl.store.mapa">
+                <div flex>
+                    <img ng-if="$ctrl.store.mapa"
+                         class="mini-map"
+                         ngf-src="$ctrl.store.mapa">
+                </div>
             </div>
 
             <div layout="column"
