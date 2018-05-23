@@ -202,7 +202,7 @@
                         max="90"
                         ng-model="vm.store.latitud"
                         ng-change="vm.changeLocation()"
-                        ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
+                        ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,7})?$/"/>
                     <div ng-messages="storeForm.latitud.$error">
                         <div ng-message="pattern">
                             {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.ERRORS.LATITUDE'|translate}}
