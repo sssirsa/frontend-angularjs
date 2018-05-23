@@ -60,7 +60,7 @@
 
             vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
                 .then( function (mapThumbnail){
-                    vm.store.mapa = 'data:image/png;base64,'+_arrayBufferToBase64(mapThumbnail.data);
+                    vm.store.mapa_img = 'data:image/png;base64,'+_arrayBufferToBase64(mapThumbnail.data);
                     createStore();
                 })
                 .catch(function(errorMapThumbnail){
