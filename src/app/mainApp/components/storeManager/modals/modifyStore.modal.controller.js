@@ -93,6 +93,10 @@
                 segmentacion_id: vm.store.segmentacion_id
             };
 
+            if(vm.store.mapa_img){
+                storeToSend.mapa_img= vm.store.mapa_img;
+            }
+
             vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
                 .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_SUCCESS'));
