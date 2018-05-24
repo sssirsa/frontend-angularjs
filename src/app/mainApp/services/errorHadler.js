@@ -54,7 +54,6 @@
             var unexpectederror = Translate.translate('ERRORS.UNEXPECTED');
             var errorsession = Translate.translate('ERRORS.SESSION_EXPIRED');
             var translatemsg = '';
-
             if (response) {
 
                 switch (response.status) {
@@ -65,8 +64,9 @@
                     case 400:
                         if (response.data) {
                             if (response.data.message){
-                                var temporal="ERRORS."+response.data.message[0];
-
+                                console.log(response.data.message)
+                                var temporal="ERRORS."+response.data.message;
+                                console.log(temporal);
                                 translatemsg = Translate.translate(temporal);
 
                                 toastr.error(translatemsg, errorTitle);
