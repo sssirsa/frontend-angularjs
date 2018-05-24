@@ -123,18 +123,21 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'"
+             ng-if="(vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Servicio Técnico') && vm.store"
              layout-padding>
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.NEW.CABINET.TITLE</h3>
+            <h3 ng-if="vm.request.tipo === 'Recolección' || vm.request.tipo === 'Cambio'" translate>
+                REQUESTS.NEW.CABINET.TITLE</h3>
+            <h3 ng-if="vm.request.tipo === 'Servicio Técnico'" translate>REQUESTS.NEW.CABINET.TITLE2</h3>
         </div>
         <div flex
              layout="column"
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
-            <md-input-container flex class="md-block">
+            <h3 ng-if="!vm.store.cabinets || vm.store.cabinets.length == 0">{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
+            <md-input-container ng-if="vm.store.cabinets || vm.store.cabinets.length > 0" flex class="md-block">
                 <label translate>REQUESTS.NEW.CABINET.FIELD</label>
                 <md-select
                     ng-model="vm.request.cabinet">
@@ -201,6 +204,29 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.START_HOUR</label>
+                <input type="time"
+                       ng-model="vm.startHour"
+                       placeholder="HH:mm:ss"
+                       min="{{vm.minimalHour}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUESTS.NEW.MINIMAL_START_HOUR'|translate}}: {{vm.minimalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.END_HOUR</label>
+                <input type="time"
+                       ng-model="vm.endHour"
+                       placeholder="HH:mm:ss"
+                       ng-disabled="!vm.startHour"
+                       min="{{vm.startHour | moment:'HH:mm:ss'}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUESTS.NEW.MAXIMAL_END_HOUR'|translate}}: {{vm.maximalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.SCORE</label>
                 <md-select
                     ng-model="vm.request.calificacion">
@@ -208,18 +234,6 @@
                         ng-repeat="score in vm.scores"
                         ng-value="score.value">
                         {{score.label}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.ROUTE</label>
-                <md-select
-                    md-on-open="vm.loadRoutes()"
-                    ng-model="vm.request.ruta_id">
-                    <md-option
-                        ng-repeat="route in vm.routes"
-                        ng-value="route.id">
-                        {{route.nombre}}
                     </md-option>
                 </md-select>
             </md-input-container>
@@ -232,6 +246,7 @@
              layout-align-sm="start stretch"
              layout-align-xs="start stretch">
             <md-button
+                cg-busy="{promise:vm.savingPromise, message:''}"
                 aria-label="assign" ng-click="vm.save()"
                 class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>
