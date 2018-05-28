@@ -30,10 +30,10 @@
             </b>
         </div>
         <div layout="column" flex-gt-md="10" >
-            <span style="text-align: center">{{$ctrl.pre.estatus}}</span>
-            <div class="{{$ctrl.pre.estatus}}"></div>
+            <span style="text-align: center">{{$ctrl.pre.status}}</span>
+            <div class="{{$ctrl.pre.status}}"></div>
         </div>
-        <div layout="column" layout-align="center center" ng-if="$ctrl.pre.estatus=='Abierta'" >
+        <div layout="column" layout-align="center center" ng-if="$ctrl.pre.status=='Abierta'" >
             <md-button aria-label="fab button"
                        ng-click="$ctrl.statusDetail()"
                        class="md-raised md-primary">

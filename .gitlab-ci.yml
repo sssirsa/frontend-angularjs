@@ -37,8 +37,13 @@ configuration:
 
 deploy:
   stage: deploy
-  image: node:4.8.4
+  image: node:10.2.1
   before_script:
+    - npm i socket.io@2.1.1
+    - npm install fs-extra@4.0.1
+    - npm install graceful-fs@4.1.11
+    - npm i minimatch@3.0.4
+    - npm i karma@2.0.2
     - npm install gulp
   script:
     - rm -rf dist/
@@ -54,14 +59,12 @@ deploy:
 
 npm:
   stage: dep
-  image: node:4.8.4
+  image: node:10.2.1
   before_script:
     - apt-get update
     - apt-get install build-essential -y
   script:
-    - npm install -g npm@latest
     - npm install
-    - ls
   cache:
     untracked: true
     paths:
@@ -76,9 +79,9 @@ npm:
 
 bower:
   stage: dep
-  image: node:6.11.2
+  image: node:10.2.1
   variables:
-    BOWER_VERSION: 1.8.0
+    BOWER_VERSION: 1.8.4
   script:
     - ls
     - npm install -g bower@$BOWER_VERSION --silent
