@@ -34,7 +34,6 @@ configuration:
     - development
     - staging
     - master
-    - hotfix/CorrectionGitCli
 
 deploy:
   stage: deploy
@@ -48,7 +47,7 @@ deploy:
     - npm install gulp
   script:
     - rm -rf dist/
-    - ./node_modules/.bin/gulp deploy --env development
+    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
   dependencies:
     - npm
     - bower
@@ -57,7 +56,6 @@ deploy:
     - development
     - staging
     - master
-    - hotfix/CorrectionGitCli
 
 npm:
   stage: dep
@@ -78,7 +76,6 @@ npm:
     - development
     - master
     - staging
-    - hotfix/CorrectionGitCli
 
 bower:
   stage: dep
@@ -101,4 +98,3 @@ bower:
     - development
     - master
     - staging
-    - hotfix/CorrectionGitCli
