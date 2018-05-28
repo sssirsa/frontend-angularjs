@@ -41,6 +41,9 @@ deploy:
   image: node:10.2.1
   before_script:
     - npm update socket.io
+    - npm install fs-extra@4.0.1
+    - npm install graceful-fs@4.1.11
+    - npm i minimatch@3.0.4
     - npm install gulp
   script:
     - rm -rf dist/
