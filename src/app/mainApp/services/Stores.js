@@ -67,6 +67,10 @@
             return defer.promise;
         }
 
+        function getPDF(id_establecimiento) {
+            return baseURL.all(URLS.credentials).all(id_establecimiento).customGET();
+        }
+
         return {
             list: list,
             getByID: getByID,
@@ -77,7 +81,8 @@
             getByCity: getByCity,
             getByState:getByState,
             getByPostalCode:getByPostalCode,
-            getByEconomic:getByEconomic
+            getByEconomic:getByEconomic,
+            getPDF:getPDF
         };
 
     }

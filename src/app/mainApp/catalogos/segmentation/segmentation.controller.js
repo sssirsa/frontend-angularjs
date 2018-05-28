@@ -90,7 +90,7 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Segmentation.remove(vm.segmentation.id).then(function (res) {
+                vm.formLoading = Segmentation.remove(vm.segmentation.id).then(function (res) {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
@@ -103,7 +103,7 @@
         }
 
         function update() {
-            Segmentation.update(vm.segmentation, vm.segmentation.id).then(function (res) {
+            vm.formLoading = Segmentation.update(vm.segmentation, vm.segmentation.id).then(function (res) {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
@@ -118,7 +118,7 @@
         }
 
         function create() {
-            Segmentation.create(vm.segmentation).then(function (res) {
+            vm.formLoading = Segmentation.create(vm.segmentation).then(function (res) {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.segmentation = angular.copy(segmentationLocal);
                 cancel();
@@ -142,7 +142,7 @@
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
                 vm.segmentation.deleted = false;
-                Segmentation.update(vm.segmentation).then(function (res) {
+                vm.formLoading = Segmentation.update(vm.segmentation).then(function (res) {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();

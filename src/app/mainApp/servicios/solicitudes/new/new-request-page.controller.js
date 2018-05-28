@@ -13,21 +13,19 @@
                                       SCORES,
                                       TipoEquipo,
                                       OPTIONS,
-                                      Routes,
                                       SalePointRequests,
                                       Sucursal,
                                       Helper,
                                       User) {
 
         var vm = this;
-        vm.user=User.getUser();
+        vm.user = User.getUser();
 
         //Function mapping
         vm.storeSelected = storeSelected;
         vm.selectedEquipmentKindChange = selectedEquipmentKindChange;
         vm.searchEquipmentKind = searchEquipmentKind;
         vm.save = save;
-        vm.loadRoutes = loadRoutes;
         vm.loadSucursales = loadSucursales;
         vm.filesSelected = filesSelected;
 
@@ -43,11 +41,17 @@
         vm.scores = SCORES;
         vm.requestKinds = OPTIONS.requestKinds;
         vm.fileValidations = {
-            size:{
-                max:'5MB',
-                min:'10B'
+            size: {
+                max: '5MB',
+                min: '10B'
             }
         };
+        vm.minimalHour = '09:00:00';
+        vm.maximalHour = '18:00:00';
+
+        //Auxiliary variables
+        vm.startHour = null;
+        vm.endHour = null;
 
         activate();
 
@@ -66,21 +70,24 @@
         }
 
         function loadSucursales() {
-            return Sucursal.listObject()
-                .then(function (sucursalList) {
-                    vm.sucursales = Helper.filterDeleted(sucursalList, true);
-                })
-                .catch(function (sucursalListError) {
-                    $log.error(sucursalListError);
-                });
+            if (!vm.sucursales) {
+                return Sucursal.listObject()
+                    .then(function (sucursalList) {
+                        vm.sucursales = Helper.filterDeleted(sucursalList, true);
+                    })
+                    .catch(function (sucursalListError) {
+                        $log.error(sucursalListError);
+                    });
+            }
         }
 
         function storeSelected(store) {
             vm.store = store;
-            if(vm.request.cabinet) {
+            console.debug(store);
+            if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.id;
+            vm.request.establecimiento = store.no_cliente;
         }
 
         function selectedEquipmentKindChange() {
@@ -129,18 +136,13 @@
             }
         }
 
-        function loadRoutes() {
-            return Routes.list()
-                .then(function (routeList) {
-                    vm.routes = routeList;
-                })
-                .catch(function (routeListError) {
-                    $log.error(routeListError);
-                });
-        }
-
         function save() {
-            SalePointRequests.create(vm.request)
+            //vm.request.hora_cliente_inicio = getTime(vm.startHour);
+            vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0,9);
+            //vm.request.hora_cliente_fin = getTime(vm.endHour);
+            vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0,9);
+
+            vm.savingPromise = SalePointRequests.create(vm.request)
                 .then(function () {
                     $state.go('triangular.admin-default.listRequest');
                     toastr.success(
@@ -155,15 +157,15 @@
                 });
         }
 
-        function filesSelected(files){
-            vm.request.evidencia=[];
-            angular.forEach(files,function(image){
-                var base64Image=null;
+        function filesSelected(files) {
+            vm.request.evidencia = [];
+            angular.forEach(files, function (image) {
+                var base64Image = null;
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(image);
                 fileReader.onloadend = function () {
                     base64Image = fileReader.result;
-                    vm.request.evidencia.push({foto:base64Image});
+                    vm.request.evidencia.push({foto: base64Image});
                 };
             });
         }

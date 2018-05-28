@@ -31,7 +31,7 @@
         }
         function listFilteredpreRequests(requestKind) {
             if (requestKind !== 'Todo') {
-                vm.requests = _.where(vm.list, {estatus: requestKind});
+                vm.requests = _.where(vm.list, {status: requestKind});
             }
             else {
                 vm.requests = vm.list;

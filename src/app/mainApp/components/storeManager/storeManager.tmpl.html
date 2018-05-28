@@ -53,6 +53,22 @@
                 layout-align="center center">
                 <h2>{{'MAIN.COMPONENTS.STORE_MANAGER.SUBTITLE'|translate}}</h2>
             </div>
+
+            <div flex
+                 layout="column"
+                 layout-gt-sm="row"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CLIENT</label>
+                    <input
+                        readonly
+                        name="numero_cliente"
+                        ng-disabled="true"
+                        maxlength="20"
+                        ng-model="$ctrl.store.no_cliente"/>
+                </md-input-container>
+            </div>
+
             <div flex
                  layout="column"
                  layout-gt-sm="row"
@@ -63,15 +79,19 @@
                         ng-disabled="true"
                         ng-model="$ctrl.store.nombre_establecimiento"/>
                 </md-input-container>
+
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
                     <md-select
+                        ng-model="$ctrl.segmentationSelect"
+                        required
                         ng-disabled="true"
-                        ng-model="$ctrl.store.segmentacion">
+                    >
                         <md-option
-                            ng-repeat="segment in $ctrl.storeSegmentation"
-                            ng-value="segment.value">
-                            {{segment.label}}
+                            ng-repeat="segmentation in $ctrl.storeSegmentation"
+                            ng-value="segmentation.id"
+                        >
+                            {{segmentation.nombre}}
                         </md-option>
                     </md-select>
                 </md-input-container>
@@ -179,6 +199,14 @@
                         ng-model="$ctrl.store.longitud"/>
                 </md-input-container>
             </div>
+
+            <div layout="column"
+                 layout-align="center center">
+                <img ng-if="$ctrl.store.mapa"
+                     class="mini-map"
+                     ngf-src="$ctrl.store.mapa">
+            </div>
+
             <div layout="column"
                  layout-align-gt-sm="end end"
                  layout-gt-sm="row"
@@ -187,13 +215,13 @@
 
                 <!--Aquí empieza lo que agrego Alex-->
                 <md-button aria-label="credencial" ng-click="$ctrl.showCredential()" class="md-raised md-primary">
-                    <md-icon md-font-icon="fa fa-clone"></md-icon>
+                    <md-icon md-font-icon="zmdi zmdi-card"></md-icon>
                     {{'MAIN.COMPONENTS.STORE_MANAGER.CREDENTIAL'|translate}}
                 </md-button>
 
-                <md-button aria-label="pdf" ng-click="$ctrl.showPDF()" class="md-raised md-primary">
+                <md-button class="md-primary md-raised">
                     <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
-                    {{'MAIN.COMPONENTS.STORE_MANAGER.PDF'|translate}}
+                    <a href="{{$ctrl.urlPDF.url}}" download="{{$ctrl.no_cliente}}.pdf" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
                 </md-button>
                 <!--Aquí termina lo que agrego Alex-->
 

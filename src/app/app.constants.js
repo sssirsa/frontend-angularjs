@@ -481,7 +481,9 @@
             massive:{
                 store:'massive/store'
             },
-            segmentation: 'segmentacion'
+            segmentation: 'segmentacion',
+            credentials: 'credenciales',
+            map:'https://maps.googleapis.com/maps/api/staticmap'
         })
         .constant('QUERIES', {
             store: {
@@ -601,5 +603,8 @@
                     label: 'Rojo',
                     class:'store_red'
                 }]
-        );
+        )
+        .constant('KEYS', {
+            MAPS_KEY:'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
+        });
 })();

@@ -11,27 +11,12 @@
   /* Set our own color */
   color: grey; }
 
-.store_red {
-  background: #FF0000;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
+.imgQR{
+  max-height: 400px;
+  max-width: 250px;
 }
-.store_low_bronze {
-  background: #9e6201;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
-}
-.store_bronze {
-  background: #e08a00;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
-}
-.store_silver {
-  background: #afafaf;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
-}
-.store_gold {
-  background: #ffd000;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
-}
-.store_platinum {
-  background: #ededed;
-  box-shadow: 0px 0px 10px 9px #FFFFFF inset
+
+.mini-map{
+  max-width:500px;
+  max-height:300px;
 }
