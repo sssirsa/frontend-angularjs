@@ -44,6 +44,7 @@ deploy:
     - npm install fs-extra@4.0.1
     - npm install graceful-fs@4.1.11
     - npm i minimatch@3.0.4
+    - npm i karma@2.0.2
     - npm install gulp
   script:
     - rm -rf dist/
