@@ -52,6 +52,7 @@ deploy:
     - development
     - staging
     - master
+    - hotfix/CorrectionGitCli
 
 npm:
   stage: dep
@@ -61,9 +62,8 @@ npm:
     - apt-get install build-essential -y
   script:
     - npm install -g n
-    - n stable 
+    - n stable
     - npm install
-    - ls
   cache:
     untracked: true
     paths:
