@@ -40,6 +40,7 @@ deploy:
   stage: deploy
   image: node:10.2.1
   before_script:
+    - npm update socket.io
     - npm install gulp
   script:
     - rm -rf dist/
@@ -60,7 +61,7 @@ npm:
   before_script:
     - apt-get update
     - apt-get install build-essential -y
-  script: 
+  script:
     - npm install
   cache:
     untracked: true
