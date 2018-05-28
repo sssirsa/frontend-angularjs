@@ -60,7 +60,8 @@ npm:
     - apt-get update
     - apt-get install build-essential -y
   script:
-    - npm install -g npm@3.10.10
+    - npm install -g n
+    - n stable 
     - npm install
     - ls
   cache:
