@@ -5,7 +5,7 @@
         .module('app.mainApp')
         .factory('ErrorHandler', ErrorHandler);
 
-    function ErrorHandler(toastr, Translate) {
+    function ErrorHandler(toastr, Translate, $log) {
         return {
             succcesCreation: succcesCreation,
             succcesUpdate: succcesUpdate,
@@ -49,11 +49,11 @@
         }
 
         function errortranslate(response) {
+            $log.error(response);
             var errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
             var unexpectederror = Translate.translate('ERRORS.UNEXPECTED');
             var errorsession = Translate.translate('ERRORS.SESSION_EXPIRED');
             var translatemsg = '';
-
             if (response) {
 
                 switch (response.status) {
@@ -64,8 +64,9 @@
                     case 400:
                         if (response.data) {
                             if (response.data.message){
-                                var temporal="ERRORS."+response.data.message[0];
-
+                                console.log(response.data.message)
+                                var temporal="ERRORS."+response.data.message;
+                                console.log(temporal);
                                 translatemsg = Translate.translate(temporal);
 
                                 toastr.error(translatemsg, errorTitle);

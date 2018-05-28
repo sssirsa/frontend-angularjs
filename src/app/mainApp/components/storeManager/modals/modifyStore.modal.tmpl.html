@@ -55,7 +55,8 @@
                             ng-repeat="segmentation in vm.storeSegmentation"
                             ng-value="segmentation.id"
                         >
-                            {{segmentation.nombre}}
+                            <span style="background-color: {{segmentation.color}};" class="square-color"></span>
+                            <b>&nbsp;{{segmentation.nombre}} </b>
                         </md-option>
                     </md-select>
                 </md-input-container>
@@ -200,7 +201,8 @@
                         min="-90"
                         max="90"
                         ng-model="vm.store.latitud"
-                        ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
+                        ng-change="vm.changeLocation()"
+                        ng-pattern="/^-?(90|[1-8][0-9]|[0-9]){1}(\.\d{1,7})?$/"/>
                     <div ng-messages="storeForm.latitud.$error">
                         <div ng-message="pattern">
                             {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.ERRORS.LATITUDE'|translate}}
@@ -217,7 +219,8 @@
                         min="-180"
                         max="180"
                         ng-model="vm.store.longitud"
-                        ng-pattern="/^-?(180|1[0-7][0-9]|[1-9][0-9]|[0-9]){1}(\.\d{1,6})?$/"/>
+                        ng-change="vm.changeLocation()"
+                        ng-pattern="/^-?(180|1[0-7][0-9]|[1-9][0-9]|[0-9]){1}(\.\d{1,7})?$/"/>
                     <div ng-messages="storeForm.longitud.$error">
                         <div ng-message="pattern">
                             {{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.NEW.ERRORS.LONGITUDE'|translate}}
