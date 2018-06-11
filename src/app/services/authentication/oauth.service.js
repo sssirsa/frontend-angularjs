@@ -11,20 +11,11 @@
             revokeToken: revokeToken
         };
 
-        function getToken(userName, password) {
-            RoleStore.clearStore();
-            var data = {
-                grant_type: 'password',
-                client_id: EnvironmentConfig.site.oauth.clientId,
-                client_secret: EnvironmentConfig.site.oauth.clientSecret,
-                username: userName,
-                password: password
-            };
-
+        function authenticate (params){
             var request = $q.defer();
 
             MobileRestangular.all('oauth').all('token/')
-                .customPOST({'content-type': 'application/json'}, null, data)
+                .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
                     $cookies.putObject('refreshToken', loginResponse.refresh_token);
@@ -42,6 +33,8 @@
                             angular.forEach(profile, function (roleName) {
                                 roles[roleName.name.toUpperCase()] = [];
                             });
+
+                            $cookies.putObject('roles', roles);
 
                             RoleStore.defineManyRoles(roles);
 
@@ -69,6 +62,19 @@
             return request.promise;
         }
 
+        function getToken(userName, password) {
+            RoleStore.clearStore();
+            var data = {
+                grant_type: 'password',
+                client_id: EnvironmentConfig.site.oauth.clientId,
+                client_secret: EnvironmentConfig.site.oauth.clientSecret,
+                username: userName,
+                password: password
+            };
+
+            return authenticate(data);
+        }
+
         function refreshTokenFunction() {
             var data = {
                 grant_type: 'refresh_token',
@@ -76,18 +82,13 @@
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 refresh_token: $cookies.getObject('refreshToken')
             };
-            return MobileRestangular.all('oauth').all('token')
-                .customPOST({'content-type': 'application/json'}, null, data);
 
+            return authenticate(data);
         }
 
         function isValidToken() {
             if ($cookies.getObject('expiration')) {
-                if (compareDates()) {
-                    $cookies.remove('token');
-                    return false;
-                }
-                return true;
+                return !compareDates();
             }
             else {
                 return false;

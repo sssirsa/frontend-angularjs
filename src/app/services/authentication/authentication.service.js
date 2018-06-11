@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('app.mainApp')
+        .module('app')
         .factory('AuthService', AuthService);
 
     /* @ngInject */
@@ -11,7 +11,8 @@
             isAuthenticated: isAuthenticated,
             login: login,
             logout: logout,
-            getToken: getToken
+            getToken: getToken,
+            refreshToken: refreshToken
         };
 
         function isAuthenticated() {
@@ -28,6 +29,10 @@
 
         function logout() {
             return OAuth.revokeToken();
+        }
+
+        function refreshToken(){
+            return OAuth.refreshTokenFunction();
         }
 
         return authService;
