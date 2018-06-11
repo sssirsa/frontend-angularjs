@@ -19,17 +19,25 @@
                 RoleStore.defineManyRoles(roles);
             }
             else{
-                accessDenied();
+                AuthService
+                    .refreshToken()
+                    .then(function(){
+                        var roles = $cookies.getObject('roles');
+                        RoleStore.defineManyRoles(roles);
+                    })
+                    .catch(function(){
+                        accessDenied();
+                    });
             }
         });
 
         // redirect all denied permissions to 401
-        var deniedHandle = $rootScope.$on('$stateChangePermissionDenied', accessDenied);
+        // $rootScope.$on('$stateChangePermissionDenied', accessDenied);
 
         // remove watch on destroy
-        $rootScope.$on('$destroy', function () {
+/*        $rootScope.$on('$destroy', function () {
             deniedHandle();
-        });
+        });*/
 
 
     }
