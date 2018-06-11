@@ -6,22 +6,24 @@
     function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookies, RoleStore, User) {
         return {
             getToken: getToken,
-            refreshTokenFunction: refreshTokenFunction,
+            refreshToken: refreshToken,
             isValidToken: isValidToken,
+            canRefesh: canRefresh,
             revokeToken: revokeToken
         };
 
         function authenticate (params){
+            RoleStore.clearStore();
             var request = $q.defer();
 
             MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
-                    $cookies.putObject('token', loginResponse.access_token);
-                    $cookies.putObject('refreshToken', loginResponse.refresh_token);
+                    $cookies.putObject('token', loginResponse.access_token, { path: '/' });
+                    $cookies.putObject('refreshToken', loginResponse.refresh_token, { path: '/' });
                     var expiration = new Date();
                     expiration.setSeconds(expiration.getSeconds()+loginResponse.expires_in);
-                    $cookies.putObject('expiration', expiration);
+                    $cookies.putObject('expiration', expiration, { path: '/' });
                     WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
                     MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
 
@@ -34,7 +36,7 @@
                                 roles[roleName.name.toUpperCase()] = [];
                             });
 
-                            $cookies.putObject('roles', roles);
+                            $cookies.putObject('roles', roles, { path: '/' });
 
                             RoleStore.defineManyRoles(roles);
 
@@ -63,7 +65,6 @@
         }
 
         function getToken(userName, password) {
-            RoleStore.clearStore();
             var data = {
                 grant_type: 'password',
                 client_id: EnvironmentConfig.site.oauth.clientId,
@@ -75,7 +76,7 @@
             return authenticate(data);
         }
 
-        function refreshTokenFunction() {
+        function refreshToken() {
             var data = {
                 grant_type: 'refresh_token',
                 client_id: EnvironmentConfig.site.oauth.clientId,
@@ -88,24 +89,40 @@
 
         function isValidToken() {
             if ($cookies.getObject('expiration')) {
-                return !compareDates();
+                return compareDates();
             }
             else {
                 return false;
             }
         }
 
+        function canRefresh(){
+            if($cookies.getObject('refreshToken')){
+                return true;
+            }
+            return false;
+        }
+
         function revokeToken(){
-            $cookies.remove('token');
-            $cookies.remove('refresh_token');
-            $cookies.remove('expiration');
+            RoleStore.clearStore();
+            $cookies.remove('token', { path: '/' });
+            $cookies.remove('refresh_token', { path: '/' });
+            $cookies.remove('expiration', { path: '/' });
+            $cookies.remove('roles', { path: '/' });
         }
 
         function compareDates() {
-            var date_expiration = $cookies.getObject('expiration');
-            var now = new Date();
-            var expiration = new Date(date_expiration);
-            return now > expiration;
+            var cookies = $cookies.getAll();
+            console.debug(cookies);
+            if($cookies.getObject('expiration')) {
+                var date_expiration = $cookies.getObject('expiration');
+                var now = new Date();
+                var expiration = new Date(date_expiration);
+                return expiration > now;
+            }
+            else{
+                return false;
+            }
         }
 
     }

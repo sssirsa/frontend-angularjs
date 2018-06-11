@@ -36,7 +36,7 @@
                 }
             }*!/
         });*/
-        $rootScope.$on('oauth:error', function (event, rejection) {
+        /*$rootScope.$on('oauth:error', function (event, rejection) {
             if ('invalid_grant' === rejection.data.error) {
                 return;
             }
@@ -46,7 +46,7 @@
                 return OAuth.getRefreshToken();
             }
             return $window.location.href = '/login';
-        });
+        });*/
         $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
             var canal = Channel.all();
             canal[0].bind('create', function (dfs) {

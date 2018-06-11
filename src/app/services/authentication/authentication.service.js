@@ -5,7 +5,7 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $cookies) {
+    function AuthService(OAuth, $cookies, $q) {
 
         var authService = {
             isAuthenticated: isAuthenticated,
@@ -32,7 +32,21 @@
         }
 
         function refreshToken(){
-            return OAuth.refreshTokenFunction();
+            var request = $q.defer();
+            if(OAuth.canRefresh()) {
+                OAuth
+                    .refreshToken()
+                    .then(function(){
+                        request.resolve();
+                    })
+                    .catch(function(errorRefreshToken){
+                        request.reject(errorRefreshToken);
+                    });
+            }
+            else{
+                request.reject();
+            }
+            return request.promise;
         }
 
         return authService;
