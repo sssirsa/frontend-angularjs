@@ -15,7 +15,7 @@
         }
 
         $rootScope.$on('$stateChangePermissionStart', function(event, toState, toParams, options) {
-            if(toState.name != "login" || toState.name != "404") {
+            if(toState.name != "login" || toState.name != "404" || toState.name != "main") {
                 if (AuthService.isAuthenticated()) {
                     var roles = $cookies.getObject('roles');
                     RoleStore.defineManyRoles(roles);

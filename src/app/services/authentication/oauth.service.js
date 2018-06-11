@@ -8,7 +8,7 @@
             getToken: getToken,
             refreshToken: refreshToken,
             isValidToken: isValidToken,
-            canRefesh: canRefresh,
+            canRefresh: canRefresh,
             revokeToken: revokeToken
         };
 
@@ -109,11 +109,10 @@
             $cookies.remove('refresh_token', { path: '/' });
             $cookies.remove('expiration', { path: '/' });
             $cookies.remove('roles', { path: '/' });
+            $cookies.remove('keepSession', { path: '/' });
         }
 
         function compareDates() {
-            var cookies = $cookies.getAll();
-            console.debug(cookies);
             if($cookies.getObject('expiration')) {
                 var date_expiration = $cookies.getObject('expiration');
                 var now = new Date();

@@ -12,7 +12,8 @@
         'app.mainApp.inventario',
         'app.mainApp.catalogos',
         'app.mainApp.profile',
-        'app.mainApp.reportes'
+        'app.mainApp.reportes',
+        'app.mainApp.splash'
     ]);
 
 })();
