@@ -25,10 +25,11 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block" flex>
+            <md-input-container class="md-block"
+                                flex
+                                ng-if="!vm.user.sucursal">
                 <label translate>REQUESTS.NEW.SUCURSAL</label>
                 <md-select
-                    ng-if="!vm.user.sucursal"
                     md-on-open="vm.loadSucursales()"
                     ng-model="vm.request.sucursal">
                     <md-option
