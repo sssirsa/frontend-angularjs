@@ -49,8 +49,8 @@
 
 
         // set default routes when no path specified
-        $urlRouterProvider.when('', '/login');
-        $urlRouterProvider.when('/', '/login');
+        $urlRouterProvider.when('', '/main');
+        $urlRouterProvider.when('/', '/main');
 
         // always goto 404 if route not found
         $urlRouterProvider.otherwise('/404');

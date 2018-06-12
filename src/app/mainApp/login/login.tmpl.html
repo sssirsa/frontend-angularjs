@@ -32,6 +32,13 @@
                         </div>
                     </md-input-container>
 
+                    <md-input-container class="md-block">
+                        <md-checkbox ng-model="vm.keepSession">
+                            Recordarme
+                        </md-checkbox>
+                        <div class="hint">No marque esta casilla si está utilizando un equipo compartido</div>
+                    </md-input-container>
+
                     <md-button
                         class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
                         type="submit" ng-disabled="login.$invalid">

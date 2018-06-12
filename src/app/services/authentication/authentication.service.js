@@ -1,17 +1,18 @@
 (function () {
     'use strict';
     angular
-        .module('app.mainApp')
+        .module('app')
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $cookies) {
+    function AuthService(OAuth, $cookies, $q) {
 
         var authService = {
             isAuthenticated: isAuthenticated,
             login: login,
             logout: logout,
-            getToken: getToken
+            getToken: getToken,
+            refreshToken: refreshToken
         };
 
         function isAuthenticated() {
@@ -28,6 +29,24 @@
 
         function logout() {
             return OAuth.revokeToken();
+        }
+
+        function refreshToken(){
+            var request = $q.defer();
+            if(OAuth.canRefresh()) {
+                OAuth
+                    .refreshToken()
+                    .then(function(){
+                        request.resolve();
+                    })
+                    .catch(function(errorRefreshToken){
+                        request.reject(errorRefreshToken);
+                    });
+            }
+            else{
+                request.reject();
+            }
+            return request.promise;
         }
 
         return authService;
