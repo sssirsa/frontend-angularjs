@@ -45,13 +45,10 @@
                 form_data.append('foto', data.foto);
 
 
-            var defer = $q.defer();
-            WebRestangular.one(URLS.persona, data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data, "", {}, {'Content-Type': undefined}).then(function (res) {
-                defer.resolve(res);
-            }).catch(function (err) {
-                defer.reject(err);
-            });
-            return defer.promise;
+            return WebRestangular
+                .one(URLS.persona, data.id)
+                .withHttpConfig({transformRequest: angular.identity})
+                .customPUT(form_data, "", {}, {'Content-Type': undefined});
 
         }
 
