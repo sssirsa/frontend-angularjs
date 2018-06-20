@@ -5,7 +5,7 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $cookies, $q) {
+    function AuthService(OAuth, $q, WebRestangular, RoleStore, User) {
 
         var authService = {
             isAuthenticated: isAuthenticated,
@@ -20,14 +20,52 @@
         }
 
         function login(credentials) {
-            return OAuth.getToken(credentials.username, credentials.password);
+            RoleStore.clearStore();
+            var request = $q.defer();
+            OAuth
+                .getToken(credentials.username, credentials.password)
+                .then(function(){
+                    WebRestangular.all('my_groups')
+                        .customGET()
+                        .then(function (profile) {
+                            var roles = {};
+
+                            angular.forEach(profile, function (roleName) {
+                                roles[roleName.name.toUpperCase()] = [];
+                            });
+
+                            localStorage.setItem('roles', roles);
+
+                            RoleStore.defineManyRoles(roles);
+
+                            WebRestangular.all('persona')
+                                .customGET()
+                                .then(function(user){
+                                    request.resolve();
+                                    User.setUser(user);
+                                })
+                                .catch(function(errorUser){
+                                    request.reject(errorUser);
+                                });
+
+                        })
+                        .catch(function(profileError){
+                            request.reject(profileError);
+                        });
+                })
+                .catch(function(){
+                    request.reject();
+                });
+
+            return request.promise;
         }
 
         function getToken() {
-            return $cookies.getObject('token');
+            return localStorage.getItem('token');
         }
 
         function logout() {
+            RoleStore.clearStore();
             return OAuth.revokeToken();
         }
 

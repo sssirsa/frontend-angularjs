@@ -3,7 +3,7 @@
         .module('app')
         .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', 'RoleStore', 'User', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, RoleStore, User) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -12,8 +12,7 @@
             revokeToken: revokeToken
         };
 
-        function authenticate (params){
-            RoleStore.clearStore();
+        function authenticate(params) {
             var request = $q.defer();
 
             MobileRestangular.all('oauth').all('token/')
@@ -22,40 +21,19 @@
                     localStorage.setItem('token', loginResponse.access_token);
                     localStorage.setItem('refreshToken', loginResponse.refresh_token);
                     var expiration = new Date();
-                    expiration.setSeconds(expiration.getSeconds()+loginResponse.expires_in);
-                    localStorage.setItem('expiration', expiration);
-                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + loginResponse.access_token});
-                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + loginResponse.access_token});
-
-                    WebRestangular.all('my_groups')
-                        .customGET()
-                        .then(function (profile) {
-                            var roles = {};
-
-                            angular.forEach(profile, function (roleName) {
-                                roles[roleName.name.toUpperCase()] = [];
-                            });
-
-                            localStorage.setItem('roles', roles);
-
-                            RoleStore.defineManyRoles(roles);
-
-                            WebRestangular.all('persona')
-                                .customGET()
-                                .then(function(user){
-                                    request.resolve();
-                                    User.setUser(user);
-                                })
-                                .catch(function(errorUser){
-                                    request.reject(errorUser);
-                                });
-
-                        })
-                        .catch(function(profileError){
-                            request.reject(profileError);
+                    expiration
+                        .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
+                    localStorage
+                        .setItem('expiration', expiration);
+                    WebRestangular
+                        .setDefaultHeaders({
+                            Authorization: 'bearer ' + loginResponse.access_token
                         });
-
-
+                    MobileRestangular
+                        .setDefaultHeaders({
+                            Authorization: 'bearer ' + loginResponse.access_token
+                        });
+                    request.resolve();
                 })
                 .catch(function (errorLogin) {
                     request.reject(errorLogin);
@@ -96,30 +74,29 @@
             }
         }
 
-        function canRefresh(){
-            if(localStorage.getItem('refreshToken')){
+        function canRefresh() {
+            if (localStorage.getItem('refreshToken')) {
                 return true;
             }
             return false;
         }
 
-        function revokeToken(){
-            RoleStore.clearStore();
-            localStorage.remove('token');
-            localStorage.remove('refresh_token');
-            localStorage.remove('expiration');
-            localStorage.remove('roles');
-            localStorage.remove('keepSession');
+        function revokeToken() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('expiration');
+            localStorage.removeItem('roles');
+            localStorage.removeItem('keepSession');
         }
 
         function compareDates() {
-            if(localStorage.getItem('expiration')) {
+            if (localStorage.getItem('expiration')) {
                 var date_expiration = localStorage.getItem('expiration');
                 var now = new Date();
                 var expiration = new Date(date_expiration);
                 return expiration > now;
             }
-            else{
+            else {
                 return false;
             }
         }
