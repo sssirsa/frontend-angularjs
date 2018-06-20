@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', 'RoleStore', 'User', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookies, RoleStore, User) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, RoleStore, User) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -19,13 +19,13 @@
             MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
-                    $cookies.putObject('token', loginResponse.access_token, { path: '/' });
-                    $cookies.putObject('refreshToken', loginResponse.refresh_token, { path: '/' });
+                    localStorage.setItem('token', loginResponse.access_token);
+                    localStorage.setItem('refreshToken', loginResponse.refresh_token);
                     var expiration = new Date();
                     expiration.setSeconds(expiration.getSeconds()+loginResponse.expires_in);
-                    $cookies.putObject('expiration', expiration, { path: '/' });
-                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
-                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
+                    localStorage.setItem('expiration', expiration);
+                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + loginResponse.access_token});
+                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + loginResponse.access_token});
 
                     WebRestangular.all('my_groups')
                         .customGET()
@@ -36,7 +36,7 @@
                                 roles[roleName.name.toUpperCase()] = [];
                             });
 
-                            $cookies.putObject('roles', roles, { path: '/' });
+                            localStorage.setItem('roles', roles);
 
                             RoleStore.defineManyRoles(roles);
 
@@ -81,14 +81,14 @@
                 grant_type: 'refresh_token',
                 client_id: EnvironmentConfig.site.oauth.clientId,
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
-                refresh_token: $cookies.getObject('refreshToken')
+                refresh_token: localStorage.getItem('refreshToken')
             };
 
             return authenticate(data);
         }
 
         function isValidToken() {
-            if ($cookies.getObject('expiration')) {
+            if (localStorage.getItem('expiration')) {
                 return compareDates();
             }
             else {
@@ -97,7 +97,7 @@
         }
 
         function canRefresh(){
-            if($cookies.getObject('refreshToken')){
+            if(localStorage.getItem('refreshToken')){
                 return true;
             }
             return false;
@@ -105,16 +105,16 @@
 
         function revokeToken(){
             RoleStore.clearStore();
-            $cookies.remove('token', { path: '/' });
-            $cookies.remove('refresh_token', { path: '/' });
-            $cookies.remove('expiration', { path: '/' });
-            $cookies.remove('roles', { path: '/' });
-            $cookies.remove('keepSession', { path: '/' });
+            localStorage.remove('token');
+            localStorage.remove('refresh_token');
+            localStorage.remove('expiration');
+            localStorage.remove('roles');
+            localStorage.remove('keepSession');
         }
 
         function compareDates() {
-            if($cookies.getObject('expiration')) {
-                var date_expiration = $cookies.getObject('expiration');
+            if(localStorage.getItem('expiration')) {
+                var date_expiration = localStorage.getItem('expiration');
                 var now = new Date();
                 var expiration = new Date(date_expiration);
                 return expiration > now;
