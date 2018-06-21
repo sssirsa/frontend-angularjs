@@ -6,43 +6,47 @@
         .run(permissionRun);
 
     /* @ngInject */
-    function permissionRun($rootScope, $state, AuthService, RoleStore, $cookies) {
+    function permissionRun($rootScope, $state, AuthService, $urlRouter, RoleStore) {
 
         // default redirect if access is denied
         function accessDenied() {
             $state.go('404');
+            $urlRouter.sync();
             AuthService.logout();
         }
 
-        $rootScope.$on('$stateChangePermissionStart', function(event, toState, toParams, options) {
-            if(toState.name != "login" || toState.name != "404" || toState.name != "main") {
-                if (AuthService.isAuthenticated()) {
-                    var roles = $cookies.getObject('roles');
-                    RoleStore.defineManyRoles(roles);
-                }
-                else {
-                    console.debug('Access denied');
+        $rootScope.$on('$locationChangeSuccess', function (evt, new_url) {
+
+            //Required for getting roles when page Update
+            var roles = JSON.parse(localStorage.getItem('roles'));
+            roles ? RoleStore.defineManyRoles(roles) : null;
+
+            evt.preventDefault();
+            if (
+                !new_url.endsWith("#!") &&
+                !new_url.endsWith("/") &&
+                !new_url.endsWith("login") &&
+                !new_url.endsWith("404") &&
+                !new_url.endsWith("main")
+            ) {
+                if (!AuthService.isAuthenticated()) {
                     AuthService
                         .refreshToken()
                         .then(function () {
-                            var roles = $cookies.getObject('roles');
-                            RoleStore.defineManyRoles(roles);
+                            $urlRouter.sync();
                         })
                         .catch(function () {
-                            deniedHandle();
+                            accessDenied();
                         });
+                }
+                else {
+                    $urlRouter.sync();
                 }
             }
         });
 
-       // redirect all denied permissions to 401
-        var deniedHandle = $rootScope.$on('$stateChangePermissionDenied', accessDenied);
-
-        // remove watch on destroy
-        /*        $rootScope.$on('$destroy', function () {
-                   deniedHandle();
-               });*/
-
+        // redirect all denied permissions to 404
+        $rootScope.$on('$stateChangePermissionDenied', accessDenied);
 
     }
 })();
