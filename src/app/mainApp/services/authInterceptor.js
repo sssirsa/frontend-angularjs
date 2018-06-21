@@ -42,11 +42,11 @@
         }
 
         function responseError(response) {
-            if (response.status === 401 && response.statusText === 'Unauthorized') {
+            if (response.status === 401 && response.statusText == 'Unauthorized') {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
-                    inFlightRefresh = $injector.get('OAuth').refreshTokenFunction();
+                    inFlightRefresh = $injector.get('OAuth').refreshToken();
                 }
                 inFlightRefresh.then(function () {
                     inFlightRefresh = null;
