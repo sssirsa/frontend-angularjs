@@ -34,7 +34,7 @@
                                 roles[roleName.name.toUpperCase()] = [];
                             });
 
-                            localStorage.setItem('roles', roles);
+                            localStorage.setItem('roles', JSON.stringify(roles));
 
                             RoleStore.defineManyRoles(roles);
 
@@ -75,6 +75,8 @@
                 OAuth
                     .refreshToken()
                     .then(function(){
+                        var roles = JSON.parse(localStorage.getItem('roles'));
+                        RoleStore.defineManyRoles(roles);
                         request.resolve();
                     })
                     .catch(function(errorRefreshToken){
