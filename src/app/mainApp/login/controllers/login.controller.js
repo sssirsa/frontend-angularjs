@@ -9,8 +9,6 @@
     function loginController($state, toastr, $log, AuthService) {
         var vm = this;
 
-        console.debug(localStorage.getItem('keepSession'));
-
         vm.loginClick = loginClick;
 
         vm.user = {
