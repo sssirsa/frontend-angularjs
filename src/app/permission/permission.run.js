@@ -16,7 +16,6 @@
         }
 
         $rootScope.$on('$locationChangeSuccess', function (evt, new_url) {
-
             //Required for getting roles when page Update
             var roles = JSON.parse(localStorage.getItem('roles'));
             roles ? RoleStore.defineManyRoles(roles) : null;
@@ -35,8 +34,10 @@
                         .then(function () {
                             $urlRouter.sync();
                         })
-                        .catch(function () {
-                            accessDenied();
+                        .catch(function (errorCallback) {
+                            if (errorCallback) {
+                                accessDenied();
+                            }
                         });
                 }
                 else {
@@ -46,7 +47,7 @@
         });
 
         // redirect all denied permissions to 404
-        $rootScope.$on('$stateChangePermissionDenied', accessDenied);
+        $rootScope.$on('$stateChangePermissionDenied', accessDenied());
 
     }
 })();
