@@ -18,7 +18,6 @@
             // 'seed-module'
             // uncomment above to activate the example seed module
             'app.translate',
-            'angular-oauth2',
             'toastr',
             'restangular',
 
