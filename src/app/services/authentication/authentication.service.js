@@ -8,12 +8,17 @@
     function AuthService(OAuth, $q, WebRestangular, RoleStore, User) {
 
         var authService = {
+            canRefreshSession: canRefreshSession,
             isAuthenticated: isAuthenticated,
             login: login,
             logout: logout,
             getToken: getToken,
             refreshToken: refreshToken
         };
+
+        function canRefreshSession() {
+            return OAuth.canRefresh();
+        }
 
         function isAuthenticated() {
             return OAuth.isValidToken();
@@ -24,7 +29,7 @@
             var request = $q.defer();
             OAuth
                 .getToken(credentials.username, credentials.password)
-                .then(function(){
+                .then(function () {
                     WebRestangular.all('my_groups')
                         .customGET()
                         .then(function (profile) {
@@ -40,20 +45,20 @@
 
                             WebRestangular.all('persona')
                                 .customGET()
-                                .then(function(user){
+                                .then(function (user) {
                                     request.resolve();
                                     User.setUser(user);
                                 })
-                                .catch(function(errorUser){
+                                .catch(function (errorUser) {
                                     request.reject(errorUser);
                                 });
 
                         })
-                        .catch(function(profileError){
+                        .catch(function (profileError) {
                             request.reject(profileError);
                         });
                 })
-                .catch(function(){
+                .catch(function () {
                     request.reject();
                 });
 
@@ -69,21 +74,22 @@
             return OAuth.revokeToken();
         }
 
-        function refreshToken(){
+        function refreshToken() {
             var request = $q.defer();
-            if(OAuth.canRefresh()) {
+            if (OAuth.canRefresh()) {
+                console.log('Refreshing token');
                 OAuth
                     .refreshToken()
-                    .then(function(){
+                    .then(function () {
                         var roles = JSON.parse(localStorage.getItem('roles'));
                         RoleStore.defineManyRoles(roles);
                         request.resolve();
                     })
-                    .catch(function(errorRefreshToken){
+                    .catch(function (errorRefreshToken) {
                         request.reject(errorRefreshToken);
                     });
             }
-            else{
+            else {
                 request.reject();
             }
             return request.promise;

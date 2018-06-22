@@ -17,8 +17,10 @@
 
         $rootScope.$on('$locationChangeSuccess', function (evt, new_url) {
             //Required for getting roles when page Update
-            var roles = JSON.parse(localStorage.getItem('roles'));
-            roles ? RoleStore.defineManyRoles(roles) : null;
+            var roles_JSON = localStorage.getItem('roles');
+            var roles;
+            roles_JSON ? roles = JSON.parse(roles_JSON) : null;
+            roles_JSON ? RoleStore.defineManyRoles(roles) : null;
 
             evt.preventDefault();
             if (
@@ -29,16 +31,19 @@
                 !new_url.endsWith("main")
             ) {
                 if (!AuthService.isAuthenticated()) {
-                    AuthService
-                        .refreshToken()
-                        .then(function () {
-                            $urlRouter.sync();
-                        })
-                        .catch(function (errorCallback) {
-                            if (errorCallback) {
+                    if (AuthService.canRefreshSession()) {
+                        AuthService
+                            .refreshToken()
+                            .then(function () {
+                                $urlRouter.sync();
+                            })
+                            .catch(function () {
                                 accessDenied();
-                            }
-                        });
+                            });
+                    }
+                    else {
+                        accessDenied();
+                    }
                 }
                 else {
                     $urlRouter.sync();

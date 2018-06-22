@@ -83,7 +83,7 @@
 
         function revokeToken() {
             localStorage.removeItem('token');
-            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('refreshToken');
             localStorage.removeItem('expiration');
             localStorage.removeItem('roles');
             localStorage.removeItem('keepSession');
