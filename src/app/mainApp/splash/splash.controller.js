@@ -27,6 +27,7 @@
                 }
             }
             else{
+                AuthService.logout();
                 $state.go('login');
             }
         },3000);
