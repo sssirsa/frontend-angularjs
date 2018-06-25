@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .filter('padding', padding);
 
     function padding() {

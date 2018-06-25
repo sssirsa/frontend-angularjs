@@ -4,7 +4,7 @@
 (function () {
 
     angular.module('app.mainApp',[
-        'app.mainApp.solicitudes',
+        'app.mainApp.solicitudes_old',
         'app.mainApp.login',
         'app.mainApp.admin',
         'app.mainApp.bienvenida',

@@ -3,11 +3,11 @@
  */
 (function () {
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/solicitudes');
+        $translatePartialLoaderProvider.addPart('app/mainApp/solicitudes_old');
         $stateProvider
             .state('triangular.admin-default.realizarSolicitud', {
                 url: '/realizarSolicitudes',

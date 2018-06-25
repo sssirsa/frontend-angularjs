@@ -1,7 +1,7 @@
 
 (function () {
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .controller('realizarSolicitudController', realizarSolicitudController);
 
     function realizarSolicitudController(OPTIONS,
