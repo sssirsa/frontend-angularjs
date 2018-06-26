@@ -1,19 +1,16 @@
-/**
- * Created by Luis_Olvera on 02/06/16.
- */
 (function () {
     angular
-        .module('app.mainApp.admin')
-        .controller('gestion_userController', gestion_userController);
+        .module('app.mainApp.management.users')
+        .controller('usersCreateController', UsersCreateController);
 
-    function gestion_userController(groups,
-                                    NotificationPanel,
-                                    Persona_Admin,
-                                    toastr,
-                                    Helper,
-                                    Translate,
-                                    $scope,
-                                    Sucursal) {
+    function UsersCreateController(groups,
+                                  NotificationPanel,
+                                  Persona_Admin,
+                                  toastr,
+                                  Helper,
+                                  Translate,
+                                  $scope,
+                                  Sucursal) {
         var vm = this;
         vm.isClient = true;
         activate();
@@ -27,6 +24,7 @@
         vm.cancel = cancel;
         vm.selectionFoto = selectionFoto;
         vm.selectionIFE = selectionIFE;
+
         function activate() {
 
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
@@ -113,18 +111,18 @@
             Persona_Admin.createObject(vm.user_ini).then(function (res) {
                 toastr.success(vm.successCreateMessage);
                 clean();
-                var grupo=_.findWhere(vm.grupos,{name:"Administrador"});
-                var role=null;
-                if(vm.user_ini.user.role==grupo.id && vm.user_ini.sucursal!=null ){
-                    role=0;
-                }else{
-                    role=vm.user_ini.user.role;
+                var grupo = _.findWhere(vm.grupos, {name: "Administrador"});
+                var role = null;
+                if (vm.user_ini.user.role == grupo.id && vm.user_ini.sucursal != null) {
+                    role = 0;
+                } else {
+                    role = vm.user_ini.user.role;
                 }
                 var request = {
                     username: vm.user_ini.user.username,
                     name: vm.user_ini.nombre + " " + vm.user_ini.apellido_paterno + " " + vm.user_ini.apellido_materno,
-                    office:vm.user_ini.sucursal,
-                    profile:role
+                    office: vm.user_ini.sucursal,
+                    profile: role
                 };
                 // NotificationPanel.createUser(request).then(function () {
                 //     toastr.success(vm.successCreateMessage, vm.successTitle);
@@ -134,10 +132,9 @@
                 //     toastr.error(error, vm.errorTitle);
                 // });
             }).catch(function (err) {
-                if(err.status==400 && err.data.message=="El usuario ya existe")
-                {
-                    toastr.error(vm.erroNumSolConf,vm.errorTitle);
-                }else {
+                if (err.status == 400 && err.data.message == "El usuario ya existe") {
+                    toastr.error(vm.erroNumSolConf, vm.errorTitle);
+                } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
             });
@@ -170,13 +167,11 @@
                         toastr.warning(vm.errorTypeFile, vm.errorTitle);
                         vm.picFoto = null;
                     }
-                }else
-                {
-                    vm.fotoByPass=vm.picFoto;
+                } else {
+                    vm.fotoByPass = vm.picFoto;
                 }
-            }else{
-                if(vm.fotoByPass!=null)
-                {
+            } else {
+                if (vm.fotoByPass != null) {
                     vm.picFoto = vm.fotoByPass;
                     console.log("algo");
                 }
@@ -198,13 +193,11 @@
                         toastr.warning(vm.errorTypeFile, vm.errorTitle);
                         vm.picIFE = null;
                     }
-                }else
-                {
-                    vm.ifeByPass=vm.picIFE;
+                } else {
+                    vm.ifeByPass = vm.picIFE;
                 }
-            }else{
-                if(vm.ifeByPass!=null)
-                {
+            } else {
+                if (vm.ifeByPass != null) {
                     vm.picIFE = vm.ifeByPass;
                     console.log("algo2");
                 }
