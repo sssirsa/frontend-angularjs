@@ -18,8 +18,8 @@
                         only: ['ADMINISTRADOR', 'CAPTURISTA', 'CLIENTE', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/welcome/index.tmpl.html',
-                controller: 'bienvenidaController',
+                templateUrl: 'app/mainApp/welcome/welcome.tmpl.html',
+                controller: 'WelcomeController',
                 controllerAs: 'vm'
             });
 
