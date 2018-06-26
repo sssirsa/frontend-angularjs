@@ -5,10 +5,10 @@
     'use strict';
     angular
         .module('app.mainApp.welcome')
-        .config(moduleConfig);
+        .config(WelcomeModuleConfig);
 
-    function moduleConfig($stateProvider,$translatePartialLoaderProvider, triMenuProvider){
-        $translatePartialLoaderProvider.addPart('app/mainApp/bienvenida');
+    function WelcomeModuleConfig($stateProvider,$translatePartialLoaderProvider, triMenuProvider){
+        $translatePartialLoaderProvider.addPart('app/mainApp/welcome');
         $stateProvider
 
             .state('triangular.admin-default.welcome', {

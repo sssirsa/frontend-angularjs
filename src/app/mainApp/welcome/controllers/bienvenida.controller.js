@@ -3,10 +3,10 @@
  */
 (function () {
     angular
-        .module('app.mainApp')
-        .controller('bienvenidaController', bienvenidaController);
+        .module('app.mainApp.welcome')
+        .controller('welcomeController', WelcomeController);
 
-    function bienvenidaController(User, RoleStore, Sucursal, $log) {
+    function WelcomeController(User, RoleStore, Sucursal, $log) {
         var vm = this;
 
         vm.user = User.getUser();
