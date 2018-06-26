@@ -7,7 +7,7 @@
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/solicitudes_old');
+        $translatePartialLoaderProvider.addPart('app/mainApp/solicitudes');
         $stateProvider
             .state('triangular.admin-default.realizarSolicitud', {
                 url: '/realizarSolicitudes',

@@ -9,7 +9,7 @@
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/admin');
+        $translatePartialLoaderProvider.addPart('app/mainApp/management');
         $stateProvider
             .state('triangular.admin-default.gestion_user', { //Nombre del state
                 url: '/gestion_user', //Nombre que quiero en mi url
