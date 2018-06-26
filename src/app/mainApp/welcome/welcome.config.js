@@ -19,7 +19,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/welcome/welcome.tmpl.html',
-                controller: 'WelcomeController',
+                controller: 'welcomeController',
                 controllerAs: 'vm'
             });
 

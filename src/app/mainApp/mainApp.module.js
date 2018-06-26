@@ -7,13 +7,13 @@
         'app.mainApp.solicitudes_old',
         'app.mainApp.login',
         'app.mainApp.admin',
-        'app.mainApp.welcome',
         'app.mainApp.servicios',
         'app.mainApp.inventario',
         'app.mainApp.catalogos',
         'app.mainApp.profile',
         'app.mainApp.reportes',
-        'app.mainApp.splash'
+        'app.mainApp.splash',
+        'app.mainApp.welcome'
     ]);
 
 })();
