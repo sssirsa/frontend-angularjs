@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.mainApp.admin')
-        .controller('admin_userController', admin_userController)
+        .module('app.mainApp.management.users')
+        .controller('usersManagementController', UsersManagementController)
         .filter('personaSearch', personaSearch);
 
-    function admin_userController($scope, toastr, Translate, $mdDialog, Persona_Admin, Administration, Persona) {
+    function UsersManagementController($scope, toastr, Translate, $mdDialog, Persona_Admin, Administration, Persona) {
 
         var vm = this;
         vm.lookup = lookup;
@@ -174,7 +174,7 @@
                 controller: 'assignGroupDialogController',
                 controllerAs: 'vm',
                 bindToController: true,
-                templateUrl: 'app/mainApp/admin/modal/assignGroupDialog.tmpl.html',
+                templateUrl: 'app/mainApp/management/users/modal/assignGroupDialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: event,
                 clickOutsideToClose: true,
