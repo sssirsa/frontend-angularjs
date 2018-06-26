@@ -22,7 +22,7 @@
             vm.loginPromise = AuthService.login(vm.user)
                 .then(function () {
                     localStorage.setItem('keepSession', vm.keepSession);
-                    $state.go('triangular.admin-default.bienvenida');
+                    $state.go('triangular.admin-default.welcome');
                 })
                 .catch(function (loginError) {
                     toastr.error('Error al iniciar sesión');

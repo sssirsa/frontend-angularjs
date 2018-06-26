@@ -40,7 +40,7 @@
                         toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.MASSIVE_SUCCESS'));
 
                         //TODO: Change to the massive upload screen when it exists
-                        $state.go('triangular.admin-default.bienvenida');
+                        $state.go('triangular.admin-default.welcome');
                     })
                     .catch(function (errorUpload) {
                         $log.error(errorUpload);

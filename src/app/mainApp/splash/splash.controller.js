@@ -13,13 +13,13 @@
         $timeout(function(){
             if(keepSession === "true") {
                 if (AuthService.isAuthenticated()) {
-                    $state.go('triangular.admin-default.bienvenida');
+                    $state.go('triangular.admin-default.welcome');
                 }
                 else {
                     AuthService
                         .refreshToken()
                         .then(function () {
-                            $state.go('triangular.admin-default.bienvenida');
+                            $state.go('triangular.admin-default.welcome');
                         })
                         .catch(function () {
                             $state.go('login');

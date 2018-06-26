@@ -7,7 +7,7 @@
         'app.mainApp.solicitudes_old',
         'app.mainApp.login',
         'app.mainApp.admin',
-        'app.mainApp.bienvenida',
+        'app.mainApp.welcome',
         'app.mainApp.servicios',
         'app.mainApp.inventario',
         'app.mainApp.catalogos',
