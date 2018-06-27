@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.departures')
         .controller('salidaCrearController', salidaCrearController)
         .filter('salidaSearch', salidaSearch)
         .filter('tipoequipoSearch', tipoequipoSearch);
