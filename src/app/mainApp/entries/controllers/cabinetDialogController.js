@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.entries')
         .controller('CabinetDialogController',CabinetDialogController);
     function CabinetDialogController($mdDialog, Cabinet, MarcaCabinet, cabinetID, Helper, Translate, toastr){
         var vm = this;

@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.entries')
         .controller('ModeloDialogController', ModeloDialogController);
     function ModeloDialogController($mdDialog, MarcaCabinet, ModeloCabinet, Helper, Translate, toastr, TipoEquipo) {
         var vm = this;
