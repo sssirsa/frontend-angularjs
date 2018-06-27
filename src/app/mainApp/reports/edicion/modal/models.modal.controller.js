@@ -1,11 +1,8 @@
-/**
- * Created by amezc on 04/11/2016.
- */
 (function () {
     'use_strict';
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .controller('ModelsReportModalController', ModelsReportModalController);
 
     function ModelsReportModalController(Translate,Reportes,EVENTS_GENERAL, $rootScope,reporte, $mdDialog) {

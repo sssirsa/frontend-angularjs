@@ -5,7 +5,7 @@
 
         <md-virtual-repeat-container class="vertical-container" flex="flex" cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
             <md-list>
-                <md-list-item ng-repeat="reporte in vm.reportes" class="md-2-line" >
+                <md-list-item ng-repeat="reporte in vm.reports" class="md-2-line" >
                     <md-button ng-click="vm.selectedReport(reporte)"
                                layout-padding layout="row"
                                layout-align="start center"

@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .controller('GenerateReportModalController', GenerateReportModalController);
 
     function GenerateReportModalController( OPTIONS,Reportes, $mdDialog, reporte) {

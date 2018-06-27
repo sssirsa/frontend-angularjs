@@ -3,14 +3,14 @@
  */
 (function () {
     angular
-        .module("app.mainApp.reportes")
+        .module("app.mainApp.reports")
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart("app/mainApp/reportes");
+        $translatePartialLoaderProvider.addPart("app/mainApp/reports");
         $stateProvider
-            .state("triangular.admin-default.reportes", {
-                url: "/reportes",
+            .state("triangular.admin-default.reports", {
+                url: "/reports",
                 data: {
                     permissions: {
                         only: ["ADMINISTRADOR"]
@@ -19,12 +19,12 @@
                 params: {
                     id: null
                 },
-                templateUrl: "app/mainApp/reportes/manager/reportesCRUD.tmpl.html",
+                templateUrl: "app/mainApp/reports/manager/reportsCRUD.tmpl.html",
                 controller: "ReportesCrudController",
                 controllerAs: "vm"
             })
             .state("triangular.admin-default.reportModify", {
-                url: "/reportesCrear/:id/",
+                url: "/reportsCrear/:id/",
                 data: {
                     permissions: {
                         only: ["ADMINISTRADOR"]
@@ -33,7 +33,7 @@
                 params: {
                     id: null
                 },
-                templateUrl: "app/mainApp/reportes/edicion/reportEdicion.tmpl.html",
+                templateUrl: "app/mainApp/reports/edicion/reportEdicion.tmpl.html",
                 controller: "reportEditionController",
                 controllerAs: "vm"
             })
@@ -47,7 +47,7 @@
                 params: {
                     id: null
                 },
-                templateUrl: "app/mainApp/reportes/list/listReports.tmpl.html",
+                templateUrl: "app/mainApp/reports/list/listReports.tmpl.html",
                 controller: "ListReportsController",
                 controllerAs: "vm"
             })
@@ -61,7 +61,7 @@
                 params: {
                     id: null
                 },
-                templateUrl: "app/mainApp/reportes/custom/reporteInsumos/reporteProduccion.tmpl.html",
+                templateUrl: "app/mainApp/reports/custom/reporteInsumos/reporteProduccion.tmpl.html",
                 controller: "reporteProduccionController",
                 controllerAs: "vm"
             });
@@ -76,7 +76,7 @@
                 children: [
                     {
                         name: 'MAIN.MENU.REPORTS.ADMIN',
-                        state: 'triangular.admin-default.reportes',
+                        state: 'triangular.admin-default.reports',
                         type: 'link'
                     },
                     {

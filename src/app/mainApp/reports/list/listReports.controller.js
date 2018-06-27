@@ -20,8 +20,8 @@
             vm.successRemission = Translate.translate('MAIN.MSG.SUCCESS_REPORT');
             vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
             vm.loadingPromise=Reportes.getReportsGenerated().then(function (res) {
-                vm.reportes = res;
-                vm.reportes=_.sortBy(vm.reportes, 'name');
+                vm.reports = res;
+                vm.reports=_.sortBy(vm.reports, 'name');
             }).catch(function (err) {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             })

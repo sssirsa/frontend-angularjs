@@ -8,7 +8,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .controller('CloneReportModalController', CloneReportModalController);
 
     function CloneReportModalController( Reportes, $mdDialog, reporte) {

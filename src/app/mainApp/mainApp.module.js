@@ -7,7 +7,7 @@
         'app.mainApp.login',
         'app.mainApp.management',
         'app.mainApp.profile',
-        'app.mainApp.reportes',
+        'app.mainApp.reports',
         'app.mainApp.service',
         'app.mainApp.solicitudes_old',
         'app.mainApp.splash',

@@ -5,7 +5,7 @@
     "use strict";
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
     function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate) {
@@ -140,7 +140,7 @@
             $mdDialog.show({
                 controller: 'GenerateReportModalController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/reportes/manager/modal/generate/generateReport.modal.tmpl.html',
+                templateUrl: 'app/mainApp/reports/manager/modal/generate/generateReport.modal.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -189,7 +189,7 @@
             $mdDialog.show({
                 controller: 'CloneReportModalController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/reportes/manager/modal/clone/cloneReport.modal.tmpl.html',
+                templateUrl: 'app/mainApp/reports/manager/modal/clone/cloneReport.modal.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -211,7 +211,7 @@
             $mdDialog.show({
                 controller: 'CreateReportModalController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/reportes/manager/modal/create/createReport.modal.tmpl.html',
+                templateUrl: 'app/mainApp/reports/manager/modal/create/createReport.modal.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true
@@ -305,7 +305,7 @@
             $mdDialog.show({
                 controller: 'ModelsReportModalController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/reportes/edicion/modal/models.modal.tmpl.html',
+                templateUrl: 'app/mainApp/reports/edicion/modal/models.modal.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 fullscreen: true,
