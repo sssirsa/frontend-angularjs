@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.inventario')
+        .module('app.mainApp.inventory')
         .controller('insumoController', insumoController);
 
     function insumoController($scope, Translate, CatalogoInsumo, Insumo, toastr, Helper) {

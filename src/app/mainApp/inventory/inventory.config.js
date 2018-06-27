@@ -1,36 +1,33 @@
-/**
- * Created by franciscojaviercerdamartinez on 20/07/16.
- */
 (function () {
     'use strict';
     angular
-        .module('app.mainApp.inventario')
+        .module('app.mainApp.inventory')
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/inventarios');
+        $translatePartialLoaderProvider.addPart('app/mainApp/inventory');
         $stateProvider
-            .state('triangular.admin-default.cabinets', { //Nombre del state
-                url: '/cabinets', //Nombre que quiero en mi url
+            .state('triangular.admin-default.cabinets', {
+                url: '/cabinets',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
                     }
                 },
-                templateUrl: 'app/mainApp/inventarios/cabinet/cabinet.tmpl.html', //Dirección del archivo a usar
-                controller: 'cabinetController', //nombre del controlador
-                controllerAs: 'vm' //se renombra al scope
+                templateUrl: 'app/mainApp/inventory/cabinet/cabinet.tmpl.html',
+                controller: 'cabinetController',
+                controllerAs: 'vm'
             })
-            .state('triangular.admin-default.insumos', { //Nombre del state
-                url: '/insumos', //Nombre que quiero en mi url
+            .state('triangular.admin-default.insumos', {
+                url: '/insumos',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
                     }
                 },
-                templateUrl: 'app/mainApp/inventarios/insumo/insumo.tmpl.html', //Dirección del archivo a usar
-                controller: 'insumoController', //nombre del controlador
-                controllerAs: 'vm' //se renombra al scope
+                templateUrl: 'app/mainApp/inventory/insumo/insumo.tmpl.html',
+                controller: 'insumoController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(

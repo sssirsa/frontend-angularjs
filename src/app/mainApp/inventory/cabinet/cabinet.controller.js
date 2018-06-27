@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.inventario')
+        .module('app.mainApp.inventory')
         .controller('cabinetController', cabinetController);
 
     function cabinetController(Translate, OPTIONS, Sucursal, MarcaCabinet, ModeloCabinet, udn, Cabinet, toastr, $scope, EntradaSalida, Helper, $mdDialog) {
