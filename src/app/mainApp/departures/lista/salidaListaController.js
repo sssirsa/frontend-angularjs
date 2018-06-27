@@ -120,7 +120,7 @@
         function generarRemision() {
 
 
-            vm.loadingPromise=$http.get('app/mainApp/servicios/salida/lista/formato.json').then(function (col) {
+            vm.loadingPromise=$http.get('app/mainApp/departures/lista/formato.json').then(function (col) {
                 EntradaSalida.getRemision(vm.selectedSalidaList.id).then(function (res) {
                     console.log(col);
                     console.log(res);

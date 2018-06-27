@@ -387,7 +387,7 @@
             $mdDialog.show({
                 controller: 'MarcaDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/servicios/entrada/dialogs/marca.tmpl.html',
+                templateUrl: 'app/mainApp/entries/dialogs/marca.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -404,7 +404,7 @@
         function showModeloDialog(ev) {
             $mdDialog.show({
                 controller: 'ModeloDialogController',
-                templateUrl: 'app/mainApp/servicios/entrada/dialogs/modelo.tmpl.html',
+                templateUrl: 'app/mainApp/entries/dialogs/modelo.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 controllerAs: 'vm',
@@ -492,7 +492,7 @@
             $mdDialog.show({
                 controller: 'CabinetDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/servicios/entrada/dialogs/cabinet.tmpl.html',
+                templateUrl: 'app/mainApp/entries/dialogs/cabinet.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
