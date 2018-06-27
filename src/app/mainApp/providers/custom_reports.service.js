@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .factory('ReportList',Reportes);
 
     function Reportes(Restangular, EnvironmentConfig){

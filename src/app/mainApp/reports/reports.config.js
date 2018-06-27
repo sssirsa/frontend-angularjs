@@ -19,7 +19,7 @@
                 params: {
                     id: null
                 },
-                templateUrl: "app/mainApp/reports/manager/reportsCRUD.tmpl.html",
+                templateUrl: "app/mainApp/reports/manager/reportesCRUD.tmpl.html",
                 controller: "ReportesCrudController",
                 controllerAs: "vm"
             })

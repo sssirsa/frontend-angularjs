@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.reportes')
+        .module('app.mainApp.reports')
         .factory('Reportes',Reportes);
 
     function Reportes(WebRestangular, URLS, ReportList){
