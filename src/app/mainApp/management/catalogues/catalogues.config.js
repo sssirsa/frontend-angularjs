@@ -247,7 +247,7 @@
                 icon: 'fa fa-book',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
-                priority: 5,
+                priority: 3,
                 children: [
                     {
                         name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
