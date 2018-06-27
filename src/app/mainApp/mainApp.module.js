@@ -1,6 +1,8 @@
 (function () {
 
     angular.module('app.mainApp',[
+        'app.mainApp.departures',
+        'app.mainApp.entries',
         'app.mainApp.inventario',
         'app.mainApp.login',
         'app.mainApp.management',
