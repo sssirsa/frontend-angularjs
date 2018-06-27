@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.servicios')
+        .module('app.mainApp.service')
         .controller('salidaListadoController', salidaListadoController)
         .filter('moment', momentFecha) ;
 

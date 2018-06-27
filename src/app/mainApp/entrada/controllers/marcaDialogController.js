@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.servicios')
+        .module('app.mainApp.service')
         .controller('MarcaDialogController',MarcaDialogController);
     function MarcaDialogController($mdDialog, MarcaCabinet, Translate, toastr, parameter){
         var vm = this;

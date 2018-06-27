@@ -3,7 +3,7 @@
  */
 (function () {
     "use strict";
-    angular.module("app.mainApp.servicios").controller("reporteProduccionController", reporteProduccionController);
+    angular.module("app.mainApp.service").controller("reporteProduccionController", reporteProduccionController);
 
     function reporteProduccionController(CONFIGS,Persona, MarcaCabinet, Translate, TipoEquipo,  Servicios, Helper, toastr, Sucursal, Reporte) {
         var vm = this;

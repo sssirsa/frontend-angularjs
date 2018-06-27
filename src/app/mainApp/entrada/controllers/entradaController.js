@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.servicios')
+        .module('app.mainApp.service')
         .controller('entradaController', entradaController);
 
     function entradaController(EntradaSalida, toastr, $mdDialog, MarcaCabinet,
