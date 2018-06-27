@@ -13,7 +13,7 @@
                         only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/asignacionServicio/asignacionServicio.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/asignacionServicio/asignacionServicio.tmpl.html',
                 controller: 'asignacionServicioController',
                 controllerAs: 'vm'
             })
@@ -24,7 +24,7 @@
                         only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/asignacionServicio/detalleAsignacion.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller: 'detalleAsignacionController',
                 controllerAs: 'vm',
                 params: {
@@ -33,7 +33,7 @@
             })
             .state('triangular.admin-default.newRequest', {
                 url: '/request/new',
-                templateUrl: 'app/mainApp/servicios/solicitudes/new/new-request-page.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/solicitudes/new/new-request-page.tmpl.html',
                 controller: 'NewRequestPageController',
                 controllerAs: 'vm',
                 data: {
@@ -44,7 +44,7 @@
             })
             .state('triangular.admin-default.listRequest', {
                 url: '/request/list',
-                templateUrl: 'app/mainApp/servicios/solicitudes/list/list-requests-page.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/solicitudes/list/list-requests-page.tmpl.html',
                 controller: 'ListRequestPageController',
                 controllerAs: 'vm',
                 data: {
@@ -55,7 +55,7 @@
             })
             .state('triangular.admin-default.detailRequest', {
                 url: '/request/detail/:id',
-                templateUrl: 'app/mainApp/servicios/solicitudes/detail/detail-request-page.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/solicitudes/detail/detail-request-page.tmpl.html',
                 controller: 'DetailRequestPageController',
                 controllerAs: 'vm',
                 params: {
@@ -69,7 +69,7 @@
             })
             .state('triangular.admin-default.preRequest', {
                 url: '/prerequest/list',
-                templateUrl: 'app/mainApp/servicios/preRequests/preRequest.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/preRequests/preRequest.tmpl.html',
                 controller: 'preRequestListController',
                 controllerAs: 'vm',
                 data: {
@@ -81,7 +81,7 @@
 
             .state('triangular.admin-default.preRequestDetail', {
                 url: '/prerequest-detail:idPreRequest/',
-                templateUrl: 'app/mainApp/servicios/preRequests/preRequest-detail.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/preRequests/preRequest-detail.tmpl.html',
                 controller: 'preRequestDetailController',
                 controllerAs: 'vm',
                 params: {
@@ -97,7 +97,7 @@
 
             .state('triangular.admin-default.cabinetPV', {
                 url: '/prerequest/new',
-                templateUrl: 'app/mainApp/servicios/cabinetPV/pv-cabinet.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/cabinetPV/pv-cabinet.tmpl.html',
                 controller: 'NewCabinetPrerequestController',
                 controllerAs: 'vm',
                 data: {

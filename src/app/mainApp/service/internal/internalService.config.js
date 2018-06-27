@@ -12,7 +12,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/checklist/checklist.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/checklist/checklist.tmpl.html',
                 controller: 'checklistController',
                 controllerAs: 'vm'
             })
@@ -23,7 +23,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.tpl.html',
+                templateUrl: 'app/mainApp/service/internal/diagnostic/diagnostic.tpl.html',
                 controller: 'DiagnosticController',
                 controllerAs: 'vm'
             })
@@ -37,7 +37,7 @@
                         sideMenuSize: 'icon'
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/etapa/etapa.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/etapa/etapa.tmpl.html',
                 controller: 'etapaController',
                 controllerAs: 'vm'
             })
@@ -48,7 +48,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/servicios/asignacion/asignacionLinea.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
                 controllerAs: 'vm'
             });
@@ -57,7 +57,7 @@
         triMenuProvider.addMenu(
             {
                 name: 'MAIN.MENU.INTERNAL_SERVICE',
-                icon: 'fa fa-wrench',
+                icon: 'fa fa-cogs',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 4,
