@@ -56,7 +56,7 @@
 
         triMenuProvider.addMenu(
             {
-                name: 'MAIN.MENU.SERVICES',
+                name: 'MAIN.MENU.INTERNAL_SERVICE',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],

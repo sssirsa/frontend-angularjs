@@ -4,7 +4,7 @@
         .config(externalServiceConfig);
 
     function externalServiceConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/service/solicitudes');
+        $translatePartialLoaderProvider.addPart('app/mainApp/service/external/solicitudes');
         $stateProvider
             .state('triangular.admin-default.serviceAssing', {
                 url: '/asignarServicio',
@@ -110,7 +110,7 @@
 
         triMenuProvider.addMenu(
             {
-                name: 'MAIN.MENU.SERVICES',
+                name: 'MAIN.MENU.EXTERNAL_SERVICE',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
