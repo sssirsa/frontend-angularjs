@@ -8,7 +8,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.catalogos')
+        .module('app.mainApp.management.catalogues')
         .factory('Clientes', Clientes);
 
     function Clientes(WebRestangular, URLS) {

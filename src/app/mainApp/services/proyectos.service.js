@@ -5,7 +5,7 @@
     'use_strict';
 
     angular
-        .module('app.mainApp.catalogos')
+        .module('app.mainApp.management.catalogues')
         .factory('Proyectos', Proyectos);
 
     function Proyectos(WebRestangular, URLS) {
