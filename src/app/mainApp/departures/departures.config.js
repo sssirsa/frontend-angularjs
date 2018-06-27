@@ -33,10 +33,10 @@
         triMenuProvider.addMenu(
             {
                 name: 'MAIN.MENU.OUT.TITLE',
-                icon: 'zmdi zmdi-account',
+                icon: 'fa fa-sign-out',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR'],
-                priority: 3,
+                priority: 5,
                 children: [
                     {
                         name: 'MAIN.MENU.OUT.NEW',

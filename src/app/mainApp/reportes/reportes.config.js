@@ -72,7 +72,7 @@
                 icon: 'fa fa-line-chart',
                 type: 'dropdown',
                 permission: ["ADMINISTRADOR"],
-                priority: 7,
+                priority: 9,
                 children: [
                     {
                         name: 'MAIN.MENU.REPORTS.ADMIN',
@@ -86,7 +86,6 @@
                     },
                     {
                         name: 'MAIN.MENU.REPORTS.CUSTOM.TITLE',
-                        icon: 'fa fa-cogs',
                         type: 'dropdown',
                         children: [
                             {

@@ -39,7 +39,7 @@
                 icon: 'fa fa-archive',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'CAPTURISTA'],
-                priority: 6,
+                priority: 8,
                 children: [{
                     name: 'MAIN.MENU.INVENTORY.CABINETS',
                     state: 'triangular.admin-default.cabinets',

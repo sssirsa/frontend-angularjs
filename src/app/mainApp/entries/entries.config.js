@@ -20,10 +20,10 @@
         triMenuProvider.addMenu(
             {
                 name: 'MAIN.MENU.IN',
-                icon: 'zmdi zmdi-account',
+                icon: 'fa fa-sign-in',
                 type: 'link',
                 permission: ['ADMINISTRADOR'],
-                priority: 2
+                priority: 4
             }
         );
     }

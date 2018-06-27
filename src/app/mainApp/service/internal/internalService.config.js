@@ -60,7 +60,7 @@
                 icon: 'fa fa-cogs',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
-                priority: 4,
+                priority: 6,
                 children: [
                     {
                         name: 'MAIN.MENU.REGISTER_STEP',

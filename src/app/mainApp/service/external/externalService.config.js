@@ -114,7 +114,7 @@
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
-                priority: 5,
+                priority: 7,
                 children: [
                     {
                         name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
