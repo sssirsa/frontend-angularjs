@@ -141,7 +141,7 @@
             $mdDialog.show({
                 controller: 'EtapaDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/catalogos/catalogo_insumo/modal/etapa.modal.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/catalogo_insumo/modal/etapa.modal.tmpl.html',
                 focusOnOpen: false,
                 locals: {
                     catalogo: vm.catalogo_insumo
@@ -155,7 +155,7 @@
             $mdDialog.show({
                 controller: 'UnidadModalController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/catalogos/catalogo_insumo/modal/unidad.modal.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/catalogo_insumo/modal/unidad.modal.tmpl.html',
                 focusOnOpen: false
             }).then(function () {
                 listUnidades();
