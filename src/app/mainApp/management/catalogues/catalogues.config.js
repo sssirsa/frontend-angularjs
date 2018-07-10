@@ -174,71 +174,60 @@
                 controller: 'EtapasController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-rutas',{
-                url:'/rutas',
-                data:{
+            .state('triangular.admin-default.catalogo-localidades', {
+                url: '/localidades',
+                data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl:'app/mainApp/management/catalogues/routes/routes.tmpl.html',
-                controller: 'routesController',
-                controllerAs:'vm'
-            })
-            .state('triangular.admin-default.catalogo-localidades',{
-                url:'/localidades',
-                data:{
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl:'app/mainApp/management/catalogues/localities/localities.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/localities/localities.tmpl.html',
                 controller: 'localitiesController',
-                controllerAs:'vm'
+                controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-establecimientos',{
-                url:'/establecimientos',
-                data:{
+            .state('triangular.admin-default.catalogo-establecimientos', {
+                url: '/establecimientos',
+                data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl:'app/mainApp/management/catalogues/stores/stores.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/stores/stores.tmpl.html',
                 controller: 'storesController',
-                controllerAs:'vm'
+                controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-estados',{
-                url:'/estados',
-                data:{
+            .state('triangular.admin-default.catalogo-estados', {
+                url: '/estados',
+                data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl:'app/mainApp/management/catalogues/states/states.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/states/states.tmpl.html',
                 controller: 'statesController',
-                controllerAs:'vm'
+                controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-municipios',{
-                url:'/municipios',
-                data:{
+            .state('triangular.admin-default.catalogo-municipios', {
+                url: '/municipios',
+                data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl:'app/mainApp/management/catalogues/cities/cities.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/cities/cities.tmpl.html',
                 controller: 'citiesController',
-                controllerAs:'vm'
+                controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogue-segmentation',{
-                url:'/catalogue/segmentation',
-                data:{
+            .state('triangular.admin-default.catalogue-segmentation', {
+                url: '/catalogue/segmentation',
+                data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl:'app/mainApp/management/catalogues/segmentation/segmentation.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/segmentation/segmentation.tmpl.html',
                 controller: 'segmentationController',
-                controllerAs:'vm'
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -312,7 +301,7 @@
                         state: 'triangular.admin-default.catalogo-insumo',
                         permission: ['ADMINISTRADOR'],
                         type: 'link'
-                    },{
+                    }, {
                         name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
                         state: 'triangular.admin-default.categoria',
                         permission: ['ADMINISTRADOR', 'CAPTURISTA'],
@@ -323,26 +312,21 @@
                         permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                         type: 'link'
                     }, {
-                        name: 'MAIN.MENU.CATALOGS.ROUTES',
-                        state: 'triangular.admin-default.catalogo-rutas',
-                        permission: ['ADMINISTRADOR', 'TECNICO E'],
-                        type: 'link'
-                    },{
                         name: 'MAIN.MENU.CATALOGS.STATES',
                         state: 'triangular.admin-default.catalogo-estados',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
-                    },{
+                    }, {
                         name: 'MAIN.MENU.CATALOGS.CITIES',
                         state: 'triangular.admin-default.catalogo-municipios',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
-                    },{
+                    }, {
                         name: 'MAIN.MENU.CATALOGS.LOCALITIES',
                         state: 'triangular.admin-default.catalogo-localidades',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
-                    },{
+                    }, {
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
