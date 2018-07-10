@@ -49,7 +49,7 @@
 
             event.stopPropagation();
 
-            $http.get('app/mainApp/servicios/solicitudes/report/formato.json')
+            $http.get('app/mainApp/service/external/solicitudes/report/formato.json')
                 .then(function (formato) {
                     if(formato) {
                         vm.getReportPromise = Solicitudes.report(requestID)
