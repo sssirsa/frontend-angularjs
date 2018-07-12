@@ -42,7 +42,7 @@
         }
 
         function responseError(response) {
-            if (response.status === 401 && response.statusText == 'Unauthorized') {
+            if (response.status === 401 && response.statusText == 'Unauthorized' && !response.data.error_description) {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {
