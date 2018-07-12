@@ -47,7 +47,7 @@
         activate();
 
         function activate() {
-            CatalogoInsumo.listObject().then(function (res) {
+            vm.loadingPromise = CatalogoInsumo.listObject().then(function (res) {
                 vm.catalogoInsumos = Helper.filterDeleted(res, true);
                 vm.filteredInsumos = {};
                 vm.uniqueInsumos = _.filter(vm.catalogoInsumos, function (element) {
