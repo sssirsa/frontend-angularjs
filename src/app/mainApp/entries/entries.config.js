@@ -23,7 +23,8 @@
                 icon: 'fa fa-sign-in',
                 type: 'link',
                 permission: ['ADMINISTRADOR'],
-                priority: 4
+                priority: 4,
+                state: 'triangular.admin-default.entrada'
             }
         );
     }

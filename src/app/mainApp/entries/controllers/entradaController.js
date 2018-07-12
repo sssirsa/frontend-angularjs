@@ -110,12 +110,12 @@
             vm.cabinets = [];
             vm.cabinetID = "";
             vm.notFoundCabinets = [];
-
+/*
             Cabinet.getEconomics().then(function (res) {
                 vm.existingCabinets = _.pluck(res, "economico");
             }).catch(function () {
                 toastr.error(vm.errorMessage, vm.errorTitle);
-            });
+            });*/
             LineaTransporte.listObject().then(function (res) {
                 vm.lineasTransporte = Helper.filterDeleted(res, true);
                 vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
