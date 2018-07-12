@@ -182,7 +182,7 @@
             $mdDialog.show({
                 controller: 'TipoEquipoDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/catalogos/catalogo_insumo/modal/tipoEquipo.modal.tmpl.html',
+                templateUrl: 'app/mainApp/management/catalogues/catalogo_insumo/modal/tipoEquipo.modal.tmpl.html',
                 focusOnOpen: false,
                 locals: {
                     catalogo: vm.catalogo_insumo
