@@ -17,7 +17,7 @@
             console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
-                templateUrl: 'app/mainApp/servicios/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
                 parent: angular.element(document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
