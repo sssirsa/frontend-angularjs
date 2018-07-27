@@ -44,7 +44,8 @@
             "WORKER_COMMENTS": "Observaciones del personal",
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
-            "EVIDENCES":"Evidencias"
+            "EVIDENCES":"Evidencias",
+            "NO_EVIDENCES":"Sin evidencias"
         },
         "NEW": {
             "TOASTR":{

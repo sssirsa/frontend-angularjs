@@ -61,13 +61,6 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.ROUTE</label>
-                <input
-                    ng-disabled="true"
-                    ng-model="vm.request.ruta.nombre">
-                </input>
-            </md-input-container>
         </div>
         <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
             <label translate>REQUESTS.DETAIL.CABINET</label>
@@ -106,125 +99,6 @@
         store="vm.store"
     ></store-manager>
 
-    <!--<div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.NAME</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.nombre_establecimiento"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.SEGMENTATION</label>
-            <md-select
-                ng-disabled="true"
-                ng-model="vm.store.segmentacion">
-                <md-option
-                    ng-repeat="segment in vm.storeSegmentation"
-                    ng-value="segment.value">
-                    {{segment.label}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.MANAGER</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.nombre_encargado"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.MANAGER_PHONE</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.telefono_encargado"/>
-        </md-input-container>
-    </div>
-    <div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.STREET</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.calle"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.NUMBER</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.numero"/>
-        </md-input-container>
-    </div>
-    <div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.BETWEEN1</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.entre_calle1"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.BETWEEN2</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.entre_calle2"/>
-        </md-input-container>
-    </div>
-    <div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.STATE</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.localidad.municipio.estado.nombre"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.CITY</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.localidad.municipio.nombre"/>
-        </md-input-container>
-    </div>
-    <div flex
-         layout="column"
-         layout-gt-sm="row"
-         layout-align-gt-sm="center stretch">
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.LOCALITY</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.localidad.nombre"/>
-        </md-input-container>
-        <md-input-container flex class="md-block">
-            <label translate>REQUESTS.DETAIL.STORE.ZIP_CODE</label>
-            <input
-                ng-disabled="true"
-                ng-model="vm.store.localidad.codigo_postal"/>
-        </md-input-container>
-    </div>
-    <div layout="row"
-         layout-align="end end"
-         layout-sm="column"
-         layout-xs="column"
-         layout-align-sm="start stretch"
-         layout-align-xs="start stretch">
-        <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
-            <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
-        </md-button>
-    </div>-->
-
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
@@ -232,14 +106,13 @@
 
         <div
             layout="column"
-            layout-gt-xs="row"
             layout-align="space-around center">
-
-            <img ngf-src="vm.request.ine_front" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.ine_back" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.foto_local" class="thumbnails" layout-padding/>
-            <img ngf-src="vm.request.comprobante_local" class="thumbnails" layout-padding/>
-
+            <div ng-if="vm.request.evidencia.length>0">
+            <img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>
+            </div>
+            <div ng-if="vm.request.evidencia.length===0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
         </div>
 
     </md-card>
