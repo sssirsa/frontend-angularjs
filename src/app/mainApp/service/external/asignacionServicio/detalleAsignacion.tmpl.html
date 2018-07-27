@@ -9,7 +9,12 @@
         cg-busy="{promise:vm.storeLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
         layout-padding>
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE</h3>
-        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+
+        <store-manager
+            store="vm.store"
+        ></store-manager>
+
+        <!--<div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
                 <label>{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STORE_NAME'|translate}}</label>
                 <input
@@ -98,7 +103,7 @@
             <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
             </md-button>
-        </div>
+        </div>-->
     </md-card>
     <md-card layout="column" layout-align="center stretch" layout-padding>
         <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.REQUEST</h3>
