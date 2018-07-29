@@ -159,7 +159,7 @@
                         Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
                         Translate.translate('MAIN.MSG.SUCCESS_TITLE')
                     );
-                    $mdDialog.cancel();
+                    $mdDialog.hide();
                     $state.go('triangular.admin-default.serviceAssing');
                 })
                 .catch(function (error) {

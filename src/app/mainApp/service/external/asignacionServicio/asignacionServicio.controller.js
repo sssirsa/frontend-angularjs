@@ -13,7 +13,7 @@
         vm.salePointKinds = OPTIONS.salePointAssignKind;
         vm.Assing = Assing;
 
-        function Assing (salePoint) {
+        function Assing(salePoint) {
             console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
@@ -26,8 +26,10 @@
                     salePoint: salePoint
                 }
             })
-                .then(function(){
-                    $mdDialog.hide();
+                .then(function () {
+                    vm.selectedKind = 'pending';
+                    vm.salePoints = null;
+                    vm.listSalePoints();
                 });
 
         }
