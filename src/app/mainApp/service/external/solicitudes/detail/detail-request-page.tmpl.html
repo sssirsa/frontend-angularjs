@@ -107,9 +107,24 @@
         <div
             layout="column"
             layout-align="space-around center">
-            <div ng-if="vm.request.evidencia.length>0">
-            <img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>
+
+            <div ng-if="vm.request.evidencia.length>0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+            <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
             </div>
+
             <div ng-if="vm.request.evidencia.length===0">
                 <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
             </div>
