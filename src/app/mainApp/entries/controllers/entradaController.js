@@ -110,12 +110,7 @@
             vm.cabinets = [];
             vm.cabinetID = "";
             vm.notFoundCabinets = [];
-/*
-            Cabinet.getEconomics().then(function (res) {
-                vm.existingCabinets = _.pluck(res, "economico");
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });*/
+
             LineaTransporte.listObject().then(function (res) {
                 vm.lineasTransporte = Helper.filterDeleted(res, true);
                 vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
@@ -203,7 +198,7 @@
                         vm.entrada.modelos_no_existentes = _.map(res.modelos_no_existentes, function (id) {
                             return {"denominacion": id};
                         });
-                        vm.entrada.file=null;
+                        vm.entrada.file = null;
                         if (vm.entrada.no_creados.length > 0) {
                             //Input has Cabinets that couldn´t be created
                             toastr.warning(vm.warning, vm.warningTitle);
@@ -421,40 +416,43 @@
 
         function addCabinet() {
             if (vm.cabinetID.length > 0) {
-
-                if (_.contains(vm.existingCabinets, vm.cabinetID)) {
-                    Cabinet.getIfEntrada(vm.cabinetID).then(function (res) {
-                        var index = vm.cabinets.map(function (elem) {
-                            return elem.economico;
-                        }).indexOf(res.economico);
-                        if (index != -1) {
+                Cabinet
+                    .get(vm.cabinetID)
+                    .then(function (cabinetInfo) {
+                        console.debug(cabinetInfo);
+                        Cabinet.getIfEntrada(vm.cabinetID).then(function (res) {
+                            var index = vm.cabinets.map(function (elem) {
+                                return elem.economico;
+                            }).indexOf(res.economico);
+                            if (index != -1) {
+                                toastr.warning(vm.errorCabinet, vm.warning);
+                            }
+                            else {
+                                var tempCabinet = angular.copy(res);
+                                tempCabinet.modelo = modeloById(res.modelo).nombre;
+                                tempCabinet.marca = marcaById(res.modelo);
+                                vm.cabinets.push(tempCabinet);
+                            }
+                            vm.cabinetID = "";
+                        }).catch(function (err) {
+                            if (err.data.detail != null)
+                                toastr.error(err.data.detail, vm.errorTitle);
+                            else
+                                toastr.error(vm.notFoundCabinet, vm.errorTitle);
+                            vm.cabinetID = "";
+                        });
+                    })
+                    .catch(function (cabinetInfoError) {
+                        console.error(cabinetInfoError);
+                        if (vm.notFoundCabinets.indexOf(vm.cabinetID) != -1) {
                             toastr.warning(vm.errorCabinet, vm.warning);
                         }
                         else {
-                            var tempCabinet = angular.copy(res);
-                            tempCabinet.modelo = modeloById(res.modelo).nombre;
-                            tempCabinet.marca = marcaById(res.modelo);
-                            vm.cabinets.push(tempCabinet);
+                            toastr.warning(vm.notFoundCabinet, vm.warning);
+                            vm.notFoundCabinets.push(vm.cabinetID);
                         }
                         vm.cabinetID = "";
-                    }).catch(function (err) {
-                        if (err.data.detail != null)
-                            toastr.error(err.data.detail, vm.errorTitle);
-                        else
-                            toastr.error(vm.notFoundCabinet, vm.errorTitle);
-                        vm.cabinetID = "";
                     });
-                }
-                else {
-                    if (vm.notFoundCabinets.indexOf(vm.cabinetID) != -1) {
-                        toastr.warning(vm.errorCabinet, vm.warning);
-                    }
-                    else {
-                        toastr.warning(vm.notFoundCabinet, vm.warning);
-                        vm.notFoundCabinets.push(vm.cabinetID);
-                    }
-                    vm.cabinetID = "";
-                }
             }
             else
                 vm.cabinetID = "";
@@ -500,13 +498,13 @@
                     cabinetID: economico
                 }
             }).then(function (res) {
-                vm.existingCabinets.push(res);
                 removeNotFoundCabinet(res);
                 vm.cabinetID = res;
                 addCabinet();
             }).catch(function (err) {
                 if (err != null) {
-
+                    console.error(err);
+                    toastr.error(vm.errorGeneric);
                 }
             });
         }
