@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
@@ -43,7 +43,7 @@
                 icon: 'zmdi zmdi-bookmark',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
-                priority: 3,
+                priority: 99,
                 children: [
                     {
                         name: 'MAIN.MENU.SEARCH_SOLICITUD',

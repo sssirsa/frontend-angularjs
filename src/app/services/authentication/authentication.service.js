@@ -58,8 +58,8 @@
                             request.reject(profileError);
                         });
                 })
-                .catch(function () {
-                    request.reject();
+                .catch(function (error) {
+                    request.reject(error);
                 });
 
             return request.promise;
