@@ -346,7 +346,7 @@
             vm.cabinetid = vm.idCabinet;
             $mdDialog.show({
                 controller: 'DiagnosticController',
-                templateUrl: 'app/mainApp/servicios/diagnostic/diagnostic.dialog.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/diagnostic/diagnostic.dialog.tmpl.html',
                 controllerAs: 'vm',
                 locals: {
                     cabinet: vm.idCabinet
@@ -401,7 +401,7 @@
             }
             $mdDialog.show({
                 controller: 'checklistController',
-                templateUrl: 'app/mainApp/servicios/checklist/checklist.dialog.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/checklist/checklist.dialog.tmpl.html',
                 controllerAs: 'vm',
                 parent: angular.element(document.body),
                 targetEvent: ev,
@@ -834,7 +834,7 @@
                 controller: function () {
                     this.parent = vm
                 },
-                templateUrl: 'app/mainApp/servicios/etapa/dialogInfoEtapa.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/etapa/dialogInfoEtapa.tmpl.html',
                 parent: angular.element(document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true
