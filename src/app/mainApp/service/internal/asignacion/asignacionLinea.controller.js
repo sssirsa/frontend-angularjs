@@ -175,7 +175,7 @@
                 controller: function () {
                     this.parent = vm
                 },
-                templateUrl: 'app/mainApp/servicios/asignacion/dialogInfoCabinet.tmpl.html',
+                templateUrl: 'app/mainApp/service/internal/asignacion/dialogInfoCabinet.tmpl.html',
                 parent: angular.element(document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true
