@@ -31,6 +31,17 @@
                     id: null
                 }
             })
+            .state('triangular.admin-default.serviceList', {
+                url: '/listarServicios',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/external/atenciones/list/list-atention-page.tmpl.html',
+                controller: 'listAtentionController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.newRequest', {
                 url: '/request/new',
                 templateUrl: 'app/mainApp/service/external/solicitudes/new/new-request-page.tmpl.html',
@@ -117,7 +128,7 @@
                 priority: 7,
                 children: [
                     {
-                        name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
+                        name: 'MAIN.MENU.SERVICE.ASSIGN',
                         state: 'triangular.admin-default.serviceAssing',
                         permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
                         type: 'link'
@@ -140,6 +151,12 @@
                             type: 'link'
                         }
                         ]
+                    },
+                    {
+                        name : 'MAIN.MENU.SERVICE.MENU_TITLE',
+                        state: 'triangular.admin-default.serviceList',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
