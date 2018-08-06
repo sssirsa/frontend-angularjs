@@ -87,8 +87,10 @@
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
                 "PROVIDER": "Proveedor"
             },
-            "SERVICE_ASSIGN": {
-                "ASSIGN": "Asignación de servicio"
+            "SERVICE": {
+                "MENU_TITLE": "Atenciones",
+                "ASSIGN": "Asignación de servicio",
+                "LIST": "Listado de servicio"
             },
             "REQUESTS": {
                 "TITLE": "Solicitudes",
