@@ -11,27 +11,40 @@
         vm.selectedKind = null;
         vm.salePoints = null;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
-        vm.Assing = Assing;
+        vm.Atending = Atending;
+        vm.Editing = Editing;
 
-        function Assing(salePoint) {
+        // function Assing(salePoint) {
+        //     console.log(salePoint);
+        //     $mdDialog.show({
+        //         controller: 'dialogAsignacionTecnicoController',
+        //         templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+        //         parent: angular.element(document.body),
+        //         controllerAs: 'vm',
+        //         clickOutsideToClose: true,
+        //         focusOnOpen: true,
+        //         locals: {
+        //             salePoint: salePoint
+        //         }
+        //     })
+        //         .then(function () {
+        //             vm.selectedKind = 'pending';
+        //             vm.salePoints = null;
+        //             vm.listSalePoints();
+        //         });
+        //
+        // }
+
+        function Atending(salePoint) {
+            console.log('ATENDIENDO ATENCION');
             console.log(salePoint);
-            $mdDialog.show({
-                controller: 'dialogAsignacionTecnicoController',
-                templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
-                parent: angular.element(document.body),
-                controllerAs: 'vm',
-                clickOutsideToClose: true,
-                focusOnOpen: true,
-                locals: {
-                    salePoint: salePoint
-                }
-            })
-                .then(function () {
-                    vm.selectedKind = 'pending';
-                    vm.salePoints = null;
-                    vm.listSalePoints();
-                });
+            console.log('ATENDIENDO ATENCION');
+        }
 
+        function Editing(salePoint) {
+            console.log('EDITANDO ATENCION');
+            console.log(salePoint);
+            console.log('EDITANDO ATENCION');
         }
 
         //Function mapping
