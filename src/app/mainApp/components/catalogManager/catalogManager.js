@@ -247,12 +247,15 @@
                     default:
                         vm.CatalogProvider = CATALOG.generic;
                         break;
+                    finally:
+                        vm.CatalogProvider.url = vm.Url;
+                        break;
                 }
             }
             else {
                 vm.CatalogProvider = CATALOG.generic;
+                vm.CatalogProvider.url = vm.Url;
             }
-            vm.CatalogProvider.url = vm.Url;
         }
 
         function createPaginationProvider() {
