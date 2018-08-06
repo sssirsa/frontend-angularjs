@@ -13,7 +13,7 @@
                 namePlural: '@?', //If not given, the default plural handler adds an 's' to the end of the name
 
                 //Functions
-                onSuccessList:'&',
+                onSuccessList: '&',
                 onErrorList: '&',
                 onSuccessGet: '&',
                 onErrorGet: '&',
@@ -22,15 +22,15 @@
                 onSuccessUpdate: '&',
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
-                onErrorDelete:'&',
+                onErrorDelete: '&',
 
                 //Buttons, if no text is given, the button would only have an icon
-                createText: '@?',
-                deleteText: '@?',
-                modifyText: '@?',
-                saveText: '@?',
-                confirmText: '@?',
-                cancelText: '@?',
+                createButtonText: '@?',
+                deleteButtonText: '@?',
+                modifyButtonText: '@?',
+                saveButtonText: '@?',
+                confirmButtonText: '@?',
+                cancelButtonText: '@?',
 
                 //Meta object for the component
                 actions: '<',
@@ -189,6 +189,9 @@
                  *          previous: string,     (Optional) binding for the url that returns to the previous page
                  *          next: string,         (Optional) Binding for the url that brings to the next page
                  *      }
+                 *  },
+                 *  DELETE:{
+                 *      //TODO: Add procedures, validations, etc.
                  *  }
                  * }
                  */
@@ -212,8 +215,9 @@
 
         vm.catalogElements = [];
 
-        //Initializing local instance of provider
+        //Initializing local instance of providers
         vm.CatalogProvider = null;
+        vm.PaginationProvider = null;
 
         //Function mapping
         vm.create = create;
@@ -223,6 +227,9 @@
 
         function activate() {
             createMainCatalogProvider();
+            if (vm.actions.LIST.pagination) {
+                createPaginationCatalogProvider();
+            }
         }
 
         function createMainCatalogProvider() {
@@ -245,33 +252,80 @@
             vm.CatalogProvider.url = vm.Url;
         }
 
+        function createPaginationProvider() {
+            vm.PaginationProvider = CATALOG.generic;
+        }
+
         function list() {
-            vm.listLoader = vm.CatalogProvider
-                .list()
-                .then(function (elements) {
-                    vm.catalogElements = elements;
-                    vm.onSuccessList({ elements: elements });
-                })
-                .catch(function (errorElements) {
-                    console.error(errorElements);
-                    vm.onErrorList({ error: errorElements });
-                });
+            //List behaviour handling (initial loading)
+            if (vm.actions['LIST']) {
+                vm.listLoader = vm.CatalogProvider
+                    .list()
+                    .then(function (elements) {
+                        if (vm.actions.LIST.elements) {
+                            vm.catalogElements = elements[vm.actions.LIST.elements];
+                        }
+                        else {
+                            vm.catalogElements = elements;
+                        }
+                        vm.onSuccessList({ elements: vm.catalogElemets });
+                    })
+                    .catch(function (errorElements) {
+                        console.error(errorElements);
+                        vm.onErrorList({ error: errorElements });
+                    });
+            }
         }
 
         function create(objectToCreate) {
             //Creation behavior handling
+            if (vm.actions['POST']) {
+                vm.createLoader = vm.CatalogProvider
+                    .create(objectToCreate)
+                    .then(function (createResult) {
+                        activate();
+                        vm.onSuccessCreate({ result: createResult });
+                    })
+                    .catch(function (createError) {
+                        vm.onErrorCreate({ error: createError });
+                    });
+            }
         }
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
+            if (vm.actions['DELETE']) {
+
+            }
         }
 
         function update(idToUpdate, newObject) {
             //Update behavior handling
+            if (vm.actions['PUT']) {
+                vm.updateLoader = vm.CatalogProvider
+                    .update(idToUpdate, newObject)
+                    .then(function (updateResult) {
+                        activate();
+                        vm.onSuccessUpdate({ result: updateResult });
+                    })
+                    .catch(function (errorUpdate) {
+                        vm.onErrorUpdate({ error: errorUpdate });
+                    });
+            }
         }
 
         function getByID(idToGet) {
-
+            //Get one element behavior
+            if (vm.actions['LIST']) {
+                vm.getByIDLoader = vm.CatalogProvider
+                    .getByID(idToGet)
+                    .then(function (element) {
+                        vm.onSuccessGet({ element: element });
+                    })
+                    .catch(function (elementError) {
+                        vm.onErrorGet({ error: elementError });
+                    });
+            }
         }
 
     }
