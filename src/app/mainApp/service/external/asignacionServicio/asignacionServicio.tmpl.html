@@ -12,7 +12,8 @@
                 <label translate>SALEPOINT_REQUEST.ASSIGN.LABELS.KIND</label>
                 <md-select name="selectSalePointType"
                            md-on-close="vm.listSalePoints()"
-                           ng-model="vm.selectedKind">
+                           ng-model="vm.selectedKind"
+                           disabled="true">
                     <md-option ng-repeat="option in vm.salePointKinds"
                                value="{{option.id}}">
                         {{option.value}}
@@ -38,7 +39,8 @@
                     <md-toolbar class="md-hue-1">
                         <div class="md-toolbar-tools" layout-align="space-between center">
                             <b>{{salePoint.folio}}</b>
-                            <h1>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h1>
+                            <!--<h1>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h1>-->
+                            <!--<h1>NOMBRE DEL ASIGNADO XD</h1>-->
                         </div>
                     </md-toolbar>
                 </div>
@@ -94,17 +96,17 @@
                     </div>
 
                     <div layout="column">
-                        <div layout="row">
-                            <div layout="column" layout-align="center center">
-                                <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</b>
-                            </div>
-                            <div layout="column" layout-align="center center">
-                                <b>:&nbsp</b>
-                            </div>
-                            <div layout="column" layout-align="center center">
-                                <h4>{{salePoint.route}}</h4>
-                            </div>
-                        </div>
+                        <!--<div layout="row">-->
+                            <!--<div layout="column" layout-align="center center">-->
+                                <!--<b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</b>-->
+                            <!--</div>-->
+                            <!--<div layout="column" layout-align="center center">-->
+                                <!--<b>:&nbsp</b>-->
+                            <!--</div>-->
+                            <!--<div layout="column" layout-align="center center">-->
+                                <!--<h4>{{salePoint.route}}</h4>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div layout="row">
                             <div layout="column" layout-align="center center">
                                 <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</b>
@@ -128,6 +130,20 @@
                                 <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">
                                     {{salePoint.establecimiento_info.localidad.municipio.estado.nombre}}</h4>
                                 <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                            </div>
+                        </div>
+
+                        <div layout="row">
+                            <div layout="column" layout-align="center center">
+                                <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.CP</b>
+                            </div>
+                            <div layout="column" layout-align="center center">
+                                <b>:&nbsp</b>
+                            </div>
+                            <div layout="column" layout-align="center center">
+                                <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">
+                                    {{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
+                                <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No Asignado</h4>
                             </div>
                         </div>
                     </div>
@@ -160,15 +176,15 @@
 
                         <div layout="row">
                             <div layout="column" layout-align="center center">
-                                <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.CP</b>
+                                <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</b>
                             </div>
                             <div layout="column" layout-align="center center">
                                 <b>:&nbsp</b>
                             </div>
                             <div layout="column" layout-align="center center">
-                                <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">
-                                    {{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
-                                <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No Asignado</h4>
+                                <h4 ng-if="salePoint.fecha">
+                                    {{salePoint.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                                <h4 ng-if="!salePoint.fecha">No Asignado</h4>
                             </div>
                         </div>
                     </div>

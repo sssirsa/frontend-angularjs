@@ -8,9 +8,9 @@
     function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
         var vm = this;
 
-        vm.selectedKind = null;
+        vm.selectedKind = 'pending';
         vm.salePoints = null;
-        vm.salePointKinds = OPTIONS.salePointAssignKind;
+        vm.salePointKinds = [{id: 'pending', value: 'Pendientes'}];
         vm.Assing = Assing;
 
         function Assing(salePoint) {
@@ -84,6 +84,13 @@
         function selectSalePoint(salePoint) {
             $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
         }
+
+        initial();
+
+        function initial(){
+            listSalePoints();
+        }
+
 
     }
 
