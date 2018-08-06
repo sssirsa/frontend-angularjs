@@ -275,6 +275,9 @@
                         vm.onErrorList({ error: errorElements });
                     });
             }
+            else {
+                vm.onErrorList({ error: '"actions" parameter does not have the LIST element defined' });
+            }
         }
 
         function create(objectToCreate) {
@@ -290,12 +293,18 @@
                         vm.onErrorCreate({ error: createError });
                     });
             }
+            else {
+                vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined');
+            }
         }
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
             if (vm.actions['DELETE']) {
 
+            }
+            else {
+                vm.onErrorDelete({ error: '"actions" parameter does not have the DELETE element defined' });
             }
         }
 
@@ -312,11 +321,14 @@
                         vm.onErrorUpdate({ error: errorUpdate });
                     });
             }
+            else {
+                vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });
+            }
         }
 
         function getByID(idToGet) {
             //Get one element behavior
-            if (vm.actions['LIST']) {
+            if (vm.actions['GET']) {
                 vm.getByIDLoader = vm.CatalogProvider
                     .getByID(idToGet)
                     .then(function (element) {
@@ -325,6 +337,9 @@
                     .catch(function (elementError) {
                         vm.onErrorGet({ error: elementError });
                     });
+            }
+            else {
+                vm.onErrorGet({ error: '"actions" parameter does not have the GET element defined' });
             }
         }
 
