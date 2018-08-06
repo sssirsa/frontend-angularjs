@@ -1,6 +1,40 @@
-<div
-     layout="column"
-     layout-align="center stretch"
-     >
-    <p>TODO: Catalog Manager</p>
+<div layout="column"
+     layout-align="center stretch">
+    <md-card layout="column"
+             layout-align="center stretch">
+
+        <div layout="column"
+             layout-gt-sm="row"
+             layout-align="center center"
+             layout-wrap
+             layout-align-gt-md="space-around center">
+            <md-button ng-if="$ctrl.actions['SEARCH']"
+                       ng-click="$ctrl.search()"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-search"></md-icon>
+                {{$ctrl.searchButtonText}}
+            </md-button>
+            <md-button ng-if="$ctrl.actions['POST']"
+                       ng-click="$ctrl.create()"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                {{$ctrl.createButtonText}}
+            </md-button>
+            <md-button ng-if="$ctrl.selectedElement && $ctrl.actions['PUT']"
+                       ng-click="$ctrl.update()"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                {{$ctrl.modifyButtonText}}
+            </md-button>
+            <div ng-if="$ctrl.selectedElement && $ctrl.actions['DELETE']"
+                 cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
+                <md-button ng-click="$ctrl.delete()"
+                           class="md-warn md-raised">
+                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    {{$ctrl.deleteButtonText}}
+                </md-button>
+            </div>
+        </div>
+
+    </md-card>
 </div>
