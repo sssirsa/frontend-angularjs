@@ -25,6 +25,7 @@
                 onErrorDelete: '&',
 
                 //Buttons, if no text is given, the button would only have an icon
+                searchButtonText: '@?',
                 createButtonText: '@?',
                 deleteButtonText: '@?',
                 modifyButtonText: '@?',
@@ -42,6 +43,7 @@
                  * Root elements of the object MUST be the actions
                  * Example:
                  * {
+                 *  SEARCH:{...},  Not yet implemented----------------
                  *  POST:{...},    New element meta
                  *  PUT:{...},     Update element meta
                  *  GET:{...},     Detail element meta
@@ -214,6 +216,7 @@
         vm.actions ? vm.Actions : vm.actions = null;
 
         vm.catalogElements = [];
+        vm.selectedElement = null;
 
         //Initializing local instance of providers
         vm.CatalogProvider = null;
@@ -256,6 +259,10 @@
             vm.PaginationProvider = CATALOG.generic;
         }
 
+        function search() {
+            //TODO: Search behaviour handling
+        }
+
         function list() {
             //List behaviour handling (initial loading)
             if (vm.actions['LIST']) {
@@ -294,7 +301,7 @@
                     });
             }
             else {
-                vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined');
+                vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
 
