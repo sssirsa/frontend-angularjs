@@ -8,12 +8,6 @@
     function CatalogProvider(MobileRestangular, WebRestangular, $http) {
         var vm = this;
 
-        var service = {
-            mobile: vm.mobileCatalog,
-            web: vm.webCatalog,
-            generic: vm.genericCatalog
-        };
-
         vm.mobileCatalog = {
             url: null,
             getByID: function (id) {
@@ -84,6 +78,12 @@
                 return $http.delete(
                     vm.genericCatalog.url + '/' + id);
             }
+        };
+
+        var service = {
+            mobile: vm.mobileCatalog,
+            web: vm.webCatalog,
+            generic: vm.genericCatalog
         };
 
         return service;
