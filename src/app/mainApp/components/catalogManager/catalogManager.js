@@ -204,25 +204,18 @@
 
     /* @ngInject */
     function CatalogManagerController(
-        CATALOG,
-        MobileRestangular,
-        WebRestangular,
-        $http
+        CATALOG
     ) {
         var vm = this;
 
         activate();
 
         //Initializing or assingning default values to global variables
-        vm.name ? null : vm.Name = 'Catalog';
-        vm.kind ? null : vm.Kind = 'Generic';
+        vm.name ? null : vm.name = 'Catalog';
+        vm.kind ? null : vm.kind = 'Generic';
 
         vm.catalogElements = [];
         vm.selectedElement = null;
-
-        //Initializing local instance of providers
-        vm.CatalogProvider = null;
-        vm.PaginationProvider = null;
 
         //Function mapping
         vm.create = create;
@@ -232,17 +225,15 @@
 
         function activate() {
             createMainCatalogProvider();
-            if (vm.actions.LIST.pagination) {
-                createPaginationCatalogProvider();
+            function createPaginationProvider() {
+                vm.PaginationProvider = CATALOG.generic;
             }
-            console.debug(vm.actions);
-            console.debug(vm.CatalogProvider);
             list();
         }
 
         function createMainCatalogProvider() {
-            if (vm.Kind) {
-                switch (vm.Kind) {
+            if (vm.kind) {
+                switch (vm.kind) {
                     case 'Mobile':
                         vm.CatalogProvider = CATALOG.mobile;
                         break;
@@ -257,6 +248,7 @@
             else {
                 vm.CatalogProvider = CATALOG.generic;
             }
+            vm.CatalogProvider.url = vm.url;
         }
 
         function createPaginationProvider() {
@@ -271,7 +263,7 @@
             //List behaviour handling (initial loading)
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
-                    .list(vm.url)
+                    .list()
                     .then(function (elements) {
                         console.debug(elements);
                         if (vm.actions.LIST.elements) {
