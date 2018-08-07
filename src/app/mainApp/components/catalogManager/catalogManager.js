@@ -195,6 +195,9 @@
                  *  DELETE:{
                  *      //TODO: Add procedures, validations, etc.
                  *      id:string             //Defines the name of the filed that with be used as ID for deletion
+                 *  },
+                 *  SEARCH:{
+                 *      //TODO:Add procedures, validations, etc.
                  *  }
                  * }
                  */
@@ -265,13 +268,13 @@
                 vm.listLoader = vm.CatalogProvider
                     .list()
                     .then(function (elements) {
-                        console.debug(elements);
-                        if (vm.actions.LIST.elements) {
-                            vm.catalogElements = elements[vm.actions.LIST.elements];
+                        if (vm.actions['LIST'].elements) {
+                            vm.catalogElements = elements[vm.actions['LIST'].elements];
                         }
                         else {
                             vm.catalogElements = elements;
                         }
+                        console.debug(vm.catalogElements);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -305,7 +308,15 @@
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
             if (vm.actions['DELETE']) {
-
+                vm.removeLoader = vm.CatalogProvider
+                    .remove(idToRemove)
+                    .then(function () {
+                        activate();
+                        vm.onSuccessDelete();
+                    })
+                    .catch(function (removeError) {
+                        vm.onErrorDelete({ error: removeError });
+                    });
             }
             else {
                 vm.onErrorDelete({ error: '"actions" parameter does not have the DELETE element defined' });

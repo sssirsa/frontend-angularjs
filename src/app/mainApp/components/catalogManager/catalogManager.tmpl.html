@@ -1,5 +1,13 @@
 <div layout="column"
      layout-align="center stretch">
+
+    <md-card layout-padding>
+        <div layout="column"
+             layout-align="center center">
+            <h1>{{$ctrl.name}}</h1>
+        </div>
+    </md-card>
+
     <md-card layout="column"
              layout-align="center stretch">
 
@@ -8,7 +16,7 @@
              layout-align="center center"
              layout-wrap
              layout-align-gt-md="space-around center">
-            <md-button ng-if="$ctrl.actions['SEARCH']"
+            <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
                        ng-click="$ctrl.search()"
                        class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-search"></md-icon>
@@ -34,6 +42,12 @@
                     {{$ctrl.deleteButtonText}}
                 </md-button>
             </div>
+        </div>
+
+        <div layout="column"
+             layout-align="center center"
+             ng-if="$ctrl.catalogElements">
+            <h3>{{$ctrl.namePlural}}</h3>
         </div>
 
     </md-card>

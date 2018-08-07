@@ -15,33 +15,50 @@
                 fields: [
                     {
                         type: 'text',
-                        model: '',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true
+                    },
+                    {
+                        type: 'text',
+                        model: 'codigo_estado',
+                        label: 'Código Estado',
                         required: true,
-                        label: 'field_name',
                         validations: [
                             {
-                                regex: '',
-                                max: 0,
-                                min: 100,
-                                date_format: 'DD/MM/YYYY',
-                                error_message: 'Required field'
+                                regex: "/^[a-zA-Z]{3,3}/",
+                                error_message: 'El código de estado deben ser 3 letras en MAYÚSCULAS'
                             }
                         ]
                     }
-
                 ]
             },
             PUT: {
-                fields:[]
+                fields: []
             },
             DELETE: {
-                id:'id_field'
+                id: 'id_field'
             },
             LIST: {
-                fields:[]
+                elements: 'results',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre'
+                    },
+                    {
+                        type: 'text',
+                        model: 'codigo_estado',
+                        label: 'Código Estado'
+                    }
+                ]
             },
             GET: {
-                fields:[]
+                fields: []
+            },
+            SEARCH: {
+
             }
         }
 
