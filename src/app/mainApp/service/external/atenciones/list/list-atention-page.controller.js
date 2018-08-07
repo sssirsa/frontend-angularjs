@@ -13,6 +13,7 @@
         vm.salePointKinds = OPTIONS.salePointAssignKind;
         vm.Atending = Atending;
         vm.Editing = Editing;
+        vm.selectRequest = selectRequest;
 
         // function Assing(salePoint) {
         //     console.log(salePoint);
@@ -96,6 +97,11 @@
 
         function selectSalePoint(salePoint) {
             $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
+        }
+
+        function selectRequest(request) {
+            $state.go('triangular.admin-default.attentionDetail', {id: request});
+            console.log("Folio: ", request);
         }
 
     }

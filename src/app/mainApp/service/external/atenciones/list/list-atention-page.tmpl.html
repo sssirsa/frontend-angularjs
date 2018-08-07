@@ -29,6 +29,7 @@
         <md-card
             flex="100"
             layout="column"
+            ng-click="vm.selectRequest(salePoint.folio)"
             ng-repeat="salePoint in vm.salePoints|orderBy:'-fecha' "
             layout-gt-md="row">
             <div layout="column" layout-align="center stretch" flex="100">

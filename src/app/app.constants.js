@@ -458,6 +458,7 @@
             reporte_insumos: 'reports/insumos',
             rutas: 'ruta',
             solicitud_pv: 'solicitud',
+            atencion_pv: 'atencion_pv',
             etapa_servicio: 'etapa_servicio',
             insumo_usado: 'insumo_usado',
             grupo_persona: 'grupo_persona',

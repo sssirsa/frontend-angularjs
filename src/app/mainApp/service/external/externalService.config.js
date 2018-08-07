@@ -116,6 +116,21 @@
                         only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                     }
                 }
+            })
+
+            .state('triangular.admin-default.attentionDetail', {
+                url: '/atencion/:id',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/external/atenciones/detail/detail-attention-page-tmpl.html',
+                controller: 'DetailAttentionPageController',
+                controllerAs: 'vm',
+                params: {
+                    id: null
+                }
             });
 
 
