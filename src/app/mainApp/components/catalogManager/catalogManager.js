@@ -10,7 +10,7 @@
 
                 //Labels
                 name: '<', //Catalog name to show, default is 'Catalog'
-                namePlural: '@?', //If not given, the default plural handler adds an 's' to the end of the name
+                namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
 
                 //Functions
                 onSuccessList: '&',
@@ -25,13 +25,13 @@
                 onErrorDelete: '&',
 
                 //Buttons, if no text is given, the button would only have an icon
-                searchButtonText: '@?',
-                createButtonText: '@?',
-                deleteButtonText: '@?',
-                modifyButtonText: '@?',
-                saveButtonText: '@?',
-                confirmButtonText: '@?',
-                cancelButtonText: '@?',
+                searchButtonText: '<',
+                createButtonText: '<',
+                deleteButtonText: '<',
+                modifyButtonText: '<',
+                saveButtonText: '<',
+                confirmButtonText: '<',
+                cancelButtonText: '<',
 
                 //Meta object for the component
                 actions: '<',
@@ -233,6 +233,7 @@
             if (vm.actions.LIST.pagination) {
                 createPaginationCatalogProvider();
             }
+            console.debug(vm.actions);
         }
 
         function createMainCatalogProvider() {
@@ -247,15 +248,12 @@
                     default:
                         vm.CatalogProvider = CATALOG.generic;
                         break;
-                    finally:
-                        vm.CatalogProvider.url = vm.Url;
-                        break;
                 }
             }
             else {
                 vm.CatalogProvider = CATALOG.generic;
-                vm.CatalogProvider.url = vm.Url;
             }
+            vm.CatalogProvider.url = vm.Url;
         }
 
         function createPaginationProvider() {
