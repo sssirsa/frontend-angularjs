@@ -194,6 +194,7 @@
                  *  },
                  *  DELETE:{
                  *      //TODO: Add procedures, validations, etc.
+                 *      id:string             //Defines the name of the filed that with be used as ID for deletion
                  *  }
                  * }
                  */
@@ -203,17 +204,18 @@
 
     /* @ngInject */
     function CatalogManagerController(
-        CATALOG
+        CATALOG,
+        MobileRestangular,
+        WebRestangular,
+        $http
     ) {
         var vm = this;
 
         activate();
 
         //Initializing or assingning default values to global variables
-        vm.name ? vm.Name = vm.name : vm.Name = 'Catalog';
-        vm.url ? vm.Url = vm.url : null;
-        vm.kind ? vm.Kind = vm.kind : vm.Kind = 'Generic';
-        vm.actions ? vm.Actions : vm.actions = null;
+        vm.name ? null : vm.Name = 'Catalog';
+        vm.kind ? null : vm.Kind = 'Generic';
 
         vm.catalogElements = [];
         vm.selectedElement = null;
@@ -234,6 +236,8 @@
                 createPaginationCatalogProvider();
             }
             console.debug(vm.actions);
+            console.debug(vm.CatalogProvider);
+            list();
         }
 
         function createMainCatalogProvider() {
@@ -253,7 +257,6 @@
             else {
                 vm.CatalogProvider = CATALOG.generic;
             }
-            vm.CatalogProvider.url = vm.Url;
         }
 
         function createPaginationProvider() {
@@ -268,8 +271,9 @@
             //List behaviour handling (initial loading)
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
-                    .list()
+                    .list(vm.url)
                     .then(function (elements) {
+                        console.debug(elements);
                         if (vm.actions.LIST.elements) {
                             vm.catalogElements = elements[vm.actions.LIST.elements];
                         }
@@ -292,7 +296,7 @@
             //Creation behavior handling
             if (vm.actions['POST']) {
                 vm.createLoader = vm.CatalogProvider
-                    .create(objectToCreate)
+                    .create(vm.url, objectToCreate)
                     .then(function (createResult) {
                         activate();
                         vm.onSuccessCreate({ result: createResult });
@@ -320,7 +324,7 @@
             //Update behavior handling
             if (vm.actions['PUT']) {
                 vm.updateLoader = vm.CatalogProvider
-                    .update(idToUpdate, newObject)
+                    .update(vm.url, idToUpdate, newObject)
                     .then(function (updateResult) {
                         activate();
                         vm.onSuccessUpdate({ result: updateResult });
@@ -338,7 +342,7 @@
             //Get one element behavior
             if (vm.actions['GET']) {
                 vm.getByIDLoader = vm.CatalogProvider
-                    .getByID(idToGet)
+                    .getByID(vm.url, idToGet)
                     .then(function (element) {
                         vm.onSuccessGet({ element: element });
                     })

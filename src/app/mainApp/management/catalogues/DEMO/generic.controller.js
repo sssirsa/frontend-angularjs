@@ -6,8 +6,8 @@
     function GenericCatalogController() {
         var vm = this;
 
-        vm.url = '';
-        vm.kind = 'Generic';
+        vm.url = 'estado';
+        vm.kind = 'Mobile';
         vm.name = 'Catálogo';
         vm.namePlural = 'Catálogos';
         vm.actions = {
@@ -32,16 +32,16 @@
                 ]
             },
             PUT: {
-
+                fields:[]
             },
             DELETE: {
-
+                id:'id_field'
             },
             LIST: {
-
+                fields:[]
             },
             GET: {
-
+                fields:[]
             }
         }
 

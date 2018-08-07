@@ -3,80 +3,77 @@
 
     angular
         .module('app.mainApp')
-        .factory('CATALOG', CatalogProvider);
+        .service('CATALOG', ['MobileRestangular', 'WebRestangular', '$http', CatalogProvider]);
 
     function CatalogProvider(MobileRestangular, WebRestangular, $http) {
         var vm = this;
 
         vm.mobileCatalog = {
-            url: null,
-            getByID: function (id) {
-                return MobileRestangular.one(vm.mobileCatalog.url, id)
+            getByID: function (url, id) {
+                return MobileRestangular.one(url, id)
                     .customGET();
             },
-            list: function () {
-                return MobileRestangular.all(vm.mobileCatalog.url)
+            list: function (url) {
+                return MobileRestangular.all(url)
                     .getList();
             },
-            create: function (object) {
-                return MobileRestangular.all(vm.mobileCatalog.url)
+            create: function (url, object) {
+                return MobileRestangular.all(url)
                     .customPOST(object);
             },
-            update: function (id, object) {
-                return MobileRestangular.all(vm.mobileCatalog.url).all(id)
+            update: function (url, id, object) {
+                return MobileRestangular.all(url).all(id)
                     .customPUT(object);
             },
-            remove: function (id) {
-                return MobileRestangular.all(vm.mobileCatalog.url)
+            remove: function (url, id) {
+                return MobileRestangular.all(url)
                     .customDELETE(id, null, {'content-type': 'application/json'});
             }
         };
 
         vm.webCatalog = {
-            url: null,
-            getByID: function (id) {
-                return WebRestangular.one(vm.webCatalog.url, id)
+            getByID: function (url, id) {
+                return WebRestangular.one(url, id)
                     .customGET();
             },
-            list: function () {
-                return WebRestangular.all(vm.webCatalog.url)
+            list: function (url) {
+                return WebRestangular.all(url)
                     .getList();
             },
-            create: function (object) {
-                return WebRestangular.all(vm.webCatalog.url)
+            create: function (url, object) {
+                return WebRestangular.all(url)
                     .customPOST(object);
             },
-            update: function (id, object) {
-                return WebRestangular.all(vm.webCatalog.url).all(id)
+            update: function (url, id, object) {
+                return WebRestangular.all(url).all(id)
                     .customPUT(object);
             },
-            remove: function (id) {
-                return WebRestangular.all(vm.webCatalog.url)
+            remove: function (url, id) {
+                return WebRestangular.all(url)
                     .customDELETE(id, null, {'content-type': 'application/json'});
             }
         };
 
         vm.genericCatalog = {
-            url: null,
-            getByID: function (id) {
+            getByID: function (url, id) {
                 return $http.get(
-                    vm.genericCatalog.url + '/' + id);
+                    url + '/' + id);
             },
-            list: function () {
+            list: function (url) {
                 return $http.get(
-                    vm.genericCatalog.url);
+                    url);
             },
-            create: function (object) {
+            create: function (url, object) {
                 return $http.post(
-                    vm.genericCatalog.url, object);
+                    url, object);
             },
-            update: function (id, object) {
+            update: function (url, id, object) {
                 return $http.put(
-                    vm.genericCatalog.url + '/' + id, object);
+                    url + '/' + id, object);
             },
-            remove: function (id) {
+            remove: function (url, id) {
                 return $http.delete(
-                    vm.genericCatalog.url + '/' + id);
+                    url + '/' + id);
             }
         };
 
