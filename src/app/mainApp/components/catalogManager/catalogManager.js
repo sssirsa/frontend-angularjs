@@ -12,6 +12,7 @@
                 name: '<', //Catalog name to show, default is 'Catalog'
                 namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
                 totalText: '<', //If not given, the word 'Total' will be used
+                loadingMessage: '<',
 
                 //Functions
                 onSuccessList: '&',
@@ -163,7 +164,7 @@
                  *      mode: string,                  (Optional) Paged or Infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, number, email, options, file
+                 *              type: string,          Valid types are text, options, file
                  *              model: string,         Name of the field that will be used to show the data from the API
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
                  *              catalog:{                just used when the type of the field is options and the option field is not given

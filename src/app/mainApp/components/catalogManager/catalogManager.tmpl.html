@@ -29,48 +29,72 @@
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 {{$ctrl.createButtonText}}
             </md-button>
-            <md-button ng-if="$ctrl.selectedElement && $ctrl.actions['PUT']"
-                       ng-click="$ctrl.update()"
-                       class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-edit"></md-icon>
-                {{$ctrl.modifyButtonText}}
-            </md-button>
-            <div ng-if="$ctrl.selectedElement && $ctrl.actions['DELETE']"
-                 cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
-                <md-button ng-click="$ctrl.delete()"
-                           class="md-warn md-raised">
-                    <md-icon md-font-icon="fa fa-trash"></md-icon>
-                    {{$ctrl.deleteButtonText}}
-                </md-button>
-            </div>
         </div>
 
-        <div layout="column"
-             layout-align="center center"
-             layout-padding
-             ng-if="$ctrl.catalogElements">
-            <h3>{{$ctrl.namePlural}}</h3>
-        </div>
-        <!-- Section for list with pagination -->
-        <section ng-if="$ctrl.actions['LIST'].pagination">
-            <div layout="row"
-                 layout-align="start center"
-                 ng-if="$ctrl.paginationHelper['total']">
-                <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
-                <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
-                <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
+        <section ng-if="$ctrl.actions['LIST']"
+                 cg-busy="{promise:$ctrl.listLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+            <div layout="column"
+                 layout-align="center center"
+                 layout-padding>
+                <h3 ng-if="$ctrl.catalogElements.length>0">
+                    {{$ctrl.namePlural}}
+                </h3>
             </div>
-            <div id="catalog-vertical-container">
-                <div ng-repeat="element in $ctrl.catalogElements">
-                    {{element}}
-                    <md-divider></md-divider>
+            <!-- Section for list with pagination -->
+            <section ng-if="$ctrl.actions['LIST'].pagination">
+                <div layout="row"
+                     layout-align="start center"
+                     ng-if="$ctrl.paginationHelper['total']">
+                    <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
+                    <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
+                    <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
                 </div>
-            </div>
-        </section>
+                <div id="catalog-vertical-container">
+                    <div ng-repeat="element in $ctrl.catalogElements"
+                         layout="column">
+                        <div layout="row"
+                             layout-align="space-around center"
+                             layout-padding
+                             layout-wrap>
+                            <div layout="column"
+                                 layout-align="center center"
+                                 ng-repeat="field in $ctrl.actions['LIST'].fields">
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <span class="md-body-1">{{element[field.model]}}</span>
+                            </div>
+                        </div>
+                        <div layout="row"
+                             layout-align="space-around center"
+                             layout-wrap>
+                            <md-button ng-if="$ctrl.actions['PUT']"
+                                       ng-click="$ctrl.update()"
+                                       class="md-primary md-raised">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                {{$ctrl.modifyButtonText}}
+                            </md-button>
+                            <div ng-if="$ctrl.actions['DELETE']"
+                                 cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
+                                <md-button ng-click="$ctrl.delete()"
+                                           class="md-warn md-raised">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                    {{$ctrl.deleteButtonText}}
+                                </md-button>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Section for list without pagination -->
-        <section ng-if="!$ctrl.actions['LIST'].pagination">
-
+            <!-- Section for list without pagination -->
+            <section ng-if="!$ctrl.actions['LIST'].pagination"></section>
         </section>
     </md-card>
 </div>

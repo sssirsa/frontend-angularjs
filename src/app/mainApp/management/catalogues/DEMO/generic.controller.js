@@ -13,6 +13,7 @@
         vm.name = 'Estado';
         vm.namePlural = 'Estados';
         vm.totalText = 'Elementos encontrados';
+        vm.loadingMessage = 'Cargando estados';
 
         //Button labels
         vm.searchButtonText = 'Buscar Estados';
