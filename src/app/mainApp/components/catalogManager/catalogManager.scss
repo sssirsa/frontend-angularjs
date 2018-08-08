@@ -1,0 +1,10 @@
+#catalog-vertical-container {
+  //270px is the upper part size
+  //64px is the footer size
+  //64px is the header size
+  //any other number subtracted of the height is the desired offset
+  max-height: calc(100vh - 270px - 64px - 64px - 64px);
+  width: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+}

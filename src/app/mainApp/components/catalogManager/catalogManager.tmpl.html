@@ -1,5 +1,5 @@
 <div layout="column"
-     layout-align="center stretch">
+     layout-align="start stretch">
 
     <md-card layout-padding>
         <div layout="column"
@@ -9,7 +9,8 @@
     </md-card>
 
     <md-card layout="column"
-             layout-align="center stretch">
+             layout-align="center stretch"
+             layout-padding>
 
         <div layout="column"
              layout-gt-sm="row"
@@ -58,6 +59,12 @@
                 <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
                 <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
                 <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
+            </div>
+            <div id="catalog-vertical-container">
+                <div ng-repeat="element in $ctrl.catalogElements">
+                    {{element}}
+                    <md-divider></md-divider>
+                </div>
             </div>
         </section>
 
