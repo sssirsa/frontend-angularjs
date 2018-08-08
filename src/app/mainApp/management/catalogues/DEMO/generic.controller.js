@@ -8,8 +8,11 @@
 
         vm.url = 'estado';
         vm.kind = 'Mobile';
+
+        //Labels
         vm.name = 'Estado';
         vm.namePlural = 'Estados';
+        vm.totalText = 'Elementos encontrados';
 
         //Button labels
         vm.searchButtonText = 'Buscar Estados';
@@ -52,6 +55,9 @@
             },
             LIST: {
                 elements: 'results',
+                pagination: {
+                    total:'count'
+                },
                 fields: [
                     {
                         type: 'text',

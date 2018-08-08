@@ -46,9 +46,24 @@
 
         <div layout="column"
              layout-align="center center"
+             layout-padding
              ng-if="$ctrl.catalogElements">
             <h3>{{$ctrl.namePlural}}</h3>
         </div>
+        <!-- Section for list with pagination -->
+        <section ng-if="$ctrl.actions['LIST'].pagination">
+            <div layout="row"
+                 layout-align="start center"
+                 ng-if="$ctrl.paginationHelper['total']">
+                <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
+                <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
+                <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
+            </div>
+        </section>
 
+        <!-- Section for list without pagination -->
+        <section ng-if="!$ctrl.actions['LIST'].pagination">
+
+        </section>
     </md-card>
 </div>

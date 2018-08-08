@@ -11,6 +11,7 @@
                 //Labels
                 name: '<', //Catalog name to show, default is 'Catalog'
                 namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
+                totalText: '<', //If not given, the word 'Total' will be used
 
                 //Functions
                 onSuccessList: '&',
@@ -217,6 +218,7 @@
         vm.name ? null : vm.name = 'Catalog';
         vm.kind ? null : vm.kind = 'Generic';
 
+        vm.paginationHelper = {};
         vm.catalogElements = [];
         vm.selectedElement = null;
 
@@ -268,13 +270,44 @@
                 vm.listLoader = vm.CatalogProvider
                     .list()
                     .then(function (elements) {
+                        //Elements list is returned in any other model
                         if (vm.actions['LIST'].elements) {
                             vm.catalogElements = elements[vm.actions['LIST'].elements];
                         }
+                        //Elements list is returned directly as an array
                         else {
                             vm.catalogElements = elements;
                         }
+
+                        //Building the pagination helper
+                        //(if pagination element is in the actions of the LIST),
+                        //if the meta contains the specific models,
+                        //then those will be used, otherwise, the default models will.
+                        if (vm.actions['LIST'].pagination) {
+                            //Total of elements model to be used
+                            if (vm.actions['LIST'].pagination['total']) {
+                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
+                            }
+                            else {
+                                vm.paginationHelper['total'] = elements['total'];
+                            }
+                            //Previous page model to be used
+                            if (vm.actions['LIST'].pagination['previous']) {
+                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
+                            }
+                            else {
+                                vm.paginationHelper['previous'] = elements['previous'];
+                            }
+                            //Next page model to be used
+                            if (vm.actions['LIST'].pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
+                            }
+                            else {
+                                vm.paginationHelper['next'] = elements['next'];
+                            }
+                        }
                         console.debug(vm.catalogElements);
+                        console.debug(vm.paginationHelper);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
