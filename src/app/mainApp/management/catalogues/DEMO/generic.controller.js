@@ -8,8 +8,19 @@
 
         vm.url = 'estado';
         vm.kind = 'Mobile';
-        vm.name = 'Catálogo';
-        vm.namePlural = 'Catálogos';
+        vm.name = 'Estado';
+        vm.namePlural = 'Estados';
+
+        //Button labels
+        vm.searchButtonText = 'Buscar Estados';
+        vm.createButtonText = 'Crear Estado';
+        vm.deleteButtonText = 'Borrar Estado';
+        vm.modifyButtonText = 'Editar Estado';
+        vm.saveButtonText = 'Guardar';
+        vm.confirmButtonText = 'Aceptar';
+        vm.cancelButtonText = 'Cancelar';
+        
+        //Actions meta
         vm.actions = {
             POST: {
                 fields: [
