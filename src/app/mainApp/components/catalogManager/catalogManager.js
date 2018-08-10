@@ -200,6 +200,10 @@
                  *          total: string,        (Optional) Binding for the number of total elements
                  *          previous: string,     (Optional) binding for the url that returns to the previous page
                  *          next: string,         (Optional) Binding for the url that brings to the next page
+                 *      },
+                 *      softDelete: {
+                 *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
+                 *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
                  *      }
                  *  },
                  *  DELETE:{
@@ -298,6 +302,10 @@
                         //Elements list is returned directly as an array
                         else {
                             vm.catalogElements = elements;
+                        }
+                        //Determine if the soft delete parameter is given, and procede with the filtering
+                        if (vm.actions['LIST'].softDelete) {
+                            vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
                         //Building the pagination helper
@@ -436,6 +444,11 @@
                         else {
                             vm.catalogElements = elements;
                         }
+                        //Determine if the soft delete parameter is given, and procede with the filtering
+                        if (vm.actions['LIST'].softDelete) {
+                            vm.catalogElements = filterDeleted(vm.catalogElements);
+                        }
+
                         //Re-Building the pagination helper
                         //(if pagination element is in the actions of the LIST),
                         //if the meta contains the specific models,
@@ -492,6 +505,11 @@
                         else {
                             vm.catalogElements = elements;
                         }
+                        //Determine if the soft delete parameter is given, and procede with the filtering
+                        if (vm.actions['LIST'].softDelete) {
+                            vm.catalogElements = filterDeleted(vm.catalogElements);
+                        }
+
                         //Re-Building the pagination helper
                         //(if pagination element is in the actions of the LIST),
                         //if the meta contains the specific models,
@@ -548,7 +566,11 @@
                         else {
                             vm.catalogElements = vm.catalogElements.concat(elements);
                         }
-                        console.debug(vm.catalogElements);
+                        //Determine if the soft delete parameter is given, and procede with the filtering
+                        if (vm.actions['LIST'].softDelete) {
+                            vm.catalogElements = filterDeleted(vm.catalogElements);
+                        }
+
                         //Re-Building the pagination helper
                         //(if pagination element is in the actions of the LIST),
                         //if the meta contains the specific models,
@@ -585,6 +607,20 @@
             else {
                 vm.onErrorList({ error: 'No next page URL found' });
             }
+        }
+
+        function filterDeleted(elements) {
+            var hide = vm.actions['LIST'].softDelete['hide'];
+            var reverse = vm.actions['LIST'].softDelete['reverse'];
+            //ng - hide="element[$ctrl.actions['LIST'].softDelete['hide']] ^ $ctrl.actions['LIST'].softDelete['reverse']"
+            var filteredElements = [];
+            elements.forEach(function (element) {
+                //Negated XOR comparison to decide whether to show or not the element
+                if (!element[hide] ? !reverse : reverse) {
+                    filteredElements.push(element);
+                }
+            });
+            return filteredElements;
         }
 
     }

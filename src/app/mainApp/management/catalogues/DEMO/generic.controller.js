@@ -61,7 +61,7 @@
             },
             LIST: {
                 elements: 'results',
-                mode:'infinite',
+                mode:'paged',
                 pagination: {
                     total:'count'
                 },
@@ -76,7 +76,11 @@
                         model: 'codigo_estado',
                         label: 'Código Estado'
                     }
-                ]
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             },
             GET: {
                 fields: []
