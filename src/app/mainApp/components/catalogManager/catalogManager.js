@@ -212,7 +212,7 @@
 
     /* @ngInject */
     function CatalogManagerController(
-        CATALOG
+        CATALOG,
         $window
     ) {
         var vm = this;
@@ -242,9 +242,15 @@
         vm.delete = remove;
         vm.update = update;
         vm.geByID = getByID;
-        vm.downloadFile = downoadFile;
+        vm.downloadFile = downloadFile;
 
         function activate() {
+            //var verticalContainer =
+            //    document.getElementsByClassName("catalog-vertical-container");
+            //console.debug(verticalContainer);
+            //if (verticalContainer.style.maxHeight < 200) {
+            //    verticalContainer.stye.maxHeight = '100%';
+            //}
             createMainCatalogProvider();
             function createPaginationProvider() {
                 vm.PaginationProvider = CATALOG.generic;

@@ -12,22 +12,24 @@
              layout-align="center stretch"
              layout-padding>
 
-        <div layout="column"
-             layout-gt-sm="row"
-             layout-align="center center"
-             layout-wrap
-             layout-align-gt-md="space-around center">
+        <div layout="row"
+             layout-align="space-around center"
+             layout-wrap>
             <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
                        ng-click="$ctrl.search()"
                        class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-search"></md-icon>
-                {{$ctrl.searchButtonText}}
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-search"></md-icon>
+                    <div hide-xs hide-sm>{{$ctrl.searchButtonText}}</div>
+                </div>
             </md-button>
             <md-button ng-if="$ctrl.actions['POST']"
                        ng-click="$ctrl.create()"
                        class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-plus"></md-icon>
-                {{$ctrl.createButtonText}}
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                    <div hide-xs hide-sm>{{$ctrl.createButtonText}}</div>
+                </div>
             </md-button>
         </div>
 
@@ -106,15 +108,19 @@
                             <md-button ng-if="$ctrl.actions['PUT']"
                                        ng-click="$ctrl.update()"
                                        class="md-primary md-raised">
-                                <md-icon md-font-icon="fa fa-edit"></md-icon>
-                                {{$ctrl.modifyButtonText}}
+                                <div layout="row" layout-align="center center">
+                                    <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                    <div hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
+                                </div>
                             </md-button>
                             <div ng-if="$ctrl.actions['DELETE']"
                                  cg-busy="{promise:vm.deletingStore, message:'Eliminando establecimiento...'}">
                                 <md-button ng-click="$ctrl.delete()"
                                            class="md-warn md-raised">
-                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
-                                    {{$ctrl.deleteButtonText}}
+                                    <div layout="row" layout-align="center center">
+                                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        <div hide-xs hide-sm>{{$ctrl.deleteButtonText}}</div>
+                                    </div>
                                 </md-button>
                             </div>
                         </div>
