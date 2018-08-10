@@ -56,18 +56,48 @@
                              layout-align="space-around center"
                              layout-padding
                              layout-wrap>
+                            <!-- Repeat per each field specified in the actions parameter -->
                             <div layout="column"
                                  layout-align="center center"
                                  ng-repeat="field in $ctrl.actions['LIST'].fields">
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <span class="md-body-1">{{element[field.model]}}</span>
+                                <!-- Just show this section when the field is text -->
+                                <section ng-if="field.type==='text'">
+                                    <!-- Label of the field -->
+                                    <div class="md-body-2"
+                                         ng-if="field.label">
+                                        {{field.label}}
+                                    </div>
+                                    <div class="md-body-2"
+                                         ng-if="!field.label">
+                                        {{field.model}}
+                                    </div>
+                                    <!-- Value of the field -->
+                                    <span class="md-body-1">{{element[field.model]}}</span>
+                                </section>
+                                <!-- Just show this section when the field is options -->
+                                <section ng-if="field.type==='options'">
+                                    <!-- Label of the field -->
+                                    <div class="md-body-2"
+                                         ng-if="field.label">
+                                        {{field.label}}
+                                    </div>
+                                    <div class="md-body-2"
+                                         ng-if="!field.label">
+                                        {{field.model}}
+                                    </div>
+                                    <!-- TODO:Options management -->
+                                </section>
+                                <!-- Just show this section when the field is file -->
+                                <section ng-if="field.type==='file'">
+                                    <img ng-if="field.file.mode==='preview'"
+                                         class="image-preview"
+                                         ng-src="{{field.model}}" />
+                                    <md-button ng-if="field.file.mode==='download'"
+                                               ng-click="$ctrl.downloadFile(field.model)"
+                                               class="md-primary md-raised">
+                                        <md-icon md-font-icon="fa fa-download"></md-icon>
+                                    </md-button>
+                                </section>
                             </div>
                         </div>
                         <div layout="row"

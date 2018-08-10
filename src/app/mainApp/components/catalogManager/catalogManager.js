@@ -147,7 +147,7 @@
                  *  GET:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, number, email, options, file
+                 *              type: string,          Valid types are text, options, file
                  *              model: string,         Name of the field that will be used to show the data from the API
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
                  *              catalog:{                just used when the type of the field is options and the option field is not given
@@ -161,18 +161,21 @@
                  *      ]
                  *  },
                  *  LIST:{
-                 *      mode: string,                  (Optional) Paged or Infinite, default is Paged
+                 *      mode: string,                  (Optional) Paged or Infinite, default is Paged //Infinite is not yet implemented
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, file
+                 *              type: string,          Valid types are text, options, file //Options not yet implemented
                  *              model: string,         Name of the field that will be used to show the data from the API
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
-                 *              catalog:{                just used when the type of the field is options and the option field is not given
+                 *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
                  *                  url: string,         Full or partial URL depending on the kind
                  *                  kind: string,        Mobile, Web, Generic. Default is 'Generic'
                  *                  model: string,       From the catalog object, which element is used for binding (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
+                 *              }
+                 *              file:{                   (Optional) Just used if the type of the field is file
+                 *                  mode: string            Valid modes are preview and download, preview just work for images
                  *              }
                  *          }
                  *      ],
@@ -210,24 +213,36 @@
     /* @ngInject */
     function CatalogManagerController(
         CATALOG
+        $window
     ) {
         var vm = this;
 
         activate();
 
         //Initializing or assingning default values to global variables
-        vm.name ? null : vm.name = 'Catalog';
+        if (vm.name) {
+            if (!vm.namePlural) {
+                vm.namePlural = vn.name + 's';
+            }
+        }
+        else {
+            vm.name = 'Catalog';
+        }
         vm.kind ? null : vm.kind = 'Generic';
+        vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {};
         vm.catalogElements = [];
         vm.selectedElement = null;
+        vm.CatalogProvider = null;
+        vm.PaginationProvider = null;
 
         //Function mapping
         vm.create = create;
         vm.delete = remove;
         vm.update = update;
         vm.geByID = getByID;
+        vm.downloadFile = downoadFile;
 
         function activate() {
             createMainCatalogProvider();
@@ -390,6 +405,10 @@
             else {
                 vm.onErrorGet({ error: '"actions" parameter does not have the GET element defined' });
             }
+        }
+
+        function downloadFile(url) {
+            $window.open(url);
         }
 
     }
