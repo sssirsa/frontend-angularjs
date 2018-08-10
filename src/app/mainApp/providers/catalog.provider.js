@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp')
-        .factory('CATALOG', CatalogProvider);
+        .service('CATALOG', CatalogProvider);
 
     function CatalogProvider(MobileRestangular, WebRestangular, $http) {
         var vm = this;

@@ -23,6 +23,11 @@
         vm.saveButtonText = 'Guardar';
         vm.confirmButtonText = 'Aceptar';
         vm.cancelButtonText = 'Cancelar';
+        vm.deletingMessage = 'Eliminando estado';
+        vm.savingMessage = 'Guardando';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas...';
         
         //Actions meta
         vm.actions = {
@@ -52,10 +57,11 @@
                 fields: []
             },
             DELETE: {
-                id: 'id_field'
+                id: 'id'
             },
             LIST: {
                 elements: 'results',
+                mode:'infinite',
                 pagination: {
                     total:'count'
                 },

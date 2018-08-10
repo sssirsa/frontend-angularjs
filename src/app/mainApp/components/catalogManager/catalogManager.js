@@ -13,6 +13,8 @@
                 namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
                 totalText: '<', //If not given, the word 'Total' will be used
                 loadingMessage: '<',
+                deletingMessage: '<',
+                savingMessage: '<',
 
                 //Functions
                 onSuccessList: '&',
@@ -34,6 +36,9 @@
                 saveButtonText: '<',
                 confirmButtonText: '<',
                 cancelButtonText: '<',
+                nextButtonText: '<',
+                previousButtonText: '<',
+                loadMoreButtonText: '<',
 
                 //Meta object for the component
                 actions: '<',
@@ -161,7 +166,7 @@
                  *      ]
                  *  },
                  *  LIST:{
-                 *      mode: string,                  (Optional) Paged or Infinite, default is Paged //Infinite is not yet implemented
+                 *      mode: string,                  (Optional) paged or infinite, default is Paged //Infinite is not yet implemented
                  *      fields:[
                  *          {
                  *              type: string,          Valid types are text, options, file //Options not yet implemented
@@ -243,18 +248,11 @@
         vm.update = update;
         vm.geByID = getByID;
         vm.downloadFile = downloadFile;
+        vm.previousPage = previousPage;
+        vm.nextPage = nextPage;
+        vm.loadMore = loadMore;
 
         function activate() {
-            //var verticalContainer =
-            //    document.getElementsByClassName("catalog-vertical-container");
-            //console.debug(verticalContainer);
-            //if (verticalContainer.style.maxHeight < 200) {
-            //    verticalContainer.stye.maxHeight = '100%';
-            //}
-            createMainCatalogProvider();
-            function createPaginationProvider() {
-                vm.PaginationProvider = CATALOG.generic;
-            }
             list();
         }
 
@@ -288,6 +286,7 @@
 
         function list() {
             //List behaviour handling (initial loading)
+            createMainCatalogProvider();
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
@@ -328,8 +327,6 @@
                                 vm.paginationHelper['next'] = elements['next'];
                             }
                         }
-                        console.debug(vm.catalogElements);
-                        console.debug(vm.paginationHelper);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -344,6 +341,7 @@
 
         function create(objectToCreate) {
             //Creation behavior handling
+            createMainCatalogProvider();
             if (vm.actions['POST']) {
                 vm.createLoader = vm.CatalogProvider
                     .create(vm.url, objectToCreate)
@@ -362,6 +360,7 @@
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
+            createMainCatalogProvider();
             if (vm.actions['DELETE']) {
                 vm.removeLoader = vm.CatalogProvider
                     .remove(idToRemove)
@@ -380,6 +379,7 @@
 
         function update(idToUpdate, newObject) {
             //Update behavior handling
+            createMainCatalogProvider();
             if (vm.actions['PUT']) {
                 vm.updateLoader = vm.CatalogProvider
                     .update(vm.url, idToUpdate, newObject)
@@ -398,6 +398,7 @@
 
         function getByID(idToGet) {
             //Get one element behavior
+            createMainCatalogProvider();
             if (vm.actions['GET']) {
                 vm.getByIDLoader = vm.CatalogProvider
                     .getByID(vm.url, idToGet)
@@ -415,6 +416,175 @@
 
         function downloadFile(url) {
             $window.open(url);
+        }
+
+        function previousPage() {
+            if (vm.paginationHelper.previous) {
+                if (vm.actions['LIST'].pagination) {
+                    createPaginationProvider();
+                }
+                vm.PaginationProvider.url = vm.paginationHelper.previous;
+                vm.listLoader = vm.PaginationProvider
+                    .list()
+                    .then(function (response) {
+                        var elements = response.data;
+                        //Elements list is returned in any other model
+                        if (vm.actions['LIST'].elements) {
+                            vm.catalogElements = elements[vm.actions['LIST'].elements];
+                        }
+                        //Elements list is returned directly as an array
+                        else {
+                            vm.catalogElements = elements;
+                        }
+                        //Re-Building the pagination helper
+                        //(if pagination element is in the actions of the LIST),
+                        //if the meta contains the specific models,
+                        //then those will be used, otherwise, the default models will.
+                        if (vm.actions['LIST'].pagination) {
+                            //Total of elements model to be used
+                            if (vm.actions['LIST'].pagination['total']) {
+                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
+                            }
+                            else {
+                                vm.paginationHelper['total'] = elements['total'];
+                            }
+                            //Previous page model to be used
+                            if (vm.actions['LIST'].pagination['previous']) {
+                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
+                            }
+                            else {
+                                vm.paginationHelper['previous'] = elements['previous'];
+                            }
+                            //Next page model to be used
+                            if (vm.actions['LIST'].pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
+                            }
+                            else {
+                                vm.paginationHelper['next'] = elements['next'];
+                            }
+                        }
+                        vm.onSuccessList({ elements: vm.catalogElemets });
+                    })
+                    .catch(function (errorElements) {
+                        vm.onErrorList({ error: errorElements });
+                    });
+            }
+            else {
+                vm.onErrorList({ error: 'No previous page URL found' });
+            }
+        }
+
+        function nextPage() {
+            if (vm.paginationHelper.next) {
+                if (vm.actions['LIST'].pagination) {
+                    createPaginationProvider();
+                }
+                vm.PaginationProvider.url = vm.paginationHelper.next;
+                vm.listLoader = vm.PaginationProvider
+                    .list()
+                    .then(function (response) {
+                        var elements = response.data;
+                        //Elements list is returned in any other model
+                        if (vm.actions['LIST'].elements) {
+                            vm.catalogElements = elements[vm.actions['LIST'].elements];
+                        }
+                        //Elements list is returned directly as an array
+                        else {
+                            vm.catalogElements = elements;
+                        }
+                        //Re-Building the pagination helper
+                        //(if pagination element is in the actions of the LIST),
+                        //if the meta contains the specific models,
+                        //then those will be used, otherwise, the default models will.
+                        if (vm.actions['LIST'].pagination) {
+                            //Total of elements model to be used
+                            if (vm.actions['LIST'].pagination['total']) {
+                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
+                            }
+                            else {
+                                vm.paginationHelper['total'] = elements['total'];
+                            }
+                            //Previous page model to be used
+                            if (vm.actions['LIST'].pagination['previous']) {
+                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
+                            }
+                            else {
+                                vm.paginationHelper['previous'] = elements['previous'];
+                            }
+                            //Next page model to be used
+                            if (vm.actions['LIST'].pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
+                            }
+                            else {
+                                vm.paginationHelper['next'] = elements['next'];
+                            }
+                        }
+                        vm.onSuccessList({ elements: vm.catalogElemets });
+                    })
+                    .catch(function (errorElements) {
+                        vm.onErrorList({ error: errorElements });
+                    });
+            }
+            else {
+                vm.onErrorList({ error: 'No next page URL found' });
+            }
+        }
+
+        function loadMore() {
+            if (vm.paginationHelper.next) {
+                if (vm.actions['LIST'].pagination) {
+                    createPaginationProvider();
+                }
+                vm.PaginationProvider.url = vm.paginationHelper.next;
+                vm.listLoader = vm.PaginationProvider
+                    .list()
+                    .then(function (response) {
+                        var elements = response.data;
+                        //Elements list is returned in any other model
+                        if (vm.actions['LIST'].elements) {
+                            vm.catalogElements = vm.catalogElements.concat(elements[vm.actions['LIST'].elements]);
+                        }
+                        //Elements list is returned directly as an array
+                        else {
+                            vm.catalogElements = vm.catalogElements.concat(elements);
+                        }
+                        console.debug(vm.catalogElements);
+                        //Re-Building the pagination helper
+                        //(if pagination element is in the actions of the LIST),
+                        //if the meta contains the specific models,
+                        //then those will be used, otherwise, the default models will.
+                        if (vm.actions['LIST'].pagination) {
+                            //Total of elements model to be used
+                            if (vm.actions['LIST'].pagination['total']) {
+                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
+                            }
+                            else {
+                                vm.paginationHelper['total'] = elements['total'];
+                            }
+                            //Previous page model to be used
+                            if (vm.actions['LIST'].pagination['previous']) {
+                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
+                            }
+                            else {
+                                vm.paginationHelper['previous'] = elements['previous'];
+                            }
+                            //Next page model to be used
+                            if (vm.actions['LIST'].pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
+                            }
+                            else {
+                                vm.paginationHelper['next'] = elements['next'];
+                            }
+                        }
+                        vm.onSuccessList({ elements: vm.catalogElemets });
+                    })
+                    .catch(function (errorElements) {
+                        vm.onErrorList({ error: errorElements });
+                    });
+            }
+            else {
+                vm.onErrorList({ error: 'No next page URL found' });
+            }
         }
 
     }
