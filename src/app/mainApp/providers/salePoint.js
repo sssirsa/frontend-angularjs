@@ -21,12 +21,12 @@
             return baseUrl.one('atencion_pv', id).customGET();
         }
 
-        function listUnasignedServices() {
-            return baseUrl.all('list_atencion').getList();
+        function listUnasignedServices(urlAux) {
+            return baseUrl.all('list_atencion'+ urlAux).customGET();
         }
 
-        function listAttendedServices() {
-            return baseUrl.all('list_atendido_pv').getList();
+        function listAttendedServices(urlAux) {
+            return baseUrl.all('list_atendido_pv'+ urlAux).customGET();
         }
 
         function assignToPerson(object, serviceID) {
