@@ -13,33 +13,20 @@
         vm.salePointKinds = OPTIONS.salePointAssignKind;
         vm.Atending = Atending;
         vm.Editing = Editing;
+        vm.Cancel = Cancel;
         vm.selectRequest = selectRequest;
 
-        // function Assing(salePoint) {
-        //     console.log(salePoint);
-        //     $mdDialog.show({
-        //         controller: 'dialogAsignacionTecnicoController',
-        //         templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
-        //         parent: angular.element(document.body),
-        //         controllerAs: 'vm',
-        //         clickOutsideToClose: true,
-        //         focusOnOpen: true,
-        //         locals: {
-        //             salePoint: salePoint
-        //         }
-        //     })
-        //         .then(function () {
-        //             vm.selectedKind = 'pending';
-        //             vm.salePoints = null;
-        //             vm.listSalePoints();
-        //         });
-        //
-        // }
 
         function Atending(salePoint) {
             console.log('ATENDIENDO ATENCION');
             console.log(salePoint);
             console.log('ATENDIENDO ATENCION');
+        }
+
+        function Cancel(salePoint) {
+            console.log('CANCELANDO ATENCION');
+            console.log(salePoint);
+            console.log('CANCELANDO ATENCION');
         }
 
         function Editing(salePoint) {
@@ -50,7 +37,6 @@
 
         //Function mapping
         vm.listSalePoints = listSalePoints;
-        vm.selectSalePoint = selectSalePoint;
 
         //datos para paginado
         vm.objectAtention = null;
@@ -69,7 +55,7 @@
                 vm.objectAtention = null;
                 switch (vm.selectedKind) {
                     case 'pending':
-                        vm.loadingPromise = SalePoint.listUnasignedServices('/reasign_list?limit=20&offset='+vm.offset)
+                        vm.loadingPromise = SalePoint.listAsignedService('20',vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -116,13 +102,8 @@
             listSalePoints();
         }
 
-        function selectSalePoint(salePoint) {
-            $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
-        }
-
         function selectRequest(request) {
-            $state.go('triangular.admin-default.attentionDetail', {id: request});
-            console.log("Folio: ", request);
+            $state.go('triangular.admin-default.attentionDetail', {id: request, tipo: vm.selectedKind });
         }
 
     }
