@@ -205,6 +205,11 @@
                                        class="md-raised md-primary">
                                 <md-icon md-font-icon="zmdi zmdi-assignment-check"></md-icon>
                             </md-button>
+                            <md-button aria-label="fab button"
+                                       ng-click="$event.stopPropagation(); vm.Cancel(salePoint)"
+                                       class="md-raised md-warn">
+                                <md-icon md-font-icon="zmdi zmdi-block"></md-icon>
+                            </md-button>
                         </div>
                     </div>
                 </md-content>
