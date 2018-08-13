@@ -27,7 +27,7 @@
         }
 
         function listAsignedService(limit, offset) {
-            return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset);
+            return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset).customGET();
         }
 
         function listAttendedServices(urlAux) {
