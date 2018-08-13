@@ -13,9 +13,6 @@
                 namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
                 totalText: '<', //If not given, the word 'Total' will be used
                 loadingMessage: '<',
-                deletingMessage: '<',
-                savingMessage: '<',
-                creatingMessage: '<',
 
                 //Functions
                 onSuccessList: '&',

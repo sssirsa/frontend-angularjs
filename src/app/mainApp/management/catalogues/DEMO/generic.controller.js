@@ -25,10 +25,7 @@
 
         //Messages
         vm.loadingMessage = 'Cargando Estados';
-        vm.deletingMessage = 'Eliminando Estado';
-        vm.savingMessage = 'Guardando Estado';
-        vm.creatingMessage = 'Creando Estado';
-        
+
         //Actions meta
         vm.actions = {
             POST: {
@@ -51,19 +48,38 @@
                             }
                         ]
                     }
-                ]
+                ],
+                dialog: {
+                    title: 'Crear estado',
+                    okButton: 'Guardar',
+                    cancelButton: 'Cancelar',
+                    loading: 'Creando estado'
+                }
             },
             PUT: {
-                fields: []
+                fields: [],
+                dialog: {
+                    title: 'Editar estado',
+                    okButton: 'Guardar',
+                    cancelButton: 'Cancelar',
+                    loading: 'Guardando estado'
+                }
             },
             DELETE: {
-                id: 'id'
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar estado',
+                    message: 'Confirme la eliminación del estado',
+                    okButton: 'Aceptar',
+                    cancelButton: 'Cancelar',
+                    loading: 'Eliminando estado'
+                }
             },
             LIST: {
                 elements: 'results',
-                mode:'infinite',
+                mode: 'infinite',
                 pagination: {
-                    total:'count'
+                    total: 'count'
                 },
                 fields: [
                     {
