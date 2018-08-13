@@ -203,5 +203,28 @@
                 </md-content>
             </div>
         </md-card>
+        <div layout-padding layout="row" layout-align="space-between center">
+            <md-button class="md-primary md-raised"
+                       ng-disabled="vm.objectAtention.previous == null"
+                       ng-click="vm.prev()">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+                    <div hide-xs hide-sm>
+                        Anterior
+                    </div>
+                </div>
+            </md-button>
+
+            <md-button class="md-primary md-raised"
+                       ng-disabled="vm.objectAtention.next == null"
+                       ng-click="vm.sig()">
+                <div layout="row" layout-align="center center">
+                    <div hide-xs hide-sm>
+                        Siguiente
+                    </div>
+                    <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+                </div>
+            </md-button>
+        </div>
     </div>
 </div>
