@@ -69,7 +69,7 @@
                 vm.objectAtention = null;
                 switch (vm.selectedKind) {
                     case 'pending':
-                        vm.loadingPromise = SalePoint.listUnasignedServices('?limit=20&offset='+vm.offset)
+                        vm.loadingPromise = SalePoint.listUnasignedServices('/reasign_list?limit=20&offset='+vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
