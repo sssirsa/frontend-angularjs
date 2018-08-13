@@ -129,7 +129,8 @@
                 controller: 'DetailAttentionPageController',
                 controllerAs: 'vm',
                 params: {
-                    id: null
+                    id: null,
+                    tipo: null
                 }
             });
 
