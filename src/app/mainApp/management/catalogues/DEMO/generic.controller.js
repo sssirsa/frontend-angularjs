@@ -13,21 +13,21 @@
         vm.name = 'Estado';
         vm.namePlural = 'Estados';
         vm.totalText = 'Elementos encontrados';
-        vm.loadingMessage = 'Cargando estados';
 
         //Button labels
         vm.searchButtonText = 'Buscar Estados';
         vm.createButtonText = 'Crear Estado';
         vm.deleteButtonText = 'Borrar Estado';
         vm.modifyButtonText = 'Editar Estado';
-        vm.saveButtonText = 'Guardar';
-        vm.confirmButtonText = 'Aceptar';
-        vm.cancelButtonText = 'Cancelar';
-        vm.deletingMessage = 'Eliminando estado';
-        vm.savingMessage = 'Guardando';
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas...';
+        vm.loadMoreButtonText = 'Cargar mas estados';
+
+        //Messages
+        vm.loadingMessage = 'Cargando Estados';
+        vm.deletingMessage = 'Eliminando Estado';
+        vm.savingMessage = 'Guardando Estado';
+        vm.creatingMessage = 'Creando Estado';
         
         //Actions meta
         vm.actions = {

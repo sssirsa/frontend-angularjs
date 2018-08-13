@@ -15,6 +15,7 @@
                 loadingMessage: '<',
                 deletingMessage: '<',
                 savingMessage: '<',
+                creatingMessage: '<',
 
                 //Functions
                 onSuccessList: '&',
@@ -33,9 +34,9 @@
                 createButtonText: '<',
                 deleteButtonText: '<',
                 modifyButtonText: '<',
-                saveButtonText: '<',
-                confirmButtonText: '<',
-                cancelButtonText: '<',
+                //saveButtonText: '<',
+                //confirmButtonText: '<',
+                //cancelButtonText: '<',
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
@@ -103,7 +104,12 @@
                  *                                       If not given, then the model will be used
                  *              }
                  *          }
-                 *      ]
+                 *      ],
+                 *      dialog:{              //Labels to use in the creation dialog
+                 *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
+                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
+                 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
+                 *      }
                  *  },
                  *  PUT:{
                  *      fields:[
@@ -147,7 +153,12 @@
                  *                                       If not given, then the model will be used
                  *              }
                  *          }
-                 *      ]
+                 *      ],
+                 *      dialog:{              //Labels to use in the modify dialog
+                 *          title: string,          (Optional) Title for the modify dialog, default is 'Modify element'
+                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Save'
+                 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
+                 *      }
                  *  },
                  *  GET:{
                  *      fields:[
@@ -208,7 +219,13 @@
                  *  },
                  *  DELETE:{
                  *      //TODO: Add procedures, validations, etc.
-                 *      id:string             //Defines the name of the filed that with be used as ID for deletion
+                 *      id:string,            //Defines the name of the filed that with be used as ID for deletion
+                 *      dialog:{              //Labels to use in the deletion dialog
+                 *          title: string,          (Optional) Title for the deletion dialog, default is 'Confirm deletion'
+                 *          message: string,        (Optional) Message for the deletion dialog, default is 'Confirm element deletion'
+                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Ok'
+                 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
+                 *      }
                  *  },
                  *  SEARCH:{
                  *      //TODO:Add procedures, validations, etc.
