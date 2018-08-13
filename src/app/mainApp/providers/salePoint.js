@@ -11,6 +11,7 @@
         var service = {
             getByID: getByID,
             listUnasignedServices: listUnasignedServices,
+            listAsignedService: listAsignedService,
             listAttendedServices: listAttendedServices,
             assignToPerson: assignToPerson,
             assignedTo: assignedTo,
@@ -23,6 +24,10 @@
 
         function listUnasignedServices(urlAux) {
             return baseUrl.all('list_atencion'+ urlAux).customGET();
+        }
+
+        function listAsignedService(limit, offset) {
+            return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset);
         }
 
         function listAttendedServices(urlAux) {
