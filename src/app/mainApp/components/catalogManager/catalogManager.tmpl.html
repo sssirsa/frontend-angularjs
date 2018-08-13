@@ -171,8 +171,8 @@
                                        class="md-primary md-raised">
                                 <div layout="row" layout-align="center center">
                                     <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-                                    <div ng-if="$ctrl.previousButtonText" hide-xs hide-sm>{{$ctrl.loadMoreButtonText}}</div>
-                                    <div ng-if="!$ctrl.previousButtonText" hide-xs hide-sm>Load more</div>
+                                    <div ng-if="$ctrl.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.loadMoreButtonText}}</div>
+                                    <div ng-if="!$ctrl.loadMoreButtonText" hide-xs hide-sm>Load more</div>
                                 </div>
                             </md-button>
                         </section>
@@ -181,7 +181,89 @@
             </section>
 
             <!-- Section for list without pagination -->
-            <section ng-if="!$ctrl.actions['LIST'].pagination"></section>
+            <section ng-if="!$ctrl.actions['LIST'].pagination">
+                <div id="catalog-vertical-container">
+                    <!-- Repeat per each element in the results -->
+                    <div ng-repeat="element in $ctrl.catalogElements"
+                         layout="column">
+                        <div layout="row"
+                             layout-align="space-around center"
+                             layout-padding
+                             layout-wrap>
+                            <!-- Repeat per each field specified in the actions parameter -->
+                            <div layout="column"
+                                 layout-align="center center"
+                                 ng-repeat="field in $ctrl.actions['LIST'].fields">
+                                <!-- Just show this section when the field is text -->
+                                <section ng-if="field.type==='text'">
+                                    <!-- Label of the field -->
+                                    <div class="md-body-2"
+                                         ng-if="field.label">
+                                        {{field.label}}
+                                    </div>
+                                    <div class="md-body-2"
+                                         ng-if="!field.label">
+                                        {{field.model}}
+                                    </div>
+                                    <!-- Value of the field -->
+                                    <span class="md-body-1">{{element[field.model]}}</span>
+                                </section>
+                                <!-- Just show this section when the field is options -->
+                                <section ng-if="field.type==='options'">
+                                    <!-- Label of the field -->
+                                    <div class="md-body-2"
+                                         ng-if="field.label">
+                                        {{field.label}}
+                                    </div>
+                                    <div class="md-body-2"
+                                         ng-if="!field.label">
+                                        {{field.model}}
+                                    </div>
+                                    <!-- TODO:Options management -->
+                                </section>
+                                <!-- Just show this section when the field is file -->
+                                <section ng-if="field.type==='file'">
+                                    <img ng-if="field.file.mode==='preview'"
+                                         class="image-preview"
+                                         ng-src="{{field.model}}" />
+                                    <md-button ng-if="field.file.mode==='download'"
+                                               ng-click="$ctrl.downloadFile(field.model)"
+                                               class="md-primary md-raised">
+                                        <md-icon md-font-icon="fa fa-download"></md-icon>
+                                    </md-button>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- Action buttons bar -->
+                        <div layout="row"
+                             layout-align="space-around center"
+                             layout-wrap>
+                            <!-- Modify button -->
+                            <md-button ng-if="$ctrl.actions['PUT']"
+                                       ng-click="$ctrl.update()"
+                                       class="md-primary md-raised">
+                                <div layout="row" layout-align="center center">
+                                    <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                    <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
+                                    <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
+                                </div>
+                            </md-button>
+                            <!-- Delete button -->
+                            <div ng-if="$ctrl.actions['DELETE']">
+                                <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
+                                           class="md-warn md-raised">
+                                    <div layout="row" layout-align="center center">
+                                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        <div ng-if="$ctrl.deleteButtonText" hide-xs hide-sm>{{$ctrl.deleteButtonText}}</div>
+                                        <div ng-if="!$ctrl.deleteButtonText" hide-xs hide-sm>Delete</div>
+                                    </div>
+                                </md-button>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </div>
+                </div>
+            </section>
         </section>
     </md-card>
 </div>

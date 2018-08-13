@@ -61,7 +61,7 @@
             },
             LIST: {
                 elements: 'results',
-                mode:'paged',
+                mode:'infinite',
                 pagination: {
                     total:'count'
                 },
