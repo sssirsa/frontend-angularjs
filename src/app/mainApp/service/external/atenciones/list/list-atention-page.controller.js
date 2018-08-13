@@ -18,9 +18,8 @@
 
 
         function Atending(salePoint) {
-            console.log('ATENDIENDO ATENCION');
             console.log(salePoint);
-            console.log('ATENDIENDO ATENCION');
+            selectRequest(salePoint.folio);
         }
 
         function Cancel(salePoint) {
