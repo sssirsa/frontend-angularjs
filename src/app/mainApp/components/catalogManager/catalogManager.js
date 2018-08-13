@@ -236,7 +236,8 @@
     /* @ngInject */
     function CatalogManagerController(
         CATALOG,
-        $window
+        $window,
+        $mdDialog
     ) {
         var vm = this;
 
@@ -384,15 +385,26 @@
             //Confirmation dialog for deletion behavior
             createMainCatalogProvider();
             if (vm.actions['DELETE']) {
-                vm.removeLoader = vm.CatalogProvider
-                    .remove(idToRemove)
-                    .then(function () {
-                        activate();
-                        vm.onSuccessDelete();
-                    })
-                    .catch(function (removeError) {
-                        vm.onErrorDelete({ error: removeError });
-                    });
+                $mdDialog.show({
+                    controller: 'CatalogDeleteDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/deleteDialog/deleteDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['DELETE'].dialog,
+                        id: idToRemove,
+                        provider: vm.CatalogProvider
+                    }
+                }).then(function () {
+                    activate();
+                    vm.onSuccessDelete();
+                }).catch(function (errorDelete) {
+                    if (errorDelete) {
+                        vm.onErrorDelete(errorDelete);
+                    }
+                });
             }
             else {
                 vm.onErrorDelete({ error: '"actions" parameter does not have the DELETE element defined' });

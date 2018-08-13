@@ -45,8 +45,7 @@
                 </h3>
             </div>
             <!-- Section for list with pagination -->
-            <section ng-if="$ctrl.actions['LIST'].pagination"
-                     cg-busy="{promise:$ctrl.removeLoader, message:$ctrl.deletingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+            <section ng-if="$ctrl.actions['LIST'].pagination">
                 <div layout="row"
                      layout-align="start center"
                      ng-if="$ctrl.paginationHelper['total']">
