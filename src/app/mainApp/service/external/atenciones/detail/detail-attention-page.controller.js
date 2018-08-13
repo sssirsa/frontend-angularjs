@@ -11,33 +11,56 @@
         var vm = this;
 
         //Function mapping
-        vm.showStoreLocation = showStoreLocation;
+        //vm.showStoreLocation = showStoreLocation;
 
         //Variable declaration
         vm.id = $stateParams.id;
         vm.user = null;
         vm.request = null;
+        vm.solicitudDetalles = null;
         vm.store = null;
+        vm.servicio = null;
+        vm.insumos = null;
+        vm.improductivo = 'a';
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.scores = SCORES;
+
+        //Declaración de funciones
+        vm.changeProductivo = changeProductivo;
+        vm.filesSelected = filesSelected;
 
         activate();
 
         function activate() {
             vm.loadingPromise = atencionPV.getByID(vm.id)
                 .then(function (requestSuccess) {
-                    convertImages();
-                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento)
-                        .then(function (storeSuccess) {
-                            $log.debug(storeSuccess);
-                            vm.store = storeSuccess;
+                    vm.request = requestSuccess;
+
+                    SalePointRequests.getByID(vm.id)
+                        .then(function (requestSuccess2) {
+                            $log.debug(requestSuccess2);
+                            vm.solicitudDetalles = requestSuccess2;
+
+                            if(vm.request.tipo == 'Medio'){
+                                atencionPV.getInsumos(vm.solicitudDetalles.cabinet)
+                                    .then(function (respuesta) {
+                                        vm.insumos = respuesta;
+                                    })
+                                    .catch(function (errorRespuesta) {
+                                        console.log(errorRespuesta);
+                                    });
+                            }
+
                         })
-                        .catch(function (storeError) {
-                            $log.error(storeError);
-                            toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_STORE'));
+                        .catch(function (errorRequest2) {
+                            $log.error(errorRequest2);
+                            toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_PV'));
                         });
+
+                    convertImages();
+                    vm.store = requestSuccess.establecimiento;
                     vm.personaPromise = Persona_Admin.get(requestSuccess.persona)
                         .then(function (userSuccess) {
                             $log.debug(userSuccess);
@@ -47,6 +70,7 @@
                             $log.error(userError);
                             toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_USER'));
                         });
+
                 })
                 .catch(function (errorRequest) {
                     $log.error(errorRequest);
@@ -63,8 +87,29 @@
             vm.request.evidencia = evidences;
         }
 
-        function showStoreLocation() {
+        function changeProductivo() {
+            if(vm.improductivo == null){
+                vm.improductivo = 'a';
+            }else{
+                vm.improductivo = null;
+            }
+        }
+
+        /*function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
+        }*/
+
+        function filesSelected(files) {
+            vm.request.evidencia = [];
+            angular.forEach(files, function (image) {
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.request.evidencia.push({foto: base64Image});
+                };
+            });
         }
     }
 })();
