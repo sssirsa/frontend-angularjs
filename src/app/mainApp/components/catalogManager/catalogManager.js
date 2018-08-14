@@ -64,11 +64,11 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, number, email, options, date, color, file, fileUploader
+                 *              type: string,          Valid types are the html5 types, plus: color and fileUploader
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
-                 *              validations: [
+                 *              validations: 
                  *                  {
                  *                      regex: string,          Option regular expression for field validation (just used when text),
                  *                      max: number,            Maximum value allowed for selection (just used when number)
@@ -88,9 +88,14 @@
                  *                          keep: '<', //true, false or distinct,
                  *                          filesSelected: '&'// {files:vm.files}
                  *                      },
-                 *                      error_message: string   Error message to show when the validation is not fulfilled
-                 *                  }
-                 *              ],
+                 *                      errors:{
+                 *                          required: string,       (Optional) Default is 'Required field'
+                 *                          regex: string,          (Optional) Default is 'Invalid pattern {{regex}}'
+                 *                          max: string,            (Optional) Default is 'Max value is {{max}}'
+                 *                          min: string,            (Optional) Default is 'Min value is {{min}}'
+                 *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
+                 *                      }
+                 *                  },
                  *              catalog:{                just used when the type of the field is options
                  *                  requires: string,    (Optional) Field required to enable this catalog
                  *                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
@@ -362,19 +367,30 @@
             }
         }
 
-        function create(objectToCreate) {
+        function create() {
             //Creation behavior handling
             createMainCatalogProvider();
             if (vm.actions['POST']) {
-                vm.createLoader = vm.CatalogProvider
-                    .create(vm.url, objectToCreate)
-                    .then(function (createResult) {
-                        activate();
-                        vm.onSuccessCreate({ result: createResult });
-                    })
-                    .catch(function (createError) {
-                        vm.onErrorCreate({ error: createError });
-                    });
+                $mdDialog.show({
+                    controller: 'CatalogCreateDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['POST'].dialog,
+                        fields: vm.actions['POST'].fields,
+                        provider: vm.CatalogProvider
+                    }
+                }).then(function () {
+                    activate();
+                    vm.onSuccessCreate();
+                }).catch(function (errorCreate) {
+                    if (errorCreate) {
+                        vm.onErrorCreate(errorCreate);
+                    }
+                });
             }
             else {
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
