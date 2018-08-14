@@ -30,7 +30,7 @@
                                max="{{field.max}}"
                                ng-pattern="field['validations'].regex"
                                ng-model="vm.objectToCreate[field.model]" />
-                        <div ng-messages="createForm.field.model.$error">
+                        <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                         </div>
@@ -51,6 +51,7 @@
             </div>
         </md-button>
         <md-button ng-click="vm.create(vm.objectToCreate)"
+                   ng-disabled="createForm.$invalid"
                    class="md-primary md-raised">
             <div layout="row" layout-align="center center">
                 <md-icon md-font-icon="fa fa-trash"></md-icon>

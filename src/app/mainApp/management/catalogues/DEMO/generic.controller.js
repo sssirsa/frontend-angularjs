@@ -34,19 +34,25 @@
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre',
-                        required: true
+                        required: true,
+                        validations: {
+                            errors: {
+                                required:'El nombre del estado es obligatorio'
+                            }
+                        }
                     },
                     {
                         type: 'text',
                         model: 'codigo_estado',
                         label: 'Código Estado',
                         required: true,
-                        validations: [
-                            {
-                                regex: "/^[a-zA-Z]{3,3}/",
-                                error_message: 'El código de estado deben ser 3 letras en MAYÚSCULAS'
+                        validations: {
+                            regex: "[A-Z]{3,3}",
+                            errors: {
+                                regex: 'El código de estado deben ser 3 letras en MAYÚSCULAS',
+                                required: 'El código de estado es obligatorio'
                             }
-                        ]
+                        }
                     }
                 ],
                 dialog: {
