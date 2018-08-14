@@ -24,8 +24,12 @@
             return baseMarca.get(id);
         }
 
-        function listPromise() {
-            return baseMarca.getList();
+        function listPromise(limit, offset) {
+            if(limit.isDefined && offset.isDefined) {
+                return WebRestangular.all(URLS.marca + '?limit=' + limit + '&offset=' + offset).customGET();
+            } else {
+                return baseMarca.customGET();
+            }
         }
 
         function list(){

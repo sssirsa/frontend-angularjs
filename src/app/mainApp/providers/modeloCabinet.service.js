@@ -19,8 +19,12 @@
             listWitout:listWitout
         };
 
-        function listWitout(){
-            return baseModelo.getList();
+        function listWitout(limit, offset){
+            if(limit.isDefined && offset.isDefined) {
+                return WebRestangular.all(URLS.modelo_cabinet+'?limit='+limit+'&offset='+offset).customGET();
+            } else {
+                return baseModelo.customGET();
+            }
         }
         function get(id) {
             return baseModelo.get(id);
