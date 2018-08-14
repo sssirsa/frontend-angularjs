@@ -1,61 +1,188 @@
-<div layout="column"
-     layout-align="start stretch"
-     class="full-height full-width">
+<div class="full-height full-width"
+     layout="column"
+     layout-align="start stretch">
+    <md-card layout-padding>
+        <div layout="column"
+             layout-align="center center">
+            <h1>{{$ctrl.name}}</h1>
+        </div>
+    </md-card>
 
-    <div class="full-vertical-scroller">
-        <md-card layout-padding>
-            <div layout="column"
-                 layout-align="center center">
-                <h1>{{$ctrl.name}}</h1>
-            </div>
-        </md-card>
+    <md-card layout="column"
+             layout-align="center stretch"
+             layout-padding>
 
-        <md-card layout="column"
-                 layout-align="center stretch"
-                 layout-padding>
-             
-            <div layout="row"
-                 layout-align="space-around center"
-                 layout-wrap>
-                <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
-                           ng-click="$ctrl.search()"
-                           class="md-primary md-raised">
-                    <div layout="row" layout-align="center center">
-                        <md-icon md-font-icon="fa fa-search"></md-icon>
-                        <div ng-if="$ctrl.searchButtonText" hide-xs hide-sm>{{$ctrl.searchButtonText}}</div>
-                        <div ng-if="!$ctrl.searchButtonText" hide-xs hide-sm>Search</div>
-                    </div>
-                </md-button>
-                <md-button ng-if="$ctrl.actions['POST']"
-                           ng-click="$ctrl.create()"
-                           class="md-primary md-raised">
-                    <div layout="row" layout-align="center center">
-                        <md-icon md-font-icon="fa fa-plus"></md-icon>
-                        <div ng-if="$ctrl.createButtonText" hide-xs hide-sm>{{$ctrl.createButtonText}}</div>
-                        <div ng-if="!$ctrl.createButtonText" hide-xs hide-sm>New</div>
-                    </div>
-                </md-button>
-            </div>
-
-            <section ng-if="$ctrl.actions['LIST']"
-                     cg-busy="{promise:$ctrl.listLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
-                <div layout="column"
-                     layout-align="center center"
-                     layout-padding>
-                    <h3 ng-if="$ctrl.catalogElements.length>0">
-                        {{$ctrl.namePlural}}
-                    </h3>
+        <div layout="row"
+             layout-align="space-around center"
+             layout-wrap>
+            <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
+                       ng-click="$ctrl.search()"
+                       class="md-primary md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-search"></md-icon>
+                    <div ng-if="$ctrl.searchButtonText" hide-xs hide-sm>{{$ctrl.searchButtonText}}</div>
+                    <div ng-if="!$ctrl.searchButtonText" hide-xs hide-sm>Search</div>
                 </div>
-                <!-- Section for list with pagination -->
-                <section ng-if="$ctrl.actions['LIST'].pagination">
+            </md-button>
+            <md-button ng-if="$ctrl.actions['POST']"
+                       ng-click="$ctrl.create()"
+                       class="md-primary md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                    <div ng-if="$ctrl.createButtonText" hide-xs hide-sm>{{$ctrl.createButtonText}}</div>
+                    <div ng-if="!$ctrl.createButtonText" hide-xs hide-sm>New</div>
+                </div>
+            </md-button>
+        </div>
+
+        <section ng-if="$ctrl.actions['LIST']"
+                 class="catalog-vertical-container"
+                 cg-busy="{promise:$ctrl.listLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+            <div layout="column"
+                 layout-align="center center"
+                 layout-padding>
+                <h3 ng-if="$ctrl.catalogElements.length>0">
+                    {{$ctrl.namePlural}}
+                </h3>
+            </div>
+            <!-- Section for list with pagination -->
+            <section ng-if="$ctrl.actions['LIST'].pagination">
+                <div layout="row"
+                     layout-align="start center"
+                     ng-if="$ctrl.paginationHelper['total']">
+                    <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
+                    <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
+                    <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
+                </div>
+                <!--<div id="catalog-vertical-container">-->
+                <!-- Repeat per each element in the results -->
+                <div ng-repeat="element in $ctrl.catalogElements"
+                     layout="column">
                     <div layout="row"
-                         layout-align="start center"
-                         ng-if="$ctrl.paginationHelper['total']">
-                        <span class="md-subtitle" ng-if="!$ctrl.totalText">Total: </span>
-                        <span class="md-subtitle" ng-if="$ctrl.totalText">{{$ctrl.totalText}}: </span>
-                        <span class="md-subtitle"> {{$ctrl.paginationHelper['total']}}</span>
+                         layout-align="space-around center"
+                         layout-padding
+                         layout-wrap>
+                        <!-- Repeat per each field specified in the actions parameter -->
+                        <div layout="column"
+                             layout-align="center center"
+                             ng-repeat="field in $ctrl.actions['LIST'].fields">
+                            <!-- Just show this section when the field is text -->
+                            <section ng-if="field.type==='text'">
+                                <!-- Label of the field -->
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <!-- Value of the field -->
+                                <span class="md-body-1">{{element[field.model]}}</span>
+                            </section>
+                            <!-- Just show this section when the field is options -->
+                            <section ng-if="field.type==='options'">
+                                <!-- Label of the field -->
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <!-- TODO:Options management -->
+                            </section>
+                            <!-- Just show this section when the field is file -->
+                            <section ng-if="field.type==='file'">
+                                <img ng-if="field.file.mode==='preview'"
+                                     class="image-preview"
+                                     ng-src="{{field.model}}" />
+                                <md-button ng-if="field.file.mode==='download'"
+                                           ng-click="$ctrl.downloadFile(field.model)"
+                                           class="md-primary md-raised">
+                                    <md-icon md-font-icon="fa fa-download"></md-icon>
+                                </md-button>
+                            </section>
+                        </div>
                     </div>
-                    <!--<div id="catalog-vertical-container">-->
+                    <!-- Action buttons bar -->
+                    <div layout="row"
+                         layout-align="space-around center"
+                         layout-wrap>
+                        <!-- Modify button -->
+                        <md-button ng-if="$ctrl.actions['PUT']"
+                                   ng-click="$ctrl.update()"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
+                                <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
+                            </div>
+                        </md-button>
+                        <!-- Delete button -->
+                        <div ng-if="$ctrl.actions['DELETE']">
+                            <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
+                                       class="md-warn md-raised">
+                                <div layout="row" layout-align="center center">
+                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                    <div ng-if="$ctrl.deleteButtonText" hide-xs hide-sm>{{$ctrl.deleteButtonText}}</div>
+                                    <div ng-if="!$ctrl.deleteButtonText" hide-xs hide-sm>Delete</div>
+                                </div>
+                            </md-button>
+                        </div>
+                    </div>
+                    <md-divider></md-divider>
+                </div>
+                <div layout="column"
+                     layout-align="center stretch">
+                    <!-- Pagination mode paged -->
+                    <section layout="row"
+                             layout-align="space-between center"
+                             ng-if="$ctrl.actions['LIST'].mode==='paged'">
+                        <!-- Previous page button -->
+                        <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
+                                   ng-click="$ctrl.previousPage()"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+                                <div ng-if="$ctrl.previousButtonText" hide-xs hide-sm>{{$ctrl.previousButtonText}}</div>
+                                <div ng-if="!$ctrl.previousButtonText" hide-xs hide-sm>Previous</div>
+                            </div>
+                        </md-button>
+                        <!-- Next page button -->
+                        <md-button ng-disabled="!$ctrl.paginationHelper['next']"
+                                   ng-click="$ctrl.nextPage()"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+                                <div ng-if="$ctrl.nextButtonText" hide-xs hide-sm>{{$ctrl.nextButtonText}}</div>
+                                <div ng-if="!$ctrl.nextButtonText" hide-xs hide-sm>Next</div>
+                            </div>
+                        </md-button>
+                    </section>
+                    <!-- Pagination mode inifinte -->
+                    <section layout="column"
+                             layout-align="center center"
+                             ng-if="$ctrl.actions['LIST'].mode==='infinite'">
+                        <!-- Load more results button -->
+                        <md-button ng-if="$ctrl.paginationHelper['next']"
+                                   ng-click="$ctrl.loadMore()"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+                                <div ng-if="$ctrl.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.loadMoreButtonText}}</div>
+                                <div ng-if="!$ctrl.loadMoreButtonText" hide-xs hide-sm>Load more</div>
+                            </div>
+                        </md-button>
+                    </section>
+                </div>
+                <!--</div>-->
+            </section>
+
+            <!-- Section for list without pagination -->
+            <section ng-if="!$ctrl.actions['LIST'].pagination">
+                <div id="catalog-vertical-container">
                     <!-- Repeat per each element in the results -->
                     <div ng-repeat="element in $ctrl.catalogElements"
                          layout="column">
@@ -135,137 +262,8 @@
                         </div>
                         <md-divider></md-divider>
                     </div>
-                    <div layout="column"
-                         layout-align="center stretch">
-                        <!-- Pagination mode paged -->
-                        <section layout="row"
-                                 layout-align="space-between center"
-                                 ng-if="$ctrl.actions['LIST'].mode==='paged'">
-                            <!-- Previous page button -->
-                            <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
-                                       ng-click="$ctrl.previousPage()"
-                                       class="md-primary md-raised">
-                                <div layout="row" layout-align="center center">
-                                    <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                                    <div ng-if="$ctrl.previousButtonText" hide-xs hide-sm>{{$ctrl.previousButtonText}}</div>
-                                    <div ng-if="!$ctrl.previousButtonText" hide-xs hide-sm>Previous</div>
-                                </div>
-                            </md-button>
-                            <!-- Next page button -->
-                            <md-button ng-disabled="!$ctrl.paginationHelper['next']"
-                                       ng-click="$ctrl.nextPage()"
-                                       class="md-primary md-raised">
-                                <div layout="row" layout-align="center center">
-                                    <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                                    <div ng-if="$ctrl.nextButtonText" hide-xs hide-sm>{{$ctrl.nextButtonText}}</div>
-                                    <div ng-if="!$ctrl.nextButtonText" hide-xs hide-sm>Next</div>
-                                </div>
-                            </md-button>
-                        </section>
-                        <!-- Pagination mode inifinte -->
-                        <section layout="column"
-                                 layout-align="center center"
-                                 ng-if="$ctrl.actions['LIST'].mode==='infinite'">
-                            <!-- Load more results button -->
-                            <md-button ng-if="$ctrl.paginationHelper['next']"
-                                       ng-click="$ctrl.loadMore()"
-                                       class="md-primary md-raised">
-                                <div layout="row" layout-align="center center">
-                                    <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-                                    <div ng-if="$ctrl.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.loadMoreButtonText}}</div>
-                                    <div ng-if="!$ctrl.loadMoreButtonText" hide-xs hide-sm>Load more</div>
-                                </div>
-                            </md-button>
-                        </section>
-                    </div>
-                    <!--</div>-->
-                </section>
-
-                <!-- Section for list without pagination -->
-                <section ng-if="!$ctrl.actions['LIST'].pagination">
-                    <div id="catalog-vertical-container">
-                        <!-- Repeat per each element in the results -->
-                        <div ng-repeat="element in $ctrl.catalogElements"
-                             layout="column">
-                            <div layout="row"
-                                 layout-align="space-around center"
-                                 layout-padding
-                                 layout-wrap>
-                                <!-- Repeat per each field specified in the actions parameter -->
-                                <div layout="column"
-                                     layout-align="center center"
-                                     ng-repeat="field in $ctrl.actions['LIST'].fields">
-                                    <!-- Just show this section when the field is text -->
-                                    <section ng-if="field.type==='text'">
-                                        <!-- Label of the field -->
-                                        <div class="md-body-2"
-                                             ng-if="field.label">
-                                            {{field.label}}
-                                        </div>
-                                        <div class="md-body-2"
-                                             ng-if="!field.label">
-                                            {{field.model}}
-                                        </div>
-                                        <!-- Value of the field -->
-                                        <span class="md-body-1">{{element[field.model]}}</span>
-                                    </section>
-                                    <!-- Just show this section when the field is options -->
-                                    <section ng-if="field.type==='options'">
-                                        <!-- Label of the field -->
-                                        <div class="md-body-2"
-                                             ng-if="field.label">
-                                            {{field.label}}
-                                        </div>
-                                        <div class="md-body-2"
-                                             ng-if="!field.label">
-                                            {{field.model}}
-                                        </div>
-                                        <!-- TODO:Options management -->
-                                    </section>
-                                    <!-- Just show this section when the field is file -->
-                                    <section ng-if="field.type==='file'">
-                                        <img ng-if="field.file.mode==='preview'"
-                                             class="image-preview"
-                                             ng-src="{{field.model}}" />
-                                        <md-button ng-if="field.file.mode==='download'"
-                                                   ng-click="$ctrl.downloadFile(field.model)"
-                                                   class="md-primary md-raised">
-                                            <md-icon md-font-icon="fa fa-download"></md-icon>
-                                        </md-button>
-                                    </section>
-                                </div>
-                            </div>
-                            <!-- Action buttons bar -->
-                            <div layout="row"
-                                 layout-align="space-around center"
-                                 layout-wrap>
-                                <!-- Modify button -->
-                                <md-button ng-if="$ctrl.actions['PUT']"
-                                           ng-click="$ctrl.update()"
-                                           class="md-primary md-raised">
-                                    <div layout="row" layout-align="center center">
-                                        <md-icon md-font-icon="fa fa-edit"></md-icon>
-                                        <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
-                                        <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
-                                    </div>
-                                </md-button>
-                                <!-- Delete button -->
-                                <div ng-if="$ctrl.actions['DELETE']">
-                                    <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
-                                               class="md-warn md-raised">
-                                        <div layout="row" layout-align="center center">
-                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
-                                            <div ng-if="$ctrl.deleteButtonText" hide-xs hide-sm>{{$ctrl.deleteButtonText}}</div>
-                                            <div ng-if="!$ctrl.deleteButtonText" hide-xs hide-sm>Delete</div>
-                                        </div>
-                                    </md-button>
-                                </div>
-                            </div>
-                            <md-divider></md-divider>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </section>
-        </md-card>
-    </div>
+        </section>
+    </md-card>
 </div>
