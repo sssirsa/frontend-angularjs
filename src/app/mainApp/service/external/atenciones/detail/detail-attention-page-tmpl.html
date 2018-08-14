@@ -145,7 +145,7 @@
         <h3 translate>Servicio</h3>
 
         <md-input-container class="md-block">
-            <input ng-model="vm.servicio.km" type="number" placeholder="km (required)" ng-required="true">
+            <input ng-model="vm.servicio.km" type="number" placeholder="km (required)" ng-required="true" md-maxlength="4">
         </md-input-container>
 
         <md-input-container class="md-block"
@@ -167,16 +167,46 @@
 
         </md-input-container>
 
-        <div layout-align="left center">
+        <div layout-align="left center" ng-if="vm.request.tipo === 'Medio' && vm.visible">
 
             <div layout="column" layout-align="center center">
                 <h3><b translate>Insumos</b></h3>
                 <md-switch ng-click="vm.changeProductivo()">Improductivo</md-switch>
             </div>
 
-            <md-list-item md-invert ng-repeat="insumo in vm.insumos.results" ng-if="vm.improductivo">
-                <md-switch value="insumo.id">{{insumo.descripcion}}</md-switch>
-            </md-list-item>
+            <div>
+                <md-list md-invert ng-repeat="insumo in vm.insumos.results" ng-if="vm.improductivo">
+                    <div column>
+                        <div layout="row" layout-align="center center">
+                            <div flex="50">
+                                <md-switch value="insumo.id" ng-click="vm.insumoSelect(insumo)">{{insumo.descripcion}}</md-switch>
+                            </div>
+
+                            <div layout="column" flex>
+                            </div>
+
+                            <div ng-click="vm.validaMax(insumo)" ng-if="insumo.check == true">
+                                <md-input-container ng-if="insumo.insumoMax > 0">
+                                    <div range-spinner
+                                         range-min="1"
+                                         range-step="1"
+                                         range-max="{{insumo.insumoMax}}"
+                                         range-decimal-precision="1"
+                                         range-default-value="1"
+                                         range-model="insumo.usado"
+                                         accept-decimal="false"
+                                         id-of-field="rangeFieldId">
+                                    </div>
+
+                                </md-input-container>
+                                <div ng-if="insumo.error">
+                                    <span style="color: #FF1B28;"> <b translate>MAIN.GENERAL.MAX </b><b>{{insumo.insumoMax}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-list>
+            </div>
         </div>
 
         <div layout-align="center stretch"
@@ -204,6 +234,8 @@
                     </tr>
                     </tbody>
                 </table>
+
+
             </div>
 
         </div>
@@ -212,7 +244,7 @@
 
     <md-card layout-align="center stretch"
              layout="column"
-             ng-if="vm.request.tipo"
+             ng-if="vm.request.tipo && vm.visible"
              layout-padding>
         <div flex
              layout="row"
@@ -245,7 +277,8 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.CLIENT_COMMENTS</label>
                 <input
-                    ng-model="vm.request.observaciones_cliente"/>
+                    ng-model="vm.request.observaciones_cliente"
+                    readonly="vm.visible"/>
             </md-input-container>
         </div>
         <div flex
@@ -255,7 +288,8 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.WORKER_COMMENTS</label>
                 <input
-                    ng-model="vm.request.observaciones_tecnico"/>
+                    ng-model="vm.request.observaciones_tecnico"
+                    readonly="vm.visible"/>
             </md-input-container>
         </div>
         <div flex
@@ -266,7 +300,7 @@
             <md-input-container flex class="md-block">
                 <label translate>REQUESTS.NEW.SCORE</label>
                 <md-select
-                    ng-model="vm.request.calificacion">
+                    ng-model="vm.request.calificacion" disabled="vm.visible">
                     <md-option
                         ng-repeat="score in vm.scores"
                         ng-value="score.value">
@@ -281,7 +315,8 @@
              layout-sm="column"
              layout-xs="column"
              layout-align-sm="start stretch"
-             layout-align-xs="start stretch">
+             layout-align-xs="start stretch"
+             ng-if="vm.visible">
             <md-button
                 cg-busy="{promise:vm.savingPromise, message:''}"
                 aria-label="assign" ng-click="vm.save()"

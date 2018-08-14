@@ -15,13 +15,17 @@
 
         //Variable declaration
         vm.id = $stateParams.id;
+        vm.kindAtention = $stateParams.tipo;
         vm.user = null;
         vm.request = null;
         vm.solicitudDetalles = null;
         vm.store = null;
         vm.servicio = null;
         vm.insumos = null;
-        vm.improductivo = 'a';
+        vm.improductivo = !null;
+        vm.visible = null;
+
+        console.log("tipo atención", vm.kindAtention);
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
@@ -30,10 +34,18 @@
         //Declaración de funciones
         vm.changeProductivo = changeProductivo;
         vm.filesSelected = filesSelected;
+        vm.insumoSelect = insumoSelect;
+        vm.validaMax = validaMax;
 
         activate();
 
         function activate() {
+            if(vm.kindAtention == 'attended'){
+                vm.visible = null;
+            }else{
+                vm.visible = true;
+            }
+
             vm.loadingPromise = atencionPV.getByID(vm.id)
                 .then(function (requestSuccess) {
                     vm.request = requestSuccess;
@@ -44,13 +56,7 @@
                             vm.solicitudDetalles = requestSuccess2;
 
                             if(vm.request.tipo == 'Medio'){
-                                atencionPV.getInsumos(vm.solicitudDetalles.cabinet)
-                                    .then(function (respuesta) {
-                                        vm.insumos = respuesta;
-                                    })
-                                    .catch(function (errorRespuesta) {
-                                        console.log(errorRespuesta);
-                                    });
+                                insumos();
                             }
 
                         })
@@ -88,10 +94,54 @@
         }
 
         function changeProductivo() {
-            if(vm.improductivo == null){
-                vm.improductivo = 'a';
+            vm.improductivo = !vm.improductivo;
+
+            if(vm.insumos){
+                angular.forEach(vm.insumos.results, function (value) {
+                    value.check = false;
+                    value.usado = 0;
+                });
+            }
+        }
+
+        function insumoSelect(insumo) {
+            insumo.check = !insumo.check;
+        }
+
+        function insumos() {
+            atencionPV.getInsumos(vm.solicitudDetalles.cabinet)
+                .then(function (respuesta) {
+                    vm.insumos = respuesta;
+                    var aux = null;
+
+                    angular.forEach(vm.insumos.results, function (value) {
+                        value.check = false;
+                        value.usado = 0;
+                        value.error = null;
+
+
+                        if(parseInt(value.cantidad) === 0){
+                            aux = 0;
+                        }else if(parseInt(value.tipos_equipo[0].cantidad) > parseInt(value.cantidad) && parseInt(value.cantidad) > 0){
+                            aux = parseInt(value.cantidad);
+                        }else if(parseInt(value.tipos_equipo[0].cantidad) < parseInt(value.cantidad) && parseInt(value.cantidad) > 0){
+                            aux = parseInt(value.tipos_equipo[0].cantidad);
+                        }
+
+                        value.insumoMax = aux;
+
+                    });
+                })
+                .catch(function (errorRespuesta) {
+                    console.log(errorRespuesta);
+                });
+        }
+
+        function validaMax(insumo){
+            if(insumo.usado > insumo.insumoMax){
+                insumo.error = true;
             }else{
-                vm.improductivo = null;
+                insumo.error = false;
             }
         }
 
