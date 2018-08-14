@@ -45,6 +45,7 @@
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
             "EVIDENCES":"Evidencias",
+            "EVIDENCES_S":"Evidencias de la Solicitud",
             "NO_EVIDENCES":"Sin evidencias"
         },
         "NEW": {

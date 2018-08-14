@@ -24,7 +24,8 @@
         vm.servicio = null;
         vm.insumos = null;
         vm.improductivo = !null;
-        vm.visible = null;
+        vm.visible = !null;
+        vm.insumosUsados = [];
 
         console.log("tipo atención", vm.kindAtention);
 
@@ -37,12 +38,13 @@
         vm.filesSelected = filesSelected;
         vm.insumoSelect = insumoSelect;
         vm.validaMax = validaMax;
+        vm.enviar = enviar;
 
         activate();
 
         function activate() {
             if(vm.kindAtention == 'attended'){
-                vm.visible = null;
+                vm.visible = false;
             }else{
                 vm.visible = true;
             }
@@ -146,19 +148,38 @@
             }
         }
 
+        function enviar(){
+            vm.insumosUsados = [];
+            console.log("improductivo: ", vm.improductivo);
+            if(vm.improductivo === true) {
+                angular.forEach(vm.insumos.results, function (valor) {
+                    if (valor.check === true) {
+                        if (valor.usado > valor.insumoMax) {
+                            valor.usado = valor.insumoMax;
+                        }
+
+                        vm.insumosUsados.push(valor);
+                    }
+                });
+
+                console.log("insumosusados", vm.insumosUsados);
+            }
+
+        }
+
         /*function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }*/
 
         function filesSelected(files) {
-            vm.request.evidencia = [];
+            vm.request.evidenciaNueva = [];
             angular.forEach(files, function (image) {
                 var base64Image = null;
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(image);
                 fileReader.onloadend = function () {
                     base64Image = fileReader.result;
-                    vm.request.evidencia.push({foto: base64Image});
+                    vm.request.evidenciaNueva.push({foto: base64Image});
                 };
             });
         }

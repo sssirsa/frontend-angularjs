@@ -24,7 +24,7 @@
         }
 
         function getInsumos(economico) {
-            return insumosURL.all(economico + '?limit=100&offset=0').customGET();
+            return insumosURL.all(economico + '?limit=1000&offset=0').customGET();
         }
 
         return service;
