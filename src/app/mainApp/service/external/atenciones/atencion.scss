@@ -1,0 +1,21 @@
+.qr-icon {
+  border-radius: 4px;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0px;
+  vertical-align: middle;
+  zoom:0.70;
+  transform: translateZ(0);
+  -webkit-transform: scale(0.70);
+  -moz-transform:scale(0.70);
+}
+
+
+.virtualRepeatScroll{
+  height: 300px;
+  width: 100%;
+  overflow-y: auto;
+}

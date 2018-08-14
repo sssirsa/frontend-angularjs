@@ -132,6 +132,18 @@
                     id: null,
                     tipo: null
                 }
+            })
+
+            .state('triangular.admin-default.temporalAttentionDetail', {
+                url: '/atencionTemp',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/external/atenciones/toDetail/temporal-attention-page-tmpl.html',
+                controller: 'TemporalAttentionPageController',
+                controllerAs: 'vm'
             });
 
 
@@ -171,6 +183,12 @@
                     {
                         name : 'MAIN.MENU.SERVICE.MENU_TITLE',
                         state: 'triangular.admin-default.serviceList',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name : 'TEMPORAL',
+                        state: 'triangular.admin-default.temporalAttentionDetail',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     },
