@@ -64,7 +64,7 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are the html5 types, plus: color and fileUploader
+                 *              type: string,          Valid types are the html5 types, plus: color, options, catalog and fileUploader
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
@@ -96,7 +96,7 @@
                  *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
                  *                      }
                  *                  },
-                 *              catalog:{                just used when the type of the field is options
+                 *              catalog:{                (Optional) Just used when the type of the field is catalog
                  *                  requires: string,    (Optional) Field required to enable this catalog
                  *                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
                  *                  url: string,         Full or partial URL depending on the kind
@@ -104,7 +104,8 @@
                  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
-                 *              }
+                 *              },
+                 *              options:[]               // (Optional) Just used when the field is options (String array)
                  *          }
                  *      ],
                  *      dialog:{              //Labels to use in the creation dialog
@@ -179,7 +180,7 @@
                  *      ]
                  *  },
                  *  LIST:{
-                 *      mode: string,                  (Optional) paged or infinite, default is Paged //Infinite is not yet implemented
+                 *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
                  *              type: string,          Valid types are text, options, file //Options not yet implemented
@@ -474,7 +475,7 @@
                     createPaginationProvider();
                 }
                 vm.PaginationProvider.url = vm.paginationHelper.previous;
-                vm.listLoader = vm.PaginationProvider
+                vm.pageLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
                         var elements = response.data;
@@ -535,7 +536,7 @@
                     createPaginationProvider();
                 }
                 vm.PaginationProvider.url = vm.paginationHelper.next;
-                vm.listLoader = vm.PaginationProvider
+                vm.pageLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
                         var elements = response.data;
@@ -596,7 +597,7 @@
                     createPaginationProvider();
                 }
                 vm.PaginationProvider.url = vm.paginationHelper.next;
-                vm.listLoader = vm.PaginationProvider
+                vm.infiniteLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
                         var elements = response.data;

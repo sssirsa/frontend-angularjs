@@ -139,7 +139,8 @@
                     <!-- Pagination mode paged -->
                     <section layout="row"
                              layout-align="space-between center"
-                             ng-if="$ctrl.actions['LIST'].mode==='paged'">
+                             ng-if="$ctrl.actions['LIST'].mode==='paged'"
+                 cg-busy="{promise:$ctrl.pageLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Previous page button -->
                         <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
                                    ng-click="$ctrl.previousPage()"
@@ -164,7 +165,8 @@
                     <!-- Pagination mode inifinte -->
                     <section layout="column"
                              layout-align="center center"
-                             ng-if="$ctrl.actions['LIST'].mode==='infinite'">
+                             ng-if="$ctrl.actions['LIST'].mode==='infinite'"
+                 cg-busy="{promise:$ctrl.infiniteLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Load more results button -->
                         <md-button ng-if="$ctrl.paginationHelper['next']"
                                    ng-click="$ctrl.loadMore()"
