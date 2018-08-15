@@ -13,6 +13,7 @@
 
         vm.create = create;
         vm.cancel = cancel;
+        vm.filesSelected = filesSelected;
 
         function create(objectToCreate) {
             vm.createLoader = vm.CatalogProvider
@@ -29,6 +30,15 @@
             $mdDialog.cancel(null);
         }
 
+        function filesSelected(files, field) {
+            //fileProcessing MUST be a function in case it exists
+            let fileProcessing = field.fileUploader['filesSelected'];
+            if (fileProcessing) {
+                files = fileProcessing(files);
+            }
+            vm.objectToCreate[field.model] = files;
+            console.debug(vm.objectToCreate);
+        }
     }
 
 })();

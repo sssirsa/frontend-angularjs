@@ -74,20 +74,6 @@
                  *                      max: number,            Maximum value allowed for selection (just used when number)
                  *                      min: number,            Minimum value allowed for selection (just used when number)
                  *                      date_format: string,    String format to use for date formating (just used when date)
-                 *                      fileUploder: {                 As used by the file-uploader component
-                 *                          fileFormats: '<', //image/*, audio/*, video/*, application/pdf
-                 *                          capture: '<', //camera
-                 *                          validations: '<', //size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}
-                 *                          resize: '<', //{width: 1000, height: 1000, centerCrop: true}
-                 *                          resizeIf: '<', //$width > 5000 || $height > 5000
-                 *                          maxDimensions: '<', //Max dimensions for images
-                 *                          maxDuration: '<', //Max duration for videos
-                 *                          multipleFiles: '<', //Allow multiple files
-                 *                          allowFolders: '<', //Allow directory uploading
-                 *                          maxFiles: '<', //Max number of files allowed
-                 *                          keep: '<', //true, false or distinct,
-                 *                          filesSelected: '&'// {files:vm.files}
-                 *                      },
                  *                      errors:{
                  *                          required: string,       (Optional) Default is 'Required field'
                  *                          regex: string,          (Optional) Default is 'Invalid pattern {{regex}}'
@@ -105,7 +91,22 @@
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
                  *              },
-                 *              options:[]               // (Optional) Just used when the field is options (String array)
+                 *              options:[],              // (Optional) Just used when the field is options (String array)
+                 *              fileUploder: {                 As used by the file-uploader component
+                 *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
+                 *                          capture: '<',               //camera
+                 *                          validations: '<',           //size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}
+                 *                          resize: '<',                //{width: 1000, height: 1000, centerCrop: true}
+                 *                          resizeIf: '<',              //$width > 5000 || $height > 5000
+                 *                          maxDimensions: '<',         //Max dimensions for images
+                 *                          maxDuration: '<',           //Max duration for videos
+                 *                          multipleFiles: '<',         //Allow multiple files
+                 *                          allowFolders: '<',          //Allow directory uploading
+                 *                          maxFiles: '<',              //Max number of files allowed
+                 *                          keep: '<',                  //true, false or distinct,
+                 *                                                      (Optional) Just necessary if any further treatment is required in the model of the files, such as conversion.
+                 *                          filesSelected: '<'          * function(files){ return model; } //Do the necesary processing for the files inside the given function
+                 *                      },
                  *          }
                  *      ],
                  *      dialog:{              //Labels to use in the creation dialog

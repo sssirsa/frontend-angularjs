@@ -20,7 +20,10 @@
             <div layout="column"
                  layout-align="center stretch"
                  ng-repeat="field in vm.fields">
-                <section ng-if="field['type']!=='color' && field['type']!=='fileUploader'">
+                <section ng-if="field['type']!=='color'
+                         && field['type']!=='fileUploader'
+                         && field['type']!=='catalog'
+                         && field['type']!=='options'">
                     <md-input-container class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
@@ -38,6 +41,20 @@
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                         </div>
                     </md-input-container>
+                </section>
+                <section ng-if="field['type']==='fileUploader'">
+                    <file-uploader file-formats="field['validations'].fileUploader.fileFormats"
+                                   capture="field['validations'].fileUploader.capture"
+                                   validations="field['validations'].fileUploader.validations"
+                                   resize="field['validations'].fileUploader.resize"
+                                   resize-if="field['validations'].fileUploader.resizeIf"
+                                   max-dimensions="field['validations'].fileUploader.maxDimensions"
+                                   multiple-files="field['validations'].fileUploader.multipleFiles"
+                                   allow-folders="field['validations'].fileUploader.allowFolders"
+                                   max-files="field['validations'].fileUploader.maxfiles"
+                                   keep="field['validations'].fileUploader.keep"
+                                   files-selected="vm.filesSelected(files, field)">
+                    </file-uploader>
                 </section>
             </div>
         </form>

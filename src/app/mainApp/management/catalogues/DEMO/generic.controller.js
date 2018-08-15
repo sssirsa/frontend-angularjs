@@ -53,6 +53,25 @@
                                 required: 'El código de estado es obligatorio'
                             }
                         }
+                    },
+                    {
+                        type: 'fileUploader',
+                        model: 'file',
+                        fileUploader: {
+                            filesSelected: function fileProcessing(files) {
+                                let processedFiles=[];
+                                angular.forEach(files, function (image) {
+                                    var base64Image = null;
+                                    var fileReader = new FileReader();
+                                    fileReader.readAsDataURL(image);
+                                    fileReader.onloadend = function () {
+                                        base64Image = fileReader.result;
+                                        processedFiles.push({ foto: base64Image });
+                                    };
+                                });
+                                return processedFiles;
+                            }
+                        }
                     }
                 ],
                 dialog: {
