@@ -1,0 +1,114 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h3 translate>SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO </h3>
+            : {{vm.id}}
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div layout="column">
+
+        <md-card layout="column" layout-align="center center" layout-padding
+                 cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+
+            <form name="modalFormAssigned">
+
+            <md-content>
+                <div>
+                    <md-autocomplete md-input-name="persona"
+                                     md-no-cache="true"
+                                     flex="100"
+                                     md-min-length="0"
+                                     md-selected-item="vm.assignedPerson"
+                                     md-selected-item-change="vm.selectedPersonChange()"
+                                     md-search-text="vm.personSearchText"
+                                     md-items="item in vm.searchPerson(item)"
+                                     md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
+                                     md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
+                                     md-menu-class="autocomplete-custom-template"
+                                     required>
+                        <md-item-template>
+                            <span class="item-title" title="{{item.nombre}}">
+                            <md-icon md-font-icon="fa fa-id-card-o"></md-icon>
+                            <span>
+                                <b>{{item.user.username}}</b>
+                            </span>
+                            </span>
+                            <span class="md-caption">
+                            {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}}
+                            </span>
+                        </md-item-template>
+                        <md-not-found>
+                        <span class="item-title">
+                            <span>
+                                {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.units.searchText}}"
+                            </span>
+                        </span>
+                        </md-not-found>
+                    </md-autocomplete>
+                </div>
+                <div>
+                    <md-slider-container>
+                        <span class="md-body-1">Prioridad&nbsp;</span>
+                        <md-slider ng-model="vm.toAsigned.prioridad"
+                                   min="0"
+                                   max="10"
+                                   aria-label="blue"
+                                   id="blue-slider"
+                                   class="md-primary">
+                        </md-slider>
+                        <md-input-container>
+                            <input type="number"
+                                   ng-model="vm.toAsigned.prioridad"
+                                   aria-label="blue"
+                                   aria-controls="blue-slider">
+                        </md-input-container>
+                    </md-slider-container>
+                </div>
+                <div>
+                    <md-input-container>
+                        <label>Hora inicio</label>
+                        <input type="time"
+                               ng-model="vm.horainicio"
+                               placeholder="HH:mm:ss"
+                               min="{{vm.horamin}}"
+                               max="{{vm.horamax}}"
+                               required />
+                        <span>hora minima: {{vm.horamin}}</span>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Hora fin</label>
+                        <input type="time"
+                               ng-model="vm.horafin"
+                               placeholder="HH:mm:ss"
+                               min="{{vm.horamin}}"
+                               max="{{vm.horamax}}"
+                               required />
+                        <span>hora maxima: {{vm.horamax}}</span>
+                    </md-input-container>
+                </div>
+            </md-content>
+
+            <md-content>
+                <div layout="row"
+                     layout-align="end end"
+                     layout-sm="column"
+                     layout-xs="column"
+                     layout-align-sm="start stretch"
+                     layout-align-xs="start stretch">
+                    <md-button
+                        aria-label="assign" ng-click="vm.assign()"
+                        class="md-raised md-primary" ng-disabled="modalFormAssigned.$invalid">
+                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                    </md-button>
+                </div>
+            </md-content>
+
+            </form>
+        </md-card>
+    </div>
+</md-dialog>
