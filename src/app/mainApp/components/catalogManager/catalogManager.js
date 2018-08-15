@@ -64,7 +64,7 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are the html5 types, plus: color, options, catalog and fileUploader
+                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
@@ -82,7 +82,7 @@
                  *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
                  *                      }
                  *                  },
-                 *              catalog:{                (Optional) Just used when the type of the field is catalog
+                 *              catalog:{                (Optional) Just used when the type of the field is catalog, in this case the component handles itself the loading of the catalog
                  *                  requires: string,    (Optional) Field required to enable this catalog
                  *                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
                  *                  url: string,         Full or partial URL depending on the kind
@@ -91,7 +91,16 @@
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
                  *              },
-                 *              options:[],              // (Optional) Just used when the field is options (String array)
+                 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
+                 *                  model: string,            Field of the element to be used in the model
+                 *                  option: string,           Field of the element to show in list
+                 *                  elements:[
+                 *                      {
+                 *                          model: {{}},
+                 *                          option: {{}}
+                 *                      }
+                 *                  ]
+                 *              }
                  *              fileUploder: {                 As used by the file-uploader component
                  *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
                  *                          capture: '<',               //camera

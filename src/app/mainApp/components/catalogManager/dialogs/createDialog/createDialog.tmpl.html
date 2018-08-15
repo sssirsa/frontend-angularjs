@@ -20,8 +20,7 @@
             <div layout="column"
                  layout-align="center stretch"
                  ng-repeat="field in vm.fields">
-                <section ng-if="field['type']!=='color'
-                         && field['type']!=='fileUploader'
+                <section ng-if="field['type']!=='fileUploader'
                          && field['type']!=='catalog'
                          && field['type']!=='options'">
                     <md-input-container class="md-block">
@@ -42,7 +41,11 @@
                         </div>
                     </md-input-container>
                 </section>
-                <section ng-if="field['type']==='fileUploader'">
+                <section ng-if="field['type']==='fileUploader'"
+                         layout="column">
+                    <!--Field label selection depending on the parameters given-->
+                    <label ng-if="field['label']">{{field['label']}}</label>
+                    <label ng-if="!field['label']">{{field['model']}}</label>
                     <file-uploader file-formats="field['validations'].fileUploader.fileFormats"
                                    capture="field['validations'].fileUploader.capture"
                                    validations="field['validations'].fileUploader.validations"
@@ -55,6 +58,21 @@
                                    keep="field['validations'].fileUploader.keep"
                                    files-selected="vm.filesSelected(files, field)">
                     </file-uploader>
+                </section>
+                <section ng-if="field['type']==='options'">
+                    <md-input-container class="md-block">
+                        <!--Field label selection depending on the parameters given-->
+                        <label ng-if="field['label']">{{field['label']}}</label>
+                        <label ng-if="!field['label']">{{field['model']}}</label>
+                        <md-select ng-model="vm.objectToCreate[field.model]"
+                                   ng-required="field.required"
+                                   md-on-close="vm.selectState()">
+                            <md-option ng-repeat="option in field.options.elements"
+                                       ng-value="field.options.model">
+                                {{field.options.option}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                 </section>
             </div>
         </form>
