@@ -17,6 +17,7 @@
              layout-wrap>
             <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
                        ng-click="$ctrl.search()"
+                       aria-label="{{$ctrl.searchButtonText}}"
                        class="md-primary md-raised">
                 <div layout="row" layout-align="center center">
                     <md-icon md-font-icon="fa fa-search"></md-icon>
@@ -26,6 +27,7 @@
             </md-button>
             <md-button ng-if="$ctrl.actions['POST']"
                        ng-click="$ctrl.create()"
+                       aria-label="{{$ctrl.createButtonText}}"
                        class="md-primary md-raised">
                 <div layout="row" layout-align="center center">
                     <md-icon md-font-icon="fa fa-plus"></md-icon>
@@ -99,6 +101,7 @@
                                      class="image-preview"
                                      ng-src="{{field.model}}" />
                                 <md-button ng-if="field.file.mode==='download'"
+                                           aria-label="'Download File'"
                                            ng-click="$ctrl.downloadFile(field.model)"
                                            class="md-primary md-raised">
                                     <md-icon md-font-icon="fa fa-download"></md-icon>
@@ -113,6 +116,7 @@
                         <!-- Modify button -->
                         <md-button ng-if="$ctrl.actions['PUT']"
                                    ng-click="$ctrl.update()"
+                                   aria-label="{{$ctrl.modifyButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fa fa-edit"></md-icon>
@@ -123,6 +127,7 @@
                         <!-- Delete button -->
                         <div ng-if="$ctrl.actions['DELETE']">
                             <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
+                                       aria-label="{{$ctrl.deleteButtonText}}"
                                        class="md-warn md-raised">
                                 <div layout="row" layout-align="center center">
                                     <md-icon md-font-icon="fa fa-trash"></md-icon>
@@ -144,6 +149,7 @@
                         <!-- Previous page button -->
                         <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
                                    ng-click="$ctrl.previousPage()"
+                                   aria-label="{{$ctrl.previousButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
@@ -154,6 +160,7 @@
                         <!-- Next page button -->
                         <md-button ng-disabled="!$ctrl.paginationHelper['next']"
                                    ng-click="$ctrl.nextPage()"
+                                   aria-label="{{$ctrl.nextButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
@@ -170,6 +177,7 @@
                         <!-- Load more results button -->
                         <md-button ng-if="$ctrl.paginationHelper['next']"
                                    ng-click="$ctrl.loadMore()"
+                                   aria-label="{{$ctrl.loadMoreButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
@@ -230,6 +238,7 @@
                                          ng-src="{{field.model}}" />
                                     <md-button ng-if="field.file.mode==='download'"
                                                ng-click="$ctrl.downloadFile(field.model)"
+                                               aria-label="'Download file'"
                                                class="md-primary md-raised">
                                         <md-icon md-font-icon="fa fa-download"></md-icon>
                                     </md-button>
@@ -243,6 +252,7 @@
                             <!-- Modify button -->
                             <md-button ng-if="$ctrl.actions['PUT']"
                                        ng-click="$ctrl.update()"
+                                       aria-label="{{$ctrl.modifyButtonText}}"
                                        class="md-primary md-raised">
                                 <div layout="row" layout-align="center center">
                                     <md-icon md-font-icon="fa fa-edit"></md-icon>
@@ -253,6 +263,7 @@
                             <!-- Delete button -->
                             <div ng-if="$ctrl.actions['DELETE']">
                                 <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
+                                           aria-label="{{$ctrl.deleteButtonText}}"
                                            class="md-warn md-raised">
                                     <div layout="row" layout-align="center center">
                                         <md-icon md-font-icon="fa fa-trash"></md-icon>

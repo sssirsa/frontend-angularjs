@@ -183,7 +183,7 @@
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, file //Options not yet implemented
+                 *              type: string,          Valid types are text, options, catalog, file //Options and catalog not yet implemented
                  *              model: string,         Name of the field that will be used to show the data from the API
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
                  *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
