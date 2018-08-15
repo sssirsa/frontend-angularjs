@@ -3,8 +3,8 @@
      cg-busy="{promise:vm.createLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
     <md-toolbar layout="row"
                 layout-align="space-between center">
-        <div ng-if="vm.dialog.title" class="md-title">{{vm.dialog.title}}</div>
-        <div ng-if="!vm.dialog.title" class="md-title">Create element</div>
+        <div layout-padding ng-if="vm.dialog.title" class="md-title">{{vm.dialog.title}}</div>
+        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Create element</div>
         <md-button class="md-icon-button"
                    ng-click="vm.cancel()"
                    aria-label="exit dialog">
