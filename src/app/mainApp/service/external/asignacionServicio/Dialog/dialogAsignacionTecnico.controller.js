@@ -97,8 +97,9 @@
 
         function searchPerson() {
             if (!vm.personList) {
-                return Persona_Admin.listPromise()
+                return Persona_Admin.listPromise(1000,0)
                     .then(function (userListSuccess) {
+                        userListSuccess = userListSuccess.results;
                         vm.personList = userListSuccess;
                         return searchPersonCollection();
                     })
