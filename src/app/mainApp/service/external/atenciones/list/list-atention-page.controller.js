@@ -17,6 +17,26 @@
         vm.selectRequest = selectRequest;
 
 
+        function Editing(salePoint) {
+            console.log(salePoint);
+            $mdDialog.show({
+                controller: 'dialogReasignacionTecnicoController',
+                templateUrl: 'app/mainApp/service/external/atenciones/Dialog/dialogReasignacionTecnico.tmpl.html',
+                parent: angular.element(document.body),
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    salePoint: salePoint
+                }
+            })
+                .then(function () {
+                    listSalePoints();
+                });
+
+        }
+
+
         function Atending(salePoint) {
             console.log(salePoint);
             selectRequest(salePoint.folio);
@@ -28,11 +48,6 @@
             console.log('CANCELANDO ATENCION');
         }
 
-        function Editing(salePoint) {
-            console.log('EDITANDO ATENCION');
-            console.log(salePoint);
-            console.log('EDITANDO ATENCION');
-        }
 
         //Function mapping
         vm.listSalePoints = listSalePoints;
@@ -68,8 +83,8 @@
                                 );
                             });
                         break;
-                    case 'attended':
-                        vm.loadingPromise = SalePoint.listAttendedServices('?limit=20&offset='+vm.offset)
+                    case 'all':
+                        vm.loadingPromise = SalePoint.listAllServices('20',vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -89,6 +104,7 @@
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
+            console.log(vm.salePoints);
         }
 
         function sigPage() {

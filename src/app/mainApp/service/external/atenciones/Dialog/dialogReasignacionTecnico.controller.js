@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app.mainApp.service')
-        .controller('dialogAsignacionTecnicoController', dialogAsignacionTecnicoController);
+        .controller('dialogReasignacionTecnicoController', dialogReasignacionTecnicoController);
 
-    function dialogAsignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
+    function dialogReasignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
                                                Persona_Admin, $state, salePoint, $mdDialog, ErrorHandler) {
         var vm = this;
 
@@ -157,11 +157,10 @@
             vm.personLoading = SalePoint.assignToPerson(vm.toAsigned, vm.salePoint.folio)
                 .then(function () {
                     toastr.success(
-                        Translate.translate('SALEPOINT_REQUEST.ASSIGN_DETAIL.TOASTR_SUCCESS'),
+                        Translate.translate('Se reasigno correctamente al tecnico'),
                         Translate.translate('MAIN.MSG.SUCCESS_TITLE')
                     );
                     $mdDialog.hide();
-                    $state.go('triangular.admin-default.serviceAssing');
                 })
                 .catch(function (error) {
                     ErrorHandler.errortranslate(error);

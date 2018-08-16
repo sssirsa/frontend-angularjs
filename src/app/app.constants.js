@@ -397,7 +397,7 @@
             ],
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
-                {id: 'attended', value: 'Atendidos'}
+                {id: 'all', value: 'Todas'}
             ],
             requestKinds: [
                 {
@@ -452,6 +452,7 @@
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
+            tecnicosDisponibles: 'employees',
             proveedor: 'proveedor',
             proyecto: 'proyecto',
             report_builder: 'report_builder',

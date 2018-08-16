@@ -8,7 +8,7 @@
         .module('app.mainApp')
         .factory('Persona_Admin',Persona_Admin);
 
-    function Persona_Admin(WebRestangular, URLS){
+    function Persona_Admin(WebRestangular, URLS, MobileRestangular){
 
         var baseModelo = WebRestangular.all(URLS.persona_admin);
 
@@ -81,8 +81,8 @@
             return baseModelo.all(object.id).customPUT(object,null,{'content-type':'application/json'});
         }
 
-        function listPromise(){
-            return baseModelo.getList();
+        function listPromise(limit, offset){
+            return MobileRestangular.all(URLS.tecnicosDisponibles+'?limit='+limit+'&offset='+offset).customGET();
         }
 
     }
