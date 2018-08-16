@@ -1,0 +1,16 @@
+<md-content>
+    <md-input-container class="md-block">
+        <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
+        <label ng-if="!$ctrl.catalog.name">Catalog</label>
+        <md-select ng-model="user.state" whenScrollEnds="$ctrl.loadMore()">
+            <md-option ng-repeat="element in $ctrl.catalogelements" ng-value="{{element[$ctrl.catalog.model]}}">
+                <section ng-if="$ctrl.catalog.option">
+                    {{element[$ctrl.catalog.option]}}
+                </section>
+                <section ng-if="!$ctrl.catalog.option">
+                    {{element[$ctrl.catalog.model]}}
+                </section>
+            </md-option>
+        </md-select>
+    </md-input-container>
+</md-content>
