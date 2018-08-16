@@ -3,6 +3,7 @@
  *          url: string,         Full or partial URL depending on the kind
  *          kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
  *          name: string,        (Optional) Default is "Catalog"
+ *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
  *          option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
  *                               If not given, then the model will be used
@@ -32,36 +33,38 @@
     angular
         .module('app.mainApp')
         .component('catalogSelect', {
-            temlateUrl: 'app/mainApp/components/catalogSelect/catalogSlect.tmpl.html',
+            templateUrl: 'app/mainApp/components/catalogSelect/catalogSelect.tmpl.html',
             controller: CatalogSelectController,
             bindings: {
                 catalog: '<',
                 pagination: '<',
                 elements: '<',
-                softDelete:'<',
+                softDelete: '<',
 
                 onSuccessList: '&',
-                onErrorList: '&'
+                onErrorList: '&',
+                onSelect:'&'
             }
         });
     function CatalogSelectController(
         CATALOG
     ) {
         var vm = this;
-
-        //Variables
-        vm.catalog = catalog;
-        vm.pagination = pagination;
-        vm.elements = elements;
-        vm.sofDelete = softDelete;
+        ////Variables
+        //vm.catalog = catalog;
+        //vm.pagination = pagination;
+        //vm.elements = elements;
+        //vm.sofDelete = softDelete;
 
         vm.Catalogrovider = null;
         vm.PaginationProvider = null;
         vm.catalogElements = [];
         vm.paginationHelper = {};
+        vm.selectedElement = null;
 
         //Functions
         vm.loadMore = loadMore;
+        vm.onClose = onClose;
 
         init();
 
@@ -140,7 +143,7 @@
             else {
                 vm.CatalogProvider = CATALOG.generic;
             }
-            vm.CatalogProvider.url = vm.url;
+            vm.CatalogProvider.url = vm.catalog.url;
         }
 
         function createPaginationProvider() {
@@ -189,9 +192,8 @@
         }
 
         function filterDeleted(elements) {
-            var hide = vm.actions['LIST'].softDelete['hide'];
-            var reverse = vm.actions['LIST'].softDelete['reverse'];
-            //ng - hide="element[$ctrl.actions['LIST'].softDelete['hide']] ^ $ctrl.actions['LIST'].softDelete['reverse']"
+            var hide = vm.softDelete['hide'];
+            var reverse = vm.softDelete['reverse'];
             var filteredElements = [];
             elements.forEach(function (element) {
                 //Negated XOR comparison to decide whether to show or not the element
@@ -200,6 +202,12 @@
                 }
             });
             return filteredElements;
+        }
+
+        function onClose() {
+            if (vm.selectedElement) {
+                vm.onSelect({ element: vm.selectedElement });
+            }
         }
 
     }

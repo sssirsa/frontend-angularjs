@@ -74,6 +74,24 @@
                         </md-select>
                     </md-input-container>
                 </section>
+                <section ng-if="field['type']==='catalog'">
+                    <section ng-if="field['catalog'].requires">
+                        <catalog-select ng-if="$ctrl.objectToCreate[field['catalog'].requires]"
+                                        catalog="field.catalog"
+                                        pagination="field.pagination"
+                                        elements="field.elements"
+                                        soft-delete="field.softDelete">
+                        </catalog-select>
+                    </section>
+                    <section ng-if="!field['catalog'].requires">
+                        <catalog-select catalog="field.catalog"
+                                        pagination="field.pagination"
+                                        elements="field.elements"
+                                        soft-delete="field.softDelete"
+                                        on-select="vm.onElementSelect(element,field)">
+                        </catalog-select>
+                    </section>
+                </section>
             </div>
         </form>
     </md-content>

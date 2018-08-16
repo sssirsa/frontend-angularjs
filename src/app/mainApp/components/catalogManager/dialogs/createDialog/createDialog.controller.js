@@ -19,11 +19,13 @@
                  *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
                  *                      }
                  *                  },
-                 *              catalog:{                (Optional) Just used when the type of the field is catalog, in this case the component handles itself the loading of the catalog
+                 *              catalog:{                (Optional) Just used when the type of the field is catalog,
+                 *                                       in this case the component catalog-select is used to delegate the catalog handling
                  *                  requires: string,    (Optional) Field required to enable this catalog
                  *                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
                  *                  url: string,         Full or partial URL depending on the kind
                  *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+                 *                  name: string,        (Optional) Name of the catalog to show in the label
                  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
@@ -78,6 +80,7 @@
         vm.create = create;
         vm.cancel = cancel;
         vm.filesSelected = filesSelected;
+        vm.onElementSelect = onElementSelect;
 
         function create(objectToCreate) {
             vm.createLoader = vm.CatalogProvider
@@ -101,7 +104,10 @@
                 files = fileProcessing(files);
             }
             vm.objectToCreate[field.model] = files;
-            console.debug(vm.objectToCreate);
+        }
+
+        function onElementSelect(element, field) {
+            vm.objectToCreate[field.model] = element;
         }
     }
 

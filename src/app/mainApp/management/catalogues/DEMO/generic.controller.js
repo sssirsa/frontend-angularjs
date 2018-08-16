@@ -37,7 +37,7 @@
                         required: true,
                         validations: {
                             errors: {
-                                required:'El nombre del estado es obligatorio'
+                                required: 'El nombre del estado es obligatorio'
                             }
                         }
                     },
@@ -59,7 +59,7 @@
                         model: 'file',
                         fileUploader: {
                             filesSelected: function fileProcessing(files) {
-                                let processedFiles=[];
+                                let processedFiles = [];
                                 angular.forEach(files, function (image) {
                                     var base64Image = null;
                                     var fileReader = new FileReader();
@@ -71,6 +71,27 @@
                                 });
                                 return processedFiles;
                             }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'catalog_id',
+                        label: 'Sub catálogo estados',
+                        catalog: {
+                            url: 'estado',
+                            name:'Estado',
+                            kind: 'Mobile',
+                            model: 'codigo_estado',
+                            option: 'nombre',
+                            loadMoreButtonText:'Cargar mas...'
+                        },
+                        pagination: {
+                            total: 'count'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     }
                 ],
