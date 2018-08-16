@@ -83,8 +83,8 @@
                                 );
                             });
                         break;
-                    case 'attended':
-                        vm.loadingPromise = SalePoint.listAttendedServices('?limit=20&offset='+vm.offset)
+                    case 'all':
+                        vm.loadingPromise = SalePoint.listAllServices('20',vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -104,6 +104,7 @@
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
+            console.log(vm.salePoints);
         }
 
         function sigPage() {
