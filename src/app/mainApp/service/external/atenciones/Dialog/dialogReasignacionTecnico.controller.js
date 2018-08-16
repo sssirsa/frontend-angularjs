@@ -100,7 +100,6 @@
                 return Persona_Admin.listPromise(1000,0)
                     .then(function (userListSuccess) {
                         userListSuccess = userListSuccess.results;
-                        console.log(userListSuccess);
                         vm.personList = userListSuccess;
                         return searchPersonCollection();
                     })
