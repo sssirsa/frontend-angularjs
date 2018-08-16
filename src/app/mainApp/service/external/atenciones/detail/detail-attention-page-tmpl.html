@@ -88,6 +88,14 @@
                             <div class="Cancelada"></div>
                         </div>
                     </div>
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Improductiva'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.UNPRODUCTIVE</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="Improductiva"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </md-content>
@@ -111,6 +119,39 @@
              layout="column"
              layout-padding>
         <h3 translate>REQUESTS.DETAIL.EVIDENCES_S</h3>
+
+        <div
+            layout="column"
+            layout-align="space-around center">
+
+            <div ng-if="vm.solicitudDetalles.evidencia.length>0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.solicitudDetalles.evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.solicitudDetalles.evidencia.length===0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding
+             ng-if="!vm.visible">
+        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
 
         <div
             layout="column"
@@ -145,7 +186,8 @@
         <h3 translate>Servicio</h3>
 
         <md-input-container class="md-block">
-            <input ng-model="vm.servicio.km" type="number" placeholder="km (required)" ng-required="true" maxlength="4">
+            <input ng-model="vm.km" type="text" placeholder="km (required)"
+                   ng-required="true" maxlength="6" ng-disabled="!vm.visible" only-digits>
         </md-input-container>
 
         <md-input-container class="md-block"
@@ -179,12 +221,15 @@
             >
                 <div ng-repeat="insumo in vm.insumos.results" ng-if="vm.improductivo" flex-gt-sm="50" flex="100">
                     <div flex>
-                        <div layout="colum" layout-align="center center">
-                            <div flex="100" layout="row">
-                                <md-switch value="insumo.id" ng-click="vm.insumoSelect(insumo)">{{insumo.descripcion}}</md-switch>
+                        <div layout="colum" layout-align="left center">
+                            <div layout="row">
+                                <md-switch value="insumo.id" ng-click="vm.insumoSelect(insumo)"></md-switch>
+                            </div>
+                            <div layout="colum" flex="66" class="wrapperText">
+                                {{insumo.descripcion}}
                             </div>
 
-                            <div ng-click="vm.validaMax(insumo)" ng-if="insumo.check == true" layout="row">
+                            <div ng-click="vm.validaMax(insumo)" ng-if="insumo.check == true" layout="row" style="width: 200px">
                                 <md-input-container ng-if="insumo.insumoMax > 0">
                                     <div range-spinner
                                          range-min="1"
@@ -198,10 +243,10 @@
                                     </div>
 
                                 </md-input-container>
-                                <div ng-if="insumo.error">
-                                    <span style="color: #FF1B28;"> <b translate>MAIN.GENERAL.MAX </b><b>{{insumo.insumoMax}}</b></span>
-                                </div>
                             </div>
+                        </div>
+                        <div ng-if="insumo.error" align="right" flex>
+                            <span style="color: #FF1B28;"> <b translate>MAIN.GENERAL.MAX </b><b>{{insumo.insumoMax}}</b></span>
                         </div>
                     </div>
                 </div>
@@ -210,8 +255,8 @@
 
         <div layout-align="center stretch"
              layout="column"
-             layout-padding>
-                 <!--ng-if="vm.request.tipo === 'Alta' || vm.request.tipo === 'Cambio'">-->
+             layout-padding
+             ng-if="vm.request.tipo === 'Alta' || vm.request.tipo === 'Cambio'">
 
             <div ng-if="vm.solicitudDetalles.solicitudes_cabinet.length > 0" flex class="md-block">
                 <table md-table flex>
@@ -445,7 +490,45 @@
                        max-files="5"
                        multiple-files="true"
                        keep="true"
-                       files-selected="vm.filesSelected(files)"
+                       files-selected="vm.filesSelected(files,1)"
+        ></file-uploader>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo && vm.visible"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="false"
+                       max-files="1"
+                       multiple-files="false"
+                       keep="true"
+                       files-selected="vm.filesSelected(files,2)"
+        ></file-uploader>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo && vm.visible"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="false"
+                       max-files="1"
+                       multiple-files="false"
+                       keep="true"
+                       files-selected="vm.filesSelected(files,3)"
         ></file-uploader>
     </md-card>
 
@@ -515,6 +598,5 @@
         </div>
 
     </md-card>
-
 
 </div>

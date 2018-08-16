@@ -12,6 +12,7 @@
             "IN_PROCESS":"En proceso",
             "CANCELED":"Cancelada",
             "CLOSED":"Cerrada",
+            "UNPRODUCTIVE":"Improductiva",
             "FOLIO":"Folio",
             "STATUS":"Estado",
             "DATE":"Fecha",
@@ -97,6 +98,8 @@
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
             "EVIDENCES":"Evidencias",
+            "FIRM_CLIENT": "Firma cliente",
+            "FIRM_TECHNICAL": "Firma Técnico",
             "KIND":"Tipo de solicitud",
             "EQUIPMENT":{
                 "SEARCH":"Tipo de equipo a asignar"

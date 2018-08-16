@@ -21,13 +21,33 @@
         vm.request = null;
         vm.solicitudDetalles = null;
         vm.store = null;
-        vm.servicio = null;
+        vm.km = null;
         vm.insumos = null;
         vm.improductivo = !null;
         vm.visible = !null;
         vm.insumosUsados = [];
+        vm.evidenciaNueva = [];
+        vm.firmaC = [];
+        vm.firmaT = [];
+        vm.fileValidations = {
+            size: {
+                max: '5MB',
+                min: '10B'
+            }
+        };
 
-        console.log("tipo atención", vm.kindAtention);
+        vm.objetoAtencion = [{
+            cabinets: [],
+            descripcion_trabajo: null,
+            observaciones_cliente: null,
+            observaciones_tecnicas: null,
+            km: null,
+            firma_cliente: null,
+            firma_prospectador: null,
+            insumos: [],
+            insumos_lote: [],
+            calificacion: null
+        }];
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
@@ -143,26 +163,58 @@
         function validaMax(insumo){
             if(insumo.usado > insumo.insumoMax){
                 insumo.error = true;
+                insumo.usado = insumo.insumoMax;
             }else{
                 insumo.error = false;
             }
         }
 
         function enviar(){
-            vm.insumosUsados = [];
-            console.log("improductivo: ", vm.improductivo);
-            if(vm.improductivo === true) {
-                angular.forEach(vm.insumos.results, function (valor) {
-                    if (valor.check === true) {
-                        if (valor.usado > valor.insumoMax) {
-                            valor.usado = valor.insumoMax;
+
+            if(vm.evidenciaNueva.length === 0 || vm.km === null){
+                toastr.error();
+            }else {
+                vm.insumosUsados = [];
+
+                if (vm.improductivo === true) {
+                    angular.forEach(vm.insumos.results, function (valor) {
+                        if (valor.check === true) {
+                            if (valor.usado > valor.insumoMax) {
+                                valor.usado = valor.insumoMax;
+                            }
+
+                            var aux = {
+                                catalogo_insumos: valor.id,
+                                cantidad: valor.usado
+                            };
+
+                            vm.insumosUsados.push(aux);
                         }
+                    });
+                }
 
-                        vm.insumosUsados.push(valor);
-                    }
-                });
+                var economico = [];
+                if (vm.todosSeleccionado.length === 0) {
+                    economico.push(vm.solicitudDetalles.cabinet);
+                } else {
+                    economico.push(vm.todosSeleccionado[0].economico);
+                }
 
-                console.log("insumosusados", vm.insumosUsados);
+                vm.objetoAtencion = [{
+                    cabinets: economico,
+                    descripcion_trabajo: vm.request.tipo,
+                    observaciones_cliente: vm.request.observaciones_cliente,
+                    observaciones_tecnicas: vm.request.observaciones_tecnico,
+                    km: vm.km,
+                    firma_cliente: vm.firmaC,
+                    firma_prospectador: vm.firmaT,
+                    insumos: [],
+                    insumos_lote: vm.insumosUsados,
+                    evidencia: vm.evidenciaNueva,
+                    calificacion: vm.request.calificacion
+                }];
+
+                console.log(vm.objetoAtencion);
             }
 
         }
@@ -171,17 +223,43 @@
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }*/
 
-        function filesSelected(files) {
-            vm.request.evidenciaNueva = [];
-            angular.forEach(files, function (image) {
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(image);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.request.evidenciaNueva.push({foto: base64Image});
-                };
-            });
+        function filesSelected(files, num) {
+            console.log(files, num);
+            if(num === 1) {
+                vm.evidenciaNueva = [];
+                angular.forEach(files, function (image) {
+                    var base64Image = null;
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(image);
+                    fileReader.onloadend = function () {
+                        base64Image = fileReader.result;
+                        vm.evidenciaNueva.push({foto: base64Image});
+                    };
+                });
+            }else if(num === 2){
+                vm.firmaC = [];
+                angular.forEach(files, function (image) {
+                    var base64Image = null;
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(image);
+                    fileReader.onloadend = function () {
+                        base64Image = fileReader.result;
+                        vm.firmaC.push({foto: base64Image});
+                    };
+                });
+
+            }else if(num === 3){
+                vm.firmaT = [];
+                angular.forEach(files, function (image) {
+                    var base64Image = null;
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(image);
+                    fileReader.onloadend = function () {
+                        base64Image = fileReader.result;
+                        vm.firmaT.push({foto: base64Image});
+                    };
+                });
+            }
         }
 
 
@@ -333,7 +411,6 @@
             vm.loadingPromise = cabinetPV.list(1000, 0)
                 .then(function (res) {
                     res = res.results;
-                    console.log(res);
                     vm.todosprev = Helper.filterDeleted(res, true);
 
                     angular.forEach(vm.todosprev, function (cabinet) {
