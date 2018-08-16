@@ -26,6 +26,35 @@
     </md-card>
     <div
         ng-if="vm.objectAtention">
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch"
+                 ng-if="vm.selectedKind == 'all'">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div class="Abierta"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div class="En_proceso"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div class="Atendida"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.CANCELED</span>
+                    <div class="Cancelada"></div>
+                </div>
+            </div>
+        </md-card>
+        <div class="virtualRepeatScroll-600">
         <md-card
             flex="100"
             layout="column"
@@ -38,9 +67,9 @@
                         <md-toolbar class="md-hue-1">
                             <div class="md-toolbar-tools" layout-align="space-between center">
                                 <b>{{salePoint.folio}}</b>
-                                <!--<h1>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h1>-->
-                                <h1 ng-if="salePoint.tecnico">{{salePoint.tecnico.nombre+' '+salePoint.tecnico.apellido_paterno+' '+salePoint.tecnico.apellido_materno}}</h1>
-                                <h1 ng-if="!salePoint.tecnico">Sin Asignar</h1>
+                                <h1 ng-if="(salePoint.tecnico) && vm.selectedKind == 'pending'">{{salePoint.tecnico.nombre+' '+salePoint.tecnico.apellido_paterno+' '+salePoint.tecnico.apellido_materno}}</h1>
+                                <h1 ng-if="(!salePoint.tecnico) && vm.selectedKind == 'pending'">Sin Asignar</h1>
+                                <div ng-if="vm.selectedKind != 'pending'" class="{{salePoint.status}}"></div>
                             </div>
                         </md-toolbar>
                     </div>
@@ -115,7 +144,7 @@
                                     <b>:&nbsp</b>
                                 </div>
                                 <div layout="column" layout-align="center center">
-                                    <h4>{{salePoint.establecimiento_info.nombre_establecimiento}}</h4>
+                                    <h4>{{salePoint.establecimiento.nombre_establecimiento}}</h4>
                                 </div>
                             </div>
 
@@ -127,9 +156,9 @@
                                     <b>:&nbsp</b>
                                 </div>
                                 <div layout="column" layout-align="center center">
-                                    <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">
-                                        {{salePoint.establecimiento_info.localidad.municipio.estado.nombre}}</h4>
-                                    <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                                    <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                        {{salePoint.establecimiento.localidad.municipio.estado.nombre}}</h4>
+                                    <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
                                 </div>
                             </div>
 
@@ -141,9 +170,9 @@
                                     <b>:&nbsp</b>
                                 </div>
                                 <div layout="column" layout-align="center center">
-                                    <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">
-                                        {{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
-                                    <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No Asignado</h4>
+                                    <h4 ng-if="salePoint.establecimiento.localidad.codigo_postal">
+                                        {{salePoint.establecimiento.localidad.codigo_postal}}</h4>
+                                    <h4 ng-if="!salePoint.establecimiento.localidad.codigo_postal">No Asignado</h4>
                                 </div>
                             </div>
                         </div>
@@ -157,9 +186,9 @@
                                     <b>:&nbsp</b>
                                 </div>
                                 <div layout="column" layout-align="center center">
-                                    <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">
-                                        {{salePoint.establecimiento_info.localidad.municipio.nombre}}</h4>
-                                    <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                                    <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                        {{salePoint.establecimiento.localidad.municipio.nombre}}</h4>
+                                    <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
                                 </div>
                             </div>
                             <div layout="row">
@@ -170,7 +199,7 @@
                                     <b>:&nbsp</b>
                                 </div>
                                 <div layout="column" layout-align="center center">
-                                    <h4>{{salePoint.establecimiento_info.localidad.nombre}}</h4>
+                                    <h4>{{salePoint.establecimiento.localidad.nombre}}</h4>
                                 </div>
                             </div>
 
@@ -215,6 +244,8 @@
                 </md-content>
             </div>
         </md-card>
+
+        </div>
 
         <div layout-padding layout="row" layout-align="space-between center">
             <md-button class="md-primary md-raised"
