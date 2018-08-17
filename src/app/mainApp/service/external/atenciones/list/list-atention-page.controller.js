@@ -18,7 +18,7 @@
 
 
         function Editing(salePoint) {
-            console.log(salePoint);
+            // console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogReasignacionTecnicoController',
                 templateUrl: 'app/mainApp/service/external/atenciones/Dialog/dialogReasignacionTecnico.tmpl.html',
@@ -38,13 +38,14 @@
 
 
         function Atending(salePoint) {
-            console.log(salePoint);
+            // console.log(salePoint);
             selectRequest(salePoint.folio);
         }
 
         function Cancel(salePoint) {
             console.log('CANCELANDO ATENCION');
-            console.log(salePoint);
+            var aux = {cancelacion: true};
+            console.log(salePoint, aux);
             console.log('CANCELANDO ATENCION');
         }
 
@@ -73,10 +74,10 @@
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
-                                console.log(salePointsSuccess);
+                                // console.log(salePointsSuccess);
                             })
                             .catch(function (salePointsError) {
-                                console.log(salePointsError);
+                                // console.log(salePointsError);
                                 toastr.error(
                                     Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                                     Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -88,10 +89,10 @@
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
-                                console.log(salePointsSuccess);
+                                // console.log(salePointsSuccess);
                             })
                             .catch(function (salePointsError) {
-                                console.log(salePointsError);
+                                // console.log(salePointsError);
                                 toastr.error(
                                     Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
                                     Translate.translate('MAIN.MSG.ERROR_MESSAGE')
@@ -104,7 +105,7 @@
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
-            console.log(vm.salePoints);
+            // console.log(vm.salePoints);
         }
 
         function sigPage() {
