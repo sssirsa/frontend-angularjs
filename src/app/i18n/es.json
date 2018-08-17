@@ -291,7 +291,9 @@
             "RESTORE_MESSAGE": "¿Seguro que desea restaurar este elemento a un estado activo?",
             "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?",
             "ATTENTION_TITLE": "Confirmación de Atención",
-            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?"
+            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?",
+            "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
+            "CANCEL_ATTENTION_MESSAGE":"¿Seguro que desea cancelar la atencion"
         }
     },
     "SUCCESS":{
