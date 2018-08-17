@@ -12,7 +12,8 @@
         var service = {
             getByID: getByID,
             getAll: getAll,
-            getInsumos: getInsumos
+            getInsumos: getInsumos,
+            putActualiza: putActualiza
         };
 
         function getByID(id) {
@@ -25,6 +26,10 @@
 
         function getInsumos(economico) {
             return insumosURL.all(economico + '?limit=1000&offset=0').customGET();
+        }
+
+        function putActualiza(id, data) {
+            return baseUrl.all(id).customPUT(data);
         }
 
         return service;
