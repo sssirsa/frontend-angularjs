@@ -8,15 +8,15 @@
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, STORE_SEGMENTATION, SCORES, atencionPV,
-                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet) {
+                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
         var vm = this;
-
-        //Function mapping
-        //vm.showStoreLocation = showStoreLocation;
 
         //Variable declaration
         vm.id = $stateParams.id;
         vm.kindAtention = $stateParams.tipo;
+
+        vm.statusNew = "Atendida";
+        vm.cancelacion = false;
         vm.user = null;
         vm.request = null;
         vm.solicitudDetalles = null;
@@ -38,20 +38,24 @@
 
         vm.objetoAtencion = [{
             cabinets: [],
-            descripcion_trabajo: null,
-            observaciones_cliente: null,
-            observaciones_tecnicas: null,
-            km: null,
-            firma_cliente: null,
-            firma_prospectador: null,
+            descripcion_trabajo: "",
+            observaciones_cliente: "",
+            observaciones_tecnicas: "",
+            km: "",
+            firma_cliente: [],
+            firma_prospectador: [],
             insumos: [],
             insumos_lote: [],
-            calificacion: null
+            calificacion: 0
         }];
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
         vm.scores = SCORES;
+        vm.aceptButton = Translate.translate('MAIN.BUTTONS.ACCEPT');
+        vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
+        vm.dialogRestoreTitle = Translate.translate('MAIN.DIALOG.ATTENTION_TITLE');
+        vm.dialogRestoreMessage = Translate.translate('MAIN.DIALOG.ATTENTION_MESSAGE');
 
         //Declaración de funciones
         vm.changeProductivo = changeProductivo;
@@ -63,7 +67,7 @@
         activate();
 
         function activate() {
-            if(vm.kindAtention == 'attended'){
+            if(vm.kindAtention == 'all'){
                 vm.visible = false;
             }else{
                 vm.visible = true;
@@ -72,6 +76,8 @@
             vm.loadingPromise = atencionPV.getByID(vm.id)
                 .then(function (requestSuccess) {
                     vm.request = requestSuccess;
+                    vm.user = requestSuccess.tecnico;
+                    vm.store = requestSuccess.establecimiento;
 
                     SalePointRequests.getByID(vm.id)
                         .then(function (requestSuccess2) {
@@ -89,16 +95,6 @@
                         });
 
                     convertImages();
-                    vm.store = requestSuccess.establecimiento;
-                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona)
-                        .then(function (userSuccess) {
-                            $log.debug(userSuccess);
-                            vm.user = userSuccess;
-                        })
-                        .catch(function (userError) {
-                            $log.error(userError);
-                            toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_USER'));
-                        });
 
                 })
                 .catch(function (errorRequest) {
@@ -156,7 +152,7 @@
                     });
                 })
                 .catch(function (errorRespuesta) {
-                    console.log(errorRespuesta);
+                    ErrorHandler.errortranslate(errorRespuesta);
                 });
         }
 
@@ -172,7 +168,15 @@
         function enviar(){
 
             if(vm.evidenciaNueva.length === 0 || vm.km === null){
-                toastr.error();
+
+                if(vm.evidenciaNueva.length === 0){
+                    toastr.error(Translate.translate('Se requiere de al menos una evidencia'));
+                }
+
+                if(vm.km === null){
+                    toastr.error(Translate.translate('El campo de km es requerido'));
+                }
+
             }else {
                 vm.insumosUsados = [];
 
@@ -191,6 +195,14 @@
                             vm.insumosUsados.push(aux);
                         }
                     });
+                }else{
+                    vm.statusNew = "Improductiva";
+                    vm.cancelacion = true;
+
+                    vm.objetoAtencion = {
+                        cancelacion: true,
+                        km: vm.km
+                    };
                 }
 
                 var economico = [];
@@ -200,7 +212,7 @@
                     economico.push(vm.todosSeleccionado[0].economico);
                 }
 
-                vm.objetoAtencion = [{
+                vm.objetoAtencion = {
                     cabinets: economico,
                     descripcion_trabajo: vm.request.tipo,
                     observaciones_cliente: vm.request.observaciones_cliente,
@@ -211,12 +223,36 @@
                     insumos: [],
                     insumos_lote: vm.insumosUsados,
                     evidencia: vm.evidenciaNueva,
-                    calificacion: vm.request.calificacion
-                }];
+                    calificacion: vm.request.calificacion,
+                    //status: vm.statusNew,
+                    cancelacion: vm.cancelacion
+                };
 
-                console.log(vm.objetoAtencion);
+                confirmacion();
+
             }
 
+        }
+
+        function confirmacion() {
+            var confirm = $mdDialog.confirm()
+                .title(vm.dialogRestoreTitle)
+                .textContent(vm.dialogRestoreMessage)
+                .ariaLabel('Confirmar')
+                .ok(vm.aceptButton)
+                .cancel(vm.cancelButton);
+            $mdDialog.show(confirm).then(function () {
+                console.log("Objeto final", vm.objetoAtencion);
+                atencionPV.putActualiza(vm.request.folio, vm.objetoAtencion)
+                    .then(function (result) {
+                        toastr.success(result);
+                    })
+                    .catch(function (resultError) {
+                        ErrorHandler.errortranslate(resultError);
+                    });
+            }, function () {
+
+            });
         }
 
         /*function showStoreLocation() {

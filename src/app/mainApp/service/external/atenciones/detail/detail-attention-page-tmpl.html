@@ -494,42 +494,40 @@
         ></file-uploader>
     </md-card>
 
-    <md-card layout-align="center stretch"
-             layout="column"
+    <md-card layout-align="space-around center"
+             layout="row"
              ng-if="vm.request.tipo && vm.visible"
              layout-padding>
-        <div flex
-             layout="row"
-             layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+            </div>
+            <file-uploader file-formats="'image/*'"
+                           validations="vm.fileValidations"
+                           allow-folders="false"
+                           max-files="1"
+                           multiple-files="false"
+                           keep="true"
+                           files-selected="vm.filesSelected(files,2)">
+            </file-uploader>
         </div>
-        <file-uploader file-formats="'image/*'"
-                       validations="vm.fileValidations"
-                       allow-folders="false"
-                       max-files="1"
-                       multiple-files="false"
-                       keep="true"
-                       files-selected="vm.filesSelected(files,2)"
-        ></file-uploader>
-    </md-card>
-
-    <md-card layout-align="center stretch"
-             layout="column"
-             ng-if="vm.request.tipo && vm.visible"
-             layout-padding>
-        <div flex
-             layout="row"
-             layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+            </div>
+            <file-uploader file-formats="'image/*'"
+                           validations="vm.fileValidations"
+                           allow-folders="false"
+                           max-files="1"
+                           multiple-files="false"
+                           keep="true"
+                           files-selected="vm.filesSelected(files,3)"
+            ></file-uploader>
         </div>
-        <file-uploader file-formats="'image/*'"
-                       validations="vm.fileValidations"
-                       allow-folders="false"
-                       max-files="1"
-                       multiple-files="false"
-                       keep="true"
-                       files-selected="vm.filesSelected(files,3)"
-        ></file-uploader>
     </md-card>
 
     <md-card layout-align="center stretch"

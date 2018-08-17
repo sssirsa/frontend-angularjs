@@ -289,7 +289,9 @@
             "DELETE_MESSAGE": "¿Seguro que desea eliminar este elemento?",
             "RESTORE_TITLE": "Confirmación de restauración",
             "RESTORE_MESSAGE": "¿Seguro que desea restaurar este elemento a un estado activo?",
-            "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?"
+            "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?",
+            "ATTENTION_TITLE": "Confirmación de Atención",
+            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?"
         }
     },
     "SUCCESS":{
