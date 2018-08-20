@@ -5,7 +5,7 @@
         .module('app.mainApp.service')
         .controller('listAtentionController', listAtentionController);
 
-    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler) {
+    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler,AttentionReportBuilder,$log) {
         var vm = this;
 
         vm.selectedKind = null;
@@ -19,8 +19,17 @@
         vm.Editing = Editing;
         vm.Cancel = Cancel;
         vm.selectRequest = selectRequest;
+        vm.Report=Report;
 
+        function Report(id) {
+           var finishReport= AttentionReportBuilder.buildReport(id);
+            finishReport.then(function (res) {
+                $log.info(res);
+            }).catch(function(err){
+                $log.error(err);
+            });
 
+        }
         function Editing(salePoint) {
             // console.log(salePoint);
             $mdDialog.show({
