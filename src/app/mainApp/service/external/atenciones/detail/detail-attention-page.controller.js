@@ -34,6 +34,7 @@
                 min: '10B'
             }
         };
+        vm.promiseLoader = null;
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
@@ -255,10 +256,10 @@
                 .ok(vm.aceptButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                atencionPV.putActualiza(vm.request.folio, data)
+                vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
                     .then(function (result) {
-                        toastr.success(Translate.translate('MAIN.SUCCESS.UPDATE'));
-                        $state.go('triangular.admin-default.serviceList');
+                        toastr.success(Translate.translate('SUCCESS.UPDATE'));
+                        $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
                     .catch(function (resultError) {
                         ErrorHandler.errortranslate(resultError);

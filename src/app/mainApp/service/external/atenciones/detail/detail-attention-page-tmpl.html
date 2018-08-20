@@ -589,7 +589,8 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch"
-             ng-if="vm.visible">
+             ng-if="vm.visible"
+             cg-busy="{promise:vm.promiseLoader,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
             <md-button
                 cg-busy="{promise:vm.savingPromise, message:''}"
                 aria-label="assign" ng-click="vm.enviar()"
