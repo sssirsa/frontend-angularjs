@@ -65,13 +65,11 @@
                     vm.user = requestSuccess.tecnico;
                     vm.store = requestSuccess.establecimiento;
                     vm.km = requestSuccess.km;
-                    console.log("Atencion", requestSuccess)
 
                     SalePointRequests.getByID(vm.id)
                         .then(function (requestSuccess2) {
                             $log.debug(requestSuccess2);
                             vm.solicitudDetalles = requestSuccess2;
-                            console.log("Solicitud", requestSuccess2)
 
                             if(vm.request.tipo == 'Medio'){
                                 insumos();
@@ -257,7 +255,6 @@
                 .ok(vm.aceptButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                console.log("Objeto final", vm.objetoAtencion);
                 atencionPV.putActualiza(vm.request.folio, data)
                     .then(function (result) {
                         toastr.success(Translate.translate('MAIN.SUCCESS.UPDATE'));
@@ -276,7 +273,6 @@
         }*/
 
         function filesSelected(files, num) {
-            console.log(files, num);
             if(num === 1) {
                 vm.evidenciaNueva = [];
                 angular.forEach(files, function (image) {
@@ -362,13 +358,11 @@
 
         function seleccion() {
             vm.todosSeleccionado = [];
-            console.log('cabinet a usar: ', cabinetTemporal);
             vm.todosSeleccionado.push(cabinetTemporal);
             vm.isUsed = true;
         }
 
         function accept() {
-            console.log('CREACION DE CABINET');
             var aux = {
                 economico: vm.cabinetSelected.economico,
                 modelo_id: vm.cabinetSelected.modelo_id,
@@ -377,7 +371,6 @@
             };
             cabinetPV.create(aux)
                 .then(function (res) {
-                    console.log(res);
                     cabinetTemporal = res;
                     ErrorHandler.succcesCreation();
                 })
@@ -419,7 +412,6 @@
 
 
         function selectCabinet(cabinet) {
-            console.log(cabinet);
             vm.isSelected = true;
             vm.marca = cabinet.modelo.marca;
             cabinetTemporal = cabinet;
