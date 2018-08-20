@@ -80,7 +80,8 @@
                                         catalog="field.catalog"
                                         pagination="field.pagination"
                                         elements="field.elements"
-                                        soft-delete="field.softDelete">
+                                        soft-delete="field.softDelete"
+                                        on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                     </section>
                     <section ng-if="!field['catalog'].requires">

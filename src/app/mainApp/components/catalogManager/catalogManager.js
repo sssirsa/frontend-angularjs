@@ -83,7 +83,6 @@
                  *                      }
                  *                  },
                  *              catalog:{                (Optional) Just used when the type of the field is catalog, in this case the component handles itself the loading of the catalog
-                 *                  requires: string,    (Optional) Field required to enable this catalog
                  *                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
                  *                  url: string,         Full or partial URL depending on the kind
                  *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
