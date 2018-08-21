@@ -124,7 +124,7 @@
             layout="column"
             layout-align="space-around center">
 
-            <div ng-if="vm.solicitudDetalles.evidencia.length>0" layout-fill>
+            <div ng-if="vm.solicitudDetalles.evidencia.length === 0" layout-fill>
 
                 <ng-image-gallery
                     images="vm.solicitudDetalles.evidencia"
@@ -205,7 +205,9 @@
             <div layout="colum" layout-align="left center" ng-if="vm.request.tipo === 'Medio'">
                 Servicio Técnico al Cabinet:&nbsp
             </div>
-            <input ng-model="vm.solicitudDetalles.cabinet" readonly>
+            <div layout="colum" layout-align="left center">
+                <input ng-model="vm.solicitudDetalles.cabinet" readonly>
+            </div>
 
         </md-input-container>
 
@@ -281,196 +283,197 @@
 
 
             </div>
-            <!--  codigo a copiar  -->
-            <div flex class="md-block" ng-if="vm.isUsed">
-                <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
-                <div ng-if="vm.todosprev.length != null" style="height: 500px">
-                    <md-toolbar>
-                        <div class="md-toolbar-tools">
-                            <h2>Cabinet seleccionado</h2>
-                            <span flex></span>
-                        </div>
-                    </md-toolbar>
-                    <md-content
-                        layout="column"
-                        layout-align="center stretch"
-                        layout-padding
-                    >
-                        <div class="virtualRepeatScroll">
-                            <md-list-item class="md-3-line" ng-repeat="item in vm.todosSeleccionado">
-                                <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                                <div class="md-list-item-text" layout="column">
-                                    <h2>Económico: {{ item.economico }}</h2>
-                                    <h3>Modelo: {{ item.modelo.nombre }}</h3>
-                                    <h4>Número de Serie: {{ item.no_serie }}</h4>
-                                    <p>Estado: {{ item.estado }}</p>
-                                </div>
-                                <md-button class="md-secondary" ng-click="vm.unUsedCabinet()">
-                                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
-                                </md-button>
-                            </md-list-item>
-                        </div>
-
-                    </md-content>
-                </div>
-            </div>
-
-
-            <div flex class="md-block" ng-if="!vm.isUsed">
-                <div>
-                    <md-toolbar>
-                        <div class="md-toolbar-tools">
-                            <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
-                            <span flex></span>
-                        </div>
-                    </md-toolbar>
-                    <md-content
-                        layout="column"
-                        layout-align="center stretch"
-                        layout-padding
-                    >
-                        <form name="newcabinetFrom">
-                            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                <md-input-container flex class="md-block">
-                                    <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
-                                    <input name="economico" required digits-only MAXLENGTH="20"
-                                           ng-model="vm.cabinetSelected.economico"
-                                           ng-disabled="vm.isSelected"/>
-                                    <div ng-messages="newcabinetFrom.serial.$error">
-                                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+            <div ng-if="vm.visible">
+                <!--  codigo a copiar  -->
+                <div flex class="md-block" ng-if="vm.isUsed">
+                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
+                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>Cabinet seleccionado</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+                            <div class="virtualRepeatScroll">
+                                <md-list-item class="md-3-line" ng-repeat="item in vm.todosSeleccionado">
+                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
+                                    <div class="md-list-item-text" layout="column">
+                                        <h2>Económico: {{ item.economico }}</h2>
+                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
+                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
+                                        <p>Estado: {{ item.estado }}</p>
                                     </div>
-                                </md-input-container>
+                                    <md-button class="md-secondary" ng-click="vm.unUsedCabinet()">
+                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </div>
 
-                                <md-input-container flex class="md-block">
-                                    <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
-                                    <input name="serial" maxlength="25"
-                                           ng-pattern="/^[a-zA-Z0-9]+$/"
-                                           required
-                                           ng-model="vm.cabinetSelected.no_serie"
-                                           ng-disabled="vm.isSelected"/>
-                                    <div ng-messages="newcabinetFrom.serial.$error">
-                                        <div ng-message="pattern">
-                                            {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                        </md-content>
+                    </div>
+                </div>
+
+
+                <div flex class="md-block" ng-if="!vm.isUsed">
+                    <div>
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+                            <form name="newcabinetFrom">
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                                        <input name="economico" required digits-only MAXLENGTH="20"
+                                               ng-model="vm.cabinetSelected.economico"
+                                               ng-disabled="vm.isSelected"/>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                                         </div>
-                                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                    </div>
-                                </md-input-container>
-                            </div>
+                                    </md-input-container>
 
-                            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                <md-input-container flex class="md-block">
-                                    <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
-                                    <md-select ng-model="vm.cabinetSelected.marca"
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                                        <input name="serial" maxlength="25"
+                                               ng-pattern="/^[a-zA-Z0-9]+$/"
                                                required
-                                               ng-change="vm.changeTrademark()"
-                                               ng-disabled="vm.isSelected">
-                                        <md-option ng-repeat="marca in vm.marcas" value="{{marca.id}}">
-                                            {{marca.descripcion}}
-                                        </md-option>
-                                    </md-select>
-                                    <div ng-messages="newcabinetFrom.serial.$error">
-                                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                    </div>
-                                </md-input-container>
-
-                                <md-input-container flex class="md-block">
-                                    <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
-                                    <md-select ng-model="vm.cabinetSelected.modelo_id"
-                                               required
-                                               ng-disabled="!vm.modelos || vm.isSelected">
-                                        <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">
-                                            {{modelo.nombre}}
-                                        </md-option>
-                                    </md-select>
-                                    <div ng-messages="newcabinetFrom.serial.$error">
-                                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                    </div>
-                                </md-input-container>
-                            </div>
-
-                            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                <md-input-container flex class="md-block">
-                                    <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
-                                    <input name="antiguedad"
-                                           maxlength="1"
-                                           only-text
-                                           ng-model="vm.cabinetSelected.antiguedad"
-                                           ng-disabled="vm.isSelected"/>
-                                </md-input-container>
-                            </div>
-                        </form>
-
-                        <md-actions
-                            layout="row"
-                            layout-align="end center">
-                            <md-button
-                                ng-click="vm.accept()"
-                                class="md-primary md-raised"
-                                ng-if="!vm.isSelected">
-                                <md-icon md-font-icon="fa fa-plus"></md-icon>
-                                {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}
-                            </md-button>
-                            <md-button
-                                ng-click="vm.seleccion()"
-                                class="md-primary md-raised"
-                                ng-if="vm.isSelected">
-                                <md-icon md-font-icon="fa fa-plus"></md-icon>
-                                Usar cabinet
-                            </md-button>
-                            <md-button
-                                ng-click="vm.cleanForm()"
-                                class="md-primary md-raised">
-                                Limpiar campos
-                            </md-button>
-                        </md-actions>
-                    </md-content>
-                </div>
-            </div>
-
-            <div flex class="md-block" ng-if="!vm.isUsed">
-                <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
-                <div ng-if="vm.todosprev.length != null" style="height: 500px">
-                    <md-toolbar>
-                        <div class="md-toolbar-tools">
-                            <h2>{{'MAIN.MENU.PREREQUESTS.LISTPV'|translate}}</h2>
-                            <span flex></span>
-                        </div>
-                    </md-toolbar>
-                    <md-content
-                        layout="column"
-                        layout-align="center stretch"
-                        layout-padding
-                    >
-
-                        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="vm.todosprev.length>1">
-                            <md-input-container
-                                flex="80"
-                                class="md-block">
-                                <input
-                                    placeholder="Búsqueda por economico"
-                                    ng-model="vm.searchText"
-                                    ng-change="vm.filterCabinets()">
-                            </md-input-container>
-
-                        </div>
-
-                        <div class="virtualRepeatScroll">
-                            <md-list-item class="md-3-line" ng-repeat="item in vm.todos" ng-click="vm.selectCabinet(item)">
-                                <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                                <div class="md-list-item-text" layout="column">
-                                    <h2>Económico: {{ item.economico }}</h2>
-                                    <h3>Modelo: {{ item.modelo.nombre }}</h3>
-                                    <h4>Número de Serie: {{ item.no_serie }}</h4>
-                                    <p>Estado: {{ item.estado }}</p>
+                                               ng-model="vm.cabinetSelected.no_serie"
+                                               ng-disabled="vm.isSelected"/>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="pattern">
+                                                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                                            </div>
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
                                 </div>
-                            </md-list-item>
-                        </div>
 
-                    </md-content>
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
+                                        <md-select ng-model="vm.cabinetSelected.marca"
+                                                   required
+                                                   ng-change="vm.changeTrademark()"
+                                                   ng-disabled="vm.isSelected">
+                                            <md-option ng-repeat="marca in vm.marcas" value="{{marca.id}}">
+                                                {{marca.descripcion}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
+                                        <md-select ng-model="vm.cabinetSelected.modelo_id"
+                                                   required
+                                                   ng-disabled="!vm.modelos || vm.isSelected">
+                                            <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">
+                                                {{modelo.nombre}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
+                                        <input name="antiguedad"
+                                               maxlength="1"
+                                               only-text
+                                               ng-model="vm.cabinetSelected.antiguedad"
+                                               ng-disabled="vm.isSelected"/>
+                                    </md-input-container>
+                                </div>
+                            </form>
+
+                            <md-actions
+                                layout="row"
+                                layout-align="end center">
+                                <md-button
+                                    ng-click="vm.accept()"
+                                    class="md-primary md-raised"
+                                    ng-if="!vm.isSelected">
+                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                                    {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}
+                                </md-button>
+                                <md-button
+                                    ng-click="vm.seleccion()"
+                                    class="md-primary md-raised"
+                                    ng-if="vm.isSelected">
+                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                                    Usar cabinet
+                                </md-button>
+                                <md-button
+                                    ng-click="vm.cleanForm()"
+                                    class="md-primary md-raised">
+                                    Limpiar campos
+                                </md-button>
+                            </md-actions>
+                        </md-content>
+                    </div>
                 </div>
-            </div>
-            <!--  codigo a copiar  -->
 
+                <div flex class="md-block" ng-if="!vm.isUsed">
+                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
+                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>{{'MAIN.MENU.PREREQUESTS.LISTPV'|translate}}</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+
+                            <div layout="row" layout-align="space-around center" layout-padding="" ng-if="vm.todosprev.length>1">
+                                <md-input-container
+                                    flex="80"
+                                    class="md-block">
+                                    <input
+                                        placeholder="Búsqueda por economico"
+                                        ng-model="vm.searchText"
+                                        ng-change="vm.filterCabinets()">
+                                </md-input-container>
+
+                            </div>
+
+                            <div class="virtualRepeatScroll">
+                                <md-list-item class="md-3-line" ng-repeat="item in vm.todos" ng-click="vm.selectCabinet(item)">
+                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
+                                    <div class="md-list-item-text" layout="column">
+                                        <h2>Económico: {{ item.economico }}</h2>
+                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
+                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
+                                        <p>Estado: {{ item.estado }}</p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+                        </md-content>
+                    </div>
+                </div>
+                <!--  codigo a copiar  -->
+            </div>
         </div>
 
     </md-card>
@@ -586,7 +589,8 @@
              layout-xs="column"
              layout-align-sm="start stretch"
              layout-align-xs="start stretch"
-             ng-if="vm.visible">
+             ng-if="vm.visible"
+             cg-busy="{promise:vm.promiseLoader,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
             <md-button
                 cg-busy="{promise:vm.savingPromise, message:''}"
                 aria-label="assign" ng-click="vm.enviar()"

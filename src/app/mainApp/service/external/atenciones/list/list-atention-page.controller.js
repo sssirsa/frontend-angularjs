@@ -6,6 +6,7 @@
         .controller('listAtentionController', listAtentionController);
 
     function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler,AttentionReportBuilder,$log) {
+    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler, $stateParams) {
         var vm = this;
 
         vm.selectedKind = null;
@@ -28,6 +29,21 @@
             }).catch(function(err){
                 $log.error(err);
             });
+        init();
+
+        function init() {
+            if ($stateParams.runListPendientes !== null) {
+                vm.selectedKind = 'pending';
+                changeSelected();
+            }
+            else {
+                if ($stateParams.runListTodos !== null) {
+                    vm.selectedKind = 'all';
+                    changeSelected();
+                }
+            }
+        }
+
 
         }
         function Editing(salePoint) {

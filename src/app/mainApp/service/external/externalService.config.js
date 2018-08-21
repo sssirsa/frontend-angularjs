@@ -27,9 +27,6 @@
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller: 'detalleAsignacionController',
                 controllerAs: 'vm',
-                params: {
-                    id: null
-                }
             })
             .state('triangular.admin-default.serviceList', {
                 url: '/listarServicios',
@@ -40,7 +37,11 @@
                 },
                 templateUrl: 'app/mainApp/service/external/atenciones/list/list-atention-page.tmpl.html',
                 controller: 'listAtentionController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                params: {
+                    runListPendientes: null,
+                    runListTodos: null
+                }
             })
             .state('triangular.admin-default.newRequest', {
                 url: '/request/new',

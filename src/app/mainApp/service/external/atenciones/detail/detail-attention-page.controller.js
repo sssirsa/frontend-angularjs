@@ -16,7 +16,6 @@
         vm.kindAtention = $stateParams.tipo;
 
         vm.statusNew = "Atendida";
-        vm.cancelacion = false;
         vm.user = null;
         vm.request = null;
         vm.solicitudDetalles = null;
@@ -35,19 +34,7 @@
                 min: '10B'
             }
         };
-
-        vm.objetoAtencion = [{
-            cabinets: [],
-            descripcion_trabajo: "",
-            observaciones_cliente: "",
-            observaciones_tecnicas: "",
-            km: "",
-            firma_cliente: [],
-            firma_prospectador: [],
-            insumos: [],
-            insumos_lote: [],
-            calificacion: 0
-        }];
+        vm.promiseLoader = null;
 
         //Constants declaration
         vm.storeSegmentation = STORE_SEGMENTATION;
@@ -78,6 +65,7 @@
                     vm.request = requestSuccess;
                     vm.user = requestSuccess.tecnico;
                     vm.store = requestSuccess.establecimiento;
+                    vm.km = requestSuccess.km;
 
                     SalePointRequests.getByID(vm.id)
                         .then(function (requestSuccess2) {
@@ -166,75 +154,101 @@
         }
 
         function enviar(){
-
-            if(vm.evidenciaNueva.length === 0 || vm.km === null){
-
-                if(vm.evidenciaNueva.length === 0){
-                    toastr.error(Translate.translate('Se requiere de al menos una evidencia'));
-                }
-
-                if(vm.km === null){
-                    toastr.error(Translate.translate('El campo de km es requerido'));
-                }
-
-            }else {
+            if(validar()){
                 vm.insumosUsados = [];
 
                 if (vm.improductivo === true) {
-                    angular.forEach(vm.insumos.results, function (valor) {
-                        if (valor.check === true) {
-                            if (valor.usado > valor.insumoMax) {
-                                valor.usado = valor.insumoMax;
+                    var economico = [];
+
+                    if(vm.request.tipo === "Medio"){
+                        angular.forEach(vm.insumos.results, function (valor) {
+                            if (valor.check === true) {
+                                if (valor.usado > valor.insumoMax) {
+                                    valor.usado = valor.insumoMax;
+                                }
+
+                                var aux = {
+                                    catalogo_insumos: valor.id,
+                                    cantidad: valor.usado
+                                };
+
+                                vm.insumosUsados.push(aux);
                             }
+                        });
 
-                            var aux = {
-                                catalogo_insumos: valor.id,
-                                cantidad: valor.usado
-                            };
+                        economico.push(vm.solicitudDetalles.cabinet);
+                    }else{
+                        economico.push(vm.todosSeleccionado[0].economico);
+                    }
 
-                            vm.insumosUsados.push(aux);
-                        }
-                    });
+                    if(vm.request.observaciones_cliente === null){
+                        vm.request.observaciones_cliente = "";
+                    }
+
+                    if(vm.request.observaciones_tecnico === null){
+                        vm.request.observaciones_tecnico = "";
+                    }
+
+                    if(vm.request.calificacion === null){
+                        vm.request.calificacion = 0;
+                    }
+
+                    //aqui estaba el objeto a enviar
+                    vm.objetoAtencion = {
+                        cabinets: economico,
+                        descripcion_trabajo: vm.request.tipo,
+                        observaciones_cliente: vm.request.observaciones_cliente,
+                        observaciones_tecnicas: vm.request.observaciones_tecnico,
+                        km: vm.km,
+                        firma_cliente: vm.firmaC,
+                        firma_prospectador: vm.firmaT,
+                        insumos: [],
+                        insumos_lote: vm.insumosUsados,
+                        evidencia: vm.evidenciaNueva,
+                        calificacion: vm.request.calificacion,
+                        //status: vm.statusNew,
+                        cancelacion: false
+                    };
+
+                    confirmacion(vm.objetoAtencion);
                 }else{
-                    vm.statusNew = "Improductiva";
-                    vm.cancelacion = true;
-
                     vm.objetoAtencion = {
                         cancelacion: true,
                         km: vm.km
                     };
+
+                    confirmacion(vm.objetoAtencion);
                 }
-
-                var economico = [];
-                if (vm.todosSeleccionado.length === 0) {
-                    economico.push(vm.solicitudDetalles.cabinet);
-                } else {
-                    economico.push(vm.todosSeleccionado[0].economico);
-                }
-
-                vm.objetoAtencion = {
-                    cabinets: economico,
-                    descripcion_trabajo: vm.request.tipo,
-                    observaciones_cliente: vm.request.observaciones_cliente,
-                    observaciones_tecnicas: vm.request.observaciones_tecnico,
-                    km: vm.km,
-                    firma_cliente: vm.firmaC,
-                    firma_prospectador: vm.firmaT,
-                    insumos: [],
-                    insumos_lote: vm.insumosUsados,
-                    evidencia: vm.evidenciaNueva,
-                    calificacion: vm.request.calificacion,
-                    //status: vm.statusNew,
-                    cancelacion: vm.cancelacion
-                };
-
-                confirmacion();
-
             }
-
         }
 
-        function confirmacion() {
+        function validar(){
+            var cont = 0;
+            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio" ){
+                if (vm.todosSeleccionado.length === 0) {
+                    toastr.error(Translate.translate('Seleccione un cabinet'));
+                    cont++;
+                }
+            }
+
+            if(vm.evidenciaNueva.length === 0){
+                toastr.error(Translate.translate('Se requiere de al menos una evidencia'));
+                cont++;
+            }
+
+            if(vm.km === null){
+                toastr.error(Translate.translate('El campo de km es requerido'));
+                cont++;
+            }
+
+            if(cont === 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function confirmacion(data) {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
                 .textContent(vm.dialogRestoreMessage)
@@ -242,10 +256,10 @@
                 .ok(vm.aceptButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                console.log("Objeto final", vm.objetoAtencion);
-                atencionPV.putActualiza(vm.request.folio, vm.objetoAtencion)
+                vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
                     .then(function (result) {
-                        toastr.success(result);
+                        toastr.success(Translate.translate('SUCCESS.UPDATE'));
+                        $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
                     .catch(function (resultError) {
                         ErrorHandler.errortranslate(resultError);
@@ -260,7 +274,6 @@
         }*/
 
         function filesSelected(files, num) {
-            console.log(files, num);
             if(num === 1) {
                 vm.evidenciaNueva = [];
                 angular.forEach(files, function (image) {
@@ -346,13 +359,11 @@
 
         function seleccion() {
             vm.todosSeleccionado = [];
-            console.log('cabinet a usar: ', cabinetTemporal);
             vm.todosSeleccionado.push(cabinetTemporal);
             vm.isUsed = true;
         }
 
         function accept() {
-            console.log('CREACION DE CABINET');
             var aux = {
                 economico: vm.cabinetSelected.economico,
                 modelo_id: vm.cabinetSelected.modelo_id,
@@ -361,7 +372,6 @@
             };
             cabinetPV.create(aux)
                 .then(function (res) {
-                    console.log(res);
                     cabinetTemporal = res;
                     ErrorHandler.succcesCreation();
                 })
@@ -403,7 +413,6 @@
 
 
         function selectCabinet(cabinet) {
-            console.log(cabinet);
             vm.isSelected = true;
             vm.marca = cabinet.modelo.marca;
             cabinetTemporal = cabinet;
