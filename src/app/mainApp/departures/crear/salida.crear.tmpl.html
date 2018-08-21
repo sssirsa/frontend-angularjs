@@ -56,20 +56,25 @@
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                      layout-align-sm="center stretch" layout-align-xs="center stretch">
-
-                                    <md-input-container flex="100" class="md-block">
-                                        <label>{{'OUTPUT.FORM.LABEL.SUBSIDIARY'|translate}}</label>
-                                        <md-select name="selectSubsidiary" ng-model="vm.salida.sucursal" required=""
-                                                   ng-disabled="vm.sucursal!=null"
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="sucursal in vm.Sucursales" ng-value="sucursal.id">
-                                                {{sucursal.nombre}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectSubsidiary.$error">
-                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
-                                        </div>
-                                    </md-input-container>
+                                    <catalog-select catalog="vm.catalogues['sucursal'].catalog"
+                                                    pagination="vm.catalogues['sucursal'].pagination"
+                                                    elements="vm.catalogues['sucursal'].elements"
+                                                    soft-delete="vm.catalogues['sucursal'].softDelete"
+                                                    on-select="vm.onElementSelect(element,'sucursal')">
+                                    </catalog-select>
+                                    <!--<md-input-container flex="100" class="md-block">
+        <label>{{'OUTPUT.FORM.LABEL.SUBSIDIARY'|translate}}</label>
+        <md-select name="selectSubsidiary" ng-model="vm.salida.sucursal" required=""
+                   ng-disabled="vm.sucursal!=null"
+                   md-no-asterisk="">
+            <md-option ng-repeat="sucursal in vm.Sucursales" ng-value="sucursal.id">
+                {{sucursal.nombre}}
+            </md-option>
+        </md-select>
+        <div ng-messages="entradaForm.selectSubsidiary.$error">
+            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
+        </div>
+    </md-input-container>-->
                                     <md-input-container flex="100" class="md-inline-form">
                                         <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.LINE'|translate}}</label>
                                         <md-select name="selectTransportLine" ng-model="vm.salida.linea_transporte"
