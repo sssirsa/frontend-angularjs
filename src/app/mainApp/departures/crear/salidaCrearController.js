@@ -24,7 +24,7 @@
         udn,
         Cabinet,
         CabinetEntradaSalida,
-        TipoTransporte,
+        //TipoTransporte,
         $scope,
         //LineaTransporte,
         URLS,
@@ -351,12 +351,12 @@
             //}).catch(function (err) {
             //    toastr.error(vm.errorMessage, vm.errorTitle);
             //});
-            TipoTransporte.listObject().then(function (res) {
-                vm.tiposTransporte = Helper.filterDeleted(res, true);
-                vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
-            }).catch(function (err) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
+            //TipoTransporte.listObject().then(function (res) {
+            //    vm.tiposTransporte = Helper.filterDeleted(res, true);
+            //    vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
+            //}).catch(function (err) {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
             //Sucursal.listObject().then(function (res) {
             //    vm.Sucursales = Helper.filterDeleted(res, true);
             //    vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
