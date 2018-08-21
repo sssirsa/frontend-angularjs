@@ -26,7 +26,7 @@
             return urlbase.all(id).customGET();
         }
         function list(limit, offset){
-            if(limit.isDefined && offset.isDefined){
+            if(limit !== undefined && offset !== undefined){
                 return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
             }
             else {
