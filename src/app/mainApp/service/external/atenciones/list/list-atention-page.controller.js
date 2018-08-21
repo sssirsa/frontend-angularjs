@@ -21,8 +21,9 @@
         vm.selectRequest = selectRequest;
         vm.Report = Report;
 
-        function Report(id) {
-            var finishReport = AttentionReportBuilder.buildReport(id);
+        function Report(salepoint) {
+            console.log(salepoint)
+            var finishReport = AttentionReportBuilder.buildReport(salepoint.folio);
             finishReport.then(function (res) {
                 $log.info(res);
             }).catch(function (err) {

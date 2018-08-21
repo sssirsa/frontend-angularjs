@@ -221,6 +221,17 @@
                             </div>
                         </div>
                     </md-content>
+                    <md-content ng-if="vm.selectedKind == 'all' ">
+                        <div flex="100" layout="column" layout-align="end end">
+                            <div>
+                                <md-button aria-label="fab button"
+                                           ng-click="$event.stopPropagation(); vm.Report(salePoint)"
+                                           class="md-raised md-warn">
+                                    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-content>
                     <md-content ng-if="vm.selectedKind == 'pending' ">
                         <div flex="100" layout="column" layout-align="end end">
                             <div>
@@ -244,16 +255,7 @@
                             </div>
                         </div>
                     </md-content>
-                    <md-content ng-if="vm.selectedKind == 'all' ">
-                        <div flex="100" layout="column" layout-align="end end">
-                            <div>
-                                <md-button aria-label="fab button"
-                                           ng-click="$event.stopPropagation(); vm.Report(salePoint)"
-                                           class="md-raised md-warn">
-                                    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
-                                </md-button>
-                            </div>
-                    </md-content>
+
                 </div>
             </md-card>
 
