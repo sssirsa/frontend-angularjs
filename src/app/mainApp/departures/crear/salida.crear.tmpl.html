@@ -56,7 +56,8 @@
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                      layout-align-sm="center stretch" layout-align-xs="center stretch">
-                                    <catalog-select catalog="vm.catalogues['sucursal'].catalog"
+                                    <catalog-select class="full-width"
+                                                    catalog="vm.catalogues['sucursal'].catalog"
                                                     pagination="vm.catalogues['sucursal'].pagination"
                                                     elements="vm.catalogues['sucursal'].elements"
                                                     soft-delete="vm.catalogues['sucursal'].softDelete"
@@ -75,7 +76,15 @@
             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
         </div>
     </md-input-container>-->
-                                    <md-input-container flex="100" class="md-inline-form">
+
+                                    <catalog-select class="full-width"
+                                                    catalog="vm.catalogues['linea_transporte'].catalog"
+                                                    pagination="vm.catalogues['linea_transporte'].pagination"
+                                                    elements="vm.catalogues['linea_transporte'].elements"
+                                                    soft-delete="vm.catalogues['linea_transporte'].softDelete"
+                                                    on-select="vm.onElementSelect(element,'linea_transporte')">
+                                    </catalog-select>
+                                    <!--<md-input-container flex="100" class="md-inline-form">
                                         <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.LINE'|translate}}</label>
                                         <md-select name="selectTransportLine" ng-model="vm.salida.linea_transporte"
                                                    required="" md-no-asterisk="">
@@ -86,7 +95,7 @@
                                         <div ng-messages="entradaForm.selectTransportLine.$error">
                                             <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
                                         </div>
-                                    </md-input-container>
+                                    </md-input-container>-->
 
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"

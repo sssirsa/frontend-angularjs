@@ -1,28 +1,28 @@
-<md-content cg-busy="{ promise:$ctrl.listLoader, message:' ' }">
-    <md-input-container class="md-block">
-        <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
-        <label ng-if="!$ctrl.catalog.name">Catalog</label>
-        <md-select ng-model="$ctrl.selectedElement"
-                   md-on-close="$ctrl.onClose()">
-            <md-option ng-repeat="element in $ctrl.catalogElements" ng-value="element[$ctrl.catalog.model]">
-                <section ng-if="$ctrl.catalog.option">
-                    {{element[$ctrl.catalog.option]}}
-                </section>
-                <section ng-if="!$ctrl.catalog.option">
-                    {{element[$ctrl.catalog.model]}}
-                </section>
-            </md-option>
-            <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
-                       ng-if="$ctrl.paginationHelper['next']"
-                       ng-click="$ctrl.loadMore()"
-                       aria-label="{{$ctrl.loadMoreButtonText}}"
-                       class="md-primary md-raised">
-                <div layout="row" layout-align="center center">
-                    <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-                    <div ng-if="$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.catalog.loadMoreButtonText}}</div>
-                    <div ng-if="!$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>Load more</div>
-                </div>
-            </md-button>
-        </md-select>
-    </md-input-container>
-</md-content>
+<md-input-container flex
+                    class="md-block full-width"
+                    cg-busy="{ promise:$ctrl.listLoader, message:' ' }">
+    <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
+    <label ng-if="!$ctrl.catalog.name">Catalog</label>
+    <md-select ng-model="$ctrl.selectedElement"
+               md-on-close="$ctrl.onClose()">
+        <md-option ng-repeat="element in $ctrl.catalogElements" ng-value="element[$ctrl.catalog.model]">
+            <section ng-if="$ctrl.catalog.option">
+                {{element[$ctrl.catalog.option]}}
+            </section>
+            <section ng-if="!$ctrl.catalog.option">
+                {{element[$ctrl.catalog.model]}}
+            </section>
+        </md-option>
+        <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
+                   ng-if="$ctrl.paginationHelper['next']"
+                   ng-click="$ctrl.loadMore()"
+                   aria-label="{{$ctrl.loadMoreButtonText}}"
+                   class="md-primary md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+                <div ng-if="$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.catalog.loadMoreButtonText}}</div>
+                <div ng-if="!$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>Load more</div>
+            </div>
+        </md-button>
+    </md-select>
+</md-input-container>
