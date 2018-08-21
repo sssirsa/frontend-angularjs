@@ -397,7 +397,7 @@
             ],
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
-                {id: 'all', value: 'Todas'}
+                {id: 'all', value: 'Detalle de atanción'}
             ],
             requestKinds: [
                 {
