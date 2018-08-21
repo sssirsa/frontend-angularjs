@@ -63,7 +63,8 @@
                     <div layout="row"
                          layout-align="space-around center"
                          layout-padding
-                         layout-wrap>
+                         layout-wrap
+                         ng-click="$ctrl.elementSelection(element)">
                         <!-- Repeat per each field specified in the actions parameter -->
                         <div layout="column"
                              layout-align="center center"
@@ -145,7 +146,7 @@
                     <section layout="row"
                              layout-align="space-between center"
                              ng-if="$ctrl.actions['LIST'].mode==='paged'"
-                 cg-busy="{promise:$ctrl.pageLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+                             cg-busy="{promise:$ctrl.pageLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Previous page button -->
                         <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
                                    ng-click="$ctrl.previousPage()"
@@ -173,7 +174,7 @@
                     <section layout="column"
                              layout-align="center center"
                              ng-if="$ctrl.actions['LIST'].mode==='infinite'"
-                 cg-busy="{promise:$ctrl.infiniteLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+                             cg-busy="{promise:$ctrl.infiniteLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Load more results button -->
                         <md-button ng-if="$ctrl.paginationHelper['next']"
                                    ng-click="$ctrl.loadMore()"

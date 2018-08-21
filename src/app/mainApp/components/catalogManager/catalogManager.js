@@ -25,6 +25,7 @@
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
                 onErrorDelete: '&',
+                onElementSelect:'&',
 
                 //Buttons, if no text is given, the button would only have an icon
                 searchButtonText: '<',
@@ -285,6 +286,7 @@
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
         vm.loadMore = loadMore;
+        vm.elementSelection = elementSelection;
 
         function activate() {
             list();
@@ -663,6 +665,10 @@
             else {
                 vm.onErrorList({ error: 'No next page URL found' });
             }
+        }
+
+        function elementSelection(element) {
+            vm.onElementSelect({ element: element });
         }
 
         //Soft-Delete dynamic filtering function
