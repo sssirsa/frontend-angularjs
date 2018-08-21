@@ -289,9 +289,19 @@
                                      layout-align-xs="center stretch">
                                     <md-input-container class="md-inline-form" flex="50" flex-sm="100" flex-xs="100">
                                         <label>{{'OUTPUT.FORM.PLACEHOLDER.SEARCH'|translate}}</label>
-                                        <input type="text" ng-model="vm.economicoFilter" ng-change="vm.lookupByEconomico()" />
+                                        <input type="text"
+                                               ng-model="vm.economicoFilter"
+                                               ng-change="vm.lookupByEconomico()" />
                                     </md-input-container>
-                                    <md-input-container class="md-inline-form md-block" id="salidaSelect" flex="50" flex-sm="100"
+
+                                    <catalog-select class="full-width"
+                                                    catalog="vm.catalogues['tipo_equipo'].catalog"
+                                                    pagination="vm.catalogues['tipo_equipo'].pagination"
+                                                    elements="vm.catalogues['tipo_equipo'].elements"
+                                                    soft-delete="vm.catalogues['tipo_equipo'].softDelete"
+                                                    on-select="vm.onEquipmentKindSelect(element)">
+                                    </catalog-select>
+                                    <!--<md-input-container class="md-inline-form md-block" id="salidaSelect" flex="50" flex-sm="100"
                                                         flex-xs="100">
                                         <md-select ng-model="vm.filtroTipo"
                                                    placeholder="{{'OUTPUT.FORM.PLACEHOLDER.TYPE_EQUIPMENT'|translate}}">
@@ -300,7 +310,7 @@
                                                 {{tipo.nombre}}
                                             </md-option>
                                         </md-select>
-                                    </md-input-container>
+                                    </md-input-container>-->
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-md="column" flex="100"
                                      layout-align="center center">

@@ -16,7 +16,7 @@
         ModeloCabinet,
         Persona,
         $mdDialog,
-        TipoEquipo,
+        //TipoEquipo,
         Helper,
         Translate,
         toastr,
@@ -48,6 +48,7 @@
         //vm.selectedItemChange = selectedItemChange;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
+        vm.onEquipmentKindSelect = onEquipmentKindSelect;
 
 
         activate();
@@ -139,6 +140,25 @@
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'agencia'
+                },
+                pagination: {
+                    total: PAGINATION.total,
+                    next: PAGINATION.next
+                },
+                elements: PAGINATION.elements,
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            tipo_equipo: {
+                catalog: {
+                    url: URLS.tipo_equipo,
+                    kind: 'Web',
+                    name: Translate.translate('OUTPUT.FORM.PLACEHOLDER.TYPE_EQUIPMENT'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
                 },
                 pagination: {
                     total: PAGINATION.total,
@@ -392,12 +412,12 @@
             ModeloCabinet.listWitout().then(function (res) {
                 vm.modelos = Helper.filterDeleted(res, true);
             });
-            TipoEquipo.listWitout().then(function (res) {
-                vm.tipoEquipos = res;
-                vm.tipoEquipos = _.sortBy(vm.tipoEquipos, 'nombre');
-            }).catch(function (err) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
+            //TipoEquipo.listWitout().then(function (res) {
+            //    vm.tipoEquipos = res;
+            //    vm.tipoEquipos = _.sortBy(vm.tipoEquipos, 'nombre');
+            //}).catch(function (err) {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
             Clientes.listObject().then(function (res) {
                 vm.clients = res;
                 vm.clients = _.sortBy(vm.clients, 'nombre');
@@ -515,6 +535,9 @@
             vm.salida[field.model] = files;
         }
 
+        function onEquipmentKindSelect(element) {
+            vm.filtroEquipo = element;
+        }
 
     }
 
