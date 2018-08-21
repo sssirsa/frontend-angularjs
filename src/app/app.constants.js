@@ -610,6 +610,7 @@
         .constant('PAGINATION', {
             total: 'count',
             next: 'next',
-            previous: 'previous'
+            previous: 'previous',
+            elements: 'results'
         });
 })();
