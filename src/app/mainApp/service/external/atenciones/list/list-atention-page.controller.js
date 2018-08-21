@@ -23,12 +23,8 @@
 
         function Report(salepoint) {
             console.log(salepoint)
-            var finishReport = AttentionReportBuilder.buildReport(salepoint.folio);
-            finishReport.then(function (res) {
-                $log.info(res);
-            }).catch(function (err) {
-                $log.error(err);
-            });
+            AttentionReportBuilder.buildReport(salepoint.folio);
+
 
         }
 

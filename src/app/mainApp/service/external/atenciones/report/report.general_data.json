@@ -131,8 +131,7 @@
                     },
                     {
                         "text": "SCORE",
-                        "bold": true,
-                        "fontSize": 20
+                        "bold": true
                     }
                 ]
             }
