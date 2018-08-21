@@ -27,10 +27,18 @@
                                 </div>
                                 <div layout-gt-md="row" layout="column" layout-align-gt-md="center center"
                                      layout-align="center stretch">
-                                    <div flex="100" class="md-inline-form">
+                                    <catalog-select class="full-width"
+                                                    catalog="vm.catalogues['udn'].catalog"
+                                                    pagination="vm.catalogues['udn'].pagination"
+                                                    elements="vm.catalogues['udn'].elements"
+                                                    soft-delete="vm.catalogues['udn'].softDelete"
+                                                    on-select="vm.onElementSelect(element,'udn')">
+                                    </catalog-select>
+                                    <!--<div flex="100" class="md-inline-form">
                                         <md-autocomplete md-selected-item="vm.salida.udn"
                                                          md-selected-item-change="vm.selectedItemChange(vm.salida.udn)"
-                                                         md-items="item in vm.search_items" md-item-text="item.agencia"
+                                                         md-items="item in vm.search_items"
+                                                         md-item-text="item.agencia"
                                                          md-min-length="0"
                                                          md-input-name="selectUDN"
                                                          md-search-text-change="vm.lookupUDN(vm.searchText)"
@@ -56,7 +64,7 @@
                                             </div>
                                         </md-autocomplete>
 
-                                    </div>
+                                    </div>-->
 
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"

@@ -21,7 +21,7 @@
         Translate,
         toastr,
         //Sucursal,
-        udn,
+        //udn,
         Cabinet,
         CabinetEntradaSalida,
         //TipoTransporte,
@@ -43,9 +43,9 @@
         vm.lookupByEconomico = lookupByEconomico;
         vm.clear = clear;
         vm.search = search;
-        vm.lookupUDN = lookupUDN;
+        //vm.lookupUDN = lookupUDN;
         vm.changeType = changeType;
-        vm.selectedItemChange = selectedItemChange;
+        //vm.selectedItemChange = selectedItemChange;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
 
@@ -120,6 +120,25 @@
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'descripcion'
+                },
+                pagination: {
+                    total: PAGINATION.total,
+                    next: PAGINATION.next
+                },
+                elements: PAGINATION.elements,
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            udn: {
+                catalog: {
+                    url: URLS.udn,
+                    kind: 'Web',
+                    name: Translate.translate('OUTPUT.FORM.LABEL.UDN'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'agencia'
                 },
                 pagination: {
                     total: PAGINATION.total,
@@ -323,9 +342,9 @@
             }
         }
 
-        function selectedItemChange(item) {
-            vm.isValid = angular.isObject(item);
-        }
+        //function selectedItemChange(item) {
+        //    vm.isValid = angular.isObject(item);
+        //}
 
         function selectionFile($files) {
             if ($files.length > 0) {
@@ -363,13 +382,13 @@
             //}).catch(function (err) {
             //    toastr.error(vm.errorMessage, vm.errorTitle);
             //});
+            //udn.listObject().then(function (res) {
+            //    vm.udns = Helper.filterDeleted(res, true);
+            //    vm.udns = _.sortBy(vm.udns, 'agencia');
+            //}).catch(function (err) {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
 
-            udn.listObject().then(function (res) {
-                vm.udns = Helper.filterDeleted(res, true);
-                vm.udns = _.sortBy(vm.udns, 'agencia');
-            }).catch(function (err) {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
             ModeloCabinet.listWitout().then(function (res) {
                 vm.modelos = Helper.filterDeleted(res, true);
             });
@@ -466,17 +485,17 @@
             }
         }
 
-        function lookupUDN(search_text) {
-            if (!angular.isUndefined(search_text)) {
-                vm.search_items = _.filter(vm.udns, function (item) {
-                    return item.zona.toLowerCase().includes(search_text.toLowerCase()) || item.agencia.toLowerCase().includes(search_text.toLowerCase());
-                });
+        //function lookupUDN(search_text) {
+        //    if (!angular.isUndefined(search_text)) {
+        //        vm.search_items = _.filter(vm.udns, function (item) {
+        //            return item.zona.toLowerCase().includes(search_text.toLowerCase()) || item.agencia.toLowerCase().includes(search_text.toLowerCase());
+        //        });
 
-                vm.isValid = !((vm.search_items.length == 0 && search_text.length > 0) || (search_text.length > 0 && !angular.isObject(vm.salida.udn)));
-                return vm.search_items;
-            }
+        //        vm.isValid = !((vm.search_items.length == 0 && search_text.length > 0) || (search_text.length > 0 && !angular.isObject(vm.salida.udn)));
+        //        return vm.search_items;
+        //    }
 
-        }
+        //}
 
 
         function nextTab() {
