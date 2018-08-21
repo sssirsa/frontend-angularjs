@@ -5,8 +5,7 @@
         .module('app.mainApp.service')
         .controller('listAtentionController', listAtentionController);
 
-    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler,AttentionReportBuilder,$log) {
-    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler, $stateParams) {
+    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler, AttentionReportBuilder, $log, $stateParams) {
         var vm = this;
 
         vm.selectedKind = null;
@@ -20,15 +19,18 @@
         vm.Editing = Editing;
         vm.Cancel = Cancel;
         vm.selectRequest = selectRequest;
-        vm.Report=Report;
+        vm.Report = Report;
 
         function Report(id) {
-           var finishReport= AttentionReportBuilder.buildReport(id);
+            var finishReport = AttentionReportBuilder.buildReport(id);
             finishReport.then(function (res) {
                 $log.info(res);
-            }).catch(function(err){
+            }).catch(function (err) {
                 $log.error(err);
             });
+
+        }
+
         init();
 
         function init() {
@@ -44,8 +46,6 @@
             }
         }
 
-
-        }
         function Editing(salePoint) {
             // console.log(salePoint);
             $mdDialog.show({
@@ -72,7 +72,7 @@
         }
 
         function Cancel(salePoint) {
-            var aux = {cancelacion: true, km:'0'};
+            var aux = {cancelacion: true, km: '0'};
 
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
@@ -116,7 +116,7 @@
                 vm.objectAtention = null;
                 switch (vm.selectedKind) {
                     case 'pending':
-                        vm.loadingPromise = SalePoint.listAsignedService('20',vm.offset)
+                        vm.loadingPromise = SalePoint.listAsignedService('20', vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -131,7 +131,7 @@
                             });
                         break;
                     case 'all':
-                        vm.loadingPromise = SalePoint.listAllServices('20',vm.offset)
+                        vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -165,7 +165,7 @@
         }
 
         function selectRequest(request) {
-            $state.go('triangular.admin-default.attentionDetail', {id: request, tipo: vm.selectedKind });
+            $state.go('triangular.admin-default.attentionDetail', {id: request, tipo: vm.selectedKind});
         }
 
     }
