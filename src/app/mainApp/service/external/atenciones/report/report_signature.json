@@ -1,0 +1,35 @@
+{
+    "SIGNATURE_SAPACE": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Firma Técnico:",
+                        "width": 100,
+                        "style": "storeName"
+                    },
+                    {
+                        "image": "data:image/png;base64,",
+                        "fit": [
+                            100,
+                            100
+                        ]
+                    },
+                    {
+                        "text": "Firma Cliente:",
+                        "width": 100,
+                        "style": "storeName"
+                    },
+                    {
+                        "image": "data:image/png;base64,",
+                        "fit": [
+                            100,
+                            100
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

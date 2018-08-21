@@ -13,13 +13,17 @@
             getByID: getByID,
             getAll: getAll,
             getInsumos: getInsumos,
-            putActualiza: putActualiza
+            putActualiza: putActualiza,
+            getReport:getReport
         };
 
         function getByID(id) {
             return baseUrl.all(id).customGET();
         }
 
+        function getReport(id) {
+            return baseUrl.all('report').all(id).customGET();
+        }
         function getAll() {
             return baseUrl.getList();
         }

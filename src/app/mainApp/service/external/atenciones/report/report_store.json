@@ -1,0 +1,185 @@
+{
+    "TITLE_STORE": {
+        "text": "Datos del Establecimiento",
+        "style": "subheader"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "STORE_NAME": {
+        "columns": [
+            {
+                "width": 110,
+                "bold": true,
+                "text": "Establecimiento:"
+            },
+            {
+                "text": "STORE_NAME",
+                "style": "storeName"
+            }
+        ]
+    },
+    "ENCARGADO": {
+        "columns": [
+            {
+                "width": 110,
+                "bold": true,
+                "text": "Encargado:"
+            },
+            {
+                "text": "STORE_MANAGER",
+                "alignment": "justify"
+            }
+        ]
+    },
+    "TELEPHONE_STATE": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Teléfono:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "PHONE_NUMBER"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Estado:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "STATE_VALUE"
+                    }
+                ]
+            }
+        ]
+    },
+    "CITY_LOCALITY": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Municipio:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "CITY_VALUE"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Localidad:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "LOCALITY_NAME"
+                    }
+                ]
+            }
+        ]
+    },
+    "STREET_NUMBERSTREET": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Calle:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "STREET"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Número:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "NUMBER_STORE",
+                        "style": "storeName"
+                    }
+                ]
+            }
+        ]
+    },
+    "NEXT_NEAR_STREET": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Entre calle:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "NEXT_STREET"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "y Calle:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "NEAR_STREET"
+                    }
+                ]
+            }
+        ]
+    },
+    "ZIPCODE_CABINET": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Código Postal",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "ZIP_CODE "
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Cabinet:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "IDENTIFIER_NUMBER",
+                        "style": "storeName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DOUBLE_BLANK": {
+        "text": "\n\n"
+    }
+}

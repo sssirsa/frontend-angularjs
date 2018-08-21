@@ -1,0 +1,20 @@
+{
+    "EVIDENCES_TITLE": {
+        "text": "Evidencias del Servicio",
+        "style": "subheader"
+    },
+    "IMAGE_EVIDENDCE": {
+        "image": "data:image/png;base64,",
+        "fit": [
+            500,
+            330
+        ],
+        "alignment": "center"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "SEPARATOR": {
+        "text": "_______________________________________________________________________________________________º"
+    }
+}
