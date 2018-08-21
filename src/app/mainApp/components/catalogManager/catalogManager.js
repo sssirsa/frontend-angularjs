@@ -438,7 +438,7 @@
         }
 
         function update(idToUpdate, newObject) {
-            //Update behavior handling
+            //TODO: Update behavior handling
             createMainCatalogProvider();
             if (vm.actions['PUT']) {
                 vm.updateLoader = vm.CatalogProvider
@@ -457,7 +457,7 @@
         }
 
         function getByID(idToGet) {
-            //Get one element behavior
+            //TODO: Get one element behavior
             createMainCatalogProvider();
             if (vm.actions['GET']) {
                 vm.getByIDLoader = vm.CatalogProvider
@@ -474,10 +474,12 @@
             }
         }
 
+        //File downloading into new window
         function downloadFile(url) {
             $window.open(url);
         }
 
+        //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
             if (vm.paginationHelper.previous) {
                 if (vm.actions['LIST'].pagination) {
@@ -539,6 +541,7 @@
             }
         }
 
+        //Load the next page of results when the pagination is Paged
         function nextPage() {
             if (vm.paginationHelper.next) {
                 if (vm.actions['LIST'].pagination) {
@@ -600,6 +603,7 @@
             }
         }
 
+        //Load more elements when pagination is infinite 
         function loadMore() {
             if (vm.paginationHelper.next) {
                 if (vm.actions['LIST'].pagination) {
@@ -661,6 +665,7 @@
             }
         }
 
+        //Soft-Delete dynamic filtering function
         function filterDeleted(elements) {
             var hide = vm.actions['LIST'].softDelete['hide'];
             var reverse = vm.actions['LIST'].softDelete['reverse'];
