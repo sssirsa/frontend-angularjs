@@ -85,7 +85,8 @@
                                                 vm.reportToPDF.content.push(vm.storeInfo.TITLE_STORE);
                                                 vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
 
-                                                if (!vm.infoReport.establecimiento) {
+                                                console.log(vm.infoReport.establecimiento)
+                                                if (vm.infoReport.establecimiento==undefined) {
                                                     vm.reportToPDF.content.push(vm.storeInfo.NO_STORE);
                                                 }
                                                 else {
@@ -137,7 +138,7 @@
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.CABINET_TITLE);
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
-                                                        console.log(vm.infoReport.cabinet);
+                                                        //console.log(vm.infoReport.cabinet);
                                                         if (vm.infoReport.cabinet==undefined) {
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.NO_CABINET);
                                                         }
@@ -162,9 +163,44 @@
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER);
 
                                                         }
+                                                        $http.get('app/mainApp/service/external/atenciones/report/report_work_notes.json')
+                                                            .then(function (worknotes) {
+                                                                vm.worknotes = worknotes.data;
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.REPORT_WORK_TITLE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+
+                                                                //Descripción de Trabajo
+
+                                                                vm.reportToPDF.content.push(vm.worknotes.WORK_DESCRIPTION_JOB);
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                //operador ternario para asignar la descripción del trabajo
+                                                                vm.worknotes.WORK_DESCRIPTION.text= vm.infoReport.descripcion_trabajo ? vm.infoReport.descripcion_trabajo : 'Sin Notas de Trabajo';
+                                                                vm.reportToPDF.content.push(vm.worknotes.WORK_DESCRIPTION);
+
+                                                                //Observaciones Tecnicas
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.TECHNICAL_OBSERVATION_TITLE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                //operador ternario para asignar la descripción del trabajo
+                                                                vm.worknotes.TECHNICAL_OBSERVATION.text= vm.infoReport.observaciones_tecnico ? vm.infoReport.observaciones_tecnico : 'Sin Observaciones del Tecnico';
+                                                                vm.reportToPDF.content.push(vm.worknotes.TECHNICAL_OBSERVATION);
+
+                                                                //Observaciones Cliente
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.CLIENT_OBSERVATION_TITLE);
+                                                                vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
+                                                                //operador ternario para asignar la descripción del trabajo
+                                                                vm.worknotes.CLIENT_OBSERVATION.text= vm.infoReport.observaciones_cliente ? vm.infoReport.observaciones_cliente : 'Sin Observaciones del Cliente';
+                                                                vm.reportToPDF.content.push(vm.worknotes.CLIENT_OBSERVATION);
+
+                                                                vm.reportToPDF.content.push(vm.worknotes.DOUBLE_BLANK_SPACE);
 
 
-                                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+
+
+                                                                pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                            });
                                                     });
 
                                             });
