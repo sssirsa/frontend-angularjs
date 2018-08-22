@@ -3,6 +3,10 @@
         "text": "Información del Cabinet",
         "style": "subheader"
     },
+    "NO_CABINET": {
+        "text": "Sin datos de Cabinet",
+        "style": "subheader"
+    },
     "BLANK_SPACE": {
         "text": "\n"
     },

@@ -3,6 +3,11 @@
         "text": "Datos del Establecimiento",
         "style": "subheader"
     },
+
+    "NO_STORE": {
+        "text": "\n Sin Datos de Establecimiento",
+        "style": "subheader"
+    },
     "BLANK_SPACE": {
         "text": "\n"
     },

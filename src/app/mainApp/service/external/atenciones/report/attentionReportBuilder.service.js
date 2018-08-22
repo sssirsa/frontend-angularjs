@@ -14,11 +14,11 @@
         };
 
         function buildReport(id) {
-            vm.reportToPDF={
-                content:[],
-                styles:{}
+            vm.reportToPDF = {
+                content: [],
+                styles: {}
             };
-            vm.reportToPDF.content=[];
+            vm.reportToPDF.content = [];
             var getInfopromise = atencionPV.getReport(id);
             getInfopromise.then(function (respuesta) {
                 vm.infoReport = respuesta;
@@ -29,7 +29,7 @@
                         $log.info(vm.reportToPDF);
                         $http.get('app/mainApp/service/external/atenciones/report/report.header.json')
                             .then(function (cabecera) {
-                                vm.cabecera={};
+                                vm.cabecera = {};
                                 vm.cabecera = cabecera.data;
                                 vm.cabecera.header.columns[1][4].text = vm.infoReport.folio;
                                 vm.cabecera.header.columns[1][5].text = vm.infoReport.tipo;
@@ -55,32 +55,119 @@
 
                                         //Operador Ternario para asignar fecha de solicitud
 
-                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[0].columns[1].text = vm.infoReport.fecha  ?  moment(vm.infoReport.fecha).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de Solicitud';
+                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[0].columns[1].text = vm.infoReport.fecha ? moment(vm.infoReport.fecha).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de Solicitud';
                                         //Operador Ternario para asignar la fecha de asignación
-                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[1].columns[1].text = vm.infoReport.fecha_asignacion  ? moment(vm.infoReport.fecha_asignacion).format('MMMM Do YYYY, h:mm:ss a')  : 'Sin fecha de Asignación';
+                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[1].columns[1].text = vm.infoReport.fecha_asignacion ? moment(vm.infoReport.fecha_asignacion).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de Asignación';
                                         vm.reportToPDF.content.push(vm.generalData.DATE_REQUEST_ASSIGNEMENT);
 
                                         //Operador Ternario para asignar el inicio atención
-                                        vm.generalData.DATE_ATTENTION.columns[0].columns[1].text = vm.infoReport.fecha_inicio_servicio  ?  moment(vm.infoReport.fecha_inicio_servicio).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de inicio de servicio';
+                                        vm.generalData.DATE_ATTENTION.columns[0].columns[1].text = vm.infoReport.fecha_inicio_servicio ? moment(vm.infoReport.fecha_inicio_servicio).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de inicio de servicio';
                                         //Operador Ternario para asignar el fin atención
-                                        vm.generalData.DATE_ATTENTION.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio ?  moment(vm.infoReport.fecha_fin_servicio).format('MMMM Do YYYY, h:mm:ss a')  : 'Sin fecha de fin de servicio';
+                                        vm.generalData.DATE_ATTENTION.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio ? moment(vm.infoReport.fecha_fin_servicio).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de fin de servicio';
                                         vm.reportToPDF.content.push(vm.generalData.DATE_ATTENTION);
 
 
                                         //Operador Ternario para asignar el kilometraje
                                         vm.generalData.KILOMETERS_SCORE.columns[0].columns[1].text = vm.infoReport.km !== null ? vm.infoReport.km : 'Sin kilometraje registrado';
-                                        var iterator, califStar='';
-                                        for(iterator=0; i<vm.infoReport.calificacion;i++){
-                                            califStar=califStar.concat("*");
+                                        var iterator, califStar = '';
+                                        for (iterator = 0; i < vm.infoReport.calificacion; i++) {
+                                            califStar = califStar.concat("*");
                                         }
                                         //Operador Ternario para asignar la calificación
-                                        vm.generalData.KILOMETERS_SCORE.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio >0 ? califStar : 'Sin Calificación';
+                                        vm.generalData.KILOMETERS_SCORE.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio > 0 ? califStar : 'Sin Calificación';
                                         vm.reportToPDF.content.push(vm.generalData.KILOMETERS_SCORE);
                                         vm.reportToPDF.content.push(vm.generalData.DOUBLE_BLANK);
 
-                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
-                                        $http.get('app/mainApp/service/external/atenciones/report/report.general_data.json')
-                                            .then(function (generalData) {
+                                        $http.get('app/mainApp/service/external/atenciones/report/report_store.json')
+                                            .then(function (storeInfo) {
+                                                vm.storeInfo = storeInfo.data;
+                                                vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
+                                                vm.reportToPDF.content.push(vm.storeInfo.TITLE_STORE);
+                                                vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
+
+                                                if (!vm.infoReport.establecimiento) {
+                                                    vm.reportToPDF.content.push(vm.storeInfo.NO_STORE);
+                                                }
+                                                else {
+                                                    //Operador Ternario para asignar nombre de Establecimiento
+                                                    vm.storeInfo.STORE_NAME.columns[1].text = vm.infoReport.establecimiento.nombre_establecimiento ? vm.infoReport.establecimiento.nombre_establecimiento : 'Sin Establecimiento';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.STORE_NAME);
+
+                                                    //Operador Ternario para asignar nombre de Encargado
+                                                    vm.storeInfo.ENCARGADO.columns[1].text = vm.infoReport.establecimiento.nombre_encargado ? vm.infoReport.establecimiento.nombre_encargado : 'Sin Encargado Registrado';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.ENCARGADO);
+
+                                                    //Operador Ternario para asignar el Telefono del Establecimiento
+                                                    vm.storeInfo.TELEPHONE_STATE.columns[0].columns[1].text = vm.infoReport.establecimiento.telefono_encargado ? vm.infoReport.establecimiento.telefono_encargado : 'Telefono no Registrado';
+                                                    //Operador Ternario para asignar el Estado
+                                                    vm.storeInfo.TELEPHONE_STATE.columns[1].columns[1].text = vm.infoReport.establecimiento.estado ? vm.infoReport.establecimiento.estado : 'Sin Estado';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.TELEPHONE_STATE);
+
+                                                    //Operador Ternario para asignar  el Municipio
+                                                    vm.storeInfo.CITY_LOCALITY.columns[0].columns[1].text = vm.infoReport.establecimiento.municipio ? vm.infoReport.establecimiento.municipio : 'Sin Municipio';
+                                                    //Operador Ternario para asignar la localidad
+                                                    vm.storeInfo.CITY_LOCALITY.columns[1].columns[1].text = vm.infoReport.establecimiento.localidad ? vm.infoReport.establecimiento.localidad : 'Sin Localidad';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.CITY_LOCALITY);
+
+                                                    //Operador Ternario para asignar  la calle
+                                                    vm.storeInfo.STREET_NUMBERSTREET.columns[0].columns[1].text = vm.infoReport.establecimiento.calle ? vm.infoReport.establecimiento.calle : 'Sin Calle';
+                                                    //Operador Ternario para asignar el número de vivienda
+                                                    vm.storeInfo.STREET_NUMBERSTREET.columns[1].columns[1].text = vm.infoReport.establecimiento.numero ? vm.infoReport.establecimiento.numero : 'Sin Número';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.STREET_NUMBERSTREET);
+
+                                                    //Operador Ternario para asignar  entre calle
+                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[0].columns[1].text = vm.infoReport.establecimiento.entre_calle1 ? vm.infoReport.establecimiento.entre_calle1 : 'Entre Calle';
+                                                    //Operador Ternario para asignar y calle
+                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[1].columns[1].text = vm.infoReport.establecimiento.entre_calle2 ? vm.infoReport.establecimiento.entre_calle2 : 'Entre Número';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.NEXT_NEAR_STREET);
+
+
+                                                    //Operador Ternario para asignar  el codigo postal
+                                                    vm.storeInfo.ZIPCODE_CABINET.columns[0].columns[1].text = vm.infoReport.establecimiento.cp ? vm.infoReport.establecimiento.cp : 'Sin Codigo Postal';
+                                                    //Operador Ternario para asignar el cabinet
+                                                    vm.storeInfo.ZIPCODE_CABINET.columns[1].columns[1].text = vm.infoReport.cabinet.economico ?  vm.infoReport.cabinet.economico: 'Sin Economico';
+                                                    vm.reportToPDF.content.push(vm.storeInfo.ZIPCODE_CABINET);
+
+
+                                                }
+                                                vm.reportToPDF.content.push(vm.storeInfo.DOUBLE_BLANK);
+                                                $http.get('app/mainApp/service/external/atenciones/report/report.cabinet.json')
+                                                    .then(function (cabinet) {
+                                                        vm.cabinetInfo = cabinet.data;
+                                                        vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
+                                                        vm.reportToPDF.content.push(vm.cabinetInfo.CABINET_TITLE);
+                                                        vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
+                                                        console.log(vm.infoReport.cabinet);
+                                                        if (vm.infoReport.cabinet==undefined) {
+                                                            vm.reportToPDF.content.push(vm.cabinetInfo.NO_CABINET);
+                                                        }
+                                                        else {
+
+                                                            //Operador Ternario para asignar  el economico del cabinet
+                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[0].columns[1].text =vm.infoReport.cabinet.economico  ? vm.infoReport.cabinet.economico : 'Sin Economico';
+                                                            //Operador Ternario para asignar el numero de activo del cabinet
+                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.activo_id ?  vm.infoReport.cabinet.economico: 'Sin número de Activo';
+                                                            vm.reportToPDF.content.push(vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER);
+
+                                                            //Operador Ternario para asignar  el modelo del cabinet
+                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[0].columns[1].text =vm.infoReport.cabinet.modelo.nombre  ? vm.infoReport.cabinet.modelo.nombre : 'Sin Modelo';
+                                                            //Operador Ternario para asignar la antiguedad del cabinet
+                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[1].columns[1].text = vm.infoReport.cabinet.antiguedad ?  vm.infoReport.cabinet.antiguedad: 'Sin Antigüedad';
+                                                            vm.reportToPDF.content.push(vm.cabinetInfo.MODEL_LEVEL_ANTIQUE);
+
+                                                            //Operador Ternario para asignar  el modelo del cabinet
+                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[0].columns[1].text =vm.infoReport.cabinet.no_incidencias  ? vm.infoReport.cabinet.no_incidencias : 'Sin Incidencias';
+                                                            //Operador Ternario para asignar la antiguedad del cabinet
+                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.no_serie ?  vm.infoReport.cabinet.no_serie: 'Sin No. de Serie';
+                                                            vm.reportToPDF.content.push(vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER);
+
+                                                        }
+
+
+                                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                    });
+
+                                            });
 
 
                                     });
