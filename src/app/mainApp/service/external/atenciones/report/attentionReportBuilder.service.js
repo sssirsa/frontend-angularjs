@@ -195,11 +195,49 @@
                                                                 vm.reportToPDF.content.push(vm.worknotes.CLIENT_OBSERVATION);
 
                                                                 vm.reportToPDF.content.push(vm.worknotes.DOUBLE_BLANK_SPACE);
+                                                                $http.get('app/mainApp/service/external/atenciones/report/report.material.json')
+                                                                    .then(function (materials) {
+                                                                        vm.materials=materials.data;
+                                                                        vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
+                                                                        vm.reportToPDF.content.push(vm.materials.MATERIAL_USED_TITLE);
+                                                                        vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
+                                                                        console.log(vm.materials)
+
+                                                                        if(vm.infoReport.insumos_lote){
+                                                                            if(vm.infoReport.insumos_lote.length>0){
+
+                                                                                var materialsToReport=[];
+                                                                                vm.infoReport.insumos_lote.forEach(function (insumo) {
+                                                                                    //Operador Ternario para asignar  el insumo lote usado
+                                                                                    console.log(insumo)
+                                                                                    let tmp = new Object();
+                                                                                    angular.copy(vm.materials.MATERIAL, tmp);
+                                                                                    let space=_.clone(vm.materials.SEPARATOR);
+                                                                                    insumo.catalogo_insumos  ? tmp.columns[0].columns[1].text = insumo.catalogo_insumos : tmp.columns[0].columns[1].text =  'Sin Nombre';
+                                                                                    //Operador Ternario para asignar el numero de activo del cabinet
+                                                                                   insumo.cantidad  ?   tmp.columns[1].columns[1].text = insumo.cantidad: tmp.columns[1].columns[1].text = 'Sin Cantidad';
+                                                                                    materialsToReport.push(tmp);
+                                                                                    materialsToReport.push(space);
+
+                                                                                });
+                                                                                console.log(materialsToReport);
+                                                                                vm.reportToPDF.content.push(materialsToReport);
+
+                                                                            }else{
+                                                                                vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
+                                                                            }
+
+                                                                        }else{
+                                                                            vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
+                                                                        }
+
+                                                                        vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
+                                                                        
 
 
 
-
-                                                                pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                                    });
                                                             });
                                                     });
 

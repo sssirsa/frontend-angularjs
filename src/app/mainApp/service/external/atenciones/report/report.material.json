@@ -3,6 +3,10 @@
         "text": "Insumos Usados",
         "style": "subTitle"
     },
+    "NO_MATERIAL": {
+        "text": "No hay Insumos Usados",
+        "style": "subTitle"
+    },
     "BLANK_SPACE": {
         "text": "\n"
     },
@@ -17,7 +21,7 @@
                         "bold": true
                     },
                     {
-                        "text": "ARNES TOMA CORRIENTE PARA 134-A",
+                        "text": "",
                         "width": 300
                     }
                 ]
@@ -30,14 +34,14 @@
                         "bold": true
                     },
                     {
-                        "text": "1.00"
+                        "text": ""
                     }
                 ]
             }
         ]
     },
     "SEPARATOR": {
-        "text": "_______________________________________________________________________________________________º"
+        "text": "_______________________________________________________________________________________________"
     },
     "MOTOR_COMPRESOR_TITLE": {
         "text": "Micromotores y Compresores",
