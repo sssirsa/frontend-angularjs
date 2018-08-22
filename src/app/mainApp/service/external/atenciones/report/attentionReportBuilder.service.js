@@ -232,7 +232,29 @@
                                                                         }
 
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
-                                                                        
+                                                                        vm.reportToPDF.content.push(vm.materials.MOTOR_COMPRESOR_TITLE);
+                                                                        vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
+                                                                        if(vm.infoReport.insumos){
+                                                                            if(vm.infoReport.insumos.length>0){
+                                                                                //Operador Ternario para asignar la descripcion del micromotor
+                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[0].columns[1].text =vm.infoReport.insumos[0].descripcion  ? vm.infoReport.insumos[0].descripcion : 'Compresor sin Nombre';
+                                                                                //Operador Ternario para asignar la cantidad de micromotores usados
+                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[1].columns[1].text = vm.infoReport.insumos[0].cantidad ?  vm.infoReport.insumos[0].cantidad: 'Cantidad no Especificada';
+                                                                                vm.reportToPDF.content.push(vm.materials.MICROMOTOR_NAME_QUANTITY);
+                                                                                //Operador Ternario para asignar el no de serie
+                                                                                vm.materials.SERIAL_NUMBER_MICROMOTOR.columns[1].text = vm.infoReport.insumos[0].no_serie ? vm.infoReport.insumos[0].no_serie  : 'Sin Establecimiento';
+                                                                                vm.reportToPDF.content.push(vm.materials.SERIAL_NUMBER_MICROMOTOR);
+                                                                                //operador ternario para asignar notas al compresor
+                                                                                vm.materials.MICROMOTOR_NOTES.columns[1].text = vm.infoReport.insumos[0].notas ? vm.infoReport.insumos[0].notas : 'Sin Establecimiento';
+                                                                                vm.reportToPDF.content.push(vm.materials.MICROMOTOR_NOTES);
+
+
+                                                                            }else{
+                                                                                vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
+                                                                            }
+                                                                        }else{
+                                                                            vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
+                                                                        }
 
 
 
