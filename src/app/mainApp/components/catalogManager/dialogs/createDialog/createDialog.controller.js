@@ -61,7 +61,8 @@
                  *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
                  *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
                  *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
-                 *      }
+                 *      },
+                 *      provider: CATALOG provider object
 */
 
 (function () {
