@@ -85,7 +85,7 @@
                                                 vm.reportToPDF.content.push(vm.storeInfo.TITLE_STORE);
                                                 vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
 
-                                                console.log(vm.infoReport.establecimiento)
+                                               // console.log(vm.infoReport.establecimiento)
                                                 if (vm.infoReport.establecimiento==undefined) {
                                                     vm.reportToPDF.content.push(vm.storeInfo.NO_STORE);
                                                 }
@@ -201,7 +201,7 @@
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
                                                                         vm.reportToPDF.content.push(vm.materials.MATERIAL_USED_TITLE);
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
-                                                                        console.log(vm.materials)
+                                                                        //console.log(vm.materials)
 
                                                                         if(vm.infoReport.insumos_lote){
                                                                             if(vm.infoReport.insumos_lote.length>0){
@@ -209,7 +209,7 @@
                                                                                 var materialsToReport=[];
                                                                                 vm.infoReport.insumos_lote.forEach(function (insumo) {
                                                                                     //Operador Ternario para asignar  el insumo lote usado
-                                                                                    console.log(insumo)
+                                                                                  //  console.log(insumo)
                                                                                     let tmp = new Object();
                                                                                     angular.copy(vm.materials.MATERIAL, tmp);
                                                                                     let space=_.clone(vm.materials.SEPARATOR);
@@ -220,7 +220,7 @@
                                                                                     materialsToReport.push(space);
 
                                                                                 });
-                                                                                console.log(materialsToReport);
+                                                                               // console.log(materialsToReport);
                                                                                 vm.reportToPDF.content.push(materialsToReport);
 
                                                                             }else{
@@ -255,10 +255,55 @@
                                                                         }else{
                                                                             vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
                                                                         }
+                                                                        vm.reportToPDF.content.push(vm.materials.SEPARATOR);
+                                                                        $http.get('app/mainApp/service/external/atenciones/report/report.evidences.json')
+                                                                            .then(function (evidences) {
+                                                                                vm.evidencesInfo=evidences.data;
+                                                                                //console.log(evidences.data);
+                                                                                vm.reportToPDF.content.push(vm.evidencesInfo.BLANK_SPACE);
+                                                                                vm.reportToPDF.content.push(vm.evidencesInfo.EVIDENCES_TITLE);
+                                                                                if(vm.infoReport.evidencia) {
+                                                                                    if (vm.infoReport.evidencia.length > 0) {
+                                                                                        var incidencesToReport=[];
+                                                                                        vm.infoReport.evidencia.forEach(function (evidence) {
+                                                                                            //Operador Ternario para asignar  el insumo lote usado
+                                                                                           // console.log(evidence)
+                                                                                            let tmp = new Object();
+                                                                                            angular.copy(vm.evidencesInfo.IMAGE_EVIDENDCE, tmp);
+                                                                                            let space=_.clone(vm.evidencesInfo.SEPARATOR);
+                                                                                            //Operador Ternario para asignar la foto de Evidencia
+                                                                                            evidence.foto  ? tmp.image ='data:image/png;base64,'+evidence.foto : tmp.image ='data:image/png;base64,';
+                                                                                            //console.log(tmp)
+                                                                                            incidencesToReport.push(tmp);
+                                                                                            incidencesToReport.push(space);
 
+                                                                                        });
+                                                                                       // console.log(incidencesToReport);
 
+                                                                                        vm.reportToPDF.content.push(incidencesToReport);
+                                                                                    }else{
+                                                                                        vm.reportToPDF.content.push(vm.evidencesInfo.NO_IMAGE);
+                                                                                    }
+                                                                                }
+                                                                                else{
+                                                                                    vm.reportToPDF.content.push(vm.evidencesInfo.NO_IMAGE);
+                                                                                }
 
-                                                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                                                $http.get('app/mainApp/service/external/atenciones/report/report_signature.json')
+                                                                                    .then(function (signature) {
+                                                                                        vm.signature=signature.data;
+                                                                                        //Operador Ternario para asignar la firma tecnico
+                                                                                        console.log( vm.infoReport.firma_tecnico );
+                                                                                        console.log( vm.infoReport.firma_cliente );
+                                                                                        vm.infoReport.firma_tecnico != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].image='data:image/png;base64,'+ vm.infoReport.firma_tecnico : vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].text="Sin firma";
+                                                                                        //Operador Ternario para asignar la firma cliente
+                                                                                        vm.infoReport.firma_cliente != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].image='data:image/png;base64,'+ vm.infoReport.firma_cliente : vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].text="Sin firma";
+                                                                                        console.log(vm.signature.SIGNATURE_SAPACE);
+                                                                                        vm.reportToPDF.content.push(vm.signature.SIGNATURE_SAPACE);
+                                                                                        console.log(vm.reportToPDF);
+                                                                                        pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
+                                                                                    });
+                                                                            });
                                                                     });
                                                             });
                                                     });
