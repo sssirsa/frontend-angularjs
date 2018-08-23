@@ -47,7 +47,8 @@
             "ROUTE":"Ruta",
             "EVIDENCES":"Evidencias",
             "EVIDENCES_S":"Evidencias de la Solicitud",
-            "NO_EVIDENCES":"Sin evidencias"
+            "NO_EVIDENCES":"Sin evidencias",
+            "NO_INPUT": "Sin insumos"
         },
         "NEW": {
             "TOASTR":{

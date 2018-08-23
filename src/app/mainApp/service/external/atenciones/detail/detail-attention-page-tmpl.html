@@ -1,5 +1,5 @@
 <div class="bg-01"
-     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     cg-busy="{promise:vm.loadingPromise && vm.loadingPromise2,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
      layout="column">
 
     <md-card layout="column" layout-align="center stretch" layout-gt-sm="row" layout-align-gt-sm="space-around center" layout-padding>
@@ -253,6 +253,28 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div layout="column" layout-padding="" layout-align="center center" ng-if="vm.request.tipo === 'Medio' && !vm.visible">
+
+            <div layout="row" layout-align="center center">
+                <h3><b translate>Insumos Usados</b></h3>
+            </div>
+            <div layout="row" layout-align="center center" ng-if="vm.request.insumos_lote.length===0">
+                <p>{{'REQUESTS.DETAIL.NO_INPUT'|translate}}</p>
+            </div>
+
+            <div layout="row" layout-align="center center" flex="90">
+                <div layout="row" layout-sm="column" layout-xs="column"
+                     flex="100" layout-wrap>
+                    <div ng-repeat="insumo in vm.request.insumos_lote" flex-gt-sm="50" flex="100">
+                        <div layout="colum" layout-align="left center" >
+                            <b>{{insumo.nombre_insumo}}:</b>&nbsp{{insumo.cantidad}}&nbsp unidades.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div layout-align="center stretch"

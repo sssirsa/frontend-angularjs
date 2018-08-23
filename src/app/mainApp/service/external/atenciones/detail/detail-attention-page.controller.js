@@ -67,13 +67,17 @@
                     vm.store = requestSuccess.establecimiento;
                     vm.km = requestSuccess.km;
 
-                    SalePointRequests.getByID(vm.id)
+                    vm.loadingPromise2 = SalePointRequests.getByID(vm.id)
                         .then(function (requestSuccess2) {
                             $log.debug(requestSuccess2);
                             vm.solicitudDetalles = requestSuccess2;
 
                             if(vm.request.tipo == 'Medio'){
                                 insumos();
+                            }else{
+                                listMarcas();
+                                listModelos();
+                                listcabinets();
                             }
 
                         })
@@ -116,32 +120,38 @@
         }
 
         function insumos() {
-            atencionPV.getInsumos(vm.solicitudDetalles.cabinet)
-                .then(function (respuesta) {
-                    vm.insumos = respuesta;
-                    var aux = null;
-
-                    angular.forEach(vm.insumos.results, function (value) {
-                        value.check = false;
-                        value.usado = 0;
-                        value.error = null;
-
-
-                        if(parseInt(value.cantidad) === 0){
-                            aux = 0;
-                        }else if(parseInt(value.tipos_equipo[0].cantidad) > parseInt(value.cantidad) && parseInt(value.cantidad) > 0){
-                            aux = parseInt(value.cantidad);
-                        }else if(parseInt(value.tipos_equipo[0].cantidad) < parseInt(value.cantidad) && parseInt(value.cantidad) > 0){
-                            aux = parseInt(value.tipos_equipo[0].cantidad);
-                        }
-
-                        value.insumoMax = aux;
-
-                    });
-                })
-                .catch(function (errorRespuesta) {
-                    ErrorHandler.errortranslate(errorRespuesta);
+            if(vm.request.status === "Atendida"){
+                angular.forEach(vm.request.insumos_lote,function (valor) {
+                    valor.cantidad = parseInt(valor.cantidad);
                 });
+            }else {
+                atencionPV.getInsumos(vm.solicitudDetalles.cabinet)
+                    .then(function (respuesta) {
+                        vm.insumos = respuesta;
+                        var aux = null;
+
+                        angular.forEach(vm.insumos.results, function (value) {
+                            value.check = false;
+                            value.usado = 0;
+                            value.error = null;
+
+
+                            if (parseInt(value.cantidad) === 0) {
+                                aux = 0;
+                            } else if (parseInt(value.tipos_equipo[0].cantidad) > parseInt(value.cantidad) && parseInt(value.cantidad) > 0) {
+                                aux = parseInt(value.cantidad);
+                            } else if (parseInt(value.tipos_equipo[0].cantidad) < parseInt(value.cantidad) && parseInt(value.cantidad) > 0) {
+                                aux = parseInt(value.tipos_equipo[0].cantidad);
+                            }
+
+                            value.insumoMax = aux;
+
+                        });
+                    })
+                    .catch(function (errorRespuesta) {
+                        ErrorHandler.errortranslate(errorRespuesta);
+                    });
+            }
         }
 
         function validaMax(insumo){
@@ -346,9 +356,9 @@
         vm.accept = accept;
         vm.unUsedCabinet = unUsedCabinet;
 
-        listMarcas();
-        listModelos();
-        listcabinets();
+        //listMarcas();
+        //listModelos();
+        //listcabinets();
 
 
         function unUsedCabinet() {

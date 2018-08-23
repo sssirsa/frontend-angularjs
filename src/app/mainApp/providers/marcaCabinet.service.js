@@ -25,7 +25,7 @@
         }
 
         function listPromise(limit, offset) {
-            if(limit.isDefined && offset.isDefined) {
+            if(limit !== undefined && offset !== undefined ) {
                 return WebRestangular.all(URLS.marca + '?limit=' + limit + '&offset=' + offset).customGET();
             } else {
                 return baseMarca.customGET();

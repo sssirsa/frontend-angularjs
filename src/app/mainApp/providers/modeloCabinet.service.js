@@ -20,7 +20,7 @@
         };
 
         function listWitout(limit, offset){
-            if(limit.isDefined && offset.isDefined) {
+            if(limit !== undefined  && offset !== undefined ) {
                 return WebRestangular.all(URLS.modelo_cabinet+'?limit='+limit+'&offset='+offset).customGET();
             } else {
                 return baseModelo.customGET();
