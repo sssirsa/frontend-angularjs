@@ -12,3 +12,4 @@ config
 .awspublish-genesis.sssirsa.com
 src/app/config.js
 gulp/deploy.js
+.vs/
