@@ -1,3 +1,9 @@
+<md-card layout-padding>
+    <div layout="column"
+         layout-align="center center">
+        <h1>{{vm.name}}</h1>
+    </div>
+</md-card>
 <catalog-manager url="vm.url"
                  kind="vm.kind"
                  name="vm.name"
@@ -11,5 +17,6 @@
                  previous-button-text="vm.previousButtonText"
                  load-more-button-text="vm.loadMoreButtonText"
                  total-text="vm.totalText"
-                 loading-message="vm.loadingMessage">
+                 loading-message="vm.loadingMessage"
+                 on-element-select="vm.onElementSelect(element)">
 </catalog-manager>

@@ -173,22 +173,6 @@
                  *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
                  *      }
                  *  },
-                 *  GET:{
-                 *      fields:[
-                 *          {
-                 *              type: string,          Valid types are text, options, file
-                 *              model: string,         Name of the field that will be used to show the data from the API
-                 *              label: string,         (Optional) Label to show, if not given, the model will be used
-                 *              catalog:{                just used when the type of the field is options and the option field is not given
-                 *                  url: string,         Full or partial URL depending on the kind
-                 *                  kind: string,        Mobile, Web, Generic. Default is 'Generic'
-                 *                  model: string,       From the catalog object, which element is used for binding (aka: id, name, etc.)
-                 *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
-                 *                                       If not given, then the model will be used
-                 *              }
-                 *          }
-                 *      ]
-                 *  },
                  *  LIST:{
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
@@ -281,7 +265,6 @@
         vm.create = create;
         vm.delete = remove;
         vm.update = update;
-        vm.geByID = getByID;
         vm.downloadFile = downloadFile;
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
@@ -443,36 +426,18 @@
             //TODO: Update behavior handling
             createMainCatalogProvider();
             if (vm.actions['PUT']) {
-                vm.updateLoader = vm.CatalogProvider
-                    .update(vm.url, idToUpdate, newObject)
-                    .then(function (updateResult) {
-                        activate();
-                        vm.onSuccessUpdate({ result: updateResult });
-                    })
-                    .catch(function (errorUpdate) {
-                        vm.onErrorUpdate({ error: errorUpdate });
-                    });
+                //vm.updateLoader = vm.CatalogProvider
+                //    .update(vm.url, idToUpdate, newObject)
+                //    .then(function (updateResult) {
+                //        activate();
+                //        vm.onSuccessUpdate({ result: updateResult });
+                //    })
+                //    .catch(function (errorUpdate) {
+                //        vm.onErrorUpdate({ error: errorUpdate });
+                //    });
             }
             else {
                 vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });
-            }
-        }
-
-        function getByID(idToGet) {
-            //TODO: Get one element behavior
-            createMainCatalogProvider();
-            if (vm.actions['GET']) {
-                vm.getByIDLoader = vm.CatalogProvider
-                    .getByID(vm.url, idToGet)
-                    .then(function (element) {
-                        vm.onSuccessGet({ element: element });
-                    })
-                    .catch(function (elementError) {
-                        vm.onErrorGet({ error: elementError });
-                    });
-            }
-            else {
-                vm.onErrorGet({ error: '"actions" parameter does not have the GET element defined' });
             }
         }
 

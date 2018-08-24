@@ -8,6 +8,7 @@
 
         vm.url = 'estado';
         vm.kind = 'Mobile';
+        vm.name = 'Catálogo de Estados';
 
         //Labels
         vm.name = 'Estado';
@@ -25,6 +26,9 @@
 
         //Messages
         vm.loadingMessage = 'Cargando Estados';
+
+        //Functions
+        vm.onElementSelect = onElementSelect;
 
         //Actions meta
         vm.actions = {
@@ -144,12 +148,14 @@
                     reverse: false
                 }
             },
-            GET: {
-                fields: []
-            },
             SEARCH: {
 
             }
+        }
+
+        function onElementSelect(element) {
+            console.debug('Element selected');
+            console.debug(element);
         }
 
     }
