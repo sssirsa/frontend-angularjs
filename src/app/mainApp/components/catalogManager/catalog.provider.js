@@ -29,6 +29,10 @@
             remove: function (id) {
                 return MobileRestangular.all(vm.mobileCatalog.url)
                     .customDELETE(id, null, { 'content-type': 'application/json' });
+            },
+            search: function (query) {
+                return MobileRestangular.all(vm.mobileCatalog.url + '?' + query)
+                    .customGET();
             }
         };
 
@@ -53,6 +57,10 @@
             remove: function (id) {
                 return WebRestangular.all(vm.webCatalog.url)
                     .customDELETE(id, null, { 'content-type': 'application/json' });
+            },
+            search: function (query) {
+                return MobileRestangular.all(vm.webCatalog.url + '?' + query)
+                    .customGET();
             }
         };
 
@@ -77,6 +85,10 @@
             remove: function (id) {
                 return $http.delete(
                     vm.genericCatalog.url + '/' + id);
+            },
+            search: function (query) {
+                return $http.get(
+                    vm.genericCatalog.url + '?' + query);
             }
         };
 
