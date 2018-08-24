@@ -265,6 +265,7 @@
         vm.create = create;
         vm.delete = remove;
         vm.update = update;
+        vm.search = search;
         vm.downloadFile = downloadFile;
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
@@ -438,6 +439,35 @@
             }
             else {
                 vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });
+            }
+        }
+
+        function search() {
+            //Search behavior handling
+            createMainCatalogProvider();
+            if (vm.actions['SEARCH']) {
+                $mdDialog.show({
+                    controller: 'CatalogSearchDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/searchDialog/searchDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['SEARCH'].dialog,
+                        fields: vm.actions['SEARCH'].fields,
+                        provider: vm.CatalogProvider
+                    }
+                }).then(function (element) {
+                    vm.onElementSelect(element);
+                }).catch(function (errorSearch) {
+                    if (errorSearch) {
+                        vm.onErrorSearch(errorSearch);
+                    }
+                });
+            }
+            else {
+                vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
 

@@ -49,10 +49,19 @@
         dialog
     ) {
         var vm = this;
-        
+
         //Variables
         vm.selectedTab = 0;
+        vm.CatalogProvider = provider;
+        vm.dialog = dialog;
+
+        //Functions
+        vm.cancel = cancel;
+
+        function cancel() {
+            $mdDialog.cancel(null);
+        }
 
     }
 
-}) ();
+})();

@@ -83,11 +83,11 @@
                         label: 'Sub catálogo estados',
                         catalog: {
                             url: 'estado',
-                            name:'Estado',
+                            name: 'Estado',
                             kind: 'Mobile',
                             model: 'codigo_estado',
                             option: 'nombre',
-                            loadMoreButtonText:'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...'
                         },
                         pagination: {
                             total: 'count'
@@ -149,6 +149,11 @@
                 }
             },
             SEARCH: {
+                dialog: {
+                    title: 'Busqueda de estados',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando'
+                }
 
             }
         }
