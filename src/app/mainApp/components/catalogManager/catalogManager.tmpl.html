@@ -33,7 +33,10 @@
 
         <section ng-if="$ctrl.actions['LIST']"
                  class="catalog-vertical-container"
-                 cg-busy="{promise:$ctrl.listLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+                 cg-busy="{
+                 promise:$ctrl.listLoader,
+                 message:$ctrl.loadingMessage,
+                 templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
             <div layout="column"
                  layout-align="center center"
                  layout-padding>

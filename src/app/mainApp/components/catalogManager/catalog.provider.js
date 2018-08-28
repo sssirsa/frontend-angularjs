@@ -5,7 +5,7 @@
         .module('app.mainApp')
         .service('CATALOG', CatalogProvider);
 
-    function CatalogProvider(MobileRestangular, WebRestangular, $http) {
+    function CatalogProvider(MobileRestangular, WebRestangular, $http, $q) {
         var vm = this;
 
         vm.mobileCatalog = {
@@ -67,28 +67,76 @@
         vm.genericCatalog = {
             url: null,
             getByID: function (id) {
-                return $http.get(
-                    vm.genericCatalog.url + '/' + id);
+                let deferred = $q.defer();
+                $http.get(
+                    vm.genericCatalog.url + '/' + id)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             },
             list: function () {
-                return $http.get(
-                    vm.genericCatalog.url);
+                let deferred = $q.defer();
+                $http.get(
+                    vm.genericCatalog.url)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             },
             create: function (object) {
-                return $http.post(
-                    vm.genericCatalog.url, object);
+                let deferred = $q.defer();
+                $http.post(
+                    vm.genericCatalog.url, object)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             },
             update: function (id, object) {
-                return $http.put(
-                    vm.genericCatalog.url + '/' + id, object);
+                let deferred = $q.defer();
+                $http.put(
+                    vm.genericCatalog.url + '/' + id, object)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             },
             remove: function (id) {
-                return $http.delete(
-                    vm.genericCatalog.url + '/' + id);
+                let deferred = $q.defer();
+                $http.delete(
+                    vm.genericCatalog.url + '/' + id)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             },
             search: function (query) {
-                return $http.get(
-                    vm.genericCatalog.url + '?' + query);
+                let deferred = $q.defer();
+                $http.get(
+                    vm.genericCatalog.url + '?' + query)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
             }
         };
 

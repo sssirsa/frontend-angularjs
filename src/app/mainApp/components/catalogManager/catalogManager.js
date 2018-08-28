@@ -25,7 +25,7 @@
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
                 onErrorDelete: '&',
-                onElementSelect:'&',
+                onElementSelect: '&',
 
                 //Buttons, if no text is given, the button would only have an icon
                 searchButtonText: '<',
@@ -300,57 +300,14 @@
             vm.PaginationProvider = CATALOG.generic;
         }
 
-        function search() {
-            //TODO: Search behaviour handling
-        }
-
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
-                    .then(function (elements) {
-                        //Elements list is returned in any other model
-                        if (vm.actions['LIST'].elements) {
-                            vm.catalogElements = elements[vm.actions['LIST'].elements];
-                        }
-                        //Elements list is returned directly as an array
-                        else {
-                            vm.catalogElements = elements;
-                        }
-                        //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.actions['LIST'].softDelete) {
-                            vm.catalogElements = filterDeleted(vm.catalogElements);
-                        }
-
-                        //Building the pagination helper
-                        //(if pagination element is in the actions of the LIST),
-                        //if the meta contains the specific models,
-                        //then those will be used, otherwise, the default models will.
-                        if (vm.actions['LIST'].pagination) {
-                            //Total of elements model to be used
-                            if (vm.actions['LIST'].pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
-                            }
-                            else {
-                                vm.paginationHelper['total'] = elements['total'];
-                            }
-                            //Previous page model to be used
-                            if (vm.actions['LIST'].pagination['previous']) {
-                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
-                            }
-                            else {
-                                vm.paginationHelper['previous'] = elements['previous'];
-                            }
-                            //Next page model to be used
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['next'] = elements['next'];
-                            }
-                        }
+                    .then(function (response) {
+                        treatResponse(response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -455,7 +412,7 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
-                        fields: vm.actions['SEARCH'].fields,
+                        filters: vm.actions['SEARCH'].filters,
                         provider: vm.CatalogProvider
                     }
                 }).then(function (element) {
@@ -486,47 +443,7 @@
                 vm.pageLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
-                        var elements = response.data;
-                        //Elements list is returned in any other model
-                        if (vm.actions['LIST'].elements) {
-                            vm.catalogElements = elements[vm.actions['LIST'].elements];
-                        }
-                        //Elements list is returned directly as an array
-                        else {
-                            vm.catalogElements = elements;
-                        }
-                        //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.actions['LIST'].softDelete) {
-                            vm.catalogElements = filterDeleted(vm.catalogElements);
-                        }
-
-                        //Re-Building the pagination helper
-                        //(if pagination element is in the actions of the LIST),
-                        //if the meta contains the specific models,
-                        //then those will be used, otherwise, the default models will.
-                        if (vm.actions['LIST'].pagination) {
-                            //Total of elements model to be used
-                            if (vm.actions['LIST'].pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
-                            }
-                            else {
-                                vm.paginationHelper['total'] = elements['total'];
-                            }
-                            //Previous page model to be used
-                            if (vm.actions['LIST'].pagination['previous']) {
-                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
-                            }
-                            else {
-                                vm.paginationHelper['previous'] = elements['previous'];
-                            }
-                            //Next page model to be used
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['next'] = elements['next'];
-                            }
-                        }
+                        treatResponse(response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -548,47 +465,7 @@
                 vm.pageLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
-                        var elements = response.data;
-                        //Elements list is returned in any other model
-                        if (vm.actions['LIST'].elements) {
-                            vm.catalogElements = elements[vm.actions['LIST'].elements];
-                        }
-                        //Elements list is returned directly as an array
-                        else {
-                            vm.catalogElements = elements;
-                        }
-                        //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.actions['LIST'].softDelete) {
-                            vm.catalogElements = filterDeleted(vm.catalogElements);
-                        }
-
-                        //Re-Building the pagination helper
-                        //(if pagination element is in the actions of the LIST),
-                        //if the meta contains the specific models,
-                        //then those will be used, otherwise, the default models will.
-                        if (vm.actions['LIST'].pagination) {
-                            //Total of elements model to be used
-                            if (vm.actions['LIST'].pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
-                            }
-                            else {
-                                vm.paginationHelper['total'] = elements['total'];
-                            }
-                            //Previous page model to be used
-                            if (vm.actions['LIST'].pagination['previous']) {
-                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
-                            }
-                            else {
-                                vm.paginationHelper['previous'] = elements['previous'];
-                            }
-                            //Next page model to be used
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['next'] = elements['next'];
-                            }
-                        }
+                        treatResponse(response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -610,47 +487,7 @@
                 vm.infiniteLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
-                        var elements = response.data;
-                        //Elements list is returned in any other model
-                        if (vm.actions['LIST'].elements) {
-                            vm.catalogElements = vm.catalogElements.concat(elements[vm.actions['LIST'].elements]);
-                        }
-                        //Elements list is returned directly as an array
-                        else {
-                            vm.catalogElements = vm.catalogElements.concat(elements);
-                        }
-                        //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.actions['LIST'].softDelete) {
-                            vm.catalogElements = filterDeleted(vm.catalogElements);
-                        }
-
-                        //Re-Building the pagination helper
-                        //(if pagination element is in the actions of the LIST),
-                        //if the meta contains the specific models,
-                        //then those will be used, otherwise, the default models will.
-                        if (vm.actions['LIST'].pagination) {
-                            //Total of elements model to be used
-                            if (vm.actions['LIST'].pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.actions['LIST'].pagination['total']];
-                            }
-                            else {
-                                vm.paginationHelper['total'] = elements['total'];
-                            }
-                            //Previous page model to be used
-                            if (vm.actions['LIST'].pagination['previous']) {
-                                vm.paginationHelper['previous'] = elements[vm.actions['LIST'].pagination['previous']];
-                            }
-                            else {
-                                vm.paginationHelper['previous'] = elements['previous'];
-                            }
-                            //Next page model to be used
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['next'] = elements['next'];
-                            }
-                        }
+                        treatResponse(response, true);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -681,6 +518,66 @@
             return filteredElements;
         }
 
-    }
+        //Treatment function for backend responses
+        function treatResponse(response, infinitePagination) {
+            //Elements list is returned in any other model
+            if (vm.actions['LIST'].elements) {
+                if (infinitePagination) {
+                    vm.catalogElements = vm.catalogElements.concat(response[vm.actions['LIST'].elements]);
+                }
+                else {
+                    vm.catalogElements = response[vm.actions['LIST'].elements];
+                }
+            }
+            //Elements list is returned directly as an array
+            else {
+                if (infinitePagination) {
+                    vm.catalogElements = vm.catalogElements.concat(response);
+                }
+                else {
+                    vm.catalogElements = response;
+                }
+            }
+            //Determine if the soft delete parameter is given, and procede with the filtering
+            if (vm.actions['LIST'].softDelete) {
+                vm.catalogElements = filterDeleted(vm.catalogElements);
+            }
+            //Determine if the pagination parameter is given, and proceed with the building of the pagination helper
+            if (vm.actions['LIST'].pagination) {
+                buildPaginationHelper(response);
+            }
+        }
 
+        //Pagination helper builder
+        function buildPaginationHelper(response) {
+            //Building the pagination helper
+            //(if pagination element is in the actions of the LIST),
+            //if the meta contains the specific models,
+            //then those will be used, otherwise, the default models will.
+            if (vm.actions['LIST'].pagination) {
+                //Total of response model to be used
+                if (vm.actions['LIST'].pagination['total']) {
+                    vm.paginationHelper['total'] = response[vm.actions['LIST'].pagination['total']];
+                }
+                else {
+                    vm.paginationHelper['total'] = response['total'];
+                }
+                //Previous page model to be used
+                if (vm.actions['LIST'].pagination['previous']) {
+                    vm.paginationHelper['previous'] = response[vm.actions['LIST'].pagination['previous']];
+                }
+                else {
+                    vm.paginationHelper['previous'] = response['previous'];
+                }
+                //Next page model to be used
+                if (vm.actions['LIST'].pagination['next']) {
+                    vm.paginationHelper['next'] = response[vm.actions['LIST'].pagination['next']];
+                }
+                else {
+                    vm.paginationHelper['next'] = response['next'];
+                }
+            }
+        }
+
+    }
 })();
