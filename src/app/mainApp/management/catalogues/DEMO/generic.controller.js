@@ -152,9 +152,28 @@
                 dialog: {
                     title: 'Busqueda de estados',
                     searchButton: 'Buscar',
-                    loadingText: 'Buscando'
-                }
-
+                    loadingText: 'Buscando estados'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'nombre',
+                        header: 'por Nombre',
+                        label: 'Nombre',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'equals',
+                        model: 'codigo_estado',
+                        header: 'por Código de Estado',
+                        label: 'Código de Estado',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
             }
         }
 
