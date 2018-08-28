@@ -124,7 +124,7 @@
             layout="column"
             layout-align="space-around center">
 
-            <div ng-if="vm.solicitudDetalles.evidencia.length === 0" layout-fill>
+            <div ng-if="vm.solicitudDetalles.evidencia.length > 0" layout-fill>
 
                 <ng-image-gallery
                     images="vm.solicitudDetalles.evidencia"
@@ -141,7 +141,7 @@
                 <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
             </div>
 
-            <div ng-if="vm.solicitudDetalles.evidencia.length===0">
+            <div ng-if="vm.solicitudDetalles.evidencia.length === 0">
                 <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
             </div>
         </div>
@@ -157,7 +157,7 @@
             layout="column"
             layout-align="space-around center">
 
-            <div ng-if="vm.request.evidencia.length>0" layout-fill>
+            <div ng-if="vm.request.evidencia.length > 0" layout-fill>
 
                 <ng-image-gallery
                     images="vm.request.evidencia"
@@ -552,6 +552,70 @@
                            keep="true"
                            files-selected="vm.filesSelected(files,3)"
             ></file-uploader>
+        </div>
+    </md-card>
+
+    <md-card layout-align="space-around center"
+             layout="row"
+             ng-if="!vm.visible"
+             layout-padding>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+            </div>
+
+            <div ng-if="vm.request.firma_cliente.length > 0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.firma_cliente_evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.request.firma_cliente_evidencia.length === 0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+
+        </div>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+            </div>
+
+            <div ng-if="vm.request.firma_tecnico.length > 0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.firma_tecnico_evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.request.firma_tecnico_evidencia.length === 0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+
         </div>
     </md-card>
 

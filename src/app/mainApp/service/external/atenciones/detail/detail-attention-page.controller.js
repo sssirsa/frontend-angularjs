@@ -72,6 +72,12 @@
                             $log.debug(requestSuccess2);
                             vm.solicitudDetalles = requestSuccess2;
 
+                            console.log("Solicitud", vm.solicitudDetalles);
+                            urlEvidencia();
+
+                            console.log("evidencias Atención", vm.request.evidencia);
+                            console.log("evidencias Solicitud", vm.solicitudDetalles.evidencia);
+
                             if(vm.request.tipo == 'Medio'){
                                 insumos();
                             }else{
@@ -93,6 +99,27 @@
                     $log.error(errorRequest);
                     toastr.error(Translate.translate('REQUESTS.DETAIL.TOASTR.ERROR_PV'));
                 });
+        }
+
+
+        function urlEvidencia() {
+            if(vm.solicitudDetalles.evidencia.length >0){
+                angular.forEach(vm.solicitudDetalles.evidencia, function (evidence) {
+                    vm.evidenciaAux = [];
+                    var auxE = {
+                        id: evidence.id,
+                        foto: evidence.foto,
+                        atencion: evidence.atencion,
+                        solicitud: evidence.solicitud,
+                        pre_solicitud: evidence.pre_solicitud,
+                        url: evidence.foto
+                    };
+                    vm.evidenciaAux.push(auxE);
+                });
+
+                vm.solicitudDetalles.evidencia = vm.evidenciaAux;
+                vm.evidenciaAux = [];
+            }
         }
 
 
@@ -203,22 +230,36 @@
                         vm.request.calificacion = 0;
                     }
 
-                    //aqui estaba el objeto a enviar
-                    vm.objetoAtencion = {
-                        cabinets: economico,
-                        descripcion_trabajo: vm.request.tipo,
-                        observaciones_cliente: vm.request.observaciones_cliente,
-                        observaciones_tecnicas: vm.request.observaciones_tecnico,
-                        km: vm.km,
-                        firma_cliente: vm.firmaC,
-                        firma_prospectador: vm.firmaT,
-                        insumos: [],
-                        insumos_lote: vm.insumosUsados,
-                        evidencia: vm.evidenciaNueva,
-                        calificacion: vm.request.calificacion,
-                        //status: vm.statusNew,
-                        cancelacion: false
-                    };
+                    if(vm.request.tipo === "Medio"){
+                        vm.objetoAtencion = {
+                            cabinets: economico,
+                            descripcion_trabajo: vm.request.tipo,
+                            observaciones_cliente: vm.request.observaciones_cliente,
+                            observaciones_tecnicas: vm.request.observaciones_tecnico,
+                            km: vm.km,
+                            firma_cliente: vm.firmaC,
+                            firma_tecnico: vm.firmaT,
+                            insumos: [],
+                            insumos_lote: vm.insumosUsados,
+                            evidencia: vm.evidenciaNueva,
+                            calificacion: vm.request.calificacion,
+                            //status: vm.statusNew,
+                            cancelacion: false
+                        };
+                    }else{
+                        vm.objetoAtencion = {
+                            cabinets: economico,
+                            descripcion_trabajo: vm.request.tipo,
+                            observaciones_cliente: vm.request.observaciones_cliente,
+                            observaciones_tecnicas: vm.request.observaciones_tecnico,
+                            km: vm.km,
+                            firma_cliente: vm.firmaC,
+                            firma_tecnico: vm.firmaT,
+                            evidencia: vm.evidenciaNueva,
+                            calificacion: vm.request.calificacion,
+                            cancelacion: false
+                        };
+                    }
 
                     confirmacion(vm.objetoAtencion);
                 }else{
@@ -259,6 +300,7 @@
         }
 
         function confirmacion(data) {
+            console.log("Data: ", data);
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
                 .textContent(vm.dialogRestoreMessage)
