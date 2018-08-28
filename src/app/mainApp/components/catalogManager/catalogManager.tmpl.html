@@ -37,13 +37,6 @@
                  promise:$ctrl.listLoader,
                  message:$ctrl.loadingMessage,
                  templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
-            <div layout="column"
-                 layout-align="center center"
-                 layout-padding>
-                <h3 ng-if="$ctrl.catalogElements.length>0">
-                    {{$ctrl.namePlural}}
-                </h3>
-            </div>
             <!-- Section for list with pagination -->
             <section ng-if="$ctrl.actions['LIST'].pagination">
                 <div layout="row"

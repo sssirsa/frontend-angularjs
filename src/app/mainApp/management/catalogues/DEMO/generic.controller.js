@@ -11,8 +11,6 @@
         vm.name = 'Catálogo de Estados';
 
         //Labels
-        vm.name = 'Estado';
-        vm.namePlural = 'Estados';
         vm.totalText = 'Elementos encontrados';
 
         //Button labels

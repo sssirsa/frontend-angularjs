@@ -9,8 +9,6 @@
                 kind: '<', //Mobile, Web, Generic. Default is 'Generic'
 
                 //Labels
-                name: '<', //Catalog name to show, default is 'Catalog'
-                namePlural: '<', //If not given, the default plural handler adds an 's' to the end of the name
                 totalText: '<', //If not given, the word 'Total' will be used
                 loadingMessage: '<',
 
