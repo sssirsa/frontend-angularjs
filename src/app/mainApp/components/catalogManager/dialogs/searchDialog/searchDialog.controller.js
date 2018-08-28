@@ -50,8 +50,6 @@
     ) {
         var vm = this;
 
-        console.debug(filters);
-
         //Variables
         vm.selectedTab = 0;
         vm.CatalogProvider = provider;
@@ -70,13 +68,13 @@
                 query = query + "__" + filter.type + "=";
             }
             query = query + vm.searchAuxVar;
-            vm.searchingPromise = CatalogProvider
+            vm.searchingPromise = vm.CatalogProvider
                 .search(query)
-                .then(function (elements) {
-                    $mdDialog.hide({ elements: elements });
+                .then(function (response) {
+                    $mdDialog.hide(response);
                 })
                 .catch(function (errorSearch) {
-                    $mdDialog({ error: errorSearch });
+                    $mdDialog(errorSearch);
                 });
         }
 

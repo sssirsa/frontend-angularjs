@@ -25,6 +25,8 @@
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
                 onErrorDelete: '&',
+                onSuccessSearch: '&',
+                onErrorSearch: '&',
                 onElementSelect: '&',
 
                 //Buttons, if no text is given, the button would only have an icon
@@ -415,8 +417,10 @@
                         filters: vm.actions['SEARCH'].filters,
                         provider: vm.CatalogProvider
                     }
-                }).then(function (element) {
-                    vm.onElementSelect(element);
+                }).then(function (response) {
+                    console.debug(response);
+                    treatResponse(response);
+                    vm.onSuccessSearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
                         vm.onErrorSearch(errorSearch);
