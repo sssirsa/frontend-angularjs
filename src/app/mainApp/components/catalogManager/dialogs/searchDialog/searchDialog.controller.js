@@ -67,6 +67,9 @@
             if (filter.type !== 'equals') {
                 query = query + "__" + filter.type + "=";
             }
+            else {
+                query = query + "=";
+            }
             query = query + vm.searchAuxVar;
             vm.searchingPromise = vm.CatalogProvider
                 .search(query)
