@@ -72,11 +72,7 @@
                             $log.debug(requestSuccess2);
                             vm.solicitudDetalles = requestSuccess2;
 
-                            console.log("Solicitud", vm.solicitudDetalles);
                             urlEvidencia();
-
-                            console.log("evidencias Atención", vm.request.evidencia);
-                            console.log("evidencias Solicitud", vm.solicitudDetalles.evidencia);
 
                             if(vm.request.tipo == 'Medio'){
                                 insumos();
@@ -300,8 +296,7 @@
         }
 
         function confirmacion(data) {
-            console.log("Data: ", data);
-            /*var confirm = $mdDialog.confirm()
+            var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
                 .textContent(vm.dialogRestoreMessage)
                 .ariaLabel('Confirmar')
@@ -318,7 +313,7 @@
                     });
             }, function () {
 
-            });*/
+            });
         }
 
         /*function showStoreLocation() {
