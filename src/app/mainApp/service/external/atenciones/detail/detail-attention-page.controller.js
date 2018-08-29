@@ -275,7 +275,7 @@
 
         function validar(){
             var cont = 0;
-            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio" ){
+            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio"  || vm.request.tipo === 'Retiro'){
                 if (vm.todosSeleccionado.length === 0) {
                     toastr.error(Translate.translate('Seleccione un cabinet'));
                     cont++;

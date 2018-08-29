@@ -191,10 +191,10 @@
         </md-input-container>
 
         <md-input-container class="md-block"
-                            ng-if="vm.request.tipo === 'Baja' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Medio'"
+                            ng-if="vm.request.tipo === 'Baja' || vm.request.tipo === 'Retiro' || vm.request.tipo === 'Cambio' || vm.request.tipo === 'Medio'"
                             layout-padding>
 
-            <div layout="colum" layout-align="left center" ng-if="vm.request.tipo === 'Baja'">
+            <div layout="colum" layout-align="left center" ng-if="vm.request.tipo === 'Baja' || vm.request.tipo === 'Retiro'">
                 Retirar Cabinet:&nbsp
             </div>
 
