@@ -10,6 +10,7 @@
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
+                totalFilteredText:'<', //If not given 'Total filtered' will be used
                 loadingMessage: '<',
 
                 //Functions
@@ -38,6 +39,7 @@
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
+                removeFilterButtonText:'<',
 
                 //Meta object for the component
                 actions: '<',
@@ -242,16 +244,7 @@
         var vm = this;
 
         activate();
-
-        //Initializing or assingning default values to global variables
-        if (vm.name) {
-            if (!vm.namePlural) {
-                vm.namePlural = vn.name + 's';
-            }
-        }
-        else {
-            vm.name = 'Catalog';
-        }
+        
         vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
@@ -260,6 +253,7 @@
         vm.selectedElement = null;
         vm.CatalogProvider = null;
         vm.PaginationProvider = null;
+        vm.filterApplied = null;
 
         //Function mapping
         vm.create = create;
@@ -271,6 +265,7 @@
         vm.nextPage = nextPage;
         vm.loadMore = loadMore;
         vm.elementSelection = elementSelection;
+        vm.removeFilter = removeFilter;
 
         function activate() {
             list();
@@ -400,7 +395,7 @@
         }
 
         function search() {
-            //Search behavior handling
+            //Search behavior handling, delegated to the search Dialog
             createMainCatalogProvider();
             if (vm.actions['SEARCH']) {
                 $mdDialog.show({
@@ -415,9 +410,10 @@
                         filters: vm.actions['SEARCH'].filters,
                         provider: vm.CatalogProvider
                     }
-                }).then(function (response) {
-                    console.debug(response);
-                    treatResponse(response);
+                }).then(function (successCallback) {
+                    treatResponse(successCallback.response);
+                    vm.filterApplied = successCallback.filter;
+                    console.debug(vm.filterApplied);
                     vm.onSuccessSearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
@@ -579,6 +575,12 @@
                     vm.paginationHelper['next'] = response['next'];
                 }
             }
+        }
+
+        //Remove filter function that reloads the elements of the list
+        function removeFilter() {
+            vm.filterApplied = null;
+            activate();
         }
 
     }

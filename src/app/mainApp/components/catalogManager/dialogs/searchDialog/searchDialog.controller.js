@@ -74,7 +74,8 @@
             vm.searchingPromise = vm.CatalogProvider
                 .search(query)
                 .then(function (response) {
-                    $mdDialog.hide(response);
+                    filter.search = vm.searchAuxVar;
+                    $mdDialog.hide({ response: response, filter: filter });
                 })
                 .catch(function (errorSearch) {
                     $mdDialog(errorSearch);

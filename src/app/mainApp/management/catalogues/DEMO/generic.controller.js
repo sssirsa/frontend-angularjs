@@ -11,7 +11,8 @@
         vm.name = 'Catálogo de Estados';
 
         //Labels
-        vm.totalText = 'Elementos encontrados';
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
         vm.searchButtonText = 'Buscar Estados';
@@ -21,6 +22,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas estados';
+        vm.removeFilterButtonText = 'Qutar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Estados';
@@ -176,6 +178,7 @@
         }
 
         function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
             console.debug('Element selected');
             console.debug(element);
         }
