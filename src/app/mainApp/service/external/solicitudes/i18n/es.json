@@ -48,7 +48,8 @@
             "EVIDENCES":"Evidencias",
             "EVIDENCES_S":"Evidencias de la Solicitud",
             "NO_EVIDENCES":"Sin evidencias",
-            "NO_INPUT": "Sin insumos"
+            "NO_INPUT": "Sin insumos",
+            "NO_FIRM": "Sin firma"
         },
         "NEW": {
             "TOASTR":{
