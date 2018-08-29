@@ -58,46 +58,46 @@
                             }
                         }
                     },
-                    {
-                        type: 'fileUploader',
-                        model: 'file',
-                        fileUploader: {
-                            filesSelected: function fileProcessing(files) {
-                                let processedFiles = [];
-                                angular.forEach(files, function (image) {
-                                    var base64Image = null;
-                                    var fileReader = new FileReader();
-                                    fileReader.readAsDataURL(image);
-                                    fileReader.onloadend = function () {
-                                        base64Image = fileReader.result;
-                                        processedFiles.push({ foto: base64Image });
-                                    };
-                                });
-                                return processedFiles;
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'catalog_id',
-                        label: 'Sub catálogo estados',
-                        catalog: {
-                            url: 'estado',
-                            name: 'Estado',
-                            kind: 'Mobile',
-                            model: 'codigo_estado',
-                            option: 'nombre',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
+                    //{
+                    //    type: 'fileUploader',
+                    //    model: 'file',
+                    //    fileUploader: {
+                    //        filesSelected: function fileProcessing(files) {
+                    //            let processedFiles = [];
+                    //            angular.forEach(files, function (image) {
+                    //                var base64Image = null;
+                    //                var fileReader = new FileReader();
+                    //                fileReader.readAsDataURL(image);
+                    //                fileReader.onloadend = function () {
+                    //                    base64Image = fileReader.result;
+                    //                    processedFiles.push({ foto: base64Image });
+                    //                };
+                    //            });
+                    //            return processedFiles;
+                    //        }
+                    //    }
+                    //},
+                    //{
+                    //    type: 'catalog',
+                    //    model: 'catalog_id',
+                    //    label: 'Sub catálogo estados',
+                    //    catalog: {
+                    //        url: 'estado',
+                    //        name: 'Estado',
+                    //        kind: 'Mobile',
+                    //        model: 'codigo_estado',
+                    //        option: 'nombre',
+                    //        loadMoreButtonText: 'Cargar mas...'
+                    //    },
+                    //    pagination: {
+                    //        total: 'count'
+                    //    },
+                    //    elements: 'results',
+                    //    softDelete: {
+                    //        hide: 'deleted',
+                    //        reverse: false
+                    //    }
+                    //}
                 ],
                 dialog: {
                     title: 'Crear estado',
