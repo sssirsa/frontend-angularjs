@@ -47,8 +47,6 @@
         //Declaración de funciones
         vm.changeProductivo = changeProductivo;
         vm.filesSelected = filesSelected;
-        vm.filesSelected2 = filesSelected2;
-        vm.filesSelected3 = filesSelected3;
         vm.insumoSelect = insumoSelect;
         vm.validaMax = validaMax;
         vm.enviar = enviar;
@@ -289,7 +287,7 @@
                 cont++;
             }
 
-            if(vm.km === null){
+            if(!vm.km){
                 toastr.error(Translate.translate('El campo de km es requerido'));
                 cont++;
             }
@@ -303,7 +301,7 @@
 
         function confirmacion(data) {
             console.log("Data: ", data);
-            var confirm = $mdDialog.confirm()
+            /*var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
                 .textContent(vm.dialogRestoreMessage)
                 .ariaLabel('Confirmar')
@@ -317,55 +315,47 @@
                     })
                     .catch(function (resultError) {
                         ErrorHandler.errortranslate(resultError);
-                        console.log(resultError);
                     });
             }, function () {
 
-            });
+            });*/
         }
 
         /*function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }*/
 
-        function filesSelected(files) {
-            vm.evidenciaNueva = [];
+        function filesSelected(files, num) {
+            if(num === 1){
+                vm.evidenciaNueva = [];
+            }
+
             angular.forEach(files, function (image) {
                 var base64Image = null;
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(image);
                 fileReader.onloadend = function () {
                     base64Image = fileReader.result;
-                    vm.evidenciaNueva.push({foto: base64Image});
+
+                    switch (num){
+                        case 1:
+                            vm.evidenciaNueva.push({foto: base64Image});
+                            break;
+
+                        case 2:
+                            vm.firmaC = null;
+                            vm.firmaC = base64Image.toString();
+                            break;
+
+                        case 3:
+                            vm.firmaT = null;
+                            vm.firmaT = base64Image;
+                            break;
+                    }
                 };
             });
         }
 
-        function filesSelected2(files) {
-            vm.firmaC = null;
-            angular.forEach(files, function (image) {
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(image);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.firmaC = base64Image.toString();
-                };
-            });
-        }
-
-        function filesSelected3(files) {
-            vm.firmaT = null;
-            angular.forEach(files, function (image) {
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(image);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.firmaT = base64Image;
-                };
-            });
-        }
 
         //codigo para listar cabinets
         vm.todosprev = null;
