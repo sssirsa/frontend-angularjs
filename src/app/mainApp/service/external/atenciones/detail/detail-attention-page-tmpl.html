@@ -566,7 +566,7 @@
                 <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
             </div>
 
-            <div ng-if="vm.request.firma_cliente.length > 0" layout-fill>
+            <div ng-if="vm.request.firma_cliente" layout-fill>
 
                 <ng-image-gallery
                     images="vm.request.firma_cliente_evidencia"
@@ -583,8 +583,10 @@
                 <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
             </div>
 
-            <div ng-if="vm.request.firma_cliente_evidencia.length === 0">
-                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center" ng-if="!vm.request.firma_cliente.length">
+                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
             </div>
 
         </div>
@@ -595,7 +597,7 @@
                 <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
             </div>
 
-            <div ng-if="vm.request.firma_tecnico.length > 0" layout-fill>
+            <div ng-if="vm.request.firma_tecnico" layout-fill>
 
                 <ng-image-gallery
                     images="vm.request.firma_tecnico_evidencia"
@@ -612,8 +614,11 @@
                 <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
             </div>
 
-            <div ng-if="vm.request.firma_tecnico_evidencia.length === 0">
-                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center"
+                 ng-if="!vm.request.firma_tecnico_evidencia">
+                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
             </div>
 
         </div>
