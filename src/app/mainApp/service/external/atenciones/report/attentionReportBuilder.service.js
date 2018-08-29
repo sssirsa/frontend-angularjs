@@ -126,7 +126,7 @@
                                                     //Operador Ternario para asignar  el codigo postal
                                                     vm.storeInfo.ZIPCODE_CABINET.columns[0].columns[1].text = vm.infoReport.establecimiento.cp ? vm.infoReport.establecimiento.cp : 'Sin Codigo Postal';
                                                     //Operador Ternario para asignar el cabinet
-                                                    vm.storeInfo.ZIPCODE_CABINET.columns[1].columns[1].text = vm.infoReport.cabinet.economico ?  vm.infoReport.cabinet.economico: 'Sin Economico';
+                                                    vm.storeInfo.ZIPCODE_CABINET.columns[1].columns[1].text = vm.infoReport.cabinet ?  vm.infoReport.cabinet.economico: 'Sin Economico';
                                                     vm.reportToPDF.content.push(vm.storeInfo.ZIPCODE_CABINET);
 
 
