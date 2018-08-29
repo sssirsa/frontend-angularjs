@@ -47,6 +47,8 @@
         //Declaración de funciones
         vm.changeProductivo = changeProductivo;
         vm.filesSelected = filesSelected;
+        vm.filesSelected2 = filesSelected2;
+        vm.filesSelected3 = filesSelected3;
         vm.insumoSelect = insumoSelect;
         vm.validaMax = validaMax;
         vm.enviar = enviar;
@@ -219,11 +221,11 @@
                     }
 
                     if(vm.request.observaciones_cliente === null){
-                        vm.request.observaciones_cliente = "";
+                        vm.request.observaciones_cliente = "Sin observaciones";
                     }
 
                     if(vm.request.observaciones_tecnico === null){
-                        vm.request.observaciones_tecnico = "";
+                        vm.request.observaciones_tecnico = "Sin observaciones";
                     }
 
                     if(vm.request.calificacion === null){
@@ -315,6 +317,7 @@
                     })
                     .catch(function (resultError) {
                         ErrorHandler.errortranslate(resultError);
+                        console.log(resultError);
                     });
             }, function () {
 
@@ -325,44 +328,44 @@
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
         }*/
 
-        function filesSelected(files, num) {
-            if(num === 1) {
-                vm.evidenciaNueva = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.evidenciaNueva.push({foto: base64Image});
-                    };
-                });
-            }else if(num === 2){
-                vm.firmaC = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.firmaC.push({foto: base64Image});
-                    };
-                });
-
-            }else if(num === 3){
-                vm.firmaT = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.firmaT.push({foto: base64Image});
-                    };
-                });
-            }
+        function filesSelected(files) {
+            vm.evidenciaNueva = [];
+            angular.forEach(files, function (image) {
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.evidenciaNueva.push({foto: base64Image});
+                };
+            });
         }
 
+        function filesSelected2(files) {
+            vm.firmaC = null;
+            angular.forEach(files, function (image) {
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.firmaC = base64Image.toString();
+                };
+            });
+        }
+
+        function filesSelected3(files) {
+            vm.firmaT = null;
+            angular.forEach(files, function (image) {
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.firmaT = base64Image;
+                };
+            });
+        }
 
         //codigo para listar cabinets
         vm.todosprev = null;
