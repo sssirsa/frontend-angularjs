@@ -12,6 +12,7 @@
             "IN_PROCESS":"En proceso",
             "CANCELED":"Cancelada",
             "CLOSED":"Cerrada",
+            "UNPRODUCTIVE":"Improductiva",
             "FOLIO":"Folio",
             "STATUS":"Estado",
             "DATE":"Fecha",
@@ -45,7 +46,10 @@
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
             "EVIDENCES":"Evidencias",
-            "NO_EVIDENCES":"Sin evidencias"
+            "EVIDENCES_S":"Evidencias de la Solicitud",
+            "NO_EVIDENCES":"Sin evidencias",
+            "NO_INPUT": "Sin insumos",
+            "NO_FIRM": "Sin firma"
         },
         "NEW": {
             "TOASTR":{
@@ -96,6 +100,8 @@
             "SCORE":"Calificación del servicio",
             "ROUTE":"Ruta",
             "EVIDENCES":"Evidencias",
+            "FIRM_CLIENT": "Firma cliente",
+            "FIRM_TECHNICAL": "Firma Técnico",
             "KIND":"Tipo de solicitud",
             "EQUIPMENT":{
                 "SEARCH":"Tipo de equipo a asignar"

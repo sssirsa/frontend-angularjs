@@ -1,0 +1,143 @@
+{
+    "TITLE": {
+        "text": "Datos Generales",
+        "style": "subheader"
+    },
+    "BLANCK_SPACE": {
+        "text": "\n"
+    },
+    "NAME_ATTENTION": {
+        "columns": [
+            {
+                "width": 110,
+                "bold": true,
+                "text": "Atendió:"
+            },
+            {
+                "text": "NOMBRE_TECNICO",
+                "alignment": "justify"
+            }
+        ]
+    },
+    "ESTATUS": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Estatus:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "ESTATUS_VARIABLE",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Sucursal:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "SUCURSAL_VARIABLE"
+                    }
+                ]
+            }
+        ]
+    },
+    "DATE_REQUEST_ASSIGNEMENT": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Fecha Solicitud:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "DATE_TIME_REQUEST"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Fecha Asignación:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "DATE_TIME_ASSIGMENT"
+                    }
+                ]
+            }
+        ]
+    },
+    "DATE_ATTENTION": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Inicio Atención:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "DATE_TIME_START"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Fin Atención:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "DATE_TIME_END"
+                    }
+                ]
+            }
+        ]
+    },
+    "KILOMETERS_SCORE": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Kilometraje:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "KILOMETRES"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Calificación:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "SCORE",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    "DOUBLE_BLANK": {
+        "text": "\n\n"
+    }
+}

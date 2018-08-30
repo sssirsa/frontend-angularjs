@@ -25,8 +25,14 @@
         function getByID(id) {
             return urlbase.all(id).customGET();
         }
-        function list(){
-            return urlbase.getList();
+        function list(limit, offset){
+            if(limit !== undefined && offset !== undefined){
+                return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
+            }
+            else {
+                return urlbase.customGET();
+            }
+
         }
 
         function update(economico, data) {

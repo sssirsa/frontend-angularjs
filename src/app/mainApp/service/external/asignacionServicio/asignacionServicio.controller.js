@@ -8,9 +8,9 @@
     function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
         var vm = this;
 
-        vm.selectedKind = null;
+        vm.selectedKind = 'unasigned';
         vm.salePoints = null;
-        vm.salePointKinds = OPTIONS.salePointAssignKind;
+        vm.salePointKinds = [{id: 'unasigned', value: 'Sin asignar'}];
         vm.Assing = Assing;
 
         function Assing(salePoint) {
@@ -27,7 +27,7 @@
                 }
             })
                 .then(function () {
-                    vm.selectedKind = 'pending';
+                    vm.selectedKind = 'unasigned';
                     vm.salePoints = null;
                     vm.listSalePoints();
                 });
@@ -38,15 +38,23 @@
         vm.listSalePoints = listSalePoints;
         vm.selectSalePoint = selectSalePoint;
 
+
+        //datos para paginado
+        vm.objectAtention = null;
+        vm.offset = 0;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+
         function listSalePoints() {
             if (vm.selectedKind) {
-                vm.salePoints = null;
+                vm.objectAtention = null;
                 switch (vm.selectedKind) {
-                    case 'pending':
-                        vm.loadingPromise = SalePoint.listUnasignedServices()
+                    case 'unasigned':
+                        vm.loadingPromise = SalePoint.listUnasignedServices('?limit=20&offset='+vm.offset)
                             .then(function (salePointsSuccess) {
-                                vm.salePoints = salePointsSuccess;
-                                console.log(vm.salePoints);
+                                vm.objectAtention = salePointsSuccess;
+                                prepareDataFunction();
+                                console.log(salePointsSuccess);
                             })
                             .catch(function (salePointsError) {
                                 console.log(salePointsError);
@@ -56,34 +64,34 @@
                                 );
                             });
                         break;
-                    case 'attended':
-                        vm.loadingPromise = SalePoint.listAttendedServices()
-                            .then(function (salePointsSuccess) {
-                                if (salePointsSuccess.length > 0) {
-                                    vm.salePoints = salePointsSuccess;
-                                    console.log(vm.salePoints);
-
-                                }
-                                else {
-                                    vm.salePoints = null;
-                                }
-                            })
-                            .catch(function (salePointsError) {
-                                console.log(salePointsError);
-                                vm.salePoints = null;
-                                toastr.error(
-                                    Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                                );
-                            });
-                        break;
                 }
             }
+        }
+
+        function prepareDataFunction() {
+            vm.salePoints = vm.objectAtention.results;
+        }
+
+        function sigPage() {
+            vm.offset += 20;
+            listSalePoints();
+        }
+
+        function prevPage() {
+            vm.offset -= 20;
+            listSalePoints();
         }
 
         function selectSalePoint(salePoint) {
             $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
         }
+
+        initial();
+
+        function initial(){
+            listSalePoints();
+        }
+
 
     }
 
