@@ -105,20 +105,8 @@
         function urlEvidencia() {
             if(vm.solicitudDetalles.evidencia.length >0){
                 angular.forEach(vm.solicitudDetalles.evidencia, function (evidence) {
-                    vm.evidenciaAux = [];
-                    var auxE = {
-                        id: evidence.id,
-                        foto: evidence.foto,
-                        atencion: evidence.atencion,
-                        solicitud: evidence.solicitud,
-                        pre_solicitud: evidence.pre_solicitud,
-                        url: evidence.foto
-                    };
-                    vm.evidenciaAux.push(auxE);
+                    evidence.url = evidence.foto;
                 });
-
-                vm.solicitudDetalles.evidencia = vm.evidenciaAux;
-                vm.evidenciaAux = [];
             }
         }
 
