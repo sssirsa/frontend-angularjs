@@ -55,26 +55,28 @@
 
                                         //Operador Ternario para asignar fecha de solicitud
 
-                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[0].columns[1].text = vm.infoReport.fecha ? moment(vm.infoReport.fecha).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de Solicitud';
+                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[0].columns[1].text = vm.infoReport.fecha ? moment(vm.infoReport.fecha).format('MMMM Do YYYY, h:mm a') : 'Sin fecha de Solicitud';
                                         //Operador Ternario para asignar la fecha de asignación
-                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[1].columns[1].text = vm.infoReport.fecha_asignacion ? moment(vm.infoReport.fecha_asignacion).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de Asignación';
+                                        vm.generalData.DATE_REQUEST_ASSIGNEMENT.columns[1].columns[1].text = vm.infoReport.fecha_asignacion ? moment(vm.infoReport.fecha_asignacion).format('MMMM Do YYYY, h:mm a') : 'Sin fecha de Asignación';
                                         vm.reportToPDF.content.push(vm.generalData.DATE_REQUEST_ASSIGNEMENT);
 
                                         //Operador Ternario para asignar el inicio atención
-                                        vm.generalData.DATE_ATTENTION.columns[0].columns[1].text = vm.infoReport.fecha_inicio_servicio ? moment(vm.infoReport.fecha_inicio_servicio).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de inicio de servicio';
+                                        vm.generalData.DATE_ATTENTION.columns[0].columns[1].text = vm.infoReport.fecha_inicio_servicio ? moment(vm.infoReport.fecha_inicio_servicio).format('MMMM Do YYYY, h:mm a') : 'Sin fecha de inicio de servicio';
                                         //Operador Ternario para asignar el fin atención
-                                        vm.generalData.DATE_ATTENTION.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio ? moment(vm.infoReport.fecha_fin_servicio).format('MMMM Do YYYY, h:mm:ss a') : 'Sin fecha de fin de servicio';
+                                        vm.generalData.DATE_ATTENTION.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio ? moment(vm.infoReport.fecha_fin_servicio).format('MMMM Do YYYY, h:mm a') : 'Sin fecha de fin de servicio';
                                         vm.reportToPDF.content.push(vm.generalData.DATE_ATTENTION);
 
 
                                         //Operador Ternario para asignar el kilometraje
                                         vm.generalData.KILOMETERS_SCORE.columns[0].columns[1].text = vm.infoReport.km !== null ? vm.infoReport.km : 'Sin kilometraje registrado';
+                                        //console.log(vm.infoReport.calificacion);
                                         var iterator, califStar = '';
-                                        for (iterator = 0; i < vm.infoReport.calificacion; i++) {
+                                        for (iterator = 0; iterator < vm.infoReport.calificacion; iterator++) {
                                             califStar = califStar.concat("*");
+                                            //console.log(califStar)
                                         }
                                         //Operador Ternario para asignar la calificación
-                                        vm.generalData.KILOMETERS_SCORE.columns[1].columns[1].text = vm.infoReport.fecha_fin_servicio > 0 ? califStar : 'Sin Calificación';
+                                        vm.generalData.KILOMETERS_SCORE.columns[1].columns[1].text = vm.infoReport.calificacion > 0 ? califStar : 'Sin Calificación';
                                         vm.reportToPDF.content.push(vm.generalData.KILOMETERS_SCORE);
                                         vm.reportToPDF.content.push(vm.generalData.DOUBLE_BLANK);
 
@@ -117,9 +119,9 @@
                                                     vm.reportToPDF.content.push(vm.storeInfo.STREET_NUMBERSTREET);
 
                                                     //Operador Ternario para asignar  entre calle
-                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[0].columns[1].text = vm.infoReport.establecimiento.entre_calle1 ? vm.infoReport.establecimiento.entre_calle1 : 'Entre Calle';
+                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[0].columns[1].text = vm.infoReport.establecimiento.entre_calle1 ? vm.infoReport.establecimiento.entre_calle1 : 'Sin Calle';
                                                     //Operador Ternario para asignar y calle
-                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[1].columns[1].text = vm.infoReport.establecimiento.entre_calle2 ? vm.infoReport.establecimiento.entre_calle2 : 'Entre Número';
+                                                    vm.storeInfo.NEXT_NEAR_STREET.columns[1].columns[1].text = vm.infoReport.establecimiento.entre_calle2 ? vm.infoReport.establecimiento.entre_calle2 : 'Sin Calle';
                                                     vm.reportToPDF.content.push(vm.storeInfo.NEXT_NEAR_STREET);
 
 
@@ -293,14 +295,14 @@
                                                                                     .then(function (signature) {
                                                                                         vm.signature=signature.data;
                                                                                         //Operador Ternario para asignar la firma tecnico
-                                                                                        console.log( vm.infoReport.firma_tecnico );
-                                                                                        console.log( vm.infoReport.firma_cliente );
+                                                                                        //console.log( vm.infoReport.firma_tecnico );
+                                                                                       // console.log( vm.infoReport.firma_cliente );
                                                                                         vm.infoReport.firma_tecnico != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].image='data:image/png;base64,'+ vm.infoReport.firma_tecnico : vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].text="Sin firma";
                                                                                         //Operador Ternario para asignar la firma cliente
                                                                                         vm.infoReport.firma_cliente != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].image='data:image/png;base64,'+ vm.infoReport.firma_cliente : vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].text="Sin firma";
-                                                                                        console.log(vm.signature.SIGNATURE_SAPACE);
+                                                                                       // console.log(vm.signature.SIGNATURE_SAPACE);
                                                                                         vm.reportToPDF.content.push(vm.signature.SIGNATURE_SAPACE);
-                                                                                        console.log(vm.reportToPDF);
+                                                                                       // console.log(vm.reportToPDF);
                                                                                         pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
                                                                                     });
                                                                             });
