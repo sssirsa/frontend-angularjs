@@ -569,7 +569,7 @@
             <div ng-if="vm.request.firma_cliente" layout-fill>
 
                 <ng-image-gallery
-                    images="vm.request.firma_cliente_evidencia"
+                    images="vm.request.firma_cliente"
                     thumbnails="false"
                     thumb-size="80"
                     inline="true"
@@ -585,7 +585,7 @@
 
             <div flex
                  layout="row"
-                 layout-align-gt-sm="space-around center" ng-if="!vm.request.firma_cliente.length">
+                 layout-align-gt-sm="space-around center" ng-if="!vm.request.firma_cliente">
                 <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
             </div>
 
@@ -600,7 +600,7 @@
             <div ng-if="vm.request.firma_tecnico" layout-fill>
 
                 <ng-image-gallery
-                    images="vm.request.firma_tecnico_evidencia"
+                    images="vm.request.firma_tecnico"
                     thumbnails="false"
                     thumb-size="80"
                     inline="true"
@@ -617,7 +617,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center"
-                 ng-if="!vm.request.firma_tecnico_evidencia">
+                 ng-if="!vm.request.firma_tecnico">
                 <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
             </div>
 

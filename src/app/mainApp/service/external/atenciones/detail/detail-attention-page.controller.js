@@ -67,6 +67,10 @@
                     vm.store = requestSuccess.establecimiento;
                     vm.km = requestSuccess.km;
 
+                    if(vm.kindAtention === "all"){
+                        convertFirm();
+                    }
+
                     vm.loadingPromise2 = SalePointRequests.getByID(vm.id)
                         .then(function (requestSuccess2) {
                             $log.debug(requestSuccess2);
@@ -115,6 +119,18 @@
 
                 vm.solicitudDetalles.evidencia = vm.evidenciaAux;
                 vm.evidenciaAux = [];
+            }
+        }
+
+        function convertFirm() {
+            if(vm.request.firma_cliente){
+                var firmClient = [{url: vm.request.firma_cliente, foto: vm.request.firma_cliente}];
+                vm.request.firma_cliente = firmClient;
+            }
+
+            if(vm.request.firma_tecnico){
+                var firmTec = [{url: vm.request.firma_tecnico, foto: vm.request.firma_tecnico}];
+                vm.request.firma_tecnico = firmTec;
             }
         }
 
