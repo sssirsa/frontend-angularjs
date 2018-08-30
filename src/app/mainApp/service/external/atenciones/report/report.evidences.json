@@ -1,0 +1,24 @@
+{
+    "EVIDENCES_TITLE": {
+        "text": "Evidencias del Servicio",
+        "style": "subheader"
+    },
+    "IMAGE_EVIDENDCE": {
+        "image": "data:image/png;base64,",
+        "fit": [
+            500,
+            330
+        ],
+        "alignment": "center"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "NO_IMAGE": {
+        "text": "Sin Evidencia",
+        "style": "subheader"
+    },
+    "SEPARATOR": {
+        "text": "_______________________________________________________________________________________________"
+    }
+}
