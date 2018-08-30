@@ -72,11 +72,7 @@
                             $log.debug(requestSuccess2);
                             vm.solicitudDetalles = requestSuccess2;
 
-                            console.log("Solicitud", vm.solicitudDetalles);
                             urlEvidencia();
-
-                            console.log("evidencias Atención", vm.request.evidencia);
-                            console.log("evidencias Solicitud", vm.solicitudDetalles.evidencia);
 
                             if(vm.request.tipo == 'Medio'){
                                 insumos();
@@ -219,11 +215,11 @@
                     }
 
                     if(vm.request.observaciones_cliente === null){
-                        vm.request.observaciones_cliente = "";
+                        vm.request.observaciones_cliente = "Sin observaciones";
                     }
 
                     if(vm.request.observaciones_tecnico === null){
-                        vm.request.observaciones_tecnico = "";
+                        vm.request.observaciones_tecnico = "Sin observaciones";
                     }
 
                     if(vm.request.calificacion === null){
@@ -275,7 +271,7 @@
 
         function validar(){
             var cont = 0;
-            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio" ){
+            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio"  || vm.request.tipo === 'Retiro'){
                 if (vm.todosSeleccionado.length === 0) {
                     toastr.error(Translate.translate('Seleccione un cabinet'));
                     cont++;
@@ -287,7 +283,7 @@
                 cont++;
             }
 
-            if(vm.km === null){
+            if(!vm.km){
                 toastr.error(Translate.translate('El campo de km es requerido'));
                 cont++;
             }
@@ -300,7 +296,6 @@
         }
 
         function confirmacion(data) {
-            console.log("Data: ", data);
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogRestoreTitle)
                 .textContent(vm.dialogRestoreMessage)
@@ -326,41 +321,34 @@
         }*/
 
         function filesSelected(files, num) {
-            if(num === 1) {
+            if(num === 1){
                 vm.evidenciaNueva = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.evidenciaNueva.push({foto: base64Image});
-                    };
-                });
-            }else if(num === 2){
-                vm.firmaC = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.firmaC.push({foto: base64Image});
-                    };
-                });
-
-            }else if(num === 3){
-                vm.firmaT = [];
-                angular.forEach(files, function (image) {
-                    var base64Image = null;
-                    var fileReader = new FileReader();
-                    fileReader.readAsDataURL(image);
-                    fileReader.onloadend = function () {
-                        base64Image = fileReader.result;
-                        vm.firmaT.push({foto: base64Image});
-                    };
-                });
             }
+
+            angular.forEach(files, function (image) {
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(image);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+
+                    switch (num){
+                        case 1:
+                            vm.evidenciaNueva.push({foto: base64Image});
+                            break;
+
+                        case 2:
+                            vm.firmaC = null;
+                            vm.firmaC = base64Image.toString();
+                            break;
+
+                        case 3:
+                            vm.firmaT = null;
+                            vm.firmaT = base64Image;
+                            break;
+                    }
+                };
+            });
         }
 
 
