@@ -211,18 +211,23 @@
 
                         economico.push(vm.solicitudDetalles.cabinet);
                     }else{
-                        economico.push(vm.todosSeleccionado[0].economico);
+
+                        if(vm.request.tipo === "Retiro" || vm.request.tipo === "Baja"){
+                            economico.push(vm.solicitudDetalles.cabinet);
+                        }else{
+                            economico.push(vm.todosSeleccionado[0].economico);
+                        }
                     }
 
-                    if(vm.request.observaciones_cliente === null){
+                    if(!vm.request.observaciones_cliente){
                         vm.request.observaciones_cliente = "Sin observaciones";
                     }
 
-                    if(vm.request.observaciones_tecnico === null){
+                    if(!vm.request.observaciones_tecnico){
                         vm.request.observaciones_tecnico = "Sin observaciones";
                     }
 
-                    if(vm.request.calificacion === null){
+                    if(!vm.request.calificacion){
                         vm.request.calificacion = 0;
                     }
 
@@ -231,7 +236,7 @@
                             cabinets: economico,
                             descripcion_trabajo: vm.request.tipo,
                             observaciones_cliente: vm.request.observaciones_cliente,
-                            observaciones_tecnicas: vm.request.observaciones_tecnico,
+                            observaciones_tecnico: vm.request.observaciones_tecnico,
                             km: vm.km,
                             firma_cliente: vm.firmaC,
                             firma_tecnico: vm.firmaT,
@@ -247,7 +252,7 @@
                             cabinets: economico,
                             descripcion_trabajo: vm.request.tipo,
                             observaciones_cliente: vm.request.observaciones_cliente,
-                            observaciones_tecnicas: vm.request.observaciones_tecnico,
+                            observaciones_tecnico: vm.request.observaciones_tecnico,
                             km: vm.km,
                             firma_cliente: vm.firmaC,
                             firma_tecnico: vm.firmaT,
@@ -271,7 +276,7 @@
 
         function validar(){
             var cont = 0;
-            if(vm.request.tipo === "Alta" || vm.request.tipo === "Baja" || vm.request.tipo === "Cambio"  || vm.request.tipo === 'Retiro'){
+            if(vm.request.tipo === "Alta" || vm.request.tipo === "Cambio"){
                 if (vm.todosSeleccionado.length === 0) {
                     toastr.error(Translate.translate('Seleccione un cabinet'));
                     cont++;
