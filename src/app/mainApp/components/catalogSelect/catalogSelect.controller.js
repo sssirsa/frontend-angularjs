@@ -159,7 +159,7 @@
                 vm.loadMoreLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
-                        var elements = response.data;
+                        var elements = response;
                         //Elements list is returned in any other model
                         if (vm.elements) {
                             vm.catalogElements = vm.catalogElements.concat(elements[vm.elements]);
