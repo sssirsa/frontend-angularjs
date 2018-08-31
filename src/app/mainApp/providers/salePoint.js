@@ -11,7 +11,8 @@
         var service = {
             getByID: getByID,
             listUnasignedServices: listUnasignedServices,
-            listAttendedServices: listAttendedServices,
+            listAsignedService: listAsignedService,
+            listAllServices: listAllServices,
             assignToPerson: assignToPerson,
             assignedTo: assignedTo,
             getStore: getStore
@@ -21,12 +22,16 @@
             return baseUrl.one('atencion_pv', id).customGET();
         }
 
-        function listUnasignedServices() {
-            return baseUrl.all('list_atencion').getList();
+        function listUnasignedServices(urlAux) {
+            return baseUrl.all('list_atencion'+ urlAux).customGET();
         }
 
-        function listAttendedServices() {
-            return baseUrl.all('list_atendido_pv').getList();
+        function listAsignedService(limit, offset) {
+            return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset).customGET();
+        }
+
+        function listAllServices(limit, offset) {
+            return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset).customGET();
         }
 
         function assignToPerson(object, serviceID) {

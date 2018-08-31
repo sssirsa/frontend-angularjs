@@ -1,0 +1,106 @@
+{
+    "CABINET_TITLE": {
+        "text": "Información del Cabinet",
+        "style": "subheader"
+    },
+    "NO_CABINET": {
+        "text": "Sin datos de Cabinet",
+        "style": "subheader"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "IDENTIFIER_INVENTORY_NUMBER": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Economico:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "IDENTIFIER_NUMBER"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "No. de Activo:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "INVENTORY_NUMBER",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    "MODEL_LEVEL_ANTIQUE": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Modelo:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "MODEL_VALUE"
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Antiguedad:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "LEVEL_ANTIQUE",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    "INCIDENCES_SERIAL_NUMBER": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "No. de Incidencias:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "INCIDENCE_NUMBER",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "No. de Serie:",
+                        "width": 110,
+                        "bold": true
+                    },
+                    {
+                        "text": "SERIAL_NUMBER"
+                    }
+                ]
+            }
+        ]
+    },
+    "DOUBLE_BLANK": {
+        "text": "\n\n"
+    }
+}

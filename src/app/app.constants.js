@@ -396,8 +396,8 @@
 
             ],
             salePointAssignKind: [
-                { id: 'pending', value: 'Pendientes' },
-                { id: 'attended', value: 'Atendidos' }
+                {id: 'pending', value: 'Pendientes'},
+                {id: 'all', value: 'Detalle de atención'}
             ],
             requestKinds: [
                 {
@@ -452,12 +452,14 @@
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
+            tecnicosDisponibles: 'employees',
             proveedor: 'proveedor',
             proyecto: 'proyecto',
             report_builder: 'report_builder',
             reporte_insumos: 'reports/insumos',
             rutas: 'ruta',
             solicitud_pv: 'solicitud',
+            atencion_pv: 'atencion_pv',
             etapa_servicio: 'etapa_servicio',
             insumo_usado: 'insumo_usado',
             grupo_persona: 'grupo_persona',

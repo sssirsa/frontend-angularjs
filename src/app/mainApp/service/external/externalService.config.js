@@ -27,8 +27,20 @@
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/detalleAsignacion.tmpl.html',
                 controller: 'detalleAsignacionController',
                 controllerAs: 'vm',
+            })
+            .state('triangular.admin-default.serviceList', {
+                url: '/listarServicios',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/external/atenciones/list/list-atention-page.tmpl.html',
+                controller: 'listAtentionController',
+                controllerAs: 'vm',
                 params: {
-                    id: null
+                    runListPendientes: null,
+                    runListTodos: null
                 }
             })
             .state('triangular.admin-default.newRequest', {
@@ -105,6 +117,22 @@
                         only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
                     }
                 }
+            })
+
+            .state('triangular.admin-default.attentionDetail', {
+                url: '/atencion/:id',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/external/atenciones/detail/detail-attention-page-tmpl.html',
+                controller: 'DetailAttentionPageController',
+                controllerAs: 'vm',
+                params: {
+                    id: null,
+                    tipo: null
+                }
             });
 
 
@@ -117,7 +145,7 @@
                 priority: 7,
                 children: [
                     {
-                        name: 'MAIN.MENU.SERVICE_ASSIGN.ASSIGN',
+                        name: 'MAIN.MENU.SERVICE.ASSIGN',
                         state: 'triangular.admin-default.serviceAssing',
                         permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
                         type: 'link'
@@ -140,6 +168,12 @@
                             type: 'link'
                         }
                         ]
+                    },
+                    {
+                        name : 'MAIN.MENU.SERVICE.MENU_TITLE',
+                        state: 'triangular.admin-default.serviceList',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
