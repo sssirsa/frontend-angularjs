@@ -1,5 +1,7 @@
 node_modules/
 bower_components/
+v15/
+.vs/
 .sass-cache/
 .tmp/
 dist/

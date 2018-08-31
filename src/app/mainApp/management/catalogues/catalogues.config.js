@@ -229,6 +229,17 @@
                 controller: 'segmentationController',
                 controllerAs: 'vm'
             });
+            //.state('triangular.admin-default.generic-catalogue', {
+            //    url: '/catalogue/DEMO',
+            //    data: {
+            //        permissions: {
+            //            only: ['ADMINISTRADOR']
+            //        }
+            //    },
+            //    templateUrl: 'app/mainApp/management/catalogues/DEMO/generic.tmpl.html',
+            //    controller: 'GenericCatalogueController',
+            //    controllerAs: 'vm'
+            //});
 
         triMenuProvider.addMenu(
             {
@@ -238,6 +249,12 @@
                 permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
                 priority: 3,
                 children: [
+                    //{
+                    //    name: 'DEMO Generic Catalog',
+                    //    state: 'triangular.admin-default.generic-catalogue',
+                    //    permission: ['ADMINISTRADOR'],
+                    //    type: 'link'
+                    //},
                     {
                         name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
                         state: 'triangular.admin-default.catalogue-segmentation',

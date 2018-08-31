@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', 'RoleStore', 'User', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -33,6 +33,7 @@
                         .setDefaultHeaders({
                             Authorization: 'bearer ' + loginResponse.access_token
                         });
+                    $http.defaults.headers.common['Authorization'] = 'bearer ' + loginResponse.access_token;
                     request.resolve();
                 })
                 .catch(function (errorLogin) {
