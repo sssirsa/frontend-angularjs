@@ -3,10 +3,10 @@
         .module('app.mainApp')
         .controller('GenericCatalogueController', GenericCatalogController);
 
-    function GenericCatalogController() {
+    function GenericCatalogController(URLS) {
         var vm = this;
 
-        vm.url = 'estado';
+        vm.url = URLS.estado;
         vm.kind = 'Mobile';
         vm.name = 'Catálogo de Estados';
 
