@@ -148,6 +148,15 @@
                         field: {
                             type: 'text'
                         }
+                    },
+                    {
+                        type: 'istartswith',
+                        model: 'responsable',
+                        header: 'por Responsable',
+                        label: 'Responsable',
+                        field: {
+                            type: 'text'
+                        }
                     }
                 ]
             }
