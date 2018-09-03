@@ -119,7 +119,8 @@
         function generarRemision() {
 
 
-            vm.loadingPromise=$http.get('app/mainApp/servicios/salida/lista/formato.json').success(function (col) {
+            vm.loadingPromise=$http.get('app/mainApp/servicios/salida/lista/formato.json').then(function (col2) {
+                var col=col2.data;
                 EntradaSalida.getRemision(vm.selectedSalidaList.id).then(function (res) {
                     col.content[0].table.body[1][0].stack[2].text = res.udn.agencia + "\n" + res.udn.direccion;//Direccion UDN
                     col.content[0].table.body[1][1].stack[2].text = res.sucursal.nombre + "\n " + res.sucursal.direccion;//Almacen general
