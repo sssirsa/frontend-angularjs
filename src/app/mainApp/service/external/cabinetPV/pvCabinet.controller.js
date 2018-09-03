@@ -1,4 +1,3 @@
-
 (function () {
     angular
         .module('app.mainApp')
@@ -15,12 +14,27 @@
         vm.aRefresh = aRefresh;
         vm.listcabinets = listcabinets;
 
+        //datos para paginado
+        vm.objectPaginado = null;
+        vm.offset = 0;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+
         function aRefresh() {
             console.log("Refresca la principal");
             vm.todosprev = null;
             vm.todos = [];
+            vm.objectPaginado = null;
+            vm.offset = 0;
             listcabinets();
 
+        }
+
+        function paginadoRefresh() {
+            console.log("Refresca la principal");
+            vm.todosprev = null;
+            vm.todos = [];
+            listcabinets();
         }
 
         listcabinets();
@@ -28,9 +42,12 @@
         function listcabinets(){
             var ux = "Activo";
 
-            vm.loadingPromise = cabinetPV.list()
+            vm.loadingPromise = cabinetPV.list('50', vm.offset)
                 .then(function (res) {
-                    vm.todosprev = Helper.filterDeleted(res, true);
+                    console.log(res);
+                    vm.objectPaginado = res;
+                    prepareDataFunction();
+
 
                     angular.forEach(vm.todosprev, function (cabinet) {
 
@@ -67,6 +84,22 @@
                 .catch(function (err) {
 
                 });
+        }
+
+        function prepareDataFunction() {
+            vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+        }
+
+        function sigPage() {
+            vm.offset += 100;
+            paginadoRefresh();
+            //listcabinets();
+        }
+
+        function prevPage() {
+            vm.offset -= 100;
+            paginadoRefresh();
+            //listcabinets();
         }
 
     }
