@@ -61,7 +61,8 @@
                         label: 'Telefonos',
                         required: false,
                         validations: {
-                            regex: "[0-9]{1,10}",
+                            max: 10,
+                            regex: "[0-9]{7,10}",
                             errors: {
                                 regex: 'El número no tiene un formato correcto'
                             }

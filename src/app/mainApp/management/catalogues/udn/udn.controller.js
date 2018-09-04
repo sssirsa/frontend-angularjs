@@ -6,172 +6,212 @@
         .module('app.mainApp.management.catalogues')
         .controller('UDNController',UDNController);
 
-    function UDNController(udn, toastr,OPTIONS, Translate, $scope, Helper, $mdDialog)
+    function UDNController(URLS, Translate, OPTIONS)
     {
+
         var vm = this;
 
-        //Variables
-        vm.searchText = '';
-        vm.search_items = [];
-        vm.udn_list = null;
-        vm.udn = null;
-        vm.udns=OPTIONS.zone;
+        vm.url = URLS.udn;
+        vm.kind = 'Web';
+        vm.name = Translate.translate('UDN_CATALOG.title');
+        vm.options = OPTIONS.zone;
 
-        vm.toggleDeleted = true;
+        //Labels
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
+
+        //Button labels
+        vm.searchButtonText = 'Buscar UDN';
+        vm.createButtonText = 'Crear UDN';
+        vm.deleteButtonText = 'Borrar UDN';
+        vm.modifyButtonText = 'Editar UDN';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas UDN';
+        vm.removeFilterButtonText = 'Qutar filtro';
+
+        //Messages
+        vm.loadingMessage = 'Cargando UDN';
 
         //Functions
-        vm.lookup = lookup;
-        vm.selectedItemChange = selectedItemChange;
-        vm.cancel = cancel;
-        vm.update = update;
-        vm.create = create;
-        vm.remove = remove;
-        vm.clickRepeater = clickRepeater;
-        vm.restore = restore;
-        vm.toggleDeletedFunction = toggleDeletedFunction;
+        vm.onElementSelect = onElementSelect;
 
-        activate();
-
-
-        function activate(){
-
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
-            vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-            vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
-            vm.deleteButton=Translate.translate('MAIN.BUTTONS.DELETE');
-            vm.restoreButton=Translate.translate('MAIN.BUTTONS.RESTORE');
-            vm.cancelButton=Translate.translate('MAIN.BUTTONS.CANCEL');
-            vm.dialogTitle=Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage=Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.dialogRestoreTitle=Translate.translate('MAIN.DIALOG.RESTORE_TITLE');
-            vm.dialogRestoreMessage=Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
-            vm.duplicateMessage=Translate.translate('UDN_CATALOG.duplicate');
-            listUdns();
-        }
-
-
-
-        function listUdns()
-        {
-
-            vm.loadingPromise = udn.listObject().then(function(res){
-                vm.udn_list = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.udn_list = Helper.sortByAttribute(vm.udn_list, 'zona');
-
-            }).catch(function(err){
-
-            });
-        }
-
-        function toggleDeletedFunction() {
-            listUdns();
-            cancel();
-        }
-
-        function lookup(search_text){
-            vm.search_items = _.filter(vm.udn_list,function(item){
-                return item.zona.toLowerCase().includes(search_text.toLowerCase()) || item.agencia.toLowerCase().includes(search_text.toLowerCase());
-            });
-            return vm.search_items;
-        }
-
-        function selectedItemChange(item)
-        {
-            vm.selected_udn = item.clone();
-        }
-
-        function clickRepeater(item){
-            vm.selected_udn = item.clone();
-            vm.udn = vm.selected_udn;
-        }
-
-        function  cancel(){
-            $scope.inputForm.$setPristine();
-            $scope.inputForm.$setUntouched();
-
-            vm.udn = null;
-            vm.selected_udn = null;
-        }
-
-        function update(){
-            udn.update(vm.selected_udn).then(function(res){
-                toastr.success(vm.successUpdateMessage,vm.successTitle);
-                listUdns();
-            }).catch(function(err){
-                if(err.status == 400 && err.data.non_field_errors!=undefined){
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-                }else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
+        //Actions meta
+        vm.actions = {
+            POST: {
+                fields: [
+                    {
+                        type: 'options',
+                        model: 'zona',
+                        label: 'Zona',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        options: {
+                            model: 'value',
+                            option: 'value',
+                            elements: vm.options
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'agencia',
+                        label: 'Agencia',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'centro',
+                        label: 'Centro',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono',
+                        required: true,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
+                dialog: {
+                    title: 'Crear UDN',
+                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando UDN'
                 }
-            });
-        }
-
-        function create()
-        {
-            udn.create(vm.selected_udn).then(function(res){
-                listUdns();
-                toastr.success(vm.successCreateMessage,vm.successTitle);
-                cancel();
-            }).catch(function(err){
-                if(err.status == 400 && err.data.non_field_errors!=undefined){
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-                }else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
+            },
+            PUT: {
+                fields: [],
+                dialog: {
+                    title: 'Editar UDN',
+                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Guardando UDN'
                 }
+            },
+            DELETE: {
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar UDN',
+                    message: 'Confirme la eliminación de UDN',
+                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Eliminando UDN'
+                }
+            },
+            LIST: {
+                elements: 'results',
+                mode: 'infinite',
+                pagination: {
+                    total: 'count'
+                },
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'zona',
+                        label: 'Zona'
+                    },
+                    {
+                        type: 'text',
+                        model: 'agencia',
+                        label: 'Agencia'
+                    },
+                    {
+                        type: 'text',
+                        model: 'centro',
+                        label: 'Centro'
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección'
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono'
+                    }
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            SEARCH: {
+                dialog: {
+                    title: 'Busqueda de UDN',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando UDN'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'zona',
+                        header: 'por Zona',
+                        label: 'Zona',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'istartswith',
+                        model: 'agencia',
+                        header: 'por Agencia',
+                        label: 'Agencia',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'istartswith',
+                        model: 'centro',
+                        header: 'por Centro',
+                        label: 'Centro',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
+            }
+        };
 
-            });
+        function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
+            console.debug('Element selected');
+            console.debug(element);
+            console.log(element);
         }
-
-        function remove()
-        {
-
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                udn.remove(vm.selected_udn).then(function(res){
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function() {
-
-            });
-
-        }
-
-        function restore() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogRestoreTitle)
-                .textContent(vm.dialogRestoreMessage)
-                .ariaLabel('Confirmar restauración')
-                .ok(vm.restoreButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                vm.selected_udn.deleted=false;
-                udn.update(vm.selected_udn).then(function (res) {
-                    toastr.success(vm.successRestoreMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    vm.selected_udn.deleted=true;
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function() {
-
-            });
-
-        }
-
     }
 
 })();
