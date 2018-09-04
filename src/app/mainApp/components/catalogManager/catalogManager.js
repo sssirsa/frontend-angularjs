@@ -289,7 +289,6 @@
                 vm.CatalogProvider = CATALOG.generic;
             }
             vm.CatalogProvider.url = vm.url;
-            console.log('createMainCatalogProvider()', vm.CatalogProvider);
         }
 
         function createPaginationProvider() {
