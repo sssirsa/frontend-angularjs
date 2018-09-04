@@ -106,7 +106,7 @@
                 ],
                 dialog: {
                     title: 'Crear UDN',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Creando UDN'
                 }
@@ -115,7 +115,7 @@
                 fields: [],
                 dialog: {
                     title: 'Editar UDN',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Guardando UDN'
                 }
@@ -125,7 +125,7 @@
                 dialog: {
                     title: 'Eliminar UDN',
                     message: 'Confirme la eliminación de UDN',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Eliminando UDN'
                 }

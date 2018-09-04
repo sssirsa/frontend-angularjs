@@ -52,7 +52,7 @@
                 ],
                 dialog: {
                     title: 'Crear Transporte',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Creando Transporte'
                 }
@@ -61,7 +61,7 @@
                 fields: [],
                 dialog: {
                     title: 'Editar Transporte',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Guardando Transporte'
                 }
@@ -71,7 +71,7 @@
                 dialog: {
                     title: 'Eliminar Transporte',
                     message: 'Confirme la eliminación de la segmentación',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Eliminando Transporte'
                 }

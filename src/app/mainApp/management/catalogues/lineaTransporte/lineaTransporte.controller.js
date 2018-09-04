@@ -77,7 +77,7 @@
                 ],
                 dialog: {
                     title: 'Crear Linea de Transporte',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Creando Linea de Transporte'
                 }
@@ -86,7 +86,7 @@
                 fields: [],
                 dialog: {
                     title: 'Editar Linea de Transporte',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Guardando Linea de Transporte'
                 }
@@ -96,7 +96,7 @@
                 dialog: {
                     title: 'Eliminar Linea de Transporte',
                     message: 'Confirme la eliminación de la Linea de Transporte',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Eliminando Linea de Transporte'
                 }

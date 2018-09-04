@@ -4,217 +4,170 @@
     angular
         .module('app.mainApp.management.catalogues')
         .controller('SucursalController', SucursalController)
-        .filter('sucursalSearch', sucursalSearch);
 
     /* @ngInject */
-    function SucursalController(Sucursal,
-                                $scope,
-                                //NotificationPanel,
-                                toastr,
-                                Helper,
-                                Translate,
-                                $mdDialog) {
+    function SucursalController(URLS, Translate) {
 
         var vm = this;
 
-        vm.lookup = lookup;
-        vm.querySearch = querySearch;
-        vm.selectedSucursales = selectedSucursales;
-        vm.selectedItemChange = selectedItemChange;
-        vm.toggleDeletedFunction = toggleDeletedFunction;
-        vm.restore = restore;
-        vm.cancel = cancel;
-        vm.create = create;
-        vm.remove = remove;
-        vm.update = update;
-        vm.search_items = [];
-        vm.searchText = '';
-        var sucursal = {
-            razon_social: null,
-            direccion: null,
-            telefonos: [],
-            responsable: null
-        };
-        vm.sucursal = angular.copy(sucursal);
-        vm.numberBuffer = '';
-        vm.myHeight = window.innerHeight - 250;
-        vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
-        vm.toggleDeleted = true;
+        vm.url = URLS.sucursal;
+        vm.kind = 'Web';
+        vm.name = Translate.translate('SUCURSAL.FORM.LABEL.BRANCH');
 
-        activate();
-        init();
+        //Labels
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
 
-        function init() {
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
-            vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-            vm.deleteButton = Translate.translate('MAIN.BUTTONS.DELETE');
-            vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
-            vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.duplicateMessage = Translate.translate('SUCURSAL.FORM.LABEL.DUPLICATE');
-            vm.dialogRestoreTitle = Translate.translate('MAIN.DIALOG.RESTORE_TITLE');
-            vm.dialogRestoreMessage = Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
-            vm.restoreButton = Translate.translate('MAIN.BUTTONS.RESTORE');
-            vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
-        }
+        //Button labels
+        vm.searchButtonText = 'Buscar Sucursal';
+        vm.createButtonText = 'Crear Sucursal';
+        vm.deleteButtonText = 'Borrar Sucursal';
+        vm.modifyButtonText = 'Editar Sucursal';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas Sucursal';
+        vm.removeFilterButtonText = 'Qutar filtro';
 
+        //Messages
+        vm.loadingMessage = 'Cargando Sucursal';
 
-        function activate() {
+        //Functions
+        vm.onElementSelect = onElementSelect;
 
-            listSucursales();
-
-        }
-
-        function toggleDeletedFunction() {
-            listSucursales();
-            cancel();
-        }
-
-        function listSucursales() {
-            vm.loadingPromise = Sucursal.listObject()
-                .then(function (res) {
-                    vm.sucursales = Helper.filterDeleted(res, vm.toggleDeleted);
-                    vm.sucursales = _.sortBy(vm.sucursales, 'nombre');
-                }).catch(function (err) {
-                    console.error(err);
-                });
-        }
-
-        function restore() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogRestoreTitle)
-                .textContent(vm.dialogRestoreMessage)
-                .ariaLabel('Confirmar restauración')
-                .ok(vm.restoreButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                vm.sucursal.deleted = false;
-                Sucursal.update(vm.sucursal).then(function (res) {
-                    toastr.success(vm.successRestoreMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    vm.sucursal.deleted = true;
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function () {
-
-            });
-
-        }
-
-        function remove(ev) {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                Sucursal.remove(vm.sucursal).then(function (res) {
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function () {
-
-            });
-        }
-
-        function update() {
-            Sucursal.update(vm.sucursal).then(function (res) {
-                toastr.success(vm.successUpdateMessage, vm.successTitle);
-                cancel();
-                activate();
-            }).catch(function (err) {
-                if (err.status == 400 && err.data.nombre != undefined) {
-                    toastr.error(vm.duplicateMessage, vm.errorTitle);
-                } else {
-                    toastr.error(vm.errorMessage, vm.errorTitle);
+        //Actions meta
+        vm.actions = {
+            POST: {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección',
+                        required: false
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefonos',
+                        label: 'Telefonos',
+                        required: false,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'responsable',
+                        label: 'Responsable',
+                        required: false
+                    }
+                ],
+                dialog: {
+                    title: 'Crear Sucursal',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando Sucursal'
                 }
-            });
-        }
-
-        function create() {
-            Sucursal.create(vm.sucursal).then(function (res) {
-
-                vm.sucursal = angular.copy(sucursal);
-                var request = {
-                    id: res.id,
-                    name: res.nombre
-                };
-                /*NotificationPanel.createOffice(request).then(function () {
-                }).catch(function () {
-                    toastr.error(vm.errorMessage, vm.errorTitle);
-                });*/
-                toastr.success(vm.successCreateMessage, vm.successTitle);
-                cancel();
-                activate();
-
-            }).catch(function (err) {
-                if (err.status == 400 && err.data.nombre != undefined) {
-                    toastr.error(vm.duplicateMessage, vm.errorTitle);
-                } else {
-                    toastr.error(vm.errorMessage, vm.errorTitle);
+            },
+            PUT: {
+                fields: [],
+                dialog: {
+                    title: 'Editar Sucursal',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Guardando Sucursal'
                 }
-            });
-        }
-
-        function cancel() {
-            $scope.SucursalForm.$setPristine();
-            $scope.SucursalForm.$setUntouched();
-            vm.sucursal = angular.copy(sucursal);
-            vm.selectedSucursalList = null;
-            vm.searchText = null;
-            vm.numberBuffer = null;
-        }
-
-        function selectedItemChange(item) {
-            if (item != null) {
-                vm.sucursal = angular.copy(item);
-
-            } else {
-                cancel();
+            },
+            DELETE: {
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar Sucursal',
+                    message: 'Confirme la eliminación de Sucursal',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Eliminando Sucursal'
+                }
+            },
+            LIST: {
+                elements: 'results',
+                mode: 'infinite',
+                pagination: {
+                    total: 'count'
+                },
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre'
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección'
+                    },
+                    {
+                        type: 'text',
+                        model: 'telefonos',
+                        label: 'Telefonos'
+                    },
+                    {
+                        type: 'text',
+                        model: 'responsable',
+                        label: 'Responsable'
+                    }
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            SEARCH: {
+                dialog: {
+                    title: 'Busqueda de Sucursal',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando Sucursal'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'nombre',
+                        header: 'por Nombre',
+                        label: 'Nombre',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'istartswith',
+                        model: 'responsable',
+                        header: 'por Responsable',
+                        label: 'Responsable',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
             }
-        }
-
-        function selectedSucursales(project) {
-            vm.selectedSucursalList = project;
-            vm.sucursal = angular.copy(project);
-        }
-
-        function querySearch(query) {
-            var results = query ? lookup(query) : vm.sucursales;
-            return results;
-
-        }
-
-        function lookup(search_text) {
-            vm.search_items = _.filter(vm.sucursales, function (item) {
-                return item.nombre.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
-            });
-            return vm.search_items;
-        }
-
-    }
-
-    function sucursalSearch() {
-        return function (input, text) {
-            if (!angular.isString(text) || text === '') {
-                return input;
-            }
-
-            return _.filter(input, function (item) {
-                return item.nombre.toLowerCase().indexOf(text.toLowerCase()) >= 0;
-            });
-
         };
 
+        function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
+            console.debug('Element selected');
+            console.debug(element);
+            console.log(element);
+        }
     }
 })();

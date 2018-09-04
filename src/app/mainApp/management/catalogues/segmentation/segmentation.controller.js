@@ -69,7 +69,7 @@
                 ],
                 dialog: {
                     title: 'Crear segmentación',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Creando Segmentación'
                 }
@@ -78,7 +78,7 @@
                 fields: [],
                 dialog: {
                     title: 'Editar segmentación',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Guardando Segmentación'
                 }
@@ -88,7 +88,7 @@
                 dialog: {
                     title: 'Eliminar segmentación',
                     message: 'Confirme la eliminación de la segmentación',
-                    okButton: Translate.translate('MAIN.BUTTONS.SUBMIT'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Eliminando Segmentación'
                 }
