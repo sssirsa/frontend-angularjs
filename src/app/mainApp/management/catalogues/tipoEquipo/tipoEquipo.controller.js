@@ -4,195 +4,142 @@
     angular
         .module('app.mainApp.management.catalogues')
         .controller('TipoEquipoController', TipoEquipoController)
-        .filter('tipoSearch', tipoSearch);
 
-    /* @ngInject */
-    function TipoEquipoController(TipoEquipo, $scope,Helper, toastr, Translate, $mdDialog) {
-
+    function TipoEquipoController(URLS, Translate)
+    {
         var vm = this;
-        vm.lookup = lookup;
-        vm.querySearch = querySearch;
-        vm.selectedEquipos = selectedEquipos;
-        vm.selectedItemChange = selectedItemChange;
-        vm.cancel = cancel;
-        vm.create = create;
-        vm.remove=remove;
-        vm.update=update;
-        vm.toggleDeletedFunction = toggleDeletedFunction;
-        vm.restore = restore;
 
-        vm.search_items = [];
-        vm.searchText = '';
-        var tipo_equipo = {
-            nombre: null,
-            descripcion: null
+        vm.url = URLS.tipo_equipo;
+        vm.kind = 'Web';
+        vm.name = Translate.translate('EQUIPMENT_TYPE.FORM.LABEL.MODEL');
 
-        };
-        vm.tipo_equipo = angular.copy(tipo_equipo);
-        vm.myHeight=window.innerHeight-250;
-        vm.myStyle={"min-height":""+vm.myHeight+"px"};
-        vm.toggleDeleted = true;
+        //Labels
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
 
-        activate();
-        init();
-        function init() {
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
-            vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-            vm.deleteButton=Translate.translate('MAIN.BUTTONS.DELETE');
-            vm.cancelButton=Translate.translate('MAIN.BUTTONS.CANCEL');
-            vm.dialogTitle=Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage=Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.duplicateMessage=Translate.translate('EQUIPMENT_TYPE.FORM.LABEL.DUPLICATE');
-            vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
-            vm.dialogRestoreTitle=Translate.translate('MAIN.DIALOG.RESTORE_TITLE');
-            vm.dialogRestoreMessage=Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
-            vm.restoreButton=Translate.translate('MAIN.BUTTONS.RESTORE');
+        //Button labels
+        vm.searchButtonText = 'Buscar Tipo equipo';
+        vm.createButtonText = 'Crear Tipo equipo';
+        vm.deleteButtonText = 'Borrar Tipo equipo';
+        vm.modifyButtonText = 'Editar Tipo equipo';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas tipos equipo';
+        vm.removeFilterButtonText = 'Qutar filtro';
 
-        }
+        //Messages
+        vm.loadingMessage = 'Cargando Tipos equipo';
 
-        function activate() {
-            listTipos();
-        }
-        function toggleDeletedFunction() {
-            listTipos();
-            cancel();
-        }
+        //Functions
+        vm.onElementSelect = onElementSelect;
 
-        function listTipos() {
-            vm.loadingPromise = TipoEquipo.listWitout().then(function (res) {
-                vm.tipo_equipos=Helper.filterDeleted(res,vm.toggleDeleted);
-                vm.tipo_equipos=_.sortBy(vm.tipo_equipos, 'nombre');
-            }).catch(function(err){
-
-            });
-
-
-        }
-        function restore() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogRestoreTitle)
-                .textContent(vm.dialogRestoreMessage)
-                .ariaLabel('Confirmar restauración')
-                .ok(vm.restoreButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                vm.tipo_equipo.deleted=false;
-                TipoEquipo.update(vm.tipo_equipo).then(function (res) {
-                    toastr.success(vm.successRestoreMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    vm.tipo_equipo.deleted=true;
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function() {
-
-            });
-
-        }
-
-        function selectedItemChange(item)
-        {
-            if (item!=null) {
-                vm.tipo_equipo = angular.copy(item);
-
-            }else{
-                cancel();
+        //Actions meta
+        vm.actions = {
+            POST: {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripcion',
+                        required: false
+                    }
+                ],
+                dialog: {
+                    title: 'Crear Tipo equipo',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando Tipo equipo'
+                }
+            },
+            PUT: {
+                fields: [],
+                dialog: {
+                    title: 'Editar Tipo equipo',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Guardando Tipo equipo'
+                }
+            },
+            DELETE: {
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar Tipo equipo',
+                    message: 'Confirme la eliminación del Tipo equipo',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Eliminando Tipo equipo'
+                }
+            },
+            LIST: {
+                elements: 'results',
+                mode: 'infinite',
+                pagination: {
+                    total: 'count'
+                },
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre'
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripcion'
+                    }
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            SEARCH: {
+                dialog: {
+                    title: 'Busqueda de Tipo equipo',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando Tipo equipo'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'nombre',
+                        header: 'por Nombre',
+                        label: 'Nombre',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'istartswith',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
             }
         }
-        function remove(ev) {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-                $mdDialog.show(confirm).then(function() {
-                    TipoEquipo.remove(vm.tipo_equipo).then(function (res) {
-                        toastr.success(vm.successDeleteMessage, vm.successTitle);
-                        cancel();
-                        activate();
-                    }).catch(function (res) {
-                        toastr.warning(vm.errorMessage, vm.errorTitle);
-                    });
-                }, function() {
 
-                });
+        function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
+            console.debug('Element selected');
+            console.debug(element);
+            console.log(element);
         }
-        function update() {
-            TipoEquipo.update(vm.tipo_equipo).then(function (res) {
-                toastr.success(vm.successUpdateMessage, vm.successTitle);
-                cancel();
-                activate();
-            }).catch(function (err) {
-                if(err.status==400 && err.data.nombre!=undefined)
-                {
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-                }else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
-                }
-            });
-        }
-        function create() {
-            TipoEquipo.create(vm.tipo_equipo).then(function (res) {
-                toastr.success(vm.successCreateMessage, vm.successTitle);
-                vm.tipo_equipo = angular.copy(tipo_equipo);
-                cancel();
-                activate();
-            }).catch(function (err) {
-                if(err.status==400 && err.data.nombre!=undefined)
-                {
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-                }else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
-                }
-            });
-        }
-
-        function cancel() {
-            $scope.TipoEquipoForm.$setPristine();
-            $scope.TipoEquipoForm.$setUntouched();
-            vm.tipo_equipo = angular.copy(tipo_equipo);
-            vm.selectedEquipoList = null;
-            vm.searchText=null;
-        }
-
-        function selectedEquipos(project) {
-            vm.selectedEquipoList = project;
-            vm.tipo_equipo = angular.copy(project);
-        }
-
-        function querySearch(query) {
-            var results = query ? lookup(query) : vm.tipo_equipos;
-            return results;
-
-        }
-
-        function lookup(search_text) {
-            vm.search_items = _.filter(vm.tipo_equipos, function (item) {
-                return item.nombre.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
-            });
-            return vm.search_items;
-        }
-
 
     }
 
-    function tipoSearch() {
-        return function (input, text) {
-            if (!angular.isString(text) || text === '') {
-                return input;
-            }
-
-            return _.filter(input, function (item) {
-                return item.nombre.toLowerCase().indexOf(text.toLowerCase()) >= 0;
-            });
-
-        };
-
-    }
 })();

@@ -61,7 +61,7 @@
                  *
                  * Inside each 'action' sub-object you must place the meta information, specific for each action
                  * Below are the descriptions of each action sub-object
-                 * 
+                 *
                  * Example:
                  * {
                  *  POST:{
@@ -71,7 +71,7 @@
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
-                 *              validations: 
+                 *              validations:
                  *                  {
                  *                      regex: string,          Option regular expression for field validation (just used when text),
                  *                      max: number,            Maximum value allowed for selection (just used when number)
@@ -244,7 +244,7 @@
         var vm = this;
 
         activate();
-        
+
         vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
@@ -289,6 +289,7 @@
                 vm.CatalogProvider = CATALOG.generic;
             }
             vm.CatalogProvider.url = vm.url;
+            console.log('createMainCatalogProvider()', vm.CatalogProvider);
         }
 
         function createPaginationProvider() {
@@ -475,7 +476,7 @@
             }
         }
 
-        //Load more elements when pagination is infinite 
+        //Load more elements when pagination is infinite
         function loadMore() {
             if (vm.paginationHelper.next) {
                 if (vm.actions['LIST'].pagination) {

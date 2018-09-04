@@ -70,7 +70,7 @@
                 id: 'id',
                 dialog: {
                     title: 'Eliminar Transporte',
-                    message: 'Confirme la eliminación de la segmentación',
+                    message: 'Confirme la eliminación del transporte',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                     loading: 'Eliminando Transporte'
