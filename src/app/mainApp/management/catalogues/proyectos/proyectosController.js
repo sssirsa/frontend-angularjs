@@ -5,162 +5,119 @@
         .module('app.mainApp.management.catalogues')
         .controller('proyectosController', proyectosController);
 
-    function proyectosController(Proyectos, toastr, $scope, Translate, $mdDialog, Helper) {
+    function proyectosController(URLS, Translate) {
         var vm = this;
-        vm.toggleDeleted = true;
 
+        vm.url = URLS.proyecto;
+        vm.kind = 'Web';
+        vm.name = Translate.translate('Projects.Header');
+
+        //Labels
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
+
+        //Button labels
+        vm.searchButtonText = 'Buscar Proyecto';
+        vm.createButtonText = 'Crear Proyecto';
+        vm.deleteButtonText = 'Borrar Proyecto';
+        vm.modifyButtonText = 'Editar Proyecto';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas Proyecto';
+        vm.removeFilterButtonText = 'Qutar filtro';
+
+        //Messages
+        vm.loadingMessage = 'Cargando Proyecto';
 
         //Functions
-        vm.create = create;
-        vm.update = update;
-        vm.remove = remove;
-        vm.search = search;
-        vm.clear = clear;
-        vm.clickCopy = clickCopy;
-        vm.querySearch = querySearch;
-        vm.toggleDeletedFunction = toggleDeletedFunction;
-        vm.restore = restore;
+        vm.onElementSelect = onElementSelect;
 
-
-        activate();
-        vm.successTitle = Translate.translate('Projects.Notify.Success');
-        vm.errorTitle = Translate.translate('Projects.Notify.Error');
-        vm.warningTitle = Translate.translate('Projects.Notify.Warning');
-        vm.listErrorMessage = Translate.translate('Projects.Notify.Messages.ERROR_GETTING_PROJECTS');
-        vm.errorCreate = Translate.translate('Projects.Notify.Messages.ERROR_CREATING_PROJECT');
-        vm.succesCreate = Translate.translate('Projects.Notify.Messages.SUCCESS_CREATING_PROJECT');
-        vm.errorRemove = Translate.translate('Projects.Notify.Messages.ERROR_REMOVING_PROJECT');
-        vm.successRemove = Translate.translate('Projects.Notify.Messages.SUCCESS_REMOVING_PROJECT');
-        vm.errorUpdate = Translate.translate('Projects.Notify.Messages.ERROR_UPDATING_PROJECT');
-        vm.successUpdate = Translate.translate('Projects.Notify.Messages.SUCCESS_UPDATING_PROJECT');
-        vm.successRestore = Translate.translate('Projects.Notify.Messages.SUCCESS_RESTORE_PROJECT');
-        vm.errorRestore = Translate.translate('Projects.Notify.Messages.ERROR_RESTORE_PROJECT');
-        vm.acceptButton = Translate.translate('MAIN.BUTTONS.ACCEPT');
-        vm.deleteButton = Translate.translate('MAIN.BUTTONS.DELETE');
-        vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
-        vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-        vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-        vm.dialogMessage2 = Translate.translate('Projects.Notify.Messages.CONFIRM_RESTORE');
-        vm.informationTitle = Translate.translate('Projects.Notify.Information');
-        vm.duplicateMessage = Translate.translate('Projects.Notify.Messages.EXISTING_ELEMENT');
-
-        function activate() {
-            vm.project = null;
-            vm.loadingPromise = Proyectos.listObject().then(function (res) {
-                vm.projects = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.filteredProjects = vm.projects;
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-                vm.projects = {};
-                vm.filteredProjects = {};
-            });
-        }
-
-        function create() {
-            Proyectos.create(vm.project).then(function () {
-                toastr.success(vm.succesCreate, vm.successTitle);
-                vm.clear();
-                activate();
-            }).catch(function (err) {
-                if (err.data.descripcion != null) {
-                    toastr.info(vm.duplicateMessage, vm.informationTitle);
+        //Actions meta
+        vm.actions = {
+            POST: {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Nombre del proyecto',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
+                dialog: {
+                    title: 'Crear Proyecto',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando Proyecto'
                 }
-                else
-                    toastr.error(vm.errorCreate, vm.errorTitle);
-            });
-        }
-
-        function update() {
-            Proyectos.modify(vm.project).then(function (res) {
-                toastr.success(vm.successUpdate, vm.successTitle);
-                vm.clear();
-                activate();
-            }).catch(function (err) {
-                if (err.data.descripcion != null) {
-                    toastr.info(vm.duplicateMessage, vm.informationTitle);
+            },
+            PUT: {
+                fields: [],
+                dialog: {
+                    title: 'Editar Proyecto',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Guardando Proyecto'
                 }
-                else
-                    toastr.error(vm.errorUpdate, vm.errorTitle);
-            });
-        }
-
-        function remove() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                Proyectos.remove(vm.project).then(function (res) {
-                    toastr.success(vm.successRemove, vm.successTitle);
-                    vm.clear();
-                    activate();
-                }).catch(function (err) {
-                    toastr.error(vm.errorRemove, vm.errorTitle);
-                });
-            }, function () {
-                //Cancelled
-            });
-        }
-
-        function search(text) {
-            if (text.length > 0) {
-                vm.filteredProjects = _.filter(vm.projects, function (item) {
-                    return item.descripcion.toLowerCase().includes(text.toLowerCase());
-                });
+            },
+            DELETE: {
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar Proyecto',
+                    message: 'Confirme la eliminación del Proyecto',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Eliminando Proyecto'
+                }
+            },
+            LIST: {
+                elements: 'results',
+                mode: 'infinite',
+                pagination: {
+                    total: 'count'
+                },
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Nombre'
+                    }
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            SEARCH: {
+                dialog: {
+                    title: 'Busqueda de Proyecto',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando Proyecto'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'descripcion',
+                        header: 'por Nombre',
+                        label: 'Nombre del proyecto',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
             }
-            return vm.filteredProjects;
+        };
+
+        function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
+            console.debug('Element selected');
+            console.debug(element);
+            console.log(element);
         }
-
-        function clickCopy(item) {
-            vm.selectedProject = item;
-            vm.project = angular.copy(item);
-            $scope.formProject.$invalid = true;
-        }
-
-        function clear() {
-            $scope.formProject.$setPristine();
-            $scope.formProject.$setUntouched();
-            $scope.formProject.$invalid = true;
-            vm.searchParameter = '';
-            vm.filteredProjects = vm.projects;
-            vm.selectedProject = null;
-            vm.project = null;
-        }
-
-        function querySearch(query) {
-            var results = query ? search(query) : vm.projects;
-            return results;
-
-        }
-
-        function toggleDeletedFunction() {
-            activate();
-            clear();
-        }
-
-        function restore() {
-            vm.project.deleted = false;
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage2)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.acceptButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                Proyectos.modify(vm.project).then(function (res) {
-                    toggleDeletedFunction();
-                    toastr.success(vm.successRestore, vm.successTitle);
-                }).catch(function (err) {
-                    toastr.error(vm.errorRestore, vm.errorTitle);
-                });
-            }, function () {
-                //Cancelled
-            });
-        }
-
     }
 
 })();
