@@ -22,7 +22,8 @@
                  ng-repeat="field in vm.fields">
                 <section ng-if="field['type']!=='fileUploader'
                          && field['type']!=='catalog'
-                         && field['type']!=='options'">
+                         && field['type']!=='options'
+                         && field['type']!=='color'">
                     <md-input-container class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
@@ -35,6 +36,23 @@
                                max="{{field.max}}"
                                ng-pattern="field['validations'].regex"
                                ng-model="vm.objectToCreate[field.model]" />
+                        <div ng-messages="createForm[field.model].$error">
+                            <div ng-message="required">{{field.validations.errors.required}}</div>
+                            <div ng-message="pattern">{{field.validations.errors.regex}}</div>
+                        </div>
+                    </md-input-container>
+                </section>
+                <section ng-if="field['type']==='color'">
+                    <md-input-container class="md-block">
+                        <!--Field label selection depending on the parameters given-->
+                        <label ng-if="field['label']">{{field['label']}}</label>
+                        <label ng-if="!field['label']">{{field['model']}}</label>
+                        <input ng-required="field.required"
+                               aria-label="{{field['model']}}"
+                               type="color"
+                               name="{{field.model}}"
+                               ng-model="vm.objectToCreate[field.model]"
+                               value="{{vm.objectToCreate[field.model]}}"/>
                         <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
