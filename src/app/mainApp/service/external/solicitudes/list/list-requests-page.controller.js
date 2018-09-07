@@ -40,7 +40,6 @@
         }
 
         function listRequests(requestKind) {
-            console.log(requestKind, vm.lastKindFilter);
             vm.filteredActivated = true;
             vm.lastFilter = requestKind;
             if (vm.lastKindFilter !== requestKind){
