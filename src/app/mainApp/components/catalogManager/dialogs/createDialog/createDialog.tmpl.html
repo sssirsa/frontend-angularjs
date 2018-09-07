@@ -36,6 +36,10 @@
                                max="{{field.max}}"
                                ng-pattern="field['validations'].regex"
                                ng-model="vm.objectToCreate[field.model]" />
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
                         <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
@@ -52,7 +56,7 @@
                                type="color"
                                name="{{field.model}}"
                                ng-model="vm.objectToCreate[field.model]"
-                               value="{{vm.objectToCreate[field.model]}}"/>
+                               value="{{vm.objectToCreate[field.model]}}" />
                         <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
