@@ -3,15 +3,14 @@
 
     angular
         .module('app.mainApp.splash')
-        .controller('splashController', ['$state', 'AuthService', '$timeout', splashController]);
+        .controller('splashController', ['$state', 'AuthService', '$timeout', '$cookies', splashController]);
 
     /* @ngInject */
-    function splashController($state, AuthService, $timeout) {
+    function splashController($state, AuthService, $timeout, $cookies) {
 
-        var keepSession = localStorage.getItem('keepSession');
 
         $timeout(function(){
-            if(keepSession === "true") {
+            if($cookies.getObject('keepSession')) {
                 if (AuthService.isAuthenticated()) {
                     $state.go('triangular.admin-default.welcome');
                 }
