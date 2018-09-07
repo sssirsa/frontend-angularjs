@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', '$cookies', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http, $cookies) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -18,13 +18,13 @@
             MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
-                    localStorage.setItem('token', loginResponse.access_token);
-                    localStorage.setItem('refreshToken', loginResponse.refresh_token);
+                    $cookies.putObject('token', loginResponse.access_token);
+                    $cookies.putObject('refreshToken', loginResponse.refresh_token);
                     var expiration = new Date();
                     expiration
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
-                    localStorage
-                        .setItem('expiration', expiration);
+                    $cookies
+                        .putObject('expiration', expiration);
                     WebRestangular
                         .setDefaultHeaders({
                             Authorization: 'bearer ' + loginResponse.access_token
@@ -60,14 +60,14 @@
                 grant_type: 'refresh_token',
                 client_id: EnvironmentConfig.site.oauth.clientId,
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
-                refresh_token: localStorage.getItem('refreshToken')
+                refresh_token: $cookies.getObject('refreshToken')
             };
 
             return authenticate(data);
         }
 
         function isValidToken() {
-            if (localStorage.getItem('expiration')) {
+            if ($cookies.getObject('expiration')) {
                 return compareDates();
             }
             else {
@@ -76,23 +76,23 @@
         }
 
         function canRefresh() {
-            if (localStorage.getItem('refreshToken')) {
+            if ($cookies.getObject('refreshToken')) {
                 return true;
             }
             return false;
         }
 
         function revokeToken() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('expiration');
-            localStorage.removeItem('roles');
-            localStorage.removeItem('keepSession');
+            $cookies.remove('token');
+            $cookies.remove('refreshToken');
+            $cookies.remove('expiration');
+            $cookies.remove('roles');
+            $cookies.remove('keepSession');
         }
 
         function compareDates() {
-            if (localStorage.getItem('expiration')) {
-                var date_expiration = localStorage.getItem('expiration');
+            if ($cookies.getObject('expiration')) {
+                var date_expiration = $cookies.getObject('expiration');
                 var now = new Date();
                 var expiration = new Date(date_expiration);
                 return expiration > now;
