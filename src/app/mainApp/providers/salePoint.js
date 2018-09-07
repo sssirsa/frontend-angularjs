@@ -22,8 +22,8 @@
             return baseUrl.one('atencion_pv', id).customGET();
         }
 
-        function listUnasignedServices(urlAux) {
-            return baseUrl.all('list_atencion'+ urlAux).customGET();
+        function listUnasignedServices(limit, offset) {
+            return baseUrl.all('list_atencion?limit='+limit+'&offset='+offset).customGET();
         }
 
         function listAsignedService(limit, offset) {
