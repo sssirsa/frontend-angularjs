@@ -10,7 +10,6 @@
 
         vm.selectedKind = null;
         vm.salePoints = null;
-        vm.filteredActivated = false;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
         vm.aceptButton = Translate.translate('MAIN.BUTTONS.ACCEPT');
         vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
@@ -21,7 +20,6 @@
         vm.Cancel = Cancel;
         vm.selectRequest = selectRequest;
         vm.Report = Report;
-        vm.FilterAttentions = FilterAttentions;
 
         function Report(salepoint) {
             console.log(salepoint)
@@ -64,37 +62,6 @@
 
         }
 
-        function FilterAttentions(filter) {
-            vm.filteredActivated = true;
-            if (filter === 'Todo') {
-                vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
-                    .then(function (salePointsSuccess) {
-                        vm.objectAtention = salePointsSuccess;
-                        prepareDataFunction();
-                    })
-                    .catch(function (salePointsError) {
-                        toastr.error(
-                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                        );
-                    });
-            }
-            else {
-                var filterSTR = 'status='+filter;
-                vm.loadingPromise = SalePoint.listAllServices('20', vm.offset, filterSTR)
-                    .then(function (salePointsSuccess) {
-                        vm.objectAtention = salePointsSuccess;
-                        prepareDataFunction();
-                    })
-                    .catch(function (salePointsError) {
-                        toastr.error(
-                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                        );
-                    });
-            }
-        }
-
         function Atending(salePoint) {
             // console.log(salePoint);
             selectRequest(salePoint.folio);
@@ -131,9 +98,14 @@
         //datos para paginado
         vm.objectAtention = null;
         vm.offset = 0;
+        vm.limit = 4;
+        vm.lastFilter = 'Todo';
+        vm.lastKindFilter = 'Todo';
+        vm.filteredActivated = false;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.changeSelected = changeSelected;
+        vm.FilterAttentions = filterAttentions;
 
         function changeSelected() {
             vm.offset = 0;
@@ -160,21 +132,58 @@
                             });
                         break;
                     case 'all':
-                        vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
-                            .then(function (salePointsSuccess) {
-                                vm.objectAtention = salePointsSuccess;
-                                prepareDataFunction();
-                                // console.log(salePointsSuccess);
-                            })
-                            .catch(function (salePointsError) {
-                                // console.log(salePointsError);
-                                toastr.error(
-                                    Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                                );
-                            });
+                        // vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
+                        //     .then(function (salePointsSuccess) {
+                        //         vm.objectAtention = salePointsSuccess;
+                        //         prepareDataFunction();
+                        //         // console.log(salePointsSuccess);
+                        //     })
+                        //     .catch(function (salePointsError) {
+                        //         // console.log(salePointsError);
+                        //         toastr.error(
+                        //             Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                        //             Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        //         );
+                        //     });
+                        filterAttentions('Todo');
                         break;
                 }
+            }
+        }
+
+        function filterAttentions(filter) {
+            vm.filteredActivated = true;
+            vm.lastFilter = filter;
+            if(vm.lastKindFilter !== filter){
+                vm.offset = 0;
+                vm.lastKindFilter = filter;
+            }
+            if (filter === 'Todo') {
+                vm.loadingPromise = SalePoint.listAllServices(vm.limit, vm.offset)
+                    .then(function (salePointsSuccess) {
+                        vm.objectAtention = salePointsSuccess;
+                        prepareDataFunction();
+                    })
+                    .catch(function (salePointsError) {
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        );
+                    });
+            }
+            else {
+                var filterSTR = 'status='+filter;
+                vm.loadingPromise = SalePoint.listAllServices(vm.limit, vm.offset, filterSTR)
+                    .then(function (salePointsSuccess) {
+                        vm.objectAtention = salePointsSuccess;
+                        prepareDataFunction();
+                    })
+                    .catch(function (salePointsError) {
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        );
+                    });
             }
         }
 
@@ -184,13 +193,13 @@
         }
 
         function sigPage() {
-            vm.offset += 20;
-            listSalePoints();
+            vm.offset += vm.limit;
+            filterAttentions(vm.lastFilter);
         }
 
         function prevPage() {
-            vm.offset -= 20;
-            listSalePoints();
+            vm.offset -= vm.limit;
+            filterAttentions(vm.lastFilter);
         }
 
         function selectRequest(request) {

@@ -1,4 +1,4 @@
-<div layout="column">
+<div layout="column" class="bg-01">
     <md-card layout="column"
              layout-gt-sm="row"
              layout-padding
@@ -36,25 +36,57 @@
                  layout-align-xs="center stretch"
                  layout-xs="column">
 
-                <div layout="column">
+                <div layout="column" ng-if="vm.lastKindFilter != 'Abierta'">
                     <span translate>REQUESTS.LIST.OPEN</span>
                     <div class="Abierta" ng-click="vm.FilterAttentions('Abierta')"></div>
                 </div>
-                <div layout="column">
+                <div layout="column" ng-if="vm.lastKindFilter != 'En_proceso'">
                     <span translate>REQUESTS.LIST.IN_PROCESS</span>
                     <div class="En_proceso" ng-click="vm.FilterAttentions('En_proceso')"></div>
                 </div>
-                <div layout="column">
+                <div layout="column" ng-if="vm.lastKindFilter != 'Atendida'">
                     <span translate>REQUESTS.LIST.ATTENDED</span>
                     <div class="Atendida" ng-click="vm.FilterAttentions('Atendida')"></div>
                 </div>
-                <div layout="column">
+                <div layout="column" ng-if="vm.lastKindFilter != 'Cancelada'">
                     <span translate>REQUESTS.LIST.CANCELED</span>
                     <div class="Cancelada" ng-click="vm.FilterAttentions('Cancelada')"></div>
                 </div>
-                <div layout="column">
+                <div layout="column" ng-if="vm.lastKindFilter != 'Todo'">
                     <span translate>REQUESTS.LIST.ALL</span>
                     <div class="Todo" ng-click="vm.FilterAttentions('Todo')"></div>
+                </div>
+            </div>
+        </md-card>
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch"
+                 ng-if="vm.selectedKind == 'all'">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <span>Listado de </span>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Abierta'">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div class="Abierta"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'En_proceso'">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div class="En_proceso"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Atendida'">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div class="Atendida"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Cancelada'">
+                    <span translate>REQUESTS.LIST.CANCELED</span>
+                    <div class="Cancelada"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Todo'">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div class="Todo"></div>
                 </div>
             </div>
         </md-card>
