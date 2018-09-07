@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('User', ['$cookieStore', UserController]);
+        .factory('User', ['$cookies', UserController]);
 
-    function UserController($cookieStore) {
+    function UserController($cookies) {
         var vm = this;
 
         vm.user = null;
@@ -15,13 +15,13 @@
 
         function getUser() {
             if(!vm.user){
-                vm.user=$cookieStore.get('user');
+                vm.user=$cookies.getObject('user');
             }
             return vm.user;
         }
 
         function setUser(user) {
-            $cookieStore.put('user', user);
+            $cookies.putObject('user', user);
             vm.user = user;
         }
 
