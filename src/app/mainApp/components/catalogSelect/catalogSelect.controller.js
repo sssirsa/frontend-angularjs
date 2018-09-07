@@ -12,6 +12,7 @@
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
  *      },
+ *      required: boolean,    (Optional) To be used in form validation
  *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                            aka: the API returns the array of objects in an element of the response, as in pagination
  *                            Example:
@@ -40,10 +41,10 @@
                 pagination: '<',
                 elements: '<',
                 softDelete: '<',
-
+                required: '<',
                 onSuccessList: '&',
                 onErrorList: '&',
-                onSelect:'&'
+                onSelect: '&'
             }
         });
     function CatalogSelectController(

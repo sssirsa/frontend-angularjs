@@ -5,8 +5,7 @@ Created by Emmanuel on 03/09/2016.
      layout-fill
      flex
      layout-align-gt-md="center center"
-     layout-align="space-between stretch"
->
+     layout-align="space-between stretch">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h2>{{'INPUT.Create Model'|translate}}</h2>
@@ -17,7 +16,7 @@ Created by Emmanuel on 03/09/2016.
             <div layout="column" layout-align="center stretch">
                 <md-input-container class="md-block">
                     <label>{{'INPUT.Dialogs.Model.Name'|translate}}</label>
-                    <input name="ModelName" md-no-asterisk="" required="" type="text" ng-model="vm.modelo.nombre"/>
+                    <input name="ModelName" md-no-asterisk="" required="" type="text" ng-model="vm.modelo.nombre" />
                     <div ng-messages="modelForm.ModelName.$error">
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
@@ -25,7 +24,7 @@ Created by Emmanuel on 03/09/2016.
                 <md-input-container class="md-block">
                     <label>{{'INPUT.Dialogs.Model.Description'|translate}}</label>
                     <input name="ModelDescription" md-no-asterisk="" required="" type="text"
-                           ng-model="vm.modelo.descripcion"/>
+                           ng-model="vm.modelo.descripcion" />
                     <div ng-messages="modelForm.ModelDescription.$error">
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
@@ -33,12 +32,26 @@ Created by Emmanuel on 03/09/2016.
                 <md-input-container class="md-block">
                     <label>{{'INPUT.Dialogs.Model.Keyword'|translate}}</label>
                     <input name="ModelKeyword" md-no-asterisk="" required="" type="text"
-                           ng-model="vm.modelo.palabra_clave"/>
+                           ng-model="vm.modelo.palabra_clave" />
                     <div ng-messages="modelForm.ModelKeyword.$error">
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
                 </md-input-container>
-                <md-input-container flex="100" class="md-block">
+                <catalog-select class="full-width"
+                                catalog="vm.catalogues['tipo_equipo'].catalog"
+                                pagination="vm.catalogues['tipo_equipo'].pagination"
+                                elements="vm.catalogues['tipo_equipo'].elements"
+                                soft-delete="vm.catalogues['tipo_equipo'].softDelete"
+                                on-select="vm.onTipoEquipoSelect(element)">
+                </catalog-select>
+                <catalog-select class="full-width"
+                                catalog="vm.catalogues['marca'].catalog"
+                                pagination="vm.catalogues['marca'].pagination"
+                                elements="vm.catalogues['marca'].elements"
+                                soft-delete="vm.catalogues['marca'].softDelete"
+                                on-select="vm.onElementSelect(element)">
+                </catalog-select>
+                <!--<md-input-container flex="100" class="md-block">
                     <label>{{'INPUT.Dialogs.Model.Type'|translate}}</label>
                     <md-select name="selectType" ng-model="vm.modelo.tipo" required="" md-no-asterisk=""
                                ng-if="vm.tipos!=null">
@@ -65,11 +78,12 @@ Created by Emmanuel on 03/09/2016.
                     <div ng-messages="entradaForm.selectBrand.$error">
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
-                </md-input-container>
+                </md-input-container>-->
             </div>
         </form>
-    </md-content>
+    </div>
     <div layout="row" layout-align="end center" layout-fill class="gray-color">
+        g-
         <md-button ng-click="vm.cancel()" md-no-ink class="md-primary">
             {{'INPUT.Cancel'|translate}}
         </md-button>

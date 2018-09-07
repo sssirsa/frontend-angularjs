@@ -8,10 +8,29 @@
         .module('app.mainApp.entries')
         .controller('entradaController', entradaController);
 
-    function entradaController(EntradaSalida, toastr, $mdDialog, MarcaCabinet,
-                               ModeloCabinet, Sucursal, udn, CabinetEntradaSalida,
-                               Proyectos, TipoTransporte, LineaTransporte, Translate,
-                               $scope, Cabinet, Helper, Persona, OPTIONS) {
+    function entradaController(
+        EntradaSalida,
+        toastr,
+        $mdDialog,
+        MarcaCabinet,
+        ModeloCabinet,
+        //Sucursal,
+        //udn,
+        CabinetEntradaSalida,
+        //Proyectos,
+        //TipoTransporte,
+        //LineaTransporte,
+        Translate,
+        $scope,
+        Cabinet,
+        Helper,
+        Persona,
+        OPTIONS,
+        URLS,
+        CATALOG,
+        ErrorHandler
+    ) {
+
         //Variable definition
         var vm = this;
         vm.isGarantia = false;
@@ -26,6 +45,104 @@
 
         vm.options = OPTIONS.input_types;
         vm.selectedEntrada = null;
+
+        vm.catalogues = {
+            sucursal: {
+                catalog: {
+                    url: URLS.sucursal,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Subsidiary'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            linea_transporte: {
+                catalog: {
+                    url: URLS.linea_transporte,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Transport.Line'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'razon_social'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            tipo_transporte: {
+                catalog: {
+                    url: URLS.tipo_transporte,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Transport.Kind'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            udn: {
+                catalog: {
+                    url: URLS.udn,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.UDN'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'agencia'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            proyecto: {
+                catalog: {
+                    url: URLS.proyecto,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Project'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            }
+        };
 
         //Function parsing
         vm.guardar = guardar;
@@ -44,11 +161,11 @@
         vm.removeNotFoundCabinet = removeNotFoundCabinet;
         vm.removeCabinet = removeCabinet;
         vm.selectedItemChange = selectedItemChange;
-        vm.search = search;
+        //vm.search = search;
+        vm.onElementSelect = onElementSelect;
 
-
-        vm.modelos = ModeloCabinet.list();
-        vm.marcas = MarcaCabinet.list();
+        //vm.modelos = ModeloCabinet.list();
+        //vm.marcas = MarcaCabinet.list();
 
         //Visualizations
         vm.hideMassiveUpload = true;
@@ -111,37 +228,37 @@
             vm.cabinetID = "";
             vm.notFoundCabinets = [];
 
-            LineaTransporte.listObject().then(function (res) {
-                vm.lineasTransporte = Helper.filterDeleted(res, true);
-                vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
-            TipoTransporte.listObject().then(function (res) {
-                vm.tiposTransporte = Helper.filterDeleted(res, true);
-                vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
-            Sucursal.listObject().then(function (res) {
-                vm.Sucursales = Helper.filterDeleted(res, true);
-                vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
-            Proyectos.listObject().then(function (res) {
-                vm.Proyectos = Helper.filterDeleted(res, true);
-                vm.Proyectos = _.sortBy(vm.Proyectos, 'descripcion');
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
-            udn.listObject().then(function (res) {
-                vm.udns = Helper.filterDeleted(res, true);
-                vm.udns = _.sortBy(vm.udns, 'agencia');
-                vm.filteredUDN = angular.copy(vm.udns);
-            }).catch(function () {
-                toastr.error(vm.errorMessage, vm.errorTitle);
-            });
+            //LineaTransporte.listObject().then(function (res) {
+            //    vm.lineasTransporte = Helper.filterDeleted(res, true);
+            //    vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
+            //}).catch(function () {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
+            //TipoTransporte.listObject().then(function (res) {
+            //    vm.tiposTransporte = Helper.filterDeleted(res, true);
+            //    vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
+            //}).catch(function () {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
+            //Sucursal.listObject().then(function (res) {
+            //    vm.Sucursales = Helper.filterDeleted(res, true);
+            //    vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
+            //}).catch(function () {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
+            //Proyectos.listObject().then(function (res) {
+            //    vm.Proyectos = Helper.filterDeleted(res, true);
+            //    vm.Proyectos = _.sortBy(vm.Proyectos, 'descripcion');
+            //}).catch(function () {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
+            //udn.listObject().then(function (res) {
+            //    vm.udns = Helper.filterDeleted(res, true);
+            //    vm.udns = _.sortBy(vm.udns, 'agencia');
+            //    vm.filteredUDN = angular.copy(vm.udns);
+            //}).catch(function () {
+            //    toastr.error(vm.errorMessage, vm.errorTitle);
+            //});
             vm.entrada = angular.copy(entrada);
             Persona.listProfile().then(function (res) {
                 if (res.sucursal != null) {
@@ -193,10 +310,10 @@
                         vm.entrada.id = res.id;
                         vm.entrada.creados = res.creados;
                         vm.entrada.no_creados = _.map(res.no_creados, function (id) {
-                            return {"economico": id, "motivo": "Marca o modelo no existentes"};
+                            return { "economico": id, "motivo": "Marca o modelo no existentes" };
                         });
                         vm.entrada.modelos_no_existentes = _.map(res.modelos_no_existentes, function (id) {
-                            return {"denominacion": id};
+                            return { "denominacion": id };
                         });
                         vm.entrada.file = null;
                         if (vm.entrada.no_creados.length > 0) {
@@ -230,7 +347,7 @@
                         vm.entrada.creados = res.creados;
                         vm.entrada.no_creados = res.no_creados;
                         vm.entrada.modelos_no_existentes = _.map(res.modelos_no_existentes, function (id) {
-                            return {"denominacion": id};
+                            return { "denominacion": id };
                         });
                         if (vm.entrada.no_creados.length > 0) {
                             toastr.warning(vm.warning, vm.warningTitle);
@@ -277,8 +394,8 @@
                 var request = {
                     "entrada_salida": res.id,
                     "economico": _.map(vm.cabinets, function (element) {
-                            return {"economico": element.economico};
-                        }
+                        return { "economico": element.economico };
+                    }
                     )
                 };
                 CabinetEntradaSalida.create(request).then(function () {
@@ -378,20 +495,65 @@
             });
         }
 
-        function showMarcaDialog(ev) {
+        function showMarcaDialog() {
+            let brandProvider = CATALOG.web;
+            brandProvider.url = URLS.marca;
+
+            let brandCreate = {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'categoria',
+                        label: 'Categoría',
+                        hint: 'Cabinet, carrito, etc.',
+                        required: true,
+                        validations: {
+                            regex: "[A-Za-z]{0,20}",
+                            errors: {
+                                regex: 'La longitud máxima es de 20 letras',
+                                required: 'La categoría es obligatoria'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Nombre de la marca',
+                        required: true,
+                        validations: {
+                            regex: "[A-Z a-z\d]{0,25}",
+                            errors: {
+                                regex: 'La longitud máxima es de 25 caracteres (solo letras y números)',
+                                required: 'El nombre de la marca es obligatorio'
+                            }
+                        }
+                    }
+                ],
+                dialog: {
+                    title: Translate.translate('INPUT.Create Brand'),
+                    okButton: Translate.translate('INPUT.Save'),
+                    cancelButton: Translate.translate('INPUT.Cancel'),
+                    loading: 'Creando marca'
+                }
+            };
+
             $mdDialog.show({
-                controller: 'MarcaDialogController',
+                controller: 'CatalogCreateDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/entries/dialogs/marca.tmpl.html',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
-                parameter: "lalalalala"
-            }).then(function (res) {
-
+                locals: {
+                    dialog: brandCreate.dialog,
+                    provider: brandProvider,
+                    fields: brandCreate.fields
+                }
+            }).then(function () {
+                ErrorHandler.successCreation();
             }).catch(function (err) {
-                if (err != null) {
-                    toastr.error(vm.errorGeneric, vm.errorTitle);
+                if (err) {
+                    ErrorHandler.errortranslate(err);
                 }
             });
         }
@@ -416,48 +578,58 @@
 
         function addCabinet() {
             if (vm.cabinetID.length > 0) {
-                Cabinet
-                    .get(vm.cabinetID)
-                    .then(function (cabinetInfo) {
-                        console.debug(cabinetInfo);
-                        Cabinet.getIfEntrada(vm.cabinetID).then(function (res) {
-                            var index = vm.cabinets.map(function (elem) {
-                                return elem.economico;
-                            }).indexOf(res.economico);
-                            if (index != -1) {
+                var index = vm.cabinets.map(function (elem) {
+                    return elem.economico;
+                }).indexOf(vm.cabinetID);
+                if (index != -1) {
+                    toastr.warning(vm.errorCabinet, vm.warning);
+                }
+                else {
+                    vm.searchCabinet = Cabinet
+                        .get(vm.cabinetID)
+                        .then(function (cabinetInfo) {
+                            vm.searchCabinet = Cabinet
+                                .getIfEntrada(vm.cabinetID)
+                                .then(function (res) {
+                                    var tempCabinet = angular.copy(res);
+                                    console.debug('Adding Cabinet');
+                                    console.debug(res);
+                                    vm.searchCabinet = modeloById(cabinetInfo.modelo)
+                                        .then(function (modelo) {
+                                            tempCabinet.modelo = modelo.nombre;
+                                            console.debug(tempCabinet);
+                                            vm.searchCabinet = marcaById(modelo.marca)
+                                                .then(function (marca) {
+                                                    tempCabinet.marca = marca.descripcion;
+                                                    console.debug(tempCabinet);
+                                                    vm.cabinets.push(tempCabinet);
+                                                });
+                                        });
+                                    vm.cabinetID = "";
+                                }).catch(function (err) {
+                                    if (err.data.detail != null)
+                                        toastr.error(err.data.detail, vm.errorTitle);
+                                    else
+                                        toastr.error(vm.notFoundCabinet, vm.errorTitle);
+                                    vm.cabinetID = "";
+                                });
+                        })
+                        .catch(function (cabinetInfoError) {
+                            console.error(cabinetInfoError);
+                            if (vm.notFoundCabinets.indexOf(vm.cabinetID) != -1) {
                                 toastr.warning(vm.errorCabinet, vm.warning);
                             }
                             else {
-                                var tempCabinet = angular.copy(res);
-                                tempCabinet.modelo = modeloById(res.modelo).nombre;
-                                tempCabinet.marca = marcaById(res.modelo);
-                                vm.cabinets.push(tempCabinet);
+                                toastr.warning(vm.notFoundCabinet, vm.warning);
+                                vm.notFoundCabinets.push(vm.cabinetID);
                             }
                             vm.cabinetID = "";
-                        }).catch(function (err) {
-                            if (err.data.detail != null)
-                                toastr.error(err.data.detail, vm.errorTitle);
-                            else
-                                toastr.error(vm.notFoundCabinet, vm.errorTitle);
-                            vm.cabinetID = "";
                         });
-                    })
-                    .catch(function (cabinetInfoError) {
-                        console.error(cabinetInfoError);
-                        if (vm.notFoundCabinets.indexOf(vm.cabinetID) != -1) {
-                            toastr.warning(vm.errorCabinet, vm.warning);
-                        }
-                        else {
-                            toastr.warning(vm.notFoundCabinet, vm.warning);
-                            vm.notFoundCabinets.push(vm.cabinetID);
-                        }
-                        vm.cabinetID = "";
-                    });
+                }
             }
             else
                 vm.cabinetID = "";
         }
-
 
         function removeNotFoundCabinet(id) {
             var index = vm.notFoundCabinets.indexOf(id);
@@ -474,16 +646,20 @@
         }
 
         function modeloById(id) {
-            return _.find(vm.modelos, function (model) {
-                return model.id == id;
-            });
+            return ModeloCabinet
+                .get(id);
+            //return _.find(vm.modelos, function (model) {
+            //    return model.id == id;
+            //});
         }
 
         function marcaById(id) {
-            var modelo = modeloById(id);
-            return _.find(vm.marcas, function (brand) {
-                return brand.id == modelo.marca;
-            }).descripcion;
+            return MarcaCabinet
+                .get(id);
+
+            //return _.find(vm.marcas, function (brand) {
+            //    return brand.id == modelo.marca;
+            //}).descripcion;
         }
 
         function showCabinetDialog(economico) {
@@ -509,21 +685,23 @@
             });
         }
 
-        function search(text) {
-            if (!angular.isUndefined(text)) {
-                vm.filteredUDN = _.filter(vm.udns, function (item) {
-                    return item.agencia.toLowerCase().startsWith(text.toLowerCase()) || item.zona.toLowerCase().startsWith(text.toLowerCase());
-                });
-                vm.isValid = !((vm.filteredUDN.length == 0 && text.length > 0) || (text.length > 0 && !angular.isObject(vm.entrada.udn)));
-                return vm.filteredUDN;
-            }
-        }
+        //function search(text) {
+        //    if (!angular.isUndefined(text)) {
+        //        vm.filteredUDN = _.filter(vm.udns, function (item) {
+        //            return item.agencia.toLowerCase().startsWith(text.toLowerCase()) || item.zona.toLowerCase().startsWith(text.toLowerCase());
+        //        });
+        //        vm.isValid = !((vm.filteredUDN.length == 0 && text.length > 0) || (text.length > 0 && !angular.isObject(vm.entrada.udn)));
+        //        return vm.filteredUDN;
+        //    }
+        //}
 
         function selectedItemChange(item) {
             vm.isValid = angular.isObject(item);
         }
 
-
+        function onElementSelect(element, field) {
+            vm.entrada[field] = element;
+        }
     }
 
 })();
