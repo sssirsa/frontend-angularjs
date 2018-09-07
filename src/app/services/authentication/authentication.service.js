@@ -5,7 +5,7 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $q, WebRestangular, RoleStore, User) {
+    function AuthService(OAuth, $q, WebRestangular, RoleStore, User, $cookies) {
 
         var authService = {
             canRefreshSession: canRefreshSession,
@@ -39,7 +39,7 @@
                                 roles[roleName.name.toUpperCase()] = [];
                             });
 
-                            localStorage.setItem('roles', JSON.stringify(roles));
+                            $cookies.putObject('roles', roles);
 
                             RoleStore.defineManyRoles(roles);
 
@@ -66,7 +66,7 @@
         }
 
         function getToken() {
-            return localStorage.getItem('token');
+            return $cookies.getObject('token');
         }
 
         function logout() {
@@ -77,11 +77,10 @@
         function refreshToken() {
             var request = $q.defer();
             if (OAuth.canRefresh()) {
-                console.log('Refreshing token');
                 OAuth
                     .refreshToken()
                     .then(function () {
-                        var roles = JSON.parse(localStorage.getItem('roles'));
+                        var roles = $cookies.getObject('roles');
                         RoleStore.defineManyRoles(roles);
                         request.resolve();
                     })

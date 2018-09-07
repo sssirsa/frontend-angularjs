@@ -3,10 +3,10 @@
 
     angular
         .module('app.mainApp.login')
-        .controller('loginController', ['$state', 'toastr', '$log', 'AuthService', loginController]);
+        .controller('loginController', ['$state', 'toastr', '$log', 'AuthService', '$cookies', loginController]);
 
     /* @ngInject */
-    function loginController($state, toastr, $log, AuthService) {
+    function loginController($state, toastr, $log, AuthService, $cookies) {
         var vm = this;
 
         vm.loginClick = loginClick;
@@ -21,7 +21,7 @@
         function loginClick() {
             vm.loginPromise = AuthService.login(vm.user)
                 .then(function () {
-                    localStorage.setItem('keepSession', vm.keepSession);
+                    $cookies.putObject('keepSession', vm.keepSession);
                     $state.go('triangular.admin-default.welcome');
                 })
                 .catch(function (loginError) {
