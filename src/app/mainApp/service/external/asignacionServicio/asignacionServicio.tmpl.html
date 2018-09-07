@@ -16,21 +16,18 @@
     </md-card>
     <div
         ng-if="vm.salePoints">
-        <div>
+        <div class="virtualRepeatScroll-500">
             <md-card
                 flex="100"
                 layout="column"
                 ng-repeat="salePoint in vm.salePoints|orderBy:'fecha' "
                 layout-gt-md="row">
-                <!--ng-click="vm.selectSalePoint(salePoint)">-->
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content>
                         <div flex="100">
                             <md-toolbar class="md-hue-1">
                                 <div class="md-toolbar-tools" layout-align="space-between center">
                                     <b>{{salePoint.folio}}</b>
-                                    <!--<h1>{{salePoint.fecha_creacion | moment:'DD/MM/YYYY hh:mm:ss'}}</h1>-->
-                                    <!--<h1>NOMBRE DEL ASIGNADO XD</h1>-->
                                 </div>
                             </md-toolbar>
                         </div>
@@ -86,17 +83,6 @@
                             </div>
 
                             <div layout="column">
-                                <!--<div layout="row">-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</b>-->
-                                <!--</div>-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<b>:&nbsp</b>-->
-                                <!--</div>-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<h4>{{salePoint.route}}</h4>-->
-                                <!--</div>-->
-                                <!--</div>-->
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</b>
