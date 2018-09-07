@@ -10,11 +10,9 @@
 
         vm.selectedKind = 'unasigned';
         vm.salePoints = null;
-        vm.salePointKinds = [{id: 'unasigned', value: 'Sin asignar'}];
         vm.Assing = Assing;
 
         function Assing(salePoint) {
-            console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
@@ -27,7 +25,6 @@
                 }
             })
                 .then(function () {
-                    vm.selectedKind = 'unasigned';
                     vm.salePoints = null;
                     vm.listSalePoints();
                 });
@@ -46,26 +43,18 @@
         vm.prev = prevPage;
 
         function listSalePoints() {
-            if (vm.selectedKind) {
-                vm.objectAtention = null;
-                switch (vm.selectedKind) {
-                    case 'unasigned':
-                        vm.loadingPromise = SalePoint.listUnasignedServices('?limit=20&offset='+vm.offset)
-                            .then(function (salePointsSuccess) {
-                                vm.objectAtention = salePointsSuccess;
-                                prepareDataFunction();
-                                console.log(salePointsSuccess);
-                            })
-                            .catch(function (salePointsError) {
-                                console.log(salePointsError);
-                                toastr.error(
-                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                                    Translate.translate('MAIN.MSG.ERROR_TITLE')
-                                );
-                            });
-                        break;
-                }
-            }
+            vm.objectAtention = null;
+            vm.loadingPromise = SalePoint.listUnasignedServices(20, vm.offset)
+                .then(function (salePointsSuccess) {
+                    vm.objectAtention = salePointsSuccess;
+                    prepareDataFunction();
+                })
+                .catch(function (salePointsError) {
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
         }
 
         function prepareDataFunction() {
