@@ -18,7 +18,7 @@
                         {{option.value}}
                     </md-option>
                 </md-select>
-                <div ng-if="vm.selectedKind && !vm.salePoints">
+                <div ng-if="vm.selectedKind && vm.salePoints.length == 0">
                     <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
                 </div>
             </md-input-container>
@@ -38,23 +38,27 @@
 
                 <div layout="column">
                     <span translate>REQUESTS.LIST.OPEN</span>
-                    <div class="Abierta"></div>
+                    <div class="Abierta" ng-click="vm.FilterAttentions('Abierta')"></div>
                 </div>
                 <div layout="column">
                     <span translate>REQUESTS.LIST.IN_PROCESS</span>
-                    <div class="En_proceso"></div>
+                    <div class="En_proceso" ng-click="vm.FilterAttentions('En_proceso')"></div>
                 </div>
                 <div layout="column">
                     <span translate>REQUESTS.LIST.ATTENDED</span>
-                    <div class="Atendida"></div>
+                    <div class="Atendida" ng-click="vm.FilterAttentions('Atendida')"></div>
                 </div>
                 <div layout="column">
                     <span translate>REQUESTS.LIST.CANCELED</span>
-                    <div class="Cancelada"></div>
+                    <div class="Cancelada" ng-click="vm.FilterAttentions('Cancelada')"></div>
+                </div>
+                <div layout="column">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div class="Todo" ng-click="vm.FilterAttentions('Todo')"></div>
                 </div>
             </div>
         </md-card>
-        <div class="virtualRepeatScroll-600">
+        <div class="virtualRepeatScroll-600" ng-if="!vm.filteredActivated && vm.salePoints.length != 0">
             <md-card
                 flex="100"
                 layout="column"

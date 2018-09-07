@@ -10,6 +10,7 @@
 
         vm.selectedKind = null;
         vm.salePoints = null;
+        vm.filteredActivated = false;
         vm.salePointKinds = OPTIONS.salePointAssignKind;
         vm.aceptButton = Translate.translate('MAIN.BUTTONS.ACCEPT');
         vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
@@ -20,6 +21,7 @@
         vm.Cancel = Cancel;
         vm.selectRequest = selectRequest;
         vm.Report = Report;
+        vm.FilterAttentions = FilterAttentions;
 
         function Report(salepoint) {
             console.log(salepoint)
@@ -62,6 +64,36 @@
 
         }
 
+        function FilterAttentions(filter) {
+            vm.filteredActivated = true;
+            if (filter === 'Todo') {
+                vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
+                    .then(function (salePointsSuccess) {
+                        vm.objectAtention = salePointsSuccess;
+                        prepareDataFunction();
+                    })
+                    .catch(function (salePointsError) {
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        );
+                    });
+            }
+            else {
+                var filterSTR = 'status='+filter;
+                vm.loadingPromise = SalePoint.listAllServices('20', vm.offset, filterSTR)
+                    .then(function (salePointsSuccess) {
+                        vm.objectAtention = salePointsSuccess;
+                        prepareDataFunction();
+                    })
+                    .catch(function (salePointsError) {
+                        toastr.error(
+                            Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
+                            Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                        );
+                    });
+            }
+        }
 
         function Atending(salePoint) {
             // console.log(salePoint);
@@ -148,7 +180,7 @@
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
-            // console.log(vm.salePoints);
+            vm.filteredActivated = false;
         }
 
         function sigPage() {
