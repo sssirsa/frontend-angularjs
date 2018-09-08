@@ -14,7 +14,7 @@
              layout-xs="column"
              layout-align="space-around center"
              layout-padding>
-            <md-input-container class="md-block" flex>
+            <md-input-container class="md-block" flex-gt-sm="50" flex="100">
                 <label translate>REQUESTS.NEW.KIND</label>
                 <md-select
                     ng-model="vm.request.tipo">
@@ -25,20 +25,12 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block"
-                                flex
-                                ng-if="!vm.user.sucursal">
-                <label translate>REQUESTS.NEW.SUCURSAL</label>
-                <md-select
-                    md-on-open="vm.loadSucursales()"
-                    ng-model="vm.request.sucursal">
-                    <md-option
-                        ng-repeat="sucursal in vm.sucursales"
-                        ng-value="sucursal.id">
-                        {{sucursal.nombre}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
+            <div flex-gt-sm="50" flex="100" ng-if="!vm.user.sucursal">
+            <catalog-select catalog="vm.catalogSucursal.catalog"
+                            elements="vm.catalogSucursal.elements"
+                            on-select="vm.onSelectedSucursal(element)">
+            </catalog-select>
+            </div>
         </div>
     </md-card>
 
