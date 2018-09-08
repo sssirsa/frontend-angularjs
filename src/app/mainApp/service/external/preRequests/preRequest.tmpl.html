@@ -1,44 +1,107 @@
 <div layout="column" layout-padding="">
-    <md-card layout="column"
-             layout-padding
-             layout-align="center stretch">
+    <div cg-busy="{promise:vm.loadingPromise, message:'Cargando solicitudes...'}">
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch">
 
-        <div layout="row"
-             layout-align="space-around center"
-             layout-align-xs="center stretch"
-             layout-xs="column">
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
 
-            <div layout="column">
-                <span translate>REQUESTS.LIST.OPEN</span>
-                <div ng-click="vm.listFilteredpreRequests('Abierta')"
-                     class="Abierta"></div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'Abierta'">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div ng-click="vm.listFilteredpreRequests('Abierta')"
+                         class="Abierta"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'En_proceso'">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div ng-click="vm.listFilteredpreRequests('En_proceso')"
+                         class="En_proceso"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'Atendida'">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div ng-click="vm.listFilteredpreRequests('Atendida')"
+                         class="Atendida"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'Todo'">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div ng-click="vm.listFilteredpreRequests('Todo')"
+                         class="Todo"></div>
+                </div>
             </div>
-            <div layout="column">
-                <span translate>REQUESTS.LIST.IN_PROCESS</span>
-                <div ng-click="vm.listFilteredpreRequests('En_proceso')"
-                     class="En_proceso"></div>
+        </md-card>
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <span>Listado de </span>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Abierta'">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div class="Abierta"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'En_proceso'">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div class="En_proceso"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Atendida'">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div class="Atendida"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Todo'">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div class="Todo"></div>
+                </div>
             </div>
-            <div layout="column">
-                <span translate>REQUESTS.LIST.ATTENDED</span>
-                <div ng-click="vm.listFilteredpreRequests('Atendida')"
-                     class="Atendida"></div>
+        </md-card>
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch"
+                 ng-if="vm.requests.length == 0">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
             </div>
-            <div layout="column">
-                <span translate>REQUESTS.LIST.ALL</span>
-                <div ng-click="vm.listFilteredpreRequests('Todo')"
-                     class="Todo"></div>
-            </div>
-        </div>
-    </md-card>
-    <md-card ng-if="!vm.requests">
-        <div>
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-        </div>
-    </md-card>
-    <div layout="row" flex="100" layout-align="center center" ng-repeat="item in vm.requests">
+        </md-card>
+    </div>
+    <div ng-if="vm.requests.length !=0 && !vm.filteredActivated" class="virtualRepeatScroll-400">
+    <div
+        layout="row"
+        flex="100"
+        layout-align="center center"
+        ng-repeat="item in vm.requests">
         <pre-request-item pre="item" flex="100">
-
         </pre-request-item>
+    </div>
+    </div>
+    <div layout-padding layout="row" layout-align="space-between center">
+        <md-button class="md-primary md-raised"
+                   ng-disabled="vm.list.previous == null"
+                   ng-click="vm.prev()">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+                <div hide-xs hide-sm>
+                    Anterior
+                </div>
+            </div>
+        </md-button>
 
+        <md-button class="md-primary md-raised"
+                   ng-disabled="vm.list.next == null"
+                   ng-click="vm.sig()">
+            <div layout="row" layout-align="center center">
+                <div hide-xs hide-sm>
+                    Siguiente
+                </div>
+                <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+            </div>
+        </md-button>
     </div>
 </div>
