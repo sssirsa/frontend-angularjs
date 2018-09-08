@@ -90,7 +90,7 @@
 
     <div class="virtualRepeatScroll-400"
         cg-busy="{promise:vm.getReportPromise, message:'Generando reporte...'}"
-        ng-if="vm.requests">
+        ng-if="vm.requests.length != 0 && !vm.filteredActivated">
 
         <md-card
             layout="column"
