@@ -24,8 +24,8 @@
         function list(){
             return baseURL.getList().$object;
         }
-        function listWitout(){
-            return baseURL.getList();
+        function listWitout(limit, offset){
+            return WebRestangular.all(URLS.tipo_equipo+'?limit='+limit+'&offset='+offset).customGET();
         }
 
         function update(object){
