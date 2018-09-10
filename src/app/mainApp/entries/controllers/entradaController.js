@@ -214,39 +214,8 @@
             vm.cabinets = [];
             vm.cabinetID = "";
             vm.notFoundCabinets = [];
-
-            //LineaTransporte.listObject().then(function (res) {
-            //    vm.lineasTransporte = Helper.filterDeleted(res, true);
-            //    vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
-            //}).catch(function () {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //TipoTransporte.listObject().then(function (res) {
-            //    vm.tiposTransporte = Helper.filterDeleted(res, true);
-            //    vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
-            //}).catch(function () {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //Sucursal.listObject().then(function (res) {
-            //    vm.Sucursales = Helper.filterDeleted(res, true);
-            //    vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
-            //}).catch(function () {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //Proyectos.listObject().then(function (res) {
-            //    vm.Proyectos = Helper.filterDeleted(res, true);
-            //    vm.Proyectos = _.sortBy(vm.Proyectos, 'descripcion');
-            //}).catch(function () {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //udn.listObject().then(function (res) {
-            //    vm.udns = Helper.filterDeleted(res, true);
-            //    vm.udns = _.sortBy(vm.udns, 'agencia');
-            //    vm.filteredUDN = angular.copy(vm.udns);
-            //}).catch(function () {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
             vm.entrada = angular.copy(entrada);
+
             Persona.listProfile().then(function (res) {
                 if (res.sucursal != null) {
                     vm.sucursal = res.sucursal;
@@ -561,8 +530,8 @@
             }).then(function (res) {
 
             }).catch(function (err) {
-                if (err != null) {
-                    toastr.error(vm.errorGeneric, vm.errorTitle);
+                if (err) {
+                    ErrorHandler.errortranslate(err);
                 }
             });
         }
@@ -591,27 +560,6 @@
                                 //Cabinet is in a subsidiary WareHouse
                                 toastr.error(Translate.translate('INPUT.Messages.CabinetInSubsidiary'));
                             }
-                            //vm.searchCabinet = Cabinet
-                            //    .getIfEntrada(vm.cabinetID)
-                            //    .then(function (res) {
-                            //        var tempCabinet = angular.copy(res);
-                            //        vm.searchCabinet = modeloById(cabinetInfo.modelo)
-                            //            .then(function (modelo) {
-                            //                tempCabinet.modelo = modelo.nombre;
-                            //                vm.searchCabinet = marcaById(modelo.marca)
-                            //                    .then(function (marca) {
-                            //                        tempCabinet.marca = marca.descripcion;
-                            //                        vm.cabinets.push(tempCabinet);
-                            //                    });
-                            //            });
-                            //        vm.cabinetID = "";
-                            //    }).catch(function (err) {
-                            //        if (err.data.detail != null)
-                            //            toastr.error(err.data.detail, vm.errorTitle);
-                            //        else
-                            //            toastr.error(vm.notFoundCabinet, vm.errorTitle);
-                            //        vm.cabinetID = "";
-                            //    });
                         })
                         .catch(function (cabinetInfoError) {
                             console.error(cabinetInfoError);
@@ -660,9 +608,8 @@
                 vm.cabinetID = res;
                 addCabinet();
             }).catch(function (err) {
-                if (err != null) {
-                    console.error(err);
-                    toastr.error(vm.errorGeneric);
+                if (err) {
+                    ErrorHandler.errortranslate(err);
                 }
             });
         }
