@@ -157,7 +157,7 @@
                         vm.insumos = respuesta;
                         var aux = null;
 
-                        angular.forEach(vm.insumos.results, function (value) {
+                        angular.forEach(vm.insumos, function (value) {
                             value.check = false;
                             value.usado = 0;
                             value.error = null;
