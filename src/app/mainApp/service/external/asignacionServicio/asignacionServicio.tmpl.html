@@ -91,7 +91,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{salePoint.establecimiento_info.nombre_establecimiento}}</h4>
+                                        <h4>{{salePoint.establecimiento.nombre_establecimiento}}</h4>
                                     </div>
                                 </div>
 
@@ -103,9 +103,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">
-                                            {{salePoint.establecimiento_info.localidad.municipio.estado.nombre}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                            {{salePoint.establecimiento.localidad.municipio.estado.nombre}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
                                     </div>
                                 </div>
 
@@ -117,9 +117,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento_info.localidad.codigo_postal">
-                                            {{salePoint.establecimiento_info.localidad.codigo_postal}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento_info.localidad.codigo_postal">No
+                                        <h4 ng-if="salePoint.establecimiento.localidad.codigo_postal">
+                                            {{salePoint.establecimiento.localidad.codigo_postal}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.codigo_postal">No
                                             Asignado</h4>
                                     </div>
                                 </div>
@@ -134,9 +134,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento_info.localidad.municipio">
-                                            {{salePoint.establecimiento_info.localidad.municipio.nombre}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento_info.localidad.municipio">No Asignado</h4>
+                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                            {{salePoint.establecimiento.localidad.municipio.nombre}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
                                     </div>
                                 </div>
                                 <div layout="row">
@@ -147,7 +147,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{salePoint.establecimiento_info.localidad.nombre}}</h4>
+                                        <h4>{{salePoint.establecimiento.localidad.nombre}}</h4>
                                     </div>
                                 </div>
 
