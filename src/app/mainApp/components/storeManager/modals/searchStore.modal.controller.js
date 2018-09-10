@@ -28,6 +28,9 @@
         vm.economic = null;
         vm.selectedTab = 0;
         vm.stores = null;
+        vm.limit = 20;
+        vm.offset = 0;
+        vm.fullStores = null;
 
         //Functions
         vm.accept = accept;
@@ -39,6 +42,8 @@
         vm.selectCity = selectCity;
         vm.search = search;
         vm.changeTab = changeTab;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
 
         activate();
 
@@ -131,9 +136,9 @@
                         if (vm.city) {
                             if (vm.locality) {
                                 //Look up by locality
-                                vm.loadingPromise = Stores.getByLocality(vm.locality)
+                                vm.loadingPromise = Stores.getByLocality(vm.locality, vm.limit, vm.offset)
                                     .then(function (storeList) {
-                                        vm.stores = Helper.filterDeleted(storeList, true);
+                                        prepareDataFunction(storeList);
                                     })
                                     .catch(function (storeListError) {
                                         $log.error(storeListError);
@@ -142,9 +147,9 @@
                             }
                             else {
                                 //Look up by city
-                                vm.loadingPromise = Stores.getByCity(vm.city)
+                                vm.loadingPromise = Stores.getByCity(vm.city, vm.limit, vm.offset)
                                     .then(function (storeList) {
-                                        vm.stores = Helper.filterDeleted(storeList, true);
+                                        prepareDataFunction(storeList);
                                     })
                                     .catch(function (storeListError) {
                                         $log.error(storeListError);
@@ -154,9 +159,9 @@
                         }
                         else {
                             //Look up by state
-                            vm.loadingPromise = Stores.getByState(vm.state)
+                            vm.loadingPromise = Stores.getByState(vm.state, vm.limit, vm.offset)
                                 .then(function (storeList) {
-                                    vm.stores = Helper.filterDeleted(storeList, true);
+                                    prepareDataFunction(storeList);
                                 })
                                 .catch(function (storeListError) {
                                     $log.error(storeListError);
@@ -166,9 +171,9 @@
                     }
                     break;
                 case 1:
-                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code)
+                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code, vm.limit, vm.offset)
                         .then(function (storeList) {
-                            vm.stores = Helper.filterDeleted(storeList, true);
+                            prepareDataFunction(storeList);
                         })
                         .catch(function (storeListError) {
                             $log.error(storeListError);
@@ -176,12 +181,13 @@
                         });
                     break;
                 case 2:
-                    vm.loadingPromise = Stores.getByEconomic(vm.economic)
+                    vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
                         .then(function (storeList) {
+                            vm.fullStores = storeList;
                             var justStores = [];
-                            angular.forEach(storeList, function (item) {
+                            angular.forEach(storeList.results, function (item) {
                                 if(!item.fecha_salida)
-                                justStores.push(item.establecimiento);
+                                    justStores.push(item.establecimiento_obj);
                             });
                             vm.stores = Helper.filterDeleted(justStores, true);
                         })
@@ -200,6 +206,26 @@
             vm.postal_code = null;
             vm.economic = null;
             vm.stores = null;
+            vm.fullStores = null;
+            vm.offset = 0;
+        }
+
+        function prepareDataFunction(Stores) {
+            vm.fullStores = Stores;
+            var list = Stores.results;
+            vm.stores = Helper.filterDeleted(list, true);
+        }
+
+        function sigPage() {
+            vm.stores = null;
+            vm.offset += vm.limit;
+            search();
+        }
+
+        function prevPage() {
+            vm.stores = null;
+            vm.offset -= vm.limit;
+            search();
         }
 
     }
