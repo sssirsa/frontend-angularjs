@@ -171,17 +171,6 @@
                             </div>
 
                             <div layout="column">
-                                <!--<div layout="row">-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.ROUTE</b>-->
-                                <!--</div>-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<b>:&nbsp</b>-->
-                                <!--</div>-->
-                                <!--<div layout="column" layout-align="center center">-->
-                                <!--<h4>{{salePoint.route}}</h4>-->
-                                <!--</div>-->
-                                <!--</div>-->
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</b>
@@ -315,6 +304,13 @@
                         Anterior
                     </div>
                 </div>
+            </md-button>
+
+            <md-button class="md-icon-button"
+                       aria-label="More"
+                       ng-repeat="numberButt in vm.arrayButtonPage"
+                       ng-click="vm.goToNumberPage(numberButt)">
+                {{numberButt + 1}}
             </md-button>
 
             <md-button class="md-primary md-raised"
