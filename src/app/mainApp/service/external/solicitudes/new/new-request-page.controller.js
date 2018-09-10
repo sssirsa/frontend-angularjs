@@ -58,7 +58,7 @@
                 kind: 'Web',
                 name: 'Sucursal',
                 loadMoreButtonText: 'Cargar mas',
-                model: 'nombre',
+                model: 'id',
                 option: 'nombre'
             },
             elements: 'results',
