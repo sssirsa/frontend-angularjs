@@ -104,8 +104,9 @@
                                 <div class="md-toolbar-tools" layout-align="space-between center">
                                     <b>{{salePoint.folio}}</b>
                                     <h1 ng-if="(salePoint.tecnico) && vm.selectedKind == 'pending'">
-                                        {{salePoint.tecnico.nombre+' '+salePoint.tecnico.apellido_paterno+'
-                                        '+salePoint.tecnico.apellido_materno}}</h1>
+                                        {{salePoint.tecnico.nombre+
+                                        ' '+salePoint.tecnico.apellido_paterno+
+                                        ' '+salePoint.tecnico.apellido_materno}}</h1>
                                     <h1 ng-if="(!salePoint.tecnico) && vm.selectedKind == 'pending'">Sin Asignar</h1>
                                     <div ng-if="vm.selectedKind != 'pending'" class="{{salePoint.status}}"></div>
                                 </div>
@@ -139,13 +140,20 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <div layout="column" layout-align="center center">
+                                        <div layout="column" layout-align="center center"
+                                             ng-if="salePoint.status == 'Abierta'">
                                             <h4 ng-if="salePoint.hora_cliente_inicio">
                                                 {{salePoint.hora_cliente_inicio}}</h4>
                                             <h4 ng-if="!salePoint.hora_cliente_inicio">No Asignada</h4>
                                         </div>
+                                        <div layout="column" layout-align="center center"
+                                             ng-if="salePoint.status != 'Abierta'">
+                                            <h4 ng-if="salePoint.hora_tecnico_inicio">
+                                                {{salePoint.hora_tecnico_inicio}}</h4>
+                                            <h4 ng-if="!salePoint.hora_tecnico_inicio">No Asignada</h4>
+                                        </div>
                                     </div>
-                                </div>
+                                </div>§
 
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
