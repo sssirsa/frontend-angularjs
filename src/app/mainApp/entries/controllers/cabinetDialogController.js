@@ -87,9 +87,9 @@
                 "tipo_entrada": "",
             };
             vm.cabinet['status'] = 'N/A';
-            vm.cabinet['linea_x'] = 0;
-            vm.cabinet['linea_y'] = 0;
-            vm.cabinet['linea_z'] = 0;
+            vm.cabinet['linea_x'] = null;
+            vm.cabinet['linea_y'] = null;
+            vm.cabinet['linea_z'] = null;
             vm.cabinet['no_incidencias'] = 0;
             vm.cabinet['activo'] = true;
             if (vm.cabinet.id_unilever) {
