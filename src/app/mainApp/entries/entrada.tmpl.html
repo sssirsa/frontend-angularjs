@@ -79,42 +79,6 @@
                                                         soft-delete="vm.catalogues['udn'].softDelete"
                                                         on-select="vm.onElementSelect(element,'udn')">
                                         </catalog-select>
-                                        <!--<md-autocomplete md-selected-item="vm.entrada.udn"
-                                                         md-selected-item-change="vm.selectedItemChange(vm.entrada.udn)"
-                                                         md-items="item in vm.filteredUDN" md-item-text="item.agencia"
-                                                         md-min-length="0"
-                                                         only-text
-                                                         md-input-name="selectUDN"
-                                                         md-search-text-change="vm.search(vm.searchText)"
-                                                         required
-                                                         md-input-id="udn"
-                                                         md-search-text="vm.searchText"
-                                                         md-menu-class="autocomplete-custom-template"
-                                                         md-require-match="true"
-                                                         md-floating-label="{{'INPUT.UDN'| translate}}">
-                                            <md-item-template>
-                                                <span class="item-title">
-                                                    <md-icon md-font-icon="zmdi zmdi-city"></md-icon>
-                                                    <span>&nbsp; {{item.agencia}}</span>
-                                                </span>
-                                                <span class="item-metadata">
-                                                    <span class="item-metastat">
-                                                        <strong>{{item.zona}}</strong>
-                                                    </span>
-                                                </span>
-                                            </md-item-template>
-                                            <md-not-found>
-                                                <span translate="INPUT.Messages.NotFoundUdn"></span>
-                                            </md-not-found>
-                                            <div ng-messages="entradaForm.selectUDN.$error"
-                                                 ng-if="entradaForm.selectUDN.$touched">
-                                                <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                                                <div class="validate" ng-show="!vm.isValid"
-                                                     ng-class="{'slide':vm.isValid==false}">
-                                                    <span>{{'INPUT.Messages.InvalidUDN'| translate}}</span>
-                                                </div>
-                                            </div>
-                                        </md-autocomplete>-->
                                     </div>
 
                                     <catalog-select class="full-width"
@@ -126,20 +90,6 @@
                                                     soft-delete="vm.catalogues['linea_transporte'].softDelete"
                                                     on-select="vm.onElementSelect(element,'linea_transporte')">
                                     </catalog-select>
-                                    <!--<md-input-container flex="100"
-                                                        class="md-block"
-                                                        ng-if="vm.selectedEntrada.text ==='Nuevo' || vm.selectedEntrada.text === 'Garantia'">
-                                        <label>{{'INPUT.Transport.Line'|translate}}</label>
-                                        <md-select name="selectTransportLine" ng-model="vm.entrada.linea_transporte"
-                                                   required="" md-no-asterisk="">
-                                            <md-option ng-repeat="linea in vm.lineasTransporte" value="{{linea.id}}">
-                                                {{linea.razon_social}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectTransportLine.$error">
-                                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
                                     <catalog-select class="full-width"
                                                     required="true"
                                                     ng-if="vm.selectedEntrada.text ==='Nuevo' || vm.selectedEntrada.text === 'Garantia'"
@@ -149,24 +99,11 @@
                                                     soft-delete="vm.catalogues['tipo_transporte'].softDelete"
                                                     on-select="vm.onElementSelect(element,'tipo_transporte')">
                                     </catalog-select>
-                                    <!--<md-input-container flex="100"
-                                                        class="md-block"
-                                                        ng-if="vm.selectedEntrada.text ==='Nuevo' || vm.selectedEntrada.text === 'Garantia'">
-                                        <label>{{'INPUT.Transport.Kind'|translate}}</label>
-                                        <md-select name="selectTransportKind" ng-model="vm.entrada.tipo_transporte"
-                                                   required="" md-no-asterisk="">
-                                            <md-option ng-repeat="tipo in vm.tiposTransporte" value="{{tipo.id}}">
-                                                {{tipo.descripcion}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectTransportKind.$error">
-                                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
                                 </div>
                                 <div layout-gt-xs="row" layout="column" layout-align-gt-xs="center center"
                                      layout-align="center stretch">
                                     <catalog-select class="full-width"
+                                                    ng-if="!vm.sucursal"
                                                     required="true"
                                                     ng-if="vm.selectedEntrada.text ==='Nuevo' || vm.selectedEntrada.text === 'Garantia'"
                                                     catalog="vm.catalogues['sucursal'].catalog"
@@ -175,23 +112,6 @@
                                                     soft-delete="vm.catalogues['sucursal'].softDelete"
                                                     on-select="vm.onElementSelect(element,'sucursal')">
                                     </catalog-select>
-                                    <!--<md-input-container flex="100"
-                                                        class="md-block"
-                                                        ng-if="vm.selectedEntrada.text ==='Nuevo' || vm.selectedEntrada.text === 'Garantia'">
-                                        <label>{{'INPUT.Subsidiary'|translate}}</label>
-                                        <md-select name="selectSubsidiary"
-                                                   ng-model="vm.entrada.sucursal"
-                                                   required=""
-                                                   ng-disabled="vm.sucursal!=null"
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="sucursal in vm.Sucursales" value="{{sucursal.id}}">
-                                                {{sucursal.nombre}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectSubsidiary.$error">
-                                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
                                     <catalog-select class="full-width"
                                                     required="true"
                                                     ng-if="vm.selectedEntrada.text ==='Nuevo'"
@@ -201,20 +121,6 @@
                                                     soft-delete="vm.catalogues['proyecto'].softDelete"
                                                     on-select="vm.onElementSelect(element,'proyecto')">
                                     </catalog-select>
-                                    <!--<md-input-container flex="100"
-                                                        class="md-block"
-                                                        ng-if="vm.selectedEntrada.text ==='Nuevo'">
-                                        <label>{{'INPUT.Project'|translate}}</label>
-                                        <md-select name="selectProject" ng-model="vm.entrada.proyecto" required=""
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="proyecto in vm.Proyectos" value="{{proyecto.id}}">
-                                                {{proyecto.descripcion}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectProject.$error">
-                                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
                                 </div>
                             </form>
                             <div layout-gt-xs="row"
@@ -254,7 +160,6 @@
                     </md-tab>
 
                     <!--Registro de cabinets-->
-                    <!--ng-disabled="entradaForm.$invalid"-->
                     <md-tab label={{'INPUT.Tabs.CabinetsUpload'|translate}} ng-disabled="entradaForm.$invalid">
                         <md-content layout-padding=""
                                     cg-busy="{promise:vm.loadingPromiseInput,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
