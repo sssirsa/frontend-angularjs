@@ -35,7 +35,8 @@
             "NotFoundCabinet": "Cabinet no encontrado",
             "NotFoundUdn": "Sin resultados",
             "InvalidUDN": "Selecciona una UDN",
-            "QuantityExceeded": "Se sobrepasó la cantidad máxima de 2000 cabinets por carga masiva"
+            "QuantityExceeded": "Se sobrepasó la cantidad máxima de 2000 cabinets por carga masiva",
+            "CabinetInSubsidiary": "El cabinet ya tiene una entrada"
         },
         "Transport": {
             "Line": "Linea de transporte",

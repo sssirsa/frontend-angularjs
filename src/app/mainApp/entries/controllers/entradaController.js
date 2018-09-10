@@ -12,18 +12,10 @@
         EntradaSalida,
         toastr,
         $mdDialog,
-        MarcaCabinet,
-        ModeloCabinet,
-        //Sucursal,
-        //udn,
         CabinetEntradaSalida,
-        //Proyectos,
-        //TipoTransporte,
-        //LineaTransporte,
         Translate,
         $scope,
         Cabinet,
-        //Helper,
         Persona,
         OPTIONS,
         URLS,
@@ -160,12 +152,7 @@
         vm.addCabinet = addCabinet;
         vm.removeNotFoundCabinet = removeNotFoundCabinet;
         vm.removeCabinet = removeCabinet;
-        //vm.selectedItemChange = selectedItemChange;
-        //vm.search = search;
         vm.onElementSelect = onElementSelect;
-
-        //vm.modelos = ModeloCabinet.list();
-        //vm.marcas = MarcaCabinet.list();
 
         //Visualizations
         vm.hideMassiveUpload = true;
@@ -592,27 +579,39 @@
                     vm.searchCabinet = Cabinet
                         .get(vm.cabinetID)
                         .then(function (cabinetInfo) {
-                            vm.searchCabinet = Cabinet
-                                .getIfEntrada(vm.cabinetID)
-                                .then(function (res) {
-                                    var tempCabinet = angular.copy(res);
-                                    vm.searchCabinet = modeloById(cabinetInfo.modelo)
-                                        .then(function (modelo) {
-                                            tempCabinet.modelo = modelo.nombre;
-                                            vm.searchCabinet = marcaById(modelo.marca)
-                                                .then(function (marca) {
-                                                    tempCabinet.marca = marca.descripcion;
-                                                    vm.cabinets.push(tempCabinet);
-                                                });
-                                        });
-                                    vm.cabinetID = "";
-                                }).catch(function (err) {
-                                    if (err.data.detail != null)
-                                        toastr.error(err.data.detail, vm.errorTitle);
-                                    else
-                                        toastr.error(vm.notFoundCabinet, vm.errorTitle);
-                                    vm.cabinetID = "";
-                                });
+                            if (!cabinetInfo.sucursal) {
+                                //Cabinet can enter in this WareHouse
+                                let tempCabinet = angular.copy(cabinetInfo);
+                                tempCabinet.modelo = cabinetInfo.modelo.nombre;
+                                tempCabinet.marca = cabinetInfo.marca;
+                                vm.cabinets.push(tempCabinet);
+                                vm.cabinetID = "";
+                            }
+                            else {
+                                //Cabinet is in a subsidiary WareHouse
+                                toastr.error(Translate.translate('INPUT.Messages.CabinetInSubsidiary'));
+                            }
+                            //vm.searchCabinet = Cabinet
+                            //    .getIfEntrada(vm.cabinetID)
+                            //    .then(function (res) {
+                            //        var tempCabinet = angular.copy(res);
+                            //        vm.searchCabinet = modeloById(cabinetInfo.modelo)
+                            //            .then(function (modelo) {
+                            //                tempCabinet.modelo = modelo.nombre;
+                            //                vm.searchCabinet = marcaById(modelo.marca)
+                            //                    .then(function (marca) {
+                            //                        tempCabinet.marca = marca.descripcion;
+                            //                        vm.cabinets.push(tempCabinet);
+                            //                    });
+                            //            });
+                            //        vm.cabinetID = "";
+                            //    }).catch(function (err) {
+                            //        if (err.data.detail != null)
+                            //            toastr.error(err.data.detail, vm.errorTitle);
+                            //        else
+                            //            toastr.error(vm.notFoundCabinet, vm.errorTitle);
+                            //        vm.cabinetID = "";
+                            //    });
                         })
                         .catch(function (cabinetInfoError) {
                             console.error(cabinetInfoError);
@@ -643,23 +642,6 @@
             if (index > -1) {
                 vm.cabinets.splice(index, 1);
             }
-        }
-
-        function modeloById(id) {
-            return ModeloCabinet
-                .get(id);
-            //return _.find(vm.modelos, function (model) {
-            //    return model.id == id;
-            //});
-        }
-
-        function marcaById(id) {
-            return MarcaCabinet
-                .get(id);
-
-            //return _.find(vm.marcas, function (brand) {
-            //    return brand.id == modelo.marca;
-            //}).descripcion;
         }
 
         function showCabinetDialog(economico) {
