@@ -31,35 +31,33 @@
             }
         }
 
-        function getByLocality(LocalityID){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_locality + LocalityID);
+        function getByLocality(LocalityID, limit, offset){
+            return querySearch(URLS.establecimiento + QUERIES.store.by_locality + LocalityID, limit, offset);
         }
 
-        function getByCity(cityID){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_city + cityID);
+        function getByCity(cityID, limit, offset){
+            return querySearch(URLS.establecimiento + QUERIES.store.by_city + cityID, limit, offset);
         }
 
-        function getByState(stateID){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_state + stateID);
+        function getByState(stateID, limit, offset){
+            return querySearch(URLS.establecimiento + QUERIES.store.by_state + stateID, limit, offset);
         }
 
-        function getByPostalCode(postalCode){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_postal_code + postalCode);
+        function getByPostalCode(postalCode, limit, offset){
+            return querySearch(URLS.establecimiento + QUERIES.store.by_postal_code + postalCode, limit, offset);
         }
 
-        function getByEconomic(economic){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_economic + economic);
+        function getByEconomic(economic, limit, offset){
+            return querySearch(URLS.establecimiento + QUERIES.store.by_economic + economic + '?', limit, offset);
         }
 
-        function querySearch(query){
+        function querySearch(query, limit, offset){
             var defer = $q.defer();
             // TODO: falta agregar metodo de paginado
-            MobileRestangular.all(query+'&limit=1000&offset=0')
+            MobileRestangular.all(query+'&limit='+limit+'&offset='+offset)
                 .customGET()
                 .then(function (list) {
-                    list = list.results;
-                    var elements = Helper.filterDeleted(list,true);
-                    defer.resolve(elements);
+                    defer.resolve(list);
                 })
                 .catch(function (listError) {
                     defer.reject(listError);
