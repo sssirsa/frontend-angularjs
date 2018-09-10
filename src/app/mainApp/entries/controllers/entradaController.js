@@ -23,7 +23,7 @@
         Translate,
         $scope,
         Cabinet,
-        Helper,
+        //Helper,
         Persona,
         OPTIONS,
         URLS,
@@ -160,7 +160,7 @@
         vm.addCabinet = addCabinet;
         vm.removeNotFoundCabinet = removeNotFoundCabinet;
         vm.removeCabinet = removeCabinet;
-        vm.selectedItemChange = selectedItemChange;
+        //vm.selectedItemChange = selectedItemChange;
         //vm.search = search;
         vm.onElementSelect = onElementSelect;
 
@@ -292,7 +292,7 @@
             fd.append('tipo_transporte', vm.entrada.tipo_transporte);
 
             if (vm.entrada.udn != null)
-                fd.append('udn', vm.entrada.udn.id);
+                fd.append('udn', vm.entrada.udn);
 
             if (vm.entrada.id != null)
                 fd.append("id", vm.entrada.id);
@@ -324,7 +324,9 @@
                         else {
                             //Completely Succesful Input
                             toastr.success(vm.sucessMassive, vm.successTitle);
-                            vm.inputWasCorrect = true;
+                            //vm.inputWasCorrect = true;
+                            vm.selectedEntrada.text = null;
+                            limpiar();
                         }
                     }).catch(function (err) {
                         vm.entrada.file = null;
@@ -355,7 +357,9 @@
                         }
                         else {
                             toastr.success(vm.sucessMassive, vm.successTitle);
-                            vm.inputWasCorrect = true;
+                            //vm.inputWasCorrect = true;
+                            vm.selectedEntrada.text = null;
+                            limpiar();
                         }
                     }).catch(function (err) {
                         if (err.data.no_creados.length > 0) {
@@ -401,6 +405,7 @@
                 CabinetEntradaSalida.create(request).then(function () {
                     toastr.success(vm.successNormal, vm.successTitle);
                     limpiar();
+                    vm.selectedEntrada.text = null;
                 }).catch(function (err) {
                     vm.entrada.no_creados = err.data.cabinet;
                     toastr.error(vm.errorNormal, vm.errorTitle);
@@ -422,7 +427,6 @@
             vm.selectedTab = 0;
             vm.inputWasCorrect = false;
             vm.ife_chofer = null;
-            vm.searchText = "";
         }
 
         function partialClean() {
@@ -592,16 +596,12 @@
                                 .getIfEntrada(vm.cabinetID)
                                 .then(function (res) {
                                     var tempCabinet = angular.copy(res);
-                                    console.debug('Adding Cabinet');
-                                    console.debug(res);
                                     vm.searchCabinet = modeloById(cabinetInfo.modelo)
                                         .then(function (modelo) {
                                             tempCabinet.modelo = modelo.nombre;
-                                            console.debug(tempCabinet);
                                             vm.searchCabinet = marcaById(modelo.marca)
                                                 .then(function (marca) {
                                                     tempCabinet.marca = marca.descripcion;
-                                                    console.debug(tempCabinet);
                                                     vm.cabinets.push(tempCabinet);
                                                 });
                                         });
@@ -694,10 +694,6 @@
         //        return vm.filteredUDN;
         //    }
         //}
-
-        function selectedItemChange(item) {
-            vm.isValid = angular.isObject(item);
-        }
 
         function onElementSelect(element, field) {
             vm.entrada[field] = element;
