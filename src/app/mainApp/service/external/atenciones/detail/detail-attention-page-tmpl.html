@@ -221,7 +221,7 @@
             <div layout="row" layout-sm="column" layout-xs="column"
                  flex="100" layout-wrap
             >
-                <div ng-repeat="insumo in vm.insumos.results" ng-if="vm.improductivo" flex-gt-sm="50" flex="100">
+                <div ng-repeat="insumo in vm.insumos" ng-if="vm.improductivo" flex-gt-sm="50" flex="100">
                     <div flex>
                         <div layout="colum" layout-align="left center">
                             <div layout="row">
@@ -479,7 +479,7 @@
 
                             </div>
 
-                            <div class="virtualRepeatScroll">
+                            <div class="virtualRepeatScroll-300">
                                 <md-list-item class="md-3-line" ng-repeat="item in vm.todos" ng-click="vm.selectCabinet(item)">
                                     <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
                                     <div class="md-list-item-text" layout="column">
