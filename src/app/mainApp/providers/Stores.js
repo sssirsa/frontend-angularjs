@@ -53,10 +53,11 @@
 
         function querySearch(query){
             var defer = $q.defer();
-
-            MobileRestangular.all(query)
-                .getList()
+            // TODO: falta agregar metodo de paginado
+            MobileRestangular.all(query+'&limit=1000&offset=0')
+                .customGET()
                 .then(function (list) {
+                    list = list.results;
                     var elements = Helper.filterDeleted(list,true);
                     defer.resolve(elements);
                 })
