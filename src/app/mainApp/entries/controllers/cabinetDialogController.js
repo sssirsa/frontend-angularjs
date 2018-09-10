@@ -1,84 +1,124 @@
 /**
  * Created by Emmanuel on 15/10/2016.
  */
-(function(){
+(function () {
     'use_strict';
 
     angular
         .module('app.mainApp.entries')
-        .controller('CabinetDialogController',CabinetDialogController);
-    function CabinetDialogController($mdDialog, Cabinet, MarcaCabinet, cabinetID, Helper, Translate, toastr){
+        .controller('CabinetDialogController', CabinetDialogController);
+    function CabinetDialogController(
+        $mdDialog,
+        Cabinet,
+        //MarcaCabinet,
+        URLS,
+        cabinetID,
+        Helper,
+        Translate,
+        toastr
+    ) {
         var vm = this;
 
         //Functions
-        vm.create=create;
-        vm.cancel=cancelClick;
-        vm.filterModels=filterModels;
+        vm.create = create;
+        vm.cancel = cancelClick;
+        vm.onBrandSelect = onBrandSelect;
+        vm.onElementSelect = onElementSelect;
+
 
         //Blank variables templates
-        var cabinet = {
-            "economico": "",
-            "deleted": false,
-            "status": "N/A",
-            "id_unilever": "",
-            "antiguedad": null,
-            "activo": false,
-            "capitalizado": false,
-            "no_serie": "",
-            "tipo_entrada": "",
-            "year": null,
-            "no_incidencias": "1",
-            "linea_x": null,
-            "linea_y": null,
-            "linea_z": null,
-            "foto": null,
-            "modelo": null,
-            "insumo": null
+        vm.cabinet = {};
+        vm.modelos = [];
+
+        vm.catalogues = {
+            marca: {
+                catalog: {
+                    url: URLS.marca,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Dialogs.Cabinet.Brand'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            modelo_by_marca: {
+                catalog: {
+                    url: null,
+                    kind: 'Web',
+                    name: Translate.translate('INPUT.Dialogs.Cabinet.Model'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            }
         };
 
         //Translates
-        vm.errorTitle=Translate.translate('MAIN.MSG.ERROR_TITLE');
-        vm.errorMessage=Translate.translate('MAIN.MSG.ERROR_CATALOG');
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
 
         activate();
 
-        function activate(){
-            vm.cabinet=angular.copy(cabinet);
-            vm.marca=null;
-            vm.cabinet.economico=cabinetID;
-            MarcaCabinet.listObject().then(function(res){
-                vm.marcas=Helper.filterDeleted(res,true);
-                vm.marcas = Helper.sortByAttribute(vm.marcas, 'descripcion');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-                vm.marcas=[];
-            });
-            vm.modelos=[];
+        function activate() {
+            vm.cabinet.economico = cabinetID;
         }
 
-        function filterModels(){
-            if(vm.marca!=null) {
-                vm.modelos = MarcaCabinet.getModels(vm.marca).then(function(res){
-                    if(res.length>0) {
-                        vm.modelos = Helper.filterDeleted(res,true);
-                    }
-                }).catch(function(){
-                    vm.modelos=[];
-                });
+        function create() {
+            //Filling up minimum required fields
+            let cabinet = {
+                "tipo_entrada": "",
+            };
+            vm.cabinet['status'] = 'N/A';
+            vm.cabinet['linea_x'] = 0;
+            vm.cabinet['linea_y'] = 0;
+            vm.cabinet['linea_z'] = 0;
+            vm.cabinet['no_incidencias'] = 0;
+            vm.cabinet['activo'] = true;
+            if (vm.cabinet.id_unilever) {
+                vm.cabinet['capitalizado'] = true;
             }
-        }
+            else {
+                vm.cabinet['capitalizado'] = false;
+            }
+            vm.cabinet['deleted'] = false;            
 
-        function create(){
-            Cabinet.createClean(vm.cabinet).then(function(res){
+            vm.createPromise = Cabinet.createClean(vm.cabinet).then(function (res) {
                 $mdDialog.hide(vm.cabinet.economico);
-            }).catch(function(err){
+            }).catch(function (err) {
                 $mdDialog.cancel(err);
             });
         }
 
-        function cancelClick(){
+        function cancelClick() {
             $mdDialog.cancel(null);
         }
 
+        function onBrandSelect(element) {
+            vm.cabinet.modelo = null;
+            vm.marca = element;
+            vm.catalogues.modelo_by_marca.catalog.url = URLS.marca + '/models/' + element;
+        }
+
+        function onElementSelect(element, field) {
+            vm.cabinet[field] = element;
+        }
     }
 })();

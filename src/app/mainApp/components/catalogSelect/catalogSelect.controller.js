@@ -40,11 +40,13 @@
                 catalog: '<',
                 pagination: '<',
                 elements: '<',
+                lazy:'<',
                 softDelete: '<',
                 required: '<',
                 onSuccessList: '&',
                 onErrorList: '&',
-                onSelect: '&'
+                onSelect: '&',
+                onOpen:'&'
             }
         });
     function CatalogSelectController(
@@ -66,11 +68,14 @@
         //Functions
         vm.loadMore = loadMore;
         vm.onClose = onClose;
+        vm.onSelectOpen = onSelectOpen;
 
         init();
 
         function init() {
-            list();
+            if (!vm.lazy) {
+                list();
+            }
         }
 
         function list() {
@@ -209,6 +214,13 @@
             if (vm.selectedElement) {
                 vm.onSelect({ element: vm.selectedElement });
             }
+        }
+
+        function onSelectOpen() {
+            if (vm.lazy) {
+                list();
+            }
+            vm.onOpen();
         }
 
     }

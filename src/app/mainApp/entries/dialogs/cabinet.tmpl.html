@@ -1,113 +1,117 @@
 <div layout="column"
-     layout-fill
-     flex
-     layout-align-gt-md="center center"
-     layout-align="space-between stretch">
-    <md-toolbar class="toolbar-default">
-        <div class="md-toolbar-tools">
-            <h2>
-                <span>{{'INPUT.Dialogs.Cabinet.Title'|translate}}</span>
-            </h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="cancel">
-                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
-            </md-button>
+     layout-align="center stretch">
+    <md-toolbar layout="row"
+                layout-align="space-between center">
+        <div layout-padding class="md-title">
+            <span>{{'INPUT.Dialogs.Cabinet.Title'|translate}}</span>
         </div>
+        <md-button class="md-icon-button"
+                   ng-click="vm.cancel()"
+                   aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
     </md-toolbar>
-    <div flex="100" layout-padding layout-fill class="gray-color">
+    <md-content layout="column"
+                layout-padding
+                layout-align="center stretch">
         <form name="cabinetForm" novalidate="">
-            <div layout="row" flex="100">
-                <md-input-container class="md-block" flex="50">
-                    <label>{{'INPUT.Dialogs.Cabinet.Economic'|translate}}</label>
-                    <input name="CabinetEconomic"
+            <div id="cabinetDialog"
+                 layout="column"
+                 layout-align="center stretch">
+                <div layout="row">
+                    <md-input-container class="md-block" flex="50">
+                        <label>{{'INPUT.Dialogs.Cabinet.Economic'|translate}}</label>
+                        <input name="CabinetEconomic"
+                               md-no-asterisk=""
+                               required=""
+                               type="text"
+                               disabled="true"
+                               ng-model="vm.cabinet.economico" />
+                        <div ng-messages="brandForm.CabinetEconomic.$error">
+                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex="50">
+                        <label>{{'INPUT.Dialogs.Cabinet.Active'|translate}}</label>
+                        <input name="CabinetActive"
+                               md-no-asterisk=""
+                               type="text"
+                               ng-model="vm.cabinet.id_unilever" />
+                        <div ng-messages="cabinetForm.CabinetActive.$error">
+                            <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="column"
+                 layout-align="center stretch">
+                <md-input-container class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Year'|translate}}</label>
+                    <input name="CabinetYear"
                            md-no-asterisk=""
-                           required=""
                            type="text"
-                           disabled="true"
-                           ng-model="vm.cabinet.economico"/>
-                    <div ng-messages="brandForm.CabinetEconomic.$error">
-                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block" flex="50">
-                    <label>{{'INPUT.Dialogs.Cabinet.Active'|translate}}</label>
-                    <input name="CabinetActive"
-                           md-no-asterisk=""
-                           required=""
-                           type="text"
-                           ng-model="vm.cabinet.id_unilever"/>
-                    <div ng-messages="cabinetForm.CabinetActive.$error">
+                           ng-pattern="/^[0-9]{4,4}/"
+                           ng-required="true"
+                           digits-only=""
+                           ng-model="vm.cabinet.year" />
+                    <div ng-messages="cabinetForm.CabinetYear.$error">
+                        <div ng-message="pattern">{{'INPUT.Year Field'|translate}}</div>
                         <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
                     </div>
                 </md-input-container>
             </div>
-            <md-input-container class="md-block">
-                <label>{{'INPUT.Dialogs.Cabinet.Year'|translate}}</label>
-                <input name="CabinetYear"
-                       md-no-asterisk=""
-                       type="text"
-                       ng-pattern="/^[0-9]{4,4}/"
-                       ng-required="true"
-                       digits-only=""
-                       ng-model="vm.cabinet.year"
-                />
-                <div ng-messages="cabinetForm.CabinetYear.$error">
-                    <div ng-message="pattern">{{'INPUT.Year Field'|translate}}</div>
-                    <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                </div>
-            </md-input-container>
-            <md-input-container class="md-block">
-                <label>{{'INPUT.Dialogs.Cabinet.Serial'|translate}}</label>
-                <input name="CabinetSerial"
-                       md-no-asterisk=""
-                       required=""
-                       type="text"
-                       ng-model="vm.cabinet.no_serie"/>
-                <div ng-messages="cabinetForm.CabinetSerial.$error">
-                    <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                </div>
-            </md-input-container>
-            <md-input-container flex="100" class="md-block">
-                <label>{{'INPUT.Dialogs.Cabinet.Brand'|translate}}</label>
-                <md-select name="selectBrand"
-                           ng-model="vm.marca"
+            <div layout="column"
+                 layout-align="center stretch">
+                <md-input-container class="md-block">
+                    <label>{{'INPUT.Dialogs.Cabinet.Serial'|translate}}</label>
+                    <input name="CabinetSerial"
+                           md-no-asterisk=""
                            required=""
-                           md-on-close="vm.filterModels()"
-                           md-no-asterisk="">
-                    <md-option ng-repeat="marca in vm.marcas"
-                               value="{{marca.id}}">{{marca.descripcion}}
-                    </md-option>
-                </md-select>
-                <div ng-messages="entradaForm.selectBrand.$error">
-                    <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                </div>
-            </md-input-container>
-            <md-input-container flex="100" class="md-block">
-                <label>{{'INPUT.Dialogs.Cabinet.Model'|translate}}</label>
-                <md-select name="selectModel"
-                           ng-model="vm.cabinet.modelo"
-                           required=""
-                           ng-disabled="vm.marca==null || vm.modelos.length == 0"
-                           md-no-asterisk="">
-                    <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">{{modelo.nombre}}
-                    </md-option>
-                </md-select>
-                <div ng-messages="entradaForm.selectModel.$error">
-                    <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
-                </div>
-            </md-input-container>
-            <div ng-hide="!vm.modelos.length == 0||vm.marca==null ||vm.marca==undefined">
-                <p>{{'INPUT.Dialogs.Cabinet.No_Model'|translate}}</p>
+                           type="text"
+                           ng-model="vm.cabinet.no_serie" />
+                    <div ng-messages="cabinetForm.CabinetSerial.$error">
+                        <div ng-message="required">{{'INPUT.Required Field'|translate}}</div>
+                    </div>
+                </md-input-container>
             </div>
+            <catalog-select catalog="vm.catalogues['marca'].catalog"
+                            required="true"
+                            pagination="vm.catalogues['marca'].pagination"
+                            elements="vm.catalogues['marca'].elements"
+                            soft-delete="vm.catalogues['marca'].softDelete"
+                            on-select="vm.onBrandSelect(element)">
+            </catalog-select>
+            <catalog-select ng-if="vm.marca"
+                            catalog="vm.catalogues['modelo_by_marca'].catalog"
+                            required="true"
+                            lazy="true"
+                            pagination="vm.catalogues['modelo_by_marca'].pagination"
+                            elements="vm.catalogues['modelo_by_marca'].elements"
+                            soft-delete="vm.catalogues['modelo_by_marca'].softDelete"
+                            on-select="vm.onElementSelect(element,'modelo')">
+            </catalog-select>
         </form>
-    </div>
-    <md-dialog-actions layout="row" layout-align="end center" layout-fill class="gray-color">
-        <md-button ng-click="vm.cancel()" md-no-ink class="md-primary">
-            {{'INPUT.Cancel'|translate}}
+
+    </md-content>
+    <md-actions layout="row"
+                layout-align="space-between center">
+        <md-button ng-click="vm.cancel()"
+                   aria-label="{{'INPUT.Cancel'|translate}}"
+                   class="md-warn md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-close"></md-icon>
+                {{'INPUT.Cancel'|translate}}
+            </div>
         </md-button>
-        <md-button ng-click="vm.create()" ng-disabled="cabinetForm.$invalid" md-no-ink class="md-primary">
-            {{'INPUT.Save'|translate}}
+        <md-button ng-click="vm.create()"
+                   cg-busy="{ promise:vm.createPromise, message:' ' }"
+                   ng-disabled="cabinetForm.$invalid"
+                   aria-label="{{'INPUT.Save'|translate}}"
+                   class="md-primary md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                {{'INPUT.Save'|translate}}
+            </div>
         </md-button>
-    </md-dialog-actions>
-</div>
+    </md-actions>
 </div>
