@@ -24,7 +24,7 @@
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
                 onErrorDelete: '&',
-                onSuccessSearch: '&',
+                onsuccessearch: '&',
                 onErrorSearch: '&',
                 onElementSelect: '&',
 
@@ -414,7 +414,7 @@
                     treatResponse(successCallback.response);
                     vm.filterApplied = successCallback.filter;
                     console.debug(vm.filterApplied);
-                    vm.onSuccessSearch({ elements: vm.catalogElements });
+                    vm.onsuccessearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
                         vm.onErrorSearch(errorSearch);

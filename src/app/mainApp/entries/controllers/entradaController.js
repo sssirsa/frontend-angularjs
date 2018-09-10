@@ -512,7 +512,7 @@
                         hint: 'Cabinet, carrito, etc.',
                         required: true,
                         validations: {
-                            regex: "[A-Za-z]{0,20}",
+                            regex: '[A-Za-z]{0,20}',
                             errors: {
                                 regex: 'La longitud máxima es de 20 letras',
                                 required: 'La categoría es obligatoria'
@@ -525,7 +525,7 @@
                         label: 'Nombre de la marca',
                         required: true,
                         validations: {
-                            regex: "[A-Z a-z\d]{0,25}",
+                            regex: '[A-Za-zÁ-Úá-ú0-9 ]{0,25}',
                             errors: {
                                 regex: 'La longitud máxima es de 25 caracteres (solo letras y números)',
                                 required: 'El nombre de la marca es obligatorio'
@@ -684,16 +684,6 @@
                 }
             });
         }
-
-        //function search(text) {
-        //    if (!angular.isUndefined(text)) {
-        //        vm.filteredUDN = _.filter(vm.udns, function (item) {
-        //            return item.agencia.toLowerCase().startsWith(text.toLowerCase()) || item.zona.toLowerCase().startsWith(text.toLowerCase());
-        //        });
-        //        vm.isValid = !((vm.filteredUDN.length == 0 && text.length > 0) || (text.length > 0 && !angular.isObject(vm.entrada.udn)));
-        //        return vm.filteredUDN;
-        //    }
-        //}
 
         function onElementSelect(element, field) {
             vm.entrada[field] = element;

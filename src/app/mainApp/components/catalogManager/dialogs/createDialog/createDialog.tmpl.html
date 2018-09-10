@@ -24,7 +24,7 @@
                          && field['type']!=='catalog'
                          && field['type']!=='options'
                          && field['type']!=='color'">
-                    <md-input-container class="md-block">
+                    <md-input-container layout="column" class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
@@ -34,15 +34,15 @@
                                name="{{field.model}}"
                                min="{{field.min}}"
                                max="{{field.max}}"
-                               ng-pattern="field['validations'].regex"
+                               ng-pattern="{{field['validations'].regex}}"
                                ng-model="vm.objectToCreate[field.model]" />
-                        <div ng-if="field.hint"
-                             class="create-field-hint">
-                            {{field.hint}}
-                        </div>
                         <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
+                        </div>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
                         </div>
                     </md-input-container>
                 </section>
