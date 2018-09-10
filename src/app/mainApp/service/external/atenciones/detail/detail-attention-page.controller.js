@@ -422,7 +422,7 @@
             cabinetPV.create(aux)
                 .then(function (res) {
                     cabinetTemporal = res;
-                    ErrorHandler.succcesCreation();
+                    ErrorHandler.successCreation();
                 })
                 .catch(function (err) {
 
