@@ -12,9 +12,10 @@
         vm.list=[];
         vm.offset = 0;
         vm.filteredActivated = false;
-        vm.limit = 5;
+        vm.limit = 20;
         vm.lastFilter = 'Todo';
         vm.lastKindFilter = 'Todo';
+        vm.refreshPaginationButtonsComponent = false;
 
         //Listado de funciones
 
@@ -22,6 +23,7 @@
         vm.listFilteredpreRequests=listFilteredpreRequests;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
         listpreRequests();
 
         function listpreRequests() {
@@ -37,6 +39,7 @@
         }
         function listFilteredpreRequests(requestKind) {
             vm.filteredActivated = true;
+            vm.refreshPaginationButtonsComponent = false;
             vm.lastFilter = requestKind;
             if (vm.lastKindFilter !== requestKind){
                 vm.offset = 0;
@@ -59,7 +62,9 @@
         }
 
         function prepareDataFunction() {
+            console.log(vm.list);
             vm.requests = vm.list.results;
+            vm.refreshPaginationButtonsComponent = true;
             vm.filteredActivated = false;
         }
 
@@ -73,5 +78,9 @@
             listFilteredpreRequests(vm.lastFilter);
         }
 
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            listFilteredpreRequests(vm.lastFilter);
+        }
     }
 })();
