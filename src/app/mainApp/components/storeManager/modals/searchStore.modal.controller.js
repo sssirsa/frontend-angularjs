@@ -216,9 +216,9 @@
 
         function prepareDataFunction(Stores) {
             vm.fullStores = Stores;
-            vm.refreshPaginationButtonsComponent = true;
             var list = Stores.results;
             vm.stores = Helper.filterDeleted(list, true);
+            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
