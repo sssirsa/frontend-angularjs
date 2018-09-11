@@ -102,7 +102,7 @@
         vm.lastFilter = 'Todo';
         vm.lastKindFilter = 'Todo';
         vm.filteredActivated = false;
-        vm.refreshPaginationButtonsComponent = true;
+        vm.refreshPaginationButtonsComponent = false;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.changeSelected = changeSelected;
@@ -111,6 +111,7 @@
 
         function changeSelected() {
             vm.offset = 0;
+            vm.refreshPaginationButtonsComponent = false;
             listSalePoints();
         }
 
