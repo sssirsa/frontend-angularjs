@@ -40,12 +40,13 @@
         vm.objectAtention = null;
         vm.offset = 0;
         vm.limit = 20;
-        vm.refreshPaginationButtonsComponent = true;
+        vm.refreshPaginationButtonsComponent = false;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
 
         function listSalePoints() {
+            vm.refreshPaginationButtonsComponent = false;
             vm.objectAtention = null;
             vm.salePoints = null;
             vm.loadingPromise = SalePoint.listUnasignedServices(vm.limit, vm.offset)
@@ -63,6 +64,7 @@
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
+            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
