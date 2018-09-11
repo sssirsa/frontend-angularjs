@@ -31,6 +31,7 @@
         vm.limit = 20;
         vm.offset = 0;
         vm.fullStores = null;
+        vm.refreshPaginationButtonsComponent = false;
 
         //Functions
         vm.accept = accept;
@@ -44,6 +45,7 @@
         vm.changeTab = changeTab;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         activate();
 
@@ -130,6 +132,7 @@
 
         function search() {
             vm.stores = null;
+            vm.refreshPaginationButtonsComponent = false;
             switch (vm.selectedTab) {
                 case 0:
                     if (vm.state) {
@@ -190,6 +193,7 @@
                                     justStores.push(item.establecimiento_obj);
                             });
                             vm.stores = Helper.filterDeleted(justStores, true);
+                            vm.refreshPaginationButtonsComponent = true;
                         })
                         .catch(function (storeListError) {
                             $log.error(storeListError);
@@ -212,22 +216,25 @@
 
         function prepareDataFunction(Stores) {
             vm.fullStores = Stores;
+            vm.refreshPaginationButtonsComponent = true;
             var list = Stores.results;
             vm.stores = Helper.filterDeleted(list, true);
         }
 
         function sigPage() {
-            vm.stores = null;
             vm.offset += vm.limit;
             search();
         }
 
         function prevPage() {
-            vm.stores = null;
             vm.offset -= vm.limit;
             search();
         }
 
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            search();
+        }
     }
 
 })();
