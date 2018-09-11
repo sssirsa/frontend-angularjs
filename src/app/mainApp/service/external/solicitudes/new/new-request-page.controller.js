@@ -127,7 +127,7 @@
 
         function searchEquipmentKind() {
             if (!vm.equipmentKinds) {
-                return TipoEquipo.list()
+                return TipoEquipo.listWitout()
                     .then(function (userListSuccess) {
                         vm.equipmentKinds = Helper.filterDeleted(userListSuccess, true);
                         return searchEquipmentKindCollection();
