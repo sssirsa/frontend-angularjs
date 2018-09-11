@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * /
 * Autor: Erick Laureano Lechuga
 * Fecha: 10/09/18
-* Version: 1.0
+* Version: 1.5
 * Requerimientos:
 *
 *   Variables necesarias:
@@ -9,6 +9,8 @@
 *       vm.offset = 0;
 *       vm.limit = 20;
 *       vm.refreshPaginationButtonsComponent = true;
+*       vm.next = {{url de siguiente pagina}}
+*       vm.previous {{url de la pagina anterior}}
 *
 *   funciones necesarias:
 *
@@ -51,6 +53,7 @@
 *                                       go-number="vm.goToNumberPage(number)"
 *                                       limit-objects="vm.limit"
 *                                       count-object="vm.object.count"
+*                                       offset-object="vm.offset"
 *                                       nex-object="vm.object.next"
 *                                       prev-object="vm.object.previous">
 *           </pagination-manager-buttons>
@@ -74,7 +77,8 @@
                 limitObjects: '<',
                 countObject: '<',
                 nexObject: '<',
-                prevObject: '<'
+                prevObject: '<',
+                offsetObject: '<'
             }
         });
 
@@ -82,31 +86,39 @@
         var vm = this;
         vm.arrayButtonPage = [];
         vm.correctUse = true;
+        vm.numberPage = 1;
+        vm.totalPages = 1;
 
         vm.goToNumberPage = goToNumberPage;
+        vm.moveSlide = moveSlide;
+        vm.changeNumber = changeNumber;
 
         init ();
 
         function init() {
-            if (!vm.goSig) {
+            if (vm.goSig == null) {
                 vm.correctUse = false;
                 console.debug('La funcion Sig() es requerida');
             }
-            if (!vm.goPrev) {
+            if (vm.goPrev == null) {
                 vm.correctUse = false;
                 console.debug('La funcion Prev() es requerida');
             }
-            if (!vm.goNumber) {
+            if (vm.goNumber == null) {
                 vm.correctUse = false;
                 console.debug('La funcion goNumberPage(number) es requerida');
             }
-            if (!vm.limitObjects) {
+            if (vm.limitObjects == null) {
                 vm.correctUse = false;
                 console.debug('El parametro limit es requerido');
             }
-            if (!vm.countObject) {
+            if (vm.countObject == null) {
                 vm.correctUse = false;
                 console.debug('El parametro count es requerido');
+            }
+            if (vm.offsetObject == null) {
+                vm.correctUse = false;
+                console.debug('El parametro offset es requerido');
             }
             if(vm.correctUse){
                 setNumberButtons();
@@ -116,15 +128,32 @@
         function setNumberButtons() {
             var pages = Math.ceil(vm.countObject/vm.limitObjects);
             if (pages >= 2) {
-                var i = 0;
-                for (i; i<pages; i++ ) {
-                    vm.arrayButtonPage.push(i);
-                }
+                vm.totalPages = pages;
+                vm.numberPage = (vm.offsetObject/vm.limitObjects) + 1;
             }
         }
 
-        function goToNumberPage(numberButt) {
-            vm.goNumber({number: numberButt});
+        function goToNumberPage() {
+            vm.goNumber({number: vm.numberPage-1});
+        }
+
+        function moveSlide() {
+            goToNumberPage();
+        }
+
+        function changeNumber(event) {
+            if(!vm.numberPage){
+                vm.numberPage = 1;
+            }
+            if(vm.numberPage > vm.totalPages) {
+                vm.numberPage = vm.totalPages;
+            }
+            if(vm.numberPage < 1) {
+                vm.numberPage = 1;
+            }
+            if(event.keyCode === 13) {
+                goToNumberPage();
+            }
         }
     }
 })();
