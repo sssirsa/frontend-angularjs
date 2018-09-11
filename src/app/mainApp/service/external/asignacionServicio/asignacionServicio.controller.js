@@ -39,12 +39,16 @@
         //datos para paginado
         vm.objectAtention = null;
         vm.offset = 0;
+        vm.limit = 20;
+        vm.refreshPaginationButtonsComponent = true;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         function listSalePoints() {
             vm.objectAtention = null;
-            vm.loadingPromise = SalePoint.listUnasignedServices(20, vm.offset)
+            vm.salePoints = null;
+            vm.loadingPromise = SalePoint.listUnasignedServices(vm.limit, vm.offset)
                 .then(function (salePointsSuccess) {
                     vm.objectAtention = salePointsSuccess;
                     prepareDataFunction();
@@ -62,12 +66,17 @@
         }
 
         function sigPage() {
-            vm.offset += 20;
+            vm.offset += vm.limit;
             listSalePoints();
         }
 
         function prevPage() {
-            vm.offset -= 20;
+            vm.offset -= vm.limit;
+            listSalePoints();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
             listSalePoints();
         }
 
