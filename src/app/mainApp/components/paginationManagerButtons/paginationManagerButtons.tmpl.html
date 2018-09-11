@@ -1,0 +1,37 @@
+<div layout-padding layout="row"
+     layout-align="space-around center"
+     ng-if="$ctrl.correctUse">
+    <md-button class="md-primary md-raised"
+               ng-disabled="$ctrl.prevObject == null"
+               ng-click="$ctrl.goPrev()">
+        <div layout="row" layout-align="center center">
+            <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+            <div hide-xs hide-sm>
+                Anterior
+            </div>
+        </div>
+    </md-button>
+
+    <md-button class="md-icon-button"
+               aria-label="More"
+               ng-repeat="numberButt in $ctrl.arrayButtonPage"
+               ng-click="$ctrl.goToNumberPage(numberButt)">
+        {{numberButt + 1}}
+    </md-button>
+
+    <md-button class="md-primary md-raised"
+               ng-disabled="$ctrl.nexObject == null"
+               ng-click="$ctrl.goSig()">
+        <div layout="row" layout-align="center center">
+            <div hide-xs hide-sm>
+                Siguiente
+            </div>
+            <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+        </div>
+    </md-button>
+</div>
+<div layout-padding layout="row"
+     layout-align="space-around center"
+     ng-if="!$ctrl.correctUse">
+    <h2>Uso incorrecto del componente</h2>
+</div>
