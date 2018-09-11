@@ -98,7 +98,7 @@
         //datos para paginado
         vm.objectAtention = null;
         vm.offset = 0;
-        vm.limit = 4;
+        vm.limit = 20;
         vm.lastFilter = 'Todo';
         vm.lastKindFilter = 'Todo';
         vm.filteredActivated = false;
@@ -120,7 +120,7 @@
                 vm.objectAtention = null;
                 switch (vm.selectedKind) {
                     case 'pending':
-                        vm.loadingPromise = SalePoint.listAsignedService('20', vm.offset)
+                        vm.loadingPromise = SalePoint.listAsignedService(vm.limit, vm.offset)
                             .then(function (salePointsSuccess) {
                                 vm.objectAtention = salePointsSuccess;
                                 prepareDataFunction();
@@ -135,19 +135,6 @@
                             });
                         break;
                     case 'all':
-                        // vm.loadingPromise = SalePoint.listAllServices('20', vm.offset)
-                        //     .then(function (salePointsSuccess) {
-                        //         vm.objectAtention = salePointsSuccess;
-                        //         prepareDataFunction();
-                        //         // console.log(salePointsSuccess);
-                        //     })
-                        //     .catch(function (salePointsError) {
-                        //         // console.log(salePointsError);
-                        //         toastr.error(
-                        //             Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
-                        //             Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                        //         );
-                        //     });
                         filterAttentions('Todo');
                         break;
                 }
@@ -192,7 +179,6 @@
         }
 
         function prepareDataFunction() {
-            // rellenarArrayButton();
             vm.salePoints = vm.objectAtention.results;
             vm.filteredActivated = false;
             vm.refreshPaginationButtonsComponent = true;
