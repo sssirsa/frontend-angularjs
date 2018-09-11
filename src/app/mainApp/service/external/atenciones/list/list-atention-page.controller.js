@@ -102,10 +102,12 @@
         vm.lastFilter = 'Todo';
         vm.lastKindFilter = 'Todo';
         vm.filteredActivated = false;
+        vm.refreshPaginationButtonsComponent = true;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.changeSelected = changeSelected;
         vm.FilterAttentions = filterAttentions;
+        vm.goToNumberPage = goToNumberPage;
 
         function changeSelected() {
             vm.offset = 0;
@@ -153,6 +155,7 @@
 
         function filterAttentions(filter) {
             vm.filteredActivated = true;
+            vm.refreshPaginationButtonsComponent = false;
             vm.lastFilter = filter;
             if(vm.lastKindFilter !== filter){
                 vm.offset = 0;
@@ -188,8 +191,10 @@
         }
 
         function prepareDataFunction() {
+            // rellenarArrayButton();
             vm.salePoints = vm.objectAtention.results;
             vm.filteredActivated = false;
+            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
@@ -199,6 +204,11 @@
 
         function prevPage() {
             vm.offset -= vm.limit;
+            filterAttentions(vm.lastFilter);
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
             filterAttentions(vm.lastFilter);
         }
 
