@@ -212,6 +212,7 @@
             vm.stores = null;
             vm.fullStores = null;
             vm.offset = 0;
+            vm.refreshPaginationButtonsComponent = false;
         }
 
         function prepareDataFunction(Stores) {
