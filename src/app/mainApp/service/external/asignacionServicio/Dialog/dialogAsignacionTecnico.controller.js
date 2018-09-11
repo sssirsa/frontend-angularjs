@@ -29,6 +29,8 @@
 
         vm.horaminPrev = salePoint.hora_cliente_inicio;
         vm.horamaxPrev = salePoint.hora_cliente_fin;
+        
+        vm.limit = 0;
         setLimitHours();
 
 
@@ -57,6 +59,9 @@
                                 vm.assignedPerson = null;
                                 console.log(personaError);
                             });
+                    }
+                    else {
+                        preSearchPerson();
                     }
                     SalePointRequests.getByID(salePoint.solicitud)
                         .then(function (requestSuccess) {
@@ -95,28 +100,42 @@
             vm.salePoint.persona = vm.assignedPerson.id;
         }
 
+        
+        
         function searchPerson() {
-            if (!vm.personList) {
-                return Persona_Admin.listPromise(1000,0)
-                    .then(function (userListSuccess) {
-                        userListSuccess = userListSuccess.results;
-                        vm.personList = userListSuccess;
-                        return searchPersonCollection();
-                    })
-                    .catch(function (userListError) {
-                        vm.personList = null;
-                        console.log(userListError);
-                        console.log("Error al obtener personas");
-                        toastr.error(
-                            Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                            Translate.translate('MAIN.MSG.ERROR_TITLE')
-                        );
-                    });
+            if(vm.limit !== 0){
+                if (!vm.personList) {
+                    return Persona_Admin.listPromise(vm.limit,0)
+                        .then(function (userListSuccess) {
+                            userListSuccess = userListSuccess.results;
+                            vm.personList = userListSuccess;
+                            return searchPersonCollection();
+                        })
+                        .catch(function (userListError) {
+                            vm.personList = null;
+                            console.log(userListError);
+                            console.log("Error al obtener personas");
+                            toastr.error(
+                                Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                                Translate.translate('MAIN.MSG.ERROR_TITLE')
+                            );
+                        });
+                }
+                else {
+                    return searchPersonCollection();
+                }
             }
-            else {
-                return searchPersonCollection();
-            }
+        }
+        
+        function preSearchPerson() {
+            Persona_Admin.listPromise(0,0)
+                .then(function (userList) {
+                    vm.limit = userList.count;
+                    searchPerson();
+                })
+                .catch(function () {
 
+                });
         }
 
         function searchPersonCollection() {

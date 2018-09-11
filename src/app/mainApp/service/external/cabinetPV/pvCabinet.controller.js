@@ -1,4 +1,3 @@
-
 (function () {
     angular
         .module('app.mainApp')
@@ -15,22 +14,40 @@
         vm.aRefresh = aRefresh;
         vm.listcabinets = listcabinets;
 
+        //datos para paginado
+        vm.objectPaginado = null;
+        vm.offset = 0;
+        vm.limit = 50;
+        vm.refreshPaginationButtonsComponent = false;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
+
         function aRefresh() {
-            console.log("Refresca la principal");
+            vm.todosprev = null;
+            vm.todos = [];
+            vm.objectPaginado = null;
+            vm.offset = 0;
+            listcabinets();
+        }
+
+        function paginadoRefresh() {
             vm.todosprev = null;
             vm.todos = [];
             listcabinets();
-
         }
 
         listcabinets();
 
         function listcabinets(){
+            vm.refreshPaginationButtonsComponent = false;
             var ux = "Activo";
 
-            vm.loadingPromise = cabinetPV.list()
+            vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
                 .then(function (res) {
-                    vm.todosprev = Helper.filterDeleted(res, true);
+                    vm.objectPaginado = res;
+                    prepareDataFunction();
+
 
                     angular.forEach(vm.todosprev, function (cabinet) {
 
@@ -63,12 +80,31 @@
 
                         vm.todos.push(cabinetPreview);
                     });
+                    vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function (err) {
 
                 });
         }
 
+        function prepareDataFunction() {
+            vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+        }
+
+        function sigPage() {
+            vm.offset += vm.limit;
+            paginadoRefresh();
+        }
+
+        function prevPage() {
+            vm.offset -= vm.limit;
+            paginadoRefresh();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            paginadoRefresh();
+        }
     }
 
 })();

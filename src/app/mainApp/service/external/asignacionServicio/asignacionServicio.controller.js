@@ -10,11 +10,9 @@
 
         vm.selectedKind = 'unasigned';
         vm.salePoints = null;
-        vm.salePointKinds = [{id: 'unasigned', value: 'Sin asignar'}];
         vm.Assing = Assing;
 
         function Assing(salePoint) {
-            console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
@@ -27,7 +25,6 @@
                 }
             })
                 .then(function () {
-                    vm.selectedKind = 'unasigned';
                     vm.salePoints = null;
                     vm.listSalePoints();
                 });
@@ -42,43 +39,46 @@
         //datos para paginado
         vm.objectAtention = null;
         vm.offset = 0;
+        vm.limit = 20;
+        vm.refreshPaginationButtonsComponent = false;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         function listSalePoints() {
-            if (vm.selectedKind) {
-                vm.objectAtention = null;
-                switch (vm.selectedKind) {
-                    case 'unasigned':
-                        vm.loadingPromise = SalePoint.listUnasignedServices('?limit=20&offset='+vm.offset)
-                            .then(function (salePointsSuccess) {
-                                vm.objectAtention = salePointsSuccess;
-                                prepareDataFunction();
-                                console.log(salePointsSuccess);
-                            })
-                            .catch(function (salePointsError) {
-                                console.log(salePointsError);
-                                toastr.error(
-                                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                                    Translate.translate('MAIN.MSG.ERROR_TITLE')
-                                );
-                            });
-                        break;
-                }
-            }
+            vm.refreshPaginationButtonsComponent = false;
+            vm.objectAtention = null;
+            vm.salePoints = null;
+            vm.loadingPromise = SalePoint.listUnasignedServices(vm.limit, vm.offset)
+                .then(function (salePointsSuccess) {
+                    vm.objectAtention = salePointsSuccess;
+                    prepareDataFunction();
+                })
+                .catch(function (salePointsError) {
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
         }
 
         function prepareDataFunction() {
             vm.salePoints = vm.objectAtention.results;
+            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
-            vm.offset += 20;
+            vm.offset += vm.limit;
             listSalePoints();
         }
 
         function prevPage() {
-            vm.offset -= 20;
+            vm.offset -= vm.limit;
+            listSalePoints();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
             listSalePoints();
         }
 

@@ -19,8 +19,13 @@
             return baseUrl.all(id).customGET();
         }
 
-        function getAll() {
-            return baseUrl.getList();
+        function getAll(limit, offset, filter) {
+            if (filter === undefined) {
+                return MobileRestangular.all(URLS.preRequest + '?limit=' + limit + '&offset=' + offset).customGET();
+            }
+            else {
+                return MobileRestangular.all(URLS.preRequest + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+            }
         }
 
         function createRequest (element){
