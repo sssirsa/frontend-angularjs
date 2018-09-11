@@ -127,20 +127,23 @@
         </div>
         <div flex
              layout="column"
-             layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
-            <h3 ng-if="!vm.store.cabinets || vm.store.cabinets.length == 0">{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
-            <md-input-container ng-if="vm.store.cabinets || vm.store.cabinets.length > 0" flex class="md-block">
-                <label translate>REQUESTS.NEW.CABINET.FIELD</label>
-                <md-select
-                    ng-model="vm.request.cabinet">
-                    <md-option
-                        ng-repeat="cabinet in vm.store.cabinets"
-                        ng-value="cabinet">
-                        {{cabinet}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
+            <div ng-if="vm.store.cabinets.length == 0" flex>
+                <h3>{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
+            </div>
+            <div ng-if="vm.store.cabinets.length > 0" flex="">
+                <md-input-container flex class="md-block">
+                    <label translate>REQUESTS.NEW.CABINET.FIELD</label>
+                    <md-select
+                        ng-model="vm.request.cabinet">
+                        <md-option
+                            ng-repeat="cabinet in vm.store.cabinets"
+                            ng-value="cabinet">
+                            {{cabinet}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
         </div>
     </md-card>
 
