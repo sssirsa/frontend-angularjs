@@ -17,21 +17,21 @@
         //datos para paginado
         vm.objectPaginado = null;
         vm.offset = 0;
+        vm.limit = 50;
+        vm.refreshPaginationButtonsComponent = false;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         function aRefresh() {
-            console.log("Refresca la principal");
             vm.todosprev = null;
             vm.todos = [];
             vm.objectPaginado = null;
             vm.offset = 0;
             listcabinets();
-
         }
 
         function paginadoRefresh() {
-            console.log("Refresca la principal");
             vm.todosprev = null;
             vm.todos = [];
             listcabinets();
@@ -40,11 +40,11 @@
         listcabinets();
 
         function listcabinets(){
+            vm.refreshPaginationButtonsComponent = false;
             var ux = "Activo";
 
-            vm.loadingPromise = cabinetPV.list('50', vm.offset)
+            vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
                 .then(function (res) {
-                    console.log(res);
                     vm.objectPaginado = res;
                     prepareDataFunction();
 
@@ -80,6 +80,7 @@
 
                         vm.todos.push(cabinetPreview);
                     });
+                    vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function (err) {
 
@@ -91,17 +92,19 @@
         }
 
         function sigPage() {
-            vm.offset += 100;
+            vm.offset += vm.limit;
             paginadoRefresh();
-            //listcabinets();
         }
 
         function prevPage() {
-            vm.offset -= 100;
+            vm.offset -= vm.limit;
             paginadoRefresh();
-            //listcabinets();
         }
 
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            paginadoRefresh();
+        }
     }
 
 })();
