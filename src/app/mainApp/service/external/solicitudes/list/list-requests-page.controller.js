@@ -15,6 +15,7 @@
         vm.downloadReport = downloadReport;
         vm.sig = sigPage;
         vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         //Variable declaration
         vm.selectedKind = null;
@@ -24,10 +25,12 @@
         vm.limit = 20;
         vm.lastFilter = 'Todo';
         vm.lastKindFilter = 'Todo';
+        vm.refreshPaginationButtonsComponent = false;
 
         activate();
 
         function activate() {
+            vm.refreshPaginationButtonsComponent = false;
             vm.loadingPromise = SalePointRequests.getAll(vm.limit, vm.offset)
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
@@ -40,6 +43,7 @@
         }
 
         function listRequests(requestKind) {
+            vm.refreshPaginationButtonsComponent = false;
             vm.filteredActivated = true;
             vm.lastFilter = requestKind;
             if (vm.lastKindFilter !== requestKind){
@@ -167,6 +171,7 @@
         function prepareDataFunction() {
             vm.requests = vm.allRequests.results;
             vm.filteredActivated = false;
+            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
@@ -179,5 +184,9 @@
             listRequests(vm.lastFilter);
         }
 
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            listRequests(vm.lastFilter);
+        }
     }
 })();
