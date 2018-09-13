@@ -11,7 +11,11 @@
 </md-card>
 <md-card ng-if="vm.todosprev.length">
     <div id="list">
-        <list-cabinet todosex="vm.todos" up="vm.aRefresh()" todosprev2="vm.todosprev"></list-cabinet>
+        <list-cabinet todosex="vm.todos"
+                      up="vm.aRefresh()"
+                      todosprev2="vm.todosprev"
+                      filter-data="vm.filterList(economicFilter)"
+                      text-search-filter="vm.textToSearch"></list-cabinet>
     </div>
 </md-card>
 
