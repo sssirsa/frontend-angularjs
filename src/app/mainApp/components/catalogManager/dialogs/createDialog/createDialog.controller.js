@@ -4,6 +4,7 @@
 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
 *              model: string,         Name of the field that will be sent to the API
 *              required: boolean,     (Optional) Specifies whether or not the field is required
+*              hint: string,          (Optional) Hint label to show
 *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
 *              validations:
 *                  {
@@ -19,16 +20,36 @@
 *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
 *                      }
 *                  },
-*              catalog:{                (Optional) Just used when the type of the field is catalog,
-*                                       in this case the component catalog-select is used to delegate the catalog handling
-*                  requires: string,    (Optional) Field required to enable this catalog
-*                  lazy: boolean,       (Optional) Determines if the load is lazy or initial
-*                  url: string,         Full or partial URL depending on the kind
-*                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
-*                  name: string,        (Optional) Name of the catalog to show in the label
-*                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
-*                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
-*                                       If not given, then the model will be used
+*              catalog:{                 As used by the catalog-select component
+ *                  url: string,         Full or partial URL depending on the kind
+ *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+ *                  name: string,        (Optional) Default is "Catalog"
+ *                  loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
+ *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
+ *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
+ *                                       If not given, then the model will be used
+ *                               
+ *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
+ *                      total: string,        (Optional) Binding for the number of total elements
+ *                      next: string,         (Optional) Binding for the url that brings to the next page
+ *                  },
+ *                  required: boolean,    (Optional) To be used in form validation
+ *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
+ *                                        aka: the API returns the array of objects in an element of the response, as in pagination
+ *                                        Example:
+ *                                        {
+ *                                          total:'',
+ *                                          description:'',
+ *                                          results:[
+ *                                              {...},
+ *                                              {...}
+ *                                          ]
+ *                                        }
+ *                                        In this case 'elements' should receive the parameter 'results'
+ *                  softDelete: {
+ *                      hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
+ *                      reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
+ *                  }
 *              },
 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
 *                  model: string,            Field of the element to be used in the model

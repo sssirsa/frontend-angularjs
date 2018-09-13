@@ -160,8 +160,7 @@
 
                     <!--Registro de cabinets-->
                     <md-tab label={{'INPUT.Tabs.CabinetsUpload'|translate}} ng-disabled="entradaForm.$invalid">
-                        <md-content layout-padding=""
-                                    cg-busy="{promise:vm.loadingPromiseInput,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+                        <md-content layout-padding="">
                             <h2 ng-if="vm.entrada.id != null && vm.entrada.id != undefined">
                                 {{'INPUT.ID'|translate}}{{vm.entrada.id}}
                             </h2>
@@ -473,6 +472,7 @@
                                         || (vm.entrada.file==null && vm.hideManualUpload==true)
                                         || (vm.cabinets.length === 0 && vm.hideMassiveUpload==true)"
                                            ng-click="vm.guardar()"
+                                           cg-busy="{promise:vm.loadingPromiseInput, massage:' '}"
                                            aria-label="save"
                                            class="md-raised md-primary">
                                     <md-icon ng-if="vm.entrada.id == null || vm.entrada.id == undefined"

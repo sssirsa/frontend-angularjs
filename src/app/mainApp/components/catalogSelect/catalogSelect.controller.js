@@ -98,6 +98,8 @@
                             vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
+                        console.debug(vm.catalogElements);
+
                         //Building the pagination helper
                         //(if pagination element present)
                         //if the 'pagination' contains the specific models,
@@ -198,6 +200,7 @@
         }
 
         function filterDeleted(elements) {
+            console.debug(elements);
             var hide = vm.softDelete['hide'];
             var reverse = vm.softDelete['reverse'];
             var filteredElements = [];

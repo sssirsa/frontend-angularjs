@@ -519,16 +519,127 @@
         }
 
         function showModeloDialog(ev) {
+            let cabinetModelProvider = CATALOG.web;
+            cabinetModelProvider.url = URLS.modelo_cabinet;
+
+            let cabinetModelCreate = {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: Translate.translate('INPUT.Dialogs.Model.Name'),
+                        hint: 'Nombre del modelo',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del modelo es obligatorio'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: Translate.translate('INPUT.Dialogs.Model.Description'),
+                        hint: 'Información adicional del modelo',
+                        required: true,
+                        validations: {
+                            regex: '[A-Za-zÁ-Úá-ú0-9 ]{0,100}',
+                            errors: {
+                                regex: 'La longitud máxima es de 100 caracteres (solo letras y números)',
+                                required: 'La descripción del modelo es obligatoria'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'palabra_clave',
+                        label: Translate.translate('INPUT.Dialogs.Model.Keyword'),
+                        hint: 'Palabra clave para búsqueda del modelo',
+                        required: true,
+                        validations: {
+                            regex: '[A-Za-zÁ-Úá-ú0-9 ]{0,25}',
+                            errors: {
+                                regex: 'La longitud máxima es de 25 caracteres (solo letras y números)',
+                                required: 'La descripción del modelo es obligatoria'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'tipo',
+                        //label: Translate.translate('INPUT.Dialogs.Model.Type'),
+                        hint: 'Seleccione el tipo del cabinet',
+                        catalog: {
+                            url: URLS.tipo_equipo,
+                            name: Translate.translate('INPUT.Dialogs.Model.Type'),
+                            kind: 'Web',
+                            model: 'id',
+                            option: 'nombre',
+                            loadMoreButtonText: 'Cargar mas...'
+                        },
+                        pagination: {
+                            total: 'count'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        },
+                        validations: {
+                            errors: {
+                                required: 'La marca del modelo es obligatoria'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'marca',
+                        //label: Translate.translate('INPUT.Dialogs.Model.Type'),
+                        hint: 'Seleccione la marca del cabinet',
+                        catalog: {
+                            url: URLS.marca,
+                            name: Translate.translate('INPUT.Dialogs.Model.Brand'),
+                            kind: 'Web',
+                            model: 'id',
+                            option: 'descripcion',
+                            loadMoreButtonText: 'Cargar mas...'
+                        },
+                        pagination: {
+                            total: 'count'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        },
+                        validations: {
+                            errors: {
+                                required: 'La marca del modelo es obligatoria'
+                            }
+                        }
+                    }
+                ],
+                dialog: {
+                    title: Translate.translate('INPUT.Create Model'),
+                    okButton: Translate.translate('INPUT.Save'),
+                    cancelButton: Translate.translate('INPUT.Cancel'),
+                    loading: 'Creando modelo de cabinet'
+                }
+            };
+
             $mdDialog.show({
-                controller: 'ModeloDialogController',
-                templateUrl: 'app/mainApp/entries/dialogs/modelo.tmpl.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
+                controller: 'CatalogCreateDialogController',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
                 controllerAs: 'vm',
                 fullscreen: true,
-                clickOutsideToClose: true
-            }).then(function (res) {
-
+                clickOutsideToClose: true,
+                locals: {
+                    dialog: cabinetModelCreate.dialog,
+                    provider: cabinetModelProvider,
+                    fields: cabinetModelCreate.fields
+                }
+            }).then(function () {
+                ErrorHandler.successCreation();
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errortranslate(err);
