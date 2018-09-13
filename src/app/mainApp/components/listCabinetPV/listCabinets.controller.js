@@ -38,7 +38,6 @@
         function init() {
             if (vm.filterData !== null) {
                 if (vm.textSearchFilter.length > 0) {
-                    console.log(vm.textSearchFilter);
                     vm.searchText = vm.textSearchFilter;
                 }
             }

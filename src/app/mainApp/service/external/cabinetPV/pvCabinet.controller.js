@@ -114,7 +114,6 @@
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
-            console.log(vm.todosprev);
         }
 
         function sigPage() {
@@ -133,7 +132,6 @@
         }
 
         function filterList(economicFilter) {
-            console.log(economicFilter,1);
             vm.textToSearch = ''+economicFilter;
             paginadoRefresh();
         }
