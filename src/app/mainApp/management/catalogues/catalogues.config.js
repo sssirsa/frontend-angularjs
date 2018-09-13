@@ -328,22 +328,24 @@
                         state: 'triangular.admin-default.proveedor',
                         permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                         type: 'link'
-                    }, {
-                        name: 'MAIN.MENU.CATALOGS.STATES',
-                        state: 'triangular.admin-default.catalogo-estados',
-                        permission: ['ADMINISTRADOR', 'TECNICO E'],
-                        type: 'link'
-                    }, {
-                        name: 'MAIN.MENU.CATALOGS.CITIES',
-                        state: 'triangular.admin-default.catalogo-municipios',
-                        permission: ['ADMINISTRADOR', 'TECNICO E'],
-                        type: 'link'
-                    }, {
-                        name: 'MAIN.MENU.CATALOGS.LOCALITIES',
-                        state: 'triangular.admin-default.catalogo-localidades',
-                        permission: ['ADMINISTRADOR', 'TECNICO E'],
-                        type: 'link'
-                    }, {
+                    },
+                    // {
+                    //     name: 'MAIN.MENU.CATALOGS.STATES',
+                    //     state: 'triangular.admin-default.catalogo-estados',
+                    //     permission: ['ADMINISTRADOR', 'TECNICO E'],
+                    //     type: 'link'
+                    // }, {
+                    //     name: 'MAIN.MENU.CATALOGS.CITIES',
+                    //     state: 'triangular.admin-default.catalogo-municipios',
+                    //     permission: ['ADMINISTRADOR', 'TECNICO E'],
+                    //     type: 'link'
+                    // }, {
+                    //     name: 'MAIN.MENU.CATALOGS.LOCALITIES',
+                    //     state: 'triangular.admin-default.catalogo-localidades',
+                    //     permission: ['ADMINISTRADOR', 'TECNICO E'],
+                    //     type: 'link'
+                    // },
+                    {
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
