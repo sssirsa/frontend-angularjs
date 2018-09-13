@@ -249,12 +249,12 @@
                 permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
                 priority: 3,
                 children: [
-                    {
-                        name: 'DEMO Generic Catalog',
-                        state: 'triangular.admin-default.generic-catalogue',
-                        permission: ['ADMINISTRADOR'],
-                        type: 'link'
-                    },
+                    // {
+                    //     name: 'DEMO Generic Catalog',
+                    //     state: 'triangular.admin-default.generic-catalogue',
+                    //     permission: ['ADMINISTRADOR'],
+                    //     type: 'link'
+                    // },
                     {
                         name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
                         state: 'triangular.admin-default.catalogue-segmentation',
