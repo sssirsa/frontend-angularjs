@@ -11,9 +11,11 @@
             bindings:{
                 todosex: '<',
                 up: '&',
-                todosprev2: '<'
+                todosprev2: '<',
+                filterData: '&',
+                textSearchFilter: '<'
             }
-        })
+        });
         //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
@@ -30,6 +32,17 @@
 
         vm.info = info;
         vm.searchCabinet = searchCabinet;
+
+        init();
+
+        function init() {
+            if (vm.filterData !== null) {
+                if (vm.textSearchFilter.length > 0) {
+                    console.log(vm.textSearchFilter);
+                    vm.searchText = vm.textSearchFilter;
+                }
+            }
+        }
 
         function info(item) {
             //vm.toModel = item.clone();
@@ -57,14 +70,18 @@
         }
 
         function searchCabinet() {
-            console.log(vm.searchText);
-            cabinetPV.getByID(vm.searchText)
-                .then(function (respuesta) {
-                    info(respuesta);
-                })
-                .catch(function (error) {
-                    ErrorHandler.errortranslate(error);
-                });
+            if (vm.filterData === null){
+                cabinetPV.getByID(vm.searchText)
+                    .then(function (respuesta) {
+                        info(respuesta);
+                    })
+                    .catch(function (error) {
+                        ErrorHandler.errortranslate(error);
+                    });
+            }
+            else {
+                vm.filterData({economicFilter: vm.searchText});
+            }
         }
     }
 
