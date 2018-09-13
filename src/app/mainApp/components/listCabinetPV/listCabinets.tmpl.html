@@ -24,7 +24,7 @@
             </form>
         </div>
 
-        <div>
+        <div ng-if="$ctrl.todos.length > 0">
             <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos" ng-click="$ctrl.info(item)">
                 <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
                 <div class="md-list-item-text" layout="column">
@@ -34,6 +34,9 @@
                     <p>Estado: {{ item.estado }}</p>
                 </div>
             </md-list-item>
+        </div>
+        <div ng-if="$ctrl.todos.length == 0">
+            <h3>NO HAY RESULTADOS</h3>
         </div>
 
     </md-content>
