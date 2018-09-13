@@ -114,6 +114,7 @@
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+            console.log(vm.todosprev);
         }
 
         function sigPage() {
