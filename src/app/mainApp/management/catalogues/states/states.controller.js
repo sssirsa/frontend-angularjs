@@ -88,11 +88,11 @@
                 }
             },
             LIST: {
-                elements: 'results',
+                // elements: 'results',
                 mode: 'infinite',
-                pagination: {
-                    total: 'count'
-                },
+                // pagination: {
+                //     total: 'count'
+                // },
                 fields: [
                     {
                         type: 'text',
