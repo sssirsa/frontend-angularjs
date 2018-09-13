@@ -108,7 +108,7 @@
 
 
             .state('triangular.admin-default.cabinetPV', {
-                url: '/prerequest/new',
+                url: '/cabinet-pv/new',
                 templateUrl: 'app/mainApp/service/external/cabinetPV/pv-cabinet.tmpl.html',
                 controller: 'NewCabinetPrerequestController',
                 controllerAs: 'vm',
