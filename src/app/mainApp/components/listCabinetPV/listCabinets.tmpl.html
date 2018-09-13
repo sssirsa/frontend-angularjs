@@ -11,19 +11,21 @@
         layout-padding
     >
 
-        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="$ctrl.todos.length>1">
-            <md-input-container
-                flex="80"
-                class="md-block">
-                <input
-                    placeholder="Búsqueda por economico"
-                    ng-model="$ctrl.searchText">
-            </md-input-container>
-
+        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="$ctrl.todos.length > 2">
+            <form ng-submit="$ctrl.searchCabinet()" flex="80" class="md-block">
+                <md-input-container
+                    flex="80"
+                    class="md-block">
+                    <input
+                        only-digits
+                        placeholder="Búsqueda por economico"
+                        ng-model="$ctrl.searchText">
+                </md-input-container>
+            </form>
         </div>
 
         <div>
-            <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos | cabinetPVFilter:$ctrl.searchText" ng-click="$ctrl.info(item)">
+            <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos" ng-click="$ctrl.info(item)">
                 <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
                 <div class="md-list-item-text" layout="column">
                     <h2>Económico: {{ item.economico }}</h2>

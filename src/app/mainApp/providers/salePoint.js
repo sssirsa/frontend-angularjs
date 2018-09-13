@@ -22,16 +22,21 @@
             return baseUrl.one('atencion_pv', id).customGET();
         }
 
-        function listUnasignedServices(urlAux) {
-            return baseUrl.all('list_atencion'+ urlAux).customGET();
+        function listUnasignedServices(limit, offset) {
+            return baseUrl.all('list_atencion?limit='+limit+'&offset='+offset).customGET();
         }
 
         function listAsignedService(limit, offset) {
             return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset).customGET();
         }
 
-        function listAllServices(limit, offset) {
-            return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset).customGET();
+        function listAllServices(limit, offset, filter) {
+            if (filter === undefined) {
+                return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset).customGET();
+            }
+            else {
+                return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset+'&'+filter).customGET();
+            }
         }
 
         function assignToPerson(object, serviceID) {
