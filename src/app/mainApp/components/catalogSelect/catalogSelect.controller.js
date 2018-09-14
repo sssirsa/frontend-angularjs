@@ -12,6 +12,7 @@
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
  *      },
+ *      required: boolean,    (Optional) To be used in form validation
  *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                            aka: the API returns the array of objects in an element of the response, as in pagination
  *                            Example:
@@ -39,15 +40,17 @@
                 catalog: '<',
                 pagination: '<',
                 elements: '<',
+                lazy:'<',
                 softDelete: '<',
-
+                required: '<',
                 onSuccessList: '&',
                 onErrorList: '&',
-                onSelect:'&'
+                onSelect: '&',
+                onOpen:'&'
             }
         });
     function CatalogSelectController(
-        CATALOG
+        CATALOG_SELECT
     ) {
         var vm = this;
         ////Variables
@@ -65,11 +68,14 @@
         //Functions
         vm.loadMore = loadMore;
         vm.onClose = onClose;
+        vm.onSelectOpen = onSelectOpen;
 
         init();
 
         function init() {
-            list();
+            if (!vm.lazy) {
+                list();
+            }
         }
 
         function list() {
@@ -130,24 +136,24 @@
             if (vm.catalog.kind) {
                 switch (vm.catalog.kind) {
                     case 'Mobile':
-                        vm.CatalogProvider = CATALOG.mobile;
+                        vm.CatalogProvider = CATALOG_SELECT.mobile;
                         break;
                     case 'Web':
-                        vm.CatalogProvider = CATALOG.web;
+                        vm.CatalogProvider = CATALOG_SELECT.web;
                         break;
                     default:
-                        vm.CatalogProvider = CATALOG.generic;
+                        vm.CatalogProvider = CATALOG_SELECT.generic;
                         break;
                 }
             }
             else {
-                vm.CatalogProvider = CATALOG.generic;
+                vm.CatalogProvider = CATALOG_SELECT.generic;
             }
             vm.CatalogProvider.url = vm.catalog.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG.generic;
+            vm.PaginationProvider = CATALOG_SELECT.generic;
         }
 
         function loadMore() {
@@ -208,6 +214,13 @@
             if (vm.selectedElement) {
                 vm.onSelect({ element: vm.selectedElement });
             }
+        }
+
+        function onSelectOpen() {
+            if (vm.lazy) {
+                list();
+            }
+            vm.onOpen();
         }
 
     }

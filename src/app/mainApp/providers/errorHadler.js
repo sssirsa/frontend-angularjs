@@ -7,42 +7,42 @@
 
     function ErrorHandler(toastr, Translate, $log) {
         return {
-            succcesCreation: succcesCreation,
-            succcesUpdate: succcesUpdate,
-            succcesDelete: succcesDelete,
-            succcesUpload: succcesUpload,
-            succcesCancel: succcesCancel,
+            successCreation: successCreation,
+            successUpdate: successUpdate,
+            successDelete: successDelete,
+            successUpload: successUpload,
+            successCancel: successCancel,
             errortranslate: errortranslate
         };
 
 
 
 
-        function succcesCreation() {
+        function successCreation() {
             var successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             var translatemsg = Translate.translate('SUCCESS.CREATE');
             toastr.success(translatemsg, successTitle);
         }
 
-        function succcesUpdate() {
+        function successUpdate() {
             var successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             var translatemsg = Translate.translate('SUCCESS.UPDATE');
             toastr.success(translatemsg, successTitle);
         }
 
-        function succcesDelete() {
+        function successDelete() {
             var successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             var translatemsg = Translate.translate('SUCCESS.DELETE');
             toastr.success(translatemsg, successTitle);
         }
 
-        function succcesUpload() {
+        function successUpload() {
             var successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             var translatemsg = Translate.translate('SUCCESS.UPLOAD');
             toastr.success(translatemsg, successTitle);
         }
 
-        function succcesCancel() {
+        function successCancel() {
             var successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             var translatemsg = Translate.translate('SUCCESS.CANCEL');
             toastr.success(translatemsg, successTitle);

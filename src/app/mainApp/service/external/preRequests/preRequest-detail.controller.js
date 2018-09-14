@@ -113,7 +113,7 @@
             var promiseCreateRequest = preRequests.createRequest(vm.request);
             promiseCreateRequest.then(function (requestCreada) {
                 //toastr.success(vm.creationsuccess, vm.successTitle);
-                ErrorHandler.succcesCreation();
+                ErrorHandler.successCreation();
                 //  console.log(requestCreada);
                 $state.go('triangular.admin-default.preRequest');
 
@@ -132,7 +132,7 @@
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
             var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
             promiseCancelPreRequest.then(function (requestCancel) {
-                ErrorHandler.succcesCancel();
+                ErrorHandler.successCancel();
                 //toastr.success(vm.cancelationsuccess, vm.successTitle);
                 // console.log(requestCancel);
                 $state.go('triangular.admin-default.preRequest');

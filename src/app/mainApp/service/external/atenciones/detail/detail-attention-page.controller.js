@@ -423,7 +423,7 @@
             cabinetPV.create(aux)
                 .then(function (res) {
                     AddCabinetCreated(res);
-                    ErrorHandler.succcesCreation();
+                    ErrorHandler.successCreation();
                 })
                 .catch(function (err) {
 
