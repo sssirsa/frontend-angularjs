@@ -64,7 +64,12 @@
                             url: URLS.marca,
                             kind: 'Web',
                             model: 'id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            name: 'Marca',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
                         }
                     },
                     {
@@ -82,7 +87,8 @@
                             url: URLS.tipo_equipo,
                             kind: 'Web',
                             model: 'id',
-                            option: 'nombre'
+                            option: 'nombre',
+                            name: 'Tipo'
                         }
                     },
                     {
