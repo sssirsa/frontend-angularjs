@@ -567,7 +567,6 @@
                     {
                         type: 'catalog',
                         model: 'tipo',
-                        //label: Translate.translate('INPUT.Dialogs.Model.Type'),
                         hint: 'Seleccione el tipo del cabinet',
                         catalog: {
                             url: URLS.tipo_equipo,
@@ -577,10 +576,6 @@
                             option: 'nombre',
                             loadMoreButtonText: 'Cargar mas...'
                         },
-                        pagination: {
-                            total: 'count'
-                        },
-                        elements: 'results',
                         softDelete: {
                             hide: 'deleted',
                             reverse: false
@@ -594,7 +589,6 @@
                     {
                         type: 'catalog',
                         model: 'marca',
-                        //label: Translate.translate('INPUT.Dialogs.Model.Type'),
                         hint: 'Seleccione la marca del cabinet',
                         catalog: {
                             url: URLS.marca,
@@ -602,12 +596,12 @@
                             kind: 'Web',
                             model: 'id',
                             option: 'descripcion',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
                         },
-                        pagination: {
-                            total: 'count'
-                        },
-                        elements: 'results',
                         softDelete: {
                             hide: 'deleted',
                             reverse: false

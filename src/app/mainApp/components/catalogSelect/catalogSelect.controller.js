@@ -85,8 +85,11 @@
                 vm.listLoader = vm.CatalogProvider
                     .list()
                     .then(function (elements) {
+                        console.debug(elements);
                         //Elements list is returned in any other model
                         if (vm.elements) {
+                            console.debug('elements');
+                            console.debug(vm.elements);
                             vm.catalogElements = elements[vm.elements];
                         }
                         //Elements list is returned directly as an array
@@ -105,6 +108,7 @@
                         //if the 'pagination' contains the specific models,
                         //then those will be used, otherwise, the default models will.
                         if (vm.pagination) {
+                            console.debug('Pagination');
                             //Total of elements model to be used
                             if (vm.pagination['total']) {
                                 vm.paginationHelper['total'] = elements[vm.pagination['total']];
