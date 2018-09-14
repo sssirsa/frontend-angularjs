@@ -422,13 +422,8 @@
             };
             cabinetPV.create(aux)
                 .then(function (res) {
-<<<<<<< HEAD
-                    cabinetTemporal = res;
-                    ErrorHandler.successCreation();
-=======
                     AddCabinetCreated(res);
-                    ErrorHandler.succcesCreation();
->>>>>>> bafda846c72f8d5c26e8c09b6d24926ce82b8ed4
+                    ErrorHandler.successCreation();
                 })
                 .catch(function (err) {
 
