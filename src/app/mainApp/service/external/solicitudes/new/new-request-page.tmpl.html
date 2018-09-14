@@ -14,7 +14,7 @@
              layout-xs="column"
              layout-align="space-around center"
              layout-padding>
-            <md-input-container class="md-block" flex>
+            <md-input-container class="md-block" flex-gt-sm="50" flex="100">
                 <label translate>REQUESTS.NEW.KIND</label>
                 <md-select
                     ng-model="vm.request.tipo">
@@ -25,20 +25,12 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block"
-                                flex
-                                ng-if="!vm.user.sucursal">
-                <label translate>REQUESTS.NEW.SUCURSAL</label>
-                <md-select
-                    md-on-open="vm.loadSucursales()"
-                    ng-model="vm.request.sucursal">
-                    <md-option
-                        ng-repeat="sucursal in vm.sucursales"
-                        ng-value="sucursal.id">
-                        {{sucursal.nombre}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
+            <div flex-gt-sm="50" flex="100" ng-if="!vm.user.sucursal">
+            <catalog-select catalog="vm.catalogSucursal.catalog"
+                            elements="vm.catalogSucursal.elements"
+                            on-select="vm.onSelectedSucursal(element)">
+            </catalog-select>
+            </div>
         </div>
     </md-card>
 
@@ -135,20 +127,23 @@
         </div>
         <div flex
              layout="column"
-             layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
-            <h3 ng-if="!vm.store.cabinets || vm.store.cabinets.length == 0">{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
-            <md-input-container ng-if="vm.store.cabinets || vm.store.cabinets.length > 0" flex class="md-block">
-                <label translate>REQUESTS.NEW.CABINET.FIELD</label>
-                <md-select
-                    ng-model="vm.request.cabinet">
-                    <md-option
-                        ng-repeat="cabinet in vm.store.cabinets"
-                        ng-value="cabinet">
-                        {{cabinet}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
+            <div ng-if="vm.store.cabinets.length == 0" flex>
+                <h3>{{'REQUESTS.NEW.CABINET.EMPTY'|translate}}</h3>
+            </div>
+            <div ng-if="vm.store.cabinets.length > 0" flex="">
+                <md-input-container flex class="md-block">
+                    <label translate>REQUESTS.NEW.CABINET.FIELD</label>
+                    <md-select
+                        ng-model="vm.request.cabinet">
+                        <md-option
+                            ng-repeat="cabinet in vm.store.cabinets"
+                            ng-value="cabinet">
+                            {{cabinet}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
         </div>
     </md-card>
 

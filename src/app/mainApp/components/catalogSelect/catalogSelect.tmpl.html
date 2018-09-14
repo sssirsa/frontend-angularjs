@@ -4,6 +4,8 @@
     <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
     <label ng-if="!$ctrl.catalog.name">Catalog</label>
     <md-select ng-model="$ctrl.selectedElement"
+               ng-required="$ctrl.required"
+               md-on-open="$ctrl.onSelectOpen()"
                md-on-close="$ctrl.onClose()">
         <md-option ng-repeat="element in $ctrl.catalogElements" ng-value="element[$ctrl.catalog.model]">
             <section ng-if="$ctrl.catalog.option">

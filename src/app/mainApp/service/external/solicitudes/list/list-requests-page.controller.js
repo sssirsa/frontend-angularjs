@@ -13,18 +13,28 @@
         vm.listRequests = listRequests;
         vm.selectRequest = selectRequest;
         vm.downloadReport = downloadReport;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         //Variable declaration
         vm.selectedKind = null;
         vm.allRequests = null;
+        vm.offset = 0;
+        vm.filteredActivated = false;
+        vm.limit = 20;
+        vm.lastFilter = 'Todo';
+        vm.lastKindFilter = 'Todo';
+        vm.refreshPaginationButtonsComponent = false;
 
         activate();
 
         function activate() {
-            vm.loadingPromise = SalePointRequests.getAll()
+            vm.refreshPaginationButtonsComponent = false;
+            vm.loadingPromise = SalePointRequests.getAll(vm.limit, vm.offset)
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
-                    vm.requests = vm.allRequests;
+                    prepareDataFunction();
                 })
                 .catch(function (listRequestsError) {
                     $log.error(listRequestsError);
@@ -33,11 +43,27 @@
         }
 
         function listRequests(requestKind) {
-            if (requestKind !== 'Todo') {
-                vm.requests = _.where(vm.allRequests, {status: requestKind});
+            vm.refreshPaginationButtonsComponent = false;
+            vm.filteredActivated = true;
+            vm.lastFilter = requestKind;
+            if (vm.lastKindFilter !== requestKind){
+                vm.offset = 0;
+                vm.lastKindFilter = requestKind;
+            }
+            if (requestKind === 'Todo') {
+                activate();
             }
             else {
-                vm.requests = vm.allRequests;
+                var filterSTR = 'status='+requestKind;
+                vm.loadingPromise = SalePointRequests.getAll(vm.limit, vm.offset, filterSTR)
+                    .then(function (listRequestsSuccess) {
+                        vm.allRequests = listRequestsSuccess;
+                        prepareDataFunction();
+                    })
+                    .catch(function (listRequestsError) {
+                        $log.error(listRequestsError);
+                        toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.ERROR'));
+                    });
             }
         }
 
@@ -142,5 +168,25 @@
                 });
         }
 
+        function prepareDataFunction() {
+            vm.requests = vm.allRequests.results;
+            vm.filteredActivated = false;
+            vm.refreshPaginationButtonsComponent = true;
+        }
+
+        function sigPage() {
+            vm.offset += vm.limit;
+            listRequests(vm.lastFilter);
+        }
+
+        function prevPage() {
+            vm.offset -= vm.limit;
+            listRequests(vm.lastFilter);
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            listRequests(vm.lastFilter);
+        }
     }
 })();

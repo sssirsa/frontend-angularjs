@@ -157,7 +157,7 @@
                         vm.insumos = respuesta;
                         var aux = null;
 
-                        angular.forEach(vm.insumos.results, function (value) {
+                        angular.forEach(vm.insumos, function (value) {
                             value.check = false;
                             value.usado = 0;
                             value.error = null;
@@ -409,6 +409,7 @@
         function seleccion() {
             vm.todosSeleccionado = [];
             vm.todosSeleccionado.push(cabinetTemporal);
+            console.log(cabinetTemporal);
             vm.isUsed = true;
         }
 
@@ -421,13 +422,45 @@
             };
             cabinetPV.create(aux)
                 .then(function (res) {
-                    cabinetTemporal = res;
-                    ErrorHandler.succcesCreation();
+                    AddCabinetCreated(res);
+                    ErrorHandler.successCreation();
                 })
                 .catch(function (err) {
 
                     ErrorHandler.errortranslate(err);
                 });
+        }
+
+        function AddCabinetCreated(cabinet) {
+            var ux = 'Activo';
+            if(cabinet.activo === true){
+                ux = "Activo";
+            }else{
+                ux = "Inactivo";
+            }
+
+            var cabinetPreview = {
+                economico: cabinet.economico,
+                modelo: {
+                    id: cabinet.modelo.id,
+                    deleted: cabinet.modelo.deleted,
+                    nombre: cabinet.modelo.nombre,
+                    descripcion: cabinet.modelo.descripcion,
+                    palabra_clave: cabinet.modelo.palabra_clave,
+                    tipo: cabinet.modelo.tipo,
+                    marca: cabinet.modelo.marca
+                },
+                modelo_id: cabinet.modelo_id,
+                antiguedad: cabinet.antiguedad,
+                activo: cabinet.activo,
+                estado: ux,
+                no_incidencias: cabinet.no_incidencias,
+                qr_code: cabinet.qr_code,
+                deleted: cabinet.deleted,
+                no_serie: cabinet.no_serie
+            };
+            vm.todos.push(cabinetPreview);
+            selectCabinet(cabinetPreview);
         }
 
         function listMarcas(){

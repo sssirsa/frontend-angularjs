@@ -51,9 +51,9 @@
             return urlbase_clean.customDELETE(data.economico,null,{'content-type':'application/json'});
         }
 
-        function get(no_serie) {
+        function get(id) {
             var deferred = $q.defer();
-            WebRestangular.one(URLS.cabinet, no_serie).customGET().then(function (res) {
+            WebRestangular.one(URLS.cabinet, id).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);

@@ -13,19 +13,6 @@
   -moz-transform:scale(0.70);
 }
 
-
-.virtualRepeatScroll{
-  height: 300px;
-  width: 100%;
-  overflow-y: auto;
-}
-
-.virtualRepeatScroll-600{
-  height: 600px;
-  width: 100%;
-  overflow-y: auto;
-}
-
 .wrapperText {
   word-wrap: break-word;
   width: 200px;
@@ -76,4 +63,12 @@ div.En_proceso {
   padding: 10px;
   text-align: center;
   width: 80px;
+}
+
+div.Todo {
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
 }
