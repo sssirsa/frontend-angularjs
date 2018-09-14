@@ -59,7 +59,7 @@
                     .customDELETE(id, null, { 'content-type': 'application/json' });
             },
             search: function (query) {
-                return MobileRestangular.all(vm.webCatalog.url + '?' + query)
+                return WebRestangular.all(vm.webCatalog.url + '?' + query)
                     .customGET();
             }
         };
