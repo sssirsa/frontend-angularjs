@@ -50,7 +50,7 @@
             }
         });
     function CatalogSelectController(
-        CATALOG
+        CATALOG_SELECT
     ) {
         var vm = this;
         ////Variables
@@ -85,11 +85,8 @@
                 vm.listLoader = vm.CatalogProvider
                     .list()
                     .then(function (elements) {
-                        console.debug(elements);
                         //Elements list is returned in any other model
                         if (vm.elements) {
-                            console.debug('elements');
-                            console.debug(vm.elements);
                             vm.catalogElements = elements[vm.elements];
                         }
                         //Elements list is returned directly as an array
@@ -101,14 +98,11 @@
                             vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
-                        console.debug(vm.catalogElements);
-
                         //Building the pagination helper
                         //(if pagination element present)
                         //if the 'pagination' contains the specific models,
                         //then those will be used, otherwise, the default models will.
                         if (vm.pagination) {
-                            console.debug('Pagination');
                             //Total of elements model to be used
                             if (vm.pagination['total']) {
                                 vm.paginationHelper['total'] = elements[vm.pagination['total']];
@@ -142,24 +136,24 @@
             if (vm.catalog.kind) {
                 switch (vm.catalog.kind) {
                     case 'Mobile':
-                        vm.CatalogProvider = CATALOG.mobile;
+                        vm.CatalogProvider = CATALOG_SELECT.mobile;
                         break;
                     case 'Web':
-                        vm.CatalogProvider = CATALOG.web;
+                        vm.CatalogProvider = CATALOG_SELECT.web;
                         break;
                     default:
-                        vm.CatalogProvider = CATALOG.generic;
+                        vm.CatalogProvider = CATALOG_SELECT.generic;
                         break;
                 }
             }
             else {
-                vm.CatalogProvider = CATALOG.generic;
+                vm.CatalogProvider = CATALOG_SELECT.generic;
             }
             vm.CatalogProvider.url = vm.catalog.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG.generic;
+            vm.PaginationProvider = CATALOG_SELECT.generic;
         }
 
         function loadMore() {
@@ -204,7 +198,6 @@
         }
 
         function filterDeleted(elements) {
-            console.debug(elements);
             var hide = vm.softDelete['hide'];
             var reverse = vm.softDelete['reverse'];
             var filteredElements = [];

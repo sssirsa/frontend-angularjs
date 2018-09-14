@@ -95,7 +95,8 @@
 
         vm.dialog = dialog;
         vm.fields = fields;
-        vm.CatalogProvider = provider;
+        vm.CreateCatalogProvider = jQuery.extend(true, {}, provider);
+        //vm.CreateCatalogProvider = provider;
 
         vm.objectToCreate = {};
 
@@ -105,7 +106,7 @@
         vm.onElementSelect = onElementSelect;
 
         function create(objectToCreate) {
-            vm.createLoader = vm.CatalogProvider
+            vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
                 .then(function (createdElement) {
                     $mdDialog.hide(createdElement);
