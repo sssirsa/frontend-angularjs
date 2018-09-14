@@ -21,8 +21,8 @@
             getByID: getByID
         };
 
-        function listObject() {
-            return baseSucursal.getList();
+        function listObject(limit, offset) {
+            return WebRestangular.all(URLS.sucursal+'?limit='+limit+'&offset='+offset).customGET();
         }
 
         function list() {

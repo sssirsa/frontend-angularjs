@@ -496,11 +496,11 @@
                 by_economic: '/lookup/'
             },
             city: {
-                by_state: '?estado_id='
+                by_state: '?estado__id='
             },
             locality: {
-                by_state: '?municipio__estado_id=',
-                by_city: '?municipio_id='
+                by_state: '?municipio__estado__id=',
+                by_city: '?municipio__id='
             }
         })
         .constant('CONFIGS', {

@@ -13,6 +13,7 @@
         vm.personSearchText = null;
         vm.personList = null;
         vm.store = null;
+        vm.limit = 100;
         vm.toAsigned = {
             persona: null,
             prioridad: 4,
@@ -34,7 +35,7 @@
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
-        vm.searchPerson = searchPerson;
+        vm.preSearchPerson = preSearchPerson;
         vm.showStoreLocation = showStoreLocation;
         vm.showRequestLocation = showRequestLocation;
         vm.assign = assign;
@@ -45,11 +46,11 @@
         activate();
 
         function activate() {
-            SalePoint.getByID(salePoint.folio)
+            vm.personLoading = SalePoint.getByID(salePoint.folio)
                 .then(function (salePointp) {
                     vm.salePoint = salePointp;
                     if (salePointp.persona) {
-                        vm.personLoading = Persona_Admin.get(salePointp.persona)
+                        Persona_Admin.get(salePointp.persona)
                             .then(function (personaSuccess) {
                                 vm.assignedPerson = personaSuccess;
                             })
@@ -96,27 +97,37 @@
         }
 
         function searchPerson() {
-            if (!vm.personList) {
-                return Persona_Admin.listPromise(1000,0)
-                    .then(function (userListSuccess) {
-                        userListSuccess = userListSuccess.results;
-                        vm.personList = userListSuccess;
-                        return searchPersonCollection();
+            return Persona_Admin.listPromise(vm.limit,0)
+                .then(function (userListSuccess) {
+                    userListSuccess = userListSuccess.results;
+                    vm.personList = userListSuccess;
+                    return searchPersonCollection();
+                })
+                .catch(function (userListError) {
+                    vm.personList = null;
+                    console.log(userListError);
+                    console.log("Error al obtener personas");
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
+        }
+
+        function preSearchPerson() {
+            if (!vm.personList && !vm.personSearchText) {
+                return Persona_Admin.listPromise(0, 0)
+                    .then(function (userList) {
+                        vm.limit = userList.count;
+                        return searchPerson();
                     })
-                    .catch(function (userListError) {
-                        vm.personList = null;
-                        console.log(userListError);
-                        console.log("Error al obtener personas");
-                        toastr.error(
-                            Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                            Translate.translate('MAIN.MSG.ERROR_TITLE')
-                        );
+                    .catch(function () {
+
                     });
             }
             else {
                 return searchPersonCollection();
             }
-
         }
 
         function searchPersonCollection() {

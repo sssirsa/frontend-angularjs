@@ -16,7 +16,8 @@
                                       SalePointRequests,
                                       Sucursal,
                                       Helper,
-                                      User) {
+                                      User,
+                                      URLS) {
 
         var vm = this;
         vm.user = User.getUser();
@@ -28,6 +29,7 @@
         vm.save = save;
         vm.loadSucursales = loadSucursales;
         vm.filesSelected = filesSelected;
+        vm.onSelectedSucursal = onSelectedSucursal;
 
         //Variable declaration
         vm.request = {};
@@ -36,6 +38,10 @@
         vm.sucursales = null;
         vm.store = null;
         vm.equipmentKindSearchText = null;
+        vm.limitEquipo = 20;
+        vm.limitSucursales = 20;
+        vm.offsetEquipo = 0;
+        vm.offsetSucursales = 0;
 
         //Constants declaration
         vm.scores = SCORES;
@@ -45,6 +51,18 @@
                 max: '5MB',
                 min: '10B'
             }
+        };
+        vm.catalogSucursal = {
+            catalog:{
+                url: URLS.sucursal,
+                kind: 'Web',
+                name: 'Sucursal',
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'nombre'
+            },
+            elements: 'results',
+
         };
         vm.minimalHour = '09:00:00';
         vm.maximalHour = '18:00:00';
@@ -60,9 +78,9 @@
         }
 
         function loadEquipmentKinds() {
-            return TipoEquipo.listWitout()
+            return TipoEquipo.listWitout(vm.limitEquipo, vm.offsetEquipo)
                 .then(function (equipmentKindList) {
-                    vm.equipmentKinds = equipmentKindList;
+                    vm.equipmentKinds = equipmentKindList.results;
                 })
                 .catch(function (equipmentKindListError) {
                     $log.error(equipmentKindListError);
@@ -71,14 +89,19 @@
 
         function loadSucursales() {
             if (!vm.sucursales) {
-                return Sucursal.listObject()
+                return Sucursal.listObject(vm.limitSucursales, vm.limitSucursales)
                     .then(function (sucursalList) {
-                        vm.sucursales = Helper.filterDeleted(sucursalList, true);
+                        vm.sucursales = Helper.filterDeleted(sucursalList.results, true);
                     })
                     .catch(function (sucursalListError) {
                         $log.error(sucursalListError);
                     });
             }
+        }
+
+        function onSelectedSucursal(element) {
+            vm.request.sucursal = element;
+            console.log(vm.request.sucursal);
         }
 
         function storeSelected(store) {
@@ -104,7 +127,7 @@
 
         function searchEquipmentKind() {
             if (!vm.equipmentKinds) {
-                return TipoEquipo.list()
+                return TipoEquipo.listWitout()
                     .then(function (userListSuccess) {
                         vm.equipmentKinds = Helper.filterDeleted(userListSuccess, true);
                         return searchEquipmentKindCollection();

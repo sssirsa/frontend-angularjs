@@ -25,9 +25,15 @@
         function getByID(id) {
             return urlbase.all(id).customGET();
         }
-        function list(limit, offset){
+        function list(limit, offset, querySet){
             if(limit !== undefined && offset !== undefined){
-                return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
+                if (querySet === undefined) {
+                    return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
+                }
+                else {
+                    return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
+                }
+
             }
             else {
                 return urlbase.customGET();
