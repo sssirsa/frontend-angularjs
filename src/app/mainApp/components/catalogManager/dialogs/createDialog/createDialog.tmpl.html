@@ -22,8 +22,9 @@
                  ng-repeat="field in vm.fields">
                 <section ng-if="field['type']!=='fileUploader'
                          && field['type']!=='catalog'
-                         && field['type']!=='options'">
-                    <md-input-container class="md-block">
+                         && field['type']!=='options'
+                         && field['type']!=='color'">
+                    <md-input-container layout="column" class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
@@ -38,6 +39,31 @@
                         <div ng-messages="createForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
+                        </div>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
+                    </md-input-container>
+                </section>
+                <section ng-if="field['type']==='color'">
+                    <md-input-container class="md-block">
+                        <!--Field label selection depending on the parameters given-->
+                        <label ng-if="field['label']">{{field['label']}}</label>
+                        <label ng-if="!field['label']">{{field['model']}}</label>
+                        <input ng-required="field.required"
+                               aria-label="{{field['model']}}"
+                               type="color"
+                               name="{{field.model}}"
+                               ng-model="vm.objectToCreate[field.model]"
+                               value="{{vm.objectToCreate[field.model]}}" />
+                        <div ng-messages="createForm[field.model].$error">
+                            <div ng-message="required">{{field.validations.errors.required}}</div>
+                            <div ng-message="pattern">{{field.validations.errors.regex}}</div>
+                        </div>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
                         </div>
                     </md-input-container>
                 </section>
@@ -73,24 +99,38 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    <div ng-if="field.hint"
+                         class="create-field-hint">
+                        {{field.hint}}
+                    </div>
                 </section>
                 <section ng-if="field['type']==='catalog'">
                     <section ng-if="field['catalog'].requires">
                         <catalog-select ng-if="$ctrl.objectToCreate[field['catalog'].requires]"
+                                        required="field.required"
                                         catalog="field.catalog"
-                                        pagination="field.pagination"
-                                        elements="field.elements"
+                                        pagination="field['catalog'].pagination"
+                                        elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
                     </section>
                     <section ng-if="!field['catalog'].requires">
                         <catalog-select catalog="field.catalog"
-                                        pagination="field.pagination"
-                                        elements="field.elements"
+                                        required="field.required"
+                                        pagination="field['catalog'].pagination"
+                                        elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
                     </section>
                 </section>
             </div>
