@@ -56,7 +56,7 @@
                         required: false
                     },
                     {
-                        type: 'tel',
+                        type: 'array',
                         model: 'telefonos',
                         label: 'Telefonos',
                         required: false,
