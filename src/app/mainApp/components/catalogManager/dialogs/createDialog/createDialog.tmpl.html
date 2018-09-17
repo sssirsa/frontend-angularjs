@@ -23,7 +23,8 @@
                 <section ng-if="field['type']!=='fileUploader'
                          && field['type']!=='catalog'
                          && field['type']!=='options'
-                         && field['type']!=='color'">
+                         && field['type']!=='color'
+                         && field['type']!=='array'">
                     <md-input-container layout="column" class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
@@ -132,6 +133,30 @@
                             {{field.hint}}
                         </div>
                     </section>
+                </section>
+                <section ng-if="field['type']==='array'">
+                    <md-input-container layout="column" class="md-block">
+                        <!--Field label selection depending on the parameters given-->
+                        <label ng-if="field['label']">{{field['label']}}</label>
+                        <label ng-if="!field['label']">{{field['model']}}</label>
+                        <md-chips id="{{field['model']}}"
+                                  ng-model="vm.objectToCreate[field.model]"
+                                  ng-required="field.required"
+                                  delete-button-label="Remove">
+                            <input type="text"
+                                   ng-model="vm.buffer"
+                                   placeholder="+"
+                                   ng-pattern="field['validations'].regex">
+                        </md-chips>
+                        <div ng-messages="createForm[field.model].$error">
+                            <div ng-message="required">{{field.validations.errors.required}}</div>
+                            <div ng-message="pattern">{{field.validations.errors.regex}}</div>
+                        </div>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
+                    </md-input-container>
                 </section>
             </div>
         </form>

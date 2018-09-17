@@ -24,7 +24,7 @@
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
                 onErrorDelete: '&',
-                onsuccessearch: '&',
+                onSuccessSearch: '&',
                 onErrorSearch: '&',
                 onElementSelect: '&',
 
@@ -239,7 +239,8 @@
     function CatalogManagerController(
         CATALOG,
         $window,
-        $mdDialog
+        $mdDialog,
+        ErrorHandler
     ) {
         var vm = this;
 
@@ -333,14 +334,18 @@
                     }
                 }).then(function () {
                     activate();
+                    ErrorHandler.successCreation();
                     vm.onSuccessCreate();
                 }).catch(function (errorCreate) {
                     if (errorCreate) {
+                        ErrorHandler.errorTranslate(errorCreate);
                         vm.onErrorCreate(errorCreate);
                     }
+                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
+                ErrorHandler.errorTranslate({status:-1});
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
@@ -363,14 +368,18 @@
                     }
                 }).then(function () {
                     activate();
+                    ErrorHandler.successDelete();
                     vm.onSuccessDelete();
                 }).catch(function (errorDelete) {
                     if (errorDelete) {
+                        ErrorHandler.errorTranslate(errorDelete);
                         vm.onErrorDelete(errorDelete);
                     }
+                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
+                ErrorHandler.errorTranslate({ status: -1 });
                 vm.onErrorDelete({ error: '"actions" parameter does not have the DELETE element defined' });
             }
         }
@@ -391,6 +400,7 @@
             }
             else {
                 vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });
+                ErrorHandler.errorTranslate({ status: -1 });
             }
         }
 
@@ -414,14 +424,17 @@
                     treatResponse(successCallback.response);
                     vm.filterApplied = successCallback.filter;
                     console.debug(vm.filterApplied);
-                    vm.onsuccessearch({ elements: vm.catalogElements });
+                    vm.onSuccessSearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
                         vm.onErrorSearch(errorSearch);
+                        ErrorHandler.errorTranslate(errorSearch);
                     }
+                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
+                ErrorHandler.errorTranslate({ status: -1 });
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
@@ -489,6 +502,7 @@
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
+                        ErrorHandler.errorTranslate(errorElements);
                         vm.onErrorList({ error: errorElements });
                     });
             }

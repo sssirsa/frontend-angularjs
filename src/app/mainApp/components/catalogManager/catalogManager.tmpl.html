@@ -146,6 +146,21 @@
                                     <md-icon md-font-icon="fa fa-download"></md-icon>
                                 </md-button>
                             </section>
+                            <!--Just show this section when the field is an array of strings-->
+                            <section ng-if="field.type==='array'">
+                                <!-- Label of the field -->
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <!-- Value of the field -->
+                                <md-chips ng-model="element[field.model]"
+                                          readonly="true">
+                            </section>
                         </div>
                     </div>
                     <!-- Action buttons bar -->
@@ -319,6 +334,21 @@
                                            class="md-primary md-raised">
                                     <md-icon md-font-icon="fa fa-download"></md-icon>
                                 </md-button>
+                            </section>
+                            <!--Just show this section when the field is an array of strings-->
+                            <section ng-if="field.type==='array'">
+                                <!-- Label of the field -->
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <!-- Value of the field -->
+                                <md-chips ng-model="element[field.model]"
+                                          readonly="true">
                             </section>
                         </div>
                     </div>

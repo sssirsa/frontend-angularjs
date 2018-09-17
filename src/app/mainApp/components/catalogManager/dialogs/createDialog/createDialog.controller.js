@@ -105,6 +105,16 @@
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
 
+        activate();
+
+        function activate() {
+            angular.forEach(vm.fields, function (field) {
+                if (field.type === 'array') {
+                    vm.objectToCreate[field.model] = [];
+                }
+            });
+        }
+
         function create(objectToCreate) {
             vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
