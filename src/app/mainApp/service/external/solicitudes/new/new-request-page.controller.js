@@ -101,12 +101,10 @@
 
         function onSelectedSucursal(element) {
             vm.request.sucursal = element;
-            console.log(vm.request.sucursal);
         }
 
         function storeSelected(store) {
             vm.store = store;
-            console.debug(store);
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }

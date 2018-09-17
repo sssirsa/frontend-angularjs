@@ -18,8 +18,13 @@
             create:create,
             remove:remove
         };
-        function listObject() {
-            return baseProveedor.getList();
+        function listObject(limit, offset) {
+            if (limit !== undefined && offset !== undefined) {
+                return WebRestangular.all(URLS.proveedor+'?limit='+limit+'&offset='+offset).customGET();
+            }
+            else {
+                return baseProveedor.getList();
+            }
         }
 
         function list(){

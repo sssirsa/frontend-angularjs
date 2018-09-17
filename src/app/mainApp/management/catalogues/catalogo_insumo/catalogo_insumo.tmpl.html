@@ -125,6 +125,26 @@
                             </md-button>
                         </div>
                     </div>
+
+                    <!--<div class="md-block">-->
+                        <!--<catalog-select catalog="vm.catalogCategoria.catalog"-->
+                                        <!--elements="vm.catalogCategoria.elements"-->
+                                        <!--on-select="vm.onSelectedSucursal(element)">-->
+                        <!--</catalog-select>-->
+                    <!--</div>-->
+                    <!--<div class="md-block">-->
+                        <!--<catalog-select catalog="vm.catalogProveedor.catalog"-->
+                                        <!--elements="vm.catalogProveedor.elements"-->
+                                        <!--on-select="vm.onSelectedSucursal(element)">-->
+                        <!--</catalog-select>-->
+                    <!--</div>-->
+                    <!--<div class="md-block">-->
+                        <!--<catalog-select catalog="vm.catalogSucursal.catalog"-->
+                                        <!--elements="vm.catalogSucursal.elements"-->
+                                        <!--on-select="vm.onSelectedSucursal(element)">-->
+                        <!--</catalog-select>-->
+                    <!--</div>-->
+
                     <md-input-container class="md-block">
                         <label>{{ 'Consumable_Catalog.category' | translate }}</label>
                         <md-select ng-model="vm.catalogo_insumo.categoria" ng-required="true" ng-disabled="vm.disabled(vm.catalogo_insumo.categoria,'categoria',vm.catalogo_insumo.deleted)">
