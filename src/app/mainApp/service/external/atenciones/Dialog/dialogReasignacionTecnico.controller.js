@@ -174,7 +174,7 @@
                     $mdDialog.hide();
                 })
                 .catch(function (error) {
-                    ErrorHandler.errortranslate(error);
+                    ErrorHandler.errorTranslate(error);
                     //   console.log(error);
                     //   if(error.status == 500) {
                     //      toastr.error(

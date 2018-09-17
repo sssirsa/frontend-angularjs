@@ -18,8 +18,14 @@
             create:create,
             remove:remove
         };
-        function listObject() {
-            return baseCategoria.getList();
+        function listObject(limit, offset) {
+            if (limit !== undefined && offset !== undefined) {
+                return WebRestangular.all(URLS.categoria+'?limit='+limit+'&offset='+offset).customGET();
+            }
+            else {
+                return baseCategoria.getList();
+            }
+
         }
 
         function list(){

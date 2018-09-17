@@ -513,7 +513,7 @@
                 ErrorHandler.successCreation();
             }).catch(function (err) {
                 if (err) {
-                    ErrorHandler.errortranslate(err);
+                    ErrorHandler.errorTranslate(err);
                 }
             });
         }
@@ -636,7 +636,7 @@
                 ErrorHandler.successCreation();
             }).catch(function (err) {
                 if (err) {
-                    ErrorHandler.errortranslate(err);
+                    ErrorHandler.errorTranslate(err);
                 }
             });
         }
@@ -714,7 +714,7 @@
                 addCabinet();
             }).catch(function (err) {
                 if (err) {
-                    ErrorHandler.errortranslate(err);
+                    ErrorHandler.errorTranslate(err);
                 }
             });
         }

@@ -15,7 +15,8 @@
                                       Proveedor,
                                       toastr,
                                       Translate,
-                                      $scope) {
+                                      $scope,
+                                      URLS) {
         var vm = this;
         //Variables
         vm.searchText = '';
@@ -39,6 +40,40 @@
         vm.categoria_list = null;
         vm.proveedor_list = null;
 
+        vm.catalogSucursal = {
+            catalog:{
+                url: URLS.sucursal,
+                kind: 'Web',
+                name: 'Sucursal',
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'nombre'
+            },
+            elements: 'results'
+        };
+        vm.catalogProveedor = {
+            catalog:{
+                url: URLS.proveedor,
+                kind: 'Web',
+                name: 'Proveedor',
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'razon_social'
+            },
+            elements: 'results'
+        };
+        vm.catalogCategoria = {
+            catalog:{
+                url: URLS.categoria,
+                kind: 'Web',
+                name: 'Categoria',
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'nombre'
+            },
+            elements: 'results'
+        };
+
         //Functions
         vm.lookup = lookup;
         vm.selectedItemChange = selectedItemChange;
@@ -53,6 +88,9 @@
         vm.disabled = disabled;
         vm.toggleDeletedFunction = toggleDeletedFunction;
         vm.restore = restore;
+        vm.onSelectedSucursal = onSelectedSucursal;
+        vm.onSelectedProveedor = onSelectedProveedor;
+        vm.onSelectedCategoria = onSelectedCategoria;
 
         vm.catalogo_insumo = angular.copy(catalogo_insumo);
         //vm.profile=Session.userInformation;
@@ -98,13 +136,6 @@
             unidad.listObject().then(function (res) {
                 vm.unidades = Helper.filterDeleted(res, true);
                 vm.unidades = _.sortBy(vm.unidades, 'nombre');
-            });
-        }
-
-        function listSucursales() {
-            Sucursal.listObject().then(function (res) {
-                vm.sucursal_list = Helper.filterDeleted(res, true);
-                vm.sucursal_list = _.sortBy(vm.sucursal_list, 'nombre');
             });
         }
 
@@ -204,7 +235,8 @@
 
 
         function listCategorias() {
-            Categoria.listObject().then(function (res) {
+            Categoria.listObject(100,0).then(function (res) {
+                res = res.results;
                 vm.categoria_list = res;
                 vm.categoria_list = _.sortBy(vm.categoria_list, 'descripcion');
             });
@@ -212,9 +244,18 @@
 
 
         function listProveedores() {
-            Proveedor.listObject().then(function (res) {
+            Proveedor.listObject(100,0).then(function (res) {
+                res = res.results;
                 vm.proveedor_list = res;
                 vm.proveedor_list = Helper.sortByAttribute(vm.proveedor_list, 'razon_social');
+            });
+        }
+
+        function listSucursales() {
+            Sucursal.listObject(100,0).then(function (res) {
+                res = res.results;
+                vm.sucursal_list = Helper.filterDeleted(res, true);
+                vm.sucursal_list = _.sortBy(vm.sucursal_list, 'nombre');
             });
         }
 
@@ -231,6 +272,18 @@
                 item.cantidad = parseFloat(item.cantidad);
                 vm.catalogo_insumo = item.clone();
             }
+        }
+
+        function onSelectedCategoria(element) {
+            vm.catalogo_insumo.categoria = element;
+        }
+
+        function onSelectedProveedor(element) {
+            vm.catalogo_insumo.proveedor = element;
+        }
+
+        function onSelectedSucursal(element) {
+            vm.catalogo_insumo.sucursal = element;
         }
 
         function clickRepeater(catalogo_insumo) {

@@ -106,7 +106,7 @@
                 })
                 .catch(function (err) {
                     //console.log("Error", err);
-                    ErrorHandler.errortranslate(err);
+                    ErrorHandler.errorTranslate(err);
                 });
 
         }

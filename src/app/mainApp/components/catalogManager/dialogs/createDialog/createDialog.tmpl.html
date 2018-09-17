@@ -95,8 +95,8 @@
                                    ng-required="field.required"
                                    md-on-close="vm.selectState()">
                             <md-option ng-repeat="option in field.options.elements"
-                                       ng-value="field.options.model">
-                                {{field.options.option}}
+                                       ng-value="option[field.options.model]">
+                                {{option[field.options.option]}}
                             </md-option>
                         </md-select>
                     </md-input-container>

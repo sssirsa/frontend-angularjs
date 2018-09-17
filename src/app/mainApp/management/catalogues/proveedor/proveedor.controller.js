@@ -6,173 +6,222 @@
         .module('app.mainApp.management.catalogues')
         .controller('ProveedorController',ProveedorController);
 
-    function ProveedorController(Proveedor, toastr, Translate, $scope, Helper, $mdDialog)
+    function ProveedorController(URLS, Translate)
     {
+
         var vm = this;
 
-        //Variables
-        vm.searchText = '';
-        vm.search_items = [];
-        vm.proveedor_list = null;
-        vm.proveedor = null;
+        vm.url = URLS.proveedor;
+        vm.kind = 'Web';
+        vm.name = Translate.translate('Provider.title');
 
-        vm.toggleDeleted = true;
+        //Labels
+        vm.totalText = 'Total de elementos';
+        vm.totalFilteredText = 'Elementos encontrados';
+
+        //Button labels
+        vm.searchButtonText = 'Buscar Proveedor';
+        vm.createButtonText = 'Crear Proveedor';
+        vm.deleteButtonText = 'Borrar Proveedor';
+        vm.modifyButtonText = 'Editar Proveedor';
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = 'Cargar mas Proveedores';
+        vm.removeFilterButtonText = 'Qutar filtro';
+
+        //Messages
+        vm.loadingMessage = 'Cargando Proveedores';
 
         //Functions
-        vm.lookup = lookup;
-        vm.selectedItemChange = selectedItemChange;
-        vm.cancel = cancel;
-        vm.update = update;
-        vm.create = create;
-        vm.remove = remove;
-        vm.restore = restore;
-        vm.toggleDeletedFunction = toggleDeletedFunction;
-        vm.clickRepeater = clickRepeater;
+        vm.onElementSelect = onElementSelect;
 
-        activate();
-
-
-        function activate(){
-
-            vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-            vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-            vm.successCreateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE');
-            vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.successUpdateMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_UPDATE');
-            vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-            vm.successRestoreMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_RESTORE');
-            vm.deleteButton=Translate.translate('MAIN.BUTTONS.DELETE');
-            vm.restoreButton=Translate.translate('MAIN.BUTTONS.RESTORE');
-            vm.cancelButton=Translate.translate('MAIN.BUTTONS.CANCEL');
-            vm.dialogTitle=Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage=Translate.translate('MAIN.DIALOG.DELETE_MESSAGE');
-            vm.dialogRestoreTitle=Translate.translate('MAIN.DIALOG.RESTORE_TITLE');
-            vm.dialogRestoreMessage=Translate.translate('MAIN.DIALOG.RESTORE_MESSAGE');
-            vm.duplicateMessage=Translate.translate('Provider.duplicate');
-            listProveedores();
-        }
-
-        function listProveedores()
-        {
-            vm.loadingPromise = Proveedor.listObject().then(function(res){
-                vm.proveedor_list = Helper.filterDeleted(res, vm.toggleDeleted);
-                vm.proveedor_list = Helper.sortByAttribute(vm.proveedor_list, 'razon_social');
-            }).catch(function(err){
-
-            });
-        }
-
-        function toggleDeletedFunction() {
-            listProveedores();
-            cancel();
-        }
-
-        function lookup(search_text){
-            vm.search_items = _.filter(vm.proveedor_list,function(item){
-                return item.razon_social.toLowerCase().includes(search_text.toLowerCase());
-            });
-            return vm.search_items;
-        }
-
-        function selectedItemChange(item)
-        {
-            vm.selected_proveedor = item.clone();
-
-        }
-
-        function clickRepeater(item){
-            vm.proveedor = item.clone();
-            vm.selected_proveedor = vm.proveedor;
-        }
-
-        function  cancel(){
-            $scope.inputForm.$setPristine();
-            $scope.inputForm.$setUntouched();
-
-            vm.proveedor = null;
-            vm.selected_proveedor = null;
-        }
-
-        function update(){
-            Proveedor.update(vm.selected_proveedor).then(function(res){
-                toastr.success(vm.successUpdateMessage,vm.successTitle);
-                listProveedores();
-            }).catch(function(err){
-                if(err.status==400 && err.data.razon_social != undefined)
-                {
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-                }else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
+        //Actions meta
+        vm.actions = {
+            POST: {
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'razon_social',
+                        label: 'Razon social',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Direccion',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'rfc',
+                        label: 'RFC',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono',
+                        required: true,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'contacto',
+                        label: 'Contacto',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'email',
+                        model: 'correo_electronico',
+                        label: 'Correo electronico',
+                        required: true,
+                        validations:{
+                            regex: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$',
+                            errors:{
+                                regex: 'El correo no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'comentarios',
+                        label: 'Comentarios',
+                        required: true,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
+                dialog: {
+                    title: 'Crear Proveedor',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando Proveedor'
                 }
-            });
-        }
-
-        function create()
-        {
-            vm.selected_proveedor.razon_social = vm.selected_proveedor.razon_social.toUpperCase();
-            Proveedor.create(vm.selected_proveedor).then(function(res){
-                listProveedores();
-                toastr.success(vm.successCreateMessage,vm.successTitle);
-            }).catch(function(err){
-                if(err.status==400 && err.data.razon_social != undefined)
-                {
-                    toastr.error(vm.duplicateMessage,vm.errorTitle);
-
+            },
+            PUT: {
+                fields: [],
+                dialog: {
+                    title: 'Editar Proveedor',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Guardando Proveedor'
                 }
-                else{
-                    toastr.error(vm.errorMessage,vm.errorTitle);
+            },
+            DELETE: {
+                id: 'id',
+                dialog: {
+                    title: 'Eliminar Proveedor',
+                    message: 'Confirme la eliminación de Proveedor',
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Eliminando Proveedor'
                 }
+            },
+            LIST: {
+                elements: 'results',
+                mode: 'infinite',
+                pagination: {
+                    total: 'count'
+                },
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'razon_social',
+                        label: 'Razon social'
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Direccion'
+                    },
+                    {
+                        type: 'text',
+                        model: 'rfc',
+                        label: 'RFC'
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono'
+                    },
+                    {
+                        type: 'text',
+                        model: 'contacto',
+                        label: 'Contacto'
+                    },
+                    {
+                        type: 'email',
+                        model: 'correo_electronico',
+                        label: 'Correo electronico'
+                    },
+                    {
+                        type: 'text',
+                        model: 'comentarios',
+                        label: 'Comentarios'
+                    }
+                ],
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            SEARCH: {
+                dialog: {
+                    title: 'Busqueda de Proveedor',
+                    searchButton: 'Buscar',
+                    loadingText: 'Buscando Proveedor'
+                },
+                filters: [
+                    {
+                        type: 'istartswith',
+                        model: 'nombre',
+                        header: 'por Nombre',
+                        label: 'Nombre',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
+            }
+        };
 
-            });
+        function onElementSelect(element) {
+            //Here goes the handling for element selection, such as detail page navigation
+            console.debug('Element selected');
+            console.debug(element);
+            console.log(element);
         }
-
-        function remove()
-        {
-
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                Proveedor.remove(vm.selected_proveedor).then(function(res){
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function() {
-
-            });
-
-        }
-
-        function restore() {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogRestoreTitle)
-                .textContent(vm.dialogRestoreMessage)
-                .ariaLabel('Confirmar restauración')
-                .ok(vm.restoreButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                vm.selected_proveedor.deleted=false;
-                Proveedor.update(vm.selected_proveedor).then(function (res) {
-                    toastr.success(vm.successRestoreMessage, vm.successTitle);
-                    cancel();
-                    activate();
-                }).catch(function (res) {
-                    vm.selected_proveedor.deleted=true;
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function() {
-
-            });
-
-        }
-
-
     }
 
 })();

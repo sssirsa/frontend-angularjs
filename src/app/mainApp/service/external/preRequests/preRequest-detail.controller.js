@@ -81,7 +81,7 @@
             }).catch(function (err) {
                 console.log(err);
                 vm.showCabinet = false;
-                ErrorHandler.errortranslate(err);
+                ErrorHandler.errorTranslate(err);
 
             });
 
@@ -119,7 +119,7 @@
 
             }).catch(function (err) {
                 //toastr.warning(vm.unexpected, vm.errorTitle);
-                ErrorHandler.errortranslate(err);
+                ErrorHandler.errorTranslate(err);
                 console.log(err);
             });
 
@@ -138,7 +138,7 @@
                 $state.go('triangular.admin-default.preRequest');
 
             }).catch(function (err) {
-                ErrorHandler.errortranslate(err);
+                ErrorHandler.errorTranslate(err);
 
             });
 
