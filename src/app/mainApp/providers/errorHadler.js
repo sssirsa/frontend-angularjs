@@ -12,7 +12,7 @@
             successDelete: successDelete,
             successUpload: successUpload,
             successCancel: successCancel,
-            errortranslate: errortranslate
+            errorTranslate: errorTranslate
         };
 
 
@@ -48,7 +48,7 @@
             toastr.success(translatemsg, successTitle);
         }
 
-        function errortranslate(response) {
+        function errorTranslate(response) {
             $log.error(response);
             var errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
             var unexpectederror = Translate.translate('ERRORS.UNEXPECTED');

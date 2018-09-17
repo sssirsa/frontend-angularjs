@@ -84,7 +84,7 @@
                         listSalePoints();
                     })
                     .catch(function (resultError) {
-                        ErrorHandler.errortranslate(resultError);
+                        ErrorHandler.errorTranslate(resultError);
                     });
             }, function () {
 

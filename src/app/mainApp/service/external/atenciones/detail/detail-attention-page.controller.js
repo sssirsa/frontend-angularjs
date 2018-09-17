@@ -176,7 +176,7 @@
                         });
                     })
                     .catch(function (errorRespuesta) {
-                        ErrorHandler.errortranslate(errorRespuesta);
+                        ErrorHandler.errorTranslate(errorRespuesta);
                     });
             }
         }
@@ -318,7 +318,7 @@
                         $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
                     .catch(function (resultError) {
-                        ErrorHandler.errortranslate(resultError);
+                        ErrorHandler.errorTranslate(resultError);
                     });
             }, function () {
 
@@ -427,7 +427,7 @@
                 })
                 .catch(function (err) {
 
-                    ErrorHandler.errortranslate(err);
+                    ErrorHandler.errorTranslate(err);
                 });
         }
 

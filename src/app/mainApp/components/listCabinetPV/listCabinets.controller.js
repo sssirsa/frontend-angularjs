@@ -75,7 +75,7 @@
                         info(respuesta);
                     })
                     .catch(function (error) {
-                        ErrorHandler.errortranslate(error);
+                        ErrorHandler.errorTranslate(error);
                     });
             }
             else {

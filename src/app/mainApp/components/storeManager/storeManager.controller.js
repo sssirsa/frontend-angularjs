@@ -130,7 +130,7 @@
                             toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.DELETE_SUCCESS'));
                         })
                         .catch(function (errorDeleteStore) {
-                            ErrorHandler.errortranslate(errorDeleteStore);
+                            ErrorHandler.errorTranslate(errorDeleteStore);
                         });
                 });
 
@@ -166,7 +166,7 @@
                     vm.urlPDF = pdfFile;
                 })
                 .catch(function (pdfFileError) {
-                    ErrorHandler.errortranslate(pdfFileError);
+                    ErrorHandler.errorTranslate(pdfFileError);
                 })
         }
 
@@ -177,7 +177,7 @@
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
                 .catch(function (errorSegmentations) {
-                    ErrorHandler.errortranslate(errorSegmentations);
+                    ErrorHandler.errorTranslate(errorSegmentations);
                 });
         }
 
