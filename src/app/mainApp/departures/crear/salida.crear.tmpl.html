@@ -33,39 +33,7 @@
                                                     elements="vm.catalogues['udn'].elements"
                                                     soft-delete="vm.catalogues['udn'].softDelete"
                                                     on-select="vm.onElementSelect(element,'udn')">
-                                    </catalog-select>
-                                    <!--<div flex="100" class="md-inline-form">
-                                        <md-autocomplete md-selected-item="vm.salida.udn"
-                                                         md-selected-item-change="vm.selectedItemChange(vm.salida.udn)"
-                                                         md-items="item in vm.search_items"
-                                                         md-item-text="item.agencia"
-                                                         md-min-length="0"
-                                                         md-input-name="selectUDN"
-                                                         md-search-text-change="vm.lookupUDN(vm.searchText)"
-                                                         required
-                                                         md-input-id="udn"
-                                                         md-search-text="vm.searchText"
-                                                         md-menu-class="autocomplete-custom-template"
-                                                         md-require-match="true"
-                                                         md-floating-label="{{'OUTPUT.FORM.LABEL.UDN'| translate}}">
-                                            <md-item-template>
-                                                <span class="item-title">
-                                                    <md-icon md-font-icon="zmdi zmdi-truck"></md-icon><span>
-                                                        {{item.zona}} -
-                                                        {{item.agencia}}
-                                                    </span>
-                                                </span>
-                                            </md-item-template>
-                                            <div ng-messages="entradaForm.selectUDN.$error" ng-if="entradaForm.selectUDN.$touched">
-                                                <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
-                                                <div class="validate" ng-show="!vm.isValid" ng-class="{'slide':vm.isValid==false}">
-                                                    <span>{{'OUTPUT.FORM.LABEL.VALID_UDN'| translate}}</span>
-                                                </div>
-                                            </div>
-                                        </md-autocomplete>
-
-                                    </div>-->
-
+                                    </catalog-select> 
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                      layout-align-sm="center stretch" layout-align-xs="center stretch">
@@ -77,18 +45,6 @@
                                                     soft-delete="vm.catalogues['sucursal'].softDelete"
                                                     on-select="vm.onElementSelect(element,'sucursal')">
                                     </catalog-select>
-
-                                    <!--<md-input-container flex="100" class="md-block">
-                                        <label>{{'OUTPUT.FORM.LABEL.SUBSIDIARY'|translate}}</label>
-                                        <md-select name="selectSubsidiary" ng-model="vm.salida.sucursal" required=""
-                                                   ng-disabled="vm.sucursal!=null"
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="sucursal in vm.Sucursales" ng-value="sucursal.id">
-                                                {{sucursal.nombre}}            </md-option>        </md-select>
-                                        <div ng-messages="entradaForm.selectSubsidiary.$error">
-                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
                                     <catalog-select class="full-width"
                                                     catalog="vm.catalogues['linea_transporte'].catalog"
                                                     pagination="vm.catalogues['linea_transporte'].pagination"
@@ -96,19 +52,6 @@
                                                     soft-delete="vm.catalogues['linea_transporte'].softDelete"
                                                     on-select="vm.onElementSelect(element,'linea_transporte')">
                                     </catalog-select>
-
-                                    <!--<md-input-container flex="100" class="md-inline-form">
-                                        <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.LINE'|translate}}</label>
-                                        <md-select name="selectTransportLine" ng-model="vm.salida.linea_transporte"
-                                                   required="" md-no-asterisk="">
-                                            <md-option ng-repeat="linea in vm.lineasTransporte" ng-value="linea.id">
-                                                {{linea.razon_social}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectTransportLine.$error">
-                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
 
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
@@ -121,19 +64,6 @@
                                                     soft-delete="vm.catalogues['tipo_transporte'].softDelete"
                                                     on-select="vm.onElementSelect(element,'tipo_transporte')">
                                     </catalog-select>
-
-                                    <!--<md-input-container flex="50" class="md-inline-form">
-                                        <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.KIND'|translate}}</label>
-                                        <md-select name="selectTransportKind" ng-model="vm.salida.tipo_transporte"
-                                                   required="" md-no-asterisk="">
-                                            <md-option ng-repeat="tipo in vm.tiposTransporte" ng-value="tipo.id">
-                                                {{tipo.descripcion}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="entradaForm.selectTransportKind.$error">
-                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}</div>
-                                        </div>
-                                    </md-input-container>-->
 
                                     <md-input-container class="md-block full-width">
                                         <label>{{'OUTPUT.FORM.LABEL.CLIENT'|translate}}</label>
@@ -291,17 +221,11 @@
                                         <label>{{'OUTPUT.FORM.PLACEHOLDER.SEARCH'|translate}}</label>
                                         <input type="text"
                                                ng-model="vm.economicoFilter"
+                                               ng-disabled="vm.disabledSearch"
                                                ng-change="vm.lookupByEconomico()" />
                                     </md-input-container>
 
-                                    <catalog-select class="full-width"
-                                                    catalog="vm.catalogues['tipo_equipo'].catalog"
-                                                    pagination="vm.catalogues['tipo_equipo'].pagination"
-                                                    elements="vm.catalogues['tipo_equipo'].elements"
-                                                    soft-delete="vm.catalogues['tipo_equipo'].softDelete"
-                                                    on-select="vm.onEquipmentKindSelect(element)">
-                                    </catalog-select>
-                                    <!--<md-input-container class="md-inline-form md-block" id="salidaSelect" flex="50" flex-sm="100"
+                                     <md-input-container class="md-inline-form md-block" id="salidaSelect" flex="50" flex-sm="100"
                                                         flex-xs="100">
                                         <md-select ng-model="vm.filtroTipo"
                                                    placeholder="{{'OUTPUT.FORM.PLACEHOLDER.TYPE_EQUIPMENT'|translate}}">
@@ -310,7 +234,7 @@
                                                 {{tipo.nombre}}
                                             </md-option>
                                         </md-select>
-                                    </md-input-container>-->
+                                    </md-input-container>
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-md="column" flex="100"
                                      layout-align="center center">
