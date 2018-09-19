@@ -421,10 +421,10 @@
             vm.salida.no_creados = null;
             vm.salida.creados = null;
             vm.selectedCabinets = [];
+            vm.selectedEntrada = undefined;
             vm.hideMassiveUpload = true;
             vm.hideManualUpload = true;
             vm.searchText = null;
-            vm.selectedEntrada = 0;
             vm.outputWasCorrect = false;
 
         }
