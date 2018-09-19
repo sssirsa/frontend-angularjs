@@ -9,7 +9,7 @@
         .controller('salidaListadoController', salidaListadoController)
         .filter('moment', momentFecha) ;
 
-    function salidaListadoController($http,CabinetEntradaSalida, EntradaSalida,$mdDialog,Sucursal, udn, Helper, toastr, Translate,TipoTransporte, LineaTransporte) {
+    function salidaListadoController($http,CabinetEntradaSalida, EntradaSalida,$mdDialog, Helper, toastr, Translate) {
         var vm = this;
         vm.selectedSalida = selectedSalida;
         vm.generarRemision = generarRemision;
@@ -37,35 +37,7 @@
             vm.dialogTitle=Translate.translate('MAIN.DIALOG.DELETE_TITLE');
             vm.dialogMessage=Translate.translate('MAIN.DIALOG.DELETE_MESSAGE_CABINETS');
             vm.successDelete=Translate.translate('OUTPUT_LIST.FORM.DIALOG.DELETED_CABIENTS');
-
             getOutput();
-            LineaTransporte.listObject().then(function (res) {
-                vm.lineasTransporte = Helper.filterDeleted(res, true);
-                vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-            });
-            TipoTransporte.listObject().then(function (res) {
-                vm.tiposTransporte = Helper.filterDeleted(res, true);
-                vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-            });
-            Sucursal.listObject().then(function (res) {
-                vm.Sucursales = Helper.filterDeleted(res, true);
-                vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-            });
-
-            udn.listObject().then(function (res) {
-                vm.udns = Helper.filterDeleted(res, true);
-                vm.udns = _.sortBy(vm.udns, 'agencia');
-            }).catch(function(err){
-                toastr.error(vm.errorMessage,vm.errorTitle);
-            });
-
-
         }
         function remove(ev) {
             var confirm = $mdDialog.confirm()
