@@ -325,10 +325,7 @@
         function searchCabinet() {
             Cabinet.get(vm.cabinet).then(function (res) {
                 if (!res.deleted) {
-                    ModeloCabinet.get(res.modelo).then(function (res) {
-
-
-                        vm.cabinets = res;
+                        vm.cabinets = res.modelo;
                         CabinetEntradaSalida.getLastEntradaByCabinet(vm.cabinet).then(function (res) {
                             vm.statusReady = 1;
                             vm.diagnostico.cabinet_entrada_salida = res.id;
@@ -337,17 +334,8 @@
                                 vm.statusReady = 0;//NO listo
                                 toastr.info(vm.notFoundInput, vm.errorTitle);
                             }
-                        });
-                        MarcaCabinet.get(vm.cabinets.marca).then(function (res) {
-                            vm.marca = res.descripcion;
-                        }).catch(function (res) {
-                            notifyError(res.status);
-                        })
-
-
-                    }).catch(function (res) {
-                        notifyError(res.status);
-                    });
+                            });
+                    vm.marca = res.marca;
                 } else {
                     toastr.warning(vm.errorDisabled, vm.errorTitle);
                 }
