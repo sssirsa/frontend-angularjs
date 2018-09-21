@@ -32,24 +32,42 @@
                                     <div layout-gt-md="row" layout="column" layout-align-gt-md="center center"
                                          layout-align="center stretch">
                                         <catalog-select class="full-width"
+                                                        name="udn"
+                                                        required=""
                                                         catalog="vm.catalogues['udn'].catalog"
                                                         pagination="vm.catalogues['udn'].pagination"
                                                         elements="vm.catalogues['udn'].elements"
                                                         soft-delete="vm.catalogues['udn'].softDelete"
                                                         on-select="vm.onElementSelect(element,'udn')">
                                         </catalog-select>
+
+                                        <div ng-messages="entradaForm.udn.$error">
+                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                          layout-align-sm="center stretch" layout-align-xs="center stretch">
 
                                         <catalog-select class="full-width"
+
+                                                        name="sucursal"
+                                                        required=""
                                                         catalog="vm.catalogues['sucursal'].catalog"
                                                         pagination="vm.catalogues['sucursal'].pagination"
                                                         elements="vm.catalogues['sucursal'].elements"
                                                         soft-delete="vm.catalogues['sucursal'].softDelete"
                                                         on-select="vm.onElementSelect(element,'sucursal')">
                                         </catalog-select>
+
+                                        <div ng-messages="entradaForm.sucursal.$error">
+                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}
+                                            </div>
+                                        </div>
                                         <catalog-select class="full-width"
+
+                                                        name="transport"
+                                                        required=""
                                                         catalog="vm.catalogues['linea_transporte'].catalog"
                                                         pagination="vm.catalogues['linea_transporte'].pagination"
                                                         elements="vm.catalogues['linea_transporte'].elements"
@@ -57,17 +75,28 @@
                                                         on-select="vm.onElementSelect(element,'linea_transporte')">
                                         </catalog-select>
 
+                                        <div ng-messages="entradaForm.transport.$error">
+                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                          layout-align-sm="center stretch" layout-align-xs="center stretch">
 
                                         <catalog-select class="full-width"
+                                                        name="transportKind"
+                                                        required="true"
                                                         catalog="vm.catalogues['tipo_transporte'].catalog"
                                                         pagination="vm.catalogues['tipo_transporte'].pagination"
                                                         elements="vm.catalogues['tipo_transporte'].elements"
                                                         soft-delete="vm.catalogues['tipo_transporte'].softDelete"
                                                         on-select="vm.onElementSelect(element,'tipo_transporte')">
                                         </catalog-select>
+                                        <div ng-messages="entradaForm.transportKind.$error">
+                                            <div ng-message="required">{{'MAIN.GENERAL.REQUIRED_FIELD'|translate}}
+                                            </div>
+                                        </div>
 
                                         <md-input-container class="md-block full-width">
                                             <label>{{'OUTPUT.FORM.LABEL.CLIENT'|translate}}</label>
@@ -86,7 +115,6 @@
                                     <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                          layout-align-sm="center stretch" layout-align-xs="center stretch">
                                         <md-input-container flex="100" flex-sm="100" flex-xs="100" class="md-block">
-                                            <T.
                                             <label>{{'OUTPUT.FORM.LABEL.DRIVER.NAME'|translate}}</label>
                                             <input name="DriverName" md-no-asterisk="" required="" type="text"
                                                    only-text=""
@@ -121,7 +149,7 @@
                                 </div>
                             </form>
                             <div layout="row" layout-align="end center">
-                                <md-button ng-click="vm.nextTab()" ng-disabled="entradaForm.$invalid || !vm.isValid"
+                                <md-button ng-click="vm.nextTab()" ng-disabled="entradaForm.$invalid"
                                            class="md-raised md-primary">
                                     {{'OUTPUT.FORM.BUTTON.NEXT'|translate}}
                                 </md-button>
