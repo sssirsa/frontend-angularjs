@@ -341,7 +341,6 @@
                         ErrorHandler.errorTranslate(errorCreate);
                         vm.onErrorCreate(errorCreate);
                     }
-                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
@@ -375,7 +374,6 @@
                         ErrorHandler.errorTranslate(errorDelete);
                         vm.onErrorDelete(errorDelete);
                     }
-                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
@@ -430,7 +428,6 @@
                         vm.onErrorSearch(errorSearch);
                         ErrorHandler.errorTranslate(errorSearch);
                     }
-                    ErrorHandler.errorTranslate({ status: -1 });
                 });
             }
             else {
