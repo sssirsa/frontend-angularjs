@@ -7,7 +7,8 @@
                     {{'OUTPUT_LIST.FORM.LABEL.TITLE'|translate}}</h2>
             </div>
             <div flex="100" layout="row" layout-align="space-around stretch" layout-xs="column" layout-sm="column"
-                 layout-fill="" ng-style='vm.myStyle' cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+                 layout-fill="" ng-style='vm.myStyle'
+                 cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                 <div layout="column" flex-lg="40" flex-gt-lg="40" flex-xl="40" flex-gt-sm="100" flex-md="100"
                      flex-sm="100" flex-gt-xs="100" flex-xs="100">
                     <md-autocomplete md-selected-item="vm.selectedSalidaItem"
@@ -32,7 +33,8 @@
 
                     <md-virtual-repeat-container class="vertical-container" flex="flex">
                         <md-list class="inbox-list">
-                            <md-list-item ng-repeat="salida in vm.salidas" class="inbox-list__email inbox-list__email--animated md-3-line md-long-text">
+                            <md-list-item ng-repeat="salida in vm.salidas"
+                                          class="inbox-list__email inbox-list__email--animated md-3-line md-long-text">
                                 <md-button ng-click="vm.selectedSalida(salida)"
                                            layout-padding layout="row"
                                            layout-align="start center"
@@ -40,7 +42,8 @@
                                     <md-icon md-svg-icon="assets/images/remission.svg" class="avatar"></md-icon>
                                     <div class="md-list-item-text" layout="column">
                                         <h3><b>{{'OUTPUT_LIST.FORM.LABEL.FOLIO'|translate}}</b> {{salida.id }}</h3>
-                                        <h4><b>{{'OUTPUT_LIST.FORM.LABEL.DATE'|translate}}</b> {{salida.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                                        <h4><b>{{'OUTPUT_LIST.FORM.LABEL.DATE'|translate}}</b> {{salida.fecha |
+                                            moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
                                     </div>
                                 </md-button>
                                 <md-divider></md-divider>
@@ -50,7 +53,8 @@
                 </div>
                 <div layout="column" flex-lg="60" flex-gt-lg="65" flex-xl="65" flex-gt-sm="100" flex-md="100"
                      flex-sm="100" flex-gt-xs="100" flex-xs="100" layout-align="start stretch">
-                    <md-tabs layout-padding="true" md-dynamic-height="100" md-border-bottom="100" md-selected="vm.selectedTab">
+                    <md-tabs layout-padding="true" md-dynamic-height="100" md-border-bottom="100"
+                             md-selected="vm.selectedTab">
                         <md-tab label={{'OUTPUT_LIST.FORM.TABS.INFO'|translate}}>
 
                             <form name="entradaForm" novalidate="">
@@ -59,48 +63,30 @@
                                      layout-align="center stretch">
                                     <md-input-container flex="50" class="md-block">
                                         <label>{{'OUTPUT.FORM.LABEL.UDN'|translate}}</label>
-                                        <md-select name="selectSubsidiary" ng-model="vm.selectedSalidaList.udn"
-                                                   disabled=""
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="udn in vm.udns" ng-value="udn.id">
-                                                {{udn.zona}} - {{udn.agencia}}
-                                            </md-option>
-                                        </md-select>
+                                        <input name="selectudn" md-no-asterisk="" type="text"
+                                               disabled
+                                               ng-model="vm.selectedSalidaList.udn_str"/>
                                     </md-input-container>
                                     <md-input-container flex="50" class="md-block">
                                         <label>{{'OUTPUT.FORM.LABEL.SUBSIDIARY'|translate}}</label>
-                                        <md-select name="selectSubsidiary" ng-model="vm.selectedSalidaList.sucursal"
-                                                   disabled=""
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="sucursal in vm.Sucursales" ng-value="sucursal.id">
-                                                {{sucursal.nombre}}
-                                            </md-option>
-                                        </md-select>
+                                        <input name="selectSubsidiary" md-no-asterisk="" type="text"
+                                               disabled
+                                               ng-model="vm.selectedSalidaList.sucursal_str"/>
                                     </md-input-container>
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
                                      layout-align-sm="center stretch" layout-align-xs="center stretch" layout-wrap>
-
-
                                     <md-input-container flex="100" class="md-inline-form">
                                         <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.LINE'|translate}}</label>
-                                        <md-select name="selectTransportLine" ng-model="vm.selectedSalidaList.linea_transporte"
-                                                   disabled=""
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="linea in vm.lineasTransporte" ng-value="linea.id">
-                                                {{linea.razon_social}}
-                                            </md-option>
-                                        </md-select>
+                                        <input name="selectTransport" md-no-asterisk="" type="text"
+                                               disabled
+                                               ng-model="vm.selectedSalidaList.linea_transporte_str"/>
                                     </md-input-container>
                                     <md-input-container flex="100" class="md-inline-form">
                                         <label>{{'OUTPUT.FORM.LABEL.TRANSPORT.KIND'|translate}}</label>
-                                        <md-select name="selectTransportKind" ng-model="vm.selectedSalidaList.tipo_transporte"
-                                                   disabled=""
-                                                   md-no-asterisk="">
-                                            <md-option ng-repeat="tipo in vm.tiposTransporte" ng-value="tipo.id">
-                                                {{tipo.descripcion}}
-                                            </md-option>
-                                        </md-select>
+                                        <input name="selectTransportKind" md-no-asterisk="" type="text"
+                                               disabled
+                                               ng-model="vm.selectedSalidaList.tipo_transporte_str"/>
                                     </md-input-container>
                                 </div>
                                 <div layout="row" layout-sm="column" layout-xs="column" layout-align="center center"
@@ -115,18 +101,16 @@
 
                                 <div flex="80" ng-if="vm.selectedSalidaList.ife_chofer!=null">
                                     <div class="md-media-md card-media"><img ngf-src="vm.selectedSalidaList.ife_chofer"
-                                                                             style="max-width:150px" class="thumb"/></div>
+                                                                             style="max-width:150px" class="thumb"/>
+                                    </div>
                                 </div>
                             </form>
                         </md-tab>
-                        <md-tab label={{'OUTPUT_LIST.FORM.TABS.CABINETS'|translate}} ng-if="vm.selectedSalidaList!=null">
+                        <md-tab label={{'OUTPUT_LIST.FORM.TABS.CABINETS'|translate}}
+                                ng-if="vm.selectedSalidaList!=null">
                             <div ng-if="vm.cabinets.length==0" layout="column" layout-align="center center">
-
                                 <md-icon md-svg-icon="assets/images/remission.svg" class="avatar-250"></md-icon>
-
                                 <h2 md-headline-1 text-center>{{'OUTPUT_LIST.FORM.LABEL.NOT_FOUND'|translate}}</h2>
-
-
                             </div>
                             <div ng-if="vm.cabinets.length>0">
                                 <div layout="row">
@@ -142,11 +126,14 @@
                                     >
                                         <div layout-padding layout="row"
                                              layout-align="start center">
-                                            <md-checkbox checklist-model="vm.selectedCabinets" aria-label="Seleccionar cabinets" checklist-value="cabinet.id"></md-checkbox>
+                                            <md-checkbox checklist-model="vm.selectedCabinets"
+                                                         aria-label="Seleccionar cabinets"
+                                                         checklist-value="cabinet.id"></md-checkbox>
                                             <md-icon md-svg-icon="assets/images/cabinet.svg"
                                                      class="md-avatar" hide-sm="" hide-xs=""></md-icon>
                                             <div class="md-list-item-text" layout="column">
-                                                <h4><b hide-sm="" hide-xs="">{{'OUTPUT.FORM.LABEL.ECONOMIC'|translate}}</b>
+                                                <h4><b hide-sm=""
+                                                       hide-xs="">{{'OUTPUT.FORM.LABEL.ECONOMIC'|translate}}</b>
                                                     {{cabinet.economico }}</h4>
 
                                             </div>
@@ -160,7 +147,8 @@
                     </md-tabs>
                 </div>
             </div>
-            <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column" layout-align-sm="start stretch" layout-align-xs="start stretch">
+            <div layout="row" layout-align="end end" layout-sm="column" layout-xs="column"
+                 layout-align-sm="start stretch" layout-align-xs="start stretch">
                 <md-button aria-label="fab button"
                            ng-disabled="vm.selectedCabinets.length<=0"
                            ng-click="vm.remove($event)" class="md-raised md-warn">

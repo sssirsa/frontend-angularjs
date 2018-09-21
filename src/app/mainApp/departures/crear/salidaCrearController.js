@@ -11,24 +11,20 @@
         .filter('tipoequipoSearch', tipoequipoSearch);
 
     function salidaCrearController(EntradaSalida,
-        Clientes,
-        OPTIONS,
-        ModeloCabinet,
-        Persona,
-        $mdDialog,
-        //TipoEquipo,
-        Helper,
-        Translate,
-        toastr,
-        //Sucursal,
-        //udn,
-        Cabinet,
-        CabinetEntradaSalida,
-        //TipoTransporte,
-        $scope,
-        //LineaTransporte,
-        URLS,
-        PAGINATION
+                                   Clientes,
+                                   OPTIONS,
+                                   ModeloCabinet,
+                                   Persona,
+                                   $mdDialog,
+                                   TipoEquipo,
+                                   Helper,
+                                   Translate,
+                                   toastr,
+                                   Cabinet,
+                                   CabinetEntradaSalida,
+                                   $scope,
+                                   URLS,
+                                   PAGINATION
     ) {
         var vm = this;
 
@@ -73,7 +69,6 @@
         vm.outputWasCorrect = false;
         vm.filtrado = false;
         vm.economic_lookup_var = null;
-
         vm.catalogues = {
             sucursal: {
                 catalog: {
@@ -150,25 +145,6 @@
                     hide: 'deleted',
                     reverse: false
                 }
-            },
-            tipo_equipo: {
-                catalog: {
-                    url: URLS.tipo_equipo,
-                    kind: 'Web',
-                    name: Translate.translate('OUTPUT.FORM.PLACEHOLDER.TYPE_EQUIPMENT'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    next: PAGINATION.next
-                },
-                elements: PAGINATION.elements,
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
             }
         };
 
@@ -216,7 +192,7 @@
                 fd.append('proyecto', vm.salida.proyecto);
             fd.append('sucursal', vm.salida.sucursal);
             fd.append('tipo_transporte', vm.salida.tipo_transporte);
-            fd.append('udn', vm.salida.udn.id);
+            fd.append('udn', vm.salida.udn);
             if (vm.salida.id != null)
                 fd.append("id", vm.salida.id);
 
@@ -282,11 +258,15 @@
             }
 
         }
+
         function lookupByEconomico() {
             if (vm.economicoFilter != '' && vm.economicoFilter != null) {
                 var status = vm.types[vm.selectedEntrada].value_service;
+                vm.disabledSearch=true;
                 vm.loadingPromise = Cabinet.loadByStatus(status, vm.economicoFilter).then(function (res) {
                     vm.cabinetsEntrada = res;
+
+                    vm.disabledSearch=false;
                 });
             } else {
                 vm.cabinetsEntrada = [];
@@ -305,7 +285,7 @@
             vm.loadingPromise = EntradaSalida.postEntrada(fd).then(function (res) {
                 var selected = _.chain(vm.selectedCabinets)
                     .map(function (cabinet) {
-                        return { economico: cabinet };
+                        return {economico: cabinet};
                     }).flatten().value();
 
                 var request = {
@@ -316,31 +296,28 @@
                     EntradaSalida.normalizeCabinets(res.id).then(function () {
                         toastr.success(vm.successMessage, vm.successTitle);
                         clear();
-                    }).catch(function () {
+                    }).catch(function (err) {
+
+                        console.log(err);
                         toastr.error(vm.errorMessage, vm.errorTitle);
                     });
                 }).catch(function (err) {
+                    console.log(err);
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 });
             }).catch(function (err) {
-
+                console.log(err);
                 toastr.error(vm.errorMessage, vm.errorTitle);
             });
         }
 
         function search(obj) {
-            var tipo = _.findWhere(vm.modelos, { id: obj.modelo });
-            if (tipo != null) {
-                var tiposEquipo = _.findWhere(vm.tipoEquipos, { id: tipo.tipo });
-                if (tiposEquipo != null) {
-                    return tiposEquipo.nombre;
-                } else {
-                    return "No tiene";
-                }
+            var tiposEquipo = _.findWhere(vm.tipoEquipos, {id: obj.modelo.tipo});
+            if (tiposEquipo != null) {
+                return tiposEquipo.nombre;
             } else {
                 return "No tiene";
             }
-
         }
 
         function selectionImage($files) {
@@ -361,11 +338,6 @@
                 }
             }
         }
-
-        //function selectedItemChange(item) {
-        //    vm.isValid = angular.isObject(item);
-        //}
-
         function selectionFile($files) {
             if ($files.length > 0) {
                 var file = $files[0];
@@ -383,41 +355,15 @@
         }
 
         function activate() {
-
-            //LineaTransporte.listObject().then(function (res) {
-            //    vm.lineasTransporte = Helper.filterDeleted(res, true);
-            //    vm.lineasTransporte = _.sortBy(vm.lineasTransporte, 'razon_social');
-            //}).catch(function (err) {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //TipoTransporte.listObject().then(function (res) {
-            //    vm.tiposTransporte = Helper.filterDeleted(res, true);
-            //    vm.tiposTransporte = _.sortBy(vm.tiposTransporte, 'descripcion');
-            //}).catch(function (err) {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //Sucursal.listObject().then(function (res) {
-            //    vm.Sucursales = Helper.filterDeleted(res, true);
-            //    vm.Sucursales = _.sortBy(vm.Sucursales, 'nombre');
-            //}).catch(function (err) {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-            //udn.listObject().then(function (res) {
-            //    vm.udns = Helper.filterDeleted(res, true);
-            //    vm.udns = _.sortBy(vm.udns, 'agencia');
-            //}).catch(function (err) {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
-
-            ModeloCabinet.listWitout().then(function (res) {
+            ModeloCabinet.list().then(function (res) {
                 vm.modelos = Helper.filterDeleted(res, true);
             });
-            //TipoEquipo.listWitout().then(function (res) {
-            //    vm.tipoEquipos = res;
-            //    vm.tipoEquipos = _.sortBy(vm.tipoEquipos, 'nombre');
-            //}).catch(function (err) {
-            //    toastr.error(vm.errorMessage, vm.errorTitle);
-            //});
+            TipoEquipo.listWitout().then(function (res) {
+                vm.tipoEquipos = res;
+                vm.tipoEquipos = _.sortBy(vm.tipoEquipos, 'nombre');
+            }).catch(function (err) {
+                toastr.error(vm.errorMessage, vm.errorTitle);
+            });
             Clientes.listObject().then(function (res) {
                 vm.clients = res;
                 vm.clients = _.sortBy(vm.clients, 'nombre');
@@ -466,15 +412,19 @@
             vm.fotoGeneral = true;
             vm.salida = angular.copy(salida);
             vm.salida.sucursal = vm.sucursal;
+            vm.salida.linea_transporte = null;
+            vm.salida.udn = null;
+            vm.salida.tipo_transporte = null;
+            console.log(vm.salida);
             $scope.entradaForm.$setPristine();
             $scope.entradaForm.$setUntouched();
             vm.salida.no_creados = null;
             vm.salida.creados = null;
             vm.selectedCabinets = [];
+            vm.selectedEntrada = undefined;
             vm.hideMassiveUpload = true;
             vm.hideManualUpload = true;
             vm.searchText = null;
-            vm.selectedEntrada = 0;
             vm.outputWasCorrect = false;
 
         }
@@ -492,7 +442,6 @@
         }
 
         function cabinetSearch(query) {
-
             return query ? lookup(query) : vm.cabinetsEntrada;
         }
 
@@ -505,18 +454,6 @@
             }
         }
 
-        //function lookupUDN(search_text) {
-        //    if (!angular.isUndefined(search_text)) {
-        //        vm.search_items = _.filter(vm.udns, function (item) {
-        //            return item.zona.toLowerCase().includes(search_text.toLowerCase()) || item.agencia.toLowerCase().includes(search_text.toLowerCase());
-        //        });
-
-        //        vm.isValid = !((vm.search_items.length == 0 && search_text.length > 0) || (search_text.length > 0 && !angular.isObject(vm.salida.udn)));
-        //        return vm.search_items;
-        //    }
-
-        //}
-
 
         function nextTab() {
             vm.selectedTab = vm.selectedTab + 1;
@@ -524,6 +461,9 @@
 
         function onElementSelect(element, field) {
             vm.salida[field] = element;
+        }
+        function onClearSelect(element) {
+            console.log(element)
         }
 
         function filesSelected(files, field) {
@@ -543,17 +483,14 @@
 
     //Outside the controller
     function tipoequipoSearch() {
-        return function (input, text, tipos, modelos) {
+        return function (input, text, tipos) {
             if (!angular.isNumber(text) || text === '') {
                 return input;
             }
             return _.filter(input, function (item) {
-                var tipo = _.findWhere(modelos, { id: item.modelo }).tipo;
-                if (tipo != null) {
-                    var tiposEquipo = _.findWhere(tipos, { id: tipo });
-                    if (tiposEquipo != null) {
-                        return tiposEquipo.id == text;
-                    }
+                var tiposEquipo = _.findWhere(tipos, {id: item.modelo.tipo});
+                if (tiposEquipo != null) {
+                    return tiposEquipo.id == text;
                 }
             });
 
@@ -565,7 +502,6 @@
             if (!angular.isString(text) || text === '') {
                 return input;
             }
-
             return _.filter(input, function (item) {
                 return item.economico.toLowerCase().indexOf(text.toLowerCase()) >= 0;
             });

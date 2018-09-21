@@ -177,11 +177,6 @@
                     id: 3,
                     value: "Obsoleto",
                     value_service: "obsoleto"
-                },
-                {
-                    id: 4,
-                    value: "No validada",
-                    value_service: "all"
                 }
             ],
             units: [

@@ -6,7 +6,7 @@
         .factory('ModeloCabinet', ModeloCabinet);
 
     /* @ngInject */
-    function ModeloCabinet(WebRestangular, URLS) {
+    function ModeloCabinet(WebRestangular, MobileRestangular, URLS) {
         var baseModelo = WebRestangular.all(URLS.modelo_cabinet);
 
         return {
@@ -30,7 +30,7 @@
             return baseModelo.get(id);
         }
         function list(){
-            return baseModelo.getList().$object;
+            return MobileRestangular.all(URLS.modelo_cabinet).customGET();
         }
 
         function update(object)

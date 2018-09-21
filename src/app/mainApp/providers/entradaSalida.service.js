@@ -29,7 +29,7 @@
         };
 
         function getSalidas() {
-            return baseURL.all(URLS.salida).getList();
+            return baseURL.all(URLS.salida).customGET();
         }
 
         function getAll() {
