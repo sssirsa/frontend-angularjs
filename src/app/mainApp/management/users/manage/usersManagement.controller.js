@@ -79,8 +79,8 @@
         }
 
         function getPersonaAdmin() {
-            vm.loadingPromise = Persona_Admin.listCanonico().then(function (rest) {
-                vm.personas_admin = rest;
+            vm.loadingPromise = Persona_Admin.listPromise(200,0).then(function (rest) {
+                vm.personas_admin = rest.results;
                 Persona.listProfile().then(function (rest) {
                     vm.user_ini = rest;
                     vm.personas_admin = _.filter(vm.personas_admin, function (item) {

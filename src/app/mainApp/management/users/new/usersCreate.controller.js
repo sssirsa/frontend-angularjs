@@ -4,13 +4,14 @@
         .controller('usersCreateController', UsersCreateController);
 
     function UsersCreateController(groups,
-                                  NotificationPanel,
-                                  Persona_Admin,
-                                  toastr,
-                                  Helper,
-                                  Translate,
-                                  $scope,
-                                  Sucursal) {
+        NotificationPanel,
+        Persona_Admin,
+        toastr,
+        Helper,
+        Translate,
+        $scope,
+        URLS
+    ) {
         var vm = this;
         vm.isClient = true;
         activate();
@@ -18,12 +19,34 @@
         vm.fotoByPass = null;
         vm.ifeByPass = null;
         vm.guardarUsuario = guardarUsuario;
-        vm.listSucursales = listSucursales;
         vm.enviar = enviar;
         vm.clean = clean;
         vm.cancel = cancel;
         vm.selectionFoto = selectionFoto;
         vm.selectionIFE = selectionIFE;
+        vm.onSubsidiarySelect = onSubsidiarySelect;
+
+        vm.catalogues = {
+            sucursal: {
+                catalog: {
+                    url: URLS.sucursal,
+                    kind: 'Web',
+                    name: Translate.translate('ADMIN_PERSONA.PROPERTY.SUCURSALDEF'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            }
+        };
 
         function activate() {
 
@@ -38,8 +61,6 @@
             }).catch(function (error) {
 
             });
-            //vm.sucursales =Sucursal.list();
-            listSucursales();
         }
 
 
@@ -95,13 +116,6 @@
             };
         }
 
-        function listSucursales() {
-            Sucursal.listObject().then(function (res) {
-                vm.sucursales = Helper.filterDeleted(res, true);
-                vm.sucursales = _.sortBy(vm.sucursales, 'descripcion');
-            });
-        }
-
         function guardarUsuario() {
             vm.user_ini.foto = vm.picFoto;
             vm.user_ini.ife = vm.picIFE;
@@ -111,7 +125,7 @@
             Persona_Admin.createObject(vm.user_ini).then(function (res) {
                 toastr.success(vm.successCreateMessage);
                 clean();
-                var grupo = _.findWhere(vm.grupos, {name: "Administrador"});
+                var grupo = _.findWhere(vm.grupos, { name: "Administrador" });
                 var role = null;
                 if (vm.user_ini.user.role == grupo.id && vm.user_ini.sucursal != null) {
                     role = 0;
@@ -206,6 +220,9 @@
 
         }
 
+        function onSubsidiarySelect(element) {
+            vm.user_ini.sucursal = element;
+        }
 
     }
 
