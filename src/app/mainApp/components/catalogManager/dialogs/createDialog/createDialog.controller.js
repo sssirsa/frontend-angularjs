@@ -84,6 +84,17 @@
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
 *      },
 *      provider: CATALOG provider object
+*
+*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
+ *                         //The Create dialog just uses the "create" function of the provider
+           url: null,
+           getByID: function (id) {...},
+           list: function () {...},
+           create: function (object) {...},
+           update: function (id, object) {...},
+           remove: function (id) {...},
+           search: function (query) {...}
+           }
 */
 
 (function () {
