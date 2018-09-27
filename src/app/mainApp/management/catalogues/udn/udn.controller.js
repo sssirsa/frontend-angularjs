@@ -96,7 +96,7 @@
                         required: true,
                         validations: {
                             max: 10,
-                            regex: "[0-9]{7,10}",
+                            regex: "[0-9]{7,12}",
                             errors: {
                                 regex: 'El número no tiene un formato correcto',
                                 required: 'El campo es requerido.'
@@ -170,7 +170,7 @@
                         required: true,
                         validations: {
                             max: 10,
-                            regex: "[0-9]{7,10}",
+                            regex: "[0-9]{7,12}",
                             errors: {
                                 regex: 'El número no tiene un formato correcto',
                                 required: 'El campo es requerido.'
