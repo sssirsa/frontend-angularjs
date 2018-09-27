@@ -297,11 +297,11 @@
         }
     },
     "SUCCESS":{
-        "CANCEL":"Cancelación efectuada Correctamente",
-        "CREATE":"Creación de Registro efectuada Correctamente",
-        "DELETE":"Eliminación de Registro efectuada Correctamente",
-        "UPDATE":"Actualización de Registro efectuada Correctamente",
-        "UPLOAD":"Carga de Registro efectuada Correctamente"
+        "CANCEL":"Cancelación efectuada correctamente",
+        "CREATE":"Creación de registro efectuada correctamente",
+        "DELETE":"Eliminación de registro efectuada correctamente",
+        "UPDATE":"Actualización de registro efectuada correctamente",
+        "UPLOAD":"Carga de registro efectuada correctamente"
     },
     "ERRORS":{
         "UNEXPECTED":"Error inesperado, intente más tarde.",
