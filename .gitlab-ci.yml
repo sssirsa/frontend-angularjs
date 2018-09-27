@@ -31,7 +31,6 @@ configuration:
      - config/
      - gulp/deploy.js
   only:
-    - /^feature\/*/
     - development
     - staging
     - master
@@ -50,13 +49,12 @@ deploy:
     - npm install gulp
   script:
     - rm -rf dist/
-    - ./node_modules/.bin/gulp deploy --env development
+    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
   dependencies:
     - npm
     - bower
     - configuration
   only:
-    - /^feature\/*/
     - development
     - staging
     - master
@@ -76,7 +74,6 @@ npm:
     paths:
      - node_modules/
   only:
-    - /^feature\/*/
     - development
     - master
     - staging
@@ -102,6 +99,5 @@ bower:
     - development
     - master
     - staging
-    - /^feature\/*/
   tags:
     - frontend
