@@ -45,7 +45,7 @@
                         required: true,
                         validations: {
                             errors: {
-                                required: 'El nombre del estado es obligatorio'
+                                required: 'El nombre de la segmentación es obligatorio'
                             }
                         }
                     },
@@ -75,7 +75,37 @@
                 }
             },
             PUT: {
-                fields: [],
+                id:'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre de la segmentación es obligatorio'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripcion',
+                        required: false
+                    },
+                    {
+                        type: 'color',
+                        model: 'color',
+                        label: 'Color',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El color es obligatorio'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar segmentación',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
