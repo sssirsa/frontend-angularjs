@@ -76,7 +76,7 @@ npm:
     paths:
      - node_modules/
   only:
-     - /^feature\/*/
+    - /^feature\/*/
     - development
     - master
     - staging
