@@ -441,7 +441,7 @@
                     }
                 }).then(function () {
                     activate();
-                    ErrorHandler.successDelete();
+                    ErrorHandler.successUpdate();
                     vm.onSuccessDelete();
                 }).catch(function (errorDelete) {
                     if (errorDelete) {
