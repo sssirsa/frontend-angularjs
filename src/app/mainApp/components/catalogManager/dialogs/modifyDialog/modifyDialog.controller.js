@@ -118,7 +118,7 @@
         vm.ModifyCatalogProvider = jQuery.extend(true, {}, provider);
 
         vm.id = id;
-        vm.objectToModify = element;
+        vm.objectToModify = jQuery.extend(true, {}, element);
 
         vm.modify = modify;
         vm.cancel = cancel;
