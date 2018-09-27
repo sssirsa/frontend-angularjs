@@ -112,7 +112,72 @@
                 }
             },
             PUT: {
-                fields: [],
+                id:'id',
+                fields: [
+                    {
+                        type: 'options',
+                        model: 'zona',
+                        label: 'Zona',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        options: {
+                            model: 'value',
+                            option: 'value',
+                            elements: vm.options
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'agencia',
+                        label: 'Agencia',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'centro',
+                        label: 'Centro',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono',
+                        required: true,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar UDN',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
