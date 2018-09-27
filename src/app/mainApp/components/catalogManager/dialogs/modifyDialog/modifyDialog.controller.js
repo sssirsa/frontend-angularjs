@@ -49,7 +49,23 @@
  *                  softDelete: {
  *                      hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *                      reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
- *                  }
+ *                  },
+ *                  bindTo: string,     (Optional) It's used when the object returns the actual value of the catalog into a
+ *                                      different property.
+ *                                      Example:
+ *                                      
+ *                                      //When modifying is required as follows
+ *                                      object:{
+ *                                        property_id: id
+ *                                      }
+ *                                      
+ *                                      //When returned from the API is given as follows
+ *                                      object:
+ *                                      {
+ *                                        property:{}
+ *                                      }
+ *                                      In this case, the bindTo parameter should be 'property', and the model of the field
+ *                                      should be 'property_id'
 *              },
 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
 *                  model: string,            Field of the element to be used in the model
@@ -59,7 +75,23 @@
 *                          model: {{}},
 *                          option: {{}}
 *                      }
-*                  ]
+*                  ],
+*                  bindTo: string,     (Optional) It's used when the object returns the actual value of the catalog into a
+*                                      different property.
+*                                      Example:
+*
+*                                      //When modifying is required as follows
+*                                      object:{
+*                                        property_id: id
+*                                      }
+*
+*                                      //When returned from the API is given as follows
+*                                      object:
+*                                      {
+*                                        property:{}
+*                                      }
+*                                      In this case, the bindTo parameter should be 'property', and the model of the field
+*                                      should be 'property_id'
 *              }
 *              fileUploder: {                 As used by the file-uploader component
 *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
@@ -79,8 +111,8 @@
 *          }
 *      ],
 *      dialog:{              //Labels to use in the creation dialog
-*          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
-*          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
+*          title: string,          (Optional) Title for the creation dialog, default is 'Modify element'
+*          okButton: string,       (Optional) Label for the Ok button, default is 'Modify'
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
 *      },
 *      id: string,           //(Optional) Field name to be used as id for HTTP PUT method, default is 'id'
@@ -88,7 +120,7 @@
 *      provider: CATALOG provider object
 *
 *      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
-*                          //The Create dialog just uses the "create" function of the provider
+*                          //The Modify dialog just uses the "update" function of the provider
            url: null,
            getByID: function (id) {...},
            list: function () {...},
@@ -102,8 +134,8 @@
 (function () {
     angular
         .module('app.mainApp')
-        .controller('CatalogModifyDialogController', CatalogCreateDialogController);
-    function CatalogCreateDialogController(
+        .controller('CatalogModifyDialogController', CatalogModifyDialogController);
+    function CatalogModifyDialogController(
         $mdDialog,
         dialog,
         provider,
@@ -129,6 +161,7 @@
 
         function activate() {
             //Handle aditional information loading
+            bindCatalogs();
         }
 
         function modify() {
@@ -139,8 +172,6 @@
             else {
                 id = 'id';
             }
-            console.debug(id);
-            console.debug(vm.objectToModify);
             vm.modifyLoader = vm.ModifyCatalogProvider
                 .update(vm.objectToModify['id'], vm.objectToModify)
                 .then(function (modifiedElement) {
@@ -165,7 +196,25 @@
         }
 
         function onElementSelect(element, field) {
-            vm.objectToCreate[field.model] = element;
+            vm.objectToModify[field.model] = element;
+        }
+
+        function bindCatalogs() {
+            angular.forEach(
+                vm.fields,
+                function bindCatalogsRepeater(field) {
+                    if (field.type === 'catalog') {
+                        if (field['catalog'].bindTo) {
+                            vm.objectToModify[field.model] = vm.objectToModify[field.catalog.bindTo];
+                        }
+                    }
+                    if (field.type === 'options') {
+                        if (field['options'].bindTo) {
+                            vm.objectToModify[field.model] = vm.objectToModify[field.options.bindTo];
+                        }
+                    }
+                }
+            );
         }
     }
 

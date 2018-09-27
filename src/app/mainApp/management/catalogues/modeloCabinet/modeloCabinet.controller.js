@@ -59,7 +59,7 @@
                                 required: 'El campo es requerido.'
                             }
                         },
-                        catalog:{
+                        catalog: {
                             lazy: false,
                             url: URLS.marca,
                             kind: 'Web',
@@ -82,7 +82,7 @@
                                 required: 'El campo es requerido.'
                             }
                         },
-                        catalog:{
+                        catalog: {
                             lazy: false,
                             url: URLS.tipo_equipo,
                             kind: 'Web',
@@ -93,14 +93,14 @@
                     },
                     {
                         type: 'text',
-                        hint:'Descripción adicional para identificar el modelo',
+                        hint: 'Descripción adicional para identificar el modelo',
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true
                     },
                     {
                         type: 'text',
-                        hint:'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
+                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
                         model: 'palabra_clave',
                         label: 'Palabra clave',
                         required: true
@@ -144,6 +144,7 @@
                             option: 'descripcion',
                             name: 'Marca',
                             elements: 'results',
+                            bindTo: 'marca',
                             pagination: {
                                 total: 'count'
                             }
@@ -164,6 +165,7 @@
                             url: URLS.tipo_equipo,
                             kind: 'Web',
                             model: 'id',
+                            bindTo: 'tipo',
                             option: 'nombre',
                             name: 'Tipo'
                         }
@@ -216,7 +218,7 @@
                         type: 'catalog',
                         model: 'tipo',
                         label: 'Tipo',
-                        catalog:{
+                        catalog: {
                             lazy: false,
                             url: URLS.tipo_equipo,
                             kind: 'Web',
@@ -238,7 +240,7 @@
                         type: 'catalog',
                         model: 'marca',
                         label: 'Marca',
-                        catalog:{
+                        catalog: {
                             lazy: false,
                             url: URLS.marca,
                             kind: 'Web',

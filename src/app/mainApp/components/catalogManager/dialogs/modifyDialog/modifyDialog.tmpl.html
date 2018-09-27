@@ -107,12 +107,13 @@
                 </section>
                 <section ng-if="field['type']==='catalog'">
                     <section ng-if="field['catalog'].requires">
-                        <catalog-select ng-if="$ctrl.objectToModify[field['catalog'].requires]"
+                        <catalog-select ng-if="vm.objectToModify[field['catalog'].requires]"
                                         required="field.required"
                                         catalog="field.catalog"
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
+                                        initial="vm.objectToModify[field.catalog.bindTo]"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                         <div ng-if="field.hint"
@@ -126,6 +127,7 @@
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
+                                        initial="vm.objectToModify[field.catalog.bindTo]"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                         <div ng-if="field.hint"
