@@ -107,7 +107,7 @@
                 </section>
                 <section ng-if="field['type']==='catalog'">
                     <section ng-if="field['catalog'].requires">
-                        <catalog-select ng-if="$ctrl.objectToCreate[field['catalog'].requires]"
+                        <catalog-select ng-if="vm.objectToCreate[field['catalog'].requires]"
                                         required="field.required"
                                         catalog="field.catalog"
                                         pagination="field['catalog'].pagination"
