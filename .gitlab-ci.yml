@@ -55,8 +55,8 @@ deploy:
     - npm
     - bower
     - configuration
-    - /^feature\/*/
   only:
+    - /^feature\/*/
     - development
     - staging
     - master
@@ -91,7 +91,6 @@ bower:
   script:
     - npm install -g bower@$BOWER_VERSION --silent
     - bower install --allow-root --silent
-
   cache:
     untracked: true
     paths:
