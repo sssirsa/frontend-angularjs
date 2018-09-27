@@ -31,9 +31,12 @@ configuration:
      - config/
      - gulp/deploy.js
   only:
+    - /^feature\/*/
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 deploy:
   stage: deploy
@@ -47,22 +50,22 @@ deploy:
     - npm install gulp
   script:
     - rm -rf dist/
-    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+    - ./node_modules/.bin/gulp deploy --env development
   dependencies:
     - npm
     - bower
     - configuration
+    - /^feature\/*/
   only:
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 npm:
   stage: dep
   image: node:10.2.1
-  before_script:
-    - apt-get update
-    - apt-get install build-essential -y
   script:
     - npm install
   cache:
@@ -73,9 +76,12 @@ npm:
     paths:
      - node_modules/
   only:
+     - /^feature\/*/
     - development
     - master
     - staging
+  tags:
+    - frontend
 
 bower:
   stage: dep
@@ -83,7 +89,6 @@ bower:
   variables:
     BOWER_VERSION: 1.8.4
   script:
-    - ls
     - npm install -g bower@$BOWER_VERSION --silent
     - bower install --allow-root --silent
 
@@ -98,3 +103,6 @@ bower:
     - development
     - master
     - staging
+    - /^feature\/*/
+  tags:
+    - frontend
