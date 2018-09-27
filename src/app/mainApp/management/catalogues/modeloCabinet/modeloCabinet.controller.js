@@ -93,15 +93,17 @@
                     },
                     {
                         type: 'text',
+                        hint:'Descripción adicional para identificar el modelo',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: false
+                        required: true
                     },
                     {
                         type: 'text',
+                        hint:'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
                         model: 'palabra_clave',
                         label: 'Palabra clave',
-                        required: false
+                        required: true
                     }
                 ],
                 dialog: {
@@ -112,7 +114,75 @@
                 }
             },
             PUT: {
-                fields: [],
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'marca',
+                        label: 'Marca',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: URLS.marca,
+                            kind: 'Web',
+                            model: 'id',
+                            option: 'descripcion',
+                            name: 'Marca',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'tipo',
+                        label: 'Tipo',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: URLS.tipo_equipo,
+                            kind: 'Web',
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Tipo'
+                        }
+                    },
+                    {
+                        type: 'text',
+                        hint: 'Descripción adicional para identificar el modelo',
+                        model: 'descripcion',
+                        label: 'Descripción',
+                        required: true
+                    },
+                    {
+                        type: 'text',
+                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
+                        model: 'palabra_clave',
+                        label: 'Palabra clave',
+                        required: true
+                    }
+                ],
                 dialog: {
                     title: 'Editar Modelo',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
