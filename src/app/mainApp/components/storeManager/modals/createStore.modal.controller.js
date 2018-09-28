@@ -82,7 +82,7 @@
                     $mdDialog.hide(createdStore);
                 })
                 .catch(function (errorCreateStore) {
-                    ErrorHandler.errortranslate(errorCreateStore);
+                    ErrorHandler.errorTranslate(errorCreateStore);
                 });
         }
 
@@ -97,7 +97,7 @@
                         vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
                     })
                     .catch(function (stateListError) {
-                        ErrorHandler.errortranslate(stateListError);
+                        ErrorHandler.errorTranslate(stateListError);
                         vm.states = null;
                     });
             }
@@ -117,7 +117,7 @@
                     })
                     .catch(function (citiesListError) {
                         vm.cities = null;
-                        ErrorHandler.errortranslate(citiesListError);
+                        ErrorHandler.errorTranslate(citiesListError);
                     });
             }
         }
@@ -136,7 +136,7 @@
                     })
                     .catch(function (localitiesListError) {
                         vm.localities = null;
-                        ErrorHandler.errortranslate(localitiesListError);
+                        ErrorHandler.errorTranslate(localitiesListError);
                     });
             }
         }
@@ -161,7 +161,7 @@
                     vm.storeSegmentation = listSegments;
                 })
                 .catch(function (errorListSegments) {
-                    ErrorHandler.errortranslate(errorListSegments);
+                    ErrorHandler.errorTranslate(errorListSegments);
                 });
         }
 

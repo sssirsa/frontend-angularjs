@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$cookies', 'RoleStore', 'User', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', '$cookies', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $cookies, RoleStore, User) {
+    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http, $cookies) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -12,50 +12,29 @@
             revokeToken: revokeToken
         };
 
-        function authenticate (params){
-            RoleStore.clearStore();
+        function authenticate(params) {
             var request = $q.defer();
 
             MobileRestangular.all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
-                    $cookies.putObject('token', loginResponse.access_token, { path: '/' });
-                    $cookies.putObject('refreshToken', loginResponse.refresh_token, { path: '/' });
+                    $cookies.putObject('token', loginResponse.access_token);
+                    $cookies.putObject('refreshToken', loginResponse.refresh_token);
                     var expiration = new Date();
-                    expiration.setSeconds(expiration.getSeconds()+loginResponse.expires_in);
-                    $cookies.putObject('expiration', expiration, { path: '/' });
-                    WebRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
-                    MobileRestangular.setDefaultHeaders({Authorization: 'bearer ' + $cookies.getObject('token')});
-
-                    WebRestangular.all('my_groups')
-                        .customGET()
-                        .then(function (profile) {
-                            var roles = {};
-
-                            angular.forEach(profile, function (roleName) {
-                                roles[roleName.name.toUpperCase()] = [];
-                            });
-
-                            $cookies.putObject('roles', roles, { path: '/' });
-
-                            RoleStore.defineManyRoles(roles);
-
-                            WebRestangular.all('persona')
-                                .customGET()
-                                .then(function(user){
-                                    request.resolve();
-                                    User.setUser(user);
-                                })
-                                .catch(function(errorUser){
-                                    request.reject(errorUser);
-                                });
-
-                        })
-                        .catch(function(profileError){
-                            request.reject(profileError);
+                    expiration
+                        .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
+                    $cookies
+                        .putObject('expiration', expiration);
+                    WebRestangular
+                        .setDefaultHeaders({
+                            Authorization: 'bearer ' + loginResponse.access_token
                         });
-
-
+                    MobileRestangular
+                        .setDefaultHeaders({
+                            Authorization: 'bearer ' + loginResponse.access_token
+                        });
+                    $http.defaults.headers.common['Authorization'] = 'bearer ' + loginResponse.access_token;
+                    request.resolve();
                 })
                 .catch(function (errorLogin) {
                     request.reject(errorLogin);
@@ -96,30 +75,29 @@
             }
         }
 
-        function canRefresh(){
-            if($cookies.getObject('refreshToken')){
+        function canRefresh() {
+            if ($cookies.getObject('refreshToken')) {
                 return true;
             }
             return false;
         }
 
-        function revokeToken(){
-            RoleStore.clearStore();
-            $cookies.remove('token', { path: '/' });
-            $cookies.remove('refresh_token', { path: '/' });
-            $cookies.remove('expiration', { path: '/' });
-            $cookies.remove('roles', { path: '/' });
-            $cookies.remove('keepSession', { path: '/' });
+        function revokeToken() {
+            $cookies.remove('token');
+            $cookies.remove('refreshToken');
+            $cookies.remove('expiration');
+            $cookies.remove('roles');
+            $cookies.remove('keepSession');
         }
 
         function compareDates() {
-            if($cookies.getObject('expiration')) {
+            if ($cookies.getObject('expiration')) {
                 var date_expiration = $cookies.getObject('expiration');
                 var now = new Date();
                 var expiration = new Date(date_expiration);
                 return expiration > now;
             }
-            else{
+            else {
                 return false;
             }
         }

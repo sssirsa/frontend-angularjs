@@ -1,0 +1,66 @@
+<div layout-padding layout="row"
+     layout-align="space-between center"
+     ng-if="$ctrl.correctUse">
+    <md-toolbar style="background-color: whitesmoke" layout="row" layout-align="space-between center">
+
+        <div>
+        <md-button class="md-primary md-raised"
+                   ng-disabled="$ctrl.prevObject == null"
+                   ng-click="$ctrl.goPrev()">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+                <div hide-xs hide-sm>
+                    Anterior
+                </div>
+            </div>
+        </md-button>
+        </div>
+
+        <div flex="100">
+        <md-slider-container flex ng-if="$ctrl.totalPages > 1">
+            <md-slider ng-model="$ctrl.numberPage"
+                       ng-change="$ctrl.moveSlide()"
+                       min="1"
+                       max="{{$ctrl.totalPages}}"
+                       step="1"
+                       md-discrete
+                       aria-label="blue"
+                       id="blue-slider"
+                       class="md-primary"
+                       hide-sm
+                       hide-xs
+                       ng-if="true">
+            </md-slider>
+            <md-input-container>
+                <input type="number"
+                       ng-model="$ctrl.numberPage"
+                       ng-keypress="$ctrl.changeNumber($event)"
+                       min="1"
+                       max="{{$ctrl.totalPages}}"
+                       aria-label="blue"
+                       aria-controls="blue-slider"
+                       ng-if="true">
+            </md-input-container>
+        </md-slider-container>
+        </div>
+
+        <div>
+        <md-button class="md-primary md-raised"
+                   ng-disabled="$ctrl.nexObject == null"
+                   ng-click="$ctrl.goSig()">
+            <div layout="row" layout-align="center center">
+                <div hide-xs hide-sm>
+                    Siguiente
+                </div>
+                <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+            </div>
+        </md-button>
+        </div>
+
+    </md-toolbar>
+</div>
+<div layout-padding layout="row"
+     layout-align="space-around center"
+     ng-if="!$ctrl.correctUse">
+    <h2>Uso incorrecto del componente</h2>
+</div>

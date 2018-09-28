@@ -3,24 +3,22 @@
 
     angular
         .module('app.mainApp.splash')
-        .controller('splashController', ['$state', 'AuthService', '$cookies', '$timeout', splashController]);
+        .controller('splashController', ['$state', 'AuthService', '$timeout', '$cookies', splashController]);
 
     /* @ngInject */
-    function splashController($state, AuthService, $cookies, $timeout) {
+    function splashController($state, AuthService, $timeout, $cookies) {
 
-        var keepSession = $cookies.get('keepSession');
-        console.debug(keepSession);
 
         $timeout(function(){
-            if(keepSession == "true") {
+            if($cookies.getObject('keepSession')) {
                 if (AuthService.isAuthenticated()) {
-                    $state.go('triangular.admin-default.bienvenida');
+                    $state.go('triangular.admin-default.welcome');
                 }
                 else {
                     AuthService
                         .refreshToken()
                         .then(function () {
-                            $state.go('triangular.admin-default.bienvenida');
+                            $state.go('triangular.admin-default.welcome');
                         })
                         .catch(function () {
                             $state.go('login');
@@ -28,6 +26,7 @@
                 }
             }
             else{
+                AuthService.logout();
                 $state.go('login');
             }
         },3000);

@@ -103,7 +103,7 @@
                     $mdDialog.hide(createdStore);
                 })
                 .catch(function (errorCreateStore) {
-                    ErrorHandler.errortranslate(errorCreateStore);
+                    ErrorHandler.errorTranslate(errorCreateStore);
                 });
         }
 
@@ -120,7 +120,7 @@
                         listCities(vm.state);
                     })
                     .catch(function (stateListError) {
-                        ErrorHandler.errortranslate(stateListError);
+                        ErrorHandler.errorTranslate(stateListError);
                         vm.states = null;
                     });
             }
@@ -141,7 +141,7 @@
                         listLocalities(vm.city);
                     })
                     .catch(function (citiesListError) {
-                        ErrorHandler.errortranslate(citiesListError);
+                        ErrorHandler.errorTranslate(citiesListError);
                         vm.cities = null;
                     });
             }
@@ -163,7 +163,7 @@
 
                     })
                     .catch(function (localitiesListError) {
-                        ErrorHandler.errortranslate(localitiesListError);
+                        ErrorHandler.errorTranslate(localitiesListError);
                         vm.localities = null;
                     });
             }
@@ -190,7 +190,7 @@
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
                 .catch(function (errorListSegments) {
-                    ErrorHandler.errortranslate(errorListSegments);
+                    ErrorHandler.errorTranslate(errorListSegments);
                 });
         }
 

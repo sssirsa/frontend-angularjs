@@ -9,98 +9,103 @@
         .factory('NotificationPanel', NotificationPanel);
 
     /* @ngInject */
-    function NotificationPanel(EnvironmentConfig,$http,$q,OAuthToken) {
+    function NotificationPanel(EnvironmentConfig, $http, $q, AuthService) {
 
         return {
             getNotificationByUser: getNotificationByUser,
-            createUser:createUser,
+            createUser: createUser,
             markNotification: markNotification,
-            createNotification:createNotification,
-            createOffice:createOffice
+            createNotification: createNotification,
+            createOffice: createOffice
         };
+
         function getNotificationByUser(user) {
             var deferred = $q.defer();
             var req = {
                 method: 'GET',
-                url: EnvironmentConfig.site.notification.baseUrl+'api/notification/'+user,
+                url: EnvironmentConfig.site.notification.baseUrl + 'api/notification/' + user,
                 headers: {
-                    'Authorization': OAuthToken.getAuthorizationHeader()
+                    'Authorization': AuthService.getToken()
                 }
             };
-            $http(req).then(function(res){
+            $http(req).then(function (res) {
                 deferred.resolve(res);
-            }, function(err){
+            }, function (err) {
                 deferred.reject(err);
             });
             return deferred.promise;
         }
+
         function createUser(request) {
             var deferred = $q.defer();
             var req = {
                 method: 'POST',
-                url: EnvironmentConfig.site.notification.baseUrl+'api/user',
+                url: EnvironmentConfig.site.notification.baseUrl + 'api/user',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': OAuthToken.getAuthorizationHeader()
+                    'Authorization': AuthService.getToken()
                 },
                 data: request
             };
-            $http(req).then(function(res){
+            $http(req).then(function (res) {
                 deferred.resolve(res);
-            }, function(err){
+            }, function (err) {
                 console.log(err);
                 deferred.reject(err);
             });
             return deferred.promise;
         }
+
         function markNotification(notification_id) {
             var deferred = $q.defer();
             var req = {
                 method: 'PUT',
-                url: EnvironmentConfig.site.notification.baseUrl+'api/notification/user/'+notification_id,
+                url: EnvironmentConfig.site.notification.baseUrl + 'api/notification/user/' + notification_id,
                 headers: {
-                    'Authorization': OAuthToken.getAuthorizationHeader()
+                    'Authorization': AuthService.getToken()
                 }
             };
-            $http(req).then(function(res){
+            $http(req).then(function (res) {
                 deferred.resolve(res);
-            }, function(err){
+            }, function (err) {
                 deferred.reject(err);
             });
             return deferred.promise;
         }
+
         function createNotification(request) {
             var deferred = $q.defer();
             var req = {
                 method: 'POST',
-                url: EnvironmentConfig.site.notification.baseUrl+'api/notification',
+                url: EnvironmentConfig.site.notification.baseUrl + 'api/notification',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': OAuthToken.getAuthorizationHeader()
+                    'Authorization': AuthService.getToken()
                 },
                 data: request
             };
-            $http(req).then(function(res){
+            $http(req).then(function (res) {
                 deferred.resolve(res);
-            }, function(err){
+            }, function (err) {
                 deferred.reject(err);
             });
             return deferred.promise;
         }
+
         function createOffice(request) {
             var deferred = $q.defer();
             var req = {
                 method: 'POST',
-                url: EnvironmentConfig.site.notification.baseUrl+'api/office',
+                url: EnvironmentConfig.site.notification.baseUrl + 'api/office',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': OAuthToken.getAuthorizationHeader()
+                    'Authorization': AuthService.getToken()
                 },
                 data: request
             };
-            $http(req).then(function(res){
+            $http(req).then(function (res) {
                 deferred.resolve(res);
-            }, function(err){
+            }, function (err) {
                 deferred.reject(err);
             });
             return deferred.promise;

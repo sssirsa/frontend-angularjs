@@ -12,6 +12,8 @@
             "CREATES_SOLICITUD": "Crear Solicitud",
             "CALENDAR": "Calendario",
             "SERVICES": "Servicios",
+            "INTERNAL_SERVICE":"Servicio Interno",
+            "EXTERNAL_SERVICE":"Servicio Externo",
             "PREREQUESTS":{
                 "TITLE": "Pre Solicitudes",
                 "NEWCABINET": "Gestión cabinet PV",
@@ -85,8 +87,10 @@
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
                 "PROVIDER": "Proveedor"
             },
-            "SERVICE_ASSIGN": {
-                "ASSIGN": "Asignación de servicio"
+            "SERVICE": {
+                "MENU_TITLE": "Atenciones",
+                "ASSIGN": "Asignación de servicio",
+                "LIST": "Listado de servicio"
             },
             "REQUESTS": {
                 "TITLE": "Solicitudes",
@@ -285,7 +289,11 @@
             "DELETE_MESSAGE": "¿Seguro que desea eliminar este elemento?",
             "RESTORE_TITLE": "Confirmación de restauración",
             "RESTORE_MESSAGE": "¿Seguro que desea restaurar este elemento a un estado activo?",
-            "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?"
+            "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?",
+            "ATTENTION_TITLE": "Confirmación de Atención",
+            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?",
+            "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
+            "CANCEL_ATTENTION_MESSAGE":"¿Seguro que desea cancelar la atencion"
         }
     },
     "SUCCESS":{

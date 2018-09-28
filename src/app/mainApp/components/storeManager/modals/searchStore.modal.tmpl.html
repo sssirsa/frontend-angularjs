@@ -117,6 +117,7 @@
         <div
             ng-if="vm.selectedTab===0||vm.selectedTab===1"
         >
+            <!--TODO: falta agregar botones y logica para paginado-->
             <md-card
                 layout-gt-sm="row"
                 layout="column"
@@ -138,6 +139,17 @@
                     {{store.telefono_encargado}}
                 </div>
             </md-card>
+            <div ng-if="vm.refreshPaginationButtonsComponent">
+                <pagination-manager-buttons go-sig="vm.sig()"
+                                            go-prev="vm.prev()"
+                                            go-number="vm.goToNumberPage(number)"
+                                            limit-objects="vm.limit"
+                                            count-object="vm.fullStores.count"
+                                            offset-object="vm.offset"
+                                            nex-object="vm.fullStores.next"
+                                            prev-object="vm.fullStores.previous">
+                </pagination-manager-buttons>
+            </div>
         </div>
         <div
             ng-if="vm.selectedTab===2"
@@ -164,6 +176,17 @@
                     {{store.telefono_encargado}}
                 </div>
             </md-card>
+            <div ng-if="vm.refreshPaginationButtonsComponent">
+                <pagination-manager-buttons go-sig="vm.sig()"
+                                            go-prev="vm.prev()"
+                                            go-number="vm.goToNumberPage(number)"
+                                            limit-objects="vm.limit"
+                                            count-object="vm.fullStores.count"
+                                            offset-object="vm.offset"
+                                            nex-object="vm.fullStores.next"
+                                            prev-object="vm.fullStores.previous">
+                </pagination-manager-buttons>
+            </div>
         </div>
     </md-content>
 </div>

@@ -14,7 +14,7 @@
         });
 
     /* @ngInject */
-    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog, $scope) {
+    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler) {
         var vm = this;
 
         vm.economico = null;
@@ -105,8 +105,9 @@
 
                 })
                 .catch(function (err) {
-                    console.log("Error", err);
-                })
+                    //console.log("Error", err);
+                    ErrorHandler.errorTranslate(err);
+                });
 
         }
 

@@ -18,7 +18,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         })
@@ -30,7 +30,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         })
@@ -42,7 +42,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         });

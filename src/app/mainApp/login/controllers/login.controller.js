@@ -9,8 +9,6 @@
     function loginController($state, toastr, $log, AuthService, $cookies) {
         var vm = this;
 
-        console.debug($cookies.get('keepSession'));
-
         vm.loginClick = loginClick;
 
         vm.user = {
@@ -23,11 +21,16 @@
         function loginClick() {
             vm.loginPromise = AuthService.login(vm.user)
                 .then(function () {
-                    $cookies.put('keepSession', vm.keepSession, {path:'/'});
-                    $state.go('triangular.admin-default.bienvenida');
+                    $cookies.putObject('keepSession', vm.keepSession);
+                    $state.go('triangular.admin-default.welcome');
                 })
                 .catch(function (loginError) {
-                    toastr.error('Error al iniciar sesión');
+                    if(loginError.data.error_description==='Invalid credentials given.'){
+                        toastr.warning('Usuario o contraseña inválidos');
+                    }
+                    else {
+                        toastr.error('Error al iniciar sesión');
+                    }
                     $log.error('Error login');
                     $log.error(loginError);
                 });

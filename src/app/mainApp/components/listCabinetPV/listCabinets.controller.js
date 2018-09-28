@@ -11,13 +11,15 @@
             bindings:{
                 todosex: '<',
                 up: '&',
-                todosprev2: '<'
+                todosprev2: '<',
+                filterData: '&',
+                textSearchFilter: '<'
             }
-        })
-        .filter('cabinetPVFilter', custom);
+        });
+        //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
-    function listCabinetController (cabinetPV, Helper, Translate, toastr, $log, $mdDialog) {
+    function listCabinetController (cabinetPV, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
         var vm = this;
 
         vm.todosprev = vm.todosprev2;
@@ -29,6 +31,17 @@
         //functions
 
         vm.info = info;
+        vm.searchCabinet = searchCabinet;
+
+        init();
+
+        function init() {
+            if (vm.filterData !== null) {
+                if (vm.textSearchFilter.length > 0) {
+                    vm.searchText = vm.textSearchFilter;
+                }
+            }
+        }
 
         function info(item) {
             //vm.toModel = item.clone();
@@ -54,19 +67,21 @@
 
                 });
         }
-    }
 
-    function custom() {
-        return function (input, text) {
-            if (!angular.isString(text) || text === '') {
-                return input;
+        function searchCabinet() {
+            if (vm.filterData === null){
+                cabinetPV.getByID(vm.searchText)
+                    .then(function (respuesta) {
+                        info(respuesta);
+                    })
+                    .catch(function (error) {
+                        ErrorHandler.errorTranslate(error);
+                    });
             }
-
-            return _.filter(input, function (item) {
-                return item.economico.toLowerCase().indexOf(text.toLowerCase()) >= 0;
-            });
-
-        };
+            else {
+                vm.filterData({economicFilter: vm.searchText});
+            }
+        }
     }
 
 

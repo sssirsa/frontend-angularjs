@@ -34,6 +34,8 @@ configuration:
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 deploy:
   stage: deploy
@@ -56,13 +58,12 @@ deploy:
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 npm:
   stage: dep
   image: node:10.2.1
-  before_script:
-    - apt-get update
-    - apt-get install build-essential -y
   script:
     - npm install
   cache:
@@ -76,6 +77,8 @@ npm:
     - development
     - master
     - staging
+  tags:
+    - frontend
 
 bower:
   stage: dep
@@ -83,10 +86,8 @@ bower:
   variables:
     BOWER_VERSION: 1.8.4
   script:
-    - ls
     - npm install -g bower@$BOWER_VERSION --silent
     - bower install --allow-root --silent
-
   cache:
     untracked: true
     paths:
@@ -98,3 +99,5 @@ bower:
     - development
     - master
     - staging
+  tags:
+    - frontend

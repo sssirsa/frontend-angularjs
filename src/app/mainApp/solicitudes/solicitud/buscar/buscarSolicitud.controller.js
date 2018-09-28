@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .controller('buscarSolicitudController', buscarSolicitudController);
 
     function buscarSolicitudController(Translate,
