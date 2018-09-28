@@ -41,8 +41,8 @@
                         model: 'descripcion',
                         label: 'Nombre del proyecto',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -56,7 +56,20 @@
                 }
             },
             PUT: {
-                fields: [],
+                id: 'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Nombre del proyecto',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Proyecto',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

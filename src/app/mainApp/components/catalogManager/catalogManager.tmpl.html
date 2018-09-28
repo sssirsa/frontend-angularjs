@@ -169,7 +169,7 @@
                          layout-wrap>
                         <!-- Modify button -->
                         <md-button ng-if="$ctrl.actions['PUT']"
-                                   ng-click="$ctrl.update()"
+                                   ng-click="$ctrl.update(element)"
                                    aria-label="{{$ctrl.modifyButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">
@@ -358,7 +358,7 @@
                          layout-wrap>
                         <!-- Modify button -->
                         <md-button ng-if="$ctrl.actions['PUT']"
-                                   ng-click="$ctrl.update()"
+                                   ng-click="$ctrl.update(element)"
                                    aria-label="{{$ctrl.modifyButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">

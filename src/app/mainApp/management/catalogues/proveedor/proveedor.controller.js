@@ -130,7 +130,91 @@
                 }
             },
             PUT: {
-                fields: [],
+                id:'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'razon_social',
+                        label: 'Razon social',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Direccion',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'rfc',
+                        label: 'RFC',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'tel',
+                        model: 'telefono',
+                        label: 'Telefono',
+                        required: true,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'contacto',
+                        label: 'Contacto',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'email',
+                        model: 'correo_electronico',
+                        label: 'Correo electronico',
+                        required: true,
+                        validations: {
+                            regex: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$',
+                            errors: {
+                                regex: 'El correo no tiene un formato correcto',
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'comentarios',
+                        label: 'Comentarios',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Proveedor',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

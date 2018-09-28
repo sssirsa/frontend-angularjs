@@ -71,7 +71,32 @@
                 }
             },
             PUT: {
-                fields: [],
+                id:'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripción',
+                        required: false
+                    },
+                    {
+                        type: 'text',
+                        model: 'taller',
+                        label: 'Taller',
+                        required: false
+                    }
+                ],
                 dialog: {
                     title: 'Editar Etapa',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

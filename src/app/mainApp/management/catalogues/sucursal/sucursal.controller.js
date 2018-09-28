@@ -60,6 +60,7 @@
                         model: 'telefonos',
                         label: 'Telefonos',
                         required: false,
+                        hint:'Presione ENTER al terminar de capturar el teléfono',
                         validations: {
                             max: 10,
                             regex: "[0-9]{7,10}",
@@ -83,7 +84,45 @@
                 }
             },
             PUT: {
-                fields: [],
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Dirección',
+                        required: false
+                    },
+                    {
+                        type: 'array',
+                        model: 'telefonos',
+                        label: 'Telefonos',
+                        required: false,
+                        hint: 'Presione ENTER al terminar de capturar el teléfono',
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'responsable',
+                        label: 'Responsable',
+                        required: false
+                    }
+                ],
                 dialog: {
                     title: 'Editar Sucursal',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
@@ -119,7 +158,7 @@
                         label: 'Dirección'
                     },
                     {
-                        type: 'text',
+                        type: 'array',
                         model: 'telefonos',
                         label: 'Telefonos'
                     },

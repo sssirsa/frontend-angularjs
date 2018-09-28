@@ -1,10 +1,10 @@
 <div layout="column"
      layout-align="center stretch"
-     cg-busy="{promise:vm.createLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+     cg-busy="{promise:vm.modifyLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
     <md-toolbar layout="row"
                 layout-align="space-between center">
         <div layout-padding ng-if="vm.dialog.title" class="md-title">{{vm.dialog.title}}</div>
-        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Create element</div>
+        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Modify element</div>
         <md-button class="md-icon-button"
                    ng-click="vm.cancel()"
                    aria-label="exit dialog">
@@ -15,8 +15,8 @@
     <md-content layout="column"
                 layout-padding
                 layout-align="center stretch">
-        <form name="createForm"
-              ng-submit="vm.create(vm.objectToCreate)">
+        <form name="modifyForm"
+              ng-submit="vm.modify(vm.objectToModify)">
             <div layout="column"
                  layout-align="center stretch"
                  ng-repeat="field in vm.fields">
@@ -36,8 +36,8 @@
                                min="{{field.min}}"
                                max="{{field.max}}"
                                ng-pattern="field['validations'].regex"
-                               ng-model="vm.objectToCreate[field.model]" />
-                        <div ng-messages="createForm[field.model].$error">
+                               ng-model="vm.objectToModify[field.model]" />
+                        <div ng-messages="modifyForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                         </div>
@@ -56,9 +56,9 @@
                                aria-label="{{field['model']}}"
                                type="color"
                                name="{{field.model}}"
-                               ng-model="vm.objectToCreate[field.model]"
-                               value="{{vm.objectToCreate[field.model]}}" />
-                        <div ng-messages="createForm[field.model].$error">
+                               ng-model="vm.objectToModify[field.model]"
+                               value="{{vm.objectToModify[field.model]}}" />
+                        <div ng-messages="modifyForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                         </div>
@@ -91,7 +91,7 @@
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
-                        <md-select ng-model="vm.objectToCreate[field.model]"
+                        <md-select ng-model="vm.objectToModify[field.model]"
                                    ng-required="field.required"
                                    md-on-close="vm.selectState()">
                             <md-option ng-repeat="option in field.options.elements"
@@ -107,12 +107,13 @@
                 </section>
                 <section ng-if="field['type']==='catalog'">
                     <section ng-if="field['catalog'].requires">
-                        <catalog-select ng-if="vm.objectToCreate[field['catalog'].requires]"
+                        <catalog-select ng-if="vm.objectToModify[field['catalog'].requires]"
                                         required="field.required"
                                         catalog="field.catalog"
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
+                                        initial="vm.objectToModify[field.catalog.bindTo]"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                         <div ng-if="field.hint"
@@ -126,10 +127,11 @@
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
+                                        initial="vm.objectToModify[field.catalog.bindTo]"
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                         <div ng-if="field.hint"
-                             class="create-field-hint">
+                             class="modify-field-hint">
                             {{field.hint}}
                         </div>
                     </section>
@@ -140,7 +142,7 @@
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
                         <md-chips id="{{field['model']}}"
-                                  ng-model="vm.objectToCreate[field.model]"
+                                  ng-model="vm.objectToModify[field.model]"
                                   ng-required="field.required"
                                   delete-button-label="Remove">
                             <input type="text"
@@ -148,7 +150,7 @@
                                    placeholder="+"
                                    ng-pattern="field['validations'].regex">
                         </md-chips>
-                        <div ng-messages="createForm[field.model].$error">
+                        <div ng-messages="modifyForm[field.model].$error">
                             <div ng-message="required">{{field.validations.errors.required}}</div>
                             <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                         </div>
@@ -173,8 +175,8 @@
                 <div ng-if="!vm.dialog.cancelButton" hide-xs hide-sm>Cancel</div>
             </div>
         </md-button>
-        <md-button ng-click="vm.create(vm.objectToCreate)"
-                   ng-disabled="createForm.$invalid"
+        <md-button ng-click="vm.modify()"
+                   ng-disabled="modifyForm.$invalid"
                    aria-label="{{vm.dialog.okButton}}"
                    class="md-primary md-raised">
             <div layout="row" layout-align="center center">

@@ -25,6 +25,10 @@
  *                              ]
  *                            }
  *                            In this case 'elements' should receive the parameter 'results'
+ *                            
+ *      lazy: boolean,        (Optional) If given, the catalog won't load until the selector is opened
+ *      initial: string,      (Optional) If given, the lazy functionality will be disabled, and and initial
+ *                            value will be selected by the model given inside the catalog object.
  *      softDelete: {
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
@@ -40,13 +44,15 @@
                 catalog: '<',
                 pagination: '<',
                 elements: '<',
-                lazy:'<',
+                lazy: '<',
+                initial: '<',
                 softDelete: '<',
                 required: '<',
+
                 onSuccessList: '&',
                 onErrorList: '&',
                 onSelect: '&',
-                onOpen:'&'
+                onOpen: '&'
             }
         });
     function CatalogSelectController(
@@ -74,7 +80,15 @@
 
         function init() {
             if (!vm.lazy) {
+                //The catalog is not loaded in lazy mode
                 list();
+            }
+            else {
+                //The catalog is required to be loaded in lazy mode
+                if (vm.initial) {
+                    //The parameter initial was given, so the lazy parameter is ignored
+                    list();
+                }
             }
         }
 
@@ -119,6 +133,10 @@
                             }
                         }
                         vm.onSuccessList({ elements: vm.catalogElemets });
+                        //If initial parameter is given, select the element after listing the catalogue
+                        if (vm.initial) {
+                            vm.selectedElement = vm.initial;
+                        }
                     })
                     .catch(function (errorElements) {
                         console.error(errorElements);

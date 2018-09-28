@@ -4,7 +4,6 @@
  *          searchButton: string,   (Optional) Label for the Search button, default is 'Search'
  *          loadingText: string     (Optional) Text to show in the Loading, default is "Please wait..."
  *      },
- *      provider: CATALOG provider object,
  *      filters:[
  *          {
  *              type: string,            Valid types are ['equals', 'not', 'contains', 'startswith', 'icontains', 'istartswith'] Default is equals
@@ -33,7 +32,19 @@
  *                  }
  *              }
  *          }
- *      ]
+ *      ],
+ *      provider: CATALOG provider object,
+ *
+*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
+ *                         //The Search dialog just uses the "search" function of the provider
+           url: null,
+           getByID: function (id) {...},
+           list: function () {...},
+           create: function (object) {...},
+           update: function (id, object) {...},
+           remove: function (id) {...},
+           search: function (query) {...}
+           }
 */
 
 (function () {
