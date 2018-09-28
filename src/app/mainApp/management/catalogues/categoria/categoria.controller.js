@@ -70,7 +70,31 @@
                 }
             },
             PUT: {
-                fields: [],
+                id:'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripción',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Categoría',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
