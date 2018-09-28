@@ -10,7 +10,7 @@
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
-                totalFilteredText:'<', //If not given 'Total filtered' will be used
+                totalFilteredText: '<', //If not given 'Total filtered' will be used
                 loadingMessage: '<',
 
                 //Functions
@@ -39,7 +39,7 @@
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
-                removeFilterButtonText:'<',
+                removeFilterButtonText: '<',
 
                 //Meta object for the component
                 actions: '<',
@@ -129,51 +129,90 @@
                  *  PUT:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, number, email, options, date, color, file, fileUploader
-                 *              option: string,        (Optional) If type is options, and the value for the actual option is provided by the API
-                 *                                     rather than just the ID, you could bind it whit this element.
-                 *                                     This will also add and "Edit" button to the field in order to load the catalog, just if it's needed.
+                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
                  *              model: string,         Name of the field that will be sent to the API
-                 *              required: boolean,     Specifies whether or not the field is required
-                 *              label: string,         (Optional) Label to show in the form. If not given, the model will be used
-                 *              validations: [
+                 *              required: boolean,     (Optional) Specifies whether or not the field is required
+                 *              hint: string,          (Optional) Hint label to show
+                 *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
+                 *              validations:
                  *                  {
                  *                      regex: string,          Option regular expression for field validation (just used when text),
                  *                      max: number,            Maximum value allowed for selection (just used when number)
                  *                      min: number,            Minimum value allowed for selection (just used when number)
                  *                      date_format: string,    String format to use for date formating (just used when date)
-                 *                      fileUploder: {                 As used by the file-uploader component
-                 *                          fileFormats: '<', //image/*, audio/*, video/*, application/pdf
-                 *                          capture: '<', //camera
-                 *                          validations: '<', //size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}
-                 *                          resize: '<', //{width: 1000, height: 1000, centerCrop: true}
-                 *                          resizeIf: '<', //$width > 5000 || $height > 5000
-                 *                          maxDimensions: '<', //Max dimensions for images
-                 *                          maxDuration: '<', //Max duration for videos
-                 *                          multipleFiles: '<', //Allow multiple files
-                 *                          allowFolders: '<', //Allow directory uploading
-                 *                          maxFiles: '<', //Max number of files allowed
-                 *                          keep: '<', //true, false or distinct,
-                 *                          filesSelected: '&'// {files:vm.files}
-                 *                      },
-                 *                      error_message: string   Error message to show when the validation is not fulfilled
-                 *                  }
-                 *              ],
-                 *              catalog:{                just used when the type of the field is options
-                 *                  requires: string,    (Optional) Field required to enable this catalog
+                 *                      errors:{
+                 *                          required: string,       (Optional) Default is 'Required field'
+                 *                          regex: string,          (Optional) Default is 'Invalid pattern {{regex}}'
+                 *                          max: string,            (Optional) Default is 'Max value is {{max}}'
+                 *                          min: string,            (Optional) Default is 'Min value is {{min}}'
+                 *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
+                 *                      }
+                 *                  },
+                 *              catalog:{                 As used by the catalog-select component
                  *                  url: string,         Full or partial URL depending on the kind
                  *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+                 *                  name: string,        (Optional) Default is "Catalog"
+                 *                  loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
                  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
+                 *
+                 *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
+                 *                      total: string,        (Optional) Binding for the number of total elements
+                 *                      next: string,         (Optional) Binding for the url that brings to the next page
+                 *                  },
+                 *                  required: boolean,    (Optional) To be used in form validation
+                 *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
+                 *                                        aka: the API returns the array of objects in an element of the response, as in pagination
+                 *                                        Example:
+                 *                                        {
+                 *                                          total:'',
+                 *                                          description:'',
+                 *                                          results:[
+                 *                                              {...},
+                 *                                              {...}
+                 *                                          ]
+                 *                                        }
+                 *                                        In this case 'elements' should receive the parameter 'results'
+                 *                  softDelete: {
+                 *                      hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
+                 *                      reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
+                 *                  }
+                 *              },
+                 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
+                 *                  model: string,            Field of the element to be used in the model
+                 *                  option: string,           Field of the element to show in list
+                 *                  elements:[
+                 *                      {
+                 *                          model: {{}},
+                 *                          option: {{}}
+                 *                      }
+                 *                  ]
                  *              }
+                 *              fileUploder: {                 As used by the file-uploader component
+                 *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
+                 *                          capture: '<',               //camera
+                 *                          validations: '<',           //size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}
+                 *                          resize: '<',                //{width: 1000, height: 1000, centerCrop: true}
+                 *                          resizeIf: '<',              //$width > 5000 || $height > 5000
+                 *                          maxDimensions: '<',         //Max dimensions for images
+                 *                          maxDuration: '<',           //Max duration for videos
+                 *                          multipleFiles: '<',         //Allow multiple files
+                 *                          allowFolders: '<',          //Allow directory uploading
+                 *                          maxFiles: '<',              //Max number of files allowed
+                 *                          keep: '<',                  //true, false or distinct,
+                 *                                                      (Optional) Just necessary if any further treatment is required in the model of the files, such as conversion.
+                 *                          filesSelected: '<'          * function(files){ return model; } //Do the necesary processing for the files inside the given function
+                 *                      },
                  *          }
                  *      ],
-                 *      dialog:{              //Labels to use in the modify dialog
-                 *          title: string,          (Optional) Title for the modify dialog, default is 'Modify element'
-                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Save'
+                 *      dialog:{              //Labels to use in the creation dialog
+                 *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
+                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
                  *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
-                 *      }
+                 *      },
+                 *      id: string,           //Field name to be used as id for HTTP PUT method
+                 *      element: object       //Initial object to be modified
                  *  },
                  *  LIST:{
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
@@ -344,7 +383,7 @@
                 });
             }
             else {
-                ErrorHandler.errorTranslate({status:-1});
+                ErrorHandler.errorTranslate({ status: -1 });
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
@@ -382,19 +421,34 @@
             }
         }
 
-        function update(idToUpdate, newObject) {
+        function update(element) {
             //TODO: Update behavior handling
             createMainCatalogProvider();
             if (vm.actions['PUT']) {
-                //vm.updateLoader = vm.CatalogProvider
-                //    .update(vm.url, idToUpdate, newObject)
-                //    .then(function (updateResult) {
-                //        activate();
-                //        vm.onSuccessUpdate({ result: updateResult });
-                //    })
-                //    .catch(function (errorUpdate) {
-                //        vm.onErrorUpdate({ error: errorUpdate });
-                //    });
+                $mdDialog.show({
+                    controller: 'CatalogModifyDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/modifyDialog/modifyDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['PUT'].dialog,
+                        id: vm.actions['PUT'].id,
+                        fields: vm.actions['PUT'].fields,
+                        provider: vm.CatalogProvider,
+                        element: element
+                    }
+                }).then(function () {
+                    activate();
+                    ErrorHandler.successUpdate();
+                    vm.onSuccessDelete();
+                }).catch(function (errorDelete) {
+                    if (errorDelete) {
+                        ErrorHandler.errorTranslate(errorDelete);
+                        vm.onErrorDelete(errorDelete);
+                    }
+                });
             }
             else {
                 vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });

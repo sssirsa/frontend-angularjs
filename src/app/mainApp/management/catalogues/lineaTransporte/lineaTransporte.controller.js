@@ -83,7 +83,45 @@
                 }
             },
             PUT: {
-                fields: [],
+                id: 'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'razon_social',
+                        label: 'Razon social',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'La razón social es obligatoria'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'direccion',
+                        label: 'Direccion',
+                        required: false
+                    },
+                    {
+                        type: 'array',
+                        model: 'telefonos',
+                        label: 'Telefonos',
+                        required: false,
+                        validations: {
+                            max: 10,
+                            regex: "[0-9]{7,10}",
+                            errors: {
+                                regex: 'El número no tiene un formato correcto'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'responsable',
+                        label: 'Responsable',
+                        required: false
+                    }
+                ],
                 dialog: {
                     title: 'Editar Linea de Transporte',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

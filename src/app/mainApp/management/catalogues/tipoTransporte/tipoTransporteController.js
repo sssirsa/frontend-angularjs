@@ -58,7 +58,20 @@
                 }
             },
             PUT: {
-                fields: [],
+                id: 'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripcion',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Transporte',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

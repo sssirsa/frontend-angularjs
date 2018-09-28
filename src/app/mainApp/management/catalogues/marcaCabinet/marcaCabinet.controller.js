@@ -40,7 +40,7 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripcion',
+                        label: 'Nombre',
                         required: true,
                         validations:{
                             errors:{
@@ -52,6 +52,7 @@
                         type: 'text',
                         model: 'categoria',
                         label: 'Categoria',
+                        hint: 'Cabinet, carrito, etc.',
                         required: true,
                         validations: {
                             errors: {
@@ -68,7 +69,31 @@
                 }
             },
             PUT: {
-                fields: [],
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'categoria',
+                        label: 'Categoria',
+                        hint:'Cabinet, carrito, etc.',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Marca',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
