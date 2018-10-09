@@ -16,6 +16,29 @@
                 templateUrl: 'app/mainApp/entries/entrada.tmpl.html',
                 controller: 'entradaController',
                 controllerAs: 'vm'
+            })
+            /////////////////////////////////////////
+            .state('triangular.admin-default.entry.new.manual', {
+                url: '/entrada/nuevos/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/new/manual/newManualEntry.tmpl.html',
+                controller: 'newManualEntryController',
+                controllerAs:'vm'
+            })
+            .state('triangular.admin-default.entry.new.massive', {
+                url: '/entrada/nuevos/masiva',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/new/massive/newMassiveEntry.tmpl.html',
+                controller: 'newMassiveEntryController',
+                controllerAs: 'vm'
             });
         triMenuProvider.addMenu(
             {
