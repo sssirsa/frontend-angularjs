@@ -59,7 +59,7 @@
                 name: 'MAIN.MENU.INTERNAL_SERVICE',
                 icon: 'fa fa-cogs',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 6,
                 children: [
                     {
