@@ -86,6 +86,29 @@
                 templateUrl: 'app/mainApp/entries/unrecognizable/massive/unrecognizableMassiveEntry.tmpl.html',
                 controller: 'unrecognizableMassiveEntryController',
                 controllerAs: 'vm'
+            })
+            /* Obsolete asset entries */
+            .state('triangular.admin-default.entry.obsolete.manual', {
+                url: '/entrada/obsoletos/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
+                controller: 'obsoleteManualEntryController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.entry.obsolete.massive', {
+                url: '/entrada/obsoletos/masiva',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/obsolete/massive/obsoleteMassiveEntry.tmpl.html',
+                controller: 'obsoleteMassiveEntryController',
+                controllerAs: 'vm'
             });
         triMenuProvider.addMenu(
             {
