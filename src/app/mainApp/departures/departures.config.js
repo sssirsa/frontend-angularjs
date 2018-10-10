@@ -35,7 +35,7 @@
                 name: 'MAIN.MENU.OUT.TITLE',
                 icon: 'fa fa-sign-out',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 5,
                 children: [
                     {

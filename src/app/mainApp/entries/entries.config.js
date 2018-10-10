@@ -22,7 +22,7 @@
                 name: 'MAIN.MENU.IN',
                 icon: 'fa fa-sign-in',
                 type: 'link',
-                permission: ['ADMINISTRADOR'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 4,
                 state: 'triangular.admin-default.entrada'
             }
