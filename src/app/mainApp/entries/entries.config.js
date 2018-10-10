@@ -18,6 +18,7 @@
                 controllerAs: 'vm'
             })
             /////////////////////////////////////////
+            /* New asset entries */
             .state('triangular.admin-default.entry.new.manual', {
                 url: '/entrada/nuevos/manual',
                 data: {
@@ -38,6 +39,29 @@
                 },
                 templateUrl: 'app/mainApp/entries/new/massive/newMassiveEntry.tmpl.html',
                 controller: 'newMassiveEntryController',
+                controllerAs: 'vm'
+            })
+            /* Warranty asset entries */
+            .state('triangular.admin-default.entry.warranty.manual', {
+                url: '/entrada/garantias/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/warranty/manual/warrantyManualEntry.tmpl.html',
+                controller: 'warrantyManualEntryController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.entry.warranty.massive', {
+                url: '/entrada/garantias/masiva',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/warranty/massive/warrantyMassiveEntry.tmpl.html',
+                controller: 'warrantyMassiveEntryController',
                 controllerAs: 'vm'
             });
         triMenuProvider.addMenu(
