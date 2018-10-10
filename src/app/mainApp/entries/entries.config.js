@@ -63,6 +63,29 @@
                 templateUrl: 'app/mainApp/entries/warranty/massive/warrantyMassiveEntry.tmpl.html',
                 controller: 'warrantyMassiveEntryController',
                 controllerAs: 'vm'
+            })
+            /* Unrecognizable asset entries */
+            .state('triangular.admin-default.entry.unrecognizable.manual', {
+                url: '/entrada/no_capitalizados/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/unrecognizable/manual/unrecognizableManualEntry.tmpl.html',
+                controller: 'unrecognizableManualEntryController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.entry.unrecognizable.massive', {
+                url: '/entrada/no_capitalizados/masiva',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries/unrecognizable/massive/unrecognizableMassiveEntry.tmpl.html',
+                controller: 'unrecognizableMassiveEntryController',
+                controllerAs: 'vm'
             });
         triMenuProvider.addMenu(
             {
