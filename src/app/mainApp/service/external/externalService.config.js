@@ -10,7 +10,7 @@
                 url: '/asignarServicio',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/asignacionServicio.tmpl.html',
@@ -21,7 +21,7 @@
                 url: '/detalleServicio/:id',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
                 templateUrl: 'app/mainApp/service/external/asignacionServicio/detalleAsignacion.tmpl.html',
@@ -32,7 +32,7 @@
                 url: '/listarServicios',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
                 templateUrl: 'app/mainApp/service/external/atenciones/list/list-atention-page.tmpl.html',
@@ -50,7 +50,7 @@
                 controllerAs: 'vm',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -61,7 +61,7 @@
                 controllerAs: 'vm',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -75,7 +75,7 @@
                 },
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -86,7 +86,7 @@
                 controllerAs: 'vm',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -101,7 +101,7 @@
                 },
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -114,7 +114,7 @@
                 controllerAs: 'vm',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
             })
@@ -123,7 +123,7 @@
                 url: '/atencion/:id',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E']
+                        only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
                 templateUrl: 'app/mainApp/service/external/atenciones/detail/detail-attention-page-tmpl.html',
@@ -141,13 +141,13 @@
                 name: 'MAIN.MENU.EXTERNAL_SERVICE',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 7,
                 children: [
                     {
                         name: 'MAIN.MENU.SERVICE.ASSIGN',
                         state: 'triangular.admin-default.serviceAssing',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN', 'TECNICO E'],
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },
                     {
