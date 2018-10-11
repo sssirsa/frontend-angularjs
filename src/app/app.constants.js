@@ -391,8 +391,8 @@
 
             ],
             salePointAssignKind: [
-                {id: 'pending', value: 'Pendientes'},
-                {id: 'all', value: 'Detalle de atención'}
+                { id: 'pending', value: 'Pendientes' },
+                { id: 'all', value: 'Detalle de atención' }
             ],
             requestKinds: [
                 {
@@ -435,6 +435,15 @@
             diagnostico_cabinet: 'diagnostico_cabinet',
             entrada_masiva: 'mass_upload',
             entrada_salida: 'entrada_salida',
+            //TODO: Update when known
+            entries: {
+                new: 'news',
+                warranty: 'warranties',
+                obsolete: 'scrapped',
+                unrecognizable: 'no_labeled',
+                addCabinet: 'add_cabinet',
+                close: 'close'
+            },
             establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
             estado: 'estado',
@@ -453,8 +462,8 @@
             massive: {
                 store: 'massive/store'
             },
-            massiveEntries: '',//TODO: Change when known
-            manualEntries: '',//TODO: Change when known
+            massiveEntries: 'entries/massive',//TODO: Change when known
+            manualEntries: 'entries',//TODO: Change when known
             modelo_cabinet: 'modelo_cabinet',
             municipio: 'municipio',
             normalize_cabinets: 'normalize',
