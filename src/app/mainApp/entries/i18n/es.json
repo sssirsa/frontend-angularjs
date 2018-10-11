@@ -1,4 +1,13 @@
 {
+    "ENTRIES": {
+        "MENU": {
+            "TITLE": "Entradas",
+            "NEW": "Nuevos",
+            "WARRANTIES": "Garantías",
+            "UNRECOGNIZABLE": "No capitalizados",
+            "OBSOLETE": "Obsoletos"
+        }
+    },
     "INPUT": {
         "Entrance": "Registrar Entrada",
         "Output": "Registrar Salida",

@@ -6,20 +6,8 @@
     function entriesConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/entries');
         $stateProvider
-            .state('triangular.admin-default.entrada', {
-                url: '/entrada',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries/entrada.tmpl.html',
-                controller: 'entradaController',
-                controllerAs: 'vm'
-            })
-            /////////////////////////////////////////
             /* New asset entries */
-            .state('triangular.admin-default.entry.new.manual', {
+            .state('triangular.admin-default.entry-new-manual', {
                 url: '/entrada/nuevos/manual',
                 data: {
                     permissions: {
@@ -30,7 +18,7 @@
                 controller: 'newManualEntryController',
                 controllerAs:'vm'
             })
-            .state('triangular.admin-default.entry.new.massive', {
+            .state('triangular.admin-default.entry-new-massive', {
                 url: '/entrada/nuevos/masiva',
                 data: {
                     permissions: {
@@ -42,7 +30,7 @@
                 controllerAs: 'vm'
             })
             /* Warranty asset entries */
-            .state('triangular.admin-default.entry.warranty.manual', {
+            .state('triangular.admin-default.entry-warranty-manual', {
                 url: '/entrada/garantias/manual',
                 data: {
                     permissions: {
@@ -53,7 +41,7 @@
                 controller: 'warrantyManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry.warranty.massive', {
+            .state('triangular.admin-default.entry-warranty-massive', {
                 url: '/entrada/garantias/masiva',
                 data: {
                     permissions: {
@@ -65,7 +53,7 @@
                 controllerAs: 'vm'
             })
             /* Unrecognizable asset entries */
-            .state('triangular.admin-default.entry.unrecognizable.manual', {
+            .state('triangular.admin-default.entry-unrecognizable-manual', {
                 url: '/entrada/no_capitalizados/manual',
                 data: {
                     permissions: {
@@ -76,7 +64,7 @@
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry.unrecognizable.massive', {
+            .state('triangular.admin-default.entry-unrecognizable-massive', {
                 url: '/entrada/no_capitalizados/masiva',
                 data: {
                     permissions: {
@@ -88,7 +76,7 @@
                 controllerAs: 'vm'
             })
             /* Obsolete asset entries */
-            .state('triangular.admin-default.entry.obsolete.manual', {
+            .state('triangular.admin-default.entry-obsolete-manual', {
                 url: '/entrada/obsoletos/manual',
                 data: {
                     permissions: {
@@ -99,7 +87,7 @@
                 controller: 'obsoleteManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry.obsolete.massive', {
+            .state('triangular.admin-default.entry-obsolete-massive', {
                 url: '/entrada/obsoletos/masiva',
                 data: {
                     permissions: {
@@ -112,12 +100,37 @@
             });
         triMenuProvider.addMenu(
             {
-                name: 'MAIN.MENU.IN',
+                name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in',
-                type: 'link',
-                permission: ['ADMINISTRADOR'],
+                type: 'dropdown',
+                permission: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority: 4,
-                state: 'triangular.admin-default.entrada'
+                children: [
+                    {
+                        name: 'ENTRIES.MENU.NEW',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state:'triangular.admin-default.entry-new-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.WARRANTIES',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-warranty-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.UNRECOGNIZABLE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-unrecognizable-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.OBSOLETE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-obsolete-manual'
+                    }
+                ]
             }
         );
     }
