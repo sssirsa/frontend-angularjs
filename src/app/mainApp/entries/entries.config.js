@@ -107,29 +107,50 @@
                 priority: 4,
                 children: [
                     {
-                        name: 'ENTRIES.MENU.NEW',
-                        type: 'link',
+                        name: 'ENTRIES.MENU.MANUAL',
+                        type: 'dropdown',
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state:'triangular.admin-default.entry-new-manual'
+                        children: [
+                            {
+                                name: 'ENTRIES.MENU.NEW',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.entry-new-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.WARRANTIES',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.entry-warranty-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.UNRECOGNIZABLE',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.entry-unrecognizable-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.OBSOLETE',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.entry-obsolete-manual'
+                            }
+                        ]
                     },
                     {
-                        name: 'ENTRIES.MENU.WARRANTIES',
-                        type: 'link',
+                        name: 'ENTRIES.MENU.MASSIVE',
+                        type: 'dropdown',
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-warranty-manual'
+                        children: [
+                            {
+                                name: 'ENTRIES.MENU.RECOGNIZABLE',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                //state: 'triangular.admin-default.entry-new-manual'
+                            },
+                        ]
                     },
-                    {
-                        name: 'ENTRIES.MENU.UNRECOGNIZABLE',
-                        type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-unrecognizable-manual'
-                    },
-                    {
-                        name: 'ENTRIES.MENU.OBSOLETE',
-                        type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-obsolete-manual'
-                    }
+                    
                 ]
             }
         );

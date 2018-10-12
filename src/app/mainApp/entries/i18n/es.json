@@ -2,10 +2,20 @@
     "ENTRIES": {
         "MENU": {
             "TITLE": "Entradas",
+            "MANUAL": "Manual",
+            "MASSIVE": "Masiva",
             "NEW": "Nuevos",
             "WARRANTIES": "Garantías",
             "UNRECOGNIZABLE": "No capitalizados",
+            "RECOGNIZABLE": "Capitalizados",
             "OBSOLETE": "Obsoletos"
+        },
+        "NEW": {
+            "TITLE": "Entrada de nuevos",
+            "HEADERS": {
+                "ADD_CABINET": "Registro de cabinets"
+
+            }
         }
     },
     "INPUT": {
