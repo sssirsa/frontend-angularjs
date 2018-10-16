@@ -9,6 +9,7 @@
  *                               If not given, then the model will be used
  *      },
  *      hint: string,         (Optional) Shows a message under the field
+ *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
  *      pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
@@ -63,11 +64,6 @@
         CATALOG_SELECT
     ) {
         var vm = this;
-        ////Variables
-        //vm.catalog = catalog;
-        //vm.pagination = pagination;
-        //vm.elements = elements;
-        //vm.sofDelete = softDelete;
 
         vm.Catalogrovider = null;
         vm.PaginationProvider = null;
