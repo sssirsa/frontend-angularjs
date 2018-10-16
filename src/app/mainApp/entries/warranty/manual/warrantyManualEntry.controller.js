@@ -14,6 +14,20 @@
         vm.showSubsidiarySelector = false;
         vm.catalogues = {};
 
+        //Validations
+        vm.imageConstraints = {
+            validations: {
+                size: {
+                    max: '5MB',
+                    min: '10B',
+                    height: { max: 4096, min: 100 },
+                    width: {max:4096, min:100}
+                }
+            },
+            resize: { width: 4096 },
+            resizeIf:'$width > 4096 || $height > 4096'
+        };
+
         // Auto invoked init function
         (function init() {
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
@@ -28,6 +42,11 @@
 
         vm.onElementSelect = function (element, field) {
             vm.entry[field] = element;
+        }
+
+        vm.selectDriverID = function (file) {
+            vm.entry['ife_chofer'] = file;
+            console.log(vm.entry);
         }
 
     }

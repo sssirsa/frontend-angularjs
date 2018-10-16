@@ -26,7 +26,8 @@
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
-                "DRIVER_ID": "Identificación del operador"
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME":  "Nombre del operador"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
@@ -34,7 +35,8 @@
                 "AGENCY": "Selecciona alguna de las agencias",
                 "TRANSPORT_LINE": "Selecciona una linea de transporte",
                 "TRANSPORT_KIND": "Selecciona un tipo de transporte",
-                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una"
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una",
+                "DRIVER_NAME": "Operador del transporte de entrega"
             },
             "BUTTONS": {
 
