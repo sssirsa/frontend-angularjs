@@ -8,6 +8,7 @@
  *          option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
  *                               If not given, then the model will be used
  *      },
+ *      hint: string,         (Optional) Shows a message under the field
  *      pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
