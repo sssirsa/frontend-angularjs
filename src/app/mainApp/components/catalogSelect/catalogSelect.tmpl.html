@@ -2,13 +2,14 @@
                     class="md-block full-width"
                     cg-busy="{ promise:$ctrl.listLoader, message:' ' }">
 
-    <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
+    <label ng-if="$ctrl.catalog.name">
+        {{$ctrl.catalog.name}}
+    </label>
     <label ng-if="!$ctrl.catalog.name">Catalog</label>
     <div layout="row">
         <md-icon ng-if="$ctrl.icon" class="{{$ctrl.icon}}"></md-icon>
-
         <md-select ng-model="$ctrl.selectedElement"
-                   class="full-width"
+                   class="full-width no-margin"
                    ng-required="$ctrl.required"
                    md-on-open="$ctrl.onSelectOpen()"
                    md-on-close="$ctrl.onClose()">
@@ -27,8 +28,8 @@
                        class="md-primary md-raised">
                 <div layout="row" layout-align="center center">
                     <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-                    <div ng-if="$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>{{$ctrl.catalog.loadMoreButtonText}}</div>
-                    <div ng-if="!$ctrl.catalog.loadMoreButtonText" hide-xs hide-sm>Load more</div>
+                    <div ng-if="$ctrl.catalog.loadMoreButtonText" hide-xs>{{$ctrl.catalog.loadMoreButtonText}}</div>
+                    <div ng-if="!$ctrl.catalog.loadMoreButtonText" hide-xs>Load more</div>
                 </div>
             </md-button>
         </md-select>

@@ -16,6 +16,29 @@
                 "ADD_CABINET": "Registro de cabinets"
 
             }
+        },
+        "WARRANTY": {
+            "TITLE": "Entrada de garantías",
+            "LABELS": {
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador"
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona alguna de las agencias",
+                "TRANSPORT_LINE": "Selecciona una linea de transporte",
+                "TRANSPORT_KIND": "Selecciona un tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una"
+            },
+            "BUTTONS": {
+
+            }
         }
     },
     "INPUT": {
