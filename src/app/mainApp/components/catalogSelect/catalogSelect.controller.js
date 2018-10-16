@@ -43,6 +43,9 @@
             controller: CatalogSelectController,
             bindings: {
                 catalog: '<',
+                hint: '<',
+                icon:'<',
+
                 pagination: '<',
                 elements: '<',
                 lazy: '<',

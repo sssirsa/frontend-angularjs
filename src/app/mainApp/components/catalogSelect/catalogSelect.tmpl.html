@@ -1,8 +1,12 @@
 <md-input-container flex
                     class="md-block full-width"
                     cg-busy="{ promise:$ctrl.listLoader, message:' ' }">
+
     <label ng-if="$ctrl.catalog.name">{{$ctrl.catalog.name}}</label>
     <label ng-if="!$ctrl.catalog.name">Catalog</label>
+
+    <md-icon ng-if="$ctrl.icon" class="{{$ctrl.icon}}"></md-icon>
+
     <md-select ng-model="$ctrl.selectedElement"
                ng-required="$ctrl.required"
                md-on-open="$ctrl.onSelectOpen()"
