@@ -33,7 +33,7 @@
         triMenuProvider.addMenu(
             {
                 name: 'MAIN.MENU.OUT.TITLE',
-                icon: 'fa fa-sign-out',
+                icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR'],
                 priority: 5,

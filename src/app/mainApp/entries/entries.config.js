@@ -16,19 +16,19 @@
                 },
                 templateUrl: 'app/mainApp/entries/new/manual/newManualEntry.tmpl.html',
                 controller: 'newManualEntryController',
-                controllerAs:'vm'
-            })
-            .state('triangular.admin-default.entry-new-massive', {
-                url: '/entrada/nuevos/masiva',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries/new/massive/newMassiveEntry.tmpl.html',
-                controller: 'newMassiveEntryController',
                 controllerAs: 'vm'
             })
+            //.state('triangular.admin-default.entry-new-massive', {
+            //    url: '/entrada/nuevos/masiva',
+            //    data: {
+            //        permissions: {
+            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+            //        }
+            //    },
+            //    templateUrl: 'app/mainApp/entries/new/massive/newMassiveEntry.tmpl.html',
+            //    controller: 'newMassiveEntryController',
+            //    controllerAs: 'vm'
+            //})
             /* Warranty asset entries */
             .state('triangular.admin-default.entry-warranty-manual', {
                 url: '/entrada/garantias/manual',
@@ -41,17 +41,17 @@
                 controller: 'warrantyManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry-warranty-massive', {
-                url: '/entrada/garantias/masiva',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries/warranty/massive/warrantyMassiveEntry.tmpl.html',
-                controller: 'warrantyMassiveEntryController',
-                controllerAs: 'vm'
-            })
+            //.state('triangular.admin-default.entry-warranty-massive', {
+            //    url: '/entrada/garantias/masiva',
+            //    data: {
+            //        permissions: {
+            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+            //        }
+            //    },
+            //    templateUrl: 'app/mainApp/entries/warranty/massive/warrantyMassiveEntry.tmpl.html',
+            //    controller: 'warrantyMassiveEntryController',
+            //    controllerAs: 'vm'
+            //})
             /* Unrecognizable asset entries */
             .state('triangular.admin-default.entry-unrecognizable-manual', {
                 url: '/entrada/no_capitalizados/manual',
@@ -64,17 +64,17 @@
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry-unrecognizable-massive', {
-                url: '/entrada/no_capitalizados/masiva',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries/unrecognizable/massive/unrecognizableMassiveEntry.tmpl.html',
-                controller: 'unrecognizableMassiveEntryController',
-                controllerAs: 'vm'
-            })
+            //.state('triangular.admin-default.entry-unrecognizable-massive', {
+            //    url: '/entrada/no_capitalizados/masiva',
+            //    data: {
+            //        permissions: {
+            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+            //        }
+            //    },
+            //    templateUrl: 'app/mainApp/entries/unrecognizable/massive/unrecognizableMassiveEntry.tmpl.html',
+            //    controller: 'unrecognizableMassiveEntryController',
+            //    controllerAs: 'vm'
+            //})
             /* Obsolete asset entries */
             .state('triangular.admin-default.entry-obsolete-manual', {
                 url: '/entrada/obsoletos/manual',
@@ -87,71 +87,52 @@
                 controller: 'obsoleteManualEntryController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.entry-obsolete-massive', {
-                url: '/entrada/obsoletos/masiva',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries/obsolete/massive/obsoleteMassiveEntry.tmpl.html',
-                controller: 'obsoleteMassiveEntryController',
-                controllerAs: 'vm'
-            });
+            //.state('triangular.admin-default.entry-obsolete-massive', {
+            //    url: '/entrada/obsoletos/masiva',
+            //    data: {
+            //        permissions: {
+            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+            //        }
+            //    },
+            //    templateUrl: 'app/mainApp/entries/obsolete/massive/obsoleteMassiveEntry.tmpl.html',
+            //    controller: 'obsoleteMassiveEntryController',
+            //    controllerAs: 'vm'
+            //})
+            ;
         triMenuProvider.addMenu(
             {
                 name: 'ENTRIES.MENU.TITLE',
-                icon: 'fa fa-sign-in',
+                icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {
-                        name: 'ENTRIES.MENU.MANUAL',
-                        type: 'dropdown',
+                        name: 'ENTRIES.MENU.NEW',
+                        type: 'link',
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        children: [
-                            {
-                                name: 'ENTRIES.MENU.NEW',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                state: 'triangular.admin-default.entry-new-manual'
-                            },
-                            {
-                                name: 'ENTRIES.MENU.WARRANTIES',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                state: 'triangular.admin-default.entry-warranty-manual'
-                            },
-                            {
-                                name: 'ENTRIES.MENU.UNRECOGNIZABLE',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                state: 'triangular.admin-default.entry-unrecognizable-manual'
-                            },
-                            {
-                                name: 'ENTRIES.MENU.OBSOLETE',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                state: 'triangular.admin-default.entry-obsolete-manual'
-                            }
-                        ]
+                        state: 'triangular.admin-default.entry-new-manual'
                     },
                     {
-                        name: 'ENTRIES.MENU.MASSIVE',
-                        type: 'dropdown',
+                        name: 'ENTRIES.MENU.WARRANTIES',
+                        type: 'link',
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                        children: [
-                            {
-                                name: 'ENTRIES.MENU.RECOGNIZABLE',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                //state: 'triangular.admin-default.entry-new-manual'
-                            },
-                        ]
+                        state: 'triangular.admin-default.entry-warranty-manual'
                     },
-                    
+                    {
+                        name: 'ENTRIES.MENU.UNRECOGNIZABLE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-unrecognizable-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.OBSOLETE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-obsolete-manual'
+                    }
                 ]
+
             }
         );
     }
