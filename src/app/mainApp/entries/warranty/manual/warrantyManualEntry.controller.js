@@ -10,6 +10,7 @@
         var vm = this;
 
         //Variables
+        vm.selectedTab = 0;
         vm.entry = {};
         vm.showSubsidiarySelector = false;
         vm.catalogues = {};

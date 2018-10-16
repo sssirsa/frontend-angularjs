@@ -34,15 +34,17 @@
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
-                "AGENCY": "Selecciona alguna de las agencias",
-                "TRANSPORT_LINE": "Selecciona una linea de transporte",
-                "TRANSPORT_KIND": "Selecciona un tipo de transporte",
-                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega"
             },
             "BUTTONS": {
-
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada"
             }
         }
     },
