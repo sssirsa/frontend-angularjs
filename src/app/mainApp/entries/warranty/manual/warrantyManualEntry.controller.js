@@ -54,7 +54,6 @@
                 fileReader.onloadend = function () {
                     base64Image = fileReader.result;
                     vm.entry['ife_chofer'] = base64Image;
-                    console.log(vm.entry);
                 };
 
             }
