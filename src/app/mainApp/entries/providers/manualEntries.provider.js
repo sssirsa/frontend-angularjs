@@ -60,7 +60,7 @@
                             option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.SUBSIDIARY'),
-                        icon:'fa fa-home',
+                        icon:'fa fa-warehouse',
                         required: true,
                         pagination: {
                             total: 'count',
@@ -82,7 +82,7 @@
                             option: 'razon_social'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_LINE'),
-                        icon:'fa fa-shuttle-van',
+                        icon:'fa fa-pallet',
                         required: true,
                         pagination: {
                             total: 'count',
