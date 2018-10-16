@@ -20,6 +20,8 @@
         "WARRANTY": {
             "TITLE": "Entrada de garantías",
             "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
@@ -27,7 +29,7 @@
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
                 "DRIVER_ID": "Identificación del operador",
-                "DRIVER_NAME":  "Nombre del operador"
+                "DRIVER_NAME": "Nombre del operador"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
@@ -36,6 +38,7 @@
                 "TRANSPORT_LINE": "Selecciona una linea de transporte",
                 "TRANSPORT_KIND": "Selecciona un tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega"
             },
             "BUTTONS": {
