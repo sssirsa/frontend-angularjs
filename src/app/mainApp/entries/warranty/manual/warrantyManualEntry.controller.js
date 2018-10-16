@@ -21,11 +21,11 @@
                     max: '5MB',
                     min: '10B',
                     height: { max: 4096, min: 100 },
-                    width: {max:4096, min:100}
+                    width: { max: 4096, min: 100 }
                 }
             },
             resize: { width: 4096 },
-            resizeIf:'$width > 4096 || $height > 4096'
+            resizeIf: '$width > 4096 || $height > 4096'
         };
 
         // Auto invoked init function
@@ -44,9 +44,20 @@
             vm.entry[field] = element;
         }
 
-        vm.selectDriverID = function (file) {
-            vm.entry['ife_chofer'] = file;
-            console.log(vm.entry);
+        vm.selectDriverID = function (files) {
+            if (files.length > 0) {
+                var file = files[0];
+                //Image processing as a base64 string
+                var base64Image = null;
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onloadend = function () {
+                    base64Image = fileReader.result;
+                    vm.entry['ife_chofer'] = base64Image;
+                    console.log(vm.entry);
+                };
+
+            }
         }
 
     }
