@@ -7,15 +7,21 @@
              md-selected="vm.selectedTab">
         <md-tab layout="column"
                 layout-align="center stretch"
-                label="{{'ENTRIES.WARRANTY.LABELS.ASSET_LOADING'|translate}}">
-            <span>TODO: Cabinet adding behavior.</span>
+                label={{'ENTRIES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
+            <!--Cabinets list-->
+            <section>
+                <!--Existing cabinets-->
+
+                <!--Non-existing cabinets-->
+            </section>
+
             <md-actions layout="row"
                         layout-align="end center">
                 <md-button ng-click="vm.nextTab()"
                            aria-label="next tab"
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
-                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                        <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
                         {{'ENTRIES.WARRANTY.BUTTONS.NEXT'|translate}}
                     </div>
                 </md-button>
@@ -23,7 +29,7 @@
         </md-tab>
         <md-tab layout="column"
                 layout-align="center stretch"
-                label="{{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}">
+                label={{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}>
             <form name="entryForm"
                   layout="column"
                   layout-align="center stretch">
@@ -140,7 +146,7 @@
                         {{'ENTRIES.WARRANTY.BUTTONS.PREVIOUS'|translate}}
                     </div>
                 </md-button>
-                <md-button ng-click="vm.saveEntry()"
+                <md-button ng-click="vm.saveEntry(vm.entry)"
                            aria-label="previous tab"
                            class="md-primary md-raised"
                            ng-disabled="entryForm.$invalid">

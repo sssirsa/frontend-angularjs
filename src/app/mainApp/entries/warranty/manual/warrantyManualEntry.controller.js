@@ -9,6 +9,9 @@
     ) {
         var vm = this;
 
+        //Constants
+        vm.maxTabIndex = 1;
+
         //Variables
         vm.selectedTab = 0;
         vm.entry = {};
@@ -58,6 +61,24 @@
                 };
 
             }
+        }
+
+        vm.saveEntry = function (entry) {
+
+        }
+
+        //Tab functions
+
+        vm.previousTab = function () {
+            console.log(vm.selectedTab);
+            vm.selectedTab = vm.selectedTab - 1;
+            console.log(vm.selectedTab);
+        }
+
+        vm.nextTab = function () {
+            console.log(vm.selectedTab);
+            vm.selectedTab = vm.selectedTab + 1;
+            console.log(vm.selectedTab);
         }
 
     }
