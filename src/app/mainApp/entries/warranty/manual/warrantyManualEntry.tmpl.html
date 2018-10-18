@@ -8,27 +8,126 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 label={{'ENTRIES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
-            <!--Cabinets list-->
-            <section>
-                <!--Existing cabinets-->
-
-                <!--Non-existing cabinets-->
-            </section>
+            <!--Cabinet search bar-->
+            <md-actions layout-gt-xs="row"
+                        layout="column"
+                        layout-align-gt-xs="space-around center"
+                        layout-align="center stretch">
+                <h3>{{'ENTRIES.WARRANTY.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <form name="cabinetSearch"
+                      ng-submit="vm.searchCabinet(cabinetID)">
+                    <md-input-container class="md-block">
+                        <label>{{'ENTRIES.WARRANTY.LABELS.CABINET_ID'|translate}}</label>
+                        <input name="cabinetID"
+                               type="text"
+                               digits-only
+                               md-max-length="10"
+                               ng-model="cabinetID" />
+                    </md-input-container>
+                </form>
+            </md-actions>
+            <div layout="row"
+                 layout-align="space-between center">
+                <!--Cabinets list-->
+                <section ng-if="vm.cabinetList.length>0"
+                         layout-padding
+                         class="full-width">
+                    <p>Cabinets</p>
+                    <md-virtual-repeat-container class="cabinet-container">
+                        <md-list>
+                            <md-list-item layout-align="center stretch"
+                                          md-virtual-repeat="element in vm.cabinetList">
+                                <!--Existing cabinets-->
+                                <div layout="column"
+                                     layout-align="center stretch"
+                                     class="full-width"
+                                     cg-busy="{
+                                     promise:element.promise,
+                                     message:'Buscando cabinet '+element.id
+                                     }">
+                                    <section layout-gt-xs="row"
+                                             layout="column"
+                                             layout-align-gt-xs="space-between center"
+                                             layout-align="center stretch"
+                                             class="full-width found-cabinet"
+                                             ng-if="element.cabinet">
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.economico}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            {{element.cabinet.no_serie}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
+                                            {{element.cabinet.marca}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
+                                            {{element.cabinet.modelo.nombre}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                                       aria-label="remove cabinet"
+                                                       class="md-icon-button">
+                                                    <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <!--Non existing cabinet-->
+                                    <section layout-gt-xs="row"
+                                             layout="column"
+                                             layout-align-gt-xs="space-between center"
+                                             layout-align="center stretch"
+                                             class="full-width not-found-cabinet"
+                                             ng-if="!element.cabinet">
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            {{element.id}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            {{'ENTRIES.WARRANTY.ERRORS.NOT_FOUND_ID'|translate}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                                       aria-label="remove cabinet"
+                                                       class="md-icon-button">
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <md-divider></md-divider>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-virtual-repeat-container>
+                </section>
+            </div>
 
             <md-actions layout="row"
                         layout-align="end center">
                 <md-button ng-click="vm.nextTab()"
+                           ng-disabled="!vm.cabinetList.length>0"
                            aria-label="next tab"
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                        {{'ENTRIES.WARRANTY.BUTTONS.NEXT'|translate}}
+                        <div>{{'ENTRIES.WARRANTY.BUTTONS.NEXT'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
         </md-tab>
         <md-tab layout="column"
                 layout-align="center stretch"
+                ng-disabled="!vm.cabinetList.length>0"
                 label={{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}>
             <form name="entryForm"
                   layout="column"
@@ -143,7 +242,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                        {{'ENTRIES.WARRANTY.BUTTONS.PREVIOUS'|translate}}
+                        <div>{{'ENTRIES.WARRANTY.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
                 <md-button ng-click="vm.saveEntry(vm.entry)"
@@ -152,7 +251,7 @@
                            ng-disabled="entryForm.$invalid">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
-                        {{'ENTRIES.WARRANTY.BUTTONS.SAVE'|translate}}
+                        <div>{{'ENTRIES.WARRANTY.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>

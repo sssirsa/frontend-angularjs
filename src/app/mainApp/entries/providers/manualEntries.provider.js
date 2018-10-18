@@ -10,6 +10,7 @@
         Translate
     ) {
         const baseUrl = WebRestangular.all(URLS.manualEntries);
+        const cabinetUrl = WebRestangular.all(URLS.cabinet);
         const urls = URLS.entries;
 
         function createNew(element) {
@@ -40,6 +41,10 @@
             return baseUrl.all(urls.close).all(id).customPUT(element);
         }
 
+        function getCabinet(id) {
+            return cabinetUrl.all(id).customGET();
+        }
+
         const warrantyEntry = {
             template: function template() {
                 var template = {
@@ -60,7 +65,7 @@
                             option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.SUBSIDIARY'),
-                        icon:'fa fa-warehouse',
+                        icon: 'fa fa-warehouse',
                         required: true,
                         pagination: {
                             total: 'count',
@@ -82,7 +87,7 @@
                             option: 'razon_social'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_LINE'),
-                        icon:'fa fa-pallet',
+                        icon: 'fa fa-pallet',
                         required: true,
                         pagination: {
                             total: 'count',
@@ -104,7 +109,7 @@
                             option: 'descripcion'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_KIND'),
-                        icon:'fa fa-truck',
+                        icon: 'fa fa-truck',
                         required: true,
                         pagination: {
                             total: 'count',
@@ -188,6 +193,7 @@
             addCabinet: addCabinet,
             detail: detail,
             close: close,
+            getCabinet:getCabinet,
             //Constants
             warrantyEntry: warrantyEntry,
             newEntry: newEntry,

@@ -29,7 +29,15 @@
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
                 "DRIVER_ID": "Identificación del operador",
-                "DRIVER_NAME": "Nombre del operador"
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
@@ -44,7 +52,13 @@
             "BUTTONS": {
                 "NEXT": "Siguiente",
                 "PREVIOUS": "Anterior",
-                "SAVE": "Guardar entrada"
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "NOT_FOUND_ID": "Económico no encontrado",
+                "CANT_ENTER": "El cabinet ya tiene una entrada"
             }
         }
     },

@@ -5,7 +5,9 @@
     function WarrantyManualEntryController(
         MANUAL_ENTRIES,
         User,
-        URLS
+        URLS,
+        Translate,
+        toastr
     ) {
         var vm = this;
 
@@ -17,6 +19,7 @@
         vm.entry = {};
         vm.showSubsidiarySelector = false;
         vm.catalogues = {};
+        vm.cabinetList = [];
 
         //Validations
         vm.imageConstraints = {
@@ -60,6 +63,60 @@
                     vm.entry['ife_chofer'] = base64Image;
                 };
 
+            }
+        }
+
+        vm.searchCabinet = function (cabinetID) {
+            if (cabinetID.length > 0) {
+                var index = vm.cabinetList.map(function (element) {
+                    return element.id;
+                }).indexOf(cabinetID);
+                if (index !== -1) {
+                    //Cabinet already in list
+                    toastr.warning(Translate.translate('ENTRIES.WARRANTY.ERRORS.REPEATED_ID'), cabinetID);
+                }
+                else {
+                    var cabinetToAdd = {
+                        promise: MANUAL_ENTRIES
+                            .getCabinet(cabinetID),
+                        cabinet: null,
+                        id: null
+                    };
+
+                    //Adding element to the list
+                    cabinetToAdd.id = cabinetID;
+                    vm.cabinetList.unshift(cabinetToAdd);
+
+                    cabinetToAdd
+                        .promise
+                        .then(function (successCallback) {
+                            if (successCallback.sucursal) {
+                                toastr.error(Translate.translate('ENTRIES.WARRANTY.ERRORS.CANT_ENTER'), cabinetID);
+                                vm.removeCabinet(cabinetID);
+                            }
+                            else {
+                                cabinetToAdd.cabinet = successCallback;
+                            }
+                        })
+                        .catch(function (errorCallback) {
+                        });
+                }
+            }
+        }
+
+        vm.removeCabinet = function (cabinetID) {
+            if (cabinetID.length > 0) {
+                var index = vm.cabinetList
+                    .map(function (element) {
+                    return element.id;
+                }).indexOf(cabinetID);
+                if (index === -1) {
+                    //Cabinet not found in list (unreachable unless code modification is made)
+                    toastr.warning(Translate.translate('ENTRIES.WARRANTY.ERRORS.NOT_FOUND_ID'), cabinetID);
+                }
+                else {
+                    vm.cabinetList.splice(index, 1);
+                }
             }
         }
 
