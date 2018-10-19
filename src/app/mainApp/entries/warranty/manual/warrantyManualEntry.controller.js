@@ -173,6 +173,10 @@
         }
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+            //In case the cabinets array exist, restart it
+            if (entry.cabinets.length) {
+                entry.cabinets = [];
+            }
             var existingCabinets = cabinets
                 .filter(function (element) {
                     //Filtering to just add the cabinets that exist
