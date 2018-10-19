@@ -46,12 +46,11 @@
         }
 
         const warrantyEntry = {
-            template: function template() {
-                var template = {
-                    tipo_entrada: 'Garantias',
-                    cabinets: []
-                }
-                return template;
+            template: {
+                tipo_entrada: 'Garantias',
+                cabinets: [],
+                //TODO: Remove when new API is available
+                accion: 'entrada'
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -193,7 +192,7 @@
             addCabinet: addCabinet,
             detail: detail,
             close: close,
-            getCabinet:getCabinet,
+            getCabinet: getCabinet,
             //Constants
             warrantyEntry: warrantyEntry,
             newEntry: newEntry,

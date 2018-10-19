@@ -5,9 +5,10 @@
     function WarrantyManualEntryController(
         MANUAL_ENTRIES,
         User,
-        URLS,
         Translate,
-        toastr
+        toastr,
+        ErrorHandler,
+        $mdDialog
     ) {
         var vm = this;
 
@@ -37,7 +38,7 @@
 
         // Auto invoked init function
         (function init() {
-            vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
+            vm.entry = MANUAL_ENTRIES.warrantyEntry.template;
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -45,13 +46,13 @@
             }
         })();
 
-        //Controller functions
+        //Controller global functions
 
-        vm.onElementSelect = function (element, field) {
+        vm.onElementSelect = function onElementSelect(element, field) {
             vm.entry[field] = element;
         }
 
-        vm.selectDriverID = function (files) {
+        vm.selectDriverID = function selectDriverID(files) {
             if (files.length > 0) {
                 var file = files[0];
                 //Image processing as a base64 string
@@ -64,9 +65,12 @@
                 };
 
             }
+            else {
+                delete (vm.entry['ife_chofer']);
+            }
         }
 
-        vm.searchCabinet = function (cabinetID) {
+        vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList.map(function (element) {
                     return element.id;
@@ -87,29 +91,33 @@
                     cabinetToAdd.id = cabinetID;
                     vm.cabinetList.unshift(cabinetToAdd);
 
+                    //Cleaning the search bar
+                    vm.cabinetID = '';
+
+                    //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
                         .then(function (successCallback) {
                             if (successCallback.sucursal) {
+                                //Cabinet can´t enter because it already has a subsidiary assigned
                                 toastr.error(Translate.translate('ENTRIES.WARRANTY.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                             else {
+                                //Cabinet can enter
                                 cabinetToAdd.cabinet = successCallback;
                             }
-                        })
-                        .catch(function (errorCallback) {
                         });
                 }
             }
         }
 
-        vm.removeCabinet = function (cabinetID) {
+        vm.removeCabinet = function removeCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList
                     .map(function (element) {
-                    return element.id;
-                }).indexOf(cabinetID);
+                        return element.id;
+                    }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
                     toastr.warning(Translate.translate('ENTRIES.WARRANTY.ERRORS.NOT_FOUND_ID'), cabinetID);
@@ -120,22 +128,73 @@
             }
         }
 
-        vm.saveEntry = function (entry) {
+        vm.clickSaveEntry = function clickSaveEntry(entry) {
+            //Show warning message if the entry has unregistered cabinets
+            if (entryHasPendingCabinets()) {
+                var confirm = $mdDialog.confirm()
+                    .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
+                    .textContent(Translate.translate('ENTRIES.WARRANTY.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.WARRANTY.MESSAGES.PENDING_CABINETS'))
+                    .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
+                    .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
+                $mdDialog.show(confirm)
+                    .then(function () {
+                        saveEntry(entry);
+                    });
+            }
+            else {
+                saveEntry(entry);
+            }
+        }
+
+        //Internal functions
+
+        saveEntry = function saveEntry(entry) {
+            entry = addCabinetsToEntry(vm.cabinetList, entry);
+            //API callback
+            vm.createEntryPromise = MANUAL_ENTRIES
+                .createWarranty(entry)
+                .then(function () {
+                    init();
+                    toastr.success(
+                        Translate.translate('ENTRIES.WARRANTY.MESSAGES.SUCCESS_CREATE')
+                    );
+                })
+                .catch(function (errorCallback) {
+                    ErrorHandler.errorTranslate(errorCallback);
+                });
+        }
+
+        entryHasPendingCabinets = function entryHasPendingCabinets() {
+            return vm.cabinetList.some(function (element) {
+                return !element.cabinet;
+            });
+        }
+
+        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+            var existingCabinets = cabinets
+                .filter(function (element) {
+                    //Filtering to just add the cabinets that exist
+                    return element.cabinet;
+                });
+            for (
+                let i = 0;
+                i < existingCabinets.length;
+                i++) {
+                entry['cabinets'].push(existingCabinets[i].id);
+            }
+            return entry;
         }
 
         //Tab functions
 
         vm.previousTab = function () {
-            console.log(vm.selectedTab);
             vm.selectedTab = vm.selectedTab - 1;
-            console.log(vm.selectedTab);
         }
 
         vm.nextTab = function () {
-            console.log(vm.selectedTab);
             vm.selectedTab = vm.selectedTab + 1;
-            console.log(vm.selectedTab);
         }
 
     }

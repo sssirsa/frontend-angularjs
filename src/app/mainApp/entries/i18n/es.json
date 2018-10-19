@@ -55,6 +55,10 @@
                 "SAVE": "Guardar entrada",
                 "REMOVE": "Quitar"
             },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+            },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "NOT_FOUND_ID": "Económico no encontrado",
