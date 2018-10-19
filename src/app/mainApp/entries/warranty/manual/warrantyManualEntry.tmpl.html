@@ -36,8 +36,7 @@
                     <md-virtual-repeat-container class="cabinet-container">
                         <md-list>
                             <md-list-item layout-align="center stretch"
-                                          md-virtual-repeat="element in vm.cabinetList">
-                                <!--Existing cabinets-->
+                                          md-virtual-repeat="element in vm.cabinetList">                                
                                 <div layout="column"
                                      layout-align="center stretch"
                                      class="full-width"
@@ -45,6 +44,7 @@
                                      promise:element.promise,
                                      message:'Buscando cabinet '+element.id
                                      }">
+                                    <!--Existing cabinets-->
                                     <section layout-gt-xs="row"
                                              layout="column"
                                              layout-align-gt-xs="space-between center"
@@ -86,7 +86,8 @@
                                              layout-align-gt-xs="space-between center"
                                              layout-align="center stretch"
                                              class="full-width not-found-cabinet"
-                                             ng-if="!element.cabinet">
+                                             ng-if="!element.cabinet"
+                                             ng-click="vm.createCabinet(element.id)">
                                         <div layout="column"
                                              layout-align="center center">
                                             {{element.id}}

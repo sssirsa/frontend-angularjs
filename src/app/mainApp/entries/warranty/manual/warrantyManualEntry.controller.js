@@ -148,6 +148,28 @@
             }
         }
 
+        vm.createCabinet = function createCabinet(cabinetID) {
+            $mdDialog.show({
+                controller: 'CabinetDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/inventory/gestionCabinet/dialogs/creacion/cabinetCreateDialog.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    cabinetID: cabinetID
+                }
+            }).then(function (successCallback) {
+                var cabinetID = successCallback.economico;
+                vm.removeCabinet(cabinetID);
+                vm.searchCabinet(cabinetID);
+            }).catch(function (err) {
+                if (err) {
+                    ErrorHandler.errorTranslate(err);
+                }
+            });
+        }
+
         //Internal functions
 
         saveEntry = function saveEntry(entry) {
