@@ -76,7 +76,7 @@
                                             <md-button ng-click="vm.removeCabinet(element.id)"
                                                        aria-label="remove cabinet"
                                                        class="md-icon-button">
-                                                    <md-icon md-font-icon="fa fa-times"></md-icon>
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
                                             </md-button>
                                         </div>
                                     </section>
@@ -141,7 +141,7 @@
                                 pagination="vm.catalogues['subsidiary'].pagination"
                                 elements="vm.catalogues['subsidiary'].elements"
                                 soft-delete="vm.catalogues['subsidiary'].softDelete"
-                                on-select="vm.onElementSelect(element,'sucursal')">
+                                on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
                 </catalog-select>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
@@ -164,7 +164,7 @@
                                     pagination="vm.catalogues['project'].pagination"
                                     elements="vm.catalogues['project'].elements"
                                     soft-delete="vm.catalogues['project'].softDelete"
-                                    on-select="vm.onElementSelect(element,'proyecto')">
+                                    on-select="vm.onElementSelect(element,vm.catalogues['project'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
                                     catalog="vm.catalogues['udn'].catalog"
@@ -174,7 +174,7 @@
                                     pagination="vm.catalogues['udn'].pagination"
                                     elements="vm.catalogues['udn'].elements"
                                     soft-delete="vm.catalogues['udn'].softDelete"
-                                    on-select="vm.onElementSelect(element,'udn')">
+                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
                 </div>
                 <div layout="column"
@@ -189,7 +189,7 @@
                                     pagination="vm.catalogues['transport_line'].pagination"
                                     elements="vm.catalogues['transport_line'].elements"
                                     soft-delete="vm.catalogues['transport_line'].softDelete"
-                                    on-select="vm.onElementSelect(element,'linea_transporte')">
+                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_line'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
                                     catalog="vm.catalogues['transport_kind'].catalog"
@@ -199,7 +199,7 @@
                                     pagination="vm.catalogues['transport_kind'].pagination"
                                     elements="vm.catalogues['transport_kind'].elements"
                                     soft-delete="vm.catalogues['transport_kind'].softDelete"
-                                    on-select="vm.onElementSelect(element,'tipo_transporte')">
+                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
                     </catalog-select>
                 </div>
                 <div layout="column"

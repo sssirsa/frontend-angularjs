@@ -48,13 +48,12 @@
         const warrantyEntry = {
             template: {
                 tipo_entrada: 'Garantias',
-                cabinets: [],
-                //TODO: Remove when new API is available
-                accion: 'entrada'
+                cabinets: []
             },
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
+                        binding:'sucursal_id',
                         catalog: {
                             url: URLS.sucursal,
                             kind: 'Web',
@@ -77,6 +76,7 @@
                         }
                     },
                     transport_line: {
+                        binding:'linea_transporte_id',
                         catalog: {
                             url: URLS.linea_transporte,
                             kind: 'Web',
@@ -99,6 +99,7 @@
                         }
                     },
                     transport_kind: {
+                        binding:'tipo_transporte_id',
                         catalog: {
                             url: URLS.tipo_transporte,
                             kind: 'Web',
@@ -121,6 +122,7 @@
                         }
                     },
                     udn: {
+                        binding:'udn_id',
                         catalog: {
                             url: URLS.udn,
                             kind: 'Web',
@@ -143,6 +145,7 @@
                         }
                     },
                     project: {
+                        binding: 'proyecto_id',
                         catalog: {
                             url: URLS.proyecto,
                             kind: 'Web',
