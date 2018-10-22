@@ -173,8 +173,153 @@
         };
 
         const newEntry = {
-            tipo_entrada: 'Nuevos',
-            cabinets: []
+            template: {
+                tipo_entrada: 'Nuevos',
+                cabinets: []
+            },
+            catalogues: function catalogues() {
+                var catalogues = {
+                    subsidiary: {
+                        binding: 'sucursal_id',
+                        catalog: {
+                            url: URLS.sucursal,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.SUBSIDIARY'),
+                        icon: 'fa fa-warehouse',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_line: {
+                        binding: 'linea_transporte_id',
+                        catalog: {
+                            url: URLS.linea_transporte,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'razon_social'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_LINE'),
+                        icon: 'fa fa-pallet',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_kind: {
+                        binding: 'tipo_transporte_id',
+                        catalog: {
+                            url: URLS.tipo_transporte,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_KIND'),
+                        icon: 'fa fa-truck',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    udn: {
+                        binding: 'udn_id',
+                        catalog: {
+                            url: URLS.udn,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    project: {
+                        binding: 'proyecto_id',
+                        catalog: {
+                            url: URLS.proyecto,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.PROJECT'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.PROJECT'),
+                        icon: 'fa fa-book',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    petition: {
+                        binding: 'pedimento_id',
+                        catalog: {
+                            url: URLS.pedimento,
+                            kind: 'Web',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.PROJECT'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.PETITION'),
+                        icon: 'fa fa-book',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                };
+                return catalogues;
+            }
         };
 
         const unrecognizableEntry = {

@@ -467,6 +467,7 @@
             modelo_cabinet: 'modelo_cabinet',
             municipio: 'municipio',
             normalize_cabinets: 'normalize',
+            pedimento:'',
             persona: 'persona',
             persona_admin: 'persona_admin',
             preRequest: 'pre_solicitud',
