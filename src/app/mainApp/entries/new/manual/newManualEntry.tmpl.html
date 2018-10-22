@@ -44,12 +44,48 @@
                                      promise:element.promise,
                                      message:'Buscando cabinet '+element.id
                                      }">
-                                    <!--Non existing cabinet-->
+                                    <!--Created cabinets-->
                                     <section layout-gt-xs="row"
                                              layout="column"
                                              layout-align-gt-xs="space-between center"
                                              layout-align="center stretch"
                                              class="full-width found-cabinet"
+                                             ng-if="element.cabinet">
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.economico}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            {{element.cabinet.no_serie}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
+                                            {{element.cabinet.marca}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
+                                            {{element.cabinet.modelo.nombre}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                                       aria-label="remove cabinet"
+                                                       class="md-icon-button">
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <!--Non created cabinets-->
+                                    <section layout-gt-xs="row"
+                                             layout="column"
+                                             layout-align-gt-xs="space-between center"
+                                             layout-align="center stretch"
+                                             class="full-width not-found-cabinet"
                                              ng-if="!element.cabinet"
                                              ng-click="vm.createCabinet(element.id)">
                                         <div layout="column"
