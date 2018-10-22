@@ -11,7 +11,7 @@
             "OBSOLETE": "Obsoletos"
         },
         "NEW": {
-            "TITLE": "Entrada de NUEVOS",
+            "TITLE": "Entrada de Nuevos",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
@@ -52,12 +52,12 @@
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Entrada registrada correctamente",
-                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+                "PENDING_CABINETS": "Aun tienes cabinets no registrados en sistema. Estos cabinets no se considerarán en la entrada",
+                "REGISTER_CABINET": "Registrar información del cabinet"
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "NOT_FOUND_ID": "Económico no encontrado",
-                "CANT_ENTER": "El cabinet ya tiene una entrada"
+                "CANT_ENTER": "El cabinet ya existe en base, no puede registrarse como nuevo"
             }
         },
         "WARRANTY": {

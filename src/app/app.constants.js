@@ -462,8 +462,8 @@
             massive: {
                 store: 'massive/store'
             },
-            massiveEntries: 'entries/massive',//TODO: Change when known
-            manualEntries: 'entries',//TODO: Change when known
+            massiveEntries: 'entries/massive',
+            manualEntries: 'entries',
             modelo_cabinet: 'modelo_cabinet',
             municipio: 'municipio',
             normalize_cabinets: 'normalize',
