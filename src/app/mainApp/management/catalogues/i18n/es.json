@@ -339,5 +339,17 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "CONDITION":{
+        "LABELS":{
+            "TITLE":"Condición",
+            "SEARCH":"Busca tu Condición",
+            "SUBTITLE":"Información de Condición",
+            "NAME":"Nombre",
+            "DESCRIPTION":"Descripcíon"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }

@@ -239,6 +239,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/DEMO/generic.tmpl.html',
                 controller: 'GenericCatalogueController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.catalogue-condicion', {
+                url: '/catalogue/condicion',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/condicion/condicion.tmpl.html',
+                controller: 'CondicionController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -348,6 +359,12 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.STORES',
                         state: 'triangular.admin-default.catalogo-establecimientos',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.CONDITION',
+                        state: 'triangular.admin-default.catalogue-condicion',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     }
