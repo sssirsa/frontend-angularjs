@@ -1,24 +1,4 @@
-<md-card>
-    <div>
-        <create-cabinet to-refresh="vm.aRefresh()"></create-cabinet>
-    </div>
-</md-card>
-
-<md-card ng-if="!vm.todosprev">
-    <div>
-        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-    </div>
-</md-card>
-<md-card ng-if="vm.todosprev">
-    <div id="list">
-        <list-cabinet todosex="vm.todos"
-                      up="vm.aRefresh()"
-                      todosprev2="vm.todosprev"
-                      filter-data="vm.filterList(economicFilter)"
-                      text-search-filter="vm.textToSearch"></list-cabinet>
-    </div>
-</md-card>
-
+<!--Pagina a eliminar-->
 <div ng-if="vm.refreshPaginationButtonsComponent">
     <pagination-manager-buttons go-sig="vm.sig()"
                                 go-prev="vm.prev()"
