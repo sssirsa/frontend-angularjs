@@ -1,0 +1,46 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'MAIN.COMPONENTS.CABINET.QR_CODE'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-card>
+
+    <form ng-submit="vm.searchCabinet()" flex="100" layout-align="center ceneter">
+        <md-input-container layout="row">
+            <input type="text" maxlength="5" placeholder="Número de serie">
+        </md-input-container>
+        <md-input-container layout="row" >
+            <input type="text" maxlength="5" placeholder="Económico(s)">
+        </md-input-container>
+        <md-input-container layout="row" >
+
+            <input type="text" maxlength="5" placeholder="Estatus">
+        </md-input-container>
+
+        <div flex-gt-sm="50" flex="100" ng-if="!vm.user.sucursal">
+            <catalog-select catalog="vm.catalogSucursal.catalog"
+                            elements="vm.catalogSucursal.elements"
+                            on-select="vm.onSelectedSucursal(element)">
+            </catalog-select>
+        </div>
+    </form>
+
+    <md-actions
+        layout="row"
+        layout-align="end center">
+        <md-button class="md-raised md-primary" ng-click="vm.create()">
+            <span translate>NOT_CAPITALIZED.BUTTONS.CREATE</span>
+        </md-button>
+
+        <md-button
+            ng-click="vm.cancel()"
+            class="md-warn md-raised">
+            <md-icon md-font-icon="fa fa-ban"></md-icon>
+            {{'MAIN.BUTTONS.CANCEL'|translate}}
+        </md-button>
+    </md-actions>
+</md-card>
