@@ -61,7 +61,7 @@
                 model: 'id',
                 option: 'nombre'
             },
-            elements: 'results',
+            elements: 'results'
 
         };
         vm.minimalHour = '09:00:00';
