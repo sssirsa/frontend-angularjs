@@ -40,5 +40,33 @@
       "INVALID_SUPPLY":"Insumo inválido",
       "SUCCESS_CREATE":"Éxito al actualizar el inventario"
     }
-  }
+  },
+    "NOT_CAPITALIZED":{
+        "NO_SERIE": "Número de serie",
+        "DATE_SEPARATION": "Fecha de separación",
+        "DATE_RELEASE": "Fecha de liberación",
+        "ECONOMIC": "Economico(s)",
+        "ENTRY": "Entrada",
+        "DEPARTURE": "Salida",
+        "STATUS": "Estatus",
+        "POSITIONING": "Posicionamiento",
+        "NEW_ECONOMIC": "Economico nuevo",
+        "BUTTONS":{
+            "CREATE": "Crear No Capitalizado",
+            "UPDATE": "Modificar cabinet",
+            "RELEASE_CABINET": "Capitalizar"
+        },
+        "SEARCH":{
+            "ECONOMICO": "Búsqueda por economico",
+            "STATUS": "Búsqueda por estatus",
+            "TYPE":{
+                "CAPITALIZED": "Capitalizados",
+                "NOT_CAPITALIZED": "No capitalizados"
+            }
+        },
+        "RESULTS":{
+            "NO_RESULTS": "Sin resultados"
+        }
+    },
+    "CABINET_MANAGEMENT": "Gestion de cabinet"
 }
