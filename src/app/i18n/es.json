@@ -77,7 +77,8 @@
                 "STORES": "Establecimientos",
                 "STATES": "Estados",
                 "CITIES": "Municipios",
-                "SEGMENTATION": "Segmentación"
+                "SEGMENTATION": "Segmentación",
+                "CONDITION": "Condición"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",
@@ -85,7 +86,9 @@
                 "CONSUMABLES": "Insumos",
                 "CONSUMABLE_CATALOG": "Catálogo de Insumos",
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
-                "PROVIDER": "Proveedor"
+                "PROVIDER": "Proveedor",
+                "NO_CAPITALIZADO": "No Capitalizados",
+                "CABINET_MANAGEMENT": "Gestion de cabinet"
             },
             "SERVICE": {
                 "MENU_TITLE": "Atenciones",
@@ -204,7 +207,13 @@
                 "CREATE": "Crear cabinet",
                 "UPDATE": "Actualizar",
                 "SEARCH": "Buscar por económico",
-                "DELETE": "Borrar"
+                "DELETE": "Borrar",
+                "YEAR": "Año",
+                "ACTIVE_UNILEVER": "Activo Unilever",
+                "CONDITION": "Condición",
+                "STATUS_UNILEVER": "Estatus Unilever",
+                "STATUS_COM": "Estatus COM",
+                "LIST": "Listado de cabinets"
             }
         },
         "LABEL": {
