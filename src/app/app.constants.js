@@ -419,6 +419,7 @@
         })
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
+            condicion: 'condition',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',
             cabinets: 'cabinets',
