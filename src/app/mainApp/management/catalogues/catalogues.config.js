@@ -261,6 +261,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/estatusUnilever/estatusUnilever.tmpl.html',
                 controller: 'estatusUnileverController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.catalogue-status-com', {
+                url: '/catalogue/status_com',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/estatusCom/estatusCom.tmpl.html',
+                controller: 'estatusComController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -382,6 +393,12 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.STATUS_UNILEVER',
                         state: 'triangular.admin-default.catalogue-status-unilever',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.STATUS_COM',
+                        state: 'triangular.admin-default.catalogue-status-com',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     }

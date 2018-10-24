@@ -79,7 +79,8 @@
                 "CITIES": "Municipios",
                 "SEGMENTATION": "Segmentación",
                 "CONDITION": "Condición",
-                "STATUS_UNILEVER": "Estatus Unilever"
+                "STATUS_UNILEVER": "Estatus Unilever",
+                "STATUS_COM": "Estatus COM"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",

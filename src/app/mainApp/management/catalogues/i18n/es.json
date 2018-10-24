@@ -355,5 +355,13 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "STATUS_COM":{
+        "LABELS":{
+            "TITLE":"Estatus COM"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }

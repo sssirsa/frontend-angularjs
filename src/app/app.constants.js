@@ -421,6 +421,7 @@
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             condicion: 'condition',
             estatus_unilever: 'status_unilever',
+            estatus_com: 'status_com',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',
             cabinets: 'cabinets',
