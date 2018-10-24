@@ -4,33 +4,33 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CondicionController',CondicionController);
+        .controller('estatusUnileverController',estatusUnileverController);
 
-    function CondicionController(URLS, Translate, MANAGEMENT)
+    function estatusUnileverController(URLS, Translate, MANAGEMENT)
     {
 
         var vm = this;
 
-        vm.url = MANAGEMENT.uri + URLS.condicion;
+        vm.url = MANAGEMENT.uri + URLS.estatus_unilever;
         vm.kind = 'Management';
-        vm.name = Translate.translate('CONDITION.LABELS.TITLE');
+        vm.name = Translate.translate('STATUS_UNILEVER.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Condición';
+        vm.searchButtonText = 'Buscar Estatus Unilever';
         //vm.createButtonText = 'Crear Categoría';
         //vm.deleteButtonText = 'Borrar Categoría';
         //vm.modifyButtonText = 'Editar Categoría';
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas condiciones';
+        vm.loadMoreButtonText = 'Cargar mas Estatus Unilever';
         vm.removeFilterButtonText = 'Qutar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Condiciones';
+        vm.loadingMessage = 'Cargando Estatus Unilever';
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -49,25 +49,13 @@
                                 required: 'El campo es requerido.'
                             }
                         }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Condición',
+                    title: 'Crear Estatus Unilever',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Condición'
+                    loading: 'Creando Estatus Unilever'
                 }
             },
             PUT: {
@@ -83,35 +71,23 @@
                                 required: 'El campo es requerido.'
                             }
                         }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Condición',
+                    title: 'Editar Estatus Unilever',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Condición'
+                    loading: 'Guardando Estatus Unilever'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Condición',
-                    message: 'Confirme la eliminación de Condición',
+                    title: 'Eliminar Estatus Unilever',
+                    message: 'Confirme la eliminación de Estatus Unilever',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Condición'
+                    loading: 'Eliminando Estatus Unilever'
                 }
             },*/
             LIST: {
@@ -121,11 +97,6 @@
                     total: 'count'
                 },
                 fields: [
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra'
-                    },
                     {
                         type: 'text',
                         model: 'descripcion',
@@ -139,16 +110,16 @@
             }/*,
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Condición',
+                    title: 'Busqueda de Estatus Unilever',
                     searchButton: 'Buscar',
-                    loadingText: 'Buscando Condición'
+                    loadingText: 'Buscando Estatus Unilever'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'letra',
-                        header: 'por Letra',
-                        label: 'Letra',
+                        model: 'Estatus',
+                        header: 'por Estatus',
+                        label: 'Estatus',
                         field: {
                             type: 'text'
                         }
