@@ -78,7 +78,8 @@
                 "STATES": "Estados",
                 "CITIES": "Municipios",
                 "SEGMENTATION": "Segmentación",
-                "CONDITION": "Condición"
+                "CONDITION": "Condición",
+                "STATUS_UNILEVER": "Estatus Unilever"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",

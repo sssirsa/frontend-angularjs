@@ -420,6 +420,7 @@
         .constant('URLS', {
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             condicion: 'condition',
+            estatus_unilever: 'status_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',
             cabinets: 'cabinets',
@@ -610,5 +611,8 @@
             next: 'next',
             previous: 'previous',
             elements: 'results'
+        })
+        .constant('MANAGEMENT',{
+            uri: 'http://api-gateway.sssirsa.com/management-dev/catalogue/'
         });
 })();
