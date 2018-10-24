@@ -45,6 +45,10 @@
             return cabinetUrl.all(id).customGET();
         }
 
+        function getEntriesByCabinet(id) {
+
+        }
+
         const warrantyEntry = {
             template: {
                 tipo_entrada: 'Garantias',
@@ -299,13 +303,13 @@
                         catalog: {
                             url: URLS.pedimento,
                             kind: 'Web',
-                            name: Translate.translate('ENTRIES.NEW.LABELS.PROJECT'),
+                            name: Translate.translate('ENTRIES.NEW.LABELS.PETITION'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.PETITION'),
-                        icon: 'fa fa-book',
+                        icon: 'fa fa-clipboard-check',
                         required: true,
                         pagination: {
                             total: 'count',
@@ -341,6 +345,7 @@
             detail: detail,
             close: close,
             getCabinet: getCabinet,
+            getEntriesByCabinet: getEntriesByCabinet,
             //Constants
             warrantyEntry: warrantyEntry,
             newEntry: newEntry,

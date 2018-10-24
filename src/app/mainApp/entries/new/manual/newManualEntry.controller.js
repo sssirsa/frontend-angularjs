@@ -21,6 +21,7 @@
         vm.showSubsidiarySelector = false;
         vm.catalogues = {};
         vm.cabinetList = [];
+        vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
 
         //Validations
         vm.imageConstraints = {
@@ -99,6 +100,9 @@
                         .promise
                         .then(function () {
                             //Cabinet is not new
+                            //TODO: Validate incidences and subsidiary,
+                            //this in case the cabinet got created but
+                            //the previously tried entrance got an error.
                             toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER'), cabinetID);
                             vm.removeCabinet(cabinetID);
                         })
@@ -159,12 +163,18 @@
             }).then(function (successCallback) {
                 var cabinetID = successCallback.economico;
                 vm.removeCabinet(cabinetID);
-                addCreatedCabinet(successCallback);
+                addCabinetToList(successCallback);
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);
                 }
             });
+        }
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['udn'].binding]);
+            delete (vm.entry[vm.catalogues['petition'].binding]);
         }
 
         //Internal functions
@@ -173,7 +183,7 @@
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createWarranty(entry)
+                .createNew(entry)
                 .then(function () {
                     init();
                     toastr.success(
@@ -210,13 +220,13 @@
             return entry;
         }
 
-        addCreatedCabinet = function addCreatedCabinet(cabinet) {
+        addCabinetToList = function addCabinetToList(cabinet) {
             var cabinetToAdd = {
                 promise: null,
                 cabinet: cabinet,
                 id: cabinet['economico']
             };
-            
+
             vm.cabinetList.push(cabinetToAdd);
         }
 

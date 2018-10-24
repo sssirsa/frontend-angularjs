@@ -1,4 +1,5 @@
-<md-card layout-padding>
+
+}<md-card layout-padding>
     <div layout="column"
          layout-align="center center">
         <h1 translate>ENTRIES.NEW.TITLE</h1>
@@ -129,10 +130,19 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
-                label={{'ENTRIES.NEW.LABELS.ENTRY_DATA'|translate}}>
+                label={{'ENTRIES.NEW.LABELS.ENTRY_DATA'|translate}}>    
+            <div layout="row"
+                 layout-align="center center">
+                <p>{{'ENTRIES.NEW.LABELS.SWITCH.LABEL'|translate}}</p>
+                <md-switch ng-model="vm.entryFromAgency"
+                           md-change="vm.changeSwitch()">
+                    <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                </md-switch>
+            </div>
             <form name="entryForm"
                   layout="column"
-                  layout-align="center stretch">
+                  layout-align="center stretch"> 
                 <catalog-select class="full-width"
                                 ng-if="vm.showSubsidiarySelector"
                                 catalog="vm.catalogues['subsidiary'].catalog"
@@ -167,7 +177,20 @@
                                     soft-delete="vm.catalogues['project'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['project'].binding)">
                     </catalog-select>
+                    <!--Mutual excluding catalogs-->
                     <catalog-select class="full-width"
+                                    ng-if="!vm.entryFromAgency"
+                                    catalog="vm.catalogues['petition'].catalog"
+                                    hint="vm.catalogues['petition'].hint"
+                                    icon="vm.catalogues['petition'].icon"
+                                    required="vm.catalogues['petition'].required"
+                                    pagination="vm.catalogues['petition'].pagination"
+                                    elements="vm.catalogues['petition'].elements"
+                                    soft-delete="vm.catalogues['petition'].softDelete"
+                                    on-select="vm.onElementSelect(element,vm.catalogues['petition'].binding)">
+                    </catalog-select>
+                    <catalog-select class="full-width"
+                                    ng-if="vm.entryFromAgency"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
