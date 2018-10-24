@@ -342,11 +342,15 @@
     },
     "CONDITION":{
         "LABELS":{
-            "TITLE":"Condición",
-            "SEARCH":"Busca tu Condición",
-            "SUBTITLE":"Información de Condición",
-            "NAME":"Nombre",
-            "DESCRIPTION":"Descripcíon"
+            "TITLE":"Condición"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STATUS_UNILEVER":{
+        "LABELS":{
+            "TITLE":"Estatus Unilever"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
