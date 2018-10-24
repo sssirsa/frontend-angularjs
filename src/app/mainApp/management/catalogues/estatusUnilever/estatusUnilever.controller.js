@@ -11,7 +11,7 @@
 
         var vm = this;
 
-        vm.url = MANAGEMENT.uri + URLS.estatus_unilever;
+        vm.url = MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever;
         vm.kind = 'Management';
         vm.name = Translate.translate('STATUS_UNILEVER.LABELS.TITLE');
 

@@ -14,7 +14,7 @@
         });
 
     /* @ngInject */
-    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS) {
+    function createCabinetController (MANAGEMENT, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS) {
         var vm = this;
 
         //variables
@@ -22,7 +22,7 @@
         vm.economico = null;
         vm.no_serie = null;
         vm.year = null;
-        vm.unilever_id = null;
+        vm.id_unilever = null;
         vm.marca = null;
         vm.modelos = [];
 
@@ -76,8 +76,8 @@
             },
             condicion: {
                 catalog: {
-                    url: URLS.condicion,
-                    kind: 'Web',
+                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion,
+                    kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -96,8 +96,8 @@
             },
             status_unilever: {
                 catalog: {
-                    url: URLS.status_unilever,
-                    kind: 'Web',
+                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever,
+                    kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -116,8 +116,8 @@
             },
             status_com: {
                 catalog: {
-                    url: URLS.status_com,
-                    kind: 'Web',
+                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com,
+                    kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -154,25 +154,28 @@
             vm.cabinet['economico'] = vm.economico;
             vm.cabinet['no_serie'] = vm.no_serie;
             vm.cabinet['year'] = vm.year;
-            vm.cabinet['unilever_id'] = vm.unilever_id;
+            vm.cabinet['id_unilever'] = vm.id_unilever;
 
             var validate = _.contains(_.values(vm.cabinet), null);
 
             if(validate){
                 toastr.error("Llene corectamente todos los campos");
             }else{
-                /*cabinetPV.create(aux)
+                cabinetUC.create(vm.cabinet)
                     .then(function (cabinetCreated) {
+                        validate = null;
                         vm.cabinet = {};
                         vm.economico = null;
                         vm.no_serie = null;
                         vm.year = null;
-                        vm.unilever_id = null;
+                        vm.id_unilever = null;
                         vm.marca = null;
                         vm.modelos = [];
 
                         $scope.newcabinetFrom.$setPristine();
                         $scope.newcabinetFrom.$setUntouched();
+
+                        console.log(cabinetCreated);
 
                         $mdDialog.show({
                             controller: 'newCabinetPreController',
@@ -194,9 +197,7 @@
                     })
                     .catch(function (err) {
                         ErrorHandler.errorTranslate(err);
-                    });*/
-
-                toastr.success("Todo correcto");
+                    });
             }
 
         }

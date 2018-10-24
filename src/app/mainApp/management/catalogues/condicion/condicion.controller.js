@@ -11,7 +11,7 @@
 
         var vm = this;
 
-        vm.url = MANAGEMENT.uri + URLS.condicion;
+        vm.url = MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
         vm.kind = 'Management';
         vm.name = Translate.translate('CONDITION.LABELS.TITLE');
 

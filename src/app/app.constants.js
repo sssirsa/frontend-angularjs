@@ -422,6 +422,7 @@
             condicion: 'condition',
             estatus_unilever: 'status_unilever',
             estatus_com: 'status_com',
+            cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',
             cabinets: 'cabinets',
@@ -614,6 +615,10 @@
             elements: 'results'
         })
         .constant('MANAGEMENT',{
-            uri: 'http://api-gateway.sssirsa.com/management-dev/catalogue/'
+            project: {
+                catalogue: '/catalogue/',
+                inventory: '/inventory/'
+            },
+            baseManagement: 'http://api-gateway.sssirsa.com/management-dev'
         });
 })();
