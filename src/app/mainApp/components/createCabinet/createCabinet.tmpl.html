@@ -10,7 +10,7 @@
         layout-align="center stretch"
         layout-padding
     >
-        <form name="newcabinetFrom">
+        <form name="newcabinetFrom" ng-if="$ctrl.clear">
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
@@ -99,7 +99,7 @@
                                     pagination="$ctrl.catalogues['status_unilever'].pagination"
                                     elements="$ctrl.catalogues['status_unilever'].elements"
                                     soft-delete="$ctrl.catalogues['status_unilever'].softDelete"
-                                    on-select="$ctrl.onElementSelect(element,'status_unilever_id')">
+                                    on-select="$ctrl.onElementSelect(element,'estatus_unilever_id')">
                     </catalog-select>
                 </md-input-container>
             </div>
@@ -111,7 +111,7 @@
                                     pagination="$ctrl.catalogues['status_com'].pagination"
                                     elements="$ctrl.catalogues['status_com'].elements"
                                     soft-delete="$ctrl.catalogues['status_com'].softDelete"
-                                    on-select="$ctrl.onElementSelect(element,'status_com_id')">
+                                    on-select="$ctrl.onElementSelect(element,'estatus_com_id')">
                     </catalog-select>
                 </md-input-container>
             </div>

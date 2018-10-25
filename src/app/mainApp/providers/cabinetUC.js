@@ -6,9 +6,9 @@
         .factory('cabinetUC', cabinetUC);
 
     /* @ngInject */
-    function cabinetUC($q, MANAGEMENT, URLS, $http) {
+    function cabinetUC($q, MANAGEMENT, URLS, $http, ManagementRestangular) {
 
-        var urlbase = MANAGEMENT.baseManagement + MANAGEMENT.project.inventory + URLS.cabinet_unilever;
+        var urlbase = ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
 
         return {
             create: create,
@@ -19,15 +19,7 @@
         };
 
         function create(data){
-            console.log(urlbase, data);
-            $http.post(
-                urlbase, data)
-                .then(function (response) {
-                    return response.data;
-                })
-                .catch(function (errorResponse) {
-                    return errorResponse;
-                });
+            return urlbase.customPOST(data);
         }
 
         function getByID(id) {
@@ -37,10 +29,10 @@
         function list(limit, offset, querySet){
             if(limit !== undefined && offset !== undefined){
                 if (querySet === undefined) {
-                    return urlbase.all('?limit='+limit+'&offset='+offset).customGET();
+                    return ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset).customGET();
                 }
                 else {
-                    return urlbase.all('?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
+                    return ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
                 }
             }
             else {

@@ -27,6 +27,8 @@
         vm.modelos = [];
 
         vm.loadingPromise = null;
+        vm.clear = "1";
+        var validate = true;
 
         //funciones
         vm.onBrandSelect = onBrandSelect;
@@ -145,7 +147,18 @@
 
         function onElementSelect(element, field) {
             vm.cabinet[field] = element;
-            console.log(vm.cabinet[field] = element);
+        }
+
+        function limpiar(){
+            validate = true;
+            vm.cabinet = {};
+            vm.economico = null;
+            vm.no_serie = null;
+            vm.year = null;
+            vm.id_unilever = null;
+            vm.marca = null;
+            vm.modelos = [];
+            vm.clear = "1";
         }
 
         vm.accept = accept;
@@ -156,26 +169,30 @@
             vm.cabinet['year'] = vm.year;
             vm.cabinet['id_unilever'] = vm.id_unilever;
 
-            var validate = _.contains(_.values(vm.cabinet), null);
+            //variables de los catalogos
+            vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
+            vm.cabinet['condicion_id'] = vm.cabinet['condicion_id'];
+            vm.cabinet['estatus_unilever_id'] = vm.cabinet['estatus_unilever_id'];
+            vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
+
+            //variables en null (se eliminaran al corregir back)
+            vm.cabinet['insumo_id'] = 25;
+            vm.cabinet['pedimento_id'] = 1;
+            vm.cabinet['posicionamiento_id'] = 1;
+            vm.cabinet['sucursal_id'] = 1;
+            vm.cabinet['categoria_id'] = 1;
+
+            validate = _.contains(_.values(vm.cabinet), undefined);
 
             if(validate){
                 toastr.error("Llene corectamente todos los campos");
             }else{
+                vm.clear = "";
                 cabinetUC.create(vm.cabinet)
                     .then(function (cabinetCreated) {
-                        validate = null;
-                        vm.cabinet = {};
-                        vm.economico = null;
-                        vm.no_serie = null;
-                        vm.year = null;
-                        vm.id_unilever = null;
-                        vm.marca = null;
-                        vm.modelos = [];
 
-                        $scope.newcabinetFrom.$setPristine();
-                        $scope.newcabinetFrom.$setUntouched();
-
-                        console.log(cabinetCreated);
+                        limpiar();
+                        vm.toRefresh();
 
                         $mdDialog.show({
                             controller: 'newCabinetPreController',
@@ -196,10 +213,10 @@
                             });
                     })
                     .catch(function (err) {
+                        limpiar();
                         ErrorHandler.errorTranslate(err);
                     });
             }
-
         }
 
     }
