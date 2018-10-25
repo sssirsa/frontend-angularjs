@@ -36,7 +36,7 @@
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
                     }
                 },
-                templateUrl: 'app/mainApp/inventory/noCapitalizado/noCapitalizado.tmpl.html',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/noCapitalizado.tmpl.html',
                 controller: 'noCapitalizadoController',
                 controllerAs: 'vm'
             })
@@ -47,7 +47,7 @@
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
                     }
                 },
-                templateUrl: 'app/mainApp/inventory/gestionCabinet/cabinetGestion.tmpl.html',
+                templateUrl: 'app/mainApp/inventory/managementCabinet/cabinetGestion.tmpl.html',
                 controller: 'cabinetGestionController',
                 controllerAs: 'vm'
             });

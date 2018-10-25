@@ -1,12 +1,15 @@
+/**
+ * Created by Alex on 19/10/2016.
+ */
+
 (function () {
     angular
         .module('app.mainApp.inventory')
         .controller('cabinetGestionController', cabinetGestionController);
 
-    function cabinetGestionController(OPTIONS, URLS, udn, TipoEquipo, Helper, $mdEditDialog, $mdDialog, cabinetPV)
+    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler)
     {
         var vm = this;
-
         vm.todosprev = null;
         vm.todos = [];
         vm.loadingPromise = null;
@@ -50,7 +53,7 @@
                 vm.preTextToSearch = vm.textToSearch;
             }
             if (vm.textToSearch.length === 0) {
-                vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
+                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
                     .then(function (res) {
                         vm.objectPaginado = res;
                         prepareDataFunction();
@@ -63,7 +66,7 @@
             }
             else {
                 var sendQuery = vm.querySet + vm.textToSearch;
-                vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset, sendQuery)
+                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset, sendQuery)
                     .then(function (res) {
                         vm.objectPaginado = res;
                         prepareDataFunction();
@@ -81,7 +84,7 @@
             var ux = "Activo";
             angular.forEach(vm.todosprev, function (cabinet) {
 
-                if(cabinet.activo === true){
+                if(cabinet.deleted === false){
                     ux = "Activo";
                 }else{
                     ux = "Inactivo";
