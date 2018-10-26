@@ -171,9 +171,9 @@
 
             //variables de los catalogos
             vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
-            vm.cabinet['condicion_id'] = vm.cabinet['condicion_id'];
-            vm.cabinet['estatus_unilever_id'] = vm.cabinet['estatus_unilever_id'];
-            vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
+            //vm.cabinet['condicion_id'] = vm.cabinet['condicion_id'];
+            //vm.cabinet['estatus_unilever_id'] = vm.cabinet['estatus_unilever_id'];
+            //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
 
             //variables en null (se eliminaran al corregir back)
             vm.cabinet['insumo_id'] = 25;
