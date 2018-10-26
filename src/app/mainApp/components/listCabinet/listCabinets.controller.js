@@ -5,7 +5,7 @@
     angular
         .module('app.mainApp')
         .component('listCabinet', {
-            templateUrl: 'app/mainApp/components/listCabinetPV/listCabinets.tmpl.html',
+            templateUrl: 'app/mainApp/components/listCabinet/listCabinets.tmpl.html',
             controller: listCabinetController,
             controllerAs: '$ctrl',
             bindings:{
@@ -50,7 +50,7 @@
             $mdDialog.show({
                 controller: 'cabinetPVController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/listCabinetPV/modal/modalCabinetPV.tmpl.html',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinetPV.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,

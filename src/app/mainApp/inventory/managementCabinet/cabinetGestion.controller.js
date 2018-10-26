@@ -7,7 +7,7 @@
         .module('app.mainApp.inventory')
         .controller('cabinetGestionController', cabinetGestionController);
 
-    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler)
+    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler, toastr)
     {
         var vm = this;
         vm.todosprev = null;
@@ -57,11 +57,10 @@
                     .then(function (res) {
                         vm.objectPaginado = res;
                         prepareDataFunction();
-                        prepareFinalObjects();
                         vm.refreshPaginationButtonsComponent = true;
                     })
                     .catch(function (err) {
-
+                        toastr.error(err);
                     });
             }
             else {
@@ -92,23 +91,25 @@
 
                 var cabinetPreview = {
                     economico: cabinet.economico,
-                    modelo: {
-                        id: cabinet.modelo.id,
-                        deleted: cabinet.modelo.deleted,
-                        nombre: cabinet.modelo.nombre,
-                        descripcion: cabinet.modelo.descripcion,
-                        palabra_clave: cabinet.modelo.palabra_clave,
-                        tipo: cabinet.modelo.tipo,
-                        marca: cabinet.modelo.marca
-                    },
-                    modelo_id: cabinet.modelo_id,
-                    antiguedad: cabinet.antiguedad,
-                    activo: cabinet.activo,
+                    id_unilever: cabinet.id_unilever,
+                    no_serie: cabinet.no_serie,
+                    year: cabinet.year,
+                    condicion: cabinet.condicion.descripcion,
+                    estatus_com: cabinet.estatus_com.descripcion,
+                    estatus_unilever: cabinet.estatus_unilever.descripcion,
+                    marca: cabinet.modelo.marca.descripcion,
+                    modelo: cabinet.modelo.nombre,
+                    tipo: cabinet.modelo.tipo.nombre,
                     estado: ux,
-                    no_incidencias: cabinet.no_incidencias,
                     qr_code: cabinet.qr_code,
-                    deleted: cabinet.deleted,
-                    no_serie: cabinet.no_serie
+                    identifiers:{
+                        id_modelo: cabinet.modelo.id,
+                        id_marca: cabinet.modelo.marca.id
+                        //id_status_com: cabinet.estatus_com.id,
+                        //id_status_unilever: cabinet.estatus_unilever.id,
+                        //id_condicion: cabinet.condicion.id
+                    },
+                    deleted: cabinet.deleted
                 };
 
                 vm.todos.push(cabinetPreview);
@@ -117,6 +118,7 @@
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+            prepareFinalObjects();
         }
 
         function sigPage() {
