@@ -98,7 +98,7 @@
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                            <md-button ng-click="$event.stopPropagation(); vm.removeCabinet(element.id)"
                                                        aria-label="remove cabinet"
                                                        class="md-icon-button">
                                                 <md-icon md-font-icon="fa fa-times"></md-icon>
