@@ -217,7 +217,8 @@
                 "CONDITION": "Condición",
                 "STATUS_UNILEVER": "Estatus Unilever",
                 "STATUS_COM": "Estatus COM",
-                "LIST": "Listado de cabinets"
+                "LIST": "Listado de cabinets",
+                "CATEGORY": "Categoría"
             }
         },
         "LABEL": {

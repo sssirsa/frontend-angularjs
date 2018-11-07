@@ -105,7 +105,7 @@
                 </md-input-container>
             </div>
 
-            <div flex="50" layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+            <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['status_com'].catalog"
                                     required="true"
@@ -113,6 +113,16 @@
                                     elements="vm.catalogues['status_com'].elements"
                                     soft-delete="vm.catalogues['status_com'].softDelete"
                                     on-select="vm.onElementSelect(element,'estatus_com_id')">
+                    </catalog-select>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="vm.catalogues['categoria'].catalog"
+                                    required="true"
+                                    pagination="vm.catalogues['categoria'].pagination"
+                                    elements="vm.catalogues['categoria'].elements"
+                                    soft-delete="vm.catalogues['categoria'].softDelete"
+                                    on-select="vm.onElementSelect(element,'categoria_id')">
                     </catalog-select>
                 </md-input-container>
             </div>

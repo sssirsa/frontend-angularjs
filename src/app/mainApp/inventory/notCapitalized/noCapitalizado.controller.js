@@ -85,13 +85,14 @@
         function crearNoCapitalizado() {
             $mdDialog.show({
                 controller: 'notCapitalizedDialogController',
-                templateUrl: 'app/mainApp/inventory/noCapitalizado/dialog/dialogCreateNotCapitalized.tmpl.html',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogCreateNotCapitalized.tmpl.html',
                 controllerAs: 'vm',
                 fullscreen: true,
                 clickOutsideToClose: true
             }).then(function (respuesta) {
                 console.log(respuesta);
                 ErrorHandler.successCreation();
+                vm.cabinetCreated = respuesta;
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);

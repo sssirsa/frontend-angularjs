@@ -135,6 +135,26 @@
                     hide: 'deleted',
                     reverse: false
                 }
+            },
+            categoria:{
+                catalog: {
+                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria,
+                    kind: 'Management',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             }
         };
 
@@ -176,11 +196,11 @@
             //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
 
             //variables en null (se eliminaran al corregir back)
-            vm.cabinet['insumo_id'] = 25;
-            vm.cabinet['pedimento_id'] = 1;
-            vm.cabinet['posicionamiento_id'] = 1;
-            vm.cabinet['sucursal_id'] = 1;
-            vm.cabinet['categoria_id'] = 1;
+            //vm.cabinet['insumo_id'] = 25;
+            //vm.cabinet['pedimento_id'] = 1;
+            //vm.cabinet['posicionamiento_id'] = 1;
+            //vm.cabinet['sucursal_id'] = 1;
+            //vm.cabinet['categoria_id'] = 1;
 
             validate = _.contains(_.values(vm.cabinet), undefined);
 

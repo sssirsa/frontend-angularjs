@@ -19,7 +19,7 @@
         //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
-    function listCabinetController (cabinetPV, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
+    function listCabinetController (cabinetUC, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
         var vm = this;
 
         vm.todosprev = vm.todosprev2;
@@ -68,19 +68,46 @@
                 });
         }
 
+        function prepareData(data) {
+            var ux;
+
+            if(data.deleted === false){
+                ux = "Activo";
+            }else{
+                ux = "Inactivo";
+            }
+
+            var aux = {
+                economico: data.economico,
+                id_unilever: data.id_unilever,
+                no_serie: data.no_serie,
+                year: data.year,
+                condicion: data.condicion.descripcion,
+                estatus_com: data.estatus_com.descripcion,
+                estatus_unilever: data.estatus_unilever.descripcion,
+                marca: data.modelo.marca.descripcion,
+                modelo: data.modelo.nombre,
+                tipo: data.modelo.tipo.nombre,
+                estado: ux,
+                qr_code: data.qr_code,
+                identifiers:{
+                    id_modelo: data.modelo.id,
+                    id_marca: data.modelo.marca.id
+                },
+                deleted: data.deleted
+            };
+
+            return aux;
+        }
+
         function searchCabinet() {
-            if (vm.filterData === null){
-                cabinetPV.getByID(vm.searchText)
-                    .then(function (respuesta) {
-                        info(respuesta);
-                    })
-                    .catch(function (error) {
-                        ErrorHandler.errorTranslate(error);
-                    });
-            }
-            else {
-                vm.filterData({economicFilter: vm.searchText});
-            }
+            cabinetUC.getByID(vm.searchText)
+                .then(function (cabinet) {
+                    info(prepareData(cabinet));
+                })
+                .catch(function (error) {
+                    ErrorHandler.errorTranslate(error);
+                });
         }
     }
 
