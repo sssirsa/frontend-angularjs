@@ -204,7 +204,7 @@
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
             if (entry.cabinet_id.length) {
-                entry.cabinet_id = [];
+                entry.no_capitalizados_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -215,7 +215,7 @@
                 let i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinet_id'].push(existingCabinets[i].id);
+                entry['no_capitalizados_id'].push(existingCabinets[i].id);
             }
             return entry;
         }
@@ -224,7 +224,7 @@
             var cabinetToAdd = {
                 promise: null,
                 cabinet: cabinet,
-                id: cabinet['economico']
+                id: cabinet['id']
             };
 
             vm.cabinetList.push(cabinetToAdd);

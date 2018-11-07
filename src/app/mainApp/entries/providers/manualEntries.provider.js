@@ -52,7 +52,7 @@
         const warrantyEntry = {
             template: {
                 tipo_entrada: 'Garantias',
-                cabinet_id: []
+                cabinets_id: []
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -179,7 +179,7 @@
         const newEntry = {
             template: {
                 tipo_entrada: 'Nuevos',
-                cabinet_id: []
+                cabinets_id: []
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -477,7 +477,7 @@
         const obsoleteEntry = {
             template: {
                 tipo_entrada: 'Obsoletos',
-                cabinet_id: []
+                cabinets_id: []
             },
             catalogues: function catalogues() {
                 var catalogues = {
