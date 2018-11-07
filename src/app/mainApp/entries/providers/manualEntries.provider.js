@@ -327,8 +327,10 @@
         };
 
         const unrecognizableEntry = {
-            tipo_entrada: 'No_Capitalizados',
-            no_capitalizados_id: [],
+            template: {
+                tipo_entrada: 'No_Capitalizados',
+                no_capitalizados_id: [],
+            },
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {

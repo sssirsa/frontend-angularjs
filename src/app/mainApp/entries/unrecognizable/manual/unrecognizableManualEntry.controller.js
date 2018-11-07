@@ -161,7 +161,7 @@
                     cabinetID: cabinetID
                 }
             }).then(function (successCallback) {
-                var cabinetID = successCallback.economico;
+                var cabinetID = successCallback.id;
                 vm.removeCabinet(cabinetID);
                 addCabinetToList(successCallback);
             }).catch(function (err) {
@@ -202,8 +202,9 @@
         }
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+            console.log(entry);
             //In case the cabinets array exist, restart it
-            if (entry.cabinet_id.length) {
+            if (entry.no_capitalizados_id.length) {
                 entry.no_capitalizados_id = [];
             }
             var existingCabinets = cabinets

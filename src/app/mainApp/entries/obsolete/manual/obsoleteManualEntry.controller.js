@@ -195,7 +195,7 @@
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinet_id.length) {
+            if (entry.cabinets_id.length) {
                 entry.cabinets_id = [];
             }
             var existingCabinets = cabinets
