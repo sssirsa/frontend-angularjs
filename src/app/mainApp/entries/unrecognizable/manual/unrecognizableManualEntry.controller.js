@@ -151,12 +151,11 @@
 
         vm.createCabinet = function createCabinet(cabinetID) {
             $mdDialog.show({
-                controller: 'CabinetDialogController',
+                controller: 'notCapitalizedDialogController',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogCreateNotCapitalized.tmpl.html',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/inventory/gestionCabinet/dialogs/creacion/cabinetCreateDialog.tmpl.html',
                 fullscreen: true,
-                clickOutsideToClose: true,
-                focusOnOpen: true
+                clickOutsideToClose: true
             }).then(function (successCallback) {
                 var cabinetID = successCallback.id;
                 addCabinetToList(successCallback);
