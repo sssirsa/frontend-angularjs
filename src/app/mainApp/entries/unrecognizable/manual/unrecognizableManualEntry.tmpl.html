@@ -14,17 +14,15 @@
                         layout-align-gt-xs="space-around center"
                         layout-align="center stretch">
                 <h3>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET_SEARCH'|translate}}</h3>
-                <form name="cabinetSearch"
-                      ng-submit="vm.searchCabinet(vm.cabinetID)">
-                    <md-input-container class="md-block">
-                        <label>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET_ID'|translate}}</label>
-                        <input name="cabinetID"
-                               type="text"
-                               digits-only
-                               md-max-length="10"
-                               ng-model="vm.cabinetID" />
-                    </md-input-container>
-                </form>
+
+                <md-button ng-click="vm.createCabinet()"
+                           aria-label="create cabinet"
+                           class="md-primary md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.CREATE'|translate}}</div>
+                    </div>
+                </md-button>
             </md-actions>
             <div layout="row"
                  layout-align="space-between center">
@@ -40,10 +38,6 @@
                                 <div layout="column"
                                      layout-align="center stretch"
                                      class="full-width"
-                                     cg-busy="{
-                                     promise:element.promise,
-                                     message:'Buscando cabinet '+element.id
-                                     }">
                                     <!--Created cabinets-->
                                     <section layout-gt-xs="row"
                                              layout="column"
@@ -53,52 +47,32 @@
                                              ng-if="element.cabinet">
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
+                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.id}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.NUMBER'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
+                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.marca}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
+                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
                                             <md-button ng-click="vm.removeCabinet(element.id)"
-                                                       aria-label="remove cabinet"
-                                                       class="md-icon-button">
-                                                <md-icon md-font-icon="fa fa-times"></md-icon>
-                                            </md-button>
-                                        </div>
-                                    </section>
-                                    <!--Non created cabinets-->
-                                    <section layout-gt-xs="row"
-                                             layout="column"
-                                             layout-align-gt-xs="space-between center"
-                                             layout-align="center stretch"
-                                             class="full-width not-found-cabinet"
-                                             ng-if="!element.cabinet"
-                                             ng-click="vm.createCabinet(element.id)">
-                                        <div layout="column"
-                                             layout-align="center center">
-                                            {{element.id}}
-                                        </div>
-                                        <div layout="column"
-                                             layout-align="center center">
-                                            {{'ENTRIES.UNRECOGNIZABLE.MESSAGES.REGISTER_CABINET'|translate}}
-                                        </div>
-                                        <div layout="column"
-                                             layout-align="center center">
-                                            <md-button ng-click="$event.stopPropagation(); vm.removeCabinet(element.id)"
                                                        aria-label="remove cabinet"
                                                        class="md-icon-button">
                                                 <md-icon md-font-icon="fa fa-times"></md-icon>

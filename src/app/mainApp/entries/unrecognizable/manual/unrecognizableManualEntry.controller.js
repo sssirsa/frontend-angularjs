@@ -156,13 +156,9 @@
                 templateUrl: 'app/mainApp/inventory/gestionCabinet/dialogs/creacion/cabinetCreateDialog.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
-                focusOnOpen: true,
-                locals: {
-                    cabinetID: cabinetID
-                }
+                focusOnOpen: true
             }).then(function (successCallback) {
                 var cabinetID = successCallback.id;
-                vm.removeCabinet(cabinetID);
                 addCabinetToList(successCallback);
             }).catch(function (err) {
                 if (err) {

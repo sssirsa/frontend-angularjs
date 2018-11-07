@@ -176,9 +176,9 @@
                 "DRIVER_ID": "Identificación del operador",
                 "DRIVER_NAME": "Nombre del operador",
                 "CABINET_SEARCH": "Registro de cabinets",
-                "CABINET_ID": "Económico del cabinet",
                 "CABINET": {
-                    "ID": "Económico",
+                    "ID": "Identificador",
+                    "NUMBER": "Económico",
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
@@ -204,7 +204,8 @@
                 "NEXT": "Siguiente",
                 "PREVIOUS": "Anterior",
                 "SAVE": "Guardar entrada",
-                "REMOVE": "Quitar"
+                "REMOVE": "Quitar",
+                "CREATE": "Nuevo cabinet"
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Entrada registrada correctamente",
