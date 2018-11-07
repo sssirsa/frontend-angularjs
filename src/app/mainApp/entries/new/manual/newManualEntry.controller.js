@@ -203,8 +203,8 @@
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets.length) {
-                entry.cabinets = [];
+            if (entry.cabinet_id.length) {
+                entry.cabinet_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -215,7 +215,7 @@
                 let i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets'].push(existingCabinets[i].id);
+                entry['cabinet_id'].push(existingCabinets[i].id);
             }
             return entry;
         }
