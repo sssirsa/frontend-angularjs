@@ -8,76 +8,99 @@
         .module('app.mainApp.inventory')
         .controller('noCapitalizadoController', noCapitalizadoController);
 
-    function noCapitalizadoController($mdDialog, Translate, toastr, ErrorHandler) {
+    function noCapitalizadoController($mdDialog, Translate, toastr, ErrorHandler, noLabeled, Helper) {
         //Variable definition
         var vm = this;
+        vm.todos = [];
+        vm.loadingPromise = null;
 
-        //datos para paginado
-        vm.objectAtention = null;
-        vm.offset = 0;
-        vm.limit = 20;
-        vm.refreshPaginationButtonsComponent = false;
+        vm.aRefresh = aRefresh;
+        vm.listNoLabeled = listNoLabeled;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
-
-        //funciones
-        vm.selectCabinet = selectCabinet;
+        vm.filterList = filterList;
         vm.crearNoCapitalizado = crearNoCapitalizado;
 
-        vm.todos = [];
+        //datos para paginado
+        vm.objectPaginado = null;
+        vm.offset = 0;
+        vm.limit = 20;
+        vm.refreshPaginationButtonsComponent = false;
+        vm.textToSearch = '';
+        vm.preTextToSearch = '';
+        vm.querySet = 'economico__contains=';
 
-        vm.todos = [{
-            no_serie: "00010101",
-            fecha_separacion: "15 Oct 2018",
-            fecha_liberacion: "null",
-            economico: "10230, 132412",
-            entrada: "1",
-            salida: "null",
-            status: "Bien",
-            posicionamiento: "2"
-        },
-        {
-            no_serie: "10000101",
-            fecha_separacion: "13 Oct 2018",
-            fecha_liberacion: "null",
-            economico: "1897149283",
-            entrada: "2",
-            salida: "null",
-            status: "Mal",
-            posicionamiento: "1"
-        }];
+        function aRefresh() {
+            vm.todos = [];
+            vm.objectPaginado = null;
+            vm.offset = 0;
+            listNoLabeled();
+        }
+
+        function paginadoRefresh() {
+            vm.todos = [];
+            listNoLabeled();
+        }
+
+        listNoLabeled();
+
+        function listNoLabeled(){
+            vm.refreshPaginationButtonsComponent = false;
+            if (vm.preTextToSearch !== vm.textToSearch) {
+                vm.offset = 0;
+                vm.preTextToSearch = vm.textToSearch;
+            }
+            if (vm.textToSearch.length === 0) {
+                vm.loadingPromise = noLabeled.list(vm.limit, vm.offset)
+                    .then(function (res) {
+                        vm.objectPaginado = res;
+                        prepareDataFunction();
+                        vm.refreshPaginationButtonsComponent = true;
+                    })
+                    .catch(function (err) {
+                        console.debug(err);
+                        toastr.error("No se pudo cargar los elementos");
+                    });
+            }
+            else {
+                var sendQuery = vm.querySet + vm.textToSearch;
+                vm.loadingPromise = noLabeled.list(vm.limit, vm.offset, sendQuery)
+                    .then(function (res) {
+                        vm.objectPaginado = res;
+                        prepareDataFunction();
+                        vm.refreshPaginationButtonsComponent = true;
+                    })
+                    .catch(function (err) {
+                        toastr.error(err);
+                    });
+            }
+
+        }
 
 
         function prepareDataFunction() {
-            //vm.salePoints = vm.objectAtention.results;
-            //vm.refreshPaginationButtonsComponent = true;
+            vm.todos = Helper.filterDeleted(vm.objectPaginado.results, true);
         }
 
         function sigPage() {
             vm.offset += vm.limit;
-            //listSalePoints();
+            paginadoRefresh();
         }
 
         function prevPage() {
             vm.offset -= vm.limit;
-            //listSalePoints();
+            paginadoRefresh();
         }
 
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
-            //listSalePoints();
+            paginadoRefresh();
         }
 
-        function selectCabinet(salePoint) {
-
-        }
-
-        initial();
-
-        function initial(){
-            //listSalePoints();
-            console.log("hola");
+        function filterList(economicFilter) {
+            vm.textToSearch = '' + economicFilter;
+            paginadoRefresh();
         }
 
         //modales

@@ -66,8 +66,13 @@
                     <md-content>
                         <div flex="100">
                             <md-toolbar class="md-hue-1">
-                                <div class="md-toolbar-tools">
-                                    <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status}}
+                                <div layout="colum" class="md-toolbar-tools" layout-align="space-around center">
+                                    <div>
+                                        <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status.nombre}}
+                                    </div>
+                                    <div>
+                                        <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status.nombre}}
+                                    </div>
                                 </div>
                             </md-toolbar>
                         </div>
@@ -99,7 +104,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{item.economico}}</h4>
+                                        <h4>{{item.economicos}}</h4>
                                     </div>
                                 </div>
 
@@ -111,9 +116,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
-                                            {{salePoint.establecimiento.localidad.municipio.estado.nombre}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
+                                        <h4 ng-if="item.new_economico">
+                                            {{item.new_economico}}</h4>
+                                        <h4 ng-if="!item.new_economico">No Asignado</h4>
                                     </div>
                                 </div>
                             </div>
@@ -128,9 +133,9 @@
                                     </div>
                                     <div layout="column" layout-align="center center">
                                         <div layout="column" layout-align="center center">
-                                            <h4 ng-if="salePoint.hora_cliente_inicio">
-                                                {{salePoint.hora_cliente_inicio}}</h4>
-                                            <h4 ng-if="!salePoint.hora_cliente_inicio">No Asignada</h4>
+                                            <h4 ng-if="item.separacion">
+                                                {{item.separacion}}</h4>
+                                            <h4 ng-if="!item.separacion">No Asignada</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -143,9 +148,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.hora_cliente_fin">
-                                            {{salePoint.hora_cliente_fin}}</h4>
-                                        <h4 ng-if="!salePoint.hora_cliente_fin">No Asignada</h4>
+                                        <h4 ng-if="item.liberacion">
+                                            {{item.liberacion}}</h4>
+                                        <h4 ng-if="!item.liberacion">No Asignada</h4>
                                     </div>
                                 </div>
 
@@ -157,9 +162,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
-                                            {{salePoint.establecimiento.localidad.municipio.nombre}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
+                                        <h4 ng-if="item.posicionamiento.bodega_nombre">
+                                            {{item.posicionamiento.bodega_nombre}}</h4>
+                                        <h4 ng-if="!item.posicionamiento.bodega_nombre">No Asignado</h4>
                                     </div>
                                 </div>
                             </div>
@@ -173,10 +178,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento.localidad.codigo_postal">
-                                            {{salePoint.establecimiento.localidad.codigo_postal}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento.localidad.codigo_postal">No
-                                            Asignado</h4>
+                                        <h4 ng-if="item.entrada_descripcion">
+                                            {{item.entrada_descripcion}}</h4>
+                                        <h4 ng-if="!item.entrada_descripcion">No Asignado</h4>
                                     </div>
                                 </div>
 
@@ -188,9 +192,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
-                                            {{salePoint.establecimiento.localidad.municipio.nombre}}</h4>
-                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
+                                        <h4 ng-if="item.salida_descripcion">
+                                            {{item.salida_descripcion}}</h4>
+                                        <h4 ng-if="!item.salida_descripcion">No Asignado</h4>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +205,7 @@
                         <div flex="100" layout="column" layout-align="end end">
                             <div>
                                 <md-button aria-label="fab button"
-                                           ng-click="$event.stopPropagation(); vm.Assing(salePoint)"
+                                           ng-click="$event.stopPropagation()"
                                            class="md-raised md-warn">
                                         <span translate>NOT_CAPITALIZED.BUTTONS.RELEASE_CABINET</span>
                                 </md-button>
@@ -217,10 +221,10 @@
                                         go-prev="vm.prev()"
                                         go-number="vm.goToNumberPage(number)"
                                         limit-objects="vm.limit"
-                                        count-object="vm.objectAtention.count"
+                                        count-object="vm.objectPaginado.count"
                                         offset-object="vm.offset"
-                                        nex-object="vm.objectAtention.next"
-                                        prev-object="vm.objectAtention.previous">
+                                        nex-object="vm.objectPaginado.next"
+                                        prev-object="vm.objectPaginado.previous">
             </pagination-manager-buttons>
         </div>
     </div>
