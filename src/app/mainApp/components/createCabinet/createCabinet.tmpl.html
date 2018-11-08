@@ -15,7 +15,7 @@
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
                     <input name="economico" required digits-only MAXLENGTH="20" ng-model="$ctrl.economico"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <div ng-messages="newcabinetFrom.economico.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
@@ -36,17 +36,17 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.YEAR</label>
-                    <input name="economico" required digits-only MAXLENGTH="4" ng-model="$ctrl.year"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <input name="year" required digits-only MAXLENGTH="4" ng-model="$ctrl.year"/>
+                    <div ng-messages="newcabinetFrom.year.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
-                    <input name="serial" maxlength="25"
+                    <input name="unilever" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.id_unilever"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <div ng-messages="newcabinetFrom.unilever.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
                         </div>
@@ -54,7 +54,9 @@
                     </div>
                 </md-input-container>
             </div>
+        </form>
 
+        <form name="newcabinetFrom2" ng-if="$ctrl.clear">
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['marca'].catalog"
@@ -64,9 +66,6 @@
                                     soft-delete="$ctrl.catalogues['marca'].softDelete"
                                     on-select="$ctrl.onBrandSelect(element)">
                     </catalog-select>
-                    <div ng-messages="newcabinetFrom.serial.$error">
-                        <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                    </div>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
@@ -132,6 +131,7 @@
             layout-align="end center">
             <md-button
                 ng-click="$ctrl.accept()"
+                ng-disabled="newcabinetFrom.$invalid"
                 class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}

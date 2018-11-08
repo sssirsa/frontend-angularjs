@@ -228,7 +228,7 @@
                             .then(function () {
                                 //vm.toRefresh();
                             })
-                            .catch(function(){
+                            .catch(function () {
                                 //vm.toRefresh();
                             });
                     })

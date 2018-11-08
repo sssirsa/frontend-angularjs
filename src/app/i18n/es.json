@@ -219,12 +219,18 @@
                 "STATUS_COM": "Estatus COM",
                 "LIST": "Listado de cabinets",
                 "CATEGORY": "Categoría"
+            },
+            "NO_LABELED":{
+                "STATUS": "Estatus no capitalizado",
+                "ECONOMICS": "Economicos",
+                "REASON": "Motivo no capitalizado"
             }
         },
         "LABEL": {
             "REQUIRED": "Campo requerido",
             "ALFANUMERICONLY": "Solo son aceptados Caractéres Alfanúmericos, espacios y guiones",
-            "ALFANUMERIC": "Solo son aceptados Caractéres Alfanúmericos"
+            "ALFANUMERIC": "Solo son aceptados Caractéres Alfanúmericos",
+            "ECONOMICS": "Solo se aceptan números y comas"
         },
         "MSG": {
             "LOADING": "Cargando ...",
