@@ -18,12 +18,35 @@
         vm.id_unilever = data.id_unilever;
         vm.marcaP = data.marca;
         vm.modeloP = data.modelo;
-        vm.estatus_unilever = data.estatus_unilever;
-        vm.estatus_com = data.estatus_com;
-        vm.condicion = data.condicion;
         vm.marca = null;
         vm.modelos = [];
         vm.urlQR = data.qr_code;
+
+        //variable con consideraciones especiales
+        if(data.estatus_unilever){
+            vm.estatus_unilever = data.estatus_unilever.descripcion;
+        }else{
+            vm.estatus_unilever = "Sin asignar";
+        }
+
+        if(data.estatus_com){
+            vm.estatus_com = data.estatus_com.descripcion;
+        }else{
+            vm.estatus_com = "Sin asignar";
+        }
+
+        if(data.condicion){
+            vm.condicion = data.condicion.letra;
+        }else{
+            vm.condicion = "Sin asignar";
+        }
+
+        if(data.condicion){
+            vm.categoria = data.categoria.nombre;
+        }else{
+            vm.categoria = "Sin asignar";
+        }
+
 
         vm.loadingPromise = null;
         var validate = true;

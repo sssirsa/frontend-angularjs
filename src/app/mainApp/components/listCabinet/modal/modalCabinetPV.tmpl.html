@@ -112,10 +112,15 @@
                     </md-input-container>
                 </div>
 
-                <div flex="50" layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                     <md-input-container flex class="md-block" >
                         <label translate>MAIN.COMPONENTS.CABINET.STATUS_COM</label>
                         <input name="modeloAnterior" ng-model="vm.estatus_com" ng-disabled="true"/>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block" >
+                        <label translate>MAIN.COMPONENTS.CABINET.CATEGORY</label>
+                        <input name="modeloAnterior" ng-model="vm.categoria" ng-disabled="true"/>
                     </md-input-container>
                 </div>
             </form>

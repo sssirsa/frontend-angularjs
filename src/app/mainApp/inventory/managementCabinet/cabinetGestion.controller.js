@@ -7,7 +7,7 @@
         .module('app.mainApp.inventory')
         .controller('cabinetGestionController', cabinetGestionController);
 
-    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler, toastr)
+    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler, toastr, Translate)
     {
         var vm = this;
         vm.todosprev = null;
@@ -60,7 +60,7 @@
                         vm.refreshPaginationButtonsComponent = true;
                     })
                     .catch(function (err) {
-                        toastr.error(err);
+                        toastr.error(Translate.translate('MAIN.MSG.ERROR_MESSAGE'));
                     });
             }
             else {
@@ -94,9 +94,10 @@
                     id_unilever: cabinet.id_unilever,
                     no_serie: cabinet.no_serie,
                     year: cabinet.year,
-                    condicion: cabinet.condicion.descripcion,
-                    estatus_com: cabinet.estatus_com.descripcion,
-                    estatus_unilever: cabinet.estatus_unilever.descripcion,
+                    condicion: cabinet.condicion,
+                    categoria: cabinet.categoria,
+                    estatus_com: cabinet.estatus_com,
+                    estatus_unilever: cabinet.estatus_unilever,
                     marca: cabinet.modelo.marca.descripcion,
                     modelo: cabinet.modelo.nombre,
                     tipo: cabinet.modelo.tipo.nombre,

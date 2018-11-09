@@ -83,7 +83,7 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'letra'
                 },
                 pagination: {
                     total: 'count',

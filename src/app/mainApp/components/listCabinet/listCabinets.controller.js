@@ -82,18 +82,15 @@
                 id_unilever: data.id_unilever,
                 no_serie: data.no_serie,
                 year: data.year,
-                condicion: data.condicion.descripcion,
-                estatus_com: data.estatus_com.descripcion,
-                estatus_unilever: data.estatus_unilever.descripcion,
+                condicion: data.condicion,
+                categoria: cabinet.categoria,
+                estatus_com: data.estatus_com,
+                estatus_unilever: data.estatus_unilever,
                 marca: data.modelo.marca.descripcion,
                 modelo: data.modelo.nombre,
                 tipo: data.modelo.tipo.nombre,
                 estado: ux,
                 qr_code: data.qr_code,
-                identifiers:{
-                    id_modelo: data.modelo.id,
-                    id_marca: data.modelo.marca.id
-                },
                 deleted: data.deleted
             };
 
