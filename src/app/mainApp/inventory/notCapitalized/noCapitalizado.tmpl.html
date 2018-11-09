@@ -61,7 +61,7 @@
                 layout="column"
                 ng-repeat="item in vm.todos|orderBy:'no_serie' "
                 layout-gt-md="row"
-                ng-click="vm.selectCabinet(item)">
+                ng-click="vm.showNoCapitalizado(item)">
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content>
                         <div flex="100">
@@ -71,7 +71,7 @@
                                         <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status.nombre}}
                                     </div>
                                     <div>
-                                        <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status.nombre}}
+                                        <b translate>NOT_CAPITALIZED.ACTIVE</b>: &nbsp {{item.activo}}
                                     </div>
                                 </div>
                             </md-toolbar>

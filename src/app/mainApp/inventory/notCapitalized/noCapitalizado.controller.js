@@ -21,6 +21,7 @@
         vm.goToNumberPage = goToNumberPage;
         vm.filterList = filterList;
         vm.crearNoCapitalizado = crearNoCapitalizado;
+        vm.showNoCapitalizado = showNoCapitalizado;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -81,6 +82,13 @@
 
         function prepareDataFunction() {
             vm.todos = Helper.filterDeleted(vm.objectPaginado.results, true);
+            angular.forEach(Helper.filterDeleted(vm.objectPaginado.results, true), function (data) {
+                if(data.deleted === true){
+                    data.activo = "Desactivado";
+                }else{
+                    data.activo = "Activo";
+                }
+            });
         }
 
         function sigPage() {
@@ -113,9 +121,26 @@
                 fullscreen: true,
                 clickOutsideToClose: true
             }).then(function (respuesta) {
-                console.log(respuesta);
+                aRefresh();
+            }).catch(function (err) {
+            });
+        }
+
+
+        function showNoCapitalizado(item) {
+            vm.toModel = angular.copy(item);
+            $mdDialog.show({
+                controller: 'notCapitalizedUpdateDialogController',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                controllerAs: 'vm',
+                fullscreen: true,
+                locals:{
+                    data: vm.toModel
+                },
+                clickOutsideToClose: true
+            }).then(function (respuesta) {
                 ErrorHandler.successCreation();
-                vm.cabinetCreated = respuesta;
+                aRefresh();
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);

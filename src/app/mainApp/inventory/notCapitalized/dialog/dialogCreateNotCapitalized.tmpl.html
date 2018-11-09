@@ -57,7 +57,9 @@
     <md-actions
         layout="row"
         layout-align="end center">
-        <md-button class="md-raised md-primary" ng-click="vm.create()">
+        <md-button class="md-raised md-primary"
+                   cg-busy="{ promise:vm.createPromise, message:' ' }"
+                   ng-click="vm.create()">
             <span translate>NOT_CAPITALIZED.BUTTONS.CREATE</span>
         </md-button>
 

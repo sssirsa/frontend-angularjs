@@ -6,23 +6,40 @@
 
     angular
         .module('app.mainApp.inventory')
-        .controller('notCapitalizedDialogController', notCapitalizedDialogController);
+        .controller('notCapitalizedUpdateDialogController', notCapitalizedUpdateDialogController);
 
-    function notCapitalizedDialogController($mdDialog, MANAGEMENT, Translate, toastr, User, URLS, $scope, noLabeled, Helper)
+    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, Translate, toastr, URLS, $scope, noLabeled, data, ErrorHandler)
     {
         var vm = this;
-        vm.user = User.getUser();
         vm.no_labeled = {};
-        vm.no_serie = null;
-        vm.economicos = [];
+        vm.no_serie = data.no_serie;
+        vm.economicos = data.economicos;
+        vm.change = null;
+        vm.sw1 = false;
+        vm.confirmation = "";
+
+        //variables de catalogos
+        if(data.status){
+            vm.estatusPrevio = data.status.nombre;
+        }else{
+            vm.estatusPrevio = "Sin asignar";
+        }
+
+        if(data.motivo){
+            vm.motivoPrevio = data.motivo.nombre;
+        }else{
+            vm.motivoPrevio = "Sin asignar";
+        }
+
 
         //Functions
-        vm.create = create;
+        vm.update = update;
         vm.cancel = cancel;
         vm.onElementSelect = onElementSelect;
-
-        //variables definicion
-        vm.selectedItem = null;
+        vm.changeM = changeM;
+        vm.remove = remove;
+        vm.acceptConfirm = acceptConfirm;
+        vm.cancelConfirm = cancelConfirm;
         vm.transformChip = transformChip;
 
         //Fields
@@ -69,32 +86,31 @@
             }
         };
 
-
-        function create() {
-            if($scope.newNCForm.$error.pattern !== undefined){
-                console.log("error",$scope.newNCForm.$error);
-                toastr.error("Llene corectamente todos los campos");
+        function changeM() {
+            if(vm.sw1 === true){
+                vm.change = "1";
             }else{
-
-                if(vm.no_serie) {
-                    vm.no_labeled['no_serie'] = vm.no_serie;
-                }
-
-                if(vm.economicos.length > 0){
-                    vm.no_labeled['economicos'] = vm.economicos;
-                }
-
-                //$mdDialog.hide("Regreso lo que hizo");
-                vm.createPromise = noLabeled.create(vm.no_labeled)
-                    .then(function (res) {
-                        $scope.newNCForm.$setPristine();
-                        $scope.newNCForm.$setUntouched();
-
-                        $mdDialog.hide(res);
-                    }).catch(function (err) {
-                        $mdDialog.cancel(err);
-                    });
+                vm.change = "";
             }
+        }
+
+        function update() {
+            if(vm.no_serie) {
+                vm.no_labeled['no_serie'] = vm.no_serie;
+            }
+
+            if(vm.economicos.length > 0){
+                vm.no_labeled['economicos'] = vm.economicos;
+            }
+
+            //$mdDialog.hide("Regreso lo que hizo");
+            noLabeled.update(data.id, vm.no_labeled)
+                .then(function (res) {
+                    $mdDialog.hide(res);
+                })
+                .catch(function (err) {
+                    $mdDialog.hide(err);
+                });
         }
 
         function cancel() {
@@ -111,6 +127,24 @@
             }
 
             return { name: chip, type: 'new' };
+        }
+
+        function remove() {
+            vm.confirmation = "confirma";
+        }
+
+        function acceptConfirm() {
+            noLabeled.dlete(data.id)
+                .then(function (res) {
+                    $mdDialog.hide(res);
+                })
+                .catch(function (err) {
+                    $mdDialog.hide(err);
+                });
+        }
+
+        function cancelConfirm() {
+            $mdDialog.cancel(null);
         }
     }
 })();

@@ -43,6 +43,8 @@
   },
     "NOT_CAPITALIZED":{
         "NO_SERIE": "Número de serie",
+        "LAST_MOTIVE": "Motivo anterior",
+        "LAST_STATUS": "Estatus anterior",
         "DATE_SEPARATION": "Fecha de separación",
         "DATE_RELEASE": "Fecha de liberación",
         "ECONOMIC": "Economico(s)",
@@ -51,9 +53,11 @@
         "STATUS": "Estatus",
         "POSITIONING": "Posicionamiento",
         "NEW_ECONOMIC": "Economico nuevo",
+        "ACTIVE": "Activo",
+        "TITLE": "No capitalizado",
         "BUTTONS":{
             "CREATE": "Crear No Capitalizado",
-            "UPDATE": "Modificar cabinet",
+            "UPDATE": "Modificar No capitalizado",
             "RELEASE_CABINET": "Capitalizar"
         },
         "SEARCH":{
