@@ -229,6 +229,7 @@
                 cabinetUC.create(vm.cabinet)
                     .then(function (cabinetCreated) {
                         $mdDialog.hide(cabinetCreated);
+                        toastr.success(Translate.translate('SUCCESS.CREATE'));
                     })
                     .catch(function (err) {
                         $mdDialog.cancel(err);

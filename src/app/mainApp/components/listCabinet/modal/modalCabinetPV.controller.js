@@ -69,6 +69,7 @@
         vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
         vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
+        vm.update = Translate.translate('SUCCESS.UPDATE');
 
         //Blank variables templates
         vm.catalogues = {
@@ -198,31 +199,27 @@
             vm.cabinet['year'] = vm.year;
             vm.cabinet['id_unilever'] = vm.id_unilever;
 
-            //variables de los catalogos
-            vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
-            //vm.cabinet['condicion_id'] = vm.cabinet['condicion_id'];
-            //vm.cabinet['estatus_unilever_id'] = vm.cabinet['estatus_unilever_id'];
-            //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
-
-            //variables en null (se eliminaran al corregir back)
-            //vm.cabinet['insumo_id'] = 25;
-            //vm.cabinet['pedimento_id'] = 1;
-            //vm.cabinet['posicionamiento_id'] = 1;
-            //vm.cabinet['sucursal_id'] = 1;
-            //vm.cabinet['categoria_id'] = 1;
-
             validate = _.contains(_.values(vm.cabinet), undefined);
 
             if(validate){
                 toastr.error("Llene corectamente todos los campos");
             }else{
 
-                cabinetUC.update(vm.economico, vm.cabinet)
+                if(vm.sw1 === true){
+                    vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
+                    console.log(vm.cabinet);
+                }else{
+                    vm.cabinet.modelo_id = data.id_modelo;
+                    console.log(vm.cabinet);
+                }
+
+                cabinetUC.update(data.economico, vm.cabinet)
                     .then(function (res) {
+                        toastr.success(vm.update);
                         $mdDialog.hide(res);
                     })
                     .catch(function (err) {
-                        ErrorHandler.errorTranslate(err);
+                        toastr.error(ErrorHandler.errorTranslate(err));
                         $mdDialog.hide(err);
                     });
             }

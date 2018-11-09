@@ -103,13 +103,7 @@
                     tipo: cabinet.modelo.tipo.nombre,
                     estado: ux,
                     qr_code: cabinet.qr_code,
-                    identifiers:{
-                        id_modelo: cabinet.modelo.id,
-                        id_marca: cabinet.modelo.marca.id
-                        //id_status_com: cabinet.estatus_com.id,
-                        //id_status_unilever: cabinet.estatus_unilever.id,
-                        //id_condicion: cabinet.condicion.id
-                    },
+                    id_modelo: cabinet.modelo.id,
                     deleted: cabinet.deleted
                 };
 
