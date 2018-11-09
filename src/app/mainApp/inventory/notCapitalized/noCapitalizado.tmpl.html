@@ -17,32 +17,29 @@
 
     <div ng-if="vm.todos">
 
-        <div layout="colum" layout-align="center center" layout-padding="" ng-if="vm.todos.length > 0">
+        <div layout="colum" layout-align="center center" layout-padding="">
             <md-card flex="50">
                 <md-input-container class="md-block">
-                    <label translate>NOT_CAPITALIZED.SEARCH.STATUS</label>
-                    <md-select name="selectSalePointType"
+                    <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
+                    <md-select name="selectType"
                                md-on-close="vm.changeSelected()"
                                ng-model="vm.selectedKind">
-                        <md-option ng-repeat="option in vm.salePointKinds"
-                                   value="{{option.id}}">
-                            {{option.value}}
+                        <md-option ng-repeat="option in vm.Kinds"
+                                   value="{{option.value}}">
+                            {{option.nombre}}
                         </md-option>
                     </md-select>
-                    <div ng-if="vm.selectedKind && vm.salePoints.length == 0">
-                        <span translate>NOT_CAPITALIZED.RESULTS.NO_RESULTS</span>
-                    </div>
                 </md-input-container>
             </md-card>
 
             <md-card flex="50">
-                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block" ng-if="vm.todos.length > 0">
+                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
                     <md-input-container
                         flex="100"
                         class="md-block">
                         <input
-                            only-digits
-                            placeholder="Búsqueda por economico"
+                            ng-pattern="/^[a-zA-Z0-9]+$/"
+                            placeholder="Ingrese cabinet no capitalizado a buscar..."
                             ng-model="vm.searchText">
                     </md-input-container>
                 </form>
@@ -59,7 +56,7 @@
             <md-card
                 flex="100"
                 layout="column"
-                ng-repeat="item in vm.todos|orderBy:'no_serie' "
+                ng-repeat="item in vm.todos|orderBy:'id' "
                 layout-gt-md="row"
                 ng-click="vm.showNoCapitalizado(item)">
                 <div layout="column" layout-align="center stretch" flex="100">
@@ -68,7 +65,10 @@
                             <md-toolbar class="md-hue-1">
                                 <div layout="colum" class="md-toolbar-tools" layout-align="space-around center">
                                     <div>
-                                        <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status.nombre}}
+                                        <b translate>NOT_CAPITALIZED.IDENTIFIER</b>: &nbsp <b>{{item.id}}</b>
+                                    </div>
+                                    <div>
+                                        <b translate>NOT_CAPITALIZED.STATUS</b>: &nbsp {{item.status}}
                                     </div>
                                     <div>
                                         <b translate>NOT_CAPITALIZED.ACTIVE</b>: &nbsp {{item.activo}}
@@ -204,6 +204,10 @@
                     <md-content>
                         <div flex="100" layout="column" layout-align="end end">
                             <div>
+                                <md-button class="md-raised md-primary"
+                                           ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
+                                    <span translate>NOT_CAPITALIZED.BUTTONS.UPDATE</span>
+                                </md-button>
                                 <md-button aria-label="fab button"
                                            ng-click="$event.stopPropagation()"
                                            class="md-raised md-warn">

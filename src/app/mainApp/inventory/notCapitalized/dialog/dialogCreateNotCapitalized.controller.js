@@ -81,7 +81,7 @@
                 }
 
                 if(vm.economicos.length > 0){
-                    vm.no_labeled['economicos'] = vm.economicos;
+                    vm.no_labeled['economicos_id'] = vm.economicos;
                 }
 
                 //$mdDialog.hide("Regreso lo que hizo");

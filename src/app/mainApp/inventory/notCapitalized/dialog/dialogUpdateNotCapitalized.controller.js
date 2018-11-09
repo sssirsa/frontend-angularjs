@@ -20,7 +20,7 @@
 
         //variables de catalogos
         if(data.status){
-            vm.estatusPrevio = data.status.nombre;
+            vm.estatusPrevio = data.status;
         }else{
             vm.estatusPrevio = "Sin asignar";
         }
@@ -100,7 +100,7 @@
             }
 
             if(vm.economicos.length > 0){
-                vm.no_labeled['economicos'] = vm.economicos;
+                vm.no_labeled['economicos_id'] = vm.economicos;
             }
 
             //$mdDialog.hide("Regreso lo que hizo");

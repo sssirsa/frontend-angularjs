@@ -22,20 +22,63 @@
         vm.filterList = filterList;
         vm.crearNoCapitalizado = crearNoCapitalizado;
         vm.showNoCapitalizado = showNoCapitalizado;
+        vm.changeSelected = changeSelected;
+        vm.searchCabinet = searchCabinet;
+
+
+        //variables
+        vm.Kinds = [{nombre: 'Identificador',
+                    value:1},
+                    {nombre: 'Número de serie',
+                    value:2}];
+
+        vm.selectedKind = null;
+        vm.querySet = '';
+        vm.searchText = '';
 
         //datos para paginado
         vm.objectPaginado = null;
         vm.offset = 0;
         vm.limit = 20;
         vm.refreshPaginationButtonsComponent = false;
-        vm.textToSearch = '';
-        vm.preTextToSearch = '';
-        vm.querySet = 'economico__contains=';
+
+        function changeSelected(){
+            if(vm.selectedKind == 2){
+                aRefresh();
+            }
+        }
+
+        function searchCabinet(){
+            if(!vm.selectedKind){
+                toastr.error("Selecione un tipo de búsqueda");
+            }else{
+                if(vm.selectedKind == 2){
+                    vm.querySet = 'no_serie__icontains=' + vm.searchText;
+                    listNoLabeled();
+                }else{
+                    vm.loadingPromise = noLabeled.getByID(vm.searchText)
+                        .then(function (no_cap) {
+                            if(!no_cap.status){
+                                no_cap.status = "Sin asignar";
+                            }else{
+                                no_cap.status = no_cap.status.nombre;
+                            }
+                            showNoCapitalizado(no_cap);
+                            vm.searchText = '';
+                        })
+                        .catch(function (err) {
+                            ErrorHandler.errorTranslate(err);
+                        });
+                }
+            }
+        }
 
         function aRefresh() {
             vm.todos = [];
             vm.objectPaginado = null;
             vm.offset = 0;
+            vm.searchText = '';
+            vm.querySet = '';
             listNoLabeled();
         }
 
@@ -48,11 +91,19 @@
 
         function listNoLabeled(){
             vm.refreshPaginationButtonsComponent = false;
-            if (vm.preTextToSearch !== vm.textToSearch) {
-                vm.offset = 0;
-                vm.preTextToSearch = vm.textToSearch;
-            }
-            if (vm.textToSearch.length === 0) {
+
+            if(vm.searchText){
+                vm.loadingPromise = noLabeled.list(vm.limit, vm.offset, vm.querySet.toString())
+                    .then(function (res) {
+                        vm.objectPaginado = res;
+                        prepareDataFunction();
+                        vm.refreshPaginationButtonsComponent = true;
+                    })
+                    .catch(function (err) {
+                        console.debug(err);
+                        toastr.error("Error al cargar los elementos");
+                    });
+            }else{
                 vm.loadingPromise = noLabeled.list(vm.limit, vm.offset)
                     .then(function (res) {
                         vm.objectPaginado = res;
@@ -61,22 +112,9 @@
                     })
                     .catch(function (err) {
                         console.debug(err);
-                        toastr.error("No se pudo cargar los elementos");
+                        toastr.error("Error al cargar los elementos");
                     });
             }
-            else {
-                var sendQuery = vm.querySet + vm.textToSearch;
-                vm.loadingPromise = noLabeled.list(vm.limit, vm.offset, sendQuery)
-                    .then(function (res) {
-                        vm.objectPaginado = res;
-                        prepareDataFunction();
-                        vm.refreshPaginationButtonsComponent = true;
-                    })
-                    .catch(function (err) {
-                        toastr.error(err);
-                    });
-            }
-
         }
 
 
@@ -87,6 +125,12 @@
                     data.activo = "Desactivado";
                 }else{
                     data.activo = "Activo";
+                }
+
+                if(!data.status){
+                    data.status = "Sin asignar";
+                }else{
+                    data.status = data.status.nombre;
                 }
             });
         }

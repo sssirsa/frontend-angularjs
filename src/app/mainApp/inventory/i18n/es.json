@@ -42,6 +42,7 @@
     }
   },
     "NOT_CAPITALIZED":{
+        "IDENTIFIER": "Identificador",
         "NO_SERIE": "Número de serie",
         "LAST_MOTIVE": "Motivo anterior",
         "LAST_STATUS": "Estatus anterior",
@@ -61,6 +62,7 @@
             "RELEASE_CABINET": "Capitalizar"
         },
         "SEARCH":{
+            "SELECT": "Seleccione tipo de búsqueda",
             "ECONOMICO": "Búsqueda por economico",
             "STATUS": "Búsqueda por estatus",
             "TYPE":{
