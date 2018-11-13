@@ -155,6 +155,12 @@
             paginadoRefresh();
         }
 
+        function transformChip(chip) {
+            if (angular.isObject(chip)) {
+                return chip;
+            }
+        }
+
         //modales
 
         function crearNoCapitalizado() {
