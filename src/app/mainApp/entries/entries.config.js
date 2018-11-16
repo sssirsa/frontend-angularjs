@@ -18,17 +18,6 @@
                 controller: 'newManualEntryController',
                 controllerAs: 'vm'
             })
-            //.state('triangular.admin-default.entry-new-massive', {
-            //    url: '/entrada/nuevos/masiva',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries/new/massive/newMassiveEntry.tmpl.html',
-            //    controller: 'newMassiveEntryController',
-            //    controllerAs: 'vm'
-            //})
             /* Warranty asset entries */
             .state('triangular.admin-default.entry-warranty-manual', {
                 url: '/entrada/garantias/manual',
@@ -41,17 +30,6 @@
                 controller: 'warrantyManualEntryController',
                 controllerAs: 'vm'
             })
-            //.state('triangular.admin-default.entry-warranty-massive', {
-            //    url: '/entrada/garantias/masiva',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries/warranty/massive/warrantyMassiveEntry.tmpl.html',
-            //    controller: 'warrantyMassiveEntryController',
-            //    controllerAs: 'vm'
-            //})
             /* Unrecognizable asset entries */
             .state('triangular.admin-default.entry-unrecognizable-manual', {
                 url: '/entrada/no_capitalizados/manual',
@@ -64,17 +42,6 @@
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
-            //.state('triangular.admin-default.entry-unrecognizable-massive', {
-            //    url: '/entrada/no_capitalizados/masiva',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries/unrecognizable/massive/unrecognizableMassiveEntry.tmpl.html',
-            //    controller: 'unrecognizableMassiveEntryController',
-            //    controllerAs: 'vm'
-            //})
             /* Obsolete asset entries */
             .state('triangular.admin-default.entry-obsolete-manual', {
                 url: '/entrada/obsoletos/manual',
@@ -87,17 +54,6 @@
                 controller: 'obsoleteManualEntryController',
                 controllerAs: 'vm'
             })
-            //.state('triangular.admin-default.entry-obsolete-massive', {
-            //    url: '/entrada/obsoletos/masiva',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries/obsolete/massive/obsoleteMassiveEntry.tmpl.html',
-            //    controller: 'obsoleteMassiveEntryController',
-            //    controllerAs: 'vm'
-            //})
             ;
         triMenuProvider.addMenu(
             {

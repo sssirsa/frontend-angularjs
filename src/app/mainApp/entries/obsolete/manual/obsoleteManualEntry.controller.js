@@ -151,7 +151,7 @@
             $mdDialog.show({
                 controller: 'CabinetDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/creacion/cabinetCreateDialog.tmpl.html',
+                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
