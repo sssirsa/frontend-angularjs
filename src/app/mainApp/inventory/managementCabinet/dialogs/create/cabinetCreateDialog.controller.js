@@ -1,20 +1,24 @@
-//Create by Alex 26/04/2018
-
+/**
+ * Created by Emmanuel on 15/10/2016.
+ * Modified by Alex on 19/10/2016.
+ */
 (function () {
+    'use_strict';
 
     angular
-        .module('app.mainApp')
-        .component('createCabinet', {
-            templateUrl: 'app/mainApp/components/createCabinet/createCabinet.tmpl.html',
-            controller: createCabinetController,
-            controllerAs: '$ctrl',
-            bindings:{
-                toRefresh: '&'
-            }
-        });
-
-    /* @ngInject */
-    function createCabinetController (MANAGEMENT, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS) {
+        .module('app.mainApp.inventory')
+        .controller('CabinetDialogController', CabinetDialogController);
+    function CabinetDialogController(
+        $mdDialog,
+        URLS,
+        cabinetID,
+        Helper,
+        Translate,
+        toastr,
+        cabinetUC,
+        MANAGEMENT,
+        ErrorHandler
+    ) {
         var vm = this;
 
         //variables
@@ -33,6 +37,18 @@
         //funciones
         vm.onBrandSelect = onBrandSelect;
         vm.onElementSelect = onElementSelect;
+        vm.create = create;
+        vm.cancel = cancelClick;
+
+        //Translates
+        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
+        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
+
+        activate();
+
+        function activate() {
+            vm.economico = cabinetID;
+        }
 
         //Blank variables templates
         vm.catalogues = {
@@ -169,6 +185,10 @@
             vm.cabinet[field] = element;
         }
 
+        function cancelClick() {
+            $mdDialog.cancel(null);
+        }
+
         function limpiar(){
             validate = true;
             vm.cabinet = {};
@@ -181,9 +201,7 @@
             vm.clear = "1";
         }
 
-        vm.accept = accept;
-        function accept() {
-
+        function create() {
             vm.cabinet['economico'] = vm.economico;
             vm.cabinet['no_serie'] = vm.no_serie;
             vm.cabinet['year'] = vm.year;
@@ -196,10 +214,10 @@
             //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
 
             //variables en null (se eliminaran al corregir back)
-            //vm.cabinet['insumo_id'] = 25;
-            //vm.cabinet['pedimento_id'] = 1;
-            //vm.cabinet['posicionamiento_id'] = 1;
-            //vm.cabinet['sucursal_id'] = 1;
+            vm.cabinet['insumo_id'] = 25;
+            vm.cabinet['pedimento_id'] = 1;
+            vm.cabinet['posicionamiento_id'] = 1;
+            vm.cabinet['sucursal_id'] = 1;
             //vm.cabinet['categoria_id'] = 1;
 
             validate = _.contains(_.values(vm.cabinet), undefined);
@@ -210,35 +228,15 @@
                 vm.clear = "";
                 cabinetUC.create(vm.cabinet)
                     .then(function (cabinetCreated) {
-
-                        limpiar();
-                        vm.toRefresh();
-
-                        $mdDialog.show({
-                            controller: 'newCabinetPreController',
-                            controllerAs: 'vm',
-                            templateUrl: 'app/mainApp/components/createCabinet/modal/modalNewCabinet.tmpl.html',
-                            fullscreen: true,
-                            clickOutsideToClose: true,
-                            focusOnOpen: true,
-                            locals: {
-                                data: cabinetCreated
-                            }
-                        })
-                            .then(function () {
-                                //vm.toRefresh();
-                            })
-                            .catch(function () {
-                                //vm.toRefresh();
-                            });
+                        $mdDialog.hide(cabinetCreated);
+                        toastr.success(Translate.translate('SUCCESS.CREATE'));
                     })
                     .catch(function (err) {
-                        limpiar();
+                        $mdDialog.cancel(err);
                         ErrorHandler.errorTranslate(err);
                     });
             }
         }
 
     }
-
 })();

@@ -1,12 +1,15 @@
+/**
+ * Created by Alex on 19/10/2016.
+ */
+
 (function () {
     angular
-        .module('app.mainApp')
-        .controller('NewCabinetPrerequestController', NewCabinetPrerequestController);
+        .module('app.mainApp.inventory')
+        .controller('cabinetGestionController', cabinetGestionController);
 
-    function NewCabinetPrerequestController(OPTIONS, URLS, udn, TipoEquipo, Helper, $mdEditDialog, $mdDialog, cabinetPV)
+    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler, toastr, Translate)
     {
         var vm = this;
-
         vm.todosprev = null;
         vm.todos = [];
         vm.loadingPromise = null;
@@ -50,20 +53,19 @@
                 vm.preTextToSearch = vm.textToSearch;
             }
             if (vm.textToSearch.length === 0) {
-                vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
+                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
                     .then(function (res) {
                         vm.objectPaginado = res;
                         prepareDataFunction();
-                        prepareFinalObjects();
                         vm.refreshPaginationButtonsComponent = true;
                     })
                     .catch(function (err) {
-
+                        toastr.error(Translate.translate('MAIN.MSG.ERROR_MESSAGE'));
                     });
             }
             else {
                 var sendQuery = vm.querySet + vm.textToSearch;
-                vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset, sendQuery)
+                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset, sendQuery)
                     .then(function (res) {
                         vm.objectPaginado = res;
                         prepareDataFunction();
@@ -81,7 +83,7 @@
             var ux = "Activo";
             angular.forEach(vm.todosprev, function (cabinet) {
 
-                if(cabinet.activo === true){
+                if(cabinet.deleted === false){
                     ux = "Activo";
                 }else{
                     ux = "Inactivo";
@@ -89,23 +91,20 @@
 
                 var cabinetPreview = {
                     economico: cabinet.economico,
-                    modelo: {
-                        id: cabinet.modelo.id,
-                        deleted: cabinet.modelo.deleted,
-                        nombre: cabinet.modelo.nombre,
-                        descripcion: cabinet.modelo.descripcion,
-                        palabra_clave: cabinet.modelo.palabra_clave,
-                        tipo: cabinet.modelo.tipo,
-                        marca: cabinet.modelo.marca
-                    },
-                    modelo_id: cabinet.modelo_id,
-                    antiguedad: cabinet.antiguedad,
-                    activo: cabinet.activo,
+                    id_unilever: cabinet.id_unilever,
+                    no_serie: cabinet.no_serie,
+                    year: cabinet.year,
+                    condicion: cabinet.condicion,
+                    categoria: cabinet.categoria,
+                    estatus_com: cabinet.estatus_com,
+                    estatus_unilever: cabinet.estatus_unilever,
+                    marca: cabinet.modelo.marca.descripcion,
+                    modelo: cabinet.modelo.nombre,
+                    tipo: cabinet.modelo.tipo.nombre,
                     estado: ux,
-                    no_incidencias: cabinet.no_incidencias,
                     qr_code: cabinet.qr_code,
-                    deleted: cabinet.deleted,
-                    no_serie: cabinet.no_serie
+                    id_modelo: cabinet.modelo.id,
+                    deleted: cabinet.deleted
                 };
 
                 vm.todos.push(cabinetPreview);
@@ -114,6 +113,7 @@
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+            prepareFinalObjects();
         }
 
         function sigPage() {

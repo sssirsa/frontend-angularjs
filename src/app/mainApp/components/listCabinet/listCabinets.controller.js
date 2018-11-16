@@ -5,7 +5,7 @@
     angular
         .module('app.mainApp')
         .component('listCabinet', {
-            templateUrl: 'app/mainApp/components/listCabinetPV/listCabinets.tmpl.html',
+            templateUrl: 'app/mainApp/components/listCabinet/listCabinets.tmpl.html',
             controller: listCabinetController,
             controllerAs: '$ctrl',
             bindings:{
@@ -19,7 +19,7 @@
         //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
-    function listCabinetController (cabinetPV, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
+    function listCabinetController (cabinetUC, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
         var vm = this;
 
         vm.todosprev = vm.todosprev2;
@@ -50,7 +50,7 @@
             $mdDialog.show({
                 controller: 'cabinetPVController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/listCabinetPV/modal/modalCabinetPV.tmpl.html',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinetPV.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -68,19 +68,44 @@
                 });
         }
 
+        function prepareData(data) {
+            var ux;
+
+            if(data.deleted === false){
+                ux = "Activo";
+            }else{
+                ux = "Inactivo";
+            }
+
+            var aux = {
+                economico: data.economico,
+                id_unilever: data.id_unilever,
+                no_serie: data.no_serie,
+                year: data.year,
+                condicion: data.condicion,
+                categoria: data.categoria,
+                estatus_com: data.estatus_com,
+                estatus_unilever: data.estatus_unilever,
+                marca: data.modelo.marca.descripcion,
+                modelo: data.modelo.nombre,
+                id_modelo: data.modelo.id,
+                tipo: data.modelo.tipo.nombre,
+                estado: ux,
+                qr_code: data.qr_code,
+                deleted: data.deleted
+            };
+
+            return aux;
+        }
+
         function searchCabinet() {
-            if (vm.filterData === null){
-                cabinetPV.getByID(vm.searchText)
-                    .then(function (respuesta) {
-                        info(respuesta);
-                    })
-                    .catch(function (error) {
-                        ErrorHandler.errorTranslate(error);
-                    });
-            }
-            else {
-                vm.filterData({economicFilter: vm.searchText});
-            }
+            cabinetUC.getByID(vm.searchText)
+                .then(function (cabinet) {
+                    info(prepareData(cabinet));
+                })
+                .catch(function (error) {
+                    ErrorHandler.errorTranslate(error);
+                });
         }
     }
 

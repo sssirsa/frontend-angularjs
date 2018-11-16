@@ -1,0 +1,170 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'MAIN.COMPONENTS.CABINET.TITLE'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+        <div ng-if="!vm.confirmation">
+            <form name="cabinetFrom">
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                        <input name="economico" required digits-only MAXLENGTH="20" ng-model="vm.economico"/>
+                        <div ng-messages="cabinetFrom.serial.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                        <input name="serial" maxlength="25"
+                               ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="vm.no_serie"/>
+                        <div ng-messages="cabinetFrom.serial.$error">
+                            <div ng-message="pattern">
+                                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                            </div>
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.YEAR</label>
+                        <input name="economico" required digits-only MAXLENGTH="4" ng-model="vm.year"/>
+                        <div ng-messages="cabinetFrom.serial.$error">
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
+                        <input name="serial" maxlength="25"
+                               ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="vm.id_unilever"/>
+                        <div ng-messages="cabinetFrom.serial.$error">
+                            <div ng-message="pattern">
+                                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                            </div>
+                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
+                        <input name="marcaAnterior" ng-model="vm.marcaP" ng-disabled="true"/>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
+                        <input name="modeloAnterior" ng-model="vm.modeloP" ng-disabled="true"/>
+                    </md-input-container>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left">
+                    <md-switch ng-disabled="false" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeTrademark()">
+                        Cambiar Marca o modelo
+                    </md-switch>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch" ng-if="vm.changeModel">
+                    <md-input-container flex class="md-block">
+                        <catalog-select catalog="vm.catalogues['marca'].catalog"
+                                        required="true"
+                                        pagination="vm.catalogues['marca'].pagination"
+                                        elements="vm.catalogues['marca'].elements"
+                                        soft-delete="vm.catalogues['marca'].softDelete"
+                                        on-select="vm.onBrandSelect(element)">
+                        </catalog-select>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block">
+                        <catalog-select ng-if="vm.marca"
+                                        catalog="vm.catalogues['modelo_by_marca'].catalog"
+                                        required="true"
+                                        lazy="true"
+                                        pagination="vm.catalogues['modelo_by_marca'].pagination"
+                                        elements="vm.catalogues['modelo_by_marca'].elements"
+                                        soft-delete="vm.catalogues['modelo_by_marca'].softDelete"
+                                        on-select="vm.onElementSelect(element,'modelo_id')">
+                        </catalog-select>
+                    </md-input-container>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                    <md-input-container flex class="md-block">
+                        <label translate>MAIN.COMPONENTS.CABINET.CONDITION</label>
+                        <input name="marcaAnterior" ng-model="vm.condicion" ng-disabled="true"/>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block" >
+                        <label translate>MAIN.COMPONENTS.CABINET.STATUS_UNILEVER</label>
+                        <input name="modeloAnterior" ng-model="vm.estatus_unilever" ng-disabled="true"/>
+                    </md-input-container>
+                </div>
+
+                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                    <md-input-container flex class="md-block" >
+                        <label translate>MAIN.COMPONENTS.CABINET.STATUS_COM</label>
+                        <input name="modeloAnterior" ng-model="vm.estatus_com" ng-disabled="true"/>
+                    </md-input-container>
+
+                    <md-input-container flex class="md-block" >
+                        <label translate>MAIN.COMPONENTS.CABINET.CATEGORY</label>
+                        <input name="modeloAnterior" ng-model="vm.categoria" ng-disabled="true"/>
+                    </md-input-container>
+                </div>
+            </form>
+
+            <md-actions
+                layout="row"
+                layout-align="end center">
+                <md-button class="md-primary md-raised">
+                    <md-icon md-font-icon="fa fa-download"></md-icon>
+                    <a href="{{vm.urlQR}}" download="QR.png" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
+                </md-button>
+
+                <md-button
+                    ng-click="vm.accept()"
+                    class="md-primary md-raised">
+                    <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+                    {{'MAIN.COMPONENTS.CABINET.UPDATE'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.remove()"
+                    class="md-raised md-warn">
+                    <md-icon md-font-icon="fa fa-trash-o"></md-icon>
+                    {{'MAIN.COMPONENTS.CABINET.DELETE'|translate}}
+                </md-button>
+            </md-actions>
+        </div>
+
+        <div ng-if="vm.confirmation">
+            <label translate>MAIN.DIALOG.DELETE_MESSAGE</label>
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-button
+                    ng-click="vm.acceptConfirm()"
+                    class="md-raised md-warn">
+                    {{'MAIN.BUTTONS.DELETE'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.cancelConfirm()"
+                    class="md-raised">
+                    {{'MAIN.BUTTONS.CANCEL'|translate}}
+                </md-button>
+            </div>
+        </div>
+
+    </md-content>
+</md-toolbar>

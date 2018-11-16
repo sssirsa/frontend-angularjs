@@ -418,7 +418,14 @@
             ]
         })
         .constant('URLS', {
-            atencion_pv: 'atencion_pv',
+            geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
+            condicion: 'condition',
+            estatus_unilever: 'status_unilever',
+            estatus_com: 'status_com',
+            estatus_no_capitalizado: 'estatus_no_capitalizado',
+            no_labeled_unilever: 'cabinet_no_labeled_unilever',
+            motivo_no_labeled: 'motivo_no_capitalizado',
+            cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',
             cabinets: 'cabinets',
@@ -426,7 +433,7 @@
             cabinet_entrada: 'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos: 'catalogo_insumos',
-            categoria: 'categoria',
+            categoria: 'category',
             checklist: 'CheckList',
             cliente: 'persona_capturista',
             cliente_grupos: 'cliente_groups',
@@ -621,5 +628,12 @@
             next: 'next',
             previous: 'previous',
             elements: 'results'
+        })
+        .constant('MANAGEMENT',{
+            project: {
+                catalogue: '/catalogue/',
+                inventory: '/inventory/'
+            },
+            baseManagement: 'http://api-gateway.sssirsa.com/management-dev'
         });
 })();
