@@ -1,0 +1,106 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'NOT_CAPITALIZED.TITLE'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<div ng-if="!vm.confirmation">
+    <form name="newNCForm" flex="100" layout-align="center ceneter">
+        <md-input-container flex class="md-block">
+            <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+            <input name="serial" maxlength="25"
+                   ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="vm.no_serie"/>
+            <div ng-messages="newNCForm.serial.$error">
+                <div ng-message="pattern">
+                    {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex class="md-block">
+            <label translate>MAIN.COMPONENTS.NO_LABELED.ECONOMICS</label>
+            <md-chips ng-model="vm.economicos" md-max-chips="5">
+                <input type="text" ng-pattern="/^[0-9,]+$/" placeholder="Enter a económico">
+            </md-chips>
+            <div ng-messages="newNCForm.economico.$error">
+                <div ng-message="pattern">
+                    {{'MAIN.LABEL.ECONOMICS'|translate}}
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex class="md-block">
+            <label translate>NOT_CAPITALIZED.LAST_MOTIVE</label>
+            <input name="motivoAnterior" ng-model="vm.motivoPrevio" ng-disabled="true"/>
+        </md-input-container>
+
+        <md-input-container flex class="md-block">
+            <label translate>NOT_CAPITALIZED.LAST_STATUS</label>
+            <input name="estatusAnterior" ng-model="vm.estatusPrevio" ng-disabled="true"/>
+        </md-input-container>
+
+        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left">
+            <md-switch ng-disabled="false" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
+                Cambiar Estatus o Motivo
+            </md-switch>
+        </div>
+
+        <md-input-container flex class="md-block" ng-if="vm.change">
+            <catalog-select catalog="vm.catalogues['estatus_no_capitalizado'].catalog"
+                            required="true"
+                            pagination="vm.catalogues['estatus_no_capitalizado'].pagination"
+                            elements="vm.catalogues['estatus_no_capitalizado'].elements"
+                            soft-delete="vm.catalogues['estatus_no_capitalizado'].softDelete"
+                            on-select="vm.onElementSelect(element,'status_id')">
+            </catalog-select>
+        </md-input-container>
+
+        <md-input-container flex class="md-block" ng-if="vm.change">
+            <catalog-select catalog="vm.catalogues['motivo'].catalog"
+                            required="true"
+                            pagination="vm.catalogues['motivo'].pagination"
+                            elements="vm.catalogues['motivo'].elements"
+                            soft-delete="vm.catalogues['motivo'].softDelete"
+                            on-select="vm.onElementSelect(element,'motivo_id')">
+            </catalog-select>
+        </md-input-container>
+    </form>
+
+    <md-actions
+        layout="row"
+        layout-align="end center">
+        <md-button class="md-raised md-primary"
+                   cg-busy="{ promise:vm.createPromise, message:' ' }"
+                   ng-click="vm.update()">
+            <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+            <span translate>MAIN.COMPONENTS.CABINET.UPDATE</span>
+        </md-button>
+
+        <md-button
+            ng-click="vm.remove()"
+            class="md-warn md-raised">
+            <md-icon md-font-icon="fa fa-trash-o"></md-icon>
+            {{'MAIN.COMPONENTS.CABINET.DELETE'|translate}}
+        </md-button>
+    </md-actions>
+</div>
+
+<div ng-if="vm.confirmation">
+    <label translate>MAIN.DIALOG.DELETE_MESSAGE</label>
+    <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+        <md-button
+            ng-click="vm.acceptConfirm()"
+            class="md-raised md-warn">
+            {{'MAIN.BUTTONS.DELETE'|translate}}
+        </md-button>
+
+        <md-button
+            ng-click="vm.cancelConfirm()"
+            class="md-raised">
+            {{'MAIN.BUTTONS.CANCEL'|translate}}
+        </md-button>
+    </div>
+</div>

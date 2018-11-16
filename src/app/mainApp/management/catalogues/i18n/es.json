@@ -339,5 +339,29 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "CONDITION":{
+        "LABELS":{
+            "TITLE":"Condición"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STATUS_UNILEVER":{
+        "LABELS":{
+            "TITLE":"Estatus Unilever"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STATUS_COM":{
+        "LABELS":{
+            "TITLE":"Estatus COM"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }
