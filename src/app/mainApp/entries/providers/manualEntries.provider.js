@@ -5,44 +5,48 @@
 
     function ManualEntriesProvider(
         WebRestangular,
+        ManagementRestangular,
         $q,
         URLS,
         Translate
     ) {
-        const baseUrl = WebRestangular.all(URLS.manualEntries);
-        const cabinetUrl = WebRestangular.all(URLS.cabinet);
-        const urls = URLS.entries;
+        const entriesUrl = WebRestangular
+            .all(URLS.entries.base);
+        const inventoryUrl = ManagementRestangular
+            .all(URLS.inventory.base);
+        const entries = URLS.entries;
+        const inventory = URLS.inventory;
 
         function createNew(element) {
-            return baseUrl.all(urls.entries.new).customPOST(element);
+            return entriesUrl.all(entries.new).customPOST(element);
         }
 
         function createWarranty(element) {
-            return baseUrl.all(urls.entries.warranty).customPOST(element);
+            return entriesUrl.all(entries.warranty).customPOST(element);
         }
 
         function createObsolete(element) {
-            return baseUrl.all(urls.entries.obsolete).customPOST(element);
+            return entriesUrl.all(entries.obsolete).customPOST(element);
         }
 
         function createUnrecognizable(element) {
-            return baseUrl.all(urls.entries.unrecognizable).customPOST(element);
+            return entriesUrl.all(entries.unrecognizable).customPOST(element);
         }
 
         function addCabinet(id, element) {
-            return baseUrl.all(urls.entries.addCabinet).all(id).customPUT(element);
+            return entriesUrl.all(entries.addCabinet).all(id).customPUT(element);
         }
 
         function detail(id) {
-            return baseUrl.all(urls.entries.close).all(id).customGET();
+            return entriesUrl.all(entries.close).all(id).customGET();
         }
 
         function close(id, element) {
-            return baseUrl.all(urls.entries.close).all(id).customPUT(element);
+            return entriesUrl.all(entries.close).all(id).customPUT(element);
         }
 
         function getCabinet(id) {
-            return cabinetUrl.all(id).customGET();
+            return inventoryUrl.all(inventory.cabinet_unilever).all(id).customGET();
         }
 
         function getEntriesByCabinet(id) {

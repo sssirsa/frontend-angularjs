@@ -420,7 +420,7 @@
         .constant('URLS', {
             cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
-            cabinet: 'cabinet',
+            cabinet: 'cabinet_unilever',
             cabinets: 'cabinets',
             cabinet_clean: 'cabinet_clean',
             cabinet_entrada: 'cabinet_input',
@@ -436,8 +436,8 @@
             diagnostico_cabinet: 'diagnostico_cabinet',
             entrada_masiva: 'mass_upload',
             entrada_salida: 'entrada_salida',
-            //TODO: Update when known
             entries: {
+                base:'entries',
                 new: 'news',
                 warranty: 'warranties',
                 obsolete: 'scrapped',
@@ -459,6 +459,10 @@
             grupo_persona: 'grupo_persona',
             insumo: 'insumo',
             insumo_usado: 'insumo_usado',
+            inventory: {
+                base: 'inventory',
+                cabinet_unilever:'cabinet_unilever'
+            },
             linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             map: 'https://maps.googleapis.com/maps/api/staticmap',
@@ -466,8 +470,6 @@
             massive: {
                 store: 'massive/store'
             },
-            massiveEntries: 'entries/massive',
-            manualEntries: 'entries',
             modelo_cabinet: 'modelo_cabinet',
             motivo_no_labeled: 'motivo_no_capitalizado',
             municipio: 'municipio',
