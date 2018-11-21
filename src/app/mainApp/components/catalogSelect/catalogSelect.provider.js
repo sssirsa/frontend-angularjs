@@ -5,17 +5,21 @@
         .module('app.mainApp')
         .service('CATALOG_SELECT', CatalogProvider);
 
-    function CatalogProvider(MobileRestangular, WebRestangular, $http, $q) {
+    function CatalogProvider(
+        API,
+        $http,
+        $q,
+        URLS) {
         var vm = this;
 
         vm.mobileCatalog = {
             url: null,
             list: function () {
-                return MobileRestangular.all(vm.mobileCatalog.url)
+                return API.all(URLS.mobile.base).all(vm.mobileCatalog.url)
                     .customGET();
             },
             search: function (query) {
-                return MobileRestangular.all(vm.mobileCatalog.url + '?' + query)
+                return API.all(URLS.mobile.base).all(vm.mobileCatalog.url + '?' + query)
                     .customGET();
             }
         };
@@ -23,11 +27,11 @@
         vm.webCatalog = {
             url: null,
             list: function () {
-                return WebRestangular.all(vm.webCatalog.url)
+                return API.all(URLS.genesis.base).all(vm.webCatalog.url)
                     .customGET();
             },
             search: function (query) {
-                return WebRestangular.all(vm.webCatalog.url + '?' + query)
+                return API.all(URLS.genesis.base).all(vm.webCatalog.url + '?' + query)
                     .customGET();
             }
         };
