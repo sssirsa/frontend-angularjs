@@ -8,8 +8,11 @@
         .module('app.mainApp')
         .factory('Proveedor',Proveedor);
 
-    function Proveedor(WebRestangular, URLS){
-        var baseProveedor = WebRestangular.all(URLS.proveedor);
+    function Proveedor(
+        API,
+        URLS
+    ) {
+        var baseProveedor = API.all(URLS.genesis.base).all(URLS.proveedor);
 
         var service = {
             list:list,
@@ -20,7 +23,7 @@
         };
         function listObject(limit, offset) {
             if (limit !== undefined && offset !== undefined) {
-                return WebRestangular.all(URLS.proveedor+'?limit='+limit+'&offset='+offset).customGET();
+                return API.all(URLS.genesis.base).all(URLS.proveedor+'?limit='+limit+'&offset='+offset).customGET();
             }
             else {
                 return baseProveedor.getList();
