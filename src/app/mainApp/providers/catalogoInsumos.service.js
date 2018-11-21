@@ -10,8 +10,12 @@
         .factory('CatalogoInsumo', CatalogoInsumo);
 
     /* @ngInject */
-    function CatalogoInsumo($q, WebRestangular, URLS) {
-        var baseCatalogoInsumo = WebRestangular.all(URLS.catalogo_insumos);
+    function CatalogoInsumo(
+        $q,
+        API,
+        URLS
+    ) {
+        var baseCatalogoInsumo = API.all(URLS.genesis.base).all(URLS.catalogo_insumos);
 
         return {
 
@@ -29,7 +33,7 @@
 
         function getCatalogoInsumo(catalogo) {
             var deferred = $q.defer();
-            WebRestangular.one(URLS.catalogo_insumos, catalogo).customGET().then(function (res) {
+            API.all(URLS.genesis.base).one(URLS.catalogo_insumos, catalogo).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (res) {
                 deferred.reject(res);
@@ -41,7 +45,7 @@
         function getCatalogoByZone(etapa) {
             var deferred = $q.defer();
 
-            WebRestangular.all(URLS.catalogo_insumos).one('zone', etapa).customGET().then(function (res) {
+            API.all(URLS.genesis.base).all(URLS.catalogo_insumos).one('zone', etapa).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -52,7 +56,7 @@
 
         function getCatalogoByWord(word) {
             var deferred = $q.defer();
-            WebRestangular.all(URLS.catalogo_insumos).one('lookup',word).customGET().then(function (res) {
+            API.all(URLS.genesis.base).all(URLS.catalogo_insumos).one('lookup',word).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(res);
@@ -62,7 +66,7 @@
 
         function getAllCatalogoInsumos() {
             var deferred = $q.defer();
-            WebRestangular.all(URLS.catalogo_insumos).customGET().then(function (res) {
+            API.all(URLS.genesis.base).all(URLS.catalogo_insumos).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(res);
