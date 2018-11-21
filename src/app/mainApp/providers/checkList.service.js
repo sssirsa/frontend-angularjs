@@ -9,8 +9,11 @@
         .factory('CheckList', CheckList);
 
     /* @ngInject */
-    function CheckList(WebRestangular, URLS) {
-        var urlbase = WebRestangular.all(URLS.checklist);
+    function CheckList(
+        API,
+        URLS
+    ) {
+        var urlbase = API.all(URLS.genesis.base).all(URLS.checklist);
 
         return {
             crearCheckListServicio: crearCheckListServicio,
