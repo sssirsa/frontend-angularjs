@@ -6,10 +6,14 @@
         .factory('Cabinet', Cabinet);
 
     /* @ngInject */
-    function Cabinet($q, WebRestangular, URLS) {
+    function Cabinet(
+        $q,
+        API,
+        URLS
+    ) {
 
-        var urlbase = WebRestangular.all(URLS.cabinet);
-        var urlbase_clean = WebRestangular.all(URLS.cabinet_clean);
+        var urlbase = API.all(URLS.genesis.base).all(URLS.cabinet);
+        var urlbase_clean = API.all(URLS.genesis.base).all(URLS.cabinet_clean);
 
         return {
             create: create,
@@ -53,7 +57,7 @@
 
         function get(id) {
             var deferred = $q.defer();
-            WebRestangular.one(URLS.cabinet, id).customGET().then(function (res) {
+            API.all(URLS.genesis.base).one(URLS.cabinet, id).customGET().then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -77,7 +81,7 @@
 
         function modify(cabinet) {
             var deferred = $q.defer();
-            WebRestangular.one(URLS.cabinet, cabinet.economico).customPUT(cabinet).then(function (res) {
+            API.all(URLS.genesis.base).one(URLS.cabinet, cabinet.economico).customPUT(cabinet).then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
@@ -86,7 +90,7 @@
         }
         function modifyclear(cabinet) {
             var deferred = $q.defer();
-            WebRestangular.one(URLS.cabinet_clean, cabinet.economico).customPUT(cabinet).then(function (res) {
+            API.all(URLS.genesis.base).one(URLS.cabinet_clean, cabinet.economico).customPUT(cabinet).then(function (res) {
                 deferred.resolve(res);
             }).catch(function (err) {
                 deferred.reject(err);
