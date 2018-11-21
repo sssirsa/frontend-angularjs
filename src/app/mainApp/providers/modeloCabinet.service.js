@@ -1,4 +1,4 @@
-(function() {
+(function() {MobileRestangular
     'use strict';
 
     angular
@@ -6,8 +6,11 @@
         .factory('ModeloCabinet', ModeloCabinet);
 
     /* @ngInject */
-    function ModeloCabinet(WebRestangular, MobileRestangular, URLS) {
-        var baseModelo = WebRestangular.all(URLS.modelo_cabinet);
+    function ModeloCabinet(
+        API,
+        URLS
+    ) {
+        var baseModelo = API.all(URLS.genesis.base).all(URLS.modelo_cabinet);
 
         return {
             list:list,
@@ -21,7 +24,7 @@
 
         function listWitout(limit, offset){
             if(limit !== undefined  && offset !== undefined ) {
-                return WebRestangular.all(URLS.modelo_cabinet+'?limit='+limit+'&offset='+offset).customGET();
+                return API.all(URLS.genesis.base).all(URLS.modelo_cabinet+'?limit='+limit+'&offset='+offset).customGET();
             } else {
                 return baseModelo.customGET();
             }
@@ -30,7 +33,7 @@
             return baseModelo.get(id);
         }
         function list(){
-            return MobileRestangular.all(URLS.modelo_cabinet).customGET();
+            return API.all(URLS.mobile.base).all(URLS.modelo_cabinet).customGET();
         }
 
         function update(object)
