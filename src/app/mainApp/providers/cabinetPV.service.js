@@ -6,9 +6,12 @@
         .factory('cabinetPV', cabinetPV);
 
     /* @ngInject */
-    function cabinetPV($q, MobileRestangular, URLS) {
+    function cabinetPV(
+        $q,
+        API,
+        URLS) {
 
-        var urlbase = MobileRestangular.all(URLS.cabinet_pv);
+        var urlbase = API.all(URLS.mobile.base).all(URLS.cabinet_pv);
 
         return {
             create: create,
@@ -28,10 +31,10 @@
         function list(limit, offset, querySet){
             if(limit !== undefined && offset !== undefined){
                 if (querySet === undefined) {
-                    return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
+                    return API.all(URLS.mobile.base).all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset).customGET();
                 }
                 else {
-                    return MobileRestangular.all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
+                    return API.all(URLS.mobile.base).all(URLS.cabinet_pv+'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
                 }
 
             }
