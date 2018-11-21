@@ -8,8 +8,11 @@
         .module('app.mainApp')
         .factory('Solicitudes',Solicitudes);
 
-    function Solicitudes(MobileRestangular, URLS){
-        var urlbase = MobileRestangular.all(URLS.solicitud_pv);
+    function Solicitudes(
+        API,
+        URLS
+    ) {
+        var urlbase = API.all(URLS.mobile.base).all(URLS.solicitud_pv);
 
         return{
             create:create,
