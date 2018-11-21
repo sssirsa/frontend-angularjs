@@ -1,9 +1,16 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', '$cookies', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'API', '$q', '$http', '$cookies', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http, $cookies) {
+    function OAuthProvider(
+        EnvironmentConfig,
+        API,
+        $q,
+        $http,
+        $cookies,
+        URLS
+    ) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -15,7 +22,7 @@
         function authenticate(params) {
             var request = $q.defer();
 
-            MobileRestangular.all('oauth').all('token/')
+            API.all(URLS.mobile.base).all('oauth').all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
@@ -25,11 +32,11 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    WebRestangular
+                    API.all(URLS.genesis.base)
                         .setDefaultHeaders({
                             Authorization: 'bearer ' + loginResponse.access_token
                         });
-                    MobileRestangular
+                    API.all(URLS.mobile.base)
                         .setDefaultHeaders({
                             Authorization: 'bearer ' + loginResponse.access_token
                         });
