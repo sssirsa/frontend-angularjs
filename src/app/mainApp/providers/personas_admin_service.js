@@ -8,9 +8,12 @@
         .module('app.mainApp')
         .factory('Persona_Admin',Persona_Admin);
 
-    function Persona_Admin(WebRestangular, URLS, MobileRestangular){
+    function Persona_Admin(
+        API,
+        URLS
+    ) {
 
-        var baseModelo = WebRestangular.all(URLS.persona_admin);
+        var baseModelo = API.all(URLS.genesis.base).all(URLS.persona_admin);
 
         return {
             list:list,
@@ -82,7 +85,7 @@
         }
 
         function listPromise(limit, offset){
-            return MobileRestangular.all(URLS.tecnicosDisponibles+'?limit='+limit+'&offset='+offset).customGET();
+            return API.all(URLS.mobile.base).all(URLS.tecnicosDisponibles+'?limit='+limit+'&offset='+offset).customGET();
         }
 
     }
