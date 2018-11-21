@@ -9,9 +9,12 @@
         .module('app.mainApp')
         .factory('PersonaCapturista',PersonaCapturista);
 
-    function PersonaCapturista(WebRestangular, URLS){
+    function PersonaCapturista(
+        API,
+        URLS
+    ) {
         // var baseModelo=Restangular.all('persona_capturista');
-        var baseModelo = WebRestangular.all(URLS.cliente);
+        var baseModelo = API.all(URLS.genesis.base).all(URLS.cliente);
 
         return{
             list:list,
@@ -19,9 +22,7 @@
             remove:remove,
             create:create
         };
-
-
-
+        
         function list(){
             return baseModelo.getList().$object;
         }
@@ -44,7 +45,7 @@
 
 
             var defer= $q.defer();
-            WebRestangular.one(URLS.cliente,data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data,"",{},{'Content-Type':undefined}).then(function(res){
+            API.all(URLS.genesis.base).one(URLS.cliente,data.id).withHttpConfig({transformRequest: angular.identity}).customPUT(form_data,"",{},{'Content-Type':undefined}).then(function(res){
                 defer.resolve(res);
             }).catch(function(err){
                 defer.reject(err);
