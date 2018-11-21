@@ -5,9 +5,12 @@
         .module('app')
         .factory('atencionPV', atencionPV);
 
-    function atencionPV(MobileRestangular, $window, URLS) {
-        var baseUrl=MobileRestangular.all(URLS.atencion_pv);
-        var insumosURL=MobileRestangular.all(URLS.catalogo_insumos);
+    function atencionPV(
+        API,
+        $window,
+        URLS) {
+        var baseUrl=API.all(URLS.mobile.base).all(URLS.atencion_pv);
+        var insumosURL=API.all(URLS.mobile.base).all(URLS.catalogo_insumos);
 
         var service = {
             getByID: getByID,
