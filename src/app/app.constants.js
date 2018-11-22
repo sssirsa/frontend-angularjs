@@ -426,7 +426,7 @@
                 base: 'genesis'
             },
             management: {
-                base: '' //TODO: Update when known
+                base: 'management'
             },
             mobile: {
                 base:'mobile'

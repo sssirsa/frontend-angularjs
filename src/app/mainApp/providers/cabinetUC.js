@@ -6,7 +6,13 @@
         .factory('cabinetUC', cabinetUC);
 
     /* @ngInject */
-    function cabinetUC($q, MANAGEMENT, URLS, $http, ManagementRestangular) {
+    function cabinetUC(
+        $q,
+        MANAGEMENT,
+        URLS,
+        $http,
+        ManagementRestangular
+    ) {
 
         var urlbase = ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
 
