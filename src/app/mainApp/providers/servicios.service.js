@@ -12,7 +12,11 @@
         .factory('Servicios', Servicios);
 
     /* @ngInject */
-    function Servicios($q, WebRestangular, URLS) {
+    function Servicios(
+        $q,
+        API,
+        URLS
+    ) {
         var service = {
             crearEtapaServicio: crearEtapaServicio,
             editarEtapaServicio: editarEtapaServicio,
@@ -38,7 +42,7 @@
 
         };
 
-        var baseModelo = WebRestangular.all(URLS.etapa_servicio);
+        var baseModelo = API.all(URLS.genesis.base).all(URLS.etapa_servicio);
 
         function crearEtapaServicio(etapa) {
             return baseModelo.customPOST(etapa);
@@ -87,55 +91,55 @@
         }
 
         function getDiagnosticoFromCabinet(idCabinet) {
-            return WebRestangular.all(URLS.diagnostico).all('latest').one(idCabinet).customGET();
+            return API.all(URLS.genesis.base).all(URLS.diagnostico).all('latest').one(idCabinet).customGET();
         }
 
         function anadirInsumo(insumo) {
-            return WebRestangular.all(URLS.insumo_usado).customPOST(insumo);
+            return API.all(URLS.genesis.base).all(URLS.insumo_usado).customPOST(insumo);
         }
 
         function modificarInsumo(insumo) {
-            return WebRestangular.all(URLS.insumo_usado).one('', insumo.id).customPUT(insumo);
+            return API.all(URLS.genesis.base).all(URLS.insumo_usado).one('', insumo.id).customPUT(insumo);
         }
 
         function eliminarInsumo(insumo) {
-            return WebRestangular.all(URLS.insumo_usado).one('', insumo.id).customDELETE(insumo.id, null, {'content-type': 'application/json'});
+            return API.all(URLS.genesis.base).all(URLS.insumo_usado).one('', insumo.id).customDELETE(insumo.id, null, {'content-type': 'application/json'});
         }
 
         function consultarInfoCabinet(idcabinet) {
-            return WebRestangular.one(URLS.cabinet, idcabinet).customGET();
+            return API.all(URLS.genesis.base).one(URLS.cabinet, idcabinet).customGET();
         }
 
         function consultarInsumobyNombre(cadena) {
-            return WebRestangular.all(URLS.catalogo_insumos).one('lookup', cadena).customGET();
+            return API.all(URLS.genesis.base).all(URLS.catalogo_insumos).one('lookup', cadena).customGET();
 
         }
 
         function getCatalogoInsumoById(catalogo) {
-            return WebRestangular.one(URLS.catalogo_insumos, catalogo.id).customGET();
+            return API.all(URLS.genesis.base).one(URLS.catalogo_insumos, catalogo.id).customGET();
 
         }
 
         function consultarInsumosEtapa(etapa) {
-            return WebRestangular.one('Insumos', etapa.actual_etapa).customGET(etapa);
+            return API.all(URLS.genesis.base).one('Insumos', etapa.actual_etapa).customGET(etapa);
         }
 
         //Nuevos Endpoints por nuevos requerimentos y reeconstruccion Etapa Servicio
         function BusquedaCatalogoTypeStep(data) {
-            return WebRestangular.all(URLS.catalogo_insumos).one('tipo', data.idTipo).all('etapa').customGET(data.idEtapa);
+            return API.all(URLS.genesis.base).all(URLS.catalogo_insumos).one('tipo', data.idTipo).all('etapa').customGET(data.idEtapa);
         }
 
         function BusquedaInsumosTypeStep(data) {
-            return WebRestangular.all(URLS.insumo).one('tipo', data.idTipo).one('etapa', data.idEtapa).customGET();
+            return API.all(URLS.genesis.base).all(URLS.insumo).one('tipo', data.idTipo).one('etapa', data.idEtapa).customGET();
 
         }
 
         function etapaList() {
-            return WebRestangular.all(URLS.etapa).customGET();
+            return API.all(URLS.genesis.base).all(URLS.etapa).customGET();
         }
 
         function cabinetByEconomic(economico) {
-            return WebRestangular.all('model').one('cabinet', economico).customGET();
+            return API.all(URLS.genesis.base).all('model').one('cabinet', economico).customGET();
 
         }
 
