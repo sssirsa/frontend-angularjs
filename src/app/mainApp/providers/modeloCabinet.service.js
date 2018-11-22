@@ -1,4 +1,4 @@
-(function() {MobileRestangular
+(function() {
     'use strict';
 
     angular

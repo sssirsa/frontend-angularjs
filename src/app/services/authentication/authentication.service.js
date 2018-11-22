@@ -5,7 +5,15 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $q, WebRestangular, RoleStore, User, $cookies) {
+    function AuthService(
+        OAuth,
+        $q,
+        //WebRestangular,
+        API,
+        RoleStore,
+        User,
+        $cookies
+    ) {
 
         var authService = {
             canRefreshSession: canRefreshSession,

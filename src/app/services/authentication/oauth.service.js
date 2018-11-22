@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'API', '$q', '$http', '$cookies', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'API', '$q', '$http', '$cookies', 'URLS', OAuthProvider]);
 
     function OAuthProvider(
         EnvironmentConfig,
