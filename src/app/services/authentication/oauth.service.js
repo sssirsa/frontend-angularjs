@@ -22,7 +22,10 @@
         function authenticate(params) {
             var request = $q.defer();
 
-            API.all(URLS.mobile.base).all('oauth').all('token/')
+            API
+                .all(URLS.mobile.base)
+                .all('oauth')
+                .all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
@@ -32,14 +35,6 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    API.all(URLS.genesis.base)
-                        .setDefaultHeaders({
-                            Authorization: 'bearer ' + loginResponse.access_token
-                        });
-                    API.all(URLS.mobile.base)
-                        .setDefaultHeaders({
-                            Authorization: 'bearer ' + loginResponse.access_token
-                        });
                     $http.defaults.headers.common['Authorization'] = 'bearer ' + loginResponse.access_token;
                     request.resolve();
                 })
@@ -57,7 +52,7 @@
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 username: userName,
                 password: password
-            };
+            }; 
 
             return authenticate(data);
         }
