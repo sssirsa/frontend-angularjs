@@ -8,9 +8,12 @@
         .module('app.mainApp')
         .factory('Solicitudes_Admin', Solicitudes_Admin);
 
-    function Solicitudes_Admin(WebRestangular, URLS) {
+    function Solicitudes_Admin(
+        API,
+        URLS
+    ) {
         // var base=Restangular.all('solicitud_admin');
-        var base = WebRestangular.all(URLS.solicitudes.admin);
+        var base = API.all(URLS.genesis.base).all(URLS.solicitudes.admin);
 
         return {
             list: list,

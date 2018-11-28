@@ -6,9 +6,15 @@
         .factory('cabinetUC', cabinetUC);
 
     /* @ngInject */
-    function cabinetUC($q, MANAGEMENT, URLS, $http, ManagementRestangular) {
+    function cabinetUC(
+        $q,
+        MANAGEMENT,
+        URLS,
+        $http,
+        API
+    ) {
 
-        var urlbase = ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
+        var urlbase = API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
 
         return {
             create: create,
@@ -29,10 +35,10 @@
         function list(limit, offset, querySet){
             if(limit !== undefined && offset !== undefined){
                 if (querySet === undefined) {
-                    return ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset).customGET();
+                    return API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset).customGET();
                 }
                 else {
-                    return ManagementRestangular.all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
+                    return API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
                 }
             }
             else {

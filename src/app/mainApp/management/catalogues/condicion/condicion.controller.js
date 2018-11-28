@@ -6,12 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('CondicionController',CondicionController);
 
-    function CondicionController(URLS, Translate, MANAGEMENT)
+    function CondicionController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
     {
 
         var vm = this;
 
-        vm.url = MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
+        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
         vm.kind = 'Management';
         vm.name = Translate.translate('CONDITION.LABELS.TITLE');
 

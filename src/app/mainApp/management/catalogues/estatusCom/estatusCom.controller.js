@@ -6,12 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('estatusComController',estatusComController);
 
-    function estatusComController(URLS, Translate, MANAGEMENT)
+    function estatusComController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
     {
 
         var vm = this;
 
-        vm.url = MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com;
+        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com;
         vm.kind = 'Management';
         vm.name = Translate.translate('STATUS_COM.LABELS.TITLE');
 

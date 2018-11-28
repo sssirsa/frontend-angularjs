@@ -8,8 +8,11 @@
         .module('app.mainApp')
         .factory('Categoria',Categoria);
 
-    function Categoria(WebRestangular, URLS){
-        var baseCategoria = WebRestangular.all(URLS.categoria);
+    function Categoria(
+        API,
+        URLS
+    ) {
+        var baseCategoria = API.all(URLS.genesis.base).all(URLS.categoria);
 
         var service = {
             list:list,
@@ -20,7 +23,7 @@
         };
         function listObject(limit, offset) {
             if (limit !== undefined && offset !== undefined) {
-                return WebRestangular.all(URLS.categoria+'?limit='+limit+'&offset='+offset).customGET();
+                return API.all(URLS.genesis.base).all(URLS.categoria+'?limit='+limit+'&offset='+offset).customGET();
             }
             else {
                 return baseCategoria.getList();

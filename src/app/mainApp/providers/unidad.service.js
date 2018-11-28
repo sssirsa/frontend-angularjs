@@ -8,10 +8,13 @@
     angular
         .module('app.mainApp')
         .factory('unidad',unidad);
-    function unidad(WebRestangular, URLS){
+    function unidad(
+        API,
+        URLS
+    ) {
 
         // var baseUdn = Restangular.all('unidad');
-        var baseUdn = WebRestangular.all(URLS.unidad);
+        var baseUdn = API.all(URLS.genesis.base).all(URLS.unidad);
 
         return {
             list:list,

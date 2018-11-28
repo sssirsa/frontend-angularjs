@@ -11,7 +11,10 @@
         .module('app.mainApp.management.catalogues')
         .factory('Clientes', Clientes);
 
-    function Clientes(WebRestangular, URLS) {
+    function Clientes(
+        API,
+        URLS
+    ) {
         var service = {
             list: list,
             listObject: listObject,
@@ -21,7 +24,7 @@
             getClienteId: getClienteId
         };
 
-        var baseURL=WebRestangular.all(URLS.cliente);
+        var baseURL=API.all(URLS.genesis.base).all(URLS.cliente);
 
         function list(){
             return baseURL.getList().$object;
@@ -43,7 +46,7 @@
         }
 
         function getClienteId(){
-            return WebRestangular.all(URLS.cliente_grupos).customGET();
+            return API.all(URLS.genesis.base).all(URLS.cliente_grupos).customGET();
         }
 
         return service;

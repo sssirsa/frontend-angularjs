@@ -6,13 +6,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('CategoriaController',CategoriaController);
 
-    function CategoriaController(URLS, Translate)
+    function CategoriaController(URLS, Translate, EnvironmentConfig, MANAGEMENT)
     {
 
         var vm = this;
 
-        vm.url = URLS.categoria;
-        vm.kind = 'Web';
+        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria;
+
+        vm.kind = 'Management';
         vm.name = Translate.translate('Category.title');
 
         //Labels

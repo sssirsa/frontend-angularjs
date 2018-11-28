@@ -8,8 +8,11 @@
         .module('app.mainApp')
         .factory('Persona', Persona);
 
-    function Persona(WebRestangular, URLS) {
-        var baseUrl = WebRestangular.all(URLS.persona);
+    function Persona(
+        API,
+        URLS
+    ) {
+        var baseUrl = API.all(URLS.genesis.base).all(URLS.persona);
 
         return {
             list: list,
@@ -45,7 +48,7 @@
                 form_data.append('foto', data.foto);
 
 
-            return WebRestangular
+            return API.all(URLS.genesis.base)
                 .one(URLS.persona, data.id)
                 .withHttpConfig({transformRequest: angular.identity})
                 .customPUT(form_data, "", {}, {'Content-Type': undefined});

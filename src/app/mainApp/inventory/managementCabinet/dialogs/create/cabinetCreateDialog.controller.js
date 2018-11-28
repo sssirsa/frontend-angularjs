@@ -94,7 +94,7 @@
             },
             condicion: {
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
@@ -114,7 +114,7 @@
             },
             status_unilever: {
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
                     loadMoreButtonText: 'Cargar mas',
@@ -134,7 +134,7 @@
             },
             status_com: {
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
                     loadMoreButtonText: 'Cargar mas',
@@ -154,7 +154,7 @@
             },
             categoria:{
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
                     loadMoreButtonText: 'Cargar mas',

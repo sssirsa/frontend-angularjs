@@ -6,12 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('estatusUnileverController',estatusUnileverController);
 
-    function estatusUnileverController(URLS, Translate, MANAGEMENT)
+    function estatusUnileverController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
     {
 
         var vm = this;
 
-        vm.url = MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever;
+        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever;
         vm.kind = 'Management';
         vm.name = Translate.translate('STATUS_UNILEVER.LABELS.TITLE');
 

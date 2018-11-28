@@ -391,8 +391,8 @@
 
             ],
             salePointAssignKind: [
-                {id: 'pending', value: 'Pendientes'},
-                {id: 'all', value: 'Detalle de atención'}
+                { id: 'pending', value: 'Pendientes' },
+                { id: 'all', value: 'Detalle de atención' }
             ],
             requestKinds: [
                 {
@@ -418,6 +418,24 @@
             ]
         })
         .constant('URLS', {
+            //New module separation
+            entries_departures: {
+                base: '' //TODO: Update when known
+            },
+            genesis: {
+                base: 'genesis'
+            },
+            management: {
+                base: 'management'
+            },
+            mobile: {
+                base:'mobile'
+            },
+            technical_service: {
+                base: '' //TODO: Update when known
+            },
+            //TODO: Re group under the proper category
+            //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             condicion: 'condition',
             estatus_unilever: 'status_unilever',
@@ -622,6 +640,6 @@
                 catalogue: '/catalogue/',
                 inventory: '/inventory/'
             },
-            baseManagement: 'http://api-gateway.sssirsa.com/management-dev'
+            baseManagement: '/management'
         });
 })();
