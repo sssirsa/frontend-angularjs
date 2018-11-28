@@ -8,7 +8,7 @@
         .module('app.mainApp.inventory')
         .controller('notCapitalizedUpdateDialogController', notCapitalizedUpdateDialogController);
 
-    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, Translate, toastr, URLS, $scope, noLabeled, data, ErrorHandler)
+    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, URLS, $scope, noLabeled, data, ErrorHandler)
     {
         var vm = this;
         vm.no_labeled = {};
@@ -46,7 +46,7 @@
         vm.catalogues = {
             estatus_no_capitalizado: {
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_no_capitalizado,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_no_capitalizado,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.STATUS'),
                     loadMoreButtonText: 'Cargar mas',
@@ -66,7 +66,7 @@
             },
             motivo: {
                 catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.motivo_no_labeled,
+                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.motivo_no_labeled,
                     kind: 'Management',
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.REASON'),
                     loadMoreButtonText: 'Cargar mas',

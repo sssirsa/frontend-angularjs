@@ -640,6 +640,6 @@
                 catalogue: '/catalogue/',
                 inventory: '/inventory/'
             },
-            baseManagement: 'http://api-gateway.sssirsa.com/management-dev'
+            baseManagement: '/management'
         });
 })();
