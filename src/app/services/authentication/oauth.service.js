@@ -1,9 +1,16 @@
 (function () {
     angular
         .module('app')
-        .factory('OAuth', ['EnvironmentConfig', 'WebRestangular', 'MobileRestangular', '$q', '$http', '$cookies', OAuthProvider]);
+        .factory('OAuth', ['EnvironmentConfig', 'API', '$q', '$http', '$cookies', 'URLS', OAuthProvider]);
 
-    function OAuthProvider(EnvironmentConfig, WebRestangular, MobileRestangular, $q, $http, $cookies) {
+    function OAuthProvider(
+        EnvironmentConfig,
+        API,
+        $q,
+        $http,
+        $cookies,
+        URLS
+    ) {
         return {
             getToken: getToken,
             refreshToken: refreshToken,
@@ -15,7 +22,10 @@
         function authenticate(params) {
             var request = $q.defer();
 
-            MobileRestangular.all('oauth').all('token/')
+            API
+                .all(URLS.mobile.base)
+                .all('oauth')
+                .all('token/')
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
@@ -25,14 +35,6 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    WebRestangular
-                        .setDefaultHeaders({
-                            Authorization: 'bearer ' + loginResponse.access_token
-                        });
-                    MobileRestangular
-                        .setDefaultHeaders({
-                            Authorization: 'bearer ' + loginResponse.access_token
-                        });
                     $http.defaults.headers.common['Authorization'] = 'bearer ' + loginResponse.access_token;
                     request.resolve();
                 })
@@ -50,7 +52,7 @@
                 client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 username: userName,
                 password: password
-            };
+            }; 
 
             return authenticate(data);
         }

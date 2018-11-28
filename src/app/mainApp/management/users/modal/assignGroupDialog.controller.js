@@ -14,11 +14,12 @@
         activate();
 
         function activate() {
-            vm.loadingPromise=Administration.allGroups().then(function (groups_response) {
+            vm.loadingPromise = Administration.allGroups().then(function (groups_response) {
+                let group_array = groups_response.results;
                 groups_user =_.pluck(groups_user,"id");
 
                 console.log(groups_user);
-                vm.groups=_.filter(groups_response, function (group) {
+                vm.groups=_.filter(group_array, function (group) {
                     console.log(groups_user.indexOf(group.id));
                     return groups_user.indexOf(group.id) === -1;
                 });

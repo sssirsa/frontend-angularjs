@@ -9,8 +9,11 @@
         .module('app.mainApp')
         .factory('Sucursal', Sucursal);
 
-    function Sucursal(WebRestangular, URLS) {
-        var baseSucursal = WebRestangular.all(URLS.sucursal);
+    function Sucursal(
+        API,
+        URLS
+    ) {
+        var baseSucursal = API.all(URLS.genesis.base).all(URLS.sucursal);
 
         return {
             list: list,
@@ -22,7 +25,7 @@
         };
 
         function listObject(limit, offset) {
-            return WebRestangular.all(URLS.sucursal+'?limit='+limit+'&offset='+offset).customGET();
+            return API.all(URLS.genesis.base).all(URLS.sucursal+'?limit='+limit+'&offset='+offset).customGET();
         }
 
         function list() {

@@ -5,8 +5,12 @@
         .module('app')
         .factory('SalePointRequests', SalePointRequests);
 
-    function SalePointRequests(MobileRestangular, $window, URLS) {
-        var baseUrl=MobileRestangular.all(URLS.solicitud_pv);
+    function SalePointRequests(
+        API,
+        $window,
+        URLS
+    ) {
+        var baseUrl=API.all(URLS.mobile.base).all(URLS.solicitud_pv);
 
         var service = {
             getByID: getByID,
@@ -21,10 +25,10 @@
 
         function getAll(limit, offset, filter) {
             if (filter === undefined) {
-                return MobileRestangular.all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset).customGET();
+                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return MobileRestangular.all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
             }
         }
 

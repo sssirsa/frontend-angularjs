@@ -9,8 +9,11 @@
         .factory('Insumo', Insumo);
 
     /* @ngInject */
-    function Insumo(WebRestangular, URLS) {
-        var path = WebRestangular.all(URLS.insumo);
+    function Insumo(
+        API,
+        URLS
+    ) {
+        var path = API.all(URLS.genesis.base).all(URLS.insumo);
 
         return {
 

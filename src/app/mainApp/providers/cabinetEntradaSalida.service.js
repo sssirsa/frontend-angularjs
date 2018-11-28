@@ -9,8 +9,11 @@
         .module('app.mainApp')
         .factory('CabinetEntradaSalida', CabinetEntradaSalida);
 
-    function CabinetEntradaSalida(WebRestangular, URLS) {
-        var baseURL = WebRestangular.all(URLS.cabinet_entrada_salida);
+    function CabinetEntradaSalida(
+        API,
+        URLS
+    ) {
+        var baseURL = API.all(URLS.genesis.base).all(URLS.cabinet_entrada_salida);
 
         return {
             getLastEntradaByCabinet: getLastEntradaByCabinet,

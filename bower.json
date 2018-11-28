@@ -73,12 +73,6 @@
         "angular-material.scss"
       ]
     },
-    "weather-icons": {
-      "main": [
-        "./css/weather-icons.css",
-        "./font/*"
-      ]
-    },
     "overrides": {
       "angular-material": {
         "main": [
@@ -94,12 +88,6 @@
           "main": [
             "angular-material.js",
             "angular-material.scss"
-          ]
-        },
-        "weather-icons": {
-          "main": [
-            "./css/weather-icons.css",
-            "./font/*"
           ]
         },
         "angular-dragula": {

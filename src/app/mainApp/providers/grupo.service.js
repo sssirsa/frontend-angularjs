@@ -7,8 +7,11 @@
     angular
         .module('app.mainApp')
         .factory('groups',groups);
-    function groups(WebRestangular, URLS){
-        var urlbase = WebRestangular.all(URLS.grupos);
+    function groups(
+        API,
+        URLS
+    ) {
+        var urlbase = API.all(URLS.genesis.base).all(URLS.grupos);
 
         return {
             list:list

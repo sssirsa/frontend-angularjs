@@ -6,8 +6,11 @@
         .factory('MarcaCabinet', MarcaCabinet);
 
     /* @ngInject */
-    function MarcaCabinet(WebRestangular, URLS) {
-        var baseMarca = WebRestangular.all(URLS.marca);
+    function MarcaCabinet(
+        API,
+        URLS
+    ) {
+        var baseMarca = API.all(URLS.genesis.base).all(URLS.marca);
 
         return {
             list:list,
@@ -26,7 +29,7 @@
 
         function listPromise(limit, offset) {
             if(limit !== undefined && offset !== undefined ) {
-                return WebRestangular.all(URLS.marca + '?limit=' + limit + '&offset=' + offset).customGET();
+                return API.all(URLS.genesis.base).all(URLS.marca + '?limit=' + limit + '&offset=' + offset).customGET();
             } else {
                 return baseMarca.customGET();
             }

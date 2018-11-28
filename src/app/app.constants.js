@@ -418,6 +418,31 @@
             ]
         })
         .constant('URLS', {
+            //New module separation
+            entries_departures: {
+                base: '' //TODO: Update when known
+            },
+            genesis: {
+                base: 'genesis'
+            },
+            management: {
+                base: 'management'
+            },
+            mobile: {
+                base:'mobile'
+            },
+            technical_service: {
+                base: '' //TODO: Update when known
+            },
+            //TODO: Re group under the proper category
+            //When done, delete all below this line
+            geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
+            condicion: 'condition',
+            estatus_unilever: 'status_unilever',
+            estatus_com: 'status_com',
+            estatus_no_capitalizado: 'estatus_no_capitalizado',
+            no_labeled_unilever: 'cabinet_no_labeled_unilever',
+            motivo_no_labeled: 'motivo_no_capitalizado',
             cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet_unilever',
@@ -635,6 +660,6 @@
                 catalogue: '/catalogue/',
                 inventory: '/inventory/'
             },
-            baseManagement: 'http://api-gateway.sssirsa.com/management-dev'
+            baseManagement: '/management'
         });
 })();

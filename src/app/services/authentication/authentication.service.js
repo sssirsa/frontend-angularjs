@@ -5,7 +5,15 @@
         .factory('AuthService', AuthService);
 
     /* @ngInject */
-    function AuthService(OAuth, $q, WebRestangular, RoleStore, User, $cookies) {
+    function AuthService(
+        OAuth,
+        $q,
+        URLS,
+        API,
+        RoleStore,
+        User,
+        $cookies
+    ) {
 
         var authService = {
             canRefreshSession: canRefreshSession,
@@ -30,7 +38,7 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function () {
-                    WebRestangular.all('my_groups')
+                    API.all(URLS.genesis.base).all('my_groups')
                         .customGET()
                         .then(function (profile) {
                             var roles = {};
@@ -43,9 +51,10 @@
 
                             RoleStore.defineManyRoles(roles);
 
-                            WebRestangular.all('persona')
+                            API.all(URLS.genesis.base).all('persona')
                                 .customGET()
                                 .then(function (user) {
+                                    console.debug('got persona');
                                     request.resolve();
                                     User.setUser(user);
                                 })

@@ -9,8 +9,11 @@
         .module('app.mainApp')
         .factory('EntradaSalida', EntradaSalida);
 
-    function EntradaSalida(WebRestangular, URLS) {
-        var baseURL = WebRestangular.all(URLS.entrada_salida);
+    function EntradaSalida(
+        API,
+        URLS
+    ) {
+        var baseURL = API.all(URLS.genesis.base).all(URLS.entrada_salida);
 
         return {
             postEntrada: postEntrada,

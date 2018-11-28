@@ -8,10 +8,12 @@
         .module('app.mainApp')
         .factory('TipoTransporte',TipoTransporte);
 
-    function TipoTransporte(WebRestangular, URLS)
-    {
+    function TipoTransporte(
+        API,
+        URLS
+    ){
         //var baseTipoTransporte = Restangular.all('tipo_transporte');
-        var baseTipoTransporte = WebRestangular.all(URLS.tipo_transporte);
+        var baseTipoTransporte = API.all(URLS.genesis.base).all(URLS.tipo_transporte);
 
         var service = {
             list:list,

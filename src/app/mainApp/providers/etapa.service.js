@@ -6,8 +6,11 @@
         .factory('Etapa', Etapa);
 
     /* @ngInject */
-    function Etapa(WebRestangular, URLS) {
-        var baseUrl = WebRestangular.all(URLS.etapa);
+    function Etapa(
+        API,
+        URLS
+    ) {
+        var baseUrl = API.all(URLS.genesis.base).all(URLS.etapa);
 
         return {
             list:list,

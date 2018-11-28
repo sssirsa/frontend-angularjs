@@ -3,8 +3,14 @@
         .module('app.mainApp')
         .factory('Localities', Localities);
 
-    function Localities(MobileRestangular, URLS, $q, Helper, QUERIES) {
-        var baseURL = MobileRestangular.all(URLS.localidad);
+    function Localities(
+        API,
+        URLS,
+        $q,
+        Helper,
+        QUERIES
+    ) {
+        var baseURL = API.all(URLS.mobile.base).all(URLS.localidad);
 
         function list() {
             return baseURL.getList();
@@ -19,7 +25,7 @@
         }
 
         function remove(id) {
-            return baseURL.customDELETE(id, null, {'content-type': 'application/json'});
+            return baseURL.customDELETE(id, null, { 'content-type': 'application/json' });
         }
 
         function update(object, id) {
@@ -31,13 +37,13 @@
             }
         }
 
-        function getByCity(cityID){
+        function getByCity(cityID) {
             var defer = $q.defer();
 
-            MobileRestangular.all(URLS.localidad + QUERIES.locality.by_city + cityID)
+            API.all(URLS.mobile.base).all(URLS.localidad + QUERIES.locality.by_city + cityID)
                 .getList()
                 .then(function (citiesList) {
-                    var cities = Helper.filterDeleted(citiesList,true);
+                    var cities = Helper.filterDeleted(citiesList, true);
                     defer.resolve(cities);
                 })
                 .catch(function (citiesListError) {

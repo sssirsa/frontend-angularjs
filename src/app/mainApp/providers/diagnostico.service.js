@@ -3,13 +3,16 @@
 
     angular
         .module('app')
-        .factory('Diagnostico', ['WebRestangular', Diagnostico]);
+        .factory('Diagnostico', ['API', Diagnostico]);
 
     /* @ngInject */
-    function Diagnostico(WebRestangular, URLS) {
-        var diagnosticoBase = WebRestangular.all(URLS.diagnostico);
+    function Diagnostico(
+        API,
+        URLS
+    ) {
+        var diagnosticoBase = API.all(URLS.genesis.base).all(URLS.diagnostico);
 
-        var diagnosticoCabinetBase = WebRestangular.all(URLS.diagnostico_cabinet);
+        var diagnosticoCabinetBase = API.all(URLS.genesis.base).all(URLS.diagnostico_cabinet);
 
         return {
             create: create,
