@@ -215,10 +215,10 @@
             //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
 
             //variables en null (se eliminaran al corregir back)
-            vm.cabinet['insumo_id'] = 25;
-            vm.cabinet['pedimento_id'] = 1;
-            vm.cabinet['posicionamiento_id'] = 1;
-            vm.cabinet['sucursal_id'] = 1;
+            //vm.cabinet['insumo_id'] = 25;
+            //vm.cabinet['pedimento_id'] = 1;
+            //vm.cabinet['posicionamiento_id'] = 1;
+            //vm.cabinet['sucursal_id'] = 1;
             //vm.cabinet['categoria_id'] = 1;
 
             validate = _.contains(_.values(vm.cabinet), undefined);
