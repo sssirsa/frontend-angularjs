@@ -10,6 +10,7 @@
         Translate
     ) {
         const entriesUrl = API
+            .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
         const inventoryUrl = API
             .all(URLS.management.base)
