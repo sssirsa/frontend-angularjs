@@ -17,7 +17,8 @@
         toastr,
         cabinetUC,
         MANAGEMENT,
-        ErrorHandler
+        ErrorHandler,
+        EnvironmentConfig
     ) {
         var vm = this;
 

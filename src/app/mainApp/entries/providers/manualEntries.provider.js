@@ -12,10 +12,11 @@
         const entriesUrl = API
             .all(URLS.entries_departures.entries.base);
         const inventoryUrl = API
+            .all(URLS.management.base)
             .all(URLS.management.inventory.base);
 
         const entries = URLS.entries_departures.entries;
-        const inventory = URLS.inventory;
+        const inventory = URLS.management.inventory;
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);

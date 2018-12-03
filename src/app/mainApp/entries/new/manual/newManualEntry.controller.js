@@ -98,13 +98,15 @@
                     //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
-                        .then(function () {
-                            //Cabinet is not new
-                            //TODO: Validate incidences and subsidiary,
-                            //this in case the cabinet got created but
-                            //the previously tried entrance got an error.
-                            toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER'), cabinetID);
-                            vm.removeCabinet(cabinetID);
+                        .then(function (successCallback) {
+                            if (successCallback.nuevo) {
+                                //Cabinet is new, exists and can enter
+                                cabinetToAdd.cabinet = successCallback;
+                            }
+                            else {
+                                toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER'), cabinetID);
+                                vm.removeCabinet(cabinetID);
+                            }
                         })
                         .catch(function () {
                             //Cabinet is new, can enter
