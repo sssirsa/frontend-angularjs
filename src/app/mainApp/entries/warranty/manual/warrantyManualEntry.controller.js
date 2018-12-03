@@ -37,7 +37,7 @@
         };
 
         // Auto invoked init function
-        (function init() {
+        (vm.init = function init() {
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template;
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
@@ -178,7 +178,7 @@
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createWarranty(entry)
                 .then(function () {
-                    init();
+                    vm.init();
                     toastr.success(
                         Translate.translate('ENTRIES.WARRANTY.MESSAGES.SUCCESS_CREATE')
                     );
