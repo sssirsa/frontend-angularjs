@@ -420,13 +420,27 @@
         .constant('URLS', {
             //New module separation
             entries_departures: {
-                base: '' //TODO: Update when known
+                base: 'entries-departures',
+                entries: {
+                    base: 'entries',
+                    new: 'news',
+                    obsolete: 'scrapped',
+                    unrecognizable: 'no_labeled',
+                    warranty: 'warranties',
+                    addCabinet: 'add_cabinet',
+                    close: 'close'
+                }
             },
             genesis: {
                 base: 'genesis'
             },
             management: {
-                base: 'management'
+                base: 'management',
+                inventory: {
+                    base: 'inventory',
+                    cabinet: 'cabinet_unilever',
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                }
             },
             mobile: {
                 base:'mobile'
@@ -459,17 +473,6 @@
             credentials: 'credenciales',
             diagnostico: 'diagnostico',
             diagnostico_cabinet: 'diagnostico_cabinet',
-            entrada_masiva: 'mass_upload',
-            entrada_salida: 'entrada_salida',
-            entries: {
-                base:'entries',
-                new: 'news',
-                warranty: 'warranties',
-                obsolete: 'scrapped',
-                unrecognizable: 'no_labeled',
-                addCabinet: 'add_cabinet',
-                close: 'close'
-            },
             establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
             estado: 'estado',

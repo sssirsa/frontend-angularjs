@@ -4,17 +4,17 @@
         .service('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(
-        WebRestangular,
-        ManagementRestangular,
+        API,
         $q,
         URLS,
         Translate
     ) {
-        const entriesUrl = WebRestangular
-            .all(URLS.entries.base);
-        const inventoryUrl = ManagementRestangular
-            .all(URLS.inventory.base);
-        const entries = URLS.entries;
+        const entriesUrl = API
+            .all(URLS.entries_departures.entries.base);
+        const inventoryUrl = API
+            .all(URLS.management.inventory.base);
+
+        const entries = URLS.entries_departures.entries;
         const inventory = URLS.inventory;
 
         function createNew(element) {
@@ -38,7 +38,7 @@
         }
 
         function detail(id) {
-            return entriesUrl.all(entries.close).all(id).customGET();
+            return entriesUrl.all(id).customGET();
         }
 
         function close(id, element) {
@@ -46,7 +46,7 @@
         }
 
         function getCabinet(id) {
-            return inventoryUrl.all(inventory.cabinet_unilever).all(id).customGET();
+            return inventoryUrl.all(inventory.cabinet).all(id).customGET();
         }
 
         function getEntriesByCabinet(id) {
