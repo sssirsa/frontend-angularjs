@@ -29,6 +29,7 @@
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
         vm.filterList = filterList;
+        vm.modal = modal;
 
         function aRefresh() {
             vm.todosprev = null;
@@ -134,6 +135,27 @@
         function filterList(economicFilter) {
             vm.textToSearch = ''+economicFilter;
             paginadoRefresh();
+        }
+
+
+        function modal() {
+            $mdDialog.show({
+                controller: 'CabinetDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    cabinetID: '13124234'
+                }
+            }).then(function (res) {
+                vm.cabinetCreated = res;
+            }).catch(function (err) {
+                if (err) {
+                    ErrorHandler.errorTranslate(err);
+                }
+            });
         }
     }
 

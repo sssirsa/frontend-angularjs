@@ -21,7 +21,8 @@
             getByID:getByID,
             list: list,
             update: update,
-            dlete: dlete
+            dlete: dlete,
+            lebeled: lebeled
         };
 
         function create(data){
@@ -54,5 +55,11 @@
         function dlete(economico) {
             return urlbase.customDELETE(economico,null,{'content-type':'application/json'});
         }
+
+        function lebeled(data){
+            var url = API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.label);
+            return url.customPOST(data);
+        }
+
     }
 })();

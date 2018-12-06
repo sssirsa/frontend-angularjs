@@ -24,6 +24,7 @@
         vm.showNoCapitalizado = showNoCapitalizado;
         vm.changeSelected = changeSelected;
         vm.searchCabinet = searchCabinet;
+        vm.re_labeled = re_labeled;
 
 
         //variables
@@ -132,6 +133,13 @@
                 }else{
                     data.status = data.status.nombre;
                 }
+
+                if(!data.new_economico){
+                    data.condition = "No capitalizado";
+                }else{
+                    data.condition = "Recapitalizado";
+                }
+
             });
         }
 
@@ -178,19 +186,46 @@
 
 
         function showNoCapitalizado(item) {
+            if(!item.new_economico){
+                vm.toModel = angular.copy(item);
+                $mdDialog.show({
+                    controller: 'notCapitalizedUpdateDialogController',
+                    templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                    controllerAs: 'vm',
+                    fullscreen: true,
+                    locals:{
+                        data: vm.toModel
+                    },
+                    clickOutsideToClose: true
+                }).then(function (respuesta) {
+                    ErrorHandler.successCreation();
+                    aRefresh();
+                }).catch(function (err) {
+                    if (err) {
+                        ErrorHandler.errorTranslate(err);
+                    }
+                });
+            }
+        }
+
+        function re_labeled(item) {
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'notCapitalizedUpdateDialogController',
-                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                //controller: 'notCapitalizedUpdateDialogController',
+                //templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                //controllerAs: 'vm',
+                controller: 'reLabeledController',
                 controllerAs: 'vm',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/reLabeled/reLabeled.tmpl.html',
                 fullscreen: true,
-                locals:{
-                    data: vm.toModel
-                },
-                clickOutsideToClose: true
-            }).then(function (respuesta) {
-                ErrorHandler.successCreation();
-                aRefresh();
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    noLabeledID: item.id
+                    //data: vm.toModel
+                }
+            }).then(function (res) {
+                vm.cabinetCreated = res;
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);

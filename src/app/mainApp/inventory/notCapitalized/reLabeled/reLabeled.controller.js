@@ -1,25 +1,14 @@
 /**
- * Created by Emmanuel on 15/10/2016.
- * Modified by Alex on 19/10/2016.
+ * Created by Alex on 19/10/2016.
  */
 (function () {
     'use_strict';
 
     angular
         .module('app.mainApp.inventory')
-        .controller('CabinetDialogController', CabinetDialogController);
-    function CabinetDialogController(
-        $mdDialog,
-        URLS,
-        cabinetID,
-        Helper,
-        Translate,
-        toastr,
-        cabinetUC,
-        MANAGEMENT,
-        ErrorHandler,
-        EnvironmentConfig
-    ) {
+        .controller('reLabeledController', reLabeledController);
+
+    function reLabeledController($mdDialog, URLS, noLabeled, noLabeledID, Translate, toastr, MANAGEMENT, ErrorHandler, EnvironmentConfig) {
         var vm = this;
 
         //variables
@@ -43,7 +32,7 @@
         activate();
 
         function activate() {
-            vm.economico = cabinetID;
+            vm.noLabeled = noLabeledID;
         }
 
         //Blank variables templates
@@ -52,7 +41,7 @@
                 catalog: {
                     url: URLS.marca,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Brand'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'descripcion'
@@ -72,7 +61,7 @@
                 catalog: {
                     url: null,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Model'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre'
@@ -101,7 +90,7 @@
                     total: 'count',
                     next: 'next'
                 },
-                required: true,
+                required: false,
                 elements: 'results',
                 softDelete: {
                     hide: 'deleted',
@@ -121,7 +110,7 @@
                     total: 'count',
                     next: 'next'
                 },
-                required: true,
+                required: false,
                 elements: 'results',
                 softDelete: {
                     hide: 'deleted',
@@ -141,7 +130,7 @@
                     total: 'count',
                     next: 'next'
                 },
-                required: true,
+                required: false,
                 elements: 'results',
                 softDelete: {
                     hide: 'deleted',
@@ -161,7 +150,7 @@
                     total: 'count',
                     next: 'next'
                 },
-                required: true,
+                required: false,
                 elements: 'results',
                 softDelete: {
                     hide: 'deleted',
@@ -190,16 +179,18 @@
             vm.cabinet['no_serie'] = vm.no_serie;
             vm.cabinet['year'] = vm.year;
             vm.cabinet['id_unilever'] = vm.id_unilever;
+            vm.cabinet['no_capitalizado_id'] = vm.noLabeled;
 
             //variables de los catalogos
             vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
+
 
             validate = _.contains(_.values(vm.cabinet), undefined);
 
             if(validate){
                 toastr.error("Llene corectamente todos los campos");
             }else{
-                cabinetUC.create(vm.cabinet)
+                noLabeled.lebeled(vm.cabinet)
                     .then(function (cabinetCreated) {
                         $mdDialog.hide(cabinetCreated);
                         toastr.success(Translate.translate('SUCCESS.CREATE'));

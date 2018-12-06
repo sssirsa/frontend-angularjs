@@ -40,7 +40,7 @@
                 catalog: {
                     url: URLS.marca,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Brand'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'descripcion'
@@ -60,7 +60,7 @@
                 catalog: {
                     url: null,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Model'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre'
