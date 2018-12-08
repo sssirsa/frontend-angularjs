@@ -20,7 +20,7 @@
 
         //variables de catalogos
         if(data.status){
-            vm.estatusPrevio = data.status;
+            vm.estatusPrevio = data.status.nombre;
         }else{
             vm.estatusPrevio = "Sin asignar";
         }
@@ -102,6 +102,20 @@
             if(vm.economicos.length > 0){
                 vm.no_labeled['economicos_id'] = vm.economicos;
             }
+
+            if(vm.sw1 === true){
+                if(vm.no_labeled['motivo_id'] === undefined){
+                    vm.no_labeled['motivo_id'] = data.motivo.id;
+                }
+
+                if(vm.no_labeled['status_id'] === undefined){
+                    vm.no_labeled['status_id'] = data.status.id;
+                }
+            }else{
+                vm.no_labeled['status_id'] = data.status.id;
+                vm.no_labeled['motivo_id'] = data.motivo.id;
+            }
+
 
             //$mdDialog.hide("Regreso lo que hizo");
             noLabeled.update(data.id, vm.no_labeled)

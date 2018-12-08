@@ -210,7 +210,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{item.status}}</h4>
+                                        <h4 ng-if="item.status">
+                                            {{item.status.nombre}}</h4>
+                                        <h4 ng-if="!item.status">No Asignado</h4>
                                     </div>
                                 </div>
                             </div>

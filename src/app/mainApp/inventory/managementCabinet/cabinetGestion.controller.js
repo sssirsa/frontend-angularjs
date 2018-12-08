@@ -29,7 +29,6 @@
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
         vm.filterList = filterList;
-        vm.modal = modal;
 
         function aRefresh() {
             vm.todosprev = null;

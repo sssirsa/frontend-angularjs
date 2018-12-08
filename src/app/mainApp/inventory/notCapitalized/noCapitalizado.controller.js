@@ -59,11 +59,6 @@
                 }else{
                     vm.loadingPromise = noLabeled.getByID(vm.searchText)
                         .then(function (no_cap) {
-                            if(!no_cap.status){
-                                no_cap.status = "Sin asignar";
-                            }else{
-                                no_cap.status = no_cap.status.nombre;
-                            }
                             showNoCapitalizado(no_cap);
                             vm.searchText = '';
                         })
@@ -126,12 +121,6 @@
                     data.activo = "Desactivado";
                 }else{
                     data.activo = "Activo";
-                }
-
-                if(!data.status){
-                    data.status = "Sin asignar";
-                }else{
-                    data.status = data.status.nombre;
                 }
 
                 if(!data.new_economico){
