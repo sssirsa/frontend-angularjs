@@ -37,14 +37,14 @@
         };
 
         // Auto invoked init function
-        (vm.init = function init() {
+        vm.init = function init() {
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template;
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
             }
-        })();
+        }();
 
         //Controller global functions
 

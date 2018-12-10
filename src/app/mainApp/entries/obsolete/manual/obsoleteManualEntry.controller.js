@@ -36,14 +36,14 @@
         };
 
         // Auto invoked init function
-        (function init() {
+        vm.init =function init() {
             vm.entry = MANUAL_ENTRIES.obsoleteEntry.template;
             vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
             }
-        })();
+        }();
 
         //Controller global functions
 
@@ -177,7 +177,7 @@
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createWarranty(entry)
                 .then(function () {
-                    init();
+                    vm.init();
                     toastr.success(
                         Translate.translate('ENTRIES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
                     );
