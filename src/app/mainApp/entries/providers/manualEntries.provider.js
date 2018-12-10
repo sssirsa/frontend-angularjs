@@ -51,6 +51,10 @@
             return inventoryUrl.all(inventory.cabinet).all(id).customGET();
         }
 
+        function getCabinetInSubsidiary(id) {
+            return entriesUrl.all(entries.control.base).all(entries.control.cabinet_in_subsidiary).all(id).customGET();
+        }
+
         function getEntriesByCabinet(id) {
 
         }
@@ -58,7 +62,10 @@
         const warrantyEntry = {
             template: {
                 tipo_entrada: 'Garantias',
-                cabinets_id: []
+                cabinets_id: [],
+                descripcion: '',
+                nombre_chofer: ''
+
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -185,7 +192,10 @@
         const newEntry = {
             template: {
                 tipo_entrada: 'Nuevos',
-                cabinets_id: []
+                cabinets_id: [],
+                descripcion: '',
+                nombre_chofer: ''
+
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -336,6 +346,9 @@
             template: {
                 tipo_entrada: 'No_Capitalizados',
                 no_capitalizados_id: [],
+                descripcion: '',
+                nombre_chofer: ''
+
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -485,7 +498,10 @@
         const obsoleteEntry = {
             template: {
                 tipo_entrada: 'Obsoletos',
-                cabinets_id: []
+                cabinets_id: [],
+                descripcion: '',
+                nombre_chofer: ''
+
             },
             catalogues: function catalogues() {
                 var catalogues = {

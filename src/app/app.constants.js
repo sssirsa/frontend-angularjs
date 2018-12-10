@@ -428,7 +428,11 @@
                     unrecognizable: 'no_labeled',
                     warranty: 'warranties',
                     addCabinet: 'add_cabinet',
-                    close: 'close'
+                    close: 'close',
+                    control: {
+                        base: 'control',
+                        cabinet_in_subsidiary:'cabinet_in_sucursal'
+                    }
                 }
             },
             genesis: {
