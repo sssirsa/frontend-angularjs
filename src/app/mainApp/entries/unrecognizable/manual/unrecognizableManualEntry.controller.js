@@ -16,12 +16,12 @@
         vm.maxTabIndex = 1;
 
         //Variables
-        vm.selectedTab = 0;
-        vm.entry = {};
-        vm.showSubsidiarySelector = false;
-        vm.catalogues = {};
-        vm.cabinetList = [];
-        vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+        vm.selectedTab;
+        vm.entry;
+        vm.showSubsidiarySelector;
+        vm.catalogues;
+        vm.cabinetList;
+        vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
 
         //Validations
         vm.imageConstraints = {
@@ -39,6 +39,13 @@
 
         // Auto invoked init function
         vm.init = function init() {
+            vm.selectedTab = 0;
+            vm.entry = {};
+            vm.showSubsidiarySelector = false;
+            vm.catalogues = {};
+            vm.cabinetList = [];
+            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+
             vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template;
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
