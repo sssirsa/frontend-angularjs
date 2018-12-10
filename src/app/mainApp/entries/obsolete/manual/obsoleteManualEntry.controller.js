@@ -15,11 +15,11 @@
         vm.maxTabIndex = 1;
 
         //Variables
-        vm.selectedTab = 0;
-        vm.entry = {};
-        vm.showSubsidiarySelector = false;
-        vm.catalogues = {};
-        vm.cabinetList = [];
+        vm.selectedTab;
+        vm.entry;
+        vm.showSubsidiarySelector;
+        vm.catalogues;
+        vm.cabinetList;
 
         //Validations
         vm.imageConstraints = {
@@ -36,14 +36,22 @@
         };
 
         // Auto invoked init function
-        vm.init =function init() {
+        vm.init = function init() {
+            vm.selectedTab = 0;
+            vm.entry = {};
+            vm.showSubsidiarySelector = false;
+            vm.catalogues = {};
+            vm.cabinetList = [];
+
             vm.entry = MANUAL_ENTRIES.obsoleteEntry.template;
             vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
             }
-        }();
+        }
+
+        vm.init();
 
         //Controller global functions
 
