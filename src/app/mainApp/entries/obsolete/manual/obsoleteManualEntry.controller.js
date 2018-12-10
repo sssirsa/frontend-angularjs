@@ -38,13 +38,12 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.entry = {};
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-
             vm.entry = MANUAL_ENTRIES.obsoleteEntry.template;
             vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
+
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
@@ -183,7 +182,7 @@
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createWarranty(entry)
+                .createObsolete(entry)
                 .then(function () {
                     vm.init();
                     toastr.success(

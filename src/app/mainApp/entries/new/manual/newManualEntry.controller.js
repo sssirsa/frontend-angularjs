@@ -39,15 +39,13 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.selectedTab = 0;
-            vm.entry = {};
+            vm.selectedTab = 0
             vm.showSubsidiarySelector = false;
-            vm.catalogues = {};
             vm.cabinetList = [];
             vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
-
             vm.entry = MANUAL_ENTRIES.newEntry.template;
             vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
+
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
@@ -118,7 +116,7 @@
                             }
                         })
                         .catch(function () {
-                            //Cabinet is new, can enter
+
                         });
                 }
             }

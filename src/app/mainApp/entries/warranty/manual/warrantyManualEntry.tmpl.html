@@ -132,6 +132,7 @@
                 label={{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}>
             <form name="entryForm"
                   layout="column"
+                  ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
                 <catalog-select class="full-width"
                                 ng-if="vm.showSubsidiarySelector"
