@@ -25,7 +25,7 @@
  *                              ]
  *                            }
  *                            In this case 'elements' should receive the parameter 'results'
- *                            
+ *
  *      lazy: boolean,        (Optional) If given, the catalog won't load until the selector is opened
  *      initial: string,      (Optional) If given, the lazy functionality will be disabled, and and initial
  *                            value will be selected by the model given inside the catalog object.
@@ -146,7 +146,7 @@
             else {
                 vm.onErrorList({
                     error: '"catalog" parameter is not defined'
-                })
+                });
             }
         }
 
@@ -158,6 +158,9 @@
                         break;
                     case 'Web':
                         vm.CatalogProvider = CATALOG_SELECT.web;
+                        break;
+                    case 'Management':
+                        vm.CatalogProvider = CATALOG_SELECT.management;
                         break;
                     default:
                         vm.CatalogProvider = CATALOG_SELECT.generic;
