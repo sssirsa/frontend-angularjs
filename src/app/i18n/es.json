@@ -325,6 +325,7 @@
         "UPLOAD":"Carga de registro efectuada correctamente"
     },
     "ERRORS": {
+        "NO_RESULTS":"Sin Resultados",
         "UNEXPECTED": "Error inesperado, intente más tarde.",
         "SESSION_EXPIRED": "Usted no cuenta con el permiso necesario para acceder a este recurso, o su sesión ha expirado.",
         "E001": "Se envió una solicitud de Prospectación “Nuevos” sin anexar solicitudes de Cabinet",

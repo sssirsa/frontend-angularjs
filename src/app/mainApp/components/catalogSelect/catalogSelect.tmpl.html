@@ -15,6 +15,8 @@
                 {{element[$ctrl.catalog.model]}}
             </section>
         </md-option>
+        <md-option ng-if="$ctrl.catalogElements.length==0">{{$ctrl.noResults}}<span ng-if="!ctrl.noResults">No Results</span></md-option>
+
         <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
                    ng-if="$ctrl.paginationHelper['next']"
                    ng-click="$ctrl.loadMore()"

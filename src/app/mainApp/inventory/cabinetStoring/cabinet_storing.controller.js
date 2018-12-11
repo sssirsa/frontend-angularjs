@@ -17,6 +17,7 @@
 
         //funciones
         vm.onSubsidiarySelect = onSubsidiarySelect;
+        vm.onElementSelect=onElementSelect;
 
 
         //Translates
@@ -43,7 +44,8 @@
                 softDelete: {
                     hide: 'deleted',
                     reverse: false
-                }
+                },
+                noResults:Translate.translate('ERRORS.NO_RESULTS')
             }, storage_by_sucursal: {
                 catalog: {
                     url: null,
@@ -62,7 +64,8 @@
                 softDelete: {
                     hide: 'deleted',
                     reverse: false
-                }
+                },
+                noResults:Translate.translate('ERRORS.NO_RESULTS')
             }
 
         };
@@ -73,6 +76,12 @@
             vm.storage = null;
             vm.subsidiary = element;
             vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id='+vm.subsidiary;
+        }
+
+        function onElementSelect(element) {
+            vm.storage=element;
+            console.log(vm.storage);
+
         }
 
 

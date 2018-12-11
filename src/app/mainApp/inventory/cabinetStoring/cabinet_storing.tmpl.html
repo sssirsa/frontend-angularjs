@@ -34,6 +34,7 @@
                 <md-input-container flex-sm="100" flex="50" class="md-block">
                     <catalog-select catalog="vm.catalogues['subsidiary'].catalog"
                                     required="true"
+                                    noResults="vm.catalogues['subsidiary'].noResults"
                                     pagination="vm.catalogues['subsidiary'].pagination"
                                     elements="vm.catalogues['subsidiary'].elements"
                                     soft-delete="vm.catalogues['subsidiary'].softDelete"
@@ -44,11 +45,12 @@
                     <catalog-select ng-if="vm.subsidiary"
                                     catalog="vm.catalogues['storage_by_sucursal'].catalog"
                                     required="true"
+                                    noResults="vm.catalogues['subsidiary'].noResults"
                                     lazy="true"
                                     pagination="vm.catalogues['storage_by_sucursal'].pagination"
                                     elements="vm.catalogues['storage_by_sucursal'].elements"
                                     soft-delete="vm.catalogues['storage_by_sucursal'].softDelete"
-                                    on-select="vm.onElementSelect(element,'storage_id')">
+                                    on-select="vm.onElementSelect(element)">
                     </catalog-select>
                 </md-input-container>
                 <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">

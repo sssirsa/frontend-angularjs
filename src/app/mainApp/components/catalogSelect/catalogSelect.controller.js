@@ -48,6 +48,7 @@
                 initial: '<',
                 softDelete: '<',
                 required: '<',
+                noResults:'<',
 
                 onSuccessList: '&',
                 onErrorList: '&',
@@ -71,6 +72,7 @@
         vm.paginationHelper = {};
         vm.selectedElement = null;
 
+
         //Functions
         vm.loadMore = loadMore;
         vm.onClose = onClose;
@@ -79,6 +81,7 @@
         init();
 
         function init() {
+            console.log(vm.noResults)
             if (!vm.lazy) {
                 //The catalog is not loaded in lazy mode
                 list();
