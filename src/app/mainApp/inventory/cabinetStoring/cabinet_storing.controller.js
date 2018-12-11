@@ -16,7 +16,7 @@
         vm.type_storage = true;// true -> Capitalizado, false-> No Capitalizado
 
         //funciones
-        vm.onBrandSelect = onSubsidiarySelect;
+        vm.onSubsidiarySelect = onSubsidiarySelect;
 
 
         //Translates
@@ -68,9 +68,11 @@
         };
 
         function onSubsidiarySelect(element) {
+            console.log('On subsidiary select');
+            console.log(element);
             vm.storage = null;
             vm.subsidiary = element;
-            vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id='+vm.subsidiary.id;
+            vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id='+vm.subsidiary;
         }
 
 
