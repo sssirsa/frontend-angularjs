@@ -39,13 +39,14 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.selectedTab = 0;
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
-            vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template;
+            vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
+            vm.selectedTab = 0;
+            console.debug(vm.entry);
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -205,7 +206,6 @@
         }
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
-            console.log(entry);
             //In case the cabinets array exist, restart it
             if (entry.no_capitalizados_id.length) {
                 entry.no_capitalizados_id = [];

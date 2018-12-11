@@ -43,7 +43,7 @@
             vm.showSubsidiarySelector = false;
             vm.cabinetList = [];
             vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
-            vm.entry = MANUAL_ENTRIES.newEntry.template;
+            vm.entry = MANUAL_ENTRIES.newEntry.template();
             vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
 
             //Determining whether or not to show the Subsidiary selector.

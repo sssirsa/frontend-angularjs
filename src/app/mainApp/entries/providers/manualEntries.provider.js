@@ -108,12 +108,13 @@
         }
 
         const warrantyEntry = {
-            template: {
-                tipo_entrada: 'Garantias',
-                cabinets_id: [],
-                descripcion: '',
-                nombre_chofer: ''
-
+            template: function () {
+                return {
+                    tipo_entrada: 'Garantias',
+                        cabinets_id: [],
+                            descripcion: '',
+                                nombre_chofer: ''
+                }
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -238,12 +239,13 @@
         };
 
         const newEntry = {
-            template: {
-                tipo_entrada: 'Nuevos',
-                cabinets_id: [],
-                descripcion: '',
-                nombre_chofer: ''
-
+            template: function () {
+                return {
+                    tipo_entrada: 'Nuevos',
+                    cabinets_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                }
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -391,12 +393,13 @@
         };
 
         const unrecognizableEntry = {
-            template: {
-                tipo_entrada: 'No_Capitalizados',
-                no_capitalizados_id: [],
-                descripcion: '',
-                nombre_chofer: ''
-
+            template: function () {
+                return {
+                    tipo_entrada: 'No_Capitalizados',
+                    no_capitalizados_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                }
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -544,12 +547,13 @@
         };
 
         const obsoleteEntry = {
-            template: {
-                tipo_entrada: 'Obsoletos',
-                cabinets_id: [],
-                descripcion: '',
-                nombre_chofer: ''
-
+            template: function () {
+                return {
+                    tipo_entrada: 'Obsoletos',
+                    cabinets_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                }
             },
             catalogues: function catalogues() {
                 var catalogues = {

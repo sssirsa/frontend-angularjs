@@ -41,7 +41,7 @@
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entry = MANUAL_ENTRIES.obsoleteEntry.template;
+            vm.entry = MANUAL_ENTRIES.obsoleteEntry.template();
             vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
 
             //Determining whether or not to show the Subsidiary selector.
