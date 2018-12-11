@@ -106,13 +106,27 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
+                            //Cabinet can enter
                             if (cabinetSuccessCallback.can_enter) {
-                                //Cabinet can enter
-                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                //Cabinet exist in database
+                                if (cabinetSuccessCallback.hasOwnProperty('cabinet')) {
+                                    //Cabinet it's new
+                                    if (cabinetSuccessCallback.cabinet.nuevo) {
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                    }
+                                    else {
+                                        //Cabinet can´t enter because it's not new
+                                        toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER_NOT_NEW'), cabinetID);
+                                        vm.removeCabinet(cabinetID);
+                                    }
+                                }
+                                //else {
+                                //    //The cabinet is added to be created (you do nothing)
+                                //}
                             }
                             else {
-                                //Cabinet can´t enter because it's in a warehouse
-                                toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER'), cabinetID);
+                                //Cabinet can't enter because it's in a warehouse
+                                toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER_IN_WAREHOUSE'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                         })

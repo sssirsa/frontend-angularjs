@@ -62,7 +62,8 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "CANT_ENTER": "El cabinet ya existe en base, no puede registrarse como nuevo"
+                "CANT_ENTER_NOT_NEW": "El cabinet no es nuevo",
+                "CANT_ENTER_IN_WAREHOUSE": "El cabinet ya se encuentra en almacén"
             }
         },
         "WARRANTY": {
