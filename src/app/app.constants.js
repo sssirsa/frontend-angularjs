@@ -426,7 +426,13 @@
                 base: 'genesis'
             },
             management: {
-                base: 'management'
+                base: 'management',
+                catalogues:{
+                    base:'catalogue',
+                    subsidiary:'subsidiary',
+                    storage:'warehouse',
+
+                }
             },
             mobile: {
                 base:'mobile'
@@ -434,6 +440,8 @@
             technical_service: {
                 base: '' //TODO: Update when known
             },
+
+
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
@@ -643,3 +651,4 @@
             baseManagement: '/management'
         });
 })();
+

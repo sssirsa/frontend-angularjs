@@ -7,17 +7,17 @@
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/inventory');
         $stateProvider
-            /*.state('triangular.admin-default.cabinets', {
-                url: '/cabinets',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'CAPTURISTA']
-                    }
-                },
-                templateUrl: 'app/mainApp/inventory/cabinet/cabinet.tmpl.html',
-                controller: 'cabinetController',
-                controllerAs: 'vm'
-            })*/
+        /*.state('triangular.admin-default.cabinets', {
+         url: '/cabinets',
+         data: {
+         permissions: {
+         only: ['ADMINISTRADOR', 'CAPTURISTA']
+         }
+         },
+         templateUrl: 'app/mainApp/inventory/cabinet/cabinet.tmpl.html',
+         controller: 'cabinetController',
+         controllerAs: 'vm'
+         })*/
             .state('triangular.admin-default.insumos', {
                 url: '/insumos',
                 data: {
@@ -50,7 +50,18 @@
                 templateUrl: 'app/mainApp/inventory/managementCabinet/cabinetGestion.tmpl.html',
                 controller: 'cabinetGestionController',
                 controllerAs: 'vm'
-            });
+            })
+            .state('triangular.admin-default.storage', {
+            url: '/storage',
+            data: {
+                permissions: {
+                    only: ['ADMINISTRADOR', 'CAPTURISTA']
+                }
+            },
+            templateUrl: 'app/mainApp/inventory/cabinetStoring/cabinet_storing.tmpl.html',
+            controller: 'cabinetStorageController',
+            controllerAs: 'vm'
+        });
 
         triMenuProvider.addMenu(
             {
@@ -64,10 +75,10 @@
                     state: 'triangular.admin-default.gestion_cabinets',
                     type: 'link'
                 }/*, {
-                    name: 'MAIN.MENU.INVENTORY.CABINETS',
-                    state: 'triangular.admin-default.cabinets',
-                    type: 'link'
-                }*/, {
+                 name: 'MAIN.MENU.INVENTORY.CABINETS',
+                 state: 'triangular.admin-default.cabinets',
+                 type: 'link'
+                 }*/, {
                     name: 'MAIN.MENU.INVENTORY.CONSUMABLES',
                     state: 'triangular.admin-default.insumos',
                     type: 'link'
@@ -75,7 +86,12 @@
                     name: 'MAIN.MENU.INVENTORY.NO_CAPITALIZADO',
                     state: 'triangular.admin-default.no_capitalizado',
                     type: 'link'
-                }
+                },
+                    {
+                        name:'MAIN.MENU.INVENTORY.STORAGE',
+                        state:'triangular.admin-default.storage',
+                        type:'link'
+                    }
                 ]
             }
         );

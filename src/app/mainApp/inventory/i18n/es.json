@@ -74,5 +74,17 @@
             "NO_RESULTS": "Sin resultados"
         }
     },
-    "CABINET_MANAGEMENT": "Gestion de cabinet"
+    "CABINET_MANAGEMENT": "Gestion de cabinet",
+    "STORAGE":{
+        "STORING":"Posicionar ",
+        "SELECT_TYPE":"  Selección de Tipo de Asignación",
+        "CABINET":"Cabinet Capitalizado",
+        "UNRECOGNIZABLE":"Cabinet No Capitalizado",
+        "SUCURSAL":"Sucursal",
+        "STORAGE":"Bodega",
+        "CORRIDOR":"Pasillo",
+        "STOWAGE":"Estiba",
+        "DEPTH":"Profundidad",
+        "ASSET_ID":"Identificador de Cabinet"
+    }
 }
