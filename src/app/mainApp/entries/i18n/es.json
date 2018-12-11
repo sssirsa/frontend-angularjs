@@ -178,16 +178,17 @@
                 "CABINET_SEARCH": "Registro de cabinets",
                 "CABINET": {
                     "ID": "Identificador",
-                    "NUMBER": "Económico",
+                    "NUMBER": "Económicos",
                     "SERIAL_NUMBER": "Número de serie",
-                    "BRAND": "Marca",
-                    "MODEL": "Modelo"
+                    "STATUS": "Estatus",
+                    "REASON": "Motivo"
                 },
                 "SWITCH": {
                     "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
                     "TRUE": "La entrada proviene de una UDN-Agencia",
                     "FALSE": "La entrada no proviene de una UDN-Agencia"
-                }
+                },
+                "UNKNOWN": "Desconocido"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
