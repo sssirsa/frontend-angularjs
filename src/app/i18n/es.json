@@ -90,7 +90,8 @@
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
                 "PROVIDER": "Proveedor",
                 "NO_CAPITALIZADO": "No Capitalizados",
-                "CABINET_MANAGEMENT": "Gestion de cabinet"
+                "CABINET_MANAGEMENT": "Gestion de cabinet",
+                "STORAGE":"Almacenamiento y Asignación"
             },
             "SERVICE": {
                 "MENU_TITLE": "Atenciones",
