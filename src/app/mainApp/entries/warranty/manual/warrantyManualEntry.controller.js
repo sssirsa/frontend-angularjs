@@ -104,16 +104,19 @@
                     //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
-                        .then(function (successCallback) {
-                            if (successCallback.sucursal) {
-                                //Cabinet can´t enter because it already has a subsidiary assigned
+                        .then(function setCabinetToAddSuccess (cabinetSuccessCallback) {
+                            if (cabinetSuccessCallback.can_enter) {
+                                //Cabinet can enter
+                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                            }
+                            else {
+                                //Cabinet can´t enter because it's in a warehouse
                                 toastr.error(Translate.translate('ENTRIES.WARRANTY.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
-                            else {
-                                //Cabinet can enter
-                                cabinetToAdd.cabinet = successCallback;
-                            }
+                        })
+                        .catch(function setCabinetToAddError(error) {
+                            ErrorHandler.errorTranslate(error);
                         });
                 }
             }

@@ -105,18 +105,19 @@
                     //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
-                        .then(function (successCallback) {
-                            if (successCallback.nuevo) {
-                                //Cabinet is new, exists and can enter
-                                cabinetToAdd.cabinet = successCallback;
+                        .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
+                            if (cabinetSuccessCallback.can_enter) {
+                                //Cabinet can enter
+                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                             }
                             else {
+                                //Cabinet can´t enter because it's in a warehouse
                                 toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
-                        .catch(function () {
-
+                        .catch(function setCabinetToAddError(error) {
+                            ErrorHandler.errorTranslate(error);
                         });
                 }
             }

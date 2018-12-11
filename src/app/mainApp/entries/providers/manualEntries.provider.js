@@ -48,9 +48,57 @@
         }
 
         function getCabinet(id) {
-            return inventoryUrl.all(inventory.cabinet).all(id).customGET();
+            /*
+             * RETURNS
+             *   -Cabinet exists in database and can enter (commonly a WARRANTY entry or a JUST Created)
+             *       +Cabinet full object and can_enter in true
+             *   -Cabinet exist in database and can't enter (Cabinet in any warehouse)
+             *       +Cabinet simplified object and can_enter in false
+             *   -Cabinet doesn't exists, so it can enter (commonly NEWS entry)
+             *       +Cabinet in null and can_enter in true
+             *   -Backend error
+             *       +Cabinet in null, cant_enter in false, error property added to return the error response
+             */
+
+            let deferred = $q.defer();
+            let response = {
+                can_enter: false,
+                cabinet: null
+            };
+            getCabinetInSubsidiary(id)
+                .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
+                    //Cabinet can't enter
+                    response.can_enter = false;
+                    response.cabinet = apiResponse.cabinet;
+                    deferred.resolve(response);
+                })
+                .catch(function cabinetsInSubsiadiaryErrorCallback() {
+                    //Cabinet can enter
+                    response.can_enter = true;
+                    inventoryUrl.all(inventory.cabinet).all(id).customGET()
+                        .then(function cabinetSuccessCallback(apiCabinet) {
+                            //Cabinet exists
+                            response.cabinet = apiCabinet;
+                            deferred.resolve(response);
+                        })
+                        .catch(function cabinetErrorCallback(errorResponse) {
+                            if (errorResponse.status === 404) {
+                                //Cabinet doesn't exists
+                                response.cabinet = null;
+                                deferred.resolve(response);
+                            }
+                            else {
+                                //Any other error from backend
+                                response.error = errorResponse;
+                                deferred.reject(response);
+                            }
+                        });
+                });
+
+            return deferred.promise;
         }
 
+        //Internal functions
         function getCabinetInSubsidiary(id) {
             return entriesUrl.all(entries.control.base).all(entries.control.cabinet_in_subsidiary).all(id).customGET();
         }
@@ -70,7 +118,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding:'sucursal_id',
+                        binding: 'sucursal_id',
                         catalog: {
                             url: URLS.sucursal,
                             kind: 'Web',
@@ -93,7 +141,7 @@
                         }
                     },
                     transport_line: {
-                        binding:'linea_transporte_id',
+                        binding: 'linea_transporte_id',
                         catalog: {
                             url: URLS.linea_transporte,
                             kind: 'Web',
@@ -116,7 +164,7 @@
                         }
                     },
                     transport_kind: {
-                        binding:'tipo_transporte_id',
+                        binding: 'tipo_transporte_id',
                         catalog: {
                             url: URLS.tipo_transporte,
                             kind: 'Web',
@@ -139,7 +187,7 @@
                         }
                     },
                     udn: {
-                        binding:'udn_id',
+                        binding: 'udn_id',
                         catalog: {
                             url: URLS.udn,
                             kind: 'Web',
