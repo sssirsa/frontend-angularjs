@@ -40,7 +40,7 @@
                 catalog: {
                     url: URLS.marca,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Brand'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'descripcion'
@@ -60,7 +60,7 @@
                 catalog: {
                     url: null,
                     kind: 'Web',
-                    name: Translate.translate('INPUT.Dialogs.Cabinet.Model'),
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre'
@@ -191,16 +191,6 @@
 
             //variables de los catalogos
             vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
-            //vm.cabinet['condicion_id'] = vm.cabinet['condicion_id'];
-            //vm.cabinet['estatus_unilever_id'] = vm.cabinet['estatus_unilever_id'];
-            //vm.cabinet['estatus_com_id'] = vm.cabinet['estatus_com_id'];
-
-            //variables en null (se eliminaran al corregir back)
-            //vm.cabinet['insumo_id'] = 25;
-            //vm.cabinet['pedimento_id'] = 1;
-            //vm.cabinet['posicionamiento_id'] = 1;
-            //vm.cabinet['sucursal_id'] = 1;
-            //vm.cabinet['categoria_id'] = 1;
 
             validate = _.contains(_.values(vm.cabinet), undefined);
 

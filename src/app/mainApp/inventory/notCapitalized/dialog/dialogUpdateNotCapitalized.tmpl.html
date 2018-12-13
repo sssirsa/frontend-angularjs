@@ -12,7 +12,7 @@
         <md-input-container flex class="md-block">
             <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
             <input name="serial" maxlength="25"
-                   ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="vm.no_serie"/>
+                   ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="vm.no_serie" ng-disabled="vm.new_economico"/>
             <div ng-messages="newNCForm.serial.$error">
                 <div ng-message="pattern">
                     {{'MAIN.LABEL.ALFANUMERIC'|translate}}
@@ -20,10 +20,20 @@
             </div>
         </md-input-container>
 
-        <md-input-container flex class="md-block">
+        <md-input-container flex class="md-block" ng-if="vm.new_economico">
+            <div layout="colum">
+                <b translate>NOT_CAPITALIZED.ECONOMIC</b>
+            </div>
+            <div layout="colum">
+                <md-chips ng-model="vm.economicos" readonly="true">
+                </md-chips>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex class="md-block" ng-if="!vm.new_economico">
             <label translate>MAIN.COMPONENTS.NO_LABELED.ECONOMICS</label>
             <md-chips ng-model="vm.economicos" md-max-chips="5">
-                <input type="text" ng-pattern="/^[0-9,]+$/" placeholder="Enter a económico">
+                <input type="text" only-digits="true" placeholder="{{'NOT_CAPITALIZED.ENTER'|translate}}">
             </md-chips>
             <div ng-messages="newNCForm.economico.$error">
                 <div ng-message="pattern">
@@ -43,7 +53,7 @@
         </md-input-container>
 
         <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left">
-            <md-switch ng-disabled="false" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
+            <md-switch ng-disabled="vm.new_economico" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
                 Cambiar Estatus o Motivo
             </md-switch>
         </div>

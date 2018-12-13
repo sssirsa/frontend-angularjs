@@ -469,6 +469,7 @@
             insumo: 'insumo',
             linea_transporte: 'linea_transporte',
             localidad: 'localidad',
+            label: 'label',
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
