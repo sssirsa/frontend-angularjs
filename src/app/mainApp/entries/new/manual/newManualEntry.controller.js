@@ -106,10 +106,11 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
+                            console.log(cabinetSuccessCallback);
                             //Cabinet can enter
                             if (cabinetSuccessCallback.can_enter) {
                                 //Cabinet exist in database
-                                if (cabinetSuccessCallback.hasOwnProperty('cabinet')) {
+                                if (cabinetSuccessCallback.cabinet) {
                                     //Cabinet it's new
                                     if (cabinetSuccessCallback.cabinet.nuevo) {
                                         cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
