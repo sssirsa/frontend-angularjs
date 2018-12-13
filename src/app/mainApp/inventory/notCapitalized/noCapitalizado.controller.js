@@ -175,7 +175,6 @@
 
 
         function showNoCapitalizado(item) {
-            if(!item.new_economico){
                 vm.toModel = angular.copy(item);
                 $mdDialog.show({
                     controller: 'notCapitalizedUpdateDialogController',
@@ -194,7 +193,6 @@
                         ErrorHandler.errorTranslate(err);
                     }
                 });
-            }
         }
 
         function re_labeled(item) {
@@ -215,6 +213,7 @@
                 }
             }).then(function (res) {
                 vm.cabinetCreated = res;
+                aRefresh();
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);

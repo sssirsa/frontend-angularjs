@@ -3,7 +3,7 @@
     <md-toolbar layout="row"
                 layout-align="space-between center">
         <div layout-padding class="md-title">
-            <span>{{'INPUT.Dialogs.Cabinet.Title'|translate}}</span>
+            <span>{{'MAIN.COMPONENTS.CABINET.TITLE'|translate}}</span>
         </div>
         <md-button class="md-icon-button"
                    ng-click="vm.cancel()"
@@ -14,12 +14,12 @@
     <md-content layout="column"
                 layout-padding
                 layout-align="center stretch">
-        <form name="newcabinetFrom">
+        <form name="newcabinetForm">
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
                     <input name="economico" required digits-only MAXLENGTH="20" ng-model="vm.economico"/>
-                    <div ng-messages="newcabinetFrom.economico.$error">
+                    <div ng-messages="newcabinetForm.economico.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
@@ -28,7 +28,7 @@
                     <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
                     <input name="serial" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="vm.no_serie"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <div ng-messages="newcabinetForm.serial.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
                         </div>
@@ -41,7 +41,7 @@
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.YEAR</label>
                     <input name="year" required digits-only MAXLENGTH="4" ng-model="vm.year"/>
-                    <div ng-messages="newcabinetFrom.year.$error">
+                    <div ng-messages="newcabinetForm.year.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
@@ -50,7 +50,7 @@
                     <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
                     <input name="unilever" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="vm.id_unilever"/>
-                    <div ng-messages="newcabinetFrom.unilever.$error">
+                    <div ng-messages="newcabinetForm.unilever.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
                         </div>
@@ -84,7 +84,7 @@
             </div>
         </form>
 
-        <form name="newcabinetFrom2">
+        <form name="newcabinetForm2">
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['condicion'].catalog"
@@ -143,7 +143,7 @@
         </md-button>
         <md-button ng-click="vm.create()"
                    cg-busy="{ promise:vm.createPromise, message:' ' }"
-                   ng-disabled="newcabinetFrom.$invalid"
+                   ng-disabled="newcabinetForm.$invalid"
                    aria-label="{{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}"
                    class="md-primary md-raised">
             <div layout="row" layout-align="center center">

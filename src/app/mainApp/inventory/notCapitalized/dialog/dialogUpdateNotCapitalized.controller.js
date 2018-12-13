@@ -17,6 +17,7 @@
         vm.change = null;
         vm.sw1 = false;
         vm.confirmation = "";
+        vm.new_economico = data.new_economico;
 
         //variables de catalogos
         if(data.status){
