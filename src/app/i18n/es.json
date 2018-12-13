@@ -218,12 +218,14 @@
                 "STATUS_UNILEVER": "Estatus Unilever",
                 "STATUS_COM": "Estatus COM",
                 "LIST": "Listado de cabinets",
-                "CATEGORY": "Categoría"
+                "CATEGORY": "Categoría",
+                "RE_LABELED": "Capitalización del cabinet"
             },
             "NO_LABELED":{
-                "STATUS": "Estatus no capitalizado",
                 "ECONOMICS": "Economicos",
-                "REASON": "Motivo no capitalizado"
+                "STATUS": "Estatus no capitalizado",
+                "REASON": "Motivo no capitalizado",
+                "NEW_ECONOMIC": "Nuevo económico"
             }
         },
         "LABEL": {
@@ -282,6 +284,7 @@
             "CANCEL": "Cancelar",
             "DELETE": "Eliminar",
             "RESTORE": "Restaurar",
+            "SAVE": "Guardar",
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
             "LOAD_MORE": "Cargar mas elementos"

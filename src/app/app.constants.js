@@ -497,6 +497,7 @@
             },
             linea_transporte: 'linea_transporte',
             localidad: 'localidad',
+            label: 'label',
             map: 'https://maps.googleapis.com/maps/api/staticmap',
             marca: 'marca_cabinet',
             massive: {
