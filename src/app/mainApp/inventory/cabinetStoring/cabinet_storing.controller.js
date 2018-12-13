@@ -8,12 +8,13 @@
         .module('app.mainApp.inventory')
         .controller('cabinetStorageController', cabinetStorageController);
 
-    function cabinetStorageController($scope, Translate, toastr, Helper,URLS) {
+    function cabinetStorageController($scope, Translate, toastr, Helper,URLS, CATALOG,ErrorHandler) {
         //Variable definition
         var vm = this;
         vm.asset_location = {}; // Objeto de localización de Cabinet
         vm.storage = {}; //Objeto contenedor de la Bodega
         vm.type_storage = true;// true -> Capitalizado, false-> No Capitalizado
+
 
         //funciones
         vm.onSubsidiarySelect = onSubsidiarySelect;
@@ -71,16 +72,28 @@
         };
 
         function onSubsidiarySelect(element) {
-            console.log('On subsidiary select');
-            console.log(element);
             vm.storage = null;
             vm.subsidiary = element;
             vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id='+vm.subsidiary;
         }
 
         function onElementSelect(element) {
-            vm.storage=element;
-            console.log(vm.storage);
+
+            CATALOG.management.url=URLS.management.catalogues.storage;
+            var promise_storage=CATALOG.management.getByID(element);
+            promise_storage.then(function (response_storage) {
+                vm.storage=response_storage;
+                vm.storage=_.pick(vm.storage,'descripcion','estiba_max','nombre','pasillo_max','profundidad_max');
+                //we need to transform the max values from string to int
+                vm.storage.estiba_max=parseInt(vm.storage.estiba_max);
+                vm.storage.pasillo_max=parseInt(vm.storage.pasillo_max);
+                vm.storage.profundidad_max=parseInt(vm.storage.profundidad_max);
+            }).catch(function (error) {
+                ErrorHandler.errorTranslate(error);
+            });
+
+
+
 
         }
 

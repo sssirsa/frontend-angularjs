@@ -53,52 +53,46 @@
                                     on-select="vm.onElementSelect(element)">
                     </catalog-select>
                 </md-input-container>
-                <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                    <md-slider-container flex>
-                        <md-input-container flex="30" flex-sm="100">
+                <span>{{vm.storage.nombre}}</span>
+                <div flex="100" layout="column" layout-align-gt-sm="center stretch" ng-if="vm.storage.nombre">
+                    <md-slider-container flex="90" layout="row">
+                        <md-input-container flex="10" flex-sm="100">
                             <h5 translate>STORAGE.CORRIDOR</h5>
                         </md-input-container>
-                        <md-input-container flex="30">
-                            <loopify-number-picker value="vm.asset_location.pasillo" ng-model="vm.asset_location.pasillo" step="1"
-                                                   min="1" max="100"></loopify-number-picker>
-
+                        <md-input-container flex="20" >
+                            <input ng-model="vm.asset_location.pasillo" type="number" min="0" max="{{vm.storage.pasillo_max}}">
                         </md-input-container>
-                        <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.pasillo" min="0" max="vm.storage.pasillo_max"
+                        <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.pasillo" min="0" max="{{vm.storage.pasillo_max}}"
                                    step="1"
                                    aria-label="Nivel"
-                                   md-vertical flex="90"></md-slider>
+                                    flex="70"></md-slider>
                         </md-slider>
 
                     </md-slider-container>
-                    <md-slider-container flex>
-                        <md-input-container flex="20" flex-sm="100">
+                    <md-slider-container flex="90" layout="row">
+                        <md-input-container flex="10" flex-sm="100">
                             <h5 translate>STORAGE.STOWAGE</h5>
                         </md-input-container>
-                        <md-input-container flex="30">
-
-                            <loopify-number-picker value="vm.asset_location.estiba" ng-model="vm.asset_location.estiba" step="1"
-                                                   min="1" max="vm.storage.estiba_max" label=""></loopify-number-picker>
-
+                        <md-input-container flex="20">
+                            <input ng-model="vm.asset_location.estiba" type="number" min="0" max="{{vm.storage.estiba_max}}">
                         </md-input-container>
-                        <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.estiba" min="0" max="vm.storage.estiba_max"
+                        <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.estiba" min="0" max="{{vm.storage.estiba_max}}"
                                    step="1"
                                    aria-label="Nivel"
-                                   md-vertical flex="90"></md-slider>
+                                   flex="70"></md-slider>
                         </md-slider>
                     </md-slider-container>
-                    <md-slider-container flex>
+                    <md-slider-container flex="90" layout="row">
                         <md-input-container flex="10">
                             <h5 translate>STORAGE.DEPTH</h5>
                         </md-input-container>
-                        <md-input-container flex="30" flex-sm="100">
-
-                            <loopify-number-picker value="vm.asset_location.profundidad" ng-model="vm.asset_location.profundidad" step="1"
-                                                   min="1" max="vm.storage.profundidad_max" label=""></loopify-number-picker>
+                        <md-input-container flex="20" flex-sm="100">
+                            <input ng-model="vm.asset_location.profundidad" type="number" min="0" max="{{vm.storage.profundidad_max}}">
                         </md-input-container>
-                        <md-slider class="md-accent" md-discrete ng-model="vm.cabinet.linea_z" min="0" max="vm.storage.profundidad_max"
+                        <md-slider class="md-accent" md-discrete ng-model="vm.cabinet.linea_z" min="0" max="{{vm.storage.profundidad_max}}"
                                    step="1"
                                    aria-label="Nivel"
-                                   md-vertical flex="90"></md-slider>
+                                   md-vertical flex="70"></md-slider>
                         </md-slider>
                     </md-slider-container>
                 </div>
