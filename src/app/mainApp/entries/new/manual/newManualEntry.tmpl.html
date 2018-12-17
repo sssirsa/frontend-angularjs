@@ -277,7 +277,7 @@
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid">
+                           ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'ENTRIES.NEW.BUTTONS.SAVE'|translate}}</div>
