@@ -48,7 +48,7 @@
         }
 
         function assignedTo(personID) {
-            return baseUrl.one('list_atencion', personID).getList();
+            return baseUrl.one('list_atencion', personID).customGET();
         }
 
         function getStore(id) {
