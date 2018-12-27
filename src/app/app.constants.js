@@ -420,16 +420,34 @@
         .constant('URLS', {
             //New module separation
             entries_departures: {
-                base: '' //TODO: Update when known
+                base: 'entries-departures',
+                entries: {
+                    base: 'entries',
+                    new: 'news',
+                    obsolete: 'scrapped',
+                    unrecognizable: 'no_labeled',
+                    warranty: 'warranties',
+                    addCabinet: 'add_cabinet',
+                    close: 'close',
+                    control: {
+                        base: 'control',
+                        cabinet_in_subsidiary: 'cabinet_in_sucursal'
+                    }
+                }
             },
             genesis: {
                 base: 'genesis'
             },
             management: {
-                base: 'management'
+                base: 'management',
+                inventory: {
+                    base: 'inventory',
+                    cabinet: 'cabinet_unilever',
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                }
             },
             mobile: {
-                base:'mobile'
+                base: 'mobile'
             },
             technical_service: {
                 base: '' //TODO: Update when known
