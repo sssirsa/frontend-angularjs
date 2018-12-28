@@ -420,7 +420,20 @@
         .constant('URLS', {
             //New module separation
             entries_departures: {
-                base: '' //TODO: Update when known
+                base: 'entries-departures',
+                entries: {
+                    base: 'entries',
+                    new: 'news',
+                    obsolete: 'scrapped',
+                    unrecognizable: 'no_labeled',
+                    warranty: 'warranties',
+                    addCabinet: 'add_cabinet',
+                    close: 'close',
+                    control: {
+                        base: 'control',
+                        cabinet_in_subsidiary: 'cabinet_in_sucursal'
+                    }
+                }
             },
             genesis: {
                 base: 'genesis'
@@ -432,6 +445,12 @@
                     subsidiary:'subsidiary',
                     storage:'warehouse',
 
+                },
+                base: 'management',
+                inventory: {
+                    base: 'inventory',
+                    cabinet: 'cabinet_unilever',
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
                 }
             },
             mobile: {
@@ -477,6 +496,7 @@
             insumo: 'insumo',
             linea_transporte: 'linea_transporte',
             localidad: 'localidad',
+            label: 'label',
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',

@@ -24,6 +24,7 @@
         vm.showNoCapitalizado = showNoCapitalizado;
         vm.changeSelected = changeSelected;
         vm.searchCabinet = searchCabinet;
+        vm.re_labeled = re_labeled;
 
 
         //variables
@@ -58,11 +59,6 @@
                 }else{
                     vm.loadingPromise = noLabeled.getByID(vm.searchText)
                         .then(function (no_cap) {
-                            if(!no_cap.status){
-                                no_cap.status = "Sin asignar";
-                            }else{
-                                no_cap.status = no_cap.status.nombre;
-                            }
                             showNoCapitalizado(no_cap);
                             vm.searchText = '';
                         })
@@ -127,11 +123,12 @@
                     data.activo = "Activo";
                 }
 
-                if(!data.status){
-                    data.status = "Sin asignar";
+                if(!data.new_economico){
+                    data.condition = "No capitalizado";
                 }else{
-                    data.status = data.status.nombre;
+                    data.condition = "Recapitalizado";
                 }
+
             });
         }
 
@@ -178,18 +175,44 @@
 
 
         function showNoCapitalizado(item) {
+                vm.toModel = angular.copy(item);
+                $mdDialog.show({
+                    controller: 'notCapitalizedUpdateDialogController',
+                    templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                    controllerAs: 'vm',
+                    fullscreen: true,
+                    locals:{
+                        data: vm.toModel
+                    },
+                    clickOutsideToClose: true
+                }).then(function (respuesta) {
+                    ErrorHandler.successCreation();
+                    aRefresh();
+                }).catch(function (err) {
+                    if (err) {
+                        ErrorHandler.errorTranslate(err);
+                    }
+                });
+        }
+
+        function re_labeled(item) {
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'notCapitalizedUpdateDialogController',
-                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                //controller: 'notCapitalizedUpdateDialogController',
+                //templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                //controllerAs: 'vm',
+                controller: 'reLabeledController',
                 controllerAs: 'vm',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/reLabeled/reLabeled.tmpl.html',
                 fullscreen: true,
-                locals:{
-                    data: vm.toModel
-                },
-                clickOutsideToClose: true
-            }).then(function (respuesta) {
-                ErrorHandler.successCreation();
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    noLabeledID: item.id
+                    //data: vm.toModel
+                }
+            }).then(function (res) {
+                vm.cabinetCreated = res;
                 aRefresh();
             }).catch(function (err) {
                 if (err) {
