@@ -8,12 +8,15 @@
         .module('app.mainApp.inventory')
         .controller('cabinetStorageController', cabinetStorageController);
 
-    function cabinetStorageController($scope, Translate, toastr, Helper, URLS, CATALOG, ErrorHandler) {
+    function cabinetStorageController($scope, Translate, toastr, Helper, URLS, CATALOG, ErrorHandler,cabinetUC, User) {
         //Variable definition
         var vm = this;
         vm.asset_location = {}; // Objeto de localización de Cabinet
         vm.storage = {}; //Objeto contenedor de la Bodega
         vm.type_storage = true;// true -> Capitalizado, false-> No Capitalizado
+        vm.asset={}; //objeto contenedor del cabinet
+        vm.edition=true; // Booleano que permite mostrar los campos de seleccion de sucursal y/ó bodega
+
 
 
         //funciones
@@ -22,6 +25,8 @@
         vm.increment_element = increment_element;
         vm.decrement_element = decrement_element;
         vm.object_builder = object_builder;
+        vm.search_asset=search_asset;
+
 
 
         //Translates
@@ -74,10 +79,26 @@
 
         };
 
+        onLoad();
+
+
+
         function onSubsidiarySelect(element) {
             vm.storage = null;
+            console.log(element)
+            console.log(typeof (element))
             vm.subsidiary = element;
             vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id=' + vm.subsidiary;
+        }
+        function onLoad(){
+            vm.user=User.getUser();
+            console.log(vm.user);
+            if(vm.user.sucursal){
+                console.log("estoy en el if la sucursal seleccionada es:"+vm.user.sucursal);
+                onSubsidiarySelect(vm.user.sucursal);
+
+            }
+
         }
 
         function onElementSelect(element) {
@@ -168,6 +189,19 @@
         function search_asset(){
             if(vm.type_storage){
                 //Search in cabinets location
+                var promiseCabinetInfo=cabinetUC.getByID(vm.asset_location.cabinet_id);
+                promiseCabinetInfo.then(function(asset){
+                    console.log(asset);
+                    vm.asset=asset;
+                    vm.edition=false;
+                    vm.asset_location.pasillo=vm.asset.posicionamiento.pasillo;
+                    vm.asset_location.estiba=vm.asset.posicionamiento.estiba;
+                    vm.asset_location.profundidad=vm.asset.posicionamiento.profundidad;
+
+
+                }).catch(function(errormsg){
+                    ErrorHandler.errorTranslate(errormsg);
+                });
 
             }
             else{
