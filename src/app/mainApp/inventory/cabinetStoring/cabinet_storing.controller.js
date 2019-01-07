@@ -26,6 +26,7 @@
         vm.decrement_element = decrement_element;
         vm.object_builder = object_builder;
         vm.search_asset=search_asset;
+        vm.enableEdition=enableEdition;
 
 
 
@@ -112,6 +113,7 @@
                 vm.storage.estiba_max = parseInt(vm.storage.estiba_max);
                 vm.storage.pasillo_max = parseInt(vm.storage.pasillo_max);
                 vm.storage.profundidad_max = parseInt(vm.storage.profundidad_max);
+
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
             });
@@ -185,6 +187,9 @@
             }
             console.log(vm.asset_location);
         }
+        function enableEdition() {
+            vm.edition=true;
+        }
 
         function search_asset(){
             if(vm.type_storage){
@@ -193,10 +198,11 @@
                 promiseCabinetInfo.then(function(asset){
                     console.log(asset);
                     vm.asset=asset;
-                    vm.edition=false;
                     vm.asset_location.pasillo=vm.asset.posicionamiento.pasillo;
                     vm.asset_location.estiba=vm.asset.posicionamiento.estiba;
                     vm.asset_location.profundidad=vm.asset.posicionamiento.profundidad;
+                    vm.edition=false;
+
 
 
                 }).catch(function(errormsg){

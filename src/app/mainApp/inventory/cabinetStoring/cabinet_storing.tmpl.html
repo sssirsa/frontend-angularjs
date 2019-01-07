@@ -59,8 +59,8 @@
 
         </div>
         {{vm.edition}}
-        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="!vm.edition">
-            <div layout="column" flex="45" layout-align="center start">
+        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="">
+            <div layout="column" flex="45" layout-align="center start"  ng-if="vm.asset.sucursal.nombre">
                 <div layout="row">
                     <md-icon md-font-icon="fa fa-industry"></md-icon>
                     <h1>{{vm.asset.sucursal.nombre}}</h1>
@@ -69,21 +69,21 @@
                     <span>{{vm.asset.sucursal.direccion}}</span>
                 </div>
             </div>
-            <div layout="column" flex="45" layout-align="center start">
-                <div layout="row">
-                    <md-icon md-font-icon="zmdi zmdi-store-24"></md-icon>
-                    <h1>{{vm.asset.posicionamiento.bodega.nombre}}</h1>
-                </div>
-                <div>
-                    <span>{{vm.asset.posicionamiento.bodega.descripcion}}</span>
+            <div layout="row" flex="45" ng-if="vm.storage.nombre">
+                <div layout="column" flex="100" layout-align="center center">
+                    <div layout="row">
+                        <md-icon md-font-icon="zmdi zmdi-store-24"></md-icon>
+                        <h1>{{vm.storage.nombre}}</h1>
+                    </div>
+                    <div>
+                        <span>{{vm.storage.descripcion}}</span>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div layout="row" flex="100">
-            <span>{{vm.storage.nombre}}</span>
-        </div>
+
         <div flex="100" layout="column" ng-if="vm.storage.nombre|| vm.asset.posicionamiento" layout-margin="">
             <div layout-align="center center" layout="row" flex="100" layout-fill="" layout-wrap="">
                 <div layout="column" flex="50" flex-sm="100" flex-xs="100" layout-padding="">
@@ -92,21 +92,21 @@
                     </md-input-container>
                     <div layout="row">
                         <md-input-container flex="20">
-                            <input ng-model="vm.asset_location.pasillo" type="number" min="0"
+                            <input ng-disabled="!vm.edition"  ng-model="vm.asset_location.pasillo" type="number" min="0"
                                    max="{{vm.storage.pasillo_max}}">
                         </md-input-container>
                         <div layout="column">
-                            <md-button class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
+                            <md-button ng-disabled="!vm.edition"  class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
                                        ng-click="vm.increment_element(0)">
                                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                             </md-button>
-                            <md-button class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
                                        ng-click="vm.decrement_element(0)">
                                 <md-icon md-font-icon="fa fa-minus"></md-icon>
                             </md-button>
                         </div>
                         <md-slider-container flex="100" layout="row">
-                            <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.pasillo" min="0"
+                            <md-slider ng-disabled="!vm.edition" class="md-accent" md-discrete ng-model="vm.asset_location.pasillo" min="0"
                                        max="{{vm.storage.pasillo_max}}"
                                        step="1"
                                        aria-label="Nivel"
@@ -125,21 +125,21 @@
                     </md-input-container>
                     <div layout="row">
                         <md-input-container flex="20">
-                            <input ng-model="vm.asset_location.estiba" type="number" min="0"
+                            <input ng-disabled="!vm.edition"  ng-model="vm.asset_location.estiba" type="number" min="0"
                                    max="{{vm.storage.estiba_max}}">
                         </md-input-container>
                         <div layout="column">
-                            <md-button class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
+                            <md-button ng-disabled="!vm.edition"  class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
                                        ng-click="vm.increment_element(1)">
                                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                             </md-button>
-                            <md-button class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
+                            <md-button ng-disabled="!vm.edition"  class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
                                        ng-click="vm.decrement_element(1)">
                                 <md-icon md-font-icon="fa fa-minus"></md-icon>
                             </md-button>
                         </div>
                         <md-slider-container flex="100" layout="row">
-                            <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.estiba" min="0"
+                            <md-slider ng-disabled="!vm.edition"  class="md-accent" md-discrete ng-model="vm.asset_location.estiba" min="0"
                                        max="{{vm.storage.estiba_max}}"
                                        step="1"
                                        aria-label="Nivel"
@@ -155,21 +155,21 @@
                     </md-input-container>
                     <div layout="row">
                         <md-input-container flex="20">
-                            <input ng-model="vm.asset_location.profundidad" type="number" min="0"
+                            <input ng-disabled="!vm.edition"  ng-model="vm.asset_location.profundidad" type="number" min="0"
                                    max="{{vm.storage.profundidad_max}}">
                         </md-input-container>
                         <div layout="column">
-                            <md-button class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
+                            <md-button ng-disabled="!vm.edition"  class="md-fab md-mini md-primary" aria-label="Incrementar elemento"
                                        ng-click="vm.increment_element(2)">
                                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                             </md-button>
-                            <md-button class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
+                            <md-button ng-disabled="!vm.edition"  class="md-fab md-mini md-primary" aria-label="Decrementar elemento"
                                        ng-click="vm.decrement_element(2)">
                                 <md-icon md-font-icon="fa fa-minus"></md-icon>
                             </md-button>
                         </div>
                         <md-slider-container flex="100" layout="row">
-                            <md-slider class="md-accent" md-discrete ng-model="vm.asset_location.profundidad"
+                            <md-slider ng-disabled="!vm.edition"  class="md-accent" md-discrete ng-model="vm.asset_location.profundidad"
                                        min="0"
                                        max="{{vm.storage.profundidad_max}}"
                                        step="1"
@@ -183,9 +183,13 @@
         </div>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="vm.object_builder()" class="md-raised md-primary">
+            <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>
                 Guardar
+            </md-button>
+            <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                Editar
             </md-button>
         </md-card-actions>
     </md-card>
