@@ -18,7 +18,7 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
-                    <input name="economico" required digits-only MAXLENGTH="20" ng-model="vm.economico"/>
+                    <input ng-disabled="vm.economico" name="economico" required digits-only MAXLENGTH="20" ng-model="vm.economico"/>
                     <div ng-messages="newcabinetForm.economico.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
