@@ -31,6 +31,7 @@
         //Translates
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
         vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
+        vm.errorNotSubsidiary=Translate.translate('STORAGE.ERROR.NOT_SUBSIDIARY');
 
         //Blank variables templates
         vm.catalogues = {
@@ -83,17 +84,13 @@
 
         function onSubsidiarySelect(element) {
             vm.storage = null;
-            console.log(element)
-            console.log(typeof (element))
             vm.subsidiary = element;
             vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id=' + vm.subsidiary;
         }
 
         function onLoad() {
             vm.user = User.getUser();
-            console.log(vm.user);
             if (vm.user.sucursal) {
-                console.log("estoy en el if la sucursal seleccionada es:" + vm.user.sucursal);
                 onSubsidiarySelect(vm.user.sucursal);
 
             }
@@ -184,7 +181,6 @@
                 vm.asset_location.no_capitalizado_id = vm.asset_location.cabinet_id;
                 vm.asset_location = _.omit(vm.asset_location, 'cabinet_id');
             }
-            console.log(vm.asset_location);
             saveAssetLocation();
         }
 
@@ -196,9 +192,22 @@
             var promiseCreateLocation = assetStoringProvider.create(vm.asset_location);
             promiseCreateLocation.then(function () {
                 ErrorHandler.successCreation();
+                clear();
 
-            }).catch(errormsg);
-            ErrorHandler.errorTranslate(errormsg);
+            }).catch(function(errormsg){
+                ErrorHandler.errorTranslate(errormsg);
+
+            });
+
+        }
+
+        function clear() {
+            vm.asset_location = {}; // Objeto de localización de Cabinet
+            vm.storage = {}; //Objeto contenedor de la Bodega
+            vm.type_storage = true;// true -> Capitalizado, false-> No Capitalizado
+            vm.asset = {}; //objeto contenedor del cabinet
+            vm.edition = true; // Booleano que permite mostrar los campos de seleccion de sucursal y/ó bodega
+
         }
 
         function search_asset() {
@@ -206,10 +215,18 @@
                 //Search in cabinets location
                 var promiseCabinetInfo = cabinetUC.getByID(vm.asset_location.cabinet_id);
                 promiseCabinetInfo.then(function (asset) {
-                    console.log(asset);
                     vm.asset = asset;
                     //selection subsidiary
-                    onSubsidiarySelect(vm.asset.sucursal.id);
+                    if(vm.asset.sucursal.id){
+                        onSubsidiarySelect(vm.asset.sucursal.id);
+
+                    }
+                    else {
+                        toastr.error(vm.errorNotSubsidiary, vm.errorTitle);
+                        clear();
+
+                    }
+                    //Validación Posicionamiento existente
                     if (vm.asset.posicionamiento) {
 
                         onElementSelect(vm.asset.posicionamiento.bodega.id);
@@ -232,7 +249,7 @@
                 //search in unrecognizible assets location
                 var promiseUnrecognizibleAssetInfo = noLabeled.getByID(vm.asset_location.cabinet_id);
                 promiseUnrecognizibleAssetInfo.then(function (asset) {
-                    console.log(asset);
+
                     vm.asset = asset;
                     //selectionsSubsidiary
                     onSubsidiarySelect(vm.asset.sucursal.id);

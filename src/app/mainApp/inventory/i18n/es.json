@@ -87,7 +87,10 @@
         "CORRIDOR":"Pasillo",
         "STOWAGE":"Estiba",
         "DEPTH":"Profundidad",
-        "ASSET_ID":"Identificador de Cabinet"
+        "ASSET_ID":"Identificador de Cabinet",
+        "ERROR":{
+            "NOT_SUBSIDIARY":"No es posible asignarlo, ya que no se encuentra en ninguna sucursal en estos momentos."
+        }
 
     }
 }
