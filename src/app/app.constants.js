@@ -443,14 +443,14 @@
                 catalogues:{
                     base:'catalogue',
                     subsidiary:'subsidiary',
-                    storage:'warehouse',
+                    storage:'warehouse'
 
                 },
-                base: 'management',
                 inventory: {
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
-                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
+                    asset_location:'asset_location'
                 }
             },
             mobile: {
