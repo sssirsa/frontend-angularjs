@@ -421,6 +421,19 @@
             //New module separation
             entries_departures: {
                 base: 'entries-departures',
+                departures: {
+                    base: 'departures',
+                    new: 'news',
+                    obsolete: 'scrapped',
+                    unrecognizable: 'no_labeled',
+                    warranty: 'warranties',
+                    addCabinet: 'add_cabinet',
+                    close: 'close',
+                    control: {
+                        base: 'control',
+                        cabinet_in_subsidiary: 'cabinet_in_sucursal'
+                    }
+                },
                 entries: {
                     base: 'entries',
                     new: 'news',
@@ -431,7 +444,7 @@
                     close: 'close',
                     control: {
                         base: 'control',
-                        cabinet_in_subsidiary:'cabinet_in_sucursal'
+                        cabinet_in_subsidiary: 'cabinet_in_sucursal'
                     }
                 }
             },
