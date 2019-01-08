@@ -115,14 +115,14 @@
                  cg-busy="{promise:vm.worklistLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
                 <div layout="column" layout-align="center center">
 
-                    <div ng-if="vm.chip.length > 1">
+                    <div ng-if="vm.chip.length > 0">
                         <span translate="SALEPOINT_REQUEST.ASSIGN.ASSIGNED"></span>
                     </div>
-                    <div ng-if="vm.chip.length < 1">
+                    <div ng-if="vm.chip.length <= 0">
                         <span translate="SALEPOINT_REQUEST.ASSIGN.NO_RESULTS"></span>
                     </div>
 
-                    <md-chips class="custom-chips" ng-model="vm.chip" readonly="true" ng-if="vm.chip.length > 1">
+                    <md-chips class="custom-chips" ng-model="vm.chip" readonly="true" ng-if="vm.chip.length > 0">
                         <md-chip-template ng-click="vm.view($chip)">
                             <span>
                               <strong>{{$chip.servicio}}</strong>
@@ -131,22 +131,23 @@
                     </md-chips>
                 </div>
             </div>
-
-            <div layout="row" ng-if="vm.infoChip">
-                <md-content flex layout-padding>
-                    <div layout="colum" layout-align="end start">
-                        <div ng-click="vm.clean()">x</div>
-                    </div>
-                    <div class="md-list-item-text">
-                        <h5 translate="SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO"></h5>
-                        <h6>{{vm.infoChip.folio}}</h6>
-                        <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE"></h5>
-                        <h6>{{vm.infoChip.nombreEstablecimiento}}</h6>
-                        <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STREET"></h5>
-                        <h6>{{vm.infoChip.direccion}}</h6>
-                    </div>
-                </md-content>
-            </div>
         </div>
+
+        <div layout="row" ng-if="vm.infoChip" layout-padding>
+            <md-card flex layout-padding>
+                <div layout="colum" layout-align="end start">
+                    <div ng-click="vm.clean()">x</div>
+                </div>
+                <div class="md-list-item-text">
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO"></h5>
+                    <h6>{{vm.infoChip.folio}}</h6>
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE"></h5>
+                    <h6>{{vm.infoChip.nombreEstablecimiento}}</h6>
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STREET"></h5>
+                    <h6>{{vm.infoChip.direccion}}</h6>
+                </div>
+            </md-card>
+        </div>
+
     </div>
 </md-dialog>
