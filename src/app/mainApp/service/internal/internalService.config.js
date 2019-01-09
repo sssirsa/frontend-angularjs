@@ -5,15 +5,15 @@
 
     function internalServiceConfig($stateProvider, triMenuProvider) {
         $stateProvider
-            .state('triangular.admin-default.checklist', {
-                url: '/checklist',
+            .state('triangular.admin-default.inspection', {
+                url: '/inspection',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/service/internal/checklist/checklist.tmpl.html',
-                controller: 'checklistController',
+                templateUrl: 'app/mainApp/service/internal/inspection/inspection.tmpl.html',
+                controller: 'inspectionController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.diagnostic', {
@@ -62,6 +62,12 @@
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 6,
                 children: [
+                    {
+                        name:'INSPECTION.INSPECTION_NAME_MENU',
+                        state:'triangular.admin-default.inspection',
+                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type:'link'
+                    },
                     {
                         name: 'MAIN.MENU.REGISTER_STEP',
                         state: 'triangular.admin-default.etapa',

@@ -246,7 +246,14 @@
             "CANCELATION_SUCCESFULL":"Cancelación Exitosa",
             "PREREQUESTNOTFOUND":"Pre solicitud no Encontrada"
         }
+    },
+    "INSPECTION":{
+        "INSPECTION_NAME_MENU":"Inspección de Cabinet",
+        "SEARCH_CABINET":"Buscar Cabinet"
 
+    },
+    "INCIDENCE":{
+        "REPORT_INCIDENCE":"Levantar incidencia"
 
     }
 }

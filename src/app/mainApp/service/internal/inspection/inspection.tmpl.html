@@ -1,0 +1,80 @@
+<div layout="column">
+    <md-card flex layout-align="center stretch">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools" layout="row">
+                <div flex="50">
+                    <h2>
+                        <span flex translate="">INSPECTION.INSPECTION_NAME_MENU</span>
+
+                    </h2>
+                </div>
+                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+                        <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
+                        <span translate="">INCIDENCE.REPORT_INCIDENCE</span>
+                    </md-button>
+
+                </div>
+
+            </div>
+        </md-toolbar>
+        <div layout="column" layout-align="center center">
+            <md-content layout="row" layout-padding="">
+                <md-input-container>
+                    <label translate="">INSPECTION.SEARCH_CABINET</label>
+                    <input type="text" ng-model="vm.asset_location.cabinet_id" required md-maxlength="12">
+                </md-input-container>
+                <md-input-container>
+                    <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
+                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                    </md-button>
+                </md-input-container>
+            </md-content>
+        </div>
+
+        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="">
+            <div layout="column" flex="45" layout-align="center start" >
+                <div layout="row">
+                    <md-icon md-font-icon="fa fa-industry"></md-icon>
+                    <h1>{{vm.asset.sucursal.nombre}}</h1>
+                </div>
+                <div>
+                    <span>{{vm.asset.sucursal.direccion}}</span>
+                </div>
+            </div>
+            <div layout="row" flex="45" ng-if="vm.storage.nombre">
+                <div layout="column" flex="100" layout-align="center center">
+                    <div layout="row">
+                        <md-icon md-font-icon="zmdi zmdi-store-24"></md-icon>
+                        <h1>{{vm.storage.nombre}}</h1>
+                    </div>
+                    <div>
+                        <span>{{vm.storage.descripcion}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div flex="100" layout="column" ng-if="vm.storage.nombre|| vm.asset.posicionamiento" layout-margin="">
+            <div layout-align="center center" layout="row" flex="100" layout-fill="" layout-wrap="">
+
+
+
+
+            </div>
+        </div>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                Guardar
+            </md-button>
+            <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                Editar
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</div>
