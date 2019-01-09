@@ -156,7 +156,7 @@
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'DEPARTURES.NEW.LABELS.DEPARTURE_DATA'|translate}}>
-            <form name="entryForm"
+            <form name="departureForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
@@ -164,7 +164,7 @@
                                     class="md-icon-float md-block">
                     <label translate>DEPARTURES.NEW.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
-                    <input ng-model="vm.entry['descripcion']"
+                    <input ng-model="vm.departure['descripcion']"
                            name="description"
                            type="text">
                     <div class="hint" translate>DEPARTURES.NEW.HINTS.DESCRIPTION</div>
@@ -174,7 +174,7 @@
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
-                                    ng-if="vm.entryFromAgency"
+                                    ng-if="vm.departureFromAgency"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
@@ -218,7 +218,7 @@
                                         class="md-icon-float md-block full-width">
                         <label translate>DEPARTURES.NEW.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']"
+                        <input ng-model="vm.departure['nombre_chofer']"
                                name="driver_name"
                                ng-required="true"
                                type="text">
@@ -253,14 +253,14 @@
                         <div>{{'DEPARTURES.NEW.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
-                <md-button ng-click="vm.clickSaveDeparture(vm.entry)"
+                <md-button ng-click="vm.clickSaveDeparture(vm.departure)"
                            cg-busy="{
                                      promise:vm.createDeparturePromise,
                                      message:' '
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
+                           ng-disabled="departureForm.$invalid ||!vm.departure['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'DEPARTURES.NEW.BUTTONS.SAVE'|translate}}</div>

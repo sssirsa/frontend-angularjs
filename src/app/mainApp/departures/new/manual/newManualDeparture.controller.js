@@ -8,7 +8,8 @@
         Translate,
         toastr,
         ErrorHandler,
-        $mdDialog
+        $mdDialog,
+        Helper
     ) {
         var vm = this;
 
@@ -222,6 +223,7 @@
 
         saveDeparture = function saveDeparture(departure) {
             departure = addCabinetsToDeparture(vm.cabinetList, departure);
+            departure = Helper.removeBlankStrings(departure);
             //API callback
             vm.createDeparturePromise = MANUAL_DEPARTURES
                 .createNew(departure)
