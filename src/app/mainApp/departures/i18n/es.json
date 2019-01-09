@@ -28,7 +28,7 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                },
+                }
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
@@ -49,7 +49,10 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "CANT_LEAVE_NOT_NEW": "El cabinet no es nuevo"
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
             }
         },
         "WARRANTY": {
@@ -93,8 +96,8 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "NOT_FOUND_ID": "Económico no encontrado",
-                "CANT_LEAVE": "El cabinet tiene un impedimento de salida"
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías"
             }
         },
         "OBSOLETE": {
@@ -138,8 +141,8 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "NOT_FOUND_ID": "Económico no encontrado",
-                "CANT_LEAVE": "El cabinet tiene un impedimento de salida"
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de obsoletos"
             }
         },
         "UNRECOGNIZABLE": {
@@ -185,7 +188,7 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
-                "CANT_LEAVE": "El cabinet tiene un impedimento de salida"
+                "CANT_LEAVE": "El cabinet aún no puede salir"
             }
         }
     }

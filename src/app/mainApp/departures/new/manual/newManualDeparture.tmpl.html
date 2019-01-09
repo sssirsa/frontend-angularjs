@@ -169,32 +169,10 @@
                            type="text">
                     <div class="hint" translate>DEPARTURES.NEW.HINTS.DESCRIPTION</div>
                 </md-input-container>
-                <div layout="column"
+                <!--<div layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['project'].catalog"
-                                    hint="vm.catalogues['project'].hint"
-                                    icon="vm.catalogues['project'].icon"
-                                    required="vm.catalogues['project'].required"
-                                    pagination="vm.catalogues['project'].pagination"
-                                    elements="vm.catalogues['project'].elements"
-                                    soft-delete="vm.catalogues['project'].softDelete"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['project'].binding)">
-                    </catalog-select>
-                    <!--Mutual excluding catalogs-->
-                    <catalog-select class="full-width"
-                                    ng-if="!vm.entryFromAgency"
-                                    catalog="vm.catalogues['petition'].catalog"
-                                    hint="vm.catalogues['petition'].hint"
-                                    icon="vm.catalogues['petition'].icon"
-                                    required="vm.catalogues['petition'].required"
-                                    pagination="vm.catalogues['petition'].pagination"
-                                    elements="vm.catalogues['petition'].elements"
-                                    soft-delete="vm.catalogues['petition'].softDelete"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['petition'].binding)">
-                    </catalog-select>
                     <catalog-select class="full-width"
                                     ng-if="vm.entryFromAgency"
                                     catalog="vm.catalogues['udn'].catalog"
@@ -206,7 +184,7 @@
                                     soft-delete="vm.catalogues['udn'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
-                </div>
+                </div>-->
                 <div layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
