@@ -26,7 +26,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Modelo';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Modelos';
@@ -238,7 +238,7 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'marca',
+                        model: 'marca[\'nombre\']',
                         label: 'Marca',
                         catalog: {
                             lazy: false,

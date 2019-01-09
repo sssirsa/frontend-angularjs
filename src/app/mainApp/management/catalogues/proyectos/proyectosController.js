@@ -5,11 +5,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('proyectosController', proyectosController);
 
-    function proyectosController(URLS, Translate) {
+    function proyectosController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.proyecto;
-        vm.kind = 'Web';
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogue.base + '/' + URLS.entries_departures.entries.catalogue.project);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
         vm.name = Translate.translate('Projects.Header');
 
         //Labels
@@ -24,7 +27,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Proyecto';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Proyecto';

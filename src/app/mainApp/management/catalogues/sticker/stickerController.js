@@ -4,116 +4,94 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CondicionController',CondicionController);
+        .controller('stickerController',stickerController);
 
-    function CondicionController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
+    function stickerController(URLS, Translate, EnvironmentConfig)
     {
-
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
-        vm.kind = 'Management';
-        vm.name = Translate.translate('CONDITION.LABELS.TITLE');
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogue.base + '/' + URLS.entries_departures.entries.catalogue.sticker);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
+        vm.name = Translate.translate('STICKER.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Condición';
-        //vm.createButtonText = 'Crear Categoría';
-        //vm.deleteButtonText = 'Borrar Categoría';
-        //vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('STICKER.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('STICKER.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('STICKER.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('STICKER.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas condiciones';
+        vm.loadMoreButtonText = Translate.translate('STICKER.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Condiciones';
+        vm.loadingMessage = Translate.translate('STICKER.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
 
         //Actions meta
         vm.actions = {
-            /*POST: {
+            POST: {
                 fields: [
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Descripcion',
                         required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
-                                required: 'El campo es requerido.'
+                        validations: {
+                            errors: {
+                                required: 'La descripción es obligatoria'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Condición',
+                    title: 'Crear Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Condición'
+                    loading: 'Creando Sticker'
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Descripcion',
                         required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
-                                required: 'El campo es requerido.'
+                        validations: {
+                            errors: {
+                                required: 'La descripción es obligatoria'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Condición',
+                    title: 'Editar Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Condición'
+                    loading: 'Guardando Sticker'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Condición',
-                    message: 'Confirme la eliminación de Condición',
+                    title: 'Eliminar Sticker',
+                    message: 'Confirme la eliminación del Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Condición'
+                    loading: 'Eliminando Sticker'
                 }
-            },*/
+            },
             LIST: {
                 elements: 'results',
                 mode: 'infinite',
@@ -121,11 +99,6 @@
                     total: 'count'
                 },
                 fields: [
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra'
-                    },
                     {
                         type: 'text',
                         model: 'descripcion',
@@ -136,26 +109,26 @@
                     hide: 'deleted',
                     reverse: false
                 }
-            }/*,
+            },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Condición',
+                    title: 'Busqueda de Sticker',
                     searchButton: 'Buscar',
-                    loadingText: 'Buscando Condición'
+                    loadingText: 'Buscando Sticker'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'letra',
-                        header: 'por Letra',
-                        label: 'Letra',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
                         field: {
                             type: 'text'
                         }
                     }
                 ]
-            }*/
-        };
+            }
+        }
 
         function onElementSelect(element) {
             //Here goes the handling for element selection, such as detail page navigation
@@ -163,6 +136,7 @@
             console.debug(element);
             console.log(element);
         }
+
     }
 
 })();

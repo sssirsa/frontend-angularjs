@@ -6,12 +6,15 @@
         .module('app.mainApp.management.catalogues')
         .controller('TipoTransporteController',TipoTransporteController);
 
-    function TipoTransporteController(URLS, Translate)
+    function TipoTransporteController(URLS, Translate, EnvironmentConfig)
     {
         var vm = this;
 
-        vm.url = URLS.tipo_transporte;
-        vm.kind = 'Web';
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogue.base + '/' + URLS.entries_departures.entries.catalogue.transport_type);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
         vm.name = Translate.translate('Transport_Kind.title');
 
         //Labels
@@ -26,7 +29,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas tipos transporte';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Transportes';
@@ -45,7 +48,7 @@
                         required: true,
                         validations: {
                             errors: {
-                                required: 'El nombre del estado es obligatorio'
+                                required: 'El nombre es obligatorio'
                             }
                         }
                     }
@@ -67,7 +70,7 @@
                         required: true,
                         validations: {
                             errors: {
-                                required: 'El nombre del estado es obligatorio'
+                                required: 'El nombre es obligatorio'
                             }
                         }
                     }

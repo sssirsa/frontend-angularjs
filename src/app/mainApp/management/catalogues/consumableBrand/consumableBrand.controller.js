@@ -4,40 +4,41 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CondicionController',CondicionController);
+        .controller('consumableBrandController',consumableBrandController);
 
-    function CondicionController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
-    {
-
+    function consumableBrandController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
-        vm.kind = 'Management';
-        vm.name = Translate.translate('CONDITION.LABELS.TITLE');
+        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.consumable_brand);
+
+        vm.url = inventoryUrl;
+        vm.kind = 'inventory';
+        vm.name = Translate.translate('CONSUMABLE_BRAND.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Condición';
-        //vm.createButtonText = 'Crear Categoría';
-        //vm.deleteButtonText = 'Borrar Categoría';
-        //vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.TITLE');
+        vm.createButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas condiciones';
+        vm.loadMoreButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Condiciones';
+        vm.loadingMessage = Translate.translate('CONSUMABLE_BRAND.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
 
         //Actions meta
         vm.actions = {
-            /*POST: {
+            POST: {
                 fields: [
                     {
                         type: 'text',
@@ -49,71 +50,46 @@
                                 required: 'El campo es requerido.'
                             }
                         }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Condición',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Condición'
+                    loading: 'Creando Marca de Insumo'
                 }
             },
             PUT: {
-                id:'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'letra',
-                        label: 'Letra',
-                        required: true,
-                        validations:{
-                            regex: "[a-z]",
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Condición',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Condición'
+                    loading: 'Guardando Marca de Insumo'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Condición',
-                    message: 'Confirme la eliminación de Condición',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de la Marca de Insumo',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Condición'
+                    loading: 'Eliminando Marca'
                 }
-            },*/
+            },
             LIST: {
                 elements: 'results',
                 mode: 'infinite',
@@ -123,38 +99,33 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'letra',
-                        label: 'Letra'
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción'
+                        label: 'Descripcion'
                     }
                 ],
                 softDelete: {
                     hide: 'deleted',
                     reverse: false
                 }
-            }/*,
+            },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Condición',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Condición'
+                    title: 'Busqueda de Marca',
+                    searchButton: Translate.translate('CONSUMABLE_BRAND.LABELS.SEARCH'),
+                    loadingText: 'Buscando Marca'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'letra',
-                        header: 'por Letra',
-                        label: 'Letra',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
                         field: {
                             type: 'text'
                         }
                     }
                 ]
-            }*/
+            }
         };
 
         function onElementSelect(element) {
@@ -163,6 +134,7 @@
             console.debug(element);
             console.log(element);
         }
+
     }
 
 })();

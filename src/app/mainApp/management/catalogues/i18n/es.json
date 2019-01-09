@@ -363,5 +363,89 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "STICKER":{
+        "LABELS":{
+            "TITLE":"Sticker",
+            "SEARCH": "Buscar Sticker",
+            "CREATE": "Crear Sticker",
+            "DELETE": "Borrar Sticker",
+            "MODIFY": "Editar Sticker",
+            "LOAD_MORE": "Cargar más Stickers",
+            "LOADING_MESSAGE": "Cargando Sticker"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "PEDIMENT":{
+        "LABELS":{
+            "TITLE": "Pedimento",
+            "SEARCH": "Buscar Pedimento",
+            "CREATE": "Crear Pedimento",
+            "DELETE": "Borrar Pedimento",
+            "MODIFY": "Editar Pedimento",
+            "LOAD_MORE": "Cargar más Pedimentos",
+            "LOADING_MESSAGE": "Cargando Pedimentos"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_CATEGORY":{
+        "LABELS":{
+            "TITLE": "Categoría de Insumo",
+            "SEARCH": "Buscar Categoría",
+            "CREATE": "Crear Categoría",
+            "DELETE": "Borrar Categoría",
+            "MODIFY": "Editar Categoría",
+            "LOAD_MORE": "Cargar más Categorías de Insumo",
+            "LOADING_MESSAGE": "Cargando Categorías de Insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "COMPONENT_TYPE":{
+        "LABELS":{
+            "TITLE": "Tipo de Componente",
+            "SEARCH": "Buscar Tipo",
+            "CREATE": "Crear Tipo",
+            "DELETE": "Borrar Tipo",
+            "MODIFY": "Editar Tipo",
+            "LOAD_MORE": "Cargar más Tipos de Componente",
+            "LOADING_MESSAGE": "Cargando Tipos de componente"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_BRAND":{
+        "LABELS":{
+            "TITLE": "Marca de insumo",
+            "SEARCH": "Buscar Marca de insumo",
+            "CREATE": "Crear Marca de insumo",
+            "DELETE": "Borrar Marca de insumo",
+            "MODIFY": "Editar Marca de insumo",
+            "LOAD_MORE": "Cargar más Marcas de insumo",
+            "LOADING_MESSAGE": "Cargando Marcas de insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_MODEL":{
+        "LABELS":{
+            "TITLE": "Modelo de insumo",
+            "SEARCH": "Buscar Modelo de insumo",
+            "CREATE": "Crear Modelo de insumo",
+            "DELETE": "Borrar Modelo de insumo",
+            "MODIFY": "Editar Modelo de insumo",
+            "LOAD_MORE": "Cargar más Modelos de insumo",
+            "LOADING_MESSAGE": "Cargando Modelos de insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }

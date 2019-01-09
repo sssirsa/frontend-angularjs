@@ -272,6 +272,72 @@
                 templateUrl: 'app/mainApp/management/catalogues/estatusCom/estatusCom.tmpl.html',
                 controller: 'estatusComController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.catalogue-sticker', {
+                url: '/catalogue/sticker',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/sticker/sticker.tmpl.html',
+                controller: 'stickerController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.catalogue-pediment', {
+                url: '/catalogue/pediments',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/pediments/pediment.tmpl.html',
+                controller: 'pedimentController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.consumable-category', {
+                url: '/catalogue/categoria_insumo',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/consumableCategory/consumableCategory.tmpl.html',
+                controller: 'consumableCategoryController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.component-type', {
+                url: '/catalogue/tipo_componente',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/componentType/componentType.tmpl.html',
+                controller: 'componentTypeController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.consumable-brand', {
+                url: '/catalogue/marca_insumo',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/consumableBrand/consumableBrand.tmpl.html',
+                controller: 'consumableBrandController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.consumable-model', {
+                url: '/catalogue/modelo_insumo',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/consumableModel/consumableModel.tmpl.html',
+                controller: 'consumableModelController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -352,7 +418,7 @@
                         permission: ['ADMINISTRADOR'],
                         type: 'link'
                     }, {
-                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
+                        name: 'MAIN.MENU.CATALOGS.CATEGORY',
                         state: 'triangular.admin-default.categoria',
                         permission: ['ADMINISTRADOR', 'CAPTURISTA'],
                         type: 'link'
@@ -399,6 +465,42 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.STATUS_COM',
                         state: 'triangular.admin-default.catalogue-status-com',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.STICKER',
+                        state: 'triangular.admin-default.catalogue-sticker',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.PEDIMENT',
+                        state: 'triangular.admin-default.catalogue-pediment',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
+                        state: 'triangular.admin-default.consumable-category',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.COMPONENT_TYPE',
+                        state: 'triangular.admin-default.component-type',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_BRAND',
+                        state: 'triangular.admin-default.consumable-brand',
+                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.CATALOGS.CONSUMABLE_MODEL',
+                        state: 'triangular.admin-default.consumable-model',
                         permission: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     }

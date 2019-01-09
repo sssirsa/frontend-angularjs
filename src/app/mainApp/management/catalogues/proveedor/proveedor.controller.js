@@ -6,13 +6,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('ProveedorController',ProveedorController);
 
-    function ProveedorController(URLS, Translate)
-    {
-
+    function ProveedorController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.proveedor;
-        vm.kind = 'Web';
+        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.supplier);
+
+        vm.url = inventoryUrl;
+        vm.kind = 'inventory';
         vm.name = Translate.translate('Provider.title');
 
         //Labels
@@ -27,7 +28,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Proveedores';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Proveedores';

@@ -6,13 +6,16 @@
         .module('app.mainApp.management.catalogues')
         .controller('UDNController',UDNController);
 
-    function UDNController(URLS, Translate, OPTIONS)
+    function UDNController(URLS, Translate, OPTIONS, EnvironmentConfig)
     {
 
         var vm = this;
 
-        vm.url = URLS.udn;
-        vm.kind = 'Web';
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogue.base + '/' + URLS.entries_departures.entries.catalogue.udn);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
         vm.name = Translate.translate('UDN_CATALOG.title');
         vm.options = OPTIONS.zone;
 
@@ -28,7 +31,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas UDN';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando UDN';

@@ -428,6 +428,15 @@
                     unrecognizable: 'no_labeled',
                     warranty: 'warranties',
                     addCabinet: 'add_cabinet',
+                    catalogue: {
+                        base: 'catalogues',
+                        udn: 'udn',
+                        project: 'project',
+                        transport_line: 'transport_line',
+                        transport_type: 'transport_type',
+                        sticker: 'sticker',
+                        pediments: 'pediments'
+                    },
                     close: 'close',
                     control: {
                         base: 'control',
@@ -437,6 +446,17 @@
             },
             genesis: {
                 base: 'genesis'
+            },
+            inventory:{
+                base: 'inventory',
+                catalogue: {
+                    base: 'catalogues',
+                    supplier: 'proveedor',
+                    consumable_category: 'categoria_insumo',
+                    component_type: 'tipo_componente',
+                    consumable_brand: 'marca_insumo',
+                    consumable_model: 'modelo_insumo'
+                }
             },
             management: {
                 base: 'management',
@@ -481,19 +501,19 @@
             normalize_cabinets: 'normalize',
             entrada_masiva: 'mass_upload',
             salida_masiva: 'mass_exit',
-            udn: 'udn',
+            //udn: 'udn',
             etapa: 'etapa',
             grupos: 'groups',
             insumo: 'insumo',
-            linea_transporte: 'linea_transporte',
+            //linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             label: 'label',
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
             tecnicosDisponibles: 'employees',
-            proveedor: 'proveedor',
-            proyecto: 'proyecto',
+            //proveedor: 'proveedor',
+            //proyecto: 'proyecto',
             report_builder: 'report_builder',
             reporte_insumos: 'reports/insumos',
             rutas: 'ruta',
@@ -514,7 +534,7 @@
             establecimiento_template: 'https://goo.gl/kAQrxt',
             sucursal: 'sucursal',
             tipo_equipo: 'tipo_equipo',
-            tipo_transporte: 'tipo_transporte',
+            //tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
             modelo_cabinet: 'modelo_cabinet',
             estado: 'estado',

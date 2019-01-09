@@ -1,34 +1,40 @@
-(function()
-{
+(function () {
     'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('MarcaCabinetController',MarcaCabinetController);
+        .controller('consumableModelController', consumableModelController);
 
-    function MarcaCabinetController(URLS, Translate) {
+    /* @ngInject */
+    function consumableModelController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.marca;
-        vm.kind = 'Web';
-        vm.name = Translate.translate('Cabinet_Brand.title');
+        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.consumable_model);
+        const brandUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.consumable_brand);
+
+
+        vm.url = inventoryUrl;
+        vm.kind = 'inventory';
+        vm.name = Translate.translate('CONSUMABLE_MODEL.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Marca';
-        vm.createButtonText = 'Crear Marca';
-        vm.deleteButtonText = 'Borrar Marca';
-        vm.modifyButtonText = 'Editar Marca';
+        vm.searchButtonText = Translate.translate('CONSUMABLE_MODEL.LABELS.TITLE');
+        vm.createButtonText = Translate.translate('CONSUMABLE_MODEL.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('CONSUMABLE_MODEL.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('CONSUMABLE_MODEL.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Marca';
+        vm.loadMoreButtonText = Translate.translate('CONSUMABLE_MODEL.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Marcas';
+        vm.loadingMessage = Translate.translate('CONSUMABLE_MODEL.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -40,32 +46,43 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Nombre',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria',
-                        hint: 'Cabinet, carrito, etc.',
+                        label: 'Descripción',
                         required: true,
                         validations: {
                             errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'marca_id',
+                        label: 'Marca insumo',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: brandUrl,
+                            kind: 'inventory',
+                            model: 'id',
+                            option: 'descripcion',
+                            name: 'Marca',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
+                        }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Marca',
+                    title: Translate.translate('CONSUMABLE_MODEL.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Marca'
+                    loading: 'Creando Modelo'
                 }
             },
             PUT: {
@@ -73,7 +90,7 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Nombre',
+                        label: 'Descripción',
                         required: true,
                         validations: {
                             errors: {
@@ -82,33 +99,44 @@
                         }
                     },
                     {
-                        type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria',
-                        hint:'Cabinet, carrito, etc.',
+                        type: 'catalog',
+                        model: 'marca_id',
+                        label: 'Marca insumo',
                         required: true,
                         validations: {
                             errors: {
                                 required: 'El campo es requerido.'
                             }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: brandUrl,
+                            kind: 'inventory',
+                            model: 'id',
+                            option: 'descripcion',
+                            name: 'Marca',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Marca',
+                    title: Translate.translate('CONSUMABLE_MODEL.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Marca'
+                    loading: 'Guardando Modelo'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Marca',
-                    message: 'Confirme la eliminación de Marca',
+                    title: Translate.translate('CONSUMABLE_MODEL.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de Modelo de insumo',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Marca'
+                    loading: 'Eliminando Modelo'
                 }
             },
             LIST: {
@@ -121,12 +149,12 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripcion'
+                        label: 'Descripción'
                     },
                     {
                         type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria'
+                        model: 'marca_descripcion',
+                        label: 'Marca'
                     }
                 ],
                 softDelete: {
@@ -136,9 +164,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Marca',
+                    title: Translate.translate('CONSUMABLE_MODEL.LABELS.SEARCH'),
                     searchButton: 'Buscar',
-                    loadingText: 'Buscando Marca'
+                    loadingText: 'Buscando Modelo'
                 },
                 filters: [
                     {
@@ -146,15 +174,6 @@
                         model: 'descripcion',
                         header: 'por Descripción',
                         label: 'Descripción',
-                        field: {
-                            type: 'text'
-                        }
-                    },
-                    {
-                        type: 'istartswith',
-                        model: 'categoria',
-                        header: 'por Categoria',
-                        label: 'Categoria',
                         field: {
                             type: 'text'
                         }
@@ -169,7 +188,6 @@
             console.debug(element);
             console.log(element);
         }
-
     }
 
 })();
