@@ -21,7 +21,6 @@
         vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
-        //vm.departureFromAgency; //Determines which catalog to show (Petition or udn)
 
         //Validations
         vm.imageConstraints = {
@@ -48,6 +47,7 @@
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
+                vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
             }
         }
 
@@ -99,7 +99,9 @@
                         promise: MANUAL_DEPARTURES
                             .getCabinet(cabinetID),
                         cabinet: null,
-                        id: null
+                        id: null,
+                        can_leave: null,
+                        restriction: null
                     };
 
                     //Adding element to the list
@@ -113,33 +115,44 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            console.log(cabinetSuccessCallback);
-                            //Cabinet can enter
-                            if (cabinetSuccessCallback.can_enter) {
-                                //Cabinet exist in database
-                                if (cabinetSuccessCallback.cabinet) {
-                                    //Cabinet it's new
-                                    if (cabinetSuccessCallback.cabinet.nuevo) {
-                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                            if (cabinetSuccessCallback['subsidiary']) {
+                                //a.k.a. The cabinet exists in the selected subsidiary
+                                if (cabinetSuccessCallback['subsidiary'] == vm.departure[vm.catalogues['subsidiary'].binding]) {
+                                    //The subsidiary of the cabinet is the same as the user one.
+                                    if (cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida']) {
+                                        //The departure matches the entrance kind
+                                        if (cabinetSuccessCallback['can_leave']) {
+                                            //The cabinet doesn't have internal restrictions to leave
+
+                                            //Finally add the cabinet to the list
+                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        }
+                                        else {
+                                            toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            vm.removeCabinet(cabinetID);
+                                        }
                                     }
                                     else {
-                                        //Cabinet can´t enter because it's not new
-                                        toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_ENTER_NOT_NEW'), cabinetID);
+                                        toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
                                         vm.removeCabinet(cabinetID);
                                     }
                                 }
-                                //else {
-                                //    //The cabinet is added to be created (you do nothing)
-                                //}
+                                else {
+                                    //Just reachable when the user had seleced a subsidiary through the selector. 
+                                    toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    vm.removeCabinet(cabinetID);
+                                }
                             }
                             else {
-                                //Cabinet can't enter because it's in a warehouse
-                                toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_ENTER_IN_WAREHOUSE'), cabinetID);
+                                toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
-                        .catch(function setCabinetToAddError(error) {
-                            ErrorHandler.errorTranslate(error);
+                        .catch(function setCabinetToAddError(cabinetErrorCallback) {
+                            ErrorHandler.errorTranslate(cabinetErrorCallback);
+                            vm.removeCabinet(cabinetID);
                         });
                 }
             }
@@ -203,12 +216,6 @@
             //});
 
             //TODO: Cabinet restriction dialog
-        }
-
-        vm.changeSwitch = function changeSwitch() {
-            //Removing mutual excluding variables when the switch is changed
-            delete (vm.departure[vm.catalogues['udn'].binding]);
-            delete (vm.departure[vm.catalogues['petition'].binding]);
         }
 
         //Internal functions

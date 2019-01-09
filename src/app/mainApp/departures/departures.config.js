@@ -61,7 +61,7 @@
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                priority: 4,
+                priority: 5,
                 children: [
                     {
                         name: 'DEPARTURES.MENU.NEW',

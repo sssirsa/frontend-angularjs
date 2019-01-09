@@ -156,15 +156,6 @@
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'DEPARTURES.NEW.LABELS.DEPARTURE_DATA'|translate}}>
-            <div layout="row"
-                 layout-align="center center">
-                <p>{{'DEPARTURES.NEW.LABELS.SWITCH.LABEL'|translate}}</p>
-                <md-switch ng-model="vm.entryFromAgency"
-                           md-change="vm.changeSwitch()">
-                    <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.NEW.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.NEW.LABELS.SWITCH.FALSE'|translate}}</p>-->
-                </md-switch>
-            </div>
             <form name="entryForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
