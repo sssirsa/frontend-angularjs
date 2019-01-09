@@ -127,5 +127,17 @@
             });*/
         }
 
+        //Receives a JS object, if any property of the object is a blank string
+        function removeBlankStrings(element) {
+            for (var property in element) {
+                if (object.hasOwnProperty(property)) {
+                    if (property === "" || property === '') {
+                        delete element[property];
+                    }
+                }
+            }
+            return element;
+        }
+
     }
 })();
