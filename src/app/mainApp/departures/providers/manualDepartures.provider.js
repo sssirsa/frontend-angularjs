@@ -9,9 +9,12 @@
         URLS,
         Translate
     ) {
+        const entriesUrl = API
+            .all(URLS.entries_departures.base)
+            .all(URLS.entries_departures.entries.base);//TODO: Delete when departures URL is provided
         const departuresUrl = API
             .all(URLS.entries_departures.base)
-            .all(URLS.entries_departures.entries.base);//TODO: change to departures when URL is provided
+            .all(URLS.entries_departures.departures.base);
         const inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
@@ -125,7 +128,7 @@
 
         //Internal functions
         function getCabinetInSubsidiary(id) {
-            return departuresUrl.all(departures.control.base).all(departures.control.cabinet_in_subsidiary).all(id).customGET();
+            return entriesUrl.all(departures.control.base).all(departures.control.cabinet_in_subsidiary).all(id).customGET();//TODO: change to departures url when provided
         }
 
         function getDeparturesByCabinet(id) {
