@@ -16,14 +16,21 @@
                 <h3>{{'ENTRIES.WARRANTY.LABELS.CABINET_SEARCH'|translate}}</h3>
                 <form name="cabinetSearch"
                       ng-submit="vm.searchCabinet(vm.cabinetID)">
-                    <md-input-container class="md-block">
-                        <label>{{'ENTRIES.WARRANTY.LABELS.CABINET_ID'|translate}}</label>
-                        <input name="cabinetID"
-                               type="text"
-                               digits-only
-                               md-max-length="10"
-                               ng-model="vm.cabinetID" />
-                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container class="md-block">
+                            <label>{{'ENTRIES.WARRANTY.LABELS.CABINET_ID'|translate}}</label>
+                            <input name="cabinetID"
+                                   type="text"
+                                   digits-only
+                                   md-max-length="10"
+                                   ng-model="vm.cabinetID" />
+                        </md-input-container>
+                        <md-button ng-click="vm.searchCabinet(vm.cabinetID)"
+                                   class="md-fab md-mini md-primary"
+                                   aria-label="Add Cabinet">
+                            <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        </md-button>
+                    </div>
                 </form>
             </md-actions>
             <div layout="row"
@@ -36,7 +43,7 @@
                     <md-virtual-repeat-container class="cabinet-container">
                         <md-list>
                             <md-list-item layout-align="center stretch"
-                                          md-virtual-repeat="element in vm.cabinetList">                                
+                                          md-virtual-repeat="element in vm.cabinetList">
                                 <div layout="column"
                                      layout-align="center stretch"
                                      class="full-width"
