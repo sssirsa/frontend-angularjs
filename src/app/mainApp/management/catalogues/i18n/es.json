@@ -342,7 +342,13 @@
     },
     "CONDITION":{
         "LABELS":{
-            "TITLE":"Condición"
+            "TITLE":"Condición",
+            "SEARCH": "Buscar Condición",
+            "CREATE": "Crear Condición",
+            "DELETE": "Borrar Condición",
+            "MODIFY": "Editar Condición",
+            "LOAD_MORE": "Cargar más Condición",
+            "LOADING_MESSAGE": "Cargando Condición"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
@@ -350,7 +356,13 @@
     },
     "STATUS_UNILEVER":{
         "LABELS":{
-            "TITLE":"Estatus Unilever"
+            "TITLE":"Estatus Unilever",
+            "SEARCH": "Buscar Estatus Unilever",
+            "CREATE": "Crear Estatus Unilever",
+            "DELETE": "Borrar Estatus Unilever",
+            "MODIFY": "Editar Estatus Unilever",
+            "LOAD_MORE": "Cargar más Estatus Unilever",
+            "LOADING_MESSAGE": "Cargando Estatus Unilever"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
@@ -358,7 +370,13 @@
     },
     "STATUS_COM":{
         "LABELS":{
-            "TITLE":"Estatus COM"
+            "TITLE":"Estatus COM",
+            "SEARCH": "Buscar Estatus COM",
+            "CREATE": "Crear Estatus COM",
+            "DELETE": "Borrar Estatus COM",
+            "MODIFY": "Editar Estatus COM",
+            "LOAD_MORE": "Cargar más Estatus COM",
+            "LOADING_MESSAGE": "Cargando Estatus COM"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"

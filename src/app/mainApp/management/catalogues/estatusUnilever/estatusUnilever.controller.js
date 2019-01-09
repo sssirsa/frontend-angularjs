@@ -6,12 +6,13 @@
         .module('app.mainApp.management.catalogues')
         .controller('estatusUnileverController',estatusUnileverController);
 
-    function estatusUnileverController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
-    {
-
+    function estatusUnileverController(URLS, Translate, EnvironmentConfig){
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever;
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.status_unilever);
+
+        vm.url = managementUrl;
         vm.kind = 'Management';
         vm.name = Translate.translate('STATUS_UNILEVER.LABELS.TITLE');
 
@@ -20,17 +21,17 @@
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Estatus Unilever';
-        //vm.createButtonText = 'Crear Categoría';
-        //vm.deleteButtonText = 'Borrar Categoría';
-        //vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('STATUS_UNILEVER.LABELS.SEARCH');
+        //vm.createButtonText = Translate.translate('STATUS_UNILEVER.LABELS.CREATE');
+        //vm.deleteButtonText = Translate.translate('STATUS_UNILEVER.LABELS.DELETE');
+        //vm.modifyButtonText = Translate.translate('STATUS_UNILEVER.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Estatus Unilever';
+        vm.loadMoreButtonText = Translate.translate('STATUS_UNILEVER.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Estatus Unilever';
+        vm.loadingMessage = Translate.translate('STATUS_UNILEVER.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;

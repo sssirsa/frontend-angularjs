@@ -6,12 +6,13 @@
         .module('app.mainApp.management.catalogues')
         .controller('estatusComController',estatusComController);
 
-    function estatusComController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
-    {
-
+    function estatusComController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com;
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.status_com);
+
+        vm.url = managementUrl;
         vm.kind = 'Management';
         vm.name = Translate.translate('STATUS_COM.LABELS.TITLE');
 
@@ -20,17 +21,17 @@
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Estatus COM';
-        //vm.createButtonText = 'Crear Categoría';
-        //vm.deleteButtonText = 'Borrar Categoría';
-        //vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('STATUS_COM.LABELS.SEARCH');
+        //vm.createButtonText = Translate.translate('STATUS_COM.LABELS.CREATE');
+        //vm.deleteButtonText = Translate.translate('STATUS_COM.LABELS.DELETE');
+        //vm.modifyButtonText = Translate.translate('STATUS_COM.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Estatus COM';
+        vm.loadMoreButtonText = Translate.translate('STATUS_COM.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Estatus COM';
+        vm.loadingMessage = Translate.translate('STATUS_COM.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;

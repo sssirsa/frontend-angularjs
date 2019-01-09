@@ -6,12 +6,19 @@
         .controller('ModeloCabinetController', ModeloCabinetController);
 
     /* @ngInject */
-    function ModeloCabinetController(URLS, Translate) {
+    function ModeloCabinetController(URLS, Translate, EnvironmentConfig) {
 
         var vm = this;
 
-        vm.url = URLS.modelo_cabinet;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_model);
+        const brandUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_brand);
+        const equipmentUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.equipment_type);
+
+        vm.url = managementUrl;
+        vm.kind = 'Management';
         vm.name = Translate.translate('MODEL_CABINET.FORM.LABEL.MODEL');
 
         //Labels
@@ -25,7 +32,7 @@
         vm.modifyButtonText = 'Editar Modelo';
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Modelo';
+        vm.loadMoreButtonText = 'Cargar más Modelos';
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
@@ -51,7 +58,7 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'marca',
+                        model: 'marca_id',
                         label: 'Marca',
                         required: true,
                         validations: {
@@ -61,10 +68,10 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: URLS.marca,
-                            kind: 'Web',
+                            url: brandUrl,
+                            kind: 'management',
                             model: 'id',
-                            option: 'descripcion',
+                            option: 'nombre',
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
@@ -74,8 +81,8 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'tipo',
-                        label: 'Tipo',
+                        model: 'tipo_id',
+                        label: 'Tipo Equipo',
                         required: true,
                         validations: {
                             errors: {
@@ -84,11 +91,15 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: URLS.tipo_equipo,
-                            kind: 'Web',
+                            url: equipmentUrl,
+                            kind: 'management',
                             model: 'id',
                             option: 'nombre',
-                            name: 'Tipo'
+                            name: 'Tipo',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
                         }
                     },
                     {
@@ -128,7 +139,7 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'marca',
+                        model: 'marca_id',
                         label: 'Marca',
                         required: true,
                         validations: {
@@ -138,10 +149,10 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: URLS.marca,
-                            kind: 'Web',
+                            url: brandUrl,
+                            kind: 'management',
                             model: 'id',
-                            option: 'descripcion',
+                            option: 'nombre',
                             name: 'Marca',
                             elements: 'results',
                             bindTo: 'marca',
@@ -152,8 +163,8 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'tipo',
-                        label: 'Tipo',
+                        model: 'tipo_id',
+                        label: 'Tipo Equipo',
                         required: true,
                         validations: {
                             errors: {
@@ -162,12 +173,15 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: URLS.tipo_equipo,
-                            kind: 'Web',
+                            url: equipmentUrl,
+                            kind: 'management',
                             model: 'id',
-                            bindTo: 'tipo',
                             option: 'nombre',
-                            name: 'Tipo'
+                            name: 'Tipo',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
                         }
                     },
                     {
@@ -215,18 +229,6 @@
                         label: 'Nombre'
                     },
                     {
-                        type: 'catalog',
-                        model: 'tipo',
-                        label: 'Tipo',
-                        catalog: {
-                            lazy: false,
-                            url: URLS.tipo_equipo,
-                            kind: 'Web',
-                            model: 'id',
-                            option: 'nombre'
-                        }
-                    },
-                    {
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción'
@@ -237,16 +239,14 @@
                         label: 'Palabra clave'
                     },
                     {
-                        type: 'catalog',
-                        model: 'marca[\'nombre\']',
+                        type: 'text',
+                        model: 'marca_nombre',
                         label: 'Marca',
-                        catalog: {
-                            lazy: false,
-                            url: URLS.marca,
-                            kind: 'Web',
-                            model: 'id',
-                            option: 'descripcion'
-                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'tipo_nombre',
+                        label: 'Tipo',
                     }
                 ],
                 softDelete: {

@@ -5,12 +5,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('TipoEquipoController', TipoEquipoController)
 
-    function TipoEquipoController(URLS, Translate)
-    {
+    function TipoEquipoController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.tipo_equipo;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.equipment_type);
+
+        vm.url = managementUrl;
+        vm.kind = 'Management';
         vm.name = Translate.translate('EQUIPMENT_TYPE.FORM.LABEL.MODEL');
 
         //Labels
@@ -101,11 +103,11 @@
                 }
             },
             LIST: {
-                // elements: 'results',
+                elements: 'results',
                 mode: 'infinite',
-                // pagination: {
-                //     total: 'count'
-                // },
+                pagination: {
+                    total: 'count'
+                },
                 fields: [
                     {
                         type: 'text',

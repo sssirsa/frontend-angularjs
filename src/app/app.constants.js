@@ -464,6 +464,18 @@
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
                     unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                },
+                catalogue:{
+                    base: 'catalogue',
+                    subsidiary: 'subsidiary',
+                    category: 'category',
+                    status_unilever: 'status_unilever',
+                    status_com: 'status_com',
+                    condition: 'condition',
+                    equipment_type: 'tipo_equipo',
+                    cabinet_brand: 'marca_cabinet',
+                    cabinet_model: 'modelo_cabinet',
+                    werehouse: 'warehouse'
                 }
             },
             mobile: {
@@ -475,9 +487,9 @@
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
-            condicion: 'condition',
-            estatus_unilever: 'status_unilever',
-            estatus_com: 'status_com',
+            //condicion: 'condition',
+            //estatus_unilever: 'status_unilever',
+            //estatus_com: 'status_com',
             estatus_no_capitalizado: 'estatus_no_capitalizado',
             no_labeled_unilever: 'cabinet_no_labeled_unilever',
             motivo_no_labeled: 'motivo_no_capitalizado',
@@ -489,7 +501,7 @@
             cabinet_entrada: 'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos: 'catalogo_insumos',
-            categoria: 'category',
+            //categoria: 'category',
             checklist: 'CheckList',
             cliente: 'persona_capturista',
             cliente_grupos: 'cliente_groups',
@@ -508,7 +520,7 @@
             //linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             label: 'label',
-            marca: 'marca_cabinet',
+            //marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
             tecnicosDisponibles: 'employees',
@@ -532,11 +544,11 @@
             requestClient: 'technical_request',
             establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
-            sucursal: 'sucursal',
-            tipo_equipo: 'tipo_equipo',
+            //sucursal: 'sucursal',
+            //tipo_equipo: 'tipo_equipo',
             //tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
-            modelo_cabinet: 'modelo_cabinet',
+            //modelo_cabinet: 'modelo_cabinet',
             estado: 'estado',
             municipio: 'municipio',
             massive: {

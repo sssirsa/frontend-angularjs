@@ -6,12 +6,14 @@
         .controller('SucursalController', SucursalController)
 
     /* @ngInject */
-    function SucursalController(URLS, Translate) {
-
+    function SucursalController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.sucursal;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.subsidiary);
+
+        vm.url = managementUrl;
+        vm.kind = 'management';
         vm.name = Translate.translate('SUCURSAL.FORM.LABEL.BRANCH');
 
         //Labels

@@ -21,7 +21,7 @@
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.TITLE');
+        vm.searchButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.SEARCH');
         vm.createButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.CREATE');
         vm.deleteButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.DELETE');
         vm.modifyButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.MODIFY');

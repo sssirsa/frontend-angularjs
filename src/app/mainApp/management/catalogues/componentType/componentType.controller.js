@@ -23,7 +23,7 @@
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('COMPONENT_TYPE.LABELS.TITLE');
+        vm.searchButtonText = Translate.translate('COMPONENT_TYPE.LABELS.SEARCH');
         vm.createButtonText = Translate.translate('COMPONENT_TYPE.LABELS.CREATE');
         vm.deleteButtonText = Translate.translate('COMPONENT_TYPE.LABELS.DELETE');
         vm.modifyButtonText = Translate.translate('COMPONENT_TYPE.LABELS.MODIFY');
