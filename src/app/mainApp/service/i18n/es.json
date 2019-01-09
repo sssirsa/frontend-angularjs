@@ -249,7 +249,21 @@
     },
     "INSPECTION":{
         "INSPECTION_NAME_MENU":"Inspección de Cabinet",
-        "SEARCH_CABINET":"Buscar Cabinet"
+        "SEARCH_CABINET":"Buscar Cabinet",
+        "ASSET_ID":"Económico:",
+        "GENERAL_INFO":"Información General",
+        "BULK_ASSETS":"Insumos usados",
+        "CHECKLIST":"Lista de Verificación (Check)",
+        "STICKER":"Sticker",
+        "WHEELS":"Rodajas",
+        "BASKET":"Canastillas",
+        "FRONT_RACK":"Rejillas Delanteras",
+        "BACK_RACK":"Rejillas Traseras",
+        "DOORS":"Puertas",
+        "PAINT":"Pintura",
+        "WASHED":"Lavado",
+        "WRAPPED":"Emplayado",
+        "EMPTY":"Vacío de Mercancía"
 
     },
     "INCIDENCE":{

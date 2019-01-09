@@ -9,7 +9,7 @@
                     </h2>
                 </div>
                 <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+                    <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
                         <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
                         <span translate="">INCIDENCE.REPORT_INCIDENCE</span>
                     </md-button>
@@ -22,7 +22,7 @@
             <md-content layout="row" layout-padding="">
                 <md-input-container>
                     <label translate="">INSPECTION.SEARCH_CABINET</label>
-                    <input type="text" ng-model="vm.asset_location.cabinet_id" required md-maxlength="12">
+                    <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
                 </md-input-container>
                 <md-input-container>
                     <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
@@ -32,47 +32,196 @@
             </md-content>
         </div>
 
-        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="">
-            <div layout="column" flex="45" layout-align="center start" >
+        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.id">
+            <div layout="column" flex="45" layout-align="center start">
                 <div layout="row">
-                    <md-icon md-font-icon="fa fa-industry"></md-icon>
-                    <h1>{{vm.asset.sucursal.nombre}}</h1>
+                    <md-icon md-font-icon="far fa-snowflake"></md-icon>
+                    <span translate="">INSPECTION.ASSET_ID</span>
+                    <span class="md-body-2">{{vm.asset.economico}}</span>
                 </div>
-                <div>
-                    <span>{{vm.asset.sucursal.direccion}}</span>
+                <div layout="row">
+                    <md-icon md-font-icon="fas fa-tags"></md-icon>
+                    <span class="md-body-1">{{vm.asset.modelo.nombre}}</span>
                 </div>
-            </div>
-            <div layout="row" flex="45" ng-if="vm.storage.nombre">
-                <div layout="column" flex="100" layout-align="center center">
-                    <div layout="row">
-                        <md-icon md-font-icon="zmdi zmdi-store-24"></md-icon>
-                        <h1>{{vm.storage.nombre}}</h1>
-                    </div>
-                    <div>
-                        <span>{{vm.storage.descripcion}}</span>
-                    </div>
+                <div layout="row">
+                    <md-icon md-font-icon="fas fa-tag"></md-icon>
+                    <span class="md-caption">{{vm.asset.modelo.marca.descripcion}}</span>
                 </div>
             </div>
-
         </div>
 
+        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always">
+            <md-tab label="{{vm.title_info}}">
+                <md-content class="md-padding">
+                    <h3 translate="">INSPECTION.CHECKLIST</h3>
+                    <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
+                        <div flex-gt-md="30" flex-md="45" flex="100" layout-align="center center">
+                            <md-input-container flex="100" layout-fill="">
+                                <catalog-select catalog="vm.catalogues['sticker'].catalog"
+                                                required="true"
+                                                noResults="vm.catalogues['sticker'].noResults"
+                                                pagination="vm.catalogues['sticker'].pagination"
+                                                elements="vm.catalogues['sticker'].elements"
+                                                soft-delete="vm.catalogues['sticker'].softDelete"
+                                                on-select="vm.onStickerSelect(element)">
+                                </catalog-select>
+                            </md-input-container>
 
-        <div flex="100" layout="column" ng-if="vm.storage.nombre|| vm.asset.posicionamiento" layout-margin="">
-            <div layout-align="center center" layout="row" flex="100" layout-fill="" layout-wrap="">
+                        </div>
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""  layout-align="center center">
+                            <div layout="row" layout-align="center center">
+                            <md-icon md-font-icon="fas fa-bullseye"></md-icon>
+                            <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
+                            </div>
+                            <md-input-container  flex="100" layout-align="center end">
+                                <div range-spinner
+                                     range-min="0"
+                                     range-step="1"
+                                     range-max="6"
+                                     range-default-value=""
+                                     range-decimal-precision="1"
+                                     range-model="vm.checklist.rodajas"
+                                     accept-decimal=false
+                                     name-of-field="Rodajas"
+                                     id-of-field="rangeFieldId">
+                                </div>
 
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fas fa-shopping-basket"></md-icon>
+                                <span class="md-body-2">{{'INSPECTION.BASKET'|translate}}</span>
+                            </div>
+                            <md-input-container  flex="100" layout-align="center end">
+                                <div range-spinner
+                                     range-min="0"
+                                     range-step="1"
+                                     range-max="6"
+                                     range-default-value="0"
+                                     range-decimal-precision="1"
+                                     range-model="vm.checklist.canastillas"
+                                     accept-decimal=false
+                                     name-of-field="Rodajas"
+                                     id-of-field="rangeFieldId">
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
+                                <span class="md-body-2">{{'INSPECTION.FRONT_RACK'|translate}}</span>
+                            </div>
+                            <md-input-container  flex="100" layout-align="center end">
+                                <div range-spinner
+                                     range-min="0"
+                                     range-step="1"
+                                     range-max="6"
+                                     range-default-value="0"
+                                     range-decimal-precision="1"
+                                     range-model="vm.checklist.rejillas_delanteras"
+                                     accept-decimal=false
+                                     name-of-field="Rodajas"
+                                     id-of-field="rangeFieldId">
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
+                                <span class="md-body-2">{{'INSPECTION.BACK_RACK'|translate}}</span>
+                            </div>
+                            <md-input-container  flex="100" layout-align="center end">
+                                <div range-spinner
+                                     range-min="0"
+                                     range-step="1"
+                                     range-max="6"
+                                     range-default-value="0"
+                                     range-decimal-precision="1"
+                                     range-model="vm.checklist.rejillas_traseras"
+                                     accept-decimal=false
+                                     name-of-field="Rodajas"
+                                     id-of-field="rangeFieldId">
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fas fa-door-open"></md-icon>
+                                <span class="md-body-2">{{'INSPECTION.DOORS'|translate}}</span>
+                            </div>
+                            <md-input-container  flex="100" layout-align="center end">
+                                <div range-spinner
+                                     range-min="0"
+                                     range-step="1"
+                                     range-max="6"
+                                     range-default-value="0"
+                                     range-decimal-precision="1"
+                                     range-model="vm.checklist.puertas"
+                                     accept-decimal=false
+                                     name-of-field="Rodajas"
+                                     id-of-field="rangeFieldId">
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div layout="row" layout-wrap="" layout-padding="" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="zmdi zmdi-format-color-fill"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.PAINT</span>
+                            <md-checkbox ng-model="vm.checklist.pintura"></md-checkbox>
+                        </div>
+                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="fas fa-broom"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.WASHED</span>
+                            <md-checkbox ng-model="vm.checklist.lavado"></md-checkbox>
+                        </div>
+                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="fas fa-box"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.WRAPPED</span>
+                            <md-checkbox ng-model="vm.checklist.emplayado"></md-checkbox>
+                        </div>
+                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="fas fa-box-open"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.EMPTY</span>
+                            <md-checkbox ng-model="vm.checklist.vacio_mercancia"></md-checkbox>
+                        </div>
+                    </div>
 
+                </md-content>
+            </md-tab>
+            <md-tab label="{{vm.assets_info}}">
+                <md-content class="md-padding">
+                    <h3>Settings</h3>
+                    <md-list>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                            <p>Show Username</p>
+                            <md-switch class="md-secondary"></md-switch>
+                        </md-list-item>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-icon md-font-icon="zmdi zmdi-account-box"></md-icon>
+                            <p>Show Avatar</p>
+                            <md-switch class="md-secondary"></md-switch>
+                        </md-list-item>
+                        <md-list-item layout="row" layout-align="space-around center">
+                            <md-icon md-font-icon="zmdi zmdi-cloud-upload"></md-icon>
+                            <p>Allow Backups</p>
+                            <md-switch class="md-secondary"></md-switch>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-tab>
 
-
-            </div>
-        </div>
+        </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-save"></md-icon>
+                <md-icon md-font-icon="fas fa-save"></md-icon>
                 Guardar
             </md-button>
             <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
                 Editar
             </md-button>
         </md-card-actions>
