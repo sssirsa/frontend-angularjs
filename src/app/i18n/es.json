@@ -66,9 +66,13 @@
                 "SUBSIDIARY": "Sucursal",
                 "CABINET_BRAND": "Marca de Cábinet",
                 "CABINET_MODEL": "Modelo de Cábinet",
+                "CONSUMABLE_BRAND": "Marca de Insumo",
+                "CONSUMABLE_MODEL": "Modelo de Insumo",
                 "CONSUMABLE_CATALOG": "Catálogo de Insumos",
                 "PROJECTS": "Proyectos",
-                "CONSUMABLE_CATEGORY": "Categoría de Insumos",
+                "CONSUMABLE_CATEGORY": "Categoría de Insumo",
+                "CATEGORY": "Categoría",
+                "COMPONENT_TYPE": "Tipo de componente",
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "STAGE": "Etapas",
@@ -80,7 +84,9 @@
                 "SEGMENTATION": "Segmentación",
                 "CONDITION": "Condición",
                 "STATUS_UNILEVER": "Estatus Unilever",
-                "STATUS_COM": "Estatus COM"
+                "STATUS_COM": "Estatus COM",
+                "STICKER": "Sticker",
+                "PEDIMENT": "Pedimento"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",
