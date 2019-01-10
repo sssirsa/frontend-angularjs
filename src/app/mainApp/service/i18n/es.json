@@ -266,6 +266,11 @@
         "EMPTY":"Vacío de Mercancía"
 
     },
+    "SERVICES":{
+        "INFO_CABINET":"Información del Cabinet",
+        "INFO_SERVICE":"Información del Servicio Actual",
+        "PAST_SERVICES":"Servicios Anteriores"
+    },
     "INCIDENCE":{
         "REPORT_INCIDENCE":"Levantar incidencia"
 

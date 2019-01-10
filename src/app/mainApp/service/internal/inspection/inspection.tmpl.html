@@ -36,8 +36,8 @@
             <div layout="column" flex="45" layout-align="center start">
                 <div layout="row">
                     <md-icon md-font-icon="far fa-snowflake"></md-icon>
-                    <span translate="">INSPECTION.ASSET_ID</span>
-                    <span class="md-body-2">{{vm.asset.economico}}</span>
+                    <h3 translate="">INSPECTION.ASSET_ID</h3>
+                    <h1 class="md-body-2">{{vm.asset.economico}}</h1>
                 </div>
                 <div layout="row">
                     <md-icon md-font-icon="fas fa-tags"></md-icon>
@@ -48,9 +48,27 @@
                     <span class="md-caption">{{vm.asset.modelo.marca.descripcion}}</span>
                 </div>
             </div>
+            <div layout="column" flex="45" layout-align="center start">
+                <div layout="row">
+                    <span translate="">SERVICES.PAST_SERVICES</span>
+                    <span > </span>
+                </div>
+                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-button ng-if="!vm.edition" ng-click="vm.infoCabinet()" class="md-raised md-primary">
+                        <md-icon md-font-icon="fas fa-eye"></md-icon>
+                        <span translate="">SERVICES.INFO_CABINET</span>
+                    </md-button>
+                    <md-button ng-if="!vm.edition" ng-click="vm.infoService()" class="md-raised md-primary">
+                        <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
+                        <span translate="">SERVICES.INFO_SERVICE</span>
+                    </md-button>
+
+                </div>
+            </div>
         </div>
 
-        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always">
+        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
+                 ng-if="vm.asset.economico">
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
                     <h3 translate="">INSPECTION.CHECKLIST</h3>
@@ -68,12 +86,13 @@
                             </md-input-container>
 
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""  layout-align="center center">
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                             layout-align="center center">
                             <div layout="row" layout-align="center center">
-                            <md-icon md-font-icon="fas fa-bullseye"></md-icon>
-                            <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
+                                <md-icon md-font-icon="fas fa-bullseye"></md-icon>
+                                <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
                             </div>
-                            <md-input-container  flex="100" layout-align="center end">
+                            <md-input-container flex="100" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -88,12 +107,13 @@
 
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                             layout-align="center center">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fas fa-shopping-basket"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.BASKET'|translate}}</span>
                             </div>
-                            <md-input-container  flex="100" layout-align="center end">
+                            <md-input-container flex="100" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -107,12 +127,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                             layout-align="center center">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.FRONT_RACK'|translate}}</span>
                             </div>
-                            <md-input-container  flex="100" layout-align="center end">
+                            <md-input-container flex="100" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -126,12 +147,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                             layout-align="center center">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.BACK_RACK'|translate}}</span>
                             </div>
-                            <md-input-container  flex="100" layout-align="center end">
+                            <md-input-container flex="100" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -145,12 +167,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin="" layout-align="center center">
+                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                             layout-align="center center">
                             <div layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fas fa-door-open"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.DOORS'|translate}}</span>
                             </div>
-                            <md-input-container  flex="100" layout-align="center end">
+                            <md-input-container flex="100" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
