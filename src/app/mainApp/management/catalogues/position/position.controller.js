@@ -1,42 +1,42 @@
-(function () {
+(function()
+{
     'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('ModeloCabinetController', ModeloCabinetController);
+        .controller('positionController',positionController);
 
-    /* @ngInject */
-    function ModeloCabinetController(URLS, Translate, EnvironmentConfig) {
+    function positionController(URLS, Translate, EnvironmentConfig)
+    {
 
         var vm = this;
 
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_model);
-        const brandUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_brand);
-        const equipmentUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.equipment_type);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.position);
+
+        const werehouseUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.werehouse);
 
         vm.url = managementUrl;
-        vm.kind = 'Management';
-        vm.name = Translate.translate('MODEL_CABINET.FORM.LABEL.MODEL');
+        vm.kind = 'management';
+        vm.name = Translate.translate('POSITION.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Modelo';
-        vm.createButtonText = 'Crear Modelo';
-        vm.deleteButtonText = 'Borrar Modelo';
-        vm.modifyButtonText = 'Editar Modelo';
+        vm.searchButtonText = Translate.translate('POSITION.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('POSITION.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('POSITION.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('POSITION.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar más Modelos';
+        vm.loadMoreButtonText = Translate.translate('POSITION.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Modelos';
+        vm.loadingMessage = Translate.translate('POSITION.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -47,8 +47,31 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
+                        model: 'pasillo',
+                        label: 'Pasillo',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'estiba',
+                        label: 'Estiba',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        hint: 'No. de cabinets',
+                        model: 'profundidad',
+                        label: 'Profundidad',
                         required: true,
                         validations: {
                             errors: {
@@ -58,8 +81,8 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'marca_id',
-                        label: 'Marca',
+                        model: 'bodega_id',
+                        label: 'Bodega',
                         required: true,
                         validations: {
                             errors: {
@@ -68,68 +91,55 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: brandUrl,
+                            url: werehouseUrl,
                             kind: 'management',
                             model: 'id',
                             option: 'nombre',
-                            name: 'Marca',
+                            name: 'Bodega',
                             elements: 'results',
                             pagination: {
                                 total: 'count'
                             }
                         }
                     },
-                    {
-                        type: 'catalog',
-                        model: 'tipo_id',
-                        label: 'Tipo Equipo',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: equipmentUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Tipo',
-                            elements: 'results',
-                            pagination: {
-                                total: 'count'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        hint: 'Descripción adicional para identificar el modelo',
-                        model: 'descripcion',
-                        label: 'Descripción',
-                        required: true
-                    },
-                    {
-                        type: 'text',
-                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
-                        model: 'palabra_clave',
-                        label: 'Palabra clave',
-                        required: true
-                    }
                 ],
                 dialog: {
-                    title: 'Crear Modelo',
+                    title: Translate.translate('POSITION.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Modelo'
+                    loading: 'Creando Posicionamiento'
                 }
             },
             PUT: {
+                id:'id',
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
+                        model: 'pasillo',
+                        label: 'Pasillo',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'estiba',
+                        label: 'Estiba',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        hint: 'No. de cabinets',
+                        model: 'profundidad',
+                        label: 'Profundidad',
                         required: true,
                         validations: {
                             errors: {
@@ -139,8 +149,8 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'marca_id',
-                        label: 'Marca',
+                        model: 'bodega_id',
+                        label: 'Bodega',
                         required: true,
                         validations: {
                             errors: {
@@ -149,71 +159,33 @@
                         },
                         catalog: {
                             lazy: false,
-                            url: brandUrl,
+                            url: werehouseUrl,
                             kind: 'management',
                             model: 'id',
                             option: 'nombre',
-                            name: 'Marca',
-                            elements: 'results',
-                            bindTo: 'marca',
-                            pagination: {
-                                total: 'count'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'tipo_id',
-                        label: 'Tipo Equipo',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: equipmentUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Tipo',
+                            name: 'Bodega',
                             elements: 'results',
                             pagination: {
                                 total: 'count'
                             }
                         }
                     },
-                    {
-                        type: 'text',
-                        hint: 'Descripción adicional para identificar el modelo',
-                        model: 'descripcion',
-                        label: 'Descripción',
-                        required: true
-                    },
-                    {
-                        type: 'text',
-                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
-                        model: 'palabra_clave',
-                        label: 'Palabra clave',
-                        required: true
-                    }
                 ],
                 dialog: {
-                    title: 'Editar Modelo',
+                    title: Translate.translate('POSITION.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Modelo'
+                    loading: 'Guardando Posicionamiento'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Modelo',
-                    message: 'Confirme la eliminación de Modelo',
+                    title: Translate.translate('POSITION.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Posicionamiento',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Modelo'
+                    loading: 'Eliminando Posicionamiento'
                 }
             },
             LIST: {
@@ -225,28 +197,23 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
+                        model: 'pasillo',
+                        label: 'Pasillo'
                     },
                     {
                         type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripción'
+                        model: 'estiba',
+                        label: 'Estiba'
                     },
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Palabra clave'
+                        model: 'profundidad',
+                        label: 'Profundidad'
                     },
                     {
                         type: 'text',
-                        model: 'marca_nombre',
-                        label: 'Marca',
-                    },
-                    {
-                        type: 'text',
-                        model: 'tipo_nombre',
-                        label: 'Tipo Equipo',
+                        model: 'bodega_nombre',
+                        label: 'Bodega'
                     }
                 ],
                 softDelete: {
@@ -256,34 +223,34 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Modelo',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Modelo'
+                    title: 'Búsqueda de Posicionamiento',
+                    searchButton: Translate.translate('POSITION.LABELS.SEARCH'),
+                    loadingText: 'Buscando Posicionamiento'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
-                        header: 'por Nombre',
-                        label: 'Nombre',
+                        model: 'pasillo',
+                        header: 'por Pasillo',
+                        label: 'Pasillo',
                         field: {
                             type: 'text'
                         }
                     },
                     {
                         type: 'istartswith',
-                        model: 'descripcion',
-                        header: 'por Descripción',
-                        label: 'Descripción',
+                        model: 'estiba',
+                        header: 'por Estiba',
+                        label: 'Estiba',
                         field: {
                             type: 'text'
                         }
                     },
                     {
                         type: 'istartswith',
-                        model: 'palabra_clave',
-                        header: 'por Palabra clave',
-                        label: 'Palabra clave',
+                        model: 'profundidad',
+                        header: 'por Profundidad',
+                        label: 'Profundidad',
                         field: {
                             type: 'text'
                         }

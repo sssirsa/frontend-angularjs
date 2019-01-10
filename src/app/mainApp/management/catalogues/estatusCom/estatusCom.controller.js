@@ -111,7 +111,7 @@
             }/*,
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Estatus COM',
+                    title: 'Búsqueda de Estatus COM',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Estatus COM'
                 },

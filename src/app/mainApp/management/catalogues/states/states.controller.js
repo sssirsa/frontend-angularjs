@@ -112,7 +112,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Estado',
+                    title: 'Búsqueda de Estado',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Estado'
                 },

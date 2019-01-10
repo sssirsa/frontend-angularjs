@@ -112,7 +112,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Transporte',
+                    title: 'Búsqueda de Transporte',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Transporte'
                 },

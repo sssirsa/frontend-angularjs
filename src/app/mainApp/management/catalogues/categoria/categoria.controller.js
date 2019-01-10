@@ -137,7 +137,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Categoría',
+                    title: 'Búsqueda de Categoría',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Categoría'
                 },

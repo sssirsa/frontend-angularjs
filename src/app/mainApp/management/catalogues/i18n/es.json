@@ -465,5 +465,61 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "WEREHOUSE":{
+        "LABELS":{
+            "TITLE": "Bodega",
+            "SEARCH": "Buscar Bodega",
+            "CREATE": "Crear Bodega",
+            "DELETE": "Borrar Bodega",
+            "MODIFY": "Editar Bodega",
+            "LOAD_MORE": "Cargar más Bodegas",
+            "LOADING_MESSAGE": "Cargando Bodegas"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "POSITION":{
+        "LABELS":{
+            "TITLE": "Posicionamiento",
+            "SEARCH": "Buscar Posición",
+            "CREATE": "Crear Posición",
+            "DELETE": "Borrar Posición",
+            "MODIFY": "Editar Posición",
+            "LOAD_MORE": "Cargar más Posiciones",
+            "LOADING_MESSAGE": "Cargando Posiciones"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "REASON_NOT_LABELED":{
+        "LABELS":{
+            "TITLE": "Motivo no capitalizado",
+            "SEARCH": "Buscar Motivo no capitalizado",
+            "CREATE": "Crear Motivo no capitalizado",
+            "DELETE": "Borrar Motivo no capitalizado",
+            "MODIFY": "Editar Motivo no capitalizado",
+            "LOAD_MORE": "Cargar más Motivos no capitalizado",
+            "LOADING_MESSAGE": "Cargando Motivos no capitalizado"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STATUS_NOT_LABELED":{
+        "LABELS":{
+            "TITLE": "Estatus no capitalizado",
+            "SEARCH": "Buscar Estatus no capitalizado",
+            "CREATE": "Crear Estatus no capitalizado",
+            "DELETE": "Borrar Estatus no capitalizado",
+            "MODIFY": "Editar Estatus no capitalizado",
+            "LOAD_MORE": "Cargar más Estatus no capitalizado",
+            "LOADING_MESSAGE": "Cargando Estatus no capitalizado"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }

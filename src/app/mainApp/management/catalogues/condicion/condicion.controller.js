@@ -140,7 +140,7 @@
             }/*,
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Condición',
+                    title: 'Búsqueda de Condición',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Condición'
                 },

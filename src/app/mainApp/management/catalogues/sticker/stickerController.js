@@ -112,7 +112,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Sticker',
+                    title: 'Búsqueda de Sticker',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Sticker'
                 },

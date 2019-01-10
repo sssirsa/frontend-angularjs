@@ -153,7 +153,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Segmentación',
+                    title: 'Búsqueda de Segmentación',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando segmentación'
                 },

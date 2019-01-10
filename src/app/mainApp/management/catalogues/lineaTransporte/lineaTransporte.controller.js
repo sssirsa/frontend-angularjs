@@ -176,7 +176,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Linea de Transporte',
+                    title: 'Búsqueda de Linea de Transporte',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Linea de Transporte'
                 },

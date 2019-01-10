@@ -177,7 +177,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Sucursal',
+                    title: 'Búsqueda de Sucursal',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Sucursal'
                 },

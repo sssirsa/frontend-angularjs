@@ -111,7 +111,7 @@
             }/*,
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Estatus Unilever',
+                    title: 'Búsqueda de Estatus Unilever',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Estatus Unilever'
                 },

@@ -127,7 +127,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Tipo equipo',
+                    title: 'Búsqueda de Tipo equipo',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Tipo equipo'
                 },

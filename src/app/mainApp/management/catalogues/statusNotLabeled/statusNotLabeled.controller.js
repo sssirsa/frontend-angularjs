@@ -4,36 +4,37 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('componentTypeController',componentTypeController);
+        .controller('statusNotLabeledController',statusNotLabeledController);
 
-    function componentTypeController(URLS, Translate, OPTIONS, EnvironmentConfig)
+    function statusNotLabeledController(URLS, Translate, EnvironmentConfig)
     {
 
         var vm = this;
 
-        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.component_type);
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.status_not_labeled);
 
-        vm.url = inventoryUrl;
-        vm.kind = 'inventory';
-        vm.name = Translate.translate('COMPONENT_TYPE.LABELS.TITLE');
+
+        vm.url = managementUrl;
+        vm.kind = 'management';
+        vm.name = Translate.translate('STATUS_NOT_LABELED.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('COMPONENT_TYPE.LABELS.SEARCH');
-        vm.createButtonText = Translate.translate('COMPONENT_TYPE.LABELS.CREATE');
-        vm.deleteButtonText = Translate.translate('COMPONENT_TYPE.LABELS.DELETE');
-        vm.modifyButtonText = Translate.translate('COMPONENT_TYPE.LABELS.MODIFY');
+        vm.searchButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = Translate.translate('COMPONENT_TYPE.LABELS.LOAD_MORE');
+        vm.loadMoreButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = Translate.translate('COMPONENT_TYPE.LABELS.LOADING_MESSAGE');
+        vm.loadingMessage = Translate.translate('STATUS_NOT_LABELED.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -47,8 +48,8 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -57,42 +58,32 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        required: false
                     },
                     {
                         type: 'text',
-                        model: 'com_code',
-                        label: 'Código COM',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        model: 'accion',
+                        label: 'Acción',
+                        required: false
                     }
                 ],
                 dialog: {
-                    title: Translate.translate('COMPONENT_TYPE.LABELS.CREATE'),
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando tipo componente'
+                    loading: 'Creando Estatus'
                 }
             },
             PUT: {
-                id:'com_code',
+                id:'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -101,40 +92,30 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        required: false
                     },
                     {
                         type: 'text',
-                        model: 'com_code',
-                        label: 'Código COM',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        model: 'accion',
+                        label: 'Acción',
+                        required: false
                     }
                 ],
                 dialog: {
-                    title: Translate.translate('COMPONENT_TYPE.LABELS.MODIFY'),
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando tipo componente'
+                    loading: 'Guardando Estatus'
                 }
             },
             DELETE: {
-                id: 'com_code',
+                id: 'id',
                 dialog: {
-                    title: Translate.translate('COMPONENT_TYPE.LABELS.DELETE'),
-                    message: 'Confirme la eliminación del tipo de componente',
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Estatus no capitalizado',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando tipo componente'
+                    loading: 'Eliminando Estatus'
                 }
             },
             LIST: {
@@ -156,8 +137,8 @@
                     },
                     {
                         type: 'text',
-                        model: 'com_code',
-                        label: 'Código COM'
+                        model: 'accion',
+                        label: 'Acción'
                     }
                 ],
                 softDelete: {
@@ -167,9 +148,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Tipo de Componente',
-                    searchButton: Translate.translate('COMPONENT_TYPE.LABELS.SEARCH'),
-                    loadingText: 'Buscando Tipo de Componente'
+                    title: 'Búsqueda de Estatus',
+                    searchButton: Translate.translate('STATUS_NOT_LABELED.LABELS.SEARCH'),
+                    loadingText: 'Buscando Estatus'
                 },
                 filters: [
                     {
@@ -177,24 +158,6 @@
                         model: 'nombre',
                         header: 'por Nombre',
                         label: 'Nombre',
-                        field: {
-                            type: 'text'
-                        }
-                    },
-                    {
-                        type: 'istartswith',
-                        model: 'descripcion',
-                        header: 'por Descripción',
-                        label: 'Descripción',
-                        field: {
-                            type: 'text'
-                        }
-                    },
-                    {
-                        type: 'istartswith',
-                        model: 'com_code',
-                        header: 'por Código COM',
-                        label: 'Código COM',
                         field: {
                             type: 'text'
                         }

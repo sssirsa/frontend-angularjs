@@ -238,7 +238,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de UDN',
+                    title: 'Búsqueda de UDN',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando UDN'
                 },

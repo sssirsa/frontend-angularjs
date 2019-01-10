@@ -110,7 +110,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Marca',
+                    title: 'Búsqueda de Marca',
                     searchButton: Translate.translate('CONSUMABLE_BRAND.LABELS.SEARCH'),
                     loadingText: 'Buscando Marca'
                 },

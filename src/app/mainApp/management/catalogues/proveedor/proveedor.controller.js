@@ -283,7 +283,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Proveedor',
+                    title: 'Búsqueda de Proveedor',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Proveedor'
                 },

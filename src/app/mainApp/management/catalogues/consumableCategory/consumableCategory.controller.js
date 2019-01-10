@@ -167,8 +167,8 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Categoría de Insumo',
-                    searchButton: Translate.translate('CONSUMABLE_CATEGORY.LABELS.TITLE'),
+                    title: 'Búsqueda de Categoría de Insumo',
+                    searchButton: Translate.translate('CONSUMABLE_CATEGORY.LABELS.SEARCH'),
                     loadingText: 'Buscando Categoría de Insumo'
                 },
                 filters: [

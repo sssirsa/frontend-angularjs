@@ -150,7 +150,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de estados',
+                    title: 'Búsqueda de estados',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando estados'
                 },

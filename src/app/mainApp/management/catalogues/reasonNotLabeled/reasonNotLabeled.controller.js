@@ -1,36 +1,40 @@
-(function () {
-    'use_strict';
+(function()
+{
+    'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('proyectosController', proyectosController);
+        .controller('reasonNotLabeledController',reasonNotLabeledController);
 
-    function proyectosController(URLS, Translate, EnvironmentConfig) {
+    function reasonNotLabeledController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
 
-        const entriesUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogue.base + '/' + URLS.entries_departures.entries.catalogue.project);
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.reason_not_labeled);
 
-        vm.url = entriesUrl;
-        vm.kind = 'entries_departures';
-        vm.name = Translate.translate('Projects.Header');
+
+        vm.url = managementUrl;
+        vm.kind = 'management';
+        vm.name = Translate.translate('REASON_NOT_LABELED.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Proyecto';
-        vm.createButtonText = 'Crear Proyecto';
-        vm.deleteButtonText = 'Borrar Proyecto';
-        vm.modifyButtonText = 'Editar Proyecto';
+        vm.searchButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Proyecto';
+        vm.loadMoreButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Proyecto';
+        vm.loadingMessage = Translate.translate('REASON_NOT_LABELED.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -41,53 +45,65 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
-                        label: 'Nombre del proyecto',
+                        model: 'nombre',
+                        label: 'Nombre',
                         required: true,
                         validations: {
                             errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
-                    }
-                ],
-                dialog: {
-                    title: 'Crear Proyecto',
-                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
-                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Proyecto'
-                }
-            },
-            PUT: {
-                id: 'id',
-                fields: [
+                    },
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Nombre del proyecto',
+                        label: 'Descripción',
+                        required: false
+                    }
+                ],
+                dialog: {
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.CREATE'),
+                    okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                    cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                    loading: 'Creando Motivo'
+                }
+            },
+            PUT: {
+                id:'id',
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
                         required: true,
                         validations: {
                             errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripción',
+                        required: false
                     }
                 ],
                 dialog: {
-                    title: 'Editar Proyecto',
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Proyecto'
+                    loading: 'Guardando Motivo'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Proyecto',
-                    message: 'Confirme la eliminación del Proyecto',
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Motivo no capitalizado',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Proyecto'
+                    loading: 'Eliminando Motivo'
                 }
             },
             LIST: {
@@ -99,8 +115,13 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
+                        model: 'nombre',
                         label: 'Nombre'
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripción'
                     }
                 ],
                 softDelete: {
@@ -110,16 +131,16 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Proyecto',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Proyecto'
+                    title: 'Búsqueda de Motivo',
+                    searchButton: Translate.translate('REASON_NOT_LABELED.LABELS.SEARCH'),
+                    loadingText: 'Buscando Motivo'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'descripcion',
+                        model: 'nombre',
                         header: 'por Nombre',
-                        label: 'Nombre del proyecto',
+                        label: 'Nombre',
                         field: {
                             type: 'text'
                         }

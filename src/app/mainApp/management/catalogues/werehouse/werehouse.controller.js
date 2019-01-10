@@ -1,42 +1,42 @@
-(function () {
+(function()
+{
     'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('ModeloCabinetController', ModeloCabinetController);
+        .controller('werehouseController',werehouseController);
 
-    /* @ngInject */
-    function ModeloCabinetController(URLS, Translate, EnvironmentConfig) {
+    function werehouseController(URLS, Translate, EnvironmentConfig)
+    {
 
         var vm = this;
 
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_model);
-        const brandUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.cabinet_brand);
-        const equipmentUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.equipment_type);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.werehouse);
+
+        const subsidiaryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.subsidiary);
 
         vm.url = managementUrl;
-        vm.kind = 'Management';
-        vm.name = Translate.translate('MODEL_CABINET.FORM.LABEL.MODEL');
+        vm.kind = 'management';
+        vm.name = Translate.translate('WEREHOUSE.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Modelo';
-        vm.createButtonText = 'Crear Modelo';
-        vm.deleteButtonText = 'Borrar Modelo';
-        vm.modifyButtonText = 'Editar Modelo';
+        vm.searchButtonText = Translate.translate('WEREHOUSE.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('WEREHOUSE.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('WEREHOUSE.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('WEREHOUSE.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar más Modelos';
+        vm.loadMoreButtonText = Translate.translate('WEREHOUSE.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Modelos';
+        vm.loadingMessage = Translate.translate('WEREHOUSE.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -50,170 +50,186 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations: {
-                            errors: {
+                        validations:{
+                            errors:{
                                 required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'marca_id',
-                        label: 'Marca',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: brandUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Marca',
-                            elements: 'results',
-                            pagination: {
-                                total: 'count'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'tipo_id',
-                        label: 'Tipo Equipo',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: equipmentUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Tipo',
-                            elements: 'results',
-                            pagination: {
-                                total: 'count'
                             }
                         }
                     },
                     {
                         type: 'text',
-                        hint: 'Descripción adicional para identificar el modelo',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true
+                        required: false,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
                     },
                     {
                         type: 'text',
-                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
-                        model: 'palabra_clave',
-                        label: 'Palabra clave',
-                        required: true
-                    }
+                        model: 'pasillo_max',
+                        label: 'No. Máximo de Pasillos',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'estiba_max',
+                        label: 'No. Máximo de Estibas',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        hint: 'No. de cabinets',
+                        model: 'profundidad_max',
+                        label: 'Profundidad Máxima',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        label: 'Sucursal',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: subsidiaryUrl,
+                            kind: 'management',
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
+                        }
+                    },
                 ],
                 dialog: {
-                    title: 'Crear Modelo',
+                    title: Translate.translate('WEREHOUSE.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Modelo'
+                    loading: 'Creando Bodega'
                 }
             },
             PUT: {
+                id:'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations: {
-                            errors: {
+                        validations:{
+                            errors:{
                                 required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'marca_id',
-                        label: 'Marca',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: brandUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Marca',
-                            elements: 'results',
-                            bindTo: 'marca',
-                            pagination: {
-                                total: 'count'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'tipo_id',
-                        label: 'Tipo Equipo',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        },
-                        catalog: {
-                            lazy: false,
-                            url: equipmentUrl,
-                            kind: 'management',
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Tipo',
-                            elements: 'results',
-                            pagination: {
-                                total: 'count'
                             }
                         }
                     },
                     {
                         type: 'text',
-                        hint: 'Descripción adicional para identificar el modelo',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true
+                        required: false,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
+                            }
+                        }
                     },
                     {
                         type: 'text',
-                        hint: 'Palabra clave a utilizar en la búsqueda del modelo de cabinet',
-                        model: 'palabra_clave',
-                        label: 'Palabra clave',
-                        required: true
-                    }
+                        model: 'pasillo_max',
+                        label: 'No. Máximo de Pasillos',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'estiba_max',
+                        label: 'No. Máximo de Estibas',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        hint: 'No. de cabinets',
+                        model: 'profundidad_max',
+                        label: 'Profundidad Máxima',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        label: 'Sucursal',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        },
+                        catalog: {
+                            lazy: false,
+                            url: subsidiaryUrl,
+                            kind: 'management',
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: 'results',
+                            pagination: {
+                                total: 'count'
+                            }
+                        }
+                    },
                 ],
                 dialog: {
-                    title: 'Editar Modelo',
+                    title: Translate.translate('WEREHOUSE.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Modelo'
+                    loading: 'Guardando Bodega'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Modelo',
-                    message: 'Confirme la eliminación de Modelo',
+                    title: Translate.translate('WEREHOUSE.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de la Bodega',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Modelo'
+                    loading: 'Eliminando Bodega'
                 }
             },
             LIST: {
@@ -235,18 +251,23 @@
                     },
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Palabra clave'
+                        model: 'pasillo_max',
+                        label: 'No. Máximo de Pasillos'
                     },
                     {
                         type: 'text',
-                        model: 'marca_nombre',
-                        label: 'Marca',
+                        model: 'estiba_max',
+                        label: 'No. Máximo de Estibas'
                     },
                     {
                         type: 'text',
-                        model: 'tipo_nombre',
-                        label: 'Tipo Equipo',
+                        model: 'profundidad_max',
+                        label: 'Profundidad Máxima'
+                    },
+                    {
+                        type: 'text',
+                        model: 'sucursal_nombre',
+                        label: 'Sucursal'
                     }
                 ],
                 softDelete: {
@@ -256,9 +277,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Modelo',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Modelo'
+                    title: 'Búsqueda de Bodega',
+                    searchButton: Translate.translate('WEREHOUSE.LABELS.SEARCH'),
+                    loadingText: 'Buscando Bodega'
                 },
                 filters: [
                     {
@@ -281,9 +302,9 @@
                     },
                     {
                         type: 'istartswith',
-                        model: 'palabra_clave',
-                        header: 'por Palabra clave',
-                        label: 'Palabra clave',
+                        model: 'sucursal_nombre',
+                        header: 'por Sucursal',
+                        label: 'Sucursal',
                         field: {
                             type: 'text'
                         }

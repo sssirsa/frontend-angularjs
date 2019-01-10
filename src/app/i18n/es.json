@@ -76,7 +76,10 @@
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "STAGE": "Etapas",
+                "POSITION": "Posicionamiento",
                 "ROUTES": "Rutas",
+                "REASON_NOT_LABELED": "Motivo No Capitalizado",
+                "STATUS_NOT_LABELED": "Estatus No Capitalizado",
                 "LOCALITIES": "Localidades",
                 "STORES": "Establecimientos",
                 "STATES": "Estados",
@@ -86,7 +89,8 @@
                 "STATUS_UNILEVER": "Estatus Unilever",
                 "STATUS_COM": "Estatus COM",
                 "STICKER": "Sticker",
-                "PEDIMENT": "Pedimento"
+                "PEDIMENT": "Pedimento",
+                "WEREHOUSE": "Bodega"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",

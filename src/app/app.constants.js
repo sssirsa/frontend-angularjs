@@ -475,7 +475,10 @@
                     equipment_type: 'tipo_equipo',
                     cabinet_brand: 'marca_cabinet',
                     cabinet_model: 'modelo_cabinet',
-                    werehouse: 'warehouse'
+                    werehouse: 'warehouse',
+                    position: 'position',
+                    reason_not_labeled: 'motivo_no_capitalizado',
+                    status_not_labeled: 'estatus_no_capitalizado'
                 }
             },
             mobile: {
@@ -490,9 +493,9 @@
             //condicion: 'condition',
             //estatus_unilever: 'status_unilever',
             //estatus_com: 'status_com',
-            estatus_no_capitalizado: 'estatus_no_capitalizado',
+            //estatus_no_capitalizado: 'estatus_no_capitalizado',
             no_labeled_unilever: 'cabinet_no_labeled_unilever',
-            motivo_no_labeled: 'motivo_no_capitalizado',
+            //motivo_no_labeled: 'motivo_no_capitalizado',
             cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet',

@@ -139,7 +139,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Marca',
+                    title: 'Búsqueda de Marca',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Marca'
                 },

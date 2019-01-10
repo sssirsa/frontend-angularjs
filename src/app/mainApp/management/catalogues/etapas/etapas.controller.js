@@ -144,7 +144,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Etapa',
+                    title: 'Búsqueda de Etapa',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Etapa'
                 },

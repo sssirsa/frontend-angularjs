@@ -112,7 +112,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Pedimento',
+                    title: 'Búsqueda de Pedimento',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Pedimento'
                 },
