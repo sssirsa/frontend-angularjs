@@ -521,5 +521,75 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "ACTION":{
+        "LABELS":{
+            "TITLE": "Acción",
+            "SEARCH": "Buscar Acción",
+            "CREATE": "Crear Acción",
+            "DELETE": "Borrar Acción",
+            "MODIFY": "Editar Acción",
+            "LOAD_MORE": "Cargar más Acciones",
+            "LOADING_MESSAGE": "Cargando Acciones"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "SYMPTOM":{
+        "LABELS":{
+            "TITLE": "Sintoma",
+            "SEARCH": "Buscar Sintoma",
+            "CREATE": "Crear Sintoma",
+            "DELETE": "Borrar Sintoma",
+            "MODIFY": "Editar Sintoma",
+            "LOAD_MORE": "Cargar más Sintoma",
+            "LOADING_MESSAGE": "Cargando Sintoma"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "FAILURE_TYPE":{
+        "LABELS":{
+            "TITLE": "Clasificador de Falla",
+            "SEARCH": "Buscar Falla",
+            "CREATE": "Crear Falla",
+            "DELETE": "Borrar Falla",
+            "MODIFY": "Editar Falla",
+            "LOAD_MORE": "Cargar más Fallas",
+            "LOADING_MESSAGE": "Cargando Fallas"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "NEXT_STEP":{
+        "LABELS":{
+            "TITLE": "Siguiente Paso",
+            "SEARCH": "Buscar Siguiente Paso",
+            "CREATE": "Crear Siguiente Paso",
+            "DELETE": "Borrar Siguiente Paso",
+            "MODIFY": "Editar Siguiente Paso",
+            "LOAD_MORE": "Cargar más Siguientes Paso",
+            "LOADING_MESSAGE": "Cargando Siguientes Paso"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "COM_INCIDENCE":{
+        "LABELS":{
+            "TITLE": "Incidencia COM",
+            "SEARCH": "Buscar Incidencia COM",
+            "CREATE": "Crear Incidencia COM",
+            "DELETE": "Borrar Incidencia COM",
+            "MODIFY": "Editar Incidencia COM",
+            "LOAD_MORE": "Cargar más Incidencias COM",
+            "LOADING_MESSAGE": "Cargando Incidencias COM"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }

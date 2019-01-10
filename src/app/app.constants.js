@@ -485,7 +485,15 @@
                 base: 'mobile'
             },
             technical_service: {
-                base: '' //TODO: Update when known
+                base: 'technical_services',
+                catalogue:{
+                    base: 'catalogues',
+                    action: 'action',
+                    symptom: 'symptom',
+                    failure_type: 'failure_type',
+                    next_step: 'next_step',
+                    com_incidence: 'com_incidence'
+                }
             },
             //TODO: Re group under the proper category
             //When done, delete all below this line
