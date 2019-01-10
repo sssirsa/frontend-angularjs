@@ -189,7 +189,9 @@
                 "HOURATEND": "Horarios de atencion",
                 "HOURSTART": "Hora inicial",
                 "HOUREND": "Hora final"
-            }
+            },
+            "ASSIGNED": "Servicios asignados",
+            "NO_RESULTS": "Sin asignaciones"
         },
         "ASSIGN_DETAIL": {
             "TITLE": "Detalle de Servicio",
