@@ -26,6 +26,8 @@
         vm.object_builder = object_builder;
         vm.search_asset = search_asset;
         vm.enableEdition = enableEdition;
+        vm.clear=clear;
+        vm.changeStorage=changeStorage;
 
 
         //Translates
@@ -96,6 +98,7 @@
             }
 
         }
+
 
         function onElementSelect(element) {
 
@@ -176,6 +179,7 @@
         }
 
         function object_builder() {
+            vm.asset_id=vm.asset_location.cabinet_id;
             vm.asset_location.bodega_id = vm.storage.id;
             if (!vm.type_storage) {
                 vm.asset_location.no_capitalizado_id = vm.asset_location.cabinet_id;
@@ -204,17 +208,22 @@
         function clear() {
             vm.asset_location = {}; // Objeto de localización de Cabinet
             vm.storage = {}; //Objeto contenedor de la Bodega
-            vm.type_storage = true;// true -> Capitalizado, false-> No Capitalizado
             vm.asset = {}; //objeto contenedor del cabinet
             vm.edition = true; // Booleano que permite mostrar los campos de seleccion de sucursal y/ó bodega
+
+        }
+        function changeStorage(){
+            vm.editionStorage=!vm.editionStorage;
 
         }
 
         function search_asset() {
             if (vm.type_storage) {
                 //Search in cabinets location
-                var promiseCabinetInfo = cabinetUC.getByID(vm.asset_location.cabinet_id);
+                clear();
+                var promiseCabinetInfo = cabinetUC.getByID(vm.asset_id);
                 promiseCabinetInfo.then(function (asset) {
+
                     vm.asset = asset;
                     //selection subsidiary
                     if(vm.asset.sucursal.id){
@@ -228,7 +237,7 @@
                     }
                     //Validación Posicionamiento existente
                     if (vm.asset.posicionamiento) {
-
+                        vm.editionStorage=false;
                         onElementSelect(vm.asset.posicionamiento.bodega.id);
                         vm.asset_location.pasillo = vm.asset.posicionamiento.pasillo;
                         vm.asset_location.estiba = vm.asset.posicionamiento.estiba;
@@ -237,6 +246,7 @@
                     }
                     else {
                         vm.edition = true;
+                        vm.editionStorage=true;
                     }
 
 
