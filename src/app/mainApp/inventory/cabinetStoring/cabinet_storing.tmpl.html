@@ -10,7 +10,7 @@
                     </h2>
                 </div>
                 <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-switch class="md-primary" ng-model="vm.type_storage" aria-label="Primary Switch">
+                    <md-switch class="md-primary" ng-model="vm.type_storage" ng-change="vm.clear()"  aria-label="Primary Switch">
                         <span class="md-caption" translate="">STORAGE.SELECT_TYPE</span>
                     </md-switch>
                 </div>
@@ -18,35 +18,25 @@
             </div>
         </md-toolbar>
         <div layout="column" layout-align="center center">
-            <md-content layout="row" layout-padding="">
-                <md-input-container>
-                    <label translate="">STORAGE.ASSET_ID</label>
-                    <input type="text" ng-model="vm.asset_location.cabinet_id" required md-maxlength="12">
-                </md-input-container>
-                <md-input-container>
-                    <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
-                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
-                    </md-button>
-                </md-input-container>
-            </md-content>
+            <form name="searchCabinetStorage" ng-submit="vm.search_asset()">
+                <div layout="row" layout-padding="">
+                    <md-input-container>
+                        <label translate="">STORAGE.ASSET_ID</label>
+                        <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
+                            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </form>
         </div>
 
-        <div flex="100" layout-margin="" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.edition">
-            <div ng-if="!vm.user.sucursal" flex="45" flex-gt-sm="45">
-                <md-input-container ng-if="!vm.asset.sucursal.id" flex="100" layout-fill="">
-                    <catalog-select catalog="vm.catalogues['subsidiary'].catalog"
-                                    required="true"
-                                    noResults="vm.catalogues['subsidiary'].noResults"
-                                    pagination="vm.catalogues['subsidiary'].pagination"
-                                    elements="vm.catalogues['subsidiary'].elements"
-                                    soft-delete="vm.catalogues['subsidiary'].softDelete"
-                                    on-select="vm.onSubsidiarySelect(element)">
-                    </catalog-select>
-                </md-input-container>
-            </div>
+        <div flex="100" layout-margin="" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.sucursal.nombre">
 
             <md-input-container flex="45" flex-gt-sm="45">
-                <catalog-select ng-if="vm.subsidiary"
+                <catalog-select ng-if="vm.edition && vm.editionStorage"
                                 catalog="vm.catalogues['storage_by_sucursal'].catalog"
                                 required="true"
                                 noResults="vm.catalogues['subsidiary'].noResults"
@@ -79,6 +69,10 @@
                     <div>
                         <span>{{vm.storage.descripcion}}</span>
                     </div>
+                    <md-button ng-if="vm.edition&&!vm.editionStorage" ng-click="vm.changeStorage()" class="md-raised md-primary">
+                        <md-icon md-font-icon="fas fa-sync"></md-icon>
+                            <span translate="">STORAGE.CHANGE_STORAGE</span>
+                    </md-button>
                 </div>
             </div>
 
@@ -196,11 +190,11 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-save"></md-icon>
-                Guardar
+                <span translate="">STORAGE.SAVE</span>
             </md-button>
             <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
                 <md-icon md-font-icon="fa fa-pencil"></md-icon>
-                Editar
+                <span translate="">STORAGE.EDIT</span>
             </md-button>
         </md-card-actions>
     </md-card>
