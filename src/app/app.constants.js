@@ -421,6 +421,10 @@
             //New module separation
             entries_departures: {
                 base: 'entries-departures',
+                catalogues: {
+                    base: 'catalogues',
+                    petition:'pediments'
+                },
                 entries: {
                     base: 'entries',
                     new: 'news',
