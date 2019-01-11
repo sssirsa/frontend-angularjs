@@ -81,7 +81,6 @@
         init();
 
         function init() {
-            console.log(vm.noResults)
             if (!vm.lazy) {
                 //The catalog is not loaded in lazy mode
                 list();
