@@ -9,7 +9,7 @@
         var vm = this;
 
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.equipment_type);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.equipment_type);
 
         vm.url = managementUrl;
         vm.kind = 'Management';

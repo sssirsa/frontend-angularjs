@@ -12,7 +12,7 @@
         var vm = this;
 
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.status_not_labeled);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.status_not_labeled);
 
 
         vm.url = managementUrl;
