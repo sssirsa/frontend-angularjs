@@ -272,7 +272,10 @@
         "AMP_TRAB":"Amperaje de Trabajo",
         "AMP_TRAB_DESC":"Amperaje de Trabajo en Amperes",
         "ACTIONS":"Acciones Realizadas",
-        "ACTIONS_DESC":"Acciones Realizadas"
+        "ACTIONS_DESC":"Acciones Realizadas en la etapa",
+        "FAILURES":"Fallas Detectadas",
+        "FAILURES_DESC":"Fallas detectadas en el diagnostico"
+
     },
     "INCIDENCE":{
         "REPORT_INCIDENCE":"Levantar incidencia"
