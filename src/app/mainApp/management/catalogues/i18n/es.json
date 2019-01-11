@@ -480,20 +480,6 @@
             "NOT_FOUND":"No se encontraron elementos"
         }
     },
-    "POSITION":{
-        "LABELS":{
-            "TITLE": "Posicionamiento",
-            "SEARCH": "Buscar Posición",
-            "CREATE": "Crear Posición",
-            "DELETE": "Borrar Posición",
-            "MODIFY": "Editar Posición",
-            "LOAD_MORE": "Cargar más Posiciones",
-            "LOADING_MESSAGE": "Cargando Posiciones"
-        },
-        "ERRORS":{
-            "NOT_FOUND":"No se encontraron elementos"
-        }
-    },
     "REASON_NOT_LABELED":{
         "LABELS":{
             "TITLE": "Motivo no capitalizado",

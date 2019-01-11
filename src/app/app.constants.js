@@ -476,7 +476,6 @@
                     cabinet_brand: 'marca_cabinet',
                     cabinet_model: 'modelo_cabinet',
                     werehouse: 'warehouse',
-                    position: 'position',
                     reason_not_labeled: 'motivo_no_capitalizado',
                     status_not_labeled: 'estatus_no_capitalizado'
                 }

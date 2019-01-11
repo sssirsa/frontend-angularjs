@@ -350,17 +350,6 @@
                 controller: 'werehouseController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.position', {
-                url: '/catalogue/position',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/position/position.tmpl.html',
-                controller: 'positionController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.reason-not-capitalized', {
                 url: '/catalogue/reason_not_labeled',
                 data: {
@@ -554,12 +543,6 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_MODEL',
                                 state: 'triangular.admin-default.consumable-model',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.POSITION',
-                                state: 'triangular.admin-default.position',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
