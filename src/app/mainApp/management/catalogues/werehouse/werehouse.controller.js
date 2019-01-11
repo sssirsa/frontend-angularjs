@@ -73,7 +73,9 @@
                         label: 'No. Máximo de Pasillos',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -84,7 +86,9 @@
                         label: 'No. Máximo de Estibas',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -96,7 +100,9 @@
                         label: 'Profundidad Máxima',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -122,6 +128,10 @@
                             pagination: {
                                 total: 'count'
                             }
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     },
                 ],
@@ -163,7 +173,9 @@
                         label: 'No. Máximo de Pasillos',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -174,7 +186,9 @@
                         label: 'No. Máximo de Estibas',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -186,7 +200,9 @@
                         label: 'Profundidad Máxima',
                         required: true,
                         validations: {
+                            regex: "[0-9]{1,10}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -212,6 +228,10 @@
                             pagination: {
                                 total: 'count'
                             }
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     },
                 ],
