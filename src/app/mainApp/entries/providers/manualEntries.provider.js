@@ -7,7 +7,8 @@
         API,
         $q,
         URLS,
-        Translate
+        Translate,
+        EnvironmentConfig
     ) {
         const entriesUrl = API
             .all(URLS.entries_departures.base)
@@ -367,8 +368,11 @@
                     petition: {
                         binding: 'pedimento_id',
                         catalog: {
-                            url: URLS.pedimento,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.petition,
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.NEW.LABELS.PETITION'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -521,8 +525,11 @@
                     petition: {
                         binding: 'pedimento_id',
                         catalog: {
-                            url: URLS.pedimento,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.petition,
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.PETITION'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
