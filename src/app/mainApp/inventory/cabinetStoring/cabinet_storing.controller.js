@@ -226,7 +226,7 @@
 
                     vm.asset = asset;
                     //selection subsidiary
-                    if(vm.asset.sucursal.id){
+                    if(vm.asset.sucursal){
                         onSubsidiarySelect(vm.asset.sucursal.id);
 
                     }
@@ -257,12 +257,22 @@
             }
             else {
                 //search in unrecognizible assets location
-                var promiseUnrecognizibleAssetInfo = noLabeled.getByID(vm.asset_location.cabinet_id);
+                console.log(vm.asset_id);
+                var promiseUnrecognizibleAssetInfo = noLabeled.getByID(vm.asset_id);
                 promiseUnrecognizibleAssetInfo.then(function (asset) {
 
                     vm.asset = asset;
+                    console.log(vm.asset);
                     //selectionsSubsidiary
-                    onSubsidiarySelect(vm.asset.sucursal.id);
+                    if(vm.asset.sucursal){
+                        onSubsidiarySelect(vm.asset.sucursal.id);
+
+                    }
+                    else {
+                        toastr.error(vm.errorNotSubsidiary, vm.errorTitle);
+                        clear();
+
+                    }
                     if (vm.asset.posicionamiento) {
                         onElementSelect(vm.asset.posicionamiento.bodega.id);
                         vm.asset_location.pasillo = vm.asset.posicionamiento.pasillo;
