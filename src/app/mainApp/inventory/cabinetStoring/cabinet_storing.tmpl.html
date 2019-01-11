@@ -1,15 +1,15 @@
 <div layout="column">
     <md-card flex layout-align="center stretch">
         <md-toolbar class="md-hue-2">
-            <div class="md-toolbar-tools" layout="row">
-                <div flex="50">
+            <div class="md-toolbar-tools" layout="column" layout-gt-sm="row">
+                <div flex-gt-sm="50" flex>
                     <h2>
                         <span flex translate="">STORAGE.STORING</span>
                         <span ng-if="vm.type_storage" translate="">STORAGE.CABINET</span>
                         <span ng-if="!vm.type_storage" translate="">STORAGE.UNRECOGNIZABLE</span>
                     </h2>
                 </div>
-                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                <div flex-gt-sm="50" flex layout="column" layout-gt-sm="row" layout-align="end center">
                     <md-switch class="md-primary" ng-model="vm.type_storage" ng-change="vm.clear()"  aria-label="Primary Switch">
                         <span class="md-caption" translate="">STORAGE.SELECT_TYPE</span>
                     </md-switch>
