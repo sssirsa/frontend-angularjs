@@ -52,7 +52,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.storage', {
-            url: '/storage',
+            url: '/inventario/posicionamiento',
             data: {
                 permissions: {
                     only: ['ADMINISTRADOR', 'CAPTURISTA']
