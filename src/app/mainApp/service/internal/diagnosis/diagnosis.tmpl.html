@@ -19,7 +19,8 @@
             </div>
         </md-toolbar>
         <div layout="column" layout-align="center center">
-            <md-content layout="row" layout-padding="">
+            <div layout="row" layout-padding="">
+                <form ng-submit="vm.search_asset()">
                 <md-input-container>
                     <label translate="">DIAGNOSIS.SEARCH_CABINET</label>
                     <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
@@ -29,7 +30,8 @@
                         <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                     </md-button>
                 </md-input-container>
-            </md-content>
+                </form>
+            </div>
         </div>
 
         <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.id">
@@ -66,12 +68,12 @@
                 </div>
             </div>
         </div>
-
+<!-- ng-if="vm.asset.economico"-->
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
-                 ng-if="vm.asset.economico">
+                 >
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
-                    <h3 translate="">INSPECTION.CHECKLIST</h3>
+                    <h3 translate="">DIAGNOSIS.ASSET_DIAGNOSIS</h3>
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
                         <div layout="row" flex-gt-md="50" flex="100" layout-margin="">
                             <md-input-container md-no-float class="md-block">
