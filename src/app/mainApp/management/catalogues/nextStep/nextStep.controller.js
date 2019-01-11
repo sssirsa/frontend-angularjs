@@ -12,7 +12,7 @@
         var vm = this;
 
         const technicalUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogue.base + '/' + URLS.technical_service.catalogue.next_step);
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.next_step);
 
         vm.url = technicalUrl;
         vm.kind = 'technical_services';
