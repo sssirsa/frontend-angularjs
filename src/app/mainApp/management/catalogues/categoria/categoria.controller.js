@@ -9,7 +9,7 @@
     function CategoriaController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogue.base + '/' + URLS.management.catalogue.category);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
         vm.url = managementUrl;
         vm.kind = 'management';

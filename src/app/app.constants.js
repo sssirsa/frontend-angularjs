@@ -428,7 +428,7 @@
                     unrecognizable: 'no_labeled',
                     warranty: 'warranties',
                     addCabinet: 'add_cabinet',
-                    catalogue: {
+                    catalogues: {
                         base: 'catalogues',
                         udn: 'udn',
                         project: 'project',
@@ -449,7 +449,7 @@
             },
             inventory:{
                 base: 'inventory',
-                catalogue: {
+                catalogues: {
                     base: 'catalogues',
                     supplier: 'proveedor',
                     consumable_category: 'categoria_insumo',
@@ -465,7 +465,6 @@
                     cabinet: 'cabinet_unilever',
                     unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
                     asset_location:'asset_location'
-                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
                 },
                 catalogues:{
                     base: 'catalogue',
@@ -487,7 +486,7 @@
             },
             technical_service: {
                 base: 'technical_services',
-                catalogue:{
+                catalogues:{
                     base: 'catalogues',
                     action: 'action',
                     symptom: 'symptom',
