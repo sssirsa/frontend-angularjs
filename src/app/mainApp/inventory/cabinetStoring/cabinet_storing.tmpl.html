@@ -1,0 +1,210 @@
+<div layout="column">
+    <md-card flex layout-align="center stretch">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools" layout="column" layout-gt-sm="row">
+                <div flex-gt-sm="50" flex>
+                    <h2>
+                        <span flex translate="">STORAGE.STORING</span>
+                        <span ng-if="vm.type_storage" translate="">STORAGE.CABINET</span>
+                        <span ng-if="!vm.type_storage" translate="">STORAGE.UNRECOGNIZABLE</span>
+                    </h2>
+                </div>
+                <div flex-gt-sm="50" flex layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-switch class="md-primary" ng-model="vm.type_storage" ng-change="vm.clear()"  aria-label="Primary Switch">
+                        <span class="md-caption" translate="">STORAGE.SELECT_TYPE</span>
+                    </md-switch>
+                </div>
+
+            </div>
+        </md-toolbar>
+        <div layout="column" layout-align="center center">
+            <form name="searchCabinetStorage" ng-submit="vm.search_asset()">
+                <div layout="row" layout-padding="">
+                    <md-input-container>
+                        <label translate="">STORAGE.ASSET_ID</label>
+                        <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
+                            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+
+        <div flex="100" layout-margin="" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.sucursal.nombre">
+            <div flex="100" flex-gt-sm="" ng-if="vm.asset_location.cabinet_id">
+                <h3 translate="">STORAGE.ASSET_ID</h3>
+                <h1 class="md-body-2"> <md-icon md-font-icon="far fa-snowflake"></md-icon>{{vm.asset_location.cabinet_id}}</h1>
+            </div>
+
+            <md-input-container flex="100" flex-gt-sm="45">
+                <catalog-select ng-if="vm.edition && vm.editionStorage"
+                                catalog="vm.catalogues['storage_by_sucursal'].catalog"
+                                required="true"
+                                noResults="vm.catalogues['subsidiary'].noResults"
+                                lazy="true"
+                                pagination="vm.catalogues['storage_by_sucursal'].pagination"
+                                elements="vm.catalogues['storage_by_sucursal'].elements"
+                                soft-delete="vm.catalogues['storage_by_sucursal'].softDelete"
+                                on-select="vm.onElementSelect(element)">
+                </catalog-select>
+
+            </md-input-container>
+
+        </div>
+
+
+        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column">
+            <div layout="column" flex="45" layout-align="center start" ng-if="vm.asset.sucursal.nombre">
+                <div layout="row">
+                    <md-icon md-font-icon="fa fa-industry"></md-icon>
+                    <h1>{{vm.asset.sucursal.nombre}}</h1>
+                </div>
+                <div>
+                    <span>{{vm.asset.sucursal.direccion}}</span>
+                </div>
+            </div>
+            <div layout="row" flex="45" ng-if="vm.storage.nombre">
+                <div layout="column" flex="100" layout-align="center center">
+                    <div layout="row">
+                        <md-icon md-font-icon="zmdi zmdi-store-24"></md-icon>
+                        <h1>{{vm.storage.nombre}}</h1>
+                    </div>
+                    <div>
+                        <span>{{vm.storage.descripcion}}</span>
+                    </div>
+                    <md-button ng-if="vm.edition&&!vm.editionStorage" ng-click="vm.changeStorage()" class="md-raised md-primary">
+                        <md-icon md-font-icon="fas fa-sync"></md-icon>
+                            <span translate="">STORAGE.CHANGE_STORAGE</span>
+                    </md-button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div flex="100" layout="column" ng-if="vm.storage.nombre|| vm.asset.posicionamiento" layout-margin="">
+            <div layout-align="center center" layout="row" flex="100" layout-fill="" layout-wrap="">
+                <div layout="column" flex="50" flex-sm="100" flex-xs="100" layout-padding="">
+                    <md-input-container>
+                        <h5 translate>STORAGE.CORRIDOR</h5>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container flex="20">
+                            <input ng-disabled="!vm.edition" ng-model="vm.asset_location.pasillo" type="number" min="0"
+                                   max="{{vm.storage.pasillo_max}}">
+                             <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.pasillo_max}}</md-tooltip>
+                        </md-input-container>
+                        <div layout="column">
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Incrementar elemento"
+                                       ng-click="vm.increment_element(0)">
+                                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                            </md-button>
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Decrementar elemento"
+                                       ng-click="vm.decrement_element(0)">
+                                <md-icon md-font-icon="fa fa-minus"></md-icon>
+                            </md-button>
+                        </div>
+                        <md-slider-container flex="100" layout="row">
+                            <md-slider ng-disabled="!vm.edition" class="md-accent" md-discrete
+                                       ng-model="vm.asset_location.pasillo" min="0"
+                                       max="{{vm.storage.pasillo_max}}"
+                                       step="1"
+                                       aria-label="Nivel"
+                                       flex="70"></md-slider>
+                            </md-slider>
+
+                        </md-slider-container>
+
+                    </div>
+                </div>
+
+
+                <div layout="column" flex="50" flex-xs="100" flex-sm="100">
+                    <md-input-container>
+                        <h5 translate>STORAGE.STOWAGE</h5>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container flex="20">
+                            <input ng-disabled="!vm.edition" ng-model="vm.asset_location.estiba" type="number" min="0"
+                                   max="{{vm.storage.estiba_max}}">
+                            <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.estiba_max}}</md-tooltip>
+                        </md-input-container>
+                        <div layout="column">
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Incrementar elemento"
+                                       ng-click="vm.increment_element(1)">
+                                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                            </md-button>
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Decrementar elemento"
+                                       ng-click="vm.decrement_element(1)">
+                                <md-icon md-font-icon="fa fa-minus"></md-icon>
+                            </md-button>
+                        </div>
+                        <md-slider-container flex="100" layout="row">
+                            <md-slider ng-disabled="!vm.edition" class="md-accent" md-discrete
+                                       ng-model="vm.asset_location.estiba" min="0"
+                                       max="{{vm.storage.estiba_max}}"
+                                       step="1"
+                                       aria-label="Nivel"
+                                       flex="70"></md-slider>
+                            </md-slider>
+                        </md-slider-container>
+                    </div>
+                </div>
+
+                <div layout="column" flex="50" flex-xs="100" flex-sm="100">
+                    <md-input-container>
+                        <h5 translate>STORAGE.DEPTH</h5>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container flex="20">
+                            <input ng-disabled="!vm.edition" ng-model="vm.asset_location.profundidad" type="number"
+                                   min="0"
+                                   max="{{vm.storage.profundidad_max}}">
+                            <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.profundidad_max}}</md-tooltip>
+                        </md-input-container>
+                        <div layout="column">
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Incrementar elemento"
+                                       ng-click="vm.increment_element(2)">
+                                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                            </md-button>
+                            <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
+                                       aria-label="Decrementar elemento"
+                                       ng-click="vm.decrement_element(2)">
+                                <md-icon md-font-icon="fa fa-minus"></md-icon>
+                            </md-button>
+                        </div>
+                        <md-slider-container flex="100" layout="row">
+                            <md-slider ng-disabled="!vm.edition" class="md-accent" md-discrete
+                                       ng-model="vm.asset_location.profundidad"
+                                       min="0"
+                                       max="{{vm.storage.profundidad_max}}"
+                                       step="1"
+                                       aria-label="Nivel"
+                                       flex="70"></md-slider>
+                            </md-slider>
+                        </md-slider-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                <span translate="">STORAGE.SAVE</span>
+            </md-button>
+            <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                <span translate="">STORAGE.EDIT</span>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</div>
