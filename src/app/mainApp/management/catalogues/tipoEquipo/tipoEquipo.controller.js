@@ -54,7 +54,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripcion',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
                     }
                 ],
                 dialog: {
@@ -82,7 +87,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripcion',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
                     }
                 ],
                 dialog: {
