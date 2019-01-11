@@ -47,8 +47,10 @@
                         model: 'com_code',
                         label: 'Código COM',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            regex: "[0-9]{10,15}",
+                            errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -80,8 +82,10 @@
                         model: 'com_code',
                         label: 'Código COM',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            regex: "[0-9]{10,15}",
+                            errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
