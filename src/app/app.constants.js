@@ -440,18 +440,27 @@
             },
             management: {
                 base: 'management',
+                catalogues:{
+                    base:'catalogue',
+                    subsidiary:'subsidiary',
+                    storage:'warehouse'
+
+                },
                 inventory: {
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
-                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
+                    asset_location:'asset_location'
                 }
             },
             mobile: {
-                base: 'mobile'
+                base:'mobile'
             },
             technical_service: {
                 base: '' //TODO: Update when known
             },
+
+
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
@@ -662,3 +671,4 @@
             baseManagement: '/management'
         });
 })();
+

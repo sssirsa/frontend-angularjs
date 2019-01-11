@@ -73,12 +73,6 @@
                         state: 'triangular.admin-default.etapa',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
-                    },
-                    {
-                        name: 'MAIN.MENU.LINE',
-                        state: 'triangular.admin-default.asignacionLinea',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
                     }
                 ]
             }
