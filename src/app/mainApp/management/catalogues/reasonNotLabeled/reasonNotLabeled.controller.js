@@ -58,7 +58,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
                     }
                 ],
                 dialog: {
@@ -86,7 +91,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El campo es requerido.'
+                            }
+                        }
                     }
                 ],
                 dialog: {
