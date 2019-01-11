@@ -43,7 +43,7 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Nombre',
                         required: true,
                         validations:{
                             errors:{
@@ -64,7 +64,7 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Nombre',
                         required: true,
                         validations: {
                             errors: {
@@ -100,7 +100,7 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripcion'
+                        label: 'Nombre'
                     }
                 ],
                 softDelete: {
@@ -118,8 +118,8 @@
                     {
                         type: 'istartswith',
                         model: 'descripcion',
-                        header: 'por Descripción',
-                        label: 'Descripción',
+                        header: 'por Nombre',
+                        label: 'Nombre',
                         field: {
                             type: 'text'
                         }
