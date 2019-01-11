@@ -260,13 +260,19 @@
         "SHORT_NAME":"Nombre corto",
         "SHORT_NAME_DESC":"Nombre corto que define la falla del Cabinet en pocas palabras",
         "DESCRIPTION":"Descripción",
-        "DESCRIPTION_DESC":"Es la descripción ",
+        "DESCRIPTION_DESC":"Descripción detallada de la falla, no considerada en el catálogo de fallas",
         "IN_TIME":"Terminación en Tiempo",
+        "IN_TIME_DESC":"Define si el trabajo podrá ser terminado en el tiempo previsto",
         "TEMP_COM":"Temperatura Compresor",
+        "TEMP_COM_DESC":"Temperatura Compresor en grados ºC",
         "INT_TEMP":"Temperatura Interna",
+        "INT_TEMP_DESC":"Temperatura Interna en grados ºC",
         "AMP_ARRAN":"Amperaje de Arranque",
+        "AMP_DESC":"Amperaje de Arranque en Amperes",
         "AMP_TRAB":"Amperaje de Trabajo",
-        "ACTIONS":"Acciones Realizadas"
+        "AMP_TRAB_DESC":"Amperaje de Trabajo en Amperes",
+        "ACTIONS":"Acciones Realizadas",
+        "ACTIONS_DESC":"Acciones Realizadas"
     },
     "INCIDENCE":{
         "REPORT_INCIDENCE":"Levantar incidencia"
