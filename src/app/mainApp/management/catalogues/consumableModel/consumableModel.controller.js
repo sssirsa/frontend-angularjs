@@ -75,6 +75,10 @@
                             pagination: {
                                 total: 'count'
                             }
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     }
                 ],
@@ -119,6 +123,10 @@
                             pagination: {
                                 total: 'count'
                             }
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     }
                 ],
