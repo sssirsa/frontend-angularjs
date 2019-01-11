@@ -463,9 +463,11 @@
                 inventory: {
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
+                    asset_location:'asset_location'
                     unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
                 },
-                catalogue:{
+                catalogues:{
                     base: 'catalogue',
                     subsidiary: 'subsidiary',
                     category: 'category',
@@ -475,13 +477,13 @@
                     equipment_type: 'tipo_equipo',
                     cabinet_brand: 'marca_cabinet',
                     cabinet_model: 'modelo_cabinet',
-                    werehouse: 'warehouse',
+                    storage: 'warehouse',
                     reason_not_labeled: 'motivo_no_capitalizado',
                     status_not_labeled: 'estatus_no_capitalizado'
                 }
             },
             mobile: {
-                base: 'mobile'
+                base:'mobile'
             },
             technical_service: {
                 base: 'technical_services',
@@ -494,6 +496,8 @@
                     com_incidence: 'com_incidence'
                 }
             },
+
+
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
@@ -704,3 +708,4 @@
             baseManagement: '/management'
         });
 })();
+

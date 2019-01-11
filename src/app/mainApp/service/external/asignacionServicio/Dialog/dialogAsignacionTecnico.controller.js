@@ -8,6 +8,7 @@
         var vm = this;
 
         //Variables
+        vm.chip = [];
         vm.request = null;
         vm.assignedPerson = null;
         vm.personSearchText = null;
@@ -29,10 +30,9 @@
 
         vm.horaminPrev = salePoint.hora_cliente_inicio;
         vm.horamaxPrev = salePoint.hora_cliente_fin;
-        
+
         vm.limit = 0;
         setLimitHours();
-
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
@@ -41,8 +41,9 @@
         vm.showRequestLocation = showRequestLocation;
         vm.assign = assign;
         vm.cancel = cancel;
+        vm.view = view;
+        vm.clean = clean;
 
-        console.log(salePoint.folio);
         vm.id = salePoint.folio;
         activate();
 
@@ -88,20 +89,22 @@
                             );
                         });
                 }).catch(function (salePointError) {
-                console.log(salePointError);
-                toastr.error(
+                    console.log(salePointError);
+                    toastr.error(
                     Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                     Translate.translate('MAIN.MSG.ERROR_TITLE')
                 );
-            });
+                });
         }
 
         function selectedPersonChange() {
             vm.salePoint.persona = vm.assignedPerson.id;
+            vm.infoChip = null;
+            worklist(vm.salePoint.persona);
         }
 
-        
-        
+
+
         function searchPerson() {
             if(vm.limit !== 0){
                 if (!vm.personList) {
@@ -126,7 +129,7 @@
                 }
             }
         }
-        
+
         function preSearchPerson() {
             Persona_Admin.listPromise(0,0)
                 .then(function (userList) {
@@ -262,6 +265,44 @@
 
         function cancel() {
             $mdDialog.cancel();
+        }
+
+        function worklist(persona) {
+            vm.chip = [];
+            vm.worklistLoading = SalePoint.assignedTo(persona)
+                .then(function (list) {
+
+                    angular.forEach(list.results, function (solicitud) {
+                        var aux = {
+                            servicio: solicitud.hora_tecnico_inicio + ' - ' + solicitud.hora_tecnico_fin,
+                            folio: solicitud.folio,
+                            nombreEstablecimiento: solicitud.establecimiento.nombre_establecimiento,
+                            direccion: solicitud.establecimiento.calle
+                        };
+                        vm.chip.push(aux);
+                    });
+
+                })
+                .catch(function (listError) {
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
+        }
+
+        function view(info) {
+            if(!vm.infoChip){
+                vm.infoChip = info;
+            }else if(vm.infoChip.folio == info.folio){
+                vm.infoChip = null;
+            }else if(vm.infoChip.folio != info.folio){
+                vm.infoChip = info;
+            }
+        }
+
+        function clean() {
+            vm.infoChip = null;
         }
 
     }
