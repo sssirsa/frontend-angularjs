@@ -10,7 +10,7 @@
         var vm = this;
 
         const inventoryUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogue.base + '/' + URLS.inventory.catalogue.consumable_brand);
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.consumable_brand);
 
         vm.url = inventoryUrl;
         vm.kind = 'inventory';
