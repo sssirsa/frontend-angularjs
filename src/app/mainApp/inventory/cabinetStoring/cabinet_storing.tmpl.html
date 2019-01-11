@@ -34,8 +34,12 @@
         </div>
 
         <div flex="100" layout-margin="" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.sucursal.nombre">
+            <div flex="100" flex-gt-sm="" ng-if="vm.asset_location.cabinet_id">
+                <h3 translate="">STORAGE.ASSET_ID</h3>
+                <h1 class="md-body-2"> <md-icon md-font-icon="far fa-snowflake"></md-icon>{{vm.asset_location.cabinet_id}}</h1>
+            </div>
 
-            <md-input-container flex="45" flex-gt-sm="45">
+            <md-input-container flex="100" flex-gt-sm="45">
                 <catalog-select ng-if="vm.edition && vm.editionStorage"
                                 catalog="vm.catalogues['storage_by_sucursal'].catalog"
                                 required="true"
@@ -50,7 +54,9 @@
             </md-input-container>
 
         </div>
-        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="">
+
+
+        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column">
             <div layout="column" flex="45" layout-align="center start" ng-if="vm.asset.sucursal.nombre">
                 <div layout="row">
                     <md-icon md-font-icon="fa fa-industry"></md-icon>
@@ -89,6 +95,7 @@
                         <md-input-container flex="20">
                             <input ng-disabled="!vm.edition" ng-model="vm.asset_location.pasillo" type="number" min="0"
                                    max="{{vm.storage.pasillo_max}}">
+                             <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.pasillo_max}}</md-tooltip>
                         </md-input-container>
                         <div layout="column">
                             <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
@@ -125,6 +132,7 @@
                         <md-input-container flex="20">
                             <input ng-disabled="!vm.edition" ng-model="vm.asset_location.estiba" type="number" min="0"
                                    max="{{vm.storage.estiba_max}}">
+                            <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.estiba_max}}</md-tooltip>
                         </md-input-container>
                         <div layout="column">
                             <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"
@@ -159,6 +167,7 @@
                             <input ng-disabled="!vm.edition" ng-model="vm.asset_location.profundidad" type="number"
                                    min="0"
                                    max="{{vm.storage.profundidad_max}}">
+                            <md-tooltip><span translate="">STORAGE.MAX_VALUE</span>{{vm.storage.profundidad_max}}</md-tooltip>
                         </md-input-container>
                         <div layout="column">
                             <md-button ng-disabled="!vm.edition" class="md-fab md-mini md-primary"

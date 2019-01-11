@@ -225,6 +225,7 @@
                 promiseCabinetInfo.then(function (asset) {
 
                     vm.asset = asset;
+                    vm.asset_location.cabinet_id=vm.asset.economico;
                     //selection subsidiary
                     if(vm.asset.sucursal){
                         onSubsidiarySelect(vm.asset.sucursal.id);
@@ -261,7 +262,8 @@
                 var promiseUnrecognizibleAssetInfo = noLabeled.getByID(vm.asset_id);
                 promiseUnrecognizibleAssetInfo.then(function (asset) {
 
-                    vm.asset = asset;
+                    vm.asset = asset
+                    vm.asset_location.cabinet_id=vm.asset.id;
                     console.log(vm.asset);
                     //selectionsSubsidiary
                     if(vm.asset.sucursal){
