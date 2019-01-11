@@ -4,33 +4,37 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('reasonNotLabeledController',reasonNotLabeledController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function reasonNotLabeledController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
+
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.reason_not_labeled);
+
 
         vm.url = managementUrl;
         vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        vm.name = Translate.translate('REASON_NOT_LABELED.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('REASON_NOT_LABELED.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('REASON_NOT_LABELED.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -44,8 +48,8 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -55,18 +59,18 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Motivo'
                 }
             },
             PUT: {
@@ -96,20 +100,20 @@
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Motivo'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('REASON_NOT_LABELED.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Motivo no capitalizado',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Motivo'
                 }
             },
             LIST: {
@@ -137,9 +141,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Motivo',
+                    searchButton: Translate.translate('REASON_NOT_LABELED.LABELS.SEARCH'),
+                    loadingText: 'Buscando Motivo'
                 },
                 filters: [
                     {

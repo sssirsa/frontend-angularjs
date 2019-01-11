@@ -4,33 +4,36 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('actionController',actionController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function actionController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = managementUrl;
-        vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        const technicalUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
+
+        vm.url = technicalUrl;
+        vm.kind = 'technical_services';
+        vm.name = Translate.translate('ACTION.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('ACTION.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('ACTION.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('ACTION.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('ACTION.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('ACTION.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('ACTION.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -41,11 +44,13 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
+                        model: 'com_code',
+                        label: 'Código COM',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            regex: "[0-9]{10,15}",
+                            errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -63,22 +68,24 @@
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('ACTION.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Acción'
                 }
             },
             PUT: {
-                id:'id',
+                id:'com_code',
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
+                        model: 'com_code',
+                        label: 'Código COM',
                         required: true,
                         validations: {
+                            regex: "[0-9]{10,15}",
                             errors: {
+                                regex: 'Formato incorrecto, el campo es númerico',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -88,28 +95,28 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations: {
-                            errors: {
+                        validations:{
+                            errors:{
                                 required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('ACTION.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Acción'
                 }
             },
             DELETE: {
-                id: 'id',
+                id: 'com_code',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('ACTION.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de la Acción',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Acción'
                 }
             },
             LIST: {
@@ -121,8 +128,8 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
+                        model: 'com_code',
+                        label: 'Código COM'
                     },
                     {
                         type: 'text',
@@ -137,16 +144,16 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Acción',
+                    searchButton: Translate.translate('ACTION.LABELS.SEARCH'),
+                    loadingText: 'Buscando Acción'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
-                        header: 'por Nombre',
-                        label: 'Nombre',
+                        model: 'com_code',
+                        header: 'por Código COM',
+                        label: 'Código',
                         field: {
                             type: 'text'
                         }

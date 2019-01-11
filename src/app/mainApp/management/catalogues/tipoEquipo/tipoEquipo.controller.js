@@ -5,12 +5,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('TipoEquipoController', TipoEquipoController)
 
-    function TipoEquipoController(URLS, Translate)
-    {
+    function TipoEquipoController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.tipo_equipo;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.equipment_type);
+
+        vm.url = managementUrl;
+        vm.kind = 'Management';
         vm.name = Translate.translate('EQUIPMENT_TYPE.FORM.LABEL.MODEL');
 
         //Labels
@@ -52,7 +54,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripcion',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
                     }
                 ],
                 dialog: {
@@ -80,7 +87,12 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripcion',
-                        required: false
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre del estado es obligatorio'
+                            }
+                        }
                     }
                 ],
                 dialog: {
@@ -101,11 +113,11 @@
                 }
             },
             LIST: {
-                // elements: 'results',
+                elements: 'results',
                 mode: 'infinite',
-                // pagination: {
-                //     total: 'count'
-                // },
+                pagination: {
+                    total: 'count'
+                },
                 fields: [
                     {
                         type: 'text',
@@ -125,7 +137,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Tipo equipo',
+                    title: 'Búsqueda de Tipo equipo',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Tipo equipo'
                 },

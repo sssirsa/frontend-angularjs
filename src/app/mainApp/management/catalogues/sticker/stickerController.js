@@ -4,33 +4,35 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('stickerController',stickerController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function stickerController(URLS, Translate, EnvironmentConfig)
+    {
         var vm = this;
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = managementUrl;
-        vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogues.base + '/' + URLS.entries_departures.entries.catalogues.sticker);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
+        vm.name = Translate.translate('STICKER.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('STICKER.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('STICKER.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('STICKER.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('STICKER.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('STICKER.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('STICKER.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -41,75 +43,53 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Descripcion',
                         required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
+                        validations: {
+                            errors: {
+                                required: 'La descripción es obligatoria'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: 'Crear Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Sticker'
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Descripcion',
                         required: true,
                         validations: {
                             errors: {
-                                required: 'El campo es requerido.'
+                                required: 'La descripción es obligatoria'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: 'Editar Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Sticker'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: 'Eliminar Sticker',
+                    message: 'Confirme la eliminación del Sticker',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Sticker'
                 }
             },
             LIST: {
@@ -119,11 +99,6 @@
                     total: 'count'
                 },
                 fields: [
-                    {
-                        type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
-                    },
                     {
                         type: 'text',
                         model: 'descripcion',
@@ -137,23 +112,23 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
+                    title: 'Búsqueda de Sticker',
                     searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    loadingText: 'Buscando Sticker'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
-                        header: 'por Nombre',
-                        label: 'Nombre',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
                         field: {
                             type: 'text'
                         }
                     }
                 ]
             }
-        };
+        }
 
         function onElementSelect(element) {
             //Here goes the handling for element selection, such as detail page navigation
@@ -161,6 +136,7 @@
             console.debug(element);
             console.log(element);
         }
+
     }
 
 })();

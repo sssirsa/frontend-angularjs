@@ -4,33 +4,34 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('consumableBrandController',consumableBrandController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function consumableBrandController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = managementUrl;
-        vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.consumable_brand);
+
+        vm.url = inventoryUrl;
+        vm.kind = 'inventory';
+        vm.name = Translate.translate('CONSUMABLE_BRAND.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('CONSUMABLE_BRAND.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('CONSUMABLE_BRAND.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -41,19 +42,8 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Nombre',
                         required: true,
                         validations:{
                             errors:{
@@ -63,30 +53,18 @@
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Marca de Insumo'
                 }
             },
             PUT: {
-                id:'id',
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción',
+                        label: 'Nombre',
                         required: true,
                         validations: {
                             errors: {
@@ -96,20 +74,20 @@
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Marca de Insumo'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('CONSUMABLE_BRAND.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de la Marca de Insumo',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Marca'
                 }
             },
             LIST: {
@@ -121,13 +99,8 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
-                        label: 'Descripción'
+                        label: 'Nombre'
                     }
                 ],
                 softDelete: {
@@ -137,14 +110,14 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Marca',
+                    searchButton: Translate.translate('CONSUMABLE_BRAND.LABELS.SEARCH'),
+                    loadingText: 'Buscando Marca'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
+                        model: 'descripcion',
                         header: 'por Nombre',
                         label: 'Nombre',
                         field: {
@@ -161,6 +134,7 @@
             console.debug(element);
             console.log(element);
         }
+
     }
 
 })();

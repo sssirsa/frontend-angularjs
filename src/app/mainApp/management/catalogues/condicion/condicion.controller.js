@@ -6,12 +6,13 @@
         .module('app.mainApp.management.catalogues')
         .controller('CondicionController',CondicionController);
 
-    function CondicionController(URLS, Translate, MANAGEMENT, EnvironmentConfig)
-    {
-
+    function CondicionController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion;
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.condition);
+
+        vm.url = managementUrl;
         vm.kind = 'Management';
         vm.name = Translate.translate('CONDITION.LABELS.TITLE');
 
@@ -20,17 +21,17 @@
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Condición';
-        //vm.createButtonText = 'Crear Categoría';
-        //vm.deleteButtonText = 'Borrar Categoría';
-        //vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('CONDITION.LABELS.SEARCH');
+        //vm.createButtonText = Translate.translate('CONDITION.LABELS.CREATE');
+        //vm.deleteButtonText = Translate.translate('CONDITION.LABELS.DELETE');
+        //vm.modifyButtonText = Translate.translate('CONDITION.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas condiciones';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.loadMoreButtonText = Translate.translate('CONDITION.LABELS.LOAD_MORE');
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Condiciones';
+        vm.loadingMessage = Translate.translate('CONDITION.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -139,7 +140,7 @@
             }/*,
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Condición',
+                    title: 'Búsqueda de Condición',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Condición'
                 },

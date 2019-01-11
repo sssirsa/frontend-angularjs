@@ -4,33 +4,36 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('nextStepController',nextStepController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function nextStepController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = managementUrl;
-        vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        const technicalUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.next_step);
+
+        vm.url = technicalUrl;
+        vm.kind = 'technical_services';
+        vm.name = Translate.translate('NEXT_STEP.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('NEXT_STEP.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('NEXT_STEP.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('NEXT_STEP.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('NEXT_STEP.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('NEXT_STEP.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('NEXT_STEP.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -41,17 +44,6 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
@@ -63,10 +55,10 @@
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('NEXT_STEP.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Siguiente Paso'
                 }
             },
             PUT: {
@@ -74,42 +66,31 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations: {
-                            errors: {
+                        validations:{
+                            errors:{
                                 required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('NEXT_STEP.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Siguiente Paso'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('NEXT_STEP.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Siguiente Paso',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Siguiente Paso'
                 }
             },
             LIST: {
@@ -119,11 +100,6 @@
                     total: 'count'
                 },
                 fields: [
-                    {
-                        type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
-                    },
                     {
                         type: 'text',
                         model: 'descripcion',
@@ -137,16 +113,16 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Siguiente Paso',
+                    searchButton: Translate.translate('NEXT_STEP.LABELS.SEARCH'),
+                    loadingText: 'Buscando Siguiente Paso'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
-                        header: 'por Nombre',
-                        label: 'Nombre',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
                         field: {
                             type: 'text'
                         }

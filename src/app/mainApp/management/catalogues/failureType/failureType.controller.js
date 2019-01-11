@@ -4,33 +4,36 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('failureTypeController',failureTypeController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function failureTypeController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = managementUrl;
-        vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        const technicalUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
+
+        vm.url = technicalUrl;
+        vm.kind = 'technical_services';
+        vm.name = Translate.translate('FAILURE_TYPE.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('FAILURE_TYPE.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('FAILURE_TYPE.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('FAILURE_TYPE.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('FAILURE_TYPE.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('FAILURE_TYPE.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('FAILURE_TYPE.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -49,24 +52,13 @@
                                 required: 'El campo es requerido.'
                             }
                         }
-                    },
-                    {
-                        type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripción',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('FAILURE_TYPE.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Clasificación de Falla'
                 }
             },
             PUT: {
@@ -77,39 +69,28 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripción',
-                        required: true,
-                        validations: {
-                            errors: {
+                        validations:{
+                            errors:{
                                 required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('FAILURE_TYPE.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Calsificación de Falla'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('FAILURE_TYPE.LABELS.DELETE'),
+                    message: 'Confirme la eliminación de la Clasificación de Falla',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Clasificación de Falla'
                 }
             },
             LIST: {
@@ -123,11 +104,6 @@
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre'
-                    },
-                    {
-                        type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripción'
                     }
                 ],
                 softDelete: {
@@ -137,9 +113,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Clasificación de Falla',
+                    searchButton: Translate.translate('FAILURE_TYPE.LABELS.SEARCH'),
+                    loadingText: 'Buscando Clasificación de Falla'
                 },
                 filters: [
                     {

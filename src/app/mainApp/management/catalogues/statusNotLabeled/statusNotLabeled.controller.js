@@ -4,33 +4,37 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('CategoriaController',CategoriaController);
+        .controller('statusNotLabeledController',statusNotLabeledController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function statusNotLabeledController(URLS, Translate, EnvironmentConfig)
+    {
+
         var vm = this;
+
         const managementUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.status_not_labeled);
+
 
         vm.url = managementUrl;
         vm.kind = 'management';
-        vm.name = Translate.translate('Category.title');
+        vm.name = Translate.translate('STATUS_NOT_LABELED.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = 'Buscar Categoría';
-        vm.createButtonText = 'Crear Categoría';
-        vm.deleteButtonText = 'Borrar Categoría';
-        vm.modifyButtonText = 'Editar Categoría';
+        vm.searchButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = 'Cargar mas Categorías';
+        vm.loadMoreButtonText = Translate.translate('STATUS_NOT_LABELED.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = 'Cargando Categorías';
+        vm.loadingMessage = Translate.translate('STATUS_NOT_LABELED.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -44,8 +48,8 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -54,19 +58,20 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true,
-                        validations:{
-                            errors:{
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        required: false
+                    },
+                    {
+                        type: 'text',
+                        model: 'accion',
+                        label: 'Acción',
+                        required: false
                     }
                 ],
                 dialog: {
-                    title: 'Crear Categoría',
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Categoría'
+                    loading: 'Creando Estatus'
                 }
             },
             PUT: {
@@ -87,29 +92,30 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'El campo es requerido.'
-                            }
-                        }
+                        required: false
+                    },
+                    {
+                        type: 'text',
+                        model: 'accion',
+                        label: 'Acción',
+                        required: false
                     }
                 ],
                 dialog: {
-                    title: 'Editar Categoría',
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Categoría'
+                    loading: 'Guardando Estatus'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Categoría',
-                    message: 'Confirme la eliminación de Categoría',
+                    title: Translate.translate('STATUS_NOT_LABELED.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del Estatus no capitalizado',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Categoría'
+                    loading: 'Eliminando Estatus'
                 }
             },
             LIST: {
@@ -128,6 +134,11 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción'
+                    },
+                    {
+                        type: 'text',
+                        model: 'accion',
+                        label: 'Acción'
                     }
                 ],
                 softDelete: {
@@ -137,9 +148,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Categoría',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Categoría'
+                    title: 'Búsqueda de Estatus',
+                    searchButton: Translate.translate('STATUS_NOT_LABELED.LABELS.SEARCH'),
+                    loadingText: 'Buscando Estatus'
                 },
                 filters: [
                     {
