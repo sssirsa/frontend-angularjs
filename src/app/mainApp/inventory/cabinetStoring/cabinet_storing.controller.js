@@ -284,6 +284,7 @@
                     }
                     else {
                         vm.edition = true;
+                        vm.editionStorage=true;
                     }
 
 
