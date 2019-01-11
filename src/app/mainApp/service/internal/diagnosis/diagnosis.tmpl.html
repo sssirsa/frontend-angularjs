@@ -75,8 +75,22 @@
                 <md-content class="md-padding">
                     <h3 translate="">DIAGNOSIS.ASSET_DIAGNOSIS</h3>
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
+                        <div layout="row"  flex="100" layout-margin="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
+                                <input type="text" placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.SHORT_NAME_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex="100" layout-margin="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
+                                <input type="text" placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.DESCRIPTION_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
                         <div layout="row" flex-gt-md="50" flex="100" layout-margin="">
-                            <md-input-container md-no-float class="md-block">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
                                 <input type="text" placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.SHORT_NAME_DESC</span></md-tooltip>

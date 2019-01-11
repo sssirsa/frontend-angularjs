@@ -260,6 +260,7 @@
         "SHORT_NAME":"Nombre corto",
         "SHORT_NAME_DESC":"Nombre corto que define la falla del Cabinet en pocas palabras",
         "DESCRIPTION":"Descripción",
+        "DESCRIPTION_DESC":"Es la descripción ",
         "IN_TIME":"Terminación en Tiempo",
         "TEMP_COM":"Temperatura Compresor",
         "INT_TEMP":"Temperatura Interna",
