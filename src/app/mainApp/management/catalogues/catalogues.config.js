@@ -12,7 +12,7 @@
 
             .state('triangular.admin-default.proveedor', {
                 // set the url of this page
-                url: '/proveedor',
+                url: '/catalogo/proveedor',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
@@ -26,7 +26,7 @@
             })
             .state('triangular.admin-default.linea-transporte', {
                 // set the url of this page
-                url: '/lineaTransporte',
+                url: '/catalogo/linea_transporte',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -40,7 +40,7 @@
             })
             .state('triangular.admin-default.tipo-transporte', {
                 // set the url of this page
-                url: '/tipoTransporte',
+                url: '/catalogo/tipo_transporte',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -54,7 +54,7 @@
             })
             .state('triangular.admin-default.udn-catalog', {
                 // set the url of this page
-                url: '/udn',
+                url: '/catalogo/udn',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -68,7 +68,7 @@
             })
             .state('triangular.admin-default.sucursal', {
                 // set the url of this page
-                url: '/sucursal',
+                url: '/catalogo/sucursal',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -82,7 +82,7 @@
             })
             .state('triangular.admin-default.model-cabinet', {
                 // set the url of this page
-                url: '/modelCabinet',
+                url: '/catalogo/modelo_cabinet',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -96,7 +96,7 @@
             })
             .state('triangular.admin-default.marca-cabinet', {
                 // set the url of this page
-                url: '/marcaCabinet',
+                url: '/catalogo/marca_cabinet',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -109,7 +109,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.proyectos', {
-                url: '/proyectos',
+                url: '/catalogo/proyectos',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -120,7 +120,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.clientes', {
-                url: '/clientes',
+                url: '/catalogo/clientes',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -131,7 +131,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.categoria', {
-                url: '/categoria',
+                url: '/catalogo/categoria',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
@@ -142,7 +142,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-insumo', {
-                url: '/catalogo-insumo',
+                url: '/catalogo/insumo',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -153,7 +153,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-tipo-equipo', {
-                url: '/catalogo-tipo-equipo',
+                url: '/catalogo/tipo_equipo',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -164,7 +164,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-etapas', {
-                url: '/catalogo-etapas',
+                url: '/catalogo/etapas',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -175,7 +175,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-localidades', {
-                url: '/localidades',
+                url: '/catalogo/localidades',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -186,7 +186,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-establecimientos', {
-                url: '/establecimientos',
+                url: '/catalogo/establecimientos',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -197,7 +197,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-estados', {
-                url: '/estados',
+                url: '/catalogo/estados',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -208,7 +208,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-municipios', {
-                url: '/municipios',
+                url: '/catalogo/municipios',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -219,7 +219,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-segmentation', {
-                url: '/catalogue/segmentation',
+                url: '/catalogo/segmentacion',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -230,7 +230,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.generic-catalogue', {
-                url: '/catalogue/DEMO',
+                url: '/catalogo/DEMO',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -241,7 +241,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-condicion', {
-                url: '/catalogue/condicion',
+                url: '/catalogo/condicion',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -252,7 +252,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-status-unilever', {
-                url: '/catalogue/status_unilever',
+                url: '/catalogo/estatus_unilever',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -263,7 +263,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-status-com', {
-                url: '/catalogue/status_com',
+                url: '/catalogo/estatus_com',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -274,7 +274,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-sticker', {
-                url: '/catalogue/sticker',
+                url: '/catalogo/etiqueta',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -285,7 +285,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-pediment', {
-                url: '/catalogue/pediments',
+                url: '/catalogo/pedimento',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -296,7 +296,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.consumable-category', {
-                url: '/catalogue/categoria_insumo',
+                url: '/catalogo/categoria_insumo',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -307,7 +307,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.component-type', {
-                url: '/catalogue/tipo_componente',
+                url: '/catalogo/tipo_componente',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -318,7 +318,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.consumable-brand', {
-                url: '/catalogue/marca_insumo',
+                url: '/catalogo/marca_insumo',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -329,7 +329,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.consumable-model', {
-                url: '/catalogue/modelo_insumo',
+                url: '/catalogo/modelo_insumo',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -340,7 +340,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.werehouse', {
-                url: '/catalogue/werehouse',
+                url: '/catalogo/bodega',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -351,7 +351,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.reason-not-capitalized', {
-                url: '/catalogue/reason_not_labeled',
+                url: '/catalogo/motivo_no_capitalizado',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -362,7 +362,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.status-not-capitalized', {
-                url: '/catalogue/status_not_labeled',
+                url: '/catalogo/estatus_no_capitalizado',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -373,7 +373,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.action', {
-                url: '/catalogue/action',
+                url: '/catalogo/accion',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -384,7 +384,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.symptom', {
-                url: '/catalogue/symptom',
+                url: '/catalogo/sintoma',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -395,7 +395,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.failure-type', {
-                url: '/catalogue/failure_type',
+                url: '/catalogo/tipo_falla',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -406,7 +406,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.next-step', {
-                url: '/catalogue/next_step',
+                url: '/catalogo/siguiente_paso',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
@@ -417,7 +417,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.com-incidence', {
-                url: '/catalogue/com_incidence',
+                url: '/catalogo/incidencia_com',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
