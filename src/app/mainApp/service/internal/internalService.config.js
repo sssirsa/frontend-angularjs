@@ -16,15 +16,15 @@
                 controller: 'checklistController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.diagnostic', {
-                url: '/diagnostic',
+            .state('triangular.admin-default.diagnosis', {
+                url: '/diagnostico',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/service/internal/diagnostic/diagnostic.tpl.html',
-                controller: 'DiagnosticController',
+                templateUrl: 'app/mainApp/service/internal/diagnosis/diagnosis.tmpl.html',
+                controller: 'diagnosisController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.etapa', {
@@ -69,8 +69,8 @@
                         type: 'link'
                     },
                     {
-                        name: 'MAIN.MENU.LINE',
-                        state: 'triangular.admin-default.asignacionLinea',
+                        name: 'DIAGNOSIS',
+                        state: 'triangular.admin-default.diagnosis',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     }

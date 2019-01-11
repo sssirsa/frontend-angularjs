@@ -198,8 +198,8 @@
             "PERSON": "Asigna persona",
             "PERSON_ASSIGN": "Persona a asignar",
             "NO_RESULTS": "No se encontraron resultados para",
-            "REQUESTED_CABINETS":"Cabinets solicitados",
-            "TOASTR_SUCCESS":"Usuario asignado correctamente a Servicio Punto de Venta",
+            "REQUESTED_CABINETS": "Cabinets solicitados",
+            "TOASTR_SUCCESS": "Usuario asignado correctamente a Servicio Punto de Venta",
             "LABEL": {
                 "STORE_NAME": "Nombre del establecimiento",
                 "OWNER": "Encargado",
@@ -215,38 +215,61 @@
             }
         }
     },
-
-    "PREREQUEST_TRANSLATE":{
-        "PREREQUESTS":"Pre solicitudes.",
-        "FOLIO":"Folio",
-        "STORE":"Establecimiento.",
-        "STORE_NAME":"Nombre del establecimiento. ",
-        "STREET":"Calle",
-        "OWNER":"Nombre del Encargado. ",
-        "OWNER_PHONE":"Teléfono del Encargado",
-        "FIND_STORE":"Localiza la Tienda",
-        "CREATION_DATE":"Fecha de Creación",
-        "TIME_SCHEDULING":"Horario de Atención deseado",
-        "OBSERVATIONS":"Observaciones del Cliente",
-        "NUMBER":"No. ",
-        "STREET_NEAR":"Entre calle ",
-        "STREET_NEAR2":"Y calle ",
-        "LOCALITY":"Localidad",
-        "STATE":"Estado.",
-        "CABINET":"Cabinet.",
-        "DATE":"Fecha de Solicitud.",
-        "CLIENT_COMMENTS":"Observaciones del Cliente.",
-        "PHOTOS":"Evidencias Fotograficas",
-        "CREATE_REQUEST":"Levantar Solicitud",
-        "CANCEL_PREREQUEST":"Cancelar pre solicitud",
-        "MSG":{
-            "CABINET_NOT_FOUND":"Cabinet No registrado, es necesaria creación de Cabinet",
-            "UNEXPECTED":"Error inesperado, intente mas tarde",
-            "CREATION_SUCCESFULL":"Creación de la Solicitud exitosa",
-            "CANCELATION_SUCCESFULL":"Cancelación Exitosa",
-            "PREREQUESTNOTFOUND":"Pre solicitud no Encontrada"
+    "PREREQUEST_TRANSLATE": {
+        "PREREQUESTS": "Pre solicitudes.",
+        "FOLIO": "Folio",
+        "STORE": "Establecimiento.",
+        "STORE_NAME": "Nombre del establecimiento. ",
+        "STREET": "Calle",
+        "OWNER": "Nombre del Encargado. ",
+        "OWNER_PHONE": "Teléfono del Encargado",
+        "FIND_STORE": "Localiza la Tienda",
+        "CREATION_DATE": "Fecha de Creación",
+        "TIME_SCHEDULING": "Horario de Atención deseado",
+        "OBSERVATIONS": "Observaciones del Cliente",
+        "NUMBER": "No. ",
+        "STREET_NEAR": "Entre calle ",
+        "STREET_NEAR2": "Y calle ",
+        "LOCALITY": "Localidad",
+        "STATE": "Estado.",
+        "CABINET": "Cabinet.",
+        "DATE": "Fecha de Solicitud.",
+        "CLIENT_COMMENTS": "Observaciones del Cliente.",
+        "PHOTOS": "Evidencias Fotograficas",
+        "CREATE_REQUEST": "Levantar Solicitud",
+        "CANCEL_PREREQUEST": "Cancelar pre solicitud",
+        "MSG": {
+            "CABINET_NOT_FOUND": "Cabinet No registrado, es necesaria creación de Cabinet",
+            "UNEXPECTED": "Error inesperado, intente mas tarde",
+            "CREATION_SUCCESFULL": "Creación de la Solicitud exitosa",
+            "CANCELATION_SUCCESFULL": "Cancelación Exitosa",
+            "PREREQUESTNOTFOUND": "Pre solicitud no Encontrada"
         }
+    },
+    "SERVICES":{
+        "INFO_CABINET":"Información del Cabinet",
+        "INFO_SERVICE":"Información del Servicio Actual",
+        "PAST_SERVICES":"Servicios Anteriores",
+        "ASSET_ID":"Económico:"
+    },
 
+    "DIAGNOSIS": {
+        "DIAGNOSIS": "Diagnóstico de Cabinet",
+        "SEARCH_CABINET":"Buscar Cabinet",
+        "ASSET_DIAGNOSIS":"Proceso de Diagnóstico de Cabinet",
+        "SHORT_NAME":"Nombre corto",
+        "SHORT_NAME_DESC":"Nombre corto que define la falla del Cabinet en pocas palabras",
+        "DESCRIPTION":"Descripción",
+        "IN_TIME":"Terminación en Tiempo",
+        "TEMP_COM":"Temperatura Compresor",
+        "INT_TEMP":"Temperatura Interna",
+        "AMP_ARRAN":"Amperaje de Arranque",
+        "AMP_TRAB":"Amperaje de Trabajo",
+        "ACTIONS":"Acciones Realizadas"
+    },
+    "INCIDENCE":{
+        "REPORT_INCIDENCE":"Levantar incidencia"
 
     }
+
 }
