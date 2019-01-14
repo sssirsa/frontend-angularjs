@@ -11,7 +11,7 @@
     </md-toolbar>
     <div layout="column">
 
-        <md-card layout="column" layout-align="center center" layout-padding
+        <div layout="column" layout-align="center center" layout-padding
                  cg-busy="{promise:vm.personLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
 
             <form name="modalFormAssigned">
@@ -91,24 +91,63 @@
                         <span>hora maxima: {{vm.horamax}}</span>
                     </md-input-container>
                 </div>
-            </md-content>
 
-            <md-content>
-                <div layout="row"
-                     layout-align="end end"
-                     layout-sm="column"
-                     layout-xs="column"
-                     layout-align-sm="start stretch"
-                     layout-align-xs="start stretch">
-                    <md-button
-                        aria-label="assign" ng-click="vm.assign()"
-                        class="md-raised md-primary" ng-disabled="modalFormAssigned.$invalid">
-                        <md-icon md-font-icon="fa fa-save"></md-icon>
-                    </md-button>
-                </div>
+                <md-content>
+                    <div layout="row"
+                         layout-align="end end"
+                         layout-sm="column"
+                         layout-xs="column"
+                         layout-align-sm="start stretch"
+                         layout-align-xs="start stretch">
+                        <md-button
+                            aria-label="assign" ng-click="vm.assign()"
+                            class="md-raised md-primary" ng-disabled="modalFormAssigned.$invalid">
+                            <md-icon md-font-icon="fa fa-save"></md-icon>
+                        </md-button>
+                    </div>
+                </md-content>
             </md-content>
-
             </form>
-        </md-card>
+        </div>
+
+        <div layout="column" layout-align="center center" layout-padding ng-if="vm.salePoint.persona">
+            <div layout="row"
+                 cg-busy="{promise:vm.worklistLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+                <div layout="column" layout-align="center center">
+
+                    <div ng-if="vm.chip.length > 0">
+                        <span translate="SALEPOINT_REQUEST.ASSIGN.ASSIGNED"></span>
+                    </div>
+                    <div ng-if="vm.chip.length <= 0">
+                        <span translate="SALEPOINT_REQUEST.ASSIGN.NO_RESULTS"></span>
+                    </div>
+
+                    <md-chips class="custom-chips" ng-model="vm.chip" readonly="true" ng-if="vm.chip.length > 0">
+                        <md-chip-template ng-click="vm.view($chip)">
+                            <span>
+                              <strong>{{$chip.servicio}}</strong>
+                            </span>
+                        </md-chip-template>
+                    </md-chips>
+                </div>
+            </div>
+        </div>
+
+        <div layout="row" ng-if="vm.infoChip" layout-padding>
+            <md-card flex layout-padding>
+                <div layout="colum" layout-align="end start">
+                    <div ng-click="vm.clean()">x</div>
+                </div>
+                <div class="md-list-item-text">
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN.LABELS.FOLIO"></h5>
+                    <h6>{{vm.infoChip.folio}}</h6>
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE"></h5>
+                    <h6>{{vm.infoChip.nombreEstablecimiento}}</h6>
+                    <h5 translate="SALEPOINT_REQUEST.ASSIGN_DETAIL.LABEL.STREET"></h5>
+                    <h6>{{vm.infoChip.direccion}}</h6>
+                </div>
+            </md-card>
+        </div>
+
     </div>
 </md-dialog>

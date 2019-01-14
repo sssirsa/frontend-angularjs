@@ -10,9 +10,9 @@
      * @constructor
      */
     function Helper($rootScope,
-                    $log,
-                    $window,
-                    NotificationPanel) {
+        $log,
+        $window,
+        NotificationPanel) {
 
         var acceptFileTypes = /(jpe?g|png|bmp|vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.ms-excel)$/i;
         return {
@@ -132,13 +132,13 @@
         function removeBlankStrings(element) {
             for (var property in element) {
                 if (element.hasOwnProperty(property)) {
-                    if (property === "" || property === '') {
+                    if (element[property] === ""
+                        || element[property] === '') {
                         delete element[property];
                     }
                 }
             }
             return element;
         }
-
     }
 })();

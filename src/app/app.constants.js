@@ -421,6 +421,15 @@
             //New module separation
             entries_departures: {
                 base: 'entries-departures',
+                catalogues: {
+                    base: 'catalogues',
+                    udn: 'udn',
+                    project: 'project',
+                    transport_line: 'transport_line',
+                    transport_type: 'transport_type',
+                    sticker: 'sticker',
+                    pediments: 'pediments'
+                },
                 departures: {
                     base: 'departures',
                     new: 'news',
@@ -451,29 +460,65 @@
             genesis: {
                 base: 'genesis'
             },
+            inventory: {
+                base: 'inventory',
+                catalogues: {
+                    base: 'catalogues',
+                    supplier: 'proveedor',
+                    consumable_category: 'categoria_insumo',
+                    component_type: 'tipo_componente',
+                    consumable_brand: 'marca_insumo',
+                    consumable_model: 'modelo_insumo'
+                }
+            },
             management: {
                 base: 'management',
                 inventory: {
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
-                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
+                    asset_location: 'asset_location'
+                },
+                catalogues: {
+                    base: 'catalogue',
+                    category: 'category',
+                    cabinet_brand: 'marca_cabinet',
+                    cabinet_model: 'modelo_cabinet',
+                    condition: 'condition',
+                    equipment_type: 'tipo_equipo',
+                    reason_not_labeled: 'motivo_no_capitalizado',
+                    status_com: 'status_com',
+                    status_not_labeled: 'estatus_no_capitalizado',
+                    status_unilever: 'status_unilever',
+                    storage: 'warehouse',
+                    subsidiary: 'subsidiary'
                 }
             },
             mobile: {
-                base:'mobile'
+                base: 'mobile'
             },
             technical_service: {
-                base: '' //TODO: Update when known
+                base: 'technical_services',
+                catalogues: {
+                    base: 'catalogues',
+                    action: 'action',
+                    symptom: 'symptom',
+                    failure_type: 'failure_type',
+                    next_step: 'next_step',
+                    com_incidence: 'com_incidence'
+                }
             },
+
+
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
-            condicion: 'condition',
-            estatus_unilever: 'status_unilever',
-            estatus_com: 'status_com',
-            estatus_no_capitalizado: 'estatus_no_capitalizado',
+            //condicion: 'condition',
+            //estatus_unilever: 'status_unilever',
+            //estatus_com: 'status_com',
+            //estatus_no_capitalizado: 'estatus_no_capitalizado',
             no_labeled_unilever: 'cabinet_no_labeled_unilever',
-            motivo_no_labeled: 'motivo_no_capitalizado',
+            //motivo_no_labeled: 'motivo_no_capitalizado',
             cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet_unilever',
@@ -482,7 +527,7 @@
             cabinet_entrada: 'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos: 'catalogo_insumos',
-            categoria: 'category',
+            //categoria: 'category',
             checklist: 'CheckList',
             cliente: 'persona_capturista',
             cliente_grupos: 'cliente_groups',
@@ -490,12 +535,13 @@
             credentials: 'credenciales',
             diagnostico: 'diagnostico',
             diagnostico_cabinet: 'diagnostico_cabinet',
-            establecimiento: 'establecimiento',
-            establecimiento_template: 'https://goo.gl/kAQrxt',
-            estado: 'estado',
-            estatus_com: 'status_com',
-            estatus_no_capitalizado: 'estatus_no_capitalizado',
-            estatus_unilever: 'status_unilever',
+            entrada_salida: 'entrada_salida',
+            salida: 'exit',
+            remision: 'remision',
+            normalize_cabinets: 'normalize',
+            entrada_masiva: 'mass_upload',
+            salida_masiva: 'mass_exit',
+            //udn: 'udn',
             etapa: 'etapa',
             etapa_servicio: 'etapa_servicio',
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
@@ -503,31 +549,15 @@
             grupos: 'groups',
             grupo_persona: 'grupo_persona',
             insumo: 'insumo',
-            insumo_usado: 'insumo_usado',
-            inventory: {
-                base: 'inventory',
-                cabinet_unilever:'cabinet_unilever'
-            },
-            linea_transporte: 'linea_transporte',
+            //linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             label: 'label',
-            map: 'https://maps.googleapis.com/maps/api/staticmap',
             marca: 'marca_cabinet',
-            massive: {
-                store: 'massive/store'
-            },
-            modelo_cabinet: 'modelo_cabinet',
-            motivo_no_labeled: 'motivo_no_capitalizado',
-            municipio: 'municipio',
-            normalize_cabinets: 'normalize',
-            no_labeled_unilever: 'cabinet_no_labeled_unilever',
-            pedimento:'',
             persona: 'persona',
             persona_admin: 'persona_admin',
-            preRequest: 'pre_solicitud',
-            proveedor: 'proveedor',
-            proyecto: 'proyecto',
-            remision: 'remision',
+            tecnicosDisponibles: 'employees',
+            //proveedor: 'proveedor',
+            //proyecto: 'proyecto',
             report_builder: 'report_builder',
             reporte_insumos: 'reports/insumos',
             requestClient: 'technical_request',
@@ -540,147 +570,152 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            solicitud_pv: 'solicitud',
-            sucursal: 'sucursal',
-            tecnicosDisponibles: 'employees',
-            tipo_equipo: 'tipo_equipo',
-            tipo_transporte: 'tipo_transporte',
-            udn: 'udn',
+            preRequest: 'pre_solicitud',
+            requestClient: 'technical_request',
+            establecimiento: 'establecimiento',
+            establecimiento_template: 'https://goo.gl/kAQrxt',
+            //sucursal: 'sucursal',
+            //tipo_equipo: 'tipo_equipo',
+            //tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
         })
-        .constant('QUERIES', {
-            store: {
-                by_state: '?localidad__municipio__estado_id=',
-                by_city: '?localidad__municipio_id=',
-                by_locality: '?localidad_id=',
-                by_postal_code: '?localidad__codigo_postal=',
-                by_economic: '/lookup/'
-            },
-            city: {
-                by_state: '?estado__id='
-            },
-            locality: {
-                by_state: '?municipio__estado__id=',
-                by_city: '?municipio__id='
-            }
-        })
-        .constant('CONFIGS', {
-            ADTConfig: {
-                calType: 'gregorian',
-                dtpType: 'date',
-                format: 'DD/MM/YYYY',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                todayStr: 'Hoy',
-                hideTimeSelector: true,
-                position: 'top',
-                isReadOnly: true,
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            ADTConfigBottom: {
-                calType: 'gregorian',
-                dtpType: 'date',
-                format: 'DD/MM/YYYY',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                todayStr: 'Hoy',
-                hideTimeSelector: true,
-                position: 'Bottom',
-                isReadOnly: true,
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            ADTConfigTime: {
-                calType: 'gregorian',
-                dtpType: 'date&time',
-                format: 'DD/MM/YYYY hh:mm',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                isReadOnly: true,
-                todayStr: 'Hoy',
-                position: 'top',
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            }
-        })
-        .constant('SCORES',
-            [
-                {
-                    value: 0,
-                    label: '☆☆☆☆☆'
-                },
-                {
-                    value: 1,
-                    label: '★☆☆☆☆'
-                },
-                {
-                    value: 2,
-                    label: '★★☆☆☆'
-                },
-                {
-                    value: 3,
-                    label: '★★★☆☆'
-                },
-                {
-                    value: 4,
-                    label: '★★★★☆'
-                },
-                {
-                    value: 5,
-                    label: '★★★★★'
-                }]
-        )
-        .constant('STORE_SEGMENTATION',
-            [
-                {
-                    value: 5,
-                    label: 'Platino',
-                    class: 'store_platinum'
-                },
-                {
-                    value: 4,
-                    label: 'Oro',
-                    class: 'store_gold'
-                },
-                {
-                    value: 3,
-                    label: 'Plata',
-                    class: 'store_silver'
-                },
-                {
-                    value: 2,
-                    label: 'Bronce',
-                    class: 'store_bronze'
-                },
-                {
-                    value: 1,
-                    label: 'Bajo Bronce',
-                    class: 'store_low_bronze'
-                },
-                {
-                    value: 0,
-                    label: 'Rojo',
-                    class: 'store_red'
-                }]
-        )
-        .constant('KEYS', {
-            MAPS_KEY: 'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
-        })
-        .constant('PAGINATION', {
-            total: 'count',
-            next: 'next',
-            previous: 'previous',
-            elements: 'results'
-        })
-        .constant('MANAGEMENT',{
-            project: {
-                catalogue: '/catalogue/',
-                inventory: '/inventory/'
-            },
-            baseManagement: '/management'
-        });
+.constant('QUERIES', {
+    store: {
+        by_state: '?localidad__municipio__estado_id=',
+        by_city: '?localidad__municipio_id=',
+        by_locality: '?localidad_id=',
+        by_postal_code: '?localidad__codigo_postal=',
+        by_economic: '/lookup/'
+    },
+    city: {
+        by_state: '?estado__id='
+    },
+    locality: {
+        by_state: '?municipio__estado__id=',
+        by_city: '?municipio__id='
+    },
+    cabinet_model: {
+        by_brand: '?marca__id='
+    }
+})
+.constant('CONFIGS', {
+    ADTConfig: {
+        calType: 'gregorian',
+        dtpType: 'date',
+        format: 'DD/MM/YYYY',
+        default: 'today',
+        autoClose: true,
+        multiple: false,
+        todayStr: 'Hoy',
+        hideTimeSelector: true,
+        position: 'top',
+        isReadOnly: true,
+        daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    },
+    ADTConfigBottom: {
+        calType: 'gregorian',
+        dtpType: 'date',
+        format: 'DD/MM/YYYY',
+        default: 'today',
+        autoClose: true,
+        multiple: false,
+        todayStr: 'Hoy',
+        hideTimeSelector: true,
+        position: 'Bottom',
+        isReadOnly: true,
+        daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    },
+    ADTConfigTime: {
+        calType: 'gregorian',
+        dtpType: 'date&time',
+        format: 'DD/MM/YYYY hh:mm',
+        default: 'today',
+        autoClose: true,
+        multiple: false,
+        isReadOnly: true,
+        todayStr: 'Hoy',
+        position: 'top',
+        daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    }
+})
+.constant('SCORES',
+[
+    {
+        value: 0,
+        label: '☆☆☆☆☆'
+    },
+    {
+        value: 1,
+        label: '★☆☆☆☆'
+    },
+    {
+        value: 2,
+        label: '★★☆☆☆'
+    },
+    {
+        value: 3,
+        label: '★★★☆☆'
+    },
+    {
+        value: 4,
+        label: '★★★★☆'
+    },
+    {
+        value: 5,
+        label: '★★★★★'
+    }]
+)
+.constant('STORE_SEGMENTATION',
+[
+    {
+        value: 5,
+        label: 'Platino',
+        class: 'store_platinum'
+    },
+    {
+        value: 4,
+        label: 'Oro',
+        class: 'store_gold'
+    },
+    {
+        value: 3,
+        label: 'Plata',
+        class: 'store_silver'
+    },
+    {
+        value: 2,
+        label: 'Bronce',
+        class: 'store_bronze'
+    },
+    {
+        value: 1,
+        label: 'Bajo Bronce',
+        class: 'store_low_bronze'
+    },
+    {
+        value: 0,
+        label: 'Rojo',
+        class: 'store_red'
+    }]
+)
+.constant('KEYS', {
+    MAPS_KEY: 'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
+})
+.constant('PAGINATION', {
+    total: 'count',
+    next: 'next',
+    previous: 'previous',
+    elements: 'results'
+})
+.constant('MANAGEMENT', {
+    project: {
+        catalogue: '/catalogue/',
+        inventory: '/inventory/'
+    },
+    baseManagement: '/management'
+});
 })();
+

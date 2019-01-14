@@ -8,7 +8,8 @@
         Translate,
         toastr,
         ErrorHandler,
-        $mdDialog
+        $mdDialog,
+        Helper
     ) {
         var vm = this;
 
@@ -106,7 +107,6 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            console.log(cabinetSuccessCallback);
                             //Cabinet can enter
                             if (cabinetSuccessCallback.can_enter) {
                                 //Cabinet exist in database
@@ -206,6 +206,7 @@
 
         saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
+            entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createNew(entry)
@@ -216,7 +217,6 @@
                     );
                 })
                 .catch(function (errorCallback) {
-                    console.error(errorCallback);
                     ErrorHandler.errorTranslate(errorCallback);
                 });
         }
