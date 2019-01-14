@@ -421,6 +421,15 @@
             //New module separation
             entries_departures: {
                 base: 'entries-departures',
+                catalogues: {
+                    base: 'catalogues',
+                    udn: 'udn',
+                    project: 'project',
+                    transport_line: 'transport_line',
+                    transport_type: 'transport_type',
+                    sticker: 'sticker',
+                    pediments: 'pediments'
+                },
                 entries: {
                     base: 'entries',
                     new: 'news',
@@ -428,15 +437,6 @@
                     unrecognizable: 'no_labeled',
                     warranty: 'warranties',
                     addCabinet: 'add_cabinet',
-                    catalogues: {
-                        base: 'catalogues',
-                        udn: 'udn',
-                        project: 'project',
-                        transport_line: 'transport_line',
-                        transport_type: 'transport_type',
-                        sticker: 'sticker',
-                        pediments: 'pediments'
-                    },
                     close: 'close',
                     control: {
                         base: 'control',
@@ -539,7 +539,7 @@
             //linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             label: 'label',
-            //marca: 'marca_cabinet',
+            marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
             tecnicosDisponibles: 'employees',
