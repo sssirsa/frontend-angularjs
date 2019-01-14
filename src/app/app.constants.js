@@ -421,10 +421,6 @@
             //New module separation
             entries_departures: {
                 base: 'entries-departures',
-                catalogues: {
-                    base: 'catalogues',
-                    petition:'pediments'
-                },
                 entries: {
                     base: 'entries',
                     new: 'news',
@@ -432,39 +428,84 @@
                     unrecognizable: 'no_labeled',
                     warranty: 'warranties',
                     addCabinet: 'add_cabinet',
+                    catalogues: {
+                        base: 'catalogues',
+                        udn: 'udn',
+                        project: 'project',
+                        transport_line: 'transport_line',
+                        transport_type: 'transport_type',
+                        sticker: 'sticker',
+                        pediments: 'pediments'
+                    },
                     close: 'close',
                     control: {
                         base: 'control',
-                        cabinet_in_subsidiary:'cabinet_in_sucursal'
+                        cabinet_in_subsidiary: 'cabinet_in_sucursal'
                     }
                 }
             },
             genesis: {
                 base: 'genesis'
             },
+            inventory:{
+                base: 'inventory',
+                catalogues: {
+                    base: 'catalogues',
+                    supplier: 'proveedor',
+                    consumable_category: 'categoria_insumo',
+                    component_type: 'tipo_componente',
+                    consumable_brand: 'marca_insumo',
+                    consumable_model: 'modelo_insumo'
+                }
+            },
             management: {
                 base: 'management',
                 inventory: {
                     base: 'inventory',
                     cabinet: 'cabinet_unilever',
-                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever'
+                    unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
+                    asset_location:'asset_location'
+                },
+                catalogues:{
+                    base: 'catalogue',
+                    subsidiary: 'subsidiary',
+                    category: 'category',
+                    status_unilever: 'status_unilever',
+                    status_com: 'status_com',
+                    condition: 'condition',
+                    equipment_type: 'tipo_equipo',
+                    cabinet_brand: 'marca_cabinet',
+                    cabinet_model: 'modelo_cabinet',
+                    storage: 'warehouse',
+                    reason_not_labeled: 'motivo_no_capitalizado',
+                    status_not_labeled: 'estatus_no_capitalizado'
                 }
             },
             mobile: {
                 base:'mobile'
             },
             technical_service: {
-                base: '' //TODO: Update when known
+                base: 'technical_services',
+                catalogues:{
+                    base: 'catalogues',
+                    action: 'action',
+                    symptom: 'symptom',
+                    failure_type: 'failure_type',
+                    next_step: 'next_step',
+                    com_incidence: 'com_incidence'
+                }
             },
+
+
             //TODO: Re group under the proper category
             //When done, delete all below this line
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
-            condicion: 'condition',
-            estatus_unilever: 'status_unilever',
-            estatus_com: 'status_com',
-            estatus_no_capitalizado: 'estatus_no_capitalizado',
+            //condicion: 'condition',
+            //estatus_unilever: 'status_unilever',
+            //estatus_com: 'status_com',
+            //estatus_no_capitalizado: 'estatus_no_capitalizado',
             no_labeled_unilever: 'cabinet_no_labeled_unilever',
-            motivo_no_labeled: 'motivo_no_capitalizado',
+            //motivo_no_labeled: 'motivo_no_capitalizado',
             cabinet_unilever: 'cabinet_unilever',
             cabinet_pv: 'cabinet_pv',
             cabinet: 'cabinet_unilever',
@@ -473,7 +514,7 @@
             cabinet_entrada: 'cabinet_input',
             cabinet_entrada_salida: 'cabinet_entrada_salida',
             catalogo_insumos: 'catalogo_insumos',
-            categoria: 'category',
+            //categoria: 'category',
             checklist: 'CheckList',
             cliente: 'persona_capturista',
             cliente_grupos: 'cliente_groups',
@@ -481,12 +522,13 @@
             credentials: 'credenciales',
             diagnostico: 'diagnostico',
             diagnostico_cabinet: 'diagnostico_cabinet',
-            establecimiento: 'establecimiento',
-            establecimiento_template: 'https://goo.gl/kAQrxt',
-            estado: 'estado',
-            estatus_com: 'status_com',
-            estatus_no_capitalizado: 'estatus_no_capitalizado',
-            estatus_unilever: 'status_unilever',
+            entrada_salida: 'entrada_salida',
+            salida: 'exit',
+            remision: 'remision',
+            normalize_cabinets: 'normalize',
+            entrada_masiva: 'mass_upload',
+            salida_masiva: 'mass_exit',
+            //udn: 'udn',
             etapa: 'etapa',
             etapa_servicio: 'etapa_servicio',
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
@@ -494,31 +536,15 @@
             grupos: 'groups',
             grupo_persona: 'grupo_persona',
             insumo: 'insumo',
-            insumo_usado: 'insumo_usado',
-            inventory: {
-                base: 'inventory',
-                cabinet_unilever:'cabinet_unilever'
-            },
-            linea_transporte: 'linea_transporte',
+            //linea_transporte: 'linea_transporte',
             localidad: 'localidad',
             label: 'label',
-            map: 'https://maps.googleapis.com/maps/api/staticmap',
-            marca: 'marca_cabinet',
-            massive: {
-                store: 'massive/store'
-            },
-            modelo_cabinet: 'modelo_cabinet',
-            motivo_no_labeled: 'motivo_no_capitalizado',
-            municipio: 'municipio',
-            normalize_cabinets: 'normalize',
-            no_labeled_unilever: 'cabinet_no_labeled_unilever',
-            pedimento:'',
+            //marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
-            preRequest: 'pre_solicitud',
-            proveedor: 'proveedor',
-            proyecto: 'proyecto',
-            remision: 'remision',
+            tecnicosDisponibles: 'employees',
+            //proveedor: 'proveedor',
+            //proyecto: 'proyecto',
             report_builder: 'report_builder',
             reporte_insumos: 'reports/insumos',
             requestClient: 'technical_request',
@@ -531,12 +557,13 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            solicitud_pv: 'solicitud',
-            sucursal: 'sucursal',
-            tecnicosDisponibles: 'employees',
-            tipo_equipo: 'tipo_equipo',
-            tipo_transporte: 'tipo_transporte',
-            udn: 'udn',
+            preRequest: 'pre_solicitud',
+            requestClient: 'technical_request',
+            establecimiento: 'establecimiento',
+            establecimiento_template: 'https://goo.gl/kAQrxt',
+            //sucursal: 'sucursal',
+            //tipo_equipo: 'tipo_equipo',
+            //tipo_transporte: 'tipo_transporte',
             unidad: 'unidad',
         })
         .constant('QUERIES', {
@@ -675,3 +702,4 @@
             baseManagement: '/management'
         });
 })();
+

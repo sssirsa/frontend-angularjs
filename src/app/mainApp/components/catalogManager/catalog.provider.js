@@ -68,6 +68,34 @@
             }
         };
 
+        vm.managementCatalog = {
+            url: null,
+            getByID: function (id) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).one(vm.managementCatalog.url, id)
+                    .customGET();
+            },
+            list: function () {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url)
+                    .customGET();
+            },
+            create: function (object) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url)
+                    .customPOST(object);
+            },
+            update: function (id, object) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url).all(id)
+                    .customPUT(object);
+            },
+            remove: function (id) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url)
+                    .customDELETE(id, null, { 'content-type': 'application/json' });
+            },
+            search: function (query) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url + '?' + query)
+                    .customGET();
+            }
+        };
+
         vm.genericCatalog = {
             url: null,
             getByID: function (id) {
@@ -147,7 +175,8 @@
         var service = {
             mobile: vm.mobileCatalog,
             web: vm.webCatalog,
-            generic: vm.genericCatalog
+            generic: vm.genericCatalog,
+            management:vm.managementCatalog
         };
 
         return service;

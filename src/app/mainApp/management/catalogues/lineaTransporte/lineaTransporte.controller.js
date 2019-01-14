@@ -6,12 +6,14 @@
         .controller('LineaTransporteController', LineaTransporteController)
 
     /* @ngInject */
-    function LineaTransporteController(URLS, LineaTransporte,Translate) {
-
+    function LineaTransporteController(URLS, LineaTransporte, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.linea_transporte;
-        vm.kind = 'Web';
+        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogues.base + '/' + URLS.entries_departures.entries.catalogues.transport_line);
+
+        vm.url = entriesUrl;
+        vm.kind = 'entries_departures';
         vm.name = Translate.translate('TRANSPORT_LINE.FORM.LABEL.TRANSPORT_LINE');
 
         //Labels
@@ -26,7 +28,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas lineas de transporte';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Linea de Transporte';
@@ -174,7 +176,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Linea de Transporte',
+                    title: 'Búsqueda de Linea de Transporte',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Linea de Transporte'
                 },
