@@ -8,7 +8,8 @@
         Translate,
         toastr,
         ErrorHandler,
-        $mdDialog
+        $mdDialog,
+        Helper
     ) {
         var vm = this;
 
@@ -184,6 +185,7 @@
 
         saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
+            entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createWarranty(entry)

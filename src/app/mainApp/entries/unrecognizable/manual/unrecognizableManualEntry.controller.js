@@ -8,7 +8,8 @@
         Translate,
         toastr,
         ErrorHandler,
-        $mdDialog
+        $mdDialog,
+        Helper
     ) {
         var vm = this;
 
@@ -46,7 +47,6 @@
             vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
             vm.selectedTab = 0;
-            console.debug(vm.entry);
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -185,6 +185,7 @@
 
         saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
+            entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createUnrecognizable(entry)
