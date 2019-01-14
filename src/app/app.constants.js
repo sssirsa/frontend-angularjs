@@ -468,17 +468,17 @@
                 },
                 catalogues:{
                     base: 'catalogue',
-                    subsidiary: 'subsidiary',
                     category: 'category',
-                    status_unilever: 'status_unilever',
-                    status_com: 'status_com',
-                    condition: 'condition',
-                    equipment_type: 'tipo_equipo',
                     cabinet_brand: 'marca_cabinet',
                     cabinet_model: 'modelo_cabinet',
-                    storage: 'warehouse',
+                    condition: 'condition',
+                    equipment_type: 'tipo_equipo',
                     reason_not_labeled: 'motivo_no_capitalizado',
-                    status_not_labeled: 'estatus_no_capitalizado'
+                    status_com: 'status_com',
+                    status_not_labeled: 'estatus_no_capitalizado',
+                    status_unilever: 'status_unilever',
+                    storage: 'warehouse',
+                    subsidiary: 'subsidiary'
                 }
             },
             mobile: {
@@ -580,6 +580,9 @@
             locality: {
                 by_state: '?municipio__estado__id=',
                 by_city: '?municipio__id='
+            },
+            cabinet_model: {
+                by_brand:'?marca__id='
             }
         })
         .constant('CONFIGS', {

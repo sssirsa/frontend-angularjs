@@ -152,7 +152,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Web',
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -298,7 +298,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Web',
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -470,7 +470,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Web',
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -642,7 +642,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Web',
+                            kind: 'Generic',
                             name: Translate.translate('ENTRIES.OBSOLETE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
