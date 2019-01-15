@@ -1,3 +1,24 @@
 <div>
-    
+    <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+         layout-align="center center">
+        <div layout="row" layout-align="center center">
+            <md-icon md-font-icon="fas fa-cogs"></md-icon>
+            <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
+        </div>
+        <md-input-container flex="100" layout-align="center end">
+            <div range-spinner
+                 range-min="0"
+                 range-step="1"
+                 range-max="6"
+                 range-default-value=""
+                 range-decimal-precision="1"
+                 range-model="vm.checklist.rodajas"
+                 accept-decimal=false
+                 name-of-field="Rodajas"
+                 id-of-field="rangeFieldId">
+            </div>
+
+        </md-input-container>
+    </div>
+
 </div>

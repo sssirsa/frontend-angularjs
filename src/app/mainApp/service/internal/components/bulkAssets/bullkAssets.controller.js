@@ -10,12 +10,13 @@
             controller: bulkAssetsController,
             bindings: {
                 max_stock: '<',
-                etapa_id: '<',
-                bulkAsset: '&'
+                bulkAsset:'<',
+                bulkAssetSelected: '&'
             }
         });
 
     function bulkAssetsController(){
+
         var vm = this;
 
 
