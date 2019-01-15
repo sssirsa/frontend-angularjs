@@ -36,6 +36,18 @@
             }
         };
 
+        vm.managementCatalog = {
+            url: null,
+            list: function () {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url)
+                    .customGET();
+            },
+            search: function (query) {
+                return API.all(URLS.management.base).all(URLS.management.catalogues.base).all(vm.managementCatalog.url + '?' + query)
+                    .customGET();
+            }
+        };
+
         vm.genericCatalog = {
             url: null,
             list: function () {
@@ -67,7 +79,8 @@
         var service = {
             mobile: vm.mobileCatalog,
             web: vm.webCatalog,
-            generic: vm.genericCatalog
+            generic: vm.genericCatalog,
+            management:vm.managementCatalog
         };
 
         return service;

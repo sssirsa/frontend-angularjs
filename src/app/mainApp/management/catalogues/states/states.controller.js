@@ -26,7 +26,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Estados';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Estado';
@@ -112,7 +112,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Estado',
+                    title: 'Búsqueda de Estado',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Estado'
                 },

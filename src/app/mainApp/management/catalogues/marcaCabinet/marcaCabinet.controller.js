@@ -6,11 +6,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('MarcaCabinetController',MarcaCabinetController);
 
-    function MarcaCabinetController(URLS, Translate) {
+    function MarcaCabinetController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.marca;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_brand);
+
+        vm.url = managementUrl;
+        vm.kind = 'Management';
         vm.name = Translate.translate('Cabinet_Brand.title');
 
         //Labels
@@ -25,7 +28,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Marca';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Marcas';
@@ -39,7 +42,7 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
+                        model: 'nombre',
                         label: 'Nombre',
                         required: true,
                         validations:{
@@ -50,8 +53,8 @@
                     },
                     {
                         type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria',
+                        model: 'descripcion',
+                        label: 'Descripción',
                         hint: 'Cabinet, carrito, etc.',
                         required: true,
                         validations: {
@@ -72,7 +75,7 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
+                        model: 'nombre',
                         label: 'Nombre',
                         required: true,
                         validations: {
@@ -83,8 +86,8 @@
                     },
                     {
                         type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria',
+                        model: 'descripcion',
+                        label: 'Descripción',
                         hint:'Cabinet, carrito, etc.',
                         required: true,
                         validations: {
@@ -120,13 +123,13 @@
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripcion'
+                        model: 'nombre',
+                        label: 'Nombre'
                     },
                     {
                         type: 'text',
-                        model: 'categoria',
-                        label: 'Categoria'
+                        model: 'descripcion',
+                        label: 'Descripción'
                     }
                 ],
                 softDelete: {
@@ -136,25 +139,25 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Marca',
+                    title: 'Búsqueda de Marca',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Marca'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'descripcion',
-                        header: 'por Descripción',
-                        label: 'Descripción',
+                        model: 'nombre',
+                        header: 'por Nombre',
+                        label: 'Nombre',
                         field: {
                             type: 'text'
                         }
                     },
                     {
                         type: 'istartswith',
-                        model: 'categoria',
-                        header: 'por Categoria',
-                        label: 'Categoria',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
                         field: {
                             type: 'text'
                         }

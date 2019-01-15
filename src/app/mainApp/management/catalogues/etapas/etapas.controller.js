@@ -27,7 +27,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Etapas';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Etapas';
@@ -144,7 +144,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Etapa',
+                    title: 'Búsqueda de Etapa',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Etapa'
                 },

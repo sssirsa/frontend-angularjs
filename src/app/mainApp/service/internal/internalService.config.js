@@ -81,12 +81,6 @@
                         type: 'link'
                     },
                     {
-                        name: 'MAIN.MENU.LINE',
-                        state: 'triangular.admin-default.asignacionLinea',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
-                    },
-                    {
                         name: 'Prueba de Componentes',
                         state: 'triangular.admin-default.componentTest',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],

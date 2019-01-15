@@ -76,5 +76,25 @@
             "NO_RESULTS": "Sin resultados"
         }
     },
-    "CABINET_MANAGEMENT": "Gestion de cabinet"
+    "CABINET_MANAGEMENT": "Gestion de cabinet",
+    "STORAGE":{
+        "STORING":"Posicionar ",
+        "SELECT_TYPE":"  Selección de Tipo de Asignación",
+        "CABINET":"Cabinet Capitalizado",
+        "UNRECOGNIZABLE":"Cabinet No Capitalizado",
+        "SUCURSAL":"Sucursal",
+        "STORAGE":"Bodega",
+        "CORRIDOR":"Pasillo",
+        "STOWAGE":"Estiba",
+        "DEPTH":"Profundidad",
+        "ASSET_ID":"Identificador de Cabinet",
+        "MAX_VALUE":"Máximo Disponible: ",
+        "ERROR":{
+            "NOT_SUBSIDIARY":"No es posible asignarlo, ya que no se encuentra en ninguna sucursal en estos momentos."
+        },
+        "SAVE":"Guardar Posicionamiento",
+        "EDIT":"Editar Posicionamiento",
+        "CHANGE_STORAGE":"Cambiar Bodega"
+
+    }
 }
