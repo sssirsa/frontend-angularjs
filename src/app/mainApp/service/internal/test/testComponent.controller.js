@@ -6,12 +6,13 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('checklistController', checklistController);
+        .controller('testComponentController', testComponentController);
 
-    function checklistController() {
+    function testComponentController() {
         var vm = this;
 
         vm.maxStock=4;
+        vm.sucursal=1;
         vm.bulk={
             id: 9,
             tipo_equipo: {
