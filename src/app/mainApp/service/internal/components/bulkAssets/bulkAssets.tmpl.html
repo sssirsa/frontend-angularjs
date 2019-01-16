@@ -1,24 +1,37 @@
-<div>
-    <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
-         layout-align="center center">
-        <div layout="row" layout-align="center center">
-            <md-icon md-font-icon="fas fa-cogs"></md-icon>
-            <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
-        </div>
-        <md-input-container flex="100" layout-align="center end">
-            <div range-spinner
-                 range-min="0"
-                 range-step="1"
-                 range-max="6"
-                 range-default-value=""
-                 range-decimal-precision="1"
-                 range-model="vm.checklist.rodajas"
-                 accept-decimal=false
-                 name-of-field="Rodajas"
-                 id-of-field="rangeFieldId">
+<div layout-fill="">
+    <div layout="row" layout-fill>
+        <div layout="row" layout-align="center center" flex="60" layout-padding="">
+
+            <md-input-container>
+                <md-checkbox ng-model="vm.use_asset" ng-disabled="$ctrl.notStock">
+            </md-input-container>
+            </md-checkbox>
+            <div>
+                <md-icon md-font-icon="fas fa-cogs"></md-icon>
             </div>
-
-        </md-input-container>
+            <div layout="column">
+                <span class="md-body-2">{{$ctrl.bulkAsset.catalogo_insumo_lote.descripcion}}</span>
+                <b class="md-caption">{{$ctrl.bulkAsset.catalogo_insumo_lote.modelo_insumo.descripcion}}</b>
+                <span class="md-caption">{{$ctrl.bulkAsset.catalogo_insumo_lote.modelo_insumo.marca_descripcion}}</span>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container ng-if="!$ctrl.notStock">
+                <div range-spinner
+                     range-min="0"
+                     range-step="1"
+                     range-max="{{$ctrl.maxUseAccepted}}"
+                     range-default-value="{{$ctrl.maxUseAccepted}}"
+                     range-decimal-precision="1"
+                     range-model="vm.checklist.rodajas"
+                     accept-decimal=false
+                     name-of-field="Rodajas"
+                     id-of-field="rangeFieldId">
+                </div>
+            </md-input-container>
+            <div ng-if="$ctrl.notStock">
+                <h3><b translate="" class="color:DarkRed">BULK_ASSET_COMPONENT.NOT_ENOUGHT_ASSET</b></h3>
+            </div>
+        </div>
     </div>
-
 </div>
