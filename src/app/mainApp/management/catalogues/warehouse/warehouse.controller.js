@@ -4,9 +4,9 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('werehouseController',werehouseController);
+        .controller('warehouseController',warehouseController);
 
-    function werehouseController(URLS, Translate, EnvironmentConfig)
+    function warehouseController(URLS, Translate, EnvironmentConfig)
     {
 
         var vm = this;
