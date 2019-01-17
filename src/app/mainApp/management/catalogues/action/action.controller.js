@@ -77,19 +77,19 @@
             PUT: {
                 id:'com_code',
                 fields: [
-                    {
-                        type: 'text',
-                        model: 'com_code',
-                        label: 'Código COM',
-                        required: true,
-                        validations: {
-                            regex: "[0-9]{10,15}",
-                            errors: {
-                                regex: 'Formato incorrecto, el campo es númerico',
-                                required: 'El campo es requerido.'
-                            }
-                        }
-                    },
+                    //{
+                    //    type: 'text',
+                    //    model: 'com_code',
+                    //    label: 'Código COM',
+                    //    required: true,
+                    //    validations: {
+                    //        regex: "[0-9]{10,15}",
+                    //        errors: {
+                    //            regex: 'Formato incorrecto, el campo es númerico de 10 a 15 dígitos',
+                    //            required: 'El campo es requerido.'
+                    //        }
+                    //    }
+                    //},
                     {
                         type: 'text',
                         model: 'descripcion',
