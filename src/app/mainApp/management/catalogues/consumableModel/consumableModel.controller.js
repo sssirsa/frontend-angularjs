@@ -160,8 +160,8 @@
                         label: 'Descripción'
                     },
                     {
-                        type: 'text',
-                        model: 'marca_descripcion',
+                        type: 'object',
+                        model: 'marca__descripcion',
                         label: 'Marca'
                     }
                 ],

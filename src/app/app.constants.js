@@ -467,7 +467,7 @@
                     asset_location:'asset_location'
                 },
                 catalogues:{
-                    base: 'catalogue',
+                    base: 'catalogues',
                     subsidiary: 'subsidiary',
                     category: 'category',
                     status_unilever: 'status_unilever',

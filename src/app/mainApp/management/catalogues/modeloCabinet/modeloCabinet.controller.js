@@ -255,13 +255,13 @@
                         label: 'Palabra clave'
                     },
                     {
-                        type: 'text',
-                        model: 'marca_nombre',
+                        type: 'object',
+                        model: 'marca__nombre',
                         label: 'Marca',
                     },
                     {
-                        type: 'text',
-                        model: 'tipo_nombre',
+                        type: 'object',
+                        model: 'tipo__descripcion',
                         label: 'Tipo Equipo',
                     }
                 ],
