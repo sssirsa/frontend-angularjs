@@ -72,7 +72,6 @@
         };
 
         function onElementSelect(element) {
-            console.log(element);
             getDuplicity(element.insumo_lote_id);
             vm.insumos_lote.push(element);
             console.log("La Lista de Insumos Lote usados:");
