@@ -10,7 +10,7 @@
             controller: bulkAssetsController,
             bindings: {
                 bulkAsset: '<',
-                bulkAssetSelected: '&',
+                onSelect: '&',
                 sucursal: '<'
             }
         });
@@ -20,45 +20,78 @@
         var vm = this;
         vm.finalAssetBulk = {};
         vm.stockHere = {};
-        //insumo_lote_id
-        activate();
-        function activate() {
 
+        vm.selectElement = selectElement;
+        vm.validaMax = validaMax;
+        //insumo_lote_id
+
+
+        activate();
+
+
+        function activate() {
+            getMaxValue();
 
         }
 
+//Function that deteminates whats is  the accepted or the usable quantity of inventory it depends of
+        //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
-            var stock = Number(getStock());
+            getStock();
+            var stock = Number(vm.stock[0].cantidad);
             var used = Number(vm.bulkAsset.cantidad);
+            console.log("stock:" + stock);
+            console.log("used:" + used);
             if (used < 1) {
-                vm.showSelector=true;
+                vm.showSelector = true;
                 if (stock < used) {
-                    if(stock>0) {
+                    if (stock > 0) {
                         vm.maxUseAccepted = stock;
+                        console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
                     }
-                    else{
-                        vm.notStock=true;
+                    else {
+                        vm.notStock = true;
                     }
                 } else {
                     vm.maxUseAccepted = used;
+                    console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
                 }
-            }else{
+            } else {
                 if (stock < used) {
-                    vm.notStock=true;
+                    vm.notStock = true;
                 } else {
-                    vm.finalAssetBulk.cantidad = used;
+                    vm.maxUseAccepted = used;
+                    console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
                 }
             }
 
         }
 
+//Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
-
-
-            var stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
+            vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
                 return element.sucursal.id === 1;
             });
-            return stock.cantidad;
+        }
+
+//Function that validate the max value of the bulk assets acceptec
+        function validaMax() {
+            if (parseFloat(vm.finalAssetBulk.cantidad) > parseFloat(vm.maxUseAccepted)) {
+                vm.finalAssetBulk.cantidad = vm.maxUseAccepted;
+            }
+
+        }
+
+        function selectElement() {
+
+            if (vm.use_asset) {
+                console.log("ya lo mande");
+                var assetSelected={};
+                assetSelected.insumo_lote_id=vm.bulkAsset.id;
+                assetSelected.cantidad=vm.finalAssetBulk.cantidad;
+                vm.onSelect({element:assetSelected});
+
+            }
 
         }
 

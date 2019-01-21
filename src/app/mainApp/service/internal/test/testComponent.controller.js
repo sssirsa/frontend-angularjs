@@ -10,10 +10,11 @@
 
     function testComponentController() {
         var vm = this;
-
-        vm.maxStock=4;
-        vm.sucursal=1;
-        vm.bulk={
+        vm.onElementSelect = onElementSelect;
+        vm.insumos_lote = [];
+        vm.maxStock = 4;
+        vm.sucursal = 1;
+        vm.bulk = {
             id: 9,
             tipo_equipo: {
                 id: 1,
@@ -70,7 +71,26 @@
             cantidad: "2.000"
         };
 
+        function onElementSelect(element) {
+            console.log(element);
+            getDuplicity(element.insumo_lote_id);
+            vm.insumos_lote.push(element);
+            console.log("La Lista de Insumos Lote usados:");
+            console.log(vm.insumos_lote);
 
+
+        }
+
+        function getDuplicity(bulkAssetToFind) {
+            var index;
+            for (index = 0; index < vm.insumos_lote.length; ++index) {
+                if (vm.insumos_lote[index].insumo_lote_id === bulkAssetToFind) {
+                    vm.insumos_lote.splice(index, 1);
+                }
+            }
+
+
+        }
     }
 
 

@@ -253,6 +253,6 @@
     },
     "BULK_ASSET_COMPONENT":{
         "BULK_ASSET":" Insumo: ",
-        "NOT_ENOUGHT_ASSET":"No hay suficiente, para poder usar el insumo"
+        "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario."
     }
 }
