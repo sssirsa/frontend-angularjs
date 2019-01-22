@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.entries')
+        .module('app.mainApp.entries_departures.entries')
         .service('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(

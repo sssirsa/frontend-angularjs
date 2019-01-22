@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.entries.new')
+        .module('app.mainApp.entries_departures.entries.new')
         .controller('newManualEntryController', NewManualEntryController);
     function NewManualEntryController(
         MANUAL_ENTRIES,

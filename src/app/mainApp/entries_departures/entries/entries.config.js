@@ -14,7 +14,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries/new/manual/newManualEntry.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/entries/new/manual/newManualEntry.tmpl.html',
                 controller: 'newManualEntryController',
                 controllerAs: 'vm'
             })
@@ -26,7 +26,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries/warranty/manual/warrantyManualEntry.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/entries/warranty/manual/warrantyManualEntry.tmpl.html',
                 controller: 'warrantyManualEntryController',
                 controllerAs: 'vm'
             })
@@ -38,7 +38,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries/unrecognizable/manual/unrecognizableManualEntry.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/entries/unrecognizable/manual/unrecognizableManualEntry.tmpl.html',
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
@@ -50,7 +50,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
                 controller: 'obsoleteManualEntryController',
                 controllerAs: 'vm'
             })

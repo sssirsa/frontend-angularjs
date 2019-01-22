@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.entries.warranty')
+        .module('app.mainApp.entries_departures.entries.warranty')
         .controller('warrantyManualEntryController', WarrantyManualEntryController);
     function WarrantyManualEntryController(
         MANUAL_ENTRIES,

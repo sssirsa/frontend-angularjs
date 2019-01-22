@@ -1,8 +1,8 @@
 (function () {
     angular
-        .module('app.mainApp.entries.obsolete')
-        .controller('obsoleteManualEntryController', ObsoleteManualEntryController);
-    function ObsoleteManualEntryController(
+        .module('app.mainApp.entries_departures.entries.unrecognizable')
+        .controller('unrecognizableManualEntryController', UnrecognizableManualEntryController);
+    function UnrecognizableManualEntryController(
         MANUAL_ENTRIES,
         User,
         Translate,
@@ -22,6 +22,7 @@
         vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
+        vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
 
         //Validations
         vm.imageConstraints = {
@@ -39,12 +40,13 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.selectedTab = 0;
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entry = MANUAL_ENTRIES.obsoleteEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
+            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
+            vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
+            vm.selectedTab = 0;
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -85,7 +87,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
@@ -105,19 +107,16 @@
                     //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
-                        .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback.can_enter) {
-                                //Cabinet can enter
-                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                            }
-                            else {
-                                //Cabinet can´t enter because it already has a subsidiary assigned
-                                toastr.error(Translate.translate('ENTRIES.OBSOLETE.ERRORS.CANT_ENTER'), cabinetID);
-                                vm.removeCabinet(cabinetID);
-                            }
+                        .then(function () {
+                            //Cabinet is not new
+                            //TODO: Validate incidences and subsidiary,
+                            //this in case the cabinet got created but
+                            //the previously tried entrance got an error.
+                            toastr.error(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.CANT_ENTER'), cabinetID);
+                            vm.removeCabinet(cabinetID);
                         })
-                        .catch(function setCabinetToAddError(error) {
-                            ErrorHandler.errorTranslate(error);
+                        .catch(function () {
+
                         });
                 }
             }
@@ -131,7 +130,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -144,8 +143,8 @@
             if (entryHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -161,24 +160,25 @@
 
         vm.createCabinet = function createCabinet(cabinetID) {
             $mdDialog.show({
-                controller: 'CabinetDialogController',
+                controller: 'notCapitalizedDialogController',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogCreateNotCapitalized.tmpl.html',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
                 fullscreen: true,
-                clickOutsideToClose: true,
-                focusOnOpen: true,
-                locals: {
-                    cabinetID: cabinetID
-                }
+                clickOutsideToClose: true
             }).then(function (successCallback) {
-                var cabinetID = successCallback.economico;
-                vm.removeCabinet(cabinetID);
-                vm.searchCabinet(cabinetID);
+                var cabinetID = successCallback.id;
+                addCabinetToList(successCallback);
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);
                 }
             });
+        }
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['udn'].binding]);
+            delete (vm.entry[vm.catalogues['petition'].binding]);
         }
 
         //Internal functions
@@ -188,11 +188,11 @@
             entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createObsolete(entry)
+                .createUnrecognizable(entry)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('ENTRIES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {
@@ -208,8 +208,8 @@
 
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (entry.no_capitalizados_id.length) {
+                entry.no_capitalizados_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -220,9 +220,19 @@
                 let i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                entry['no_capitalizados_id'].push(existingCabinets[i].id);
             }
             return entry;
+        }
+
+        addCabinetToList = function addCabinetToList(cabinet) {
+            var cabinetToAdd = {
+                promise: null,
+                cabinet: cabinet,
+                id: cabinet['id']
+            };
+
+            vm.cabinetList.push(cabinetToAdd);
         }
 
         //Tab functions
@@ -234,7 +244,6 @@
         vm.nextTab = function () {
             vm.selectedTab = vm.selectedTab + 1;
         }
-
     }
 
 })();
