@@ -13,10 +13,32 @@
 
             }
         });
-    function showInfoCabinetController() {
+    function showInfoCabinetController($mdDialog) {
         var vm = this;
+        vm.showInfoCabinetDialog=showInfoCabinetDialog;
+
+        function showInfoCabinetDialog(ev) {
+            $mdDialog.show({
+                controller: 'showInfoCabinetDialogController',
+                templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/infoCabinetDialog.tmpl.html',
+                controllerAs: 'vm',
+                locals: {
+                    cabinet: vm.asset
+                },
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                fullscreen: true,
+                focusOnOpen: false,
+
+            }).then(function (answer) {
+                //Accepted
+                $mdDialog.hide();
+            }, function () {
+                //Cancelled
+                $mdDialog.cancel();
+            });
+        }
+
 
     }
-
-
 })();
