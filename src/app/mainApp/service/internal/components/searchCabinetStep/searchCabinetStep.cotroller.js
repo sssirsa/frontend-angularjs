@@ -10,7 +10,6 @@
             controller: searchCabinetStepController,
             bindings: {
 
-                onSelect: '&',
 
             }
         });
