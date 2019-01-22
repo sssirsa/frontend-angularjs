@@ -8,13 +8,13 @@
         .module('app.mainApp.reports')
         .controller('GenerateReportModalController', GenerateReportModalController);
 
-    function GenerateReportModalController( OPTIONS,Reportes, $mdDialog, reporte) {
+    function GenerateReportModalController( Reportes, $mdDialog, reporte) {
         var vm = this;
         //Function parsing
         vm.exportar = exportar;
         vm.cancel = cancel;
         vm.report=reporte;
-        vm.formats=OPTIONS.formats;
+        //vm.formats=OPTIONS.formats;
         vm.formatSelected="xlsx";
 
 

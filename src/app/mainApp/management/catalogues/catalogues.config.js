@@ -339,15 +339,15 @@
                 controller: 'consumableModelController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.werehouse', {
+            .state('triangular.admin-default.warehouse', {
                 url: '/catalogo/bodega',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/management/catalogues/werehouse/werehouse.tmpl.html',
-                controller: 'werehouseController',
+                templateUrl: 'app/mainApp/management/catalogues/warehouse/warehouse.tmpl.html',
+                controller: 'warehouseController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.reason-not-capitalized', {
@@ -512,7 +512,7 @@
                         children:[
                             {
                                 name: 'MAIN.MENU.CATALOGS.WEREHOUSE',
-                                state: 'triangular.admin-default.werehouse',
+                                state: 'triangular.admin-default.warehouse',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
