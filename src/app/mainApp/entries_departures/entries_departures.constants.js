@@ -3,7 +3,15 @@
         .module('app.mainApp.entries_departures')
         .constant('ENTRIES_DEPARTURES', {
             base: 'entries-departures',
-            catalogues: {},
+            catalogues: {
+                base: 'catalogues',
+                udn: 'udn',
+                project: 'project',
+                transport_line: 'transport_line',
+                transport_type: 'transport_type',
+                sticker: 'sticker',
+                pediments: 'pediments'
+            },
             departures: {},
             entries: {
                 base: 'entries',
@@ -12,15 +20,7 @@
                 unrecognizable: 'no_labeled',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
-                catalogues: {
-                    base: 'catalogues',
-                    udn: 'udn',
-                    project: 'project',
-                    transport_line: 'transport_line',
-                    transport_type: 'transport_type',
-                    sticker: 'sticker',
-                    pediments: 'pediments'
-                },
+                
                 close: 'close',
                 control: {
                     base: 'control',
