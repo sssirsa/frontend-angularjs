@@ -8,21 +8,21 @@
         .module('app.mainApp.reports')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams, OPTIONS, $mdDialog, Reportes, Translate) {
+    function ReportsCrudController(toastr, $stateParams, $mdDialog, Reportes, Translate) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
         vm.hidden = false;
         vm.report = null;
         vm.formato = "DD-MM-YYYY";
-        vm.filterType = OPTIONS.filter;
-        vm.days = OPTIONS.days;
+        //vm.filterType = OPTIONS.filter;
+        //vm.days = OPTIONS.days;
         vm.searchParameter = "";
 
-        vm.filterTypeDate = OPTIONS.filterDate;
-        vm.filterTypeChar = OPTIONS.filterChar;
-        vm.filterInt = OPTIONS.filterInt;
-        vm.fieldQueries = OPTIONS.field_types;
+        //vm.filterTypeDate = OPTIONS.filterDate;
+        //vm.filterTypeChar = OPTIONS.filterChar;
+        //vm.filterInt = OPTIONS.filterInt;
+        //vm.fieldQueries = OPTIONS.field_types;
 
         //Function parse
         vm.lookup = lookup;
@@ -63,7 +63,7 @@
             Translate.translate('REPORTS.MODIFY.DELETE')
         ];
 
-        vm.fieldQueries = OPTIONS.field_types;
+        //vm.fieldQueries = OPTIONS.field_types;
         //Translates
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');

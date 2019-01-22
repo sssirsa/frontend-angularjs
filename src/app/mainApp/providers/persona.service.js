@@ -1,6 +1,3 @@
-/**
- * Created by Luis_Olvera on 23/08/2016.
- */
 (function () {
     'use_strict';
 
