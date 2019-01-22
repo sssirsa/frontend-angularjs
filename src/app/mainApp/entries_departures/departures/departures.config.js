@@ -1,10 +1,10 @@
 (function () {
     angular
-        .module('app.mainApp.departures')
+        .module('app.mainApp.entries_departures.departures')
         .config(departuresConfig);
 
     function departuresConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/mainApp/departures');
+        $translatePartialLoaderProvider.addPart('app/mainApp/entries_departures/departures');
         $stateProvider
             /* New asset entries */
             .state('triangular.admin-default.departure-new-manual', {
@@ -14,7 +14,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/departures/new/manual/newManualDeparture.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/departures/new/manual/newManualDeparture.tmpl.html',
                 controller: 'newManualDepartureController',
                 controllerAs: 'vm'
             })
@@ -26,7 +26,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/departures/warranty/manual/warrantyManualDeparture.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/departures/warranty/manual/warrantyManualDeparture.tmpl.html',
                 controller: 'warrantyManualDepartureController',
                 controllerAs: 'vm'
             })
@@ -38,7 +38,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/departures/unrecognizable/manual/unrecognizableManualDeparture.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/departures/unrecognizable/manual/unrecognizableManualDeparture.tmpl.html',
                 controller: 'unrecognizableManualDepartureController',
                 controllerAs: 'vm'
             })
@@ -50,7 +50,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/departures/obsolete/manual/obsoleteManualDeparture.tmpl.html',
+                templateUrl: 'app/mainApp/entries_departures/departures/obsolete/manual/obsoleteManualDeparture.tmpl.html',
                 controller: 'obsoleteManualDepartureController',
                 controllerAs: 'vm'
             })
