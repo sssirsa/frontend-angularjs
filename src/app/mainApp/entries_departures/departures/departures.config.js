@@ -58,10 +58,10 @@
         triMenuProvider.addMenu(
             {
                 name: 'DEPARTURES.MENU.TITLE',
-                icon: 'fa fa-sign-in-alt',
+                icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
                 permission: ['ADMINISTRADOR', 'TULTITLAN'],     
-                priority: 4,
+                priority: 5,
                 children: [
                     {
                         name: 'DEPARTURES.MENU.NEW',
