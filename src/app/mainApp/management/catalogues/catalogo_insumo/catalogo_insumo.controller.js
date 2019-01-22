@@ -5,8 +5,7 @@
         .module('app.mainApp.management.catalogues')
         .controller('CatalogoInsumoController', CatalogoInsumoController);
 
-    function CatalogoInsumoController(Helper,
-                                      OPTIONS,
+    function CatalogoInsumoController(Helper,                                      
                                       unidad,
                                       Sucursal,
                                       CatalogoInsumo,
@@ -97,8 +96,6 @@
         vm.myHeight = window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
-
-        //vm.unidades=OPTIONS.units;
 
         activate();
 

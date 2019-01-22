@@ -6,10 +6,11 @@
         .service('CATALOG', CatalogProvider);
 
     function CatalogProvider(
-        API,
         $http,
         $q,
-        URLS) {
+        API,
+        URLS
+        ) {
         var vm = this;
 
         vm.mobileCatalog = {

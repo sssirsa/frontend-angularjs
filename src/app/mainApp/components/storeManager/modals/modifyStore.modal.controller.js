@@ -21,7 +21,6 @@
         var vm = this;
 
         //Variables
-        //vm.storeSegmentation = STORE_SEGMENTATION;
         activate();
 
         vm.states = null;
