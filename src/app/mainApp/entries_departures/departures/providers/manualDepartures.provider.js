@@ -176,8 +176,11 @@
                     transport_line: {
                         binding: 'linea_transporte_id',
                         catalog: {
-                            url: URLS.linea_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -199,8 +202,11 @@
                     transport_kind: {
                         binding: 'tipo_transporte_id',
                         catalog: {
-                            url: URLS.tipo_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -222,8 +228,11 @@
                     udn: {
                         binding: 'udn_id',
                         catalog: {
-                            url: URLS.udn,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -245,8 +254,11 @@
                     project: {
                         binding: 'proyecto_id',
                         catalog: {
-                            url: URLS.proyecto,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.PROJECT'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -310,8 +322,11 @@
                     transport_line: {
                         binding: 'linea_transporte_id',
                         catalog: {
-                            url: URLS.linea_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -333,8 +348,11 @@
                     transport_kind: {
                         binding: 'tipo_transporte_id',
                         catalog: {
-                            url: URLS.tipo_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -356,8 +374,11 @@
                     udn: {
                         binding: 'udn_id',
                         catalog: {
-                            url: URLS.udn,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -379,8 +400,11 @@
                     project: {
                         binding: 'proyecto_id',
                         catalog: {
-                            url: URLS.proyecto,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.PROJECT'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -402,8 +426,11 @@
                     petition: {
                         binding: 'pedimento_id',
                         catalog: {
-                            url: URLS.pedimento,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.pediments,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.PETITION'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -467,8 +494,11 @@
                     transport_line: {
                         binding: 'linea_transporte_id',
                         catalog: {
-                            url: URLS.linea_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -490,8 +520,11 @@
                     transport_kind: {
                         binding: 'tipo_transporte_id',
                         catalog: {
-                            url: URLS.tipo_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -513,8 +546,11 @@
                     udn: {
                         binding: 'udn_id',
                         catalog: {
-                            url: URLS.udn,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -536,8 +572,11 @@
                     project: {
                         binding: 'proyecto_id',
                         catalog: {
-                            url: URLS.proyecto,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.PROJECT'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -559,8 +598,11 @@
                     petition: {
                         binding: 'pedimento_id',
                         catalog: {
-                            url: URLS.pedimento,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.pediments,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.PETITION'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -624,8 +666,11 @@
                     transport_line: {
                         binding: 'linea_transporte_id',
                         catalog: {
-                            url: URLS.linea_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -647,8 +692,11 @@
                     transport_kind: {
                         binding: 'tipo_transporte_id',
                         catalog: {
-                            url: URLS.tipo_transporte,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -670,8 +718,11 @@
                     udn: {
                         binding: 'udn_id',
                         catalog: {
-                            url: URLS.udn,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -693,8 +744,11 @@
                     project: {
                         binding: 'proyecto_id',
                         catalog: {
-                            url: URLS.proyecto,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.PROJECT'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
