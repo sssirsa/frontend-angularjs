@@ -307,7 +307,8 @@
             "RESTORE": "Restaurar",
             "SAVE": "Guardar",
             "CLEAR_FIELDS": "Limpiar campos",
-            "DOWNLOAD": "Descargar"
+            "DOWNLOAD": "Descargar",
+            "LOAD_MORE": "Cargar mas elementos"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",

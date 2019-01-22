@@ -69,7 +69,7 @@
         triMenuProvider.addMenu(
             {
                 name: 'MAIN.MENU.REPORTS.TITLE',
-                icon: 'fa fa-line-chart',
+                icon: 'fa fa-chart-line',
                 type: 'dropdown',
                 permission: ["ADMINISTRADOR"],
                 priority: 9,

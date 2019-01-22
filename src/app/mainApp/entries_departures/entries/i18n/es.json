@@ -1,109 +1,223 @@
 {
-    "INPUT": {
-        "Entrance": "Registrar Entrada",
-        "Output": "Registrar Salida",
-        "ID": "Entrada #",
-        "Entrance_Kind": "Tipo de entrada",
-        "Save": "Guardar",
-        "Cancel": "Cancelar",
-        "Modify": "Modificar",
-        "Delete": "Borrar",
-        "Date": "Fecha",
-        "Subsidiary": "Sucursal",
-        "Project": "Proyecto",
-        "Upload Image": "Carga de Imagen",
-        "Pediment": "Pedimento",
-        "Cabinets Massive Upload": "Carga masiva",
-        "Cabinets Manual Upload": "Carga individual",
-        "Choose File": "Archivo",
-        "Choose Image": "Seleccionar Imagen",
-        "Upload File": "Cargar Archivo",
-        "Next": "Siguiente",
-        "Create Brand": "Registrar marca",
-        "Create Model": "Registrar modelo",
-        "CabinetID": "Id del cabinet",
-        "Format": "Plantilla",
-        "AllowMultiple": "Permitir multiples archivos",
-        "ForbidMultiple": "Solo permitir un archivo",
-        "Messages": {
-            "SuccessMassive": "Carga masiva registrada correctamente",
-            "SuccessNormal": "Entrada registrada correctamente",
-            "Warning": "Problema al registrar cabinets",
-            "ErrorMassive": "Error en la carga masiva",
-            "ErrorNormal": "Error al registrar la entrada",
-            "ErrorCabinet": "El cabinet ya ha sido añadido",
-            "NotFoundCabinet": "Cabinet no encontrado",
-            "NotFoundUdn": "Sin resultados",
-            "InvalidUDN": "Selecciona una UDN",
-            "QuantityExceeded": "Se sobrepasó la cantidad máxima de 2000 cabinets por carga masiva",
-            "CabinetInSubsidiary": "El cabinet ya tiene una entrada"
+    "ENTRIES": {
+        "MENU": {
+            "TITLE": "Entradas",
+            "MANUAL": "Manual",
+            "MASSIVE": "Masiva",
+            "NEW": "Nuevos",
+            "WARRANTIES": "Garantías",
+            "UNRECOGNIZABLE": "No capitalizados",
+            "RECOGNIZABLE": "Capitalizados",
+            "OBSOLETE": "Obsoletos"
         },
-        "Transport": {
-            "Line": "Linea de transporte",
-            "Kind": "Tipo de transporte"
-        },
-        "Driver": {
-            "ID": "Identificación del conductor",
-            "IFE": "Credencial de elector del operador",
-            "Name": "Nombre del operador",
-            "Information": "Información del operador"
-        },
-        "TableCabinets": {
-            "Headers": {
-                "EconomicNum": "No. Economico",
-                "SerialNum": "No. de Serie",
-                "Brand": "Marca",
-                "Model": "Modelo"
+        "NEW": {
+            "TITLE": "Entrada de nuevos",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "PETITION": "Pedimento",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
+                    "TRUE": "La entrada proviene de una UDN-Agencia",
+                    "FALSE": "La entrada no proviene de una UDN-Agencia"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "PETITION": "Ingresa el pedimento"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no registrados en sistema. Estos cabinets no se considerarán en la entrada",
+                "REGISTER_CABINET": "Registrar información del cabinet"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_ENTER_NOT_NEW": "El cabinet no es nuevo",
+                "CANT_ENTER_IN_WAREHOUSE": "El cabinet ya se encuentra en almacén"
             }
         },
-        "Dialogs": {
-            "Model": {
-                "Name": "Nombre",
-                "Description": "Descripcion",
-                "Keyword": "Palabra clave",
-                "Refrigerant type": "Tipo de refrigerante",
-                "Refrigerant quantity": "Cantidad de refrigerante",
-                "Type": "Tipo",
-                "Brand": "Marca",
-                "Duplicate": "El modelo ya existe"
+        "WARRANTY": {
+            "TITLE": "Entrada de garantías",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
             },
-            "Brand": {
-                "Category": "Categoria",
-                "Description": "Descripción",
-                "Duplicate": "La marca ya existe"
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
             },
-            "Cabinet": {
-                "Title": "Crear Cabinet",
-                "Economic": "Economico",
-                "Active": "Activo",
-                "Serial": "Número de Serie",
-                "Brand": "Marca",
-                "Model": "Modelo",
-                "Year": "Año",
-                "No_Model": "La marca no tiene modelos asignados"
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar"
             },
-            "Confirm": {
-                "Title": "Confirmar Entrada",
-                "Message": "La entrada tiene cabinets no registrados ¿Desea continuar?"
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "NOT_FOUND_ID": "Económico no encontrado",
+                "CANT_ENTER": "El cabinet ya tiene una entrada"
             }
         },
-        "Tabs": {
-            "GeneralData": "Datos Generales",
-            "CabinetsUpload": "Carga de Cabinets"
+        "OBSOLETE": {
+            "TITLE": "Entrada de obsoletos",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "NOT_FOUND_ID": "Económico no encontrado",
+                "CANT_ENTER": "El cabinet ya tiene una entrada"
+            }
         },
-        "TableUnregisteredCabinets": {
-            "Economic": "Económico",
-            "Reason": "Razón"
-        },
-        "UnregisteredCabinets": "Cabinets no registrados",
-        "RegisteredCabinets": "Cabinets Registrados",
-        "UnexistentModels": "Modelos no existentes",
-        "Required Field": "Campo Requerido",
-        "Max100": "El campo no puede contener mas de 100 caracteres",
-        "Cabinets": "Cabinets",
-        "Registered Cabinets": "Cabinets Registrados",
-        "Unregistered Cabinets": "Cabinets No Registrados",
-        "UDN": "Agencia",
-        "Year Field": "Formato de año inválido"
+        "UNRECOGNIZABLE": {
+            "TITLE": "Entrada de no capitalizados",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "PETITION": "Pedimento",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET": {
+                    "ID": "Identificador",
+                    "NUMBER": "Económicos",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "STATUS": "Estatus",
+                    "REASON": "Motivo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
+                    "TRUE": "La entrada proviene de una UDN-Agencia",
+                    "FALSE": "La entrada no proviene de una UDN-Agencia"
+                },
+                "UNKNOWN": "Desconocido"
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "PETITION": "Ingresa el pedimento"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar",
+                "CREATE": "Nuevo cabinet"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no registrados en sistema. Estos cabinets no se considerarán en la entrada",
+                "REGISTER_CABINET": "Registrar información del cabinet"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_ENTER": "El cabinet ya existe en base, no puede registrarse como nuevo"
+            }
+        }
     }
 }
