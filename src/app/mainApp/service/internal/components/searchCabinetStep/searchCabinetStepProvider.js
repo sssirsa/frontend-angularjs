@@ -6,10 +6,10 @@
 
     angular
         .module('app')
-        .factory('searchCabinetStep', searchCabinetStep);
+        .factory('searchCabinetStepProvider', searchCabinetStepProvider);
 
     /* @ngInject */
-    function cabinetUC(
+    function searchCabinetStepProvider(
         $q,
         MANAGEMENT,
         URLS,

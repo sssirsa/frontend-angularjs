@@ -13,7 +13,7 @@
 
             }
         });
-    function searchCabinetStepController($scope, Translate, toastr, cabinetUC, ErrorHandler) {
+    function searchCabinetStepController($scope, Translate, toastr, searchCabinetStepProvider, ErrorHandler) {
         var vm = this;
         vm.asset = {};//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -23,7 +23,7 @@
         vm.search_asset = search_asset;
         function search_asset() {
             //Search in cabinets location
-            var promiseCabinetInfo = cabinetUC.getByID(vm.asset_id);
+            var promiseCabinetInfo = searchCabinetStepProvider.getByID(vm.asset_id);
             promiseCabinetInfo.then(function (asset) {
                 vm.asset = asset;
                 //selection subsidiary
