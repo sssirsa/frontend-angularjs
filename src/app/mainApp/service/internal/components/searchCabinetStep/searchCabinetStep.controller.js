@@ -9,7 +9,7 @@
             templateUrl: 'app/mainApp/service/internal/components/searchCabinetStep/searchCabinetStep.tmpl.html',
             controller: searchCabinetStepController,
             bindings: {
-
+                infoGral:'&'
 
             }
         });
@@ -28,6 +28,7 @@
                 vm.asset = asset;
                 //selection subsidiary
                 console.log(vm.asset);
+                vm.infoGral({element:vm.asset});
 
 
             }).catch(function (errormsg) {

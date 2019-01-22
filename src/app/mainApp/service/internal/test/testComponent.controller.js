@@ -11,6 +11,7 @@
     function testComponentController() {
         var vm = this;
         vm.onElementSelect = onElementSelect;
+        vm.infogral=infogral;
         vm.insumos_lote = [];
         vm.maxStock = 4;
         vm.sucursal = 1;
@@ -89,6 +90,10 @@
             }
 
 
+        }
+
+        function infogral(cabinet) {
+            console.log(cabinet);
         }
     }
 
