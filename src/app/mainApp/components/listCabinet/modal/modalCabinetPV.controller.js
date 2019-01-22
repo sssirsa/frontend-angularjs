@@ -41,7 +41,7 @@
             vm.condicion = "Sin asignar";
         }
 
-        if(data.condicion){
+        if(data.categoria){
             vm.categoria = data.categoria.nombre;
         }else{
             vm.categoria = "Sin asignar";
