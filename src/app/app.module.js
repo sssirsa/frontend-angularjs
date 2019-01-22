@@ -4,19 +4,14 @@
     angular
         .module('app', ['sssirsa.config',
             'triangular',
-            'permission', 'permission.ui',
+            'permission',
             'ngAnimate', 'ngCookies', 'ngSanitize', 'ngMessages', 'ngMaterial',
             'ui.router', 'googlechart', 'chart.js', 'linkify', 'ui.calendar',
-
             'angularMoment','pascalprecht.translate','tmh.dynamicLocale', 'textAngular', 'hljs', 'md.data.table','ngMdIcons',
-            'vAccordion', 'ngMaterialDatePicker','mdPickers','cgBusy','ADM-dateTimePicker',
-            'minicolors',
+            'vAccordion', 'ngMaterialDatePicker','mdPickers','cgBusy','ADM-dateTimePicker', 'minicolors',
 
             angularDragula(angular), 'ngFileUpload', 'checklist-model',
 
-
-            // 'seed-module'
-            // uncomment above to activate the example seed module
             'app.translate',
             'toastr',
             'restangular',
@@ -30,10 +25,5 @@
             //galeria de imagenes
             'thatisuday.ng-image-gallery'
 
-        ])
-
-        // set a constant for the API we are connecting to
-        .constant('API_CONFIG', {
-            'url':  'http://triangular-api.oxygenna.com/'
-        });
+        ]);
 })();

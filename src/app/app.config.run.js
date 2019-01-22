@@ -11,7 +11,6 @@
                  Channel,
                  amMoment,
                  Helper,
-                 EVENTS_GENERAL,
                  OAuth,
                  AuthService,
                  $window) {
@@ -47,22 +46,6 @@
             }
             return $window.location.href = '/login';
         });*/
-        $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
-            var canal = Channel.all();
-            canal[0].bind('create', function (dfs) {
-                /*if (dfs.id !== Session.userInformation.id) {
-                    if (Session.userRole === 'Administrador') {
-                        Helper.showNotification('El usuario ' + dfs.usuario + " creo una solicitud ", "Nueva solicitud de " + dfs.solicitud + " !!!", null);
-
-                    }
-                }*/
-            });
-            canal[1].bind('success_create', function (dfs) {
-                Helper.showNotification('El reporte ' + dfs.name + " creo exitosamente ", "Reporte terminado!!!", dfs.link);
-                //Helper.getNotificationsByUser();
-            });
-        });
-
 
     }
 })();
