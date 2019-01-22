@@ -7,7 +7,8 @@
         API,
         $q,
         URLS,
-        Translate
+        Translate,
+        EnvironmentConfig
     ) {
         const entriesUrl = API
             .all(URLS.entries_departures.base)
@@ -149,8 +150,11 @@
                     subsidiary: {
                         binding: 'sucursal_id',
                         catalog: {
-                            url: URLS.sucursal,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -280,8 +284,11 @@
                     subsidiary: {
                         binding: 'sucursal_id',
                         catalog: {
-                            url: URLS.sucursal,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.NEW.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -434,8 +441,11 @@
                     subsidiary: {
                         binding: 'sucursal_id',
                         catalog: {
-                            url: URLS.sucursal,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.UNRECOGNIZABLE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -588,8 +598,11 @@
                     subsidiary: {
                         binding: 'sucursal_id',
                         catalog: {
-                            url: URLS.sucursal,
-                            kind: 'Web',
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
