@@ -11,7 +11,6 @@
 
     function DiagnosticController(Cabinet,
                                   cabinet,
-                                  OPTIONS,
                                   toastr,
                                   $scope,
                                   Translate,
@@ -31,8 +30,8 @@
         vm.searchCabinet = searchCabinet;
         vm.selectionFile = selectionFile;
         activate();
-        vm.antiguedad = OPTIONS.antiguedad;
-        vm.statu = OPTIONS.estatus_cabinet;
+        //vm.antiguedad = OPTIONS.antiguedad;
+        //vm.statu = OPTIONS.estatus_cabinet;
 
         function guardar() {
 

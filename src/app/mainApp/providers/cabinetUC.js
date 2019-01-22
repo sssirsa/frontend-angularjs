@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -14,17 +14,19 @@
         API
     ) {
 
-        var urlbase = API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
+        var urlbase = API.all(URLS.management.base)
+            .all(URLS.management.inventory.base)
+            .all(URLS.management.inventory.cabinet);
 
         return {
             create: create,
-            getByID:getByID,
+            getByID: getByID,
             list: list,
             update: update,
             dlete: dlete
         };
 
-        function create(data){
+        function create(data) {
             return urlbase.customPOST(data);
         }
 
@@ -32,13 +34,13 @@
             return urlbase.all(id).customGET();
         }
 
-        function list(limit, offset, querySet){
-            if(limit !== undefined && offset !== undefined){
+        function list(limit, offset, querySet) {
+            if (limit !== undefined && offset !== undefined) {
                 if (querySet === undefined) {
-                    return API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset).customGET();
+                    return API.all(URLS.management.base).all(URLS.management.inventory.base + URLS.management.inventory.cabinet_unilever + '?limit=' + limit + '&offset=' + offset).customGET();
                 }
                 else {
-                    return API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever +'?limit='+limit+'&offset='+offset+'&'+querySet).customGET();
+                    return API.all(URLS.management.base).all(URLS.management.inventory.base + URLS.management.inventory.cabinet_unilever + '?limit=' + limit + '&offset=' + offset + '&' + querySet).customGET();
                 }
             }
             else {
@@ -52,7 +54,7 @@
         }
 
         function dlete(economico) {
-            return urlbase.customDELETE(economico,null,{'content-type':'application/json'});
+            return urlbase.customDELETE(economico, null, { 'content-type': 'application/json' });
         }
     }
 })();

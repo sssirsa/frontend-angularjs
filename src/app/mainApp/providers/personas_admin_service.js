@@ -1,6 +1,3 @@
-/**
- * Created by Luis_Olvera on 23/08/2016.
- */
 (function(){
     'use_strict';
 
@@ -85,7 +82,10 @@
         }
 
         function listPromise(limit, offset){
-            return API.all(URLS.mobile.base).all(URLS.tecnicosDisponibles+'?limit='+limit+'&offset='+offset).customGET();
+            return API
+                .all(URLS.mobile.base)
+                .all(URLS.tecnicosDisponibles + '?limit=' + limit + '&offset=' + offset)
+                .customGET();
         }
 
     }

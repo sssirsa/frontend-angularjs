@@ -5,7 +5,7 @@
         .module('app.mainApp.reports')
         .controller('ModelsReportModalController', ModelsReportModalController);
 
-    function ModelsReportModalController(Translate,Reportes,EVENTS_GENERAL, $rootScope,reporte, $mdDialog) {
+    function ModelsReportModalController(Translate, Reportes, reporte, $mdDialog) {
         var vm = this;
         //Function parsing
         vm.cancel = cancel;
@@ -50,15 +50,6 @@
             };
             $mdDialog.hide(respuesta);
         }
-        $rootScope.$on(EVENTS_GENERAL.load_fields, function(event,args) {
-           vm.campos=args.fields;
-            if(args.menu===''){
-                vm.reporte=reporte.root_model_name;
-            }else {
-                vm.reporte = args.menu;
-            }
-
-        });
         function cancel() {
             $mdDialog.cancel(null);
         }

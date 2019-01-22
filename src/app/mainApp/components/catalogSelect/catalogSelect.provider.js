@@ -3,13 +3,14 @@
 
     angular
         .module('app.mainApp')
-        .service('CATALOG_SELECT', CatalogProvider);
+        .service('CATALOG_SELECT', CatalogSelectProvider);
 
-    function CatalogProvider(
-        API,
+    function CatalogSelectProvider(
         $http,
         $q,
-        URLS) {
+        API,
+        URLS
+        ) {
         var vm = this;
 
         vm.mobileCatalog = {
