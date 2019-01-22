@@ -13,6 +13,7 @@
         vm.onElementSelect = onElementSelect;
         vm.infogral=infogral;
         vm.insumos_lote = [];
+
         vm.maxStock = 4;
         vm.sucursal = 1;
         vm.bulk = {
@@ -93,7 +94,7 @@
         }
 
         function infogral(cabinet) {
-            console.log(cabinet);
+            vm.asset=cabinet;
         }
     }
 

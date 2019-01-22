@@ -1,0 +1,24 @@
+<div layout-margin="" flex="100" layout="column" layout-wrap="">
+    <div layout="column" layout-align="center start">
+        <div layout="row">
+            <md-icon md-font-icon="far fa-snowflake"></md-icon>
+            <h1 >{{$ctrl.asset.economico}}</h1>
+        </div>
+        <div layout="row">
+            <md-icon md-font-icon="fas fa-tags"></md-icon>
+            <span class="md-body-1">{{$ctrl.asset.modelo.nombre}}</span>
+        </div>
+        <div layout="row">
+            <md-icon md-font-icon="fas fa-tag"></md-icon>
+            <span class="md-caption">{{$ctrl.asset.modelo.marca.descripcion}}</span>
+        </div>
+    </div>
+    <div layout="column" flex="45" layout-align="center start">
+        <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+            <md-button  ng-click="$ctrl.infoCabinet()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-eye"></md-icon>
+                <span translate="">SHOW_INFO_CABINET.SHOW_INFO</span>
+            </md-button>
+        </div>
+    </div>
+</div>

@@ -254,5 +254,8 @@
     "BULK_ASSET_COMPONENT":{
         "BULK_ASSET":" Insumo: ",
         "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario."
+    },
+    "SHOW_INFO_CABINET":{
+        "SHOW_INFO":"Mas información del Cabinet"
     }
 }
