@@ -1,0 +1,202 @@
+{
+    "DEPARTURES": {
+        "MENU": {
+            "TITLE": "Salidas",
+            "MANUAL": "Manual",
+            "MASSIVE": "Masiva",
+            "NEW": "Nuevos",
+            "WARRANTIES": "Garantías",
+            "UNRECOGNIZABLE": "No capitalizados",
+            "RECOGNIZABLE": "Capitalizados",
+            "OBSOLETE": "Obsoletos"
+        },
+        "NEW": {
+            "TITLE": "Salida de nuevos",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+            }
+        },
+        "WARRANTY": {
+            "TITLE": "Salida de garantías",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Selecciona la agencia de arrivo",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+            }
+        },
+        "OBSOLETE": {
+            "TITLE": "Salida de obsoletos",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Selecciona la UDN-Agencia de arrivo",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+            }
+        },
+        "UNRECOGNIZABLE": {
+            "TITLE": "Salida de no capitalizados",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "PETITION": "Pedimento",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET": {
+                    "ID": "Identificador",
+                    "NUMBER": "Económicos",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "STATUS": "Estatus",
+                    "REASON": "Motivo"
+                },
+                "UNKNOWN": "Desconocido"
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Selecciona la agencia de arrivo",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para eleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "PETITION": "Ingresa el pedimento"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+            }
+        }
+    }
+}
