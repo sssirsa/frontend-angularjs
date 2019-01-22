@@ -17,7 +17,9 @@
         API
     ) {
 
-        var urlbase = API.all(URLS.management.base).all(MANAGEMENT.project.inventory + URLS.cabinet_unilever);
+        var urlbase = API.all(URLS.management.base)
+            .all(URLS.management.inventory.base)
+            .all(URLS.management.inventory.cabinet);
 
         return {
             getByID:getByID
