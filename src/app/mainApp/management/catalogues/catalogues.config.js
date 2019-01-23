@@ -426,7 +426,19 @@
                 templateUrl: 'app/mainApp/management/catalogues/comIncidence/comIncidence.tmpl.html',
                 controller: 'comIncidenceController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.impediment-reason', {
+                url: '/catalogo/motivo_impedimento_salida',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/impediment/impedimentReason.tmpl.html',
+                controller: 'impedimentReasonController',
+                controllerAs: 'vm'
             });
+
 
         triMenuProvider.addMenu(
             {
@@ -598,6 +610,12 @@
                                 name: 'MAIN.MENU.CATALOGS.STATUS_UNILEVER',
                                 state: 'triangular.admin-default.catalogue-status-unilever',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.IMPEDIMENT_REASON',
+                                state: 'triangular.admin-default.impediment-reason',
+                                permission: ['ADMINISTRATOR'],
                                 type: 'link'
                             },
                             {
