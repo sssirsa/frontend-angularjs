@@ -4,9 +4,9 @@
     'use strict';
     angular
         .module('app.mainApp')
-        .controller('cabinetPVController',cabinetPVController);
+        .controller('cabinetController',cabinetController);
 
-    function cabinetPVController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler)
+    function cabinetController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler, EnvironmentConfig, QUERIES)
     {
         var vm = this;
 
@@ -75,9 +75,12 @@
         vm.catalogues = {
             marca: {
                 catalog: {
-                    url: URLS.marca,
-                    kind: 'Web',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.NEW_TRADEMARK'),
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.cabinet_brand,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'descripcion'
@@ -96,8 +99,8 @@
             modelo_by_marca: {
                 catalog: {
                     url: null,
-                    kind: 'Web',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.NEW_MODEL'),
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre'
@@ -112,67 +115,7 @@
                     hide: 'deleted',
                     reverse: false
                 }
-            }/*,
-            condicion: {
-                catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion,
-                    kind: 'Management',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
-            status_unilever: {
-                catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever,
-                    kind: 'Management',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
-            status_com: {
-                catalog: {
-                    url: MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com,
-                    kind: 'Management',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            }*/
+            }
         };
 
         function changeTrademark() {
@@ -186,7 +129,11 @@
         function onBrandSelect(element) {
             vm.modelo = null;
             vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.url = URLS.marca + '/models/' + element;
+            vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.cabinet_model
+                + QUERIES.cabinet.by_brand + element;
         }
 
         function onElementSelect(element, field) {

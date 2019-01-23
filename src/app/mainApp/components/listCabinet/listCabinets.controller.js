@@ -32,6 +32,7 @@
 
         vm.info = info;
         vm.searchCabinet = searchCabinet;
+        vm.impediment = impediment;
 
         init();
 
@@ -44,13 +45,11 @@
         }
 
         function info(item) {
-            //vm.toModel = item.clone();
-
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'cabinetPVController',
+                controller: 'cabinetController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinetPV.tmpl.html',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinet.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -105,6 +104,30 @@
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
+                });
+        }
+
+        function impediment(item) {
+
+            vm.toModel = angular.copy(item);
+            $mdDialog.show({
+                controller: 'cabinetPVController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/impediment.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    data: vm.toModel
+                }
+            })
+                .then(function () {
+                    vm.todosprev = null;
+                    vm.todos = [];
+                    vm.up();
+                })
+                .catch(function(){
+
                 });
         }
     }

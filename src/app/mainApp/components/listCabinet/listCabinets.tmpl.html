@@ -27,12 +27,37 @@
         <div ng-if="$ctrl.todos.length > 0">
             <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos" ng-click="$ctrl.info(item)">
                 <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                <div class="md-list-item-text" layout="column">
-                    <h2>Económico: {{ item.economico }}</h2>
-                    <h3>Modelo: {{ item.modelo }}</h3>
-                    <h4>Número de Serie: {{ item.no_serie }}</h4>
-                    <p>Estado: {{ item.estado }}</p>
+
+                <div flex="100" layout="column" layout-gt-sm="row" layout-align="space-between center">
+                    <div layout="column" layout-align="start center">
+                        <div class="md-list-item-text" layout="column">
+                            <h2>Económico: {{ item.economico }}</h2>
+                            <h3>Modelo: {{ item.modelo }}</h3>
+                            <h4>Número de Serie: {{ item.no_serie }}</h4>
+                            <p>Estado: {{ item.estado }}</p>
+                        </div>
+                    </div>
+
+                    <div layout="column" layout-align="end center" ng-if="!item.impedimento">
+                        <md-button
+                            ng-click="$ctrl.impediment(item)"
+                            class="md-raised md-warn">
+                            <md-icon md-font-icon="fas fa-lock"></md-icon>
+                            {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                        </md-button>
+                    </div>
+
+                    <div layout="column" layout-align="end center" ng-if="item.impedimento">
+                        <md-button
+                            ng-click="$ctrl.impediment(item)"
+                            class="md-raised md-warn">
+                            <md-icon md-font-icon="fas fa-lock"></md-icon>
+                            {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                        </md-button>
+                    </div>
                 </div>
+
+                <md-divider></md-divider>
             </md-list-item>
         </div>
         <div ng-if="$ctrl.todos.length == 0">

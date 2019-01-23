@@ -79,6 +79,7 @@
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "FAILURE_TYPE": "Clasificador de Falla",
+                "IMPEDIMENT_REASON": "Motivo de Impedimento",
                 "LOCALITIES": "Localidades",
                 "NEXT_STEP": "Siguiente Paso",
                 "PROJECTS": "Proyectos",
@@ -240,7 +241,8 @@
                 "STATUS_COM": "Estatus COM",
                 "LIST": "Listado de cabinets",
                 "CATEGORY": "Categoría",
-                "RE_LABELED": "Capitalización del cabinet"
+                "RE_LABELED": "Capitalización del cabinet",
+                "IMPEDIMENT": "Impedir salida"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
@@ -331,14 +333,15 @@
         },
         "DIALOG": {
             "DELETE_TITLE": "Confirmación de eliminación",
-            "DELETE_MESSAGE": "¿Seguro que desea eliminar este elemento?",
+            "DELETE_MESSAGE": "¿Seguro qué desea eliminar este elemento?",
             "RESTORE_TITLE": "Confirmación de restauración",
-            "RESTORE_MESSAGE": "¿Seguro que desea restaurar este elemento a un estado activo?",
+            "RESTORE_MESSAGE": "¿Seguro qué desea restaurar este elemento a un estado activo?",
             "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?",
             "ATTENTION_TITLE": "Confirmación de Atención",
-            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?",
+            "ATTENTION_MESSAGE": "¿Seguro qué desea concluir la atención?",
             "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
-            "CANCEL_ATTENTION_MESSAGE":"¿Seguro que desea cancelar la atencion"
+            "CANCEL_ATTENTION_MESSAGE":"¿Seguro qué desea cancelar la atencion?",
+            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?"
         }
     },
     "SUCCESS":{
