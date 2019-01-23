@@ -5,8 +5,7 @@
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,
             bindings: {
-                url: '<', //Full or partial URL, depending on kind
-                kind: '<', //Mobile, Web, Generic. Default is 'Generic'
+                url: '<', //Full URL
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
@@ -33,9 +32,6 @@
                 createButtonText: '<',
                 deleteButtonText: '<',
                 modifyButtonText: '<',
-                //saveButtonText: '<',
-                //confirmButtonText: '<',
-                //cancelButtonText: '<',
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
@@ -286,7 +282,7 @@
 
         activate();
 
-        vm.kind ? null : vm.kind = 'Generic';
+        //vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {};
@@ -313,27 +309,12 @@
         }
 
         function createMainCatalogProvider() {
-            if (vm.kind) {
-                switch (vm.kind) {
-                    case 'Mobile':
-                        vm.CatalogProvider = CATALOG.mobile;
-                        break;
-                    case 'Web':
-                        vm.CatalogProvider = CATALOG.web;
-                        break;
-                    default:
-                        vm.CatalogProvider = CATALOG.generic;
-                        break;
-                }
-            }
-            else {
-                vm.CatalogProvider = CATALOG.generic;
-            }
+            vm.CatalogProvider = CATALOG;
             vm.CatalogProvider.url = vm.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG.generic;
+            vm.PaginationProvider = CATALOG;
         }
 
         function list() {
@@ -370,8 +351,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['POST'].dialog,
-                        fields: vm.actions['POST'].fields,
-                        provider: vm.CatalogProvider
+                        fields: vm.actions['POST'].fields
+                        //provider: vm.CatalogProvider
                     }
                 }).then(function () {
                     activate();
@@ -403,8 +384,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['DELETE'].dialog,
-                        id: idToRemove,
-                        provider: vm.CatalogProvider
+                        id: idToRemove
+                        //provider: vm.CatalogProvider
                     }
                 }).then(function () {
                     activate();
@@ -437,7 +418,7 @@
                         dialog: vm.actions['PUT'].dialog,
                         id: vm.actions['PUT'].id,
                         fields: vm.actions['PUT'].fields,
-                        provider: vm.CatalogProvider,
+                        //provider: vm.CatalogProvider,
                         element: element
                     }
                 }).then(function () {
@@ -470,8 +451,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
-                        filters: vm.actions['SEARCH'].filters,
-                        provider: vm.CatalogProvider
+                        filters: vm.actions['SEARCH'].filters
+                        //provider: vm.CatalogProvider
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);

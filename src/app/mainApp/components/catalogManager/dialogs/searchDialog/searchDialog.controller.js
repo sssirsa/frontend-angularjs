@@ -32,19 +32,7 @@
  *                  }
  *              }
  *          }
- *      ],
- *      provider: CATALOG provider object,
- *
-*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
- *                         //The Search dialog just uses the "search" function of the provider
-           url: null,
-           getByID: function (id) {...},
-           list: function () {...},
-           create: function (object) {...},
-           update: function (id, object) {...},
-           remove: function (id) {...},
-           search: function (query) {...}
-           }
+ *      ]
 */
 
 (function () {
@@ -55,7 +43,7 @@
 
     function CatalogSearchDialogController(
         $mdDialog,
-        provider,
+        CATALOG,
         dialog,
         filters
     ) {
@@ -63,7 +51,7 @@
 
         //Variables
         vm.selectedTab = 0;
-        vm.CatalogProvider = provider;
+        vm.CatalogProvider = CATALOG;
         vm.dialog = dialog;
         vm.filters = filters;
         vm.searchAuxVar = null;

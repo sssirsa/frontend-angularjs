@@ -95,32 +95,24 @@
 *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
 *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
-*      },
-*      provider: CATALOG provider object
-*
-*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
- *                         //The Create dialog just uses the "create" function of the provider
-           url: null,
-           getByID: function (id) {...},
-           list: function () {...},
-           create: function (object) {...},
-           update: function (id, object) {...},
-           remove: function (id) {...},
-           search: function (query) {...}
-           }
+*      }
 */
 
 (function () {
     angular
         .module('app.mainApp')
         .controller('CatalogCreateDialogController', CatalogCreateDialogController);
-    function CatalogCreateDialogController($mdDialog, dialog, provider, fields) {
+    function CatalogCreateDialogController(
+        $mdDialog,
+        dialog,
+        CATALOG,
+        fields
+    ) {
         var vm = this;
 
         vm.dialog = dialog;
         vm.fields = fields;
-        vm.CreateCatalogProvider = jQuery.extend(true, {}, provider);
-        //vm.CreateCatalogProvider = provider;
+        vm.CreateCatalogProvider = CATALOG;
 
         vm.objectToCreate = {};
 

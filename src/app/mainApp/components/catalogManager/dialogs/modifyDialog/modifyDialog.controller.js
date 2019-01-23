@@ -116,19 +116,7 @@
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
 *      },
 *      id: string,           //(Optional) Field name to be used as id for HTTP PUT method, default is 'id'
-*      element: object,      //Initial object to be modified
-*      provider: CATALOG provider object
-*
-*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
-*                          //The Modify dialog just uses the "update" function of the provider
-           url: null,
-           getByID: function (id) {...},
-           list: function () {...},
-           create: function (object) {...},
-           update: function (id, object) {...},
-           remove: function (id) {...},
-           search: function (query) {...}
-       }
+*      element: object       //Initial object to be modified
 */
 
 (function () {
@@ -138,7 +126,7 @@
     function CatalogModifyDialogController(
         $mdDialog,
         dialog,
-        provider,
+        CATALOG,
         fields,
         id,
         element
@@ -147,7 +135,7 @@
 
         vm.dialog = dialog;
         vm.fields = fields;
-        vm.ModifyCatalogProvider = jQuery.extend(true, {}, provider);
+        vm.ModifyCatalogProvider = CATALOG;
 
         vm.id = id;
         vm.objectToModify = jQuery.extend(true, {}, element);

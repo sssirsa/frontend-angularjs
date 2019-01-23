@@ -4,7 +4,6 @@
  *          query: string,       (Optional) query to be used if the catalog depends of other
  *                               In this component it must be received with the value to use directly in the API.
  *                               Example: ?parameter_name={{paramener_value}}
- *          kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
  *          name: string,        (Optional) Default is "Catalog"
  *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
@@ -156,25 +155,7 @@
         }
 
         function createMainCatalogProvider() {
-            if (vm.catalog.kind) {
-                switch (vm.catalog.kind) {
-                    case 'Mobile':
-                        vm.CatalogProvider = CATALOG_SELECT.mobile;
-                        break;
-                    case 'Web':
-                        vm.CatalogProvider = CATALOG_SELECT.web;
-                        break;
-                    case 'Management':
-                        vm.CatalogProvider = CATALOG_SELECT.management;
-                        break;
-                    default:
-                        vm.CatalogProvider = CATALOG_SELECT.generic;
-                        break;
-                }
-            }
-            else {
-                vm.CatalogProvider = CATALOG_SELECT.generic;
-            }
+            vm.CatalogProvider = CATALOG_SELECT;
             if (vm.catalog.query) {
                 vm.CatalogProvider.url = vm.catalog.url + vm.catalog.query;
             }
