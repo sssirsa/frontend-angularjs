@@ -23,7 +23,8 @@
             getByID: getByID,
             list: list,
             update: update,
-            dlete: dlete
+            dlete: dlete,
+            notDepartures: notDepartures
         };
 
         function create(data) {
@@ -55,6 +56,10 @@
 
         function dlete(economico) {
             return urlbase.customDELETE(economico, null, { 'content-type': 'application/json' });
+        }
+
+        function notDepartures(data) {
+            return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.impediment).customPOST(data);
         }
     }
 })();
