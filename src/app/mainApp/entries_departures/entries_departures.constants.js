@@ -20,7 +20,6 @@
                 unrecognizable: 'no_labeled',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
-                
                 close: 'close',
                 control: {
                     base: 'control',
