@@ -1,9 +1,11 @@
 /*
    fields:[
 *          {
-*              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+*              type: string,          Valid types are the html5 types, plus the types:
+ *                                    options, catalog, array(strings), catalog_array and fileUploader.
+ *                                    catalog and catalog_array use the catalog_select component.
 *              model: string,         Name of the field that will be sent to the API
-*              required: boolean,     (Optional) Specifies whether or not the field is required
+*              required: boolean,     (Optional) Specifies whether or not the field is required, for form validation
 *              hint: string,          (Optional) Hint label to show
 *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
 *              validations:
@@ -23,6 +25,10 @@
 *              catalog:{                 As used by the catalog-select component
  *                  url: string,         Full or partial URL depending on the kind
  *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+ *                  requires: string,    (Optional) Model of the catalog field that needs to be selected before this field appears (catalog dependance)
+ *                                       It can just be used with catlog type field, or catalog_array field.
+ *                  query: string,       (Optional) Just used if requires contains a model. Given the fact that
+ *                                       this catalog depends of other, a query would be required in order to load.
  *                  name: string,        (Optional) Default is "Catalog"
  *                  loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
@@ -33,7 +39,6 @@
  *                      total: string,        (Optional) Binding for the number of total elements
  *                      next: string,         (Optional) Binding for the url that brings to the next page
  *                  },
- *                  required: boolean,    (Optional) To be used in form validation
  *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                                        aka: the API returns the array of objects in an element of the response, as in pagination
  *                                        Example:
@@ -151,7 +156,40 @@
         }
 
         function onElementSelect(element, field) {
-            vm.objectToCreate[field.model] = element;
+            if (element) {
+                vm.objectToCreate[field.model] = element;
+                loadCatalogDependance(element, field);
+            }
+        }
+
+        function loadCatalogDependance(element, fieldName) {
+            //Validating that a element has been provided
+            if (element) {
+                for (field in vm.fields) {
+                    //Validating it's a catalog
+                    if (field.hasOwnProperty('catalog')) {
+                        //Validating it's a dependable catalog
+                        if (field.catalog.hasOwnProrperty('requires')) {
+                            //Validating that this catalog indeed requires of the previously
+                            //selected catalog.
+                            if (fieldName === field.catalog.requires) {
+                                //Validating that a query is provided
+                                if (field.catalog.hasOwnProperty('query')) {
+                                    field.catalog.query = field.catalog.query + element;
+                                }
+                                else {
+                                    console.error('No query has been provided in the catalog object of the field:'
+                                        + field.model + ' @function loadCatalogDependance @controller CatalogCreateDialogController');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                //Unreachable unless code changes are done
+                console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogCreateDialogController');
+            }
         }
     }
 
