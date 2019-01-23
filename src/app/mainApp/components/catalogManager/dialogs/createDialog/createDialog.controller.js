@@ -2,15 +2,23 @@
    fields:[
 *          {
 *              type: string,          Valid types are the html5 types, plus the types:
- *                                    options, catalog, array(strings), catalog_array and fileUploader.
+ *                                    options, catalog, array(strings), catalog_array
+ *                                    and fileUploader.
  *                                    catalog and catalog_array use the catalog_select component.
+ *             initial_value: string, (Optional) If given the value will be shown in the field
+ *                                    (just html5 types)
+ *             lock: boolean,         (Optional) If true, the field would be disabled,
+ *                                    just works if a initial_value is given, othrwise is ignored.
 *              model: string,         Name of the field that will be sent to the API
-*              required: boolean,     (Optional) Specifies whether or not the field is required, for form validation
+*              required: boolean,     (Optional) Specifies whether or not the field is required,
+ *                                    used for form validation
 *              hint: string,          (Optional) Hint label to show
-*              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
+*              label: string,         (Optional) Label to show in the form, if not given,
+ *                                    the model string will be used as label.
 *              validations:
 *                  {
-*                      regex: string,          Option regular expression for field validation (just used when text),
+*                      regex: string,          Option regular expression for field validation
+ *                                             (just used when text),
 *                      max: number,            Maximum value allowed for selection (just used when number)
 *                      min: number,            Minimum value allowed for selection (just used when number)
 *                      date_format: string,    String format to use for date formating (just used when date)
@@ -127,6 +135,18 @@
             angular.forEach(vm.fields, function (field) {
                 if (field.type === 'array') {
                     vm.objectToCreate[field.model] = [];
+                }
+                //The field is any of the HTML5 types
+                if (field['type'] === 'fileUploader'
+                    && field['type'] !== 'catalog'
+                    && field['type'] !== 'options'
+                    && field['type'] !== 'color'
+                    && field['type'] !== 'array'
+                    && field['type'] !== 'catalog_array') {
+                    if (field.hasOwnProperty('initial_value')) {
+                        //Loading initial values
+                        vm.objectToCreate[field.model] = field.initial_value;
+                    }
                 }
             });
         }

@@ -30,7 +30,20 @@
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
+                        <!--If has initial value, it can be locked-->
                         <input ng-required="field.required"
+                               ng-if="field.initial_value"
+                               ng-disabled="field.lock"
+                               aria-label="{{field['model']}}"
+                               type="{{field.type}}"
+                               name="{{field.model}}"
+                               min="{{field.min}}"
+                               max="{{field.max}}"
+                               ng-pattern="field['validations'].regex"
+                               ng-model="vm.objectToCreate[field.model]" />
+                        <!--If it doesn't have initial_value, it can't be locked-->
+                        <input ng-required="field.required"
+                               ng-if="!field.initial_value"
                                aria-label="{{field['model']}}"
                                type="{{field.type}}"
                                name="{{field.model}}"
