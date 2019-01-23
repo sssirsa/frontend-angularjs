@@ -56,7 +56,7 @@
              * RETURNS
              *   -Cabinet exists in database and can leave (Restriction validation)
              *       +Cabinet full object and can_leave in true
-             *   -Cabinet exist in database and can't leave (Because of restriction or entry kind)
+             *   -Cabinet exist in database and can't leave (Because of restriction)
              *       +Cabinet full object and can_leave in false, restriction id (when applies)
              *   -Cabinet doesn't exists, so it can't leave (wrong ID)
              *       +Cabinet in partial object, can leave in false, subsidiary in null.
@@ -127,9 +127,91 @@
             return deferred.promise;
         }
 
+        function getUnrecognizableCabinet(id) {
+            /*
+             * RETURNS
+             *   -Cabinet exists in database and can leave (Restriction validation)
+             *       +Cabinet full object and can_leave in true
+             *   -Cabinet exist in database and can't leave (Because of restriction)
+             *       +Cabinet full object and can_leave in false, restriction id (when applies)
+             *   -Cabinet doesn't exists, so it can't leave (wrong ID)
+             *       +Cabinet in partial object, can leave in false, subsidiary in null.
+             *   -Backend error
+             *       +Just returns the error response.
+             */
+
+            let deferred = $q.defer();
+            let response = {
+                can_leave: false,
+                no_capitalizado: null,
+                entrance_kind: null,
+                restriction: null,
+                subsidiary: null
+            };
+            getUnrecognizableCabinetInSubsidiary(id)
+                .then(function unrecognizableCabinetsInSubsiadiarySuccessCallback(apiResponse) {
+                    //Cabinet exists in subsidiary
+
+                    //TODO: Validate that the cabinet doesn't have internal restrictions to leave, such as pending service or not ready to market
+                    let cabinetCanLeave = null;
+                    if (true) {
+                        cabinetCanLeave = true;
+                    }
+                    else {
+                        cabinetCanLeave = false;
+                    }
+
+                    //Getting unrecoognizable cabinet full information
+                    //TODO:replace with the given URL's when known
+
+                    //inventoryUrl.all(inventory.cabinet).all(id).customGET()
+                    //    .then(function cabinetSuccessCallback(apiCabinet) {
+                    //        response.no_capitalizado = apiCabinet;
+                    //        response.entrance_kind = apiResponse['tipo_entrada'];
+                    //        response.subsidiary = apiResponse['sucursal'].id;
+
+                    //        //Cabinet can leave
+                    //        if (cabinetCanLeave) {
+                    //            response.can_leave = true;
+                    //            deferred.resolve(response);
+                    //        }
+
+                    //        //Cabinet can't leave
+                    //        else {
+                    //            response.restriction = apiResponse.impedimento;
+                    //            response.can_leave = false;
+                    //            deferred.resolve(response);
+                    //        }
+                    //    })
+                    //    .catch(function unrecognizableCabinetErrorCallback(errorResponse) {
+                    //        deferred.reject(errorRresponse);
+                    //    });
+                })
+
+                .catch(function cabinetsInSubsiadiaryErrorCallback(apiResponseError) {
+                    //Cabinet doesn't exists in any subsidiary, so it can't leave
+                    if (apiResponseError.status === 404) {
+                        //Cabinet doesn't exists
+                        response.no_capitalizado = { economico: id };
+                        deferred.resolve(response);
+                    }
+                    else {
+                        //Any other error from backend
+                        deferred.reject(response);
+                    }
+                    deferred.reject(apiResponseError);
+                });
+
+            return deferred.promise;
+        }
+
         //Internal functions
         function getCabinetInSubsidiary(id) {
             return entriesUrl.all(departures.control.base).all(departures.control.cabinet_in_subsidiary).all(id).customGET();//TODO: change to departures url when provided
+        }
+
+        function getUnrecognizableCabinetInSubsidiary(id) {
+            //TODO: Add behaviour when the URLs are provided
         }
 
         function getDeparturesByCabinet(id) {
