@@ -2,8 +2,10 @@
  *      catalog:{
  *          url: string,         Full or partial URL depending on the kind
  *          query: string,       (Optional) query to be used if the catalog depends of other
- *                               In this component it must be received with the value to use directly in the API.
- *                               Example: ?parameter_name={{paramener_value}}
+ *                               In this component it must be received without the value
+ *                               to use directly in the API.
+ *                               Example: ?parameter_name=
+ *          query_value:string,  (Optional) Value tu search on the API with the given query.
  *          name: string,        (Optional) Default is "Catalog"
  *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
@@ -99,6 +101,7 @@
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            vm.catalogElements = [];
             if (vm.catalog) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
@@ -156,8 +159,11 @@
 
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG_SELECT;
-            if (vm.catalog.query) {
-                vm.CatalogProvider.url = vm.catalog.url + vm.catalog.query;
+            if (vm.catalog.hasOwnProperty('query')
+                && vm.catalog.hasOwnProperty('query_value')) {
+                vm.CatalogProvider.url = vm.catalog.url
+                    + vm.catalog.query
+                    + vm.catalog.query_value;
             }
             else {
                 vm.CatalogProvider.url = vm.catalog.url;
@@ -165,7 +171,7 @@
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG_SELECT.generic;
+            vm.PaginationProvider = CATALOG_SELECT;
         }
 
         function loadMore() {

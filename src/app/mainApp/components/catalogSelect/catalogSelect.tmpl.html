@@ -9,7 +9,8 @@
     <div layout="row">
         <md-icon ng-if="$ctrl.icon" class="{{$ctrl.icon}}"></md-icon>
         <md-select ng-model="$ctrl.selectedElement"
-                   name="{{$ctrl.catalog.model}}"
+                   aria-label="{{$ctrl.selectedElement}}"
+                   name="{{$ctrl.catalog.url}}"
                    class="full-width no-margin"
                    ng-required="$ctrl.required"
                    md-on-open="$ctrl.onSelectOpen()"

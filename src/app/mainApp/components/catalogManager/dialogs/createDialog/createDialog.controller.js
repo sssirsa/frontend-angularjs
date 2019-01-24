@@ -119,6 +119,7 @@
         vm.cancel = cancel;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
+        vm.onCatalogSelectOpen = onCatalogSelectOpen;
 
         activate();
 
@@ -186,7 +187,8 @@
                             if (fieldName === field.catalog.requires) {
                                 //Validating that a query is provided
                                 if (field.catalog.hasOwnProperty('query')) {
-                                    field.catalog.query = field.catalog.query + element;
+                                    field.catalog.query = field.catalog.query;
+                                    field.catalog.query_value = element;
                                 }
                                 else {
                                     console.error('No query has been provided in the catalog object of the field:'
@@ -201,6 +203,9 @@
                 //Unreachable unless code changes are done
                 console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogCreateDialogController');
             }
+        }
+
+        function onCatalogSelectOpen(field, event) {
         }
     }
 
