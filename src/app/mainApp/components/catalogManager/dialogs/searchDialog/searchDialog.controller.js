@@ -32,7 +32,8 @@
  *                  }
  *              }
  *          }
- *      ]
+ *      ], *
+ *      url:string,                 URL of the API for creation.
 */
 
 (function () {
@@ -45,7 +46,8 @@
         $mdDialog,
         CATALOG,
         dialog,
-        filters
+        filters,
+        url
     ) {
         var vm = this;
 
@@ -59,9 +61,19 @@
         //Functions
         vm.search = search;
         vm.changeTab = changeTab;
-        vm.cancel = cancel;
+        vm.cancel = cancel
+
+        function createProvider() {
+            if (vm.hasOwnProperty('url')) {
+                vm.CatalogProvider.url = vm.url;
+            }
+            else {
+                $mdDialog.cancel('"url" parameter was not provided');
+            }
+        }
 
         function search(filter) {
+            createProvider();
             let query = filter.model;
             if (filter.type !== 'equals') {
                 query = query + "__" + filter.type + "=";

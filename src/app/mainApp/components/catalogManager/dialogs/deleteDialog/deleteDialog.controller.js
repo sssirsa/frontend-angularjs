@@ -4,6 +4,7 @@
  *          searchButton: string,   (Optional) Label for the Search button, default is 'Search'
  *          loadingText: string     (Optional) Text to show in the Loading, default is "Please wait..."
  *      },
+ *      url:string,                 URL of the API for creation.
  *      id: string            //Object identifier to be removed
 */
 
@@ -32,7 +33,7 @@
 
         function createProvider() {
             if (vm.hasOwnProperty('url')) {
-                vm.CreateCatalogProvider.url = vm.url;
+                vm.CatalogProvider.url = vm.url;
             }
             else {
                 $mdDialog.cancel('"url" parameter was not provided');

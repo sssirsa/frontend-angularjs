@@ -218,9 +218,6 @@
                 console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogCreateDialogController');
             }
         }
-
-        function onCatalogSelectOpen(field, event) {
-        }
     }
 
 })();
