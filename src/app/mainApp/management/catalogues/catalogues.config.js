@@ -119,17 +119,6 @@
                 controller: 'proyectosController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.clientes', {
-                url: '/catalogo/clientes',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/clientes/cliente.tmpl.html',
-                controller: 'clienteController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.categoria', {
                 url: '/catalogo/categoria',
                 data: {
@@ -628,12 +617,6 @@
                                 name: 'MAIN.MENU.CATALOGS.FAILURE_TYPE',
                                 state: 'triangular.admin-default.failure-type',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.CLIENT',
-                                state: 'triangular.admin-default.clientes',
-                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
