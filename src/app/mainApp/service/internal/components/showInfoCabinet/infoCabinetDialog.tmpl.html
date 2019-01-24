@@ -18,7 +18,7 @@
         </md-toolbar>
         <div layout="row" flex="100" layout-padding="" layout-wrap="">
             <div flex="100" flex-md="50" flex-gt-md="33" layout="column" ng-repeat="field in vm.meta">
-                <md-content ng-if="field.section && field.kind==='field'">
+                <md-content ng-if="field.section && field.kind==='field' || field.kind==='file'||field.kind==='image'||field.kind==='multiple'">
                     <md-icon ng-if="field.icon" md-font-icon="{{field.icon}}"></md-icon>
                     <b ng-if="field.section">{{field.section}}</b>
                     <b ng-if="!field.section">{{field.key}}</b>
@@ -26,9 +26,23 @@
                 <md-content ng-if="field.section && field.kind==='field'">
                     <span ng-if="vm.array[field.key]">{{vm.array[field.key]}}</span>
                 </md-content>
-                <div ng-if="field.type==='multiple'" ng-repeat="item in vm.array[field.key]">
-                    <span>{{item}}</span>
+                <div ng-if="field.kind==='multiple'" ng-repeat="item2 in vm.array[field.key] track by $index">
+                    <span ng-if="item2">{{item2}}</span>
+                    <span ng-if="!item2" translate="">GENERAL_SHOW_INFO.NO_ELEMENTS</span>
                 </div>
+                <md-content ng-if="field.kind==='file'" >
+                    <a href="{{vm.array[field.key]}}" target="_blank" >
+                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                        <span>{{field.section}}</span>
+                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                    </a>
+                </md-content>
+                <md-content class="md-media-xl card-media"  ng-if="field.kind==='image'">
+                    <img ng-src="{{vm.array[field.key]}}" class="md-card-image" alt="QR">
+                </md-content>
+                <md-content ng-if="field.kind===image">
+
+                </md-content>
                 <md-content flex="100" ng-if="field.section && field.kind==='object'">
                     <md-icon md-font-icon="{{field.icon}}"></md-icon>
                     <b ng-if="field.section">{{field.section}}</b>
@@ -42,7 +56,7 @@
                         <md-content ng-if="subfield.type==='field'">
                             <span>{{vm.array[field.key][subfield.key]}}</span>
                         </md-content>
-                        <div ng-if="subfield.type==='multiple'" ng-repeat="item in vm.array[field.key][subfield.key]">
+                        <div ng-if="subfield.type==='multiple'" ng-repeat="item in vm.array[field.key][subfield.key] track by $index">
                             <span>{{item}}</span>
                         </div>
                     </div>

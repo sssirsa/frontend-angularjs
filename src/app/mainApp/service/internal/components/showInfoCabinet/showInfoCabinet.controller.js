@@ -18,12 +18,96 @@
         vm.showInfoCabinetDialog=showInfoCabinetDialog;
 
         function showInfoCabinetDialog(ev) {
+            vm.meta=[
+                {
+                    section:"Economico",
+                    icon:'fas fa-snowflake',
+                    key:'economico',
+                    kind:'field'
+
+                },
+                {
+                    section:"No. de Activo",
+                    icon:'fas fa-hashtag',
+                    key:'id_unilever',
+                    kind:'field'
+
+                },
+                {
+                    section:"No. de Serie",
+                    icon:'fas fa-hashtag',
+                    key:'no_serie',
+                    kind:'field'
+
+                },
+                {
+                    section:"Año",
+                    icon:'fas fa-hashtag',
+                    key:'year',
+                    kind:'field'
+
+                },
+                {
+                    section:"Económicos anteriores",
+                    icon:'fab fa-slack-hash',
+                    key:'historial_economicos',
+                    kind:'multiple'
+
+                },
+                {
+                    section:"Modelo",
+                    icon:'fas fa-tags',
+                    key:'modelo',
+                    kind:'object',
+                    content:[
+                        {
+                            key:'nombre',
+                            label:'Modelo',
+                            type:'field'
+                        },
+                        {
+                            key:'descripcion',
+                            label:'Descripción',
+                            type:'field'
+                        },
+                        {
+                            key:'tipo_nombre',
+                            label:'Tipo Equipo',
+                            type:'field'
+                        },
+                        {
+                            key:'palabra_clave',
+                            label:'Palabra Clave',
+                            type:'field'
+                        }
+                    ]
+
+                },
+                {
+                    section:"Pedimento",
+                    icon:'fas fa-file-invoice',
+                    key:'pedimento',
+                    kind:'object',
+                    content:[
+                        {
+                            key:'descripcion',
+                            label:'Pedimento 2 XD',
+                            type:'field'
+                        }
+                    ]
+
+                },
+
+
+
+            ];
             $mdDialog.show({
                 controller: 'showInfoCabinetDialogController',
                 templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/infoCabinetDialog.tmpl.html',
                 controllerAs: 'vm',
                 locals: {
                     array: vm.asset,
+                    meta:vm.meta,
                     title:'Información del Cabinet'
                 },
                 parent: angular.element(document.body),

@@ -257,5 +257,8 @@
     },
     "SHOW_INFO_CABINET":{
         "SHOW_INFO":"Mas información del Cabinet"
+    },
+    "GENERAL_SHOW_INFO":{
+        "NO_ELEMENTS":"Sin Información"
     }
 }
