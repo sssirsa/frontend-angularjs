@@ -191,6 +191,7 @@
                             option: 'nombre',
                             name: 'Tipo',
                             elements: 'results',
+                            bindTo:'tipo',
                             pagination: {
                                 total: 'count'
                             }
