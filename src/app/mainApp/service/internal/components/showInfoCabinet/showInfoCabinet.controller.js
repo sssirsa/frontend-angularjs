@@ -23,7 +23,8 @@
                 templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/infoCabinetDialog.tmpl.html',
                 controllerAs: 'vm',
                 locals: {
-                    cabinet: vm.asset
+                    array: vm.asset,
+                    title:'Información del Cabinet'
                 },
                 parent: angular.element(document.body),
                 targetEvent: ev,
