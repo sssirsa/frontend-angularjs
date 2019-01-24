@@ -140,6 +140,7 @@
         vm.ModifyCatalogProvider = CATALOG;
 
         vm.id = id;
+        vm.url = url;
         vm.objectToModify = jQuery.extend(true, {}, element);
 
         vm.modify = modify;

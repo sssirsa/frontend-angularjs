@@ -57,6 +57,7 @@
         vm.dialog = dialog;
         vm.filters = filters;
         vm.searchAuxVar = null;
+        vm.url = url;
 
         //Functions
         vm.search = search;
