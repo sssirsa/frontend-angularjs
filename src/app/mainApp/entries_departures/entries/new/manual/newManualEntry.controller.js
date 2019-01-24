@@ -11,8 +11,7 @@
         $mdDialog,
         Helper,
         EnvironmentConfig,
-        URLS,
-        QUERIES
+        URLS
     ) {
         var vm = this;
 
