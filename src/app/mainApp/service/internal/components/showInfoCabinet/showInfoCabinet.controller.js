@@ -55,6 +55,20 @@
 
                 },
                 {
+                    section:"Pedimento",
+                    icon:'fas fa-file-invoice',
+                    key:'pedimento',
+                    kind:'object',
+                    content:[
+                        {
+                            key:'descripcion',
+                            label:'Pedimento 2 XD',
+                            type:'field'
+                        }
+                    ]
+
+                },
+                {
                     section:"Modelo",
                     icon:'fas fa-tags',
                     key:'modelo',
@@ -83,20 +97,12 @@
                     ]
 
                 },
-                {
-                    section:"Pedimento",
-                    icon:'fas fa-file-invoice',
-                    key:'pedimento',
-                    kind:'object',
-                    content:[
-                        {
-                            key:'descripcion',
-                            label:'Pedimento 2 XD',
-                            type:'field'
-                        }
-                    ]
+                { section:"Codigo QR",
+                    icon:'fas fa-qrcode',
+                    key:'qr_code',
+                    kind:'image'
+                }
 
-                },
 
 
 
