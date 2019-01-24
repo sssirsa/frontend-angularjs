@@ -122,7 +122,6 @@
         vm.cancel = cancel;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
-        vm.onCatalogSelectOpen = onCatalogSelectOpen;
 
         activate();
 
