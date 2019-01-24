@@ -156,7 +156,6 @@
 
         function create(objectToCreate) {
             createProvider();
-            console.log(vm.CreateCatalogProvider);
             vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
                 .then(function (createdElement) {

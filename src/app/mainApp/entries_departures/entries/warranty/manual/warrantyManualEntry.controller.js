@@ -421,6 +421,16 @@
             });
         }
 
+        addCabinetToList = function addCabinetToList(cabinet) {
+            var cabinetToAdd = {
+                promise: null,
+                cabinet: cabinet,
+                id: cabinet['economico']
+            };
+
+            vm.cabinetList.push(cabinetToAdd);
+        }
+
         addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
             if (entry.cabinets_id.length) {
