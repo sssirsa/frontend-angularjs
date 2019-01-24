@@ -340,7 +340,6 @@
 
         function create() {
             //Creation behavior handling
-            createMainCatalogProvider();
             if (vm.actions['POST']) {
                 $mdDialog.show({
                     controller: 'CatalogCreateDialogController',
@@ -373,7 +372,6 @@
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
-            createMainCatalogProvider();
             if (vm.actions['DELETE']) {
                 $mdDialog.show({
                     controller: 'CatalogDeleteDialogController',
@@ -439,7 +437,6 @@
 
         function search() {
             //Search behavior handling, delegated to the search Dialog
-            createMainCatalogProvider();
             if (vm.actions['SEARCH']) {
                 $mdDialog.show({
                     controller: 'CatalogSearchDialogController',
