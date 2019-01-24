@@ -23,7 +23,8 @@
                 cabinet: 'cabinet_unilever',
                 unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
                 asset_location: 'asset_location',
-                impediment: 'impedimento'
+                impediment: 'impedimento',
+                label: 'label'
             },
             restrictions: {},
             users: {}

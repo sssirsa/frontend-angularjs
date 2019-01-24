@@ -177,7 +177,6 @@
         function onBrandSelect(element) {
             vm.modelo = null;
             vm.marca = element;
-            console.log(vm.marca);
             vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base

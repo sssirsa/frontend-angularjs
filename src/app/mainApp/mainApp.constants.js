@@ -90,9 +90,7 @@
             },
             credentials: 'credenciales',
             map: 'https://maps.googleapis.com/maps/api/staticmap',
-            tecnicosDisponibles: 'employees',
-
-            label: 'label', //TODO: Alex, esto te toca a tí
+            tecnicosDisponibles: 'employees'
             //report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
             //reporte_insumos: 'reports/insumos',
 
@@ -114,7 +112,7 @@
                 by_locality: '?localidad_id=',
                 by_postal_code: '?localidad__codigo_postal=',
                 by_economic: '/lookup/'
-            },
+            }
         })
         .constant('CONFIGS', {
             ADTConfig: {
