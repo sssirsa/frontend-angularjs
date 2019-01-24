@@ -196,7 +196,41 @@
         }
 
         function onElementSelect(element, field) {
-            vm.objectToModify[field.model] = element;
+            if (element) {
+                vm.objectToModify[field.model] = element;
+                loadCatalogDependance(element, field.model);
+            }
+        }
+
+        function loadCatalogDependance(element, fieldName) {
+            //Validating that a element has been provided
+            if (element) {
+                vm.fields.forEach(function loadCataloguesDependanceFieldIterator(field) {
+                    //Validating it's a catalog
+                    if (field.hasOwnProperty('catalog')) {
+                        //Validating it's a dependable catalog
+                        if (field.catalog.hasOwnProperty('requires')) {
+                            //Validating that this catalog indeed requires of the previously
+                            //selected catalog.
+                            if (fieldName === field.catalog.requires) {
+                                //Validating that a query is provided
+                                if (field.catalog.hasOwnProperty('query')) {
+                                    field.catalog.query = field.catalog.query;
+                                    field.catalog.query_value = element;
+                                }
+                                else {
+                                    console.error('No query has been provided in the catalog object of the field:'
+                                        + field.model + ' @function loadCatalogDependance @controller CatalogModifyDialogController');
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                //Unreachable unless code changes are done
+                console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogModifyDialogController');
+            }
         }
 
         function bindCatalogs() {
