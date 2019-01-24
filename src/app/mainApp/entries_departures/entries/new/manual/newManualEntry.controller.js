@@ -161,7 +161,6 @@
                         total: 'count',
                         next: 'next'
                     },
-                    required: true,
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -186,7 +185,6 @@
                         total: 'count',
                         next: 'next'
                     },
-                    required: true,
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -211,7 +209,6 @@
                         total: 'count',
                         next: 'next'
                     },
-                    required: true,
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -236,7 +233,6 @@
                         total: 'count',
                         next: 'next'
                     },
-                    required: true,
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -248,7 +244,11 @@
                 okButton: 'Guardar',
                 cancelButton: 'Cancelar',
                 loading: 'Creando cabinet'
-            }
+            },
+            url: EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.inventory.base
+                + '/' + URLS.management.inventory.cabinet
         };
 
         // Auto invoked init function
@@ -417,7 +417,8 @@
                 focusOnOpen: true,
                 locals: {
                     dialog: vm.createCabinetDialog.dialog,
-                    fields: vm.createCabinetDialog.fields
+                    fields: vm.createCabinetDialog.fields,
+                    url: vm.createCabinetDialog.url
                 }
             }).then(function successCreateCabinet(successCallback) {
                 var cabinetID = successCallback.economico;

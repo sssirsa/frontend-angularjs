@@ -90,7 +90,8 @@
 *                      },
 *          }
 *      ],
-*      dialog:{              //Labels to use in the creation dialog
+ *     url:string,                 URL of the API for creation.
+*      dialog:{                    //Labels to use in the creation dialog
 *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
 *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
@@ -105,12 +106,14 @@
         $mdDialog,
         dialog,
         CATALOG,
-        fields
+        fields,
+        url
     ) {
         var vm = this;
 
         vm.dialog = dialog;
         vm.fields = fields;
+        vm.url = url;
         vm.CreateCatalogProvider = CATALOG;
 
         vm.objectToCreate = {};
@@ -143,7 +146,18 @@
             });
         }
 
+        function createProvider() {
+            if (vm.hasOwnProperty('url')) {
+                vm.CreateCatalogProvider.url = vm.url;
+            }
+            else {
+                $mdDialog.cancel('"url" parameter was not provided');
+            }
+        }
+
         function create(objectToCreate) {
+            createProvider();
+            console.log(vm.CreateCatalogProvider);
             vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
                 .then(function (createdElement) {
