@@ -31,8 +31,7 @@
 *                      }
 *                  },
 *              catalog:{                 As used by the catalog-select component
- *                  url: string,         Full or partial URL depending on the kind
- *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+ *                  url: string,         Full URL
  *                  requires: string,    (Optional) Model of the catalog field that needs to be selected before this field appears (catalog dependance)
  *                                       It can just be used with catlog type field, or catalog_array field.
  *                  query: string,       (Optional) Just used if requires contains a model. Given the fact that
@@ -129,7 +128,7 @@
                     vm.objectToCreate[field.model] = [];
                 }
                 //The field is any of the HTML5 types
-                if (field['type'] === 'fileUploader'
+                if (field['type'] !== 'fileUploader'
                     && field['type'] !== 'catalog'
                     && field['type'] !== 'options'
                     && field['type'] !== 'color'
@@ -170,18 +169,18 @@
         function onElementSelect(element, field) {
             if (element) {
                 vm.objectToCreate[field.model] = element;
-                loadCatalogDependance(element, field);
+                loadCatalogDependance(element, field.model);
             }
         }
 
         function loadCatalogDependance(element, fieldName) {
             //Validating that a element has been provided
             if (element) {
-                for (field in vm.fields) {
+                vm.fields.forEach(function loadCataloguesDependanceFieldIterator(field) {
                     //Validating it's a catalog
                     if (field.hasOwnProperty('catalog')) {
                         //Validating it's a dependable catalog
-                        if (field.catalog.hasOwnProrperty('requires')) {
+                        if (field.catalog.hasOwnProperty('requires')) {
                             //Validating that this catalog indeed requires of the previously
                             //selected catalog.
                             if (fieldName === field.catalog.requires) {
@@ -196,7 +195,7 @@
                             }
                         }
                     }
-                }
+                });
             }
             else {
                 //Unreachable unless code changes are done
