@@ -351,8 +351,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['POST'].dialog,
-                        fields: vm.actions['POST'].fields
-                        //provider: vm.CatalogProvider
+                        fields: vm.actions['POST'].fields,
+                        url: vm.url
                     }
                 }).then(function () {
                     activate();
@@ -384,8 +384,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['DELETE'].dialog,
-                        id: idToRemove
-                        //provider: vm.CatalogProvider
+                        id: idToRemove,
+                        url: vm.url
                     }
                 }).then(function () {
                     activate();
@@ -405,7 +405,6 @@
         }
 
         function update(element) {
-            createMainCatalogProvider();
             if (vm.actions['PUT']) {
                 $mdDialog.show({
                     controller: 'CatalogModifyDialogController',
@@ -418,7 +417,7 @@
                         dialog: vm.actions['PUT'].dialog,
                         id: vm.actions['PUT'].id,
                         fields: vm.actions['PUT'].fields,
-                        //provider: vm.CatalogProvider,
+                        url: vm.url,
                         element: element
                     }
                 }).then(function () {
@@ -451,8 +450,8 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
-                        filters: vm.actions['SEARCH'].filters
-                        //provider: vm.CatalogProvider
+                        filters: vm.actions['SEARCH'].filters,
+                        url: vm.url
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);

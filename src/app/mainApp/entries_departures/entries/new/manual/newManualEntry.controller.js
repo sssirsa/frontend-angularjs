@@ -389,25 +389,6 @@
 
         vm.createCabinet = function createCabinet(cabinetID) {
             vm.createCabinetDialog.fields[0].initial_value = cabinetID;
-            //$mdDialog.show({
-            //    controller: 'CabinetDialogController',
-            //    controllerAs: 'vm',
-            //    templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
-            //    fullscreen: true,
-            //    clickOutsideToClose: true,
-            //    focusOnOpen: true,
-            //    locals: {
-            //        cabinetID: cabinetID
-            //    }
-            //}).then(function (successCallback) {
-            //    var cabinetID = successCallback.economico;
-            //    vm.removeCabinet(cabinetID);
-            //    addCabinetToList(successCallback);
-            //}).catch(function (err) {
-            //    if (err) {
-            //        ErrorHandler.errorTranslate(err);
-            //    }
-            //});
             $mdDialog.show({
                 controller: 'CatalogCreateDialogController',
                 controllerAs: 'vm',

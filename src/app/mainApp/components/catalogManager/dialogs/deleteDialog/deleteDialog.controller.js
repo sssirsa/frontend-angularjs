@@ -16,27 +16,39 @@
         $mdDialog,
         dialog,
         id,
-        CATALOG
+        CATALOG,
+        url
     ) {
         var vm = this;
 
         vm.dialog = dialog;
         vm.id = id;
+        vm.url = url;
         vm.CatalogProvider = CATALOG;
 
         //Functions
         vm.confirm = confirm;
         vm.cancel = cancel;
-                
+
+        function createProvider() {
+            if (vm.hasOwnProperty('url')) {
+                vm.CreateCatalogProvider.url = vm.url;
+            }
+            else {
+                $mdDialog.cancel('"url" parameter was not provided');
+            }
+        }
+
         function confirm() {
-        vm.removeLoader = vm.CatalogProvider
-            .remove(vm.id)
-            .then(function () {
-                $mdDialog.hide();
-            })
-            .catch(function (removeError) {
-                $mdDialog.cancel(removeError);
-            });
+            createProvider();
+            vm.removeLoader = vm.CatalogProvider
+                .remove(vm.id)
+                .then(function () {
+                    $mdDialog.hide();
+                })
+                .catch(function (removeError) {
+                    $mdDialog.cancel(removeError);
+                });
         }
 
         function cancel() {
@@ -45,4 +57,4 @@
 
     }
 
-}) ();
+})();
