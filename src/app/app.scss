@@ -47,7 +47,10 @@ button, select, html, textarea, input {
 .RED{
   color:DarkRed
 }
-
+.dialogImage{
+  max-height: 150px;
+  max-width: 150px;
+}
 @import "scss/custom";
 
 

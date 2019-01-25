@@ -37,8 +37,8 @@
                         <md-icon md-font-icon="fas fa-download"></md-icon>
                     </a>
                 </md-content>
-                <md-content class="md-media-xl card-media"  ng-if="field.kind==='image'">
-                    <img ng-src="{{vm.array[field.key]}}" class="md-card-image" alt="QR">
+                <md-content class="md-media-xl card-media"  ng-if="field.kind==='image'" layout="center center">
+                    <img ng-src="{{vm.array[field.key]}}" class="dialogImage" alt="QR">
                 </md-content>
                 <md-content ng-if="field.kind===image">
 
