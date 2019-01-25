@@ -92,7 +92,7 @@
                             <b ng-if="!subfield.label">{{subfield.key}}</b>
 
                             <!--Valor del  subcampo del  tipo Objeto-->
-                            <div flex="100" ng-if="subfield.label && field.type==='object'"
+                            <div flex="100" ng-if="subfield.label && subfield.type==='object'"
                                  layout="column" ng-repeat="subsubfield in subfield.content">
                                 <!--Titulo del  subsubcampo del  tipo Objeto-->
                                 <md-content
@@ -100,6 +100,7 @@
                                     <b ng-if="subsubfield.label">{{subsubfield.label}}</b>
                                     <b ng-if="!subsubfield.label">{{subsubfield.key}}</b>
                                 </md-content>
+
                                 <!--valor del  subsubcampo   Objeto tipo field-->
                                 <md-content ng-if="subsubfield.type==='field'">
                                     <span>{{vm.array[field.key][subfield.key][subsubfield.key]}}</span>

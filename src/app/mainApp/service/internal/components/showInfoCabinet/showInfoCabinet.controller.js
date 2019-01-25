@@ -93,6 +93,24 @@
                             key:'palabra_clave',
                             label:'Palabra Clave',
                             type:'field'
+                        },
+                        {
+                            label:"Marca",
+                            icon:'fas fa-tag',
+                            key:'marca',
+                            type:'object',
+                            content:[
+                                {
+                                    key:'nombre',
+                                    label:'Marca',
+                                    type:'field'
+                                },
+                                {
+                                    key:'descripcion',
+                                    label:'Descripción',
+                                    type:'field'
+                                }
+                            ]
                         }
                     ]
 
