@@ -12,11 +12,9 @@
                 todosex: '<',
                 up: '&',
                 todosprev2: '<',
-                filterData: '&',
-                textSearchFilter: '<'
+                textSearchFilter: '&'
             }
         });
-        //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
     function listCabinetController (cabinetUC, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
@@ -27,12 +25,15 @@
         vm.loadingPromise = null;
         vm.toModel = null;
         vm.searchText = '';
+        vm.searchBool = false;
 
         //functions
 
         vm.info = info;
         vm.searchCabinet = searchCabinet;
         vm.impediment = impediment;
+        vm.removeFilter = removeFilter;
+
 
         function info(item) {
             vm.toModel = angular.copy(item);
@@ -94,9 +95,11 @@
         }
 
         function searchCabinet() {
+            vm.textSearchFilter();
             cabinetUC.getByID(vm.searchText)
                 .then(function (cabinet) {
                     prepareData(cabinet);
+                    vm.searchBool = true;
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
@@ -125,6 +128,16 @@
 
                 });
         }
+
+        function removeFilter() {
+            vm.searchBool = false;
+            vm.todosprev = null;
+            vm.todos = [];
+            vm.up();
+            vm.textSearchFilter();
+        }
+
+
     }
 
 

@@ -13,22 +13,20 @@
         vm.todosprev = null;
         vm.todos = [];
         vm.loadingPromise = null;
+        vm.textToSearch = '';
+        vm.search = false;
 
         vm.aRefresh = aRefresh;
         vm.listcabinets = listcabinets;
+        vm.setPagination = setPagination;vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         //datos para paginado
         vm.objectPaginado = null;
         vm.offset = 0;
         vm.limit = 20;
         vm.refreshPaginationButtonsComponent = false;
-        vm.textToSearch = '';
-        vm.preTextToSearch = '';
-        vm.querySet = 'economico__contains=';
-        vm.sig = sigPage;
-        vm.prev = prevPage;
-        vm.goToNumberPage = goToNumberPage;
-        vm.filterList = filterList;
 
         function aRefresh() {
             vm.todosprev = null;
@@ -44,39 +42,27 @@
             listcabinets();
         }
 
+        function setPagination(){
+            if(vm.search == false){
+                vm.search = true;
+            }else{
+                vm.search = false;
+            }
+        }
+
         listcabinets();
 
         function listcabinets(){
             vm.refreshPaginationButtonsComponent = false;
-            if (vm.preTextToSearch !== vm.textToSearch) {
-                vm.offset = 0;
-                vm.preTextToSearch = vm.textToSearch;
-            }
-
-            if (vm.textToSearch.length === 0) {
-                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
-                    .then(function (res) {
-                        vm.objectPaginado = res;
-                        prepareDataFunction();
-                        vm.refreshPaginationButtonsComponent = true;
-                    })
-                    .catch(function (err) {
-                        toastr.error(Translate.translate('MAIN.MSG.ERROR_MESSAGE'));
-                    });
-            }
-            else {
-                var sendQuery = vm.querySet + vm.textToSearch;
-                vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset, sendQuery)
-                    .then(function (res) {
-                        vm.objectPaginado = res;
-                        prepareDataFunction();
-                        prepareFinalObjects();
-                        vm.refreshPaginationButtonsComponent = true;
-                    })
-                    .catch(function (err) {
-
-                    });
-            }
+            vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
+                .then(function (res) {
+                    vm.objectPaginado = res;
+                    prepareDataFunction();
+                    vm.refreshPaginationButtonsComponent = true;
+                })
+                .catch(function (err) {
+                    toastr.error(Translate.translate('MAIN.MSG.ERROR_MESSAGE'));
+                });
 
         }
 
@@ -129,11 +115,6 @@
 
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
-            paginadoRefresh();
-        }
-
-        function filterList(economicFilter) {
-            vm.textToSearch = ''+economicFilter;
             paginadoRefresh();
         }
     }

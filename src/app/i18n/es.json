@@ -244,7 +244,9 @@
                 "RE_LABELED": "Capitalización del cabinet",
                 "NOT_IMPEDIMENT": "Impedir salida",
                 "IMPEDIMENT": "Impedido",
-                "NOT_ENTRIE": "No se tiene registro de entrada"
+                "NOT_ENTRIE": "No se tiene registro de entrada",
+                "SEARCH_BY_ECONOMIC": "Búsqueda por económico",
+                "SEARCHED_ITEM": "Elemento búscado"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
