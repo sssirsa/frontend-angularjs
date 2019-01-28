@@ -123,6 +123,14 @@
                 "NEW": "Nueva",
                 "LIST": "Listado",
                 "PREREQUEST":"Pre solicitudes"
+            },
+            "COM":{
+                "TICKETS_INCIDENCES":"Tickets e Incidencias",
+                "MANAGEMENT_NOTIFICATION":"Notificación de",
+                "ERROR":"Errores",
+                "START":"Inicio de Trabajo",
+                "NOTIFICATION":"Mensajes de Trabajo",
+                "CLOSE":"Cierre de Ticket"
             }
         },
         "COMPONENTS": {
