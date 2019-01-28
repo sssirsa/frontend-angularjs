@@ -38,23 +38,22 @@
                         </div>
                     </div>
 
-                    <div layout="column" layout-align="end center" ng-if="!item.impedimento">
-                        <md-button
-                            ng-click="$ctrl.impediment(item)"
-                            class="md-raised md-warn">
-                            <md-icon md-font-icon="fas fa-lock"></md-icon>
+
+                    <div layout="column" layout-align="end center" ng-if="item.control">
+                        <div layout="column" layout-align="end center" ng-if="!item.impedido">
+                            <md-button
+                                ng-click="$ctrl.impediment(item)"
+                                class="md-raised md-warn">
+                                <md-icon md-font-icon="fas fa-lock"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
+                            </md-button>
+                        </div>
+
+                        <div layout="column" layout-align="end center" ng-if="item.impedido">
                             {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
-                        </md-button>
+                        </div>
                     </div>
 
-                    <div layout="column" layout-align="end center" ng-if="item.impedimento">
-                        <md-button
-                            ng-click="$ctrl.impediment(item)"
-                            class="md-raised md-warn">
-                            <md-icon md-font-icon="fas fa-lock"></md-icon>
-                            {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
-                        </md-button>
-                    </div>
                 </div>
 
                 <md-divider></md-divider>

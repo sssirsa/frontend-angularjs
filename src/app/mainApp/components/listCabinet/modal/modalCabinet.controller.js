@@ -154,10 +154,8 @@
 
                 if(vm.sw1 === true){
                     vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
-                    console.log(vm.cabinet);
                 }else{
                     vm.cabinet.modelo_id = data.id_modelo;
-                    console.log(vm.cabinet);
                 }
 
                 cabinetUC.update(data.economico, vm.cabinet)

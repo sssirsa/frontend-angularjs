@@ -52,6 +52,7 @@
                 vm.offset = 0;
                 vm.preTextToSearch = vm.textToSearch;
             }
+
             if (vm.textToSearch.length === 0) {
                 vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
                     .then(function (res) {
@@ -80,34 +81,34 @@
         }
 
         function prepareFinalObjects() {
-            var ux = "Activo";
             angular.forEach(vm.todosprev, function (cabinet) {
+                cabinet.marca = cabinet.modelo.marca.nombre;
+                cabinet.modelo = cabinet.modelo.nombre;
+                cabinet.id_modelo = cabinet.modelo.id;
 
                 if(cabinet.deleted === false){
-                    ux = "Activo";
+                    cabinet.estado = "Activo";
                 }else{
-                    ux = "Inactivo";
+                    cabinet.estado = "Inactivo";
                 }
 
-                var cabinetPreview = {
-                    economico: cabinet.economico,
-                    id_unilever: cabinet.id_unilever,
-                    no_serie: cabinet.no_serie,
-                    year: cabinet.year,
-                    condicion: cabinet.condicion,
-                    categoria: cabinet.categoria,
-                    estatus_com: cabinet.estatus_com,
-                    estatus_unilever: cabinet.estatus_unilever,
-                    marca: cabinet.modelo.marca.descripcion,
-                    modelo: cabinet.modelo.nombre,
-                    tipo: cabinet.modelo.tipo.nombre,
-                    estado: ux,
-                    qr_code: cabinet.qr_code,
-                    id_modelo: cabinet.modelo.id,
-                    deleted: cabinet.deleted
-                };
+                cabinetUC.getCabinetInSubsidiary(cabinet.economico)
+                    .then(function Subsidiary(control) {
+                        if(control.impedimento){
+                            cabinet.control = true;
+                            cabinet.impedido = true;
+                        }else{
+                            cabinet.control = true;
+                            cabinet.impedido = false;
+                        }
 
-                vm.todos.push(cabinetPreview);
+                        vm.todos.push(cabinet);
+                    })
+                    .catch(function SubsidiaryError(error) {
+                        cabinet.control = false;
+                        cabinet.impedido = false;
+                        vm.todos.push(cabinet);
+                    });
             });
         }
 

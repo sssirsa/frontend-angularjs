@@ -242,7 +242,9 @@
                 "LIST": "Listado de cabinets",
                 "CATEGORY": "Categoría",
                 "RE_LABELED": "Capitalización del cabinet",
-                "IMPEDIMENT": "Impedir salida"
+                "NOT_IMPEDIMENT": "Impedir salida",
+                "IMPEDIMENT": "Impedido",
+                "NOT_ENTRIE": "No se tiene registro de entrada"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",

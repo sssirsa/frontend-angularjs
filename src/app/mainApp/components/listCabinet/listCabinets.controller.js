@@ -34,16 +34,6 @@
         vm.searchCabinet = searchCabinet;
         vm.impediment = impediment;
 
-        init();
-
-        function init() {
-            if (vm.filterData !== null) {
-                if (vm.textSearchFilter.length > 0) {
-                    vm.searchText = vm.textSearchFilter;
-                }
-            }
-        }
-
         function info(item) {
             vm.toModel = angular.copy(item);
             $mdDialog.show({
@@ -67,40 +57,46 @@
                 });
         }
 
+        function showinList(data){
+            vm.todos = [];
+            vm.todos.push(data);
+        }
+
         function prepareData(data) {
-            var ux;
+            data.marca = data.modelo.marca.nombre;
+            data.modelo = data.modelo.nombre;
+            data.id_modelo = data.modelo.id;
 
             if(data.deleted === false){
-                ux = "Activo";
+                data.estado = "Activo";
             }else{
-                ux = "Inactivo";
+                data.estado = "Inactivo";
             }
 
-            var aux = {
-                economico: data.economico,
-                id_unilever: data.id_unilever,
-                no_serie: data.no_serie,
-                year: data.year,
-                condicion: data.condicion,
-                categoria: data.categoria,
-                estatus_com: data.estatus_com,
-                estatus_unilever: data.estatus_unilever,
-                marca: data.modelo.marca.descripcion,
-                modelo: data.modelo.nombre,
-                id_modelo: data.modelo.id,
-                tipo: data.modelo.tipo.nombre,
-                estado: ux,
-                qr_code: data.qr_code,
-                deleted: data.deleted
-            };
+            cabinetUC.getCabinetInSubsidiary(data.economico)
+                .then(function Subsidiary(control) {
+                    if(control.impedimento){
+                        data.control = true;
+                        data.impedido = true;
+                    }else{
+                        data.control = true;
+                        data.impedido = false;
+                    }
 
-            return aux;
+                    showinList(data);
+                })
+                .catch(function SubsidiaryError(error) {
+                    data.control = false;
+                    data.impedido = false;
+
+                    showinList(data);
+                });
         }
 
         function searchCabinet() {
             cabinetUC.getByID(vm.searchText)
                 .then(function (cabinet) {
-                    info(prepareData(cabinet));
+                    prepareData(cabinet);
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
@@ -108,7 +104,6 @@
         }
 
         function impediment(item) {
-
             vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'cabinetPVController',
