@@ -116,7 +116,7 @@
 
         function prepareDataFunction() {
             vm.todos = Helper.filterDeleted(vm.objectPaginado.results, true);
-            angular.forEach(Helper.filterDeleted(vm.objectPaginado.results, true), function (data) {
+            angular.forEach(vm.todos, function (data) {
                 if(data.deleted === true){
                     data.activo = "Desactivado";
                 }else{
@@ -130,6 +130,8 @@
                 }
 
             });
+
+            console.log(vm.todos);
         }
 
         function sigPage() {
@@ -175,32 +177,30 @@
 
 
         function showNoCapitalizado(item) {
-                vm.toModel = angular.copy(item);
-                $mdDialog.show({
-                    controller: 'notCapitalizedUpdateDialogController',
-                    templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
-                    controllerAs: 'vm',
-                    fullscreen: true,
-                    locals:{
-                        data: vm.toModel
-                    },
-                    clickOutsideToClose: true
-                }).then(function (respuesta) {
-                    ErrorHandler.successCreation();
-                    aRefresh();
-                }).catch(function (err) {
-                    if (err) {
-                        ErrorHandler.errorTranslate(err);
-                    }
-                });
+            console.log(item);
+            vm.toModel = angular.copy(item);
+            $mdDialog.show({
+                controller: 'notCapitalizedUpdateDialogController',
+                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
+                controllerAs: 'vm',
+                fullscreen: true,
+                locals:{
+                    data: vm.toModel
+                },
+                clickOutsideToClose: true
+            }).then(function (respuesta) {
+                ErrorHandler.successCreation();
+                aRefresh();
+            }).catch(function (err) {
+                if (err) {
+                    ErrorHandler.errorTranslate(err);
+                }
+            });
         }
 
         function re_labeled(item) {
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                //controller: 'notCapitalizedUpdateDialogController',
-                //templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogUpdateNotCapitalized.tmpl.html',
-                //controllerAs: 'vm',
                 controller: 'reLabeledController',
                 controllerAs: 'vm',
                 templateUrl: 'app/mainApp/inventory/notCapitalized/reLabeled/reLabeled.tmpl.html',
@@ -209,7 +209,6 @@
                 focusOnOpen: true,
                 locals: {
                     noLabeledID: item.id
-                    //data: vm.toModel
                 }
             }).then(function (res) {
                 vm.cabinetCreated = res;

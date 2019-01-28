@@ -85,14 +85,14 @@
         <md-button class="md-raised md-primary"
                    cg-busy="{ promise:vm.createPromise, message:' ' }"
                    ng-click="vm.update()">
-            <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+            <md-icon md-font-icon="fas fa-edit"></md-icon>
             <span translate>MAIN.COMPONENTS.CABINET.UPDATE</span>
         </md-button>
 
         <md-button
             ng-click="vm.remove()"
             class="md-warn md-raised">
-            <md-icon md-font-icon="fa fa-trash-o"></md-icon>
+            <md-icon md-font-icon="fas fa-trash-alt"></md-icon>
             {{'MAIN.COMPONENTS.CABINET.DELETE'|translate}}
         </md-button>
     </md-actions>

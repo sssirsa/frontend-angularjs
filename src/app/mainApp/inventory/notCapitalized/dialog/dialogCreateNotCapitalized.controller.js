@@ -29,8 +29,11 @@
         vm.catalogues = {
             estatus_no_capitalizado: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_no_capitalizado,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.status_not_labeled,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.STATUS'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -49,8 +52,11 @@
             },
             motivo: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.motivo_no_labeled,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.reason_not_labeled,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.REASON'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
