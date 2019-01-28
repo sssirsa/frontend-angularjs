@@ -246,7 +246,8 @@
                 "IMPEDIMENT": "Impedido",
                 "NOT_ENTRIE": "No se tiene registro de entrada",
                 "SEARCH_BY_ECONOMIC": "Búsqueda por económico",
-                "SEARCHED_ITEM": "Elemento búscado"
+                "SEARCHED_ITEM": "Elemento búscado",
+                "REMOVE_FILTER": "Quitar Búsqueda"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
