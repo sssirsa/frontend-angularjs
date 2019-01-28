@@ -5,17 +5,17 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
-        .controller('showInfoCabinetDialogController', showInfoCabinetDialogController);
+        .module('app.mainApp')
+        .controller('showInfotDialogController', showInfotDialogController);
 
-    function showInfoCabinetDialogController(array, title, meta, $mdDialog) {
+    function showInfotDialogController(array, title, meta, $mdDialog) {
         var vm = this;
         vm.title=title;
         vm.closeDialog=closeDialog;
         vm.array =array;
         vm.meta=meta;
         /*
-        ejemplo del objeto de meta y su significado
+        Ejemplo del objeto de meta y su significado
          var object = [
          {
          section: 'Nombre de la sección', //Nombre del Campo a Mostrar

@@ -126,8 +126,8 @@
 
             ];
             $mdDialog.show({
-                controller: 'showInfoCabinetDialogController',
-                templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/infoCabinetDialog.tmpl.html',
+                controller: 'showInfotDialogController',
+                templateUrl: 'app/mainApp/components/dialogShowInfo/showInfoDialog.tmpl.html',
                 controllerAs: 'vm',
                 locals: {
                     array: vm.asset,
