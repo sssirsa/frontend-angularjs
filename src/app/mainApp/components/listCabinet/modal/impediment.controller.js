@@ -1,12 +1,12 @@
-//Create by Alex 26/04/2018
+//Create by Alex 25/01/2019
 
 (function () {
     'use strict';
     angular
         .module('app.mainApp')
-        .controller('cabinetPVController',cabinetPVController);
+        .controller('modalImpedimentController',modalImpedimentController);
 
-    function cabinetPVController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler, EnvironmentConfig)
+    function modalImpedimentController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler, EnvironmentConfig)
     {
         var vm = this;
 

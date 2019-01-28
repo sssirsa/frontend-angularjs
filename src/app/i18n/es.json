@@ -244,10 +244,15 @@
                 "RE_LABELED": "Capitalización del cabinet",
                 "NOT_IMPEDIMENT": "Impedir salida",
                 "IMPEDIMENT": "Impedido",
+                "INFO_IMPEDIMENT": "Información del impedimento",
                 "NOT_ENTRIE": "No se tiene registro de entrada",
                 "SEARCH_BY_ECONOMIC": "Búsqueda por económico",
                 "SEARCHED_ITEM": "Elemento búscado",
-                "REMOVE_FILTER": "Quitar Búsqueda"
+                "REMOVE_FILTER": "Quitar Búsqueda",
+                "WORTHY": "Atendible",
+                "IMPEDIMENT_DATE": "Fecha de impedimento",
+                "RELEASE_DATE": "Fecha de liberación",
+                "NOT_RELEASED": "No liberado"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
@@ -315,7 +320,8 @@
             "SAVE": "Guardar",
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
-            "LOAD_MORE": "Cargar mas elementos"
+            "LOAD_MORE": "Cargar mas elementos",
+            "CLOSE": "Cerrar"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",

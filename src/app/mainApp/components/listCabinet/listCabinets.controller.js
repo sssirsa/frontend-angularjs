@@ -33,6 +33,7 @@
         vm.searchCabinet = searchCabinet;
         vm.impediment = impediment;
         vm.removeFilter = removeFilter;
+        vm.showImpediment = showImpediment;
 
 
         function info(item) {
@@ -79,6 +80,7 @@
                     if(control.impedimento){
                         data.control = true;
                         data.impedido = true;
+                        data.impedimento_id = control.impedimento;
                     }else{
                         data.control = true;
                         data.impedido = false;
@@ -109,7 +111,7 @@
         function impediment(item) {
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'cabinetPVController',
+                controller: 'modalImpedimentController',
                 controllerAs: 'vm',
                 templateUrl: 'app/mainApp/components/listCabinet/modal/impediment.tmpl.html',
                 fullscreen: true,
@@ -126,6 +128,24 @@
                 })
                 .catch(function(){
 
+                });
+        }
+
+        function showImpediment(id) {
+            $mdDialog.show({
+                controller: 'impedimentDetailController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/impedimentDetail.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    data: id
+                }
+            })
+                .then(function () {
+                })
+                .catch(function(){
                 });
         }
 

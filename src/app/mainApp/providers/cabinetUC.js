@@ -25,7 +25,8 @@
             update: update,
             dlete: dlete,
             notDepartures: notDepartures,
-            getCabinetInSubsidiary: getCabinetInSubsidiary
+            getCabinetInSubsidiary: getCabinetInSubsidiary,
+            getImpediment: getImpediment
         };
 
         function create(data) {
@@ -66,5 +67,10 @@
         function getCabinetInSubsidiary(id) {
             return API.all(URLS.management.base).all(URLS.management.control.base + '/' + URLS.management.control.cabinet_in_subsidiary).all(id).customGET();
         }
+
+        function getImpediment(id) {
+            return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.impediment).all(id).customGET();
+        }
+
     }
 })();

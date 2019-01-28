@@ -83,6 +83,7 @@
                         if(control.impedimento){
                             cabinet.control = true;
                             cabinet.impedido = true;
+                            cabinet.impedimento_id = control.impedimento;
                         }else{
                             cabinet.control = true;
                             cabinet.impedido = false;

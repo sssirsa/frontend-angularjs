@@ -69,13 +69,18 @@
                             <md-button
                                 ng-click="$ctrl.impediment(item)"
                                 class="md-raised md-warn">
-                                <md-icon md-font-icon="fas fa-lock"></md-icon>
+                                <md-icon md-font-icon="fas fa-lock-open"></md-icon>
                                 {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
                             </md-button>
                         </div>
 
                         <div layout="column" layout-align="end center" ng-if="item.impedido">
-                            {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                            <md-button
+                                ng-click="$ctrl.showImpediment(item.impedimento_id)"
+                                class="md-raised md-primary">
+                                <md-icon md-font-icon="fas fa-lock"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                            </md-button>
                         </div>
                     </div>
 

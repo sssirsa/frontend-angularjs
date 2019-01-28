@@ -32,7 +32,7 @@
 
                 <md-input-container class="md-block">
                     <md-checkbox name="service" ng-model="vm.service" required>
-                        ATENDIBLE
+                        {{'MAIN.COMPONENTS.CABINET.WORTHY'|translate}}
                     </md-checkbox>
                 </md-input-container>
             </div>
@@ -50,7 +50,7 @@
                     class="md-raised md-warn"
                     ng-disabled="vm.validate">
                     <md-icon md-font-icon="fas fa-lock"></md-icon>
-                    {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                    {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
                 </md-button>
             </md-actions>
         </div>
@@ -67,7 +67,7 @@
                 <md-button
                     ng-click="vm.acceptConfirm()"
                     class="md-raised md-warn">
-                    {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                    {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
                 </md-button>
             </div>
         </div>
