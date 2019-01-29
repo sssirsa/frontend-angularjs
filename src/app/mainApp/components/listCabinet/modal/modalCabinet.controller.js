@@ -22,6 +22,7 @@
         vm.modelos = [];
         vm.urlQR = data.qr_code;
 
+
         //variable con consideraciones especiales
         if(data.estatus_unilever){
             vm.estatus_unilever = data.estatus_unilever.descripcion;
@@ -83,7 +84,7 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'nombre'
                 },
                 pagination: {
                     total: 'count',
@@ -158,6 +159,8 @@
                     vm.cabinet.modelo_id = data.id_modelo;
                 }
 
+                console.log("Update", vm.cabinet);
+
                 cabinetUC.update(data.economico, vm.cabinet)
                     .then(function (res) {
                         toastr.success(vm.update);
@@ -185,7 +188,7 @@
                     $mdDialog.hide(res);
                 })
                 .catch(function (err) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    ErrorHandler.errorTranslate(err);
                     $mdDialog.hide(err);
                 });
         }

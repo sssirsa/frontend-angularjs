@@ -285,6 +285,7 @@
             "SUCESSS_TRANSPORTE_MESSAGE": "Se creó exitosamente la linea de transporte",
             "SUCCESS_LINE_MESSAGE": "Se Asigno  exitosamente el Cabinet",
             "SUCCESS_TICKET_MESSAGES": "Se creó exitosamente el mensaje",
+            "SUCCESS_IMPEDIMENT": "Se impidió el cabinet correctamente",
             "ERORR_TYPE_FILE": "No se permiten este tipo de archivo",
             "SUCCESS_TAKE": "El ticket se auto asignó  exitosamente",
             "FILE_SIZE": "Solo se pueden subir un archivo con un peso máximo de 1MB",

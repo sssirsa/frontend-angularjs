@@ -61,16 +61,17 @@
                     vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function (err) {
-                    toastr.error(Translate.translate('MAIN.MSG.ERROR_MESSAGE'));
+                    ErrorHandler.errorTranslate(err);
                 });
 
         }
 
         function prepareFinalObjects() {
+            console.log("prev", vm.todosprev);
             angular.forEach(vm.todosprev, function (cabinet) {
                 cabinet.marca = cabinet.modelo.marca.nombre;
-                cabinet.modelo = cabinet.modelo.nombre;
                 cabinet.id_modelo = cabinet.modelo.id;
+                cabinet.modelo = cabinet.modelo.nombre;
 
                 if(cabinet.deleted === false){
                     cabinet.estado = "Activo";
@@ -97,10 +98,13 @@
                         vm.todos.push(cabinet);
                     });
             });
+
+            console.log("Todos", vm.todos);
         }
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
+            console.log("helper", vm.todosprev);
             prepareFinalObjects();
         }
 

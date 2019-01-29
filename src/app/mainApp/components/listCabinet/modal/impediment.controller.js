@@ -28,10 +28,7 @@
 
         //Translates
         vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-        vm.successDeleteMessage = Translate.translate('MAIN.MSG.GENERIC_SUCCESS_DELETE');
-        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-        vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-        vm.update = Translate.translate('SUCCESS.UPDATE');
+        vm.successImpediment = Translate.translate('MAIN.MSG.SUCCESS_IMPEDIMENT');
 
         //Blank variables templates
         vm.catalogues = {
@@ -60,7 +57,6 @@
             }
         };
 
-
         function cerrar() {
             $mdDialog.cancel(null);
         }
@@ -76,15 +72,20 @@
 
         function acceptConfirm() {
             vm.cabinet['economico_id'] = vm.economico;
-            vm.cabinet['atendible'] = vm.service;
+
+            if(vm.service === true){
+                vm.cabinet['atendible'] = true;
+            }else{
+                vm.cabinet['atendible'] = false;
+            }
 
             cabinetUC.notDepartures(vm.cabinet)
                 .then(function (res) {
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
+                    toastr.success(vm.successImpediment, vm.successTitle);
                     $mdDialog.hide(res);
                 })
                 .catch(function (err) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    ErrorHandler.errorTranslate(err);
                     $mdDialog.hide(err);
                 });
         }

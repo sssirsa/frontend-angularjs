@@ -37,6 +37,7 @@
 
 
         function info(item) {
+            console.log("Antes", item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'cabinetController',
@@ -66,8 +67,8 @@
 
         function prepareData(data) {
             data.marca = data.modelo.marca.nombre;
-            data.modelo = data.modelo.nombre;
             data.id_modelo = data.modelo.id;
+            data.modelo = data.modelo.nombre;
 
             if(data.deleted === false){
                 data.estado = "Activo";

@@ -6,7 +6,7 @@
         .module('app.mainApp')
         .controller('impedimentDetailController',impedimentDetailController);
 
-    function impedimentDetailController(cabinetUC, $mdDialog, data, $scope, Translate, toastr)
+    function impedimentDetailController(cabinetUC, $mdDialog, data, $scope, Translate, ErrorHandler)
     {
         var vm = this;
 
@@ -34,7 +34,7 @@
                     vm.infoImpediment = info;
                 })
                 .catch(function (err) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
+                    ErrorHandler.errorTranslate(err);
                     $mdDialog.hide(err);
                 });
         }
