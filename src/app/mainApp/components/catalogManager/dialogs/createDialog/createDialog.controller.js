@@ -118,10 +118,12 @@
 
         vm.objectToCreate = {};
 
+        //Functions
         vm.create = create;
         vm.cancel = cancel;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
+        vm.onArrayElementSelect = onArrayElementSelect;
 
         activate();
 
@@ -214,6 +216,15 @@
             else {
                 //Unreachable unless code changes are done
                 console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogCreateDialogController');
+            }
+        }
+
+        function onArrayElementSelect(element, field) {
+            if (element) {
+                if (!vm.objectToCreate[field.model]) {
+                    vm.objectToCreate[field.model] = [];
+                }
+                vm.objectToCreate[field.model].push(element);
             }
         }
     }
