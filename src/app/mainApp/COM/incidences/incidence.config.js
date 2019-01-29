@@ -6,6 +6,7 @@
         .module('app.mainApp.com.incidences')
         .config(incidencesConfig);
     function incidencesConfig($stateProvider, triMenuProvider) {
+
         $stateProvider
 
             .state('triangular.admin-default.incidences_tickets', {
@@ -25,13 +26,13 @@
                 name: 'MAIN.MENU.COM.TICKETS_INCIDENCES',
                 icon: 'fas fa-ticket-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                priority: 6,
+                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                priority:10,
                 children: [
                     {
                         name: 'MAIN.MENU.COM.MANAGEMENT_NOTIFICATION',
                         state: 'triangular.admin-default.incidences_tickets',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         type: 'link'
                     }
                 ]
