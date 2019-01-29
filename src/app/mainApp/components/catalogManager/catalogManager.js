@@ -63,7 +63,9 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+                 *              type: string,          Valid types are the html5 types, plus the types:
+                 *                                     options, catalog, array(strings), catalog_array
+                 *                                     and fileUploader.
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
