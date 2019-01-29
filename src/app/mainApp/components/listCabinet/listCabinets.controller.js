@@ -37,7 +37,7 @@
 
 
         function info(item) {
-            console.log("Antes", item);
+            ("Antes", item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'cabinetController',

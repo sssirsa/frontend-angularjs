@@ -67,7 +67,7 @@
         }
 
         function prepareFinalObjects() {
-            console.log("prev", vm.todosprev);
+            ("prev", vm.todosprev);
             angular.forEach(vm.todosprev, function (cabinet) {
                 cabinet.marca = cabinet.modelo.marca.nombre;
                 cabinet.id_modelo = cabinet.modelo.id;
@@ -99,12 +99,12 @@
                     });
             });
 
-            console.log("Todos", vm.todos);
+            ("Todos", vm.todos);
         }
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
-            console.log("helper", vm.todosprev);
+            ("helper", vm.todosprev);
             prepareFinalObjects();
         }
 

@@ -159,7 +159,7 @@
                     vm.cabinet.modelo_id = data.id_modelo;
                 }
 
-                console.log("Update", vm.cabinet);
+                ("Update", vm.cabinet);
 
                 cabinetUC.update(data.economico, vm.cabinet)
                     .then(function (res) {
