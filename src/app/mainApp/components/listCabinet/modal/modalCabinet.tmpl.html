@@ -128,10 +128,12 @@
             <md-actions
                 layout="row"
                 layout-align="end center">
-                <md-button class="md-primary md-raised">
-                    <md-icon md-font-icon="fa fa-download"></md-icon>
-                    <a href="{{vm.urlQR}}" download="QR.png" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
-                </md-button>
+                <a href="{{vm.urlQR}}" download target="_blank">
+                    <md-button class="md-primary md-raised">
+                        <md-icon md-font-icon="fa fa-download"></md-icon>
+                        {{'MAIN.BUTTONS.DOWNLOAD'|translate}}
+                    </md-button>
+                </a>
 
                 <md-button
                     ng-click="vm.accept()"
