@@ -23,7 +23,10 @@
             getByID: getByID,
             list: list,
             update: update,
-            dlete: dlete
+            dlete: dlete,
+            notDepartures: notDepartures,
+            getCabinetInSubsidiary: getCabinetInSubsidiary,
+            getImpediment: getImpediment
         };
 
         function create(data) {
@@ -37,10 +40,10 @@
         function list(limit, offset, querySet) {
             if (limit !== undefined && offset !== undefined) {
                 if (querySet === undefined) {
-                    return API.all(URLS.management.base).all(URLS.management.inventory.base + URLS.management.inventory.cabinet_unilever + '?limit=' + limit + '&offset=' + offset).customGET();
+                    return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.cabinet + '?limit=' + limit + '&offset=' + offset).customGET();
                 }
                 else {
-                    return API.all(URLS.management.base).all(URLS.management.inventory.base + URLS.management.inventory.cabinet_unilever + '?limit=' + limit + '&offset=' + offset + '&' + querySet).customGET();
+                    return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.cabinet + '?limit=' + limit + '&offset=' + offset + '&' + querySet).customGET();
                 }
             }
             else {
@@ -56,5 +59,18 @@
         function dlete(economico) {
             return urlbase.customDELETE(economico, null, { 'content-type': 'application/json' });
         }
+
+        function notDepartures(data) {
+            return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.impediment).customPOST(data);
+        }
+
+        function getCabinetInSubsidiary(id) {
+            return API.all(URLS.management.base).all(URLS.management.control.base + '/' + URLS.management.control.cabinet_in_subsidiary).all(id).customGET();
+        }
+
+        function getImpediment(id) {
+            return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.impediment).all(id).customGET();
+        }
+
     }
 })();
