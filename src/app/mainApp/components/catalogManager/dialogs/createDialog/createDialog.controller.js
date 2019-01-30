@@ -20,7 +20,8 @@
 *                  {
 *                      regex: string,          Option regular expression for field validation
  *                                             (just used when text),
-*                      max: number,            Maximum value allowed for selection (just used when number)
+*                      max: number,            Maximum value allowed for selection (just used when number
+ *                                             array and catalog_array)
 *                      min: number,            Minimum value allowed for selection (just used when number)
 *                      date_format: string,    String format to use for date formating (just used when date)
 *                      errors:{
@@ -208,7 +209,8 @@
                                 }
                                 else {
                                     console.error('No query has been provided in the catalog object of the field:'
-                                        + field.model + ' @function loadCatalogDependance @controller CatalogCreateDialogController');
+                                        + field.model + ' @function loadCatalogDependance'
+                                        +'@controller CatalogCreateDialogController');
                                 }
                             }
                         }
@@ -217,20 +219,44 @@
             }
             else {
                 //Unreachable unless code changes are done
-                console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogCreateDialogController');
+                console.error('No element has been provided for querying,'
+                    +'@function loadCatalogDependance @controller CatalogCreateDialogController');
             }
         }
 
         function onArrayElementSelect(element, field, value) {
+            if (field.hasOwnProperty('validations')) {
+                if (field.validations.hasOwnProperty('max')) {
+                    if (field.validations.max <= vm.objectToCreate[field.model].length) {
+                        addCatalogIdToArray(element, field);
+                    }
+                    else {
+                        console.error('Maximum quantity of "catalog_array" objects has been reached'
+                        + '@function onArrayElementSelect @controller CatalogCreateDialogController');
+                    }
+                }
+                else {
+                    addCatalogIdToArray(element, field);
+                }
+            }
+            else {
+                addCatalogIdToArray(element, field);
+            }
+
+        }
+
+        //Internal function
+        //It add just the returned ID of the elements to the catalog_array
+        function addCatalogIdToArray(element, field) {
             if (element) {
                 if (!vm.objectToCreate[field.model]) {
                     vm.objectToCreate[field.model] = [];
                 }
-                if (!vm[field.model+'_chip']) {
+                if (!vm[field.model + '_chip']) {
                     vm[field.model + '_chip'] = [];
                 }
                 vm.objectToCreate[field.model].push(element);
-                vm[field.model+'_chip'].push(value);
+                vm[field.model + '_chip'].push(value);
             }
         }
 

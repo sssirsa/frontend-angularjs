@@ -161,6 +161,7 @@
                         <md-chips id="{{field['model']}}"
                                   ng-model="vm.objectToCreate[field.model]"
                                   ng-required="field.required"
+                                  md-max-chips="{{field.validations.max}}"
                                   delete-button-label="Remove">
                             <input type="text"
                                    ng-model="vm.buffer"
