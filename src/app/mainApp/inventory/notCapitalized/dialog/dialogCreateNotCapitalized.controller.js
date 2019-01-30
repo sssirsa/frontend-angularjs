@@ -78,7 +78,6 @@
 
         function create() {
             if($scope.newNCForm.$error.pattern !== undefined){
-                ("error",$scope.newNCForm.$error);
                 toastr.error("Llene corectamente todos los campos");
             }else{
 
