@@ -99,12 +99,10 @@
                     });
             });
 
-            ("Todos", vm.todos);
         }
 
         function prepareDataFunction() {
             vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
-            ("helper", vm.todosprev);
             prepareFinalObjects();
         }
 
