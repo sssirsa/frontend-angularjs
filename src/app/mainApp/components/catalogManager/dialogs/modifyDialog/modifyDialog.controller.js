@@ -1,7 +1,11 @@
 /*
    fields:[
 *          {
-*              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+*              type: string,          Valid types are the html5 types,
+ *                                    plus the types: options, catalog
+ *                                    and fileUploader.
+ *             lock: string,          (Optional)  If true, the field would be locked to
+ *                                    any modification (Doens't work in file)
 *              model: string,         Name of the field that will be sent to the API
 *              required: boolean,     (Optional) Specifies whether or not the field is required
 *              hint: string,          (Optional) Hint label to show

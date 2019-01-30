@@ -35,6 +35,7 @@
                                name="{{field.model}}"
                                min="{{field.min}}"
                                max="{{field.max}}"
+                               ng-disabled="field.lock"
                                ng-pattern="field['validations'].regex"
                                ng-model="vm.objectToModify[field.model]" />
                         <div ng-messages="modifyForm[field.model].$error">
@@ -53,6 +54,7 @@
                         <label ng-if="field['label']">{{field['label']}}</label>
                         <label ng-if="!field['label']">{{field['model']}}</label>
                         <input ng-required="field.required"
+                               ng-disabled="field.lock"
                                aria-label="{{field['model']}}"
                                type="color"
                                name="{{field.model}}"
@@ -93,6 +95,7 @@
                         <label ng-if="!field['label']">{{field['model']}}</label>
                         <md-select ng-model="vm.objectToModify[field.model]"
                                    ng-required="field.required"
+                                   ng-disabled="field.lock"
                                    md-on-close="vm.selectState()">
                             <md-option ng-repeat="option in field.options.elements"
                                        ng-value="option[field.options.model]">
@@ -108,6 +111,7 @@
                 <section ng-if="field['type']==='catalog'">
                     <section ng-if="field['catalog'].requires">
                         <catalog-select ng-if="vm.objectToModify[field['catalog'].requires]"
+                                        lock="field.lock"
                                         required="field.required"
                                         catalog="field.catalog"
                                         pagination="field['catalog'].pagination"
@@ -123,6 +127,7 @@
                     </section>
                     <section ng-if="!field['catalog'].requires">
                         <catalog-select catalog="field.catalog"
+                                        lock="field.lock"
                                         required="field.required"
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
@@ -144,6 +149,7 @@
                         <md-chips id="{{field['model']}}"
                                   ng-model="vm.objectToModify[field.model]"
                                   ng-required="field.required"
+                                  ng-disabled="field.lock"
                                   delete-button-label="Remove">
                             <input type="text"
                                    ng-model="vm.buffer"

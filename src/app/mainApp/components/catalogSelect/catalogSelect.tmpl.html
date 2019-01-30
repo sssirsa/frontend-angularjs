@@ -13,6 +13,7 @@
                    name="{{$ctrl.catalog.url}}"
                    class="full-width no-margin"
                    ng-required="$ctrl.required"
+                   ng-disabled="{{$ctrl.lock}}"
                    md-on-open="$ctrl.onSelectOpen()"
                    md-on-close="$ctrl.onClose()">
             <md-option ng-repeat="element in $ctrl.catalogElements"
