@@ -14,6 +14,7 @@
  *      },
  *      hint: string,         (Optional) Shows a message under the field
  *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
+ *      lock: boolean,        (Optional) If given the catalog select will be disabled
  *      pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
@@ -39,6 +40,12 @@
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
  *      }
+ *      ---------------------------------------
+ *      RETURNS
+ *      {
+ *          element: vm.selectedElement[vm.catalog.model],
+ *          value: vm.selectedElement
+ *      }
  * */
 (function () {
     angular
@@ -50,6 +57,7 @@
                 catalog: '<',
                 hint: '<',
                 icon: '<',
+                lock:'<',
 
                 pagination: '<',
                 elements: '<',
@@ -230,7 +238,10 @@
 
         function onClose() {
             if (vm.selectedElement) {
-                vm.onSelect({ element: vm.selectedElement });
+                vm.onSelect({
+                    element: vm.selectedElement[vm.catalog.model],
+                    value: vm.selectedElement
+                });
             }
         }
 

@@ -15,7 +15,8 @@
                    ng-required="$ctrl.required"
                    md-on-open="$ctrl.onSelectOpen()"
                    md-on-close="$ctrl.onClose()">
-            <md-option ng-repeat="element in $ctrl.catalogElements" ng-value="element[$ctrl.catalog.model]">
+            <md-option ng-repeat="element in $ctrl.catalogElements"
+                       ng-value="element">
                 <section ng-if="$ctrl.catalog.option">
                     {{element[$ctrl.catalog.option]}}
                 </section>
