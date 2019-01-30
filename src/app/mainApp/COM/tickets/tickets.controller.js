@@ -7,7 +7,7 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(API) {
+    function ticketsController(API, $mdDialog) {
         var vm = this;
 
         vm.tickets = {};
@@ -33,28 +33,24 @@
                 id: 1
             },
             {
-                text: 'Enviado',
+                text: 'Confirmado',
                 id: 2
             },
             {
-                text: 'Confirmado',
+                text: 'Error',
                 id: 3
             },
             {
-                text: 'Error',
+                text: 'Empezado',
                 id: 4
             },
             {
-                text: 'Cancelado',
+                text: 'Cerrado',
                 id: 5
             },
             {
-                text: 'Abierto',
+                text: 'Cancelado',
                 id: 6
-            },
-            {
-                text: 'Empezado',
-                id: 7
             }
         ];
 
@@ -87,6 +83,22 @@
         }
 
         function showTicket(item){
+            vm.toModel = angular.copy(item);
+            $mdDialog.show({
+                controller: 'detailTicketController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/COM/tickets/modal/showTicket.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    data: vm.toModel
+                }
+            })
+                .then(function () {
+                })
+                .catch(function(){
+                });
 
         }
 

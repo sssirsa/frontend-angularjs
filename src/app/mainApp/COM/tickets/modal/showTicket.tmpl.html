@@ -1,0 +1,87 @@
+<md-dialog class="dialog">
+    <md-toolbar>
+    <div class="md-toolbar-tools">
+        <!--<h2>{{'MAIN.COMPONENTS.CABINET.INFO_IMPEDIMENT'|translate}}</h2>-->
+        <h2>Información del ticket</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+
+        <div layout="column" layout-align="center stretch">
+            <md-input-container layout="row">
+                <label translate>Identificador</label>
+                <input name="identificador" ng-disabled="true" ng-model="vm.infoTicket.identificador"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Folio</label>
+                <input name="folio" ng-disabled="true" ng-model="vm.infoTicket.folio"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Cabinet</label>
+                <input name="economico" ng-disabled="true" ng-model="vm.infoTicket.cabinet.economico"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Código COM</label>
+                <input name="com_code" ng-disabled="true" ng-model="vm.infoTicket.tipo.com_ticket_code"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Descripción</label>
+                <input name="ticket_descripcion" ng-disabled="true" ng-model="vm.infoTicket.tipo.descripcion"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Status del Ticket</label>
+                <input name="ticket_status" ng-disabled="true" ng-model="vm.infoTicket.estatus"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Fecha de creación del ticket</label>
+                <input name="ticket_create_date" ng-disabled="true" ng-model="vm.infoTicket.fecha_creacion"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Fecha de confirmación del ticket</label>
+                <input name="ticket_confirm_date" ng-disabled="true" ng-model="vm.infoTicket.fecha_confirmacion"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Mensaje COM</label>
+                <input name="ticket_msj" ng-disabled="true" ng-model="vm.infoTicket.mensaje_com"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Ticket Padre</label>
+                <input name="ticket_padre" ng-disabled="true" ng-model="vm.infoTicket.ticket_padre"/>
+            </md-input-container>
+
+            <md-input-container layout="row">
+                <label translate>Ticket Anterior</label>
+                <input name="ticket_padre" ng-disabled="true" ng-model="vm.infoTicket.ticket_anterior"/>
+            </md-input-container>
+
+        </div>
+
+        <md-actions layout="row" layout-align="end center">
+            <md-button
+                ng-click="vm.cerrar()"
+                class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-ban"></md-icon>
+                CERRAR
+            </md-button>
+        </md-actions>
+
+    </md-content>
+</md-toolbar>
+</md-dialog>
