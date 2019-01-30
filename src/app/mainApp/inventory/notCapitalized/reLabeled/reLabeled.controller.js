@@ -47,7 +47,7 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'nombre'
                 },
                 pagination: {
                     total: 'count',
