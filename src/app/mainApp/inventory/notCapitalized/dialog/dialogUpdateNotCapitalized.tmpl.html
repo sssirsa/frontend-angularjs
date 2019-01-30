@@ -52,8 +52,8 @@
             <input name="estatusAnterior" ng-model="vm.estatusPrevio" ng-disabled="true"/>
         </md-input-container>
 
-        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left">
-            <md-switch ng-disabled="vm.new_economico" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
+        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left" ng-if="!vm.new_economico">
+            <md-switch ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
                 Cambiar Estatus o Motivo
             </md-switch>
         </div>
@@ -81,7 +81,8 @@
 
     <md-actions
         layout="row"
-        layout-align="end center">
+        layout-align="end center"
+        ng-if="!vm.new_economico">
         <md-button class="md-raised md-primary"
                    cg-busy="{ promise:vm.createPromise, message:' ' }"
                    ng-click="vm.update()">
