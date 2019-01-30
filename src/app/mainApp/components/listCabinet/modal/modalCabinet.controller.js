@@ -159,8 +159,6 @@
                     vm.cabinet.modelo_id = data.id_modelo;
                 }
 
-                ("Update", vm.cabinet);
-
                 cabinetUC.update(data.economico, vm.cabinet)
                     .then(function (res) {
                         toastr.success(vm.update);
