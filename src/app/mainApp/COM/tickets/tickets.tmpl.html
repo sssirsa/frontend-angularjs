@@ -2,23 +2,23 @@
     <div layout="column"
          cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
          style="height: 100px"
-         ng-if="vm.tickets.length < 1">
+         ng-if="vm.tickets.length < 0">
         <md-card layout="column"
                  layout-gt-sm="row"
                  layout-padding
                  layout-align="center center"
-                 ng-if="vm.todos.length < 1">
+                 ng-if="vm.tickets.length < 0">
             <div flex-gt-sm="40" flex="100">
                 <md-input-container class="md-block">
-                    <div ng-if="vm.tickets.length < 1">
-                        <span translate>NOT_CAPITALIZED.RESULTS.NO_RESULTS</span>
+                    <div ng-if="vm.tickets.length < 0">
+                        <span translate>No se encontraron resultados</span>
                     </div>
                 </md-input-container>
             </div>
         </md-card>
     </div>
 
-    <div ng-if="vm.todos">
+    <div ng-if="vm.tickets">
         <div layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
             <md-card flex="50">
                 <md-input-container class="md-block">
@@ -26,9 +26,9 @@
                     <md-select name="selectType"
                                md-on-close="vm.changeSelected()"
                                ng-model="vm.selectedKind">
-                        <md-option ng-repeat="option in vm.Kinds"
-                                   value="{{option.value}}">
-                            {{option.nombre}}
+                        <md-option ng-repeat="option in vm.OPTIONS"
+                                   value="{{option.id}}">
+                            {{option.text}}
                         </md-option>
                     </md-select>
                 </md-input-container>
@@ -59,35 +59,37 @@
                     <md-content>
                         <div flex="100">
                             <md-toolbar class="md-hue-1">
-                                <div class="md-toolbar-tools" layout-align="space-around center">
+                                <div class="md-toolbar-tools" layout-align="start center">
                                     <div layout-sm="row">
-                                        <b translate>Folio</b>: &nbsp <b>{{item.id}}</b>
+                                        <b translate>Folio</b>: &nbsp <b>{{item.folio}}</b>
                                     </div>
                                 </div>
                             </md-toolbar>
                         </div>
                     </md-content>
+
                     <md-content>
 
                         <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
-                            <div layout="column">
+                            <div layout="column" layout-align="center center" flex="5">
                                 <i class="fas fa-ticket-alt"></i>
                             </div>
-                                <div layout="column" flex="30">
-                                    <div layout="row">
-                                        <div layout="column" layout-align="center center">
-                                            <b translate>Folio</b>
-                                        </div>
-                                        <div layout="column" layout-align="center center">
-                                            <b>:&nbsp</b>
-                                        </div>
-                                        <div layout="column" layout-align="center center">
-                                            <h4>{{item.folio}}</h4>
-                                        </div>
+
+                            <div layout="column" layout-align="center center" flex="25">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>Folio</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{item.folio}}</h4>
                                     </div>
                                 </div>
+                            </div>
 
-                            <div layout="column" flex="10">
+                            <div layout="column" layout-align="center center" flex="25">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>Tipo</b>
@@ -96,40 +98,42 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{item.tipo}}</h4>
+                                        <h4>{{item.tipo.nombre}}</h4>
                                     </div>
                                 </div>
                             </div>
 
-                            <div layout="column" flex="40">
-                                <div layout="row">
-                                    <md-button class="md-raised md-primary"
+                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
+                                <div layout="column">
+                                    <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
-                                        <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+                                        <md-icon md-font-icon="fas fa-play"></md-icon>
                                         <span translate>Inicio</span>
                                     </md-button>
                                 </div>
 
-                                <div layout="row">
-                                    <md-button class="md-raised md-primary"
+                                <div layout="column">
+                                    <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
-                                        <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+                                        <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
                                         <span translate>Error</span>
                                     </md-button>
                                 </div>
+                            </div>
 
-                                <div layout="row">
-                                    <md-button class="md-raised md-primary"
+                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
+                                <div layout="column">
+                                    <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
-                                        <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+                                        <md-icon md-font-icon="fas fa-times-circle"></md-icon>
                                         <span translate>Cerrar</span>
                                     </md-button>
                                 </div>
 
-                                <div layout="row">
-                                    <md-button class="md-raised md-primary"
+                                <div layout="column">
+                                    <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
-                                        <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+                                        <md-icon md-font-icon="fas fa-info"></md-icon>
                                         <span translate>Informar</span>
                                     </md-button>
                                 </div>
@@ -142,17 +146,17 @@
                 </div>
             </md-card>
         </div>
+    </div>
 
-        <div ng-if="vm.refreshPaginationButtonsComponent">
-            <pagination-manager-buttons go-sig="vm.sig()"
-                                        go-prev="vm.prev()"
-                                        go-number="vm.goToNumberPage(number)"
-                                        limit-objects="vm.limit"
-                                        count-object="vm.objectPaginado.count"
-                                        offset-object="vm.offset"
-                                        nex-object="vm.objectPaginado.next"
-                                        prev-object="vm.objectPaginado.previous">
-            </pagination-manager-buttons>
-        </div>
+    <div ng-if="vm.refreshPaginationButtonsComponent && vm.objectPaginado.next">
+        <pagination-manager-buttons go-sig="vm.sig()"
+                                    go-prev="vm.prev()"
+                                    go-number="vm.goToNumberPage(number)"
+                                    limit-objects="vm.limit"
+                                    count-object="vm.tickets"
+                                    offset-object="vm.offset"
+                                    nex-object="vm.objectPaginado.next"
+                                    prev-object="vm.objectPaginado.previous">
+        </pagination-manager-buttons>
     </div>
 </div>
