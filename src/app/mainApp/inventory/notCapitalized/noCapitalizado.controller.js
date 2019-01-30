@@ -130,8 +130,6 @@
                 }
 
             });
-
-            (vm.todos);
         }
 
         function sigPage() {
@@ -177,7 +175,6 @@
 
 
         function showNoCapitalizado(item) {
-            (item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'notCapitalizedUpdateDialogController',
