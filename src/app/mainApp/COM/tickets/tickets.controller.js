@@ -7,18 +7,23 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(API, $mdDialog) {
+    function ticketsController(API, $mdDialog, toastr) {
         var vm = this;
 
         vm.tickets = {};
-        vm.querySet = '';
         vm.loadingPromise = {};
+        vm.selectedKind = '';
+        vm.searchText = '';
+        vm.tipolist = 0;
+        vm.searchBool = false;
 
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
-        //vm.searchCabinet = searchCabinet;
+        vm.searchCabinet = searchCabinet;
         vm.showTicket = showTicket;
+        vm.changeSelected = changeSelected;
+        vm.removeFilter = removeFilter;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -29,28 +34,22 @@
 
         vm.OPTIONS = [
             {
-                text: 'Recibido',
-                id: 1
+                text: 'Recibido'
             },
             {
-                text: 'Confirmado',
-                id: 2
+                text: 'Confirmado'
             },
             {
-                text: 'Error',
-                id: 3
+                text: 'Error'
             },
             {
-                text: 'Empezado',
-                id: 4
+                text: 'Empezado'
             },
             {
-                text: 'Cerrado',
-                id: 5
+                text: 'Cerrado'
             },
             {
-                text: 'Cancelado',
-                id: 6
+                text: 'Cancelado'
             }
         ];
 
@@ -59,7 +58,7 @@
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
             }
             else {
-                API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset + '&' + querySet).customGET();
+                return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset + '&' + querySet).customGET();
             }
         }
 
@@ -71,7 +70,8 @@
         }
 
         function listTickets(){
-            vm.loadingPromise = list(vm.limit, vm.offset)
+            vm.tickets = {};
+            vm.loadingPromise = list(vm.limit, vm.offset, vm.querySet)
                 .then(function listT(list) {
                     vm.tickets = list.results;
                     vm.objectPaginado = list;
@@ -102,6 +102,19 @@
 
         }
 
+        function changeSelected(){
+            vm.tipolist = 1;
+            vm.querySet = '';
+        }
+
+        function searchCabinet(){
+            vm.querySet = '';
+            vm.querySet = 'cabinet__icontains=' + vm.searchText + '&estatus__icontains=' + vm.selectedKind;
+            vm.tickets = null;
+            vm.searchBool = true;
+            listTickets();
+        }
+
         function sigPage() {
             vm.offset += vm.limit;
             paginadoRefresh();
@@ -120,6 +133,15 @@
         function paginadoRefresh() {
             vm.tickets = {};
             vm.objectPaginado = null;
+            listTickets();
+        }
+
+        function removeFilter(){
+            vm.searchBool = false;
+            vm.querySet = '';
+            vm.tickets = null;
+            vm.selectedKind = '';
+            vm.searchText = '';
             listTickets();
         }
     }
