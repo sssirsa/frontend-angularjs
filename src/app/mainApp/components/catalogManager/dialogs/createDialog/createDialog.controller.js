@@ -222,23 +222,21 @@
         }
 
         function onArrayElementSelect(element, field, value) {
-            console.log(vm.objectToCreate[field.model]);
-            console.log(vm.objectToCreate[field.model + '_chip']);
             if (element) {
                 if (!vm.objectToCreate[field.model]) {
                     vm.objectToCreate[field.model] = [];
                 }
-                if (!vm.objectToCreate[field.model+'_chip']) {
-                    vm.objectToCreate[field.model + '_chip'] = [];
+                if (!vm[field.model+'_chip']) {
+                    vm[field.model + '_chip'] = [];
                 }
                 vm.objectToCreate[field.model].push(element);
-                vm.objectToCreate[field.model+'_chip'].push(value);
+                vm[field.model+'_chip'].push(value);
             }
         }
 
-        function onArrayElementRemove(index) {
-            vm.objectToCreate[field.model].spice(index, 1);
-            vm.objectToCreate[field.model + '_chip'].splice(index, 1);
+        function onArrayElementRemove(index, field) {
+            vm.objectToCreate[field.model].splice(index, 1);
+            vm[field.model + '_chip'].splice(index, 1);
         }
     }
 

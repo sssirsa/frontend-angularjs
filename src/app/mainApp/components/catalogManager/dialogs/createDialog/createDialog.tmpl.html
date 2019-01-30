@@ -188,9 +188,9 @@
                                             lazy="field.catalog.requires"
                                             on-select="vm.onArrayElementSelect(element, field, value)">
                             </catalog-select>
-                            <md-chips ng-model="vm.objectToCreate[field.model+'_chip']"
-                                      ng-if="vm.objectToCreate[field.model + '_chip'].length>0"
-                                      md-on-remove="vm.onArrayElementRemove($index)"
+                            <md-chips ng-model="vm[field.model+'_chip']"
+                                      ng-if="vm[field.model + '_chip'].length>0"
+                                      md-on-remove="vm.onArrayElementRemove($index, field)"
                                       md-removable="true">
                                 <md-chip-template>
                                     <span>
@@ -213,9 +213,9 @@
                                         lazy="field.catalog.requires"
                                         on-select="vm.onArrayElementSelect(element, field, value)">
                         </catalog-select>
-                        <md-chips ng-model="vm.objectToCreate[field.model+'_chip']"
-                                  ng-if="vm.objectToCreate[field.model + '_chip'].length>0"
-                                  md-on-remove="vm.onArrayElementRemove($index)"
+                        <md-chips ng-model="vm[field.model+'_chip']"
+                                  ng-if="vm[field.model + '_chip'].length>0"
+                                  md-on-remove="vm.onArrayElementRemove($index, field)"
                                   md-removable="true">
                             <md-chip-template>
                                 <span>
