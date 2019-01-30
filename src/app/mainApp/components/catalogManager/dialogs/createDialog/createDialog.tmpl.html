@@ -186,15 +186,23 @@
                                             elements="field['catalog'].elements"
                                             soft-delete="field.softDelete"
                                             lazy="field.catalog.requires"
-                                            on-select="vm.onArrayElementSelect(element,field)">
+                                            on-select="vm.onArrayElementSelect(element, field, value)">
                             </catalog-select>
+                            <md-chips ng-model="vm.objectToCreate[field.model+'_chip']"
+                                      ng-if="vm.objectToCreate[field.model + '_chip'].length>0
+                                      md-on-remove="vm.onArrayElementRemove($index)"
+                                      md-removable="true">
+                                <md-chip-template>
+                                    <span>
+                                        {{$chip[field.catalog.option]}}
+                                    </span>
+                                </md-chip-template>
+                            </md-chips>
                         </section>
                         <div ng-if="field.hint"
                              class="create-field-hint">
                             {{field.hint}}
                         </div>
-                        <md-chips ng-model="vm.objectToCreate[field.model]"
-                                  readonly="true">
                     </section>
                     <section ng-if="!field['catalog'].requires">
                         <catalog-select catalog="field.catalog"
@@ -203,14 +211,22 @@
                                         elements="field['catalog'].elements"
                                         soft-delete="field.softDelete"
                                         lazy="field.catalog.requires"
-                                        on-select="vm.onArrayElementSelect(element,field)">
+                                        on-select="vm.onArrayElementSelect(element, field, value)">
                         </catalog-select>
+                        <md-chips ng-model="vm.objectToCreate[field.model+'_chip']"
+                                  ng-if="vm.objectToCreate[field.model + '_chip'].length>0"
+                                  md-on-remove="vm.onArrayElementRemove($index)"
+                                  md-removable="true">
+                            <md-chip-template>
+                                <span>
+                                    {{$chip[field.catalog.option]}}
+                                </span>
+                            </md-chip-template>
+                        </md-chips>
                         <div ng-if="field.hint"
                              class="create-field-hint">
                             {{field.hint}}
                         </div>
-                        <md-chips ng-model="vm.objectToCreate[field.model]"
-                                  readonly="true">
                     </section>
                 </section>
             </div>

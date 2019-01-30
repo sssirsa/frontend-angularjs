@@ -8,7 +8,8 @@
  *             initial_value: string, (Optional) If given the value will be shown in the field
  *                                    (just html5 types)
  *             lock: boolean,         (Optional) If true, the field would be disabled,
- *                                    just works if a initial_value is given, othrwise is ignored.
+ *                                    just works for HTML5 fields and if a initial_value is given,
+ *                                    otherwise is ignored.
 *              model: string,         Name of the field that will be sent to the API
 *              required: boolean,     (Optional) Specifies whether or not the field is required,
  *                                    used for form validation
@@ -124,6 +125,7 @@
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
         vm.onArrayElementSelect = onArrayElementSelect;
+        vm.onArrayElementRemove = onArrayElementRemove;
 
         activate();
 
@@ -219,13 +221,24 @@
             }
         }
 
-        function onArrayElementSelect(element, field) {
+        function onArrayElementSelect(element, field, value) {
+            console.log(vm.objectToCreate[field.model]);
+            console.log(vm.objectToCreate[field.model + '_chip']);
             if (element) {
                 if (!vm.objectToCreate[field.model]) {
                     vm.objectToCreate[field.model] = [];
                 }
+                if (!vm.objectToCreate[field.model+'_chip']) {
+                    vm.objectToCreate[field.model + '_chip'] = [];
+                }
                 vm.objectToCreate[field.model].push(element);
+                vm.objectToCreate[field.model+'_chip'].push(value);
             }
+        }
+
+        function onArrayElementRemove(index) {
+            vm.objectToCreate[field.model].spice(index, 1);
+            vm.objectToCreate[field.model + '_chip'].splice(index, 1);
         }
     }
 
