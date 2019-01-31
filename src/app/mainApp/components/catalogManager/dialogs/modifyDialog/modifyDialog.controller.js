@@ -2,8 +2,8 @@
    fields:[
 *          {
 *              type: string,          Valid types are the html5 types,
- *                                    plus the types: options, catalog
- *                                    and fileUploader.
+ *                                    plus the types: options, catalog, array(string),
+ *                                    catalog_array and fileUploader.
  *             lock: string,          (Optional)  If true, the field would be locked to
  *                                    any modification (Doens't work in file)
 *              model: string,         Name of the field that will be sent to the API
@@ -151,12 +151,15 @@
         vm.cancel = cancel;
         vm.filesSelected = filesSelected;
         vm.onElementSelect = onElementSelect;
+        vm.onArrayElementSelect = onArrayElementSelect;
+        vm.onArrayElementRemove = onArrayElementRemove;
 
         activate();
 
         function activate() {
             //Handle aditional information loading
             bindCatalogs();
+            loadCatalogArrays();
         }
 
         function createProvider() {
@@ -242,18 +245,65 @@
             angular.forEach(
                 vm.fields,
                 function bindCatalogsRepeater(field) {
-                    if (field.type === 'catalog') {
+                    if (field.type === 'catalog'
+                        || field.type === 'catalog_array') {
                         if (field['catalog'].bindTo) {
-                            vm.objectToModify[field.model] = vm.objectToModify[field.catalog.bindTo];
+                            vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.catalog.bindTo]));
                         }
                     }
                     if (field.type === 'options') {
                         if (field['options'].bindTo) {
-                            vm.objectToModify[field.model] = vm.objectToModify[field.options.bindTo];
+                            vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.options.bindTo]));
                         }
                     }
                 }
             );
+        }
+
+        function loadCatalogArrays() {
+            angular.forEach(
+                vm.fields,
+                function loadCatalogArraysRepeater(field) {
+                    if (field.type === 'catalog_array') {
+                        vm[field.model + '_chip'] = JSON.parse(
+                            JSON.stringify(
+                                vm.objectToModify[field.model]
+                            ));
+                    }
+                }
+            );
+        }
+
+        function onArrayElementSelect(element, field, value) {
+            if (field.hasOwnProperty('validations')
+                && field.validations.hasOwnProperty('max')
+                && !(field.validations.max <= vm.objectToModify[field.model].length)) {
+                console.error('Maximum quantity of "catalog_array" objects has been reached'
+                    + '@function onArrayElementSelect @controller CatalogModifyDialogController');
+            }
+            else {
+                addCatalogToArray(element, field, value);
+            }
+
+        }
+
+        //Internal function
+        //It add just the returned ID of the elements to the catalog_array
+        function addCatalogToArray(element, field, value) {
+            if (element) {
+                //if (!vm.objectToModify[field.model]) {
+                //    vm.objectToModify[field.model] = [];
+                //}
+                //if (!vm[field.model + '_chip']) {
+                //    vm[field.model + '_chip'] = [];
+                //}
+                vm.objectToModify[field.model].push(element);
+                vm[field.model + '_chip'].push(value);
+            }
+        }
+
+        function onArrayElementRemove(index, field) {
+            vm.objectToModify[field.model].splice(index, 1);
         }
     }
 

@@ -24,7 +24,8 @@
                          && field['type']!=='catalog'
                          && field['type']!=='options'
                          && field['type']!=='color'
-                         && field['type']!=='array'">
+                         && field['type']!=='array'
+                         && field['type']!=='catalog_array'">
                     <md-input-container layout="column" class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
@@ -165,6 +166,58 @@
                             {{field.hint}}
                         </div>
                     </md-input-container>
+                </section>
+                <section ng-if="field['type']==='catalog_array'">
+                    <section ng-if="field['catalog'].requires">
+                        <section ng-if="vm.objectToCreate[field['catalog'].requires]">
+                            <catalog-select required="field.required"
+                                            catalog="field.catalog"
+                                            pagination="field['catalog'].pagination"
+                                            elements="field['catalog'].elements"
+                                            soft-delete="field.softDelete"
+                                            lazy="field.catalog.requires"
+                                            on-select="vm.onArrayElementSelect(element, field, value)">
+                            </catalog-select>
+                            <md-chips ng-model="vm[field.model+'_chip']"
+                                      ng-if="vm[field.model+'_chip'].length>0"
+                                      md-on-remove="vm.onArrayElementRemove($index, field)"
+                                      md-removable="true">
+                                <md-chip-template>
+                                    <span>
+                                        {{$chip[field.catalog.option]}}
+                                    </span>
+                                </md-chip-template>
+                            </md-chips>
+                        </section>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
+                    </section>
+                    <section ng-if="!field['catalog'].requires">
+                        <catalog-select catalog="field.catalog"
+                                        required="field.required"
+                                        pagination="field['catalog'].pagination"
+                                        elements="field['catalog'].elements"
+                                        soft-delete="field.softDelete"
+                                        lazy="field.catalog.requires"
+                                        on-select="vm.onArrayElementSelect(element, field, value)">
+                        </catalog-select>
+                        <md-chips ng-model="vm[field.model+'_chip']"
+                                  ng-if="vm[field.model+'_chip'].length>0"
+                                  md-on-remove="vm.onArrayElementRemove($index, field)"
+                                  md-removable="true">
+                            <md-chip-template>
+                                <span>
+                                    {{$chip[field.catalog.option]}}
+                                </span>
+                            </md-chip-template>
+                        </md-chips>
+                        <div ng-if="field.hint"
+                             class="create-field-hint">
+                            {{field.hint}}
+                        </div>
+                    </section>
                 </section>
             </div>
         </form>
