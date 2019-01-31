@@ -90,20 +90,14 @@
             },
             credentials: 'credenciales',
             map: 'https://maps.googleapis.com/maps/api/staticmap',
-            tecnicosDisponibles: 'employees',
-
-            label: 'label', //TODO: Alex, esto te toca a tí
+            tecnicosDisponibles: 'employees'
             //report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
             //reporte_insumos: 'reports/insumos',
-            
+
         })
         .constant('QUERIES', {
-            store: {
-                by_state: '?localidad__municipio__estado_id=',
-                by_city: '?localidad__municipio_id=',
-                by_locality: '?localidad_id=',
-                by_postal_code: '?localidad__codigo_postal=',
-                by_economic: '/lookup/'
+            cabinet: {
+                by_brand: '?marca__id='
             },
             city: {
                 by_state: '?estado__id='
@@ -111,6 +105,13 @@
             locality: {
                 by_state: '?municipio__estado__id=',
                 by_city: '?municipio__id='
+            },
+            store: {
+                by_state: '?localidad__municipio__estado_id=',
+                by_city: '?localidad__municipio_id=',
+                by_locality: '?localidad_id=',
+                by_postal_code: '?localidad__codigo_postal=',
+                by_economic: '/lookup/'
             }
         })
         .constant('CONFIGS', {

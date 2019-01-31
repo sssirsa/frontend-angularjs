@@ -79,6 +79,7 @@
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "FAILURE_TYPE": "Clasificador de Falla",
+                "IMPEDIMENT_REASON": "Motivo de Impedimento",
                 "LOCALITIES": "Localidades",
                 "NEXT_STEP": "Siguiente Paso",
                 "PROJECTS": "Proyectos",
@@ -250,7 +251,18 @@
                 "STATUS_COM": "Estatus COM",
                 "LIST": "Listado de cabinets",
                 "CATEGORY": "Categoría",
-                "RE_LABELED": "Capitalización del cabinet"
+                "RE_LABELED": "Capitalización del cabinet",
+                "NOT_IMPEDIMENT": "Impedir salida",
+                "IMPEDIMENT": "Impedido",
+                "INFO_IMPEDIMENT": "Información del impedimento",
+                "NOT_ENTRIE": "No se tiene registro de entrada",
+                "SEARCH_BY_ECONOMIC": "Búsqueda por económico",
+                "SEARCHED_ITEM": "Elemento búscado",
+                "REMOVE_FILTER": "Quitar Búsqueda",
+                "WORTHY": "Atendible",
+                "IMPEDIMENT_DATE": "Fecha de impedimento",
+                "RELEASE_DATE": "Fecha de liberación",
+                "NOT_RELEASED": "No liberado"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
@@ -283,6 +295,7 @@
             "SUCESSS_TRANSPORTE_MESSAGE": "Se creó exitosamente la linea de transporte",
             "SUCCESS_LINE_MESSAGE": "Se Asigno  exitosamente el Cabinet",
             "SUCCESS_TICKET_MESSAGES": "Se creó exitosamente el mensaje",
+            "SUCCESS_IMPEDIMENT": "Se impidió el cabinet correctamente",
             "ERORR_TYPE_FILE": "No se permiten este tipo de archivo",
             "SUCCESS_TAKE": "El ticket se auto asignó  exitosamente",
             "FILE_SIZE": "Solo se pueden subir un archivo con un peso máximo de 1MB",
@@ -318,7 +331,8 @@
             "SAVE": "Guardar",
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
-            "LOAD_MORE": "Cargar mas elementos"
+            "LOAD_MORE": "Cargar mas elementos",
+            "CLOSE": "Cerrar"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",
@@ -341,14 +355,15 @@
         },
         "DIALOG": {
             "DELETE_TITLE": "Confirmación de eliminación",
-            "DELETE_MESSAGE": "¿Seguro que desea eliminar este elemento?",
+            "DELETE_MESSAGE": "¿Seguro qué desea eliminar este elemento?",
             "RESTORE_TITLE": "Confirmación de restauración",
-            "RESTORE_MESSAGE": "¿Seguro que desea restaurar este elemento a un estado activo?",
+            "RESTORE_MESSAGE": "¿Seguro qué desea restaurar este elemento a un estado activo?",
             "DELETE_MESSAGE_CABINETS": "¿Seguro que desea eliminar los siguientes cabinets?",
             "ATTENTION_TITLE": "Confirmación de Atención",
-            "ATTENTION_MESSAGE": "¿Seguro que desea concluir la atención?",
+            "ATTENTION_MESSAGE": "¿Seguro qué desea concluir la atención?",
             "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
-            "CANCEL_ATTENTION_MESSAGE":"¿Seguro que desea cancelar la atencion"
+            "CANCEL_ATTENTION_MESSAGE":"¿Seguro qué desea cancelar la atencion?",
+            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?"
         }
     },
     "SUCCESS":{

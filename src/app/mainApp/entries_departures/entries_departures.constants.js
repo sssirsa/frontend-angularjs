@@ -20,12 +20,7 @@
                 unrecognizable: 'no_labeled',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
-                
-                close: 'close',
-                control: {
-                    base: 'control',
-                    cabinet_in_subsidiary: 'cabinet_in_sucursal'
-                }
+                close: 'close'
             },
             inspections: {},
             subsidiary_change: {}
