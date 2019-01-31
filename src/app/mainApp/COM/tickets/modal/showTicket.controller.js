@@ -12,9 +12,13 @@
 
         //variables
         vm.infoTicket = data;
+        vm.chip = [];
+        vm.infoChip = null;
 
         //funciones
         vm.cerrar = cerrar;
+        vm.view = view;
+        vm.clean =  clean;
 
         init();
 
@@ -23,7 +27,26 @@
         }
 
         function init() {
-            console.log(vm.infoTicket);
+            angular.forEach(vm.infoTicket.message_set, function Menssages(msj) {
+                msj.com_code = msj.tipo_com.com_code;
+                msj.text = msj.tipo_com.label;
+                msj.nombre_com =  msj.tipo_com.nombre_com;
+                vm.chip.push(msj);
+            });
+        }
+
+        function view(info) {
+            if(!vm.infoChip){
+                vm.infoChip = info;
+            }else if(vm.infoChip.identificador == info.identificador){
+                vm.infoChip = null;
+            }else if(vm.infoChip.identificador != info.identificador){
+                vm.infoChip = info;
+            }
+        }
+
+        function clean() {
+            vm.infoChip = null;
         }
 
     }

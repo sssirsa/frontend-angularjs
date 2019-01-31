@@ -15,7 +15,7 @@
         layout-padding
     >
 
-        <div layout="column" layout-align="center stretch">
+        <div layout="column" layout-align="center stretch" ng-if="!vm.infoChip">
             <md-input-container layout="row">
                 <label translate>Identificador</label>
                 <input name="identificador" ng-disabled="true" ng-model="vm.infoTicket.identificador"/>
@@ -71,6 +71,42 @@
                 <input name="ticket_padre" ng-disabled="true" ng-model="vm.infoTicket.ticket_anterior"/>
             </md-input-container>
 
+            <md-chips class="custom-chips" ng-model="vm.chip" readonly="true" ng-if="vm.chip.length > 0">
+                <md-chip-template ng-click="vm.view($chip)">
+                    <span>
+                        <strong>{{$chip.com_code}}</strong>
+                        <strong>{{$chip.nombre_com}}</strong>
+                    </span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+
+        <div layout="row" ng-if="vm.infoChip" layout-padding>
+            <md-card flex layout-padding>
+                <div layout="row" layout-align="space-between start">
+                    <div layout="column">
+                        <div layout="row" layout-align="space-between center">
+                            <div layout-align="start start" class="md-list-item-text">
+                                <h5>Ticket:&nbsp{{vm.infoChip.ticket}}</h5>
+                                <h5>Identificador MSJ:&nbsp{{vm.infoChip.identificador}}</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div layout="colum" layout-align="start start">
+                        <div ng-click="vm.clean()">x</div>
+                    </div>
+                </div>
+                <div class="md-list-item-text">
+                    <h6>Código COM:&nbsp{{vm.infoChip.com_code}}</h6>
+                    <h6>Nombre COM:&nbsp{{vm.infoChip.nombre_code}}</h6>
+                    <h6>Mensaje:&nbsp{{vm.infoChip.text}}</h6>
+                    <h6>Fecha creación:&nbsp{{vm.infoChip.fecha_creacion}}</h6>
+                    <h6>Tipo:&nbsp{{vm.infoChip.tipo}}</h6>
+                    <h6>Estatus:&nbsp{{vm.infoChip.estatus}}</h6>
+                    <h6>No. Intentos:&nbsp{{vm.infoChip.num_intentos}}</h6>
+                </div>
+            </md-card>
         </div>
 
         <md-actions layout="row" layout-align="end center">
