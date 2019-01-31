@@ -225,29 +225,21 @@
         }
 
         function onArrayElementSelect(element, field, value) {
-            if (field.hasOwnProperty('validations')) {
-                if (field.validations.hasOwnProperty('max')) {
-                    if (field.validations.max <= vm.objectToCreate[field.model].length) {
-                        addCatalogIdToArray(element, field);
-                    }
-                    else {
-                        console.error('Maximum quantity of "catalog_array" objects has been reached'
-                        + '@function onArrayElementSelect @controller CatalogCreateDialogController');
-                    }
-                }
-                else {
-                    addCatalogIdToArray(element, field);
-                }
+            if (field.hasOwnProperty('validations')
+                && field.validations.hasOwnProperty('max')
+                && !(field.validations.max <= vm.objectToModify[field.model].length)) {
+                console.error('Maximum quantity of "catalog_array" objects has been reached'
+                    + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
-                addCatalogIdToArray(element, field);
+                addCatalogToArray(element, field, value);
             }
 
         }
 
         //Internal function
         //It add just the returned ID of the elements to the catalog_array
-        function addCatalogIdToArray(element, field) {
+        function addCatalogToArray(element, field, value) {
             if (element) {
                 if (!vm.objectToCreate[field.model]) {
                     vm.objectToCreate[field.model] = [];
@@ -262,7 +254,6 @@
 
         function onArrayElementRemove(index, field) {
             vm.objectToCreate[field.model].splice(index, 1);
-            vm[field.model + '_chip'].splice(index, 1);
         }
     }
 
