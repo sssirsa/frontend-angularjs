@@ -322,6 +322,7 @@
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            vm.catalogElements = [];
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
