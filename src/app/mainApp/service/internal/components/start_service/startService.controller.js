@@ -9,7 +9,7 @@
             templateUrl: 'app/mainApp/service/internal/components/start_service/startService.tmpl.html',
             controller: startServiceController,
             bindings: {
-
+                onStart: '&'
 
             }
         });
@@ -28,6 +28,7 @@
                 vm.horas=parseInt((vm.contador/3600)%24);
 
             }, 1000);
+            vm.onStart({element:vm.date});
         }
 
 
