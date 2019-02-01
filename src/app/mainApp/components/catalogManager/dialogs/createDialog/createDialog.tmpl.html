@@ -27,7 +27,8 @@
                          && field['type']!=='options'
                          && field['type']!=='color'
                          && field['type']!=='array'
-                         && field['type']!=='catalog_array'">
+                         && field['type']!=='catalog_array'
+                         && field['type']!=='object'">
                     <md-input-container layout="column" class="md-block">
                         <!--Field label selection depending on the parameters given-->
                         <label ng-if="field['label']">{{field['label']}}</label>
@@ -230,6 +231,10 @@
                         </div>
                     </section>
                 </section>
+                <catalog-object-create ng-if="field['type']==='object'"
+                                       fields="field['fields']"
+                                       label="field['label']"
+                                       model="field['model']"></catalog-object-create>
             </div>
         </form>
     </md-content>

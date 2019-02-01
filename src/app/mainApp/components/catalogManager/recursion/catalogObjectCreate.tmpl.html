@@ -1,10 +1,9 @@
 <v-accordion id="accordionCreate"
              class="vAccordion--default"
              control="accordionCreate">
-    <v-pane id="v-accordion-pane-{{vm.model}}">
-        <v-pane-header id="v-accordion-header-{{vm.model}}-header"
-                       ng-if="vm.label">{{vm.label}}</v-pane-header>
-        <v-pane-content id="v-accordion-content-{{vm.model}}">
+    <v-pane id="v-accordion-pane">
+        <v-pane-header id="v-accordion-header">{{vm.label}}</v-pane-header>
+        <v-pane-content id="v-accordion-content">
             <div layout="column"
                  layout-align="center stretch"
                  ng-repeat="field in vm.fields">

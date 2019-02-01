@@ -141,7 +141,8 @@
                     && field['type'] !== 'options'
                     && field['type'] !== 'color'
                     && field['type'] !== 'array'
-                    && field['type'] !== 'catalog_array') {
+                    && field['type'] !== 'catalog_array'
+                    && field['type'] !== 'object') {
                     if (field.hasOwnProperty('initial_value')) {
                         //Loading initial values
                         vm.objectToCreate[field.model] = field.initial_value;

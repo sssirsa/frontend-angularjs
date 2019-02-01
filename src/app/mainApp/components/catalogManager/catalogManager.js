@@ -278,7 +278,8 @@
         CATALOG,
         $window,
         $mdDialog,
-        ErrorHandler
+        ErrorHandler,
+        $state
     ) {
         var vm = this;
 
@@ -344,28 +345,37 @@
         function create() {
             //Creation behavior handling
             if (vm.actions['POST']) {
-                $mdDialog.show({
-                    controller: 'CatalogCreateDialogController',
-                    controllerAs: 'vm',
-                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
-                    fullscreen: true,
-                    clickOutsideToClose: true,
-                    focusOnOpen: true,
-                    locals: {
-                        dialog: vm.actions['POST'].dialog,
+                if (vm.noDialogs) {
+                    $state.go('triangular.admin-default.CatalogManagerCreate', {
                         fields: vm.actions['POST'].fields,
+                        screen: vm.actions['POST'].dialog,
                         url: vm.url
-                    }
-                }).then(function () {
-                    activate();
-                    ErrorHandler.successCreation();
-                    vm.onSuccessCreate();
-                }).catch(function (errorCreate) {
-                    if (errorCreate) {
-                        ErrorHandler.errorTranslate(errorCreate);
-                        vm.onErrorCreate(errorCreate);
-                    }
-                });
+                    });
+                }
+                else {
+                    $mdDialog.show({
+                        controller: 'CatalogCreateDialogController',
+                        controllerAs: 'vm',
+                        templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
+                        fullscreen: true,
+                        clickOutsideToClose: true,
+                        focusOnOpen: true,
+                        locals: {
+                            dialog: vm.actions['POST'].dialog,
+                            fields: vm.actions['POST'].fields,
+                            url: vm.url
+                        }
+                    }).then(function () {
+                        activate();
+                        ErrorHandler.successCreation();
+                        vm.onSuccessCreate();
+                    }).catch(function (errorCreate) {
+                        if (errorCreate) {
+                            ErrorHandler.errorTranslate(errorCreate);
+                            vm.onErrorCreate(errorCreate);
+                        }
+                    });
+                }
             }
             else {
                 ErrorHandler.errorTranslate({ status: -1 });
