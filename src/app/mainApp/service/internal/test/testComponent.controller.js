@@ -12,6 +12,7 @@
         var vm = this;
         vm.onElementSelect = onElementSelect;
         vm.infogral=infogral;
+        vm.onStart=onStart;
         vm.insumos_lote = [];
 
         vm.maxStock = 4;
@@ -80,6 +81,9 @@
             console.log(vm.insumos_lote);
 
 
+        }
+        function onStart(startDate){
+            console.log(startDate);
         }
 
         function getDuplicity(bulkAssetToFind) {
