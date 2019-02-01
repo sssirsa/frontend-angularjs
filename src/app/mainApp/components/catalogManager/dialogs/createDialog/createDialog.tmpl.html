@@ -232,6 +232,7 @@
                     </section>
                 </section>
                 <catalog-object-create ng-if="field['type']==='object'"
+                                       element="vm.objectToCreate[field.model]"
                                        fields="field['fields']"
                                        label="field['label']"
                                        model="field['model']"></catalog-object-create>

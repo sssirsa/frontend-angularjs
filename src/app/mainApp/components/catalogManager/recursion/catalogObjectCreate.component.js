@@ -1,5 +1,4 @@
 (function () {
-    'use strict';
     angular
         .module('app.mainApp')
         .component('catalogObjectCreate', {
@@ -7,6 +6,7 @@
             controller: CatalogObjectCreateDirective,
             controllerAs: 'vm',
             bindings: {
+                element:'=',
                 fields: '<',
                 label: '<',
                 model:'<'
@@ -14,11 +14,12 @@
         });
     function CatalogObjectCreateDirective() {
         var vm = this;
-        
+
+        vm.objectToCreate = vm.element;
+
         activate();
 
         function activate() {
-
             angular.forEach(vm.fields, function (field) {
                 if (field.type === 'array') {
                     vm.objectToCreate[field.model] = [];

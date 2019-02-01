@@ -135,6 +135,9 @@
                 if (field.type === 'array') {
                     vm.objectToCreate[field.model] = [];
                 }
+                if (field.type === 'object') {
+                    vm.objectToCreate[field.model] = {};
+                }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
                     && field['type'] !== 'catalog'
