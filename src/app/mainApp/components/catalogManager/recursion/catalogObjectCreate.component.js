@@ -3,26 +3,27 @@
         .module('app.mainApp')
         .component('catalogObjectCreate', {
             templateUrl: 'app/mainApp/components/catalogManager/recursion/catalogObjectCreate.tmpl.html',
-            controller: CatalogObjectCreateDirective,
+            controller: CatalogObjectCreateController,
             controllerAs: 'vm',
             bindings: {
-                element:'=',
-                fields: '<',
-                label: '<',
-                model:'<'
+                element:'=', //Bidirectional bindings
+                fields: '<'
             }
         });
-    function CatalogObjectCreateDirective() {
+    function CatalogObjectCreateController() {
         var vm = this;
 
         vm.objectToCreate = vm.element;
-
+        
         activate();
 
         function activate() {
             angular.forEach(vm.fields, function (field) {
                 if (field.type === 'array') {
                     vm.objectToCreate[field.model] = [];
+                }
+                if (field.type === 'object') {
+                    vm.objectToCreate[field.model] = {};
                 }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
