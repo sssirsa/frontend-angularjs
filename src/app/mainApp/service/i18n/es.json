@@ -260,5 +260,9 @@
     },
     "GENERAL_SHOW_INFO":{
         "NO_ELEMENTS":"Sin Información"
+    },
+    "START_SERVICE_COMPONENT":{
+        "START":"Iniciar Servicio",
+        "ELAPSED_TIME":"  Tiempo Transcurrido"
     }
 }
