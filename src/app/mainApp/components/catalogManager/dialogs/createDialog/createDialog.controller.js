@@ -2,8 +2,8 @@
    fields:[
 *          {
 *              type: string,          Valid types are the html5 types, plus the types:
- *                                    options, catalog, array(strings), catalog_array
- *                                    and fileUploader.
+ *                                    options, catalog, array(strings), catalog_array,
+ *                                    catalog_array and fileUploader.
  *                                    catalog and catalog_array use the catalog_select component.
  *             initial_value: string, (Optional) If given the value will be shown in the field
  *                                    (just html5 types)

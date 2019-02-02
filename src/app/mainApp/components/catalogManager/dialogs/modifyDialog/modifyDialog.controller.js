@@ -1,15 +1,35 @@
 /*
    fields:[
 *          {
-*              type: string,          Valid types are the html5 types,
- *                                    plus the types: options, catalog, array(string),
+*              type: string,          Valid types are the html5 types, plus the types:
+ *                                    options, catalog, array(string), catalog_array,
  *                                    catalog_array and fileUploader.
  *             lock: string,          (Optional)  If true, the field would be locked to
- *                                    any modification (Doens't work in file)
+ *                                    any modification, useful if you want to show some
+ *                                    info, but don't allow modifications (Doesn't work in file)
 *              model: string,         Name of the field that will be sent to the API
 *              required: boolean,     (Optional) Specifies whether or not the field is required
 *              hint: string,          (Optional) Hint label to show
-*              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
+*              label: string,         (Optional) Label to show in the form,
+ *                                    if not given, the model string will be used as label
+*              bindTo: string,        (Optional) It's used when the object returns
+ *                                    the actual value of the field into a
+*                                     different property.
+*                                     Example:
+*                                  
+*                                     //When modifying is required as follows
+*                                     object:{
+*                                       property_id: id
+*                                     }
+*                                  
+*                                     //When returned from the API is given as follows
+*                                     object:
+*                                     {
+*                                       property:{}
+*                                     }
+*                                     In this case, the bindTo parameter should be
+ *                                    'property', and the model of the field
+*                                     should be 'property_id'
 *              validations:
 *                  {
 *                      regex: string,          Option regular expression for field validation (just used when text),
@@ -53,23 +73,7 @@
  *                  softDelete: {
  *                      hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *                      reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
- *                  },
- *                  bindTo: string,     (Optional) It's used when the object returns the actual value of the catalog into a
- *                                      different property.
- *                                      Example:
- *                                      
- *                                      //When modifying is required as follows
- *                                      object:{
- *                                        property_id: id
- *                                      }
- *                                      
- *                                      //When returned from the API is given as follows
- *                                      object:
- *                                      {
- *                                        property:{}
- *                                      }
- *                                      In this case, the bindTo parameter should be 'property', and the model of the field
- *                                      should be 'property_id'
+ *                  } 
 *              },
 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
 *                  model: string,            Field of the element to be used in the model
@@ -79,23 +83,7 @@
 *                          model: {{}},
 *                          option: {{}}
 *                      }
-*                  ],
-*                  bindTo: string,     (Optional) It's used when the object returns the actual value of the catalog into a
-*                                      different property.
-*                                      Example:
-*
-*                                      //When modifying is required as follows
-*                                      object:{
-*                                        property_id: id
-*                                      }
-*
-*                                      //When returned from the API is given as follows
-*                                      object:
-*                                      {
-*                                        property:{}
-*                                      }
-*                                      In this case, the bindTo parameter should be 'property', and the model of the field
-*                                      should be 'property_id'
+*                  ]
 *              }
 *              fileUploder: {                 As used by the file-uploader component
 *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
