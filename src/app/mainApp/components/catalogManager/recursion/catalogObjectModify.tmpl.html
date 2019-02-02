@@ -157,7 +157,6 @@
                                 pagination="field['catalog'].pagination"
                                 elements="field['catalog'].elements"
                                 soft-delete="field.softDelete"
-                                initial="vm.objectToModify[field.bindTo]"
                                 lazy="field.catalog.requires"
                                 on-select="vm.onArrayElementSelect(element, field, value)">
                 </catalog-select>
@@ -183,7 +182,6 @@
                             pagination="field['catalog'].pagination"
                             elements="field['catalog'].elements"
                             soft-delete="field.softDelete"
-                            initial="vm.objectToModify[field.bindTo]"
                             lazy="field.catalog.requires"
                             on-select="vm.onArrayElementSelect(element, field, value)">
             </catalog-select>
