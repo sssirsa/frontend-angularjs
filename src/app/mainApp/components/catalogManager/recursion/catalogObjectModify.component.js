@@ -74,18 +74,17 @@
             angular.forEach(
                 vm.fields,
                 function bindDataRepeater(field) {
-                    //if (field.type === 'catalog'
-                    //    || field.type === 'catalog_array') {
-                    //    if (field['catalog'].bindTo) {
-                    //        //vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.catalog.bindTo]));
-                    //        console.debug(vm.objectToModify);
-                    //    }
-                    //}
-                    //if (field.type === 'options') {
-                    //    if (field['options'].bindTo) {
-                    //        vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.options.bindTo]));
-                    //    }
-                    //}
+                    if (field.type !== 'catalog'
+                        && field.type !== 'catalog_array'
+                        && field.type !== 'fileUploader') {
+                        if (field.bindTo) {
+                            vm.objectToModify[field.model] = JSON.parse(
+                                JSON.stringify(
+                                    vm.objectToModify[field.bindTo]
+                                ));
+                            delete (vm.objectToModify[field.bindTo]);
+                        }
+                    }
                 }
             );
         }

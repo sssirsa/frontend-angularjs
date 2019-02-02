@@ -78,8 +78,7 @@
             <label ng-if="!field['label']">{{field['model']}}</label>
             <md-select ng-model="vm.objectToModify[field.model]"
                        ng-required="field.required"
-                       ng-disabled="field.lock"
-                       md-on-close="vm.selectState()">
+                       ng-disabled="field.lock">
                 <md-option ng-repeat="option in field.options.elements"
                            ng-value="option[field.options.model]">
                     {{option[field.options.option]}}
