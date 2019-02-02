@@ -17,7 +17,7 @@
 
         function activate() {
             //Handle aditional information loading
-            bindCatalogs();
+            bindData();
             loadCatalogArrays();
         }
 
@@ -70,22 +70,22 @@
             }
         }
 
-        function bindCatalogs() {
+        function bindData() {
             angular.forEach(
                 vm.fields,
-                function bindCatalogsRepeater(field) {
-                    if (field.type === 'catalog'
-                        || field.type === 'catalog_array') {
-                        if (field['catalog'].bindTo) {
-                            vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.catalog.bindTo]));
-                            console.debug(vm.objectToModify);
-                        }
-                    }
-                    if (field.type === 'options') {
-                        if (field['options'].bindTo) {
-                            vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.options.bindTo]));
-                        }
-                    }
+                function bindDataRepeater(field) {
+                    //if (field.type === 'catalog'
+                    //    || field.type === 'catalog_array') {
+                    //    if (field['catalog'].bindTo) {
+                    //        //vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.catalog.bindTo]));
+                    //        console.debug(vm.objectToModify);
+                    //    }
+                    //}
+                    //if (field.type === 'options') {
+                    //    if (field['options'].bindTo) {
+                    //        vm.objectToModify[field.model] = JSON.parse(JSON.stringify(vm.objectToModify[field.options.bindTo]));
+                    //    }
+                    //}
                 }
             );
         }

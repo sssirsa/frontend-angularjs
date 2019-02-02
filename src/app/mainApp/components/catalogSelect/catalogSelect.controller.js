@@ -150,7 +150,15 @@
                         vm.onSuccessList({ elements: vm.catalogElemets });
                         //If initial parameter is given, select the element after listing the catalogue
                         if (vm.initial) {
-                            vm.selectedElement = vm.initial[vm.catalog.model];
+                            vm.selectedElement = vm.catalogElements
+                                .filter(function (currentElement) {
+                                    return currentElement[vm.catalog.model]
+                                        === vm.initial[vm.catalog.model];
+                                })[0]; 
+                            vm.onSelect({
+                                element: vm.selectedElement[vm.catalog.model],
+                                value: vm.selectedElement
+                            });
                         }
                     })
                     .catch(function (errorElements) {

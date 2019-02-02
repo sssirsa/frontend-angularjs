@@ -1,4 +1,3 @@
-
 <div layout="column"
      layout-align="center stretch"
      ng-repeat="field in vm.fields">
@@ -7,7 +6,8 @@
                          && field['type']!=='options'
                          && field['type']!=='color'
                          && field['type']!=='array'
-                         && field['type']!=='catalog_array'">
+                         && field['type']!=='catalog_array'
+                         && field['type']!=='object'">
         <md-input-container layout="column" class="md-block">
             <!--Field label selection depending on the parameters given-->
             <label ng-if="field['label']">{{field['label']}}</label>
@@ -100,7 +100,7 @@
                             pagination="field['catalog'].pagination"
                             elements="field['catalog'].elements"
                             soft-delete="field.softDelete"
-                            initial="vm.objectToModify[field.catalog.bindTo]"
+                            initial="vm.objectToModify[field.bindTo]"
                             on-select="vm.onElementSelect(element,field)">
             </catalog-select>
             <div ng-if="field.hint"
@@ -115,7 +115,7 @@
                             pagination="field['catalog'].pagination"
                             elements="field['catalog'].elements"
                             soft-delete="field.softDelete"
-                            initial="vm.objectToModify[field.catalog.bindTo]"
+                            initial="vm.objectToModify[field.bindTo]"
                             on-select="vm.onElementSelect(element,field)">
             </catalog-select>
             <div ng-if="field.hint"
@@ -157,6 +157,7 @@
                                 pagination="field['catalog'].pagination"
                                 elements="field['catalog'].elements"
                                 soft-delete="field.softDelete"
+                                initial="vm.objectToModify[field.bindTo]"
                                 lazy="field.catalog.requires"
                                 on-select="vm.onArrayElementSelect(element, field, value)">
                 </catalog-select>
@@ -182,6 +183,7 @@
                             pagination="field['catalog'].pagination"
                             elements="field['catalog'].elements"
                             soft-delete="field.softDelete"
+                            initial="vm.objectToModify[field.bindTo]"
                             lazy="field.catalog.requires"
                             on-select="vm.onArrayElementSelect(element, field, value)">
             </catalog-select>
