@@ -1,0 +1,26 @@
+{
+    "COM":{
+        "ADDITIONAL_TEXTS":{
+            "LOAD_MORE":"Cargar más"
+        },
+        "URLS":{
+            "SERVICE_TASK_TYPE":"/dev/com_middleware/catalogues/ticket_type",
+            "ASSETCONDITION":"/dev/management/catalogues/condition"
+        },
+        "FIELDS":{
+            "SERVICE_TASK_TYPE" :"Tipo de Servicio",
+            "ASSET_TYPE_CODE":"Tipo de Insumo",
+            "ASSET_GLOBAL_CODE":"Código Global",
+            "SERIAL_NUMBER":"Número de Serie",
+            "BAR_CODE":"Económico",
+            "PRODUCT_DESCRIPTION":"Descripción de Producto",
+            "PRODUCT_VARIANT_CODE":"Código de Variante",
+            "ASSET_CONDITION":"Condición del Cabinet"
+
+
+
+
+
+        }
+    }
+}
