@@ -55,6 +55,13 @@
             }
         ];
 
+        vm.categories={
+            start:'Acknowledge',
+            info:'Information',
+            error:'Issue',
+            close:'Closure'
+        };
+
         function list(limit, offset, querySet) {
             if (querySet === undefined) {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
@@ -149,17 +156,26 @@
         }
 
         //Aquí empieza lo de Paco
-        function getTicketInfo(item) {
+        function getTicketInfo(item, activity) {
             console.log(item);
             var TicketProviderPromise=TicketProvider.getServiceDetails(item.mensaje_com);
             TicketProviderPromise.then(function (serviceDetails) {
-                console.log(serviceDetails);
+                vm.serviceDetails=serviceDetails.service_details;
+                console.log(vm.serviceDetails);
+                getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
             }).catch(function (error) {
+                ErrorHandler.errorTranslate(error);
+            });
 
-            })
         }
-        function getPossibleMessages(){
-
+        function getPossibleMessages(service_task_type, activity){
+            var messages_statusPromise=TicketProvider.getTicket_type(service_task_type);
+            messages_statusPromise.then(function (message_status) {
+                vm.messageStatusCatalog=_.where(message_status.messages_status,{categoria:activity});
+                console.log(vm.messageStatusCatalog);
+            }).catch(function(error){
+                ErrorHandler.errorTranslate(error);
+            });
         }
         function openDialog(){
 

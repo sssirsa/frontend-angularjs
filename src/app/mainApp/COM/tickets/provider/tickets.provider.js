@@ -15,7 +15,7 @@
         COM
     ) {
 
-        var baseCom = API.all(URLS.mobile.base).all(COM.base);
+        var baseCom = API.all(COM.base);
 
         return {
             getTicket_type:getTicket_type,
