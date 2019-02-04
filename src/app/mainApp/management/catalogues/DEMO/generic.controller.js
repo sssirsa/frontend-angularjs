@@ -77,7 +77,153 @@
                                 required: true
                             }
                         ]
-                    }
+                    },
+                    {
+                        type: 'array_object',
+                        model: 'service_details',
+                        label: 'Detalle del servicio',
+                        fields: [
+                            {
+                                type: 'text',
+                                model: 'service_task_type',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'asset_type_code',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'quantity',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'asset_global_code',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'serial_number',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'bar_code',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'product_category_code',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'product_code',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'product_description',
+                                label: '',
+                                required: true
+                            },
+                            {
+                                type: 'text',
+                                model: 'product_variant_code',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'product_variant_description',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'brand_hierarchy_code',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'brand_hierarchy',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'asset_condition',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'external_height_front',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'external_height',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'external_width',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'external_length',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'weight',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'measure_unit',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'weight_unit',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'owner_ship',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'contract_number',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'contract_signatory',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'contract_date_of_signature',
+                                label: ''
+                            },
+                            {
+                                type: 'text',
+                                model: 'documentation_link',
+                                label: ''
+                            }
+                        ]
+                    },
                     //{
                     //    type: 'fileUploader',
                     //    model: 'file',

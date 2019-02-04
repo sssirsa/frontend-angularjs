@@ -10,11 +10,11 @@
                 fields: '<'
             }
         });
-    function CatalogObjectCreateController() {
+    function CatalogObjectCreateController($scope) {
         var vm = this;
 
         vm.objectToCreate = vm.element;
-        vm.array_objects = {};
+        //vm.array_objects = {};
 
         activate();
 
@@ -25,9 +25,6 @@
                 }
                 if (field.type === 'object') {
                     vm.objectToCreate[field.model] = {};
-                }
-                if (field.type === 'array_object') {
-                    vm.array_objects[field.model] = {};
                 }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
@@ -130,25 +127,49 @@
             }
         }
 
-        vm.addObjectToArray = function addObjectToArray(element, field) {
+        vm.addObjectToArray = function addObjectToArray(field) {
             if (!vm.objectToCreate[field.model]) {
                 vm.objectToCreate[field.model] = [];
             }
-            if (!vm[field.model + '_chip']) {
-                vm[field.model + '_chip'] = [];
-            }
-            vm.objectToCreate[field.model].push(element);
-            vm[field.model + '_chip'].push(element);
-            vm.array_objects[field.model] = {};
+            //if (!vm[field.model + '_chip']) {
+            //    vm[field.model + '_chip'] = [];
+            //}
+            vm.objectToCreate[field.model].push({});
+            console.log(vm.objectToCreate);
+            //vm[field.model + '_chip'].push(vm[field.model + '_chip'].length);
         }
 
-        vm.onArrayObjectElementRemove = function onArrayObjectElementRemove(index, field) {
+        vm.removeObjectToArray = function removeObjectToArray(field, index) {
             vm.objectToCreate[field.model].splice(index, 1);
+            //console.log(vm.objectToCreate[field.model]);
         }
 
-        vm.onArrayObjectClick= function onArrayObjectClick(field, index) {
-            vm.array_objects[field.model] = vm.objectToCreate[field.model][index];
-        }
+        //vm.onArrayObjectClick = function onArrayObjectClick(field, index) {
+        //    vm.objectToCreate[field.model].push({});
+        //    //let objectArray = vm.objectToCreate[field.model];
+        //    //vm.array_objects[field.model] = objectArray[index];
+        //    //$scope.$broadcast('catalogObjectCreate-onArrayObjectClick',
+        //    //    {
+        //    //        element: vm.array_objects[field.model],
+        //    //        fields: field['fields']
+        //    //    }
+        //    //);
+        //}
+
+        //$scope.$on('catalogObjectCreate-onArrayObjectClick',
+        //    function (event, args) {
+        //        //Given the fact that the element is called recursively,
+        //        //then is needed to compare the scopes
+        //        if (event.currentScope !== event.targetScope) {
+        //            //The fields match to the desired component
+        //            //It prevents nested components to update their scope
+        //            //if (vm.fields === args['fields']) {
+        //            vm.objectToCreate = angular.copy(args['element']);
+        //            console.log('Change triggered', vm.objectToCreate);
+        //            $scope.$apply();
+        //            //}
+        //        }
+        //    });
 
     }
 })();

@@ -219,7 +219,8 @@
             <v-pane id="v-accordion-pane">
                 <v-pane-header id="v-accordion-header">{{field.label}}</v-pane-header>
                 <v-pane-content id="v-accordion-content">
-                    <catalog-object-create element="vm.objectToCreate[field.model]"
+                    <catalog-object-create id="{{field.model}}"
+                                           element="vm.objectToCreate[field.model]"
                                            fields="field['fields']"></catalog-object-create>
                 </v-pane-content>
             </v-pane>
@@ -234,9 +235,30 @@
                 <v-pane-content id="v-accordion-content">
                     <div layout="column"
                          layout-align="stretch center">
-                        <catalog-object-modify element="vm.array_objects[field.model]"
-                                               fields="field['fields']"></catalog-object-modify>
-                        <md-chips ng-model="vm[field.model+'_chip']"
+                        <div ng-repeat="arrayElement in vm.objectToCreate[field.model] track by $index">
+                            <v-accordion id="accordionArrayElementCreate"
+                                         class="vAccordion--default"
+                                         control="accordionArrayElementCreate">
+                                <v-pane id="v-accordion-pane">
+                                    <v-pane-header id="v-accordion-header">{{field.label}} {{$index}}</v-pane-header>
+                                    <v-pane-content id="v-accordion-content">
+                                        <catalog-object-modify element="arrayElement"
+                                                               fields="field['fields']"></catalog-object-modify>
+                                        <md-button ng-click="vm.removeObjectToArray(field, $index)"
+                                                   class="md-warn md-raised"
+                                                   aria-label="Remove">
+                                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                                        </md-button>
+                                    </v-pane-content>
+                                </v-pane>
+                            </v-accordion>
+                        </div>
+                        <md-button ng-click="vm.addObjectToArray(field)"
+                                   class="md-primary md-raised"
+                                   aria-label="Add">
+                            <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        </md-button>
+                        <!--<md-chips ng-model="vm[field.model+'_chip']"
                                   ng-if="vm[field.model+'_chip'].length>0"
                                   md-on-remove="vm.onArrayObjectElementRemove($index, field)"
                                   md-removable="true">
@@ -245,12 +267,7 @@
                                     {{field.label}} {{$index}}
                                 </span>
                             </md-chip-template>
-                        </md-chips>
-                        <md-button ng-click="vm.addObjectToArray(vm.array_objects[field.model], field)"
-                                   class="md-primary"
-                                   aria-label="Add">
-                            <md-icon md-font-icon="fa fa-plus"></md-icon>
-                        </md-button>
+                        </md-chips>-->
                     </div>
                 </v-pane-content>
             </v-pane>

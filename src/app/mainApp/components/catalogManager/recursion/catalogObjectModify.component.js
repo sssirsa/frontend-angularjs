@@ -14,9 +14,15 @@
         var vm = this;
 
         vm.objectToModify = vm.element;
+        vm.array_objects = {};
 
         function activate() {
             //Handle aditional information loading
+            angular.forEach(vm.fields, function (field) {
+                if (field.type === 'array_object') {
+                    vm.array_objects[field.model] = {};
+                }
+            });
             bindData();
             loadCatalogArrays();
         }
@@ -76,6 +82,7 @@
                 function bindDataRepeater(field) {
                     if (field.type !== 'catalog'
                         && field.type !== 'catalog_array'
+                        && field.type !== 'array_object'
                         && field.type !== 'fileUploader') {
                         if (field.bindTo) {
                             vm.objectToModify[field.model] = JSON.parse(
@@ -133,6 +140,11 @@
 
         vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
             vm.objectToModify[field.model].splice(index, 1);
+        }
+
+        vm.addObjectToArray = function addObjectToArray(element, field) {
+            console.log(element);
+            console.log(vm.objectToModify);
         }
     }
 })();

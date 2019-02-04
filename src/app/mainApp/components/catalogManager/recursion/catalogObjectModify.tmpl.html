@@ -202,14 +202,45 @@
         </section>
     </section>
     <section ng-if="field['type']==='object'">
-        <v-accordion id="accordionCreate"
+        <v-accordion id="accordionModify"
                      class="vAccordion--default"
-                     control="accordionCreate">
+                     control="accordionModify">
             <v-pane id="v-accordion-pane">
                 <v-pane-header id="v-accordion-header">{{field.label}}</v-pane-header>
                 <v-pane-content id="v-accordion-content">
-                    <catalog-object-create element="vm.objectToCreate[field.model]"
-                                           fields="field['fields']"></catalog-object-create>
+                    <catalog-object-modify element="vm.objectToModify[field.model]"
+                                           fields="field['fields']"></catalog-object-modify>
+                </v-pane-content>
+            </v-pane>
+        </v-accordion>
+    </section>
+    <section ng-if="field['type']==='array_object'">
+        <v-accordion id="accordionArrayModify"
+                     class="vAccordion--default"
+                     control="accordionArrayModify">
+            <v-pane id="v-accordion-pane">
+                <v-pane-header id="v-accordion-header">{{field.label}}</v-pane-header>
+                <v-pane-content id="v-accordion-content">
+                    <div layout="column"
+                         layout-align="stretch center">
+                        <catalog-object-modify element="vm.array_objects[field.model]"
+                                               fields="field['fields']"></catalog-object-modify>
+                        <md-chips ng-model="vm[field.model+'_chip']"
+                                  ng-if="vm[field.model+'_chip'].length>0"
+                                  md-on-remove="vm.onArrayObjectElementRemove($index, field)"
+                                  md-removable="true">
+                            <md-chip-template>
+                                <span>
+                                    {{$chip[field.catalog.option]}}
+                                </span>
+                            </md-chip-template>
+                        </md-chips>
+                        <md-button ng-click="vm.addObjectToArray(vm.array_objects[field.model], field)"
+                                   class="md-primary"
+                                   aria-label="Add">
+                            <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        </md-button>
+                    </div>
                 </v-pane-content>
             </v-pane>
         </v-accordion>

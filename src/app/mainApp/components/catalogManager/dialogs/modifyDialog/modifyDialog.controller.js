@@ -33,8 +33,8 @@
 *              validations:
 *                  {
 *                      regex: string,          Option regular expression for field validation (just used when text),
-*                      max: number,            Maximum value allowed for selection (just used when number)
-*                      min: number,            Minimum value allowed for selection (just used when number)
+*                      max: number,            Maximum value allowed for selection or maximum number of array elements
+*                      min: number,            Minimum value allowed for selection or minimum number of array elements
 *                      date_format: string,    String format to use for date formating (just used when date)
 *                      errors:{
 *                          required: string,       (Optional) Default is 'Required field'
@@ -148,22 +148,23 @@
         }
 
         function modify() {
-            createProvider();
-            let id = null;
-            if (vm.id) {
-                id = vm.id;
-            }
-            else {
-                id = 'id';
-            }
-            vm.modifyLoader = vm.ModifyCatalogProvider
-                .update(vm.objectToModify[id], vm.objectToModify)
-                .then(function (modifiedElement) {
-                    $mdDialog.hide(modifiedElement);
-                })
-                .catch(function (modifyError) {
-                    $mdDialog.cancel(modifyError);
-                });
+            console.log(vm.objectToModify);
+            //createProvider();
+            //let id = null;
+            //if (vm.id) {
+            //    id = vm.id;
+            //}
+            //else {
+            //    id = 'id';
+            //}
+            //vm.modifyLoader = vm.ModifyCatalogProvider
+            //    .update(vm.objectToModify[id], vm.objectToModify)
+            //    .then(function (modifiedElement) {
+            //        $mdDialog.hide(modifiedElement);
+            //    })
+            //    .catch(function (modifyError) {
+            //        $mdDialog.cancel(modifyError);
+            //    });
         }
 
         function cancel() {
