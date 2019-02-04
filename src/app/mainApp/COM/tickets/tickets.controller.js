@@ -364,7 +364,109 @@
                                             label: Translate.translate('COM.FIELDS.PRODUCT_DESCRIPTION')
                                         }
                                     ]
+                                },
+                                {
+                                    type: 'array_object',
+                                    model: 'process_instructions',
+                                    label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTIONS'),
+                                    fields: [
+                                        {
+                                            type: 'catalog',
+                                            model: 'process_instruction_code',
+                                            label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
+                                            required: true,
+                                            catalog: {
+                                                url: Translate.translate('COM.URLS.PROCESS_INSTRUCTION_CODE'),
+                                                name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
+                                                model: 'com_code',
+                                                option: 'descripcion'
+                                            }
+                                        },
+                                        {
+                                            type: 'text',
+                                            model: 'process_instruction_value',
+                                            label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_VALUE')
+                                        },
+                                        {
+                                            type: 'text',
+                                            model: 'process_instruction_extra_notes',
+                                            label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_EXTRA_NOTES')
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: 'array_object',
+                                    model: 'repairs',
+                                    label: Translate.translate('COM.FIELDS.REPAIRS'),
+                                    fields: [
+                                        {
+                                            type: 'catalog',
+                                            model: 'repair_action_code',
+                                            label: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
+                                            required: true,
+                                            catalog: {
+                                                url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
+                                                name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
+                                                model: 'com_code',
+                                                option:'descripcion'
+                                            }
+                                        },
+                                        {
+                                            type: 'text',
+                                            model: 'repair_action_notes',
+                                            label:Translate.translate('COM.FIELDS.REPAIR_ACTION_NOTES')
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: 'array_object',
+                                    model: 'faults',
+                                    label: Translate.translate('COM.FIELDS.FAULTS'),
+                                    fields: [
+                                        {
+                                            type: 'catalog',
+                                            model: 'fault_code',
+                                            label: Translate.translate('COM.FIELDS.FAULT_CODE'),
+                                            required: true,
+                                            catalog: {
+                                                url: Translate.translate('COM.URLS.FAULT_CODE'),
+                                                name: Translate.translate('COM.FIELDS.FAULT_CODE'),
+                                                model: 'com_code',
+                                                option: 'descripcion'
+                                            }
+                                        },
+                                        {
+                                            type: 'text',
+                                            model: 'fault_notes',
+                                            label: Translate.translate('COM.FIELDS.FAULT_NOTES')
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: 'array_object',
+                                    model: 'notifications',
+                                    label: 'Notificaciones',
+                                    fields: [
+                                        {
+                                            type: 'catalog',
+                                            model: 'notification_status_code',
+                                            label: 'Código de notificación',
+                                            required: true,
+                                            catalog: {
+                                                url: '',
+                                                name: 'Código de notificación',
+                                                model: '',
+                                                option: ''
+                                            }
+                                        },
+                                        {
+                                            type: 'text',
+                                            model: 'notification_extra_notes',
+                                            label: 'Notas'
+                                        }
+                                    ]
                                 }
+
 
                             ]
 
