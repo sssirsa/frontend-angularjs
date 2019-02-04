@@ -11,7 +11,7 @@
             "ASSET_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/categoria_insumo",
             "PROCESS_INSTRUCTION_CODE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/process_instructions",
             "REPAIR_ACTION_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/action",
-            "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure"
+            "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure",
         },
         "FIELDS":{
             "SERVICE_TASK_TYPE" :"Tipo de Servicio",
@@ -43,7 +43,10 @@
             "REPAIR_ACTION_NOTES":"Notas de Reparación",
             "FAULTS":"Fallas Detectadas",
             "FAULT_CODE":"Código de Falla",
-            "FAULT_NOTES":"Notas de Falla"
+            "FAULT_NOTES":"Notas de Falla",
+            "NOTIFICATION_EXTRA_NOTES":"Notas de Notificación",
+            "NOTIFICATIONS":"Notificaciones",
+            "NOTIFICATION_STATUS_CODE":"Código de notificación"
 
 
 

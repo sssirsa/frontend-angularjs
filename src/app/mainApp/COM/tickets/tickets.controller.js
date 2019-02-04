@@ -408,13 +408,13 @@
                                                 url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
                                                 name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                                 model: 'com_code',
-                                                option:'descripcion'
+                                                option: 'descripcion'
                                             }
                                         },
                                         {
                                             type: 'text',
                                             model: 'repair_action_notes',
-                                            label:Translate.translate('COM.FIELDS.REPAIR_ACTION_NOTES')
+                                            label: Translate.translate('COM.FIELDS.REPAIR_ACTION_NOTES')
                                         }
                                     ]
                                 },
@@ -432,7 +432,7 @@
                                                 url: Translate.translate('COM.URLS.FAULT_CODE'),
                                                 name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                                 model: 'com_code',
-                                                option: 'descripcion'
+                                                option: 'nombre'
                                             }
                                         },
                                         {
@@ -445,24 +445,23 @@
                                 {
                                     type: 'array_object',
                                     model: 'notifications',
-                                    label: 'Notificaciones',
+                                    label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
                                     fields: [
                                         {
-                                            type: 'catalog',
+                                            type: 'options',
                                             model: 'notification_status_code',
-                                            label: 'Código de notificación',
+                                            label: Translate.translate('COM.FIELDS.NOTIFICATION_STATUS_CODE'),
                                             required: true,
-                                            catalog: {
-                                                url: '',
-                                                name: 'Código de notificación',
-                                                model: '',
-                                                option: ''
+                                            options: {
+                                                model: "com_code",
+                                                option: "label",
+                                                elements: vm.messageStatusCatalog
                                             }
                                         },
                                         {
                                             type: 'text',
                                             model: 'notification_extra_notes',
-                                            label: 'Notas'
+                                            label: Translate.translate('COM.FIELDS.NOTIFICATION_EXTRA_NOTES')
                                         }
                                     ]
                                 }
