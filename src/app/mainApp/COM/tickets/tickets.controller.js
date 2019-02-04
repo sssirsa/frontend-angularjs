@@ -290,7 +290,7 @@
                                             model: 'date',
                                             label: Translate.translate('COM.FIELDS.DATE'),
                                             validations: {
-                                                date_format: ""//checar como es este formato con Plata
+                                                date_format: "YYYYMMDDhhmmss"//checar como es este formato con Plata
                                             }
                                         }
                                     ]
@@ -484,18 +484,27 @@
                             type: 'array_object',
                             model: 'service_details',
                             label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: []
+                            fields: [],
+                            validations:{
+                                max:0
+                            }
                         },
                         {
                             type: 'array_object',
                             model: 'repairs',
                             label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: []
+                            fields: [],
+                            validations:{
+                                max:0
+                            }
                         }, {
                             type: 'array_object',
                             model: 'faults',
                             label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: []
+                            fields: [],
+                            validations:{
+                                max:0
+                            }
                         },
                         {
                             type: 'array_object',
