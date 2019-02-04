@@ -62,6 +62,8 @@
             close: 'Closure'
         };
 
+
+
         function list(limit, offset, querySet) {
             if (querySet === undefined) {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
@@ -473,6 +475,7 @@
 
                     ]
                 };
+                openDialog();
             }
             else {
                 vm.meta_incidences = {
@@ -519,12 +522,52 @@
                         }
                     ]
                 };
-
+                openDialog();
             }
         }
 
         function openDialog() {
 
+            vm.actions = {
+                PUT: {
+                    id: 'identificador',
+                    fields: vm.meta_incidences,
+                    dialog: {
+                        title: Translate.translate('ACTION.LABELS.MODIFY'),
+                        okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                        cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                        loading: 'Guardando Acción'
+                    },
+                    url:"http://api-gateway.sssirsa.com/dev/com_middleware/com/message/send/"
+                }
+            };
+
+
+
+            $mdDialog.show({
+                controller: 'CatalogModifyDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/modifyDialog/modifyDialog.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    dialog: vm.actions['PUT'].dialog,
+                    id: vm.actions['PUT'].id,
+                    fields: vm.actions['PUT'].fields,
+                    element: vm.serviceDetails,
+                    url:vm.actions['PUT'].url
+                }
+            }).then(function () {
+                activate();
+                ErrorHandler.successUpdate();
+                vm.onSuccessDelete();
+            }).catch(function (errorDelete) {
+                if (errorDelete) {
+                    ErrorHandler.errorTranslate(errorDelete);
+                    vm.onErrorDelete(errorDelete);
+                }
+            });
         }
 
 

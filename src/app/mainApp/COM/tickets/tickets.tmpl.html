@@ -152,7 +152,7 @@
 
                                 <div layout="column" ng-if="item.estatus === 'Empezado'">
                                     <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.error)">
                                         <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
                                         <span translate>Error</span>
                                     </md-button>
@@ -162,7 +162,7 @@
                             <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
                                 <div layout="column" ng-if="item.estatus === 'Empezado'">
                                     <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.close)">
                                         <md-icon md-font-icon="fas fa-times-circle"></md-icon>
                                         <span translate>Cerrar</span>
                                     </md-button>
@@ -170,7 +170,7 @@
 
                                 <div layout="column" ng-if="item.estatus === 'Empezado'">
                                     <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.info)">
                                         <md-icon md-font-icon="fas fa-info"></md-icon>
                                         <span translate>Informar</span>
                                     </md-button>
