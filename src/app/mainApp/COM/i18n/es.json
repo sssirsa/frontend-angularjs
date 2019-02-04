@@ -4,8 +4,8 @@
             "LOAD_MORE":"Cargar más"
         },
         "URLS":{
-            "SERVICE_TASK_TYPE":"/dev/com_middleware/catalogues/ticket_type",
-            "ASSETCONDITION":"/dev/management/catalogues/condition"
+            "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/ticket_type",
+            "ASSETCONDITION":"http://api-gateway.sssirsa.com/dev/management/catalogues/condition"
         },
         "FIELDS":{
             "SERVICE_TASK_TYPE" :"Tipo de Servicio",
