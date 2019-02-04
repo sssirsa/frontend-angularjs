@@ -5,7 +5,10 @@
         },
         "URLS":{
             "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/ticket_type",
-            "ASSETCONDITION":"http://api-gateway.sssirsa.com/dev/management/catalogues/condition"
+            "ASSETCONDITION":"http://api-gateway.sssirsa.com/dev/management/catalogues/condition",
+            "DATE_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/date_type",
+            "COMPONENT_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/tipo_componente",
+            "ASSET_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/categoria_insumo"
         },
         "FIELDS":{
             "SERVICE_TASK_TYPE" :"Tipo de Servicio",
@@ -15,7 +18,20 @@
             "BAR_CODE":"Económico",
             "PRODUCT_DESCRIPTION":"Descripción de Producto",
             "PRODUCT_VARIANT_CODE":"Código de Variante",
-            "ASSET_CONDITION":"Condición del Cabinet"
+            "ASSET_CONDITION":"Condición del Cabinet",
+            "SERVICE_DATES":"Citas de Servicio",
+            "DATE_TYPE":"Tipo de Cita",
+            "DATE":"Fecha",
+            "ASSET_COMPONENTS":"Insumos únicos",
+            "COMPONENT_TYPE":"Tipo Componente",
+            "COMPONENT":"Componente",
+            "SKU":"SKU",
+            "ASSET_ADDONS":"Insumos Lote",
+            "ASSET_TYPE":"Tipo Insumo",
+            "QUANTITY":"Cantidad",
+            "PRODUCT_CATEGORY_CODE":"Categoria de Producto",
+            "PRODUCT_CODE":"Código de Producto",
+            "PRODUCT_DESCRIPTION":"Descripción del Producto"
 
 
 
