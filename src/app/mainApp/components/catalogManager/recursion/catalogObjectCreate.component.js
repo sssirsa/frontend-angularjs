@@ -6,7 +6,7 @@
             controller: CatalogObjectCreateController,
             controllerAs: 'vm',
             bindings: {
-                element:'=', //Bidirectional bindings
+                element: '=', //Bidirectional bindings
                 fields: '<'
             }
         });
@@ -14,7 +14,8 @@
         var vm = this;
 
         vm.objectToCreate = vm.element;
-        
+        vm.array_objects = {};
+
         activate();
 
         function activate() {
@@ -25,14 +26,19 @@
                 if (field.type === 'object') {
                     vm.objectToCreate[field.model] = {};
                 }
+                if (field.type === 'array_object') {
+                    vm.array_objects[field.model] = {};
+                }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
                     && field['type'] !== 'catalog'
                     && field['type'] !== 'options'
-                    && field['type'] !== 'color'
+                    //&& field['type'] !== 'color'
                     && field['type'] !== 'array'
                     && field['type'] !== 'catalog_array'
-                    && field['type'] !== 'object') {
+                    && field['type'] !== 'object'
+                    && field['type'] !== 'arrar_object'
+                ) {
                     if (field.hasOwnProperty('initial_value')) {
                         //Loading initial values
                         vm.objectToCreate[field.model] = field.initial_value;
@@ -123,5 +129,26 @@
                 vm[field.model + '_chip'].push(value);
             }
         }
+
+        vm.addObjectToArray = function addObjectToArray(element, field) {
+            if (!vm.objectToCreate[field.model]) {
+                vm.objectToCreate[field.model] = [];
+            }
+            if (!vm[field.model + '_chip']) {
+                vm[field.model + '_chip'] = [];
+            }
+            vm.objectToCreate[field.model].push(element);
+            vm[field.model + '_chip'].push(element);
+            vm.array_objects[field.model] = {};
+        }
+
+        vm.onArrayObjectElementRemove = function onArrayObjectElementRemove(index, field) {
+            vm.objectToCreate[field.model].splice(index, 1);
+        }
+
+        vm.onArrayObjectClick= function onArrayObjectClick(field, index) {
+            vm.array_objects[field.model] = vm.objectToCreate[field.model][index];
+        }
+
     }
 })();
