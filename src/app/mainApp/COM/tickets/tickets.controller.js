@@ -1,4 +1,5 @@
 /** Created by Alejandro Noriega on 29/01/19 */
+/** Modified by Francisco Cerda on 03/02/19 */
 
 (function () {
     'use strict';
@@ -7,7 +8,7 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(API, $mdDialog, toastr) {
+    function ticketsController(API, $mdDialog, toastr,TicketProvider,ErrorHandler) {
         var vm = this;
 
         vm.tickets = {};
@@ -24,6 +25,7 @@
         vm.showTicket = showTicket;
         vm.changeSelected = changeSelected;
         vm.removeFilter = removeFilter;
+        vm.getTicketInfo=getTicketInfo;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -68,6 +70,7 @@
         function init(){
             listTickets();
         }
+
 
         function listTickets(){
             vm.tickets = {};
@@ -144,6 +147,25 @@
             vm.searchText = '';
             listTickets();
         }
+
+        //Aquí empieza lo de Paco
+        function getTicketInfo(item) {
+            console.log(item);
+            var TicketProviderPromise=TicketProvider.getServiceDetails(item.mensaje_com);
+            TicketProviderPromise.then(function (serviceDetails) {
+                console.log(serviceDetails);
+            }).catch(function (error) {
+
+            })
+        }
+        function getPossibleMessages(){
+
+        }
+        function openDialog(){
+
+        }
+
+
     }
 
 

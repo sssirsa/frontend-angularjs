@@ -144,7 +144,7 @@
                             <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
                                 <div layout="column" ng-if="item.estatus === 'Confirmado'">
                                     <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.showNoCapitalizado(item)">
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item)">
                                         <md-icon md-font-icon="fas fa-play"></md-icon>
                                         <span translate>Inicio</span>
                                     </md-button>
