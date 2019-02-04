@@ -131,45 +131,12 @@
             if (!vm.objectToCreate[field.model]) {
                 vm.objectToCreate[field.model] = [];
             }
-            //if (!vm[field.model + '_chip']) {
-            //    vm[field.model + '_chip'] = [];
-            //}
             vm.objectToCreate[field.model].push({});
-            console.log(vm.objectToCreate);
-            //vm[field.model + '_chip'].push(vm[field.model + '_chip'].length);
         }
 
         vm.removeObjectToArray = function removeObjectToArray(field, index) {
             vm.objectToCreate[field.model].splice(index, 1);
-            //console.log(vm.objectToCreate[field.model]);
         }
-
-        //vm.onArrayObjectClick = function onArrayObjectClick(field, index) {
-        //    vm.objectToCreate[field.model].push({});
-        //    //let objectArray = vm.objectToCreate[field.model];
-        //    //vm.array_objects[field.model] = objectArray[index];
-        //    //$scope.$broadcast('catalogObjectCreate-onArrayObjectClick',
-        //    //    {
-        //    //        element: vm.array_objects[field.model],
-        //    //        fields: field['fields']
-        //    //    }
-        //    //);
-        //}
-
-        //$scope.$on('catalogObjectCreate-onArrayObjectClick',
-        //    function (event, args) {
-        //        //Given the fact that the element is called recursively,
-        //        //then is needed to compare the scopes
-        //        if (event.currentScope !== event.targetScope) {
-        //            //The fields match to the desired component
-        //            //It prevents nested components to update their scope
-        //            //if (vm.fields === args['fields']) {
-        //            vm.objectToCreate = angular.copy(args['element']);
-        //            console.log('Change triggered', vm.objectToCreate);
-        //            $scope.$apply();
-        //            //}
-        //        }
-        //    });
 
     }
 })();

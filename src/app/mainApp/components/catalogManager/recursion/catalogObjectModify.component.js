@@ -142,9 +142,15 @@
             vm.objectToModify[field.model].splice(index, 1);
         }
 
-        vm.addObjectToArray = function addObjectToArray(element, field) {
-            console.log(element);
-            console.log(vm.objectToModify);
+        vm.addObjectToArray = function addObjectToArray(field) {
+            if (!vm.objectToModify[field.model]) {
+                vm.objectToModify[field.model] = [];
+            }
+            vm.objectToModify[field.model].push({});
+        }
+
+        vm.removeObjectToArray = function removeObjectToArray(field, index) {
+            vm.objectToModify[field.model].splice(index, 1);
         }
     }
 })();

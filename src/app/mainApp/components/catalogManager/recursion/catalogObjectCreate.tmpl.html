@@ -235,7 +235,9 @@
                 <v-pane-content id="v-accordion-content">
                     <div layout="column"
                          layout-align="stretch center">
-                        <div ng-repeat="arrayElement in vm.objectToCreate[field.model] track by $index">
+                        <div layout="column"
+                             layout-align="stretch center"
+                             ng-repeat="arrayElement in vm.objectToCreate[field.model] track by $index">
                             <v-accordion id="accordionArrayElementCreate"
                                          class="vAccordion--default"
                                          control="accordionArrayElementCreate">
@@ -258,16 +260,6 @@
                                    aria-label="Add">
                             <md-icon md-font-icon="fa fa-plus"></md-icon>
                         </md-button>
-                        <!--<md-chips ng-model="vm[field.model+'_chip']"
-                                  ng-if="vm[field.model+'_chip'].length>0"
-                                  md-on-remove="vm.onArrayObjectElementRemove($index, field)"
-                                  md-removable="true">
-                            <md-chip-template ng-click="vm.onArrayObjectClick(field, $index)">
-                                <span>
-                                    {{field.label}} {{$index}}
-                                </span>
-                            </md-chip-template>
-                        </md-chips>-->
                     </div>
                 </v-pane-content>
             </v-pane>
