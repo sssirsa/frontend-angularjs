@@ -11,7 +11,7 @@
             "ASSET_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/categoria_insumo",
             "PROCESS_INSTRUCTION_CODE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/process_instructions",
             "REPAIR_ACTION_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/action",
-            "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure",
+            "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure"
         },
         "FIELDS":{
             "SERVICE_TASK_TYPE" :"Tipo de Servicio",
