@@ -160,6 +160,7 @@
         //Aquí empieza lo de Paco
         function getTicketInfo(item, activity) {
             console.log(item);
+            vm.identificador=item.identificador;
             var TicketProviderPromise = TicketProvider.getServiceDetails(item.mensaje_com);
             TicketProviderPromise.then(function (serviceDetails) {
                 vm.serviceDetails = serviceDetails.service_details;
@@ -183,8 +184,15 @@
         }
 
         function createMeta(activity) {
+            vm.object={
+                identificador:" vm.identificador",
+                service_details: [],
+                repairs: [],
+                faults: [],
+                notifications: []
+            };
             if (activity === vm.categories.close) {
-
+                vm.object.serviceDetails= vm.serviceDetails
                 vm.meta_incidences = {
                     fields: [
                         {
@@ -289,9 +297,7 @@
                                             type: 'text',
                                             model: 'date',
                                             label: Translate.translate('COM.FIELDS.DATE'),
-                                            validations: {
-                                                date_format: "YYYYMMDDhhmmss"//checar como es este formato con Plata
-                                            }
+
                                         }
                                     ]
                                 }, {
@@ -395,82 +401,81 @@
                                             label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_EXTRA_NOTES')
                                         }
                                     ]
-                                },
-                                {
-                                    type: 'array_object',
-                                    model: 'repairs',
-                                    label: Translate.translate('COM.FIELDS.REPAIRS'),
-                                    fields: [
-                                        {
-                                            type: 'catalog',
-                                            model: 'repair_action_code',
-                                            label: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
-                                            required: true,
-                                            catalog: {
-                                                url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
-                                                name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
-                                                model: 'com_code',
-                                                option: 'descripcion'
-                                            }
-                                        },
-                                        {
-                                            type: 'text',
-                                            model: 'repair_action_notes',
-                                            label: Translate.translate('COM.FIELDS.REPAIR_ACTION_NOTES')
-                                        }
-                                    ]
-                                },
-                                {
-                                    type: 'array_object',
-                                    model: 'faults',
-                                    label: Translate.translate('COM.FIELDS.FAULTS'),
-                                    fields: [
-                                        {
-                                            type: 'catalog',
-                                            model: 'fault_code',
-                                            label: Translate.translate('COM.FIELDS.FAULT_CODE'),
-                                            required: true,
-                                            catalog: {
-                                                url: Translate.translate('COM.URLS.FAULT_CODE'),
-                                                name: Translate.translate('COM.FIELDS.FAULT_CODE'),
-                                                model: 'com_code',
-                                                option: 'nombre'
-                                            }
-                                        },
-                                        {
-                                            type: 'text',
-                                            model: 'fault_notes',
-                                            label: Translate.translate('COM.FIELDS.FAULT_NOTES')
-                                        }
-                                    ]
-                                },
-                                {
-                                    type: 'array_object',
-                                    model: 'notifications',
-                                    label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                                    fields: [
-                                        {
-                                            type: 'options',
-                                            model: 'notification_status_code',
-                                            label: Translate.translate('COM.FIELDS.NOTIFICATION_STATUS_CODE'),
-                                            required: true,
-                                            options: {
-                                                model: "com_code",
-                                                option: "label",
-                                                elements: vm.messageStatusCatalog
-                                            }
-                                        },
-                                        {
-                                            type: 'text',
-                                            model: 'notification_extra_notes',
-                                            label: Translate.translate('COM.FIELDS.NOTIFICATION_EXTRA_NOTES')
-                                        }
-                                    ]
                                 }
-
 
                             ]
 
+                        },
+                        {
+                            type: 'array_object',
+                            model: 'repairs',
+                            label: Translate.translate('COM.FIELDS.REPAIRS'),
+                            fields: [
+                                {
+                                    type: 'catalog',
+                                    model: 'repair_action_code',
+                                    label: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
+                                    required: true,
+                                    catalog: {
+                                        url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
+                                        name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
+                                        model: 'com_code',
+                                        option: 'descripcion'
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    model: 'repair_action_notes',
+                                    label: Translate.translate('COM.FIELDS.REPAIR_ACTION_NOTES')
+                                }
+                            ]
+                        },
+                        {
+                            type: 'array_object',
+                            model: 'faults',
+                            label: Translate.translate('COM.FIELDS.FAULTS'),
+                            fields: [
+                                {
+                                    type: 'catalog',
+                                    model: 'fault_code',
+                                    label: Translate.translate('COM.FIELDS.FAULT_CODE'),
+                                    required: true,
+                                    catalog: {
+                                        url: Translate.translate('COM.URLS.FAULT_CODE'),
+                                        name: Translate.translate('COM.FIELDS.FAULT_CODE'),
+                                        model: 'com_code',
+                                        option: 'nombre'
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    model: 'fault_notes',
+                                    label: Translate.translate('COM.FIELDS.FAULT_NOTES')
+                                }
+                            ]
+                        },
+                        {
+                            type: 'array_object',
+                            model: 'notifications',
+                            label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
+                            fields: [
+                                {
+                                    type: 'options',
+                                    model: 'notification_status_code',
+                                    label: Translate.translate('COM.FIELDS.NOTIFICATION_STATUS_CODE'),
+                                    required: true,
+                                    options: {
+                                        model: "com_code",
+                                        option: "label",
+                                        elements: vm.messageStatusCatalog
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    model: 'notification_extra_notes',
+                                    label: Translate.translate('COM.FIELDS.NOTIFICATION_EXTRA_NOTES')
+                                }
+                            ]
                         }
 
                     ]
@@ -478,34 +483,11 @@
                 openDialog();
             }
             else {
+                console.log(vm.serviceDetails);
+
                 vm.meta_incidences = {
+
                     fields: [
-                        {
-                            type: 'array_object',
-                            model: 'service_details',
-                            label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: [],
-                            validations:{
-                                max:0
-                            }
-                        },
-                        {
-                            type: 'array_object',
-                            model: 'repairs',
-                            label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: [],
-                            validations:{
-                                max:0
-                            }
-                        }, {
-                            type: 'array_object',
-                            model: 'faults',
-                            label: Translate.translate('COM.FIELDS.NOTIFICATIONS'),
-                            fields: [],
-                            validations:{
-                                max:0
-                            }
-                        },
                         {
                             type: 'array_object',
                             model: 'notifications',
@@ -564,7 +546,7 @@
                     dialog: vm.actions['PUT'].dialog,
                     id: vm.actions['PUT'].id,
                     fields: vm.actions['PUT'].fields,
-                    element: vm.serviceDetails,
+                    element: vm.object,
                     url:vm.actions['PUT'].url
                 }
             }).then(function () {
