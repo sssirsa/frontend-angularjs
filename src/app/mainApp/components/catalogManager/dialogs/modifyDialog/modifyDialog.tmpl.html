@@ -1,5 +1,4 @@
 <div layout="column"
-     layout-align="center stretch"
      cg-busy="{promise:vm.modifyLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
     <md-toolbar layout="row"
                 layout-align="space-between center">
@@ -11,16 +10,12 @@
             <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
         </md-button>
     </md-toolbar>
-
-    <md-content layout="column"
-                layout-padding
-                layout-align="center stretch">
+        
         <form name="modifyForm"
               ng-submit="vm.modify(vm.objectToModify)">
             <catalog-object-modify element="vm.objectToModify"
                                    fields="vm.fields"></catalog-object-modify>
         </form>
-    </md-content>
 
     <md-actions layout="row"
                 layout-align="space-between center">
