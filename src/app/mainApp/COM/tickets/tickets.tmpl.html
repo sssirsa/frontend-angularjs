@@ -1,0 +1,203 @@
+<div>
+    <div layout="column"
+         cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+         style="height: 100px"
+         ng-if="vm.tickets.length < 0">
+        <md-card layout="column"
+                 layout-gt-sm="row"
+                 layout-padding
+                 layout-align="center center"
+                 ng-if="vm.tickets.length < 0">
+            <div flex-gt-sm="40" flex="100">
+                <md-input-container class="md-block">
+                    <div ng-if="vm.tickets.length < 0">
+                        <span translate>No se encontraron resultados</span>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-card>
+    </div>
+
+    <div ng-if="vm.tickets">
+        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+            <md-card flex="50">
+                <md-input-container class="md-block">
+                    <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
+                    <md-select name="selectType"
+                               md-on-close="vm.changeSelected()"
+                               ng-model="vm.selectedKind">
+                        <md-option ng-repeat="option in vm.OPTIONS"
+                                   value="{{option.text}}">
+                            {{option.text}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </md-card>
+
+            <md-card flex="50">
+                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
+                    <md-input-container
+                        flex="100"
+                        class="md-block">
+                        <input
+                            ng-pattern="/^[a-zA-Z0-9]+$/"
+                            placeholder="Ingrese el economico..."
+                            ng-model="vm.searchText">
+                    </md-input-container>
+                </form>
+            </md-card>
+        </div>
+
+        <div ng-if="vm.searchBool" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+            <md-toolbar layout="column"
+                        layout-gt-sm="row"
+                        layout-align="center stretch"
+                        layout-align-gt-sm="space-between center">
+                <div layout="row" layout-align="center center">
+                    <!--<span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>-->
+                    <span class="md-subtitle">Búsqueda por economico</span>
+                </div>
+                <div layout="column"
+                     layout-align="center stretch">
+                    <md-button aria-label="'Remove filter'"
+                               ng-click="vm.removeFilter()"
+                               class="md-raised">
+                        <md-icon md-font-icon="fa fa-ban"></md-icon>
+                        Quitar Filtro
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <md-content flex="100"  layout="column">
+                <div layout="row" layout-align="center center">
+                    <span class="md-subtitle">Cabinet (economico):</span>&nbsp
+                    <span class="md-subtitle">{{vm.searchText}}</span>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <span class="md-subtitle">Estatus:</span>&nbsp
+                    <span class="md-subtitle">{{vm.selectedKind}}</span>
+                </div>
+            </md-content>
+
+        </div>
+
+
+        <div class="virtualRepeatScroll-500">
+            <md-card
+                flex="100"
+                layout="column"
+                ng-repeat="item in vm.tickets"
+                layout-gt-md="row"
+                ng-click="vm.showTicket(item)">
+                <div layout="column" layout-align="center stretch" flex="100">
+                    <md-content>
+                        <div flex="100">
+                            <md-toolbar class="md-hue-1">
+                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-sm="row" layout="column">
+                                    <div layout="row">
+                                        <b translate>Folio</b>: &nbsp <b>{{item.folio}}</b>
+                                    </div>
+
+                                    <div layout="row">
+                                        <b translate>Estatus</b>: &nbsp <b>{{item.estatus}}</b>
+                                    </div>
+                                </div>
+                            </md-toolbar>
+                        </div>
+                    </md-content>
+
+                    <md-content>
+
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+                            <div layout="column" layout-align="center center" flex="5">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+
+                            <div layout="column" layout-align="center center" flex="25">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>Folio</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{item.folio}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div layout="column" layout-align="center center" flex="25">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>Tipo</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{item.tipo.nombre}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
+                                <div layout="column" ng-if="item.estatus === 'Confirmado'">
+                                    <md-button class="md-raised md-primary buttonTicket"
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.start)">
+                                        <md-icon md-font-icon="fas fa-play"></md-icon>
+                                        <span translate>Inicio</span>
+                                    </md-button>
+                                </div>
+
+                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                    <md-button class="md-raised md-primary buttonTicket"
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.error)">
+                                        <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
+                                        <span translate>Error</span>
+                                    </md-button>
+                                </div>
+                            </div>
+
+                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
+                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                    <md-button class="md-raised md-primary buttonTicket"
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.close)">
+                                        <md-icon md-font-icon="fas fa-times-circle"></md-icon>
+                                        <span translate>Cerrar</span>
+                                    </md-button>
+                                </div>
+
+                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                    <md-button class="md-raised md-primary buttonTicket"
+                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.info)">
+                                        <md-icon md-font-icon="fas fa-info"></md-icon>
+                                        <span translate>Informar</span>
+                                    </md-button>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </md-content>
+                </div>
+            </md-card>
+        </div>
+    </div>
+
+    <div ng-if="!vm.searchBool">
+        <div ng-if="vm.vm.objectPaginado.next || vm.objectPaginado.previous">
+            <pagination-manager-buttons go-sig="vm.sig()"
+                                        go-prev="vm.prev()"
+                                        go-number="vm.goToNumberPage(number)"
+                                        limit-objects="vm.limit"
+                                        count-object="vm.tickets"
+                                        offset-object="vm.offset"
+                                        nex-object="vm.objectPaginado.next"
+                                        prev-object="vm.objectPaginado.previous">
+            </pagination-manager-buttons>
+        </div>
+    </div>
+
+</div>
