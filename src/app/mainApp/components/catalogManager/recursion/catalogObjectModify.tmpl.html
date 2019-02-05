@@ -222,9 +222,9 @@
                 <v-pane-header id="v-accordion-header">{{field.label}}</v-pane-header>
                 <v-pane-content id="v-accordion-content">
                     <div layout="column"
-                         layout-align="stretch center">
+                         layout-align="center stretch">
                         <div layout="column"
-                             layout-align="stretch center"
+                             layout-align="center stretch"
                              ng-repeat="arrayElement in vm.objectToModify[field.model] track by $index">
                             <v-accordion id="accordionArrayElementModify"
                                          class="vAccordion--default"
