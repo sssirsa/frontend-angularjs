@@ -185,7 +185,7 @@
 
         function createMeta(activity) {
             vm.object={
-                identificador:" vm.identificador",
+                identificador:vm.identificador,
                 service_details: [],
                 repairs: [],
                 faults: [],
