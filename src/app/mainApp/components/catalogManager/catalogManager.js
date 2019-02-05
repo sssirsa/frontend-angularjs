@@ -5,8 +5,7 @@
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,
             bindings: {
-                url: '<', //Full or partial URL, depending on kind
-                kind: '<', //Mobile, Web, Generic. Default is 'Generic'
+                url: '<', //Full URL
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
@@ -33,9 +32,6 @@
                 createButtonText: '<',
                 deleteButtonText: '<',
                 modifyButtonText: '<',
-                //saveButtonText: '<',
-                //confirmButtonText: '<',
-                //cancelButtonText: '<',
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
@@ -67,7 +63,9 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+                 *              type: string,          Valid types are the html5 types, plus the types:
+                 *                                     options, catalog, array(strings), catalog_array
+                 *                                     and fileUploader.
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
@@ -280,13 +278,14 @@
         CATALOG,
         $window,
         $mdDialog,
-        ErrorHandler
+        ErrorHandler,
+        $state
     ) {
         var vm = this;
 
         activate();
 
-        vm.kind ? null : vm.kind = 'Generic';
+        //vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {};
@@ -313,32 +312,18 @@
         }
 
         function createMainCatalogProvider() {
-            if (vm.kind) {
-                switch (vm.kind) {
-                    case 'Mobile':
-                        vm.CatalogProvider = CATALOG.mobile;
-                        break;
-                    case 'Web':
-                        vm.CatalogProvider = CATALOG.web;
-                        break;
-                    default:
-                        vm.CatalogProvider = CATALOG.generic;
-                        break;
-                }
-            }
-            else {
-                vm.CatalogProvider = CATALOG.generic;
-            }
+            vm.CatalogProvider = CATALOG;
             vm.CatalogProvider.url = vm.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG.generic;
+            vm.PaginationProvider = CATALOG;
         }
 
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            vm.catalogElements = [];
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
@@ -359,30 +344,38 @@
 
         function create() {
             //Creation behavior handling
-            createMainCatalogProvider();
             if (vm.actions['POST']) {
-                $mdDialog.show({
-                    controller: 'CatalogCreateDialogController',
-                    controllerAs: 'vm',
-                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
-                    fullscreen: true,
-                    clickOutsideToClose: true,
-                    focusOnOpen: true,
-                    locals: {
-                        dialog: vm.actions['POST'].dialog,
+                if (vm.noDialogs) {
+                    $state.go('triangular.admin-default.CatalogManagerCreate', {
                         fields: vm.actions['POST'].fields,
-                        provider: vm.CatalogProvider
-                    }
-                }).then(function () {
-                    activate();
-                    ErrorHandler.successCreation();
-                    vm.onSuccessCreate();
-                }).catch(function (errorCreate) {
-                    if (errorCreate) {
-                        ErrorHandler.errorTranslate(errorCreate);
-                        vm.onErrorCreate(errorCreate);
-                    }
-                });
+                        screen: vm.actions['POST'].dialog,
+                        url: vm.url
+                    });
+                }
+                else {
+                    $mdDialog.show({
+                        controller: 'CatalogCreateDialogController',
+                        controllerAs: 'vm',
+                        templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
+                        fullscreen: true,
+                        clickOutsideToClose: true,
+                        focusOnOpen: true,
+                        locals: {
+                            dialog: vm.actions['POST'].dialog,
+                            fields: vm.actions['POST'].fields,
+                            url: vm.url
+                        }
+                    }).then(function () {
+                        activate();
+                        ErrorHandler.successCreation();
+                        vm.onSuccessCreate();
+                    }).catch(function (errorCreate) {
+                        if (errorCreate) {
+                            ErrorHandler.errorTranslate(errorCreate);
+                            vm.onErrorCreate(errorCreate);
+                        }
+                    });
+                }
             }
             else {
                 ErrorHandler.errorTranslate({ status: -1 });
@@ -392,7 +385,6 @@
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
-            createMainCatalogProvider();
             if (vm.actions['DELETE']) {
                 $mdDialog.show({
                     controller: 'CatalogDeleteDialogController',
@@ -404,7 +396,7 @@
                     locals: {
                         dialog: vm.actions['DELETE'].dialog,
                         id: idToRemove,
-                        provider: vm.CatalogProvider
+                        url: vm.url
                     }
                 }).then(function () {
                     activate();
@@ -424,7 +416,6 @@
         }
 
         function update(element) {
-            createMainCatalogProvider();
             if (vm.actions['PUT']) {
                 $mdDialog.show({
                     controller: 'CatalogModifyDialogController',
@@ -437,7 +428,7 @@
                         dialog: vm.actions['PUT'].dialog,
                         id: vm.actions['PUT'].id,
                         fields: vm.actions['PUT'].fields,
-                        provider: vm.CatalogProvider,
+                        url: vm.url,
                         element: element
                     }
                 }).then(function () {
@@ -459,7 +450,6 @@
 
         function search() {
             //Search behavior handling, delegated to the search Dialog
-            createMainCatalogProvider();
             if (vm.actions['SEARCH']) {
                 $mdDialog.show({
                     controller: 'CatalogSearchDialogController',
@@ -471,7 +461,7 @@
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
                         filters: vm.actions['SEARCH'].filters,
-                        provider: vm.CatalogProvider
+                        url: vm.url
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);
