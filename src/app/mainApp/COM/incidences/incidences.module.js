@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('app.mainApp.com.tickets', [
+    angular.module('app.mainApp.com.incidences', [
 
     ]);
 

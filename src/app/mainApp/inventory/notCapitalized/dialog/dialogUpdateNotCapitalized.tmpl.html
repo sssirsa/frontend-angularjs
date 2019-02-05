@@ -52,8 +52,8 @@
             <input name="estatusAnterior" ng-model="vm.estatusPrevio" ng-disabled="true"/>
         </md-input-container>
 
-        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left">
-            <md-switch ng-disabled="vm.new_economico" ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
+        <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="left" ng-if="!vm.new_economico">
+            <md-switch ng-model="vm.sw1" class="md-warn" ng-change="vm.changeM()">
                 Cambiar Estatus o Motivo
             </md-switch>
         </div>
@@ -81,18 +81,19 @@
 
     <md-actions
         layout="row"
-        layout-align="end center">
+        layout-align="end center"
+        ng-if="!vm.new_economico">
         <md-button class="md-raised md-primary"
                    cg-busy="{ promise:vm.createPromise, message:' ' }"
                    ng-click="vm.update()">
-            <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+            <md-icon md-font-icon="fas fa-edit"></md-icon>
             <span translate>MAIN.COMPONENTS.CABINET.UPDATE</span>
         </md-button>
 
         <md-button
             ng-click="vm.remove()"
             class="md-warn md-raised">
-            <md-icon md-font-icon="fa fa-trash-o"></md-icon>
+            <md-icon md-font-icon="fas fa-trash-alt"></md-icon>
             {{'MAIN.COMPONENTS.CABINET.DELETE'|translate}}
         </md-button>
     </md-actions>
