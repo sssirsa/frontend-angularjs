@@ -1,7 +1,8 @@
 {
     "COM":{
         "ADDITIONAL_TEXTS":{
-            "LOAD_MORE":"Cargar más"
+            "LOAD_MORE":"Cargar más",
+            "NOTIFICATION":"Enviar Notificacion a COM"
         },
         "URLS":{
             "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/ticket_type",

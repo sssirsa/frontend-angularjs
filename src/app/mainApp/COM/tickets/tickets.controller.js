@@ -159,12 +159,12 @@
 
         //Aquí empieza lo de Paco
         function getTicketInfo(item, activity) {
-            console.log(item);
+           // console.log(item);
             vm.identificador=item.identificador;
             var TicketProviderPromise = TicketProvider.getServiceDetails(item.mensaje_com);
             TicketProviderPromise.then(function (serviceDetails) {
                 vm.serviceDetails = serviceDetails.service_details;
-                console.log(vm.serviceDetails);
+              //  console.log(vm.serviceDetails);
                 getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
@@ -176,7 +176,7 @@
             var messages_statusPromise = TicketProvider.getTicket_type(service_task_type);
             messages_statusPromise.then(function (message_status) {
                 vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
-                console.log(vm.messageStatusCatalog);
+               // console.log(vm.messageStatusCatalog);
                 createMeta(activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
@@ -483,7 +483,7 @@
                 openDialog();
             }
             else {
-                console.log(vm.serviceDetails);
+                //console.log(vm.serviceDetails);
 
                 vm.meta_incidences = {
 
@@ -522,9 +522,10 @@
             vm.actions = {
                 PUT: {
                     id: 'identificador',
+                    object:vm.object,
                     fields: vm.meta_incidences,
                     dialog: {
-                        title: Translate.translate('ACTION.LABELS.MODIFY'),
+                        title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
                         okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                         cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                         loading: 'Guardando Acción'
@@ -534,7 +535,7 @@
             };
 
 
-
+            console.log(vm.actions);
             $mdDialog.show({
                 controller: 'CatalogModifyDialogController',
                 controllerAs: 'vm',
@@ -546,7 +547,7 @@
                     dialog: vm.actions['PUT'].dialog,
                     id: vm.actions['PUT'].id,
                     fields: vm.actions['PUT'].fields,
-                    element: vm.object,
+                    element: vm.actions['PUT'].object,
                     url:vm.actions['PUT'].url
                 }
             }).then(function () {
