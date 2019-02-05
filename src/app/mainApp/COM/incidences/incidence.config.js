@@ -20,6 +20,6 @@
                 controller: 'incidencesController',
                 controllerAs: 'vm'
             });
-        
+
     }
 })();
