@@ -80,10 +80,12 @@
             angular.forEach(
                 vm.fields,
                 function bindDataRepeater(field) {
-                    if (field.type !== 'catalog'
-                        && field.type !== 'catalog_array'
-                        && field.type !== 'array_object'
-                        && field.type !== 'fileUploader') {
+                    if (
+                        //field.type !== 'catalog'
+                        //&& field.type !== 'catalog_array'
+                        //&& field.type !== 'array_object'
+                        //&&
+                        field.type !== 'fileUploader') {
                         if (field.bindTo) {
                             vm.objectToModify[field.model] = JSON.parse(
                                 JSON.stringify(
@@ -101,10 +103,13 @@
                 vm.fields,
                 function loadCatalogArraysRepeater(field) {
                     if (field.type === 'catalog_array') {
-                        vm[field.model + '_chip'] = JSON.parse(
-                            JSON.stringify(
-                                vm.objectToModify[field.model]
-                            ));
+                        if (vm.objectToModify[field.model]) {
+                            console.log(vm.objectToModify[field.model]);
+                            vm[field.model + '_chip'] = JSON.parse(
+                                JSON.stringify(
+                                    vm.objectToModify[field.model]
+                                ));
+                        }
                     }
                 }
             );
