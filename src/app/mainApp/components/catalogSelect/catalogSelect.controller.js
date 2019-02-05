@@ -1,7 +1,11 @@
 /*
  *      catalog:{
  *          url: string,         Full or partial URL depending on the kind
- *          kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+ *          query: string,       (Optional) query to be used if the catalog depends of other
+ *                               In this component it must be received without the value
+ *                               to use directly in the API.
+ *                               Example: ?parameter_name=
+ *          query_value:string,  (Optional) Value tu search on the API with the given query.
  *          name: string,        (Optional) Default is "Catalog"
  *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
@@ -10,6 +14,7 @@
  *      },
  *      hint: string,         (Optional) Shows a message under the field
  *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
+ *      lock: boolean,        (Optional) If given the catalog select will be disabled
  *      pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
  *          total: string,        (Optional) Binding for the number of total elements
  *          next: string,         (Optional) Binding for the url that brings to the next page
@@ -35,6 +40,12 @@
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
  *      }
+ *      ---------------------------------------
+ *      RETURNS
+ *      {
+ *          element: vm.selectedElement[vm.catalog.model],
+ *          value: vm.selectedElement
+ *      }
  * */
 (function () {
     angular
@@ -45,7 +56,8 @@
             bindings: {
                 catalog: '<',
                 hint: '<',
-                icon:'<',
+                icon: '<',
+                lock:'<',
 
                 pagination: '<',
                 elements: '<',
@@ -53,7 +65,7 @@
                 initial: '<',
                 softDelete: '<',
                 required: '<',
-                noResults:'<',
+                noResults: '<',
 
                 onSuccessList: '&',
                 onErrorList: '&',
@@ -97,6 +109,7 @@
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            vm.catalogElements = [];
             if (vm.catalog) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
@@ -137,7 +150,15 @@
                         vm.onSuccessList({ elements: vm.catalogElemets });
                         //If initial parameter is given, select the element after listing the catalogue
                         if (vm.initial) {
-                            vm.selectedElement = vm.initial;
+                            vm.selectedElement = vm.catalogElements
+                                .filter(function (currentElement) {
+                                    return currentElement[vm.catalog.model]
+                                        === vm.initial[vm.catalog.model];
+                                })[0]; 
+                            vm.onSelect({
+                                element: vm.selectedElement[vm.catalog.model],
+                                value: vm.selectedElement
+                            });
                         }
                     })
                     .catch(function (errorElements) {
@@ -153,30 +174,20 @@
         }
 
         function createMainCatalogProvider() {
-            if (vm.catalog.kind) {
-                switch (vm.catalog.kind) {
-                    case 'Mobile':
-                        vm.CatalogProvider = CATALOG_SELECT.mobile;
-                        break;
-                    case 'Web':
-                        vm.CatalogProvider = CATALOG_SELECT.web;
-                        break;
-                    case 'Management':
-                        vm.CatalogProvider = CATALOG_SELECT.management;
-                        break;
-                    default:
-                        vm.CatalogProvider = CATALOG_SELECT.generic;
-                        break;
-                }
+            vm.CatalogProvider = CATALOG_SELECT;
+            if (vm.catalog.hasOwnProperty('query')
+                && vm.catalog.hasOwnProperty('query_value')) {
+                vm.CatalogProvider.url = vm.catalog.url
+                    + vm.catalog.query
+                    + vm.catalog.query_value;
             }
             else {
-                vm.CatalogProvider = CATALOG_SELECT.generic;
+                vm.CatalogProvider.url = vm.catalog.url;
             }
-            vm.CatalogProvider.url = vm.catalog.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG_SELECT.generic;
+            vm.PaginationProvider = CATALOG_SELECT;
         }
 
         function loadMore() {
@@ -235,7 +246,10 @@
 
         function onClose() {
             if (vm.selectedElement) {
-                vm.onSelect({ element: vm.selectedElement });
+                vm.onSelect({
+                    element: vm.selectedElement[vm.catalog.model],
+                    value: vm.selectedElement
+                });
             }
         }
 
