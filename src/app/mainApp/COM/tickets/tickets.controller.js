@@ -530,7 +530,7 @@
                         cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                         loading: 'Guardando Acción'
                     },
-                    url:"http://api-gateway.sssirsa.com/dev/com_middleware/com/message/send/"
+                    url:"http://api-gateway.sssirsa.com/dev/com_middleware/com/message/send"
                 }
             };
 
@@ -551,13 +551,10 @@
                     url:vm.actions['PUT'].url
                 }
             }).then(function () {
-                activate();
                 ErrorHandler.successUpdate();
-                vm.onSuccessDelete();
             }).catch(function (errorDelete) {
                 if (errorDelete) {
                     ErrorHandler.errorTranslate(errorDelete);
-                    vm.onErrorDelete(errorDelete);
                 }
             });
         }
