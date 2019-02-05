@@ -546,7 +546,7 @@
                 locals: {
                     dialog: vm.actions['PUT'].dialog,
                     id: vm.actions['PUT'].id,
-                    fields: vm.actions['PUT'],
+                    fields: vm.actions['PUT'].fields,
                     element: vm.actions['PUT'].object,
                     url:vm.actions['PUT'].url
                 }
