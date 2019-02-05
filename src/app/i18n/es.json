@@ -58,7 +58,7 @@
             "BOOK_INSUMS": "Cátalogo de Insumos",
             "PROVIDER": "Proveedor",
             "CATALOGS": {
-                "LABELS":{
+                "LABELS": {
                     "ENTRIES_DEPARTURES": "Entradas y Salidas",
                     "INVENTORY": "Inventario",
                     "MANAGEMENT": "Gestion de proceso",
@@ -91,6 +91,7 @@
                 "STAGE": "Etapas",
                 "STATUS_NOT_LABELED": "Estatus No Capitalizado",
                 "STORES": "Establecimientos",
+                "STAGES": "Etapas",
                 "STATES": "Estados",
                 "STATUS_UNILEVER": "Estatus Unilever",
                 "STATUS_COM": "Estatus COM",
