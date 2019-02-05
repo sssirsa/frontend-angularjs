@@ -1,5 +1,4 @@
 <div layout="column"
-     layout-align="center stretch"
      cg-busy="{promise:vm.createLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
     <md-toolbar layout="row"
                 layout-align="space-between center">
@@ -12,15 +11,11 @@
         </md-button>
     </md-toolbar>
 
-    <md-content layout="column"
-                layout-padding
-                layout-align="center stretch">
-        <form name="createForm"
-              ng-submit="vm.create(vm.objectToCreate)">
-            <catalog-object-create element="vm.objectToCreate"
-                                   fields="vm.fields"></catalog-object-create>
-        </form>
-    </md-content>
+    <form name="createForm"
+          ng-submit="vm.create(vm.objectToCreate)">
+        <catalog-object-create element="vm.objectToCreate"
+                               fields="vm.fields"></catalog-object-create>
+    </form>
 
     <md-actions layout="row"
                 layout-align="space-between center">

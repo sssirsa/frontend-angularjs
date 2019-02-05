@@ -148,23 +148,22 @@
         }
 
         function modify() {
-            console.log(vm.objectToModify);
-            //createProvider();
-            //let id = null;
-            //if (vm.id) {
-            //    id = vm.id;
-            //}
-            //else {
-            //    id = 'id';
-            //}
-            //vm.modifyLoader = vm.ModifyCatalogProvider
-            //    .update(vm.objectToModify[id], vm.objectToModify)
-            //    .then(function (modifiedElement) {
-            //        $mdDialog.hide(modifiedElement);
-            //    })
-            //    .catch(function (modifyError) {
-            //        $mdDialog.cancel(modifyError);
-            //    });
+            createProvider();
+            let id = null;
+            if (vm.id) {
+                id = vm.id;
+            }
+            else {
+                id = 'id';
+            }
+            vm.modifyLoader = vm.ModifyCatalogProvider
+                .update(vm.objectToModify[id], vm.objectToModify)
+                .then(function (modifiedElement) {
+                    $mdDialog.hide(modifiedElement);
+                })
+                .catch(function (modifyError) {
+                    $mdDialog.cancel(modifyError);
+                });
         }
 
         function cancel() {
