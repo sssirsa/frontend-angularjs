@@ -105,6 +105,7 @@
                     {
                         type: 'catalog',
                         model: 'marca_id',
+                        bindTo:'marca',
                         label: 'Marca insumo',
                         required: true,
                         validations: {

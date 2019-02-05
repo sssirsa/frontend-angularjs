@@ -1,15 +1,27 @@
 /*
    fields:[
 *          {
-*              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+*              type: string,          Valid types are the html5 types, plus the types:
+ *                                    options, catalog, array(strings), catalog_array,
+ *                                    catalog_array and fileUploader.
+ *                                    catalog and catalog_array use the catalog_select component.
+ *             initial_value: string, (Optional) If given the value will be shown in the field
+ *                                    (just html5 types)
+ *             lock: boolean,         (Optional) If true, the field would be disabled,
+ *                                    just works for HTML5 fields and if a initial_value is given,
+ *                                    otherwise is ignored.
 *              model: string,         Name of the field that will be sent to the API
-*              required: boolean,     (Optional) Specifies whether or not the field is required
+*              required: boolean,     (Optional) Specifies whether or not the field is required,
+ *                                    used for form validation
 *              hint: string,          (Optional) Hint label to show
-*              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
+*              label: string,         (Optional) Label to show in the form, if not given,
+ *                                    the model string will be used as label.
 *              validations:
 *                  {
-*                      regex: string,          Option regular expression for field validation (just used when text),
-*                      max: number,            Maximum value allowed for selection (just used when number)
+*                      regex: string,          Option regular expression for field validation
+ *                                             (just used when text),
+*                      max: number,            Maximum value allowed for selection (just used when number
+ *                                             array and catalog_array)
 *                      min: number,            Minimum value allowed for selection (just used when number)
 *                      date_format: string,    String format to use for date formating (just used when date)
 *                      errors:{
@@ -21,8 +33,11 @@
 *                      }
 *                  },
 *              catalog:{                 As used by the catalog-select component
- *                  url: string,         Full or partial URL depending on the kind
- *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+ *                  url: string,         Full URL
+ *                  requires: string,    (Optional) Model of the catalog field that needs to be selected before this field appears (catalog dependance)
+ *                                       It can just be used with catlog type field, or catalog_array field.
+ *                  query: string,       (Optional) Just used if requires contains a model. Given the fact that
+ *                                       this catalog depends of other, a query would be required in order to load.
  *                  name: string,        (Optional) Default is "Catalog"
  *                  loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
@@ -33,7 +48,6 @@
  *                      total: string,        (Optional) Binding for the number of total elements
  *                      next: string,         (Optional) Binding for the url that brings to the next page
  *                  },
- *                  required: boolean,    (Optional) To be used in form validation
  *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                                        aka: the API returns the array of objects in an element of the response, as in pagination
  *                                        Example:
@@ -78,55 +92,50 @@
 *                      },
 *          }
 *      ],
-*      dialog:{              //Labels to use in the creation dialog
+ *     url:string,                 URL of the API for creation.
+*      dialog:{                    //Labels to use in the creation dialog
 *          title: string,          (Optional) Title for the creation dialog, default is 'Create element'
 *          okButton: string,       (Optional) Label for the Ok button, default is 'Create'
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
-*      },
-*      provider: CATALOG provider object
-*
-*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
- *                         //The Create dialog just uses the "create" function of the provider
-           url: null,
-           getByID: function (id) {...},
-           list: function () {...},
-           create: function (object) {...},
-           update: function (id, object) {...},
-           remove: function (id) {...},
-           search: function (query) {...}
-           }
+*      }
 */
 
 (function () {
     angular
         .module('app.mainApp')
         .controller('CatalogCreateDialogController', CatalogCreateDialogController);
-    function CatalogCreateDialogController($mdDialog, dialog, provider, fields) {
+    function CatalogCreateDialogController(
+        $mdDialog,
+        dialog,
+        CATALOG,
+        fields,
+        url
+    ) {
         var vm = this;
 
         vm.dialog = dialog;
         vm.fields = fields;
-        vm.CreateCatalogProvider = jQuery.extend(true, {}, provider);
-        //vm.CreateCatalogProvider = provider;
+        vm.url = url;
+        vm.CreateCatalogProvider = CATALOG;
 
         vm.objectToCreate = {};
 
+        //Functions
         vm.create = create;
         vm.cancel = cancel;
-        vm.filesSelected = filesSelected;
-        vm.onElementSelect = onElementSelect;
+        
 
-        activate();
-
-        function activate() {
-            angular.forEach(vm.fields, function (field) {
-                if (field.type === 'array') {
-                    vm.objectToCreate[field.model] = [];
-                }
-            });
+        function createProvider() {
+            if (vm.hasOwnProperty('url')) {
+                vm.CreateCatalogProvider.url = vm.url;
+            }
+            else {
+                $mdDialog.cancel('"url" parameter was not provided');
+            }
         }
 
         function create(objectToCreate) {
+            createProvider();
             vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
                 .then(function (createdElement) {
@@ -139,19 +148,6 @@
 
         function cancel() {
             $mdDialog.cancel(null);
-        }
-
-        function filesSelected(files, field) {
-            //fileProcessing MUST be a function in case it exists
-            let fileProcessing = field.fileUploader['filesSelected'];
-            if (fileProcessing) {
-                files = fileProcessing(files);
-            }
-            vm.objectToCreate[field.model] = files;
-        }
-
-        function onElementSelect(element, field) {
-            vm.objectToCreate[field.model] = element;
         }
     }
 
