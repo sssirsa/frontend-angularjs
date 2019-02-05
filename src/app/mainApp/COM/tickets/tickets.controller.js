@@ -523,7 +523,7 @@
                 PUT: {
                     id: 'identificador',
                     object:vm.object,
-                    fields: vm.meta_incidences,
+                    fields: vm.meta_incidences.fields,
                     dialog: {
                         title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
                         okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
@@ -546,7 +546,7 @@
                 locals: {
                     dialog: vm.actions['PUT'].dialog,
                     id: vm.actions['PUT'].id,
-                    fields: vm.actions['PUT'].fields,
+                    fields: vm.actions['PUT'],
                     element: vm.actions['PUT'].object,
                     url:vm.actions['PUT'].url
                 }
