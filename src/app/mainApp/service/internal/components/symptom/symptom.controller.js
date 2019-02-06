@@ -14,26 +14,62 @@
 
             }
         });
-    function symptomController($interval) {
+    function symptomController(Translate,URLS,ErrorHandler,EnvironmentConfig) {
         var vm = this;
-        vm.contador=0;
-        vm.startService=startService;
+        const symptomURL =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base+ '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
+        vm.catalogues = {
+            symptoms: {
+                catalog: {
+                    url:symptomURL,
+                    name: Translate.translate('SYMTOMPS_COMPONENT.TITLE'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'code',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                },
+                noResults: Translate.translate('ERRORS.NO_RESULTS')
+            }
+        };
+        vm.sintomas_detectados=[];
 
-        function startService() {
-            vm.date = new Date();
-
-            $interval(function () {
-                vm.contador=vm.contador+1;
-                vm.segundos=vm.contador%60;
-                vm.minutos=parseInt((vm.contador/60)%60);
-                vm.horas=parseInt((vm.contador/3600)%24);
-
-            }, 1000);
-            vm.onStart({element:vm.date});
+        vm.onSelect=onSelect;
+        vm.addSymptom=addSymptom;
+        vm.deleteElement=deleteElement;
+        function onSelect(value) {
+            console.log(value);
+            vm.element=value;
         }
+        function addSymptom(){
 
-
-
+            getDuplicity();
+            vm.sintomas_detectados.push(vm.element);
+        }
+        function getDuplicity() {
+            var index;
+            for (index = 0; index < vm.sintomas_detectados.length; ++index) {
+                if (vm.sintomas_detectados[index].code === vm.element.code) {
+                    vm.sintomas_detectados.splice(index, 1);
+                }
+            }
+        }
+        function deleteElement(item){
+            var index;
+            for (index = 0; index < vm.sintomas_detectados.length; ++index) {
+                if (vm.sintomas_detectados[index].code === item.code) {
+                    vm.sintomas_detectados.splice(index, 1);
+                }
+            }
+        }
 
 
     }

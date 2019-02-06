@@ -266,6 +266,8 @@
         "ELAPSED_TIME":"  Tiempo Transcurrido"
     },
     "SYMTOMPS_COMPONENT":{
-        "TITLE":"Sintomas Detectados"
+        "TITLE":"Sintomas Detectados",
+        "REMOVE":"Quitar elemento.",
+        "ADD":"Añadir elemento"
     }
 }
