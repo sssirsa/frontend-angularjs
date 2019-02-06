@@ -65,7 +65,7 @@
         function lebeled(data) {
             var url = API.all(URLS.management.base)
                 .all(URLS.management.inventory.base)
-                .all(URLS.label);
+                .all(URLS.management.inventory.label);
             return url.customPOST(data);
         }
 

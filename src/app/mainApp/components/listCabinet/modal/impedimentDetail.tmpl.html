@@ -1,0 +1,54 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'MAIN.COMPONENTS.CABINET.INFO_IMPEDIMENT'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+
+        <div flex layout="column" layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                <input name="economico" required ng-disabled="true" ng-model="vm.infoImpediment.economico"/>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>MAIN.MENU.CATALOGS.IMPEDIMENT_REASON</label>
+                <input name="motive" required ng-disabled="true" ng-model="vm.infoImpediment.motivo.descripcion"/>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-checkbox name="service" ng-model="vm.infoImpediment.atendible" required ng-disabled="true">
+                    {{'MAIN.COMPONENTS.CABINET.WORTHY'|translate}}
+                </md-checkbox>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>MAIN.COMPONENTS.CABINET.IMPEDIMENT_DATE</label>
+                <input name="dateImpeiment" required ng-disabled="true" ng-model="vm.infoImpediment.date_impedimento"/>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>MAIN.COMPONENTS.CABINET.RELEASE_DATE</label>
+                <input ng-disabled="true" placeholder="{{'MAIN.COMPONENTS.CABINET.NOT_RELEASED'|translate}}"/>
+            </md-input-container>
+        </div>
+
+        <md-actions layout="row" layout-align="end center">
+            <md-button
+                ng-click="vm.cerrar()"
+                class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-ban"></md-icon>
+                {{'MAIN.BUTTONS.CLOSE'|translate}}
+            </md-button>
+        </md-actions>
+
+    </md-content>
+</md-toolbar>

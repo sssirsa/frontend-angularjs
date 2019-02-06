@@ -12,11 +12,9 @@
                 todosex: '<',
                 up: '&',
                 todosprev2: '<',
-                filterData: '&',
-                textSearchFilter: '<'
+                textSearchFilter: '&'
             }
         });
-        //.filter('cabinetPVFilter', custom);
 
     /* @ngInject */
     function listCabinetController (cabinetUC, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
@@ -27,30 +25,24 @@
         vm.loadingPromise = null;
         vm.toModel = null;
         vm.searchText = '';
+        vm.searchBool = false;
 
         //functions
 
         vm.info = info;
         vm.searchCabinet = searchCabinet;
+        vm.impediment = impediment;
+        vm.removeFilter = removeFilter;
+        vm.showImpediment = showImpediment;
 
-        init();
-
-        function init() {
-            if (vm.filterData !== null) {
-                if (vm.textSearchFilter.length > 0) {
-                    vm.searchText = vm.textSearchFilter;
-                }
-            }
-        }
 
         function info(item) {
-            //vm.toModel = item.clone();
-
+            ("Antes", item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'cabinetPVController',
+                controller: 'cabinetController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinetPV.tmpl.html',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinet.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -68,45 +60,105 @@
                 });
         }
 
+        function showinList(data){
+            vm.todos = [];
+            vm.todos.push(data);
+        }
+
         function prepareData(data) {
-            var ux;
+            data.marca = data.modelo.marca.nombre;
+            data.id_modelo = data.modelo.id;
+            data.modelo = data.modelo.nombre;
 
             if(data.deleted === false){
-                ux = "Activo";
+                data.estado = "Activo";
             }else{
-                ux = "Inactivo";
+                data.estado = "Inactivo";
             }
 
-            var aux = {
-                economico: data.economico,
-                id_unilever: data.id_unilever,
-                no_serie: data.no_serie,
-                year: data.year,
-                condicion: data.condicion,
-                categoria: data.categoria,
-                estatus_com: data.estatus_com,
-                estatus_unilever: data.estatus_unilever,
-                marca: data.modelo.marca.descripcion,
-                modelo: data.modelo.nombre,
-                id_modelo: data.modelo.id,
-                tipo: data.modelo.tipo.nombre,
-                estado: ux,
-                qr_code: data.qr_code,
-                deleted: data.deleted
-            };
+            cabinetUC.getCabinetInSubsidiary(data.economico)
+                .then(function Subsidiary(control) {
+                    if(control.impedimento){
+                        data.control = true;
+                        data.impedido = true;
+                        data.impedimento_id = control.impedimento;
+                    }else{
+                        data.control = true;
+                        data.impedido = false;
+                    }
 
-            return aux;
+                    showinList(data);
+                })
+                .catch(function SubsidiaryError(error) {
+                    data.control = false;
+                    data.impedido = false;
+
+                    showinList(data);
+                });
         }
 
         function searchCabinet() {
+            vm.textSearchFilter();
             cabinetUC.getByID(vm.searchText)
                 .then(function (cabinet) {
-                    info(prepareData(cabinet));
+                    prepareData(cabinet);
+                    vm.searchBool = true;
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
                 });
         }
+
+        function impediment(item) {
+            vm.toModel = angular.copy(item);
+            $mdDialog.show({
+                controller: 'modalImpedimentController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/impediment.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    data: vm.toModel
+                }
+            })
+                .then(function () {
+                    vm.todosprev = null;
+                    vm.todos = [];
+                    vm.up();
+                })
+                .catch(function(){
+
+                });
+        }
+
+        function showImpediment(id) {
+            $mdDialog.show({
+                controller: 'impedimentDetailController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/listCabinet/modal/impedimentDetail.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals:{
+                    data: id
+                }
+            })
+                .then(function () {
+                })
+                .catch(function(){
+                });
+        }
+
+        function removeFilter() {
+            vm.searchBool = false;
+            vm.todosprev = null;
+            vm.todos = [];
+            vm.up();
+            vm.textSearchFilter();
+        }
+
+
     }
 
 
