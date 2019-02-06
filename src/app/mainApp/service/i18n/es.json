@@ -264,5 +264,8 @@
     "START_SERVICE_COMPONENT":{
         "START":"Iniciar Servicio",
         "ELAPSED_TIME":"  Tiempo Transcurrido"
+    },
+    "SYMTOMPS_COMPONENT":{
+        "TITLE":"Sintomas Detectados"
     }
 }
