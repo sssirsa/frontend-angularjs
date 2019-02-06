@@ -29,7 +29,7 @@
 
     </div>
     <md-list flex="100" layout="row" layout-wrap="">
-        <md-list-item flex="50" ng-repeat="item in $ctrl.sintomas_detectados">
+        <md-list-item flex="50" ng-repeat="item in $ctrl.sintomas_detectados" ng-click="$ctrl.deleteElement(item)">
             <div flex="20">
                 <img ng-src="assets/images/repairSSSIR.png" class="imgList" alt="{{item.code}}"/>
             </div>
