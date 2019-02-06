@@ -123,7 +123,7 @@
                     },
                     {
                         type: 'catalog',
-                        model: 'etapas_defecto',
+                        model: 'etapa_defecto_id',
                         label: 'Etapas Defecto',
                         hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
                         catalog: {
@@ -152,7 +152,110 @@
                 }
             },
             PUT: {
-                fields: [],
+                fields: [
+                    {
+                        type: 'text',
+                        model: 'nombre',
+                        label: 'Nombre',
+                        required: true,
+                        validations: {
+                            errors: {
+                                required: 'El nombre es obligatorio'
+                            }
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'descripcion',
+                        label: 'Descripción',
+                        hint: '(Opcional) Descripción breve de la etapa',
+                        validations: {
+                            regex: '.{1,200}',
+                            errors: {
+                                regex: 'La descripción debe contener máximo 200 caracteres'
+                            }
+                        }
+                    },
+                    {
+                        type: 'options',
+                        model: 'tipo_etapa',
+                        label: 'Tipo de Etapa',
+                        required: true,
+                        hint: 'Para etapa genérica seleccione "Reparación"',
+                        options: {
+                            model: 'value',
+                            option: 'display_name',
+                            elements: URLS.technical_service.choices.tipo_etapa
+                        }
+                    },
+                    {
+                        type: 'catalog_array',
+                        model: 'acciones_id',
+                        label: 'Acciones',
+                        bindTo:'acciones',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.technical_service.base
+                                + '/' + URLS.technical_service.catalogues.base
+                                + '/' + URLS.technical_service.catalogues.action,
+                            model: 'com_code',
+                            option: 'descripcion',
+                            name: 'Acciones',
+                            elements: 'results',
+                            pagination: {}
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    {
+                        type: 'catalog_array',
+                        model: 'etapas_siguientes_id',
+                        bindTo:'etapas_siguientes',
+                        label: 'Etapas Siguientes',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.technical_service.base
+                                + '/' + URLS.technical_service.catalogues.base
+                                + '/' + URLS.technical_service.catalogues.stage,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Etapas siguientes',
+                            elements: 'results',
+                            pagination: {}
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'etapa_defecto_id',
+                        label: 'Etapas Defecto',
+                        bindTo:'etapa_defecto',
+                        hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.technical_service.base
+                                + '/' + URLS.technical_service.catalogues.base
+                                + '/' + URLS.technical_service.catalogues.stage,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Etapa siguiente por defecto',
+                            elements: 'results',
+                            pagination: {}
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                ],
                 dialog: {
                     title: 'Editar Etapa',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
