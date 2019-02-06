@@ -1,16 +1,18 @@
 /*
  *      catalog:{
- *          url: string,         Full or partial URL depending on the kind
- *          query: string,       (Optional) query to be used if the catalog depends of other
- *                               In this component it must be received without the value
- *                               to use directly in the API.
- *                               Example: ?parameter_name=
- *          query_value:string,  (Optional) Value tu search on the API with the given query.
- *          name: string,        (Optional) Default is "Catalog"
- *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
- *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
- *          option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
- *                               If not given, then the model will be used
+ *          url: string,                 Full or partial URL depending on the kind
+ *          query: string,               (Optional) query to be used if the catalog depends of other
+ *                                       In this component it must be received without the value
+ *                                       to use directly in the API.
+ *                                       Example: ?parameter_name=
+ *          query_value:string,          (Optional) Value tu search on the API with the given query.
+ *          name: string,                (Optional) Default is "Catalog"
+ *          loadMoreButtonText, string   (Optional) Test to show in the 'Load more' Button, default is 'Load more'
+ *          model: string,               From the catalog object, which element will be sent (aka: id, name, etc.)
+ *          option: string,              (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
+ *                                       If not given, then the model will be used.
+ *          showModel: boolean,          (Optional) If given, the model and the option will be shown with the following template
+ *                                       <b>{{model}}</b> - {{option}}
  *      },
  *      hint: string,         (Optional) Shows a message under the field
  *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
@@ -57,7 +59,7 @@
                 catalog: '<',
                 hint: '<',
                 icon: '<',
-                lock:'<',
+                lock: '<',
 
                 pagination: '<',
                 elements: '<',
@@ -154,7 +156,7 @@
                                 .filter(function (currentElement) {
                                     return currentElement[vm.catalog.model]
                                         === vm.initial[vm.catalog.model];
-                                })[0]; 
+                                })[0];
                             vm.onSelect({
                                 element: vm.selectedElement[vm.catalog.model],
                                 value: vm.selectedElement
