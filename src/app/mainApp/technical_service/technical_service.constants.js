@@ -15,6 +15,10 @@
             choices: {
                 tipo_etapa: [
                     {
+                        value: 'Reparacion',
+                        display_name: 'Reparación y Mantenimiento'
+                    },
+                    {
                         value: 'Diagnostico',
                         display_name: 'Diagnóstico'
                     },
@@ -41,10 +45,6 @@
                     {
                         value: 'Impedido',
                         display_name: 'Impedido'
-                    },
-                    {
-                        value: 'Reparacion',
-                        display_name: 'Reparación'
                     }
                 ]
             }
