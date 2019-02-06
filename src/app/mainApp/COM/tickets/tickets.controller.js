@@ -466,7 +466,7 @@
                                     required: true,
                                     options: {
                                         model: "com_code",
-                                        option: "label",
+                                        option: "com_code",
                                         elements: vm.messageStatusCatalog
                                     }
                                 },
@@ -500,7 +500,7 @@
                                     required: true,
                                     options: {
                                         model: "com_code",
-                                        option: "label",
+                                        option: "com_code",
                                         elements: vm.messageStatusCatalog
                                     }
                                 },
