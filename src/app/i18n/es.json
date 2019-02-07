@@ -132,7 +132,8 @@
                 "START":"Inicio de Trabajo",
                 "NOTIFICATION":"Mensajes de Trabajo",
                 "CLOSE":"Cierre de Ticket",
-                "MANAGEMENT_TICKETS": "Gestión de Tickets"
+                "MANAGEMENT_TICKETS": "Gestión de Tickets",
+                "FAKE_TICKET": "Crear Tickets Fake"
 
             }
         },
