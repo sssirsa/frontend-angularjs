@@ -268,7 +268,8 @@
     "SYMTOMPS_COMPONENT":{
         "TITLE":"Sintomas Detectados",
         "REMOVE":"Quitar elemento.",
-        "ADD":"Añadir elemento"
+        "ADD":"Seleccione el sintoma a agregar",
+        "ADD_SYMTOMP":"Añadir sintoma detectado"
     },
     "FAILURES_COMPONENT":{
         "TITLE":"Fallas Detectadas"

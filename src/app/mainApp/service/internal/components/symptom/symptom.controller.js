@@ -22,7 +22,7 @@
             symptoms: {
                 catalog: {
                     url:symptomURL,
-                    name: Translate.translate('SYMTOMPS_COMPONENT.TITLE'),
+                    name: Translate.translate('SYMTOMPS_COMPONENT.ADD_SYMTOMP'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'code',
                     option: 'descripcion'
@@ -37,7 +37,8 @@
                     hide: 'deleted',
                     reverse: false
                 },
-                noResults: Translate.translate('ERRORS.NO_RESULTS')
+                noResults: Translate.translate('ERRORS.NO_RESULTS'),
+                hint:Translate.translate('SYMTOMPS_COMPONENT.ADD')
             }
         };
         vm.sintomas_detectados=[];
@@ -48,11 +49,13 @@
         function onSelect(value) {
             console.log(value);
             vm.element=value;
+            addSymptom();
         }
         function addSymptom(){
 
             getDuplicity();
             vm.sintomas_detectados.push(vm.element);
+            vm.symptoms({element:vm.sintomas_detectados});
         }
         function getDuplicity() {
             var index;
@@ -69,6 +72,7 @@
                     vm.sintomas_detectados.splice(index, 1);
                 }
             }
+            vm.symptoms({element:vm.sintomas_detectados});
         }
 
 

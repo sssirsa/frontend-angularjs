@@ -10,23 +10,26 @@
         </div>
     </md-toolbar>
     <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
-        <md-input-container flex="90" layout-fill="">
+        <md-input-container flex="100" layout-fill="">
             <catalog-select catalog="$ctrl.catalogues['symptoms'].catalog"
                             required="true"
                             noResults="$ctrl.catalogues['symptoms'].noResults"
                             pagination="$ctrl.catalogues['symptoms'].pagination"
                             elements="$ctrl.catalogues['symptoms'].elements"
                             soft-delete="$ctrl.catalogues['symptoms'].softDelete"
-                            on-select="$ctrl.onSelect(value)">
+                            on-select="$ctrl.onSelect(value)"
+                            hint="$ctrl.catalogues['symptoms'].hint">
             </catalog-select>
+
         </md-input-container>
+        <!--
         <md-input-container flex="10" layout-align="center center">
             <md-button class="md-fab md-mini md-primary" ng-click="$ctrl.addSymptom()">
                 <md-icon md-font-icon="fas fa-plus"></md-icon>
                 <md-tooltip><span translate="">SYMTOMPS_COMPONENT.ADD</span></md-tooltip>
             </md-button>
         </md-input-container>
-
+           -->
     </div>
     <md-list flex="100" layout="row" layout-wrap="">
         <md-list-item flex="50" ng-repeat="item in $ctrl.sintomas_detectados" ng-click="$ctrl.deleteElement(item)">
