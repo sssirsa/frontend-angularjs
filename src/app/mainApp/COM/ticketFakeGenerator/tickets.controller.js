@@ -171,7 +171,6 @@
                         required: true,
                         hint: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                         label: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
-                        lock: false,
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + COM.base
@@ -180,7 +179,10 @@
                             name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                             loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                             model: 'com_ticket_code',//campo a pasar
-                            option: 'com_ticket_code'//campo a mostrar
+                            option: 'descripcion',//campo a mostrar
+                            elements: 'results',
+                            showModel:true,
+                            pagination: {}
                         }
                     }
                 ]
@@ -203,8 +205,6 @@
                 }
             };
 
-
-            console.log(vm.actions);
             $mdDialog.show({
                 controller: 'CatalogCreateDialogController',
                 controllerAs: 'vm',

@@ -115,7 +115,6 @@
 
         vm.dialog = dialog;
         vm.fields = fields;
-        console.log(vm.fields);
         vm.url = url;
         vm.CreateCatalogProvider = CATALOG;
 
