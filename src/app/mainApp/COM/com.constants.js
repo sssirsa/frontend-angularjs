@@ -13,7 +13,11 @@
                 base: "com",
                 message: {
                     base: "message",
-
+                    detail: "detail",
+                    send:"send"
+                },
+                ticket: {
+                    base: "ticket"
                 }
 
             }

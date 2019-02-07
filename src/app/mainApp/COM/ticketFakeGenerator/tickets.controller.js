@@ -8,7 +8,7 @@
         .module('app.mainApp.com.ticketFakerGenerator')
         .controller('ticketFakerController', ticketsController);
 
-    function ticketsController(API, $mdDialog, toastr, COM,EnvironmentConfig, URLS,TicketProvider, ErrorHandler, Translate) {
+    function ticketsController(API, $mdDialog, toastr, COM, MANAGEMENT,EnvironmentConfig, URLS, TicketProvider, ErrorHandler, Translate) {
         var vm = this;
 
         vm.tickets = {};
@@ -163,47 +163,100 @@
 
 
         function createMeta() {
-            vm.meta_incidences = {
-                fields: [
-                    {
-                        type: 'catalog',
-                        model: 'service_task_type',
-                        required: true,
-                        hint: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
-                        label: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + COM.base
-                                + '/' + COM.catalogues.base
-                                + '/' + COM.catalogues.ticket_type,
-                            name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
-                            loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
-                            model: 'com_ticket_code',//campo a pasar
-                            option: 'descripcion',//campo a mostrar
-                            elements: 'results',
-                            showModel:true,
-                            pagination: {}
-                        }
+            vm.fields = [
+                {
+                    type: 'catalog',
+                    model: 'service_task_type',
+                    required: true,
+                    label: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + COM.base
+                            + '/' + COM.catalogues.base
+                            + '/' + COM.catalogues.ticket_type,
+                        name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
+                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                        model: 'com_ticket_code',//campo a pasar
+                        option: 'descripcion',//campo a mostrar
+                        elements: 'results',
+                        showModel: true,
+                        pagination: {}
                     }
-                ]
-            };
+                },
+                {
+                    type: 'catalog',
+                    model: 'cabinet',
+                    required: true,
+                    label: Translate.translate('COM.FIELDS.CABINET'),
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + MANAGEMENT.base
+                            + '/' + MANAGEMENT.inventory.base
+                            + '/' + MANAGEMENT.inventory.cabinet,
+                        name: Translate.translate('COM.FIELDS.CABINET'),
+                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                        model: 'economico',//campo a pasar
+                        option: 'economico',//campo a mostrar
+                        elements: 'results',
+                        showModel: false,
+                        pagination: {}
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'cabinet_replace',
+                    required: true,
+                    label: Translate.translate('COM.FIELDS.REPLACE_CABINET'),
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + MANAGEMENT.base
+                            + '/' + MANAGEMENT.inventory.base
+                            + '/' + MANAGEMENT.inventory.cabinet,
+                        name: Translate.translate('COM.FIELDS.REPLACE_CABINET'),
+                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                        model: 'economico',//campo a pasar
+                        option: 'economico',//campo a mostrar
+                        elements: 'results',
+                        showModel: false,
+                        pagination: {}
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'ticket',
+                    required: true,
+                    label: Translate.translate('COM.FIELDS.TICKET'),
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + COM.base
+                            + '/' + COM.actions.base
+                            + '/' + COM.actions.ticket.base,
+                        name: Translate.translate('COM.FIELDS.TICKET'),
+                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                        model: 'identificador',//campo a pasar
+                        option: 'folio',//campo a mostrar
+                        elements: 'results',
+                        showModel: false,
+                        pagination: {}
+                    }
+                }
+            ];
             openDialog();
         }
 
         function openDialog() {
-
-            vm.actions = {
-                POST: {
-                    fields: vm.meta_incidences.fields,
-                    dialog: {
-                        title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
-                        okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
-                        cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                        loading: 'Guardando Acción'
-                    },
-                    url: "http://api-gateway.sssirsa.com/dev/com_middleware/com/message/send"
-                }
+            console.log(COM);
+            vm.dialog = {
+                title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
+                okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                loading: 'Guardando Acción'
             };
+            vm.url = EnvironmentConfig.site.rest.api
+                + '/' + COM.base
+                + '/' + COM.actions.base
+                + '/' + COM.actions.message.base
+                + '/' + COM.actions.message.send;
 
             $mdDialog.show({
                 controller: 'CatalogCreateDialogController',
@@ -213,9 +266,9 @@
                 clickOutsideToClose: true,
                 focusOnOpen: true,
                 locals: {
-                    dialog: vm.actions['POST'].dialog,
-                    fields: vm.actions['POST'].fields,
-                    url: vm.actions['POST'].url
+                    dialog: vm.dialog,
+                    fields: vm.fields,
+                    url: vm.url
                 }
             }).then(function () {
                 ErrorHandler.successUpdate();
