@@ -271,6 +271,12 @@
         "ADD":"Seleccione el sintoma a agregar",
         "ADD_SYMTOMP":"Añadir sintoma detectado"
     },
+    "ACTIONS_COMPONENT":{
+        "TITLE":"Acciones Realizadas",
+        "REMOVE":"Quitar elemento.",
+        "ADD":"Seleccione el reparación a realizada",
+        "ADD_ACTION":"Añadir acción realizada"
+    },
     "FAILURES_COMPONENT":{
         "TITLE":"Fallas Detectadas"
     }
