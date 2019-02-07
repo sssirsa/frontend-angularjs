@@ -165,17 +165,6 @@
                 controller: 'TipoEquipoController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-etapas', {
-                url: '/catalogo/etapas',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/etapas/etapas.tmpl.html',
-                controller: 'EtapasController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.catalogo-localidades', {
                 url: '/catalogo/localidades',
                 data: {
@@ -428,6 +417,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/impediment/impedimentReason.tmpl.html',
                 controller: 'impedimentReasonController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.stages', {
+                url: '/catalogo/etapas',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/stages/stages.tmpl.html',
+                controller: 'stagesController',
+                controllerAs: 'vm'
             });
 
 
@@ -439,12 +439,12 @@
                 permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
                 priority: 3,
                 children: [
-                     {
-                         name: 'DEMO Generic Catalog',
-                         state: 'triangular.admin-default.generic-catalogue',
-                         permission: ['ADMINISTRADOR'],
-                         type: 'link'
-                     },
+                     //{
+                     //    name: 'DEMO Generic Catalog',
+                     //    state: 'triangular.admin-default.generic-catalogue',
+                     //    permission: ['ADMINISTRADOR'],
+                     //    type: 'link'
+                     //},
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.ENTRIES_DEPARTURES',
                         type: 'dropdown',
@@ -614,6 +614,12 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.STORES',
                                 state: 'triangular.admin-default.catalogo-establecimientos',
+                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.STAGES',
+                                state: 'triangular.admin-default.stages',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },

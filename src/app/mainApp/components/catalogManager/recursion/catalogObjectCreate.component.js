@@ -28,17 +28,20 @@
                 }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
-                    && field['type'] !== 'catalog'
-                    && field['type'] !== 'options'
+                    //&& field['type'] !== 'catalog'
+                    //&& field['type'] !== 'options'
                     //&& field['type'] !== 'color'
-                    && field['type'] !== 'array'
+                    //&& field['type'] !== 'array'
                     && field['type'] !== 'catalog_array'
                     && field['type'] !== 'object'
-                    && field['type'] !== 'arrar_object'
+                    && field['type'] !== 'array_object'
                 ) {
                     if (field.hasOwnProperty('initial_value')) {
                         //Loading initial values
                         vm.objectToCreate[field.model] = field.initial_value;
+                    }
+                    else {
+                        field.lock = false;
                     }
                 }
             });

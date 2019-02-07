@@ -24,6 +24,8 @@
                 }
             });
             bindData();
+            //loadCatalogues();
+            //Functionality delegated to the catalog-select Component
             loadCatalogArrays();
         }
 
@@ -80,9 +82,10 @@
             angular.forEach(
                 vm.fields,
                 function bindDataRepeater(field) {
-                    if (field.type !== 'catalog'
+                    if (
+                        field.type !== 'catalog'
                         && field.type !== 'catalog_array'
-                        && field.type !== 'array_object'
+                        //&& field.type !== 'array_object'
                         && field.type !== 'fileUploader') {
                         if (field.bindTo) {
                             vm.objectToModify[field.model] = JSON.parse(
@@ -101,10 +104,44 @@
                 vm.fields,
                 function loadCatalogArraysRepeater(field) {
                     if (field.type === 'catalog_array') {
-                        vm[field.model + '_chip'] = JSON.parse(
-                            JSON.stringify(
-                                vm.objectToModify[field.model]
-                            ));
+                        if (
+                            vm.objectToModify[field.model]
+                            || vm.objectToModify[field.bindTo]
+                        ) {
+                            let tempCatalogArray;
+                            if (field.bindTo) {
+                                tempCatalogArray = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.bindTo]
+                                    ));
+                                delete (vm.objectToModify[field.bindTo]);
+                            }
+                            else {
+                                tempCatalogArray = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.model]
+                                    ));
+                            }
+
+                            vm[field.model + '_chip'] = JSON.parse(
+                                JSON.stringify(
+                                    tempCatalogArray
+                                ));
+
+                            if (!vm.objectToModify[field.model]) {
+                                vm.objectToModify[field.model] = [];
+                            }
+
+                            for (
+                                var catalogIndex = 0;
+                                catalogIndex < tempCatalogArray.length;
+                                catalogIndex++
+                            ) {
+                                vm.objectToModify[field.model].push(
+                                    tempCatalogArray[catalogIndex][field.catalog.model]
+                                );
+                            }
+                        }
                     }
                 }
             );
