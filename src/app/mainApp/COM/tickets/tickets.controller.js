@@ -212,7 +212,10 @@
                                         name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_ticket_code',//campo a pasar
-                                        option: 'descripcion'//campo a mostrar
+                                        option: 'descripcion',//campo a mostrar
+                                        elements:'results',//elementos del promise donde iterar
+                                        showModel:true,//mostrar model y option
+                                        pagination:{}//manejo de Paginado
                                     }
                                 }, {
                                     type: 'string',
@@ -270,7 +273,10 @@
                                         name: Translate.translate('COM.FIELDS.ASSETCONDITION'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_code',//campo a pasar
-                                        option: 'descripcion'//campo a mostrar
+                                        option: 'descripcion',//campo a mostrar
+                                        elements:'results',//elementos del promise donde iterar
+                                        showModel:true,//mostrar model y option
+                                        pagination:{}//manejo de Paginado
 
                                     }
 
@@ -290,7 +296,10 @@
                                                 url: Translate.translate('COM.URLS.DATE_TYPE'),
                                                 name: Translate.translate('COM.FIELDS.DATE_TYPE'),
                                                 model: 'com_code',
-                                                option: 'nombre'
+                                                option: 'nombre',
+                                                elements:'results',//elementos del promise donde iterar
+                                                showModel:true,//mostrar model y option
+                                                pagination:{}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -314,7 +323,10 @@
                                                 url: Translate.translate('COM.URLS.COMPONENT_TYPE'),
                                                 name: Translate.translate('COM.FIELDS.COMPONENT_TYPE'),
                                                 model: 'com_code',
-                                                option: 'descripcion'
+                                                option: 'descripcion',
+                                                elements:'results',//elementos del promise donde iterar
+                                                showModel:true,//mostrar model y option
+                                                pagination:{}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -347,7 +359,10 @@
                                                 url: Translate.translate('COM.URLS.ASSET_TYPE'),
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
-                                                option: 'descripcion'
+                                                option: 'descripcion',
+                                                elements:'results',//elementos del promise donde iterar
+                                                showModel:true,//mostrar model y option
+                                                pagination:{}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -387,7 +402,10 @@
                                                 url: Translate.translate('COM.URLS.PROCESS_INSTRUCTION_CODE'),
                                                 name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                                 model: 'com_code',
-                                                option: 'descripcion'
+                                                option: 'descripcion',
+                                                elements:'results',//elementos del promise donde iterar
+                                                showModel:true,//mostrar model y option
+                                                pagination:{}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -420,7 +438,10 @@
                                         url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                         model: 'com_code',
-                                        option: 'descripcion'
+                                        option: 'descripcion',
+                                        elements:'results',//elementos del promise donde iterar
+                                        showModel:true,//mostrar model y option
+                                        pagination:{}//manejo de Paginado
                                     }
                                 },
                                 {
@@ -444,7 +465,10 @@
                                         url: Translate.translate('COM.URLS.FAULT_CODE'),
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                         model: 'com_code',
-                                        option: 'nombre'
+                                        option: 'nombre',
+                                        elements:'results',//elementos del promise donde iterar
+                                        showModel:true,//mostrar model y option
+                                        pagination:{}//manejo de Paginado
                                     }
                                 },
                                 {
