@@ -65,6 +65,7 @@
                     "TECHNICAL_SERVICE": "Servicio Técnico"
                 },
                 "ACTION": "Acción",
+                "BULK_ASSET": "Insumos Lote",
                 "CATEGORY": "Categoría",
                 "CABINET_BRAND": "Marca de Cábinet",
                 "CABINET_MODEL": "Modelo de Cábinet",
