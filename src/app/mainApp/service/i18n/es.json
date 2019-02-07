@@ -269,5 +269,8 @@
         "TITLE":"Sintomas Detectados",
         "REMOVE":"Quitar elemento.",
         "ADD":"Añadir elemento"
+    },
+    "FAILURES_COMPONENT":{
+        "TITLE":"Fallas Detectadas"
     }
 }
