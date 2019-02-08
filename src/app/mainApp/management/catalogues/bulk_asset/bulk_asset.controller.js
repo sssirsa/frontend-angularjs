@@ -28,10 +28,10 @@
         vm.createButtonText = Translate.translate('BULK_ASSET.LABELS.CREATE');
         vm.deleteButtonText = Translate.translate('BULK_ASSET.LABELS.DELETE');
         vm.modifyButtonText = Translate.translate('BULK_ASSET.LABELS.MODIFY');
-        vm.nextButtonText = 'BULK_ASSET.LABELS.NEXT';
-        vm.previousButtonText = 'BULK_ASSET.LABELS.PREVIOUS';
+        vm.nextButtonText = Translate.translate('BULK_ASSET.LABELS.NEXT');
+        vm.previousButtonText = Translate.translate('BULK_ASSET.LABELS.PREVIOUS');
         vm.loadMoreButtonText = Translate.translate('BULK_ASSET.LABELS.LOAD_MORE');
-        vm.removeFilterButtonText = 'BULK_ASSET.LABELS.REMOVE_FILTER';
+        vm.removeFilterButtonText = Translate.translate('BULK_ASSET.LABELS.REMOVE_FILTER');
 
         //Messages
         vm.loadingMessage = Translate.translate('BULK_ASSET.LABELS.LOADING_MESSAGE');
