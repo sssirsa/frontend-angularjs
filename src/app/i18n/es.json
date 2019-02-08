@@ -332,7 +332,8 @@
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
             "LOAD_MORE": "Cargar mas elementos",
-            "CLOSE": "Cerrar"
+            "CLOSE": "Cerrar",
+            "SEARCH": "bUSCAR"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",

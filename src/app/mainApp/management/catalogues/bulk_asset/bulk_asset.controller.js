@@ -476,33 +476,24 @@
                     reverse: false
                 }
             },
-            //SEARCH: {
-            //    dialog: {
-            //        title: 'Búsqueda de Etapas',
-            //        searchButton: 'Buscar',
-            //        loadingText: 'Buscando etapas...'
-            //    },
-            //    filters: [
-            //        {
-            //            type: 'istartswith',
-            //            model: 'nombre',
-            //            header: 'por Nombre',
-            //            label: 'Nombre',
-            //            field: {
-            //                type: 'text'
-            //            }
-            //        },
-            //        {
-            //            type: 'istartswith',
-            //            model: 'tipo_etapa',
-            //            header: 'por Tipo de Etapa',
-            //            label: 'Tipo de Etapa',
-            //            field: {
-            //                type: 'text'
-            //            }
-            //        }
-            //    ]
-            //}
+            SEARCH: {
+                dialog: {
+                    title: Translate.translate('BULK_ASSET.LABELS.SEARCH'),
+                    searchButton: Translate.translate('MAIN.BUTTONS.SEARCH'),
+                    loadingText: Translate.translate('BULK_ASSET.LABELS.SEARCHING')
+                },
+                filters: [
+                    {
+                        type: 'icontains',
+                        model: 'descripcion',
+                        header: 'por Descripción',
+                        label: 'Descripción',
+                        field: {
+                            type: 'text'
+                        }
+                    }
+                ]
+            }
         };
 
         function onElementSelect(element) {
