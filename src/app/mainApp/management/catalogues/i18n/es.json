@@ -609,5 +609,24 @@
             "SEARCHING": "Buscando Insumo",
             "TITLE": "Insumos Lote"
         }
+    },
+    "UNIQUE_ASSET": {
+        "LABELS": {
+            "CREATE": "Crear Insumo",
+            "CREATING": "Creando Insumo",
+            "DELETE": "Borrar Insumo",
+            "DELETING": "Borrando Insumo",
+            "DELETE_CONFIRM": "Confirme la eliminación del Insumo",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos",
+            "MODIFY": "Modificar Insumo",
+            "MODIFYING": "Modificando insumo",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Únicos"
+        }
     }
 }

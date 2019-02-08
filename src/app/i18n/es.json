@@ -103,6 +103,7 @@
                 "TRANSPORT_LINE": "Línea de Transporte",
                 "TITLE": "Catálogos",
                 "UDN": "UDN",
+                "UNIQUE_ASSET": "Insumos Únicos",
                 "WEREHOUSE": "Bodega"
             },
             "INVENTORY": {

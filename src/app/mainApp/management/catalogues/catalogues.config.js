@@ -428,6 +428,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/bulk_asset/bulk_asset.tmpl.html',
                 controller: 'bulkAssetController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.unique-asset', {
+                url: '/catalogo/insumo_unico',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/unique_asset/unique_asset.tmpl.html',
+                controller: 'uniqueAssetController',
+                controllerAs: 'vm'
             });
 
 
@@ -500,6 +511,12 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.BULK_ASSET',
                                 state: 'triangular.admin-default.bulk-asset',
+                                permission: ['ADMINISTRADOR'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.UNIQUE_ASSET',
+                                state: 'triangular.admin-default.unique-asset',
                                 permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
