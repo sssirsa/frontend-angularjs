@@ -12,6 +12,11 @@
                 stage:'stage',
                 symptom: 'symptom'
             },
+            services:{
+                base:'repair',
+                service:'cabinet_service',
+                current_stage:'current_stage'
+            },
             choices: {
                 tipo_etapa: [
                     {

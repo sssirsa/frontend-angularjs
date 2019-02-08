@@ -5,7 +5,7 @@
 
     angular
         .module('app.mainApp')
-        .component('showInfoCabinet', {
+        .component('showInfoAsset', {
             templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/showInfoCabinet.tmpl.html',
             controller: showInfoCabinetController,
             bindings: {
