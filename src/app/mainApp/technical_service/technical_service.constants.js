@@ -17,6 +17,11 @@
                 service:'cabinet_service',
                 current_stage:'current_stage'
             },
+            type_entrie:{
+                base:'management',
+                control:'control',
+                cabinet_subsidiary:'cabinet_in_sucursal'
+            },
             choices: {
                 tipo_etapa: [
                     {
