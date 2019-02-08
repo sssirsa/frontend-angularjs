@@ -381,6 +381,17 @@
                                 <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
                             </div>
                         </md-button>
+                        <!--Patch button-->
+                        <md-button ng-if="$ctrl.actions['PATCH']"
+                                   ng-click="$ctrl.patch(element)"
+                                   aria-label="{{$ctrl.modifyButtonText}}"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
+                                <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
+                            </div>
+                        </md-button>
                         <!-- Delete button -->
                         <div ng-if="$ctrl.actions['DELETE']">
                             <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"

@@ -63,6 +63,18 @@
                     });
                 return deferred.promise;
             },
+            patch: function (id, object) {
+                let deferred = $q.defer();
+                $http.put(
+                    vm.genericCatalog.url + '/' + id, object)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
+            },
             remove: function (id) {
                 let deferred = $q.defer();
                 $http.delete(
