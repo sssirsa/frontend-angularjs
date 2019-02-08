@@ -11,21 +11,20 @@
     /* @ngInject */
     function searchCabinetStepProvider($q,
                                        URLS,
-                                       API,
-                                       EnvironmentConfig) {
+                                       API) {
 
         var urlbase = API.all(URLS.management.base)
             .all(URLS.management.inventory.base)
             .all(URLS.management.inventory.cabinet);
-        var technicalServiceBase=  (EnvironmentConfig.site.rest.api).all( URLS.technical_service.base).all(URLS.technical_service.services.base);
-        var infoTipoEtapa=(EnvironmentConfig.site.rest.api).all(URLS.technical_service.type_entrie.base);
+        var technicalServiceBase=API.all( URLS.technical_service.base).all(URLS.technical_service.services.base);
+        var infoTipoEtapa=API.all(URLS.management.base);
 
         return {
             getByID: getByID,
             getServiceById: getServiceById,
             getAllServicesByCabinet:getAllServicesByCabinet,
             getCurrentStage:getCurrentStage,
-            getEntrada:getEntrada
+            getEntrie:getEntrie
         };
 
 
@@ -34,20 +33,20 @@
         }
 
         function getServiceById(id_servicio) {
-            return technicalServiceBase.all(URLS.technical_service.services.service).all(id_servicio);
+            return technicalServiceBase.all(URLS.technical_service.services.service).all(id_servicio).customGET();
         }
 
         function getAllServicesByCabinet(economico) {
-            return technicalServiceBase.all(URLS.technical_service.services.service).all('?cabinet_economico='+economico);
+            return technicalServiceBase.all(URLS.technical_service.services.service).all('?cabinet_economico='+economico).customGET();
         }
 
         function getCurrentStage(economico) {
-            return technicalServiceBase.all(URLS.technical_service.services.current_stage).all(economico);
+            return technicalServiceBase.all(URLS.technical_service.services.current_stage).all(economico).customGET();
         }
 
-        function getEntrada(economico){
+        function getEntrie(economico){
 
-            return  infoTipoEtapa.all(URLS.technical_service.type_entrie.control).all(URLS.technical_service.type_entrie.cabinet_subsidiary).all(economico);
+            return  infoTipoEtapa.all(URLS.technical_service.type_entrie.control).all(URLS.technical_service.type_entrie.cabinet_subsidiary).all(economico).customGET();
         }
 
     }
