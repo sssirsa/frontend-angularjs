@@ -9,7 +9,8 @@
             templateUrl: 'app/mainApp/service/internal/components/searchCabinetStep/searchCabinetStep.tmpl.html',
             controller: searchCabinetStepController,
             bindings: {
-                infoGral: '&'
+                infoGral: '&',
+                infoSteptoDo: '&'
 
             }
         });
@@ -19,6 +20,11 @@
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('INSPECTION.GENERAL_INFO');
         vm.assets_info = Translate.translate('INSPECTION.BULK_ASSETS');
+        vm.infoStep = {
+            makeInspection:undefined,
+            makePrecheck:undefined,
+            currentStage:undefined
+        };
 
         vm.search_asset = search_asset;
         function search_asset() {
@@ -30,29 +36,34 @@
                 console.log(vm.asset);
                 vm.infoGral({element: vm.asset});
                 var promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset.economico);
-                console.log(promiseCabinetEntrada);
                 promiseCabinetEntrada.then(function (control) {
                     console.log(control);
                     if (control.tipo_entrada === "Garantias") {
-                        vm.makeInspection = false;
+                        vm.infoStep.makeInspection = false;
                         var promiseGetCurrentStage = searchCabinetStepProvider.getCurrentStage(vm.asset.economico);
                         promiseGetCurrentStage.then(function (currentStage) {
-                            console.log(currentStage);
+                            vm.infoStep.currentStage = currentStage;
+                            vm.infoStep.makePrecheck = false;
                         }).catch(function (errormsg) {
                             console.log(errormsg);
-                            if(errormsg.status==404){
-                                vm.makePrecheck = true;
+                            if (errormsg.status == 404) {
+                                vm.infoStep.makePrecheck = true;
+                                vm.infoStep.makeInspection  = false;
                                 console.log("Hare Precheck");
                             }
                             else {
                                 ErrorHandler.errorTranslate(errormsg);
                             }
                         });
+                    } else {
+                        vm.infoStep.makeInspection  = true;
                     }
 
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
                 });
+                console.log(vm.infoStep);
+                vm.infoSteptoDo({element: vm.infoStep});
 
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
