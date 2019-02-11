@@ -100,7 +100,7 @@
 
         function infogral(cabinet) {
             vm.asset=cabinet;
-            console.log(vm.asset);
+            //console.log(vm.asset);
         }
         function infoStep(step) {
             vm.step=step;

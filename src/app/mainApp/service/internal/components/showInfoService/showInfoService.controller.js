@@ -9,12 +9,17 @@
             templateUrl: 'app/mainApp/service/internal/components/showInfoService/showInfoService.tmpl.html',
             controller: showInfoServiceController,
             bindings: {
-                infoSteptoDo:'<'
+                info:'<'
 
             }
         });
     function showInfoServiceController($mdDialog) {
         var vm = this;
+        init();
+        function init() {
+            console.log(vm.info);
+        }
+
 
 
 

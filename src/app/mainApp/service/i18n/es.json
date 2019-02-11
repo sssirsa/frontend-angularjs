@@ -279,5 +279,9 @@
     },
     "FAILURES_COMPONENT":{
         "TITLE":"Fallas Detectadas"
+    },
+    "SHOW_INFO_SERVICE_COMPONENT":{
+        "PRECHECKLIST":"Inspección de Garantía",
+        "INSPECTION":"Inspección y Confirmación de Entradas"
     }
 }

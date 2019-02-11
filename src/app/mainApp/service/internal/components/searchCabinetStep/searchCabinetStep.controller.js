@@ -33,7 +33,7 @@
             promiseCabinetInfo.then(function (asset) {
                 vm.asset = asset;
                 //selection subsidiary
-                console.log(vm.asset);
+                //console.log(vm.asset);
                 vm.infoGral({element: vm.asset});
                 var promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset.economico);
                 promiseCabinetEntrada.then(function (control) {
@@ -44,11 +44,13 @@
                         promiseGetCurrentStage.then(function (currentStage) {
                             vm.infoStep.currentStage = currentStage;
                             vm.infoStep.makePrecheck = false;
+                            vm.infoStepToDo({element: vm.infoStep});
                         }).catch(function (errormsg) {
                             console.log(errormsg);
                             if (errormsg.status == 404) {
                                 vm.infoStep.makePrecheck = true;
                                 vm.infoStep.makeInspection  = false;
+                                vm.infoStepToDo({element: vm.infoStep});
                                 console.log("Hare Precheck");
                             }
                             else {
@@ -56,15 +58,17 @@
                             }
                         });
                     } else {
+                        vm.infoStep.makePrecheck  = false;
                         vm.infoStep.makeInspection  = true;
+                        console.log(vm.infoStep);
+                        vm.infoStepToDo({element: vm.infoStep});
+                        console.log("Hare Inspección");
                     }
 
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
                 });
-                console.log(vm.infoStep);
-                vm.infoStepToDo({element: vm.infoStep});
-                console.log(vm.infoStep);
+
 
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
