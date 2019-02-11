@@ -1,6 +1,6 @@
 
 <md-card layout="row" layout-wrap="">
-    <search-cabinet-step flex="100" info-gral="vm.infogral(element)"></search-cabinet-step>
+    <search-cabinet-step flex="100" info-gral="vm.infogral(element)" info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
     <start-service  flex="100" ng-if="vm.asset" on-start="vm.onStart(element)"></start-service>
     <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
     <show-info-servicio ></show-info-servicio>

@@ -10,7 +10,7 @@
             controller: searchCabinetStepController,
             bindings: {
                 infoGral: '&',
-                infoSteptoDo: '&'
+                infoStepToDo: '&'
 
             }
         });
@@ -63,7 +63,8 @@
                     ErrorHandler.errorTranslate(errormsg);
                 });
                 console.log(vm.infoStep);
-                vm.infoSteptoDo({element: vm.infoStep});
+                vm.infoStepToDo({element: vm.infoStep});
+                console.log(vm.infoStep);
 
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);

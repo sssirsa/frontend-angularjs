@@ -12,6 +12,7 @@
         var vm = this;
         vm.onElementSelect = onElementSelect;
         vm.infogral=infogral;
+        vm.infoStep=infoStep;
         vm.onStart=onStart;
         vm.insumos_lote = [];
 
@@ -99,6 +100,11 @@
 
         function infogral(cabinet) {
             vm.asset=cabinet;
+            console.log(vm.asset);
+        }
+        function infoStep(step) {
+            vm.step=step;
+            console.log(vm.step);
         }
     }
 

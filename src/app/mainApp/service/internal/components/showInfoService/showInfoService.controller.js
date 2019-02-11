@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('showInfoServicio', {
-            templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/showInfoCabinet.tmpl.html',
+            templateUrl: 'app/mainApp/service/internal/components/showInfoService/showInfoService.tmpl.html',
             controller: showInfoServiceController,
             bindings: {
                 infoSteptoDo:'<'
