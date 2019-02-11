@@ -51,6 +51,18 @@
                 templateUrl: 'app/mainApp/service/internal/asignacion/asignacionLinea.tmpl.html',
                 controller: 'asignacionLineaController',
                 controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.componentTest', {
+                url: '/prueba_componente',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/service/internal/test/testComponent.tmpl.html',
+                controller: 'testComponentController',
+                controllerAs: 'vm'
             });
 
 
@@ -73,7 +85,14 @@
                         state: 'triangular.admin-default.etapa',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
+                    },
+                    {
+                        name: 'Prueba de Componentes',
+                        state: 'triangular.admin-default.componentTest',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
                     }
+
                 ]
             }
         );

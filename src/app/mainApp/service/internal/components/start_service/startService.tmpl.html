@@ -1,0 +1,31 @@
+<div layout="row">
+    <div flex="30" layout="column">
+
+        <md-button ng-if="!$ctrl.date" ng-click="$ctrl.startService()" class="md-raised md-primary">
+            <md-icon md-font-icon="fas fa-hourglass-start"></md-icon>
+            <span translate="">START_SERVICE_COMPONENT.START</span>
+        </md-button>
+        <div ng-if="$ctrl.date" layout="column">
+            <div layout="row" class="Clock-date" layout-align="center center">
+                <span ng-if="$ctrl.horas<10">0</span>{{$ctrl.horas}} :<span ng-if="$ctrl.minutos<10">0</span>
+                {{$ctrl.minutos}} :<span ng-if="$ctrl.segundos<10">0</span>{{$ctrl.segundos}}
+            </div>
+            <div layout="row" class="Clock-date">
+                <md-icon md-font-icon="fas fa-hourglass-start"><span
+                    translate="">START_SERVICE_COMPONENT.ELAPSED_TIME</span></md-icon>
+            </div>
+        </div>
+
+    </div>
+    <div flex="70" class="Clock" ng-if="$ctrl.date" layout-align="center end" layout="column">
+        <div class="Clock-time" layout="row" layout-align="end center">
+            {{$ctrl.date | date:"HH:mm:ss" }}
+            <md-icon md-font-icon="far fa-clock"></md-icon>
+        </div>
+        <div class="Clock-date" layout="row" layout-align="end center">
+            {{$ctrl.date | date:"EEEE dd.MM.yyyy" }}
+            <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+        </div>
+    </div>
+
+</div>

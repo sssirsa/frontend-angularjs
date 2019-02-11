@@ -200,18 +200,17 @@
         }
     },
     "STAGES": {
-        "FORM": {
-            "LABEL": {
-                "MODEL": "Etapas",
-                "NAME": "Nombre",
-                "DESCRIPTION": "Descripción",
-                "WORKSHOP":"Taller",
-                "INFO_MODEL": "Información de la Etapa"
-            },
-            "PLACEHOLDER": {
-                "SEARCH_BRANCH": "Búsqueda de etapa",
-                "NOT_FOUND": "No se encontró la etapa"
-            }
+        "LABELS": {
+            "CREATE": "Crear Etapa",
+            "DELETE": "Borrar Etapa",
+            "LOAD_MORE": "Cargar mas etapas...",
+            "LOADING_MESSAGE": "Cargando etapas",
+            "MODIFY": "Modificar Etapa",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar Etapa",
+            "TITLE": "Etapas"
         }
     },
     "Transport_Kind": {

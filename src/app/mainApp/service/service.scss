@@ -73,3 +73,34 @@ md-input-container .md-errors-spacer {
   width: 100%;
   overflow-y: auto;
 }
+
+/* Clock Module */
+.Clock {
+  font-family: 'Oswald', sans-serif;
+}
+
+.Clock-time {
+  font-size: 40px;
+
+}
+
+.Clock-date {
+  font-size: 25px;
+
+}
+.toolbarSubtitle   {
+  background-color: #e0e0e0;
+  color: black;
+  height:50px;
+}
+.toolbarSubtitleIcon  {
+  background-color: #4C9EF1;
+  color: #ffffff;
+  height:70px;
+}
+.Subtitle{
+  height: 60px;
+}
+.imgList{
+  max-width: 80px;
+}
