@@ -23,7 +23,8 @@
         vm.infoStep = {
             makeInspection:undefined,
             makePrecheck:undefined,
-            currentStage:undefined
+            currentStage:undefined,
+            control:undefined
         };
 
         vm.search_asset = search_asset;
@@ -38,6 +39,7 @@
                 var promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset.economico);
                 promiseCabinetEntrada.then(function (control) {
                     console.log(control);
+                    vm.infoStep.control=control;
                     if (control.tipo_entrada === "Garantias") {
                         vm.infoStep.makeInspection = false;
                         var promiseGetCurrentStage = searchCabinetStepProvider.getCurrentStage(vm.asset.economico);

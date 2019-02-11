@@ -1,26 +1,25 @@
 <div layout-margin="" flex="100" layout="column" layout-wrap="">
     <div layout="column" layout-align="center start">
-        {{$ctrl.info}}
         <div layout="row">
             <md-icon md-font-icon="far fa-hand-point-down"></md-icon>
-            <h1 ng-if="$ctrl.info.currentStage">{{$ctrl.infoSteptoDo.currentStage}}</h1>
-            <h1 ng-if="$ctrl.info.makeInspection" translate="">SHOW_INFO_SERVICE_COMPONENT.INSPECTION</h1>
-            <h1 ng-if="$ctrl.info.makePrecheck" translate="">SHOW_INFO_SERVICE_COMPONENT.PRECHECKLIST</h1>
+            <h2 ng-if="$ctrl.info.currentStage">{{$ctrl.infoSteptoDo.currentStage}}</h2>
+            <h2 ng-if="$ctrl.info.makeInspection" translate="">SHOW_INFO_SERVICE_COMPONENT.INSPECTION</h2>
+            <h2 ng-if="$ctrl.info.makePrecheck" translate="">SHOW_INFO_SERVICE_COMPONENT.PRECHECKLIST</h2>
         </div>
         <div layout="row">
-            <md-icon md-font-icon="fas fa-tags"></md-icon>
-            <span class="md-body-1">{{$ctrl.asset.modelo.nombre}}</span>
+            <md-icon md-font-icon="fas fa-truck-loading"></md-icon>
+            <span class="md-body-1">{{$ctrl.info.control.tipo_entrada}}</span>
         </div>
         <div layout="row">
             <md-icon md-font-icon="fas fa-tag"></md-icon>
-            <span class="md-caption">{{$ctrl.asset.modelo.marca.descripcion}}</span>
+            <span class="md-caption">{{$ctrl.info.control.sucursal.nombre}}</span>
         </div>
     </div>
-    <div layout="column" flex="45" layout-align="center start">
+    <div ng-if="$ctrl.info.currentStage" layout="column" flex="45" layout-align="center start">
         <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
-            <md-button  ng-click="$ctrl.showInfoCabinetDialog()" class="md-raised md-primary">
+            <md-button  ng-click="$ctrl.showInfoServiceDialog()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-eye"></md-icon>
-                <span translate="">SHOW_INFO_CABINET.SHOW_INFO</span>
+                <span translate="">SHOW_INFO_SERVICE_COMPONENT.SHOW_INFO</span>
             </md-button>
         </div>
     </div>

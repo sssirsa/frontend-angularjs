@@ -282,6 +282,7 @@
     },
     "SHOW_INFO_SERVICE_COMPONENT":{
         "PRECHECKLIST":"Inspección de Garantía",
-        "INSPECTION":"Inspección y Confirmación de Entradas"
+        "INSPECTION":"Inspección y Confirmación de Entradas",
+        "SHOW_INFO":"Mas Información del Servicio"
     }
 }
