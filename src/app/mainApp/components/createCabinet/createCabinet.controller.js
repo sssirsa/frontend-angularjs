@@ -14,7 +14,7 @@
         });
 
     /* @ngInject */
-    function createCabinetController (MANAGEMENT, EnvironmentConfig, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS) {
+    function createCabinetController (EnvironmentConfig, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS, QUERIES) {
         var vm = this;
 
         //variables
@@ -38,12 +38,15 @@
         vm.catalogues = {
             marca: {
                 catalog: {
-                    url: URLS.marca,
-                    kind: 'Web',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.cabinet_brand,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'nombre'
                 },
                 pagination: {
                     total: 'count',
@@ -59,7 +62,7 @@
             modelo_by_marca: {
                 catalog: {
                     url: null,
-                    kind: 'Web',
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -78,8 +81,11 @@
             },
             condicion: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.condicion,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.condition,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -98,8 +104,11 @@
             },
             status_unilever: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_unilever,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.status_unilever,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -118,8 +127,11 @@
             },
             status_com: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.estatus_com,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.status_com,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -136,10 +148,13 @@
                     reverse: false
                 }
             },
-            categoria:{
+            categoria: {
                 catalog: {
-                    url: EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria,
-                    kind: 'Management',
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.category,
+                    kind: 'Generic',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -162,7 +177,11 @@
         function onBrandSelect(element) {
             vm.modelo = null;
             vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.url = URLS.marca + '/models/' + element;
+            vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.cabinet_model
+                + QUERIES.cabinet.by_brand + element;
         }
 
         function onElementSelect(element, field) {

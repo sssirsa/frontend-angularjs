@@ -10,9 +10,9 @@
      * @constructor
      */
     function Helper($rootScope,
-                    $log,
-                    $window,
-                    NotificationPanel) {
+        $log,
+        $window,
+        NotificationPanel) {
 
         var acceptFileTypes = /(jpe?g|png|bmp|vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.ms-excel)$/i;
         return {
@@ -21,7 +21,8 @@
             filterDeleted: filterDeleted,
             searchByField: searchByField,
             sortByAttribute: sortByAttribute,
-            getNotificationsByUser: getNotificationsByUser
+            getNotificationsByUser: getNotificationsByUser,
+            removeBlankStrings: removeBlankStrings
         };
 
         /**
@@ -127,5 +128,17 @@
             });*/
         }
 
+        //Receives a JS object, if any property of the object is a blank string
+        function removeBlankStrings(element) {
+            for (var property in element) {
+                if (element.hasOwnProperty(property)) {
+                    if (element[property] === ""
+                        || element[property] === '') {
+                        delete element[property];
+                    }
+                }
+            }
+            return element;
+        }
     }
 })();

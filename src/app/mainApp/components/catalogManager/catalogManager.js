@@ -218,8 +218,9 @@
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, catalog, file and color //Options and catalog not yet implemented
-                 *              model: string,         Name of the field that will be used to show the data from the API
+                 *              type: string,          Valid types are text, options, catalog, file, object and color //Options and catalog not yet implemented
+                 *              model: string,         Name of the field that will be used to show the data from the API,
+                 *                                     separate with double underscores when nested fields are found (just in object type field)
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
                  *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
                  *                  url: string,         Full or partial URL depending on the kind
@@ -343,6 +344,7 @@
                     .list()
                     .then(function (response) {
                         treatResponse(response);
+                        treatObjectFields();
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -422,7 +424,6 @@
         }
 
         function update(element) {
-            //TODO: Update behavior handling
             createMainCatalogProvider();
             if (vm.actions['PUT']) {
                 $mdDialog.show({
@@ -646,6 +647,29 @@
         function removeFilter() {
             vm.filterApplied = null;
             activate();
+        }
+
+        //Treat the object fields and convert the desired property to a root property of the main object
+        function treatObjectFields() {
+            for (element in vm.actions['LIST'].fields) {
+                if (vm.actions['LIST']
+                    .fields[element].type === 'object') {
+                    let nested_properties = vm.actions['LIST']
+                        .fields[element]
+                        .model
+                        .split('__');
+                    for (var catalog_index = 0; catalog_index < vm.catalogElements.length; catalog_index++) {
+                        catalogElement = vm.catalogElements[catalog_index];
+                        let actualProperty = catalogElement[nested_properties[0]];
+                        for (var i = 1; i < nested_properties.length; i++) {
+                            actualProperty = actualProperty[nested_properties[i]];
+                        }
+                        catalogElement[vm.actions['LIST']
+                            .fields[element]
+                            .model] = actualProperty;
+                    }
+                }
+            }
         }
 
     }

@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
-                                         Persona_Admin, Geolocation, STORE_SEGMENTATION, SCORES, atencionPV,
+                                         Persona_Admin, Geolocation, SCORES, atencionPV,
                                            cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
         var vm = this;
 
@@ -37,7 +37,7 @@
         vm.promiseLoader = null;
 
         //Constants declaration
-        vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.storeSegmentation = []; //TODO: Update with API callback
         vm.scores = SCORES;
         vm.aceptButton = Translate.translate('MAIN.BUTTONS.ACCEPT');
         vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');

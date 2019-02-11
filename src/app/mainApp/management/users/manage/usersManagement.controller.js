@@ -6,7 +6,14 @@
         .controller('usersManagementController', UsersManagementController)
         .filter('personaSearch', personaSearch);
 
-    function UsersManagementController($scope, toastr, Translate, $mdDialog, Persona_Admin, Administration, Persona) {
+    function UsersManagementController(
+        $scope,
+        toastr,
+        Translate,
+        $mdDialog,
+        Persona_Admin,
+        Administration,
+        Persona) {
 
         var vm = this;
         vm.lookup = lookup;

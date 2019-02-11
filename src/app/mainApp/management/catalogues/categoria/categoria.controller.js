@@ -6,14 +6,13 @@
         .module('app.mainApp.management.catalogues')
         .controller('CategoriaController',CategoriaController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig, MANAGEMENT)
-    {
-
+    function CategoriaController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
 
-        vm.url = EnvironmentConfig.site.rest.api + MANAGEMENT.baseManagement + MANAGEMENT.project.catalogue + URLS.categoria;
-
-        vm.kind = 'Management';
+        vm.url = managementUrl;
+        vm.kind = 'management';
         vm.name = Translate.translate('Category.title');
 
         //Labels
@@ -28,7 +27,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Categorías';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Categorías';
@@ -138,7 +137,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Categoría',
+                    title: 'Búsqueda de Categoría',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Categoría'
                 },

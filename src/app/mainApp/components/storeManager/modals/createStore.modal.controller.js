@@ -20,7 +20,6 @@
         var vm = this;
 
         //Variables
-        //vm.storeSegmentation = STORE_SEGMENTATION;
         vm.storeSegmentation = null;
         vm.segmentationSelect = null;
         vm.store = null;

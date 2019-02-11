@@ -6,12 +6,14 @@
         .controller('SucursalController', SucursalController)
 
     /* @ngInject */
-    function SucursalController(URLS, Translate) {
-
+    function SucursalController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.sucursal;
-        vm.kind = 'Web';
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.subsidiary);
+
+        vm.url = managementUrl;
+        vm.kind = 'management';
         vm.name = Translate.translate('SUCURSAL.FORM.LABEL.BRANCH');
 
         //Labels
@@ -26,7 +28,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Sucursal';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Sucursal';
@@ -175,7 +177,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Sucursal',
+                    title: 'Búsqueda de Sucursal',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Sucursal'
                 },
