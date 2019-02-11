@@ -5,7 +5,7 @@
              layout-gt-sm="row"
              layout-padding
              layout-align="center center"
-             ng-if="vm.salePoints.length < 1">
+             ng-if="vm.salePoints.length < 0">
         <div flex-gt-sm="40" flex="100">
             <md-input-container class="md-block">
                 <div ng-if="vm.selectedKind && !vm.salePoints">
@@ -34,11 +34,11 @@
                     </md-content>
                     <md-content>
 
-                        <div flex="100" layout="row" layout-align="space-around center">
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
                             <div layout="column">
                                 <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
                             </div>
-                            <div layout="column">
+                            <div layout="column" flex="30">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</b>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <div layout="column">
+                            <div layout="column" flex="40">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</b>
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
 
-                            <div layout="column">
+                            <div layout="column" flex="30">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
                                         <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.MUN</b>
