@@ -253,7 +253,8 @@
     },
     "BULK_ASSET_COMPONENT":{
         "BULK_ASSET":" Insumo: ",
-        "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario."
+        "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario.",
+        "TITLE":"Insumos Utilizados"
     },
     "BULK_ASSET_CONTAINER_COMPONENT":{
         "NO_BULKS":"No hay ningún insumo asociado a esta etapa"
