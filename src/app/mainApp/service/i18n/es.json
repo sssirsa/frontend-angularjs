@@ -251,10 +251,6 @@
     },
     "INSPECTION":{
         "INSPECTION_NAME_MENU":"Inspección de Cabinet",
-        "SEARCH_CABINET":"Buscar Cabinet",
-        "ASSET_ID":"Económico:",
-        "GENERAL_INFO":"Información General",
-        "BULK_ASSETS":"Insumos usados",
         "CHECKLIST":"Lista de Verificación (Check)",
         "STICKER":"Sticker",
         "WHEELS":"Rodajas",
@@ -265,7 +261,13 @@
         "PAINT":"Pintura",
         "WASHED":"Lavado",
         "WRAPPED":"Emplayado",
-        "EMPTY":"Vacío de Mercancía"
+        "EMPTY":"Vacío de Mercancía",
+        "MORE_INFO":"Más Información",
+        "ACTIONS":{
+            "SAVE_INSPECTION":"Confirmar Entrada",
+            "SAVE_PRECHECK":"Confirmar Entrada de Garantía",
+            "SAVE_CHECKLIST":"Guardar Checklist"
+        }
 
     },
     "SERVICES":{

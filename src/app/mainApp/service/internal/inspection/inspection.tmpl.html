@@ -18,60 +18,17 @@
 
             </div>
         </md-toolbar>
-        <div layout="column" layout-align="center center">
-            <md-content layout="row" layout-padding="">
-                <md-input-container>
-                    <label translate="">INSPECTION.SEARCH_CABINET</label>
-                    <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
-                </md-input-container>
-                <md-input-container>
-                    <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
-                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
-                    </md-button>
-                </md-input-container>
-            </md-content>
+        <div layout="row" flex="100" layout-wrap="">
+        <search-cabinet-step flex="100" info-gral="vm.infogral(element)" info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+        <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+        <show-info-servicio  ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
         </div>
 
-        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.id">
-            <div layout="column" flex="45" layout-align="center start">
-                <div layout="row">
-                    <md-icon md-font-icon="far fa-snowflake"></md-icon>
-                    <h3 translate="">INSPECTION.ASSET_ID</h3>
-                    <h1 class="md-body-2">{{vm.asset.economico}}</h1>
-                </div>
-                <div layout="row">
-                    <md-icon md-font-icon="fas fa-tags"></md-icon>
-                    <span class="md-body-1">{{vm.asset.modelo.nombre}}</span>
-                </div>
-                <div layout="row">
-                    <md-icon md-font-icon="fas fa-tag"></md-icon>
-                    <span class="md-caption">{{vm.asset.modelo.marca.descripcion}}</span>
-                </div>
-            </div>
-            <div layout="column" flex="45" layout-align="center start">
-                <div layout="row">
-                    <span translate="">SERVICES.PAST_SERVICES</span>
-                    <span > </span>
-                </div>
-                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-button ng-if="!vm.edition" ng-click="vm.infoCabinet()" class="md-raised md-primary">
-                        <md-icon md-font-icon="fas fa-eye"></md-icon>
-                        <span translate="">SERVICES.INFO_CABINET</span>
-                    </md-button>
-                    <md-button ng-if="!vm.edition" ng-click="vm.infoService()" class="md-raised md-primary">
-                        <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
-                        <span translate="">SERVICES.INFO_SERVICE</span>
-                    </md-button>
-
-                </div>
-            </div>
-        </div>
 
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
                  ng-if="vm.asset.economico">
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
-                    <h3 translate="">INSPECTION.CHECKLIST</h3>
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
                         <div flex-gt-md="30" flex-md="45" flex="100" layout-align="center center">
                             <md-input-container flex="100" layout-fill="">
@@ -213,39 +170,26 @@
 
                 </md-content>
             </md-tab>
-            <md-tab label="{{vm.assets_info}}">
+            <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
                 <md-content class="md-padding">
-                    <h3>Settings</h3>
-                    <md-list>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
-                            <p>Show Username</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-account-box"></md-icon>
-                            <p>Show Avatar</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-cloud-upload"></md-icon>
-                            <p>Allow Backups</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                    </md-list>
+
                 </md-content>
             </md-tab>
 
         </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
+            <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendInspection()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                Guardar
+                <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
+            </md-button>
+            <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendPrecheck()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="">INSPECTION.ACTIONS.SAVE_PRECHECK</span>
             </md-button>
             <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
-                Editar
+                <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
             </md-button>
         </md-card-actions>
     </md-card>

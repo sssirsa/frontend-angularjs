@@ -7,28 +7,35 @@
     angular
         .module('app.mainApp.service')
         .controller('inspectionController', inspectionController);
-    function inspectionController($scope, Translate, toastr, cabinetUC, ErrorHandler) {
+    function inspectionController($scope, Translate, ErrorHandler) {
         var vm = this;
-        vm.asset = {};//objeto contenedor del cabinet
+        vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id=''; //asset identifier
-        vm.title_info=Translate.translate('INSPECTION.GENERAL_INFO');
-        vm.assets_info=Translate.translate('INSPECTION.BULK_ASSETS');
+        vm.title_info=Translate.translate('INSPECTION.CHECKLIST');
+        vm.assets_info=Translate.translate('INSPECTION.MORE_INFO');
 
-        vm.search_asset = search_asset;
-        function search_asset() {
-            //Search in cabinets location
-            var promiseCabinetInfo = cabinetUC.getByID(vm.asset_id);
-            promiseCabinetInfo.then(function (asset) {
-                vm.asset = asset;
-                //selection subsidiary
-                console.log(vm.asset);
+        //Declaración de Funciones como variable  de Componentes________________________________________________________
+        vm.infogral=infogral;
+        vm.infoStep=infoStep;
+        vm.onStart=onStart;
+        //--------------------------------------------------------------------------------------------------------------
+        //Funciones Propias de la Pantalla
 
 
-            }).catch(function (errormsg) {
-                ErrorHandler.errorTranslate(errormsg);
-            });
+        //  Funciones para Componentes _________________________________________________________________________________
 
+        function infogral(cabinet) {
+            vm.asset=cabinet;
+            //console.log(vm.asset);
         }
+        function infoStep(step) {
+            vm.step=step;
+            console.log(vm.step);
+        }
+        function onStart(startDate){
+            console.log(startDate);
+        }
+        //--------------------------------------------------------------------------------------------------------------
 
 
     }
