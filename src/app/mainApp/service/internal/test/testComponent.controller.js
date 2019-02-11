@@ -10,10 +10,10 @@
 
     function testComponentController() {
         var vm = this;
-        vm.onElementSelect = onElementSelect;
         vm.infogral=infogral;
         vm.infoStep=infoStep;
         vm.onStart=onStart;
+        vm.getInsumosLote=getInsumosLote;
         vm.insumos_lote = [];
 
         vm.maxStock = 4;
@@ -75,36 +75,24 @@
             cantidad: "2.000"
         };
 
-        function onElementSelect(element) {
-            getDuplicity(element.insumo_lote_id);
-            vm.insumos_lote.push(element);
-            console.log("La Lista de Insumos Lote usados:");
+        function getInsumosLote(element){
+            vm.insumos_lote=element;
             console.log(vm.insumos_lote);
-
-
         }
         function onStart(startDate){
             console.log(startDate);
         }
 
-        function getDuplicity(bulkAssetToFind) {
-            var index;
-            for (index = 0; index < vm.insumos_lote.length; ++index) {
-                if (vm.insumos_lote[index].insumo_lote_id === bulkAssetToFind) {
-                    vm.insumos_lote.splice(index, 1);
-                }
-            }
 
 
-        }
 
         function infogral(cabinet) {
             vm.asset=cabinet;
-            //console.log(vm.asset);
         }
         function infoStep(step) {
             vm.step=step;
-            console.log(vm.step);
+            console.log("sucursal de step");
+            console.log(vm.step.control.sucursal);
         }
     }
 

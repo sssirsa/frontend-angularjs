@@ -283,6 +283,9 @@
         "BULK_ASSET":" Insumo: ",
         "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario."
     },
+    "BULK_ASSET_CONTAINER_COMPONENT":{
+        "NO_BULKS":"No hay ningún insumo asociado a esta etapa"
+    },
     "SHOW_INFO_CABINET":{
         "SHOW_INFO":"Mas información del Cabinet"
     },

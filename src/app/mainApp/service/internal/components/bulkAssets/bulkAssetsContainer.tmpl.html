@@ -1,0 +1,4 @@
+<div flex="100" layout-wrap="" layout="row">
+    <b class="BLUE" ng-if="$ctrl.bulks.length==0" translate="">BULK_ASSET_CONTAINER_COMPONENT.NO_BULKS</b>
+    <bulk-asset ng-repeat="bulk in $ctrl.bulks"  flex-gt-md="50" flex="100" bulk-asset="bulk" sucursal="$ctrl.sucursal" on-select="$ctrl.onElementSelect(element)"></bulk-asset>
+</div>

@@ -70,7 +70,7 @@
 //Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
             vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
-                return element.sucursal.id === 1;
+                return element.sucursal.id === vm.sucursal.id;
             });
         }
 
