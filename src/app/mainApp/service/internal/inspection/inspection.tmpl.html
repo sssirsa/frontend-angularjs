@@ -172,7 +172,9 @@
             </md-tab>
             <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
                 <md-content class="md-padding">
-
+                    <bulk-asset-container flex="100" ng-if="vm.step"  sucursal="vm.step.control.sucursal" tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'" bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+                    <symptom-manager flex="100"></symptom-manager>
+                    <actions-manager flex="100"></actions-manager>
                 </md-content>
             </md-tab>
 
@@ -183,11 +185,11 @@
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
             </md-button>
-            <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendPrecheck()" class="md-raised md-primary">
+            <md-button ng-if="vm.step.makePrecheck" ng-click="vm.sendPrecheck()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_PRECHECK</span>
             </md-button>
-            <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
+            <md-button ng-if="vm.currentStage" ng-click="vm.enableEdition()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
             </md-button>

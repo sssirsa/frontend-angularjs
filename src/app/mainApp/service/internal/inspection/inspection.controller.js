@@ -17,7 +17,6 @@
         //Declaración de Funciones como variable  de Componentes________________________________________________________
         vm.infogral=infogral;
         vm.infoStep=infoStep;
-        vm.onStart=onStart;
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
 
@@ -30,11 +29,9 @@
         }
         function infoStep(step) {
             vm.step=step;
-            console.log(vm.step);
+            //console.log(vm.step);
         }
-        function onStart(startDate){
-            console.log(startDate);
-        }
+
         //--------------------------------------------------------------------------------------------------------------
 
 
