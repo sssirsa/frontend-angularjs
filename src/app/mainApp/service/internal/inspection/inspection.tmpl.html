@@ -19,9 +19,10 @@
             </div>
         </md-toolbar>
         <div layout="row" flex="100" layout-wrap="">
-        <search-cabinet-step flex="100" info-gral="vm.infogral(element)" info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
-        <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
-        <show-info-servicio  ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            <search-cabinet-step flex="100" info-gral="vm.infogral(element)"
+                                 info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
         </div>
 
 
@@ -171,8 +172,10 @@
                 </md-content>
             </md-tab>
             <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
-                <md-content class="md-padding">
-                    <bulk-asset-container flex="100" ng-if="vm.step"  sucursal="vm.step.control.sucursal" tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'" bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+                <md-content>
+                    <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
+                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Electrico'"
+                                          bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
                     <symptom-manager flex="100"></symptom-manager>
                     <actions-manager flex="100"></actions-manager>
                 </md-content>
