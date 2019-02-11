@@ -22,6 +22,10 @@
                 control:'control',
                 cabinet_subsidiary:'cabinet_in_sucursal'
             },
+            bulk_assets:{
+                asset:'asset',
+                bulksByStep:'bulk_asset_process'
+            },
             choices: {
                 tipo_etapa: [
                     {
