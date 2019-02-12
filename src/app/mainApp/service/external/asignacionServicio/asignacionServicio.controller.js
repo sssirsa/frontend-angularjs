@@ -5,12 +5,30 @@
         .module('app.mainApp.service')
         .controller('asignacionServicioController', asignacionServicioController);
 
-    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
+    function asignacionServicioController(SalePoint, $state, $mdDialog, ErrorHandler) {
         var vm = this;
 
         vm.selectedKind = 'unasigned';
         vm.salePoints = null;
+
+        //datos para paginado
+        vm.objectAtention = null;
+        vm.offset = 0;
+        vm.limit = 20;
+        vm.refreshPaginationButtonsComponent = false;
+
+        vm.listSalePoints = listSalePoints;
+        vm.selectSalePoint = selectSalePoint;
         vm.Assing = Assing;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
+
+        initial();
+
+        function initial(){
+            listSalePoints();
+        }
 
         function Assing(salePoint) {
             $mdDialog.show({
@@ -31,20 +49,6 @@
 
         }
 
-        //Function mapping
-        vm.listSalePoints = listSalePoints;
-        vm.selectSalePoint = selectSalePoint;
-
-
-        //datos para paginado
-        vm.objectAtention = null;
-        vm.offset = 0;
-        vm.limit = 20;
-        vm.refreshPaginationButtonsComponent = false;
-        vm.sig = sigPage;
-        vm.prev = prevPage;
-        vm.goToNumberPage = goToNumberPage;
-
         function listSalePoints() {
             vm.refreshPaginationButtonsComponent = false;
             vm.objectAtention = null;
@@ -55,10 +59,7 @@
                     prepareDataFunction();
                 })
                 .catch(function (salePointsError) {
-                    toastr.error(
-                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                        Translate.translate('MAIN.MSG.ERROR_TITLE')
-                    );
+                    ErrorHandler.error(salePointsError);
                 });
         }
 
@@ -83,15 +84,8 @@
         }
 
         function selectSalePoint(salePoint) {
-            $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
+            $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.salePoint.tipo});
         }
-
-        initial();
-
-        function initial(){
-            listSalePoints();
-        }
-
 
     }
 
