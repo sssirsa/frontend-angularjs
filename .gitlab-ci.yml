@@ -74,7 +74,7 @@ deploy_feature:
         - npm install gulp
     script:
         - rm -rf dist/
-        - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+        - ./node_modules/.bin/gulp deploy --env development
     dependencies:
         - npm
         - bower
