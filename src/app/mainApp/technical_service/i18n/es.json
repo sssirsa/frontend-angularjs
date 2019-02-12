@@ -17,6 +17,10 @@
             "SAVE_INSPECTION":"Confirmar Entrada",
             "SAVE_PRECHECK":"Confirmar Entrada de Garantía",
             "SAVE_CHECKLIST":"Guardar Checklist"
+        },
+        "CATALOGUES":{
+            "STICKER":"Etiquetas",
+            "STICKER_HINT":"Agregar tipo de etiqueta"
         }
 
     },
