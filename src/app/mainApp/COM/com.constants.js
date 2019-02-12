@@ -17,7 +17,8 @@
                     send:"send"
                 },
                 ticket: {
-                    base: "ticket"
+                    base: "ticket",
+                    create:"create"
                 }
 
             }

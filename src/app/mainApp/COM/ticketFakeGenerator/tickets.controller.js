@@ -205,7 +205,7 @@
                 {
                     type: 'catalog',
                     model: 'cabinet_replace',
-                    required: true,
+                    required: false,
                     label: Translate.translate('COM.FIELDS.REPLACE_CABINET'),
                     catalog: {
                         url: EnvironmentConfig.site.rest.api
@@ -223,8 +223,8 @@
                 },
                 {
                     type: 'catalog',
-                    model: 'ticket',
-                    required: true,
+                    model: 'ticket_parent',
+                    required: false,
                     label: Translate.translate('COM.FIELDS.TICKET'),
                     catalog: {
                         url: EnvironmentConfig.site.rest.api
@@ -239,7 +239,37 @@
                         showModel: false,
                         pagination: {}
                     }
-                }
+                },
+                {
+                    type: 'catalog',
+                    model: 'ticket_master',
+                    required: false,
+                    label: Translate.translate('COM.FIELDS.TICKET_MASTER'),
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + COM.base
+                            + '/' + COM.actions.base
+                            + '/' + COM.actions.ticket.base,
+                        name: Translate.translate('COM.FIELDS.TICKET_MASTER'),
+                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                        model: 'identificador',//campo a pasar
+                        option: 'folio',//campo a mostrar
+                        elements: 'results',
+                        showModel: false,
+                        pagination: {}
+                    }
+                },
+                {
+                    type: 'text',
+                    model: 'folio',
+                    label: 'folio',
+                    required: true,
+                    validations:{
+                        errors:{
+                            required: 'El campo es requerido.'
+                        }
+                    }
+                },
             ];
             openDialog();
         }
@@ -252,11 +282,12 @@
                 cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                 loading: 'Guardando Acción'
             };
+            //com/ticket/create
             vm.url = EnvironmentConfig.site.rest.api
                 + '/' + COM.base
                 + '/' + COM.actions.base
-                + '/' + COM.actions.message.base
-                + '/' + COM.actions.message.send;
+                + '/' + COM.actions.ticket.base
+                + '/' + COM.actions.ticket.create;
 
             $mdDialog.show({
                 controller: 'CatalogCreateDialogController',

@@ -15,7 +15,8 @@
             "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure"
         },
         "FIELDS":{
-            "TICKET": "Ticket",
+            "TICKET": "Ticket anterior",
+            "TICKET_MASTER": "Ticket Padre",
             "CABINET":"Cabinet",
             "REPLACE_CABINET":"Cabinet a remplazar",
             "SERVICE_TASK_TYPE" :"Tipo de Servicio",
