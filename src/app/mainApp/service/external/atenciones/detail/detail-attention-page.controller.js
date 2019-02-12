@@ -8,7 +8,7 @@
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, SCORES, atencionPV,
-                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
+                                           cabinetUC, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
         var vm = this;
 
         //Variable declaration
@@ -420,7 +420,7 @@
                 no_serie: vm.cabinetSelected.no_serie.toUpperCase(),
                 antiguedad: vm.cabinetSelected.antiguedad.toUpperCase()
             };
-            cabinetPV.create(aux)
+            cabinetUC.create(aux)
                 .then(function (res) {
                     AddCabinetCreated(res);
                     ErrorHandler.successCreation();
@@ -535,7 +535,7 @@
         function listcabinets(){
             var ux = "Activo";
 
-            vm.loadingPromise = cabinetPV.list(1000, 0)
+            vm.loadingPromise = cabinetUC.list(1000, 0)
                 .then(function (res) {
                     res = res.results;
                     vm.todosprev = Helper.filterDeleted(res, true);
