@@ -43,37 +43,5 @@
                 controllerAs: 'vm'
             });
 
-
-        triMenuProvider.addMenu(
-            {
-                name: 'MAIN.MENU.INTERNAL_SERVICE',
-                icon: 'fa fa-cogs',
-                type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                priority: 6,
-                children: [
-                    {
-                        name:'INSPECTION.INSPECTION_NAME_MENU',
-                        state:'triangular.admin-default.inspection',
-                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type:'link'
-                    },
-                    {
-                        name: 'MAIN.MENU.REGISTER_STEP',
-                        state: 'triangular.admin-default.etapa',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
-                    },
-                    {
-                        name: 'Prueba de Componentes',
-                        state: 'triangular.admin-default.componentTest',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
-                    }
-
-                ]
-            }
-        );
-
     }
 })();
