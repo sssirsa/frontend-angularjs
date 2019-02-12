@@ -185,6 +185,10 @@
         </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                <md-icon md-font-icon="fas fa-eraser"></md-icon>
+                <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
+            </md-button>
             <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendInspection()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
@@ -193,7 +197,7 @@
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_PRECHECK</span>
             </md-button>
-            <md-button ng-if="vm.currentStage" ng-click="vm.enableEdition()" class="md-raised md-primary">
+            <md-button ng-if="vm.currentStage" ng-click="vm.sendCheckList()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
             </md-button>

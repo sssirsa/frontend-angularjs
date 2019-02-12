@@ -16,7 +16,8 @@
         "ACTIONS":{
             "SAVE_INSPECTION":"Confirmar Entrada",
             "SAVE_PRECHECK":"Confirmar Entrada de Garantía",
-            "SAVE_CHECKLIST":"Guardar Checklist"
+            "SAVE_CHECKLIST":"Guardar Checklist",
+            "CLEAR_FIELD":"Limpiar campos"
         },
         "CATALOGUES":{
             "STICKER":"Etiquetas",

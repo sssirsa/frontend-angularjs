@@ -15,6 +15,12 @@
         vm.assets_info=Translate.translate('INSPECTION.MORE_INFO');
         vm.checklist={};
 
+        //Declaracion de Funciones como variables_______________________________________________________________________
+        vm.sendPrecheck=sendPrecheck;
+        vm.sendInspection=sendInspection;
+        vm.sendCheckList=sendCheckList;
+        vm.clear=clear;
+
         const stickersURL =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.entries_departures.base+ '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.sticker);
         vm.catalogues = {
@@ -37,7 +43,7 @@
                     reverse: false
                 },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint:Translate.translate('SYMTOMPS_COMPONENT.ADD')
+                hint:Translate.translate('INSPECTION.CATALOGUES.ADD')
             }
         };
 
@@ -45,18 +51,33 @@
         vm.infogral=infogral;
         vm.infoStep=infoStep;
         vm.getInsumosLote=getInsumosLote;
-        vm.buildObject=buildObject;
+        vm.onStickerSelect=onStickerSelect;
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
-        function buildObject() {
+        function sendInspection() {
             console.log(vm.checklist);
 
+        }
+        function sendCheckList() {
+            console.log(vm.checklist);
+
+        }
+        function sendPrecheck() {
+            console.log(vm.checklist);
+
+        }
+        function clear(){
+            vm.checklist=undefined;
+            vm.asset=undefined;
+            vm.step=undefined;
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
 
         function infogral(cabinet) {
             vm.asset=cabinet;
+            console.log(vm.asset);
+            vm.checklist.cabinet_id=vm.asset.economico;
 
         }
         function infoStep(step) {
@@ -66,7 +87,10 @@
         function getInsumosLote(element){
             console.log(element);
         }
-
+        function onStickerSelect(value) {
+            //console.log(value);
+            vm.checklist.sticker_id=value;
+        }
         //--------------------------------------------------------------------------------------------------------------
 
 
