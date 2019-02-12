@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('startService', {
-            templateUrl: 'app/mainApp/service/internal/components/start_service/startService.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/start_service/startService.tmpl.html',
             controller: startServiceController,
             bindings: {
                 onStart: '&'

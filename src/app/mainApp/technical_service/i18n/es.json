@@ -1,0 +1,70 @@
+{
+    "INSPECTION":{
+        "INSPECTION_NAME_MENU":"Inspección de Cabinet",
+        "CHECKLIST":"Lista de Verificación (Check)",
+        "STICKER":"Sticker",
+        "WHEELS":"Rodajas",
+        "BASKET":"Canastillas",
+        "FRONT_RACK":"Rejillas Delanteras",
+        "BACK_RACK":"Rejillas Traseras",
+        "DOORS":"Puertas",
+        "PAINT":"Pintura",
+        "WASHED":"Lavado",
+        "WRAPPED":"Emplayado",
+        "EMPTY":"Vacío de Mercancía",
+        "MORE_INFO":"Más Información",
+        "ACTIONS":{
+            "SAVE_INSPECTION":"Confirmar Entrada",
+            "SAVE_PRECHECK":"Confirmar Entrada de Garantía",
+            "SAVE_CHECKLIST":"Guardar Checklist"
+        }
+
+    },
+    "SERVICES":{
+        "INFO_CABINET":"Información del Cabinet",
+        "INFO_SERVICE":"Información del Servicio Actual",
+        "PAST_SERVICES":"Servicios Anteriores"
+    },
+    "INCIDENCE":{
+        "REPORT_INCIDENCE":"Levantar incidencia"
+
+    },
+    "BULK_ASSET_COMPONENT":{
+        "BULK_ASSET":" Insumo: ",
+        "NOT_ENOUGHT_ASSET":"No hay suficiente en inventario.",
+        "TITLE":"Insumos Utilizados"
+    },
+    "BULK_ASSET_CONTAINER_COMPONENT":{
+        "NO_BULKS":"No hay ningún insumo asociado a esta etapa"
+    },
+    "SHOW_INFO_CABINET":{
+        "SHOW_INFO":"Mas información del Cabinet"
+    },
+    "GENERAL_SHOW_INFO":{
+        "NO_ELEMENTS":"Sin Información"
+    },
+    "START_SERVICE_COMPONENT":{
+        "START":"Iniciar Servicio",
+        "ELAPSED_TIME":"  Tiempo Transcurrido"
+    },
+    "SYMTOMPS_COMPONENT":{
+        "TITLE":"Sintomas Detectados",
+        "REMOVE":"Quitar elemento.",
+        "ADD":"Seleccione el sintoma a agregar",
+        "ADD_SYMTOMP":"Añadir sintoma detectado"
+    },
+    "ACTIONS_COMPONENT":{
+        "TITLE":"Acciones Realizadas",
+        "REMOVE":"Quitar elemento.",
+        "ADD":"Seleccione el reparación a realizada",
+        "ADD_ACTION":"Añadir acción realizada"
+    },
+    "FAILURES_COMPONENT":{
+        "TITLE":"Fallas Detectadas"
+    },
+    "SHOW_INFO_SERVICE_COMPONENT":{
+        "PRECHECKLIST":"Inspección de Garantía",
+        "INSPECTION":"Inspección y Confirmación de Entradas",
+        "SHOW_INFO":"Mas Información del Servicio"
+    }
+}

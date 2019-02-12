@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('showInfoAsset', {
-            templateUrl: 'app/mainApp/service/internal/components/showInfoCabinet/showInfoCabinet.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/showInfoCabinet/showInfoCabinet.tmpl.html',
             controller: showInfoCabinetController,
             bindings: {
                 asset:'<'

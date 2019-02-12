@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('searchCabinetStep', {
-            templateUrl: 'app/mainApp/service/internal/components/searchCabinetStep/searchCabinetStep.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/searchCabinetStep/searchCabinetStep.tmpl.html',
             controller: searchCabinetStepController,
             bindings: {
                 infoGral: '&',

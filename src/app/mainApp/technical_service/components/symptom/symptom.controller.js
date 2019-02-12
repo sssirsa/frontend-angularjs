@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp')
         .component('symptomManager', {
-            templateUrl: 'app/mainApp/service/internal/components/symptom/symptom.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/symptom/symptom.tmpl.html',
             controller: symptomController,
             bindings: {
                 symptoms: '&'

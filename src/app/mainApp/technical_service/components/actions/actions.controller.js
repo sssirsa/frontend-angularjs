@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp')
         .component('actionsManager', {
-            templateUrl: 'app/mainApp/service/internal/components/actions/actions.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/actions/actions.tmpl.html',
             controller: actionsController,
             bindings: {
                 actions: '&'

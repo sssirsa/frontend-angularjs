@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('showInfoServicio', {
-            templateUrl: 'app/mainApp/service/internal/components/showInfoService/showInfoService.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/showInfoService/showInfoService.tmpl.html',
             controller: showInfoServiceController,
             bindings: {
                 info:'<'

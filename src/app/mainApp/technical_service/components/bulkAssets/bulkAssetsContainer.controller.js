@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('bulkAssetContainer', {
-            templateUrl: 'app/mainApp/service/internal/components/bulkAssets/bulkAssetsContainer.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/bulkAssets/bulkAssetsContainer.tmpl.html',
             controller: bulkAssetsContainerController,
             bindings: {
                 sucursal: '<',

@@ -6,7 +6,7 @@
     angular
         .module('app.mainApp')
         .component('bulkAsset', {
-            templateUrl: 'app/mainApp/service/internal/components/bulkAssets/bulkAssets.tmpl.html',
+            templateUrl: 'app/mainApp/technical_service/components/bulkAssets/bulkAssets.tmpl.html',
             controller: bulkAssetsController,
             bindings: {
                 bulkAsset: '<',
