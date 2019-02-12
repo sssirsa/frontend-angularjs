@@ -12,10 +12,16 @@
                 stage:'stage',
                 symptom: 'symptom'
             },
+            inspections:{
+                base:'inspections',
+                preliminary_inspection:'preliminary_inspection',
+                pre_checklist:'pre_checklist'
+            },
             services:{
                 base:'repair',
                 service:'cabinet_service',
-                current_stage:'current_stage'
+                current_stage:'current_stage',
+                checklist:'checklist'
             },
             type_entrie:{
                 base:'management',

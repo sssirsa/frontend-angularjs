@@ -14,8 +14,9 @@
                                        API) {
 
         var urlbase = API.all(URLS.entries_departures.base)
-            .all(URLS.management.inventory.base)
-            .all(URLS.management.inventory.cabinet);
+            .all(URLS.technical_service.inspections.base);
+        var urlrepair=API.all(URLS.technical_service.base)
+            .all(URLS.technical_service.services.base);
 
         return {
             makeInspection: makeInspection,
@@ -24,16 +25,16 @@
         };
 
 
-        function makeInspection(body,id) {
-            return urlbase.all(id).customPATCH();
+        function makeChecklist(body,id) {
+            return urlrepair.all(URLS.technical_service.services.checklist).all(id).customPATCH(body);
         }
 
         function makePrecheck(body) {
-            return technicalServiceBase.all(URLS.technical_service.services.service).all(id_servicio).customPOST();
+            return urlbase.all(URLS.technical_service.inspections.pre_checklist).customPOST(body);
         }
 
-        function makeChecklist(body) {
-            return technicalServiceBase.all(URLS.technical_service.services.service).all('?cabinet_economico='+economico).customPOST();
+        function makeInspection(body) {
+            return urlbase.all(URLS.technical_service.inspections.preliminary_inspection).customPOST(body);
         }
 
 
