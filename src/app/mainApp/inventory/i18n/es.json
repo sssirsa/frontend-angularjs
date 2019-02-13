@@ -106,9 +106,14 @@
             "NEXT": "Siguiente",
             "PREVIOUS": "Anterior",
             "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
             "SEARCH": "Buscar Insumo",
             "SEARCHING": "Buscando Insumo",
+            "SUBSIDIARY": "Sucursal",
             "TITLE": "Inventario de Insumos Lote"
+        },
+        "HINTS": {
+            "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una."
         }
     },
     "UNIQUE_ASSET_INVENTORY": {
@@ -120,9 +125,14 @@
             "NEXT": "Siguiente",
             "PREVIOUS": "Anterior",
             "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
             "SEARCH": "Buscar Insumo",
             "SEARCHING": "Buscando Insumo",
+            "SUBSIDIARY": "Sucursal",
             "TITLE": "Inventario de Insumos Únicos"
+        },
+        "HINTS": {
+            "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una."
         }
     }
 }

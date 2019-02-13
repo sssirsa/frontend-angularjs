@@ -2,7 +2,7 @@
     angular
         .module('app.mainApp')
         .component('catalogObjectCreate', {
-            templateUrl: 'app/mainApp/components/catalogManager/recursion/catalogObjectCreate.tmpl.html',
+            templateUrl: 'app/mainApp/components/catalogManager/components/catalogObjectCreate.tmpl.html',
             controller: CatalogObjectCreateController,
             controllerAs: 'vm',
             bindings: {

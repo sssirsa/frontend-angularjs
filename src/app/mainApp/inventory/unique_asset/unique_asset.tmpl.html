@@ -3,20 +3,53 @@
          layout-align="center center">
         <h1>{{vm.name}}</h1>
     </div>
+    <div layout="row"
+         layout-align="center center"
+         ng-if="vm.showSubsidiarySelector">
+        <catalog-select class="full-width"
+                        ng-if="!vm.subsidiary"
+                        catalog="vm.catalogues['subsidiary'].catalog"
+                        hint="vm.catalogues['subsidiary'].hint"
+                        icon="vm.catalogues['subsidiary'].icon"
+                        required="vm.catalogues['subsidiary'].required"
+                        pagination="vm.catalogues['subsidiary'].pagination"
+                        elements="vm.catalogues['subsidiary'].elements"
+                        soft-delete="vm.catalogues['subsidiary'].softDelete"
+                        on-select="vm.onSubsidiarySelect(element)">
+        </catalog-select>
+        <md-toolbar layout="column"
+                    layout-gt-sm="row"
+                    layout-align="center center"
+                    layout-align-gt-sm="center center"
+                    ng-if="vm.subsidiary">
+            <div layout="column"
+                 layout-align="center center">
+                <md-button aria-label="'Change subsidiary'"
+                           ng-click="vm.removeSubsidiary()"
+                           class="md-raised">
+                    <md-icon md-font-icon="fa fa-ban"></md-icon>
+                    <md-icon md-font-icon="fa fa-filter"></md-icon>
+                    {{'UNIQUE_ASSET_INVENTORY.LABELS.REMOVE_SUBSIDIARY'|translate}}
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
 </md-card>
-<catalog-manager url="vm.url"
-                 kind="vm.kind"
-                 actions="vm.actions"
-                 search-button-text="vm.searchButtonText"
-                 create-button-text="vm.createButtonText"
-                 delete-button-text="vm.deleteButtonText"
-                 modify-button-text="vm.modifyButtonText"
-                 next-button-text="vm.nextButtonText"
-                 previous-button-text="vm.previousButtonText"
-                 load-more-button-text="vm.loadMoreButtonText"
-                 remove-filter-button-text="vm.removeFilterButtonText"
-                 total-text="vm.totalText"
-                 total-filtered-text="vm.totalFilteredText"
-                 loading-message="vm.loadingMessage"
-                 on-element-select="vm.onElementSelect(element)">
-</catalog-manager>
+<section ng-if="vm.subsidiary">
+    <catalog-manager url="vm.url"
+                     kind="vm.kind"
+                     actions="vm.actions"
+                     search-button-text="vm.searchButtonText"
+                     create-button-text="vm.createButtonText"
+                     delete-button-text="vm.deleteButtonText"
+                     modify-button-text="vm.modifyButtonText"
+                     next-button-text="vm.nextButtonText"
+                     previous-button-text="vm.previousButtonText"
+                     load-more-button-text="vm.loadMoreButtonText"
+                     remove-filter-button-text="vm.removeFilterButtonText"
+                     total-text="vm.totalText"
+                     total-filtered-text="vm.totalFilteredText"
+                     loading-message="vm.loadingMessage"
+                     on-element-select="vm.onElementSelect(element)">
+    </catalog-manager>
+</section>

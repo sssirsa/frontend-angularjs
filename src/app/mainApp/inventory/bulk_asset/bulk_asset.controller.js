@@ -8,23 +8,57 @@
     function BulkAssetInventoryController(
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        User
     ) {
 
         var vm = this;
+        vm.showSubsidiarySelector;
+        vm.subsidiary;
+        vm.url;
 
-        vm.url = EnvironmentConfig.site.rest.api
+        const baseUrl = EnvironmentConfig.site.rest.api
             + '/' + URLS.inventory.base
             + '/' + URLS.inventory.management.base
-            + '/' + URLS.inventory.management.bulk_asset_inventory,
-            vm.name = Translate.translate('BULK_ASSET_INVENTORY.LABELS.TITLE');
+            + '/' + URLS.inventory.management.bulk_asset_inventory;
+
+        vm.name = Translate.translate('BULK_ASSET_INVENTORY.LABELS.TITLE');
+
+        vm.catalogues = {
+            subsidiary: {
+                binding: 'sucursal_id',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
+                    kind: 'Generic',
+                    name: Translate.translate('BULK_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: 'id',
+                    option: 'nombre'
+                },
+                hint: Translate.translate('BULK_ASSET_INVENTORY.HINTS.SUBSIDIARY'),
+                icon: 'fa fa-warehouse',
+                required: true,
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+        };
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('BULK_ASSET_INVENTORY.LABELS.SEARCH');
+        //vm.searchButtonText = Translate.translate('BULK_ASSET_INVENTORY.LABELS.SEARCH');
         //vm.createButtonText = Translate.translate('BULK_ASSET_INVENTORY.LABELS.CREATE');
         //vm.deleteButtonText = Translate.translate('BULK_ASSET_INVENTORY.LABELS.DELETE');
         vm.modifyButtonText = Translate.translate('BULK_ASSET_INVENTORY.LABELS.MODIFY');
@@ -36,201 +70,21 @@
         //Messages
         vm.loadingMessage = Translate.translate('BULK_ASSET_INVENTORY.LABELS.LOADING_MESSAGE');
 
-        //Functions
-        vm.onElementSelect = onElementSelect;
-
         //Actions meta
         vm.actions = {
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
-                        model: 'descripcion',
-                        label: 'Descripción',
+                        model: 'cantidad',
+                        label: 'Cantidad',
                         required: true,
-                        hint: 'Descripción del insumo',
+                        hint: 'Cantidada del insumo',
                         validations: {
-                            regex: '.{1,200}',
                             errors: {
-                                regex: 'La descripción debe contener máximo 200 caracteres',
-                                required: 'La descripción es requerida'
+                                required: 'La cantidad es requerida'
                             }
-                        }
-                    },
-                    {
-                        type: 'text',
-                        model: 'costo',
-                        label: 'Costo',
-                        required: true,
-                        hint: 'Costo actual del insumo (máximo 2 decimales)',
-                        validations: {
-                            //regex: '\d+(\.(\d{1,2}))*',
-                            errors: {
-                                regex: 'Formato de costo inválido',
-                                required: 'El costo es requerido'
-                            }
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'marca_insumo',
-                        label: 'Marca del insumo',
-                        hint: 'Seleccione para listar los modelos',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.consumable_brand,
-                            name: 'Marca del insumo',
-                            model: 'id',
-                            option: 'descripcion',
-                            loadMoreButtonText: 'Cargar mas...',
-                            elements: 'results'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'modelo_insumo_id',
-                        label: 'Modelo del insumo',
-                        bindTo: 'modelo_insumo',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.consumable_model,
-                            query: '?marca__id=',
-                            requires: 'marca_insumo',
-                            name: 'Modelo del insumo',
-                            model: 'id',
-                            option: 'descripcion',
-                            elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'proveedor_id',
-                        label: 'Proveedor del insumo',
-                        bindTo: 'proveedor',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.supplier,
-                            name: 'Proveedor del insumo',
-                            model: 'id',
-                            option: 'razon_social',
-                            elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'unidad_id',
-                        label: 'Unidad del insumo',
-                        bindTo: 'unidad',
-                        hint: 'Unidad en la que el insumo es medido',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.consumable_unit,
-                            name: 'Unidad del insumo',
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'categoria_insumo_id',
-                        label: 'Categoría del insumo',
-                        bindTo: 'categoria_insumo',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.consumable_category,
-                            name: 'Categoría del insumo',
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    {
-                        type: 'catalog',
-                        model: 'tipo_componente_id',
-                        label: 'Tipo de componente',
-                        hint: 'Unidad en la que el insumo es medido',
-                        bindTo: 'tipo_componente',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.component_type,
-                            name: 'Tipo de componente',
-                            model: 'com_code',
-                            showModel: true,
-                            option: 'nombre',
-                            elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
-                        },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     }
                 ],
@@ -247,22 +101,27 @@
                 pagination: {},
                 fields: [
                     {
-                        type: 'object',
-                        model: 'catalogo_insumo_lote__descripcion',
+                        type: 'text',
+                        model: 'description',
                         label: 'Descripción'
                     },
                     {
-                        type: 'object',
-                        model: 'catalogo_insumo_lote__costo',
+                        type: 'text',
+                        model: 'cost',
                         label: 'Costo'
                     },
                     {
                         type: 'object',
-                        model: 'sucursal__nombre',
-                        label: 'Sucursal'
+                        model: 'asset_model__marca__descripcion',
+                        label: 'Marca'
                     },
                     {
-                        type: 'text',
+                        type: 'object',
+                        model: 'asset_model__descripcion',
+                        label: 'Modelo'
+                    },
+                    {
+                        type: 'array',
                         model: 'cantidad',
                         label: 'Cantidad'
                     }
@@ -274,11 +133,30 @@
             }
         };
 
-        function onElementSelect(element) {
+        //Determining whether or not to show the Subsidiary selector.
+        if (User.getUser().hasOwnProperty('sucursal')) {
+            vm.showSubsidiarySelector = !User.getUser().sucursal;
+            vm.subsidiary = User.getUser().sucursal;
+            vm.url = baseUrl;
+        }
+
+        vm.onElementSelect = function onElementSelect(element) {
             //Here goes the handling for element selection, such as detail page navigation
             console.debug('Element selected');
             console.debug(element);
             console.log(element);
+        }
+
+        vm.onSubsidiarySelect = function onSubsidiarySelect(element) {
+            vm.subsidiary = element;
+            vm.url = baseUrl
+                + '?sucursal__id='
+                + element;
+        }
+
+        vm.removeSubsidiary = function removeSubsidiary() {
+            vm.subsidiary = null;
+            vm.url = null;
         }
     }
 
