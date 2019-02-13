@@ -11,7 +11,7 @@
         $stateProvider
 
             .state('triangular.admin-default.inspection', {
-                url: '/inspection',
+                url: '/Inspeccion',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
@@ -19,6 +19,17 @@
                 },
                 templateUrl: 'app/mainApp/technical_service/inspection/inspection.tmpl.html',
                 controller: 'inspectionController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.puncture', {
+                url: '/Pinchado',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/technical_service/puncture/puncture.tmpl.html',
+                controller: 'punctureController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.componentTest', {
@@ -44,6 +55,12 @@
                     {
                         name:'INSPECTION.INSPECTION_NAME_MENU',
                         state:'triangular.admin-default.inspection',
+                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type:'link'
+                    },
+                    {
+                        name:'PUNCTURE.PUNCTURE_MENU',
+                        state:'triangular.admin-default.puncture',
                         permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },

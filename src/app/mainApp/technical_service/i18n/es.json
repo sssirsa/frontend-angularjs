@@ -26,6 +26,9 @@
         }
 
     },
+    "PUNCTURE":{
+        "PUNCTURE_MENU":"Pinchado"
+    },
     "SERVICES":{
         "INFO_CABINET":"Información del Cabinet",
         "INFO_SERVICE":"Información del Servicio Actual",
