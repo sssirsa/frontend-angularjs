@@ -23,6 +23,9 @@
                 current_stage:'current_stage',
                 checklist:'checklist'
             },
+            puncture:{
+                base:'puncture'
+            },
             type_entrie:{
                 base:'management',
                 control:'control',

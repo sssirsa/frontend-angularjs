@@ -26,8 +26,8 @@
         };
 
 
-        function makePuncture(id) {
-            return urlrepair.all(URLS.technical_service.services.service).all(id).customGET();
+        function makePuncture(body,id) {
+            return urlrepair.all(URLS.technical_service.puncture.base).all(id).customPATCH(body);
         }
 
 
