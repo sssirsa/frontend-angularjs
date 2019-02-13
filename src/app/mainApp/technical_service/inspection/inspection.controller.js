@@ -13,7 +13,22 @@
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('INSPECTION.CHECKLIST');
         vm.assets_info = Translate.translate('INSPECTION.MORE_INFO');
-        vm.checklist = {};
+        vm.checklist = {
+            cabinet_id: undefined,
+            sticker_id: undefined,
+            rodajas: undefined,
+            canastillas: undefined,
+            rejillas_traseras: undefined,
+            rejillas_delanteras: undefined,
+            puertas: undefined,
+            pintura: false,
+            lavado: false,
+            emplayado: false,
+            vacio_mercancia: false,
+            gas: false,
+            observaciones: ''
+
+        };
 
         //Declaracion de Funciones como variables_______________________________________________________________________
         vm.sendPrecheck = sendPrecheck;
@@ -52,12 +67,14 @@
         vm.infoStep = infoStep;
         vm.getInsumosLote = getInsumosLote;
         vm.onStickerSelect = onStickerSelect;
+        vm.getSymptoms = getSymptoms;
+        vm.getActions = getActions;
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
         function sendInspection() {
             console.log(vm.checklist);
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
-            promiseSendInspection.then(function(response){
+            promiseSendInspection.then(function (response) {
                 ErrorHandler.successCreation();
             }).catch(function (errormsg) {
                 console.log(errormsg);
@@ -72,8 +89,36 @@
         }
 
         function sendPrecheck() {
-            console.log(vm.checklist);
 
+            vm.checklist.sintomas_detectados_id = [];
+            vm.checklist.acciones_id = [];
+            console.log(vm.checklist);
+            if (vm.checklist.insumos_lote) {
+                if (vm.checklist.insumos_lote.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'insumos_lote');
+                }
+            }
+            if (vm.symptoms.length === 0) {
+                vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
+            } else {
+                var index;
+                for (index = 0; index < vm.symptoms.length; ++index) {
+                    if (vm.symptoms[index].code) {
+                        vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
+                    }
+                }
+            }
+            if (vm.actions.length === 0) {
+                vm.checklist = _.omit(vm.checklist, 'acciones_id');
+            } else {
+                var index2;
+                for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                    if (vm.actions[index2].com_code) {
+                        vm.checklist.acciones_id.push(vm.actions[index2].com_code);
+                    }
+                }
+            }
+            console.log(vm.checklist);
         }
 
         function clear() {
@@ -98,11 +143,25 @@
 
         function getInsumosLote(element) {
             console.log(element);
+            vm.checklist.insumos_lote = element;
         }
 
         function onStickerSelect(value) {
             //console.log(value);
             vm.checklist.sticker_id = value;
+
+        }
+
+        function getSymptoms(symptoms) {
+            console.log(symptoms);
+            vm.symptoms = symptoms;
+
+        }
+
+        function getActions(acciones) {
+            console.log(acciones);
+            vm.actions = acciones;
+
         }
 
         //--------------------------------------------------------------------------------------------------------------

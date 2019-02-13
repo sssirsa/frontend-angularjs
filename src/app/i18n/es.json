@@ -458,8 +458,7 @@
         "E080": "Uno o más cabinets capitalizados no corresponde el tipo de entrada con el tipo de salida",
         "E081": "Uno o más cabinets no capitalizados no corresponde el tipo de entrada con el tipo de salida",
         "E082": "El cabinet no posee entradas",
-        "E083": "El cabinet indicado ya fue inspeccionado",
-    "E083A": "El tipo no corresponde a la url usada",
+        "E083": "El tipo no corresponde a la url usada",
         "E084": "Uno o más cabinets capitalizados no corresponde el tipo de entrada con el tipo de cambio",
         "E085": "Uno o más cabinets no capitalizados no corresponde el tipo de entrada con el tipo de cambio",
         "E086": "El cabinet no pertenece a la sucursal indicada como la sucursal de procedencia",
@@ -493,7 +492,8 @@
         "E114": "No se puede mandar mensajes debido a que no se ha iniciado el ticket",
         "E115": "No se puede mandar el mismo usuario más de una vez",
         "E116": "No es posible mandar este tipo de mensaje en este tipo de ticket",
-        "E117": "No se puede establecer etapa defecto si no se establecen etapas siguientes"
+        "E117": "No se puede establecer etapa defecto si no se establecen etapas siguientes",
+        "E118": "El cabinet indicado ya fue inspeccionado"
 
     }
 }

@@ -129,7 +129,7 @@
                         <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
                              layout-align="center center">
                             <div layout="row" layout-align="center center">
-                                <md-icon md-font-icon="fas fa-door-open"></md-icon>
+                                <md-icon md-font-icon="fas fa-sticky-note"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.DOORS'|translate}}</span>
                             </div>
                             <md-input-container flex="100" layout-align="center end">
@@ -146,6 +146,7 @@
                                 </div>
                             </md-input-container>
                         </div>
+
                     </div>
                     <div layout="row" layout-wrap="" layout-padding="" layout-align="space-between center">
                         <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
@@ -169,6 +170,12 @@
                             <md-checkbox ng-model="vm.checklist.vacio_mercancia"></md-checkbox>
                         </div>
                     </div>
+                    <div flex="100">
+                        <md-input-container flex="100" layout-align="center center" layout-fill="">
+                            <label translate=""><md-icon  md-font-icon=""></md-icon>INSPECTION.OBSERVATIONS</label>
+                            <textarea ng-model="vm.checklist.observaciones" type="text" rows="5" ></textarea>
+                        </md-input-container>
+                    </div>
 
                 </md-content>
             </md-tab>
@@ -177,8 +184,8 @@
                     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
                                           tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
-                    <symptom-manager flex="100"></symptom-manager>
-                    <actions-manager flex="100"></actions-manager>
+                    <symptom-manager symptoms="vm.getSymptoms(element)" flex="100" ></symptom-manager>
+                    <actions-manager actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
             </md-tab>
 
