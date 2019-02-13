@@ -26,7 +26,8 @@
             emplayado: false,
             vacio_mercancia: false,
             gas: false,
-            observaciones: ''
+            observaciones: '',
+
 
         };
 
@@ -72,10 +73,11 @@
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
         function sendInspection() {
-            console.log(vm.checklist);
+            vm.checklist.sucursal_id=vm.step.control.sucursal.id;
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
             promiseSendInspection.then(function (response) {
                 ErrorHandler.successCreation();
+                clear();
             }).catch(function (errormsg) {
                 console.log(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
@@ -89,10 +91,9 @@
         }
 
         function sendPrecheck() {
-
+            vm.checklist.sucursal_id=vm.step.control.sucursal.id;
             vm.checklist.sintomas_detectados_id = [];
             vm.checklist.acciones_id = [];
-            console.log(vm.checklist);
             if (vm.checklist.insumos_lote) {
                 if (vm.checklist.insumos_lote.length === 0) {
                     vm.checklist = _.omit(vm.checklist, 'insumos_lote');
@@ -118,7 +119,14 @@
                     }
                 }
             }
-            console.log(vm.checklist);
+            var promiseSendPreCheck = inspectionProvider.makePrecheck(vm.checklist);
+            promiseSendPreCheck.then(function (response) {
+                ErrorHandler.successCreation();
+                clear();
+            }).catch(function (errormsg) {
+                console.log(errormsg);
+                ErrorHandler.errorTranslate(errormsg);
+            });
         }
 
         function clear() {
@@ -131,18 +139,17 @@
 
         function infogral(cabinet) {
             vm.asset = cabinet;
-            console.log(vm.asset);
             vm.checklist.cabinet_id = vm.asset.economico;
 
         }
 
         function infoStep(step) {
+            console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
 
         }
 
         function getInsumosLote(element) {
-            console.log(element);
             vm.checklist.insumos_lote = element;
         }
 
@@ -153,13 +160,11 @@
         }
 
         function getSymptoms(symptoms) {
-            console.log(symptoms);
             vm.symptoms = symptoms;
 
         }
 
         function getActions(acciones) {
-            console.log(acciones);
             vm.actions = acciones;
 
         }
