@@ -13,6 +13,11 @@
                 consumable_unit: 'unidad',
                 supplier: 'proveedor',
                 unique_asset: 'unique_asset'
+            },
+            management: {
+                base: 'management',
+                bulk_asset_inventory: 'bulk_asset_branch',
+                unique_asset_inventory:'unique_asset_branch'
             }
         });
 })();

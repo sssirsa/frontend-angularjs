@@ -44,7 +44,6 @@
             "CLIENT": "Cliente",
             "STOCK": "Inventarios",
             "CABINETS": "Cabinets",
-            "INSUMS": "Insumos",
             "REPORTS": {
                 "TITLE": "Reportes",
                 "ADMIN": "Gestión",
@@ -108,14 +107,16 @@
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",
+                "BULK_ASSET": "Insumos lote",
                 "CABINETS": "Cabinets",
+                "CABINET_MANAGEMENT": "Gestion de cabinet",
                 "CONSUMABLES": "Insumos",
                 "CONSUMABLE_CATALOG": "Catálogo de Insumos",
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
-                "PROVIDER": "Proveedor",
                 "NO_CAPITALIZADO": "No Capitalizados",
-                "CABINET_MANAGEMENT": "Gestion de cabinet",
-                "STORAGE":"Almacenamiento y Asignación"
+                "PROVIDER": "Proveedor",
+                "STORAGE": "Almacenamiento y Asignación",
+                "UNIQUE_ASSET": "Insumos unicos"
             },
             "SERVICE": {
                 "MENU_TITLE": "Atenciones",
