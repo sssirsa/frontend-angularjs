@@ -377,8 +377,6 @@
         var vm = this;
 
         activate();
-
-        //vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {};
