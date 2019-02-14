@@ -201,9 +201,20 @@
                     <div layout="row"
                          layout-align="space-around center"
                          layout-wrap>
+                        <!-- Update button -->
+                        <md-button ng-if="$ctrl.actions['PATCH']"
+                                   ng-click="$ctrl.update(element)"
+                                   aria-label="{{$ctrl.updateButtonText}}"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                <div ng-if="$ctrl.updateButtonText" hide-xs hide-sm>{{$ctrl.updateButtonText}}</div>
+                                <div ng-if="!$ctrl.updateButtonText" hide-xs hide-sm>Update</div>
+                            </div>
+                        </md-button>
                         <!-- Modify button -->
                         <md-button ng-if="$ctrl.actions['PUT']"
-                                   ng-click="$ctrl.update(element)"
+                                   ng-click="$ctrl.modify(element)"
                                    aria-label="{{$ctrl.modifyButtonText}}"
                                    class="md-primary md-raised">
                             <div layout="row" layout-align="center center">

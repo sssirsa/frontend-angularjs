@@ -19,6 +19,8 @@
                 onErrorGet: '&',
                 onSuccessCreate: '&',
                 onErrorCreate: '&',
+                onSuccessModify: '&',
+                onErrorModify: '&',
                 onSuccessUpdate: '&',
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
@@ -32,6 +34,7 @@
                 createButtonText: '<',
                 deleteButtonText: '<',
                 modifyButtonText: '<',
+                updateButtonText: '<',
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
@@ -388,6 +391,7 @@
         //Function mapping
         vm.create = create;
         vm.delete = remove;
+        vm.modify = modify;
         vm.update = update;
         vm.search = search;
         vm.downloadFile = downloadFile;
@@ -436,38 +440,30 @@
         function create() {
             //Creation behavior handling
             if (vm.actions['POST']) {
-                if (vm.noDialogs) {
-                    $state.go('triangular.admin-default.CatalogManagerCreate', {
+                $mdDialog.show({
+                    controller: 'CatalogCreateDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['POST'].dialog,
                         fields: vm.actions['POST'].fields,
-                        screen: vm.actions['POST'].dialog,
                         url: vm.url
-                    });
-                }
-                else {
-                    $mdDialog.show({
-                        controller: 'CatalogCreateDialogController',
-                        controllerAs: 'vm',
-                        templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
-                        fullscreen: true,
-                        clickOutsideToClose: true,
-                        focusOnOpen: true,
-                        locals: {
-                            dialog: vm.actions['POST'].dialog,
-                            fields: vm.actions['POST'].fields,
-                            url: vm.url
-                        }
-                    }).then(function () {
-                        activate();
-                        ErrorHandler.successCreation();
-                        vm.onSuccessCreate();
-                    }).catch(function (errorCreate) {
-                        if (errorCreate) {
-                            ErrorHandler.errorTranslate(errorCreate);
-                            vm.onErrorCreate(errorCreate);
-                        }
-                    });
-                }
+                    }
+                }).then(function () {
+                    activate();
+                    ErrorHandler.successCreation();
+                    vm.onSuccessCreate();
+                }).catch(function (errorCreate) {
+                    if (errorCreate) {
+                        ErrorHandler.errorTranslate(errorCreate);
+                        vm.onErrorCreate(errorCreate);
+                    }
+                });
             }
+
             else {
                 ErrorHandler.errorTranslate({ status: -1 });
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
@@ -506,7 +502,7 @@
             }
         }
 
-        function update(element) {
+        function modify(element) {
             if (vm.actions['PUT']) {
                 $mdDialog.show({
                     controller: 'CatalogModifyDialogController',
@@ -525,16 +521,48 @@
                 }).then(function () {
                     activate();
                     ErrorHandler.successUpdate();
-                    vm.onSuccessDelete();
-                }).catch(function (errorDelete) {
-                    if (errorDelete) {
-                        ErrorHandler.errorTranslate(errorDelete);
-                        vm.onErrorDelete(errorDelete);
+                    vm.onSuccessModify();
+                }).catch(function (errorModify) {
+                    if (errorModify) {
+                        ErrorHandler.errorTranslate(errorModify);
+                        vm.onErrorModify(errorModify);
                     }
                 });
             }
             else {
                 vm.onErrorUpdate({ error: '"actions" parameter does not have the PUT element defined' });
+                ErrorHandler.errorTranslate({ status: -1 });
+            }
+        }
+
+        function update(element) {
+            if (vm.actions['PATCH']) {
+                $mdDialog.show({
+                    controller: 'CatalogUpdateDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/patchDialog/patchDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['PATCH'].dialog,
+                        id: vm.actions['PATCH'].id,
+                        fields: vm.actions['PATCH'].fields,
+                        url: vm.url
+                    }
+                }).then(function () {
+                    activate();
+                    ErrorHandler.successUpdate();
+                    vm.onSuccessUpdate();
+                }).catch(function (errorUpdate) {
+                    if (errorUpdate) {
+                        ErrorHandler.errorTranslate(errorUpdate);
+                        vm.onErrorUpdate(errorUpdate);
+                    }
+                });
+            }
+            else {
+                vm.onErrorUpdate({ error: '"actions" parameter does not have the PATCH element defined' });
                 ErrorHandler.errorTranslate({ status: -1 });
             }
         }

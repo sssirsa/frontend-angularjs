@@ -3,7 +3,7 @@
     <md-toolbar layout="row"
                 layout-align="space-between center">
         <div layout-padding ng-if="vm.dialog.title" class="md-title">{{vm.dialog.title}}</div>
-        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Patch element</div>
+        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Update element</div>
         <md-button class="md-icon-button"
                    ng-click="vm.cancel()"
                    aria-label="exit dialog">
@@ -12,8 +12,8 @@
     </md-toolbar>
         
         <form name="modifyForm"
-              ng-submit="vm.modify(vm.objectToModify)">
-            <catalog-object-modify element="vm.objectToModify"
+              ng-submit="vm.modify(vm.objectToUpdate)">
+            <catalog-object-modify element="vm.objectToUpdate"
                                    fields="vm.fields"></catalog-object-modify>
         </form>
 

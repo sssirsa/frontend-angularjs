@@ -103,8 +103,8 @@
 *          }
 *      ],
 *      dialog:{              //Labels to use in the creation dialog
-*          title: string,          (Optional) Title for the creation dialog, default is 'Modify element'
-*          okButton: string,       (Optional) Label for the Ok button, default is 'Modify'
+*          title: string,          (Optional) Title for the creation dialog, default is 'Update element'
+*          okButton: string,       (Optional) Label for the Ok button, default is 'Update'
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
 *      },
  *     url:string,                 URL of the API for creation.
@@ -114,8 +114,8 @@
 (function () {
     angular
         .module('app.mainApp')
-        .controller('CatalogModifyDialogController', CatalogModifyDialogController);
-    function CatalogModifyDialogController(
+        .controller('CatalogUpdateDialogController', CatalogUpdateDialogController);
+    function CatalogUpdateDialogController(
         $mdDialog,
         dialog,
         CATALOG,
@@ -127,18 +127,18 @@
 
         vm.dialog = dialog;
         vm.fields = fields;
-        vm.ModifyCatalogProvider = CATALOG;
+        vm.UpdateCatalogProvider = CATALOG;
 
         vm.id = id;
         vm.url = url;
-        vm.objectToModify = {};
+        vm.objectToUpdate = {};
 
         vm.modify = modify;
         vm.cancel = cancel;
 
         function createProvider() {
             if (vm.hasOwnProperty('url')) {
-                vm.ModifyCatalogProvider.url = vm.url;
+                vm.UpdateCatalogProvider.url = vm.url;
             }
             else {
                 $mdDialog.cancel('"url" parameter was not provided');
@@ -154,8 +154,8 @@
             else {
                 id = 'id';
             }
-            vm.modifyLoader = vm.ModifyCatalogProvider
-                .patch(vm.objectToModify[id], vm.objectToModify)
+            vm.modifyLoader = vm.UpdateCatalogProvider
+                .patch(vm.objectToUpdate[id], vm.objectToUpdate)
                 .then(function (modifiedElement) {
                     $mdDialog.hide(modifiedElement);
                 })
