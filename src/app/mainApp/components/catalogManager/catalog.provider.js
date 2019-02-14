@@ -65,7 +65,7 @@
             },
             patch: function (id, object) {
                 let deferred = $q.defer();
-                $http.put(
+                $http.patch(
                     vm.genericCatalog.url + '/' + id, object)
                     .then(function (response) {
                         deferred.resolve(response.data);

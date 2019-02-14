@@ -300,7 +300,7 @@
                  *          okButton: string,       (Optional) Label for the Ok button, default is 'Patch'
                  *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
                  *      },
-                 *      id: string            //Field name to be used as id for HTTP PATCH method
+                 *      id: string            //Field name of the object to be used as id for HTTP PATCH method
                  *  },
                  *  LIST:{
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
@@ -544,7 +544,7 @@
                     focusOnOpen: true,
                     locals: {
                         dialog: vm.actions['PATCH'].dialog,
-                        id: vm.actions['PATCH'].id,
+                        id: element[vm.actions['PATCH'].id],
                         fields: vm.actions['PATCH'].fields,
                         url: vm.url
                     }

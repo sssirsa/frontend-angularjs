@@ -108,7 +108,7 @@
 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
 *      },
  *     url:string,                 URL of the API for creation.
-*      id: string            //(Optional) Field name to be used as id for HTTP PUT method, default is 'id'
+*      id: string            //Id of the object to be used for HTTP PATCH method, 
 */
 
 (function () {
@@ -147,15 +147,8 @@
 
         function modify() {
             createProvider();
-            let id = null;
-            if (vm.id) {
-                id = vm.id;
-            }
-            else {
-                id = 'id';
-            }
             vm.modifyLoader = vm.UpdateCatalogProvider
-                .patch(vm.objectToUpdate[id], vm.objectToUpdate)
+                .patch(id, vm.objectToUpdate)
                 .then(function (modifiedElement) {
                     $mdDialog.hide(modifiedElement);
                 })
