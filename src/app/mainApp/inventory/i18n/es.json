@@ -134,5 +134,45 @@
         "HINTS": {
             "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una."
         }
+    },
+    "BULK_ASSET_STAGE": {
+        "LABELS": {
+            "CREATE": "Relacionar insumo a etapa ",
+            "CREATING": "Relacionando insumo",
+            "DELETE": "Borrar relación",
+            "CONFIRM_DELETE": "Confirme que desea borrar la relación",
+            "DELETING": "Borrando relación",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos por etapa",
+            "UPDATE": "Actualizar cantidad",
+            "UPDATING": "Actualizando cantidad",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Lote por Etapa"
+        }
+    },
+    "UNIQUE_ASSET_STAGE": {
+        "LABELS": {
+            "CREATE": "Relacionar insumo a etapa ",
+            "CREATING": "Relacionando insumo",
+            "DELETE": "Borrar relación",
+            "CONFIRM_DELETE": "Confirme que desea borrar la relación",
+            "DELETING": "Borrando relación",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos por etapa",
+            "UPDATE": "Actualizar cantidad",
+            "UPDATING": "Actualizando cantidad",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Únicos por Etapa"
+        }
     }
 }

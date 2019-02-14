@@ -3,6 +3,11 @@
         .module('app.mainApp.inventory')
         .constant('INVENTORY', {
             base: 'inventory',
+            asset: {
+                base: 'asset',
+                bulk_asset_stage: 'bulk_asset_process',
+                unique_asset_stage:'unique_asset_process'
+            },
             catalogues: {
                 base: 'catalogues',
                 bulk_asset:'bulk_asset',

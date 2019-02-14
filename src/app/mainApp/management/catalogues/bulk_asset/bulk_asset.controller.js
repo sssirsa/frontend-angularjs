@@ -16,7 +16,8 @@
         vm.url = EnvironmentConfig.site.rest.api
             + '/' + URLS.inventory.base
             + '/' + URLS.inventory.catalogues.base
-            + '/' + URLS.inventory.catalogues.bulk_asset,
+            + '/' + URLS.inventory.catalogues.bulk_asset;
+
             vm.name = Translate.translate('BULK_ASSET.LABELS.TITLE');
 
         //Labels

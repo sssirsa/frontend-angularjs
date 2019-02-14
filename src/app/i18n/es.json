@@ -108,6 +108,7 @@
             "INVENTORY": {
                 "TITLE": "Inventarios",
                 "BULK_ASSET": "Insumos lote",
+                "BULK_ASSET_STAGE": "Insumos lote por etapa",
                 "CABINETS": "Cabinets",
                 "CABINET_MANAGEMENT": "Gestion de cabinet",
                 "CONSUMABLES": "Insumos",
@@ -116,7 +117,8 @@
                 "NO_CAPITALIZADO": "No Capitalizados",
                 "PROVIDER": "Proveedor",
                 "STORAGE": "Almacenamiento y Asignación",
-                "UNIQUE_ASSET": "Insumos unicos"
+                "UNIQUE_ASSET": "Insumos unicos",
+                "UNIQUE_ASSET_STAGE": "Insumos unicos por etapa"
             },
             "SERVICE": {
                 "MENU_TITLE": "Atenciones",

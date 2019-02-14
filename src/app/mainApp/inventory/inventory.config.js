@@ -12,7 +12,7 @@
         $translatePartialLoaderProvider.addPart('app/mainApp/inventory');
         $stateProvider
             .state('triangular.admin-default.bulk-asset-inventory', {
-                url: '/inventario/insumo_unico',
+                url: '/inventario/insumo_lote',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -23,7 +23,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.unique-asset-inventory', {
-                url: '/inventario/insumo_lote',
+                url: '/inventario/insumo_unico',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
@@ -65,6 +65,28 @@
                 templateUrl: 'app/mainApp/inventory/cabinetStoring/cabinet_storing.tmpl.html',
                 controller: 'cabinetStorageController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.bulk-asset-stage', {
+                url: '/inventario/insumo_lote_etapa',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/inventory/bulk_asset_stage/bulk_asset_stage.tmpl.html',
+                controller: 'bulkAssetStageController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.unique-asset-stage', {
+                url: '/inventario/insumo_unico_etapa',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/inventory/unique_asset_stage/unique_asset_stage.tmpl.html',
+                controller: 'uniqueAssetStageController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -97,6 +119,16 @@
                 {
                     name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET',
                     state: 'triangular.admin-default.unique-asset-inventory',
+                    type: 'link'
+                },
+                {
+                    name: 'MAIN.MENU.INVENTORY.BULK_ASSET_STAGE',
+                    state: 'triangular.admin-default.bulk-asset-stage',
+                    type: 'link'
+                },
+                {
+                    name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET_STAGE',
+                    state: 'triangular.admin-default.unique-asset-stage',
                     type: 'link'
                 }
                 ]
