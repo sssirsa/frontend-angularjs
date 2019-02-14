@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.management.inventory')
+        .module('app.mainApp.inventory.assets')
         .controller('uniqueAssetInventoryController', UniqueAssetInventoryController)
 
     function UniqueAssetInventoryController(
@@ -79,7 +79,7 @@
                         model: 'cantidad',
                         label: 'Cantidad',
                         required: true,
-                        hint: 'Cantidada del insumo',
+                        hint: 'Cantidad del insumo',
                         validations: {
                             errors: {
                                 required: 'La cantidad es requerida'
