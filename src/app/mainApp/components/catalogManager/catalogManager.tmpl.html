@@ -175,6 +175,26 @@
                                 <!-- Value of the field -->
                                 <span class="md-body-1">{{element[field.model]}}</span>
                             </section>
+                            <!--Just show this section when the field is an array of objects-->
+                            <section ng-if="field.type==='array_object'">
+                                <!-- Label of the field -->
+                                <div class="md-body-2"
+                                     ng-if="field.label">
+                                    {{field.label}}
+                                </div>
+                                <div class="md-body-2"
+                                     ng-if="!field.label">
+                                    {{field.model}}
+                                </div>
+                                <!-- Value of the field -->
+                                <md-chips ng-model="element[field.model]"
+                                          readonly="true">
+                                    <md-chip-template>
+                                        <section ng-repeat="display_field in field.display_fields">
+                                            {{$chip[display_field]}} - 
+                                        </section>
+                                    </md-chip-template>
+                            </section>
                         </div>
                     </div>
                     <!-- Action buttons bar -->

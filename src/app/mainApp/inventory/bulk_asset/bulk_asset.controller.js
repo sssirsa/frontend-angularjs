@@ -121,8 +121,9 @@
                         label: 'Modelo'
                     },
                     {
-                        type: 'array',
-                        model: 'cantidad',
+                        type: 'array_object',
+                        model: 'inventory',
+                        display_fields: ['inventory__sucursal__nombre','inventory__cantidad'],
                         label: 'Cantidad'
                     }
                 ],

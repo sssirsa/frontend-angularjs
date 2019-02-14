@@ -303,20 +303,23 @@
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, catalog, file, object and color //Options and catalog not yet implemented
+                 *              type: string,          Valid types are text, options, catalog, file, object, array_object and color //Options and catalog not yet implemented
                  *              model: string,         Name of the field that will be used to show the data from the API,
                  *                                     separate with double underscores when nested fields are found (just in object type field)
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
                  *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
-                 *                  url: string,         Full or partial URL depending on the kind
-                 *                  kind: string,        Mobile, Web, Generic. Default is 'Generic'
+                 *                  url: string,         Full URL
                  *                  model: string,       From the catalog object, which element is used for binding (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
                  *              }
                  *              file:{                   (Optional) Just used if the type of the field is file
                  *                  mode: string            Valid modes are preview and download, preview just work for images
-                 *              }
+                 *              },
+                 *              display_fields: [string] (Optional) Used when field type is array_object,
+                 *                                       just the field names are needed, the field names
+                 *                                       could be "underscore treated" as in the object type
+                 *                                       for nested properties
                  *          }
                  *      ],
                  *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
@@ -417,6 +420,7 @@
                     .then(function (response) {
                         treatResponse(response);
                         treatObjectFields();
+                        treatArrayObjectFields();
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -743,6 +747,38 @@
                         catalogElement[vm.actions['LIST']
                             .fields[element]
                             .model] = actualProperty;
+                    }
+                }
+            }
+        }
+
+        //Treat the array_object fields and convert
+        //the desired array of objects, to a simple array
+        function treatArrayObjectFields() {
+            for (element in vm.actions['LIST'].fields) {
+                if (vm.actions['LIST']
+                    .fields[element].type === 'array_object') {
+                    for (var display_field_index = 0;
+                        display_field_index < vm.actions['LIST']
+                            .fields[element].display_fields.length;
+                        display_field_index++) {
+                        let nested_properties = vm.actions['LIST']
+                            .fields[element]
+                            .display_fields[display_field_index]
+                            .split('__');
+                        for (var catalog_index = 0; catalog_index < vm.catalogElements.length; catalog_index++) {
+                            catalogElement = vm.catalogElements[catalog_index];
+                            let actualProperty = catalogElement[nested_properties[0]];
+                            for (var i = 1; i < nested_properties.length; i++) {
+                                actualProperty = actualProperty[nested_properties[i]];
+                            }
+                            catalogElement[vm.actions['LIST']
+                                .fields[element]
+                                .display_fields[display_field_index]] = actualProperty;
+                            console.log(catalogElement[vm.actions['LIST']
+                                .fields[element]
+                                .display_fields[display_field_index]]);
+                        }
                     }
                 }
             }
