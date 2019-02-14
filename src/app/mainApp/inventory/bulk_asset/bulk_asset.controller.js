@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.management.catalogues')
+        .module('app.mainApp.management.inventory')
         .controller('bulkAssetInventoryController', BulkAssetInventoryController)
 
     function BulkAssetInventoryController(
