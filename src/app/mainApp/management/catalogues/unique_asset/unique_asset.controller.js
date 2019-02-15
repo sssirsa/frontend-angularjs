@@ -408,12 +408,12 @@
                         label: 'Costo'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'modelo_insumo__marca__descripcion',
                         label: 'Marca'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'modelo_insumo__descripcion',
                         label: 'Modelo'
                     }

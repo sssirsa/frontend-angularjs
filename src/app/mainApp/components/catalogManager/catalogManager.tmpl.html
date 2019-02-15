@@ -80,123 +80,11 @@
                         </md-button>
                     </div>
                 </md-toolbar>
-                <!--<div id="catalog-vertical-container">-->
                 <!-- Repeat per each element in the results -->
                 <div ng-repeat="element in $ctrl.catalogElements"
                      layout="column">
-                    <div layout="row"
-                         layout-align="space-around center"
-                         layout-padding
-                         layout-wrap
-                         ng-click="$ctrl.elementSelection(element)">
-                        <!-- Repeat per each field specified in the actions parameter -->
-                        <div layout="column"
-                             layout-align="center center"
-                             ng-repeat="field in $ctrl.actions['LIST'].fields">
-                            <!-- Just show this section when the field is text -->
-                            <section ng-if="field.type==='text'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <span class="md-body-1">{{element[field.model]}}</span>
-                            </section>
-                            <!-- Just show this section when the field is colour -->
-                            <section ng-if="field.type==='color'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <input ng-disabled="true" type="color" name="{field.model}}" value="{{element[field.model]}}">
-                            </section>
-                            <!-- Just show this section when the field is options -->
-                            <section ng-if="field.type==='options'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- TODO:Options management -->
-                            </section>
-                            <!-- Just show this section when the field is file -->
-                            <section ng-if="field.type==='file'">
-                                <img ng-if="field.file.mode==='preview'"
-                                     class="image-preview"
-                                     ng-src="{{field.model}}" />
-                                <md-button ng-if="field.file.mode==='download'"
-                                           aria-label="'Download File'"
-                                           ng-click="$ctrl.downloadFile(field.model)"
-                                           class="md-primary md-raised">
-                                    <md-icon md-font-icon="fa fa-download"></md-icon>
-                                </md-button>
-                            </section>
-                            <!--Just show this section when the field is an array of strings-->
-                            <section ng-if="field.type==='array'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <md-chips ng-model="element[field.model]"
-                                          readonly="true">
-                            </section>
-                            <!-- Just show this section when the field is an object -->
-                            <section ng-if="field.type==='object'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <span class="md-body-1">{{element[field.model]}}</span>
-                            </section>
-                            <!--Just show this section when the field is an array of objects-->
-                            <section ng-if="field.type==='array_object'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <md-chips ng-model="element[field.model]"
-                                          readonly="true">
-                                    <md-chip-template>
-                                        <section ng-repeat="display_field in field.display_fields">
-                                            {{$chip[display_field]}} - 
-                                        </section>
-                                    </md-chip-template>
-                            </section>
-                        </div>
-                    </div>
+                    <catalog-object-display element="element"
+                                            fields="$ctrl.actions['LIST'].fields"></catalog-object-display>
                     <!-- Action buttons bar -->
                     <div layout="row"
                          layout-align="space-around center"
@@ -286,12 +174,13 @@
                         </md-button>
                     </section>
                 </div>
-                <!--</div>-->
             </section>
 
             <!-- Section for list without pagination -->
             <section ng-if="!$ctrl.actions['LIST'].pagination">
                 <!-- Repeat per each element in the results -->
+                <catalog-object-display element="element"
+                                        fields="$ctrl.actions['LIST'].fields"></catalog-object-display>
                 <md-toolbar layout="column"
                             layout-gt-sm="row"
                             layout-align="center stretch"
@@ -317,127 +206,6 @@
                         </md-button>
                     </div>
                 </md-toolbar>
-                <div ng-repeat="element in $ctrl.catalogElements"
-                     layout="column">
-                    <div layout="row"
-                         layout-align="space-around center"
-                         layout-padding
-                         layout-wrap>
-                        <!-- Repeat per each field specified in the actions parameter -->
-                        <div layout="column"
-                             layout-align="center center"
-                             ng-repeat="field in $ctrl.actions['LIST'].fields">
-                            <!-- Just show this section when the field is text -->
-                            <section ng-if="field.type==='text'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <span class="md-body-1">{{element[field.model]}}</span>
-                            </section>
-                            <!-- Just show this section when the field is colour -->
-                            <section ng-if="field.type==='color'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <input ng-disabled="true" type="color" name="{{field.model}}" value="{{element[field.model]}}">
-                            </section>
-                            <!-- Just show this section when the field is options -->
-                            <section ng-if="field.type==='options'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- TODO:Options management -->
-                            </section>
-                            <!-- Just show this section when the field is file -->
-                            <section ng-if="field.type==='file'">
-                                <img ng-if="field.file.mode==='preview'"
-                                     class="image-preview"
-                                     ng-src="{{field.model}}" />
-                                <md-button ng-if="field.file.mode==='download'"
-                                           ng-click="$ctrl.downloadFile(field.model)"
-                                           aria-label="'Download file'"
-                                           class="md-primary md-raised">
-                                    <md-icon md-font-icon="fa fa-download"></md-icon>
-                                </md-button>
-                            </section>
-                            <!--Just show this section when the field is an array of strings-->
-                            <section ng-if="field.type==='array'">
-                                <!-- Label of the field -->
-                                <div class="md-body-2"
-                                     ng-if="field.label">
-                                    {{field.label}}
-                                </div>
-                                <div class="md-body-2"
-                                     ng-if="!field.label">
-                                    {{field.model}}
-                                </div>
-                                <!-- Value of the field -->
-                                <md-chips ng-model="element[field.model]"
-                                          readonly="true">
-                            </section>
-                        </div>
-                    </div>
-                    <!-- Action buttons bar -->
-                    <div layout="row"
-                         layout-align="space-around center"
-                         layout-wrap>
-                        <!-- Modify button -->
-                        <md-button ng-if="$ctrl.actions['PUT']"
-                                   ng-click="$ctrl.update(element)"
-                                   aria-label="{{$ctrl.modifyButtonText}}"
-                                   class="md-primary md-raised">
-                            <div layout="row" layout-align="center center">
-                                <md-icon md-font-icon="fa fa-edit"></md-icon>
-                                <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
-                                <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
-                            </div>
-                        </md-button>
-                        <!--Patch button-->
-                        <md-button ng-if="$ctrl.actions['PATCH']"
-                                   ng-click="$ctrl.patch(element)"
-                                   aria-label="{{$ctrl.modifyButtonText}}"
-                                   class="md-primary md-raised">
-                            <div layout="row" layout-align="center center">
-                                <md-icon md-font-icon="fa fa-edit"></md-icon>
-                                <div ng-if="$ctrl.modifyButtonText" hide-xs hide-sm>{{$ctrl.modifyButtonText}}</div>
-                                <div ng-if="!$ctrl.modifyButtonText" hide-xs hide-sm>Modify</div>
-                            </div>
-                        </md-button>
-                        <!-- Delete button -->
-                        <div ng-if="$ctrl.actions['DELETE']">
-                            <md-button ng-click="$ctrl.delete(element[$ctrl.actions['DELETE'].id])"
-                                       aria-label="{{$ctrl.deleteButtonText}}"
-                                       class="md-warn md-raised">
-                                <div layout="row" layout-align="center center">
-                                    <md-icon md-font-icon="fa fa-trash"></md-icon>
-                                    <div ng-if="$ctrl.deleteButtonText" hide-xs hide-sm>{{$ctrl.deleteButtonText}}</div>
-                                    <div ng-if="!$ctrl.deleteButtonText" hide-xs hide-sm>Delete</div>
-                                </div>
-                            </md-button>
-                        </div>
-                    </div>
-                    <md-divider></md-divider>
-                </div>
             </section>
         </section>
     </md-card>

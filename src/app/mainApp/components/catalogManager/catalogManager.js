@@ -306,7 +306,7 @@
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, catalog, file, object, array_object and color //Options and catalog not yet implemented
+                 *              type: string,          Valid types are text, options, catalog, file, object, array_object, object_property and color //Options and catalog not yet implemented
                  *              model: string,         Name of the field that will be used to show the data from the API,
                  *                                     separate with double underscores when nested fields are found (just in object type field)
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
@@ -319,10 +319,9 @@
                  *              file:{                   (Optional) Just used if the type of the field is file
                  *                  mode: string            Valid modes are preview and download, preview just work for images
                  *              },
-                 *              display_fields: [string] (Optional) Used when field type is array_object,
-                 *                                       just the field names are needed, the field names
-                 *                                       could be "underscore treated" as in the object type
-                 *                                       for nested properties
+                 *              fields:{                 (Optional) Used when object and array_object
+                 *                                       Nest the same kind of fields object in order to show the required fields
+                 *              }
                  *          }
                  *      ],
                  *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
@@ -392,12 +391,11 @@
         vm.modify = modify;
         vm.update = update;
         vm.search = search;
-        vm.downloadFile = downloadFile;
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
         vm.loadMore = loadMore;
-        vm.elementSelection = elementSelection;
         vm.removeFilter = removeFilter;
+        vm.elementSelection = elementSelection;
 
         function activate() {
             list();
@@ -421,8 +419,6 @@
                     .list()
                     .then(function (response) {
                         treatResponse(response);
-                        treatObjectFields();
-                        treatArrayObjectFields();
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -596,12 +592,7 @@
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
-
-        //File downloading into new window
-        function downloadFile(url) {
-            $window.open(url);
-        }
-
+        
         //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
             if (vm.paginationHelper.previous) {
@@ -755,60 +746,7 @@
             activate();
         }
 
-        //Treat the object fields and convert the desired property to a root property of the main object
-        function treatObjectFields() {
-            for (element in vm.actions['LIST'].fields) {
-                if (vm.actions['LIST']
-                    .fields[element].type === 'object') {
-                    let nested_properties = vm.actions['LIST']
-                        .fields[element]
-                        .model
-                        .split('__');
-                    for (var catalog_index = 0; catalog_index < vm.catalogElements.length; catalog_index++) {
-                        catalogElement = vm.catalogElements[catalog_index];
-                        let actualProperty = catalogElement[nested_properties[0]];
-                        for (var i = 1; i < nested_properties.length; i++) {
-                            actualProperty = actualProperty[nested_properties[i]];
-                        }
-                        catalogElement[vm.actions['LIST']
-                            .fields[element]
-                            .model] = actualProperty;
-                    }
-                }
-            }
-        }
-
-        //Treat the array_object fields and convert
-        //the desired array of objects, to a simple array
-        function treatArrayObjectFields() {
-            for (element in vm.actions['LIST'].fields) {
-                if (vm.actions['LIST']
-                    .fields[element].type === 'array_object') {
-                    for (var display_field_index = 0;
-                        display_field_index < vm.actions['LIST']
-                            .fields[element].display_fields.length;
-                        display_field_index++) {
-                        let nested_properties = vm.actions['LIST']
-                            .fields[element]
-                            .display_fields[display_field_index]
-                            .split('__');
-                        for (var catalog_index = 0; catalog_index < vm.catalogElements.length; catalog_index++) {
-                            catalogElement = vm.catalogElements[catalog_index];
-                            let actualProperty = catalogElement[nested_properties[0]];
-                            for (var i = 1; i < nested_properties.length; i++) {
-                                actualProperty = actualProperty[nested_properties[i]];
-                            }
-                            catalogElement[vm.actions['LIST']
-                                .fields[element]
-                                .display_fields[display_field_index]] = actualProperty;
-                            console.log(catalogElement[vm.actions['LIST']
-                                .fields[element]
-                                .display_fields[display_field_index]]);
-                        }
-                    }
-                }
-            }
-        }
+        
 
     }
 })();

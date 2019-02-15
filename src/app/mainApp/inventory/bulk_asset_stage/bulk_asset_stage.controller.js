@@ -191,17 +191,17 @@
                         label: 'Cantidad a utilizar'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'catalogo_insumo_lote__descripcion',
                         label: 'Insumo'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'tipo_equipo__nombre',
                         label: 'Tipo de Equipo'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'catalogo_etapa__nombre',
                         label: 'Etapa'
                     }

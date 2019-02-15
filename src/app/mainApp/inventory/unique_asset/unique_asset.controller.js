@@ -110,12 +110,12 @@
                         label: 'Costo'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'asset_model__marca__descripcion',
                         label: 'Marca'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'asset_model__descripcion',
                         label: 'Modelo'
                     },
