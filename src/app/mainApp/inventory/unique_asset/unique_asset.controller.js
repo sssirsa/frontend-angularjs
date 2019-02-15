@@ -15,39 +15,13 @@
         var vm = this;
         vm.showSubsidiarySelector;
         vm.subsidiary;
-        vm.url;
 
-        vm.catalogues = {
-            subsidiary: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.management.base
-                        + '/' + URLS.management.catalogues.base
-                        + '/' + URLS.management.catalogues.subsidiary,
-                    kind: 'Generic',
-                    name: Translate.translate('UNIQUE_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
-                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                    model: 'id',
-                    option: 'nombre'
-                },
-                hint: Translate.translate('UNIQUE_ASSET_INVENTORY.HINTS.SUBSIDIARY'),
-                icon: 'fa fa-warehouse',
-                required: true,
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
-        };
         const baseUrl = EnvironmentConfig.site.rest.api
             + '/' + URLS.inventory.base
             + '/' + URLS.inventory.management.base
             + '/' + URLS.inventory.management.unique_asset_inventory;
+            
+        vm.url=baseUrl;
 
         vm.name = Translate.translate('UNIQUE_ASSET_INVENTORY.LABELS.TITLE');
 
@@ -144,10 +118,41 @@
         };
 
         //Determining whether or not to show the Subsidiary selector.
-        if (User.getUser().hasOwnProperty('sucursal')) {
-            vm.showSubsidiarySelector = !User.getUser().sucursal;
-            vm.subsidiary = User.getUser().sucursal;
-            vm.url = baseUrl;
+        if (!User.getUser()['sucursal']) {
+            vm.actions['PUT']
+                .fields
+                .push({
+                    type: 'catalog',
+                    model: 'sucursal_id',
+                    label: 'Sucursal',
+                    required: true,
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.subsidiary,
+                        kind: 'Generic',
+                        name: Translate.translate('UNIQUE_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
+                        loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                        model: 'id',
+                        option: 'nombre',
+                        icon: 'fa fa-warehouse',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    validations: {
+                        errors: {
+                            required: 'La sucursal es requerida'
+                        }
+                    }
+                });
         }
 
         vm.onElementSelect = function onElementSelect(element) {
@@ -157,17 +162,6 @@
             console.log(element);
         }
 
-        vm.onSubsidiarySelect = function onSubsidiarySelect(element) {
-            vm.subsidiary = element;
-            vm.url = baseUrl
-                + '?sucursal__id='
-                + element;
-        }
-
-        vm.removeSubsidiary = function removeSubsidiary() {
-            vm.subsidiary = null;
-            vm.url = null;
-        }
     }
 
 })();

@@ -15,42 +15,15 @@
         var vm = this;
         vm.showSubsidiarySelector;
         vm.subsidiary;
-        vm.url;
 
         const baseUrl = EnvironmentConfig.site.rest.api
             + '/' + URLS.inventory.base
             + '/' + URLS.inventory.management.base
             + '/' + URLS.inventory.management.bulk_asset_inventory;
 
-        vm.name = Translate.translate('BULK_ASSET_INVENTORY.LABELS.TITLE');
+        vm.url=baseUrl;
 
-        vm.catalogues = {
-            subsidiary: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.management.base
-                        + '/' + URLS.management.catalogues.base
-                        + '/' + URLS.management.catalogues.subsidiary,
-                    kind: 'Generic',
-                    name: Translate.translate('BULK_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
-                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                    model: 'id',
-                    option: 'nombre'
-                },
-                hint: Translate.translate('BULK_ASSET_INVENTORY.HINTS.SUBSIDIARY'),
-                icon: 'fa fa-warehouse',
-                required: true,
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
-        };
+        vm.name = Translate.translate('BULK_ASSET_INVENTORY.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
@@ -145,10 +118,41 @@
         };
 
         //Determining whether or not to show the Subsidiary selector.
-        if (User.getUser().hasOwnProperty('sucursal')) {
-            vm.showSubsidiarySelector = !User.getUser().sucursal;
-            vm.subsidiary = User.getUser().sucursal;
-            vm.url = baseUrl;
+        if (!User.getUser()['sucursal']) {
+            vm.actions['PUT']
+                .fields
+                .push({
+                    type: 'catalog',
+                    model: 'sucursal_id',
+                    label: 'Sucursal',
+                    required: true,
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.subsidiary,
+                        kind: 'Generic',
+                        name: Translate.translate('BULK_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
+                        loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                        model: 'id',
+                        option: 'nombre',
+                        icon: 'fa fa-warehouse',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    validations: {
+                        errors: {
+                            required: 'La sucursal es requerida'
+                        }
+                    }
+                });
         }
 
         vm.onElementSelect = function onElementSelect(element) {
@@ -156,18 +160,6 @@
             console.debug('Element selected');
             console.debug(element);
             console.log(element);
-        }
-
-        vm.onSubsidiarySelect = function onSubsidiarySelect(element) {
-            vm.subsidiary = element;
-            vm.url = baseUrl
-                + '?sucursal__id='
-                + element;
-        }
-
-        vm.removeSubsidiary = function removeSubsidiary() {
-            vm.subsidiary = null;
-            vm.url = null;
         }
     }
 
