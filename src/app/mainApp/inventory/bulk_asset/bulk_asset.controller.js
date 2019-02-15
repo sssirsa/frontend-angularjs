@@ -122,7 +122,19 @@
                     {
                         type: 'array_object',
                         model: 'inventory',
-                        label: 'Cantidad'
+                        label: 'Inventario',
+                        fields: [
+                            {
+                                type: 'text',
+                                model: 'cantidad',
+                                label: 'Cantidad'
+                            },
+                            {
+                                type: 'object_property',
+                                model: 'sucursal__nombre',
+                                label: 'Sucursal'
+                            }
+                        ]
                     }
                 ],
                 softDelete: {
