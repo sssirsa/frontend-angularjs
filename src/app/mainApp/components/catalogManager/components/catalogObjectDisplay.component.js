@@ -13,7 +13,8 @@
 
     function CatalogObjectDisplay() {
         var vm = this;
-
+        //console.log("Element: ", vm.element);
+        //console.log("Fields: ", vm.fields);
         //Functions
         vm.elementSelection = elementSelection;
         vm.downloadFile = downloadFile;
@@ -36,19 +37,16 @@
         //Treat the object fields and convert the desired property to a root property of the main object
         function treatObjectPropertyFields() {
             for (element in vm.fields) {
-                if (vm.fields[element].type === 'object') {
+                if (vm.fields[element].type === 'object_property') {
                     let nested_properties = vm.fields[element]
                         .model
                         .split('__');
-                    for (var catalog_index = 0; catalog_index < vm.catalogElements.length; catalog_index++) {
-                        catalogElement = vm.catalogElements[catalog_index];
-                        let actualProperty = catalogElement[nested_properties[0]];
+                    let actualProperty = vm.element[nested_properties[0]];
                         for (var i = 1; i < nested_properties.length; i++) {
                             actualProperty = actualProperty[nested_properties[i]];
                         }
-                        catalogElement[vm.fields[element]
+                        vm.element[vm.fields[element]
                             .model] = actualProperty;
-                    }
                 }
             }
         }

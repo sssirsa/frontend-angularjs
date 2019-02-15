@@ -116,18 +116,10 @@
                 {{field.model}}
             </div>
             <section ng-repeat="subElement in $ctrl.element[field.model]">
-                <!-- Label of the field -->
-                <div class="md-body-2"
-                     ng-if="field.label">
-                    {{field.label}} {{$index}}
-                </div>
-                <div class="md-body-2"
-                     ng-if="!field.label">
-                    {{field.model}} {{$index}}
-                </div>
                 <!--Recursion-->
                 <catalog-object-display element="subElement"
                                         fields="field.fields"></catalog-object-display>
+                <md-divider></md-divider>
             </section>
         </section>
     </div>

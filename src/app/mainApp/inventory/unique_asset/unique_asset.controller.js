@@ -19,7 +19,6 @@
 
         vm.catalogues = {
             subsidiary: {
-                binding: 'sucursal_id',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
                         + '/' + URLS.management.base
@@ -122,8 +121,19 @@
                     {
                         type: 'array_object',
                         model: 'inventory',
-                        display_fields: ['inventory__sucursal__nombre', 'inventory__cantidad'],
-                        label: 'Cantidad'
+                        label: 'Inventario',
+                        fields: [
+                            {
+                                type: 'text',
+                                model: 'cantidad',
+                                label: 'Cantidad'
+                            },
+                            {
+                                type: 'object_property',
+                                model: 'sucursal__nombre',
+                                label: 'Sucursal'
+                            }
+                        ]
                     }
                 ],
                 softDelete: {
