@@ -4,35 +4,36 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('pedimentController',pedimentController);
+        .controller('impedimentReasonController',impedimentReasonController);
 
-    function pedimentController(URLS, Translate, EnvironmentConfig)
+    function impedimentReasonController(URLS, Translate, EnvironmentConfig)
     {
+
         var vm = this;
 
-        const entriesUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.pediments);
+        const managementUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.impediment);
 
-        vm.url = entriesUrl;
-        vm.kind = 'entries_departures';
-        vm.name = Translate.translate('PEDIMENT.LABELS.TITLE');
+        vm.url = managementUrl;
+        vm.kind = 'management';
+        vm.name = Translate.translate('IMPEDIMENT_REASON.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('PEDIMENT.LABELS.SEARCH');
-        vm.createButtonText = Translate.translate('PEDIMENT.LABELS.CREATE');
-        vm.deleteButtonText = Translate.translate('PEDIMENT.LABELS.DELETE');
-        vm.modifyButtonText = Translate.translate('PEDIMENT.LABELS.MODIFY');
+        vm.searchButtonText = Translate.translate('IMPEDIMENT_REASON.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('IMPEDIMENT_REASON.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('IMPEDIMENT_REASON.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('IMPEDIMENT_REASON.LABELS.MODIFY');
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
-        vm.loadMoreButtonText = Translate.translate('PEDIMENT.LABELS.LOAD_MORE');
+        vm.loadMoreButtonText = Translate.translate('IMPEDIMENT_REASON.LABELS.LOAD_MORE');
         vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = Translate.translate('PEDIMENT.LABELS.LOADING_MESSAGE');
+        vm.loadingMessage = Translate.translate('IMPEDIMENT_REASON.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -44,52 +45,52 @@
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripcion',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'La descripción es obligatoria'
+                        label: 'Descripción',
+                        required: false,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Crear Pedimento',
+                    title: Translate.translate('IMPEDIMENT_REASON.LABELS.CREATE'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Pedimento'
+                    loading: 'Creando Motivo de Impedimento'
                 }
             },
             PUT: {
-                id: 'id',
+                id:'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'descripcion',
-                        label: 'Descripcion',
-                        required: true,
-                        validations: {
-                            errors: {
-                                required: 'La descripción es obligatoria'
+                        label: 'Descripción',
+                        required: false,
+                        validations:{
+                            errors:{
+                                required: 'El campo es requerido.'
                             }
                         }
                     }
                 ],
                 dialog: {
-                    title: 'Editar Pedimento',
+                    title: Translate.translate('IMPEDIMENT_REASON.LABELS.MODIFY'),
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Guardando Pedimento'
+                    loading: 'Guardando Motivo de Impedimento'
                 }
             },
             DELETE: {
                 id: 'id',
                 dialog: {
-                    title: 'Eliminar Pedimento',
-                    message: 'Confirme la eliminación del Pedimento',
+                    title: Translate.translate('IMPEDIMENT_REASON.LABELS.DELETE'),
+                    message: 'Confirme la eliminación del motivo de impedimento',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Pedimento'
+                    loading: 'Eliminando Motivo de impedimento'
                 }
             },
             LIST: {
@@ -112,9 +113,9 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Pedimento',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando Pedimento'
+                    title: 'Búsqueda de Motivo de Impedimento de Salida',
+                    searchButton: Translate.translate('IMPEDIMENT_REASON.LABELS.SEARCH'),
+                    loadingText: 'Buscando Motivo de Impedimento'
                 },
                 filters: [
                     {
@@ -128,7 +129,7 @@
                     }
                 ]
             }
-        }
+        };
 
         function onElementSelect(element) {
             //Here goes the handling for element selection, such as detail page navigation
@@ -136,7 +137,6 @@
             console.debug(element);
             console.log(element);
         }
-
     }
 
 })();

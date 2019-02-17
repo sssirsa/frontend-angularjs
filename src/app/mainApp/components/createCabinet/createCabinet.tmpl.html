@@ -14,6 +14,8 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                    <md-icon class="fas fa-tag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.ECONOMIC</div>
                     <input name="economico" required digits-only MAXLENGTH="20" ng-model="$ctrl.economico"/>
                     <div ng-messages="newcabinetForm.economico.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
@@ -22,6 +24,8 @@
 
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                    <md-icon class="fas fa-hashtag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.SERIAL</div>
                     <input name="serial" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
                     <div ng-messages="newcabinetForm.serial.$error">
@@ -36,6 +40,8 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.YEAR</label>
+                    <md-icon class="fas fa-calendar-check"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.YEAR</div>
                     <input name="year" required digits-only MAXLENGTH="4" ng-model="$ctrl.year"/>
                     <div ng-messages="newcabinetForm.year.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
@@ -44,6 +50,8 @@
 
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
+                    <md-icon class="fas fa-hashtag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</div>
                     <input name="unilever" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.id_unilever"/>
                     <div ng-messages="newcabinetForm.unilever.$error">

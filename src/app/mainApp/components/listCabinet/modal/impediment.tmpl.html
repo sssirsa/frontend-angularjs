@@ -1,0 +1,76 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+        <div ng-if="!vm.confirmation">
+
+            <div flex layout="column" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                    <input name="economico" required ng-disabled="true" ng-model="vm.economico"/>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="vm.catalogues['motivo'].catalog"
+                                    required="true"
+                                    pagination="vm.catalogues['motivo'].pagination"
+                                    elements="vm.catalogues['motivo'].elements"
+                                    soft-delete="vm.catalogues['motivo'].softDelete"
+                                    on-select="vm.onElementSelect(element,'motivo_id')">
+                    </catalog-select>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <md-checkbox name="service" ng-model="vm.service">
+                        {{'MAIN.COMPONENTS.CABINET.WORTHY'|translate}}
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+
+            <md-actions layout="row" layout-align="end center">
+                <md-button
+                    ng-click="vm.cerrar()"
+                    class="md-raised">
+                    <md-icon md-font-icon="fas fa-ban"></md-icon>
+                    {{'MAIN.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.impediment()"
+                    class="md-raised md-warn"
+                    ng-disabled="vm.validate">
+                    <md-icon md-font-icon="fas fa-lock"></md-icon>
+                    {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
+                </md-button>
+            </md-actions>
+        </div>
+
+        <div ng-if="vm.confirmation">
+            <label translate>MAIN.DIALOG.IMPEDIMENT_MESSAGE</label>
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-button
+                    ng-click="vm.cancelConfirm()"
+                    class="md-raised">
+                    {{'MAIN.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.acceptConfirm()"
+                    class="md-raised md-warn">
+                    {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
+                </md-button>
+            </div>
+        </div>
+
+    </md-content>
+</md-toolbar>

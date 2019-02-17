@@ -194,7 +194,7 @@
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
                 + '/' + URLS.management.catalogues.cabinet_model
-                + QUERIES.cabinet_model.by_brand
+                + QUERIES.cabinet.by_brand
                 + element;
         }
 

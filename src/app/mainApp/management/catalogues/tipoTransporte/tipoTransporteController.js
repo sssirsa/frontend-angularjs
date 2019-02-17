@@ -11,7 +11,7 @@
         var vm = this;
 
         const entriesUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.entries.catalogues.base + '/' + URLS.entries_departures.entries.catalogues.transport_type);
+            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.transport_type);
         vm.url = entriesUrl;
         vm.kind = 'entries_departures';
         vm.name = Translate.translate('Transport_Kind.title');

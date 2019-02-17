@@ -119,17 +119,6 @@
                 controller: 'proyectosController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.clientes', {
-                url: '/catalogo/clientes',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/clientes/cliente.tmpl.html',
-                controller: 'clienteController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.categoria', {
                 url: '/catalogo/categoria',
                 data: {
@@ -426,7 +415,19 @@
                 templateUrl: 'app/mainApp/management/catalogues/comIncidence/comIncidence.tmpl.html',
                 controller: 'comIncidenceController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.impediment-reason', {
+                url: '/catalogo/motivo_impedimento_salida',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/impediment/impedimentReason.tmpl.html',
+                controller: 'impedimentReasonController',
+                controllerAs: 'vm'
             });
+
 
         triMenuProvider.addMenu(
             {
@@ -601,6 +602,12 @@
                                 type: 'link'
                             },
                             {
+                                name: 'MAIN.MENU.CATALOGS.IMPEDIMENT_REASON',
+                                state: 'triangular.admin-default.impediment-reason',
+                                permission: ['ADMINISTRATOR'],
+                                type: 'link'
+                            },
+                            {
                                 name: 'MAIN.MENU.CATALOGS.REASON_NOT_LABELED',
                                 state: 'triangular.admin-default.reason-not-capitalized',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
@@ -628,12 +635,6 @@
                                 name: 'MAIN.MENU.CATALOGS.FAILURE_TYPE',
                                 state: 'triangular.admin-default.failure-type',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.CLIENT',
-                                state: 'triangular.admin-default.clientes',
-                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {

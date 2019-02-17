@@ -577,5 +577,19 @@
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
         }
+    },
+    "IMPEDIMENT_REASON":{
+        "LABELS":{
+            "TITLE": "Motivo de Impedimento de Salida",
+            "SEARCH": "Buscar Motivo de Impedimento",
+            "CREATE": "Crear Motivo de Impedimento",
+            "DELETE": "Borrar Motivo de Impedimento",
+            "MODIFY": "Editar Motivo de Impedimento",
+            "LOAD_MORE": "Cargar más Motivos de Impedimento",
+            "LOADING_MESSAGE": "Cargando Motivos de Impedimento"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
     }
 }
