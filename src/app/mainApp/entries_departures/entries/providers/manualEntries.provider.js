@@ -21,7 +21,7 @@
 
         const control = URLS.management.control;
         const entries = URLS.entries_departures.entries;
-        const inspection = URLS.entries_departures.inspection;
+        const inspections = URLS.entries_departures.inspections;
         const inventory = URLS.management.inventory;
 
         function createNew(element) {
@@ -122,8 +122,8 @@
                 vacio_mercancia: true
             };
             return entriesUrl
-                .all(inspection.base)
-                .all(inspection.preliminary_inspection)
+                .all(inspections.base)
+                .all(inspections.preliminary_inspection)
                 .customPOST(preliminaryInspection);
         }
 
