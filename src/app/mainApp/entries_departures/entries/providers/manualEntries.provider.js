@@ -21,6 +21,7 @@
 
         const control = URLS.management.control;
         const entries = URLS.entries_departures.entries;
+        const inspection = URLS.entries_departures.inspection;
         const inventory = URLS.management.inventory;
 
         function createNew(element) {
@@ -104,6 +105,26 @@
                 });
 
             return deferred.promise;
+        }
+
+        function createAutomaticInspection(assetID){
+            const preliminaryInspection = {
+                cabinet_id: assetID,
+                sticker_id: 8,
+                rodajas: 0,
+                canastillas: 0,
+                rejillas_traseras: 0,
+                rejillas_delanteras: 0,
+                puertas: 0,
+                pintura: true,
+                lavado: true,
+                emplayado: false,
+                vacio_mercancia:true
+            };
+            return entriesUrl
+                .all(inspection.base)
+                .all(inspection.preliminary_inspection)
+                .customPOST(preliminaryInspection);
         }
 
         //Internal functions
