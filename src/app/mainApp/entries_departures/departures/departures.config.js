@@ -102,7 +102,7 @@
                     {
                         name: 'DEPARTURES.MENU.WAREHOUSE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO C', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-warehouse-manual'
                     }
                 ]
