@@ -19,7 +19,10 @@
         const inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
+        const managementUrl = API
+            .all(URLS.management.base);
 
+        const control = URLS.management.control;
         const departures = URLS.entries_departures.departures;
         const inventory = URLS.management.inventory;
 
@@ -211,7 +214,10 @@
 
         //Internal functions
         function getCabinetInSubsidiary(id) {
-            return entriesUrl.all(departures.control.base).all(departures.control.cabinet_in_subsidiary).all(id).customGET();//TODO: change to departures url when provided
+            return managementUrl
+                .all(control.base)
+                .all(control.cabinet_in_subsidiary)
+                .all(id).customGET();
         }
 
         function getUnrecognizableCabinetInSubsidiary(id) {

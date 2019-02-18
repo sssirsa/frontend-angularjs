@@ -16,7 +16,10 @@
         const inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
+        const managementUrl = API
+            .all(URLS.management.base);
 
+        const control = URLS.management.control;
         const entries = URLS.entries_departures.entries;
         const inventory = URLS.management.inventory;
 
@@ -105,7 +108,10 @@
 
         //Internal functions
         function getCabinetInSubsidiary(id) {
-            return entriesUrl.all(entries.control.base).all(entries.control.cabinet_in_subsidiary).all(id).customGET();
+            return managementUrl
+                .all(control.base)
+                .all(control.cabinet_in_subsidiary)
+                .all(id).customGET();
         }
 
         function getEntriesByCabinet(id) {
