@@ -71,3 +71,10 @@ gulp.task('config:server', function () {
     }))
     .pipe(gulp.dest(path.join(conf.paths.src, '/app/')))
 });
+gulp.task('config:pre-qa', function () {
+  gulp.src(path.join(conf.paths.src, '../config/config.json'))
+    .pipe(gulpNgConfig('sssirsa.config', {
+      environment: 'pre-qa'
+    }))
+    .pipe(gulp.dest(path.join(conf.paths.src, '/app/')))
+});
