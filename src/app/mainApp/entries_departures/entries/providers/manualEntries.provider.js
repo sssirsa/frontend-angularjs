@@ -107,7 +107,7 @@
             return deferred.promise;
         }
 
-        function createAutomaticInspection(assetID){
+        function createAutomaticInspection(assetID) {
             const preliminaryInspection = {
                 cabinet_id: assetID,
                 sticker_id: 8,
@@ -119,7 +119,7 @@
                 pintura: true,
                 lavado: true,
                 emplayado: false,
-                vacio_mercancia:true
+                vacio_mercancia: true
             };
             return entriesUrl
                 .all(inspection.base)
@@ -932,6 +932,7 @@
             close: close,
             getCabinet: getCabinet,
             getEntriesByCabinet: getEntriesByCabinet,
+            createAutomaticInspection: createAutomaticInspection,
             //Constants
             warrantyEntry: warrantyEntry,
             newEntry: newEntry,
