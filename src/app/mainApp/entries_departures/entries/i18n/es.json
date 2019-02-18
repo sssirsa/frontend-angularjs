@@ -162,6 +162,54 @@
                 "CANT_ENTER": "El cabinet ya tiene una entrada"
             }
         },
+        "WAREHOUSE": {
+            "TITLE": "Entrada de obsoletos",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "PROJECT": "Proyecto",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                }
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "NOT_FOUND_ID": "Económico no encontrado",
+                "CANT_ENTER": "El cabinet ya tiene una entrada"
+            }
+        },
         "UNRECOGNIZABLE": {
             "TITLE": "Entrada de no capitalizados",
             "LABELS": {
