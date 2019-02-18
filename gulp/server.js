@@ -32,7 +32,7 @@ function browserSyncInit(baseDir, files, browser) {
   });
 }
 
-gulp.task('serve', ['config:dev','watch'], function () {
+gulp.task('serve', ['config:pre-qa','watch'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
