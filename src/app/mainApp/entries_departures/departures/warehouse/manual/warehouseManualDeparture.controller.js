@@ -102,7 +102,8 @@
                         cabinet: null,
                         id: null,
                         can_leave: null,
-                        restriction: null
+                        restriction: null,
+                        obsolete: false
                     };
 
                     //Adding element to the list
@@ -118,10 +119,10 @@
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
                             if (cabinetSuccessCallback['subsidiary']) {
                                 //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'] == vm.departure[vm.catalogues['subsidiary'].binding]) {
+                                if (cabinetSuccessCallback['subsidiary'] === vm.departure[vm.catalogues['subsidiary'].binding]) {
                                     //The subsidiary of the cabinet is the same as the user one.
-                                    if (cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida']) {
-                                        //The departure matches the entrance kind
+                                    if ((cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida'])) {
+                                        //The departure matches the Departure kind)
                                         if (cabinetSuccessCallback['can_leave']) {
                                             //The cabinet doesn't have internal restrictions to leave
 
@@ -129,6 +130,28 @@
                                             cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                                             cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
                                             cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        }
+                                        else {
+                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            vm.removeCabinet(cabinetID);
+                                        }
+                                    }
+                                    //else {
+                                    //    toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                    //    vm.removeCabinet(cabinetID);
+                                    //}
+                                    if ((cabinetSuccessCallback['entrance_kind'] === 'Obsoletos')) {
+                                        //Repeated logic for 'Obsoleto' entrance kind
+                                        if (cabinetSuccessCallback['can_leave']) {
+                                            //The cabinet doesn't have internal restrictions to leave
+
+                                            //Finally add the cabinet to the list
+                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+
+                                            //Add the obsolete flag to the cabinet object
+                                            cabinetToAdd.obsolete = true;
                                         }
                                         else {
                                             toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
@@ -222,21 +245,45 @@
         //Internal functions
 
         saveDeparture = function saveDeparture(departure) {
-            departure = addCabinetsToDeparture(vm.cabinetList, departure);
-            departure = Helper.removeBlankStrings(departure);
-            //API callback
-            vm.createDeparturePromise = MANUAL_DEPARTURES
-                .createWarehouse(departure)
-                .then(function () {
-                    vm.init();
-                    toastr.success(
-                        Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
-                    );
-                })
-                .catch(function (errorCallback) {
-                    console.error(errorCallback);
-                    ErrorHandler.errorTranslate(errorCallback);
-                });
+            let warehouseDeparture = JSON.parse(JSON.stringify(departure));
+            warehouseDeparture = addCabinetsToDeparture(vm.cabinetList, warehouseDeparture, false);
+            warehouseDeparture = Helper.removeBlankStrings(warehouseDeparture);
+
+            let obsoleteDeparture = JSON.parse(JSON.stringify(departure));
+            obsoleteDeparture = addCabinetsToDeparture(vm.cabinetList, obsoleteDeparture, true);
+            obsoleteDeparture = Helper.removeBlankStrings(obsoleteDeparture);
+
+            //API callbacks
+            if (warehouseDeparture.cabinets_id.length > 0) {
+                vm.createDeparturePromise = MANUAL_DEPARTURES
+                    .createWarehouse(warehouseDeparture)
+                    .then(function () {
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        console.error(errorCallback);
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
+            obsoleteDeparture.tipo_salida = 'Obsoletos';
+
+            if (obsoleteDeparture.cabinets_id.length > 0) {
+                vm.createDeparturePromise = MANUAL_DEPARTURES
+                    .createObsolete(obsoleteDeparture)
+                    .then(function () {
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('DEPARTURES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        console.error(errorCallback);
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
         }
 
         departureHasPendingCabinets = function departureHasPendingCabinets() {
@@ -245,15 +292,17 @@
             });
         }
 
-        addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure) {
+        addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure, obsolete) {
             //In case the cabinets array exist, restart it
             if (departure.cabinets_id.length) {
                 departure.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
-                    //Filtering to just add the cabinets that exist
-                    return element.cabinet;
+                    //Filtering to just add the cabinets that exist and matches obsolete flag
+                    if (element.obsolete == obsolete) {
+                        return element.cabinet;
+                    }
                 });
             for (
                 let i = 0;
@@ -262,6 +311,7 @@
                 departure['cabinets_id'].push(existingCabinets[i].id);
             }
             return departure;
+
         }
 
         addCabinetToList = function addCabinetToList(cabinet) {

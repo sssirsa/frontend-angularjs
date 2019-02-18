@@ -145,7 +145,7 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de obsoletos",
                 "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
                 "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
             }
@@ -192,7 +192,7 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de almacén u obsoletos",
                 "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
                 "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
             }
