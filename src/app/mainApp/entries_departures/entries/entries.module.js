@@ -3,6 +3,7 @@
         'app.mainApp.entries_departures.entries.new',
         'app.mainApp.entries_departures.entries.obsolete',
         'app.mainApp.entries_departures.entries.unrecognizable',
+        'app.mainApp.entries_departures.entries.warehouse',
         'app.mainApp.entries_departures.entries.warranty'
     ]);
 })();

@@ -1,8 +1,8 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.warehouse')
-        .controller('obsoleteManualEntryController', ObsoleteManualEntryController);
-    function ObsoleteManualEntryController(
+        .controller('warehouseManualEntryController', WarehouseManualEntryController);
+    function WarehouseManualEntryController(
         MANUAL_ENTRIES,
         User,
         Translate,
@@ -43,8 +43,8 @@
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entry = MANUAL_ENTRIES.obsoleteEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
+            vm.entry = MANUAL_ENTRIES.warehouseEntry.template();
+            vm.catalogues = MANUAL_ENTRIES.warehouseEntry.catalogues();
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -85,7 +85,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
@@ -112,7 +112,7 @@
                             }
                             else {
                                 //Cabinet can´t enter because it already has a subsidiary assigned
-                                toastr.error(Translate.translate('ENTRIES.OBSOLETE.ERRORS.CANT_ENTER'), cabinetID);
+                                toastr.error(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -131,7 +131,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -144,8 +144,8 @@
             if (entryHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -188,11 +188,11 @@
             entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createObsolete(entry)
+                .createWarehouse(entry)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('ENTRIES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {

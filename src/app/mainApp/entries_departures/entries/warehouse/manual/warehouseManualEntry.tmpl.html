@@ -1,24 +1,24 @@
 <md-card layout-padding>
     <div layout="column"
          layout-align="center center">
-        <h1 translate>ENTRIES.OBSOLETE.TITLE</h1>
+        <h1 translate>ENTRIES.WAREHOUSE.TITLE</h1>
     </div>
     <md-tabs md-dynamic-height="true"
              md-selected="vm.selectedTab">
         <md-tab layout="column"
                 layout-align="center stretch"
-                label={{'ENTRIES.OBSOLETE.LABELS.ASSET_LOADING'|translate}}>
+                label={{'ENTRIES.WAREHOUSE.LABELS.ASSET_LOADING'|translate}}>
             <!--Cabinet search bar-->
             <md-actions layout-gt-xs="row"
                         layout="column"
                         layout-align-gt-xs="space-around center"
                         layout-align="center stretch">
-                <h3>{{'ENTRIES.OBSOLETE.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <h3>{{'ENTRIES.WAREHOUSE.LABELS.CABINET_SEARCH'|translate}}</h3>
                 <form name="cabinetSearch"
                       ng-submit="vm.searchCabinet(vm.cabinetID)">
                     <div layout="row">
                         <md-input-container class="md-block">
-                            <label>{{'ENTRIES.OBSOLETE.LABELS.CABINET_ID'|translate}}</label>
+                            <label>{{'ENTRIES.WAREHOUSE.LABELS.CABINET_ID'|translate}}</label>
                             <input name="cabinetID"
                                    type="text"
                                    digits-only
@@ -60,22 +60,22 @@
                                              ng-if="element.cabinet">
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.OBSOLETE.LABELS.CABINET.ID'|translate}}</b>
+                                            <b>{{'ENTRIES.WAREHOUSE.LABELS.CABINET.ID'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.OBSOLETE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'ENTRIES.WAREHOUSE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.OBSOLETE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            <b>{{'ENTRIES.WAREHOUSE.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.OBSOLETE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            <b>{{'ENTRIES.WAREHOUSE.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column"
@@ -101,7 +101,7 @@
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            {{'ENTRIES.OBSOLETE.ERRORS.NOT_FOUND_ID'|translate}}
+                                            {{'ENTRIES.WAREHOUSE.ERRORS.NOT_FOUND_ID'|translate}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
@@ -128,7 +128,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                        <div>{{'ENTRIES.OBSOLETE.BUTTONS.NEXT'|translate}}</div>
+                        <div>{{'ENTRIES.WAREHOUSE.BUTTONS.NEXT'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
@@ -136,7 +136,7 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
-                label={{'ENTRIES.OBSOLETE.LABELS.ENTRY_DATA'|translate}}>
+                label={{'ENTRIES.WAREHOUSE.LABELS.ENTRY_DATA'|translate}}>
             <form name="entryForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
@@ -154,12 +154,12 @@
                 </catalog-select>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
-                    <label translate>ENTRIES.OBSOLETE.LABELS.DESCRIPTION</label>
+                    <label translate>ENTRIES.WAREHOUSE.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
                     <input ng-model="vm.entry['descripcion']"
                            name="description"
                            type="text">
-                    <div class="hint" translate>ENTRIES.OBSOLETE.HINTS.DESCRIPTION</div>
+                    <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column"
                      layout-gt-xs="row"
@@ -217,13 +217,13 @@
                      layout-align="center stretch">
                     <md-input-container layout="column"
                                         class="md-icon-float md-block full-width">
-                        <label translate>ENTRIES.OBSOLETE.LABELS.DRIVER_NAME</label>
+                        <label translate>ENTRIES.WAREHOUSE.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
                         <input ng-model="vm.entry['nombre_chofer']"
                                name="driver_name"
                                ng-required="true"
                                type="text">
-                        <div class="hint" translate>ENTRIES.OBSOLETE.HINTS.DRIVER_NAME</div>
+                        <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DRIVER_NAME</div>
                     </md-input-container>
                     <md-input-container layout="column"
                                         layout-align="start center"
@@ -233,14 +233,14 @@
                             <div>
                                 <md-icon class="far fa-id-card"></md-icon>
                             </div>
-                            <div translate>ENTRIES.OBSOLETE.LABELS.DRIVER_ID</div>
+                            <div translate>ENTRIES.WAREHOUSE.LABELS.DRIVER_ID</div>
                         </div>
                         <file-uploader files-selected="vm.selectDriverID(files)"
                                        file-formats="'image/*'"
                                        validations="vm.imageConstraints.validations"
                                        resize-if="vm.imageConstraints.resizeIf"
                                        resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>ENTRIES.OBSOLETE.HINTS.DRIVER_ID</div>
+                        <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DRIVER_ID</div>
                     </md-input-container>
                 </div>
             </form>
@@ -251,7 +251,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                        <div>{{'ENTRIES.OBSOLETE.BUTTONS.PREVIOUS'|translate}}</div>
+                        <div>{{'ENTRIES.WAREHOUSE.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
                 <md-button ng-click="vm.clickSaveEntry(vm.entry)"
@@ -264,7 +264,7 @@
                            ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
-                        <div>{{'ENTRIES.OBSOLETE.BUTTONS.SAVE'|translate}}</div>
+                        <div>{{'ENTRIES.WAREHOUSE.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>

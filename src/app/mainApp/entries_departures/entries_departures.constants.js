@@ -17,6 +17,7 @@
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
                 close: 'close'
@@ -26,6 +27,7 @@
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
                 close: 'close'

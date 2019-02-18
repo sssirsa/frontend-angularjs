@@ -1,8 +1,8 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.departures.warehouse')
-        .controller('obsoleteManualDepartureController', ObsoleteManualDepartureController);
-    function ObsoleteManualDepartureController(
+        .controller('warehouseManualDepartureController', WarehouseManualDepartureController);
+    function WarehouseManualDepartureController(
         MANUAL_DEPARTURES,
         User,
         Translate,
@@ -42,8 +42,8 @@
             vm.selectedTab = 0
             vm.showSubsidiarySelector = false;
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
-            vm.catalogues = MANUAL_DEPARTURES.obsoleteDeparture.catalogues();
+            vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
+            vm.catalogues = MANUAL_DEPARTURES.warehouseDeparture.catalogues();
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -63,7 +63,7 @@
         vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
             vm.selectedTab = 0
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
+            vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
 
             vm.onElementSelect(element, field);
         }
@@ -93,7 +93,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
@@ -131,23 +131,23 @@
                                             cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                         }
                                         else {
-                                            toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
                                             vm.removeCabinet(cabinetID);
                                         }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
                                         vm.removeCabinet(cabinetID);
                                     }
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
                             else {
-                                toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -167,7 +167,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -180,8 +180,8 @@
             if (departureHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('DEPARTURES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('DEPARTURES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -226,11 +226,11 @@
             departure = Helper.removeBlankStrings(departure);
             //API callback
             vm.createDeparturePromise = MANUAL_DEPARTURES
-                .createObsolete(departure)
+                .createWarehouse(departure)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('DEPARTURES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {

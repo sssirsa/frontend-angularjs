@@ -32,6 +32,10 @@
             return entriesUrl.all(entries.obsolete).customPOST(element);
         }
 
+        function createWarehouse(element) {
+            return entriesUrl.all(entries.warehouse).customPOST(element);
+        }
+
         function createUnrecognizable(element) {
             return entriesUrl.all(entries.unrecognizable).customPOST(element);
         }
@@ -744,10 +748,157 @@
             }
         };
 
+        const warehouseEntry = {
+            template: function () {
+                return {
+                    tipo_entrada: 'Obsoletos',
+                    cabinets_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                }
+            },
+            catalogues: function catalogues() {
+                var catalogues = {
+                    subsidiary: {
+                        binding: 'sucursal_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.SUBSIDIARY'),
+                        icon: 'fa fa-warehouse',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_line: {
+                        binding: 'linea_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_LINE'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'razon_social'
+                        },
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.TRANSPORT_LINE'),
+                        icon: 'fa fa-pallet',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_kind: {
+                        binding: 'tipo_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_KIND'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.TRANSPORT_KIND'),
+                        icon: 'fa fa-truck',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    udn: {
+                        binding: 'udn_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia'
+                        },
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    project: {
+                        binding: 'proyecto_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.PROJECT'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.PROJECT'),
+                        icon: 'fa fa-book',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                };
+                return catalogues;
+            }
+        };
+
         return {
             createNew: createNew,
             createWarranty: createWarranty,
             createObsolete: createObsolete,
+            createWarehouse: createWarehouse,
             createUnrecognizable: createUnrecognizable,
             addCabinet: addCabinet,
             detail: detail,
@@ -758,6 +909,7 @@
             warrantyEntry: warrantyEntry,
             newEntry: newEntry,
             obsoleteEntry: obsoleteEntry,
+            warehouseEntry: warehouseEntry,
             unrecognizableEntry: unrecognizableEntry
         }
 
