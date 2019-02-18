@@ -757,7 +757,7 @@
         const warehouseEntry = {
             template: function () {
                 return {
-                    tipo_entrada: 'Obsoletos',
+                    tipo_entrada: 'Almacen',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''

@@ -183,7 +183,8 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                }
+                },
+                "OBSOLETE": "Cabinet obsoleto"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
@@ -202,7 +203,8 @@
                 "REMOVE": "Quitar"
             },
             "MESSAGES": {
-                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "SUCCESS_CREATE_SCRAPPED": "Entrada de obsoletos registrada correctamente",
+                "SUCCESS_CREATE_WAREHOUSE": "Entrada de almacén registrada correctamente",
                 "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
             },
             "ERRORS": {

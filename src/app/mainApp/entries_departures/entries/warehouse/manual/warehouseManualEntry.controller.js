@@ -92,6 +92,7 @@
                         promise: MANUAL_ENTRIES
                             .getCabinet(cabinetID),
                         cabinet: null,
+                        obsolete:false,
                         id: null
                     };
 
@@ -184,20 +185,44 @@
         //Internal functions
 
         saveEntry = function saveEntry(entry) {
-            entry = addCabinetsToEntry(vm.cabinetList, entry);
-            entry = Helper.removeBlankStrings(entry);
+            let warehouseEntry = JSON.parse(JSON.stringify(entry));
+            warehouseEntry = addCabinetsToEntry(vm.cabinetList, warehouseEntry, false);
+            warehouseEntry = Helper.removeBlankStrings(warehouseEntry);
+
+            let obsoleteEntry = JSON.parse(JSON.stringify(entry));
+            obsoleteEntry = addCabinetsToEntry(vm.cabinetList, obsoleteEntry, true);
+            obsoleteEntry = Helper.removeBlankStrings(obsoleteEntry);
+
             //API callback
-            vm.createEntryPromise = MANUAL_ENTRIES
-                .createWarehouse(entry)
-                .then(function () {
-                    vm.init();
-                    toastr.success(
-                        Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
-                    );
-                })
-                .catch(function (errorCallback) {
-                    ErrorHandler.errorTranslate(errorCallback);
-                });
+            if (warehouseEntry.cabinets_id.length > 0) {
+                vm.createEntryPromise = MANUAL_ENTRIES
+                    .createWarehouse(warehouseEntry)
+                    .then(function () {
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_WAREHOUSE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
+
+            obsoleteEntry.tipo_entrada = 'Obsoletos';
+
+            if (obsoleteEntry.cabinets_id.length > 0) {
+                vm.createEntryPromise = MANUAL_ENTRIES
+                    .createObsolete(obsoleteEntry)
+                    .then(function () {
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_SCRAPPED')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
         }
 
         entryHasPendingCabinets = function entryHasPendingCabinets() {
@@ -206,15 +231,17 @@
             });
         }
 
-        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry, obsolete) {
             //In case the cabinets array exist, restart it
             if (entry.cabinets_id.length) {
                 entry.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
-                    //Filtering to just add the cabinets that exist
-                    return element.cabinet;
+                    //Filtering to just add the cabinets that exist and have the obsolete flag
+                    if (element.obsolete == obsolete) {
+                        return element.cabinet;
+                    }
                 });
             for (
                 let i = 0;

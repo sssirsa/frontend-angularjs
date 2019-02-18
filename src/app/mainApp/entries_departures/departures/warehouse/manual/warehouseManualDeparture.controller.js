@@ -268,6 +268,7 @@
                         ErrorHandler.errorTranslate(errorCallback);
                     });
             }
+
             obsoleteDeparture.tipo_salida = 'Obsoletos';
 
             if (obsoleteDeparture.cabinets_id.length > 0) {

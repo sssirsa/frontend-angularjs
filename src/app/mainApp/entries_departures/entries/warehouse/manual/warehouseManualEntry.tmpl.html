@@ -80,6 +80,12 @@
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
+                                            <b>{{'ENTRIES.WAREHOUSE.LABELS.OBSOLETE'|translate}}</b>
+                                            <md-switch ng-model="element.obsolete" aria-label="Obsolete selector">
+                                            </md-switch>
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
                                             <md-button ng-click="vm.removeCabinet(element.id)"
                                                        aria-label="remove cabinet"
                                                        class="md-icon-button">
