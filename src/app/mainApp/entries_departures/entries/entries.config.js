@@ -62,8 +62,8 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries_departures/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
-                controller: 'obsoleteManualEntryController',
+                templateUrl: 'app/mainApp/entries_departures/entries/warehouse/manual/warehouseManualEntry.tmpl.html',
+                controller: 'warehouseManualEntryController',
                 controllerAs: 'vm'
             })
             ;
