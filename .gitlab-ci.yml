@@ -34,6 +34,7 @@ configuration:
     - development
     - staging
     - master
+    - pre-qa
   tags:
     - frontend
 
@@ -58,6 +59,7 @@ deploy:
     - development
     - staging
     - master
+    - pre-qa
   tags:
     - frontend
 
@@ -77,6 +79,7 @@ npm:
     - development
     - master
     - staging
+    - pre-qa
   tags:
     - frontend
 
@@ -99,5 +102,6 @@ bower:
     - development
     - master
     - staging
+    - pre-qa
   tags:
     - frontend
