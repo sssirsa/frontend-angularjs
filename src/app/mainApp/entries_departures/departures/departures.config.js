@@ -78,31 +78,31 @@
                     {
                         name: 'DEPARTURES.MENU.NEW',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-new-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.WARRANTIES',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-warranty-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.UNRECOGNIZABLE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-unrecognizable-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.OBSOLETE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-obsolete-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.WAREHOUSE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-warehouse-manual'
                     }
                 ]
