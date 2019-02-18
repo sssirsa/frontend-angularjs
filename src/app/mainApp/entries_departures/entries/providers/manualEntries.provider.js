@@ -10,6 +10,9 @@
         Translate,
         EnvironmentConfig
     ) {
+
+        const entriesDeparturesUrl = API
+            .all(URLS.entries_departures.base);
         const entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
@@ -121,7 +124,7 @@
                 emplayado: false,
                 vacio_mercancia: true
             };
-            return entriesUrl
+            return entriesDeparturesUrl
                 .all(inspections.base)
                 .all(inspections.preliminary_inspection)
                 .customPOST(preliminaryInspection);
