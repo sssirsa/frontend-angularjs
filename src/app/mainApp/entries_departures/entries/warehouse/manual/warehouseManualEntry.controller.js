@@ -92,7 +92,7 @@
                         promise: MANUAL_ENTRIES
                             .getCabinet(cabinetID),
                         cabinet: null,
-                        obsolete:false,
+                        obsolete: false,
                         id: null
                     };
 
@@ -197,7 +197,13 @@
             if (warehouseEntry.cabinets_id.length > 0) {
                 vm.createEntryPromise = MANUAL_ENTRIES
                     .createWarehouse(warehouseEntry)
-                    .then(function () {
+                    .then(function (warehouseEntrySuccessCallback) {
+                        console.log(warehouseEntrySuccessCallback);
+                        for (let i = 0;
+                            i < warehouseEntrySuccessCallback['cabinets'].length;
+                            i++) {
+                            MANUAL_ENTRIES.createAutomaticInspection(warehouseEntrySuccessCallback['cabinets'][i]);
+                        }
                         vm.init();
                         toastr.success(
                             Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_WAREHOUSE')
@@ -213,7 +219,13 @@
             if (obsoleteEntry.cabinets_id.length > 0) {
                 vm.createEntryPromise = MANUAL_ENTRIES
                     .createObsolete(obsoleteEntry)
-                    .then(function () {
+                    .then(function (obsoleteEntrySuccessCallback) {
+                        console.log(obsoleteEntrySuccessCallback);
+                        for (let i = 0;
+                            i < obsoleteEntrySuccessCallback['cabinets'].length;
+                            i++) {
+                            MANUAL_ENTRIES.createAutomaticInspection(obsoleteEntrySuccessCallback['cabinets'][i]);
+                        }
                         vm.init();
                         toastr.success(
                             Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_SCRAPPED')

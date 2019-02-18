@@ -72,7 +72,7 @@
                 name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TECNICO A','TECNICO C', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {

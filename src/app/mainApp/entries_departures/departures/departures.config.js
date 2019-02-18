@@ -72,7 +72,7 @@
                 name: 'DEPARTURES.MENU.TITLE',
                 icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TULTITLAN'],     
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO C', 'TULTITLAN'],     
                 priority: 5,
                 children: [
                     {
