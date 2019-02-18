@@ -54,6 +54,18 @@
                 controller: 'obsoleteManualDepartureController',
                 controllerAs: 'vm'
             })
+            /* Warehouse asset entries */
+            .state('triangular.admin-default.departure-warehouse-manual', {
+                url: '/salida/almacen/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/departures/obsolete/manual/obsoleteManualDeparture.tmpl.html',
+                controller: 'obsoleteManualDepartureController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
@@ -86,6 +98,12 @@
                         type: 'link',
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-obsolete-manual'
+                    },
+                    {
+                        name: 'DEPARTURES.MENU.WAREHOUSE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.departure-warehouse-manual'
                     }
                 ]
 

@@ -8,7 +8,8 @@
             "WARRANTIES": "Garantías",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
-            "OBSOLETE": "Obsoletos"
+            "OBSOLETE": "Obsoletos",
+            "WAREHOUSE": "Almacén"
         },
         "NEW": {
             "TITLE": "Salida de nuevos",
@@ -150,7 +151,7 @@
             }
         },
         "WAREHOUSE": {
-            "TITLE": "Salida de obsoletos",
+            "TITLE": "Salida de almacén",
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
