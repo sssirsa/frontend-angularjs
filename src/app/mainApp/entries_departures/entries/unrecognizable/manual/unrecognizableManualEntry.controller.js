@@ -86,6 +86,8 @@
                     return element.id;
                 }).indexOf(cabinetID);
                 if (index !== -1) {
+                    //Cleaning the search bar
+                    vm.cabinetID = '';
                     //Cabinet already in list
                     toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.REPEATED_ID'), cabinetID);
                 }
