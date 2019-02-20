@@ -8,7 +8,7 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(API, $mdDialog, toastr, TicketProvider, ErrorHandler, Translate) {
+    function ticketsController(API, $mdDialog, toastr,EnvironmentConfig, COM, TicketProvider, ErrorHandler, Translate) {
         var vm = this;
 
         vm.tickets = {};
@@ -542,7 +542,11 @@
         }
 
         function openDialog() {
-
+            vm.url = EnvironmentConfig.site.rest.api
+                + '/' + COM.base
+                + '/' + COM.actions.base
+                + '/' + COM.actions.message.base
+                + '/' + COM.actions.message.send;
             vm.actions = {
                 PUT: {
                     id: 'identificador',
@@ -554,7 +558,7 @@
                         cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
                         loading: 'Guardando Acción'
                     },
-                    url:"http://api-gateway.sssirsa.com/dev/com_middleware/com/message/send"
+                    url: vm.url
                 }
             };
 
