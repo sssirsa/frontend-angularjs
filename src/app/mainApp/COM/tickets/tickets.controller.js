@@ -269,8 +269,8 @@
                                     label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                     lock: true,
                                     catalog: {
-                                        url: Translate.translate('COM.URLS.ASSETCONDITION'),
-                                        name: Translate.translate('COM.FIELDS.ASSETCONDITION'),
+                                        url: Translate.translate('COM.URLS.ASSET_CONDITION'),
+                                        name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_code',//campo a pasar
                                         option: 'descripcion',//campo a mostrar
@@ -284,8 +284,8 @@
                                 {
                                     type: 'array_object',
                                     model: 'service_dates',
-                                    label: Translate.translate('COM.FIELDS.ASSETCONDITION'),
-                                    hint: Translate.translate('COM.FIELDS.ASSETCONDITION'),
+                                    label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
+                                    hint: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                     fields: [
                                         {
                                             type: 'catalog',
