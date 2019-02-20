@@ -133,6 +133,7 @@
 
         vm.id = id;
         vm.url = url;
+        console.log(element);
         vm.objectToModify = jQuery.extend(true, {}, element);
 
         vm.modify = modify;

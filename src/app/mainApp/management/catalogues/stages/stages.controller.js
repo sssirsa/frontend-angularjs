@@ -17,7 +17,6 @@
             + '/' + URLS.technical_service.base
             + '/' + URLS.technical_service.catalogues.base
             + '/' + URLS.technical_service.catalogues.stage;
-        vm.kind = 'Mobile';
         vm.name = Translate.translate('STAGES.LABELS.TITLE');
 
         //Labels
