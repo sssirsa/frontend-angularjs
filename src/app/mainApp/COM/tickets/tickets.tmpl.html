@@ -142,7 +142,7 @@
                             </div>
 
                             <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
-                                <div layout="column" ng-if="item.estatus === 'Confirmado'">
+                                <div layout="column">
                                     <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.start)">
                                         <md-icon md-font-icon="fas fa-play"></md-icon>
@@ -150,7 +150,7 @@
                                     </md-button>
                                 </div>
 
-                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                <div layout="column" >
                                     <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.error)">
                                         <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
@@ -160,7 +160,7 @@
                             </div>
 
                             <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
-                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                <div layout="column">
                                     <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.close)">
                                         <md-icon md-font-icon="fas fa-times-circle"></md-icon>
@@ -168,7 +168,7 @@
                                     </md-button>
                                 </div>
 
-                                <div layout="column" ng-if="item.estatus === 'Empezado'">
+                                <div layout="column">
                                     <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.info)">
                                         <md-icon md-font-icon="fas fa-info"></md-icon>

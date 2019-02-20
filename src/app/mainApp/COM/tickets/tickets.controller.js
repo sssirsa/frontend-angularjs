@@ -192,7 +192,7 @@
                 notifications: []
             };
             if (activity === vm.categories.close) {
-                vm.object.serviceDetails= vm.serviceDetails
+                vm.object.service_details= vm.serviceDetails
                 vm.meta_incidences = {
                     fields: [
                         {

@@ -5,14 +5,14 @@
             "NOTIFICATION":"Enviar Notificacion a COM"
         },
         "URLS":{
-            "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/ticket_type",
-            "ASSETCONDITION":"http://api-gateway.sssirsa.com/dev/management/catalogues/condition",
-            "DATE_TYPE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/date_type",
-            "COMPONENT_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/tipo_componente",
-            "ASSET_TYPE":"http://api-gateway.sssirsa.com/dev/inventory/catalogues/categoria_insumo",
-            "PROCESS_INSTRUCTION_CODE":"http://api-gateway.sssirsa.com/dev/com_middleware/catalogues/process_instructions",
-            "REPAIR_ACTION_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/action",
-            "FAULT_CODE":"http://api-gateway.sssirsa.com/dev/technical_services/catalogues/failure"
+            "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/pre-qa/com_middleware/catalogues/ticket_type",
+            "ASSETCONDITION":"http://api-gateway.sssirsa.com/pre-qa/management/catalogues/condition",
+            "DATE_TYPE":"http://api-gateway.sssirsa.com/pre-qa/com_middleware/catalogues/date_type",
+            "COMPONENT_TYPE":"http://api-gateway.sssirsa.com/pre-qa/inventory/catalogues/tipo_componente",
+            "ASSET_TYPE":"http://api-gateway.sssirsa.com/pre-qa/inventory/catalogues/categoria_insumo",
+            "PROCESS_INSTRUCTION_CODE":"http://api-gateway.sssirsa.com/pre-qa/com_middleware/catalogues/process_instructions",
+            "REPAIR_ACTION_CODE":"http://api-gateway.sssirsa.com/pre-qa/technical_services/catalogues/action",
+            "FAULT_CODE":"http://api-gateway.sssirsa.com/pre-qa/technical_services/catalogues/failure"
         },
         "FIELDS":{
             "TICKET": "Ticket anterior",
