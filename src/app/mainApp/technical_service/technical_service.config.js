@@ -21,6 +21,7 @@
                 controller: 'inspectionController',
                 controllerAs: 'vm'
             })
+
             .state('triangular.admin-default.puncture', {
                 url: '/Pinchado',
                 data: {
@@ -32,6 +33,19 @@
                 controller: 'punctureController',
                 controllerAs: 'vm'
             })
+
+            .state('triangular.admin-default.diagnostic', {
+                url: '/Diagnostico',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/technical_service/diagnosis/diagnosis.tmpl.html',
+                controller: 'diagnosisController',
+                controllerAs: 'vm'
+            })
+
             .state('triangular.admin-default.componentTest', {
                 url: '/prueba_componente',
                 data: {
@@ -61,6 +75,12 @@
                     {
                         name:'PUNCTURE.PUNCTURE_MENU',
                         state:'triangular.admin-default.puncture',
+                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type:'link'
+                    },
+                    {
+                        name:'DIAGNOSIS.DIAGNOSIS',
+                        state:'triangular.admin-default.diagnostic',
                         permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },
