@@ -22,7 +22,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas estados';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Estados';
@@ -150,7 +150,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de estados',
+                    title: 'Búsqueda de estados',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando estados'
                 },

@@ -6,7 +6,7 @@
         .controller('TipoEquipoDialogController', TipoEquipoDialogController);
 
     /* @ngInject */
-    function TipoEquipoDialogController($mdDialog,OPTIONS,unidad, $scope, catalogo, TipoEquipo, Helper) {
+    function TipoEquipoDialogController($mdDialog,unidad, $scope, catalogo, TipoEquipo, Helper) {
 
         var vm = this;
         vm.cancelClick = cancelClick;
@@ -19,9 +19,8 @@
         vm.search = search;
         vm.catalogo = catalogo;
         vm.equipos = [];
-        vm.isValid=false;
+        vm.isValid = false;
 
-        // vm.unidades=OPTIONS.units;
         var tipos_equipo = {
             tipo_equipo: null,
             cantidad: 1,

@@ -11,28 +11,82 @@
         layout-padding
     >
 
-        <div layout="row" layout-align="space-around center" layout-padding="">
+        <div layout="row" layout-align="space-around center" layout-padding="" ng-if="!$ctrl.searchBool">
             <form ng-submit="$ctrl.searchCabinet()" flex="80" class="md-block">
                 <md-input-container
                     flex="80"
                     class="md-block">
+                    <label>{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</label>
                     <input
                         only-digits
-                        placeholder="Búsqueda por económico"
                         ng-model="$ctrl.searchText">
                 </md-input-container>
             </form>
         </div>
 
+        <div flex="40" ng-if="$ctrl.searchBool">
+            <md-toolbar layout="column"
+                        layout-gt-sm="row"
+                        layout-align="center stretch"
+                        layout-align-gt-sm="space-between center">
+                <div layout="row" layout-align="center center">
+                    <span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>
+                </div>
+                <div layout="column"
+                     layout-align="center stretch">
+                    <md-button aria-label="'Remove filter'"
+                               ng-click="$ctrl.removeFilter()"
+                               class="md-raised">
+                        <md-icon md-font-icon="fa fa-ban"></md-icon>
+                        {{'MAIN.COMPONENTS.CABINET.REMOVE_FILTER'|translate}}
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-align="center center">
+                <span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCHED_ITEM'|translate}}:</span>&nbsp
+                <span class="md-subtitle">{{$ctrl.searchText}}</span>
+            </div>
+        </div>
+
         <div ng-if="$ctrl.todos.length > 0">
             <md-list-item class="md-3-line" ng-repeat="item in $ctrl.todos" ng-click="$ctrl.info(item)">
                 <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                <div class="md-list-item-text" layout="column">
-                    <h2>Económico: {{ item.economico }}</h2>
-                    <h3>Modelo: {{ item.modelo }}</h3>
-                    <h4>Número de Serie: {{ item.no_serie }}</h4>
-                    <p>Estado: {{ item.estado }}</p>
+
+                <div flex="100" layout="column" layout-gt-sm="row" layout-align="space-between center">
+                    <div layout="column" layout-align="start center">
+                        <div class="md-list-item-text" layout="column">
+                            <h2>Económico: {{ item.economico }}</h2>
+                            <h3>Modelo: {{ item.modelo }}</h3>
+                            <h4>Número de Serie: {{ item.no_serie }}</h4>
+                            <p>Estado: {{ item.estado }}</p>
+                        </div>
+                    </div>
+
+
+                    <div layout="column" layout-align="end center" ng-if="item.control">
+                        <div layout="column" layout-align="end center" ng-if="!item.impedido">
+                            <md-button
+                                ng-click="$ctrl.impediment(item)"
+                                class="md-raised md-warn">
+                                <md-icon md-font-icon="fas fa-lock-open"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.NOT_IMPEDIMENT'|translate}}
+                            </md-button>
+                        </div>
+
+                        <div layout="column" layout-align="end center" ng-if="item.impedido">
+                            <md-button
+                                ng-click="$ctrl.showImpediment(item.impedimento_id)"
+                                class="md-raised md-primary">
+                                <md-icon md-font-icon="fas fa-lock"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
+                            </md-button>
+                        </div>
+                    </div>
+
                 </div>
+
+                <md-divider></md-divider>
             </md-list-item>
         </div>
         <div ng-if="$ctrl.todos.length == 0">

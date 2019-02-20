@@ -10,7 +10,8 @@
         Helper,
         Translate,
         $scope,
-        URLS
+        URLS,
+        EnvironmentConfig
     ) {
         var vm = this;
         vm.isClient = true;
@@ -29,8 +30,11 @@
         vm.catalogues = {
             sucursal: {
                 catalog: {
-                    url: URLS.sucursal,
-                    kind: 'Web',
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
+                    kind: 'Generic',
                     name: Translate.translate('ADMIN_PERSONA.PROPERTY.SUCURSALDEF'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',

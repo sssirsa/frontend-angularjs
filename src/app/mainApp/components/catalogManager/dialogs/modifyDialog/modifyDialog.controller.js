@@ -173,7 +173,7 @@
                 id = 'id';
             }
             vm.modifyLoader = vm.ModifyCatalogProvider
-                .update(vm.objectToModify['id'], vm.objectToModify)
+                .update(vm.objectToModify[id], vm.objectToModify)
                 .then(function (modifiedElement) {
                     $mdDialog.hide(modifiedElement);
                 })

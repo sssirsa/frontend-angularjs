@@ -342,7 +342,13 @@
     },
     "CONDITION":{
         "LABELS":{
-            "TITLE":"Condición"
+            "TITLE":"Condición",
+            "SEARCH": "Buscar Condición",
+            "CREATE": "Crear Condición",
+            "DELETE": "Borrar Condición",
+            "MODIFY": "Editar Condición",
+            "LOAD_MORE": "Cargar más Condición",
+            "LOADING_MESSAGE": "Cargando Condición"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
@@ -350,7 +356,13 @@
     },
     "STATUS_UNILEVER":{
         "LABELS":{
-            "TITLE":"Estatus Unilever"
+            "TITLE":"Estatus Unilever",
+            "SEARCH": "Buscar Estatus Unilever",
+            "CREATE": "Crear Estatus Unilever",
+            "DELETE": "Borrar Estatus Unilever",
+            "MODIFY": "Editar Estatus Unilever",
+            "LOAD_MORE": "Cargar más Estatus Unilever",
+            "LOADING_MESSAGE": "Cargando Estatus Unilever"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"
@@ -358,7 +370,223 @@
     },
     "STATUS_COM":{
         "LABELS":{
-            "TITLE":"Estatus COM"
+            "TITLE":"Estatus COM",
+            "SEARCH": "Buscar Estatus COM",
+            "CREATE": "Crear Estatus COM",
+            "DELETE": "Borrar Estatus COM",
+            "MODIFY": "Editar Estatus COM",
+            "LOAD_MORE": "Cargar más Estatus COM",
+            "LOADING_MESSAGE": "Cargando Estatus COM"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STICKER":{
+        "LABELS":{
+            "TITLE":"Sticker",
+            "SEARCH": "Buscar Sticker",
+            "CREATE": "Crear Sticker",
+            "DELETE": "Borrar Sticker",
+            "MODIFY": "Editar Sticker",
+            "LOAD_MORE": "Cargar más Stickers",
+            "LOADING_MESSAGE": "Cargando Sticker"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "PEDIMENT":{
+        "LABELS":{
+            "TITLE": "Pedimento",
+            "SEARCH": "Buscar Pedimento",
+            "CREATE": "Crear Pedimento",
+            "DELETE": "Borrar Pedimento",
+            "MODIFY": "Editar Pedimento",
+            "LOAD_MORE": "Cargar más Pedimentos",
+            "LOADING_MESSAGE": "Cargando Pedimentos"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_CATEGORY":{
+        "LABELS":{
+            "TITLE": "Categoría de Insumo",
+            "SEARCH": "Buscar Categoría",
+            "CREATE": "Crear Categoría",
+            "DELETE": "Borrar Categoría",
+            "MODIFY": "Editar Categoría",
+            "LOAD_MORE": "Cargar más Categorías de Insumo",
+            "LOADING_MESSAGE": "Cargando Categorías de Insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "COMPONENT_TYPE":{
+        "LABELS":{
+            "TITLE": "Tipo de Componente",
+            "SEARCH": "Buscar Tipo",
+            "CREATE": "Crear Tipo",
+            "DELETE": "Borrar Tipo",
+            "MODIFY": "Editar Tipo",
+            "LOAD_MORE": "Cargar más Tipos de Componente",
+            "LOADING_MESSAGE": "Cargando Tipos de componente"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_BRAND":{
+        "LABELS":{
+            "TITLE": "Marca de insumo",
+            "SEARCH": "Buscar Marca de insumo",
+            "CREATE": "Crear Marca de insumo",
+            "DELETE": "Borrar Marca de insumo",
+            "MODIFY": "Editar Marca de insumo",
+            "LOAD_MORE": "Cargar más Marcas de insumo",
+            "LOADING_MESSAGE": "Cargando Marcas de insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_MODEL":{
+        "LABELS":{
+            "TITLE": "Modelo de insumo",
+            "SEARCH": "Buscar Modelo de insumo",
+            "CREATE": "Crear Modelo de insumo",
+            "DELETE": "Borrar Modelo de insumo",
+            "MODIFY": "Editar Modelo de insumo",
+            "LOAD_MORE": "Cargar más Modelos de insumo",
+            "LOADING_MESSAGE": "Cargando Modelos de insumo"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "WEREHOUSE":{
+        "LABELS":{
+            "TITLE": "Bodega",
+            "SEARCH": "Buscar Bodega",
+            "CREATE": "Crear Bodega",
+            "DELETE": "Borrar Bodega",
+            "MODIFY": "Editar Bodega",
+            "LOAD_MORE": "Cargar más Bodegas",
+            "LOADING_MESSAGE": "Cargando Bodegas"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "REASON_NOT_LABELED":{
+        "LABELS":{
+            "TITLE": "Motivo no capitalizado",
+            "SEARCH": "Buscar Motivo no capitalizado",
+            "CREATE": "Crear Motivo no capitalizado",
+            "DELETE": "Borrar Motivo no capitalizado",
+            "MODIFY": "Editar Motivo no capitalizado",
+            "LOAD_MORE": "Cargar más Motivos no capitalizado",
+            "LOADING_MESSAGE": "Cargando Motivos no capitalizado"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "STATUS_NOT_LABELED":{
+        "LABELS":{
+            "TITLE": "Estatus no capitalizado",
+            "SEARCH": "Buscar Estatus no capitalizado",
+            "CREATE": "Crear Estatus no capitalizado",
+            "DELETE": "Borrar Estatus no capitalizado",
+            "MODIFY": "Editar Estatus no capitalizado",
+            "LOAD_MORE": "Cargar más Estatus no capitalizado",
+            "LOADING_MESSAGE": "Cargando Estatus no capitalizado"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "ACTION":{
+        "LABELS":{
+            "TITLE": "Acción",
+            "SEARCH": "Buscar Acción",
+            "CREATE": "Crear Acción",
+            "DELETE": "Borrar Acción",
+            "MODIFY": "Editar Acción",
+            "LOAD_MORE": "Cargar más Acciones",
+            "LOADING_MESSAGE": "Cargando Acciones"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "SYMPTOM":{
+        "LABELS":{
+            "TITLE": "Sintoma",
+            "SEARCH": "Buscar Sintoma",
+            "CREATE": "Crear Sintoma",
+            "DELETE": "Borrar Sintoma",
+            "MODIFY": "Editar Sintoma",
+            "LOAD_MORE": "Cargar más Sintoma",
+            "LOADING_MESSAGE": "Cargando Sintoma"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "FAILURE_TYPE":{
+        "LABELS":{
+            "TITLE": "Clasificador de Falla",
+            "SEARCH": "Buscar Falla",
+            "CREATE": "Crear Falla",
+            "DELETE": "Borrar Falla",
+            "MODIFY": "Editar Falla",
+            "LOAD_MORE": "Cargar más Fallas",
+            "LOADING_MESSAGE": "Cargando Fallas"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "NEXT_STEP":{
+        "LABELS":{
+            "TITLE": "Siguiente Paso",
+            "SEARCH": "Buscar Siguiente Paso",
+            "CREATE": "Crear Siguiente Paso",
+            "DELETE": "Borrar Siguiente Paso",
+            "MODIFY": "Editar Siguiente Paso",
+            "LOAD_MORE": "Cargar más Siguientes Paso",
+            "LOADING_MESSAGE": "Cargando Siguientes Paso"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "COM_INCIDENCE":{
+        "LABELS":{
+            "TITLE": "Incidencia COM",
+            "SEARCH": "Buscar Incidencia COM",
+            "CREATE": "Crear Incidencia COM",
+            "DELETE": "Borrar Incidencia COM",
+            "MODIFY": "Editar Incidencia COM",
+            "LOAD_MORE": "Cargar más Incidencias COM",
+            "LOADING_MESSAGE": "Cargando Incidencias COM"
+        },
+        "ERRORS":{
+            "NOT_FOUND":"No se encontraron elementos"
+        }
+    },
+    "IMPEDIMENT_REASON":{
+        "LABELS":{
+            "TITLE": "Motivo de Impedimento de Salida",
+            "SEARCH": "Buscar Motivo de Impedimento",
+            "CREATE": "Crear Motivo de Impedimento",
+            "DELETE": "Borrar Motivo de Impedimento",
+            "MODIFY": "Editar Motivo de Impedimento",
+            "LOAD_MORE": "Cargar más Motivos de Impedimento",
+            "LOADING_MESSAGE": "Cargando Motivos de Impedimento"
         },
         "ERRORS":{
             "NOT_FOUND":"No se encontraron elementos"

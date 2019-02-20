@@ -58,56 +58,29 @@
         <div layout="column" layout-align="center center">
             <h3 translate>REQUESTS.NEW.CABINETS.TITLE</h3>
         </div>
-        <md-autocomplete md-input-name="tipo_equipo"
-                         md-no-cache="true"
-                         flex="100"
-                         md-min-length="0"
-                         md-selected-item="vm.assignedEquipmentKind"
-                         md-selected-item-change="vm.selectedEquipmentKindChange()"
-                         md-search-text="vm.equipmentKindSearchText"
-                         md-items="item in vm.searchEquipmentKind(item)"
-                         md-item-text="item.nombre"
-                         md-floating-label="{{'REQUESTS.NEW.EQUIPMENT.SEARCH'|translate}}"
-                         md-menu-class="autocomplete-custom-template"
-                         required>
-            <md-item-template>
-                <span class="item-title" title="{{item.nombre}}">
-                    <md-icon md-font-icon="fa fa-university"></md-icon>
-                    <span>
-                        <b>{{item.nombre}}</b>
-                    </span>
-                </span>
-                <span class="md-caption">
-                    {{item.descripcion}}
-                </span>
-            </md-item-template>
-            <md-not-found>
-                <span class="item-title">
-                    <span>
-                        {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.equipmentKindSearchText}}"
-                    </span>
-                </span>
-            </md-not-found>
-        </md-autocomplete>
+        <catalog-select catalog="vm.catalogEquipmentKind.catalog"
+                        elements="vm.catalogEquipmentKind.elements"
+                        on-select="vm.onSelectedEquipmentKind(element)">
+        </catalog-select>
 
         <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
             <table md-table flex>
                 <thead md-head>
-                <tr md-row>
-                    <th md-column>
-                        <span translate>REQUESTS.NEW.CABINETS.KIND</span>
-                    </th>
-                    <th md-column>
-                        <span translate>REQUESTS.NEW.CABINETS.QUANTITY</span>
-                    </th>
-                </tr>
+                    <tr md-row>
+                        <th md-column>
+                            <span translate>REQUESTS.NEW.CABINETS.KIND</span>
+                        </th>
+                        <th md-column>
+                            <span translate>REQUESTS.NEW.CABINETS.QUANTITY</span>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row
-                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
-                    <td md-cell>{{cabinet.tipo}}</td>
-                    <td md-cell>{{cabinet.cantidad}}</td>
-                </tr>
+                    <tr md-row
+                        ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                        <td md-cell>{{cabinet.tipo}}</td>
+                        <td md-cell>{{cabinet.cantidad}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
