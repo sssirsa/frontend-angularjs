@@ -18,64 +18,21 @@
 
             </div>
         </md-toolbar>
-        <div layout="column" layout-align="center center">
-            <div layout="row" layout-padding="">
-                <form ng-submit="vm.search_asset()">
-                <md-input-container>
-                    <label translate="">DIAGNOSIS.SEARCH_CABINET</label>
-                    <input type="text" ng-model="vm.asset_id" required md-maxlength="12">
-                </md-input-container>
-                <md-input-container>
-                    <md-button class="md-fab md-primary md-hue-2" ng-click="vm.search_asset()" aria-label="Profile">
-                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
-                    </md-button>
-                </md-input-container>
-                </form>
-            </div>
+        <div layout="row" flex="100" layout-wrap="">
+            <search-cabinet-step flex="100" info-gral="vm.infogral(element)"
+                                 info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
         </div>
 
-        <div layout-margin="" flex="100" layout-gt-sm="row" layout="column" layout-wrap="" ng-if="vm.asset.id">
-            <div layout="column" flex="45" layout-align="center start">
-                <div layout="row">
-                    <md-icon md-font-icon="far fa-snowflake"></md-icon>
-                    <h3 translate="">SERVICES.ASSET_ID</h3>
-                    <h1 class="md-body-2">{{vm.asset.economico}}</h1>
-                </div>
-                <div layout="row">
-                    <md-icon md-font-icon="fas fa-tags"></md-icon>
-                    <span class="md-body-1">{{vm.asset.modelo.nombre}}</span>
-                </div>
-                <div layout="row">
-                    <md-icon md-font-icon="fas fa-tag"></md-icon>
-                    <span class="md-caption">{{vm.asset.modelo.marca.descripcion}}</span>
-                </div>
-            </div>
-            <div layout="column" flex="45" layout-align="center start">
-                <div layout="row">
-                    <span translate="">SERVICES.PAST_SERVICES</span>
-                    <span> </span>
-                </div>
-                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-button ng-if="!vm.edition" ng-click="vm.infoCabinet()" class="md-raised md-primary">
-                        <md-icon md-font-icon="fas fa-eye"></md-icon>
-                        <span translate="">SERVICES.INFO_CABINET</span>
-                    </md-button>
-                    <md-button ng-if="!vm.edition" ng-click="vm.infoService()" class="md-raised md-primary">
-                        <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
-                        <span translate="">SERVICES.INFO_SERVICE</span>
-                    </md-button>
 
-                </div>
-            </div>
-        </div>
-<!-- ng-if="vm.asset.economico"-->
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
-                 >
+                 ng-if="vm.asset.economico">
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
                     <h3 translate="">DIAGNOSIS.ASSET_DIAGNOSIS</h3>
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
-                        <div layout="row"  flex="100" layout-margin="">
+                        <div layout="row" flex="100" layout-margin="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
                                 <input type="text" placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
@@ -86,14 +43,14 @@
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-thermometer-half"></md-icon>
-                                <input type="text" only-digits="" placeholder="{{'DIAGNOSIS.TEMP_COM'|translate}}">
+                                <input type="number" pattern="([0-9]+[.]+[0-9]+)|([0-9])"  placeholder="{{'DIAGNOSIS.TEMP_COM'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.TEMP_COM_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-thermometer-empty"></md-icon>
-                                <input type="text" only-digits="" placeholder="{{'DIAGNOSIS.INT_TEMP'|translate}}">
+                                <input type="number"  placeholder="{{'DIAGNOSIS.INT_TEMP'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.INT_TEMP_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
@@ -101,21 +58,21 @@
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-bolt"></md-icon>
-                                <input type="text" only-digits="" placeholder="{{'DIAGNOSIS.AMP_ARRAN'|translate}}">
+                                <input type="number"  placeholder="{{'DIAGNOSIS.AMP_ARRAN'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.AMP_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-bolt"></md-icon>
-                                <input type="text" only-digits="" placeholder="{{'DIAGNOSIS.AMP_TRAB'|translate}}">
+                                <input type="number" placeholder="{{'DIAGNOSIS.AMP_TRAB'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.AMP_TRAB_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex="100" layout-margin="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
-                                <textarea  rows="5" placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}"></textarea>
+                                <textarea rows="5" placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}"></textarea>
                                 <md-tooltip><span translate="">DIAGNOSIS.DESCRIPTION_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
@@ -126,39 +83,25 @@
                 </md-content>
             </md-tab>
             <md-tab label="{{vm.assets_info}}">
-                <md-content class="md-padding">
-                    <h3>Settings</h3>
-                    <md-list>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
-                            <p>Show Username</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-account-box"></md-icon>
-                            <p>Show Avatar</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                        <md-list-item layout="row" layout-align="space-around center">
-                            <md-icon md-font-icon="zmdi zmdi-cloud-upload"></md-icon>
-                            <p>Allow Backups</p>
-                            <md-switch class="md-secondary"></md-switch>
-                        </md-list-item>
-                    </md-list>
+                <md-content>
+                    <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
+                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'"
+                                          bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+                    <symptom-manager symptoms="vm.getSymptoms(element)" flex="100"></symptom-manager>
+                    <actions-manager actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
             </md-tab>
 
 
         </md-tabs>
-
         <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-if="vm.edition" ng-click="vm.object_builder()" class="md-raised md-primary">
-                <md-icon md-font-icon="fas fa-save"></md-icon>
-                Guardar
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                <md-icon md-font-icon="fas fa-eraser"></md-icon>
+                <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>
-            <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
-                <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
-                Editar
+            <md-button ng-click="vm.sendDiagnosis()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
             </md-button>
         </md-card-actions>
     </md-card>
