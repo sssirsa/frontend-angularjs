@@ -13,8 +13,8 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/service/internal/diagnostic/diagnostic.tpl.html',
-                controller: 'DiagnosticController',
+                templateUrl: 'app/mainApp/service/internal/diagnosis/diagnosis.tmpl.html',
+                controller: 'diagnosisController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.etapa', {
@@ -42,6 +42,25 @@
                 controller: 'asignacionLineaController',
                 controllerAs: 'vm'
             });
+
+
+        triMenuProvider.addMenu(
+            {
+                name: 'MAIN.MENU.INTERNAL_SERVICE',
+                icon: 'fa fa-cogs',
+                type: 'dropdown',
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                priority: 6,
+                children: [
+                    {
+                        name: 'MAIN.MENU.REGISTER_STEP',
+                        state: 'triangular.admin-default.etapa',
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type: 'link'
+                    }
+                ]
+            }
+        );
 
     }
 })();
