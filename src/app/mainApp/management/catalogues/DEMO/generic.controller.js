@@ -44,7 +44,7 @@
                         required: true
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'test_object',
                         label: 'Test Object',
                         fields: [

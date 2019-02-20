@@ -143,17 +143,6 @@
                 controller: 'CategoriaController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-insumo', {
-                url: '/catalogo/insumo',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/catalogo_insumo/catalogo_insumo.tmpl.html',
-                controller: 'CatalogoInsumoController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.catalogo-tipo-equipo', {
                 url: '/catalogo/tipo_equipo',
                 data: {
@@ -428,6 +417,28 @@
                 templateUrl: 'app/mainApp/management/catalogues/stages/stages.tmpl.html',
                 controller: 'stagesController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.bulk-asset', {
+                url: '/catalogo/insumo_lote',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/bulk_asset/bulk_asset.tmpl.html',
+                controller: 'bulkAssetController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.unique-asset', {
+                url: '/catalogo/insumo_unico',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/unique_asset/unique_asset.tmpl.html',
+                controller: 'uniqueAssetController',
+                controllerAs: 'vm'
             });
 
 
@@ -495,6 +506,18 @@
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
                                 state: 'triangular.admin-default.consumable-category',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.BULK_ASSET',
+                                state: 'triangular.admin-default.bulk-asset',
+                                permission: ['ADMINISTRADOR'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.UNIQUE_ASSET',
+                                state: 'triangular.admin-default.unique-asset',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {

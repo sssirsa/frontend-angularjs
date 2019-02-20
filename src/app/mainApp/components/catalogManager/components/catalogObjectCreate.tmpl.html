@@ -43,7 +43,7 @@
                         <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                     </div>
                     <div ng-if="field.hint"
-                         class="create-field-hint">
+                         class="hint">
                         {{field.hint}}
                     </div>
                 </md-input-container>
@@ -65,7 +65,7 @@
                         <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                     </div>
                     <div ng-if="field.hint"
-                         class="create-field-hint">
+                         class="hint">
                         {{field.hint}}
                     </div>
                 </md-input-container>
@@ -104,7 +104,7 @@
                     </md-select>
                 </md-input-container>
                 <div ng-if="field.hint"
-                     class="create-field-hint">
+                     class="hint">
                     {{field.hint}}
                 </div>
             </section>
@@ -113,6 +113,7 @@
                     <section ng-if="vm.objectToCreate[field['catalog'].requires]">
                         <catalog-select required="field.required"
                                         lock="field.lock"
+                                        hint="field.hint"
                                         catalog="field.catalog"
                                         pagination="field['catalog'].pagination"
                                         elements="field['catalog'].elements"
@@ -121,14 +122,11 @@
                                         on-select="vm.onElementSelect(element,field)">
                         </catalog-select>
                     </section>
-                    <div ng-if="field.hint"
-                         class="create-field-hint">
-                        {{field.hint}}
-                    </div>
                 </section>
                 <section ng-if="!field['catalog'].requires">
                     <catalog-select catalog="field.catalog"
-                                        lock="field.lock"
+                                    lock="field.lock"
+                                    hint="field.hint"
                                     required="field.required"
                                     pagination="field['catalog'].pagination"
                                     elements="field['catalog'].elements"
@@ -136,10 +134,6 @@
                                     lazy="field.catalog.requires"
                                     on-select="vm.onElementSelect(element,field)">
                     </catalog-select>
-                    <div ng-if="field.hint"
-                         class="create-field-hint">
-                        {{field.hint}}
-                    </div>
                 </section>
             </section>
             <section ng-if="field['type']==='array'">
@@ -163,7 +157,7 @@
                         <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                     </div>
                     <div ng-if="field.hint"
-                         class="create-field-hint">
+                         class="hint">
                         {{field.hint}}
                     </div>
                 </md-input-container>
@@ -191,7 +185,7 @@
                         </md-chips>
                     </section>
                     <div ng-if="field.hint"
-                         class="create-field-hint">
+                         class="hint">
                         {{field.hint}}
                     </div>
                 </section>
@@ -215,7 +209,7 @@
                         </md-chip-template>
                     </md-chips>
                     <div ng-if="field.hint"
-                         class="create-field-hint">
+                         class="hint">
                         {{field.hint}}
                     </div>
                 </section>
