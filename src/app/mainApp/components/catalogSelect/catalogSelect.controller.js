@@ -41,7 +41,8 @@
  *      softDelete: {
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
- *      }
+ *      },
+ *      initial:string        (Optional) Must be the ID you want to be selected
  *      ---------------------------------------
  *      RETURNS
  *      {
@@ -99,12 +100,9 @@
                 //The catalog is not loaded in lazy mode
                 list();
             }
-            else {
-                //The catalog is required to be loaded in lazy mode
-                if (vm.initial) {
-                    //The parameter initial was given, so the lazy parameter is ignored
-                    list();
-                }
+            if (vm.initial && vm.pagination) {
+                //Warranty that lazy is true if you have initial and pagination
+                vm.lazy = true;
             }
         }
 
@@ -152,15 +150,34 @@
                         vm.onSuccessList({ elements: vm.catalogElemets });
                         //If initial parameter is given, select the element after listing the catalogue
                         if (vm.initial) {
-                            vm.selectedElement = vm.catalogElements
-                                .filter(function (currentElement) {
-                                    return currentElement[vm.catalog.model]
-                                        === vm.initial[vm.catalog.model];
-                                })[0];
-                            vm.onSelect({
-                                element: vm.selectedElement[vm.catalog.model],
-                                value: vm.selectedElement
-                            });
+                            if (!vm.pagination) {
+                                vm.selectedElement = vm.catalogElements
+                                    .filter(function (currentElement) {
+                                        return currentElement[vm.catalog.model]
+                                            === vm.initial;
+                                    })[0];
+                                vm.onSelect({
+                                    element: vm.selectedElement[vm.catalog.model],
+                                    value: vm.selectedElement
+                                });
+                            }
+                            else {
+                                createMainCatalogProvider();
+                                vm.listLoader = CATALOG_SELECT.detail(vm.initial)
+                                    .then(function catalogSelectDetailSuccess(successCallback) {
+                                        vm.selectedElement = successCallback;
+                                        vm.catalogElements = [];
+                                        vm.catalogElements.push(successCallback);
+                                        vm.initial = null;
+                                        vm.onSelect({
+                                            element: vm.selectedElement[vm.catalog.model],
+                                            value: vm.selectedElement
+                                        });
+                                    })
+                                    .catch(function catalogSelectDetailError(errorCallback) {
+                                        console.error('@CatalogSelectController @list @CATALOG_SELECT.detail', errorCallback);
+                                    });
+                            }
                         }
                     })
                     .catch(function (errorElements) {
