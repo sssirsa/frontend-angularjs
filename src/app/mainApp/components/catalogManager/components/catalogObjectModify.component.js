@@ -95,6 +95,24 @@
                             delete (vm.objectToModify[field.bindTo]);
                         }
                     }
+                    if (field.type === 'catalog') {
+                        if (field.bindTo) {
+                            let catalogElement = JSON.parse(
+                                JSON.stringify(
+                                    vm.objectToModify[field.bindTo]
+                                ))[field.catalog.model];
+                            //delete (vm.objectToModify[field.bindTo]);
+                            vm.objectToModify[field.model] = catalogElement;
+                        }
+                        else {
+                            let catalogElement = JSON.parse(
+                                JSON.stringify(
+                                    vm.objectToModify[field.model]
+                                ))[field.catalog.model];
+                            delete (vm.objectToModify[field.bindTo]);
+                            vm.objectToModify[field.model] = catalogElement;
+                        }
+                    }
                 }
             );
         }

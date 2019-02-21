@@ -10,7 +10,7 @@
         $q,
         API,
         URLS
-        ) {
+    ) {
         var vm = this;
 
         vm.genericCatalog = {
@@ -19,6 +19,18 @@
                 let deferred = $q.defer();
                 $http.get(
                     vm.genericCatalog.url)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
+            },
+            detail: function (id) {
+                let deferred = $q.defer();
+                $http.get(
+                    vm.genericCatalog.url + '/' + id)
                     .then(function (response) {
                         deferred.resolve(response.data);
                     })
