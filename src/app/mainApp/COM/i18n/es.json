@@ -6,7 +6,7 @@
         },
         "URLS":{
             "SERVICE_TASK_TYPE":"http://api-gateway.sssirsa.com/pre-qa/com_middleware/catalogues/ticket_type",
-            "ASSETCONDITION":"http://api-gateway.sssirsa.com/pre-qa/management/catalogues/condition",
+            "ASSET_CONDITION":"http://api-gateway.sssirsa.com/pre-qa/management/catalogues/condition",
             "DATE_TYPE":"http://api-gateway.sssirsa.com/pre-qa/com_middleware/catalogues/date_type",
             "COMPONENT_TYPE":"http://api-gateway.sssirsa.com/pre-qa/inventory/catalogues/tipo_componente",
             "ASSET_TYPE":"http://api-gateway.sssirsa.com/pre-qa/inventory/catalogues/categoria_insumo",
