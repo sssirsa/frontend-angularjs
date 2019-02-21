@@ -433,7 +433,7 @@
                                     type: 'catalog',
                                     model: 'repair_action_code',
                                     label: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
-                                    required: true,
+                                    required: false,
                                     catalog: {
                                         url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
@@ -460,7 +460,7 @@
                                     type: 'catalog',
                                     model: 'fault_code',
                                     label: Translate.translate('COM.FIELDS.FAULT_CODE'),
-                                    required: true,
+                                    required: false,
                                     catalog: {
                                         url: Translate.translate('COM.URLS.FAULT_CODE'),
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
