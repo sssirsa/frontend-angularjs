@@ -8,6 +8,7 @@
                 action: 'action',
                 com_incidence: 'com_incidence',
                 failure_type: 'failure_type',
+                failure:'failure',
                 next_step: 'next_step',
                 stage:'stage',
                 symptom: 'symptom'

@@ -13,21 +13,19 @@
 
             }
         });
-    function failureController(Translate,URLS,ErrorHandler,EnvironmentConfig) {
+    function failureController(Translate, URLS, ErrorHandler, EnvironmentConfig) {
         var vm = this;
-        const failure_typeURL =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base+ '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
-        const failure_URL =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base+ '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
+        const failure_typeURL = (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
         vm.catalogues = {
             failure_type: {
                 catalog: {
-                    url:failure_typeURL,
+                    url: failure_typeURL,
                     name: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre'
-                  },
+                },
                 pagination: {
                     total: 'count',
                     next: 'next'
@@ -39,11 +37,11 @@
                     reverse: false
                 },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint:Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE_FOR')
+                hint: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE_FOR')
             },
             failure: {
                 catalog: {
-                    url:failure_URL+'?clasificador_falla__id='+vm.failure_type,
+                    url: null,
                     name: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'com_code',
@@ -60,24 +58,37 @@
                     reverse: false
                 },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint:Translate.translate('FAILURES_COMPONENT.ADD_FAILURE')
+                hint: Translate.translate('FAILURES_COMPONENT.ADD_FAILURE')
             }
         };
-        vm.failures=[];
+        vm.failures = [];
 
-        vm.onSelectType=onSelectType;
-        vm.addFailure=addFailure;
-        vm.deleteElement=deleteElement;
+        vm.onSelectType = onSelectType;
+        vm.addFailure = addFailure;
+        vm.deleteElement = deleteElement;
         function onSelectType(value) {
             console.log(value);
-            vm.failure_type=vm.value.id;
+            console.log(value.id);
+            if (value.id) {
+                vm.idType = value.id;
+            }
+            vm.fallasCargadas = false;
+            var failure_URL = (EnvironmentConfig.site.rest.api)
+                .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure + '?clasificador_falla__id=').concat(vm.idType);
+
+            vm.catalogues.failure.catalog.url = failure_URL;
+            vm.fallasCargadas = true;
         }
-        function addFailure(value){
-            vm.element=value;
+
+        function addFailure(value) {
+            console.log(value);
+            vm.element = value;
             getDuplicity();
             vm.failures.push(vm.element);
-            vm.failuresDetected({element:vm.failures});
+            console.log(vm.element);
+            vm.failuresDetected({element: vm.failures});
         }
+
         function getDuplicity() {
             var index;
             for (index = 0; index < vm.failures.length; ++index) {
@@ -86,14 +97,15 @@
                 }
             }
         }
-        function deleteElement(item){
+
+        function deleteElement(item) {
             var index;
             for (index = 0; index < vm.failures.length; ++index) {
                 if (vm.failures[index].com_code === item.com_code) {
                     vm.failures.splice(index, 1);
                 }
             }
-            vm.failuresDetected({element:vm.failures});
+            vm.failuresDetected({element: vm.failures});
         }
 
 

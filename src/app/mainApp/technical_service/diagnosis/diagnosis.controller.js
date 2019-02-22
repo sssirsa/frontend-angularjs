@@ -35,7 +35,7 @@
         vm.infogral = infogral;
         vm.infoStep = infoStep;
         vm.getInsumosLote = getInsumosLote;
-        vm.getSymptoms = getSymptoms;
+        vm.getFailures = getFailures;
         vm.getActions = getActions;
         //--------------------------------------------------------------------------------------------------------------
 
@@ -81,8 +81,9 @@
             vm.checklist.insumos_lote = element;
         }
 
-        function getSymptoms(symptoms) {
-            vm.symptoms = symptoms;
+        function getFailures(failures) {
+            vm.failures = failures;
+            console.log(vm.failures);
 
         }
 
