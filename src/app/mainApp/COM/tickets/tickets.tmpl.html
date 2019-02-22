@@ -18,6 +18,16 @@
         </md-card>
     </div>
 
+    <md-card>
+        <form ng-submit="vm.searchByTicketNumber(vm.searchTicketText)" flex="100" class="md-block">
+            <md-input-container flex="100"
+                                class="md-block">
+                <input placeholder="Ingrese el número de ticket..."
+                       ng-model="vm.searchTicketText">
+            </md-input-container>
+        </form>
+    </md-card>
+
     <div ng-if="vm.tickets">
         <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
             <md-card flex="50">
@@ -36,13 +46,11 @@
 
             <md-card flex="50">
                 <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
-                    <md-input-container
-                        flex="100"
-                        class="md-block">
-                        <input
-                            ng-pattern="/^[a-zA-Z0-9]+$/"
-                            placeholder="Ingrese el economico..."
-                            ng-model="vm.searchText">
+                    <md-input-container flex="100"
+                                        class="md-block">
+                        <input ng-pattern="/^[a-zA-Z0-9]+$/"
+                               placeholder="Ingrese el economico..."
+                               ng-model="vm.searchText">
                     </md-input-container>
                 </form>
             </md-card>
@@ -68,7 +76,7 @@
                 </div>
             </md-toolbar>
 
-            <md-content flex="100"  layout="column">
+            <md-content flex="100" layout="column">
                 <div layout="row" layout-align="center center">
                     <span class="md-subtitle">Cabinet (economico):</span>&nbsp
                     <span class="md-subtitle">{{vm.searchText}}</span>
@@ -83,12 +91,11 @@
 
 
         <div class="virtualRepeatScroll-500">
-            <md-card
-                flex="100"
-                layout="column"
-                ng-repeat="item in vm.tickets"
-                layout-gt-md="row"
-                ng-click="vm.showTicket(item)">
+            <md-card flex="100"
+                     layout="column"
+                     ng-repeat="item in vm.tickets"
+                     layout-gt-md="row"
+                     ng-click="vm.showTicket(item)">
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content>
                         <div flex="100">
@@ -152,7 +159,7 @@
                                     </md-button>
                                 </div>
 
-                                <div layout="column" >
+                                <div layout="column">
                                     <md-button class="md-raised md-primary buttonTicket"
                                                ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.error)">
                                         <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
@@ -188,7 +195,7 @@
         </div>
     </div>
 
-    <div >
+    <div>
         <div ng-if="vm.objectPaginado.next || vm.objectPaginado.previous">
             <pagination-manager-buttons go-sig="vm.sig()"
                                         go-prev="vm.prev()"

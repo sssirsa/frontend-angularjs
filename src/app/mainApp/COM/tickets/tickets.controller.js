@@ -15,6 +15,7 @@
         vm.loadingPromise = {};
         vm.selectedKind = '';
         vm.searchText = '';
+        vm.searchTicketText = '';
         vm.tipolist = 0;
         vm.searchBool = false;
 
@@ -122,6 +123,13 @@
         function searchCabinet() {
             vm.querySet = '';
             vm.querySet = 'cabinet__icontains=' + vm.searchText + '&estatus__icontains=' + vm.selectedKind;
+            vm.tickets = null;
+            vm.searchBool = true;
+            listTickets();
+        }
+
+        vm.searchByTicketNumber = function searchByTicketNumber(id) {
+            vm.querySet = 'folio=' + id;
             vm.tickets = null;
             vm.searchBool = true;
             listTickets();
