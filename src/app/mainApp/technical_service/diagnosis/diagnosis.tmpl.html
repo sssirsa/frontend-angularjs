@@ -85,11 +85,12 @@
             <md-tab label="{{vm.assets_info}}">
                 <md-content>
                     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
-                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'"
+                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Diagnóstico'"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
                     <symptom-manager symptoms="vm.getSymptoms(element)" flex="100"></symptom-manager>
                     <actions-manager actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
+                <fault-manager flex="100"></fault-manager>
             </md-tab>
 
 

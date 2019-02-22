@@ -75,7 +75,12 @@
         "ADD_ACTION": "Añadir acción realizada"
     },
     "FAILURES_COMPONENT": {
-        "TITLE": "Fallas Detectadas"
+        "TITLE": "Fallas Detectadas",
+        "SELECT_FAILURE_TYPE":"Seleccione el Tipo de Falla",
+        "SELECT_FAILURE_TYPE_FOR":"Seleccione el Tipo de Falla para poder seleccionar la falla detectada",
+        "SELECT_FAILURE":"Seleccione la Falla Detectada",
+        "REMOVE": "Quitar elemento.",
+        "ADD_FAILURE":"Añadir falla"
     },
     "SHOW_INFO_SERVICE_COMPONENT": {
         "PRECHECKLIST": "Inspección de Garantía",
