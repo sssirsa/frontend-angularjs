@@ -387,8 +387,8 @@
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
                                                     + '/' + URLS.inventory.base
-                                                    + '/' + URLS.inventory.catalgues.base
-                                                    + '/' + URLS.inventory.catalgues.consumable_category,
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.consumable_category,
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
