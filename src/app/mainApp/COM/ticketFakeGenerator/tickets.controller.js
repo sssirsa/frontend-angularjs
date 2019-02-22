@@ -184,42 +184,21 @@
                     }
                 },
                 {
-                    type: 'catalog',
+                    type: 'text',
                     model: 'cabinet',
+                    label:  Translate.translate('COM.FIELDS.CABINET'),
                     required: true,
-                    label: Translate.translate('COM.FIELDS.CABINET'),
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + MANAGEMENT.base
-                            + '/' + MANAGEMENT.inventory.base
-                            + '/' + MANAGEMENT.inventory.cabinet,
-                        name: Translate.translate('COM.FIELDS.CABINET'),
-                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
-                        model: 'economico',//campo a pasar
-                        option: 'economico',//campo a mostrar
-                        elements: 'results',
-                        showModel: false,
-                        pagination: {}
+                    validations:{
+                        errors:{
+                            required: 'El campo es requerido.'
+                        }
                     }
                 },
                 {
-                    type: 'catalog',
+                    type: 'text',
                     model: 'cabinet_replace',
-                    required: false,
-                    label: Translate.translate('COM.FIELDS.REPLACE_CABINET'),
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + MANAGEMENT.base
-                            + '/' + MANAGEMENT.inventory.base
-                            + '/' + MANAGEMENT.inventory.cabinet,
-                        name: Translate.translate('COM.FIELDS.REPLACE_CABINET'),
-                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
-                        model: 'economico',//campo a pasar
-                        option: 'economico',//campo a mostrar
-                        elements: 'results',
-                        showModel: false,
-                        pagination: {}
-                    }
+                    label:  Translate.translate('COM.FIELDS.REPLACE_CABINET'),
+                    required: false
                 },
                 {
                     type: 'catalog',
@@ -239,6 +218,7 @@
                         showModel: false,
                         pagination: {}
                     }
+
                 },
                 {
                     type: 'catalog',
