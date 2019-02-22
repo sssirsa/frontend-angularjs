@@ -7,6 +7,7 @@
 
     /* @ngInject */
     function mainAppConfig(
+        COM,
         ENTRIES_DEPARTURES,
         INVENTORY,
         MANAGEMENT,
@@ -18,6 +19,7 @@
         URLS.inventory = INVENTORY;
         URLS.management = MANAGEMENT;
         URLS.technical_service = TECHNICAL_SERVICE;
+        URLS.com = COM;
 
         $provide.constant('URLS', URLS);
     }
