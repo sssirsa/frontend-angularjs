@@ -8,7 +8,16 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(API, $mdDialog, toastr,EnvironmentConfig, COM, TicketProvider, ErrorHandler, Translate) {
+    function ticketsController(
+        API,
+        $mdDialog,
+        toastr,
+        EnvironmentConfig,
+        URLS,
+        COM,
+        TicketProvider,
+        ErrorHandler,
+        Translate) {
         var vm = this;
 
         vm.tickets = {};
@@ -167,12 +176,12 @@
 
         //Aquí empieza lo de Paco
         function getTicketInfo(item, activity) {
-           // console.log(item);
-            vm.identificador=item.identificador;
+            // console.log(item);
+            vm.identificador = item.identificador;
             var TicketProviderPromise = TicketProvider.getServiceDetails(item.mensaje_com);
             TicketProviderPromise.then(function (serviceDetails) {
                 vm.serviceDetails = serviceDetails.service_details;
-              //  console.log(vm.serviceDetails);
+                //  console.log(vm.serviceDetails);
                 getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
@@ -183,8 +192,8 @@
         function getPossibleMessages(service_task_type, activity) {
             var messages_statusPromise = TicketProvider.getTicket_type(service_task_type);
             messages_statusPromise.then(function (message_status) {
-                vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
-               // console.log(vm.messageStatusCatalog);
+                vm.messageStatusCatalog = _.where(message_status.messages_status, { categoria: activity });
+                // console.log(vm.messageStatusCatalog);
                 createMeta(activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
@@ -192,15 +201,15 @@
         }
 
         function createMeta(activity) {
-            vm.object={
-                identificador:vm.identificador,
+            vm.object = {
+                identificador: vm.identificador,
                 service_details: [],
                 repairs: [],
                 faults: [],
                 notifications: []
             };
             if (activity === vm.categories.close) {
-                vm.object.service_details= vm.serviceDetails
+                vm.object.service_details = vm.serviceDetails
                 vm.meta_incidences = {
                     fields: [
                         {
@@ -216,14 +225,17 @@
                                     label: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                     lock: true,
                                     catalog: {
-                                        url: Translate.translate('COM.URLS.SERVICE_TASK_TYPE'),
+                                        url: EnvironmentConfig.site.rest.api
+                                            + '/' + URLS.com.base
+                                            + '/' + URLS.com.catalogues.base
+                                            + '/' + URLS.com.catalogues.ticket_type,
                                         name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_ticket_code',//campo a pasar
                                         option: 'descripcion',//campo a mostrar
-                                        elements:'results',//elementos del promise donde iterar
-                                        showModel:true,//mostrar model y option
-                                        pagination:{}//manejo de Paginado
+                                        elements: 'results',//elementos del promise donde iterar
+                                        showModel: true,//mostrar model y option
+                                        pagination: {}//manejo de Paginado
                                     }
                                 }, {
                                     type: 'string',
@@ -277,14 +289,17 @@
                                     label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                     lock: true,
                                     catalog: {
-                                        url: Translate.translate('COM.URLS.ASSET_CONDITION'),
+                                        url: EnvironmentConfig.site.rest.api
+                                            + '/' + URLS.management.base
+                                            + '/' + URLS.management.catalogues.base
+                                            + '/' + URLS.management.catalogues.condition,
                                         name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_code',//campo a pasar
                                         option: 'descripcion',//campo a mostrar
-                                        elements:'results',//elementos del promise donde iterar
-                                        showModel:true,//mostrar model y option
-                                        pagination:{}//manejo de Paginado
+                                        elements: 'results',//elementos del promise donde iterar
+                                        showModel: true,//mostrar model y option
+                                        pagination: {}//manejo de Paginado
 
                                     }
 
@@ -301,13 +316,16 @@
                                             label: '',
                                             required: true,
                                             catalog: {
-                                                url: Translate.translate('COM.URLS.DATE_TYPE'),
+                                                url: EnvironmentConfig.site.rest.api
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.date_type,
                                                 name: Translate.translate('COM.FIELDS.DATE_TYPE'),
                                                 model: 'com_code',
                                                 option: 'nombre',
-                                                elements:'results',//elementos del promise donde iterar
-                                                showModel:true,//mostrar model y option
-                                                pagination:{}//manejo de Paginado
+                                                elements: 'results',//elementos del promise donde iterar
+                                                showModel: true,//mostrar model y option
+                                                pagination: {}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -328,13 +346,16 @@
                                             label: Translate.translate('COM.FIELDS.ASSET_COMPONENTS'),
                                             required: true,
                                             catalog: {
-                                                url: Translate.translate('COM.URLS.COMPONENT_TYPE'),
+                                                url: EnvironmentConfig.site.rest.api
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.component_type,
                                                 name: Translate.translate('COM.FIELDS.COMPONENT_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
-                                                elements:'results',//elementos del promise donde iterar
-                                                showModel:true,//mostrar model y option
-                                                pagination:{}//manejo de Paginado
+                                                elements: 'results',//elementos del promise donde iterar
+                                                showModel: true,//mostrar model y option
+                                                pagination: {}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -364,13 +385,16 @@
                                             label: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                             required: true,
                                             catalog: {
-                                                url: Translate.translate('COM.URLS.ASSET_TYPE'),
+                                                url: EnvironmentConfig.site.rest.api
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalgues.base
+                                                    + '/' + URLS.inventory.catalgues.consumable_category,
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
-                                                elements:'results',//elementos del promise donde iterar
-                                                showModel:true,//mostrar model y option
-                                                pagination:{}//manejo de Paginado
+                                                elements: 'results',//elementos del promise donde iterar
+                                                showModel: true,//mostrar model y option
+                                                pagination: {}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -407,13 +431,16 @@
                                             label: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                             required: true,
                                             catalog: {
-                                                url: Translate.translate('COM.URLS.PROCESS_INSTRUCTION_CODE'),
+                                                url: EnvironmentConfig.site.rest.api
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.process_instructions,
                                                 name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
-                                                elements:'results',//elementos del promise donde iterar
-                                                showModel:true,//mostrar model y option
-                                                pagination:{}//manejo de Paginado
+                                                elements: 'results',//elementos del promise donde iterar
+                                                showModel: true,//mostrar model y option
+                                                pagination: {}//manejo de Paginado
                                             }
                                         },
                                         {
@@ -443,13 +470,16 @@
                                     label: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                     required: false,
                                     catalog: {
-                                        url: Translate.translate('COM.URLS.REPAIR_ACTION_CODE'),
+                                        url: EnvironmentConfig.site.rest.api
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.action,
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                         model: 'com_code',
                                         option: 'descripcion',
-                                        elements:'results',//elementos del promise donde iterar
-                                        showModel:true,//mostrar model y option
-                                        pagination:{}//manejo de Paginado
+                                        elements: 'results',//elementos del promise donde iterar
+                                        showModel: true,//mostrar model y option
+                                        pagination: {}//manejo de Paginado
                                     }
                                 },
                                 {
@@ -470,13 +500,16 @@
                                     label: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                     required: false,
                                     catalog: {
-                                        url: Translate.translate('COM.URLS.FAULT_CODE'),
+                                        url: EnvironmentConfig.site.rest.api
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.failure,
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                         model: 'com_code',
                                         option: 'nombre',
-                                        elements:'results',//elementos del promise donde iterar
-                                        showModel:true,//mostrar model y option
-                                        pagination:{}//manejo de Paginado
+                                        elements: 'results',//elementos del promise donde iterar
+                                        showModel: true,//mostrar model y option
+                                        pagination: {}//manejo de Paginado
                                     }
                                 },
                                 {
@@ -500,7 +533,7 @@
                                         model: "com_code",
                                         option: "com_code",
 
-                                        showModel:true,
+                                        showModel: true,
                                         elements: vm.messageStatusCatalog
                                     }
                                 },
@@ -560,7 +593,7 @@
             vm.actions = {
                 PUT: {
                     id: 'identificador',
-                    object:vm.object,
+                    object: vm.object,
                     fields: vm.meta_incidences.fields,
                     dialog: {
                         title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
@@ -586,7 +619,7 @@
                     id: vm.actions['PUT'].id,
                     fields: vm.actions['PUT'].fields,
                     element: vm.actions['PUT'].object,
-                    url:vm.actions['PUT'].url
+                    url: vm.actions['PUT'].url
                 }
             }).then(function () {
                 ErrorHandler.successUpdate();
