@@ -188,8 +188,8 @@
         </div>
     </div>
 
-    <div ng-if="!vm.searchBool">
-        <div ng-if="vm.vm.objectPaginado.next || vm.objectPaginado.previous">
+    <div >
+        <div ng-if="vm.objectPaginado.next || vm.objectPaginado.previous">
             <pagination-manager-buttons go-sig="vm.sig()"
                                         go-prev="vm.prev()"
                                         go-number="vm.goToNumberPage(number)"

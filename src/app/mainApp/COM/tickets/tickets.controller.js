@@ -491,6 +491,8 @@
                                     options: {
                                         model: "com_code",
                                         option: "com_code",
+
+                                        showModel:true,
                                         elements: vm.messageStatusCatalog
                                     }
                                 },
