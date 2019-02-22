@@ -23,7 +23,7 @@
                     vm.array_objects[field.model] = {};
                 }
             });
-            bindData();
+            ///bindData();
             //loadCatalogues();
             //Functionality delegated to the catalog-select Component
             loadCatalogArrays();
@@ -101,15 +101,14 @@
                                 JSON.stringify(
                                     vm.objectToModify[field.bindTo]
                                 ))[field.catalog.model];
-                            //delete (vm.objectToModify[field.bindTo]);
                             vm.objectToModify[field.model] = catalogElement;
+                            delete (vm.objectToModify[field.bindTo]);
                         }
                         else {
                             let catalogElement = JSON.parse(
                                 JSON.stringify(
                                     vm.objectToModify[field.model]
                                 ))[field.catalog.model];
-                            delete (vm.objectToModify[field.bindTo]);
                             vm.objectToModify[field.model] = catalogElement;
                         }
                     }
