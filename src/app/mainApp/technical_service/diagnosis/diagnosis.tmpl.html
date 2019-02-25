@@ -76,6 +76,7 @@
                                 <md-tooltip><span translate="">DIAGNOSIS.DESCRIPTION_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
+                        <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
 
                     </div>
 
@@ -89,7 +90,7 @@
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
                     <actions-manager actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
-                <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
+
             </md-tab>
 
 

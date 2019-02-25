@@ -36,14 +36,14 @@
 
     </div>
     <md-list flex="100" layout="row" layout-wrap="">
-        <md-list-item flex="50" ng-repeat="item in $ctrl.failures" ng-click="$ctrl.deleteElement(item)">
+        <md-list-item flex="50" ng-repeat="item in $ctrl.failures track by item.com_code" ng-click="$ctrl.deleteElement(item)">
             <div flex="20">
                 <img ng-src="assets/images/repairSSSIR.png" class="imgList" alt="{{item.code}}"/>
             </div>
             <div flex="80" class="md-list-item-text" layout="row">
                 <div layout="column" flex="90">
-                    <h3>{{ item.com_code }}</h3>
-                    <h4>{{ item.descripcion }}</h4>
+                    <h3>{{ item.com_code }}-{{item.descripcion}}</h3>
+                    <h4>{{ item.clasificador_falla.nombre}}</h4>
                 </div>
                 <div flex="10">
                     <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="$ctrl.deleteElement(item)">
