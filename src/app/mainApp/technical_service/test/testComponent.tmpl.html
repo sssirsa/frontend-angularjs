@@ -10,6 +10,6 @@
                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
     <symptom-manager flex="100"></symptom-manager>
     <actions-manager flex="100"></actions-manager>
-    <next-step flex="100"></next-step>
+    <next-step ng-if="vm.step" flex="100" next-step="vm.nextStep(element)" actual-step="vm.step.currentStage.etapa"></next-step>
 
 </md-card>

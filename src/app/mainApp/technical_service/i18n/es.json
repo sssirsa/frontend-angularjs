@@ -90,7 +90,8 @@
     "NEXT_STEP":{
         "NEXT_STEP":"Siguiente Etapa:",
         "EDIT_NEXT_STEP":"Editar etapa siguiente",
-        "NOT_EDIT":"Mantener etapa defecto"
+        "NOT_EDIT":"Mantener etapa defecto",
+        "SELECT_STEP":"Seleccione a que etapa será enviada el cabinet"
     },
     "DIAGNOSIS": {
         "DIAGNOSIS": "Diagnóstico de Cabinet",

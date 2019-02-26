@@ -9,36 +9,35 @@
             templateUrl: 'app/mainApp/technical_service/components/nextStep/nextStep.tmpl.html',
             controller: nextStepController,
             bindings: {
-                nextstep: '&',
+                nextStep: '&',
                 failures:'<',
-                actual_step:'<'
+                actualStep:'<'
 
             }
         });
-    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig) {
+    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig,stageProvider) {
         var vm = this;
-        vm.steps= [
-            {
-                "id": 4,
-                "nombre": "Diagnóstico",
-                "tipo_etapa": "Diagnostico"
-            },
-            {
-                "id": 5,
-                "nombre": "Checklist",
-                "tipo_etapa": "Checklist"
-            },
-            {
-                "id": 7,
-                "nombre": "Presurizado",
-                "tipo_etapa": "Presurizado"
-            },
-            {
-                "id": 10,
-                "nombre": "Impedido",
-                "tipo_etapa": "Impedido"
-            }
-        ];
+        vm.nextStepSelected=undefined;
+        vm.steps=undefined;
+        vm.selectStep=selectStep;
+        activate();
+        function activate(){
+            console.log(vm.actualStep);
+            var promiseGetStage=stageProvider.getStage(vm.actualStep.id);
+            promiseGetStage.then(function(currentStage){
+                vm.steps=currentStage.etapas_siguientes;
+                console.log(vm.steps);
+            }).catch(function (errormsg){
+                ErrorHandler.errorTranslate(errormsg);
+            });
+        }
+
+        function selectStep(){
+            vm.nextStep({element:vm.nextStepSelected});
+            vm.step=vm.nextStepSelected;
+        }
+
+
 
 
 

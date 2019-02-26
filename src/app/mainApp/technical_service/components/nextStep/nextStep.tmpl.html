@@ -5,7 +5,7 @@
                 <md-icon md-font-icon="fas fa-sign-out-alt"></md-icon>
             </div>
             <div flex="" class="nextStep" layout-align="center start" layout="column">
-                <div layout="row" >&nbsp;<b translate="">NEXT_STEP.NEXT_STEP</b><b>{{'Diagnostico'}}</b></div>
+                <div layout="row" >&nbsp;<b translate="">NEXT_STEP.NEXT_STEP</b><b>{{$ctrl.step.nombre}}</b></div>
                 <div layout="row">
                     &nbsp;
                     <md-checkbox ng-model="$ctrl.edit_next_step">
@@ -15,9 +15,9 @@
                 </div>
             </div>
             <md-input-container class="nextStep" flex="45" ng-if="$ctrl.edit_next_step" layout="row" layout-align="end center">
-                <label translate=""></label>
-                <md-select layout-fill="" ng-model="$ctrl.nextStepSelected">
-                    <md-option ng-repeat="step in $ctrl.steps" layout-padding="">
+                <label translate="" ng-if="!$ctrl.nextStepSelected">NEXT_STEP.SELECT_STEP</label>
+                <md-select layout-fill="" ng-model="$ctrl.nextStepSelected"  md-on-close="$ctrl.selectStep()">
+                    <md-option ng-repeat="step in $ctrl.steps" layout-padding="" ng-value="step">
                         <md-icon  md-font-icon="fas fa-bezier-curve"></md-icon>
                         <b>{{step.nombre}}</b>-<span class="md-caption">{{step.tipo_etapa}}</span>
                     </md-option>

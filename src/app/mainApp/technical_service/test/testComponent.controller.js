@@ -14,6 +14,7 @@
         vm.infoStep=infoStep;
         vm.onStart=onStart;
         vm.getInsumosLote=getInsumosLote;
+        vm.nextStep=nextStep;
         vm.insumos_lote = [];
 
         vm.maxStock = 4;
@@ -93,6 +94,10 @@
             vm.step=step;
             console.log("sucursal de step");
             console.log(vm.step.control.sucursal);
+        }
+        function nextStep(step) {
+            console.log(step);
+
         }
     }
 
