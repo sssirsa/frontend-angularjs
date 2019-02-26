@@ -8,67 +8,71 @@
   opacity: 0 !important;
 }
 
-#salidaSelect{
+#salidaSelect {
   margin-top: 19px;
 }
+
 md-autocomplete[md-floating-label] md-input-container {
   padding-bottom: 2px;
 }
+
 md-input-container .md-errors-spacer {
   min-height: 0;
 }
-#udn{
+
+#udn {
   padding-top: -10px;
 }
-.white-background{
+
+.white-background {
   background-color: #FFFFFF;
   color: #607D8B;
   box-shadow: 0px 0px 10px #888888;
 }
 
 @media screen and (min-width: 600px) {
-  .thumbnails{
+  .thumbnails {
     max-width: 15vw;
   }
 }
 
-.virtualRepeatScroll{
+.virtualRepeatScroll {
   height: 80%;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-100{
+.virtualRepeatScroll-100 {
   max-height: 100px;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-200{
+.virtualRepeatScroll-200 {
   max-height: 200px;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-300{
+.virtualRepeatScroll-300 {
   max-height: 300px;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-400{
+.virtualRepeatScroll-400 {
   max-height: 400px;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-500{
+.virtualRepeatScroll-500 {
   max-height: 500px;
   width: 100%;
   overflow-y: auto;
 }
 
-.virtualRepeatScroll-600{
+.virtualRepeatScroll-600 {
   max-height: 600px;
   width: 100%;
   overflow-y: auto;
@@ -88,22 +92,47 @@ md-input-container .md-errors-spacer {
   font-size: 25px;
 
 }
-.toolbarSubtitle   {
+
+.toolbarSubtitle {
   background-color: #e0e0e0;
   color: black;
-  height:50px;
+  height: 50px;
 }
-.toolbarSubtitleIcon  {
+
+.nextStep {
+  background-color: #e0e0e0;
+  color: black;
+  height: 65px;
+}
+
+.toolbarSubtitleIcon {
   background-color: #4C9EF1;
   color: #ffffff;
-  height:70px;
+  height: 65px;
 }
-.Subtitle{
+
+.subtitleIcon {
+  background-color: #4C9EF1;
+  color: #ffffff;
+  height: 80px;
+}
+
+.grayclass {
+  background-color: rgb(96, 125, 139);
+  height: 80px;
+}
+
+.Subtitle {
   height: 60px;
 }
-.imgList{
+
+.imgList {
   max-width: 80px;
 }
-.BLUE{
-  color:#4C9EF1
+
+.BLUE {
+  color: #4C9EF1
+}
+.WHITE{
+  color: #FFFFFF;
 }

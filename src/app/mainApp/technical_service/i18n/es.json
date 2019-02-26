@@ -87,6 +87,11 @@
         "INSPECTION": "Inspección y Confirmación de Entradas",
         "SHOW_INFO": "Mas Información del Servicio"
     },
+    "NEXT_STEP":{
+        "NEXT_STEP":"Siguiente Etapa:",
+        "EDIT_NEXT_STEP":"Editar etapa siguiente",
+        "NOT_EDIT":"Mantener etapa defecto"
+    },
     "DIAGNOSIS": {
         "DIAGNOSIS": "Diagnóstico de Cabinet",
         "DIAGNOSIS_INFO":"Información del Diagnóstico",

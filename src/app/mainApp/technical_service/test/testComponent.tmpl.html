@@ -4,9 +4,12 @@
     <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)"></start-service>
     <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
     <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+
     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
                           tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Electrico'"
                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
     <symptom-manager flex="100"></symptom-manager>
     <actions-manager flex="100"></actions-manager>
+    <next-step flex="100"></next-step>
+
 </md-card>
