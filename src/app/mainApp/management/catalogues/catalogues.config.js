@@ -426,6 +426,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/impediment/impedimentReason.tmpl.html',
                 controller: 'impedimentReasonController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.failures', {
+                url: '/catalogo/falla',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/failure/failure.tmpl.html',
+                controller: 'failureCatalogController',
+                controllerAs: 'vm'
             });
 
 
@@ -641,6 +652,12 @@
                                 name: 'MAIN.MENU.CATALOGS.STORES',
                                 state: 'triangular.admin-default.catalogo-establecimientos',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.FAILURE',
+                                state: 'triangular.admin-default.failures',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
