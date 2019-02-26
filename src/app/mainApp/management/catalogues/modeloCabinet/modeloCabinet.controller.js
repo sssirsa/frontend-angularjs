@@ -149,6 +149,7 @@
                         type: 'catalog',
                         model: 'marca_id',
                         label: 'Marca',
+                        bindTo: 'marca',
                         required: true,
                         validations: {
                             errors: {
@@ -163,7 +164,6 @@
                             option: 'nombre',
                             name: 'Marca',
                             elements: 'results',
-                            bindTo: 'marca',
                             pagination: {
                                 total: 'count'
                             }
@@ -176,6 +176,7 @@
                     {
                         type: 'catalog',
                         model: 'tipo_id',
+                        bindTo: 'tipo',
                         label: 'Tipo Equipo',
                         required: true,
                         validations: {
@@ -255,12 +256,12 @@
                         label: 'Palabra clave'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'marca__nombre',
                         label: 'Marca',
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'tipo__descripcion',
                         label: 'Tipo Equipo',
                     }

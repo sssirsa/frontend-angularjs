@@ -11,7 +11,7 @@
  *              header: string,          (Optional) Header to show in the tab, default is "Search by {{label}}" or "Search by {{model}}" if no label is given either
  *              label: string,           (Optional) Label to show in the search-bar or selector. Default is model
  *              field:{
- *                  type: string,        Valid types are html5 types plus catalog and options
+ *                  type: string,        Valid types are html5 types plus catalog and options //Not yet implemented with catalog and options
  *                  catalog:{                (Optional) Just used when the type of the field is catalog, in this case the component handles itself the loading of the catalog
  *                      lazy: boolean,       (Optional) Determines if the load is lazy or initial
  *                      url: string,         Full or partial URL depending on the kind
@@ -32,19 +32,8 @@
  *                  }
  *              }
  *          }
- *      ],
- *      provider: CATALOG provider object,
- *
-*      PROVIDER = {        //Every function must return a promise, the URL must be defined when the provider object is given
- *                         //The Search dialog just uses the "search" function of the provider
-           url: null,
-           getByID: function (id) {...},
-           list: function () {...},
-           create: function (object) {...},
-           update: function (id, object) {...},
-           remove: function (id) {...},
-           search: function (query) {...}
-           }
+ *      ], *
+ *      url:string,                 URL of the API for creation.
 */
 
 (function () {
@@ -55,25 +44,37 @@
 
     function CatalogSearchDialogController(
         $mdDialog,
-        provider,
+        CATALOG,
         dialog,
-        filters
+        filters,
+        url
     ) {
         var vm = this;
 
         //Variables
         vm.selectedTab = 0;
-        vm.CatalogProvider = provider;
+        vm.CatalogProvider = CATALOG;
         vm.dialog = dialog;
         vm.filters = filters;
         vm.searchAuxVar = null;
+        vm.url = url;
 
         //Functions
         vm.search = search;
         vm.changeTab = changeTab;
-        vm.cancel = cancel;
+        vm.cancel = cancel
+
+        function createProvider() {
+            if (vm.hasOwnProperty('url')) {
+                vm.CatalogProvider.url = vm.url;
+            }
+            else {
+                $mdDialog.cancel('"url" parameter was not provided');
+            }
+        }
 
         function search(filter) {
+            createProvider();
             let query = filter.model;
             if (filter.type !== 'equals') {
                 query = query + "__" + filter.type + "=";
