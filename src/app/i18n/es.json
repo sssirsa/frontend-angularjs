@@ -79,6 +79,7 @@
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "FAILURE_TYPE": "Clasificador de Falla",
+                "FAILURE": "Fallas",
                 "IMPEDIMENT_REASON": "Motivo de Impedimento",
                 "LOCALITIES": "Localidades",
                 "NEXT_STEP": "Siguiente Paso",

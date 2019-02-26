@@ -407,6 +407,17 @@
                 controller: 'impedimentReasonController',
                 controllerAs: 'vm'
             })
+            .state('triangular.admin-default.failures', {
+                url: '/catalogo/falla',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/failure/failure.tmpl.html',
+                controller: 'failureCatalogController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.stages', {
                 url: '/catalogo/etapas',
                 data: {
@@ -644,6 +655,12 @@
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.FAILURE',
+                                state: 'triangular.admin-default.failures',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
