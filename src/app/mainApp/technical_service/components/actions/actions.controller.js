@@ -10,53 +10,50 @@
             templateUrl: 'app/mainApp/technical_service/components/actions/actions.tmpl.html',
             controller: actionsController,
             bindings: {
-                actions: '&'
+                actionsAdded: '&',
+                actualStep: '<'
 
             }
         });
-    function actionsController(Translate,URLS,ErrorHandler,EnvironmentConfig) {
+    function actionsController(Translate, URLS, ErrorHandler, EnvironmentConfig, stageProvider) {
         var vm = this;
-        const actionURL =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base+ '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
-        vm.catalogues = {
-            actions: {
-                catalog: {
-                    url:actionURL,
-                    name: Translate.translate('ACTIONS_COMPONENT.ADD_ACTION'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'com_code',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                },
-                noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint:Translate.translate('ACTIONS_COMPONENT.ADD')
-            }
-        };
-        vm.actionsDoIt=[];
+        const actionURL = (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
 
-        vm.onSelectAction=onSelectAction;
-        vm.addAction=addAction;
-        vm.deleteElement=deleteElement;
+        vm.actionsDoIt = [];
+
+        activate();
+
+
+        vm.onSelectAction = onSelectAction;
+        vm.addAction = addAction;
+        vm.deleteElement = deleteElement;
+
+        function activate() {
+            console.log(vm.actualStep);
+            var promiseGetStage = stageProvider.getStage(vm.actualStep.id);
+            promiseGetStage.then(function (currentStage) {
+                vm.actions = currentStage.acciones;
+                console.log(vm.actions);
+            }).catch(function (errormsg) {
+                ErrorHandler.errorTranslate(errormsg);
+            });
+        }
+
+
         function onSelectAction(value) {
             console.log(value);
-            vm.element=value;
+            vm.element = value;
             addAction();
         }
-        function addAction(){
+
+        function addAction() {
 
             getDuplicity();
             vm.actionsDoIt.push(vm.element);
-            vm.actions({element:vm.actionsDoIt});
+            vm.actionsAdded({element: vm.actionsDoIt});
         }
+
         function getDuplicity() {
             var index;
             for (index = 0; index < vm.actionsDoIt.length; ++index) {
@@ -65,14 +62,15 @@
                 }
             }
         }
-        function deleteElement(item){
+
+        function deleteElement(item) {
             var index;
             for (index = 0; index < vm.actionsDoIt.length; ++index) {
                 if (vm.actionsDoIt[index].com_code === item.com_code) {
                     vm.actionsDoIt.splice(index, 1);
                 }
             }
-            vm.actions({element:vm.actionsDoIt});
+            vm.actionsAdded({element: vm.actionsDoIt});
         }
 
 

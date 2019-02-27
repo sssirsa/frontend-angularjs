@@ -44,7 +44,7 @@
                         </md-input-container>
                     </div>
                 <md-content flex="100" layout-padding="">
-                <actions-manager actions="vm.getActions(element)" flex="100"></actions-manager>
+                <actions-manager ng-if="vm.step"  actual-step="vm.step.currentStage.etapa" actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
             </md-tab>
             <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
