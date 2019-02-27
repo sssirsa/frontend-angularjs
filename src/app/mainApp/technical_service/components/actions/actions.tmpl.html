@@ -9,8 +9,8 @@
             </div>
         </div>
     </md-toolbar>
-    <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
-        <md-input-container flex="100" layout-fill="">
+    <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center" >
+        <md-input-container flex="100" layout-fill=""layout-padding="">
 
             <label translate="" ng-if="!$ctrl.nextStepSelected">ACTIONS_COMPONENT.ADD</label>
             <md-select layout-fill="" ng-model="$ctrl.actionSelected"  md-on-close="$ctrl.onSelectAction($ctrl.actionSelected)">
@@ -19,6 +19,9 @@
                     <b>{{action.descripcion}}</b>-<span class="md-caption">{{action.com_code}}</span>
                 </md-option>
             </md-select>
+            <div class="hint">
+                <span translate="">ACTIONS_COMPONENT.ADD_ACTION</span>
+            </div>
         </md-input-container>
 
     </div>
