@@ -135,7 +135,7 @@
             vm.step = undefined;
         }
 
-        //  Funciones para Componentes _________________________________________________________________________________
+        //  Funciones para Componentes ___________________________________________________________________________ .all(URL.technical_service.catalogues.stage);______
 
         function infogral(cabinet) {
             vm.asset = cabinet;
@@ -144,8 +144,19 @@
         }
 
         function infoStep(step) {
-            console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
+            console.log(vm.step);
+            if(!vm.step.currentStage){
+                console.log('entre al if')
+                var promiseStep=inspectionProvider.getStep();
+                promiseStep.then(function(stage){
+                    vm.stage_for_not_stage=stage.results[0];
+                    console.log(vm.stage_for_not_stage);
+                }).catch(function (errormsg) {
+                    console.log(errormsg);
+                    ErrorHandler.errorTranslate(errormsg);
+                });
+            }
 
         }
 

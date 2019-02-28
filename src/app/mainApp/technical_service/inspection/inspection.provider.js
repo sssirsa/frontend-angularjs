@@ -17,14 +17,18 @@
             .all(URLS.technical_service.inspections.base);
         var urlrepair=API.all(URLS.technical_service.base)
             .all(URLS.technical_service.services.base);
+        var urlstep=API.all(URLS.technical_service.base).all(URLS.technical_service.catalogues.base);
+
+
 
         return {
             makeInspection: makeInspection,
             makePrecheck: makePrecheck,
-            makeChecklist:makeChecklist
+            makeChecklist:makeChecklist,
+            getStep:getStep
         };
 
-
+        var filter='?nombre=Checklist';
         function makeChecklist(body,id) {
             return urlrepair.all(URLS.technical_service.services.checklist).all(id).customPATCH(body);
         }
@@ -35,6 +39,10 @@
 
         function makeInspection(body) {
             return urlbase.all(URLS.technical_service.inspections.preliminary_inspection).customPOST(body);
+        }
+        function getStep() {
+            console.log("Get Step")
+            return urlstep.all(URLS.technical_service.catalogues.stage+'?nombre=Checklist').customGET();
         }
 
 
