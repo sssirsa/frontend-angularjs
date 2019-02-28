@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp.service')
         .controller('inspectionController', inspectionController);
-    function inspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider) {
+    function inspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider,toastr) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -156,6 +156,14 @@
                     console.log(errormsg);
                     ErrorHandler.errorTranslate(errormsg);
                 });
+            }
+            if(vm.step.currentStage.etapa.nombre!=='CheckList'||vm.stage_for_not_stage.nombre!=='CheckList'){
+                console.log("No en la etapa Correcta");
+                var NOT_CORRECT_STEP = Translate.translate('INSPECTION.ERROR.NOT_CORRECT_STEP');
+                var SENT_TO = Translate.translate('INSPECTION.ERROR.GO_TO');
+                toastr.warning(NOT_CORRECT_STEP,SENT_TO+" "+vm.step.currentStage.etapa.nombre);
+                clear();
+
             }
 
         }

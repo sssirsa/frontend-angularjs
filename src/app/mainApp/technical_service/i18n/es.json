@@ -14,6 +14,10 @@
         "EMPTY": "Vacío de Mercancía",
         "MORE_INFO": "Más Información",
         "OBSERVATIONS": "Observaciones",
+        "ERROR": {
+            "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
+            "GO_TO": "Enviar a:"
+        },
         "ACTIONS": {
             "SAVE_INSPECTION": "Confirmar Entrada",
             "SAVE_PRECHECK": "Confirmar Entrada de Garantía",
@@ -31,7 +35,7 @@
         "WITHOUT_GAS": "Sin Gas",
         "MORE_INFO": "Más Información",
         "INITIAL_INFO": "Información Inicial",
-        "OBSERVATIONS":"Observaciones",
+        "OBSERVATIONS": "Observaciones",
         "ACTIONS": {
             "SAVE_PUNCTURE": "Guardar Pinchado"
         }
@@ -76,46 +80,45 @@
     },
     "FAILURES_COMPONENT": {
         "TITLE": "Fallas Detectadas",
-        "SELECT_FAILURE_TYPE":"Seleccione el Tipo de Falla",
-        "SELECT_FAILURE_TYPE_FOR":"Seleccione el Tipo de Falla para poder seleccionar la falla detectada",
-        "SELECT_FAILURE":"Seleccione la Falla Detectada",
+        "SELECT_FAILURE_TYPE": "Seleccione el Tipo de Falla",
+        "SELECT_FAILURE_TYPE_FOR": "Seleccione el Tipo de Falla para poder seleccionar la falla detectada",
+        "SELECT_FAILURE": "Seleccione la Falla Detectada",
         "REMOVE": "Quitar elemento.",
-        "ADD_FAILURE":"Añadir falla"
+        "ADD_FAILURE": "Añadir falla"
     },
     "SHOW_INFO_SERVICE_COMPONENT": {
         "PRECHECKLIST": "Inspección de Garantía",
         "INSPECTION": "Inspección y Confirmación de Entradas",
         "SHOW_INFO": "Mas Información del Servicio"
     },
-    "NEXT_STEP":{
-        "NEXT_STEP":"Siguiente Etapa:",
-        "EDIT_NEXT_STEP":"Editar etapa siguiente",
-        "NOT_EDIT":"Mantener etapa defecto",
-        "SELECT_STEP":"Seleccione a que etapa será enviada el cabinet"
+    "NEXT_STEP": {
+        "NEXT_STEP": "Siguiente Etapa:",
+        "EDIT_NEXT_STEP": "Editar etapa siguiente",
+        "NOT_EDIT": "Mantener etapa defecto",
+        "SELECT_STEP": "Seleccione a que etapa será enviada el cabinet"
     },
     "DIAGNOSIS": {
         "DIAGNOSIS": "Diagnóstico de Cabinet",
-        "DIAGNOSIS_INFO":"Información del Diagnóstico",
-        "SEARCH_CABINET":"Buscar Cabinet",
-        "ASSET_DIAGNOSIS":"Proceso de Diagnóstico de Cabinet",
-        "SHORT_NAME":"Nombre corto",
-        "SHORT_NAME_DESC":"Nombre corto que define la falla del Cabinet en pocas palabras",
-        "DESCRIPTION":"Descripción",
-        "DESCRIPTION_DESC":"Descripción detallada de la falla, no considerada en el catálogo de fallas",
-        "IN_TIME":"Terminación en Tiempo",
-        "IN_TIME_DESC":"Define si el trabajo podrá ser terminado en el tiempo previsto",
-        "TEMP_COM":"Temperatura Compresor",
-        "TEMP_COM_DESC":"Temperatura Compresor en grados ºC",
-        "INT_TEMP":"Temperatura Interna",
-        "INT_TEMP_DESC":"Temperatura Interna en grados ºC",
-        "AMP_ARRAN":"Amperaje de Arranque",
-        "AMP_DESC":"Amperaje de Arranque en Amperes",
-        "AMP_TRAB":"Amperaje de Trabajo",
-        "AMP_TRAB_DESC":"Amperaje de Trabajo en Amperes",
-        "ACTIONS":"Acciones Realizadas",
-        "ACTIONS_DESC":"Acciones Realizadas en la etapa",
-        "FAILURES":"Fallas Detectadas",
-        "FAILURES_DESC":"Fallas detectadas en el diagnostico"
-
+        "DIAGNOSIS_INFO": "Información del Diagnóstico",
+        "SEARCH_CABINET": "Buscar Cabinet",
+        "ASSET_DIAGNOSIS": "Proceso de Diagnóstico de Cabinet",
+        "SHORT_NAME": "Nombre corto",
+        "SHORT_NAME_DESC": "Nombre corto que define la falla del Cabinet en pocas palabras",
+        "DESCRIPTION": "Descripción",
+        "DESCRIPTION_DESC": "Descripción detallada de la falla, no considerada en el catálogo de fallas",
+        "IN_TIME": "Terminación en Tiempo",
+        "IN_TIME_DESC": "Define si el trabajo podrá ser terminado en el tiempo previsto",
+        "TEMP_COM": "Temperatura Compresor",
+        "TEMP_COM_DESC": "Temperatura Compresor en grados ºC",
+        "INT_TEMP": "Temperatura Interna",
+        "INT_TEMP_DESC": "Temperatura Interna en grados ºC",
+        "AMP_ARRAN": "Amperaje de Arranque",
+        "AMP_DESC": "Amperaje de Arranque en Amperes",
+        "AMP_TRAB": "Amperaje de Trabajo",
+        "AMP_TRAB_DESC": "Amperaje de Trabajo en Amperes",
+        "ACTIONS": "Acciones Realizadas",
+        "ACTIONS_DESC": "Acciones Realizadas en la etapa",
+        "FAILURES": "Fallas Detectadas",
+        "FAILURES_DESC": "Fallas detectadas en el diagnostico"
     }
 }
