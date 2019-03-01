@@ -14,10 +14,6 @@
         "EMPTY": "Vacío de Mercancía",
         "MORE_INFO": "Más Información",
         "OBSERVATIONS": "Observaciones",
-        "ERROR": {
-            "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
-            "GO_TO": "Enviar a:"
-        },
         "ACTIONS": {
             "SAVE_INSPECTION": "Confirmar Entrada",
             "SAVE_PRECHECK": "Confirmar Entrada de Garantía",
@@ -28,6 +24,12 @@
             "STICKER": "Etiquetas",
             "STICKER_HINT": "Agregar tipo de etiqueta"
         }
+    },
+    "ERROR_STEP": {
+        "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
+        "GO_TO": "Enviar a:",
+        "NOT_STEP":"Este cabinet requiere una Inspección Previa",
+        "SENT_TO_CHECK":"Enviar a Inspección"
     },
     "PUNCTURE": {
         "PUNCTURE_MENU": "Pinchado",

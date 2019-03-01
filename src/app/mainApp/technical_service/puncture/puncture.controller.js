@@ -8,7 +8,7 @@
     angular
         .module('app.mainApp.service')
         .controller('punctureController', punctureController);
-    function punctureController($scope, Translate, ErrorHandler,  punctureProvider) {
+    function punctureController($scope, Translate, ErrorHandler, punctureProvider, toastr) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -18,7 +18,7 @@
             cabinet_id: undefined,
             gas: false,
             observaciones: '',
-            fecha_revision:undefined
+            fecha_revision: undefined
 
 
         };
@@ -34,15 +34,13 @@
         vm.infoStep = infoStep;
         vm.getInsumosLote = getInsumosLote;
         vm.getActions = getActions;
-        vm.onStart=onStart;
+        vm.onStart = onStart;
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
 
 
-
-
         function sendPuncture() {
-            vm.puncture.sucursal_id=vm.step.control.sucursal.id;
+            vm.puncture.sucursal_id = vm.step.control.sucursal.id;
             vm.puncture.acciones_id = [];
             if (vm.puncture.insumos_lote) {
                 if (vm.puncture.insumos_lote.length === 0) {
@@ -59,7 +57,7 @@
                     }
                 }
             }
-            var promiseSendPuncture = punctureProvider.makePuncture(vm.puncture,vm.step.currentStage.id);
+            var promiseSendPuncture = punctureProvider.makePuncture(vm.puncture, vm.step.currentStage.id);
             promiseSendPuncture.then(function (response) {
                 ErrorHandler.successCreation();
                 clear();
@@ -79,21 +77,39 @@
 
         function infogral(cabinet) {
             vm.asset = cabinet;
-            vm.puncture.cabinet_id = vm.asset.economico;
-
+            if (vm.puncture) {
+                vm.puncture.cabinet_id = vm.asset.economico;
+            }
         }
 
         function infoStep(step) {
             console.log(step.currentStage);
             vm.step = step;
 
+            if (!vm.step) {
+                console.log();
+                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                clear();
+            }
+            if (vm.step.currentStage.etapa.nombre !== 'Pinchado') {
+                console.log("No en la etapa Correcta");
+                var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                clear();
+
+            }
+
         }
 
         function getInsumosLote(element) {
             vm.puncture.insumos_lote = element;
         }
-        function onStart(startDate){
-            vm.puncture.fecha_revision=moment(startDate).format('YYYY-MM-DD[T]HH:mm:ss.SSSSSS[Z]');
+
+        function onStart(startDate) {
+            vm.puncture.fecha_revision = moment(startDate).format('YYYY-MM-DD[T]HH:mm:ss.SSSSSS[Z]');
 
         }
 

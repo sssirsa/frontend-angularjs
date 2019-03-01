@@ -159,8 +159,8 @@
             }
             if(vm.step.currentStage.etapa.nombre!=='CheckList'||vm.stage_for_not_stage.nombre!=='CheckList'){
                 console.log("No en la etapa Correcta");
-                var NOT_CORRECT_STEP = Translate.translate('INSPECTION.ERROR.NOT_CORRECT_STEP');
-                var SENT_TO = Translate.translate('INSPECTION.ERROR.GO_TO');
+                var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_CORRECT_STEP,SENT_TO+" "+vm.step.currentStage.etapa.nombre);
                 clear();
 
