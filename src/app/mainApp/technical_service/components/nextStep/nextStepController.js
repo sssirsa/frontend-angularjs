@@ -10,40 +10,88 @@
             controller: nextStepController,
             bindings: {
                 nextStep: '&',
-                failures:'<',
-                actualStep:'<'
+                failures: '<',
+                actualStep: '<'
 
             }
         });
-    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig,stageProvider) {
+    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig, stageProvider) {
         var vm = this;
-        vm.nextStepSelected=undefined;
-        vm.steps=undefined;
-        vm.selectStep=selectStep;
+        vm.nextStepSelected = undefined;
+        vm.steps = undefined;
+        vm.step = undefined;
+        vm.selectStep = selectStep;
         activate();
-        function activate(){
-            console.log(vm.actualStep);
-            var promiseGetStage=stageProvider.getStage(vm.actualStep.id);
-            promiseGetStage.then(function(currentStage){
-                vm.steps=currentStage.etapas_siguientes;
+        function activate() {
+
+            if (vm.actualStep) {
+                console.log(vm.actualStep);
+                getStagesByActualStage();
+
+            }
+            if (vm.failures) {
+                getStagesByFailures();
+            }
+        }
+//Función que obtiene las etapas siguientes a partir de la etapa actual
+        function getStagesByActualStage() {
+            var promiseGetStage = stageProvider.getStage(vm.actualStep.id);
+            promiseGetStage.then(function (currentStage) {
+                vm.steps = currentStage.etapas_siguientes;
                 console.log(vm.steps);
-            }).catch(function (errormsg){
+                //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
+                //a partir de la etapa actual
+                if(currentStage.etapa_defecto){
+                    vm.step=currentStage.etapa_defecto;
+                }else{
+                    vm.edit_next_step=true;
+                    vm.step.nombre="Es necesario se Seleccione Etapa";
+                }
+            }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
             });
-            if(vm.failures.lenght>0){
-                vm.failures.forEach(function (failure){
-                    console.log(failure);
+        }
+//Función que obtiene las etapas siguientes posibles a partir del caralogo de fallas
+        function getStagesByFailures() {
+            vm.steps = [];
+            if (vm.failures.length > 0) {
+                //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
+                //a partir del sintoma
+                if(vm.failures.length===1 && vm.failures[0].etapa_defecto){
+                    vm.step=vm.failures[0].etapa_defecto;
+                }
+                if (vm.failures.length>1 && !vm.step){
+                    vm.edit_next_step=true;
+                    vm.step.nombre="Es necesario se Seleccione Etapa";
+                }
+                vm.failures.forEach(function (failure) {
+                    console.log(failure.etapas_posibles);
+                    if (failure.etapas_posibles.length > 0) {
+                        failure.etapas_posibles.forEach(function (stage) {
+                            console.log(stage);
+                            vm.steps.push(stage);
+                            getDuplicity(stage);
+                        });
+
+                    }
                 });
+            }
+
+        }
+
+        function getDuplicity(stage) {
+            var index;
+            for (index = 0; index < vm.steps.length; ++index) {
+                if (vm.steps[index].id === stage.id) {
+                    vm.steps.splice(index, 1);
+                }
             }
         }
 
-        function selectStep(){
-            vm.nextStep({element:vm.nextStepSelected});
-            vm.step=vm.nextStepSelected;
+        function selectStep() {
+            vm.nextStep({element: vm.nextStepSelected});
+            vm.step = vm.nextStepSelected;
         }
-
-
-
 
 
     }
