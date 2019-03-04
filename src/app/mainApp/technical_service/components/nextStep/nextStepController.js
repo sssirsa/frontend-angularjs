@@ -30,6 +30,11 @@
             }).catch(function (errormsg){
                 ErrorHandler.errorTranslate(errormsg);
             });
+            if(vm.failures.lenght>0){
+                vm.failures.forEach(function (failure){
+                    console.log(failure);
+                });
+            }
         }
 
         function selectStep(){
