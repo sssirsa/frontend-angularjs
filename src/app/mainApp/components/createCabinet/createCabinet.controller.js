@@ -125,29 +125,6 @@
                     reverse: false
                 }
             },
-            status_com: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.status_com,
-                    kind: 'Generic',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
             categoria: {
                 catalog: {
                     url: EnvironmentConfig.site.rest.api

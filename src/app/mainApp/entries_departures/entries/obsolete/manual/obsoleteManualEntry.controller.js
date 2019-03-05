@@ -190,30 +190,6 @@
                 },
                 {
                     type: 'catalog',
-                    model: 'estatus_com_id',
-                    label: 'Estatus COM',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_com,
-                        name: 'Estatus COM',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                },
-                {
-                    type: 'catalog',
                     model: 'categoria_id',
                     label: 'Categoría',
                     catalog: {
