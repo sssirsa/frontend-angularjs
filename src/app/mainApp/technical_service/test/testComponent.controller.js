@@ -97,7 +97,8 @@
             console.log(vm.step.control.sucursal);
         }
         function nextStep(step) {
-            console.log(step);
+
+            console.log("siguiente etapa:"+step);
 
         }
         function getFailures(failures) {

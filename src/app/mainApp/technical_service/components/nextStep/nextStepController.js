@@ -43,6 +43,7 @@
                 //a partir de la etapa actual
                 if(currentStage.etapa_defecto){
                     vm.step=currentStage.etapa_defecto;
+                    vm.nextStep({element: vm.step});
                 }else{
                     vm.edit_next_step=true;
                     vm.step.nombre="Es necesario se Seleccione Etapa";
@@ -59,6 +60,7 @@
                 //a partir del sintoma
                 if(vm.failures.length===1 && vm.failures[0].etapa_defecto){
                     vm.step=vm.failures[0].etapa_defecto;
+                    vm.nextStep({element: vm.step});
                 }
                 if (vm.failures.length>1 && !vm.step){
                     vm.edit_next_step=true;

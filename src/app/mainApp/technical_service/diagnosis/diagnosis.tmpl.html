@@ -77,7 +77,7 @@
                             </md-input-container>
                         </div>
                         <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
-
+                        <next-step ng-if="vm.step && vm.failures.length>0" failures="vm.failures" flex="100" next-step="vm.nextStep(element)" actual-step="vm.step.currentStage.etapa"></next-step>
                     </div>
 
 
