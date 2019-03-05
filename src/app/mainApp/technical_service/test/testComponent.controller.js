@@ -15,6 +15,7 @@
         vm.onStart=onStart;
         vm.getInsumosLote=getInsumosLote;
         vm.nextStep=nextStep;
+        vm.getFailures=getFailures;
         vm.insumos_lote = [];
 
         vm.maxStock = 4;
@@ -97,6 +98,11 @@
         }
         function nextStep(step) {
             console.log(step);
+
+        }
+        function getFailures(failures) {
+            vm.failures = failures;
+            console.log(vm.failures);
 
         }
     }

@@ -24,7 +24,7 @@
         activate();
         function activate() {
 
-            if (vm.actualStep) {
+            if (vm.actualStep && !vm.failures) {
                 console.log(vm.actualStep);
                 getStagesByActualStage();
 
@@ -68,9 +68,9 @@
                     console.log(failure.etapas_posibles);
                     if (failure.etapas_posibles.length > 0) {
                         failure.etapas_posibles.forEach(function (stage) {
-                            console.log(stage);
-                            vm.steps.push(stage);
                             getDuplicity(stage);
+                            vm.steps.push(stage);
+                            console.log(stage);
                         });
 
                     }
