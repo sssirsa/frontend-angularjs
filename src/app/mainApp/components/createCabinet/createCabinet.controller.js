@@ -39,9 +39,9 @@
 
 
         function listMarcas(){
-            vm.loadingPromise = MarcaCabinet.listPromise()
+            vm.loadingPromise = MarcaCabinet.listPromise(1000, 0)
                 .then(function (res) {
-                    vm.marcas = Helper.filterDeleted(res, true);
+                    vm.marcas = Helper.filterDeleted(res.results, true);
                 })
                 .catch(function (err) {
 
@@ -49,8 +49,8 @@
         }
 
         function listModelos() {
-            vm.loadingPromise = ModeloCabinet.listWitout().then(function (res) {
-                models = Helper.filterDeleted(res, true);
+            vm.loadingPromise = ModeloCabinet.listWitout(1000, 0).then(function (res) {
+                models = Helper.filterDeleted(res.results, true);
             }).catch(function(err){
 
             });
