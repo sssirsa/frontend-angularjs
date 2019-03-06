@@ -97,19 +97,33 @@
                     }
                     if (field.type === 'catalog') {
                         if (field.bindTo) {
-                            let catalogElement = JSON.parse(
-                                JSON.stringify(
-                                    vm.objectToModify[field.bindTo]
-                                ))[field.catalog.model];
-                            vm.objectToModify[field.model] = catalogElement;
-                            delete (vm.objectToModify[field.bindTo]);
+                            if (vm.objectToModify[field.bindTo]) {
+                                let catalogElement = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.bindTo]
+                                    ))[field.catalog.model];
+                                vm.objectToModify[field.model] = catalogElement;
+                                delete (vm.objectToModify[field.bindTo]);
+                            }
+                            else {
+                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.bindTo] is undefined',
+                                    field.bindTo,
+                                    vm.objectToModify);
+                            }
                         }
                         else {
-                            let catalogElement = JSON.parse(
-                                JSON.stringify(
-                                    vm.objectToModify[field.model]
-                                ))[field.catalog.model];
-                            vm.objectToModify[field.model] = catalogElement;
+                            if (vm.objectToModify[field.model]) {
+                                let catalogElement = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.model]
+                                    ))[field.catalog.model];
+                                vm.objectToModify[field.model] = catalogElement;
+                            }
+                            else {
+                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.model] is undefined',
+                                    field.model,
+                                    vm.objectToModify);
+                            }
                         }
                     }
                 }
