@@ -23,11 +23,12 @@
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+
+            <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id" on-start="vm.onStart(element)"></start-service>
         </div>
 
-
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
-                 ng-if="vm.asset.economico">
+                 ng-if="vm.step.currentStage.id">
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
                     <h3 translate="">DIAGNOSIS.ASSET_DIAGNOSIS</h3>

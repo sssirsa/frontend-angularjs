@@ -37,6 +37,7 @@
         vm.getInsumosLote = getInsumosLote;
         vm.getFailures = getFailures;
         vm.getActions = getActions;
+        vm.nextStep = nextStep;
         //--------------------------------------------------------------------------------------------------------------
 
         //Declaracion de Funciones como variables_______________________________________________________________________
@@ -72,6 +73,8 @@
         }
 
         function infoStep(step) {
+            console.log('etapa actual:');
+            console.log(step.currentStage.id);
             console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
 
@@ -84,6 +87,11 @@
         function getFailures(failures) {
             vm.failures = failures;
             console.log(vm.failures);
+
+        }
+        function nextStep(step) {
+
+            console.log("siguiente etapa:"+step);
 
         }
 

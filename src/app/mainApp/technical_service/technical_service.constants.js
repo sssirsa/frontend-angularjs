@@ -22,7 +22,11 @@
                 base:'repair',
                 service:'cabinet_service',
                 current_stage:'current_stage',
-                checklist:'checklist'
+                checklist:'checklist',
+                stage:'stage',
+                diagnose:'diagnose',
+                puncture:'puncture',
+                pressurize:'pressurize'
             },
             puncture:{
                 base:'puncture'
