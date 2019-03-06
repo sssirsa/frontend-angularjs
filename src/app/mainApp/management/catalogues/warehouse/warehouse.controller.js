@@ -210,6 +210,7 @@
                     {
                         type: 'catalog',
                         model: 'sucursal_id',
+                        bindTo:'sucursal',
                         label: 'Sucursal',
                         required: true,
                         validations: {
