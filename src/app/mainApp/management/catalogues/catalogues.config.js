@@ -645,12 +645,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.STORES',
-                                state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.STORES',
+                            //    state: 'triangular.admin-default.catalogo-establecimientos',
+                            //    permission: ['ADMINISTRADOR', 'TECNICO E'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',
@@ -669,12 +669,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
-                                state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
+                            //    state: 'triangular.admin-default.catalogue-segmentation',
+                            //    permission: ['ADMINISTRADOR'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.SYMPTOM',
                                 state: 'triangular.admin-default.symptom',
