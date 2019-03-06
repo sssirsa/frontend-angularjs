@@ -24,21 +24,21 @@
 
         };
 
-        var nada={};
-        function startStage(id) {
-            return urlrepair.all(URLS.technical_service.services.stage).all(id).customPATCH(nada);
+
+        function startStage(id,body) {
+            return urlrepair.all(URLS.technical_service.services.stage).all(id).customPATCH(body);
         }
 
-        function startDiagnosis(id) {
-            return urlrepair.all(URLS.technical_service.services.diagnose).all(id).customPATCH(nada);
+        function startDiagnosis(id,body) {
+            return urlrepair.all(URLS.technical_service.services.diagnose).all(id).customPATCH(body);
         }
 
-        function startPuncture(id) {
-            return urlrepair.all(URLS.technical_service.services.puncture).all(id).customPATCH(nada);
+        function startPuncture(id,body) {
+            return urlrepair.all(URLS.technical_service.services.puncture).all(id).customPATCH(body);
         }
 
-        function startPresurize(id) {
-            return urlrepair.all(URLS.technical_service.services.pressurize).all(id).customPATCH(nada);
+        function startPresurize(id,body) {
+            return urlrepair.all(URLS.technical_service.services.pressurize).all(id).customPATCH(body);
         }
 
 

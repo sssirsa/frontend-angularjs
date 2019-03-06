@@ -13,7 +13,8 @@
                 diagnosis: '<',
                 puncture: '<',
                 presurize: '<',
-                stage: '<'
+                stage: '<',
+                sucursal:'<'
             }
         });
     function startServiceController($interval, startServiceProvider, ErrorHandler) {
@@ -23,19 +24,21 @@
 
         function startService() {
             vm.date = new Date();
-
+            vm.body={
+                sucursal_id:vm.sucursal
+            };
             var promiseStartStage = undefined;
             if (vm.diagnosis) {
-                promiseStartStage = startServiceProvider.startDiagnosis(vm.diagnosis);
+                promiseStartStage = startServiceProvider.startDiagnosis(vm.diagnosis,vm.body);
             }
             if (vm.puncture) {
-                promiseStartStage = startServiceProvider.startPuncture(vm.diagnosis);
+                promiseStartStage = startServiceProvider.startPuncture(vm.diagnosis,vm.body);
             }
             if (vm.presurize) {
-                promiseStartStage = startServiceProvider.startPresurize(vm.diagnosis);
+                promiseStartStage = startServiceProvider.startPresurize(vm.diagnosis,vm.body);
             }
             if (vm.stage) {
-                promiseStartStage = startServiceProvider.startStage(vm.diagnosis);
+                promiseStartStage = startServiceProvider.startStage(vm.diagnosis,vm.body);
             }
             if (promiseStartStage) {
                 promiseStartStage.then(function (response) {

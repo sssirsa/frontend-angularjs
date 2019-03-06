@@ -74,6 +74,7 @@
 
         function infoStep(step) {
             console.log('etapa actual:');
+            console.log(step);
             console.log(step.currentStage.id);
             console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
