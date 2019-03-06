@@ -23,7 +23,7 @@
                     vm.array_objects[field.model] = {};
                 }
             });
-            ///bindData();
+            bindData();
             //loadCatalogues();
             //Functionality delegated to the catalog-select Component
             loadCatalogArrays();
