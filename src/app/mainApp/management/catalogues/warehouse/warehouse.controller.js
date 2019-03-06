@@ -286,8 +286,8 @@
                         label: 'Profundidad Máxima'
                     },
                     {
-                        type: 'text',
-                        model: 'sucursal_nombre',
+                        type: 'object_property',
+                        model: 'sucursal__nombre',
                         label: 'Sucursal'
                     }
                 ],
