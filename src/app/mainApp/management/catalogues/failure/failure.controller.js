@@ -103,7 +103,7 @@
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.failure_type,
+                                + '/' + URLS.technical_service.catalogues.stage,
                             pagination: {},
                             elements: 'results',
                             name: 'Etapas posibles',
@@ -184,7 +184,7 @@
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.failure_type,
+                                + '/' + URLS.technical_service.catalogues.stage,
                             pagination: {},
                             elements: 'results',
                             name: 'Etapas posibles',
