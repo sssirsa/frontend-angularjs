@@ -108,7 +108,7 @@
                                md-on-close="vm.selectState()">
                         <md-option ng-repeat="option in field.options.elements"
                                    ng-value="option[field.options.model]">
-                            <section ng-if="!field.option.showModel">
+                            <section ng-if="!field.options.showModel">
                                 <section ng-if="field.option">
                                     {{option[field.options.option]}}
                                 </section>
@@ -116,7 +116,7 @@
                                     {{option[field.options.model]}}
                                 </section>
                             </section>
-                            <section ng-if="field.option.showModel">
+                            <section ng-if="field.options.showModel">
                                 <b>{{option[field.options.model]}}</b> - {{option[field.options.option]}}
                             </section>
                         </md-option>
