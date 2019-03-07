@@ -10,7 +10,7 @@
                 failure:'failure',
                 failure_type: 'failure_type',
                 next_step: 'next_step',
-                stage:'stage',
+                stage: 'stage',
                 symptom: 'symptom'
             },
             choices: {

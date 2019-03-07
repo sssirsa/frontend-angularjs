@@ -11,6 +11,7 @@
                          && field['type']!=='array'
                          && field['type']!=='catalog_array'
                          && field['type']!=='object'
+                         && field['type']!=='boolean'
                          && field['type']!=='array_object'">
             <md-input-container layout="column" class="md-block">
                 <!--Field label selection depending on the parameters given-->
@@ -33,6 +34,14 @@
                      class="hint">
                     {{field.hint}}
                 </div>
+            </md-input-container>
+        </section>
+        <section ng-if="field['type']==='boolean'">
+            <md-input-container class="md-block">
+                <md-switch ng-model="vm.objectToModify[field.model]">
+                    <div ng-if="field['label']">{{field.label}}</div>
+                    <div ng-if="!field['label']">{{field.model}}</div>
+                </md-switch>
             </md-input-container>
         </section>
         <section ng-if="field['type']==='color'">
@@ -85,7 +94,17 @@
                            ng-disabled="field.lock">
                     <md-option ng-repeat="option in field.options.elements"
                                ng-value="option[field.options.model]">
-                        {{option[field.options.option]}}
+                        <section ng-if="!field.option.showModel">
+                            <section ng-if="field.option">
+                                {{option[field.options.option]}}
+                            </section>
+                            <section ng-if="!field.option">
+                                {{option[field.options.model]}}
+                            </section>
+                        </section>
+                        <section ng-if="field.option.showModel">
+                            <b>{{option[field.options.model]}}</b> - {{option[field.options.option]}}
+                        </section>
                     </md-option>
                 </md-select>
             </md-input-container>
