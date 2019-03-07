@@ -8,7 +8,7 @@
         .module('app.mainApp.service')
         .controller('diagnosisController', diagnosisController);
 
-    function diagnosisController($scope, Translate, toastr, cabinetUC, ErrorHandler) {
+    function diagnosisController($scope, Translate, toastr, ErrorHandler,diagnosisProvider) {
         var vm = this;
 
         vm.asset = undefined;//objeto contenedor del cabinet
@@ -42,6 +42,7 @@
 
         //Declaracion de Funciones como variables_______________________________________________________________________
         vm.clear = clear;
+        vm.sendDiagnosis=sendDiagnosis;
 
         //Funciones Propias de la Pantalla
         function clear() {
@@ -88,6 +89,19 @@
                 vm.diagnostic.temp_com=vm.step.currentStage.diagnostico.temp_com;
                 vm.diagnostic.temp_int=vm.step.currentStage.diagnostico.temp_int;
             }
+        }
+
+        function sendDiagnosis() {
+            var promiseSendDiagnosis=diagnosisProvider.sendDiagnosis(vm.step.currentStage.id,vm.diagnostic);
+            promiseSendDiagnosis.then(function(response){
+                console.info(response);
+                clear();
+
+            }).catch(function (errormsg) {
+                console.error(errormsg);
+                ErrorHandler.errorTranslate(errormsg);
+            });
+
         }
 
         function getInsumosLote(element) {

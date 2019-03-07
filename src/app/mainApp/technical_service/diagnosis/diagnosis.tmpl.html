@@ -87,7 +87,7 @@
             <md-tab label="{{vm.assets_info}}">
                 <md-content>
                     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
-                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Diagnóstico'"
+                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="vm.step.currentStage.etapa.nombre"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
                     <actions-manager ng-if="vm.step"  actual-step="vm.step.currentStage.etapa" actions="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
