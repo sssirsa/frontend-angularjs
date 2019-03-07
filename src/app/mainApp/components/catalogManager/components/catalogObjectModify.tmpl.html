@@ -36,6 +36,14 @@
                 </div>
             </md-input-container>
         </section>
+        <section ng-if="field['type']==='boolean'">
+            <md-input-container class="md-block">
+                <md-switch ng-model="vm.objectToModify[field.model]">
+                    <div ng-if="field['label']">{{field.label}}</div>
+                    <div ng-if="!field['label']">{{field.model}}</div>
+                </md-switch>
+            </md-input-container>
+        </section>
         <section ng-if="field['type']==='color'">
             <md-input-container class="md-block">
                 <!--Field label selection depending on the parameters given-->
