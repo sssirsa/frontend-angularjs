@@ -20,16 +20,20 @@
         vm.nextStepSelected = undefined;
         vm.steps = undefined;
         vm.step = undefined;
+        vm.endService=true;
         vm.selectStep = selectStep;
+        vm.activate=activate;
         activate();
         function activate() {
 
             if (vm.actualStep && !vm.failures) {
+                console.log("Sin fallas")
                 console.log(vm.actualStep);
                 getStagesByActualStage();
 
             }
             if (vm.failures) {
+                console.log("Con fallas")
                 getStagesByFailures();
             }
         }
@@ -58,13 +62,14 @@
             if (vm.failures.length > 0) {
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir del sintoma
+                console.log("hay mas de una falla");
                 if(vm.failures.length===1 && vm.failures[0].etapa_defecto){
                     vm.step=vm.failures[0].etapa_defecto;
                     vm.nextStep({element: vm.step});
                 }
                 if (vm.failures.length>1 && !vm.step){
                     vm.edit_next_step=true;
-                    vm.step.nombre="Es necesario se Seleccione Etapa";
+                    console.log(vm.steps);
                 }
                 vm.failures.forEach(function (failure) {
                     console.log(failure.etapas_posibles);
@@ -77,6 +82,7 @@
 
                     }
                 });
+
                 if (vm.steps.length===0){
                     getStagesByActualStage();
                 }

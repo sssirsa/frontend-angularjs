@@ -11,7 +11,7 @@
     <symptom-manager flex="100"></symptom-manager>
     <actions-manager  ng-if="vm.step"  actual-step="vm.step.currentStage.etapa" flex="100"></actions-manager>
     <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
-    <next-step ng-if="vm.step && vm.failures.length>0" failures="vm.failures" flex="100" next-step="vm.nextStep(element)" actual-step="vm.step.currentStage.etapa"></next-step>
+    <next-step ng-if="vm.step" failures="vm.failures" flex="100" next-step="vm.nextStep(element)" actual-step="vm.step.currentStage.etapa"></next-step>
 
 
 </md-card>
