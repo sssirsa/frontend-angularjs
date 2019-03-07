@@ -3,6 +3,7 @@
     angular.module('app.mainApp', [
         'app.mainApp.com',
         'app.mainApp.entries_departures',
+        'app.mainApp.external_service',
         'app.mainApp.inventory',
         'app.mainApp.management',
         'app.mainApp.reports',

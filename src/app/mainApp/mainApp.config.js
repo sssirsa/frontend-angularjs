@@ -11,6 +11,7 @@
         INVENTORY,
         MANAGEMENT,
         TECHNICAL_SERVICE,
+        EXTERNAL_SERVICE,
         URLS,
         $provide
     ) {
@@ -18,6 +19,7 @@
         URLS.inventory = INVENTORY;
         URLS.management = MANAGEMENT;
         URLS.technical_service = TECHNICAL_SERVICE;
+        URLS.external_service = EXTERNAL_SERVICE;
 
         $provide.constant('URLS', URLS);
     }
