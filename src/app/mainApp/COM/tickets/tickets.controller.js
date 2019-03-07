@@ -73,12 +73,10 @@
         };
 
 
-
         function list(limit, offset, querySet) {
             if (querySet === undefined) {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
-            }
-            else {
+            } else {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset + '&' + querySet).customGET();
             }
         }
@@ -182,7 +180,11 @@
             TicketProviderPromise.then(function (serviceDetails) {
                 vm.serviceDetails = serviceDetails.service_details;
                 //  console.log(vm.serviceDetails);
-                getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
+                if (vm.serviceDetails.length == 1) {
+                    getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
+                } else {
+                    getPossibleMessages('291110003', activity);
+                }
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
             });
@@ -192,7 +194,10 @@
         function getPossibleMessages(service_task_type, activity) {
             var messages_statusPromise = TicketProvider.getTicket_type(service_task_type);
             messages_statusPromise.then(function (message_status) {
-                vm.messageStatusCatalog = _.where(message_status.messages_status, { categoria: activity });
+                vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
+                console.log(vm.messageStatusCatalog);
+                console.log(message_status);
+                console.log(activity);
                 // console.log(vm.messageStatusCatalog);
                 createMeta(activity);
             }).catch(function (error) {
@@ -261,12 +266,24 @@
                                     label: Translate.translate('COM.FIELDS.SERIAL_NUMBER'),
                                     lock: true
                                 }, {
-                                    type: 'string',
+                                    type: 'catalog',
                                     model: 'bar_code',
                                     required: true,
                                     hint: Translate.translate('COM.FIELDS.BAR_CODE'),
                                     label: Translate.translate('COM.FIELDS.BAR_CODE'),
-                                    lock: true
+                                    catalog: {
+                                        url: EnvironmentConfig.site.rest.api
+                                            + '/' + URLS.management.base
+                                            + '/' + URLS.management.inventory.base
+                                            + '/' + URLS.management.inventory.cabinet,
+                                        name: Translate.translate('COM.FIELDS.CABINET'),
+                                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                                        model: 'economico',//campo a pasar
+                                        option: 'economico',//campo a mostrar
+                                        elements: 'results',
+                                        showModel: false,
+                                        pagination: {}
+                                    }
                                 }, {
                                     type: 'string',
                                     model: 'product_description',
@@ -548,8 +565,7 @@
                     ]
                 };
                 openDialog();
-            }
-            else {
+            } else {
                 //console.log(vm.serviceDetails);
 
                 vm.meta_incidences = {
@@ -568,7 +584,8 @@
                                     options: {
                                         model: "com_code",
                                         option: "com_code",
-                                        elements: vm.messageStatusCatalog
+                                        elements: vm.messageStatusCatalog,
+                                        showModel: true
                                     }
                                 },
                                 {
