@@ -567,7 +567,7 @@
                 openDialog();
             } else {
                 //console.log(vm.serviceDetails);
-
+                console.log(vm.messageStatusCatalog);
                 vm.meta_incidences = {
 
                     fields: [
@@ -583,7 +583,7 @@
                                     required: true,
                                     options: {
                                         model: "com_code",
-                                        option: "com_code",
+                                        option: "nombre_com",
                                         elements: vm.messageStatusCatalog,
                                         showModel: true
                                     }
