@@ -12,6 +12,7 @@
                          && field['type']!=='array'
                          && field['type']!=='catalog_array'
                          && field['type']!=='object'
+                         && field['type']!=='boolean'
                          && field['type']!=='array_object'">
                 <md-input-container layout="column" class="md-block">
                     <!--Field label selection depending on the parameters given-->
@@ -99,7 +100,17 @@
                                md-on-close="vm.selectState()">
                         <md-option ng-repeat="option in field.options.elements"
                                    ng-value="option[field.options.model]">
-                            {{option[field.options.option]}}
+                            <section ng-if="!field.option.showModel">
+                                <section ng-if="field.option">
+                                    {{option[field.options.option]}}
+                                </section>
+                                <section ng-if="!field.option">
+                                    {{option[field.options.model]}}
+                                </section>
+                            </section>
+                            <section ng-if="field.option.showModel">
+                                <b>{{option[field.options.model]}}</b> - {{option[field.options.option]}}
+                            </section>
                         </md-option>
                     </md-select>
                 </md-input-container>
