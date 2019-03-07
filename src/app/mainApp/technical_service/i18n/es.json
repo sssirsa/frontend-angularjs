@@ -97,7 +97,9 @@
         "NEXT_STEP": "Siguiente Etapa:",
         "EDIT_NEXT_STEP": "Editar etapa siguiente",
         "NOT_EDIT": "Mantener etapa defecto",
-        "SELECT_STEP": "Seleccione a que etapa será enviada el cabinet"
+        "SELECT_STEP": "Seleccione a que etapa será enviada el cabinet",
+        "CLOSE_SERVICE":"Cerrar Etapa",
+        "SAVE_SERVICE_WITHOUT_CLOSE":"Guardar Etapa Sin Cerrar"
     },
     "DIAGNOSIS": {
         "DIAGNOSIS": "Diagnóstico de Cabinet",

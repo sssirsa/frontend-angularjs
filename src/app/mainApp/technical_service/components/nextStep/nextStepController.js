@@ -77,6 +77,9 @@
 
                     }
                 });
+                if (vm.steps.length===0){
+                    getStagesByActualStage();
+                }
             }
 
         }

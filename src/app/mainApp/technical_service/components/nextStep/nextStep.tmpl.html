@@ -1,5 +1,11 @@
 <div>
     <div flex="100">
+        <md-checkbox ng-model="$ctrl.endService">
+            <b class="md-caption" ng-if="$ctrl.endService" translate="">NEXT_STEP.CLOSE_SERVICE</b>
+            <b class="md-caption" ng-if="!$ctrl.endService" translate="">NEXT_STEP.SAVE_SERVICE_WITHOUT_CLOSE</b>
+        </md-checkbox>
+    </div>
+    <div flex="100" ng-if="$ctrl.endService">
         <div layout="row" class="grayclass" layout-align="center center">
             <div flex="10" class="subtitleIcon" layout="row" layout-align="center center">
                 <md-icon md-font-icon="fas fa-sign-out-alt"></md-icon>
