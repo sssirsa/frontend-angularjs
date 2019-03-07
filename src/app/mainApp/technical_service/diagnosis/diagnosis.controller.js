@@ -78,7 +78,16 @@
             console.log(step.currentStage.id);
             console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
-
+            if(vm.step.currentStage.diagnostico){
+                vm.diagnostic.nombre_corto=vm.step.currentStage.diagnostico.nombre_corto;
+                vm.diagnostic.amp_arran=vm.step.currentStage.diagnostico.amp_arran;
+                vm.diagnostic.amp_trab=vm.step.currentStage.diagnostico.amp_trab;
+                vm.diagnostic.descripcion=vm.step.currentStage.diagnostico.descripcion;
+                vm.diagnostic.en_tiempo=vm.step.currentStage.diagnostico.en_tiempo;
+                vm.diagnostic.fallas=vm.step.currentStage.diagnostico.fallas;
+                vm.diagnostic.temp_com=vm.step.currentStage.diagnostico.temp_com;
+                vm.diagnostic.temp_int=vm.step.currentStage.diagnostico.temp_int;
+            }
         }
 
         function getInsumosLote(element) {
@@ -91,7 +100,6 @@
 
         }
         function nextStep(step) {
-
             console.log("siguiente etapa:"+step);
 
         }
