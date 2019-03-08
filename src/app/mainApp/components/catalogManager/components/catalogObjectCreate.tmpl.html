@@ -121,11 +121,11 @@
                             </section>
                         </md-option>
                     </md-select>
+                    <div ng-if="field.hint"
+                         class="hint">
+                        {{field.hint}}
+                    </div>
                 </md-input-container>
-                <div ng-if="field.hint"
-                     class="hint">
-                    {{field.hint}}
-                </div>
             </section>
             <section ng-if="field['type']==='catalog'">
                 <section ng-if="field['catalog'].requires">
