@@ -9,7 +9,8 @@
         API,
         $window,
         URLS) {
-        var baseUrl=API.all(URLS.mobile.base).all(URLS.preRequest);
+        var baseUrl=API.all(URLS.external_service.base).all(URLS.preRequest.base);
+        //var baseUrl=API.all(URLS.mobile.base).all(URLS.preRequest);
         var service = {
             getByID: getByID,
             getAll: getAll,

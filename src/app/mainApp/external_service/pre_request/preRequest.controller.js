@@ -3,7 +3,7 @@
         .module('app.mainApp.external_service.pre_request')
         .controller('preRequestController', preRequestController);
 
-    function preRequestController(EXTERNAL_SERVICE){
+    function preRequestController(URLS, preRequests){
 
         var vm = this;
 
