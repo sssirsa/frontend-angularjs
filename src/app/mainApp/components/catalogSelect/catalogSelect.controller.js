@@ -42,7 +42,10 @@
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
  *      },
- *      initial:string        (Optional) Must be the ID you want to be selected
+ *      initial:string,       (Optional) Must be the ID you want to be selected
+ *      showModel:boolean,    (Optional) Allows to shoe the model and the option of the catalog with the following format
+ *                            <b>{{model}}</b> - {{option}}
+ *      multiple:boolean      (Optional) Allows to select more than one element.
  *      ---------------------------------------
  *      RETURNS
  *      {
@@ -61,6 +64,7 @@
                 hint: '<',
                 icon: '<',
                 lock: '<',
+                multiple:'<',
 
                 pagination: '<',
                 elements: '<',
@@ -96,6 +100,7 @@
         init();
 
         function init() {
+            console.log("Multiple", vm.multiple);
             if (!vm.lazy) {
                 //The catalog is not loaded in lazy mode
                 list();
