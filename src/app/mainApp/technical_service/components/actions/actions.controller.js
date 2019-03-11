@@ -15,7 +15,7 @@
 
             }
         });
-    function actionsController(Translate, URLS, ErrorHandler, EnvironmentConfig, stageProvider) {
+    function actionsController(Translate, URLS, ErrorHandler, EnvironmentConfig, actionProvider) {
         var vm = this;
         const actionURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
@@ -31,7 +31,7 @@
 
         function activate() {
             console.log(vm.actualStep);
-            var promiseGetStage = stageProvider.getStage(vm.actualStep.id);
+            var promiseGetStage = actionProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.actions = currentStage.acciones;
                 console.log(vm.actions);

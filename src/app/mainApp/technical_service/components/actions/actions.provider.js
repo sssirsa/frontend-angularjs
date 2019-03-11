@@ -1,17 +1,17 @@
 /**
- * Created by franciscojaviercerdamartinez on 2/26/19.
+ * Created by franciscojaviercerdamartinez on 3/11/19.
  */
 (function () {
     'use strict';
 
     angular
         .module('app')
-        .factory('nextStageProvider', nextStageProvider);
+        .factory('actionProvider', actionProvider);
 
     /* @ngInject */
-    function nextStageProvider($q,
-                                URLS,
-                                API) {
+    function actionProvider($q,
+                           URLS,
+                           API) {
 
         var urlbase = API.all(URLS.technical_service.base)
             .all(URLS.technical_service.catalogues.base);

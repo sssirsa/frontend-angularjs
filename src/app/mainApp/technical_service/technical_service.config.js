@@ -46,6 +46,18 @@
                 controllerAs: 'vm'
             })
 
+            .state('triangular.admin-default.general_stage', {
+                url: '/etapa_de_servicio',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/technical_service/generalStage/generalStage.tmpl.html',
+                controller: 'generalStageController',
+                controllerAs: 'vm'
+            })
+
             .state('triangular.admin-default.componentTest', {
                 url: '/prueba_componente',
                 data: {
@@ -81,6 +93,12 @@
                     {
                         name:'DIAGNOSIS.DIAGNOSIS',
                         state:'triangular.admin-default.diagnostic',
+                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type:'link'
+                    },
+                    {
+                        name:'GENERAL_STAGE.TITLE',
+                        state:'triangular.admin-default.general_stage',
                         permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },

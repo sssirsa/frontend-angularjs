@@ -124,5 +124,15 @@
         "ACTIONS_DESC": "Acciones Realizadas en la etapa",
         "FAILURES": "Fallas Detectadas",
         "FAILURES_DESC": "Fallas detectadas en el diagnostico"
+    },
+    "GENERAL_STAGE":{
+        "TITLE":"Etapa de Reparación",
+        "BULK_ASSET":"Insumos usados en la Reparación",
+        "ACTIONS_MADE":"Acciones Realizadas",
+        "ACTIONS":{
+            "SAVE":"Guardar Etapa",
+            "CLOSE":"Cerrar Etapa",
+            "Clear":"Limpiar Campos"
+        }
     }
 }

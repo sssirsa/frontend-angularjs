@@ -15,7 +15,7 @@
 
             }
         });
-    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig, stageProvider) {
+    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig, nextStageProvider) {
         var vm = this;
         vm.nextStepSelected = undefined;
         vm.steps = undefined;
@@ -39,7 +39,7 @@
         }
 //Función que obtiene las etapas siguientes a partir de la etapa actual
         function getStagesByActualStage() {
-            var promiseGetStage = stageProvider.getStage(vm.actualStep.id);
+            var promiseGetStage = nextStageProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.steps = currentStage.etapas_siguientes;
                 console.log(vm.steps);
