@@ -30,11 +30,9 @@
         vm.deleteElement = deleteElement;
 
         function activate() {
-            console.log(vm.actualStep);
             var promiseGetStage = actionProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.actions = currentStage.acciones;
-                console.log(vm.actions);
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
             });
@@ -42,7 +40,6 @@
 
 
         function onSelectAction(value) {
-            console.log(value);
             vm.element = value;
             addAction();
         }

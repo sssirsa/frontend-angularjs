@@ -30,6 +30,7 @@
         }
 
         function startDiagnosis(id,body) {
+
             return urlrepair.all(URLS.technical_service.services.diagnose).all(id).customPATCH(body);
         }
 

@@ -38,7 +38,7 @@
                 vm.infoGral({element: vm.asset});
                 var promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset.economico);
                 promiseCabinetEntrada.then(function (control) {
-                    console.log(control);
+
                     vm.infoStep.control=control;
                     if (control.tipo_entrada === "Garantias") {
                         vm.infoStep.makeInspection = false;
@@ -48,12 +48,12 @@
                             vm.infoStep.makePrecheck = false;
                             vm.infoStepToDo({element: vm.infoStep});
                         }).catch(function (errormsg) {
-                            console.log(errormsg);
+
                             if (errormsg.status == 404) {
                                 vm.infoStep.makePrecheck = true;
                                 vm.infoStep.makeInspection  = false;
                                 vm.infoStepToDo({element: vm.infoStep});
-                                console.log("Hare Precheck");
+
                             }
                             else {
                                 ErrorHandler.errorTranslate(errormsg);
@@ -62,9 +62,9 @@
                     } else {
                         vm.infoStep.makePrecheck  = false;
                         vm.infoStep.makeInspection  = true;
-                        console.log(vm.infoStep);
+
                         vm.infoStepToDo({element: vm.infoStep});
-                        console.log("Hare Inspección");
+
                     }
 
                 }).catch(function (errormsg) {

@@ -40,28 +40,24 @@
             getStock();
             var stock = Number(vm.stock[0].cantidad);
             var used = Number(vm.bulkAsset.cantidad);
-            console.log("stock:" + stock);
-            console.log("used:" + used);
             if (used < 1) {
                 vm.showSelector = true;
                 if (stock < used) {
                     if (stock > 0) {
                         vm.maxUseAccepted = stock;
-                        console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
+
                     }
                     else {
                         vm.notStock = true;
                     }
                 } else {
                     vm.maxUseAccepted = used;
-                    console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
                 }
             } else {
                 if (stock < used) {
                     vm.notStock = true;
                 } else {
                     vm.maxUseAccepted = used;
-                    console.log("vm.maxUseAccepted:" + vm.maxUseAccepted);
                 }
             }
 
@@ -85,7 +81,6 @@
         function selectElement() {
 
             if (vm.use_asset) {
-                console.log("ya lo mande");
                 var assetSelected={};
                 assetSelected.insumo_lote_id=vm.bulkAsset.id;
                 assetSelected.cantidad=vm.finalAssetBulk.cantidad;

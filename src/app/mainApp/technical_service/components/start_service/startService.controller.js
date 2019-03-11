@@ -42,7 +42,6 @@
             }
             if (promiseStartStage) {
                 promiseStartStage.then(function (response) {
-                    console.log(response)
                     $interval(function () {
                         vm.contador = vm.contador + 1;
                         vm.segundos = vm.contador % 60;

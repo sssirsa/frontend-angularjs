@@ -67,8 +67,7 @@
         vm.addFailure = addFailure;
         vm.deleteElement = deleteElement;
         function onSelectType(value) {
-            console.log(value);
-            console.log(value.id);
+
             if (value.id) {
                 vm.idType = value.id;
             }
@@ -81,11 +80,9 @@
         }
 
         function addFailure(value) {
-            console.log(value);
             vm.element = value;
             getDuplicity();
             vm.failures.push(vm.element);
-            console.log(vm.element);
             vm.failuresDetected({element: vm.failures});
         }
 

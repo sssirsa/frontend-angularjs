@@ -27,13 +27,11 @@
         function activate() {
 
             if (vm.actualStep && !vm.failures) {
-                console.log("Sin fallas")
-                console.log(vm.actualStep);
                 getStagesByActualStage();
 
             }
             if (vm.failures) {
-                console.log("Con fallas")
+
                 getStagesByFailures();
             }
         }
@@ -42,7 +40,7 @@
             var promiseGetStage = nextStageProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.steps = currentStage.etapas_siguientes;
-                console.log(vm.steps);
+
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir de la etapa actual
                 if(currentStage.etapa_defecto){
@@ -62,14 +60,14 @@
             if (vm.failures.length > 0) {
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir del sintoma
-                console.log("hay mas de una falla");
+
                 if(vm.failures.length===1 && vm.failures[0].etapa_defecto){
                     vm.step=vm.failures[0].etapa_defecto;
                     vm.nextStep({element: vm.step});
                 }
                 if (vm.failures.length>1 && !vm.step){
                     vm.edit_next_step=true;
-                    console.log(vm.steps);
+
                 }
                 vm.failures.forEach(function (failure) {
                     console.log(failure.etapas_posibles);
@@ -77,7 +75,7 @@
                         failure.etapas_posibles.forEach(function (stage) {
                             getDuplicity(stage);
                             vm.steps.push(stage);
-                            console.log(stage);
+
                         });
 
                     }
