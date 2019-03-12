@@ -64,7 +64,7 @@
                 hint: '<',
                 icon: '<',
                 lock: '<',
-                multiple:'<',
+                multiple: '<',
 
                 pagination: '<',
                 elements: '<',
@@ -100,7 +100,6 @@
         init();
 
         function init() {
-            console.log("Multiple", vm.multiple);
             if (!vm.lazy) {
                 //The catalog is not loaded in lazy mode
                 list();
@@ -161,10 +160,15 @@
                                         return currentElement[vm.catalog.model]
                                             === vm.initial;
                                     })[0];
-                                vm.onSelect({
-                                    element: vm.selectedElement[vm.catalog.model],
-                                    value: vm.selectedElement
-                                });
+                                if (vm.multiple) {
+
+                                }
+                                else {
+                                    vm.onSelect({
+                                        element: vm.selectedElement[vm.catalog.model],
+                                        value: vm.selectedElement
+                                    });
+                                }
                             }
                             else {
                                 createMainCatalogProvider();
@@ -174,15 +178,21 @@
                                         vm.catalogElements = [];
                                         vm.catalogElements.push(successCallback);
                                         vm.initial = null;
-                                        vm.onSelect({
-                                            element: vm.selectedElement[vm.catalog.model],
-                                            value: vm.selectedElement
-                                        });
+                                        if (vm.multple) {
+
+                                        }
+                                        else {
+                                            vm.onSelect({
+                                                element: vm.selectedElement[vm.catalog.model],
+                                                value: vm.selectedElement
+                                            });
+                                        }
                                     })
                                     .catch(function catalogSelectDetailError(errorCallback) {
                                         console.error('@CatalogSelectController @list @CATALOG_SELECT.detail', errorCallback);
                                     });
                             }
+
                         }
                     })
                     .catch(function (errorElements) {
@@ -270,10 +280,27 @@
 
         function onClose() {
             if (vm.selectedElement) {
-                vm.onSelect({
-                    element: vm.selectedElement[vm.catalog.model],
-                    value: vm.selectedElement
-                });
+                if (!vm.multiple) {
+                    //Returns the element and value as is.
+                    vm.onSelect({
+                        element: vm.selectedElement[vm.catalog.model],
+                        value: vm.selectedElement
+                    });
+                }
+                else {
+                    //Makes tratment for returning the element as an id array,
+                    //the value is return as is.
+                    let idArray = [];
+                    for (let elementRepeater = 0;
+                        elementRepeater < vm.selectedElement.length;
+                        elementRepeater++) {
+                        idArray.push(vm.selectedElement[elementRepeater][vm.catalog.model]);
+                    }
+                    vm.onSelect({
+                        element: idArray,
+                        value: vm.selectedElement
+                    });
+                }
             }
         }
 
