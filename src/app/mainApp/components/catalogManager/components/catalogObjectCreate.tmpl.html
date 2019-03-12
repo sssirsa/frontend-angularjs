@@ -191,9 +191,10 @@
                                         soft-delete="field.softDelete"
                                         lazy="field.catalog.requires"
                                         multiple="field"
+                                hint="field.hint"
                                         on-select="vm.onArrayElementSelect(element, field, value)">
                         </catalog-select>
-                        <md-chips ng-model="vm[field.model+'_chip']"
+                        <!--<md-chips ng-model="vm[field.model+'_chip']"
                                   ng-if="vm[field.model + '_chip'].length>0"
                                   md-on-remove="vm.onArrayElementRemove($index, field)"
                                   md-removable="true">
@@ -202,12 +203,8 @@
                                     {{$chip[field.catalog.option]}}
                                 </span>
                             </md-chip-template>
-                        </md-chips>
+                        </md-chips>-->
                     </section>
-                    <div ng-if="field.hint"
-                         class="hint">
-                        {{field.hint}}
-                    </div>
                 </section>
                 <section ng-if="!field['catalog'].requires">
                     <catalog-select catalog="field.catalog"
@@ -216,9 +213,11 @@
                                     elements="field['catalog'].elements"
                                     soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
+                                    multiple="true"
+                                hint="field.hint"
                                     on-select="vm.onArrayElementSelect(element, field, value)">
                     </catalog-select>
-                    <md-chips ng-model="vm[field.model+'_chip']"
+                    <!--<md-chips ng-model="vm[field.model+'_chip']"
                               ng-if="vm[field.model + '_chip'].length>0"
                               md-on-remove="vm.onArrayElementRemove($index, field)"
                               md-removable="true">
@@ -227,11 +226,7 @@
                                 {{$chip[field.catalog.option]}}
                             </span>
                         </md-chip-template>
-                    </md-chips>
-                    <div ng-if="field.hint"
-                         class="hint">
-                        {{field.hint}}
-                    </div>
+                    </md-chips>-->
                 </section>
             </section>
             <section ng-if="field['type']==='object'">
