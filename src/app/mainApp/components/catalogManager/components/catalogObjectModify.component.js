@@ -154,14 +154,14 @@
                                     ));
                             }
 
-                            vm[field.model + '_chip'] = JSON.parse(
-                                JSON.stringify(
-                                    tempCatalogArray
-                                ));
-
                             if (!vm.objectToModify[field.model]) {
                                 vm.objectToModify[field.model] = [];
                             }
+
+                            vm[field.model + '_initial'] = JSON.parse(
+                                JSON.stringify(
+                                    tempCatalogArray
+                                ));
 
                             for (
                                 var catalogIndex = 0;
@@ -186,28 +186,9 @@
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
-                addCatalogToArray(element, field, value);
+                vm.objectToModify[field.model] = element;
             }
 
-        }
-
-        //Internal function
-        //It add just the returned ID of the elements to the catalog_array
-        function addCatalogToArray(element, field, value) {
-            if (element) {
-                //if (!vm.objectToModify[field.model]) {
-                //    vm.objectToModify[field.model] = [];
-                //}
-                //if (!vm[field.model + '_chip']) {
-                //    vm[field.model + '_chip'] = [];
-                //}
-                vm.objectToModify[field.model].push(element);
-                vm[field.model + '_chip'].push(value);
-            }
-        }
-
-        vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
-            vm.objectToModify[field.model].splice(index, 1);
         }
 
         vm.addObjectToArray = function addObjectToArray(field) {

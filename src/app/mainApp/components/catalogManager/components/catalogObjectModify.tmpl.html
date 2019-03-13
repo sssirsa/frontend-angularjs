@@ -175,19 +175,10 @@
                                     soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
                                     multiple="true"
-                                hint="field.hint"
+                                    hint="field.hint"
+                                    initial="vm[field.model + '_initial']"
                                     on-select="vm.onArrayElementSelect(element, field, value)">
                     </catalog-select>
-                    <!--<md-chips ng-model="vm[field.model+'_chip']"
-                              ng-if="vm[field.model+'_chip'].length>0"
-                              md-on-remove="vm.onArrayElementRemove($index, field)"
-                              md-removable="true">
-                        <md-chip-template>
-                            <span>
-                                {{$chip[field.catalog.option]}}
-                            </span>
-                        </md-chip-template>
-                    </md-chips>-->
                 </section>
             </section>
             <section ng-if="!field['catalog'].requires">
@@ -199,18 +190,9 @@
                                 lazy="field.catalog.requires"
                                 multiple="true"
                                 hint="field.hint"
+                                initial="vm[field.model + '_initial']"
                                 on-select="vm.onArrayElementSelect(element, field, value)">
                 </catalog-select>
-                <!--<md-chips ng-model="vm[field.model+'_chip']"
-                          ng-if="vm[field.model+'_chip'].length>0"
-                          md-on-remove="vm.onArrayElementRemove($index, field)"
-                          md-removable="true">
-                    <md-chip-template>
-                        <span>
-                            {{$chip[field.catalog.option]}}
-                        </span>
-                    </md-chip-template>
-                </md-chips>-->
             </section>
         </section>
         <section ng-if="field['type']==='object'">

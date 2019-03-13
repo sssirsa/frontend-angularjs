@@ -14,7 +14,6 @@
         var vm = this;
 
         vm.objectToCreate = vm.element;
-        //vm.array_objects = {};
 
         activate();
 
