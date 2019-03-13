@@ -179,7 +179,7 @@
                     vm.selectedElement = vm.catalogElements
                         .filter(function (currentElement) {
                             return vm.initial.find(function (iteratedElement) {
-                                iteratedElement === currentElement;
+                                return iteratedElement === currentElement;
                             })
                         })[0];
                     vm.onClose();
@@ -200,7 +200,6 @@
             }
             //Paginated catalogue
             else {
-                createMainCatalogProvider();
                 if (vm.multiple) {
                     vm.selectedElement = JSON.parse(JSON.stringify(vm.initial));
                     //Iterating over every initial object
@@ -209,20 +208,34 @@
                         selectedElementRepeater++) {
                         if (!elementInList(vm.selectedElement[selectedElementRepeater], vm.catalogElements)) {
                             //Adding elements to list if they were not in the actual page of pagination
-                            vm.catalogElements.push(vm.selectedElement[selectedElementRepeater]);
+                            vm.catalogElements.unshift(vm.selectedElement[selectedElementRepeater]);
+                        }
+                        else {
+                            vm.catalogElements.splice(
+                                getIndexById(vm.selectedElement[selectedElementRepeater],
+                                    vm.catalogElements), 1);
+                            vm.catalogElements.unshift(vm.selectedElement[selectedElementRepeater]);
                         }
                     }
                     vm.onClose();
                 }
                 else {
+                    createMainCatalogProvider();
                     vm.listLoader = CATALOG_SELECT.detail(vm.initial)
                         .then(function catalogSelectDetailSuccess(successCallback) {
+                            console.log("Callback", successCallback);
                             vm.selectedElement = successCallback;
                             if (!vm.catalogElements) {
                                 vm.catalogElements = [];
                             }
                             if (!elementInList(successCallback, vm.catalogElements)) {
-                                vm.catalogElements.push(successCallback);
+                                vm.catalogElements.unshift(successCallback);
+                            }
+                            else {
+                                vm.catalogElements.splice(
+                                    getIndexById(vm.selectedElement,
+                                        vm.catalogElements), 1);
+                                vm.catalogElements.unshift(vm.selectedElement);
                             }
                             vm.onClose();
 
@@ -238,8 +251,20 @@
         //If the element is on the list, it returns it, else, returns undefined
         function elementInList(element, list) {
             return list.find(function (iteratedElement) {
-                iteratedElement[vm.catalog.model] === element[vm.catalog.model];
+                return iteratedElement[vm.catalog.model] === element[vm.catalog.model];
             });
+        }
+
+        function getIndexById(element, list) {
+            let index = null;
+            let listIterator = 0;
+            while (listIterator < list.length && !index) {
+                if (list[listIterator][vm.catalog.model] === element[vm.catalog.model]) {
+                    index = listIterator;
+                }
+                listIterator++;
+            }
+            return index;
         }
 
         function createMainCatalogProvider() {
@@ -284,32 +309,35 @@
                         //This procedures are required because of the initial loading of the elements
                         //And are just used in the case of pagination
                         if (vm.multiple) {
+                            console.log("Before splice",loadedElementList);
                             for (var selectedElementRepeater = 0;
                                 selectedElementRepeater < vm.selectedElement.length;
                                 selectedElementRepeater++) {
                                 //Validating if one of the selected elements is present in the actual page
                                 if (elementInList(vm.selectedElement[selectedElementRepeater], loadedElementList)) {
                                     //remove vm.selectedElement[selectedElementRepeater]
-                                    vm.catalogElements.splice(
-                                        vm.catalogElements.indexOf(
-                                            vm.selectedElement[selectedElementRepeater]
+                                    loadedElementList.splice(
+                                        getIndexById(vm.selectedElement[selectedElementRepeater],
+                                            loadedElementList
                                         ), 1);
                                 }
                             }
+
                         }
                         else {
                             //Validate if selected element is present on the actual page
                             if (elementInList(vm.selectedElement, loadedElementList)) {
                                 //remove vm.selectedElement
-                                vm.catalogElements.splice(
-                                    vm.catalogElements.indexOf(
-                                        vm.selectedElement[selectedElementRepeater]
+                                loadedElementList.splice(
+                                    getIndexById(
+                                        vm.selectedElement,
+                                        loadedElementList
                                     ), 1);
                             }
                         }
 
                         //Appending elemets to the now sanitized list
-                        vm.catalogElements = vm.catalogElements.concat(elements[vm.elements]);
+                        vm.catalogElements = vm.catalogElements.concat(loadedElementList);
 
                         //Determine if the soft delete parameter is given, and procede with the filtering
                         if (vm.softDelete) {
