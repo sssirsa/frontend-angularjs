@@ -8,7 +8,14 @@
 
                     </h2>
                 </div>
-                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-button ng-if="!vm.search" ng-click="vm.enableSearch()" class="md-raised md-primary">
+                        <md-icon md-font-icon="fas fa-search"></md-icon>
+                        <span translate="">GENERAL_STAGE.SEARCH</span>
+                    </md-button>
+
+                </div>
+                <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
                     <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
                         <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
                         <span translate="">INCIDENCE.REPORT_INCIDENCE</span>
@@ -19,12 +26,24 @@
             </div>
         </md-toolbar>
         <div layout="row" flex="100" layout-wrap="">
-            <search-cabinet-step flex="100" info-gral="vm.infogral(element)"
+            <search-cabinet-step ng-if="vm.search" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
-            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
-            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-
-            <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
+            <v-accordion ng-if="vm.asset" flex="100" layout-padding="" id="infogral" class="vAccordion--default"
+                         control="infogral">
+                <v-pane flex="100" id="v-accordion-pane-info-gral">
+                    <v-pane-header id="v-accordion-pane-info-gral-header">
+                        Información General
+                    </v-pane-header>
+                    <v-pane-content id="v-accordion-pane-info-gral-content">
+                        <div layout="row" flex="100" layout-wrap="">
+                            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+                            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+                        </div>
+                    </v-pane-content>
+                </v-pane>
+            </v-accordion>
+            <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id"
+                           sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
 
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
@@ -36,7 +55,8 @@
                         <div layout="row" flex="100" layout-margin="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
-                                <input type="text" ng-model="vm.diagnostic.nombre_corto" placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
+                                <input type="text" ng-model="vm.diagnostic.nombre_corto"
+                                       placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.SHORT_NAME_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
@@ -44,14 +64,17 @@
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-thermometer-half"></md-icon>
-                                <input type="number"  ng-model="vm.diagnostic.temp_com" pattern="([0-9]+[.]+[0-9]+)|([0-9])"  placeholder="{{'DIAGNOSIS.TEMP_COM'|translate}}">
+                                <input type="number" ng-model="vm.diagnostic.temp_com"
+                                       pattern="([0-9]+[.]+[0-9]+)|([0-9])"
+                                       placeholder="{{'DIAGNOSIS.TEMP_COM'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.TEMP_COM_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-thermometer-empty"></md-icon>
-                                <input type="number"  ng-model="vm.diagnostic.temp_int"  placeholder="{{'DIAGNOSIS.INT_TEMP'|translate}}">
+                                <input type="number" ng-model="vm.diagnostic.temp_int"
+                                       placeholder="{{'DIAGNOSIS.INT_TEMP'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.INT_TEMP_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
@@ -59,37 +82,78 @@
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-bolt"></md-icon>
-                                <input type="number" ng-model="vm.diagnostic.amp_arran"  placeholder="{{'DIAGNOSIS.AMP_ARRAN'|translate}}">
+                                <input type="number" ng-model="vm.diagnostic.amp_arran"
+                                       placeholder="{{'DIAGNOSIS.AMP_ARRAN'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.AMP_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="fas fa-bolt"></md-icon>
-                                <input type="number"  ng-model="vm.diagnostic.amp_trab" placeholder="{{'DIAGNOSIS.AMP_TRAB'|translate}}">
+                                <input type="number" ng-model="vm.diagnostic.amp_trab"
+                                       placeholder="{{'DIAGNOSIS.AMP_TRAB'|translate}}">
                                 <md-tooltip><span translate="">DIAGNOSIS.AMP_TRAB_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
                         <div layout="row" flex="100" layout-margin="">
                             <md-input-container md-no-float class="md-block" layout-fill="">
                                 <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
-                                <textarea rows="5"  ng-model="vm.diagnostic.descripcion" placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}"></textarea>
+                                <textarea rows="5" ng-model="vm.diagnostic.descripcion"
+                                          placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}"></textarea>
                                 <md-tooltip><span translate="">DIAGNOSIS.DESCRIPTION_DESC</span></md-tooltip>
                             </md-input-container>
                         </div>
-                        <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
-                        <next-step ng-if="vm.step && vm.failures.length>0" failures="vm.failures" flex="100" next-step="vm.nextStep(element)" actual-step="vm.step.currentStage.etapa"></next-step>
+                        <div layout="row" flex="100" layout-margin="">
+                            <md-input-container layout-align="center center">
+                                <md-switch class="md-primary" ng-model="vm.diagnostic.en_tiempo"
+                                           aria-label="{{DIAGNOSIS.IN_TIME|translate}}"
+                                           ng-init="vm.diagnostic.en_tiempo = true">
+                                    <b ng-if="vm.diagnostic.en_tiempo" translate="">DIAGNOSIS.IN_TIME</b>
+                                    <b ng-if="!vm.diagnostic.en_tiempo" translate="">DIAGNOSIS.NO_TIME</b>
+                                </md-switch>
+                            </md-input-container>
+                        </div>
                     </div>
-
-
                 </md-content>
             </md-tab>
-            <md-tab label="{{vm.assets_info}}">
+            <md-tab label="{{vm.failures_and_actions}}">
+                <md-content layout-padding="">
+                    <v-accordion id="failures_and_actions"
+                                 class="vAccordion--default"
+                                 control="failures_and_actions">
+                        <v-pane id="actions" >
+                            <v-pane-header id="actions-header">Acciones Realizadas</v-pane-header>
+                            <v-pane-content id="actions-content">
+                                <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
+                                                 actions="vm.getActions(element)" flex="100"></actions-manager>
+                            </v-pane-content>
+                        </v-pane>
+
+                        <v-pane id="failures">
+                            <v-pane-header id="failures-header">Fallas Detectadas</v-pane-header>
+                            <v-pane-content id="failures-content">
+                                <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
+                            </v-pane-content>
+                        </v-pane>
+
+                        <v-pane id="nextStep">
+                            <v-pane-header id="nextStep-header">Siguiente Etapa</v-pane-header>
+                            <v-pane-content id="nextStep-content">
+                                <next-step ng-if="vm.step || vm.failures.length>0" failures="vm.failures" flex="100"
+                                           next-step="vm.nextStep(element)"
+                                           actual-step="vm.step.currentStage.etapa"></next-step>
+                            </v-pane-content>
+                        </v-pane>
+                    </v-accordion>
+                </md-content>
+            </md-tab>
+            <md-tab label="{{vm.bulkAssets}}">
                 <md-content>
                     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
-                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="vm.step.currentStage.etapa.nombre"
+                                          tipo-equipo="vm.asset.modelo.tipo.id"
+                                          catalogo-etapa="vm.step.currentStage.etapa.nombre"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
-                    <actions-manager ng-if="vm.step"  actual-step="vm.step.currentStage.etapa" actions="vm.getActions(element)" flex="100"></actions-manager>
+
                 </md-content>
 
             </md-tab>

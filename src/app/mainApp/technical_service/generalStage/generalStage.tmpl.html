@@ -23,7 +23,6 @@
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-
             <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
 
@@ -50,11 +49,15 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
+                <span translate="">GENERAL_STAGE.ACTIONS.CLEAR_FIELD</span>
             </md-button>
-            <md-button ng-click="vm.sendDiagnosis()" class="md-raised md-primary">
+            <md-button ng-click="vm.saveStage()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
+                <span translate="">GENERAL_STAGE.ACTIONS.SAVE</span>
+            </md-button>
+            <md-button ng-click="vm.closeStage()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="">GENERAL_STAGE.ACTIONS.CLOSE</span>
             </md-button>
         </md-card-actions>
     </md-card>

@@ -43,7 +43,7 @@
 
         //Declaracion de Funciones como variables_______________________________________________________________________
         vm.clear = clear;
-        vm.sendDiagnosis=sendDiagnosis;
+        vm.s=sendDiagnosis;
 
         //Funciones Propias de la Pantalla
         function clear() {
@@ -93,6 +93,7 @@
         }
 
         function sendDiagnosis() {
+            console.log(vm.diagnostic)
             var promiseSendDiagnosis=diagnosisProvider.sendDiagnosis(vm.step.currentStage.id,vm.diagnostic);
             promiseSendDiagnosis.then(function(response){
                 console.info(response);
@@ -112,6 +113,7 @@
         function getFailures(failures) {
             vm.failures = failures;
             console.log(vm.failures);
+            vm.failures.forEach()
 
         }
         function nextStep(step) {
