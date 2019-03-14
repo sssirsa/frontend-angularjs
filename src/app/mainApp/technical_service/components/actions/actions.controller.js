@@ -11,7 +11,8 @@
             controller: actionsController,
             bindings: {
                 actionsAdded: '&',
-                actualStep: '<'
+                actualStep: '<',
+                actions:'<'
 
             }
         });
