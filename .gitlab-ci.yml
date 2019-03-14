@@ -33,6 +33,8 @@ configuration:
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 deploy:
   stage: deploy
@@ -55,6 +57,8 @@ deploy:
     - development
     - staging
     - master
+  tags:
+    - frontend
 
 npm:
   stage: dep
@@ -72,6 +76,8 @@ npm:
     - development
     - master
     - staging
+  tags:
+    - frontend
 
 bower:
   stage: dep
@@ -92,3 +98,5 @@ bower:
     - development
     - master
     - staging
+  tags:
+    - frontend
