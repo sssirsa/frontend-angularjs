@@ -31,7 +31,7 @@
             insumos_lote: [],
             sucursal_id: undefined
         };
-        vm.search=true;
+        vm.search = true;
 
         //Declaración de Funciones como variable  de Componentes________________________________________________________
         vm.infogral = infogral;
@@ -45,7 +45,7 @@
         //Declaracion de Funciones como variables_______________________________________________________________________
         vm.clear = clear;
         vm.sendDiagnosis = sendDiagnosis;
-        vm.enableSearch=enableSearch;
+        vm.enableSearch = enableSearch;
 
         //Funciones Propias de la Pantalla
         function clear() {
@@ -65,10 +65,11 @@
             };
             vm.asset = undefined;
             vm.step = undefined;
-            vm.search=true;
+            vm.search = true;
         }
 
         function sendDiagnosis() {
+            vm.diagnostic.sucursal_id=vm.step.control.sucursal.id;
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
             promiseSendDiagnosis.then(function (response) {
                 console.info(response);
@@ -81,11 +82,10 @@
         }
 
         function enableSearch() {
-            vm.search=!vm.search;
+            vm.search = !vm.search;
             clear();
 
         }
-
 
 
         //  Funciones para Componentes _________________________________________________________________________________
@@ -102,7 +102,7 @@
             console.log(step.currentStage.id);
             console.log(step.currentStage.servicio_cabinet);
             vm.step = step;
-            vm.search=false;
+            vm.search = false;
             if (vm.step.currentStage.diagnostico) {
                 vm.diagnostic.nombre_corto = vm.step.currentStage.diagnostico.nombre_corto;
                 vm.diagnostic.amp_arran = vm.step.currentStage.diagnostico.amp_arran;
@@ -114,7 +114,6 @@
                 vm.diagnostic.temp_int = vm.step.currentStage.diagnostico.temp_int;
             }
         }
-
 
 
         function getInsumosLote(element) {
@@ -132,7 +131,7 @@
                 }
 
                 console.log("Fallas");
-                cosole.log(vm.failures)
+                console.log(vm.failures)
                 console.log(vm.diagnostic.fallas_id);
             }
 
@@ -145,17 +144,22 @@
 
         }
 
-        function getActions(acciones) {
-            vm.actions = acciones;
-            if (vm.failures.length > 0) {
-                vm.diagnostic.acciones_id = [];
-                var index;
-                for (index = 0; index < vm.actions.length; ++index) {
-                    vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
+        function getActions(element) {
+            console.log('acciones detectadas:');
+            console.log(element);
+            vm.actions = element;
+            vm.diagnostic.acciones_id = [];
+            if (vm.actions) {
+                if (vm.actions.length > 0) {
+
+                    var index;
+                    for (index = 0; index < vm.actions.length; ++index) {
+                        vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
+                    }
+                    console.log("Acciones");
+                    console.log(vm.actions)
+                    console.log(vm.diagnostic.acciones_id);
                 }
-                console.log("Acciones");
-                cosole.log(vm.actions)
-                console.log(vm.diagnostic.acciones_id);
             }
 
         }
