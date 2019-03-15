@@ -31,12 +31,24 @@
         vm.deleteElement = deleteElement;
 
         function activate() {
+            console.log(vm.action);
+            getActions();
             var promiseGetStage = actionProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.actions = currentStage.acciones;
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
             });
+        }
+
+        function getActions(){
+            console.log("Acciones Obtenidas de la carga de información");
+            console.log(vm.actions);
+            for (index = 0; index < vm.actions.length; ++index) {
+                vm.actionsDoIt.push(vm.actions[index]);
+            }
+            vm.actionsAdded({element: vm.actionsDoIt});
+
         }
 
 
