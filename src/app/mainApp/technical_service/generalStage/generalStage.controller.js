@@ -17,18 +17,7 @@
         vm.title_info=Translate.translate('GENERAL_STAGE.BULK_ASSET');
         vm.assets_info=Translate.translate('GENERAL_STAGE.ACTIONS_MADE');
 
-        vm.diagnostic = {
-            nombre_corto: undefined,
-            descripcion: undefined,
-            fallas_id: [],
-            en_tiempo: true,
-            temp_com: undefined,
-            temp_int: undefined,
-            amp_arran: undefined,
-            amp_trab: undefined,
-            etapa_siguiente_id: undefined,
-            acciones_id:[],
-            insumos_lote:[],
+        vm.stage = {
             sucursal_id:undefined
         };
         vm.search=true;
@@ -37,7 +26,6 @@
         vm.infogral = infogral;
         vm.infoStep = infoStep;
         vm.getInsumosLote = getInsumosLote;
-        vm.getFailures = getFailures;
         vm.getActions = getActions;
         vm.nextStep = nextStep;
         //--------------------------------------------------------------------------------------------------------------
@@ -118,17 +106,22 @@
 
         }
 
-        function getActions(acciones) {
-            vm.actions = acciones;
-            if (vm.failures.length > 0) {
-                vm.diagnostic.acciones_id = [];
-                var index;
-                for (index = 0; index < vm.actions.length; ++index) {
-                    vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
+        function getActions(element) {
+            console.log('acciones detectadas:');
+            console.log(element);
+            vm.actions = element;
+            vm.diagnostic.acciones_id = [];
+            if (vm.actions) {
+                if (vm.actions.length > 0) {
+
+                    var index;
+                    for (index = 0; index < vm.actions.length; ++index) {
+                        vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
+                    }
+                    console.log("Acciones");
+                    console.log(vm.actions);
+                    console.log(vm.diagnostic.acciones_id);
                 }
-                console.log("Acciones");
-                cosole.log(vm.actions)
-                console.log(vm.diagnostic.acciones_id);
             }
 
         }

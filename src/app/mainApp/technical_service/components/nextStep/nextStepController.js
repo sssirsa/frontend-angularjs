@@ -20,9 +20,9 @@
         vm.nextStepSelected = undefined;
         vm.steps = undefined;
         vm.step = undefined;
-        vm.endService=true;
+        vm.endService = false;
         vm.selectStep = selectStep;
-        vm.activate=activate;
+        vm.activate = activate;
         activate();
         function activate() {
 
@@ -35,6 +35,7 @@
                 getStagesByFailures();
             }
         }
+
 //Función que obtiene las etapas siguientes a partir de la etapa actual
         function getStagesByActualStage() {
             var promiseGetStage = nextStageProvider.getStage(vm.actualStep.id);
@@ -43,17 +44,20 @@
 
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir de la etapa actual
-                if(currentStage.etapa_defecto){
-                    vm.step=currentStage.etapa_defecto;
-                    vm.nextStep({element: vm.step});
-                }else{
-                    vm.edit_next_step=true;
-                    vm.step.nombre="Es necesario se Seleccione Etapa";
+                if (currentStage.etapa_defecto) {
+                    vm.step = currentStage.etapa_defecto;
+                    if (vm.endService) {
+                        vm.nextStep({element: vm.step});
+                    }
+                } else {
+                    vm.edit_next_step = true;
+                    vm.step.nombre = "Es necesario se Seleccione Etapa";
                 }
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
+
 //Función que obtiene las etapas siguientes posibles a partir del caralogo de fallas
         function getStagesByFailures() {
             vm.steps = [];
@@ -61,12 +65,14 @@
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir del sintoma
 
-                if(vm.failures.length===1 && vm.failures[0].etapa_defecto){
-                    vm.step=vm.failures[0].etapa_defecto;
-                    vm.nextStep({element: vm.step});
+                if (vm.failures.length === 1 && vm.failures[0].etapa_defecto) {
+                    vm.step = vm.failures[0].etapa_defecto;
+                    if (vm.endService) {
+                        vm.nextStep({element: vm.step});
+                    }
                 }
-                if (vm.failures.length>1 && !vm.step){
-                    vm.edit_next_step=true;
+                if (vm.failures.length > 1 && !vm.step) {
+                    vm.edit_next_step = true;
 
                 }
                 vm.failures.forEach(function (failure) {
@@ -81,7 +87,7 @@
                     }
                 });
 
-                if (vm.steps.length===0){
+                if (vm.steps.length === 0) {
                     getStagesByActualStage();
                 }
             }
@@ -98,8 +104,11 @@
         }
 
         function selectStep() {
-            vm.nextStep({element: vm.nextStepSelected});
+            if (vm.endService) {
+                vm.nextStep({element: vm.nextStepSelected});
+            }
             vm.step = vm.nextStepSelected;
+
         }
 
 
