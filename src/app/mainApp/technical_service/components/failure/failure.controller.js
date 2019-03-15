@@ -9,7 +9,8 @@
             templateUrl: 'app/mainApp/technical_service/components/failure/failure.tmpl.html',
             controller: failureController,
             bindings: {
-                failuresDetected: '&'
+                failuresDetected: '&',
+                failures:'<'
 
             }
         });
@@ -61,11 +62,19 @@
                 hint: Translate.translate('FAILURES_COMPONENT.ADD_FAILURE')
             }
         };
-        vm.failures = [];
+
 
         vm.onSelectType = onSelectType;
         vm.addFailure = addFailure;
         vm.deleteElement = deleteElement;
+        function getFailures(){
+            console.log("Fallas Obtenidas de la carga de información");
+            console.log(vm.failures);
+            if(vm.failures.length===0){
+                vm.failures = [];
+            }
+
+        }
         function onSelectType(value) {
 
             if (value.id) {
