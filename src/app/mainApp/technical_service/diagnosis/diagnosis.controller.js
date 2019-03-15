@@ -69,7 +69,7 @@
         }
 
         function sendDiagnosis() {
-            vm.diagnostic.sucursal_id=vm.step.control.sucursal.id;
+            vm.diagnostic.sucursal_id = vm.step.control.sucursal.id;
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
             promiseSendDiagnosis.then(function (response) {
                 console.info(response);
@@ -105,13 +105,19 @@
             vm.search = false;
             if (vm.step.currentStage.diagnostico) {
                 vm.diagnostic.nombre_corto = vm.step.currentStage.diagnostico.nombre_corto;
-                vm.diagnostic.amp_arran = vm.step.currentStage.diagnostico.amp_arran;
-                vm.diagnostic.amp_trab = vm.step.currentStage.diagnostico.amp_trab;
+                vm.diagnostic.amp_arran = parseFloat(vm.step.currentStage.diagnostico.amp_arran);
+                vm.diagnostic.amp_trab = parseFloat(vm.step.currentStage.diagnostico.amp_trab);
                 vm.diagnostic.descripcion = vm.step.currentStage.diagnostico.descripcion;
                 vm.diagnostic.en_tiempo = vm.step.currentStage.diagnostico.en_tiempo;
                 vm.diagnostic.fallas = vm.step.currentStage.diagnostico.fallas;
-                vm.diagnostic.temp_com = vm.step.currentStage.diagnostico.temp_com;
-                vm.diagnostic.temp_int = vm.step.currentStage.diagnostico.temp_int;
+                vm.diagnostic.temp_com = parseFloat(vm.step.currentStage.diagnostico.temp_com);
+                vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
+                console.log(vm.diagnostic);
+                console.log(vm.step.currentStage.acciones);
+                console.log(vm.step.currentStage.insumos_lote_usados);
+                console.log(vm.step.currentStage.insumos_lote_usados);
+                console.log(vm.step.currentStage.insumos_lote_usados);
+
             }
         }
 
@@ -157,7 +163,7 @@
                         vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
                     }
                     console.log("Acciones");
-                    console.log(vm.actions)
+                    console.log(vm.actions);
                     console.log(vm.diagnostic.acciones_id);
                 }
             }
