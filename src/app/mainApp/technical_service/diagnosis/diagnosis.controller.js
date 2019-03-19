@@ -114,9 +114,14 @@
                 vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
                 console.log(vm.diagnostic);
                 console.log(vm.step.currentStage.acciones);
-                console.log(vm.step.currentStage.insumos_lote_usados);
-                console.log(vm.step.currentStage.insumos_lote_usados);
-                console.log(vm.step.currentStage.insumos_lote_usados);
+            }
+
+            if(vm.step.currentStage.etapa.nombre!=='Diagnostico'){
+                console.log("No en la etapa Correcta");
+                var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                toastr.warning(NOT_CORRECT_STEP,SENT_TO+" "+vm.step.currentStage.etapa.nombre);
+                clear();
 
             }
         }

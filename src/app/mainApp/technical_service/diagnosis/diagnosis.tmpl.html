@@ -125,14 +125,14 @@
                             <v-pane-header id="actions-header">Acciones Realizadas</v-pane-header>
                             <v-pane-content id="actions-content">
                                 <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
-                                                 actions-added="vm.getActions(element)" flex="100"></actions-manager>
+                                                 actions-added="vm.getActions(element)"  actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
                             </v-pane-content>
                         </v-pane>
 
                         <v-pane id="failures">
                             <v-pane-header id="failures-header">Fallas Detectadas</v-pane-header>
                             <v-pane-content id="failures-content">
-                                <fault-manager flex="100" failures-detected="vm.getFailures(element)"></fault-manager>
+                                <fault-manager flex="100" failures-detected="vm.getFailures(element)" failures="vm.step.currentStage.diagnostico.fallas"></fault-manager>
                             </v-pane-content>
                         </v-pane>
 
