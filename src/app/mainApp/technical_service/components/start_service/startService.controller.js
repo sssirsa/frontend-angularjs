@@ -27,18 +27,17 @@
             vm.body={
                 sucursal_id:vm.sucursal
             };
-            var promiseStartStage = undefined;
             if (vm.diagnosis) {
                 promiseStartStage = startServiceProvider.startDiagnosis(vm.diagnosis,vm.body);
             }
             if (vm.puncture) {
-                promiseStartStage = startServiceProvider.startPuncture(vm.diagnosis,vm.body);
+                promiseStartStage = startServiceProvider.startPuncture(vm.puncture,vm.body);
             }
             if (vm.presurize) {
-                promiseStartStage = startServiceProvider.startPresurize(vm.diagnosis,vm.body);
+                promiseStartStage = startServiceProvider.startPresurize(vm.presurize,vm.body);
             }
             if (vm.stage) {
-                promiseStartStage = startServiceProvider.startStage(vm.diagnosis,vm.body);
+                promiseStartStage = startServiceProvider.startStage(vm.stage,vm.body);
             }
             if (promiseStartStage) {
                 promiseStartStage.then(function (response) {
