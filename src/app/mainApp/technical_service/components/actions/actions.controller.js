@@ -12,7 +12,7 @@
             bindings: {
                 actionsAdded: '&',
                 actualStep: '<',
-                actions:'<'
+                actions: '<'
 
             }
         });
@@ -41,13 +41,15 @@
             });
         }
 
-        function getActions(){
+        function getActions() {
             console.log("Acciones Obtenidas de la carga de información");
             console.log(vm.actions);
-            for (index = 0; index < vm.actions.length; ++index) {
-                vm.actionsDoIt.push(vm.actions[index]);
+            if (vm.actions) {
+                for (index = 0; index < vm.actions.length; ++index) {
+                    vm.actionsDoIt.push(vm.actions[index]);
+                }
+                vm.actionsAdded({element: vm.actionsDoIt});
             }
-            vm.actionsAdded({element: vm.actionsDoIt});
 
         }
 
