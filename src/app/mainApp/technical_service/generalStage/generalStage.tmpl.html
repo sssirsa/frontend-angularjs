@@ -42,7 +42,7 @@
                     </v-pane-content>
                 </v-pane>
             </v-accordion>
-            <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id"
+            <start-service flex="100" ng-if="vm.step.currentStage.id" stage="vm.step.currentStage.id"
                            sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
 
@@ -64,6 +64,9 @@
                                      actions="vm.getActions(element)" flex="100"></actions-manager>
 
                 </md-content>
+                <next-step ng-if="vm.step" flex="100"
+                           next-step="vm.nextStep(element)"
+                           actual-step="vm.step.currentStage.etapa"></next-step>
 
             </md-tab>
 
@@ -78,7 +81,7 @@
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.SAVE</span>
             </md-button>
-            <md-button ng-click="vm.closeStage()" class="md-raised md-primary">
+            <md-button ng-if="vm.stage.etapa_siguiente_id" ng-click="vm.closeStage()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.CLOSE</span>
             </md-button>
