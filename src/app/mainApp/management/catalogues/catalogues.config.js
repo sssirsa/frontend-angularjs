@@ -253,17 +253,6 @@
                 controller: 'stickerController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogue-pediment', {
-                url: '/catalogo/pedimento',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/pediments/pediment.tmpl.html',
-                controller: 'pedimentController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.consumable-category', {
                 url: '/catalogo/categoria_insumo',
                 data: {
@@ -475,12 +464,6 @@
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                                 state: 'triangular.admin-default.linea-transporte',
                                 permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.PEDIMENT',
-                                state: 'triangular.admin-default.catalogue-pediment',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
                             {
