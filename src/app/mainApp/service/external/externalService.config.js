@@ -141,7 +141,7 @@
                 name: 'MAIN.MENU.EXTERNAL_SERVICE',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO D', 'TECNICO E'],
                 priority: 7,
                 children: [
                     {

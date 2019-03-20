@@ -1,8 +1,8 @@
 (function () {
     angular
-        .module('app.mainApp.entries_departures.entries.unrecognizable')
-        .controller('unrecognizableManualEntryController', UnrecognizableManualEntryController);
-    function UnrecognizableManualEntryController(
+        .module('app.mainApp.entries_departures.entries.warehouse')
+        .controller('warehouseManualEntryController', WarehouseManualEntryController);
+    function WarehouseManualEntryController(
         MANUAL_ENTRIES,
         User,
         Translate,
@@ -22,7 +22,6 @@
         vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
 
         //Validations
         vm.imageConstraints = {
@@ -40,13 +39,12 @@
 
         // Auto invoked init function
         vm.init = function init() {
+            vm.selectedTab = 0;
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
-            vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
-            vm.selectedTab = 0;
+            vm.entry = MANUAL_ENTRIES.warehouseEntry.template();
+            vm.catalogues = MANUAL_ENTRIES.warehouseEntry.catalogues();
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
@@ -89,13 +87,14 @@
                     //Cleaning the search bar
                     vm.cabinetID = '';
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_ENTRIES
                             .getCabinet(cabinetID),
                         cabinet: null,
+                        obsolete: false,
                         id: null
                     };
 
@@ -109,16 +108,21 @@
                     //Searching for cabinet in the API
                     cabinetToAdd
                         .promise
-                        .then(function () {
-                            //Cabinet is not new
-                            //TODO: Validate incidences and subsidiary,
-                            //this in case the cabinet got created but
-                            //the previously tried entrance got an error.
-                            toastr.error(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.CANT_ENTER'), cabinetID);
-                            vm.removeCabinet(cabinetID);
+                        .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
+                            if (cabinetSuccessCallback.can_enter) {
+                                //Cabinet can enter
+                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                            }
+                            else {
+                                //Cabinet can´t enter because it already has a subsidiary assigned
+                                toastr.error(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.CANT_ENTER'), cabinetID);
+                                vm.removeCabinet(cabinetID);
+                            }
                         })
-                        .catch(function () {
-
+                        .catch(function setCabinetToAddError(error) {
+                            //Cleaning the search bar
+                            vm.cabinetID = '';
+                            ErrorHandler.errorTranslate(error);
                         });
                 }
             }
@@ -132,7 +136,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -145,8 +149,8 @@
             if (entryHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -162,14 +166,19 @@
 
         vm.createCabinet = function createCabinet(cabinetID) {
             $mdDialog.show({
-                controller: 'notCapitalizedDialogController',
-                templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogCreateNotCapitalized.tmpl.html',
+                controller: 'CabinetDialogController',
                 controllerAs: 'vm',
+                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
                 fullscreen: true,
-                clickOutsideToClose: true
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    cabinetID: cabinetID
+                }
             }).then(function (successCallback) {
-                var cabinetID = successCallback.id;
-                addCabinetToList(successCallback);
+                var cabinetID = successCallback.economico;
+                vm.removeCabinet(cabinetID);
+                vm.searchCabinet(cabinetID);
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);
@@ -177,29 +186,59 @@
             });
         }
 
-        vm.changeSwitch = function changeSwitch() {
-            //Removing mutual excluding variables when the switch is changed
-            delete (vm.entry[vm.catalogues['udn'].binding]);
-            delete (vm.entry[vm.catalogues['petition'].binding]);
-        }
-
         //Internal functions
 
         saveEntry = function saveEntry(entry) {
-            entry = addCabinetsToEntry(vm.cabinetList, entry);
-            entry = Helper.removeBlankStrings(entry);
+            let warehouseEntry = JSON.parse(JSON.stringify(entry));
+            warehouseEntry = addCabinetsToEntry(vm.cabinetList, warehouseEntry, false);
+            warehouseEntry = Helper.removeBlankStrings(warehouseEntry);
+
+            let obsoleteEntry = JSON.parse(JSON.stringify(entry));
+            obsoleteEntry = addCabinetsToEntry(vm.cabinetList, obsoleteEntry, true);
+            obsoleteEntry = Helper.removeBlankStrings(obsoleteEntry);
+
             //API callback
-            vm.createEntryPromise = MANUAL_ENTRIES
-                .createUnrecognizable(entry)
-                .then(function () {
-                    vm.init();
-                    toastr.success(
-                        Translate.translate('ENTRIES.UNRECOGNIZABLE.MESSAGES.SUCCESS_CREATE')
-                    );
-                })
-                .catch(function (errorCallback) {
-                    ErrorHandler.errorTranslate(errorCallback);
-                });
+            if (warehouseEntry.cabinets_id.length > 0) {
+                vm.createEntryPromise = MANUAL_ENTRIES
+                    .createWarehouse(warehouseEntry)
+                    .then(function (warehouseEntrySuccessCallback) {
+                        console.log(warehouseEntrySuccessCallback);
+                        for (let i = 0;
+                            i < warehouseEntrySuccessCallback['cabinets'].length;
+                            i++) {
+                            MANUAL_ENTRIES.createAutomaticInspection(warehouseEntrySuccessCallback['cabinets'][i]);
+                        }
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_WAREHOUSE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
+
+            obsoleteEntry.tipo_entrada = 'Obsoletos';
+
+            if (obsoleteEntry.cabinets_id.length > 0) {
+                vm.createEntryPromise = MANUAL_ENTRIES
+                    .createObsolete(obsoleteEntry)
+                    .then(function (obsoleteEntrySuccessCallback) {
+                        console.log(obsoleteEntrySuccessCallback);
+                        for (let i = 0;
+                            i < obsoleteEntrySuccessCallback['cabinets'].length;
+                            i++) {
+                            MANUAL_ENTRIES.createAutomaticInspection(obsoleteEntrySuccessCallback['cabinets'][i]);
+                        }
+                        vm.init();
+                        toastr.success(
+                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_SCRAPPED')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
         }
 
         entryHasPendingCabinets = function entryHasPendingCabinets() {
@@ -208,33 +247,25 @@
             });
         }
 
-        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry, obsolete) {
             //In case the cabinets array exist, restart it
-            if (entry.no_capitalizados_id.length) {
-                entry.no_capitalizados_id = [];
+            if (entry.cabinets_id.length) {
+                entry.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
-                    //Filtering to just add the cabinets that exist
-                    return element.cabinet;
+                    //Filtering to just add the cabinets that exist and have the obsolete flag
+                    if (element.obsolete == obsolete) {
+                        return element.cabinet;
+                    }
                 });
             for (
                 let i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['no_capitalizados_id'].push(existingCabinets[i].id);
+                entry['cabinets_id'].push(existingCabinets[i].id);
             }
             return entry;
-        }
-
-        addCabinetToList = function addCabinetToList(cabinet) {
-            var cabinetToAdd = {
-                promise: null,
-                cabinet: cabinet,
-                id: cabinet['id']
-            };
-
-            vm.cabinetList.push(cabinetToAdd);
         }
 
         //Tab functions
@@ -246,6 +277,7 @@
         vm.nextTab = function () {
             vm.selectedTab = vm.selectedTab + 1;
         }
+
     }
 
 })();

@@ -296,6 +296,8 @@
                     return element.id;
                 }).indexOf(cabinetID);
                 if (index !== -1) {
+                    //Cleaning the search bar
+                    vm.cabinetID = '';
                     //Cabinet already in list
                     toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.REPEATED_ID'), cabinetID);
                 }
@@ -329,6 +331,8 @@
                             }
                         })
                         .catch(function setCabinetToAddError(error) {
+                            //Cleaning the search bar
+                            vm.cabinetID = '';
                             ErrorHandler.errorTranslate(error);
                         });
                 }

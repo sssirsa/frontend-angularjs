@@ -17,6 +17,7 @@
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
                 close: 'close'
@@ -26,11 +27,15 @@
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
                 close: 'close'
             },
-            inspections: {},
+            inspections: {
+                base: 'inspections',
+                preliminary_inspection:'preliminary_inspection'
+            },
             subsidiary_change: {}
         });
 })();

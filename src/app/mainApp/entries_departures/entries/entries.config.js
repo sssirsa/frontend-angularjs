@@ -54,38 +54,56 @@
                 controller: 'obsoleteManualEntryController',
                 controllerAs: 'vm'
             })
+            /* Warehouse asset entries */
+            .state('triangular.admin-default.entry-warehouse-manual', {
+                url: '/entrada/almacen/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/entries/warehouse/manual/warehouseManualEntry.tmpl.html',
+                controller: 'warehouseManualEntryController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
                 name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TECNICO A','TECNICO C', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {
                         name: 'ENTRIES.MENU.NEW',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-new-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WARRANTIES',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-warranty-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.UNRECOGNIZABLE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.OBSOLETE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-obsolete-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.WAREHOUSE',
+                        type: 'link',
+                        permission: ['ADMINISTRADOR', 'TECNICO C', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-warehouse-manual'
                     }
                 ]
 
