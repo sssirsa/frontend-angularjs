@@ -11,12 +11,10 @@
         </md-button>
     </md-toolbar>
 
-    <form name="createForm"
-          ng-submit="vm.create(vm.objectToCreate)">
+    <form name="createDialogForm">
         <catalog-object-create element="vm.objectToCreate"
                                fields="vm.fields"></catalog-object-create>
     </form>
-
     <md-actions layout="row"
                 layout-align="space-between center">
         <md-button ng-click="vm.cancel()"
@@ -29,7 +27,7 @@
             </div>
         </md-button>
         <md-button ng-click="vm.create(vm.objectToCreate)"
-                   ng-disabled="createForm.$invalid"
+                   ng-disabled="createDialogForm.$invalid"
                    aria-label="{{vm.dialog.okButton}}"
                    class="md-primary md-raised">
             <div layout="row" layout-align="center center">
