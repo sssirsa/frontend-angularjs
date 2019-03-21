@@ -143,17 +143,6 @@
                 controller: 'CategoriaController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogo-insumo', {
-                url: '/catalogo/insumo',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/catalogo_insumo/catalogo_insumo.tmpl.html',
-                controller: 'CatalogoInsumoController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.catalogo-tipo-equipo', {
                 url: '/catalogo/tipo_equipo',
                 data: {
@@ -262,17 +251,6 @@
                 },
                 templateUrl: 'app/mainApp/management/catalogues/sticker/sticker.tmpl.html',
                 controller: 'stickerController',
-                controllerAs: 'vm'
-            })
-            .state('triangular.admin-default.catalogue-pediment', {
-                url: '/catalogo/pedimento',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/pediments/pediment.tmpl.html',
-                controller: 'pedimentController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.consumable-category', {
@@ -418,6 +396,17 @@
                 controller: 'impedimentReasonController',
                 controllerAs: 'vm'
             })
+            .state('triangular.admin-default.failures', {
+                url: '/catalogo/falla',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/failure/failure.tmpl.html',
+                controller: 'failureCatalogController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.stages', {
                 url: '/catalogo/etapas',
                 data: {
@@ -427,6 +416,28 @@
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stages/stages.tmpl.html',
                 controller: 'stagesController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.bulk-asset', {
+                url: '/catalogo/insumo_lote',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/bulk_asset/bulk_asset.tmpl.html',
+                controller: 'bulkAssetController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.unique-asset', {
+                url: '/catalogo/insumo_unico',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/unique_asset/unique_asset.tmpl.html',
+                controller: 'uniqueAssetController',
                 controllerAs: 'vm'
             });
 
@@ -453,12 +464,6 @@
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                                 state: 'triangular.admin-default.linea-transporte',
                                 permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.PEDIMENT',
-                                state: 'triangular.admin-default.catalogue-pediment',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
                             {
@@ -495,6 +500,18 @@
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
                                 state: 'triangular.admin-default.consumable-category',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.BULK_ASSET',
+                                state: 'triangular.admin-default.bulk-asset',
+                                permission: ['ADMINISTRADOR'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.UNIQUE_ASSET',
+                                state: 'triangular.admin-default.unique-asset',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
@@ -611,16 +628,22 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.STORES',
-                                state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.STORES',
+                            //    state: 'triangular.admin-default.catalogo-establecimientos',
+                            //    permission: ['ADMINISTRADOR', 'TECNICO E'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.FAILURE',
+                                state: 'triangular.admin-default.failures',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
@@ -629,12 +652,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
-                                state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
+                            //    state: 'triangular.admin-default.catalogue-segmentation',
+                            //    permission: ['ADMINISTRADOR'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.SYMPTOM',
                                 state: 'triangular.admin-default.symptom',

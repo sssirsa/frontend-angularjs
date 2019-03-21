@@ -11,6 +11,7 @@
                          && field['type']!=='array'
                          && field['type']!=='catalog_array'
                          && field['type']!=='object'
+                         && field['type']!=='boolean'
                          && field['type']!=='array_object'">
             <md-input-container layout="column" class="md-block">
                 <!--Field label selection depending on the parameters given-->
@@ -30,9 +31,17 @@
                     <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                 </div>
                 <div ng-if="field.hint"
-                     class="create-field-hint">
+                     class="hint">
                     {{field.hint}}
                 </div>
+            </md-input-container>
+        </section>
+        <section ng-if="field['type']==='boolean'">
+            <md-input-container class="md-block">
+                <md-switch ng-model="vm.objectToModify[field.model]">
+                    <div ng-if="field['label']">{{field.label}}</div>
+                    <div ng-if="!field['label']">{{field.model}}</div>
+                </md-switch>
             </md-input-container>
         </section>
         <section ng-if="field['type']==='color'">
@@ -52,7 +61,7 @@
                     <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                 </div>
                 <div ng-if="field.hint"
-                     class="create-field-hint">
+                     class="hint">
                     {{field.hint}}
                 </div>
             </md-input-container>
@@ -85,46 +94,50 @@
                            ng-disabled="field.lock">
                     <md-option ng-repeat="option in field.options.elements"
                                ng-value="option[field.options.model]">
-                        {{option[field.options.option]}}
+                        <section ng-if="!field.options.showModel">
+                            <section ng-if="field.option">
+                                {{option[field.options.option]}}
+                            </section>
+                            <section ng-if="!field.option">
+                                {{option[field.options.model]}}
+                            </section>
+                        </section>
+                        <section ng-if="field.options.showModel">
+                            <b>{{option[field.options.model]}}</b> - {{option[field.options.option]}}
+                        </section>
                     </md-option>
                 </md-select>
+                <div ng-if="field.hint"
+                     class="hint">
+                    {{field.hint}}
+                </div>
             </md-input-container>
-            <div ng-if="field.hint"
-                 class="create-field-hint">
-                {{field.hint}}
-            </div>
         </section>
         <section ng-if="field['type']==='catalog'">
             <section ng-if="field['catalog'].requires">
                 <catalog-select ng-if="vm.objectToModify[field['catalog'].requires]"
                                 lock="field.lock"
+                                hint="field.hint"
                                 required="field.required"
                                 catalog="field.catalog"
                                 pagination="field['catalog'].pagination"
                                 elements="field['catalog'].elements"
                                 soft-delete="field.softDelete"
-                                initial="vm.objectToModify[field.bindTo]"
+                                initial="vm.objectToModify[field.model]"
                                 on-select="vm.onElementSelect(element,field)">
                 </catalog-select>
-                <div ng-if="field.hint"
-                     class="create-field-hint">
-                    {{field.hint}}
-                </div>
             </section>
             <section ng-if="!field['catalog'].requires">
                 <catalog-select catalog="field.catalog"
                                 lock="field.lock"
+                                hint="field.hint"
                                 required="field.required"
                                 pagination="field['catalog'].pagination"
                                 elements="field['catalog'].elements"
                                 soft-delete="field.softDelete"
-                                initial="vm.objectToModify[field.bindTo]"
+                                initial="vm.objectToModify[field.model]"
                                 on-select="vm.onElementSelect(element,field)">
                 </catalog-select>
-                <div ng-if="field.hint"
-                     class="modify-field-hint">
-                    {{field.hint}}
-                </div>
             </section>
         </section>
         <section ng-if="field['type']==='array'">
@@ -147,7 +160,7 @@
                     <div ng-message="pattern">{{field.validations.errors.regex}}</div>
                 </div>
                 <div ng-if="field.hint"
-                     class="create-field-hint">
+                     class="hint">
                     {{field.hint}}
                 </div>
             </md-input-container>
@@ -161,23 +174,12 @@
                                     elements="field['catalog'].elements"
                                     soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
+                                    multiple="true"
+                                    hint="field.hint"
+                                    initial="vm[field.model + '_initial']"
                                     on-select="vm.onArrayElementSelect(element, field, value)">
                     </catalog-select>
-                    <md-chips ng-model="vm[field.model+'_chip']"
-                              ng-if="vm[field.model+'_chip'].length>0"
-                              md-on-remove="vm.onArrayElementRemove($index, field)"
-                              md-removable="true">
-                        <md-chip-template>
-                            <span>
-                                {{$chip[field.catalog.option]}}
-                            </span>
-                        </md-chip-template>
-                    </md-chips>
                 </section>
-                <div ng-if="field.hint"
-                     class="create-field-hint">
-                    {{field.hint}}
-                </div>
             </section>
             <section ng-if="!field['catalog'].requires">
                 <catalog-select catalog="field.catalog"
@@ -186,22 +188,11 @@
                                 elements="field['catalog'].elements"
                                 soft-delete="field.softDelete"
                                 lazy="field.catalog.requires"
+                                multiple="true"
+                                hint="field.hint"
+                                initial="vm[field.model + '_initial']"
                                 on-select="vm.onArrayElementSelect(element, field, value)">
                 </catalog-select>
-                <md-chips ng-model="vm[field.model+'_chip']"
-                          ng-if="vm[field.model+'_chip'].length>0"
-                          md-on-remove="vm.onArrayElementRemove($index, field)"
-                          md-removable="true">
-                    <md-chip-template>
-                        <span>
-                            {{$chip[field.catalog.option]}}
-                        </span>
-                    </md-chip-template>
-                </md-chips>
-                <div ng-if="field.hint"
-                     class="create-field-hint">
-                    {{field.hint}}
-                </div>
             </section>
         </section>
         <section ng-if="field['type']==='object'">

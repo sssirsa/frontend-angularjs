@@ -2,7 +2,7 @@
     angular
         .module('app.mainApp')
         .component('catalogObjectCreate', {
-            templateUrl: 'app/mainApp/components/catalogManager/recursion/catalogObjectCreate.tmpl.html',
+            templateUrl: 'app/mainApp/components/catalogManager/components/catalogObjectCreate.tmpl.html',
             controller: CatalogObjectCreateController,
             controllerAs: 'vm',
             bindings: {
@@ -14,7 +14,6 @@
         var vm = this;
 
         vm.objectToCreate = vm.element;
-        //vm.array_objects = {};
 
         activate();
 
@@ -28,17 +27,20 @@
                 }
                 //The field is any of the HTML5 types
                 if (field['type'] !== 'fileUploader'
-                    && field['type'] !== 'catalog'
-                    && field['type'] !== 'options'
+                    //&& field['type'] !== 'catalog'
+                    //&& field['type'] !== 'options'
                     //&& field['type'] !== 'color'
-                    && field['type'] !== 'array'
+                    //&& field['type'] !== 'array'
                     && field['type'] !== 'catalog_array'
                     && field['type'] !== 'object'
-                    && field['type'] !== 'arrar_object'
+                    && field['type'] !== 'array_object'
                 ) {
                     if (field.hasOwnProperty('initial_value')) {
                         //Loading initial values
                         vm.objectToCreate[field.model] = field.initial_value;
+                    }
+                    else {
+                        field.lock = false;
                     }
                 }
             });
@@ -103,28 +105,13 @@
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
-                addCatalogToArray(element, field, value);
+                vm.objectToCreate[field.model] = element;
             }
 
         }
 
         vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
             vm.objectToCreate[field.model].splice(index, 1);
-        }
-
-        //Internal function
-        //It add just the returned ID of the elements to the catalog_array
-        function addCatalogToArray(element, field, value) {
-            if (element) {
-                if (!vm.objectToCreate[field.model]) {
-                    vm.objectToCreate[field.model] = [];
-                }
-                if (!vm[field.model + '_chip']) {
-                    vm[field.model + '_chip'] = [];
-                }
-                vm.objectToCreate[field.model].push(element);
-                vm[field.model + '_chip'].push(value);
-            }
         }
 
         vm.addObjectToArray = function addObjectToArray(field) {

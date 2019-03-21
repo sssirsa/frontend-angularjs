@@ -1,16 +1,18 @@
 /*
  *      catalog:{
- *          url: string,         Full or partial URL depending on the kind
- *          query: string,       (Optional) query to be used if the catalog depends of other
- *                               In this component it must be received without the value
- *                               to use directly in the API.
- *                               Example: ?parameter_name=
- *          query_value:string,  (Optional) Value tu search on the API with the given query.
- *          name: string,        (Optional) Default is "Catalog"
- *          loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
- *          model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
- *          option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
- *                               If not given, then the model will be used
+ *          url: string,                 Full or partial URL depending on the kind
+ *          query: string,               (Optional) query to be used if the catalog depends of other
+ *                                       In this component it must be received without the value
+ *                                       to use directly in the API.
+ *                                       Example: ?parameter_name=
+ *          query_value:string,          (Optional) Value tu search on the API with the given query.
+ *          name: string,                (Optional) Default is "Catalog"
+ *          loadMoreButtonText, string   (Optional) Test to show in the 'Load more' Button, default is 'Load more'
+ *          model: string,               From the catalog object, which element will be sent (aka: id, name, etc.)
+ *          option: string,              (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
+ *                                       If not given, then the model will be used.
+ *          showModel: boolean,          (Optional) If given, the model and the option will be shown with the following template
+ *                                       <b>{{model}}</b> - {{option}}
  *      },
  *      hint: string,         (Optional) Shows a message under the field
  *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
@@ -34,12 +36,17 @@
  *                            In this case 'elements' should receive the parameter 'results'
  *
  *      lazy: boolean,        (Optional) If given, the catalog won't load until the selector is opened
- *      initial: string,      (Optional) If given, the lazy functionality will be disabled, and and initial
- *                            value will be selected by the model given inside the catalog object.
  *      softDelete: {
  *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
  *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
- *      }
+ *      },
+ *      
+ *      initial:string,       (Optional) Must be the ID you want to be selected (if single)
+ *                            Must be the elements selected with ID and option (if multiple)
+ *                            Iy nulls the lazy parameter
+ *      showModel:boolean,    (Optional) Allows to shoe the model and the option of the catalog with the following format
+ *                            <b>{{model}}</b> - {{option}}
+ *      multiple:boolean      (Optional) Allows to select more than one element.
  *      ---------------------------------------
  *      RETURNS
  *      {
@@ -57,7 +64,8 @@
                 catalog: '<',
                 hint: '<',
                 icon: '<',
-                lock:'<',
+                lock: '<',
+                multiple: '<',
 
                 pagination: '<',
                 elements: '<',
@@ -93,17 +101,14 @@
         init();
 
         function init() {
-            if (!vm.lazy) {
-                //The catalog is not loaded in lazy mode
+            if (!vm.lazy || vm.initial) {
+                //The catalog is not loaded in lazy mode and when no initial value is given
                 list();
             }
-            else {
-                //The catalog is required to be loaded in lazy mode
-                if (vm.initial) {
-                    //The parameter initial was given, so the lazy parameter is ignored
-                    list();
-                }
-            }
+            //if (vm.initial && vm.pagination) {
+            //    //Warranty that lazy is true if you have initial and pagination
+            //    vm.lazy = true;
+            //}
         }
 
         function list() {
@@ -148,17 +153,9 @@
                             }
                         }
                         vm.onSuccessList({ elements: vm.catalogElemets });
-                        //If initial parameter is given, select the element after listing the catalogue
+                        //If initial parameter is given, select (and load) the element after listing the catalogue
                         if (vm.initial) {
-                            vm.selectedElement = vm.catalogElements
-                                .filter(function (currentElement) {
-                                    return currentElement[vm.catalog.model]
-                                        === vm.initial[vm.catalog.model];
-                                })[0]; 
-                            vm.onSelect({
-                                element: vm.selectedElement[vm.catalog.model],
-                                value: vm.selectedElement
-                            });
+                            initialValueLoad();
                         }
                     })
                     .catch(function (errorElements) {
@@ -171,6 +168,103 @@
                     error: '"catalog" parameter is not defined'
                 });
             }
+        }
+
+        //Called if the parameter vm.initial exists when listing the elements
+        function initialValueLoad() {
+            //Non paginated catalogue
+            if (!vm.pagination) {
+                //Multiple elements to select
+                if (vm.multiple) {
+                    vm.selectedElement = vm.catalogElements
+                        .filter(function (currentElement) {
+                            return vm.initial.find(function (iteratedElement) {
+                                return iteratedElement === currentElement;
+                            })
+                        })[0];
+                    vm.onClose();
+                }
+                //Just one element to select
+                else {
+                    vm.selectedElement = vm.catalogElements
+                        .filter(function (currentElement) {
+                            return currentElement[vm.catalog.model]
+                                === vm.initial;
+                        })[0];
+                    vm.onClose();
+                }
+                //Pushing if no elements are in the list or the element is not contained
+                if (!elementInList(vm.selectedElement)) {
+                    vm.catalogElements.push(vm.selectedElement);
+                }
+            }
+            //Paginated catalogue
+            else {
+                if (vm.multiple) {
+                    vm.selectedElement = JSON.parse(JSON.stringify(vm.initial));
+                    //Iterating over every initial object
+                    for (var selectedElementRepeater = 0;
+                        selectedElementRepeater < vm.selectedElement.length;
+                        selectedElementRepeater++) {
+                        if (!elementInList(vm.selectedElement[selectedElementRepeater], vm.catalogElements)) {
+                            //Adding elements to list if they were not in the actual page of pagination
+                            vm.catalogElements.unshift(vm.selectedElement[selectedElementRepeater]);
+                        }
+                        else {
+                            vm.catalogElements.splice(
+                                getIndexById(vm.selectedElement[selectedElementRepeater],
+                                    vm.catalogElements), 1);
+                            vm.catalogElements.unshift(vm.selectedElement[selectedElementRepeater]);
+                        }
+                    }
+                    vm.onClose();
+                }
+                else {
+                    createMainCatalogProvider();
+                    vm.listLoader = CATALOG_SELECT.detail(vm.initial)
+                        .then(function catalogSelectDetailSuccess(successCallback) {
+                            console.log("Callback", successCallback);
+                            vm.selectedElement = successCallback;
+                            if (!vm.catalogElements) {
+                                vm.catalogElements = [];
+                            }
+                            if (!elementInList(successCallback, vm.catalogElements)) {
+                                vm.catalogElements.unshift(successCallback);
+                            }
+                            else {
+                                vm.catalogElements.splice(
+                                    getIndexById(vm.selectedElement,
+                                        vm.catalogElements), 1);
+                                vm.catalogElements.unshift(vm.selectedElement);
+                            }
+                            vm.onClose();
+
+                        })
+                        .catch(function catalogSelectDetailError(errorCallback) {
+                            console.error('@CatalogSelectController @list @CATALOG_SELECT.detail', errorCallback);
+                        });
+
+                }
+            }
+        }
+
+        //If the element is on the list, it returns it, else, returns undefined
+        function elementInList(element, list) {
+            return list.find(function (iteratedElement) {
+                return iteratedElement[vm.catalog.model] === element[vm.catalog.model];
+            });
+        }
+
+        function getIndexById(element, list) {
+            let index = null;
+            let listIterator = 0;
+            while (listIterator < list.length && !index) {
+                if (list[listIterator][vm.catalog.model] === element[vm.catalog.model]) {
+                    index = listIterator;
+                }
+                listIterator++;
+            }
+            return index;
         }
 
         function createMainCatalogProvider() {
@@ -200,14 +294,51 @@
                     .list()
                     .then(function (response) {
                         var elements = response;
+                        let loadedElementList = [];
                         //Elements list is returned in any other model
                         if (vm.elements) {
-                            vm.catalogElements = vm.catalogElements.concat(elements[vm.elements]);
+                            //Add the returned elements after the list sanitation
+                            //vm.catalogElements = vm.catalogElements.concat(elements[vm.elements]);
+                            loadedElementList = elements[vm.elements];
                         }
                         //Elements list is returned directly as an array
                         else {
-                            vm.catalogElements = vm.catalogElements.concat(elements);
+                            loadedElementList = elements;
                         }
+
+                        //This procedures are required because of the initial loading of the elements
+                        //And are just used in the case of pagination
+                        if (vm.multiple) {
+                            console.log("Before splice",loadedElementList);
+                            for (var selectedElementRepeater = 0;
+                                selectedElementRepeater < vm.selectedElement.length;
+                                selectedElementRepeater++) {
+                                //Validating if one of the selected elements is present in the actual page
+                                if (elementInList(vm.selectedElement[selectedElementRepeater], loadedElementList)) {
+                                    //remove vm.selectedElement[selectedElementRepeater]
+                                    loadedElementList.splice(
+                                        getIndexById(vm.selectedElement[selectedElementRepeater],
+                                            loadedElementList
+                                        ), 1);
+                                }
+                            }
+
+                        }
+                        else {
+                            //Validate if selected element is present on the actual page
+                            if (elementInList(vm.selectedElement, loadedElementList)) {
+                                //remove vm.selectedElement
+                                loadedElementList.splice(
+                                    getIndexById(
+                                        vm.selectedElement,
+                                        loadedElementList
+                                    ), 1);
+                            }
+                        }
+
+                        //Appending elemets to the now sanitized list
+                        vm.catalogElements = vm.catalogElements.concat(loadedElementList);
+
                         //Determine if the soft delete parameter is given, and procede with the filtering
                         if (vm.softDelete) {
                             vm.catalogElements = filterDeleted(vm.catalogElements);
@@ -246,10 +377,27 @@
 
         function onClose() {
             if (vm.selectedElement) {
-                vm.onSelect({
-                    element: vm.selectedElement[vm.catalog.model],
-                    value: vm.selectedElement
-                });
+                if (!vm.multiple) {
+                    //Returns the element and value as is.
+                    vm.onSelect({
+                        element: vm.selectedElement[vm.catalog.model],
+                        value: vm.selectedElement
+                    });
+                }
+                else {
+                    //Makes tratment for returning the element as an id array,
+                    //the value is return as is.
+                    let idArray = [];
+                    for (let elementRepeater = 0;
+                        elementRepeater < vm.selectedElement.length;
+                        elementRepeater++) {
+                        idArray.push(vm.selectedElement[elementRepeater][vm.catalog.model]);
+                    }
+                    vm.onSelect({
+                        element: idArray,
+                        value: vm.selectedElement
+                    });
+                }
             }
         }
 

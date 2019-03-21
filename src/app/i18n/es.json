@@ -44,7 +44,6 @@
             "CLIENT": "Cliente",
             "STOCK": "Inventarios",
             "CABINETS": "Cabinets",
-            "INSUMS": "Insumos",
             "REPORTS": {
                 "TITLE": "Reportes",
                 "ADMIN": "Gestión",
@@ -65,6 +64,7 @@
                     "TECHNICAL_SERVICE": "Servicio Técnico"
                 },
                 "ACTION": "Acción",
+                "BULK_ASSET": "Insumos Lote",
                 "CATEGORY": "Categoría",
                 "CABINET_BRAND": "Marca de Cábinet",
                 "CABINET_MODEL": "Modelo de Cábinet",
@@ -79,11 +79,11 @@
                 "CLIENT": "Cliente",
                 "EQUIPMENT_TYPE": "Tipo de Equipo",
                 "FAILURE_TYPE": "Clasificador de Falla",
+                "FAILURE": "Fallas",
                 "IMPEDIMENT_REASON": "Motivo de Impedimento",
                 "LOCALITIES": "Localidades",
                 "NEXT_STEP": "Siguiente Paso",
                 "PROJECTS": "Proyectos",
-                "PEDIMENT": "Pedimento",
                 "PROVIDER": "Proveedor",
                 "REASON_NOT_LABELED": "Motivo No Capitalizado",
                 "ROUTES": "Rutas",
@@ -102,18 +102,23 @@
                 "TRANSPORT_LINE": "Línea de Transporte",
                 "TITLE": "Catálogos",
                 "UDN": "UDN",
+                "UNIQUE_ASSET": "Insumos Únicos",
                 "WEREHOUSE": "Bodega"
             },
             "INVENTORY": {
                 "TITLE": "Inventarios",
+                "BULK_ASSET": "Insumos lote",
+                "BULK_ASSET_STAGE": "Insumos lote por etapa",
                 "CABINETS": "Cabinets",
+                "CABINET_MANAGEMENT": "Gestion de cabinet",
                 "CONSUMABLES": "Insumos",
                 "CONSUMABLE_CATALOG": "Catálogo de Insumos",
                 "CONSUMABLE_CATEGORY": "Categoría de Insumos",
-                "PROVIDER": "Proveedor",
                 "NO_CAPITALIZADO": "No Capitalizados",
-                "CABINET_MANAGEMENT": "Gestion de cabinet",
-                "STORAGE":"Almacenamiento y Asignación"
+                "PROVIDER": "Proveedor",
+                "STORAGE": "Almacenamiento y Asignación",
+                "UNIQUE_ASSET": "Insumos unicos",
+                "UNIQUE_ASSET_STAGE": "Insumos unicos por etapa"
             },
             "SERVICE": {
                 "MENU_TITLE": "Atenciones",
@@ -331,7 +336,8 @@
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
             "LOAD_MORE": "Cargar mas elementos",
-            "CLOSE": "Cerrar"
+            "CLOSE": "Cerrar",
+            "SEARCH": "bUSCAR"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",

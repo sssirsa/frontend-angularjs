@@ -7,10 +7,11 @@
                 base: 'catalogues',
                 action: 'action',
                 com_incidence: 'com_incidence',
+                failure: 'failure',
                 failure_type: 'failure_type',
                 failure:'failure',
                 next_step: 'next_step',
-                stage:'stage',
+                stage: 'stage',
                 symptom: 'symptom'
             },
             inspections:{
@@ -43,6 +44,10 @@
             choices: {
                 tipo_etapa: [
                     {
+                        value: 'Reparacion',
+                        display_name: 'Reparación y Mantenimiento'
+                    },
+                    {
                         value: 'Diagnostico',
                         display_name: 'Diagnóstico'
                     },
@@ -69,10 +74,6 @@
                     {
                         value: 'Impedido',
                         display_name: 'Impedido'
-                    },
-                    {
-                        value: 'Reparacion',
-                        display_name: 'Reparación'
                     }
                 ]
             }

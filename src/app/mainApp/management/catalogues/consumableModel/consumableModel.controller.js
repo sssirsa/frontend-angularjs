@@ -161,7 +161,7 @@
                         label: 'Descripción'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'marca__descripcion',
                         label: 'Marca'
                     }

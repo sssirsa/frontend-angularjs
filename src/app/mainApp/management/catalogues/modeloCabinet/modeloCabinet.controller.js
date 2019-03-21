@@ -256,12 +256,12 @@
                         label: 'Palabra clave'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'marca__nombre',
                         label: 'Marca',
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'tipo__descripcion',
                         label: 'Tipo Equipo',
                     }
