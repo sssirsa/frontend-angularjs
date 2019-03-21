@@ -139,5 +139,9 @@
             "CLOSE":"Cerrar Etapa",
             "CLEAR":"Limpiar Campos"
         }
+    },
+    "UNIQUE_ASSET_COMPONENT":{
+        "TITLE":"Insumos Unicos",
+        "CODE_BAR":"Introduzca el número de serie del insumo a utilizar"
     }
 }
