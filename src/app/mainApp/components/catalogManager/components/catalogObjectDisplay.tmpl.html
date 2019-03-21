@@ -8,7 +8,7 @@
          layout-align="center center"
          ng-repeat="field in $ctrl.fields">
         <!-- Just show this section when the field is text -->
-        <section ng-if="field.type==='text'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='text'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
@@ -22,7 +22,7 @@
             <span class="md-body-1">{{$ctrl.element[field.model]}}</span>
         </section>
         <!-- Just show this section when the field is colour -->
-        <section ng-if="field.type==='color'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='color'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
@@ -36,7 +36,7 @@
             <input ng-disabled="true" type="color" name="{field.model}}" value="{{$ctrl.element[field.model]}}">
         </section>
         <!-- Just show this section when the field is options -->
-        <section ng-if="field.type==='options'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='options'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
@@ -49,7 +49,7 @@
             <!-- TODO:Options management -->
         </section>
         <!-- Just show this section when the field is file -->
-        <section ng-if="field.type==='file'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='file'">
             <img ng-if="field.file.mode==='preview'"
                  class="image-preview"
                  ng-src="{{$ctrl.element[field.model]}}" />
@@ -61,7 +61,7 @@
             </md-button>
         </section>
         <!--Just show this section when the field is an array of strings-->
-        <section ng-if="field.type==='array'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='array'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
@@ -76,7 +76,7 @@
                       readonly="true">
         </section>
         <!-- Just show this section when the field is an object -->
-        <section ng-if="field.type==='object_property'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='object_property'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
@@ -105,7 +105,7 @@
                                     fields="field.fields"></catalog-object-display>
         </section>
         <!--Just show this section when the field is an array of objects-->
-        <section ng-if="field.type==='array_object'">
+        <section ng-if="$ctrl.element[field.model] && field.type==='array_object'">
             <!-- Label of the field -->
             <div class="md-body-2"
                  ng-if="field.label">
