@@ -23,6 +23,7 @@
         };
 
 
+        
         function getUniqueAssetsList(barcode) {
             return urlbase.all(URLS.technical_service.catalogues.stage).all(id).customGET();
         }
