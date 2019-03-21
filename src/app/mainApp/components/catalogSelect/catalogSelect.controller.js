@@ -194,7 +194,7 @@
                     vm.onClose();
                 }
                 //Pushing if no elements are in the list or the element is not contained
-                if (!elementInList(vm.selectedElement)) {
+                if (!elementInList(vm.selectedElement, vm.catalogElements)) {
                     vm.catalogElements.push(vm.selectedElement);
                 }
             }
