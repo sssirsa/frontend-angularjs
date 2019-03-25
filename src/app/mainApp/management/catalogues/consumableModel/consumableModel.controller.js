@@ -105,6 +105,7 @@
                     {
                         type: 'catalog',
                         model: 'marca_id',
+                        bindTo:'marca',
                         label: 'Marca insumo',
                         required: true,
                         validations: {
@@ -160,7 +161,7 @@
                         label: 'Descripción'
                     },
                     {
-                        type: 'object',
+                        type: 'object_property',
                         model: 'marca__descripcion',
                         label: 'Marca'
                     }
