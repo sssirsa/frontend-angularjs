@@ -10,11 +10,11 @@
         </div>
     </md-toolbar>
     <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
-        <form name="searchUniqueAsset" ng-submit="$ctrl.search_asset()">
-            <div layout="row" layout-padding="">
+        <form flex="100" name="searchUniqueAsset" ng-submit="$ctrl.search_unique_asset()">
+            <div layout="row" layout-padding="" layout-align="center center">
                 <md-input-container flex="80">
                     <label translate="">UNIQUE_ASSET_COMPONENT.CODE_BAR</label>
-                    <input type="text" ng-model="$ctrl.barcode" required md-maxlength="12">
+                    <input type="text" ng-model="$ctrl.barcode" required md-maxlength="20">
                 </md-input-container>
                 <md-input-container flex="20">
                     <md-button class="md-fab md-primary md-hue-2" ng-click="$ctrl.search_unique_asset()">
@@ -24,4 +24,29 @@
             </div>
         </form>
     </div>
+    <section layout-gt-xs="row"
+             layout="column"
+             layout-align-gt-xs="space-between center"
+             layout-align="center stretch"
+             class="full-width not-found-cabinet"
+             ng-if="!element.cabinet"
+             ng-click="$ctrl.createAsset(element.id)"
+             layout-padding="">
+        <div layout="column"
+             layout-align="center center">
+            {{element.id}}
+        </div>
+        <div layout="column"
+             layout-align="center center">
+            {{'ENTRIES.NEW.MESSAGES.REGISTER_CABINET'|translate}}
+        </div>
+        <div layout="column"
+             layout-align="center center">
+            <md-button ng-click="$event.stopPropagation(); $ctrl.removeAsset(element.id)"
+                       aria-label="remove insumo único"
+                       class="md-icon-button">
+                <md-icon md-font-icon="fa fa-times"></md-icon>
+            </md-button>
+        </div>
+    </section>
 </div>

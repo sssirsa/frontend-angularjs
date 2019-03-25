@@ -13,8 +13,9 @@
                             URLS,
                             API) {
 
-        var urlbase = API.all(URLS.inventory.base)
-            .all(URLS.inventory.catalogues.base);
+
+        var urlbase =API.all(URLS.inventory.base)
+            .all(URLS.inventory.management.base);
 
         return {
 
@@ -23,9 +24,11 @@
         };
 
 
-        
+
         function getUniqueAssetsList(barcode) {
-            return urlbase.all(URLS.technical_service.catalogues.stage).all(id).customGET();
+            var filter='?no_serie__contains=';
+            filter.concat(barcode);
+            return urlbase.all(URLS.inventory.management.unique_asset_inventory+filter).customGET();
         }
 
 

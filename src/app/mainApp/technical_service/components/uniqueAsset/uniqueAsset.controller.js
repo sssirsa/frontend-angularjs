@@ -19,9 +19,12 @@
 
             }
         });
-    function uniqueAssetController(Translate, URLS, ErrorHandler, EnvironmentConfig) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider) {
         var vm = this;
-
+        vm.search_unique_asset=search_unique_asset;
+        function search_unique_asset(){
+            uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
+        }
 
     }
 })();
