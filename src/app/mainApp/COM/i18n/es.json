@@ -5,6 +5,7 @@
             "NOTIFICATION":"Enviar Notificacion a COM"
         },
         "FIELDS":{
+            "TYPE_MESSAGE":"Tipo de Mensaje a Enviar",
             "TICKET": "Ticket anterior",
             "TICKET_MASTER": "Ticket Padre",
             "CABINET":"Cabinet",
@@ -42,12 +43,6 @@
             "NOTIFICATION_EXTRA_NOTES":"Notas de Notificación",
             "NOTIFICATIONS":"Notificaciones",
             "NOTIFICATION_STATUS_CODE":"Código de notificación"
-
-
-
-
-
-
         }
     }
 }

@@ -8,16 +8,15 @@
         .module('app.mainApp.com.tickets')
         .controller('ticketsController', ticketsController);
 
-    function ticketsController(
-        API,
-        $mdDialog,
-        toastr,
-        EnvironmentConfig,
-        URLS,
-        COM,
-        TicketProvider,
-        ErrorHandler,
-        Translate) {
+    function ticketsController(API,
+                               $mdDialog,
+                               toastr,
+                               EnvironmentConfig,
+                               URLS,
+                               COM,
+                               TicketProvider,
+                               ErrorHandler,
+                               Translate) {
         var vm = this;
 
         vm.tickets = {};
@@ -36,6 +35,7 @@
         vm.changeSelected = changeSelected;
         vm.removeFilter = removeFilter;
         vm.getTicketInfo = getTicketInfo;
+        vm.openDialogCreate = openDialogCreate;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -65,12 +65,25 @@
             }
         ];
 
-        vm.categories = {
-            start: 'Acknowledge',
-            info: 'Information',
-            error: 'Issue',
-            close: 'Closure'
-        };
+        vm.categories = [
+            {
+                icon: 'fas fa-play',
+                label: 'Inicio',
+                value: 'Acknowledge'
+            }, {
+                icon: 'fas fa-info',
+                label: 'Información',
+                value: 'Information'
+            }, {
+                icon: 'fas fa-exclamation-triangle',
+                label: 'Incidencia',
+                value: 'Issue'
+            }, {
+                icon: 'fas fa-times-circle',
+                label: 'Cerrar',
+                value: 'Closure'
+            }
+        ];
 
 
         function list(limit, offset, querySet) {
@@ -196,16 +209,18 @@
             messages_statusPromise.then(function (message_status) {
                 vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
                 console.log(vm.messageStatusCatalog);
-                console.log(message_status);
-                console.log(activity);
+                console.log(vm.messageStatusCatalog.length);
+                //console.log(message_status);
+                //console.log(activity);
                 // console.log(vm.messageStatusCatalog);
-                createMeta(activity);
+                //createMeta(activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
             });
         }
 
-        function createMeta(activity) {
+
+        function createMeta(sendServiceDetails) {
             vm.object = {
                 identificador: vm.identificador,
                 service_details: [],
@@ -213,7 +228,7 @@
                 faults: [],
                 notifications: []
             };
-            if (activity === vm.categories.close) {
+            if (sendServiceDetails) {
                 vm.object.service_details = vm.serviceDetails
                 vm.meta_incidences = {
                     fields: [
@@ -231,9 +246,9 @@
                                     lock: true,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                            + '/' + URLS.com.base
-                                            + '/' + URLS.com.catalogues.base
-                                            + '/' + URLS.com.catalogues.ticket_type,
+                                        + '/' + URLS.com.base
+                                        + '/' + URLS.com.catalogues.base
+                                        + '/' + URLS.com.catalogues.ticket_type,
                                         name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_ticket_code',//campo a pasar
@@ -273,9 +288,9 @@
                                     label: Translate.translate('COM.FIELDS.BAR_CODE'),
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                            + '/' + URLS.management.base
-                                            + '/' + URLS.management.inventory.base
-                                            + '/' + URLS.management.inventory.cabinet,
+                                        + '/' + URLS.management.base
+                                        + '/' + URLS.management.inventory.base
+                                        + '/' + URLS.management.inventory.cabinet,
                                         name: Translate.translate('COM.FIELDS.CABINET'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'economico',//campo a pasar
@@ -307,9 +322,9 @@
                                     lock: true,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                            + '/' + URLS.management.base
-                                            + '/' + URLS.management.catalogues.base
-                                            + '/' + URLS.management.catalogues.condition,
+                                        + '/' + URLS.management.base
+                                        + '/' + URLS.management.catalogues.base
+                                        + '/' + URLS.management.catalogues.condition,
                                         name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_code',//campo a pasar
@@ -334,9 +349,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                    + '/' + URLS.com.base
-                                                    + '/' + URLS.com.catalogues.base
-                                                    + '/' + URLS.com.catalogues.date_type,
+                                                + '/' + URLS.com.base
+                                                + '/' + URLS.com.catalogues.base
+                                                + '/' + URLS.com.catalogues.date_type,
                                                 name: Translate.translate('COM.FIELDS.DATE_TYPE'),
                                                 model: 'com_code',
                                                 option: 'nombre',
@@ -364,9 +379,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                    + '/' + URLS.inventory.base
-                                                    + '/' + URLS.inventory.catalogues.base
-                                                    + '/' + URLS.inventory.catalogues.component_type,
+                                                + '/' + URLS.inventory.base
+                                                + '/' + URLS.inventory.catalogues.base
+                                                + '/' + URLS.inventory.catalogues.component_type,
                                                 name: Translate.translate('COM.FIELDS.COMPONENT_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -403,9 +418,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                    + '/' + URLS.inventory.base
-                                                    + '/' + URLS.inventory.catalogues.base
-                                                    + '/' + URLS.inventory.catalogues.consumable_category,
+                                                + '/' + URLS.inventory.base
+                                                + '/' + URLS.inventory.catalogues.base
+                                                + '/' + URLS.inventory.catalogues.consumable_category,
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -449,9 +464,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                    + '/' + URLS.com.base
-                                                    + '/' + URLS.com.catalogues.base
-                                                    + '/' + URLS.com.catalogues.process_instructions,
+                                                + '/' + URLS.com.base
+                                                + '/' + URLS.com.catalogues.base
+                                                + '/' + URLS.com.catalogues.process_instructions,
                                                 name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -488,9 +503,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                            + '/' + URLS.technical_service.base
-                                            + '/' + URLS.technical_service.catalogues.base
-                                            + '/' + URLS.technical_service.catalogues.action,
+                                        + '/' + URLS.technical_service.base
+                                        + '/' + URLS.technical_service.catalogues.base
+                                        + '/' + URLS.technical_service.catalogues.action,
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                         model: 'com_code',
                                         option: 'descripcion',
@@ -518,9 +533,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                            + '/' + URLS.technical_service.base
-                                            + '/' + URLS.technical_service.catalogues.base
-                                            + '/' + URLS.technical_service.catalogues.failure,
+                                        + '/' + URLS.technical_service.base
+                                        + '/' + URLS.technical_service.catalogues.base
+                                        + '/' + URLS.technical_service.catalogues.failure,
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                         model: 'com_code',
                                         option: 'nombre',
@@ -599,6 +614,7 @@
             }
         }
 
+
         function openDialog() {
             vm.url = EnvironmentConfig.site.rest.api
                 + '/' + COM.base
@@ -643,6 +659,13 @@
                     ErrorHandler.errorTranslate(errorDelete);
                 }
             });
+        }
+
+        function openDialogCreate(ticket, messageStatus) {
+            console.log(ticket);
+            console.log(messageStatus);
+            var sendServiceDetails=messageStatus.asset;
+            createMeta(sendServiceDetails);
         }
 
 

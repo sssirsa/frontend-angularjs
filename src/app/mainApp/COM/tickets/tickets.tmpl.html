@@ -29,7 +29,8 @@
     </md-card>
 
     <div ng-if="vm.tickets">
-        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
+             layout-md="center center">
             <md-card flex="50">
                 <md-input-container class="md-block">
                     <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
@@ -94,13 +95,13 @@
             <md-card flex="100"
                      layout="column"
                      ng-repeat="item in vm.tickets"
-                     layout-gt-md="row"
-                     ng-click="vm.showTicket(item)">
+                     layout-gt-md="row">
                 <div layout="column" layout-align="center stretch" flex="100">
-                    <md-content>
+                    <md-content ng-click="vm.showTicket(item)">
                         <div flex="100">
                             <md-toolbar class="md-hue-1">
-                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-sm="row" layout="column">
+                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-sm="row"
+                                     layout="column">
                                     <div layout="row">
                                         <b translate>Folio</b>: &nbsp <b>{{item.folio}}</b>
                                     </div>
@@ -117,7 +118,8 @@
 
                     <md-content>
 
-                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
+                             layout-md="center center">
                             <div layout="column" layout-align="center center" flex="5">
                                 <i class="fas fa-ticket-alt"></i>
                             </div>
@@ -150,6 +152,41 @@
                                 </div>
                             </div>
 
+                            <!-- Manejo con Selector -->
+                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="50">
+                                <md-input-container flex="100">
+                                    <label translate="">COM.FIELDS.TYPE_MESSAGE</label>
+                                    <md-select ng-model="typeMessage"
+                                               md-on-close="vm.getTicketInfo(item,typeMessage)">
+                                        <md-option ng-repeat="tipo in vm.categories" ng-value="tipo.value">
+                                            <md-icon md-font-icon="{{tipo.icon}}"></md-icon>
+                                            <b translate="">{{tipo.label}}</b>
+                                        </md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+
+                            <div ng-if="vm.messageStatusCatalog && typeMessage" layout="colum" layout-align-sm="row"
+                                 layout-align="space-aroumessageStatusnd center" flex="50">
+                                <md-input-container flex="100">
+                                    <label translate="">COM.FIELDS.NOTIFICATIONS</label>
+                                    <md-select ng-model="notification_code"
+                                               md-on-close="vm.openDialogCreate(item,notification_code)">
+                                        <md-option ng-repeat="messageStatus in vm.messageStatusCatalog"
+                                                   ng-value="messageStatus">
+                                            <div layout="column">
+                                                <b>{{messageStatus.com_code}} - {{messageStatus.nombre_com}}</b>
+                                                <span>{{messageStatus.label}}</span>
+                                            </div>
+                                            <md-divider></md-divider>
+                                        </md-option>
+
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+
+                            <!-- Manejo con botones
                             <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
                                 <div layout="column">
                                     <md-button class="md-raised md-primary buttonTicket"
@@ -186,6 +223,7 @@
                                 </div>
 
                             </div>
+                            -->
 
 
                         </div>
