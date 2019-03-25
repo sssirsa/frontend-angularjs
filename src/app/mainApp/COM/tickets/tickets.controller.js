@@ -664,6 +664,7 @@
                 ErrorHandler.successUpdate();
                 vm.notification_code=undefined;
                 vm.messageStatusCatalog=undefined;
+                listTickets();
 
             }).catch(function (errorDelete) {
                 if (errorDelete) {
@@ -671,6 +672,7 @@
                 }
                 vm.notification_code=undefined;
                 vm.messageStatusCatalog=undefined;
+                listTickets();
             });
         }
 
