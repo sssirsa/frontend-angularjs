@@ -229,6 +229,10 @@
                 notifications: []
             };
             if (sendServiceDetails) {
+                vm.object.notifications.push({
+                    notification_status_code:vm.notification_code.com_code,
+                    notification_extra_notes:''
+                });
                 vm.object.service_details = vm.serviceDetails
                 vm.meta_incidences = {
                     fields: [
@@ -580,6 +584,10 @@
                 };
                 openDialog();
             } else {
+                vm.object.notifications.push({
+                    notification_status_code:vm.notification_code.com_code,
+                    notification_extra_notes:''
+                });
                 //console.log(vm.serviceDetails);
                 vm.meta_incidences = {
 
@@ -654,10 +662,15 @@
                 }
             }).then(function () {
                 ErrorHandler.successUpdate();
+                vm.notification_code=undefined;
+                vm.messageStatusCatalog=undefined;
+
             }).catch(function (errorDelete) {
                 if (errorDelete) {
                     ErrorHandler.errorTranslate(errorDelete);
                 }
+                vm.notification_code=undefined;
+                vm.messageStatusCatalog=undefined;
             });
         }
 

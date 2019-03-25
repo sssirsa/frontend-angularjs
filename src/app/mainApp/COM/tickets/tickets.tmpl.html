@@ -171,8 +171,8 @@
                                  layout-align="space-aroumessageStatusnd center" flex="50">
                                 <md-input-container flex="100">
                                     <label translate="">COM.FIELDS.NOTIFICATIONS</label>
-                                    <md-select ng-model="notification_code"
-                                               md-on-close="vm.openDialogCreate(item,notification_code)">
+                                    <md-select ng-model="vm.notification_code"
+                                               md-on-close="vm.openDialogCreate(item,vm.notification_code)">
                                         <md-option ng-repeat="messageStatus in vm.messageStatusCatalog"
                                                    ng-value="messageStatus">
                                             <div layout="column">
