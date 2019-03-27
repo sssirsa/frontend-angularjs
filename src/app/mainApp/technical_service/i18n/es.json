@@ -142,6 +142,9 @@
     },
     "UNIQUE_ASSET_COMPONENT":{
         "TITLE":"Insumos Unicos",
-        "CODE_BAR":"Introduzca el número de serie del insumo a utilizar"
+        "RESULTS":"Resultados de la búsqueda",
+        "CODE_BAR":"Introduzca el número de serie del insumo a utilizar",
+        "SERIAL_NUMBER":"Número de Serie",
+        "CATEGORY":"Categoría"
     }
 }

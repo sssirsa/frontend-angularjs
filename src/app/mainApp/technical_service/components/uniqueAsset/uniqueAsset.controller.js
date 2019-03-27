@@ -21,9 +21,18 @@
         });
     function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider) {
         var vm = this;
+        vm.notDetected=[]
         vm.search_unique_asset=search_unique_asset;
+
         function search_unique_asset(){
-            uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
+           var promiseUniqueAssets= uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
+          promiseUniqueAssets.then(function (uniqueAssetsList) {
+              vm.unique_asset_list=uniqueAssetsList.results;
+              console.log(vm.unique_asset_list);
+          }).catch(function(errormsg){
+              console.log(errormsg);
+              ErrorHandler.errorTranslate(errormsg);
+          });
         }
 
     }
