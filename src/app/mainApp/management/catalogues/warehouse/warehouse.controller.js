@@ -210,6 +210,7 @@
                     {
                         type: 'catalog',
                         model: 'sucursal_id',
+                        bindTo:'sucursal',
                         label: 'Sucursal',
                         required: true,
                         validations: {
@@ -285,9 +286,10 @@
                         label: 'Profundidad Máxima'
                     },
                     {
-                        type: 'text',
-                        model: 'sucursal_nombre',
-                        label: 'Sucursal'
+                        type: 'object_property',
+                        model: 'sucursal__nombre',
+                        label: 'Sucursal',
+                        nullOrEmpty:'Sin sucursal'
                     }
                 ],
                 softDelete: {

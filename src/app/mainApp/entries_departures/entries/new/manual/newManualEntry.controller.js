@@ -9,7 +9,9 @@
         toastr,
         ErrorHandler,
         $mdDialog,
-        Helper
+        Helper,
+        EnvironmentConfig,
+        URLS
     ) {
         var vm = this;
 
@@ -24,7 +26,7 @@
         vm.cabinetList;
         vm.entryFromAgency; //Determines which catalog to show (Petition or udn)
 
-        //Validations
+        //Validations and constraints
         vm.imageConstraints = {
             validations: {
                 size: {
@@ -36,6 +38,210 @@
             },
             resize: { width: 4096 },
             resizeIf: '$width > 4096 || $height > 4096'
+        };
+
+        vm.createCabinetDialog = {
+            fields: [
+                {
+                    type: 'text',
+                    model: 'economico',
+                    label: 'Económico',
+                    initial_value: '',
+                    lock: true
+                },
+                {
+                    type: 'text',
+                    model: 'no_serie',
+                    label: 'Número de serie',
+                    required: true,
+                    hint: 'Número de serie del cabinet',
+                    validations: {
+                        errors: {
+                            required: 'El número de serie es obligatorio'
+                        }
+                    }
+                },
+                {
+                    type: 'text',
+                    model: 'year',
+                    label: 'Año',
+                    required: true,
+                    hint: 'Año de fabricación del cabinet',
+                    validations: {
+                        regex: '(19|20)[0-9]{2}',
+                        errors: {
+                            regex: 'Formato inválido de año',
+                            required: 'El año es obligatorio'
+                        }
+                    }
+                },
+                {
+                    type: 'text',
+                    model: 'id_unilever',
+                    label: 'Activo Unilever',
+                    required: true,
+                    hint: 'Número de identificación utilizado por Unilever',
+                    validations: {
+                        regex: '[a-zA-Z0-9]+',
+                        errors: {
+                            regex: 'Solo caracteres alfanuméricos',
+                            required: 'El activo unilever'
+                        }
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'marca',
+                    label: 'Marca del cabinet',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.cabinet_brand,
+                        name: 'Marca',
+                        model: 'id',
+                        option: 'descripcion',
+                        loadMoreButtonText: 'Cargar mas...',
+                        elements: 'results',
+                        pagination: {}
+                    },
+                    required: true,
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'modelo_id',
+                    label: 'Modelo del cabinet',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.cabinet_model,
+                        query: '?marca__id=',
+                        requires: 'marca',
+                        name: 'Modelo',
+                        model: 'id',
+                        option: 'nombre',
+                        elements: 'results',
+                        pagination: {},
+                        loadMoreButtonText: 'Cargar mas...'
+                    },
+                    required: true,
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'condicion_id',
+                    label: 'Condición del cabinet',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.condition,
+                        name: 'Condición',
+                        model: 'id',
+                        option: 'letra',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results'
+                    },
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'estatus_unilever_id',
+                    label: 'Estatus unilever',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.status_unilever,
+                        name: 'Estatus Unilever',
+                        model: 'id',
+                        option: 'descripcion',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results'
+                    },
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'estatus_com_id',
+                    label: 'Estatus COM',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.status_com,
+                        name: 'Estatus COM',
+                        model: 'id',
+                        option: 'descripcion',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results'
+                    },
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'categoria_id',
+                    label: 'Categoría',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.category,
+                        name: 'Categoría del cabinet',
+                        model: 'id',
+                        option: 'nombre',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results'
+                    },
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                }
+            ],
+            dialog: {
+                title: 'Información del cabinet',
+                okButton: 'Guardar',
+                cancelButton: 'Cancelar',
+                loading: 'Creando cabinet'
+            },
+            url: EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.inventory.base
+                + '/' + URLS.management.inventory.cabinet
         };
 
         // Auto invoked init function
@@ -175,23 +381,26 @@
         }
 
         vm.createCabinet = function createCabinet(cabinetID) {
+            vm.createCabinetDialog.fields[0].initial_value = cabinetID;
             $mdDialog.show({
-                controller: 'CabinetDialogController',
+                controller: 'CatalogCreateDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
                 locals: {
-                    cabinetID: cabinetID
+                    dialog: vm.createCabinetDialog.dialog,
+                    fields: vm.createCabinetDialog.fields,
+                    url: vm.createCabinetDialog.url
                 }
-            }).then(function (successCallback) {
+            }).then(function successCreateCabinet(successCallback) {
                 var cabinetID = successCallback.economico;
                 vm.removeCabinet(cabinetID);
                 addCabinetToList(successCallback);
-            }).catch(function (err) {
-                if (err) {
-                    ErrorHandler.errorTranslate(err);
+            }).catch(function errorCreateCabinet(errorCallback) {
+                if (errorCallback) {
+                    ErrorHandler.errorTranslate(errorCallback);
                 }
             });
         }
