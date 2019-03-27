@@ -1,8 +1,8 @@
 image: docker:latest
 
 variables:
-  DOCKER_DRIVER: overlay2
-  PROJECT_BASE: "sssirsa/genesis"
+    DOCKER_DRIVER: overlay2
+    PROJECT_BASE: "sssirsa/genesis"
 
 services:
 - docker:dind
@@ -14,23 +14,23 @@ stages:
 
 
 configuration:
-  stage: configuration
-  image: python:latest
-  script:
+    stage: configuration
+    image: python:latest
+    script:
     - pip install awscli
     - mkdir -p config
     - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
     - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
-  cache:
-    untracked: true
-    paths:
-     - config/
-     - gulp/deploy.js
-  artifacts:
-    paths:
-     - config/
-     - gulp/deploy.js
-  only:
+    cache:
+        untracked: true
+        paths:
+        - config/
+        - gulp/deploy.js
+    artifacts:
+        paths:
+        - config/
+        - gulp/deploy.js
+    only:
     - development
     - staging
     - master
@@ -47,14 +47,14 @@ deploy:
     - npm i minimatch@3.0.4
     - npm i karma@2.0.2
     - npm install gulp
-  script:
+    script:
     - rm -rf dist/
     - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
-  dependencies:
+    dependencies:
     - npm
     - bower
     - configuration
-  only:
+    only:
     - development
     - staging
     - master
@@ -66,14 +66,14 @@ npm:
   image: node:10.2.1
   script:
     - npm install
-  cache:
-    untracked: true
-    paths:
-     - node_modules/
-  artifacts:
-    paths:
-     - node_modules/
-  only:
+    cache:
+        untracked: true
+        paths:
+        - node_modules/
+    artifacts:
+        paths:
+        - node_modules/
+    only:
     - development
     - master
     - staging
