@@ -28,6 +28,10 @@
         vm.economic = null;
         vm.selectedTab = 0;
         vm.stores = null;
+        vm.limit = 20;
+        vm.offset = 0;
+        vm.fullStores = null;
+        vm.refreshPaginationButtonsComponent = false;
 
         //Functions
         vm.accept = accept;
@@ -39,6 +43,9 @@
         vm.selectCity = selectCity;
         vm.search = search;
         vm.changeTab = changeTab;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         activate();
 
@@ -125,15 +132,16 @@
 
         function search() {
             vm.stores = null;
+            vm.refreshPaginationButtonsComponent = false;
             switch (vm.selectedTab) {
                 case 0:
                     if (vm.state) {
                         if (vm.city) {
                             if (vm.locality) {
                                 //Look up by locality
-                                vm.loadingPromise = Stores.getByLocality(vm.locality)
+                                vm.loadingPromise = Stores.getByLocality(vm.locality, vm.limit, vm.offset)
                                     .then(function (storeList) {
-                                        vm.stores = Helper.filterDeleted(storeList, true);
+                                        prepareDataFunction(storeList);
                                     })
                                     .catch(function (storeListError) {
                                         $log.error(storeListError);
@@ -142,9 +150,9 @@
                             }
                             else {
                                 //Look up by city
-                                vm.loadingPromise = Stores.getByCity(vm.city)
+                                vm.loadingPromise = Stores.getByCity(vm.city, vm.limit, vm.offset)
                                     .then(function (storeList) {
-                                        vm.stores = Helper.filterDeleted(storeList, true);
+                                        prepareDataFunction(storeList);
                                     })
                                     .catch(function (storeListError) {
                                         $log.error(storeListError);
@@ -154,9 +162,9 @@
                         }
                         else {
                             //Look up by state
-                            vm.loadingPromise = Stores.getByState(vm.state)
+                            vm.loadingPromise = Stores.getByState(vm.state, vm.limit, vm.offset)
                                 .then(function (storeList) {
-                                    vm.stores = Helper.filterDeleted(storeList, true);
+                                    prepareDataFunction(storeList);
                                 })
                                 .catch(function (storeListError) {
                                     $log.error(storeListError);
@@ -166,9 +174,9 @@
                     }
                     break;
                 case 1:
-                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code)
+                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code, vm.limit, vm.offset)
                         .then(function (storeList) {
-                            vm.stores = Helper.filterDeleted(storeList, true);
+                            prepareDataFunction(storeList);
                         })
                         .catch(function (storeListError) {
                             $log.error(storeListError);
@@ -176,14 +184,16 @@
                         });
                     break;
                 case 2:
-                    vm.loadingPromise = Stores.getByEconomic(vm.economic)
+                    vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
                         .then(function (storeList) {
+                            vm.fullStores = storeList;
                             var justStores = [];
-                            angular.forEach(storeList, function (item) {
+                            angular.forEach(storeList.results, function (item) {
                                 if(!item.fecha_salida)
-                                justStores.push(item.establecimiento);
+                                    justStores.push(item.establecimiento_obj);
                             });
                             vm.stores = Helper.filterDeleted(justStores, true);
+                            vm.refreshPaginationButtonsComponent = true;
                         })
                         .catch(function (storeListError) {
                             $log.error(storeListError);
@@ -200,8 +210,32 @@
             vm.postal_code = null;
             vm.economic = null;
             vm.stores = null;
+            vm.fullStores = null;
+            vm.offset = 0;
+            vm.refreshPaginationButtonsComponent = false;
         }
 
+        function prepareDataFunction(Stores) {
+            vm.fullStores = Stores;
+            var list = Stores.results;
+            vm.stores = Helper.filterDeleted(list, true);
+            vm.refreshPaginationButtonsComponent = true;
+        }
+
+        function sigPage() {
+            vm.offset += vm.limit;
+            search();
+        }
+
+        function prevPage() {
+            vm.offset -= vm.limit;
+            search();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            search();
+        }
     }
 
 })();

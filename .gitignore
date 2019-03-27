@@ -1,5 +1,7 @@
 node_modules/
 bower_components/
+v15/
+.vs/
 .sass-cache/
 .tmp/
 dist/
@@ -10,3 +12,4 @@ config
 .awspublish-genesis.sssirsa.com
 src/app/config.js
 gulp/deploy.js
+.vs/

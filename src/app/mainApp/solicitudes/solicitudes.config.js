@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module('app.mainApp.solicitudes')
+        .module('app.mainApp.solicitudes_old')
         .config(moduleConfig);
 
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
@@ -12,7 +12,7 @@
             .state('triangular.admin-default.realizarSolicitud', {
                 url: '/realizarSolicitudes',
                 data: {
-                    roles: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN']
+                    roles: ['ADMINISTRADOR']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/crear/realizarSolicitud.tmpl.html',
                 controller: 'realizarSolicitudController',
@@ -21,7 +21,7 @@
             .state('triangular.admin-default.buscarSolicitud', {
                 url: '/buscarSolicitud',
                 data: {
-                    roles: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN']
+                    roles: ['ADMINISTRADOR']
                 },
                 templateUrl: 'app/mainApp/solicitudes/solicitud/buscar/buscarSolicitud.html',
                 controller: 'buscarSolicitudController',
@@ -42,25 +42,25 @@
                 name: 'MAIN.MENU.SOLICITUD',
                 icon: 'zmdi zmdi-bookmark',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
-                priority: 3,
+                permission: ['ADMINISTRADOR'],
+                priority: 99,
                 children: [
                     {
                         name: 'MAIN.MENU.SEARCH_SOLICITUD',
                         state: 'triangular.admin-default.buscarSolicitud',
-                        permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CREATES_SOLICITUD',
                         state: 'triangular.admin-default.realizarSolicitud',
-                        permission: ['ADMINISTRADOR','CAPTURISTA','CLIENTE', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
                     },
                     {
                         name: 'MAIN.MENU.CALENDAR',
                         state: 'triangular.admin-default.calendar',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR'],
                         type: 'link'
 
                     }

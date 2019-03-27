@@ -1,0 +1,124 @@
+{
+    "MATERIAL_USED_TITLE": {
+        "text": "Insumos Usados",
+        "style": "subTitle"
+    },
+    "NO_MATERIAL": {
+        "text": "No hay Insumos Usados",
+        "style": "subTitle"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "MATERIAL": {
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns": [
+                    {
+                        "text": "Insumo:",
+                        "width": 60,
+                        "bold": true
+                    },
+                    {
+                        "text": "",
+                        "width": 300
+                    }
+                ]
+            },
+            {
+                "columns": [
+                    {
+                        "text": "Cantidad:",
+                        "width": 60,
+                        "bold": true
+                    },
+                    {
+                        "text": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "SEPARATOR": {
+        "text": "_______________________________________________________________________________________________"
+    },
+    "MOTOR_COMPRESOR_TITLE": {
+        "text": "Micromotores y Compresores",
+        "style": "subTitle"
+    },
+    "MICROMOTOR_NAME_QUANTITY":{
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns":[
+                    {
+                        "text":"Insumo:",
+                        "width": 60,
+                        "bold" :true
+                    },
+                    {
+                        "text":"MATERIAL_NAME",
+                        "width": 300
+
+                    }
+
+                ]
+            },
+            {
+                "columns":[
+                    {
+                        "text":"Cantidad:",
+                        "width": 60,
+                        "bold" :true
+                    },
+                    {
+                        "text":"QUANTITY"
+
+                    }
+                ]
+            }
+        ]
+    },
+    "SERIAL_NUMBER_MICROMOTOR":{
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns":[
+                    {
+                        "text":"Número Serie:",
+                        "width": 60,
+                        "bold":true
+                    },
+                    {
+                        "text":"SERIAL_NUMBER",
+                        "width": 430,
+                        "bold":true
+
+                    }
+
+                ]
+            }
+        ]
+    },
+    "MICROMOTOR_NOTES":{
+        "alignment": "justify",
+        "columns": [
+            {
+                "columns":[
+                    {
+                        "text":"Notas:",
+                        "width": 60,
+                        "bold":true
+                    },
+                    {
+                        "text":"Lorem ipsum dolor sit amet consectetur adipiscing elit nulla, imperdiet aliquet id porta arcu egestas placerat orci sodales, mauris accumsan gravida eleifend viverra per lacinia.",
+                        "width": 430
+                    }
+
+                ]
+            }
+        ]
+    }
+
+}

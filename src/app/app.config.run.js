@@ -16,8 +16,14 @@
                  AuthService,
                  $window) {
         amMoment.changeLocale('es');
-        $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
-            if (toState.name != 'login') {
+        /*$rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+            if (!AuthService.isAuthenticated()) {
+                AuthService.logout();
+            }
+                $rootScope.toState = toState;
+                $rootScope.toStateParams = toStateParams;
+
+            /!*if (toState.name != 'login') {
                 if (AuthService.isAuthenticated()) {
                     //AuthService.getUser();
                 }
@@ -28,9 +34,9 @@
                 if (AuthService.isAuthenticated()) {
                     AuthService.logout();
                 }
-            }
-        });
-        $rootScope.$on('oauth:error', function (event, rejection) {
+            }*!/
+        });*/
+        /*$rootScope.$on('oauth:error', function (event, rejection) {
             if ('invalid_grant' === rejection.data.error) {
                 return;
             }
@@ -40,7 +46,7 @@
                 return OAuth.getRefreshToken();
             }
             return $window.location.href = '/login';
-        });
+        });*/
         $rootScope.$on(EVENTS_GENERAL.bind_channels, function () {
             var canal = Channel.all();
             canal[0].bind('create', function (dfs) {

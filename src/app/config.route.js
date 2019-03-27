@@ -18,7 +18,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         })
@@ -30,7 +30,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         })
@@ -42,15 +42,15 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('login');
+                    $state.go('splash');
                 };
             }
         });
 
 
         // set default routes when no path specified
-        $urlRouterProvider.when('', '/login');
-        $urlRouterProvider.when('/', '/login');
+        $urlRouterProvider.when('', '/main');
+        $urlRouterProvider.when('/', '/main');
 
         // always goto 404 if route not found
         $urlRouterProvider.otherwise('/404');

@@ -1,0 +1,36 @@
+{
+    "REPORT_WORK_TITLE": {
+        "text": "Notas de Trabajo",
+        "style": "subheader"
+    },
+    "BLANK_SPACE": {
+        "text": "\n"
+    },
+    "WORK_DESCRIPTION_JOB": {
+        "text": "Descripción del Trabajo",
+        "style": "subTitle"
+    },
+    "WORK_DESCRIPTION": {
+        "alignment": "justify",
+        "text": "TEXT_JOB"
+    },
+    "TECHNICAL_OBSERVATION_TITLE": {
+        "text": "Observaciones Técnico",
+        "style": "subTitle"
+    },
+    "TECHNICAL_OBSERVATION": {
+        "alignment": "justify",
+        "text": "TEXT_TECH"
+    },
+    "CLIENT_OBSERVATION_TITLE": {
+        "text": "Observaciones Cliente",
+        "style": "subTitle"
+    },
+    "CLIENT_OBSERVATION": {
+        "alignment": "justify",
+        "text": "TEXT_CUSTOMER"
+    },
+    "DOUBLE_BLANK_SPACE": {
+        "text": "\n\n"
+    }
+}

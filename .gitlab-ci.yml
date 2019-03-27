@@ -5,80 +5,80 @@ variables:
     PROJECT_BASE: "sssirsa/genesis"
 
 services:
-- docker:dind
+    - docker:dind
 
 stages:
-- dep
-- configuration
-- deploy
+    - dep
+    - configuration
+    - deploy
 
 
 configuration:
     stage: configuration
     image: python:latest
     script:
-    - pip install awscli
-    - mkdir -p config
-    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
-    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
+        - pip install awscli
+        - mkdir -p config
+        - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
+        - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
     cache:
         untracked: true
         paths:
-        - config/
-        - gulp/deploy.js
+            - config/
+            - gulp/deploy.js
     artifacts:
         paths:
-        - config/
-        - gulp/deploy.js
+            - config/
+            - gulp/deploy.js
     only:
-    - development
-    - staging
-    - master
+        - development
+        - staging
+        - master
     tags:
-    - frontend
+        - frontend
 
 deploy:
     stage: deploy
     image: node:10.2.1
     before_script:
-    - npm i socket.io@2.1.1
-    - npm install fs-extra@4.0.1
-    - npm install graceful-fs@4.1.11
-    - npm i minimatch@3.0.4
-    - npm i karma@2.0.2
-    - npm install gulp
+        - npm i socket.io@2.1.1
+        - npm install fs-extra@4.0.1
+        - npm install graceful-fs@4.1.11
+        - npm i minimatch@3.0.4
+        - npm i karma@2.0.2
+        - npm install gulp
     script:
-    - rm -rf dist/
-    - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+        - rm -rf dist/
+        - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
     dependencies:
-    - npm
-    - bower
-    - configuration
+        - npm
+        - bower
+        - configuration
     only:
-    - development
-    - staging
-    - master
+        - development
+        - staging
+        - master
     tags:
-    - frontend
+        - frontend
 
 npm:
     stage: dep
     image: node:10.2.1
     script:
-    - npm install
+        - npm install
     cache:
         untracked: true
         paths:
-        - node_modules/
+            - node_modules/
     artifacts:
         paths:
-        - node_modules/
+            - node_modules/
     only:
-    - development
-    - master
-    - staging
+        - development
+        - master
+        - staging
     tags:
-    - frontend
+        - frontend
 
 bower:
     stage: dep
@@ -86,18 +86,18 @@ bower:
     variables:
         BOWER_VERSION: 1.8.4
     script:
-    - npm install -g bower@$BOWER_VERSION --silent
-    - bower install --allow-root --silent
+        - npm install -g bower@$BOWER_VERSION --silent
+        - bower install --allow-root --silent
     cache:
         untracked: true
         paths:
-        - bower_components/
+            - bower_components/
     artifacts:
         paths:
-        - bower_components/
+            - bower_components/
     only:
-    - development
-    - master
-    - staging
+        - development
+        - master
+        - staging
     tags:
-    - frontend
+        - frontend

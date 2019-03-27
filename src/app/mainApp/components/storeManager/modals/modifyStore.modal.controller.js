@@ -13,20 +13,17 @@
                                    $log,
                                    States,
                                    Cities,
-                                   STORE_SEGMENTATION,
                                    store,
                                    Localities,
-                                   Segmentation) {
+                                   Segmentation,
+                                   ErrorHandler,
+                                   Geolocation) {
         var vm = this;
 
         //Variables
         //vm.storeSegmentation = STORE_SEGMENTATION;
         activate();
 
-        vm.store = store;
-        vm.store.latitud= parseFloat(vm.store.latitud);
-        vm.store.longitud= parseFloat(vm.store.longitud);
-        vm.store.no_cliente = vm.store.no_cliente;
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
@@ -35,8 +32,8 @@
         vm.locality = null;
         vm.postal_code = null;
 
-        vm.estado_nombre = vm.store.localidad.municipio.estado.nombre;
-        vm.municipio_nombre = vm.store.localidad.municipio.nombre;
+        //Control variables
+        vm.changedLocation = null;
 
         //Functions
         vm.accept = accept;
@@ -47,42 +44,48 @@
         vm.selectState = selectState;
         vm.selectCity = selectCity;
         vm.selectSegmentation = selectSegmentation;
+        vm.changeLocation = changeLocation;
 
         activate();
 
         function activate() {
+            vm.store = store;
+            vm.store.latitud = parseFloat(vm.store.latitud);
+            vm.store.longitud = parseFloat(vm.store.longitud);
             listStates();
             selectSegmentation();
         }
 
 
         function accept() {
-            vm.store.estado_nombre = vm.estado_nombre;
-            vm.store.municipio_nombre = vm.municipio_nombre;
+            if (vm.changedLocation || !vm.store.mapa) {
+                vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
+                    .then(function (mapThumbnail) {
+                        vm.store.mapa_img = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
+                        modifyStore();
+                    })
+                    .catch(function (errorMapThumbnail) {
+                        $log.error(errorMapThumbnail);
+                        toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
+                        modifyStore();
+                    });
+            }
+            else {
+                modifyStore();
+            }
+        }
+
+        function modifyStore() {
             vm.store.segmentacion_id = vm.segmentationSelect;
 
-            angular.forEach(vm.localities, function (local) {
-                if(local.id == vm.locality){
-                    vm.store.localidad_id = local.id;
-                    vm.store.localidad_nombre = local.nombre;
-                    vm.store.localidad_cp = local.codigo_postal;
-                    vm.store.cp = local.codigo_postal;
-                }
-            });
-
-            var data = {
+            var storeToSend = {
                 no_cliente: vm.store.no_cliente,
-                localidad_id: vm.store.localidad_id,
-                estado_nombre: vm.store.estado_nombre,
-                municipio_nombre: vm.store.municipio_nombre,
-                localidad_nombre: vm.store.localidad_nombre,
-                localidad_cp: vm.store.localidad_cp,
+                localidad_id: vm.store.localidad.id,
                 nombre_establecimiento: vm.store.nombre_establecimiento,
                 calle: vm.store.calle,
                 numero: vm.store.numero,
                 entre_calle1: vm.store.entre_calle1,
                 entre_calle2: vm.store.entre_calle2,
-                cp: vm.store.cp,
                 latitud: vm.store.latitud,
                 longitud: vm.store.longitud,
                 nombre_encargado: vm.store.nombre_encargado,
@@ -90,24 +93,17 @@
                 segmentacion_id: vm.store.segmentacion_id
             };
 
-            vm.loadingPromise = Stores.update(data, vm.store.no_cliente)
-                .then(function(createdStore){
+            if(vm.store.mapa_img){
+                storeToSend.mapa_img= vm.store.mapa_img;
+            }
+
+            vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
+                .then(function (createdStore) {
                     toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
-
-                    data = null;
-                    vm.store = null;
-                    vm.cities = null;
-                    vm.localities = null;
-                    vm.state = null;
-                    vm.city = null;
-                    vm.locality = null;
-                    vm.postal_code = null;
-                    vm.estado_nombre = null;
-                    vm.municipio_nombre = null;
                 })
-                .catch(function(errorCreateStore){
-                    toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_ERROR'));
+                .catch(function (errorCreateStore) {
+                    ErrorHandler.errorTranslate(errorCreateStore);
                 });
         }
 
@@ -124,9 +120,8 @@
                         listCities(vm.state);
                     })
                     .catch(function (stateListError) {
-                        $log.error(stateListError);
+                        ErrorHandler.errorTranslate(stateListError);
                         vm.states = null;
-                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
                     });
             }
         }
@@ -139,23 +134,15 @@
                         vm.city = vm.store.localidad.municipio.id;
 
                         angular.forEach(vm.states, function (stado) {
-                            if(stado.id == state){
+                            if (stado.id == state) {
                                 vm.estado_nombre = stado.nombre;
                             }
                         });
                         listLocalities(vm.city);
                     })
                     .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-            else {
-                vm.loadingCities = Cities.list()
-                    .then(function (citiesList) {
-                        vm.cities = Helper.filterDeleted(citiesList, true);
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
+                        ErrorHandler.errorTranslate(citiesListError);
+                        vm.cities = null;
                     });
             }
         }
@@ -169,23 +156,15 @@
                         vm.codigo_postal = vm.store.localidad.codigo_postal;
 
                         angular.forEach(vm.cities, function (ciudad) {
-                            if(ciudad.id == city){
+                            if (ciudad.id == city) {
                                 vm.municipio_nombre = ciudad.nombre;
                             }
                         });
 
                     })
                     .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-            else {
-                vm.loadingLocalities = Localities.list()
-                    .then(function (localitiesList) {
-                        vm.cities = Helper.filterDeleted(localitiesList, true);
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
+                        ErrorHandler.errorTranslate(localitiesListError);
+                        vm.localities = null;
                     });
             }
         }
@@ -206,13 +185,27 @@
 
         function selectSegmentation() {
             Segmentation.list()
-                .then(function (res) {
-                    vm.storeSegmentation = res;
+                .then(function (listSegments) {
+                    vm.storeSegmentation = listSegments;
                     vm.segmentationSelect = vm.store.segmentacion.id;
                 })
-                .catch(function (err) {
-                    console.log(err);
+                .catch(function (errorListSegments) {
+                    ErrorHandler.errorTranslate(errorListSegments);
                 });
+        }
+
+        function changeLocation() {
+            vm.changedLocation = true;
+        }
+
+        function _arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
         }
 
     }

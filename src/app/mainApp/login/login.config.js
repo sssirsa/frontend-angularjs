@@ -6,7 +6,7 @@
         .module('app.mainApp.login')
         .config(moduleConfig);
 
-    function moduleConfig($stateProvider, triMenuProvider){
+    function moduleConfig($stateProvider){
         $stateProvider
             .state('login',{
                 url:'/login',
@@ -14,7 +14,7 @@
                 controller:'loginController',
                 controllerAs:'vm'
 
-            })
+            });
 
     }
 

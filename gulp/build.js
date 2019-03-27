@@ -8,6 +8,7 @@ var paths = gulp.paths;
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
+let uglify = require('gulp-uglify-es').default;
 
 gulp.task('partials',['markups'] ,function () {
   return gulp.src([
@@ -47,7 +48,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.useref())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
-    .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
+    .pipe(uglify())
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.csso())

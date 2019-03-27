@@ -141,21 +141,21 @@
                 value: 'ED'
             }],
             antiguedad: [
-                {id: 'A', value: 'A'},
-                {id: 'B', value: 'B'},
-                {id: 'C', value: 'C'},
-                {id: 'D', value: 'D'},
-                {id: 'E', value: 'E'},
-                {id: 'F', value: 'F'}
+                { id: 'A', value: 'A' },
+                { id: 'B', value: 'B' },
+                { id: 'C', value: 'C' },
+                { id: 'D', value: 'D' },
+                { id: 'E', value: 'E' },
+                { id: 'F', value: 'F' }
             ],
             estatus_cabinet: [
-                {display: 'Reparación Mayor', value: 'Reparacion Mayor'},
-                {display: 'Sistema Tapado', value: 'Sistema Tapado'},
-                {display: 'Reparación Media', value: 'Reparacion Media'},
-                {display: 'Reparación Menor', value: 'Reparacion Menor'},
-                {display: 'Fuga Interna', value: 'Fuga Interna'},
-                {display: 'Obsoleto', value: 'Obsoleto'},
-                {display: 'N/A', value: 'N/A'}
+                { display: 'Reparación Mayor', value: 'Reparacion Mayor' },
+                { display: 'Sistema Tapado', value: 'Sistema Tapado' },
+                { display: 'Reparación Media', value: 'Reparacion Media' },
+                { display: 'Reparación Menor', value: 'Reparacion Menor' },
+                { display: 'Fuga Interna', value: 'Fuga Interna' },
+                { display: 'Obsoleto', value: 'Obsoleto' },
+                { display: 'N/A', value: 'N/A' }
             ],
             type_out: [
                 {
@@ -177,11 +177,6 @@
                     id: 3,
                     value: "Obsoleto",
                     value_service: "obsoleto"
-                },
-                {
-                    id: 4,
-                    value: "No validada",
-                    value_service: "all"
                 }
             ],
             units: [
@@ -233,62 +228,62 @@
                 }
             ],
             filter: [
-                {id: 'exact', value: "Igual"},
-                {id: 'iexact', value: "Igual (Exacto)"},
-                {id: 'contains', value: "Contiene"},
-                {id: 'icontains', value: "Contine (Exacto)"},
-                {id: 'in', value: "Lista de valores"},
-                {id: 'gt', value: "Mayor que"},
-                {id: 'gte', value: "Mayor igual que"},
-                {id: 'lt', value: "Menor que"},
-                {id: 'lte', value: "Menor igual que"},
-                {id: 'startswith', value: "Comienza con"},
-                {id: 'istartswith', value: "Comienza con (Exacto)"},
-                {id: 'endswith', value: "Termina con"},
-                {id: 'iendswith', value: "Termina con (Exacto)"},
-                {id: 'range', value: "Rango de fecha"},
-                {id: 'week_day', value: "Día de la semana"},
-                {id: 'isnull', value: "Es vacio"},
-                {id: 'max', value: "Máximo"},
-                {id: 'min', value: "Mínimo"}
+                { id: 'exact', value: "Igual" },
+                { id: 'iexact', value: "Igual (Exacto)" },
+                { id: 'contains', value: "Contiene" },
+                { id: 'icontains', value: "Contine (Exacto)" },
+                { id: 'in', value: "Lista de valores" },
+                { id: 'gt', value: "Mayor que" },
+                { id: 'gte', value: "Mayor igual que" },
+                { id: 'lt', value: "Menor que" },
+                { id: 'lte', value: "Menor igual que" },
+                { id: 'startswith', value: "Comienza con" },
+                { id: 'istartswith', value: "Comienza con (Exacto)" },
+                { id: 'endswith', value: "Termina con" },
+                { id: 'iendswith', value: "Termina con (Exacto)" },
+                { id: 'range', value: "Rango de fecha" },
+                { id: 'week_day', value: "Día de la semana" },
+                { id: 'isnull', value: "Es vacio" },
+                { id: 'max', value: "Máximo" },
+                { id: 'min', value: "Mínimo" }
             ],
             filterInt: [
-                {id: 'gt', value: "Mayor que"},
-                {id: 'gte', value: "Mayor igual que"},
-                {id: 'lt', value: "Menor que"},
-                {id: 'lte', value: "Menor igual que"},
-                {id: 'exact', value: "Igual"},
-                {id: 'iexact', value: "Igual (Exacto)"}
+                { id: 'gt', value: "Mayor que" },
+                { id: 'gte', value: "Mayor igual que" },
+                { id: 'lt', value: "Menor que" },
+                { id: 'lte', value: "Menor igual que" },
+                { id: 'exact', value: "Igual" },
+                { id: 'iexact', value: "Igual (Exacto)" }
             ],
             filterChar: [
-                {id: 'exact', value: "Igual"},
-                {id: 'iexact', value: "Igual (Exacto)"},
-                {id: 'contains', value: "Contiene"},
-                {id: 'icontains', value: "Contine (Exacto)"},
-                {id: 'in', value: "Lista de valores"},
-                {id: 'startswith', value: "Comienza con"},
-                {id: 'istartswith', value: "Comienza con (Exacto)"},
-                {id: 'endswith', value: "Termina con"},
-                {id: 'iendswith', value: "Termina con (Exacto)"},
-                {id: 'isnull', value: "Es vacio"}
+                { id: 'exact', value: "Igual" },
+                { id: 'iexact', value: "Igual (Exacto)" },
+                { id: 'contains', value: "Contiene" },
+                { id: 'icontains', value: "Contine (Exacto)" },
+                { id: 'in', value: "Lista de valores" },
+                { id: 'startswith', value: "Comienza con" },
+                { id: 'istartswith', value: "Comienza con (Exacto)" },
+                { id: 'endswith', value: "Termina con" },
+                { id: 'iendswith', value: "Termina con (Exacto)" },
+                { id: 'isnull', value: "Es vacio" }
             ],
             filterDate: [
-                {id: 'range', value: "Rango de fecha"},
-                {id: 'week_day', value: "Día de la semana"},
-                {id: 'isnull', value: "Es vacio"}
+                { id: 'range', value: "Rango de fecha" },
+                { id: 'week_day', value: "Día de la semana" },
+                { id: 'isnull', value: "Es vacio" }
             ],
             days: [
-                {id: 2, value: "Lunes"},
-                {id: 3, value: "Martes"},
-                {id: 4, value: "Miércoles"},
-                {id: 5, value: "Jueves"},
-                {id: 6, value: "Viernes"},
-                {id: 7, value: "Sábado"},
-                {id: 1, value: "Domingo"}
+                { id: 2, value: "Lunes" },
+                { id: 3, value: "Martes" },
+                { id: 4, value: "Miércoles" },
+                { id: 5, value: "Jueves" },
+                { id: 6, value: "Viernes" },
+                { id: 7, value: "Sábado" },
+                { id: 1, value: "Domingo" }
             ],
             formats: [
-                {value: "xlsx"},
-                {value: "csv"}
+                { value: "xlsx" },
+                { value: "csv" }
             ],
             types: [
                 {
@@ -386,18 +381,18 @@
                 }
             ],
             jobKinds: [
-                {value: 'Mayor'},
-                {value: 'Medio'},
-                {value: 'Menor'},
-                {value: 'Cambio de Equipo'},
-                {value: 'Entrega de equipo'},
-                {value: 'Retiro de equipo'},
-                {value: 'Otro'}
+                { value: 'Mayor' },
+                { value: 'Medio' },
+                { value: 'Menor' },
+                { value: 'Cambio de Equipo' },
+                { value: 'Entrega de equipo' },
+                { value: 'Retiro de equipo' },
+                { value: 'Otro' }
 
             ],
             salePointAssignKind: [
                 {id: 'pending', value: 'Pendientes'},
-                {id: 'attended', value: 'Atendidos'}
+                {id: 'all', value: 'Detalle de atención'}
             ],
             requestKinds: [
                 {
@@ -452,12 +447,14 @@
             marca: 'marca_cabinet',
             persona: 'persona',
             persona_admin: 'persona_admin',
+            tecnicosDisponibles: 'employees',
             proveedor: 'proveedor',
             proyecto: 'proyecto',
             report_builder: 'report_builder',
             reporte_insumos: 'reports/insumos',
             rutas: 'ruta',
             solicitud_pv: 'solicitud',
+            atencion_pv: 'atencion_pv',
             etapa_servicio: 'etapa_servicio',
             insumo_usado: 'insumo_usado',
             grupo_persona: 'grupo_persona',
@@ -467,10 +464,10 @@
                 servicio: 'solicitud_servicio',
                 servicio_admin: 'solicitud_servicio_admin'
             },
-            preRequest:'pre_solicitud',
-            requestClient:'technical_request',
+            preRequest: 'pre_solicitud',
+            requestClient: 'technical_request',
             establecimiento: 'establecimiento',
-            establecimiento_template:'https://goo.gl/kAQrxt',
+            establecimiento_template: 'https://goo.gl/kAQrxt',
             sucursal: 'sucursal',
             tipo_equipo: 'tipo_equipo',
             tipo_transporte: 'tipo_transporte',
@@ -478,11 +475,12 @@
             modelo_cabinet: 'modelo_cabinet',
             estado: 'estado',
             municipio: 'municipio',
-            massive:{
-                store:'massive/store'
+            massive: {
+                store: 'massive/store'
             },
             segmentation: 'segmentacion',
-            credentials: 'credenciales'
+            credentials: 'credenciales',
+            map: 'https://maps.googleapis.com/maps/api/staticmap'
         })
         .constant('QUERIES', {
             store: {
@@ -493,11 +491,11 @@
                 by_economic: '/lookup/'
             },
             city: {
-                by_state: '?estado_id='
+                by_state: '?estado__id='
             },
             locality: {
-                by_state: '?municipio__estado_id=',
-                by_city: '?municipio_id='
+                by_state: '?municipio__estado__id=',
+                by_city: '?municipio__id='
             }
         })
         .constant('CONFIGS', {
@@ -575,32 +573,41 @@
                 {
                     value: 5,
                     label: 'Platino',
-                    class:'store_platinum'
+                    class: 'store_platinum'
                 },
                 {
                     value: 4,
                     label: 'Oro',
-                    class:'store_gold'
+                    class: 'store_gold'
                 },
                 {
                     value: 3,
                     label: 'Plata',
-                    class:'store_silver'
+                    class: 'store_silver'
                 },
                 {
                     value: 2,
                     label: 'Bronce',
-                    class:'store_bronze'
+                    class: 'store_bronze'
                 },
                 {
                     value: 1,
                     label: 'Bajo Bronce',
-                    class:'store_low_bronze'
+                    class: 'store_low_bronze'
                 },
                 {
                     value: 0,
                     label: 'Rojo',
-                    class:'store_red'
+                    class: 'store_red'
                 }]
-        );
+        )
+        .constant('KEYS', {
+            MAPS_KEY: 'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
+        })
+        .constant('PAGINATION', {
+            total: 'count',
+            next: 'next',
+            previous: 'previous',
+            elements: 'results'
+        });
 })();

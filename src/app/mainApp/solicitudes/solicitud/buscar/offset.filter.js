@@ -1,7 +1,7 @@
 /**
  * Created by Luis_Olvera on 02/09/2016.
  */
-angular.module('app.mainApp.solicitudes').filter('offset', function() {
+angular.module('app.mainApp.solicitudes_old').filter('offset', function() {
     return function(input, start) {
         if(input!=null)
         {
