@@ -141,6 +141,7 @@
         }
     },
     "UNIQUE_ASSET_COMPONENT":{
+        "NOT_FOUND":"Insumo No Encontrado",
         "TITLE":"Insumos Unicos",
         "RESULTS":"Resultados de la búsqueda",
         "CODE_BAR":"Introduzca el número de serie del insumo a utilizar",
