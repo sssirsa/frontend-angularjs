@@ -6,18 +6,20 @@
 
     /* @ngInject */
     function searchStoreController(Stores,
-                                   toastr,
-                                   Translate,
-                                   $mdDialog,
-                                   Helper,
-                                   $log,
-                                   States,
-                                   Cities,
-                                   Localities) {
+        toastr,
+        Translate,
+        $mdDialog,
+        Helper,
+        $log,
+        ErrorHandler,
+        States,
+        Cities,
+        Localities) {
         var vm = this;
 
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
+        vm.client_id = null;
         vm.states = null;
         vm.cities = null;
         vm.localities = null;
@@ -135,6 +137,21 @@
             vm.refreshPaginationButtonsComponent = false;
             switch (vm.selectedTab) {
                 case 0:
+                    vm.loadingPromise = Stores.getByID(vm.client_id)
+                        .then(function (store) {
+                            vm.accept(store);
+                        })
+                        .catch(function (storeError) {
+                            $log.error(storeError);
+                            if (storeError.status == 404) {
+                                toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
+                            }
+                            else {
+                                ErrorHandler.errorTranslate(storeError);
+                            }
+                        });
+                    break;
+                case 1:
                     if (vm.state) {
                         if (vm.city) {
                             if (vm.locality) {
@@ -173,7 +190,7 @@
                         }
                     }
                     break;
-                case 1:
+                case 2:
                     vm.loadingPromise = Stores.getByPostalCode(vm.postal_code, vm.limit, vm.offset)
                         .then(function (storeList) {
                             prepareDataFunction(storeList);
@@ -183,13 +200,13 @@
                             toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
                         });
                     break;
-                case 2:
+                case 3:
                     vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
                         .then(function (storeList) {
                             vm.fullStores = storeList;
                             var justStores = [];
                             angular.forEach(storeList.results, function (item) {
-                                if(!item.fecha_salida)
+                                if (!item.fecha_salida)
                                     justStores.push(item.establecimiento_obj);
                             });
                             vm.stores = Helper.filterDeleted(justStores, true);
@@ -207,6 +224,7 @@
             vm.state = null;
             vm.city = null;
             vm.locality = null;
+            vm.client_id = null;
             vm.postal_code = null;
             vm.economic = null;
             vm.stores = null;
