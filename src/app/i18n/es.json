@@ -132,6 +132,7 @@
                     "CITY": "Municipio",
                     "LOCALITY": "Localidad",
                     "ZIP_CODE": "Código postal",
+                    "CLIENT_ID": "Número de cliente",
                     "SEGMENTATION": "Segmentación",
                     "ECONOMIC": "Económico",
                     "CLIENT": "Número de cliente"
@@ -139,13 +140,15 @@
                 "MODALS": {
                     "SEARCH": {
                         "TITLE": "Búsqueda de establecimiento",
+                        "BY_ID": "Por número de cliente",
                         "BY_ECONOMIC": "Por económico",
                         "BY_POSTAL_CODE": "Por código postal",
                         "BY_ADDRESS": "Por dirección",
                         "BUTTON": "Buscar",
                         "HINTS": {
                             "ECONOMIC": "Ingrese un económico de cabinet",
-                            "ZIP_CODE": "Ingrese un código postal"
+                            "ZIP_CODE": "Ingrese un código postal",
+                            "CLIENT_ID": "Ingrese un número de cliente"
                         },
                         "ERRORS": {
                             "NO_RESULTS": "No se encontraron establecimientos",
