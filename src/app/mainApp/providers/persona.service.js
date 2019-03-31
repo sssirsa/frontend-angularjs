@@ -7,9 +7,12 @@
 
     function Persona(
         API,
-        URLS
+        URLS,
+        MANAGEMENT
     ) {
-        var baseUrl = API.all(URLS.genesis.base).all(URLS.persona);
+        var baseUrl = API.all(MANAGEMENT.base
+            + '/' + MANAGEMENT.administration.base
+            + '/' + MANAGEMENT.administration.person.base);
 
         return {
             list: list,
