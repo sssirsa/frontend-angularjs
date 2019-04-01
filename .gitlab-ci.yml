@@ -15,9 +15,8 @@ stages:
 
 configuration:
   stage: configuration
-  image: python:latest
+  image: quay.io/coreos/awscli:master
   script:
-    - pip install awscli
     - mkdir -p config
     - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
     - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
