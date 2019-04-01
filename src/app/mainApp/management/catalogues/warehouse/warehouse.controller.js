@@ -288,7 +288,8 @@
                     {
                         type: 'object_property',
                         model: 'sucursal__nombre',
-                        label: 'Sucursal'
+                        label: 'Sucursal',
+                        nullOrEmpty:'Sin sucursal'
                     }
                 ],
                 softDelete: {

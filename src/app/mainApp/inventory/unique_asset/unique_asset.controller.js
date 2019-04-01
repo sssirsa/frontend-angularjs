@@ -107,7 +107,8 @@
                                 model: 'sucursal__nombre',
                                 label: 'Sucursal'
                             }
-                        ]
+                        ],
+                        nullOrEmpty: 'Sin inventario'
                     }
                 ],
                 softDelete: {
