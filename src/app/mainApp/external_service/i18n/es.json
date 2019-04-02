@@ -1,0 +1,16 @@
+{
+    "EXTERNAL_SERVICE": {
+        "MENU": {
+            "TITLE": "Servicio Externo",
+            "PRE_REQUEST":{
+                "TITLE": "Pre Solicitudes"
+            },
+            "REQUEST":{
+                "TITLE": "Solicitudes",
+                "NEW": "Nuevos",
+                "INCREASE": "Incremental",
+                "REMOVE": "Recolección"
+            }
+        }
+    }
+}

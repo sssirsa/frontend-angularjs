@@ -1,0 +1,27 @@
+{
+    "REQUEST":{
+        "TYPE":{
+            "NEW": "Solicitud de Nuevos",
+            "INCREASE": "Solicitud Incremental",
+            "REMOVE": "Solicitud de Recolección"
+        },
+        "CABINET":{
+            "TITLE": "Tipos de cabinet",
+            "KIND": "Tipo de cabinet a asignar",
+            "QUANTITY": "Cantidad"
+        },
+        "EVIDENCES": "Eviudencias",
+        "INFO": "Información de la solicitud",
+        "COMMENTS":{
+            "CLIENT": "Observaciones del cliente",
+            "WORKER": "Observaciones del personal"
+        },
+        "HOUR":{
+            "START": "Hora inicio",
+            "END": "Hora término",
+            "MIN": "Hora mínima de inicio",
+            "MAX": "Hora máxima de término"
+        },
+        "SCORE": "Calificación"
+    }
+}

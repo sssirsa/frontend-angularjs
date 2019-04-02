@@ -1,0 +1,179 @@
+<div class="bg-01"
+     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     layout="column">
+
+    <md-card layout="column">
+        <div
+            layout="column"
+            layout-align="center center"
+        >
+            <h2 translate>REQUEST.TYPE.NEW</h2>
+        </div>
+        <div layout="row"
+             layout-align-xs="center stretch"
+             layout-xs="column"
+             layout-align="space-around center"
+             layout-padding>
+            <div flex-gt-sm="50" flex="100" ng-if="!vm.user.sucursal">
+                <catalog-select catalog="vm.catalogSucursal.catalog"
+                                elements="vm.catalogSucursal.elements"
+                                on-select="vm.onSelectedSucursal(element)">
+                </catalog-select>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card>
+        <div
+            layout="column"
+            layout-align="center center">
+            <h3>{{'MAIN.COMPONENTS.STORE_MANAGER.TITLE'|translate}}</h3>
+        </div>
+
+        <store-manager
+            can-create= true
+            can-modify= true
+            can-search= false
+            store-selected="vm.storeSelected(store)"
+        ></store-manager>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div layout="column" layout-align="center center">
+            <h3 translate>REQUEST.CABINET.TITLE</h3>
+        </div>
+        <catalog-select catalog="vm.catalogEquipmentKind.catalog"
+                        elements="vm.catalogEquipmentKind.elements"
+                        on-select="vm.onSelectedEquipmentKind(value)">
+        </catalog-select>
+
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUEST.CABINETS.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUEST.CABINETS.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUEST.EVIDENCES</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="true"
+                       max-files="5"
+                       multiple-files="true"
+                       keep="true"
+                       files-selected="vm.filesSelected(files)"
+        ></file-uploader>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUEST.INFO</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUEST.COMMENTS.CLIENT</label>
+                <input
+                    ng-model="vm.request.observaciones_cliente"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUEST.COMMENTS.WORKER</label>
+                <input
+                    ng-model="vm.request.observaciones_tecnico"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUEST.HOUR.START</label>
+                <input type="time"
+                       ng-model="vm.startHour"
+                       placeholder="HH:mm:ss"
+                       min="{{vm.minimalHour}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUEST.HOUR.MIN'|translate}}: {{vm.minimalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>REQUEST.HOUR.END</label>
+                <input type="time"
+                       ng-model="vm.endHour"
+                       placeholder="HH:mm:ss"
+                       ng-disabled="!vm.startHour"
+                       min="{{vm.startHour | moment:'HH:mm:ss'}}"
+                       max="{{vm.maximalHour}}"
+                       required/>
+                <span>{{'REQUEST.HOUR.MAX'|translate}}: {{vm.maximalHour}}</span>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label translate>REQUEST.SCORE</label>
+                <md-select
+                    ng-model="vm.request.calificacion">
+                    <md-option
+                        ng-repeat="score in vm.scores"
+                        ng-value="score.value">
+                        {{score.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout="row"
+             layout-align="end end"
+             layout-sm="column"
+             layout-xs="column"
+             layout-align-sm="start stretch"
+             layout-align-xs="start stretch">
+            <md-button
+                cg-busy="{promise:vm.savingPromise, message:''}"
+                aria-label="assign" ng-click="vm.save()"
+                class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+            </md-button>
+        </div>
+
+    </md-card>
+
+</div>

@@ -1,8 +1,0 @@
-{
-    "EXTERNAL_SERVICE": {
-        "MENU": {
-            "TITLE": "Servicio Externo",
-            "PRE_REQUEST": "Pre Solicitud"
-        }
-    }
-}

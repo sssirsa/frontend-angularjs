@@ -12,7 +12,10 @@
                 new_request: 'request'
             },
             request: {
-                base: ''
+                base: 'request',
+                list: 'all',
+                new_request: 'register',
+                increase_request: 'increase'
             }
         });
 })();
