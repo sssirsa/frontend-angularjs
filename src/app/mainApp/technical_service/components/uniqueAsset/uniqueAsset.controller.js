@@ -15,6 +15,7 @@
             bindings: {
                 uniqueAssetLoaded: '&',
                 uniqueAssetSelected: '<',
+                sucursal:'<'
 
             }
         });
@@ -26,6 +27,7 @@
         vm.search_unique_asset=search_unique_asset;
         vm.removePossibleUniqueAsset=removePossibleUniqueAsset;
         vm.onChange=onChange;
+        vm.createUnique=createUnique;
 
         function removePossibleUniqueAsset(element) {
             var index;
@@ -93,33 +95,34 @@
           });
         }
 
-        vm.meta_creation={
-            fields:[
-                {
-                    type: 'catalog',
-                    model: 'catalogo_insumo_unico_id',
-                    label: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
-                    required: true,
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.management.base
-                        + '/' + URLS.management.catalogues.unique_asset_inventory,
-                        name: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
-                        model: 'id',
-                        option: 'description',
-                        elements: 'results',//elementos del promise donde iterar
-                        showModel: true,//mostrar model y option
-                        pagination: {}//manejo de Paginado
+        function createUnique(element){
+            vm.meta_creation={
+                fields:[
+                    {
+                        type: 'catalog',
+                        model: 'catalogo_insumo_unico_id',
+                        label: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
+                        required: true,
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.unique_asset_inventory,
+                            name: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
+                            model: 'id',
+                            option: 'description',
+                            elements: 'results',//elementos del promise donde iterar
+                            showModel: true,//mostrar model y option
+                            pagination: {}//manejo de Paginado
+                        }
+                    },
+                    {
+                        type: 'text',
+                        model: 'no_serie',
+                        initial:element,
+                        label: Translate.translate('COM.FIELDS.COMPONENT')
                     }
-                },
-                {
-                    type: 'text',
-                    model: 'no_serie',
-                    label: Translate.translate('COM.FIELDS.COMPONENT')
-                },
-
-            ]
-        };
-
+                ]
+            };
+        }
     }
 })();
