@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-        .module('app.mainApp.management.catalogues')
-        .controller('stagesController', StagesController)
+        .module('app.mainApp.technical_service')
+        .controller('failureCatalogController', FailureCatalogController);
 
-    function StagesController(
+    function FailureCatalogController(
         URLS,
         Translate,
         EnvironmentConfig
@@ -13,28 +13,30 @@
 
         var vm = this;
 
-        vm.url = EnvironmentConfig.site.rest.api
+        const technicalUrl = EnvironmentConfig.site.rest.api
             + '/' + URLS.technical_service.base
             + '/' + URLS.technical_service.catalogues.base
-            + '/' + URLS.technical_service.catalogues.stage;
-        vm.name = Translate.translate('STAGES.LABELS.TITLE');
+            + '/' + URLS.technical_service.catalogues.failure;
+
+        vm.url = technicalUrl;
+        vm.name = 'Fallas';
 
         //Labels
         vm.totalText = 'Total de elementos';
         vm.totalFilteredText = 'Elementos encontrados';
 
         //Button labels
-        vm.searchButtonText = Translate.translate('STAGES.LABELS.SEARCH');
-        vm.createButtonText = Translate.translate('STAGES.LABELS.CREATE');
-        vm.deleteButtonText = Translate.translate('STAGES.LABELS.DELETE');
-        vm.modifyButtonText = Translate.translate('STAGES.LABELS.MODIFY');
-        vm.nextButtonText = 'STAGES.LABELS.NEXT';
-        vm.previousButtonText = 'STAGES.LABELS.PREVIOUS';
-        vm.loadMoreButtonText = Translate.translate('STAGES.LABELS.LOAD_MORE');
-        vm.removeFilterButtonText = 'STAGES.LABELS.REMOVE_FILTER';
+        vm.searchButtonText = Translate.translate('ACTION.LABELS.SEARCH');
+        vm.createButtonText = Translate.translate('ACTION.LABELS.CREATE');
+        vm.deleteButtonText = Translate.translate('ACTION.LABELS.DELETE');
+        vm.modifyButtonText = Translate.translate('ACTION.LABELS.MODIFY');
+        vm.nextButtonText = 'Siguiente';
+        vm.previousButtonText = 'Anterior';
+        vm.loadMoreButtonText = Translate.translate('ACTION.LABELS.LOAD_MORE');
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
-        vm.loadingMessage = Translate.translate('STAGES.LABELS.LOADING_MESSAGE');
+        vm.loadingMessage = Translate.translate('ACTION.LABELS.LOADING_MESSAGE');
 
         //Functions
         vm.onElementSelect = onElementSelect;
@@ -48,78 +50,67 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
+                        hint: 'Nombre de la falla',
                         validations: {
                             errors: {
-                                required: 'El nombre es obligatorio'
+                                required: 'El nombre es requerido.'
                             }
                         }
+                    },
+                    {
+                        type: 'boolean',
+                        model: 'obsoleto',
+                        label: 'Obsoletizar',
+                        hint: 'Active si esta falla obsoletiza el cabinet'
                     },
                     {
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        hint: '(Opcional) Descripción breve de la etapa',
+                        hint: 'Descripción breve de la falla.',
                         validations: {
-                            regex: '.{1,200}',
                             errors: {
-                                regex: 'La descripción debe contener máximo 200 caracteres'
+                                required: 'El nombre es requerido.'
                             }
                         }
                     },
                     {
-                        type: 'options',
-                        model: 'tipo_etapa',
-                        label: 'Tipo de Etapa',
-                        required: true,
-                        lock: true,
-                        initial_value: 'Reparacion',
-                        hint:'Campo no editable',
-                        options: {
-                            model: 'value',
-                            option: 'display_name',
-                            elements: URLS.technical_service.choices.tipo_etapa
-                        }
-                    },
-                    {
-                        type: 'catalog_array',
-                        model: 'acciones_id',
-                        label: 'Acciones',
+                        type: 'catalog',
+                        model: 'clasificador_falla_id',
+                        hint: 'Selecciona un tipo de falla',
                         catalog: {
-                            lazy: false,
+                            model: 'id',
+                            option: 'nombre',
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.action,
-                            model: 'com_code',
-                            option: 'descripcion',
-                            name: 'Acciones',
+                                + '/' + URLS.technical_service.catalogues.failure_type,
+                            pagination: {},
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            name: 'Tipo de falla',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
                         type: 'catalog_array',
-                        model: 'etapas_siguientes_id',
-                        label: 'Etapas Siguientes',
+                        model: 'etapas_posibles_id',
                         catalog: {
-                            lazy: false,
+                            model: 'id',
+                            option: 'nombre',
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.stage,
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Etapas siguientes',
+                            pagination: {},
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            name: 'Etapas posibles',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
@@ -146,99 +137,89 @@
                     }
                 ],
                 dialog: {
-                    title: 'Crear Etapa',
+                    title: 'Crear Falla',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Creando Etapa'
+                    loading: 'Creando Falla'
                 }
             },
             PUT: {
+                id: 'com_code',
                 fields: [
                     {
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
+                        hint: 'Nombre de la falla',
                         validations: {
                             errors: {
-                                required: 'El nombre es obligatorio'
+                                required: 'El nombre es requerido.'
                             }
                         }
+                    },
+                    {
+                        type: 'boolean',
+                        model: 'obsoleto',
+                        label: 'Obsoletizar',
+                        hint: 'Active si esta falla obsoletiza el cabinet'
                     },
                     {
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción',
-                        hint: '(Opcional) Descripción breve de la etapa',
+                        hint: 'Descripción breve de la falla.',
                         validations: {
-                            regex: '.{1,200}',
                             errors: {
-                                regex: 'La descripción debe contener máximo 200 caracteres'
+                                required: 'El nombre es requerido.'
                             }
                         }
                     },
                     {
-                        type: 'options',
-                        model: 'tipo_etapa',
-                        label: 'Tipo de Etapa',
-                        required: true,
-                        lock: true,
-                        hint: 'Campo no editable',
-                        options: {
-                            model: 'value',
-                            option: 'display_name',
-                            elements: URLS.technical_service.choices.tipo_etapa
-                        }
-                    },
-                    {
-                        type: 'catalog_array',
-                        model: 'acciones_id',
-                        label: 'Acciones',
-                        bindTo:'acciones',
+                        type: 'catalog',
+                        model: 'clasificador_falla_id',
+                        bindTo: 'clasificador_falla',
+                        hint: 'Selecciona un tipo de falla',
                         catalog: {
-                            lazy: false,
+                            model: 'id',
+                            option: 'nombre',
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.action,
-                            model: 'com_code',
-                            option: 'descripcion',
-                            name: 'Acciones',
+                                + '/' + URLS.technical_service.catalogues.failure_type,
+                            pagination: {},
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            name: 'Tipo de falla',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
                         type: 'catalog_array',
-                        model: 'etapas_siguientes_id',
-                        bindTo:'etapas_siguientes',
-                        label: 'Etapas Siguientes',
+                        model: 'etapas_posibles_id',
+                        bindTo: 'etapas_posibles',
                         catalog: {
-                            lazy: false,
+                            model: 'id',
+                            option: 'nombre',
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.stage,
-                            model: 'id',
-                            option: 'nombre',
-                            name: 'Etapas siguientes',
+                            pagination: {},
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            name: 'Etapas posibles',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
                         type: 'catalog',
                         model: 'etapa_defecto_id',
                         label: 'Etapas Defecto',
-                        bindTo:'etapa_defecto',
                         hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
                         catalog: {
                             lazy: false,
@@ -259,36 +240,33 @@
                     }
                 ],
                 dialog: {
-                    title: 'Editar Etapa',
+                    title: 'Modificar Falla',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Actualizando Etapa'
+                    loading: 'Guardando Falla'
                 }
             },
             DELETE: {
-                id: 'id',
+                id: 'com_code',
                 dialog: {
-                    title: 'Eliminar Etapa',
-                    message: 'Confirme la eliminación de Etapa',
+                    title: 'Eliminar Falla',
+                    message: 'Confirme la eliminación de la Falla',
                     okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
                     cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
-                    loading: 'Eliminando Etapa'
+                    loading: 'Eliminando Falla'
                 }
             },
             LIST: {
                 elements: 'results',
                 mode: 'infinite',
-                pagination: {},
+                pagination: {
+                    total: 'count'
+                },
                 fields: [
                     {
                         type: 'text',
-                        model: 'nombre',
-                        label: 'Nombre'
-                    },
-                    {
-                        type: 'text',
-                        model: 'tipo_etapa',
-                        label: 'Tipo de Etapa'
+                        model: 'com_code',
+                        label: 'Código COM'
                     },
                     {
                         type: 'text',
@@ -303,25 +281,16 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Búsqueda de Etapas',
-                    searchButton: 'Buscar',
-                    loadingText: 'Buscando etapas...'
+                    title: 'Búsqueda de Acción',
+                    searchButton: Translate.translate('ACTION.LABELS.SEARCH'),
+                    loadingText: 'Buscando Acción'
                 },
                 filters: [
                     {
                         type: 'istartswith',
-                        model: 'nombre',
-                        header: 'por Nombre',
-                        label: 'Nombre',
-                        field: {
-                            type: 'text'
-                        }
-                    },
-                    {
-                        type: 'istartswith',
-                        model: 'tipo_etapa',
-                        header: 'por Tipo de Etapa',
-                        label: 'Tipo de Etapa',
+                        model: 'com_code',
+                        header: 'por Código COM',
+                        label: 'Código',
                         field: {
                             type: 'text'
                         }

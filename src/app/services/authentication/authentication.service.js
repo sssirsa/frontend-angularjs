@@ -12,7 +12,8 @@
         API,
         RoleStore,
         User,
-        $cookies
+        $cookies,
+        MANAGEMENT
     ) {
 
         var authService = {
@@ -38,7 +39,9 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function () {
-                    API.all(URLS.genesis.base).all('my_groups')
+                    API.all(MANAGEMENT.base
+                        + '/' +MANAGEMENT.administration.base
+                        + '/' +MANAGEMENT.administration.my_groups)
                         .customGET()
                         .then(function (profile) {
                             var roles = {};
@@ -51,7 +54,9 @@
 
                             RoleStore.defineManyRoles(roles);
 
-                            API.all(URLS.genesis.base).all('persona')
+                            API.all(MANAGEMENT.base
+                                + '/' +MANAGEMENT.administration.base
+                                + '/' +MANAGEMENT.administration.person.base)
                                 .customGET()
                                 .then(function (user) {
                                     console.debug('got persona');

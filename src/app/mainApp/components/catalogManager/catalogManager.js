@@ -310,6 +310,7 @@
                  *              model: string,         Name of the field that will be used to show the data from the API,
                  *                                     separate with double underscores when nested fields are found (just in object type field)
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
+                 *              nullOrEmpty: string,   (Optional) Text to show if the binding is null or empty, if not sent, the element won't be shown at all.
                  *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
                  *                  url: string,         Full URL
                  *                  model: string,       From the catalog object, which element is used for binding (aka: id, name, etc.)

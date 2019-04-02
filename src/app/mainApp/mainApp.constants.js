@@ -72,12 +72,9 @@
             //TODO: Re group under the proper category
             //When done, delete all below this line
             estado: 'estado',
-            grupos: 'groups',
             localidad: 'localidad',
             municipio: 'municipio',
             segmentation: 'segmentacion',
-            persona: 'persona',
-            persona_admin: 'persona_admin',
             solicitud_pv: 'solicitud',
             atencion_pv: 'atencion_pv',
             grupo_persona: 'grupo_persona',

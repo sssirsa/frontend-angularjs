@@ -6,15 +6,13 @@
             controller: CatalogObjectDisplay,
             bindings: {
                 element: '<',
-                fields:'<',
+                fields: '<',
                 onElementSelect: '&'
             }
         });
 
     function CatalogObjectDisplay() {
         var vm = this;
-        //console.log("Element: ", vm.element);
-        //console.log("Fields: ", vm.fields);
         //Functions
         vm.elementSelection = elementSelection;
         vm.downloadFile = downloadFile;
@@ -41,12 +39,23 @@
                     let nested_properties = vm.fields[element]
                         .model
                         .split('__');
-                    let actualProperty = vm.element[nested_properties[0]];
+                    let actualProperty;
+                    if (vm.element.hasOwnProperty(nested_properties[0])) {
+                        actualProperty = vm.element[nested_properties[0]];
+                    } else {
+                        console.error("The property" + nested_properties[0]
+                            + " of " + vm.element
+                            + " is null or undefined @function treatObjectPropertyFields @CatalogObjectDisplay component");
+                    }
+                    if (actualProperty) {
                         for (var i = 1; i < nested_properties.length; i++) {
-                            actualProperty = actualProperty[nested_properties[i]];
+                            if (actualProperty[nested_properties[i]]) {
+                                actualProperty = actualProperty[nested_properties[i]];
+                            }
                         }
-                        vm.element[vm.fields[element]
-                            .model] = actualProperty;
+                    }
+                    vm.element[vm.fields[element]
+                        .model] = actualProperty;
                 }
             }
         }

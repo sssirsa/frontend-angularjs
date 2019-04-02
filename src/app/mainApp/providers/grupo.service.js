@@ -9,9 +9,11 @@
         .factory('groups',groups);
     function groups(
         API,
-        URLS
+        MANAGEMENT
     ) {
-        var urlbase = API.all(URLS.genesis.base).all(URLS.grupos);
+        var urlbase = API.all(MANAGEMENT.base
+            + '/' +MANAGEMENT.administration.base
+            + '/' +MANAGEMENT.administration.groups);
 
         return {
             list:list

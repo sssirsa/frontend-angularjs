@@ -23,7 +23,7 @@
                     vm.array_objects[field.model] = {};
                 }
             });
-            ///bindData();
+            bindData();
             //loadCatalogues();
             //Functionality delegated to the catalog-select Component
             loadCatalogArrays();
@@ -97,19 +97,33 @@
                     }
                     if (field.type === 'catalog') {
                         if (field.bindTo) {
-                            let catalogElement = JSON.parse(
-                                JSON.stringify(
-                                    vm.objectToModify[field.bindTo]
-                                ))[field.catalog.model];
-                            vm.objectToModify[field.model] = catalogElement;
-                            delete (vm.objectToModify[field.bindTo]);
+                            if (vm.objectToModify[field.bindTo]) {
+                                let catalogElement = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.bindTo]
+                                    ))[field.catalog.model];
+                                vm.objectToModify[field.model] = catalogElement;
+                                delete (vm.objectToModify[field.bindTo]);
+                            }
+                            else {
+                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.bindTo] is undefined',
+                                    field.bindTo,
+                                    vm.objectToModify);
+                            }
                         }
                         else {
-                            let catalogElement = JSON.parse(
-                                JSON.stringify(
-                                    vm.objectToModify[field.model]
-                                ))[field.catalog.model];
-                            vm.objectToModify[field.model] = catalogElement;
+                            if (vm.objectToModify[field.model]) {
+                                let catalogElement = JSON.parse(
+                                    JSON.stringify(
+                                        vm.objectToModify[field.model]
+                                    ))[field.catalog.model];
+                                vm.objectToModify[field.model] = catalogElement;
+                            }
+                            else {
+                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.model] is undefined',
+                                    field.model,
+                                    vm.objectToModify);
+                            }
                         }
                     }
                 }
@@ -140,14 +154,14 @@
                                     ));
                             }
 
-                            vm[field.model + '_chip'] = JSON.parse(
-                                JSON.stringify(
-                                    tempCatalogArray
-                                ));
-
                             if (!vm.objectToModify[field.model]) {
                                 vm.objectToModify[field.model] = [];
                             }
+
+                            vm[field.model + '_initial'] = JSON.parse(
+                                JSON.stringify(
+                                    tempCatalogArray
+                                ));
 
                             for (
                                 var catalogIndex = 0;
@@ -172,28 +186,9 @@
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
-                addCatalogToArray(element, field, value);
+                vm.objectToModify[field.model] = element;
             }
 
-        }
-
-        //Internal function
-        //It add just the returned ID of the elements to the catalog_array
-        function addCatalogToArray(element, field, value) {
-            if (element) {
-                //if (!vm.objectToModify[field.model]) {
-                //    vm.objectToModify[field.model] = [];
-                //}
-                //if (!vm[field.model + '_chip']) {
-                //    vm[field.model + '_chip'] = [];
-                //}
-                vm.objectToModify[field.model].push(element);
-                vm[field.model + '_chip'].push(value);
-            }
-        }
-
-        vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
-            vm.objectToModify[field.model].splice(index, 1);
         }
 
         vm.addObjectToArray = function addObjectToArray(field) {

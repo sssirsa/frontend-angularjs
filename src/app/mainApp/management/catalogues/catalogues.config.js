@@ -253,17 +253,6 @@
                 controller: 'stickerController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.catalogue-pediment', {
-                url: '/catalogo/pedimento',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/pediments/pediment.tmpl.html',
-                controller: 'pedimentController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.consumable-category', {
                 url: '/catalogo/categoria_insumo',
                 data: {
@@ -407,6 +396,17 @@
                 controller: 'impedimentReasonController',
                 controllerAs: 'vm'
             })
+            .state('triangular.admin-default.failures', {
+                url: '/catalogo/falla',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/failure/failure.tmpl.html',
+                controller: 'failureCatalogController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.stages', {
                 url: '/catalogo/etapas',
                 data: {
@@ -464,12 +464,6 @@
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                                 state: 'triangular.admin-default.linea-transporte',
                                 permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.PEDIMENT',
-                                state: 'triangular.admin-default.catalogue-pediment',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
                             {
@@ -634,16 +628,22 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.STORES',
-                                state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.STORES',
+                            //    state: 'triangular.admin-default.catalogo-establecimientos',
+                            //    permission: ['ADMINISTRADOR', 'TECNICO E'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.FAILURE',
+                                state: 'triangular.admin-default.failures',
+                                permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             },
                             {
@@ -652,12 +652,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
-                                state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
+                            //{
+                            //    name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
+                            //    state: 'triangular.admin-default.catalogue-segmentation',
+                            //    permission: ['ADMINISTRADOR'],
+                            //    type: 'link'
+                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.SYMPTOM',
                                 state: 'triangular.admin-default.symptom',

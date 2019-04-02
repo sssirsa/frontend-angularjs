@@ -102,11 +102,8 @@
                         model: 'id',
                         option: 'descripcion',
                         loadMoreButtonText: 'Cargar mas...',
-                        elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
+                        elements: 'results',
+                        pagination: {}
                     },
                     required: true,
                     softDelete: {
@@ -129,11 +126,8 @@
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
+                        pagination: {},
                         loadMoreButtonText: 'Cargar mas...'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     required: true,
                     softDelete: {
@@ -154,11 +148,11 @@
                         model: 'id',
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',
@@ -178,11 +172,11 @@
                         model: 'id',
                         option: 'descripcion',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',
@@ -202,11 +196,11 @@
                         model: 'id',
                         option: 'descripcion',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',
@@ -226,11 +220,11 @@
                         model: 'id',
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',
