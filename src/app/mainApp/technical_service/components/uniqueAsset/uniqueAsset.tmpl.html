@@ -12,11 +12,11 @@
     <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
         <form flex="100" name="searchUniqueAsset" ng-submit="$ctrl.search_unique_asset()">
             <div layout="row" layout-padding="" layout-align="center center">
-                <md-input-container flex="80">
+                <md-input-container flex="90">
                     <label translate="">UNIQUE_ASSET_COMPONENT.CODE_BAR</label>
                     <input type="text" ng-model="$ctrl.barcode" required md-maxlength="20">
                 </md-input-container>
-                <md-input-container flex="20">
+                <md-input-container flex="10">
                     <md-button class="md-fab md-primary md-hue-2" ng-click="$ctrl.search_unique_asset()">
                         <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                     </md-button>
