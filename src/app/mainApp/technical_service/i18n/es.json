@@ -147,6 +147,9 @@
         "CODE_BAR":"Introduzca el número de serie del insumo a utilizar",
         "SERIAL_NUMBER":"Número de Serie",
         "CATEGORY":"Categoría",
-        "CATALOG_UNIQUE_ASSET_BRANCH":"Seleccione el insumo unico a utilizar"
+        "CATALOG_UNIQUE_ASSET_BRANCH":"Seleccione el insumo unico a utilizar",
+        "CREATE_UNIQUE":"Crear Insumo único",
+        "BARCODE":"No de Serie",
+        "SUBSIDIARY":"Sucursal"
     }
 }

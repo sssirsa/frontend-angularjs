@@ -15,19 +15,19 @@
             bindings: {
                 uniqueAssetLoaded: '&',
                 uniqueAssetSelected: '<',
-                sucursal:'<'
+                sucursal: '<'
 
             }
         });
-    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS) {
         var vm = this;
-        vm.notDetected=[];
-        vm.unique_asset_list=[];
-        vm.selected_unique_assets=[];
-        vm.search_unique_asset=search_unique_asset;
-        vm.removePossibleUniqueAsset=removePossibleUniqueAsset;
-        vm.onChange=onChange;
-        vm.createUnique=createUnique;
+        vm.notDetected = [];
+        vm.unique_asset_list = [];
+        vm.selected_unique_assets = [];
+        vm.search_unique_asset = search_unique_asset;
+        vm.removePossibleUniqueAsset = removePossibleUniqueAsset;
+        vm.onChange = onChange;
+        vm.createUnique = createUnique;
 
         function removePossibleUniqueAsset(element) {
             var index;
@@ -37,6 +37,7 @@
                 }
             }
         }
+
         function getDuplicity(unique_asset) {
             var index;
             for (index = 0; index < vm.selected_unique_assets.length; ++index) {
@@ -56,18 +57,19 @@
             vm.uniqueAssetLoaded({element: vm.selected_unique_assets});
         }
 
-        function addElement(unique_asset){
-                getDuplicity();
-                vm.selected_unique_assets.push(unique_asset);
-                vm.uniqueAssetLoaded({element: vm.selected_unique_assets});
+        function addElement(unique_asset) {
+            getDuplicity();
+            vm.selected_unique_assets.push(unique_asset);
+            vm.uniqueAssetLoaded({element: vm.selected_unique_assets});
 
         }
-        function onChange(unique_asset){
+
+        function onChange(unique_asset) {
             console.log(unique_asset)
-            if(unique_asset.used){
+            if (unique_asset.used) {
                 addElement(unique_asset);
             }
-            else{
+            else {
                 deleteElement(unique_asset);
             }
             console.log("insumos Usados:")
@@ -75,29 +77,29 @@
 
         }
 
-        function search_unique_asset(){
-           var promiseUniqueAssets= uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
-          promiseUniqueAssets.then(function (uniqueAssetsList) {
-              if(uniqueAssetsList.results.length>0) {
-                  var i;
-                  for(i=0;i<uniqueAssetsList.results.length;++i){
-                  vm.unique_asset_list.push(uniqueAssetsList.results[i]);
-                  }
-              }
-              else{
-                  vm.notDetected.push(vm.barcode);
-              }
-              console.log(vm.unique_asset_list);
-              console.log(vm.notDetected);
-          }).catch(function(errormsg){
-              console.log(errormsg);
-              ErrorHandler.errorTranslate(errormsg);
-          });
+        function search_unique_asset() {
+            var promiseUniqueAssets = uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
+            promiseUniqueAssets.then(function (uniqueAssetsList) {
+                if (uniqueAssetsList.results.length > 0) {
+                    var i;
+                    for (i = 0; i < uniqueAssetsList.results.length; ++i) {
+                        vm.unique_asset_list.push(uniqueAssetsList.results[i]);
+                    }
+                }
+                else {
+                    vm.notDetected.push(vm.barcode);
+                }
+                console.log(vm.unique_asset_list);
+                console.log(vm.notDetected);
+            }).catch(function (errormsg) {
+                console.log(errormsg);
+                ErrorHandler.errorTranslate(errormsg);
+            });
         }
 
-        function createUnique(element){
-            vm.meta_creation={
-                fields:[
+        function createUnique(element) {
+            vm.meta_creation = {
+                fields: [
                     {
                         type: 'catalog',
                         model: 'catalogo_insumo_unico_id',
@@ -105,8 +107,9 @@
                         required: true,
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.inventory.base
                             + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.unique_asset_inventory,
+                            + '/unique_asset_branch',
                             name: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
                             model: 'id',
                             option: 'description',
@@ -118,11 +121,65 @@
                     {
                         type: 'text',
                         model: 'no_serie',
-                        initial:element,
-                        label: Translate.translate('COM.FIELDS.COMPONENT')
+                        initial_value: element,
+                        lock: true,
+                        label: Translate.translate('UNIQUE_ASSET_COMPONENT.BARCODE')
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        initial_value: vm.sucursal.id,
+                        label: Translate.translate('UNIQUE_ASSET_COMPONENT.SUBSIDIARY'),
+                        required:true,
+                        lock: true
                     }
                 ]
             };
+            vm.url = EnvironmentConfig.site.rest.api
+                + '/' + URLS.inventory.base
+                + '/' + URLS.management.base
+                + '/unique_asset';
+            vm.actions = {
+                POST: {
+
+                    fields: vm.meta_creation.fields,
+                    dialog: {
+                        title: Translate.translate('UNIQUE_ASSET_COMPONENT.CREATE_UNIQUE'),
+                        okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),
+                        cancelButton: Translate.translate('MAIN.BUTTONS.CANCEL'),
+                        loading: 'Guardando Acción'
+                    },
+                    url: vm.url
+                }
+            };
+            $mdDialog.show({
+                controller: 'CatalogCreateDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    dialog: vm.actions['POST'].dialog,
+                    id: vm.actions['POST'].id,
+                    fields: vm.actions['POST'].fields,
+                    element: vm.actions['POST'].object,
+                    url: vm.actions['POST'].url
+                }
+            }).then(function () {
+                ErrorHandler.successCreation();
+                removePossibleUniqueAsset(element);
+                search_unique_asset(element);
+
+
+            }).catch(function (errorDelete) {
+                if (errorDelete) {
+                    ErrorHandler.errorTranslate(errorDelete);
+                }
+
+            });
+
+
         }
     }
 })();
