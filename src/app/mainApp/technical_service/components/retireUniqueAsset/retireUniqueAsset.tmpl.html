@@ -1,0 +1,33 @@
+<div>
+    <div flex="100" layout="row" layout-wrap="">
+        <md-subheader ng-if="$ctrl.unique_asset_list.length!=0||$ctrl.notDetected!=0" flex="100" class="md-no-sticky"><span translate="">UNIQUE_ASSET_COMPONENT.RESULTS</span></md-subheader>
+        <md-list-item flex="100" flex-gt-sm="50"  class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list " ng-click="null" flex="50" ng-if="unique_asset.disponible">
+            <md-input-container>
+                <md-checkbox md-no-ink ng-model="unique_asset.used" ng-change="$ctrl.onChange(unique_asset)"  class="md-primary">
+                </md-checkbox>
+            </md-input-container>
+            <img ng-src="assets/images/compressor.png" class="md-avatar" />
+            <div class="md-list-item-text" layout="column">
+                <md-content><h3><b>{{unique_asset.catalogo_insumo_unico.descripcion}}</b></h3></md-content>
+                <md-content>
+                    <h3><span translate="">UNIQUE_ASSET_COMPONENT.SERIAL_NUMBER</span>:<b>{{unique_asset.no_serie}}</b>
+                    </h3>
+                </md-content>
+                <md-content layout="column">
+                    <h4>
+                        <b>{{unique_asset.catalogo_insumo_unico.modelo_insumo.descripcion}}
+                            - {{unique_asset.catalogo_insumo_unico.modelo_insumo.marca.descripcion}}</b>
+                    </h4>
+                </md-content>
+                <md-content layout="column">
+                    <h4><span translate="">UNIQUE_ASSET_COMPONENT.CATEGORY</span>:
+                        <span><b>{{unique_asset.catalogo_insumo_unico.categoria_insumo.nombre}}</b>
+                        {{unique_asset.catalogo_insumo_unico.categoria_insumo.com_code}}</span>
+                    </h4>
+                </md-content>
+                <p>{{ item.notes }}</p>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>
+    </div>
+</div>
