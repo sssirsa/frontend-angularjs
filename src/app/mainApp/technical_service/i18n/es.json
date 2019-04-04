@@ -140,6 +140,10 @@
             "CLEAR":"Limpiar Campos"
         }
     },
+    "RETIRE_ASSET_COMPONENT":{
+        "DISCARD_ASSET":"Desechar Insumo Único",
+        "SALVAGE_ASSET":"Recuperar Insumo Único"
+    },
     "UNIQUE_ASSET_COMPONENT":{
         "NOT_FOUND":"Insumo No Encontrado",
         "TITLE":"Insumos Unicos",

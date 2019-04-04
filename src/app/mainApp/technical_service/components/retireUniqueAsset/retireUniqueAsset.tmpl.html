@@ -1,12 +1,10 @@
 <div>
     <div flex="100" layout="row" layout-wrap="">
-        <md-subheader ng-if="$ctrl.unique_asset_list.length!=0||$ctrl.notDetected!=0" flex="100" class="md-no-sticky"><span translate="">UNIQUE_ASSET_COMPONENT.RESULTS</span></md-subheader>
-        <md-list-item flex="100" flex-gt-sm="50"  class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list " ng-click="null" flex="50" ng-if="unique_asset.disponible">
-            <md-input-container>
-                <md-checkbox md-no-ink ng-model="unique_asset.used" ng-change="$ctrl.onChange(unique_asset)"  class="md-primary">
-                </md-checkbox>
-            </md-input-container>
-            <img ng-src="assets/images/compressor.png" class="md-avatar" />
+        <md-subheader ng-if="$ctrl.unique_asset_list.length!=0||$ctrl.notDetected!=0" flex="100" class="md-no-sticky">
+            <span translate="">UNIQUE_ASSET_COMPONENT.RESULTS</span></md-subheader>
+        <md-list-item flex="100" flex-gt-sm="50" class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list "
+                      ng-click="null" flex="50" ng-if="unique_asset.disponible">
+            <img ng-src="assets/images/compressor.png" class="md-avatar"/>
             <div class="md-list-item-text" layout="column">
                 <md-content><h3><b>{{unique_asset.catalogo_insumo_unico.descripcion}}</b></h3></md-content>
                 <md-content>
@@ -27,6 +25,22 @@
                 </md-content>
                 <p>{{ item.notes }}</p>
             </div>
+            <md-input-container>
+                <md-button class="md-raised md-primary">
+                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+                </md-button>
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary" ng-click="$ctrl.salvageAsset(unique_asset)">
+                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+                </md-button>
+                <md-button class="md-raised md-primary" ng-click="$ctrl.DiscardAsset(unique_asset)">
+                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+                </md-button>
+            </md-input-container>
         </md-list-item>
         <md-divider></md-divider>
     </div>
