@@ -16,6 +16,8 @@
         vm.getInsumosLote=getInsumosLote;
         vm.nextStep=nextStep;
         vm.getFailures=getFailures;
+        vm.getUniqueAsset=getUniqueAsset;
+
         vm.insumos_lote = [];
 
         vm.maxStock = 4;
@@ -105,6 +107,11 @@
             vm.failures = failures;
             console.log(vm.failures);
 
+        }
+
+        function getUniqueAsset(element){
+            console.log("Insumos unicos detectados")
+            console.log(element);
         }
     }
 

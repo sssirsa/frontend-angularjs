@@ -39,6 +39,7 @@
         }
 
         function getDuplicity(unique_asset) {
+            console.log(unique_asset);
             var index;
             for (index = 0; index < vm.selected_unique_assets.length; ++index) {
                 if (vm.selected_unique_assets[index].no_serie === unique_asset.no_serie) {
@@ -58,24 +59,25 @@
         }
 
         function addElement(unique_asset) {
-            getDuplicity();
+            getDuplicity(unique_asset);
             vm.selected_unique_assets.push(unique_asset);
             vm.uniqueAssetLoaded({element: vm.selected_unique_assets});
 
         }
 
         function onChange(unique_asset) {
-            console.log(unique_asset)
+            //console.log(unique_asset)
             if (unique_asset.used) {
                 addElement(unique_asset);
             }
             else {
                 deleteElement(unique_asset);
             }
-            console.log("insumos Usados:")
-            console.log(vm.selected_unique_assets);
+            //console.log("insumos Usados:")
+            //console.log(vm.selected_unique_assets);
 
         }
+
 
         function search_unique_asset() {
             var promiseUniqueAssets = uniqueAssetProvider.getUniqueAssetsList(vm.barcode);
@@ -83,18 +85,29 @@
                 if (uniqueAssetsList.results.length > 0) {
                     var i;
                     for (i = 0; i < uniqueAssetsList.results.length; ++i) {
+                        getDuplicityOptions(uniqueAssetsList.results[i]);
                         vm.unique_asset_list.push(uniqueAssetsList.results[i]);
                     }
                 }
                 else {
                     vm.notDetected.push(vm.barcode);
                 }
-                console.log(vm.unique_asset_list);
-                console.log(vm.notDetected);
+                //console.log(vm.unique_asset_list);
+                //console.log(vm.notDetected);
             }).catch(function (errormsg) {
                 console.log(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
+        }
+
+        function getDuplicityOptions(unique_asset) {
+            console.log(unique_asset);
+            var index;
+            for (index = 0; index < vm.unique_asset_list.length; ++index) {
+                if (vm.unique_asset_list[index].no_serie === unique_asset.no_serie) {
+                    vm.unique_asset_list.splice(index, 1);
+                }
+            }
         }
 
         function createUnique(element) {
