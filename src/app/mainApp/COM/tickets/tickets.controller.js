@@ -285,24 +285,11 @@
                                     label: Translate.translate('COM.FIELDS.SERIAL_NUMBER'),
                                     lock: true
                                 }, {
-                                    type: 'catalog',
+                                    type: 'string',
                                     model: 'bar_code',
                                     required: true,
                                     hint: Translate.translate('COM.FIELDS.BAR_CODE'),
-                                    label: Translate.translate('COM.FIELDS.BAR_CODE'),
-                                    catalog: {
-                                        url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.management.base
-                                        + '/' + URLS.management.inventory.base
-                                        + '/' + URLS.management.inventory.cabinet,
-                                        name: Translate.translate('COM.FIELDS.CABINET'),
-                                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
-                                        model: 'economico',//campo a pasar
-                                        option: 'economico',//campo a mostrar
-                                        elements: 'results',
-                                        showModel: false,
-                                        pagination: {}
-                                    }
+                                    label: Translate.translate('COM.FIELDS.BAR_CODE')
                                 }, {
                                     type: 'string',
                                     model: 'product_description',
