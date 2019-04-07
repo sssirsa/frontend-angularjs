@@ -17,7 +17,7 @@
 
         var urlbase =API.all(URLS.inventory.base)
             .all(URLS.inventory.management.base);
-        var urlRetireBase=API.all(URLS.inventory.base);
+
 
         return {
 
@@ -34,7 +34,7 @@
         }
 
         function removeUniqueAsset(uniqueAsset,id) {
-            return urlRetireBase.all(id).customPUT(uniqueAsset);
+            return urlbase.all(URLS.inventory.management.recover_asset).all(id).customPUT(uniqueAsset);
         }
 
 
