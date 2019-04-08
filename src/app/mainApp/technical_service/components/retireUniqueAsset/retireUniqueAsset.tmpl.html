@@ -1,47 +1,57 @@
-<div>
-    <div flex="100" layout="row" layout-wrap="">
-        <md-subheader ng-if="$ctrl.unique_asset_list.length!=0||$ctrl.notDetected!=0" flex="100" class="md-no-sticky">
-            <span translate="">UNIQUE_ASSET_COMPONENT.RESULTS</span></md-subheader>
-        <md-list-item flex="100" flex-gt-sm="50" class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list "
-                      ng-click="null" flex="50" ng-if="unique_asset.disponible">
-            <img ng-src="assets/images/compressor.png" class="md-avatar"/>
-            <div class="md-list-item-text" layout="column">
-                <md-content><h3><b>{{unique_asset.catalogo_insumo_unico.descripcion}}</b></h3></md-content>
-                <md-content>
-                    <h3><span translate="">UNIQUE_ASSET_COMPONENT.SERIAL_NUMBER</span>:<b>{{unique_asset.no_serie}}</b>
-                    </h3>
-                </md-content>
-                <md-content layout="column">
-                    <h4>
-                        <b>{{unique_asset.catalogo_insumo_unico.modelo_insumo.descripcion}}
-                            - {{unique_asset.catalogo_insumo_unico.modelo_insumo.marca.descripcion}}</b>
-                    </h4>
-                </md-content>
-                <md-content layout="column">
-                    <h4><span translate="">UNIQUE_ASSET_COMPONENT.CATEGORY</span>:
-                        <span><b>{{unique_asset.catalogo_insumo_unico.categoria_insumo.nombre}}</b>
-                        {{unique_asset.catalogo_insumo_unico.categoria_insumo.com_code}}</span>
-                    </h4>
-                </md-content>
-                <p>{{ item.notes }}</p>
+<div flex="100" layout="row" layout-wrap="">
+    <md-toolbar flex="100" class="Subtitle">
+        <div layout="row" layout-align="center center">
+            <div flex="10" class="toolbarSubtitleIcon" layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-pager"></md-icon>
             </div>
-            <md-input-container>
-                <md-button class="md-raised md-primary">
-                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
-                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
-                </md-button>
-            </md-input-container>
-            <md-input-container>
-                <md-button class="md-raised md-primary" ng-click="$ctrl.salvageAsset(unique_asset)">
-                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
-                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
-                </md-button>
-                <md-button class="md-raised md-primary" ng-click="$ctrl.discardAsset(unique_asset)">
-                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
-                    <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
-                </md-button>
-            </md-input-container>
-        </md-list-item>
-        <md-divider></md-divider>
-    </div>
+            <div flex="90" class="toolbarSubtitle" layout-padding="" layout-align="center center">
+                <b translate="">RETIRE_ASSET_COMPONENT.TITLE</b>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-subheader ng-if="$ctrl.unique_asset_list.length==0" flex="100" class="md-no-sticky">
+        <span translate="">RETIRE_ASSET_COMPONENT.NOT_UNIQUE_ASSETS</span></md-subheader>
+    <md-subheader ng-if="$ctrl.unique_asset_list.length>=1" flex="100" class="md-no-sticky">
+        <span translate="">RETIRE_ASSET_COMPONENT.UNIQUE_ASSETS</span></md-subheader>
+    <md-list-item flex="100" flex-gt-sm="50" class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list "
+                  ng-click="null" flex="50" ng-if="unique_asset.disponible">
+        <img ng-src="assets/images/compressor.png" class="md-avatar"/>
+        <div class="md-list-item-text" layout="column">
+            <md-content><h3><b>{{unique_asset.catalogo_insumo_unico.descripcion}}</b></h3></md-content>
+            <md-content>
+                <h3><span translate="">UNIQUE_ASSET_COMPONENT.SERIAL_NUMBER</span>:<b>{{unique_asset.no_serie}}</b>
+                </h3>
+            </md-content>
+            <md-content layout="column">
+                <h4>
+                    <b>{{unique_asset.catalogo_insumo_unico.modelo_insumo.descripcion}}
+                        - {{unique_asset.catalogo_insumo_unico.modelo_insumo.marca.descripcion}}</b>
+                </h4>
+            </md-content>
+            <md-content layout="column">
+                <h4><span translate="">UNIQUE_ASSET_COMPONENT.CATEGORY</span>:
+                    <span><b>{{unique_asset.catalogo_insumo_unico.categoria_insumo.nombre}}</b>
+                        {{unique_asset.catalogo_insumo_unico.categoria_insumo.com_code}}</span>
+                </h4>
+            </md-content>
+            <p>{{ item.notes }}</p>
+        </div>
+        <md-input-container>
+            <md-button class="md-raised md-primary">
+                <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+            </md-button>
+        </md-input-container>
+        <md-input-container>
+            <md-button class="md-raised md-primary" ng-click="$ctrl.salvageAsset(unique_asset)">
+                <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="$ctrl.discardAsset(unique_asset)">
+                <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                <span translate="">RETIRE_ASSET_COMPONENT.SALVAGE_ASSET</span>
+            </md-button>
+        </md-input-container>
+    </md-list-item>
+    <md-divider></md-divider>
 </div>

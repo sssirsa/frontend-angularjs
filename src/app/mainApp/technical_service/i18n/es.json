@@ -142,7 +142,10 @@
     },
     "RETIRE_ASSET_COMPONENT":{
         "DISCARD_ASSET":"Desechar Insumo Único",
-        "SALVAGE_ASSET":"Recuperar Insumo Único"
+        "SALVAGE_ASSET":"Recuperar Insumo Único",
+        "TITLE":"Insumos Únicos asociados al Cabinet",
+        "NOT_UNIQUE_ASSETS":"No hay insumos Únicos, asociados al cabinet",
+        "UNIQUE_ASSETS":"Insumos únicos asociados al cabinet"
     },
     "UNIQUE_ASSET_COMPONENT":{
         "NOT_FOUND":"Insumo No Encontrado",

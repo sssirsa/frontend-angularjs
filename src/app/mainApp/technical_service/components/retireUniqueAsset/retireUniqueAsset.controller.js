@@ -29,6 +29,7 @@
             console.log(vm.sucursal);
             var promiseUniqueAssetList = retireUniqueAssetProvider.getUniqueAssetsListByCabinet(vm.barcode);
             promiseUniqueAssetList.then(function (uniqueAssets) {
+                vm.unique_asset_list=uniqueAssets.results;
 
             }).catch(function (errormsg) {
                 console.log(errormsg);
