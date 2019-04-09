@@ -60,7 +60,6 @@
         }
 
         function addAction() {
-
             getDuplicity();
             vm.actionsDoIt.push(vm.element);
             vm.actionsAdded({element: vm.actionsDoIt});

@@ -179,13 +179,14 @@
         }
 
         function getSymptoms(symptoms) {
+            console.log(symptoms)
             vm.symptoms = symptoms;
 
         }
 
-        function getActions(acciones) {
-            vm.actions = acciones;
-
+        function getActions(element) {
+            console.log(element);
+            vm.actions = element;
         }
 
         //--------------------------------------------------------------------------------------------------------------
