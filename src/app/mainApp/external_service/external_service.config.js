@@ -60,6 +60,30 @@
                 controllerAs: 'vm'
             })
 
+            .state('triangular.admin-default.exchange-request', {
+                url: '/servicio_externo/solicitud/cambio',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/external_service/request/exchange/exchangeRequest.tmpl.html',
+                controller: 'exchangeRequestController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.service-request', {
+                url: '/servicio_externo/solicitud/servicio_tecnico',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/external_service/request/technical_service/serviceRequest.tmpl.html',
+                controller: 'serviceRequestController',
+                controllerAs: 'vm'
+            })
+
         ;
 
         triMenuProvider.addMenu(
@@ -98,6 +122,18 @@
                                 type: 'link',
                                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.remove-request'
+                            },
+                            {
+                                name: 'EXTERNAL_SERVICE.MENU.REQUEST.EXCHANGE',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.exchange-request'
+                            },
+                            {
+                                name: 'EXTERNAL_SERVICE.MENU.REQUEST.TECHNICAL_SERVICE',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.service-request'
                             }
                         ]
 

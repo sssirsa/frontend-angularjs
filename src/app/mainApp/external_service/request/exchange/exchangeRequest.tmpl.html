@@ -7,7 +7,7 @@
             layout="column"
             layout-align="center center"
         >
-            <h2 translate>REQUEST.TYPE.REMOVE</h2>
+            <h2 translate>REQUEST.TYPE.EXCHANGE</h2>
         </div>
         <div layout="row"
              layout-align-xs="center stretch"
@@ -36,6 +36,41 @@
             can-search= true
             store-selected="vm.storeSelected(store)"
         ></store-manager>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div layout="column" layout-align="center center">
+            <h3 translate>REQUEST.CABINET.TITLE</h3>
+        </div>
+        <catalog-select catalog="vm.catalogEquipmentKind.catalog"
+                        elements="vm.catalogEquipmentKind.elements"
+                        on-select="vm.onSelectedEquipmentKind(value)">
+        </catalog-select>
+
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUEST.CABINET.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUEST.CABINET.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     </md-card>
 
@@ -173,4 +208,3 @@
     </md-card>
 
 </div>
-
