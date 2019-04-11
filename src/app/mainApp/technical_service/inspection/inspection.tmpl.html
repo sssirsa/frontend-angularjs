@@ -185,8 +185,8 @@
                                           tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="'Checklist'"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
                     <symptom-manager symptoms="vm.getSymptoms(element)" flex="100" ></symptom-manager>
-                    <actions-manager  ng-if="vm.step.currentStage.etapa"  actual-step="vm.step.currentStage.etapa" actions="vm.getActions(element)" flex="100"></actions-manager>
-                    <actions-manager  ng-if="vm.stage_for_not_stage"  actual-step="vm.stage_for_not_stage" actions="vm.getActions(element)" flex="100"></actions-manager>
+                    <actions-manager  ng-if="vm.step.currentStage.etapa"  actual-step="vm.step.currentStage.etapa" actions-added="vm.getActions(element)" flex="100"></actions-manager>
+                    <actions-manager  ng-if="vm.stage_for_not_stage"  actual-step="vm.stage_for_not_stage" actions-added="vm.getActions(element)" flex="100"></actions-manager>
                 </md-content>
             </md-tab>
 

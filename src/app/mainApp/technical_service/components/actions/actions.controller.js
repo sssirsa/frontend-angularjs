@@ -63,6 +63,7 @@
             getDuplicity();
             vm.actionsDoIt.push(vm.element);
             vm.actionsAdded({element: vm.actionsDoIt});
+            //console.log(vm.actionsDoIt);
         }
 
         function getDuplicity() {
@@ -82,6 +83,7 @@
                 }
             }
             vm.actionsAdded({element: vm.actionsDoIt});
+            //console.log(vm.actionsDoIt);
         }
 
 
