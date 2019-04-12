@@ -9,7 +9,10 @@
         $q,
         Helper,
         QUERIES) {
-        var baseURL = API.all(URLS.mobile.base).all(URLS.municipio);
+        var baseURL = API
+            .all(URLS.salepoint.base)
+            .all(URLS.salepoint.catalogues.base)
+            .all(URLS.salepoint.catalogues.cities);
 
         function list() {
             return baseURL.getList();
@@ -24,7 +27,7 @@
         }
 
         function remove(id) {
-            return baseURL.customDELETE(id, null, {'content-type': 'application/json'});
+            return baseURL.customDELETE(id, null, { 'content-type': 'application/json' });
         }
 
         function update(object, id) {
@@ -39,10 +42,13 @@
         function getByState(stateID) {
             var defer = $q.defer();
 
-            API.all(URLS.mobile.base).all(URLS.municipio + QUERIES.city.by_state + stateID)
+            API
+                .all(URLS.salepoint.base)
+                .all(URLS.salepoint.catalogues.base)
+                .all(URLS.salepoint.catalogues.cities + QUERIES.city.by_state + stateID)
                 .getList()
                 .then(function (citiesList) {
-                    var cities = Helper.filterDeleted(citiesList,true);
+                    var cities = Helper.filterDeleted(citiesList, true);
                     defer.resolve(cities);
                 })
                 .catch(function (citiesListError) {

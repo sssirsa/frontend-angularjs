@@ -7,7 +7,8 @@
                 base: 'catalogues',
                 cities: 'municipio',
                 localities: 'localidad',
-                states:'estado'
+                states: 'estado',
+                stores:'establecimiento'
             }
         });
 }) ();
