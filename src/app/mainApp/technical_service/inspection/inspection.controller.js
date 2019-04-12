@@ -130,27 +130,50 @@
         }
 
         function clear() {
-            vm.checklist = undefined;
+            vm.checklist = {
+                cabinet_id: undefined,
+                sticker_id: undefined,
+                rodajas: undefined,
+                canastillas: undefined,
+                rejillas_traseras: undefined,
+                rejillas_delanteras: undefined,
+                puertas: undefined,
+                pintura: false,
+                lavado: false,
+                emplayado: false,
+                vacio_mercancia: false,
+                gas: false,
+                observaciones: ''
+            };
             vm.asset = undefined;
             vm.step = undefined;
+            vm.stage_for_not_stage=undefined;
         }
 
         //  Funciones para Componentes ___________________________________________________________________________ .all(URL.technical_service.catalogues.stage);______
 
         function infogral(cabinet) {
+            vm.asset = undefined;
             vm.asset = cabinet;
             vm.checklist.cabinet_id = vm.asset.economico;
 
         }
 
         function infoStep(step) {
+            vm.step=undefined;
             vm.step = step;
+            console.log("etapa del cabinet")
             console.log(vm.step);
+            console.log("etapa envidada a la función")
+            console.log(step);
+
             if(!vm.step.currentStage){
                 console.log('entre al if')
                 var promiseStep=inspectionProvider.getStep();
                 promiseStep.then(function(stage){
+                    console.log(stage);
                     vm.stage_for_not_stage=stage.results[0];
+                    console.log("stage_for_not_stage:")
                     console.log(vm.stage_for_not_stage);
                 }).catch(function (errormsg) {
                     console.log(errormsg);

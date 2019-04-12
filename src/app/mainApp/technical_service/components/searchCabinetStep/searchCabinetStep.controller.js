@@ -28,7 +28,18 @@
         };
 
         vm.search_asset = search_asset;
+        function clear(){
+            vm.infoStep = {
+                makeInspection:undefined,
+                makePrecheck:undefined,
+                currentStage:undefined,
+                control:undefined
+            };
+            vm.asset = {};//objeto contenedor del cabinet
+        }
         function search_asset() {
+            //Limpiamos las variables antes de hacer una nueva búsqueda
+            clear();
             //Search in cabinets location
             var promiseCabinetInfo = searchCabinetStepProvider.getByID(vm.asset_id);
             promiseCabinetInfo.then(function (asset) {
