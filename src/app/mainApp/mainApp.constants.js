@@ -66,14 +66,9 @@
 
             //TODO: Re group under the proper category
             //When done, delete all below this line
-            estado: 'estado',
-            localidad: 'localidad',
-            municipio: 'municipio',
-            segmentation: 'segmentacion',
             solicitud_pv: 'solicitud',
             atencion_pv: 'atencion_pv',
             preRequest: 'pre_solicitud',
-            establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
             massive: {
                 store: 'massive/store'

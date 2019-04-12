@@ -2,11 +2,12 @@
     angular
         .module('app.mainApp.salepoint')
         .constant('SALEPOINT', {
-            base: 'salepoint',
+            base: 'sale_point',
             catalogues: {
                 base: 'catalogues',
                 cities: 'municipio',
                 localities: 'localidad',
+                segmentation:'segmentacion',
                 states: 'estado',
                 stores:'establecimiento'
             }
