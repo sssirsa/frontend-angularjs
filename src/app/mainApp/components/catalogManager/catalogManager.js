@@ -5,8 +5,7 @@
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,
             bindings: {
-                url: '<', //Full or partial URL, depending on kind
-                kind: '<', //Mobile, Web, Generic. Default is 'Generic'
+                url: '<', //Full URL
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
@@ -20,6 +19,8 @@
                 onErrorGet: '&',
                 onSuccessCreate: '&',
                 onErrorCreate: '&',
+                onSuccessModify: '&',
+                onErrorModify: '&',
                 onSuccessUpdate: '&',
                 onErrorUpdate: '&',
                 onSuccessDelete: '&',
@@ -33,9 +34,7 @@
                 createButtonText: '<',
                 deleteButtonText: '<',
                 modifyButtonText: '<',
-                //saveButtonText: '<',
-                //confirmButtonText: '<',
-                //cancelButtonText: '<',
+                updateButtonText: '<',
                 nextButtonText: '<',
                 previousButtonText: '<',
                 loadMoreButtonText: '<',
@@ -67,7 +66,9 @@
                  *  POST:{
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+                 *              type: string,          Valid types are the html5 types, plus the types:
+                 *                                     options, catalog, array(strings), catalog_array
+                 *                                     and fileUploader.
                  *              model: string,         Name of the field that will be sent to the API
                  *              required: boolean,     (Optional) Specifies whether or not the field is required
                  *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
@@ -214,22 +215,113 @@
                  *      id: string,           //Field name to be used as id for HTTP PUT method
                  *      element: object       //Initial object to be modified
                  *  },
+                 *  PATCH:{
+                 *      fields:[
+                 *          {
+                 *              type: string,          Valid types are the html5 types, plus the types: options, catalog and fileUploader
+                 *              model: string,         Name of the field that will be sent to the API
+                 *              required: boolean,     (Optional) Specifies whether or not the field is required
+                 *              hint: string,          (Optional) Hint label to show
+                 *              label: string,         (Optional) Label to show in the form, if not given, the model string will be used as label
+                 *              validations:
+                 *                  {
+                 *                      regex: string,          Option regular expression for field validation (just used when text),
+                 *                      max: number,            Maximum value allowed for selection (just used when number)
+                 *                      min: number,            Minimum value allowed for selection (just used when number)
+                 *                      date_format: string,    String format to use for date formating (just used when date)
+                 *                      errors:{
+                 *                          required: string,       (Optional) Default is 'Required field'
+                 *                          regex: string,          (Optional) Default is 'Invalid pattern {{regex}}'
+                 *                          max: string,            (Optional) Default is 'Max value is {{max}}'
+                 *                          min: string,            (Optional) Default is 'Min value is {{min}}'
+                 *                          date_format: string     (Optional) Default is 'Required date format is {{date_format}}'
+                 *                      }
+                 *                  },
+                 *              catalog:{                 As used by the catalog-select component
+                 *                  url: string,         Full or partial URL depending on the kind
+                 *                  kind: string,        (Optional) Mobile, Web, Generic. Default is 'Generic'
+                 *                  name: string,        (Optional) Default is "Catalog"
+                 *                  loadMoreButtonText, string (Optional) Test to show in the 'Load more' Button, default is 'Load more'
+                 *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
+                 *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
+                 *                                       If not given, then the model will be used
+                 *
+                 *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
+                 *                      total: string,        (Optional) Binding for the number of total elements
+                 *                      next: string,         (Optional) Binding for the url that brings to the next page
+                 *                  },
+                 *                  required: boolean,    (Optional) To be used in form validation
+                 *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
+                 *                                        aka: the API returns the array of objects in an element of the response, as in pagination
+                 *                                        Example:
+                 *                                        {
+                 *                                          total:'',
+                 *                                          description:'',
+                 *                                          results:[
+                 *                                              {...},
+                 *                                              {...}
+                 *                                          ]
+                 *                                        }
+                 *                                        In this case 'elements' should receive the parameter 'results'
+                 *                  softDelete: {
+                 *                      hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
+                 *                      reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
+                 *                  }
+                 *              },
+                 *              options:{              // (Optional) Just used when the field is options, in this case, the possible options are passed to the component since the beginning
+                 *                  model: string,            Field of the element to be used in the model
+                 *                  option: string,           Field of the element to show in list
+                 *                  elements:[
+                 *                      {
+                 *                          model: {{}},
+                 *                          option: {{}}
+                 *                      }
+                 *                  ]
+                 *              }
+                 *              fileUploder: {                 As used by the file-uploader component
+                 *                          fileFormats: '<',           //image/*, audio/*, video/*, application/pdf
+                 *                          capture: '<',               //camera
+                 *                          validations: '<',           //size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}
+                 *                          resize: '<',                //{width: 1000, height: 1000, centerCrop: true}
+                 *                          resizeIf: '<',              //$width > 5000 || $height > 5000
+                 *                          maxDimensions: '<',         //Max dimensions for images
+                 *                          maxDuration: '<',           //Max duration for videos
+                 *                          multipleFiles: '<',         //Allow multiple files
+                 *                          allowFolders: '<',          //Allow directory uploading
+                 *                          maxFiles: '<',              //Max number of files allowed
+                 *                          keep: '<',                  //true, false or distinct,
+                 *                                                      (Optional) Just necessary if any further treatment is required in the model of the files, such as conversion.
+                 *                          filesSelected: '<'          * function(files){ return model; } //Do the necesary processing for the files inside the given function
+                 *                      },
+                 *          }
+                 *      ],
+                 *      dialog:{              //Labels to use in the creation dialog
+                 *          title: string,          (Optional) Title for the creation dialog, default is 'Patch element'
+                 *          okButton: string,       (Optional) Label for the Ok button, default is 'Patch'
+                 *          cancelButton: string    (Optional) Label for the cancel button, default is 'Cancel'
+                 *      },
+                 *      id: string            //Field name of the object to be used as id for HTTP PATCH method
+                 *  },
                  *  LIST:{
                  *      mode: string,                  (Optional) paged or infinite, default is Paged
                  *      fields:[
                  *          {
-                 *              type: string,          Valid types are text, options, catalog, file and color //Options and catalog not yet implemented
-                 *              model: string,         Name of the field that will be used to show the data from the API
+                 *              type: string,          Valid types are text, options, catalog, file, object, array_object, object_property and color //Options and catalog not yet implemented
+                 *              model: string,         Name of the field that will be used to show the data from the API,
+                 *                                     separate with double underscores when nested fields are found (just in object type field)
                  *              label: string,         (Optional) Label to show, if not given, the model will be used
+                 *              nullOrEmpty: string,   (Optional) Text to show if the binding is null or empty, if not sent, the element won't be shown at all.
                  *              catalog:{                (Optional) Just used when the type of the field is options and the option field is not given
-                 *                  url: string,         Full or partial URL depending on the kind
-                 *                  kind: string,        Mobile, Web, Generic. Default is 'Generic'
+                 *                  url: string,         Full URL
                  *                  model: string,       From the catalog object, which element is used for binding (aka: id, name, etc.)
                  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
                  *                                       If not given, then the model will be used
                  *              }
                  *              file:{                   (Optional) Just used if the type of the field is file
                  *                  mode: string            Valid modes are preview and download, preview just work for images
+                 *              },
+                 *              fields:{                 (Optional) Used when object and array_object
+                 *                                       Nest the same kind of fields object in order to show the required fields
                  *              }
                  *          }
                  *      ],
@@ -279,13 +371,12 @@
         CATALOG,
         $window,
         $mdDialog,
-        ErrorHandler
+        ErrorHandler,
+        $state
     ) {
         var vm = this;
 
         activate();
-
-        vm.kind ? null : vm.kind = 'Generic';
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {};
@@ -298,46 +389,32 @@
         //Function mapping
         vm.create = create;
         vm.delete = remove;
+        vm.modify = modify;
         vm.update = update;
         vm.search = search;
-        vm.downloadFile = downloadFile;
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
         vm.loadMore = loadMore;
-        vm.elementSelection = elementSelection;
         vm.removeFilter = removeFilter;
+        vm.elementSelection = elementSelection;
 
         function activate() {
             list();
         }
 
         function createMainCatalogProvider() {
-            if (vm.kind) {
-                switch (vm.kind) {
-                    case 'Mobile':
-                        vm.CatalogProvider = CATALOG.mobile;
-                        break;
-                    case 'Web':
-                        vm.CatalogProvider = CATALOG.web;
-                        break;
-                    default:
-                        vm.CatalogProvider = CATALOG.generic;
-                        break;
-                }
-            }
-            else {
-                vm.CatalogProvider = CATALOG.generic;
-            }
+            vm.CatalogProvider = CATALOG;
             vm.CatalogProvider.url = vm.url;
         }
 
         function createPaginationProvider() {
-            vm.PaginationProvider = CATALOG.generic;
+            vm.PaginationProvider = CATALOG;
         }
 
         function list() {
             //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            vm.catalogElements = [];
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
@@ -357,7 +434,6 @@
 
         function create() {
             //Creation behavior handling
-            createMainCatalogProvider();
             if (vm.actions['POST']) {
                 $mdDialog.show({
                     controller: 'CatalogCreateDialogController',
@@ -369,7 +445,7 @@
                     locals: {
                         dialog: vm.actions['POST'].dialog,
                         fields: vm.actions['POST'].fields,
-                        provider: vm.CatalogProvider
+                        url: vm.url
                     }
                 }).then(function () {
                     activate();
@@ -382,6 +458,7 @@
                     }
                 });
             }
+
             else {
                 ErrorHandler.errorTranslate({ status: -1 });
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
@@ -390,7 +467,6 @@
 
         function remove(idToRemove) {
             //Confirmation dialog for deletion behavior
-            createMainCatalogProvider();
             if (vm.actions['DELETE']) {
                 $mdDialog.show({
                     controller: 'CatalogDeleteDialogController',
@@ -402,7 +478,7 @@
                     locals: {
                         dialog: vm.actions['DELETE'].dialog,
                         id: idToRemove,
-                        provider: vm.CatalogProvider
+                        url: vm.url
                     }
                 }).then(function () {
                     activate();
@@ -421,9 +497,7 @@
             }
         }
 
-        function update(element) {
-            //TODO: Update behavior handling
-            createMainCatalogProvider();
+        function modify(element) {
             if (vm.actions['PUT']) {
                 $mdDialog.show({
                     controller: 'CatalogModifyDialogController',
@@ -436,17 +510,17 @@
                         dialog: vm.actions['PUT'].dialog,
                         id: vm.actions['PUT'].id,
                         fields: vm.actions['PUT'].fields,
-                        provider: vm.CatalogProvider,
+                        url: vm.url,
                         element: element
                     }
                 }).then(function () {
                     activate();
                     ErrorHandler.successUpdate();
-                    vm.onSuccessDelete();
-                }).catch(function (errorDelete) {
-                    if (errorDelete) {
-                        ErrorHandler.errorTranslate(errorDelete);
-                        vm.onErrorDelete(errorDelete);
+                    vm.onSuccessModify();
+                }).catch(function (errorModify) {
+                    if (errorModify) {
+                        ErrorHandler.errorTranslate(errorModify);
+                        vm.onErrorModify(errorModify);
                     }
                 });
             }
@@ -456,9 +530,40 @@
             }
         }
 
+        function update(element) {
+            if (vm.actions['PATCH']) {
+                $mdDialog.show({
+                    controller: 'CatalogUpdateDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/catalogManager/dialogs/patchDialog/patchDialog.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        dialog: vm.actions['PATCH'].dialog,
+                        id: element[vm.actions['PATCH'].id],
+                        fields: vm.actions['PATCH'].fields,
+                        url: vm.url
+                    }
+                }).then(function () {
+                    activate();
+                    ErrorHandler.successUpdate();
+                    vm.onSuccessUpdate();
+                }).catch(function (errorUpdate) {
+                    if (errorUpdate) {
+                        ErrorHandler.errorTranslate(errorUpdate);
+                        vm.onErrorUpdate(errorUpdate);
+                    }
+                });
+            }
+            else {
+                vm.onErrorUpdate({ error: '"actions" parameter does not have the PATCH element defined' });
+                ErrorHandler.errorTranslate({ status: -1 });
+            }
+        }
+
         function search() {
             //Search behavior handling, delegated to the search Dialog
-            createMainCatalogProvider();
             if (vm.actions['SEARCH']) {
                 $mdDialog.show({
                     controller: 'CatalogSearchDialogController',
@@ -470,12 +575,11 @@
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
                         filters: vm.actions['SEARCH'].filters,
-                        provider: vm.CatalogProvider
+                        url: vm.url
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);
                     vm.filterApplied = successCallback.filter;
-                    console.debug(vm.filterApplied);
                     vm.onSuccessSearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
@@ -489,12 +593,7 @@
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
-
-        //File downloading into new window
-        function downloadFile(url) {
-            $window.open(url);
-        }
-
+        
         //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
             if (vm.paginationHelper.previous) {
@@ -647,6 +746,8 @@
             vm.filterApplied = null;
             activate();
         }
+
+        
 
     }
 })();

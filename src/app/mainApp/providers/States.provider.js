@@ -3,8 +3,11 @@
         .module('app.mainApp')
         .factory('States', States);
 
-    function States(MobileRestangular, URLS) {
-        var baseURL = MobileRestangular.all(URLS.estado);
+    function States(
+        API,
+        URLS
+    ) {
+        var baseURL = API.all(URLS.mobile.base).all(URLS.estado);
 
         function list() {
             return baseURL.getList();

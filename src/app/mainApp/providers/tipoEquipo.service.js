@@ -8,9 +8,12 @@
         .module('app.mainApp')
         .factory('TipoEquipo',TipoEquipo);
 
-    function TipoEquipo(WebRestangular, URLS){
+    function TipoEquipo(
+        API,
+        URLS
+    ) {
         // var baseURL=Restangular.all('tipo_equipo');
-        var baseURL = WebRestangular.all(URLS.tipo_equipo);
+        var baseURL = API.all(URLS.genesis.base).all(URLS.tipo_equipo);
         return {
             list: list,
             update: update,

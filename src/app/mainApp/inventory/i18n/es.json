@@ -1,44 +1,178 @@
 {
-  "CABINET_CRUD":{
-    "STATUS":"Estatus actual",
-    "ACTIVE":"Activo",
-    "INFO":"Información de Cabinet",
-    "LOOKUP":"Búsqueda por económico",
-    "TITLE":"Gestión de Cabinets",
-    "SELECT_BRAND":"Selecciona la marca",
-    "SELECT_MODEL":"Selecciona el modelo",
-    "ECONOMIC_NUMBER":"Número económico",
-    "PREVIOUS_ECONOMIC_NUMBER":"Número económico anterior",
-    "MAX_ISSUES":"Solo se permiten entre 1 y 6 incidencias",
-    "MAX_GRIDS":"Solo se permiten entre 1 y 6 rejillas",
-    "MAX_LAYETTES":"Solo se permiten entre 1 y 6 canastillas",
-    "MAX_WHEELS":"Solo se permiten entre 1 y 6 rodajas",
-    "SHOW_BRANDS_MODELS_SEARCH":"Búsqueda por marca y modelo",
-    "SHOW_ECONOMIC_SEARCH":"Búsqueda por económico",
-    "SEARCH":"Buscar",
-    "DOORS":"Puertas",
-    "GAS":"Gas",
-    "OFFICE":"Sucursal"
-  },
-  "SUPPLIES":{
-    "HEADER":"Inventario de Insumos",
-    "FIELDS":{
-      "SUPPLY":"Insumo",
-      "KIND":"Tipo de Insumo",
-      "KIND_CHOICES":{
-        "UNIQUE":"Unico",
-        "LOT":"Lote"
-      },
-      "REMISSION":"Remisión",
-      "LINE":"Linea",
-      "SERIAL":"Número de serie",
-      "STOCK":"Elementos en existencia",
-      "QUANTITY":"Cantidad"
+    "CABINET_CRUD": {
+        "STATUS": "Estatus actual",
+        "ACTIVE": "Activo",
+        "INFO": "Información de Cabinet",
+        "LOOKUP": "Búsqueda por económico",
+        "TITLE": "Gestión de Cabinets",
+        "SELECT_BRAND": "Selecciona la marca",
+        "SELECT_MODEL": "Selecciona el modelo",
+        "ECONOMIC_NUMBER": "Número económico",
+        "PREVIOUS_ECONOMIC_NUMBER": "Número económico anterior",
+        "MAX_ISSUES": "Solo se permiten entre 1 y 6 incidencias",
+        "MAX_GRIDS": "Solo se permiten entre 1 y 6 rejillas",
+        "MAX_LAYETTES": "Solo se permiten entre 1 y 6 canastillas",
+        "MAX_WHEELS": "Solo se permiten entre 1 y 6 rodajas",
+        "SHOW_BRANDS_MODELS_SEARCH": "Búsqueda por marca y modelo",
+        "SHOW_ECONOMIC_SEARCH": "Búsqueda por económico",
+        "SEARCH": "Buscar",
+        "DOORS": "Puertas",
+        "GAS": "Gas",
+        "OFFICE": "Sucursal"
     },
-    "MESSAGES":{
-      "NO_RESULTS":"Sin resultados",
-      "INVALID_SUPPLY":"Insumo inválido",
-      "SUCCESS_CREATE":"Éxito al actualizar el inventario"
+    "SUPPLIES": {
+        "HEADER": "Inventario de Insumos",
+        "FIELDS": {
+            "SUPPLY": "Insumo",
+            "KIND": "Tipo de Insumo",
+            "KIND_CHOICES": {
+                "UNIQUE": "Unico",
+                "LOT": "Lote"
+            },
+            "REMISSION": "Remisión",
+            "LINE": "Linea",
+            "SERIAL": "Número de serie",
+            "STOCK": "Elementos en existencia",
+            "QUANTITY": "Cantidad"
+        },
+        "MESSAGES": {
+            "NO_RESULTS": "Sin resultados",
+            "INVALID_SUPPLY": "Insumo inválido",
+            "SUCCESS_CREATE": "Éxito al actualizar el inventario"
+        }
+    },
+    "NOT_CAPITALIZED": {
+        "IDENTIFIER": "Identificador",
+        "NO_SERIE": "Número de serie",
+        "LAST_MOTIVE": "Motivo anterior",
+        "LAST_STATUS": "Estatus anterior",
+        "DATE_SEPARATION": "Fecha de separación",
+        "DATE_RELEASE": "Fecha de liberación",
+        "ECONOMIC": "Economico(s)",
+        "ENTRY": "Entrada",
+        "DEPARTURE": "Salida",
+        "STATUS": "Estatus",
+        "POSITIONING": "Posicionamiento",
+        "NEW_ECONOMIC": "Economico nuevo",
+        "ACTIVE": "Activo",
+        "TITLE": "No capitalizado",
+        "CONDITION": "Condición",
+        "ENTER": "Ingrese un económico",
+        "BUTTONS": {
+            "CREATE": "Crear No Capitalizado",
+            "UPDATE": "Modificar No capitalizado",
+            "RELEASE_CABINET": "Capitalizar"
+        },
+        "SEARCH": {
+            "SELECT": "Seleccione tipo de búsqueda",
+            "ECONOMICO": "Búsqueda por economico",
+            "STATUS": "Búsqueda por estatus",
+            "TYPE": {
+                "CAPITALIZED": "Capitalizados",
+                "NOT_CAPITALIZED": "No capitalizados"
+            }
+        },
+        "RESULTS": {
+            "NO_RESULTS": "Sin resultados"
+        }
+    },
+    "CABINET_MANAGEMENT": "Gestion de cabinet",
+    "STORAGE": {
+        "STORING": "Posicionar ",
+        "SELECT_TYPE": "  Selección de Tipo de Asignación",
+        "CABINET": "Cabinet Capitalizado",
+        "UNRECOGNIZABLE": "Cabinet No Capitalizado",
+        "SUCURSAL": "Sucursal",
+        "STORAGE": "Bodega",
+        "CORRIDOR": "Pasillo",
+        "STOWAGE": "Estiba",
+        "DEPTH": "Profundidad",
+        "ASSET_ID": "Identificador de Cabinet",
+        "MAX_VALUE": "Máximo Disponible: ",
+        "ERROR": {
+            "NOT_SUBSIDIARY": "No es posible asignarlo, ya que no se encuentra en ninguna sucursal en estos momentos."
+        },
+        "SAVE": "Guardar Posicionamiento",
+        "EDIT": "Editar Posicionamiento",
+        "CHANGE_STORAGE": "Cambiar Bodega"
+
+    },
+    "BULK_ASSET_INVENTORY": {
+        "LABELS": {
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos",
+            "MODIFY": "Modificar Inventario",
+            "MODIFYING": "Modificando inventario",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "SUBSIDIARY": "Sucursal",
+            "TITLE": "Inventario de Insumos Lote"
+        },
+        "HINTS": {
+            "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una."
+        }
+    },
+    "UNIQUE_ASSET_INVENTORY": {
+        "LABELS": {
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos",
+            "MODIFY": "Modificar Inventario",
+            "MODIFYING": "Modificando inventario",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "SUBSIDIARY": "Sucursal",
+            "TITLE": "Inventario de Insumos Únicos"
+        },
+        "HINTS": {
+            "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una."
+        }
+    },
+    "BULK_ASSET_STAGE": {
+        "LABELS": {
+            "CREATE": "Relacionar insumo a etapa ",
+            "CREATING": "Relacionando insumo",
+            "DELETE": "Borrar relación",
+            "CONFIRM_DELETE": "Confirme que desea borrar la relación",
+            "DELETING": "Borrando relación",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos por etapa",
+            "UPDATE": "Actualizar cantidad",
+            "UPDATING": "Actualizando cantidad",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Lote por Etapa"
+        }
+    },
+    "UNIQUE_ASSET_STAGE": {
+        "LABELS": {
+            "CREATE": "Relacionar insumo a etapa ",
+            "CREATING": "Relacionando insumo",
+            "DELETE": "Borrar relación",
+            "CONFIRM_DELETE": "Confirme que desea borrar la relación",
+            "DELETING": "Borrando relación",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos por etapa",
+            "UPDATE": "Actualizar cantidad",
+            "UPDATING": "Actualizando cantidad",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "REMOVE_SUBSIDIARY": "Cambiar sucursal",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Únicos por Etapa"
+        }
     }
-  }
 }

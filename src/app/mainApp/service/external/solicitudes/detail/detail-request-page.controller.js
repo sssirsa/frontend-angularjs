@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function DetailRequestPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
-                                         Persona_Admin, Geolocation, STORE_SEGMENTATION, SCORES) {
+                                         Persona_Admin, Geolocation, SCORES) {
         var vm = this;
 
         //Function mapping
@@ -20,7 +20,7 @@
         vm.store = null;
 
         //Constants declaration
-        vm.storeSegmentation = STORE_SEGMENTATION;
+        vm.storeSegmentation = []; //TODO: update with API callback
         vm.scores = SCORES;
 
         activate();

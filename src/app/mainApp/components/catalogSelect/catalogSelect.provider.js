@@ -3,34 +3,15 @@
 
     angular
         .module('app.mainApp')
-        .service('CATALOG_SELECT', CatalogProvider);
+        .service('CATALOG_SELECT', CatalogSelectProvider);
 
-    function CatalogProvider(MobileRestangular, WebRestangular, $http, $q) {
+    function CatalogSelectProvider(
+        $http,
+        $q,
+        API,
+        URLS
+    ) {
         var vm = this;
-
-        vm.mobileCatalog = {
-            url: null,
-            list: function () {
-                return MobileRestangular.all(vm.mobileCatalog.url)
-                    .customGET();
-            },
-            search: function (query) {
-                return MobileRestangular.all(vm.mobileCatalog.url + '?' + query)
-                    .customGET();
-            }
-        };
-
-        vm.webCatalog = {
-            url: null,
-            list: function () {
-                return WebRestangular.all(vm.webCatalog.url)
-                    .customGET();
-            },
-            search: function (query) {
-                return WebRestangular.all(vm.webCatalog.url + '?' + query)
-                    .customGET();
-            }
-        };
 
         vm.genericCatalog = {
             url: null,
@@ -38,6 +19,18 @@
                 let deferred = $q.defer();
                 $http.get(
                     vm.genericCatalog.url)
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (errorResponse) {
+                        deferred.reject(errorResponse);
+                    });
+                return deferred.promise;
+            },
+            detail: function (id) {
+                let deferred = $q.defer();
+                $http.get(
+                    vm.genericCatalog.url + '/' + id)
                     .then(function (response) {
                         deferred.resolve(response.data);
                     })
@@ -60,11 +53,7 @@
             }
         };
 
-        var service = {
-            mobile: vm.mobileCatalog,
-            web: vm.webCatalog,
-            generic: vm.genericCatalog
-        };
+        var service = vm.genericCatalog;
 
         return service;
 

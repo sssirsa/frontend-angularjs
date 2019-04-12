@@ -1,7 +1,7 @@
 <div>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
+            <h2>{{'MAIN.COMPONENTS.CABINET.TITLE'|translate}}</h2>
             <span flex></span>
         </div>
     </md-toolbar>
@@ -10,21 +10,25 @@
         layout-align="center stretch"
         layout-padding
     >
-        <form name="newcabinetFrom">
+        <form name="newcabinetForm" ng-if="$ctrl.clear">
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                    <md-icon class="fas fa-tag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.ECONOMIC</div>
                     <input name="economico" required digits-only MAXLENGTH="20" ng-model="$ctrl.economico"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <div ng-messages="newcabinetForm.economico.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                    <md-icon class="fas fa-hashtag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.SERIAL</div>
                     <input name="serial" maxlength="25"
                            ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <div ng-messages="newcabinetForm.serial.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
                         </div>
@@ -35,34 +39,97 @@
 
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
-                    <md-select ng-model="$ctrl.marca" required ng-change="$ctrl.changeTrademark()">
-                        <md-option ng-repeat="marca in $ctrl.marcas" value="{{marca.id}}">
-                            {{marca.descripcion}}
-                        </md-option>
-                    </md-select>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <label translate>MAIN.COMPONENTS.CABINET.YEAR</label>
+                    <md-icon class="fas fa-calendar-check"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.YEAR</div>
+                    <input name="year" required digits-only MAXLENGTH="4" ng-model="$ctrl.year"/>
+                    <div ng-messages="newcabinetForm.year.$error">
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
-                    <md-select ng-model="$ctrl.modelo_id" required ng-disabled="!$ctrl.modelos">
-                        <md-option ng-repeat="modelo in $ctrl.modelos" value="{{modelo.id}}">
-                            {{modelo.nombre}}
-                        </md-option>
-                    </md-select>
-                    <div ng-messages="newcabinetFrom.serial.$error">
+                    <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
+                    <md-icon class="fas fa-hashtag"></md-icon>
+                    <div class="hint" translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</div>
+                    <input name="unilever" maxlength="25"
+                           ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.id_unilever"/>
+                    <div ng-messages="newcabinetForm.unilever.$error">
+                        <div ng-message="pattern">
+                            {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                        </div>
                         <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
                     </div>
+                </md-input-container>
+            </div>
+        </form>
+
+        <form name="newcabinetForm2" ng-if="$ctrl.clear">
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="$ctrl.catalogues['marca'].catalog"
+                                    required="true"
+                                    pagination="$ctrl.catalogues['marca'].pagination"
+                                    elements="$ctrl.catalogues['marca'].elements"
+                                    soft-delete="$ctrl.catalogues['marca'].softDelete"
+                                    on-select="$ctrl.onBrandSelect(element)">
+                    </catalog-select>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <catalog-select ng-if="$ctrl.marca"
+                                    catalog="$ctrl.catalogues['modelo_by_marca'].catalog"
+                                    required="true"
+                                    lazy="true"
+                                    pagination="$ctrl.catalogues['modelo_by_marca'].pagination"
+                                    elements="$ctrl.catalogues['modelo_by_marca'].elements"
+                                    soft-delete="$ctrl.catalogues['modelo_by_marca'].softDelete"
+                                    on-select="$ctrl.onElementSelect(element,'modelo_id')">
+                    </catalog-select>
                 </md-input-container>
             </div>
 
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
-                    <input name="antiguedad" maxlength="1" only-text ng-model="$ctrl.antiguedad"/>
+                    <catalog-select catalog="$ctrl.catalogues['condicion'].catalog"
+                                    required="true"
+                                    pagination="$ctrl.catalogues['condicion'].pagination"
+                                    elements="$ctrl.catalogues['condicion'].elements"
+                                    soft-delete="$ctrl.catalogues['condicion'].softDelete"
+                                    on-select="$ctrl.onElementSelect(element,'condicion_id')">
+                    </catalog-select>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="$ctrl.catalogues['status_unilever'].catalog"
+                                    required="true"
+                                    pagination="$ctrl.catalogues['status_unilever'].pagination"
+                                    elements="$ctrl.catalogues['status_unilever'].elements"
+                                    soft-delete="$ctrl.catalogues['status_unilever'].softDelete"
+                                    on-select="$ctrl.onElementSelect(element,'estatus_unilever_id')">
+                    </catalog-select>
+                </md-input-container>
+            </div>
+
+            <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="$ctrl.catalogues['status_com'].catalog"
+                                    required="true"
+                                    pagination="$ctrl.catalogues['status_com'].pagination"
+                                    elements="$ctrl.catalogues['status_com'].elements"
+                                    soft-delete="$ctrl.catalogues['status_com'].softDelete"
+                                    on-select="$ctrl.onElementSelect(element,'estatus_com_id')">
+                    </catalog-select>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <catalog-select catalog="$ctrl.catalogues['categoria'].catalog"
+                                    required="true"
+                                    pagination="$ctrl.catalogues['categoria'].pagination"
+                                    elements="$ctrl.catalogues['categoria'].elements"
+                                    soft-delete="$ctrl.catalogues['categoria'].softDelete"
+                                    on-select="$ctrl.onElementSelect(element,'categoria_id')">
+                    </catalog-select>
                 </md-input-container>
             </div>
         </form>
@@ -72,6 +139,7 @@
             layout-align="end center">
             <md-button
                 ng-click="$ctrl.accept()"
+                ng-disabled="newcabinetForm.$invalid"
                 class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}

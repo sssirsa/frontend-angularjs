@@ -6,8 +6,11 @@
         .factory('LineaTransporte', LineaTransporte);
 
     /* @ngInject */
-    function LineaTransporte(WebRestangular, URLS) {
-        var baseModelo = WebRestangular.all(URLS.linea_transporte);
+    function LineaTransporte(
+        API,
+        URLS
+    ) {
+        var baseModelo = API.all(URLS.genesis.base).all(URLS.linea_transporte);
 
         return {
             list:list,

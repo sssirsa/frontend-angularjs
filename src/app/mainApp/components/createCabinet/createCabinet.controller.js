@@ -14,101 +14,238 @@
         });
 
     /* @ngInject */
-    function createCabinetController (cabinetPV, ModeloCabinet, MarcaCabinet, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler) {
+    function createCabinetController (EnvironmentConfig, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS, QUERIES) {
         var vm = this;
 
+        //variables
+        vm.cabinet = {};
         vm.economico = null;
-        vm.marca = null;
-        vm.modelo_id = null;
         vm.no_serie = null;
-        vm.antiguedad = null;
+        vm.year = null;
+        vm.id_unilever = null;
+        vm.marca = null;
+        vm.modelos = [];
 
-        vm.marcas = null;
-        vm.modelos = null;
         vm.loadingPromise = null;
+        vm.clear = "1";
+        var validate = true;
 
-        var models = null;
+        //funciones
+        vm.onBrandSelect = onBrandSelect;
+        vm.onElementSelect = onElementSelect;
 
-        //functions
-        vm.listMarcas = listMarcas;
-        vm.listModelos = listModelos;
-        vm.changeTrademark = changeTrademark;
+        //Blank variables templates
+        vm.catalogues = {
+            marca: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.cabinet_brand,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            modelo_by_marca: {
+                catalog: {
+                    url: null,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            condicion: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.condition,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'letra'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            status_unilever: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.status_unilever,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            status_com: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.status_com,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'descripcion'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            categoria: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.catalogues.base
+                    + '/' + URLS.management.catalogues.category,
+                    kind: 'Generic',
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            }
+        };
 
-        listMarcas();
-        listModelos();
 
-
-        function listMarcas(){
-            vm.loadingPromise = MarcaCabinet.listPromise(1000, 0)
-                .then(function (res) {
-                    vm.marcas = Helper.filterDeleted(res.results, true);
-                })
-                .catch(function (err) {
-
-                });
+        function onBrandSelect(element) {
+            vm.modelo = null;
+            vm.marca = element;
+            vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.cabinet_model
+                + QUERIES.cabinet.by_brand + element;
         }
 
-        function listModelos() {
-            vm.loadingPromise = ModeloCabinet.listWitout(1000, 0).then(function (res) {
-                models = Helper.filterDeleted(res.results, true);
-            }).catch(function(err){
-
-            });
+        function onElementSelect(element, field) {
+            vm.cabinet[field] = element;
         }
 
-        function changeTrademark() {
-            vm.modelos = null;
-            vm.modelos = _.where(models, {marca: parseInt(vm.marca)});
+        function limpiar(){
+            validate = true;
+            vm.cabinet = {};
+            vm.economico = null;
+            vm.no_serie = null;
+            vm.year = null;
+            vm.id_unilever = null;
+            vm.marca = null;
+            vm.modelos = [];
+            vm.clear = "1";
         }
 
         vm.accept = accept;
         function accept() {
-            var cabinetCreated = null;
-            var aux = {
-                economico: vm.economico,
-                modelo_id: vm.modelo_id,
-                no_serie: vm.no_serie.toUpperCase(),
-                antiguedad: vm.antiguedad.toUpperCase()
-            }
-            console.log("objeto final", aux);
 
-            cabinetPV.create(aux)
-                .then(function (res) {
-                    cabinetCreated = res;
-                    vm.economico = null;
-                    vm.marca = null;
-                    vm.modelo_id = null;
-                    vm.no_serie = null;
-                    vm.antiguedad = null;
-                    vm.toRefresh();
+            vm.cabinet['economico'] = vm.economico;
+            vm.cabinet['no_serie'] = vm.no_serie;
+            vm.cabinet['year'] = vm.year;
+            vm.cabinet['id_unilever'] = vm.id_unilever;
 
-                    $scope.newcabinetFrom.$setPristine();
-                    $scope.newcabinetFrom.$setUntouched();
+            //variables de los catalogos
+            vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
 
-                    $mdDialog.show({
-                        controller: 'newCabinetPreController',
-                        controllerAs: 'vm',
-                        templateUrl: 'app/mainApp/components/createCabinet/modal/modalNewCabinet.tmpl.html',
-                        fullscreen: true,
-                        clickOutsideToClose: true,
-                        focusOnOpen: true,
-                        locals: {
-                            data: cabinetCreated
-                        }
-                    })
-                        .then(function () {
-                            //vm.toRefresh();
+            validate = _.contains(_.values(vm.cabinet), undefined);
+
+            if(validate){
+                toastr.error("Llene corectamente todos los campos");
+            }else{
+                vm.clear = "";
+                cabinetUC.create(vm.cabinet)
+                    .then(function (cabinetCreated) {
+
+                        limpiar();
+                        vm.toRefresh();
+
+                        $mdDialog.show({
+                            controller: 'newCabinetPreController',
+                            controllerAs: 'vm',
+                            templateUrl: 'app/mainApp/components/createCabinet/modal/modalNewCabinet.tmpl.html',
+                            fullscreen: true,
+                            clickOutsideToClose: true,
+                            focusOnOpen: true,
+                            locals: {
+                                data: cabinetCreated
+                            }
                         })
-                        .catch(function(){
-                            //vm.toRefresh();
-                        });
-
-                })
-                .catch(function (err) {
-                    //console.log("Error", err);
-                    ErrorHandler.errorTranslate(err);
-                });
-
+                            .then(function () {
+                                //vm.toRefresh();
+                            })
+                            .catch(function () {
+                                //vm.toRefresh();
+                            });
+                    })
+                    .catch(function (err) {
+                        limpiar();
+                        ErrorHandler.errorTranslate(err);
+                    });
+            }
         }
 
     }

@@ -6,13 +6,14 @@
         .module('app.mainApp.management.catalogues')
         .controller('ProveedorController',ProveedorController);
 
-    function ProveedorController(URLS, Translate)
-    {
-
+    function ProveedorController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        vm.url = URLS.proveedor;
-        vm.kind = 'Web';
+        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.supplier);
+
+        vm.url = inventoryUrl;
+        vm.kind = 'inventory';
         vm.name = Translate.translate('Provider.title');
 
         //Labels
@@ -27,7 +28,7 @@
         vm.nextButtonText = 'Siguiente';
         vm.previousButtonText = 'Anterior';
         vm.loadMoreButtonText = 'Cargar mas Proveedores';
-        vm.removeFilterButtonText = 'Qutar filtro';
+        vm.removeFilterButtonText = 'Quitar filtro';
 
         //Messages
         vm.loadingMessage = 'Cargando Proveedores';
@@ -255,9 +256,10 @@
                         label: 'RFC'
                     },
                     {
-                        type: 'tel',
+                        type: 'text',
                         model: 'telefono',
-                        label: 'Telefono'
+                        label: 'Telefono',
+                        nullOrEmpty:'Sin teléfono'
                     },
                     {
                         type: 'text',
@@ -282,7 +284,7 @@
             },
             SEARCH: {
                 dialog: {
-                    title: 'Busqueda de Proveedor',
+                    title: 'Búsqueda de Proveedor',
                     searchButton: 'Buscar',
                     loadingText: 'Buscando Proveedor'
                 },

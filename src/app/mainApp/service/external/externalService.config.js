@@ -107,7 +107,7 @@
             })
 
 
-            .state('triangular.admin-default.cabinetPV', {
+            /*.state('triangular.admin-default.cabinetPV', {
                 url: '/cabinet-pv/new',
                 templateUrl: 'app/mainApp/service/external/cabinetPV/pv-cabinet.tmpl.html',
                 controller: 'NewCabinetPrerequestController',
@@ -117,7 +117,7 @@
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 }
-            })
+            })*/
 
             .state('triangular.admin-default.attentionDetail', {
                 url: '/atencion/:id',
@@ -174,13 +174,13 @@
                         state: 'triangular.admin-default.serviceList',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
-                    },
+                    }/*,
                     {
                         name: 'MAIN.MENU.PREREQUESTS.NEWCABINET',
                         state: 'triangular.admin-default.cabinetPV',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
-                    }
+                    }*/
                 ]
             }
         );

@@ -3,8 +3,14 @@
         .module('app.mainApp')
         .factory('Stores', Stores);
 
-    function Stores(MobileRestangular, URLS, QUERIES, Helper, $q) {
-        var baseURL = MobileRestangular.all(URLS.establecimiento);
+    function Stores(
+        API,
+        URLS,
+        QUERIES,
+        Helper,
+        $q
+    ) {
+        var baseURL = API.all(URLS.mobile.base).all(URLS.establecimiento);
 
         function list() {
             return baseURL.getList();
@@ -54,7 +60,7 @@
         function querySearch(query, limit, offset){
             var defer = $q.defer();
             // TODO: falta agregar metodo de paginado
-            MobileRestangular.all(query+'&limit='+limit+'&offset='+offset)
+            API.all(URLS.mobile.base).all(query+'&limit='+limit+'&offset='+offset)
                 .customGET()
                 .then(function (list) {
                     defer.resolve(list);

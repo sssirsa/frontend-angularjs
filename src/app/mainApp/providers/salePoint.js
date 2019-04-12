@@ -5,8 +5,12 @@
         .module('app')
         .factory('SalePoint', SalePoint);
 
-    function SalePoint(MobileRestangular, URLS) {
-        var baseUrl = MobileRestangular;
+    function SalePoint(
+        API,
+        URLS
+    ) {
+
+        var baseUrl = API.all(URLS.mobile.base);
 
         var service = {
             getByID: getByID,
@@ -23,19 +27,19 @@
         }
 
         function listUnasignedServices(limit, offset) {
-            return baseUrl.all('list_atencion?limit='+limit+'&offset='+offset).customGET();
+            return baseUrl.all('list_atencion?limit=' + limit + '&offset=' + offset).customGET();
         }
 
         function listAsignedService(limit, offset) {
-            return baseUrl.all('list_atencion').all('reasign_list?limit='+limit+'&offset='+offset).customGET();
+            return baseUrl.all('list_atencion').all('reasign_list?limit=' + limit + '&offset=' + offset).customGET();
         }
 
         function listAllServices(limit, offset, filter) {
             if (filter === undefined) {
-                return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset).customGET();
+                return baseUrl.all('atencion_pv' + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return baseUrl.all('atencion_pv'+'?limit='+limit+'&offset='+offset+'&'+filter).customGET();
+                return baseUrl.all('atencion_pv' + '?limit=' + limit + '&offset=' + offset + '&' + filter).customGET();
             }
         }
 
@@ -44,7 +48,7 @@
         }
 
         function assignedTo(personID) {
-            return baseUrl.one('list_atencion', personID).getList();
+            return baseUrl.one('list_atencion', personID).customGET();
         }
 
         function getStore(id) {
