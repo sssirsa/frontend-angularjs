@@ -14,7 +14,6 @@
         var vm = this;
 
         vm.objectToCreate = vm.element;
-        //vm.array_objects = {};
 
         activate();
 
@@ -106,28 +105,13 @@
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
-                addCatalogToArray(element, field, value);
+                vm.objectToCreate[field.model] = element;
             }
 
         }
 
         vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
             vm.objectToCreate[field.model].splice(index, 1);
-        }
-
-        //Internal function
-        //It add just the returned ID of the elements to the catalog_array
-        function addCatalogToArray(element, field, value) {
-            if (element) {
-                if (!vm.objectToCreate[field.model]) {
-                    vm.objectToCreate[field.model] = [];
-                }
-                if (!vm[field.model + '_chip']) {
-                    vm[field.model + '_chip'] = [];
-                }
-                vm.objectToCreate[field.model].push(element);
-                vm[field.model + '_chip'].push(value);
-            }
         }
 
         vm.addObjectToArray = function addObjectToArray(field) {

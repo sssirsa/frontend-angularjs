@@ -183,7 +183,7 @@
                         label: 'Tipo de Etapa',
                         required: true,
                         lock: true,
-                        hint: 'Para etapa genérica seleccione "Reparación"',
+                        hint: 'Campo no editable',
                         options: {
                             model: 'value',
                             option: 'display_name',

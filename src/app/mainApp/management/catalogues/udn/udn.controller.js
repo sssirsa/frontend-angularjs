@@ -226,7 +226,7 @@
                         label: 'Dirección'
                     },
                     {
-                        type: 'tel',
+                        type: 'text',
                         model: 'telefono',
                         label: 'Telefono'
                     }

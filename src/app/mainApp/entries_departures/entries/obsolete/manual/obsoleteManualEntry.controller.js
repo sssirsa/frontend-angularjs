@@ -101,11 +101,8 @@
                         model: 'id',
                         option: 'descripcion',
                         loadMoreButtonText: 'Cargar mas...',
-                        elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
+                        elements: 'results',
+                        pagination: {}
                     },
                     required: true,
                     softDelete: {
@@ -128,11 +125,8 @@
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
+                        pagination: {},
                         loadMoreButtonText: 'Cargar mas...'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     required: true,
                     softDelete: {
@@ -153,11 +147,11 @@
                         model: 'id',
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',
@@ -177,11 +171,35 @@
                         model: 'id',
                         option: 'descripcion',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
                     },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'estatus_com_id',
+                    label: 'Estatus COM',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.status_com,
+                        name: 'Estatus COM',
+                        model: 'id',
+                        option: 'descripcion',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results'
                     },
                     softDelete: {
                         hide: 'deleted',
@@ -201,11 +219,11 @@
                         model: 'id',
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
                         elements: 'results'
-                    },
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
                     },
                     softDelete: {
                         hide: 'deleted',

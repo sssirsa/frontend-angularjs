@@ -162,7 +162,8 @@
                     {
                         type: 'array',
                         model: 'telefonos',
-                        label: 'Telefonos'
+                        label: 'Telefonos',
+                        nullOrEmpty:'Sin teléfono'
                     },
                     {
                         type: 'text',

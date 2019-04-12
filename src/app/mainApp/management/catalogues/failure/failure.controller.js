@@ -103,7 +103,7 @@
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.failure_type,
+                                + '/' + URLS.technical_service.catalogues.stage,
                             pagination: {},
                             elements: 'results',
                             name: 'Etapas posibles',
@@ -111,6 +111,28 @@
                                 hide: 'deleted',
                                 reverse: false
                             }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'etapa_defecto_id',
+                        label: 'Etapas Defecto',
+                        hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.technical_service.base
+                                + '/' + URLS.technical_service.catalogues.base
+                                + '/' + URLS.technical_service.catalogues.stage,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Etapa siguiente por defecto',
+                            elements: 'results',
+                            pagination: {}
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     }
                 ],
@@ -184,7 +206,7 @@
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
-                                + '/' + URLS.technical_service.catalogues.failure_type,
+                                + '/' + URLS.technical_service.catalogues.stage,
                             pagination: {},
                             elements: 'results',
                             name: 'Etapas posibles',
@@ -192,6 +214,28 @@
                                 hide: 'deleted',
                                 reverse: false
                             }
+                        }
+                    },
+                    {
+                        type: 'catalog',
+                        model: 'etapa_defecto_id',
+                        label: 'Etapas Defecto',
+                        hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.technical_service.base
+                                + '/' + URLS.technical_service.catalogues.base
+                                + '/' + URLS.technical_service.catalogues.stage,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Etapa siguiente por defecto',
+                            elements: 'results',
+                            pagination: {}
+                        },
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
                         }
                     }
                 ],

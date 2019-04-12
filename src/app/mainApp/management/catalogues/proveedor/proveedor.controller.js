@@ -256,9 +256,10 @@
                         label: 'RFC'
                     },
                     {
-                        type: 'tel',
+                        type: 'text',
                         model: 'telefono',
-                        label: 'Telefono'
+                        label: 'Telefono',
+                        nullOrEmpty:'Sin teléfono'
                     },
                     {
                         type: 'text',

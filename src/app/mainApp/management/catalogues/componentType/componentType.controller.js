@@ -69,10 +69,11 @@
                         model: 'com_code',
                         label: 'Código COM',
                         required: true,
+                        hint:'El campo es númerico de 10 a 15 caracteres',
                         validations: {
                             regex: "[0-9]{10,15}",
                             errors: {
-                                regex: 'Formato incorrecto, el campo es númerico',
+                                regex: 'Formato incorrecto, el campo es númerico de 10 a 15 caracteres',
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -114,11 +115,12 @@
                         type: 'text',
                         model: 'com_code',
                         label: 'Código COM',
+                        hint:'El campo es númerico de 10 a 15 caracteres',
                         required: true,
                         validations: {
                             regex: "[0-9]{10,15}",
                             errors: {
-                                regex: 'Formato incorrecto, el campo es númerico',
+                                regex: 'Formato incorrecto, el campo es númerico de 10 a 15 caracteres',
                                 required: 'El campo es requerido.'
                             }
                         }

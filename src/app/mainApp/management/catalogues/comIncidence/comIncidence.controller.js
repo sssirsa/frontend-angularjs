@@ -136,6 +136,7 @@
                     {
                         type: 'catalog',
                         model: 'siguiente_paso_id',
+                        bindTo: 'siguiente_paso',
                         label: 'Siguiente Paso',
                         required: true,
                         validations: {
@@ -197,8 +198,8 @@
                         label: 'Descripción'
                     },
                     {
-                        type: 'text',
-                        model: 'siguiente_paso_descripcion',
+                        type: 'object_property',
+                        model: 'siguiente_paso__descripcion',
                         label: 'Siguiente Paso'
                     }
                 ],
