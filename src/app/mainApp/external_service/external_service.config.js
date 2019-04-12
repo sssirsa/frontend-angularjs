@@ -23,6 +23,21 @@
                 controllerAs: 'vm'
             })
 
+            .state('triangular.admin-default.detail-pre-request', {
+                url: '/servicio_externo/pre-solicitud/detalle',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/external_service/pre_request/detail_pre_request/detailPreRequest.tmpl.html',
+                controller: 'detailPreRequestController',
+                controllerAs: 'vm'
+            })
+
             //Solicitudes
             .state('triangular.admin-default.new-request', {
                 url: '/servicio_externo/solicitud/nuevo',
@@ -84,6 +99,30 @@
                 controllerAs: 'vm'
             })
 
+            .state('triangular.admin-default.list-request', {
+                url: '/servicio_externo/solicitud/listado',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/external_service/request/list/listRequest.tmpl.html',
+                controller: 'listRequestController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.detail-request', {
+                url: '/servicio_externo/solicitud/detalle',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/external_service/request/list/detailRequest/deatilRequest.tmpl.html',
+                controller: 'detailRequestController',
+                controllerAs: 'vm'
+            })
+
         ;
 
         triMenuProvider.addMenu(
@@ -134,6 +173,12 @@
                                 type: 'link',
                                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.service-request'
+                            },
+                            {
+                                name: 'EXTERNAL_SERVICE.MENU.REQUEST.LIST',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.list-request'
                             }
                         ]
 

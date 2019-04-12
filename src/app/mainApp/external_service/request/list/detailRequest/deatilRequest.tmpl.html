@@ -1,0 +1,193 @@
+<div class="mb-bg-fb-08"
+     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     layout="column">
+
+    <md-card layout="row"
+             layout-align-xs="center stretch"
+             layout-xs="column"
+             layout-align="space-around center"
+             layout-padding>
+        <h2 translate>REQUESTS.DETAIL.TITLE</h2>
+        <h2>{{vm.request.id}}</h2>
+        <div class="{{vm.request.status}}">
+            {{vm.request.status}}
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.DETAIL.INFO</h3>
+            <h3>{{vm.request.tipo}}</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.CLIENT_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_cliente"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.WORKER_COMMENTS</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.request.observaciones_tecnico"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.SCORE</label>
+                <md-select
+                    ng-disabled="true"
+                    ng-model="vm.request.calificacion">
+                    <md-option
+                        ng-repeat="score in vm.scores"
+                        ng-value="score.value">
+                        {{score.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
+            <label translate>REQUESTS.DETAIL.CABINET</label>
+            <input
+                ng-disabled="true"
+                ng-model="vm.request.cabinet"/>
+        </md-input-container>
+        <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
+            <span translate>REQUESTS.DETAIL.CABINETS.TITLE</span>
+            <table md-table flex>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>
+                        <span translate>REQUESTS.DETAIL.CABINETS.KIND</span>
+                    </th>
+                    <th md-column>
+                        <span translate>REQUESTS.DETAIL.CABINETS.QUANTITY</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row
+                    ng-repeat="cabinet in vm.request.solicitudes_cabinet">
+                    <td md-cell>{{cabinet.tipo}}</td>
+                    <td md-cell>{{cabinet.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-card>
+
+    <div
+        cg-busy="{promise:vm.storePromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+    </div>
+    <store-manager
+        store="vm.store"
+    ></store-manager>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
+
+        <div
+            layout="column"
+            layout-align="space-around center">
+
+            <div ng-if="vm.request.evidencia.length>0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.request.evidencia.length===0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             cg-busy="{promise:vm.personaPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+             layout-padding>
+        <h3 translate>REQUESTS.DETAIL.USER.TITLE</h3>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.USERNAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.username"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.nombre"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.MIDDLE_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_paterno"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.LAST_NAME</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.apellido_materno"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.PHONE</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.telefono"/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.DETAIL.USER.EMAIL</label>
+                <input
+                    ng-disabled="true"
+                    ng-model="vm.user.user.email"/>
+            </md-input-container>
+        </div>
+    </md-card>
+
+</div>

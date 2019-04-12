@@ -1,1 +1,137 @@
-JNVKJFNWJKVNWDÑKJCNVÑDJKSNCKÑ
+<div layout="column" layout-padding="">
+    <div cg-busy="{promise:vm.loadingPromise, message:'Cargando solicitudes...'}">
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+
+                <div layout="column" ng-if="vm.lastKindFilter != 'Abierta'">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div ng-click="vm.listFilteredpreRequests('Abierta')"
+                         class="Abierta"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'En_proceso'">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div ng-click="vm.listFilteredpreRequests('En_proceso')"
+                         class="En_proceso"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'Atendida'">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div ng-click="vm.listFilteredpreRequests('Atendida')"
+                         class="Atendida"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter != 'Todo'">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div ng-click="vm.listFilteredpreRequests('Todo')"
+                         class="Todo"></div>
+                </div>
+            </div>
+        </md-card>
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <span>Listado de </span>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Abierta'">
+                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <div class="Abierta"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'En_proceso'">
+                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <div class="En_proceso"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Atendida'">
+                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <div class="Atendida"></div>
+                </div>
+                <div layout="column" ng-if="vm.lastKindFilter == 'Todo'">
+                    <span translate>REQUESTS.LIST.ALL</span>
+                    <div class="Todo"></div>
+                </div>
+            </div>
+        </md-card>
+        <md-card layout="column"
+                 layout-padding
+                 layout-align="center stretch"
+                 ng-if="vm.requests.length == 0">
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-align-xs="center stretch"
+                 layout-xs="column">
+                <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
+            </div>
+        </md-card>
+    </div>
+
+    <div ng-if="vm.requests.length !=0 && !vm.filteredActivated" class="virtualRepeatScroll-400">
+        <div
+            layout="row"
+            flex="100"
+            layout-align="center center"
+            ng-repeat="item in vm.requests">
+            <md-card
+                flex="100"
+                layout="column"
+                layout-gt-md="row"
+                layout-align="space-around center" layout-padding="">
+
+                <img src="assets/images/request.png" class="avatar">
+                <div layout="column" flex-gt-md="30">
+                    <div layout="column">
+                        <div layout="row" layout-align="center center">
+                            <h4 translate>PREREQUEST_TRANSLATE.FOLIO</h4>
+                            <h4 translate>:</h4>
+                            <h4>{{item.id}}</h4>
+                        </div>
+
+                        <div layout="column" layout-align="center center">
+                            <span>{{item.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div layout="column" flex-gt-md="30" layout-align="center center">
+                    <b>
+                        {{item.establecimiento.nombre_establecimiento}}-{{item.cabinet}}
+                    </b>
+
+                    <b>
+                        {{item.establecimiento.localidad.nombre}}-{{item.establecimiento.localidad.codigo_postal}}
+                    </b>
+                </div>
+                <div layout="column" flex-gt-md="10" >
+                    <span style="text-align: center">{{item.status}}</span>
+                    <div class="{{item.status}}"></div>
+                </div>
+                <div layout="column" layout-align="center center" ng-if="item.status=='Abierta'" >
+                    <md-button aria-label="fab button"
+                               ng-click="vm.statusDetail(item.id)"
+                               class="md-raised md-primary">
+                        <md-icon md-font-icon="zmdi zmdi-open-in-new"></md-icon>
+                    </md-button>
+                </div>
+
+            </md-card>
+        </div>
+    </div>
+
+    <div ng-if="vm.refreshPaginationButtonsComponent">
+        <pagination-manager-buttons go-sig="vm.sig()"
+                                    go-prev="vm.prev()"
+                                    go-number="vm.goToNumberPage(number)"
+                                    limit-objects="vm.limit"
+                                    count-object="vm.list.count"
+                                    offset-object="vm.offset"
+                                    nex-object="vm.list.next"
+                                    prev-object="vm.list.previous">
+        </pagination-manager-buttons>
+    </div>
+</div>

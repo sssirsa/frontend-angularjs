@@ -10,7 +10,8 @@
                 "INCREASE": "Incremental",
                 "REMOVE": "Recolección",
                 "EXCHANGE": "Cambio",
-                "TECHNICAL_SERVICE": "Servico Técnico"
+                "TECHNICAL_SERVICE": "Servico Técnico",
+                "LIST": "Listado de solicitudes"
             },
             "TITLE": "Servicio Externo"
         }

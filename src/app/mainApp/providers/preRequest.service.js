@@ -9,8 +9,8 @@
         API,
         $window,
         URLS) {
-        var baseUrl=API.all(URLS.external_service.base).all(URLS.preRequest.base);
-        //var baseUrl=API.all(URLS.mobile.base).all(URLS.preRequest);
+        var baseUrl = API.all(URLS.external_service.base).all(URLS.external_service.pre_request.base);
+
         var service = {
             getByID: getByID,
             getAll: getAll,
@@ -20,20 +20,20 @@
         };
 
         function getByID(id) {
-            return baseUrl.all(id).customGET();
+            return baseUrl.all(URLS.external_service.pre_request.pre_request).all(id).customGET();
         }
 
         function getAll(limit, offset, filter) {
             if (filter === undefined) {
-                return API.all(URLS.mobile.base).all(URLS.preRequest + '?limit=' + limit + '&offset=' + offset).customGET();
+                return baseUrl.all(URLS.external_service.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return API.all(URLS.mobile.base).all(URLS.preRequest + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return baseUrl.all(URLS.external_service.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
             }
         }
 
         function createRequest (element){
-            return baseUrl.all('solicitud').post(element);
+            return baseUrl.all(URLS.external_service.pre_request.new_request).post(element);
         }
         function create (element){
             return baseUrl.post(element);

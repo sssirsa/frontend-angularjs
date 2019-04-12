@@ -10,25 +10,26 @@
         $window,
         URLS
     ) {
-        var baseUrl=API.all(URLS.mobile.base).all(URLS.solicitud_pv);
+        var baseUrl = API.all(URLS.external_service.base).all(URLS.external_service.request.base);
 
         var service = {
             getByID: getByID,
             getAll: getAll,
             locate: locate,
-            create:create
+            create: create,
+            report: report
         };
 
         function getByID(id) {
-            return baseUrl.all(id).customGET();
+            return baseUrl.all("all").all(id).customGET();
         }
 
         function getAll(limit, offset, filter) {
             if (filter === undefined) {
-                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset).customGET();
+                return API.all(URLS.external_service.base).all(URLS.external_service.request.base).all(URLS.external_service.request.list + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return API.all(URLS.external_service.base).all(URLS.external_service.request.base).all(URLS.external_service.request.list + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
             }
         }
 
@@ -41,6 +42,10 @@
 
         function create (element){
             return baseUrl.post(element);
+        }
+
+        function report(id){
+            return baseUrl.one('report',id).get();
         }
 
         return service;

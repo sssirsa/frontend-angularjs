@@ -3,7 +3,7 @@
         .module('app.mainApp.external_service.pre_request')
         .controller('preRequestController', preRequestController);
 
-    function preRequestController(URLS, preRequests){
+    function preRequestController(URLS, preRequests, ErrorHandler, $state){
 
         var vm = this;
 
@@ -24,6 +24,7 @@
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
+        vm.statusDetail = statusDetail;
         listpreRequests();
 
         function listpreRequests() {
@@ -33,7 +34,7 @@
                     prepareDataFunction();
                 })
                 .catch(function (errCarga) {
-                    toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.ERROR'));
+                    ErrorHandler.errorTranslate(errCarga);
                 });
 
         }
@@ -56,13 +57,16 @@
                         prepareDataFunction();
                     })
                     .catch(function (errCarga) {
-                        toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.ERROR'));
+                        ErrorHandler.errorTranslate(errCarga);
                     });
             }
         }
 
+        function statusDetail(id) {
+            $state.go('triangular.admin-default.detail-pre-request', {id: id});
+        }
+
         function prepareDataFunction() {
-            console.log(vm.list);
             vm.requests = vm.list.results;
             vm.refreshPaginationButtonsComponent = true;
             vm.filteredActivated = false;

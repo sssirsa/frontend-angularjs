@@ -27,7 +27,21 @@
             "INCREASE": "Solicitud Incremental",
             "REMOVE": "Solicitud de Recolección",
             "EXCHANGE": "Solicitud de Cambio",
-            "TECHNICAL_SERVICE": "Solicitud de Servico Técnico"
-        }
+            "TECHNICAL_SERVICE": "Solicitud de Servico Técnico",
+            "LIST":{
+                "TYPE":{
+                    "ALL": "Todas",
+                    "ATTENDED": "Atendida",
+                    "CANCELED": "Cancelada",
+                    "IN_PROCESS": "En proceso",
+                    "OPEN": "Abierta",
+                    "FOLIO": "Folio",
+                    "STATUS": "Estatus",
+                    "DATE": "Fecha"
+                },
+                "LIST_OF": "Listado de"
+            }
+        },
+        "NO_RESULTS": "No se encontrarón resultados"
     }
 }
