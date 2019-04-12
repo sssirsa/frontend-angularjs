@@ -58,15 +58,10 @@
             //then it must be added trough the mainApp config file.
             com: {},
             entries_departures: {}, //Added at config file
-            genesis: {
-                base: 'genesis'
-            },
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             inventory: {}, //Added at config file
             management: {}, //Added at config file
-            mobile: {
-                base: 'mobile'
-            },
+            salepoint: {},//Added at config file
             technical_service: {}, //Added at config file
 
             //TODO: Re group under the proper category
