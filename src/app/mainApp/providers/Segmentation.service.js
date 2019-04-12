@@ -3,8 +3,12 @@
         .module('app.mainApp')
         .factory('Segmentation', Segmentation);
 
-    function Segmentation(MobileRestangular, URLS) {
-        var baseURL = MobileRestangular.all(URLS.segmentation);
+    function Segmentation(
+        API,
+        URLS
+    ) {
+
+        var baseURL = API.all(URLS.mobile.base).all(URLS.segmentation);
 
         function list() {
             return baseURL.getList();

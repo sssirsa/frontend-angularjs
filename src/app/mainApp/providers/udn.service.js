@@ -7,10 +7,13 @@
     angular
         .module('app.mainApp')
         .factory('udn',udn);
-    function udn(WebRestangular, URLS){
+    function udn(
+        API,
+        URLS
+    ) {
 
         //var baseUdn = Restangular.all('udn');
-        var baseUdn = WebRestangular.all(URLS.udn);
+        var baseUdn = API.all(URLS.genesis.base).all(URLS.udn);
 
         return {
             list:list,

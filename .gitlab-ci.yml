@@ -14,28 +14,27 @@ stages:
 
 
 configuration:
-    stage: configuration
-    image: python:latest
-    script:
-        - pip install awscli
-        - mkdir -p config
-        - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
-        - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
-    cache:
-        untracked: true
-        paths:
-            - config/
-            - gulp/deploy.js
-    artifacts:
-        paths:
-            - config/
-            - gulp/deploy.js
-    only:
-        - development
-        - staging
-        - master
-    tags:
-        - frontend
+  stage: configuration
+  image: quay.io/coreos/awscli:master
+  script:
+    - mkdir -p config
+    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
+    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
+  cache:
+    untracked: true
+    paths:
+     - config/
+     - gulp/deploy.js
+  artifacts:
+    paths:
+     - config/
+     - gulp/deploy.js
+  only:
+    - development
+    - staging
+    - master
+  tags:
+    - frontend
 
 deploy:
     stage: deploy

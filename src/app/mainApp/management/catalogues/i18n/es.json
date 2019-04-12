@@ -10,7 +10,7 @@
                 "INFO_TRANSPORT_LINE": "Información de Linea de Transporte",
                 "NEW_REGISTER": "Registro de Linea de Transporte",
                 "PLUS-PHONE": "+Teléfono",
-                "DUPLICATE":"Ya existe una Linea de Transporte con esta razón social"
+                "DUPLICATE": "Ya existe una Linea de Transporte con esta razón social"
             },
             "PLACEHOLDER": {
                 "SEARCH_TRANSPORT_LINE": "Busca tu linea de transporte",
@@ -32,7 +32,7 @@
         "PRE_CHECKLIST": "Pre Checklist",
         "LAYETTES": "Canastillas",
         "DOORS": "Puertas",
-        "GAS":"Gas",
+        "GAS": "Gas",
         "GRIDS": "Rejillas",
         "ISSUES": "Incidencias",
         "ENTRY": "Asignar Entrada",
@@ -56,7 +56,7 @@
                 "INFO_BRANCH": "Información de Sucursal",
                 "NEW_REGISTER": "Registro de Sucursal",
                 "PLUS-PHONE": "+Teléfono",
-                "DUPLICATE":"Ya existe una Sucursal con este nombre"
+                "DUPLICATE": "Ya existe una Sucursal con este nombre"
             },
             "PLACEHOLDER": {
                 "SEARCH_BRANCH": "Busca tu sucursal",
@@ -71,7 +71,7 @@
         "category": "Categoria",
         "description": "Descripción",
         "lookup": "Busca la Marca de Cábinet",
-        "duplicate":"Ya existe una Marca de Cabinet con esta descripción"
+        "duplicate": "Ya existe una Marca de Cabinet con esta descripción"
     },
     "Category": {
         "title": "Categoría",
@@ -79,7 +79,7 @@
         "name": "Nombre",
         "description": "Descripción",
         "lookup": "Busca la Categoría",
-        "duplicate":"Ya existe una Categoría de Insumos con este nombre"
+        "duplicate": "Ya existe una Categoría de Insumos con este nombre"
     },
     "Consumable_Catalog": {
         "title": "Catálogo de Insumo",
@@ -93,13 +93,13 @@
         "provider": "Proveedor",
         "zone": "Zona",
         "lookup": "Busca el Catálogo",
-        "office":"Sucursal",
-        "units":"Unidades",
-        "DUPLICATE":"Ya existe la Unidad con este nombre",
-        "CREATE":"Se creó exitosamente la unidad",
-        "LABEL":{
-          "TITLE":"Crear unidad",
-            "NAME":"Nombre"
+        "office": "Sucursal",
+        "units": "Unidades",
+        "DUPLICATE": "Ya existe la Unidad con este nombre",
+        "CREATE": "Se creó exitosamente la unidad",
+        "LABEL": {
+            "TITLE": "Crear unidad",
+            "NAME": "Nombre"
         },
         "BUTTON": {
             "STEPS": "Etapas",
@@ -115,21 +115,21 @@
             "PLACEHOLDER": {
                 "SEARCH": "Búsqueda de etapa",
                 "SEARCH_TYPE": "Búsqueda de tipo de equipo",
-                "DESCRIPTION":"Ingrese descripción"
+                "DESCRIPTION": "Ingrese descripción"
             },
             "LABEL": {
-                "NAME":"Nombre",
+                "NAME": "Nombre",
                 "NOT_FOUND": "No se encontró la etapa",
                 "NOT_FOUND_TYPE": "No se encontró el tipo de equipo",
                 "DESCRIPTION": "Descripción:",
                 "TYPE": "Tipo de Equipo:",
-                "QUANTITY":"Cantidad:"
+                "QUANTITY": "Cantidad:"
             },
-            "BUTTON":{
-                "ADD":"Agregar"
+            "BUTTON": {
+                "ADD": "Agregar"
             },
-            "MESSAGE":{
-                "EQUIPMENT":"No seleccionaste un Tipo de equipo válido"
+            "MESSAGE": {
+                "EQUIPMENT": "No seleccionaste un Tipo de equipo válido"
             }
         }
     },
@@ -155,7 +155,7 @@
         "address": "Dirección",
         "phone": "Teléfono",
         "lookup": "Busca el UDN",
-        "duplicate":"Ya existe un UDN con esta zona, centro y agencia"
+        "duplicate": "Ya existe un UDN con esta zona, centro y agencia"
     },
     "MODEL_CABINET": {
         "FORM": {
@@ -171,15 +171,15 @@
                 "BRAND": "Marca",
                 "INFO_MODEL": "Información de Modelo de Cabinet",
                 "NEW_REGISTER": "Registro de Modelo de Cabinet",
-                "DUPLICATE":"Ya existe un Modelo de Cabinet con este nombre y marca"
+                "DUPLICATE": "Ya existe un Modelo de Cabinet con este nombre y marca"
             },
             "PLACEHOLDER": {
                 "SEARCH_BRANCH": "Busca tu modelo de cabinet",
                 "NOT_FOUND": "No se encontró el modelo"
             }
         },
-        "MESSAGES":{
-            "DUPLICATE":"Ya existe un Modelo de Cabinet con este nombre y marca"
+        "MESSAGES": {
+            "DUPLICATE": "Ya existe un Modelo de Cabinet con este nombre y marca"
         }
     },
     "EQUIPMENT_TYPE": {
@@ -191,7 +191,7 @@
                 "KEYWORD": "Palabra clave",
                 "INFO_MODEL": "Información de Tipo de Equipo",
                 "NEW_REGISTER": "Registro de Tipo de Equipo",
-                "DUPLICATE":"Ya existe un Tipo de Equipo con este nombre"
+                "DUPLICATE": "Ya existe un Tipo de Equipo con este nombre"
             },
             "PLACEHOLDER": {
                 "SEARCH_BRANCH": "Busca tu tipo de equipo",
@@ -200,18 +200,17 @@
         }
     },
     "STAGES": {
-        "FORM": {
-            "LABEL": {
-                "MODEL": "Etapas",
-                "NAME": "Nombre",
-                "DESCRIPTION": "Descripción",
-                "WORKSHOP":"Taller",
-                "INFO_MODEL": "Información de la Etapa"
-            },
-            "PLACEHOLDER": {
-                "SEARCH_BRANCH": "Búsqueda de etapa",
-                "NOT_FOUND": "No se encontró la etapa"
-            }
+        "LABELS": {
+            "CREATE": "Crear Etapa",
+            "DELETE": "Borrar Etapa",
+            "LOAD_MORE": "Cargar mas etapas...",
+            "LOADING_MESSAGE": "Cargando etapas",
+            "MODIFY": "Modificar Etapa",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar Etapa",
+            "TITLE": "Etapas"
         }
     },
     "Transport_Kind": {
@@ -242,13 +241,13 @@
                 "ERROR_CREATING_PROJECT": "Error al crear el proyecto",
                 "SUCCESS_CREATING_PROJECT": "Proyecto creado correctamente",
                 "SUCCESS_REMOVING_PROJECT": "Proyecto eliminado correctamente",
-                "SUCCESS_RESTORE_PROJECT":"Proyecto restaurado correctamente",
-                "ERROR_RESTORE_PROJECT":"Error al restaurar proyecto",
+                "SUCCESS_RESTORE_PROJECT": "Proyecto restaurado correctamente",
+                "ERROR_RESTORE_PROJECT": "Error al restaurar proyecto",
                 "ERROR_REMOVING_PROJECT": "Error al eliminar proyecto",
                 "SUCCESS_UPDATING_PROJECT": "Proyecto actualizado correctamente",
                 "ERROR_UPDATING_PROJECT": "Error al eliminar proyecto",
-                "CONFIRM_RESTORE":"¿Seguro que desea restaurar el elemento?",
-                "EXISTING_ELEMENT":"Existe un proyecto con el mismo nombre"
+                "CONFIRM_RESTORE": "¿Seguro que desea restaurar el elemento?",
+                "EXISTING_ELEMENT": "Existe un proyecto con el mismo nombre"
             }
         }
     },
@@ -276,7 +275,7 @@
             "Error": "Error",
             "Success": "Éxito",
             "Warning": "Advertencia",
-            "Information":"Información",
+            "Information": "Información",
             "Messages": {
                 "ERROR_GETTING_CLIENTS": "Error al obtener la lista de clientes",
                 "ERROR_CREATING_CLIENT": "Error al crear el cliente",
@@ -285,59 +284,349 @@
                 "ERROR_REMOVING_CLIENT": "Error al eliminar cliente",
                 "SUCCESS_UPDATING_CLIENT": "Cliente actualizado correctamente",
                 "ERROR_UPDATING_CLIENT": "Error al actualizar cliente",
-                "EXISTING_ELEMENT":"Existe un cliente con el mismo nombre de usuario"
+                "EXISTING_ELEMENT": "Existe un cliente con el mismo nombre de usuario"
             }
         }
     },
-    "ROUTES":{
-        "LABELS":{
-            "TITLE":"Rutas",
-            "SUBTITLE":"Información de ruta",
-            "NAME":"Nombre",
-            "SEARCH":"Búsqueda de rutas"
+    "ROUTES": {
+        "LABELS": {
+            "TITLE": "Rutas",
+            "SUBTITLE": "Información de ruta",
+            "NAME": "Nombre",
+            "SEARCH": "Búsqueda de rutas"
         }
     },
-    "LOCALITIES":{
-        "LABELS":{
-            "TITLE":"Localidades",
-            "SUBTITLE":"Información de localidad",
-            "NAME":"Nombre",
-            "SEARCH":"Búsqueda de localidades",
-            "STATE":"Estado",
-            "CITY":"Municipio",
-            "ZIP_CODE":"Código Postal"
+    "LOCALITIES": {
+        "LABELS": {
+            "TITLE": "Localidades",
+            "SUBTITLE": "Información de localidad",
+            "NAME": "Nombre",
+            "SEARCH": "Búsqueda de localidades",
+            "STATE": "Estado",
+            "CITY": "Municipio",
+            "ZIP_CODE": "Código Postal"
         }
     },
-    "STATES":{
-        "LABELS":{
-            "TITLE":"Estados",
-            "SUBTITLE":"Información de Estado",
-            "NAME":"Nombre",
-            "CODE":"Código del estado"
+    "STATES": {
+        "LABELS": {
+            "TITLE": "Estados",
+            "SUBTITLE": "Información de Estado",
+            "NAME": "Nombre",
+            "CODE": "Código del estado"
         }
     },
-    "CITIES":{
-        "LABELS":{
-            "TITLE":"Municipios",
-            "SUBTITLE":"Información de municipio",
-            "NAME":"Nombre",
-            "STATE":"Estado"
+    "CITIES": {
+        "LABELS": {
+            "TITLE": "Municipios",
+            "SUBTITLE": "Información de municipio",
+            "NAME": "Nombre",
+            "STATE": "Estado"
         },
-        "TOASTR":{
-            "ERROR_STATE_LIST":"Error al cargar la lista de estados"
+        "TOASTR": {
+            "ERROR_STATE_LIST": "Error al cargar la lista de estados"
         }
     },
-    "SEGMENTATION":{
-        "LABELS":{
-            "TITLE":"Segmentación",
-            "SEARCH":"Busca tu segmentación",
-            "SUBTITLE":"Información de segmentación",
-            "COLOR":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selección de color",
-            "NAME":"Nombre",
-            "DESCRIPTION":"Descripcíon"
+    "SEGMENTATION": {
+        "LABELS": {
+            "TITLE": "Segmentación",
+            "SEARCH": "Busca tu segmentación",
+            "SUBTITLE": "Información de segmentación",
+            "COLOR": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selección de color",
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripcíon"
         },
-        "ERRORS":{
-            "NOT_FOUND":"No se encontraron elementos"
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "CONDITION": {
+        "LABELS": {
+            "TITLE": "Condición",
+            "SEARCH": "Buscar Condición",
+            "CREATE": "Crear Condición",
+            "DELETE": "Borrar Condición",
+            "MODIFY": "Editar Condición",
+            "LOAD_MORE": "Cargar más Condición",
+            "LOADING_MESSAGE": "Cargando Condición"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "STATUS_UNILEVER": {
+        "LABELS": {
+            "TITLE": "Estatus Unilever",
+            "SEARCH": "Buscar Estatus Unilever",
+            "CREATE": "Crear Estatus Unilever",
+            "DELETE": "Borrar Estatus Unilever",
+            "MODIFY": "Editar Estatus Unilever",
+            "LOAD_MORE": "Cargar más Estatus Unilever",
+            "LOADING_MESSAGE": "Cargando Estatus Unilever"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "STATUS_COM": {
+        "LABELS": {
+            "TITLE": "Estatus COM",
+            "SEARCH": "Buscar Estatus COM",
+            "CREATE": "Crear Estatus COM",
+            "DELETE": "Borrar Estatus COM",
+            "MODIFY": "Editar Estatus COM",
+            "LOAD_MORE": "Cargar más Estatus COM",
+            "LOADING_MESSAGE": "Cargando Estatus COM"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "STICKER": {
+        "LABELS": {
+            "TITLE": "Sticker",
+            "SEARCH": "Buscar Sticker",
+            "CREATE": "Crear Sticker",
+            "DELETE": "Borrar Sticker",
+            "MODIFY": "Editar Sticker",
+            "LOAD_MORE": "Cargar más Stickers",
+            "LOADING_MESSAGE": "Cargando Sticker"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "PEDIMENT": {
+        "LABELS": {
+            "TITLE": "Pedimento",
+            "SEARCH": "Buscar Pedimento",
+            "CREATE": "Crear Pedimento",
+            "DELETE": "Borrar Pedimento",
+            "MODIFY": "Editar Pedimento",
+            "LOAD_MORE": "Cargar más Pedimentos",
+            "LOADING_MESSAGE": "Cargando Pedimentos"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_CATEGORY": {
+        "LABELS": {
+            "TITLE": "Categoría de Insumo",
+            "SEARCH": "Buscar Categoría",
+            "CREATE": "Crear Categoría",
+            "DELETE": "Borrar Categoría",
+            "MODIFY": "Editar Categoría",
+            "LOAD_MORE": "Cargar más Categorías de Insumo",
+            "LOADING_MESSAGE": "Cargando Categorías de Insumo"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "COMPONENT_TYPE": {
+        "LABELS": {
+            "TITLE": "Tipo de Componente",
+            "SEARCH": "Buscar Tipo",
+            "CREATE": "Crear Tipo",
+            "DELETE": "Borrar Tipo",
+            "MODIFY": "Editar Tipo",
+            "LOAD_MORE": "Cargar más Tipos de Componente",
+            "LOADING_MESSAGE": "Cargando Tipos de componente"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_BRAND": {
+        "LABELS": {
+            "TITLE": "Marca de insumo",
+            "SEARCH": "Buscar Marca de insumo",
+            "CREATE": "Crear Marca de insumo",
+            "DELETE": "Borrar Marca de insumo",
+            "MODIFY": "Editar Marca de insumo",
+            "LOAD_MORE": "Cargar más Marcas de insumo",
+            "LOADING_MESSAGE": "Cargando Marcas de insumo"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "CONSUMABLE_MODEL": {
+        "LABELS": {
+            "TITLE": "Modelo de insumo",
+            "SEARCH": "Buscar Modelo de insumo",
+            "CREATE": "Crear Modelo de insumo",
+            "DELETE": "Borrar Modelo de insumo",
+            "MODIFY": "Editar Modelo de insumo",
+            "LOAD_MORE": "Cargar más Modelos de insumo",
+            "LOADING_MESSAGE": "Cargando Modelos de insumo"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "WEREHOUSE": {
+        "LABELS": {
+            "TITLE": "Bodega",
+            "SEARCH": "Buscar Bodega",
+            "CREATE": "Crear Bodega",
+            "DELETE": "Borrar Bodega",
+            "MODIFY": "Editar Bodega",
+            "LOAD_MORE": "Cargar más Bodegas",
+            "LOADING_MESSAGE": "Cargando Bodegas"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "REASON_NOT_LABELED": {
+        "LABELS": {
+            "TITLE": "Motivo no capitalizado",
+            "SEARCH": "Buscar Motivo no capitalizado",
+            "CREATE": "Crear Motivo no capitalizado",
+            "DELETE": "Borrar Motivo no capitalizado",
+            "MODIFY": "Editar Motivo no capitalizado",
+            "LOAD_MORE": "Cargar más Motivos no capitalizado",
+            "LOADING_MESSAGE": "Cargando Motivos no capitalizado"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "STATUS_NOT_LABELED": {
+        "LABELS": {
+            "TITLE": "Estatus no capitalizado",
+            "SEARCH": "Buscar Estatus no capitalizado",
+            "CREATE": "Crear Estatus no capitalizado",
+            "DELETE": "Borrar Estatus no capitalizado",
+            "MODIFY": "Editar Estatus no capitalizado",
+            "LOAD_MORE": "Cargar más Estatus no capitalizado",
+            "LOADING_MESSAGE": "Cargando Estatus no capitalizado"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "ACTION": {
+        "LABELS": {
+            "TITLE": "Acción",
+            "SEARCH": "Buscar Acción",
+            "CREATE": "Crear Acción",
+            "DELETE": "Borrar Acción",
+            "MODIFY": "Editar Acción",
+            "LOAD_MORE": "Cargar más Acciones",
+            "LOADING_MESSAGE": "Cargando Acciones"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "SYMPTOM": {
+        "LABELS": {
+            "TITLE": "Sintoma",
+            "SEARCH": "Buscar Sintoma",
+            "CREATE": "Crear Sintoma",
+            "DELETE": "Borrar Sintoma",
+            "MODIFY": "Editar Sintoma",
+            "LOAD_MORE": "Cargar más Sintoma",
+            "LOADING_MESSAGE": "Cargando Sintoma"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "FAILURE_TYPE": {
+        "LABELS": {
+            "TITLE": "Clasificador de Falla",
+            "SEARCH": "Buscar Falla",
+            "CREATE": "Crear Falla",
+            "DELETE": "Borrar Falla",
+            "MODIFY": "Editar Falla",
+            "LOAD_MORE": "Cargar más Fallas",
+            "LOADING_MESSAGE": "Cargando Fallas"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "NEXT_STEP": {
+        "LABELS": {
+            "TITLE": "Siguiente Paso",
+            "SEARCH": "Buscar Siguiente Paso",
+            "CREATE": "Crear Siguiente Paso",
+            "DELETE": "Borrar Siguiente Paso",
+            "MODIFY": "Editar Siguiente Paso",
+            "LOAD_MORE": "Cargar más Siguientes Paso",
+            "LOADING_MESSAGE": "Cargando Siguientes Paso"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "COM_INCIDENCE": {
+        "LABELS": {
+            "TITLE": "Incidencia COM",
+            "SEARCH": "Buscar Incidencia COM",
+            "CREATE": "Crear Incidencia COM",
+            "DELETE": "Borrar Incidencia COM",
+            "MODIFY": "Editar Incidencia COM",
+            "LOAD_MORE": "Cargar más Incidencias COM",
+            "LOADING_MESSAGE": "Cargando Incidencias COM"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "IMPEDIMENT_REASON": {
+        "LABELS": {
+            "TITLE": "Motivo de Impedimento de Salida",
+            "SEARCH": "Buscar Motivo de Impedimento",
+            "CREATE": "Crear Motivo de Impedimento",
+            "DELETE": "Borrar Motivo de Impedimento",
+            "MODIFY": "Editar Motivo de Impedimento",
+            "LOAD_MORE": "Cargar más Motivos de Impedimento",
+            "LOADING_MESSAGE": "Cargando Motivos de Impedimento"
+        },
+        "ERRORS": {
+            "NOT_FOUND": "No se encontraron elementos"
+        }
+    },
+    "BULK_ASSET": {
+        "LABELS": {
+            "CREATE": "Crear Insumo",
+            "CREATING": "Creando Insumo",
+            "DELETE": "Borrar Insumo",
+            "DELETING": "Borrando Insumo",
+            "DELETE_CONFIRM": "Confirme la eliminación del Insumo",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos",
+            "MODIFY": "Modificar Insumo",
+            "MODIFYING": "Modificando insumo",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Lote"
+        }
+    },
+    "UNIQUE_ASSET": {
+        "LABELS": {
+            "CREATE": "Crear Insumo",
+            "CREATING": "Creando Insumo",
+            "DELETE": "Borrar Insumo",
+            "DELETING": "Borrando Insumo",
+            "DELETE_CONFIRM": "Confirme la eliminación del Insumo",
+            "LOAD_MORE": "Cargar mas insumos...",
+            "LOADING_MESSAGE": "Cargando insumos",
+            "MODIFY": "Modificar Insumo",
+            "MODIFYING": "Modificando insumo",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar Insumo",
+            "SEARCHING": "Buscando Insumo",
+            "TITLE": "Insumos Únicos"
         }
     }
 }

@@ -1,52 +1,52 @@
 <div layout="column"
      layout-align="center center"
 >
-<div layout="column" layout-align="center center">
-    <div
-        class="drop-box"
-        ng-model="$ctrl.files"
-        ngf-drop="$ctrl.dropFiles($files)"
-        ngf-drag-over-class="'dragover'"
-        accept="{{$ctrl.fileFormats}}"
-        ngf-pattern="{{$ctrl.fileFormats}}"
-        ngf-validate="$ctrl.validations"
-        ngf-resize="$ctrl.resize"
-        ngf-resize-if="$ctrl.resizeIf"
-        ngf-dimensions="$ctrl.maxDimensions"
-        ngf-duration="$ctrl.maxDuration"
-        ngf-max-files="$ctrl.maxFiles"
-        ngf-multiple="$ctrl.multipleFiles"
-        ngf-keep="{{$ctrl.keep}}"
-        ngf-allow-dir="$ctrl.allowFolders">
+    <div layout="column"
+         layout-align="center center"
+         ng-hide="($ctrl.files.length && !$ctrl.multipleFiles)||($ctrl.files.length == $ctrl.maxFiles)">
+        <div class="drop-box"
+             ng-model="$ctrl.files"
+             ngf-drop="$ctrl.dropFiles($files)"
+             ngf-drag-over-class="'dragover'"
+             accept="{{$ctrl.fileFormats}}"
+             ngf-pattern="{{$ctrl.fileFormats}}"
+             ngf-validate="$ctrl.validations"
+             ngf-resize="$ctrl.resize"
+             ngf-resize-if="$ctrl.resizeIf"
+             ngf-dimensions="$ctrl.maxDimensions"
+             ngf-duration="$ctrl.maxDuration"
+             ngf-max-files="$ctrl.maxFiles"
+             ngf-multiple="$ctrl.multipleFiles"
+             ngf-keep="{{$ctrl.keep}}"
+             ngf-allow-dir="$ctrl.allowFolders">
 
-        <span ng-if="$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.MULTIPLE_FILES'|translate}}</span>
-        <span ng-if="!$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.SINGLE_FILE'|translate}}</span>
+            <span ng-if="$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.MULTIPLE_FILES'|translate}}</span>
+            <span ng-if="!$ctrl.multipleFiles">{{'MAIN.COMPONENTS.FILE_UPLOADER.LABELS.SINGLE_FILE'|translate}}</span>
 
+        </div>
+        <md-button ngf-select="$ctrl.selectFiles($files)"
+                   ng-model="$ctrl.files"
+                   accept="{{$ctrl.fileFormats}}"
+                   ngf-pattern="{{$ctrl.fileFormats}}"
+                   ngf-validate="$ctrl.validations"
+                   ngf-resize="$ctrl.resize"
+                   ngf-resize-if="$ctrl.resizeIf"
+                   ngf-dimensions="$ctrl.maxDimensions"
+                   ngf-duration="$ctrl.maxDuration"
+                   ngf-max-files="$ctrl.maxFiles"
+                   ngf-multiple="$ctrl.multipleFiles"
+                   ngf-allow-dir="$ctrl.allowFolders"
+                   ngf-keep="{{$ctrl.keep}}"
+                   class="md-primary md-raised">
+            <md-icon md-font-icon="fa fa-folder-open"></md-icon>
+            <span ng-if="$ctrl.multipleFiles">
+                {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.MULTIPLE_FILES'|translate}}
+            </span>
+            <span ng-if="!$ctrl.multipleFiles">
+                {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.SINGLE_FILE'|translate}}
+            </span>
+        </md-button>
     </div>
-    <md-button
-        ngf-select="$ctrl.selectFiles($files)"
-        ng-model="$ctrl.files"
-        accept="{{$ctrl.fileFormats}}"
-        ngf-pattern="{{$ctrl.fileFormats}}"
-        ngf-validate="$ctrl.validations"
-        ngf-resize="$ctrl.resize"
-        ngf-resize-if="$ctrl.resizeIf"
-        ngf-dimensions="$ctrl.maxDimensions"
-        ngf-duration="$ctrl.maxDuration"
-        ngf-max-files="$ctrl.maxFiles"
-        ngf-multiple="$ctrl.multipleFiles"
-        ngf-allow-dir="$ctrl.allowFolders"
-        ngf-keep="{{$ctrl.keep}}"
-        class="md-primary md-raised">
-        <md-icon md-font-icon="fa fa-folder-open"></md-icon>
-        <span ng-if="$ctrl.multipleFiles">
-            {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.MULTIPLE_FILES'|translate}}
-            </span>
-        <span ng-if="!$ctrl.multipleFiles">
-            {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.SINGLE_FILE'|translate}}
-            </span>
-    </md-button>
-</div>
 <div
     layout="row"
     layout-align="space-around center"

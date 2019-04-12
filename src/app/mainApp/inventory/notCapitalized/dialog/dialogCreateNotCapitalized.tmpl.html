@@ -1,0 +1,72 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'NOT_CAPITALIZED.BUTTONS.CREATE'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<form name="newNCForm" flex="100" layout-align="center ceneter">
+    <md-input-container flex class="md-block">
+        <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+        <input name="serial" maxlength="25"
+               ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="vm.no_serie"/>
+        <div ng-messages="newNCForm.serial.$error">
+            <div ng-message="pattern">
+                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex class="md-block">
+        <label translate>MAIN.COMPONENTS.NO_LABELED.ECONOMICS</label>
+        <md-chips ng-model="vm.economicos" md-max-chips="5">
+            <input type="text" ng-pattern="/^[0-9,]+$/" placeholder="{{'NOT_CAPITALIZED.ENTER'|translate}}">
+        </md-chips>
+        <div ng-messages="newNCForm.economico.$error">
+            <div ng-message="pattern">
+                {{'MAIN.LABEL.ECONOMICS'|translate}}
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex class="md-block">
+        <catalog-select catalog="vm.catalogues['estatus_no_capitalizado'].catalog"
+                        required="true"
+                        pagination="vm.catalogues['estatus_no_capitalizado'].pagination"
+                        elements="vm.catalogues['estatus_no_capitalizado'].elements"
+                        soft-delete="vm.catalogues['estatus_no_capitalizado'].softDelete"
+                        on-select="vm.onElementSelect(element,'status_id')">
+        </catalog-select>
+    </md-input-container>
+
+    <md-input-container flex class="md-block">
+        <catalog-select catalog="vm.catalogues['motivo'].catalog"
+                        required="true"
+                        pagination="vm.catalogues['motivo'].pagination"
+                        elements="vm.catalogues['motivo'].elements"
+                        soft-delete="vm.catalogues['motivo'].softDelete"
+                        on-select="vm.onElementSelect(element,'motivo_id')">
+        </catalog-select>
+    </md-input-container>
+</form>
+
+<md-actions
+    layout="row"
+    layout-align="end center">
+    <md-button class="md-raised md-primary"
+               cg-busy="{ promise:vm.createPromise, message:' ' }"
+               ng-click="vm.create()">
+        <md-icon md-font-icon="fa fa-plus"></md-icon>
+        <span translate>NOT_CAPITALIZED.BUTTONS.CREATE</span>
+    </md-button>
+
+    <md-button
+        ng-click="vm.cancel()"
+        class="md-warn md-raised">
+        <md-icon md-font-icon="fa fa-ban"></md-icon>
+        {{'MAIN.BUTTONS.CANCEL'|translate}}
+    </md-button>
+</md-actions>

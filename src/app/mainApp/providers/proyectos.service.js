@@ -8,9 +8,12 @@
         .module('app.mainApp.management.catalogues')
         .factory('Proyectos', Proyectos);
 
-    function Proyectos(WebRestangular, URLS) {
+    function Proyectos(
+        API,
+        URLS
+    ) {
 
-        var baseURL = WebRestangular.all(URLS.proyecto);
+        var baseURL = API.all(URLS.genesis.base).all(URLS.proyecto);
 
         var service = {
             list: list,

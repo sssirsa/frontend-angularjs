@@ -10,8 +10,11 @@
         .factory("Reporte", Reporte);
 
     /* @ngInject */
-    function Reporte(WebRestangular, URLS) {
-        var path = WebRestangular.all(URLS.reporte_insumos);
+    function Reporte(
+        API,
+        URLS
+    ) {
+        var path = API.all(URLS.genesis.base).all(URLS.reporte_insumos);
 
         return {
             reporteInsumos: reporteInsumos

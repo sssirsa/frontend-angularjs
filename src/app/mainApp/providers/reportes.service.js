@@ -8,9 +8,13 @@
         .module('app.mainApp.reports')
         .factory('Reportes',Reportes);
 
-    function Reportes(WebRestangular, URLS, ReportList){
-        var path= WebRestangular.all(URLS.report_builder).all('api');
-        var pathReport= WebRestangular.all(URLS.report_builder).all('report');
+    function Reportes(
+        API,
+        URLS,
+        ReportList
+    ) {
+        var path= API.all(URLS.genesis.base).all(URLS.report_builder).all('api');
+        var pathReport= API.all(URLS.genesis.base).all(URLS.report_builder).all('report');
 
         return {
             getPartialReports:getPartialReports,
