@@ -23,9 +23,9 @@
             var request = $q.defer();
 
             API
-                .all(URLS.mobile.base)
-                .all('oauth')
-                .all('token/')
+                .all(URLS.management.base)
+                .all(URLS.management.oauth.base)
+                .all(URLS.management.oauth.login)
                 .customPOST({'content-type': 'application/json'}, null, params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
