@@ -8,7 +8,7 @@
         .controller('assignGroupDialogController',assignGroupDialogController)
         .filter('groupSearch', groupSearch);
 
-    function assignGroupDialogController($mdDialog,Administration,groups_user)
+    function assignGroupDialogController($mdDialog,groups_user)
     {
         var vm = this;
         activate();

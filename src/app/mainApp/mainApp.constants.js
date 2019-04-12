@@ -72,8 +72,6 @@
             segmentation: 'segmentacion',
             solicitud_pv: 'solicitud',
             atencion_pv: 'atencion_pv',
-            grupo_persona: 'grupo_persona',
-            group_employee: 'grupo',
             preRequest: 'pre_solicitud',
             establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
