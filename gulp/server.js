@@ -32,7 +32,7 @@ function browserSyncInit(baseDir, files, browser) {
   });
 }
 
-gulp.task('serve', ['config:dev','watch'], function () {
+gulp.task('serve', ['config:dev','scripts','watch'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
@@ -46,7 +46,7 @@ gulp.task('serve', ['config:dev','watch'], function () {
   ]);
 });
 
-gulp.task('serve:dev', ['config:dev', 'watch'], function () {
+gulp.task('serve:dev', ['config:dev', 'scripts', 'watch'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
@@ -62,7 +62,7 @@ gulp.task('serve:dev', ['config:dev', 'watch'], function () {
 
 
 
-gulp.task('serve:stg', ['config', 'watch'], function () {
+gulp.task('serve:stg', ['config', 'scripts', 'watch'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
@@ -76,7 +76,7 @@ gulp.task('serve:stg', ['config', 'watch'], function () {
     ]);
 });
 
-gulp.task('serve:prod', ['config:build', 'watch'], function () {
+gulp.task('serve:prod', ['config:build', 'scripts', 'watch'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
