@@ -628,12 +628,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            //{
-                            //    name: 'MAIN.MENU.CATALOGS.STORES',
-                            //    state: 'triangular.admin-default.catalogo-establecimientos',
-                            //    permission: ['ADMINISTRADOR', 'TECNICO E'],
-                            //    type: 'link'
-                            //},
+                            {
+                                name: 'MAIN.MENU.CATALOGS.STORES',
+                                state: 'triangular.admin-default.catalogo-establecimientos',
+                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',

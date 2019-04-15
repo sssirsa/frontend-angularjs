@@ -58,29 +58,17 @@
             //then it must be added trough the mainApp config file.
             com: {},
             entries_departures: {}, //Added at config file
-            genesis: {
-                base: 'genesis'
-            },
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             inventory: {}, //Added at config file
             management: {}, //Added at config file
-            mobile: {
-                base: 'mobile'
-            },
+            salepoint: {},//Added at config file
             technical_service: {}, //Added at config file
 
             //TODO: Re group under the proper category
             //When done, delete all below this line
-            estado: 'estado',
-            localidad: 'localidad',
-            municipio: 'municipio',
-            segmentation: 'segmentacion',
             solicitud_pv: 'solicitud',
             atencion_pv: 'atencion_pv',
-            grupo_persona: 'grupo_persona',
-            group_employee: 'grupo',
             preRequest: 'pre_solicitud',
-            establecimiento: 'establecimiento',
             establecimiento_template: 'https://goo.gl/kAQrxt',
             massive: {
                 store: 'massive/store'

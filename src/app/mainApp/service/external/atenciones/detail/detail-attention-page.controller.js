@@ -51,6 +51,16 @@
         vm.validaMax = validaMax;
         vm.enviar = enviar;
 
+        //codigo para listar cabinets
+        //datos para paginado
+        vm.objectPaginado = null;
+        vm.offset = 0;
+        vm.limit = 50;
+        vm.refreshPaginationButtonsComponent = false;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
+
         activate();
 
         function activate() {
@@ -386,7 +396,7 @@
 
         vm.listcabinets = listcabinets;
         vm.selectCabinet = selectCabinet;
-        vm.filterCabinets = filterCabinets;
+        vm.searchCabinet = searchCabinet;
         vm.cleanForm = cleanForm;
         vm.listMarcas = listMarcas;
         vm.listModelos = listModelos;
@@ -409,7 +419,6 @@
         function seleccion() {
             vm.todosSeleccionado = [];
             vm.todosSeleccionado.push(cabinetTemporal);
-            console.log(cabinetTemporal);
             vm.isUsed = true;
         }
 
@@ -522,23 +531,30 @@
             $scope.newcabinetFrom.$setUntouched();
         }
 
-        function filterCabinets() {
-            vm.todos = [];
-            vm.todos = _.filter(vm.todosprev, function (cabinet) {
-                if (!angular.isString(vm.searchText) || vm.searchText === ''){
-                    return true;
-                }
-                return cabinet.economico.toLowerCase().indexOf(vm.searchText.toLowerCase()) >= 0;
-            });
+        function searchCabinet() {
+            if(vm.searchText == '' || vm.searchText.length <= 0){
+                listcabinets();
+            }else{
+                cabinetPV.getByID(vm.searchText)
+                    .then(function (respuesta) {
+                        vm.todos = [];
+                        AddCabinetCreated(respuesta);
+                    })
+                    .catch(function (error) {
+                        ErrorHandler.errorTranslate(error);
+                    });
+            }
         }
 
         function listcabinets(){
             var ux = "Activo";
+            console.log("lista");
 
-            vm.loadingPromise = cabinetPV.list(1000, 0)
+            vm.refreshPaginationButtonsComponent = false;
+            vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
                 .then(function (res) {
-                    res = res.results;
-                    vm.todosprev = Helper.filterDeleted(res, true);
+                    vm.objectPaginado = res;
+                    vm.todosprev = Helper.filterDeleted(res.results, true);
 
                     angular.forEach(vm.todosprev, function (cabinet) {
 
@@ -571,12 +587,34 @@
 
                         vm.todos.push(cabinetPreview);
                     });
+
+                    vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function (err) {
 
                 });
         }
-        //codigo para listar cabinets
+
+        function sigPage() {
+            vm.offset += vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
+
+        function prevPage() {
+            vm.offset -= vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
 
     }
 })();

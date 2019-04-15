@@ -9,8 +9,9 @@
         API,
         $window,
         URLS) {
-        var baseUrl=API.all(URLS.mobile.base).all(URLS.atencion_pv);
-        var insumosURL=API.all(URLS.mobile.base).all(URLS.catalogo_insumos);
+        //TODO:Replace with the correct constant, don't use mobile
+        //var baseUrl=API.all(URLS.mobile.base).all(URLS.atencion_pv);
+        //var insumosURL=API.all(URLS.mobile.base).all(URLS.catalogo_insumos);
 
         var service = {
             getByID: getByID,

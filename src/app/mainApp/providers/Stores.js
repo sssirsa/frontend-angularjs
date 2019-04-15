@@ -10,7 +10,10 @@
         Helper,
         $q
     ) {
-        var baseURL = API.all(URLS.mobile.base).all(URLS.establecimiento);
+        var baseURL = API
+            .all(URLS.salepoint.base)
+            .all(URLS.salepoint.catalogues.base)
+            .all(URLS.salepoint.catalogues.stores);
 
         function list() {
             return baseURL.getList();
@@ -60,7 +63,10 @@
         function querySearch(query, limit, offset){
             var defer = $q.defer();
             // TODO: falta agregar metodo de paginado
-            API.all(URLS.mobile.base).all(query+'&limit='+limit+'&offset='+offset)
+            API
+                .all(URLS.salepoint.base)
+                .all(URLS.salepoint.catalogues.base)
+                .all(URLS.salepoint.catalogues.stores).all(query+'&limit='+limit+'&offset='+offset)
                 .customGET()
                 .then(function (list) {
                     defer.resolve(list);

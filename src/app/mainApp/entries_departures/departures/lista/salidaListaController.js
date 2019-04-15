@@ -94,21 +94,22 @@
 
             vm.loadingPromise = $http.get('app/mainApp/entries_departures/departures/lista/formato.json').then(function (col) {
                 EntradaSalida.getRemision(vm.selectedSalidaList.id).then(function (res) {
+                    console.log(col.data);
                     console.log(col);
                     console.log(res);
-                    col.data.content[0].table.body[1][0].stack[2].text = res.udn.agencia + "\n" + res.udn.direccion;//Direccion UDN
-                    col.data.content[0].table.body[1][1].stack[2].text = res.sucursal.nombre + "\n " + res.sucursal.direccion;//Almacen general
-                    col.data.content[0].table.body[2][0].stack[2].text = res.cliente === null ? "No tiene" : res.cliente;//Datos del cliente
-                    col.data.content[0].table.body[2][1].stack[2].text = moment(res.fecha).format("DD-MM-YYYY HH:mm:ss");//Fecha de envio
-                    col.data.content[0].table.body[2][2].stack[2].text = res.id.toString();//Remisión No.
-                    col.data.content[4].table.body[1][4].text = "Sello de recepción " + res.udn.agencia + "\n \n \n \n \n \n \n \n \n \n";  //add cabinets
+                    col.content[0].table.body[1][0].stack[2].text = res.udn.agencia + "\n" + res.udn.direccion;//Direccion UDN
+                    col.content[0].table.body[1][1].stack[2].text = res.sucursal.nombre + "\n " + res.sucursal.direccion;//Almacen general
+                    col.content[0].table.body[2][0].stack[2].text = res.cliente === null ? "No tiene" : res.cliente;//Datos del cliente
+                    col.content[0].table.body[2][1].stack[2].text = moment(res.fecha).format("DD-MM-YYYY HH:mm:ss");//Fecha de envio
+                    col.content[0].table.body[2][2].stack[2].text = res.id.toString();//Remisión No.
+                    col.content[4].table.body[1][4].text = "Sello de recepción " + res.udn.agencia + "\n \n \n \n \n \n \n \n \n \n";  //add cabinets
                     if (res.ife_chofer != null) {
-                        col.data.content[8].columns[0].stack[0].image = "data:image/jpeg;base64," + res.ife_chofer;
+                        col.content[8].columns[0].stack[0].image = "data:image/jpeg;base64," + res.ife_chofer;
                     } else {
-                        col.data.content.splice(8, 1);
+                        col.content.splice(8, 1);
                     }
                     if (res.cabinets.length == 0) {
-                        col.data.content[4].table.body.splice(0, 1);
+                        col.content[4].table.body.splice(0, 1);
                     }
                     var contador=res.cabinets.length;
                     var cabinets=_.sortBy(res.cabinets, 'economico' );
@@ -123,12 +124,12 @@
                         } else {
                             arreglo = [{"text":contador.toString(),"style": "extra_small"}, {"text":  value.economico,"style": "extra_small"}, {"text": value.modelo.marca.descripcion,"style": "extra_small"}, {"text": value.no_serie,"style": "extra_small"}, " ", {"text":"N/A","style": "extra_small"}, {"text":"N/A","style": "extra_small"}];
                         }
-                        col.data.content[4].table.body.splice(1, 0, arreglo);
+                        col.content[4].table.body.splice(1, 0, arreglo);
                         contador--;
                     });
 
                     toastr.success(vm.successRemission, vm.successTitle);
-                    pdfMake.createPdf(col.data).download("Remision-Folio-" + vm.selectedSalidaList.id.toString() + ".pdf");
+                    pdfMake.createPdf(col).download("Remision-Folio-" + vm.selectedSalidaList.id.toString() + ".pdf");
                 }).catch(function (err) {
                     console.log(err)
                     toastr.warning(vm.errorMessage, vm.errorTitle);

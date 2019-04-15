@@ -2,6 +2,16 @@
     angular
         .module('app.mainApp.management')
         .constant('MANAGEMENT', {
+            administration: {
+                base: 'manage_system',
+                my_groups: 'my_groups',
+                groups: 'groups',
+                person: {
+                    base: 'persona',
+                    admin: 'persona_admin',
+                    capturist: 'persona_capturista'
+                }
+            },
             base: 'management',
             catalogues: {
                 base: 'catalogues',
@@ -18,6 +28,11 @@
                 reason_not_labeled: 'motivo_no_capitalizado',
                 status_not_labeled: 'estatus_no_capitalizado'
             },
+            control: {
+                base: 'control',
+                cabinet_in_subsidiary: 'cabinet_in_sucursal',
+                no_labeled_in_subsidiary: 'no_capitalizado_in_sucursal'
+            },
             inventory: {
                 base: 'inventory',
                 cabinet: 'cabinet_unilever',
@@ -26,22 +41,11 @@
                 impediment: 'impedimento',
                 label: 'label'
             },
-            control: {
-                base: 'control',
-                cabinet_in_subsidiary: 'cabinet_in_sucursal',
-                no_labeled_in_subsidiary: 'no_capitalizado_in_sucursal'
+            oauth: {
+                base: 'oauth',
+                login: 'token/'
             },
             restrictions: {},
-            administration: {
-                base: 'manage_system',
-                my_groups: 'my_groups',
-                groups:'groups',
-                person: {
-                    base: 'persona',
-                    admin: 'persona_admin',
-                    capturist: 'persona_capturista'
-                }
-            },
             users: {}
         });
 })();

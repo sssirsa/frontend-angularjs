@@ -11,8 +11,7 @@
         toastr,
         Translate,
         $mdDialog,
-        Persona_Admin,
-        Administration,
+        Persona_Admin,        
         Persona) {
 
         var vm = this;
