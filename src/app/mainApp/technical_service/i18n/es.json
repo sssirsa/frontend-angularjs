@@ -42,6 +42,21 @@
             "SAVE_PUNCTURE": "Guardar Pinchado"
         }
     },
+    "PRESURIZE": {
+        "PRESURIZE_MENU": "Presurizado",
+        "WITH_GAS": "Con Gas",
+        "WITHOUT_GAS": "Sin Gas",
+        "MORE_INFO": "Más Información",
+        "INITIAL_INFO": "Información Inicial",
+        "OBSERVATIONS": "Observaciones",
+        "CHARGE_DATE":"Fecha de carga",
+        "CHARGE_PRESSION":"Presión de carga",
+        "REVISION_DATE":"Fecha de revisión",
+        "REVISION_PRESSION":"Presión de carga",
+        "ACTIONS": {
+            "SAVE_PRESURIZE": "Guardar Presurizado"
+        }
+    },
     "SERVICES": {
         "INFO_CABINET": "Información del Cabinet",
         "INFO_SERVICE": "Información del Servicio Actual",
