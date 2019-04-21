@@ -1,106 +1,173 @@
 <div>
 
-    <md-card layout="column">
-        <md-toolbar class="toolbar-default margin-bottom-30">
-            <div class="md-toolbar-tools" layout-align="space-between center">
-                <h2>
-                    <span>{{vm.preRequest.id}}</span>
-                </h2>
-                <b>Económico: {{vm.preRequest.cabinet}}</b>
-                <h2>
-                    <span>{{vm.preRequest.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</span>
-                </h2>
-
+    <md-card  layout="column" ng-if="!vm.user.sucursal">
+        <md-toolbar class="toolbar-default margin-bottom-10">
+            <div layout-align="center center" layout="column" layout-gt-sm="row">
+                <b translate>PRE_REQUEST.SUBSIDIARY.TITLE</b>
             </div>
         </md-toolbar>
-        <div layout="row" layout-wrap="" layout-align="center center">
-            <div ng-if="vm.photos.length>0" flex-gt-md=50 flex="100" layout-fill="" layout-padding="">
-                <ng-image-gallery
-                    images="vm.photos"
-                    thumbnails="true"
-                    thumb-size="80"
-                    inline="true"
-                    bubbles="true"
-                    bubble-size="5"
-                    img-bubbles="true"
-                    bg-close="false"
-                    piracy="false"
-                    img-anim="fadeup"
-                ></ng-image-gallery>
-            </div>
-            <div flex-gt-md="50" flex="100" layout-fill="" layout="column" layout-align="center center">
 
-                <div layout-align="center center">
-                    <span translate="">PREREQUEST_TRANSLATE.STORE_NAME</span> &nbsp; &nbsp;
-                    <b translate="">{{vm.preRequest.establecimiento.nombre_establecimiento}}</b>
+        <div layout="row"
+             layout-align-xs="center stretch"
+             layout-xs="column"
+             layout-align="space-around center"
+             layout-padding>
+            <div flex-gt-sm="50" flex="100">
+                <catalog-select catalog="vm.catalogSucursal.catalog"
+                                elements="vm.catalogSucursal.elements"
+                                on-select="vm.onSelectedSucursal(element)">
+                </catalog-select>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card layout="column">
+        <md-toolbar class="toolbar-default margin-bottom-30">
+            <div layout-align="space-between center" layout="column" layout-gt-sm="row">
+                <div layout="column" layout-gt-sm="row">
+                    <b translate>{{vm.preRequest.id}}</b>
                 </div>
-                <div layout-gt-md="row" layout="column" layout-align="center center">&nbsp;
-                    <b translate="">{{vm.preRequest.establecimiento.localidad.nombre}}</b>,&nbsp;
-                    <b translate="">{{vm.preRequest.establecimiento.localidad.municipio.nombre}}</b>&nbsp;,
-                    <b translate="">{{vm.preRequest.establecimiento.localidad.municipio.estado.nombre}}</b>&nbsp;
-                </div>
-                <div layout-gt-md="row" layout="column" layout-align="center center" layout-fill=""
-                     layout-align="space-around center">
-                    <div layout="row" flex-gt-md=50 flex="100" layout-fill="" layout-align="center center">
-                        <span translate="">PREREQUEST_TRANSLATE.STREET</span> &nbsp; &nbsp;
-                        <b translate="">{{vm.preRequest.establecimiento.calle}}</b>&nbsp;
-                        <span translate="">PREREQUEST_TRANSLATE.NUMBER</span> &nbsp; &nbsp;
-                        <b translate="">{{vm.preRequest.establecimiento.numero}}</b>&nbsp;
+                <div layout="column" layout-gt-sm="row">
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.CABINET.ECONOMIC</b>: &nbsp
+                        <b translate>{{vm.preRequest.cabinet}}</b>
                     </div>
-                    <div layout-gt-md="row" layout="column" flex-gt-md=50 flex="100" layout-fill=""
-                         layout-align="space-around center">
-                        <span translate="">PREREQUEST_TRANSLATE.STREET_NEAR</span> &nbsp; &nbsp;
-                        <b translate="">{{vm.preRequest.establecimiento.entre_calle1}}</b>,&nbsp;
-                        <span translate="">PREREQUEST_TRANSLATE.STREET_NEAR2</span> &nbsp; &nbsp;
-                        <b translate="">{{vm.preRequest.establecimiento.entre_calle2}}</b>.&nbsp;
+                </div>
+                <div layout="column" layout-gt-sm="row">
+                    <b translate>{{vm.preRequest.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</b>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <div layout-gt-sm="row" layout="column" layout-align="space-between center">
+            <div flex-gt-md="50" layout="column">
+                <div layout-align="center stretch"
+                     layout="column"
+                     layout-padding>
+                    <h3 translate>PRE_REQUEST.EVIDENCES.TITLE</h3>
+
+                    <div
+                        layout="column"
+                        layout-align="space-around center">
+
+                        <div ng-if="vm.preRequest.fotos" layout-fill>
+
+                            <ng-image-gallery
+                                images="vm.preRequest.fotos"
+                                thumbnails="false"
+                                thumb-size="80"
+                                inline="true"
+                                bubbles="true"
+                                bubble-size="5"
+                                img-bubbles="true"
+                                bg-close="false"
+                                piracy="false"
+                                img-anim="fadeup"
+                            ></ng-image-gallery>
+                        </div>
+
+                        <div ng-if="!vm.preRequest.fotos">
+                            <p>{{'PRE_REQUEST.EVIDENCES.NO_EVICENCES'|translate}}</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div flex-gt-md="50" layout="column" layout-align="center center">
+
+                <div layout-align="space-around center">
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.NAME</b>: &nbsp
+                        {{vm.preRequest.establecimiento.nombre_establecimiento}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.LOCATION</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.CITY</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.municipio.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.STATE</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.municipio.estado.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.STREET</b>: &nbsp
+                        {{vm.preRequest.establecimiento.calle}} &nbsp
+                        <b translate>PRE_REQUEST.STORE.NUMBER</b>: &nbsp
+                        {{vm.preRequest.establecimiento.numero}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.BETWEEN_1</b>: &nbsp
+                        {{vm.preRequest.establecimiento.entre_calle1}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.BETWEEN_2</b>: &nbsp
+                        {{vm.preRequest.establecimiento.entre_calle2}}
+                    </div>
+                </div>
+
                 <div flex-gt-md="50" flex="100" layout-fill="" layout="column" layout-align="center center">
                     <h2 translate="">
-                        PREREQUEST_TRANSLATE.TIME_SCHEDULING
+                        PRE_REQUEST.HOUR.TITLE
                     </h2>
-                    <div layout="column" layout-align="center center">
-                        <div layout-align="center center">
-                            <img src="assets/images/clock.png" class="avatar">
+                    <div layout="row" layout-align="space-between center">
+                        <div layout="row">
+                            <i class="fas fa-user-clock"></i> &nbsp
                         </div>
-                        <div layout-align="end center" full-width>
+                        <div layout="row">
                             <b>{{vm.preRequest.hora_cliente_inicio}}</b> &nbsp;- &nbsp;<b>{{vm.preRequest.hora_cliente_fin}}</b>
                         </div>
                     </div>
                 </div>
-                <div flex-gt-md="50" flex="100" layout-fill="" layout="column" layout-align="center center">
 
-                    <div layout-align="end center" full-width>
-                        <h3 translate="">PREREQUEST_TRANSLATE.OBSERVATIONS</h3> &nbsp;-
-                        <span>{{vm.preRequest.observaciones_cliente}}</span>
+                <div layout-align="space-around center">
+                    <div layout="row" layout-wrap>
+                        <b translate="">PRE_REQUEST.OBSERVATIONS</b>
+                        {{vm.preRequest.observaciones_cliente}}
                     </div>
-
                 </div>
+
             </div>
         </div>
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
-                {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}
-            </md-button>
-            <md-button aria-label="cancel" ng-click="vm.cancelPreRequest()" class="md-raised md-warn">
-                <md-icon md-font-icon="zmdi zmdi-close-circle"></md-icon>
-                {{'PREREQUEST_TRANSLATE.CANCEL_PREREQUEST'|translate}}
-            </md-button>
-            <md-button aria-label="send" ng-if="vm.showCabinet" ng-click="vm.createRequest()"
-                       class="md-raised md-primary">
-                <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
-                {{'PREREQUEST_TRANSLATE.CREATE_REQUEST'|translate}}
-            </md-button>
 
+        <md-card-actions layout="column"
+                         layout-align="space-around end"
+                         layout-padding>
+
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-wrap>
+
+                <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}
+                </md-button>
+                &nbsp
+
+                <md-button aria-label="send" ng-if="vm.cabinetExist" ng-click="vm.createRequest()"
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                    {{'PRE_REQUEST.BUTTONS.CREATE'|translate}}
+                </md-button>
+                &nbsp
+
+                <md-button aria-label="cancel" ng-click="vm.cancelPreRequest()" class="md-raised md-warn">
+                    <md-icon md-font-icon="zmdi zmdi-close-circle"></md-icon>
+                    {{'PRE_REQUEST.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+            </div>
         </md-card-actions>
+
     </md-card>
 
     <md-card ng-if="!vm.cabinetExist">
         <md-toolbar class="toolbar-default">
             <div class="md-toolbar-tools" layout-align="center center">
                 <h2>
-                    <span>Cabinet no registrado</span>
+                    <span translate>PRE_REQUEST.CABINET.NOT_REGISTERED</span>
                 </h2>
 
             </div>
@@ -117,7 +184,7 @@
             </div>
             <div layout="column"
                  layout-align="center center">
-                {{'ENTRIES.NEW.MESSAGES.REGISTER_CABINET'|translate}}
+                {{'PRE_REQUEST.CABINET.NEW_REGISTER'|translate}}
             </div>
         </section>
     </md-card>

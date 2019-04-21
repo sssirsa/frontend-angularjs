@@ -6,33 +6,10 @@
         .controller('detailPreRequestController', detailPreRequestController);
 
     function detailPreRequestController(preRequests, $stateParams, cabinetUC, Translate, Helper, $state, ErrorHandler, toastr,
-    EnvironmentConfig, URLS, $mdDialog) {
+    EnvironmentConfig, URLS, $mdDialog, Geolocation, User) {
 
         var vm = this;
-
-        //Listado de Variables
-        vm.preRequest = {};
-        vm.photos = [];
-        vm.images = [];
-        vm.errorMessage = '';
-        vm.showCabinet = false;
-        vm.cabinet = [];
-        vm.request = {
-            id: "",
-            cabinet: ""
-        };
-        vm.cabinetExist = true;
-
-        //listado de constantes
-
-        vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
-        vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
-        vm.cabinetNotFound = Translate.translate('PREREQUEST_TRANSLATE.MSG.CABINET_NOT_FOUND');
-        vm.unexpected = Translate.translate('PREREQUEST_TRANSLATE.MSG.UNEXPECTED');
-        vm.creationsuccess = Translate.translate('PREREQUEST_TRANSLATE.MSG.CREATION_SUCCESFULL');
-        vm.cancelationsuccess = Translate.translate('PREREQUEST_TRANSLATE.MSG.CANCELATION_SUCCESFULL');
-        vm.preRequestnotFound = Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND');
-
+        vm.user = User.getUser();
 
         //Listado de funciones
         vm.getinfo = getinfo;
@@ -40,6 +17,28 @@
         vm.cancelPreRequest = cancelPreRequest;
         vm.createRequest = createRequest;
         vm.back = back;
+
+        //Listado de Variables
+        vm.preRequest = {};
+        vm.photos = [];
+        vm.request = {};
+        vm.cabinetExist = true;
+
+        vm.catalogSucursal = {
+            catalog: {
+                url: EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.subsidiary,
+                kind: 'Generic',
+                name: Translate.translate('PRE_REQUEST.SUBSIDIARY.SELECT'),
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'nombre'
+            },
+            elements: 'results'
+
+        };
 
         vm.createCabinetDialog = {
             fields: [
@@ -182,39 +181,34 @@
                 .then(function infoPre(elementPreRequest) {
                     vm.preRequest = elementPreRequest;
 
-                    conditioninGallery();
+                    convertImages();
                     getinfoCabinet(vm.preRequest.cabinet);
                 })
-                .catch(function (errCarga) {
-                    toastr.warning(vm.preRequestnotFound, vm.errorTitle);
+                .catch(function errInfoPre(errInfoPre) {
+                    toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
+                                   Translate.translate('MAIN.MSG.ERROR_TITLE'));
                 });
 
         }
 
         function getinfoCabinet(id) {
             cabinetUC.getByID(id)
-                .then(function InfoCabinet(info) {
+                .then(function infoCabinet(info) {
                 })
-                .catch(function errorInfo(errInfo) {
+                .catch(function errorInfoCabinet(errInfo) {
                     vm.cabinetExist = false;
                     ErrorHandler.errorTranslate(errInfo);
                 });
         }
 
-        //vm.photos=vm.preRequest.fotos;
-        function conditioninGallery() {
-            if (vm.preRequest.fotos.length > 0) {
-                vm.preRequest.fotos.forEach(function (foto, index) {
-                    var fototmp = {
-                        id: index + 1,
-                        url: foto.foto
-                    };
-                    vm.photos.push(fototmp);
-                });
-            }
-            //console.log(vm.photos);
-
+        function convertImages() {
+            var evidences = vm.preRequest.fotos;
+            angular.forEach(evidences, function (evidence) {
+                evidence.url = evidence.foto;
+            });
+            vm.preRequest.fotos = evidences;
         }
+
 
         function showStoreLocation() {
             Geolocation.locate(vm.preRequest.establecimiento.latitud, vm.preRequest.establecimiento.longitud);
@@ -235,9 +229,8 @@
                     url: vm.createCabinetDialog.url
                 }
             }).then(function successCreateCabinet(successCallback) {
-                var cabinetID = successCallback.economico;
+                vm.preRequest.cabinet = successCallback.economico;
                 vm.cabinetExist = true;
-                console.log(cabinetID);
             }).catch(function errorCreateCabinet(errorCallback) {
                 if (errorCallback) {
                     vm.cabinetExist = false;
@@ -247,40 +240,33 @@
         };
 
         function createRequest() {
-
             vm.request.id = vm.preRequest.id;
-            vm.request.cabinet = vm.preRequest.cabinet;
-            var promiseCreateRequest = preRequests.createRequest(vm.request);
-            promiseCreateRequest.then(function (requestCreada) {
-                //toastr.success(vm.creationsuccess, vm.successTitle);
-                ErrorHandler.successCreation();
-                //  console.log(requestCreada);
-                $state.go('triangular.admin-default.preRequest');
-
-            }).catch(function (err) {
-                //toastr.warning(vm.unexpected, vm.errorTitle);
-                ErrorHandler.errorTranslate(err);
-                console.log(err);
-            });
+            vm.request.cabinet_id = vm.preRequest.cabinet;
 
 
+            preRequests.createRequest(vm.request)
+                .then(function createRe(requestCreada) {
+                    ErrorHandler.successCreation(requestCreada);
+                    $state.go('triangular.admin-default.pre-request');
+                })
+                .catch(function errCreateRe(err) {
+                    ErrorHandler.errorTranslate(err);
+                });
         }
 
         function cancelPreRequest() {
             vm.preRequest.cancelacion = true;
             vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
-            var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
-            promiseCancelPreRequest.then(function (requestCancel) {
-                ErrorHandler.successCancel();
-                //toastr.success(vm.cancelationsuccess, vm.successTitle);
-                // console.log(requestCancel);
-                $state.go('triangular.admin-default.preRequest');
 
-            }).catch(function (err) {
-                ErrorHandler.errorTranslate(err);
-
-            });
+            preRequests.update(prereqSinFoto)
+                .then(function cancelPre (requestCancel) {
+                    ErrorHandler.successCancel(requestCancel);
+                    $state.go('triangular.admin-default.pre-request');
+                })
+                .catch(function errCancelPre(err) {
+                    ErrorHandler.errorTranslate(err);
+                });
 
         }
 

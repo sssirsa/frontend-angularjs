@@ -1,0 +1,39 @@
+{
+    "PRE_REQUEST":{
+        "TITLE": "Pre solicitud",
+        "EVIDENCES":{
+            "TITLE": "Evidencias de la Pre solicitud",
+            "NO_EVICENCES": "Sin evidencias"
+        },
+        "CABINET":{
+            "ECONOMIC": "Económico",
+            "NOT_REGISTERED": "Cabinet no registrado",
+            "NEW_REGISTER": "Registrar cabinet"
+        },
+        "STORE":{
+            "BETWEEN_1": "Entre calle 1",
+            "BETWEEN_2": "Y entre calle 2",
+            "CITY": "Municipio",
+            "LOCATION": "Localidad",
+            "NAME": "Nombre del establecimiento",
+            "NUMBER": "Número",
+            "STATE": "Estado",
+            "STREET": "Calle"
+
+        },
+        "HOUR":{
+            "TITLE": "Horario de atención deseado",
+            "START": "Hora inicio",
+            "END": "Hora fin"
+        },
+        "OBSERVATIONS": "Observaciones del cliente",
+        "BUTTONS": {
+            "CANCEL": "Cancelar Pre Solicitud",
+            "CREATE": "Levantar Solicitud"
+        },
+        "SUBSIDIARY":{
+            "TITLE": "Sucursal",
+            "SELECT": "Seleccione una sucursal"
+        }
+    }
+}

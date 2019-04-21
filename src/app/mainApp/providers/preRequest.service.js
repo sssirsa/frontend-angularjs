@@ -14,7 +14,6 @@
         var service = {
             getByID: getByID,
             getAll: getAll,
-            create:create,
             createRequest:createRequest,
             update:update
         };
@@ -35,11 +34,9 @@
         function createRequest (element){
             return baseUrl.all(URLS.external_service.pre_request.new_request).post(element);
         }
-        function create (element){
-            return baseUrl.post(element);
-        }
+
         function update(element) {
-            return baseUrl.all(element.id).customPUT(element);
+            return baseUrl.all(URLS.external_service.pre_request.pre_request).all(element.id).customPUT(element);
         }
 
         return service;
