@@ -28,7 +28,7 @@
         }
 
         function listPromise(limit, offset) {
-            if(limit !== undefined && offset !== undefined ) {
+            if(angular.isDefined(limit) && angular.isDefined(offset)) {
                 return API.all(URLS.genesis.base).all(URLS.marca + '?limit=' + limit + '&offset=' + offset).customGET();
             } else {
                 return baseMarca.customGET();

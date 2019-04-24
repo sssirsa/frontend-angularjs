@@ -7,7 +7,7 @@
         .module('app.mainApp.inventory')
         .controller('cabinetGestionController', cabinetGestionController);
 
-    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler, toastr, Translate)
+    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler)
     {
         var vm = this;
         vm.todosprev = null;
@@ -92,7 +92,7 @@
 
                         vm.todos.push(cabinet);
                     })
-                    .catch(function SubsidiaryError(error) {
+                    .catch(function SubsidiaryError() {
                         cabinet.control = false;
                         cabinet.impedido = false;
                         vm.todos.push(cabinet);

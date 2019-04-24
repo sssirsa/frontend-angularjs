@@ -1,6 +1,4 @@
-/**
- * Created by Luis Olvera on 19/07/2016.
- */
+//TODO: Delete this provider when doing the refactor
 (function(){
     'use_strict';
 
@@ -12,7 +10,7 @@
         API,
         URLS
     ) {
-        var urlbase = API.all(URLS.mobile.base).all(URLS.solicitud_pv);
+        var urlbase = API.all(URLS.salepoint.base).all(URLS.salepoint.requests);
 
         return{
             create:create,

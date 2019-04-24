@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.inventory.assets')
-        .controller('bulkAssetStageController', BulkAssetStageController)
+        .controller('bulkAssetStageController', BulkAssetStageController);
 
     function BulkAssetStageController(
         URLS,
@@ -213,12 +213,9 @@
             }
         };
 
-        vm.onElementSelect = function onElementSelect(element) {
+        vm.onElementSelect = function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
-        }
+        };
     }
 
 })();

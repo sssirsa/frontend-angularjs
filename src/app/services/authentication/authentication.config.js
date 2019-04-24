@@ -6,7 +6,7 @@
         .config(moduleConfig);
 
     /* @ngInject */
-    function moduleConfig($stateProvider, triMenuProvider) {
+    function moduleConfig() {
 
 
     }

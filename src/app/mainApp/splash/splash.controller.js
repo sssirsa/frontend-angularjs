@@ -3,10 +3,10 @@
 
     angular
         .module('app.mainApp.splash')
-        .controller('splashController', ['$state', 'AuthService', '$timeout', '$cookies', splashController]);
+        .controller('SplashController', SplashController);
 
     /* @ngInject */
-    function splashController($state, AuthService, $timeout, $cookies) {
+    function SplashController($state, AuthService, $timeout, $cookies) {
 
 
         $timeout(function(){

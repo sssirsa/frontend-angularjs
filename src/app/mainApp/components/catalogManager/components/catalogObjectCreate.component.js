@@ -10,7 +10,7 @@
                 fields: '<'
             }
         });
-    function CatalogObjectCreateController($scope) {
+    function CatalogObjectCreateController($log) {
         var vm = this;
 
         vm.objectToCreate = vm.element;
@@ -48,19 +48,19 @@
 
         vm.filesSelected = function filesSelected(files, field) {
             //fileProcessing MUST be a function in case it exists
-            let fileProcessing = field.fileUploader['filesSelected'];
+            var fileProcessing = field.fileUploader['filesSelected'];
             if (fileProcessing) {
                 files = fileProcessing(files);
             }
             vm.objectToCreate[field.model] = files;
-        }
+        };
 
         vm.onElementSelect = function onElementSelect(element, field) {
             if (element) {
                 vm.objectToCreate[field.model] = element;
                 loadCatalogDependance(element, field.model);
             }
-        }
+        };
 
         //Internal function
         //It loads the catalogues dependance on every catalogue select
@@ -81,7 +81,7 @@
                                     field.catalog.query_value = element;
                                 }
                                 else {
-                                    console.error('No query has been provided in the catalog object of the field:'
+                                    $log.error('No query has been provided in the catalog object of the field:'
                                         + field.model + ' @function loadCatalogDependance'
                                         + '@controller CatalogCreateDialogController');
                                 }
@@ -92,38 +92,38 @@
             }
             else {
                 //Unreachable unless code changes are done
-                console.error('No element has been provided for querying,'
+                $log.error('No element has been provided for querying,'
                     + '@function loadCatalogDependance @controller CatalogCreateDialogController');
             }
         }
 
-        vm.onArrayElementSelect = function onArrayElementSelect(element, field, value) {
+        vm.onArrayElementSelect = function onArrayElementSelect(element, field) {
             if (field.hasOwnProperty('validations')
                 && field.validations.hasOwnProperty('max')
                 && !(field.validations.max <= vm.objectToModify[field.model].length)) {
-                console.error('Maximum quantity of "catalog_array" objects has been reached'
+                $log.error('Maximum quantity of "catalog_array" objects has been reached'
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
                 vm.objectToCreate[field.model] = element;
             }
 
-        }
+        };
 
         vm.onArrayElementRemove = function onArrayElementRemove(index, field) {
             vm.objectToCreate[field.model].splice(index, 1);
-        }
+        };
 
         vm.addObjectToArray = function addObjectToArray(field) {
             if (!vm.objectToCreate[field.model]) {
                 vm.objectToCreate[field.model] = [];
             }
             vm.objectToCreate[field.model].push({});
-        }
+        };
 
         vm.removeObjectToArray = function removeObjectToArray(field, index) {
             vm.objectToCreate[field.model].splice(index, 1);
-        }
+        };
 
     }
 })();

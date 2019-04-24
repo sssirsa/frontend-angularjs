@@ -23,7 +23,7 @@
         };
 
         function listWitout(limit, offset){
-            if(limit !== undefined  && offset !== undefined ) {
+            if(angular.isDefined(limit) && angular.isDefined(offset)) {
                 return API.all(URLS.genesis.base).all(URLS.modelo_cabinet+'?limit='+limit+'&offset='+offset).customGET();
             } else {
                 return baseModelo.customGET();

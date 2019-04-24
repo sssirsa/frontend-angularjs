@@ -9,7 +9,7 @@
         .factory('NotificationPanel', NotificationPanel);
 
     /* @ngInject */
-    function NotificationPanel(EnvironmentConfig, $http, $q, AuthService) {
+    function NotificationPanel(EnvironmentConfig, $http, $q, AuthService, $log) {
 
         return {
             getNotificationByUser: getNotificationByUser,
@@ -50,7 +50,7 @@
             $http(req).then(function (res) {
                 deferred.resolve(res);
             }, function (err) {
-                console.log(err);
+                $log.error(err);
                 deferred.reject(err);
             });
             return deferred.promise;

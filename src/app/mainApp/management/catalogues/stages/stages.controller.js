@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('stagesController', StagesController)
+        .controller('StagesController', StagesController);
 
     function StagesController(
         URLS,
@@ -330,11 +330,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

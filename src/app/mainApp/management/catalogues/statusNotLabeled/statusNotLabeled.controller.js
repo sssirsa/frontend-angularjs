@@ -11,7 +11,7 @@
 
         var vm = this;
 
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.status_not_labeled);
 
 
@@ -166,11 +166,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 
