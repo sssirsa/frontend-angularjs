@@ -7,7 +7,10 @@
         API,
         URLS
     ) {
-        var baseURL = API.all(URLS.mobile.base).all(URLS.estado);
+        var baseURL = API
+            .all(URLS.salepoint.base)
+            .all(URLS.salepoint.catalogues.base)
+            .all(URLS.salepoint.catalogues.states);
 
         function list() {
             return baseURL.getList();

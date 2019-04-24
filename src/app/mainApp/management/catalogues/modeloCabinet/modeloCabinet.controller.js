@@ -10,11 +10,11 @@
 
         var vm = this;
 
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_model);
-        const brandUrl =  (EnvironmentConfig.site.rest.api)
+        var brandUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_brand);
-        const equipmentUrl =  (EnvironmentConfig.site.rest.api)
+        var equipmentUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.equipment_type);
 
         vm.url = managementUrl;
@@ -258,12 +258,12 @@
                     {
                         type: 'object_property',
                         model: 'marca__nombre',
-                        label: 'Marca',
+                        label: 'Marca'
                     },
                     {
                         type: 'object_property',
                         model: 'tipo__descripcion',
-                        label: 'Tipo Equipo',
+                        label: 'Tipo Equipo'
                     }
                 ],
                 softDelete: {
@@ -309,11 +309,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

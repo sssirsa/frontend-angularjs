@@ -11,7 +11,7 @@
 
         var vm = this;
 
-        const inventoryUrl =  (EnvironmentConfig.site.rest.api)
+        var inventoryUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.consumable_category);
 
         vm.url = inventoryUrl;
@@ -207,11 +207,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

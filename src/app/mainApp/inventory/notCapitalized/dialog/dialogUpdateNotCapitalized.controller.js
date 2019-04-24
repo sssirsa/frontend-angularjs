@@ -8,7 +8,7 @@
         .module('app.mainApp.inventory')
         .controller('notCapitalizedUpdateDialogController', notCapitalizedUpdateDialogController);
 
-    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, URLS, $scope, noLabeled, data, ErrorHandler)
+    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, URLS, $scope, noLabeled, data)
     {
         var vm = this;
         vm.no_labeled = {};
@@ -110,12 +110,12 @@
                 vm.no_labeled['economicos_id'] = vm.economicos;
             }
 
-            if(vm.sw1 === true){
-                if(vm.no_labeled['motivo_id'] === undefined){
+            if (vm.sw1 === true) {
+                if (angular.isUndefined(vm.no_labeled['motivo_id'])) {
                     vm.no_labeled['motivo_id'] = data.motivo.id;
                 }
 
-                if(vm.no_labeled['status_id'] === undefined){
+                if (angular.isUndefined(vm.no_labeled['status_id'])) {
                     vm.no_labeled['status_id'] = data.status.id;
                 }
             }else{

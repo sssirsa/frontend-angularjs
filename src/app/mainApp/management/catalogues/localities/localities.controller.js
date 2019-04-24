@@ -3,11 +3,23 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('localitiesController', localitiesController)
+        .controller('LocalitiesController', LocalitiesController)
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function localitiesController(Localities, Cities, States, Helper, $scope, toastr, Translate, $mdDialog, $log) {
+    function LocalitiesController(
+        Localities,
+        Cities,
+        States,
+        Helper,
+        $scope,
+        toastr,
+        Translate,
+        $mdDialog,
+        $log,
+        $window,
+        _
+    ) {
 
         var vm = this;
 
@@ -31,7 +43,7 @@
         var locality = null;
         vm.locality = angular.copy(locality);
         vm.numberBuffer = '';
-        vm.myHeight = window.innerHeight - 250;
+        vm.myHeight = $window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
         vm.localityRoute = null;
@@ -71,7 +83,7 @@
             cancel();
         }
 
-        function remove(ev) {
+        function remove() {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
                 .textContent(vm.dialogMessage)
@@ -79,11 +91,11 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Localities.remove(vm.locality.id).then(function (res) {
+                Localities.remove(vm.locality.id).then(function () {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
-                }).catch(function (res) {
+                }).catch(function () {
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
             }, function () {
@@ -93,34 +105,34 @@
 
         function update() {
             vm.locality['ruta_id'] = vm.localityRoute;
-            Localities.update(vm.locality).then(function (res) {
+            Localities.update(vm.locality).then(function () {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && angular.isDefined(err.data.razon_social)) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
-                console.log(err);
+                $log.error(err);
             });
         }
 
         function create() {
             vm.locality['ruta_id'] = vm.localityRoute;
-            Localities.create(vm.locality).then(function (res) {
+            Localities.create(vm.locality).then(function () {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.locality = angular.copy(locality);
                 cancel();
                 activate();
             }).catch(function (err) {
-                if (err.status == 400 && err.data.razon_social != undefined) {
+                if (err.status == 400 && angular.isDefined(err.data.razon_social)) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 }
-                console.log(err);
+                $log.error(err);
             });
         }
 
@@ -134,14 +146,14 @@
             $mdDialog.show(confirm).then(function () {
                 vm.locality.deleted = false;
                 vm.locality.ruta_id = vm.localityRoute;
-                Localities.update(vm.locality).then(function (res) {
+                Localities.update(vm.locality).then(function () {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();
-                }).catch(function (res) {
+                }).catch(function (err) {
                     vm.locality.deleted = true;
                     toastr.warning(vm.errorMessage, vm.errorTitle);
-                    console.log(err);
+                    $log.error(err);
                 });
             }, function () {
 
@@ -164,7 +176,7 @@
             vm.loadingPromise = Localities.list().then(function (res) {
                 vm.lineas = Helper.filterDeleted(res, vm.toggleDeleted);
                 vm.lineas = _.sortBy(vm.lineas, 'razon_social');
-            }).catch(function (err) {
+            }).catch(function () {
 
             });
         }
@@ -247,7 +259,7 @@
     }
 
 //Outside the controller
-    function custom() {
+    function custom(_) {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
                 return input;

@@ -3,12 +3,25 @@
  */
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp.inventory')
         .controller('cabinetStorageController', cabinetStorageController);
 
-    function cabinetStorageController($scope, Translate, toastr, Helper, URLS, CATALOG, ErrorHandler, cabinetUC, User, noLabeled, assetStoringProvider) {
+    function cabinetStorageController(
+        $scope,
+        Translate,
+        toastr,
+        Helper,
+        URLS,
+        CATALOG,
+        ErrorHandler,
+        cabinetUC,
+        User,
+        noLabeled,
+        assetStoringProvider,
+        _,
+        EnvironmentConfig
+    ) {
         //Variable definition
         var vm = this;
         vm.asset_location = {}; // Objeto de localización de Cabinet
@@ -26,14 +39,14 @@
         vm.object_builder = object_builder;
         vm.search_asset = search_asset;
         vm.enableEdition = enableEdition;
-        vm.clear=clear;
-        vm.changeStorage=changeStorage;
+        vm.clear = clear;
+        vm.changeStorage = changeStorage;
 
 
         //Translates
         vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
         vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_CATALOG');
-        vm.errorNotSubsidiary=Translate.translate('STORAGE.ERROR.NOT_SUBSIDIARY');
+        vm.errorNotSubsidiary = Translate.translate('STORAGE.ERROR.NOT_SUBSIDIARY');
 
         //Blank variables templates
         vm.catalogues = {
@@ -87,16 +100,20 @@
         function onSubsidiarySelect(element) {
             vm.storage = null;
             vm.subsidiary = element;
-            vm.catalogues.storage_by_sucursal.catalog.url = URLS.management.catalogues.storage + '?sucursal__id=' + vm.subsidiary;
+            vm.catalogues.storage_by_sucursal.catalog.url =
+                EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.storage
+                + '?sucursal__id=' + vm.subsidiary;
         }
 
         function onLoad() {
+            //TODO: Improve subsidiary selection
             vm.user = User.getUser();
             if (vm.user.sucursal) {
                 onSubsidiarySelect(vm.user.sucursal);
-
             }
-
         }
 
 
@@ -179,7 +196,7 @@
         }
 
         function object_builder() {
-            vm.asset_id=vm.asset_location.cabinet_id;
+            vm.asset_id = vm.asset_location.cabinet_id;
             vm.asset_location.bodega_id = vm.storage.id;
             if (!vm.type_storage) {
                 vm.asset_location.no_capitalizado_id = vm.asset_location.cabinet_id;
@@ -198,7 +215,7 @@
                 ErrorHandler.successCreation();
                 clear();
 
-            }).catch(function(errormsg){
+            }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
 
             });
@@ -212,8 +229,8 @@
             vm.edition = true; // Booleano que permite mostrar los campos de seleccion de sucursal y/ó bodega
 
         }
-        function changeStorage(){
-            vm.editionStorage=!vm.editionStorage;
+        function changeStorage() {
+            vm.editionStorage = !vm.editionStorage;
 
         }
 
@@ -225,9 +242,9 @@
                 promiseCabinetInfo.then(function (asset) {
 
                     vm.asset = asset;
-                    vm.asset_location.cabinet_id=vm.asset.economico;
+                    vm.asset_location.cabinet_id = vm.asset.economico;
                     //selection subsidiary
-                    if(vm.asset.sucursal){
+                    if (vm.asset.sucursal) {
                         onSubsidiarySelect(vm.asset.sucursal.id);
 
                     }
@@ -238,7 +255,7 @@
                     }
                     //Validación Posicionamiento existente
                     if (vm.asset.posicionamiento) {
-                        vm.editionStorage=false;
+                        vm.editionStorage = false;
                         onElementSelect(vm.asset.posicionamiento.bodega.id);
                         vm.asset_location.pasillo = vm.asset.posicionamiento.pasillo;
                         vm.asset_location.estiba = vm.asset.posicionamiento.estiba;
@@ -247,7 +264,7 @@
                     }
                     else {
                         vm.edition = true;
-                        vm.editionStorage=true;
+                        vm.editionStorage = true;
                     }
 
 
@@ -262,11 +279,11 @@
                 var promiseUnrecognizibleAssetInfo = noLabeled.getByID(vm.asset_id);
                 promiseUnrecognizibleAssetInfo.then(function (asset) {
 
-                    vm.asset = asset
-                    vm.asset_location.cabinet_id=vm.asset.id;
+                    vm.asset = asset;
+                    vm.asset_location.cabinet_id = vm.asset.id;
 
                     //selectionsSubsidiary
-                    if(vm.asset.sucursal){
+                    if (vm.asset.sucursal) {
                         onSubsidiarySelect(vm.asset.sucursal.id);
 
                     }
@@ -284,7 +301,7 @@
                     }
                     else {
                         vm.edition = true;
-                        vm.editionStorage=true;
+                        vm.editionStorage = true;
                     }
 
 

@@ -3,10 +3,10 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('segmentationController', segmentationController)
+        .controller('SegmentationController', SegmentationController);
 
     /* @ngInject */
-    function segmentationController(URLS, Translate) {
+    function SegmentationController(URLS, Translate) {
 
         var vm = this;
 
@@ -75,7 +75,7 @@
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
@@ -169,13 +169,10 @@
                     }
                 ]
             }
-        }
+        };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
 
     }

@@ -8,7 +8,7 @@
             .state('splash', {
                 url:'/main',
                 templateUrl:'app/mainApp/splash/splash.html',
-                controller:'splashController',
+                controller:'SplashController',
                 controllerAs:'vm'
             });
     }

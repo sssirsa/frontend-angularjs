@@ -3,12 +3,18 @@
  */
 (function () {
     "use strict";
-
     angular
         .module('app.mainApp.reports')
         .controller('ReportesCrudController', ReportsCrudController)
         .filter('reportSearch', reportSearch);
-    function ReportsCrudController(toastr, $stateParams, $mdDialog, Reportes, Translate) {
+    function ReportsCrudController(
+        toastr,
+        $stateParams,
+        $mdDialog,
+        Reportes,
+        Translate,
+        _
+    ) {
         //Variable declaration
         var vm = this;
         vm.isOpen = false;
@@ -92,12 +98,6 @@
                 vm.reports = _.sortBy(vm.reports, 'name');
 
             });
-            if ($stateParams.id !== null) {
-                var obj = {
-                    id: $stateParams.id
-                };
-                selected(obj);
-            }
 
         }
 
@@ -165,7 +165,7 @@
         function update() {
             vm.report.report_file_creation=moment(vm.report.report_file_creation,vm.formato).format('YYYY-MM-DD');
             vm.report.report_file_creation=moment(vm.report.report_file_creation,vm.formato).format('YYYY-MM-DD');
-            angular.forEach(vm.report.filterfield_set, function(value, key) {
+            angular.forEach(vm.report.filterfield_set, function(value) {
                 if(value.field_type === "DateField"){
                     value.filter_value2=moment(value.filter_value2,vm.formato).format('YYYY-MM-DD');
                 }
@@ -216,13 +216,13 @@
                 clickOutsideToClose: true,
                 focusOnOpen: true
             }).then(function (reportCreatedSuccess) {
-                Reportes.getReportObject(reportCreatedSuccess.id).then(function(reportObtainedSuccess){
+                Reportes.getReportObject(reportCreatedSuccess.id).then(function (reportObtainedSuccess) {
                     clear();
-                    vm.searchParameter=reportObtainedSuccess.name;
-                    vm.report=angular.copy(reportObtainedSuccess);
-                    vm.selectedReport=angular.copy(reportObtainedSuccess);
+                    vm.searchParameter = reportObtainedSuccess.name;
+                    vm.report = angular.copy(reportObtainedSuccess);
+                    vm.selectedReport = angular.copy(reportObtainedSuccess);
                     toastr.success(vm.successCreate, vm.successTitle);
-                })
+                });
             }).catch(function (err) {
                 if (err !== null) {
                     toastr.error(vm.errorCreate, vm.errorTitle);
@@ -255,20 +255,16 @@
             switch (fieldType) {
                 case 'CharField':
                     return vm.filterTypeChar;
-                    break;
                 case 'DateTimeField':
                     return vm.filterTypeDate;
-                    break;
                 case 'DateField':
                     return vm.filterTypeDate;
-                    break;
                 case 'DecimalField':
                     return vm.filterInt;
                 case 'IntegerField':
                     return vm.filterInt;
                 default:
                     return vm.filterType;
-                    break;
             }
         }
 
@@ -295,7 +291,7 @@
         }
 
         function reorganizeFieldIndexes(fields) {
-            for (i = 0; i < fields.length; i++) {
+            for (var i = 0; i < fields.length; i++) {
                 fields[i].position = i;
             }
             return fields;
@@ -306,7 +302,6 @@
                 controller: 'ModelsReportModalController',
                 controllerAs: 'vm',
                 templateUrl: 'app/mainApp/reports/edicion/modal/models.modal.tmpl.html',
-                parent: angular.element(document.body),
                 targetEvent: ev,
                 fullscreen: true,
                 clickOutsideToClose: true,
@@ -326,7 +321,7 @@
         }
     }
 
-    function reportSearch() {
+    function reportSearch(_) {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
                 return input;

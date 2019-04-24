@@ -133,7 +133,7 @@
 
         vm.id = id;
         vm.url = url;
-        vm.objectToModify = JSON.parse(JSON.stringify(element));
+        vm.objectToModify = angular.fromJson(angular.toJson(element));
 
         vm.modify = modify;
         vm.cancel = cancel;
@@ -149,7 +149,7 @@
 
         function modify() {
             createProvider();
-            let id = null;
+            var id = null;
             if (vm.id) {
                 id = vm.id;
             }

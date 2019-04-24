@@ -3,10 +3,10 @@
 
     angular
         .module('app.mainApp.management.login')
-        .controller('loginController', ['$state', 'toastr', '$log', 'AuthService', '$cookies', loginController]);
+        .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function loginController($state, toastr, $log, AuthService, $cookies) {
+    function LoginController($state, toastr, $log, AuthService, $cookies) {
         var vm = this;
 
         vm.loginClick = loginClick;

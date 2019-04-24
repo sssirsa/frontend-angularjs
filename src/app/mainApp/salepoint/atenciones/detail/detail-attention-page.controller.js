@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('DetailAttentionPageController', DetailAttentionPageController);
 
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, SCORES, atencionPV,
-                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
+                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog, _) {
         var vm = this;
 
         //Variable declaration
@@ -323,7 +323,7 @@
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
                 vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
-                    .then(function (result) {
+                    .then(function () {
                         toastr.success(Translate.translate('SUCCESS.UPDATE'));
                         $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
@@ -478,7 +478,7 @@
                     res = res.results;
                     vm.marcas = Helper.filterDeleted(res, true);
                 })
-                .catch(function (err) {
+                .catch(function () {
 
                 });
         }
@@ -489,7 +489,7 @@
                     res = res.results;
                     models = Helper.filterDeleted(res, true);
                 })
-                .catch(function(err){
+                .catch(function(){
 
                 });
         }
@@ -548,7 +548,6 @@
 
         function listcabinets(){
             var ux = "Activo";
-            console.log("lista");
 
             vm.refreshPaginationButtonsComponent = false;
             vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
@@ -590,7 +589,7 @@
 
                     vm.refreshPaginationButtonsComponent = true;
                 })
-                .catch(function (err) {
+                .catch(function () {
 
                 });
         }

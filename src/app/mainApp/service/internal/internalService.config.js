@@ -13,7 +13,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/service/internal/checklist/checklist.tmpl.html',
-                controller: 'checklistController',
+                controller: 'ChecklistController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.diagnostic', {
@@ -38,7 +38,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/service/internal/etapa/etapa.tmpl.html',
-                controller: 'etapaController',
+                controller: 'EtapaController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.asignacionLinea', {

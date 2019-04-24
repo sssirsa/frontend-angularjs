@@ -4,9 +4,9 @@
 (function () {
     angular
         .module('app')
-        .controller('homeController',homeController);
+        .controller('HomeController', HomeController);
 
-    function homeController(){
+    function HomeController(){
 
     }
 

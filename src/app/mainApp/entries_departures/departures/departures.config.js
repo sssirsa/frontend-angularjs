@@ -38,15 +38,15 @@
                 permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 5,
                 children: [
-                    {
-                        name: 'MAIN.MENU.OUT.NEW',
-                        type: 'link',
-                        state: 'triangular.admin-default.salida-crear'
-                    }, {
-                        name: 'MAIN.MENU.OUT.LIST',
-                        type: 'link',
-                        state: 'triangular.admin-default.salida-list'
-                    }
+                    //{
+                    //    name: 'MAIN.MENU.OUT.NEW',
+                    //    type: 'link',
+                    //    state: 'triangular.admin-default.salida-crear'
+                    //}, {
+                    //    name: 'MAIN.MENU.OUT.LIST',
+                    //    type: 'link',
+                    //    state: 'triangular.admin-default.salida-list'
+                    //}
                 ]
             }
         );
