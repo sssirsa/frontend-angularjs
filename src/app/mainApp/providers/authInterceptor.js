@@ -6,7 +6,7 @@
 
     angular
         .module('app')
-        .service('AuthInterceptor', AuthInterceptor);
+        .factory('AuthInterceptor', AuthInterceptor);
 
     /* @ngInject */
     function AuthInterceptor($injector, $q, EnvironmentConfig) {

@@ -7,24 +7,27 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('checklistController', checklistController);
+        .controller('ChecklistController', ChecklistController);
 
-    function checklistController($mdDialog,
-                                 Cabinet,
-                                 $scope,
-                                 ModeloCabinet,
-                                 etapaActual,
-                                 diagnosticoEtapa,
-                                 cabinet,
-                                 toastr,
-                                 Translate,
-                                 Helper,
-                                 Upload,
-                                 EnvironmentConfig,
-                                 $cookieStore,
-                                 MarcaCabinet,
-                                 CabinetEntradaSalida,
-                                 Servicios) {
+    function ChecklistController(
+        $mdDialog,
+        Cabinet,
+        $scope,
+        ModeloCabinet,
+        etapaActual,
+        diagnosticoEtapa,
+        cabinet,
+        toastr,
+        Translate,
+        Helper,
+        Upload,
+        EnvironmentConfig,
+        $cookie,
+        MarcaCabinet,
+        CabinetEntradaSalida,
+        Servicios,
+        _
+    ) {
         var vm = this;
         vm.diagnostico = {};
         vm.cabinets = null;
@@ -35,15 +38,15 @@
         vm.searchCabinet = searchCabinet;
         vm.selectionFile = selectionFile;
         vm.cerrarDialog = cerrarDialog;
-        vm.change = change
-        vm.a="";
+        vm.change = change;
+        vm.a = "";
         activate();
         vm.picFile2;
-        // ---Inician Funciones para Guardar etapa de Servicio
 
-        function guardarEtapa(){
+        function guardarEtapa() {
+            var promise;
             if (vm.etapaActual.id == null) {
-                var promise = Servicios.crearEtapaServicio(vm.etapaActual);
+                promise = Servicios.crearEtapaServicio(vm.etapaActual);
                 promise.then(function (res) {
                     toastr.success(vm.successTitle, vm.successCreateMessage);
                     vm.etapaActual = res;
@@ -56,15 +59,15 @@
                 });
             }
             else {
-                var promise = Servicios.editarEtapaServicio(vm.etapaActual);
+                promise = Servicios.editarEtapaServicio(vm.etapaActual);
                 promise.then(function (res) {
 
                     toastr.success(vm.successTitle, vm.successUpdateMessage);
                     vm.etapaActual = res;
                     vm.cancel();
                 }).catch(function (res) {
-                    if(res.status==400){
-                        vm.errorMessage=res.data.errors[0].message;// checar condicion de campo de res
+                    if (res.status == 400) {
+                        vm.errorMessage = res.data.errors[0].message;// checar condicion de campo de res
 
                     }
                     notifyError(res.status);
@@ -79,14 +82,14 @@
                     break;
                 case 404:
                     toastr.info(vm.notFoundMessage, vm.errorTitle);
-                    cancel();
+                    //cancel();
                     break;
                 case 405:
                     toastr.warning(vm.notAllow, vm.errorTitle);
                     break;
                 case 406:
                     toastr.warning(vm.messageNotEntrada, vm.errorTitle);
-                    cancel();
+                    //cancel();
                     break;
                 case 407:
                     toastr.warning(vm.messageNotTipoEquipo, vm.errorTitle);
@@ -146,12 +149,12 @@
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet',
-                    headers: {'Authorization':"Bearer "+ $cookieStore.get('token')},
+                    headers: { 'Authorization': "Bearer " + $cookie.get('token') },
                     method: 'POST',
                     data: vm.diagnostico
-                }).then(function (res) {
+                }).then(function () {
                     //cambio Para guardar Etapa
-                    if (vm.etapaActual){
+                    if (vm.etapaActual) {
                         guardarEtapa();
                     }
                     //Finaliza Cambio para Guardar Etapa
@@ -163,13 +166,11 @@
 
                     toastr.success(vm.successCreateMessage, vm.successTitle);
                     cerrarDialog();
-                    vm.diagnostico = angular.copy(diagnostico);
+                    //vm.diagnostico = angular.copy(diagnostico);
 
-                }, function (resp) {
-
+                }, function () {
                     vm.status = 'idle';
                     toastr.warning(vm.errorMessage, vm.errorTitle);
-
                 });
             }
             else {
@@ -182,17 +183,16 @@
                 vm.diagnostico.vacio = false;
 
                 if (vm.diagnostico.foto == null) {
-
                     vm.diagnostico = _.omit(vm.diagnostico, 'foto');
                 }
                 Upload.upload({
                     url: EnvironmentConfig.site.rest.web_api + '/diagnostico_cabinet/' + vm.diagnostico.id,
-                    headers: {'Authorization':"Bearer "+ $cookieStore.get('token')},
+                    headers: { 'Authorization': "Bearer " + $cookie.get('token') },
                     method: 'PUT',
                     data: vm.diagnostico
-                }).then(function (res) {
+                }).then(function () {
                     //cambio Para guardar Etapa
-                    if (vm.etapaActual){
+                    if (vm.etapaActual) {
                         guardarEtapa();
                     }
                     //Finaliza Cambio para Guardar Etapa
@@ -202,7 +202,7 @@
                     vm.statusReady = 0;
                     toastr.success(vm.successCreateMessage, vm.successTitle);
                     cerrarDialog();
-                }, function (resp) {
+                }, function () {
 
                     vm.status = 'idle';
                     toastr.warning(vm.errorMessage, vm.errorTitle);
@@ -215,10 +215,10 @@
             if ($files.length > 0) {
                 var file = $files[0];
                 var extn = file.name.split(".").pop();
-                vm.picFile2=vm.picFile;
+                vm.picFile2 = vm.picFile;
                 if (file.size / 1000000 > 1) {
                     toastr.warning(vm.errorSize, vm.errorTitle);
-                    vm.picFile = null
+                    vm.picFile = null;
 
                 } else if (!Helper.acceptFile(file.type)) {
                     if (!Helper.acceptFile(extn)) {
@@ -236,73 +236,71 @@
         }
 
         function activate() {
+            //if (cabinet != null) {
+            //    vm.cabinet = cabinet;
+            //    var diagnostico = null;
+            //    if (diagnosticoEtapa.id != null) {
+            //        diagnostico = _.clone(diagnosticoEtapa);
 
-            if (cabinet != null) {
-                vm.cabinet = cabinet;
+            //    }
+            //    if (etapaActual) {
+            //        vm.etapaActual = etapaActual;
+            //    }
+            //    else {
+            //        diagnostico = {
+            //            tipo: 'entrada',
+            //            rodajas: null,
+            //            canastillas: null,
+            //            puertas: null,
+            //            rejillas: null,
+            //            sticker: false,
+            //            pintura: false,
+            //            lavado: false,
+            //            emplayado: false,
+            //            lubricacion: false,
+            //            listo_mercado: false,
+            //            fecha: moment().toISOString(),
+            //            tipo_insumo: '',
+            //            cabinet_entrada_salida: null
+            //        };
+            //    }
+            //    vm.diagnostico = _.clone(diagnosticoEtapa);
+            //    if (vm.diagnostico.vacio == true) {
 
+            //        vm.NotEditable = false;
 
-                if (diagnosticoEtapa.id != null) {
-                    var diagnostico = _.clone(diagnosticoEtapa);
+            //    }
+            //    else {
 
-                }
-                    if(etapaActual){
-                        vm.etapaActual=etapaActual;
-                    }
-                else {
-                    var diagnostico = {
-                        tipo: 'entrada',
-                        rodajas: null,
-                        canastillas: null,
-                        puertas: null,
-                        rejillas: null,
-                        sticker: false,
-                        pintura: false,
-                        lavado: false,
-                        emplayado: false,
-                        lubricacion: false,
-                        listo_mercado: false,
-                        fecha: moment().toISOString(),
-                        tipo_insumo: '',
-                        cabinet_entrada_salida: null
-                    };
-                }
-                vm.diagnostico = _.clone(diagnosticoEtapa);
-                if (vm.diagnostico.vacio == true) {
+            //        vm.NotEditable = true;
 
-                    vm.NotEditable = false;
+            //    }
+            //    if (vm.diagnostico.tipo == 'salida') {
 
-                }
-                else {
-
-                    vm.NotEditable = true;
-
-                }
-                if (vm.diagnostico.tipo == 'salida') {
-
-                    vm.diagnostico.id = null;
-                    vm.diagnostico.tipo = 'salida';
-                    vm.diagnostico.sticker = false;
-                    vm.diagnostico.pintura = false;
-                    vm.diagnostico.lavado = false;
-                    vm.diagnostico.emplayado = false;
-                    vm.diagnostico.lubricacion = false;
-                    vm.diagnostico.listo_mercado = false;
-                    vm.diagnostico.fecha = moment().toISOString();
-                    vm.diagnostico.isSalida = true;
-                    vm.diagnostico.foto = null;
-                    vm.NotEditable = false;
+            //        vm.diagnostico.id = null;
+            //        vm.diagnostico.tipo = 'salida';
+            //        vm.diagnostico.sticker = false;
+            //        vm.diagnostico.pintura = false;
+            //        vm.diagnostico.lavado = false;
+            //        vm.diagnostico.emplayado = false;
+            //        vm.diagnostico.lubricacion = false;
+            //        vm.diagnostico.listo_mercado = false;
+            //        vm.diagnostico.fecha = moment().toISOString();
+            //        vm.diagnostico.isSalida = true;
+            //        vm.diagnostico.foto = null;
+            //        vm.NotEditable = false;
 
 
-                }
-                if (vm.diagnostico.tipo_insumo == 'cabinet') {
-                    vm.diagnostico.isCabinet = true;
-                }
-                else {
-                    vm.diagnostico.isCabinet = false;
-                }
+            //    }
+            //    if (vm.diagnostico.tipo_insumo == 'cabinet') {
+            //        vm.diagnostico.isCabinet = true;
+            //    }
+            //    else {
+            //        vm.diagnostico.isCabinet = false;
+            //    }
 
-                vm.searchCabinet();
-            }
+            //    vm.searchCabinet();
+            //}
 
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.errorTitle = Translate.translate('MAIN.MSG.ERROR_TITLE');
@@ -315,26 +313,26 @@
             vm.errorDisabled = Translate.translate('MAIN.MSG.ERROR_DISABLED_CABINET');
         }
 
-        function clear() {
-            $scope.searchCabinetForm.$setPristine();
-            $scope.searchCabinetForm.$setUntouched();
-            $scope.registerForm.$setPristine();
-            $scope.registerForm.$setUntouched();
-        }
+        //function clear() {
+        //    $scope.searchCabinetForm.$setPristine();
+        //    $scope.searchCabinetForm.$setUntouched();
+        //    $scope.registerForm.$setPristine();
+        //    $scope.registerForm.$setUntouched();
+        //}
 
         function searchCabinet() {
             Cabinet.get(vm.cabinet).then(function (res) {
                 if (!res.deleted) {
-                        vm.cabinets = res.modelo;
-                        CabinetEntradaSalida.getLastEntradaByCabinet(vm.cabinet).then(function (res) {
-                            vm.statusReady = 1;
-                            vm.diagnostico.cabinet_entrada_salida = res.id;
-                        }).catch(function (res) {
-                            if (res.status == 404) {
-                                vm.statusReady = 0;//NO listo
-                                toastr.info(vm.notFoundInput, vm.errorTitle);
-                            }
-                            });
+                    vm.cabinets = res.modelo;
+                    CabinetEntradaSalida.getLastEntradaByCabinet(vm.cabinet).then(function (res) {
+                        vm.statusReady = 1;
+                        vm.diagnostico.cabinet_entrada_salida = res.id;
+                    }).catch(function (res) {
+                        if (res.status == 404) {
+                            vm.statusReady = 0;//NO listo
+                            toastr.info(vm.notFoundInput, vm.errorTitle);
+                        }
+                    });
                     vm.marca = res.marca;
                 } else {
                     toastr.warning(vm.errorDisabled, vm.errorTitle);
@@ -343,19 +341,6 @@
                 notifyError(res.status);
             });
         }
-
-        function notifyError(status) {
-            switch (status) {
-                case 404:
-                    toastr.info(vm.notFoundMessage, vm.errorTitle);
-                    break;
-                case 500:
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                    break;
-            }
-        }
-
-
     }
 
 

@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('ListRequestPageController', ListRequestPageController);
 
     /* @ngInject */
-    function ListRequestPageController($state, $log, toastr, SalePointRequests, Translate, $http, Solicitudes) {
+    function ListRequestPageController($state, $log, toastr, SalePointRequests, Translate, $http, Solicitudes, pdfMake) {
         var vm = this;
 
         //Function mapping
@@ -75,7 +75,7 @@
 
             event.stopPropagation();
 
-            $http.get('app/mainApp/service/external/solicitudes/report/formato.json')
+            $http.get('app.mainApp.salepoint/external/solicitudes/report/formato.json')
                 .then(function (formato) {
                     if(formato) {
                         vm.getReportPromise = Solicitudes.report(requestID)
@@ -88,7 +88,7 @@
                                 formato.data.content[0].columns[1].stack[3].text = reporte.id;
                                 //Información de la solicitud
                                 //Titulo
-                                formato.data.content[1].text = 'Información de la solicitud'
+                                formato.data.content[1].text = 'Información de la solicitud';
                                 //Estatus
                                 formato.data.content[2].stack[0].columns[1].text = reporte.status;
                                 //Tipo

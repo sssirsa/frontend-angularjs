@@ -2,10 +2,22 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('preRequestDetailController', preRequestDetailController);
 
-    function preRequestDetailController(preRequests, $stateParams, cabinetPV, toastr, Translate, Geolocation, Helper, $state,ErrorHandler) {
+    function preRequestDetailController(
+        preRequests,
+        $stateParams,
+        cabinetPV,
+        toastr,
+        Translate,
+        Geolocation,
+        Helper,
+        $state,
+        ErrorHandler,
+        $log,
+        _
+    ) {
 
         var vm = this;
         //Listado de Variables
@@ -64,7 +76,7 @@
                 conditioninGallery();
                 getinfoCabinet(vm.preRequest.cabinet);
             }).catch(function (errCarga) {
-                console.log(errCarga);
+                $log.error(errCarga);
                 toastr.warning(vm.preRequestnotFound, vm.errorTitle);
 
             });
@@ -79,7 +91,7 @@
                 vm.todosprev = Helper.filterDeleted(vm.cabinet, true);
                 vm.showCabinet = true;
             }).catch(function (err) {
-                console.log(err);
+                $log.error(err);
                 vm.showCabinet = false;
                 ErrorHandler.errorTranslate(err);
 
@@ -111,7 +123,7 @@
             vm.request.id = vm.preRequest.id;
             vm.request.cabinet = vm.preRequest.cabinet;
             var promiseCreateRequest = preRequests.createRequest(vm.request);
-            promiseCreateRequest.then(function (requestCreada) {
+            promiseCreateRequest.then(function () {
                 //toastr.success(vm.creationsuccess, vm.successTitle);
                 ErrorHandler.successCreation();
                 //  console.log(requestCreada);
@@ -120,7 +132,7 @@
             }).catch(function (err) {
                 //toastr.warning(vm.unexpected, vm.errorTitle);
                 ErrorHandler.errorTranslate(err);
-                console.log(err);
+                $log.error(err);
             });
 
 
@@ -131,7 +143,7 @@
             vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
             var promiseCancelPreRequest = preRequests.update(prereqSinFoto);
-            promiseCancelPreRequest.then(function (requestCancel) {
+            promiseCancelPreRequest.then(function () {
                 ErrorHandler.successCancel();
                 //toastr.success(vm.cancelationsuccess, vm.successTitle);
                 // console.log(requestCancel);

@@ -3,9 +3,9 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('statesController', statesController)
+        .controller('StatesController', StatesController);
 
-    function statesController(URLS, Translate)
+    function StatesController(URLS, Translate)
     {
 
         var vm = this;
@@ -139,11 +139,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

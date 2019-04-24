@@ -1,10 +1,10 @@
 (function () {
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('dialogAsignacionTecnicoController', dialogAsignacionTecnicoController);
 
     function dialogAsignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
-                                               Persona_Admin, $state, salePoint, $mdDialog, ErrorHandler) {
+                                               Persona_Admin, $state, salePoint, $mdDialog, ErrorHandler, $log, _) {
         var vm = this;
 
         //Variables
@@ -58,7 +58,7 @@
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
-                                console.log(personaError);
+                                $log.error(personaError);
                             });
                     }
                     else {
@@ -72,7 +72,7 @@
                                     vm.store = storeSuccess;
                                 })
                                 .catch(function (storeError) {
-                                    console.log(storeError);
+                                    $log.error(storeError);
                                     toastr.error(
                                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -81,7 +81,7 @@
 
                         })
                         .catch(function (requestError) {
-                            console.log(requestError);
+                            $log.error(requestError);
                             vm.salePoint = null;
                             toastr.error(
                                 Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
@@ -89,7 +89,7 @@
                             );
                         });
                 }).catch(function (salePointError) {
-                    console.log(salePointError);
+                    $log.error(salePointError);
                     toastr.error(
                     Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                     Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -116,8 +116,8 @@
                         })
                         .catch(function (userListError) {
                             vm.personList = null;
-                            console.log(userListError);
-                            console.log("Error al obtener personas");
+                            $log.error(userListError);
+
                             toastr.error(
                                 Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                                 Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -174,7 +174,7 @@
                 return;
             }
 
-            console.log('asignedPerson: ', vm.toAsigned);
+
 
             vm.personLoading = SalePoint.assignToPerson(vm.toAsigned, vm.salePoint.folio)
                 .then(function () {
@@ -221,9 +221,6 @@
             var hora2 = hora2Num < 10 ? '0' + hora2Num.toString() : hora2Num.toString();
             var min1 = min1Num < 10 ? '0' + min1Num.toString() : min1Num.toString();
             var min2 = min2Num < 10 ? '0' + min2Num.toString() : min2Num.toString();
-
-            console.log("hora_inicio", hora1, ':', min1, ':00');
-            console.log("hora_fin", hora2, ':', min2, ':00');
 
             vm.toAsigned.hora_inicio = hora1 + ':' + min1 + ':00';
             vm.toAsigned.hora_fin = hora2 + ':' + min2 + ':00';
@@ -283,7 +280,7 @@
                     });
 
                 })
-                .catch(function (listError) {
+                .catch(function () {
                     toastr.error(
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                         Translate.translate('MAIN.MSG.ERROR_TITLE')

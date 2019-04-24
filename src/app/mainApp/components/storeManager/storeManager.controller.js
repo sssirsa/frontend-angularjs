@@ -167,7 +167,7 @@
                 })
                 .catch(function (pdfFileError) {
                     ErrorHandler.errorTranslate(pdfFileError);
-                })
+                });
         }
 
         function selectSegmentation() {

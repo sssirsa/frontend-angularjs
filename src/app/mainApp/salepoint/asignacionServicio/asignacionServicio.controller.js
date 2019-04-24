@@ -2,10 +2,18 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('asignacionServicioController', asignacionServicioController);
 
-    function asignacionServicioController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog) {
+    function asignacionServicioController(
+        SalePoint,
+        OPTIONS,
+        toastr,
+        Translate,
+        $state,
+        $mdDialog,
+        $document
+    ) {
         var vm = this;
 
         vm.selectedKind = 'unasigned';
@@ -15,8 +23,8 @@
         function Assing(salePoint) {
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
-                templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
-                parent: angular.element(document.body),
+                templateUrl: 'app.mainApp.salepoint/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -54,7 +62,7 @@
                     vm.objectAtention = salePointsSuccess;
                     prepareDataFunction();
                 })
-                .catch(function (salePointsError) {
+                .catch(function () {
                     toastr.error(
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -83,12 +91,12 @@
         }
 
         function selectSalePoint(salePoint) {
-            $state.go('triangular.admin-default.serviceAssignDetail', {id: salePoint.folio, tipo: vm.selectedKind});
+            $state.go('triangular.admin-default.serviceAssignDetail', { id: salePoint.folio, tipo: vm.selectedKind });
         }
 
         initial();
 
-        function initial(){
+        function initial() {
             listSalePoints();
         }
 

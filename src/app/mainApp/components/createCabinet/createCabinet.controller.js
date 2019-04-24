@@ -1,7 +1,6 @@
 //Create by Alex 26/04/2018
 
 (function () {
-
     angular
         .module('app.mainApp')
         .component('createCabinet', {
@@ -14,7 +13,20 @@
         });
 
     /* @ngInject */
-    function createCabinetController (EnvironmentConfig, cabinetUC, Helper, Translate, toastr, $log, $mdDialog, $scope, ErrorHandler, URLS, QUERIES) {
+    function createCabinetController(
+        EnvironmentConfig,
+        cabinetUC,
+        Helper,
+        Translate,
+        toastr,
+        $log,
+        $mdDialog,
+        $scope,
+        ErrorHandler,
+        URLS,
+        QUERIES,
+        _
+    ) {
         var vm = this;
 
         //variables

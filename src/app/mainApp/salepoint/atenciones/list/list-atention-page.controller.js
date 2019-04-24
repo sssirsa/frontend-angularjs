@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('listAtentionController', listAtentionController);
 
-    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler, AttentionReportBuilder, $log, $stateParams) {
+    function listAtentionController(SalePoint, OPTIONS, toastr, Translate, $state, $mdDialog, atencionPV, ErrorHandler, AttentionReportBuilder, $log, $stateParams, $document) {
         var vm = this;
 
         vm.selectedKind = null;
@@ -22,10 +22,7 @@
         vm.Report = Report;
 
         function Report(salepoint) {
-            console.log(salepoint)
             AttentionReportBuilder.buildReport(salepoint.folio);
-
-
         }
 
         init();
@@ -47,8 +44,8 @@
             // console.log(salePoint);
             $mdDialog.show({
                 controller: 'dialogReasignacionTecnicoController',
-                templateUrl: 'app/mainApp/service/external/atenciones/Dialog/dialogReasignacionTecnico.tmpl.html',
-                parent: angular.element(document.body),
+                templateUrl: 'app.mainApp.salepoint/external/atenciones/Dialog/dialogReasignacionTecnico.tmpl.html',
+                parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -79,7 +76,7 @@
             $mdDialog.show(confirm).then(function () {
                 // console.log(salePoint, aux);
                 atencionPV.putActualiza(salePoint.folio, aux)
-                    .then(function (result) {
+                    .then(function () {
                         toastr.success('La atención se canceló correctamente');
                         listSalePoints();
                     })
@@ -126,7 +123,7 @@
                                 prepareDataFunction();
                                 // console.log(salePointsSuccess);
                             })
-                            .catch(function (salePointsError) {
+                            .catch(function () {
                                 // console.log(salePointsError);
                                 toastr.error(
                                     Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
@@ -155,7 +152,7 @@
                         vm.objectAtention = salePointsSuccess;
                         prepareDataFunction();
                     })
-                    .catch(function (salePointsError) {
+                    .catch(function () {
                         toastr.error(
                             Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
                             Translate.translate('MAIN.MSG.ERROR_MESSAGE')
@@ -169,7 +166,7 @@
                         vm.objectAtention = salePointsSuccess;
                         prepareDataFunction();
                     })
-                    .catch(function (salePointsError) {
+                    .catch(function () {
                         toastr.error(
                             Translate.translate('MAIN.MSG.SUCCESS_TITLE'),
                             Translate.translate('MAIN.MSG.ERROR_MESSAGE')

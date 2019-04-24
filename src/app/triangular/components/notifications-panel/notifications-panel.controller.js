@@ -21,7 +21,6 @@
             vm.currentTab = tab;
         });
         function click(notification) {
-            console.log(notification);
             var id=parseInt(notification.notification.idObject);
             if(notification.type==="Reporte"){
 
@@ -34,7 +33,6 @@
                     controllerAs: 'vm',
                     bindToController: true,
                     templateUrl: 'app/mainApp/solicitudes/solicitud/view/solicitudDetailFull.dialog.tmpl.html',
-                    parent: angular.element(document.body),
                     fullscreen: false,
                     locals: {
                         solicitud: notification.notification.idObject,
@@ -44,7 +42,7 @@
                 $mdDialog.show(config);
             }
 
-            NotificationPanel.markNotification(notification._id).then(function (res) {
+            NotificationPanel.markNotification(notification._id).then(function () {
                 Helper.getNotificationsByUser();
             });
         }

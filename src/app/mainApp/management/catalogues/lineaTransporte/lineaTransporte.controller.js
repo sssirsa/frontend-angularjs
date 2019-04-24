@@ -3,13 +3,13 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('LineaTransporteController', LineaTransporteController)
+        .controller('LineaTransporteController', LineaTransporteController);
 
     /* @ngInject */
-    function LineaTransporteController(URLS, LineaTransporte, Translate, EnvironmentConfig) {
+    function LineaTransporteController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        const entriesUrl =  (EnvironmentConfig.site.rest.api)
+        var entriesUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.transport_line);
 
         vm.url = entriesUrl;
@@ -201,13 +201,10 @@
                     }
                 ]
             }
-        }
+        };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
 
     }
