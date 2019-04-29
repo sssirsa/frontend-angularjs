@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('DetailAttentionPageController', DetailAttentionPageController);
 
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, SCORES, atencionPV,
-                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
+                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog, _) {
         var vm = this;
 
         //Variable declaration
@@ -50,6 +50,16 @@
         vm.insumoSelect = insumoSelect;
         vm.validaMax = validaMax;
         vm.enviar = enviar;
+
+        //codigo para listar cabinets
+        //datos para paginado
+        vm.objectPaginado = null;
+        vm.offset = 0;
+        vm.limit = 50;
+        vm.refreshPaginationButtonsComponent = false;
+        vm.sig = sigPage;
+        vm.prev = prevPage;
+        vm.goToNumberPage = goToNumberPage;
 
         activate();
 
@@ -313,7 +323,7 @@
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
                 vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
-                    .then(function (result) {
+                    .then(function () {
                         toastr.success(Translate.translate('SUCCESS.UPDATE'));
                         $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
@@ -386,7 +396,7 @@
 
         vm.listcabinets = listcabinets;
         vm.selectCabinet = selectCabinet;
-        vm.filterCabinets = filterCabinets;
+        vm.searchCabinet = searchCabinet;
         vm.cleanForm = cleanForm;
         vm.listMarcas = listMarcas;
         vm.listModelos = listModelos;
@@ -409,7 +419,6 @@
         function seleccion() {
             vm.todosSeleccionado = [];
             vm.todosSeleccionado.push(cabinetTemporal);
-            console.log(cabinetTemporal);
             vm.isUsed = true;
         }
 
@@ -469,7 +478,7 @@
                     res = res.results;
                     vm.marcas = Helper.filterDeleted(res, true);
                 })
-                .catch(function (err) {
+                .catch(function () {
 
                 });
         }
@@ -480,7 +489,7 @@
                     res = res.results;
                     models = Helper.filterDeleted(res, true);
                 })
-                .catch(function(err){
+                .catch(function(){
 
                 });
         }
@@ -522,23 +531,29 @@
             $scope.newcabinetFrom.$setUntouched();
         }
 
-        function filterCabinets() {
-            vm.todos = [];
-            vm.todos = _.filter(vm.todosprev, function (cabinet) {
-                if (!angular.isString(vm.searchText) || vm.searchText === ''){
-                    return true;
-                }
-                return cabinet.economico.toLowerCase().indexOf(vm.searchText.toLowerCase()) >= 0;
-            });
+        function searchCabinet() {
+            if(vm.searchText == '' || vm.searchText.length <= 0){
+                listcabinets();
+            }else{
+                cabinetPV.getByID(vm.searchText)
+                    .then(function (respuesta) {
+                        vm.todos = [];
+                        AddCabinetCreated(respuesta);
+                    })
+                    .catch(function (error) {
+                        ErrorHandler.errorTranslate(error);
+                    });
+            }
         }
 
         function listcabinets(){
             var ux = "Activo";
 
-            vm.loadingPromise = cabinetPV.list(1000, 0)
+            vm.refreshPaginationButtonsComponent = false;
+            vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
                 .then(function (res) {
-                    res = res.results;
-                    vm.todosprev = Helper.filterDeleted(res, true);
+                    vm.objectPaginado = res;
+                    vm.todosprev = Helper.filterDeleted(res.results, true);
 
                     angular.forEach(vm.todosprev, function (cabinet) {
 
@@ -571,12 +586,34 @@
 
                         vm.todos.push(cabinetPreview);
                     });
+
+                    vm.refreshPaginationButtonsComponent = true;
                 })
-                .catch(function (err) {
+                .catch(function () {
 
                 });
         }
-        //codigo para listar cabinets
+
+        function sigPage() {
+            vm.offset += vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
+
+        function prevPage() {
+            vm.offset -= vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
+
+        function goToNumberPage(number) {
+            vm.offset = number * vm.limit;
+            vm.todos = [];
+            vm.todosprev = null;
+            listcabinets();
+        }
 
     }
 })();

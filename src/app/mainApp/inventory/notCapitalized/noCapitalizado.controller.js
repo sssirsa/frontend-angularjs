@@ -8,7 +8,7 @@
         .module('app.mainApp.inventory')
         .controller('noCapitalizadoController', noCapitalizadoController);
 
-    function noCapitalizadoController($mdDialog, Translate, toastr, ErrorHandler, noLabeled, Helper) {
+    function noCapitalizadoController($mdDialog, Translate, toastr, ErrorHandler, noLabeled, Helper, $log) {
         //Variable definition
         var vm = this;
         vm.todos = [];
@@ -96,7 +96,7 @@
                         vm.refreshPaginationButtonsComponent = true;
                     })
                     .catch(function (err) {
-                        console.debug(err);
+                        $log.error(err);
                         toastr.error("Error al cargar los elementos");
                     });
             }else{
@@ -107,7 +107,7 @@
                         vm.refreshPaginationButtonsComponent = true;
                     })
                     .catch(function (err) {
-                        console.debug(err);
+                        $log.error(err);
                         toastr.error("Error al cargar los elementos");
                     });
             }
@@ -152,11 +152,11 @@
             paginadoRefresh();
         }
 
-        function transformChip(chip) {
-            if (angular.isObject(chip)) {
-                return chip;
-            }
-        }
+        //function transformChip(chip) {
+        //    if (angular.isObject(chip)) {
+        //        return chip;
+        //    }
+        //}
 
         //modales
 
@@ -167,9 +167,9 @@
                 controllerAs: 'vm',
                 fullscreen: true,
                 clickOutsideToClose: true
-            }).then(function (respuesta) {
+            }).then(function () {
                 aRefresh();
-            }).catch(function (err) {
+            }).catch(function () {
             });
         }
 
@@ -185,7 +185,7 @@
                     data: vm.toModel
                 },
                 clickOutsideToClose: true
-            }).then(function (respuesta) {
+            }).then(function () {
                 ErrorHandler.successCreation();
                 aRefresh();
             }).catch(function (err) {

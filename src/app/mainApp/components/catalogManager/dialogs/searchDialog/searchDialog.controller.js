@@ -62,7 +62,7 @@
         //Functions
         vm.search = search;
         vm.changeTab = changeTab;
-        vm.cancel = cancel
+        vm.cancel = cancel;
 
         function createProvider() {
             if (vm.hasOwnProperty('url')) {
@@ -75,7 +75,7 @@
 
         function search(filter) {
             createProvider();
-            let query = filter.model;
+            var query = filter.model;
             if (filter.type !== 'equals') {
                 query = query + "__" + filter.type + "=";
             }

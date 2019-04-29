@@ -1,14 +1,13 @@
 //Create by Alex 26/04/2018
 
 (function () {
-
     angular
         .module('app.mainApp')
         .component('listCabinet', {
             templateUrl: 'app/mainApp/components/listCabinet/listCabinets.tmpl.html',
             controller: listCabinetController,
             controllerAs: '$ctrl',
-            bindings:{
+            bindings: {
                 todosex: '<',
                 up: '&',
                 todosprev2: '<',
@@ -17,7 +16,15 @@
         });
 
     /* @ngInject */
-    function listCabinetController (cabinetUC, Helper, Translate, toastr, $log, $mdDialog, ErrorHandler) {
+    function listCabinetController(
+        cabinetUC,
+        Helper,
+        Translate,
+        toastr,
+        $log,
+        $mdDialog,
+        ErrorHandler
+    ) {
         var vm = this;
 
         vm.todosprev = vm.todosprev2;
@@ -40,13 +47,13 @@
             ("Antes", item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
-                controller: 'cabinetController',
+                controller: 'CabinetController',
                 controllerAs: 'vm',
                 templateUrl: 'app/mainApp/components/listCabinet/modal/modalCabinet.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
-                locals:{
+                locals: {
                     data: vm.toModel
                 }
             })
@@ -55,12 +62,12 @@
                     vm.todos = [];
                     vm.up();
                 })
-                .catch(function(){
+                .catch(function () {
 
                 });
         }
 
-        function showinList(data){
+        function showinList(data) {
             vm.todos = [];
             vm.todos.push(data);
         }
@@ -70,26 +77,26 @@
             data.id_modelo = data.modelo.id;
             data.modelo = data.modelo.nombre;
 
-            if(data.deleted === false){
+            if (data.deleted === false) {
                 data.estado = "Activo";
-            }else{
+            } else {
                 data.estado = "Inactivo";
             }
 
             cabinetUC.getCabinetInSubsidiary(data.economico)
                 .then(function Subsidiary(control) {
-                    if(control.impedimento){
+                    if (control.impedimento) {
                         data.control = true;
                         data.impedido = true;
                         data.impedimento_id = control.impedimento;
-                    }else{
+                    } else {
                         data.control = true;
                         data.impedido = false;
                     }
 
                     showinList(data);
                 })
-                .catch(function SubsidiaryError(error) {
+                .catch(function SubsidiaryError() {
                     data.control = false;
                     data.impedido = false;
 
@@ -118,7 +125,7 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
-                locals:{
+                locals: {
                     data: vm.toModel
                 }
             })
@@ -127,7 +134,7 @@
                     vm.todos = [];
                     vm.up();
                 })
-                .catch(function(){
+                .catch(function () {
 
                 });
         }
@@ -140,13 +147,13 @@
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
-                locals:{
+                locals: {
                     data: id
                 }
             })
                 .then(function () {
                 })
-                .catch(function(){
+                .catch(function () {
                 });
         }
 

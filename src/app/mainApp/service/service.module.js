@@ -1,5 +1,5 @@
 (function () {
     angular.module('app.mainApp.service', [
-        'app.mainApp.service.external'
+        'app.mainApp.service.internal'
     ]);
 })();

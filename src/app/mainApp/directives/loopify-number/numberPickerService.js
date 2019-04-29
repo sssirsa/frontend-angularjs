@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('app')
-        .service('numberPickerService', numberPickerService);
+        .factory('numberPickerService', numberPickerService);
 
     function numberPickerService() {
         return {

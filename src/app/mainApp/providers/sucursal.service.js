@@ -11,10 +11,16 @@
 
     function Sucursal(
         API,
-        URLS
+        URLS,
+        EnvironmentConfig
     ) {
-        var baseSucursal = API.all(URLS.genesis.base).all(URLS.sucursal);
+        var baseURL = EnvironmentConfig.site.rest.api
+            + '/' + URLS.management.base
+            + '/'
+            + URLS.management.catalogues.base
+            + '/' + URLS.management.catalogues.subsidiary;
 
+        var baseSucursal = API.all(baseURL);
         return {
             list: list,
             update: update,

@@ -7,10 +7,10 @@
 
     angular
         .module('app.mainApp.com.incidences')
-        .controller('incidencesController', incidencesController);
+        .controller('IncidencesController', IncidencesController);
 
-    function incidencesController() {
-        var vm = this;
+    function IncidencesController() {
+        //var vm = this;
 
     }
 

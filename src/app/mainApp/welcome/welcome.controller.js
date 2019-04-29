@@ -4,9 +4,15 @@
 (function () {
     angular
         .module('app.mainApp.welcome')
-        .controller('welcomeController', WelcomeController);
+        .controller('WelcomeController', WelcomeController);
 
-    function WelcomeController(User, RoleStore, Sucursal, $log) {
+    function WelcomeController(
+        User,
+        RoleStore,
+        Sucursal,
+        $log,
+        _
+    ) {
         var vm = this;
 
         vm.user = User.getUser();

@@ -52,7 +52,7 @@
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
             }
-        }
+        };
 
         vm.init();
 
@@ -60,7 +60,7 @@
 
         vm.onElementSelect = function onElementSelect(element, field) {
             vm.entry[field] = element;
-        }
+        };
 
         vm.selectDriverID = function selectDriverID(files) {
             if (files.length > 0) {
@@ -78,7 +78,7 @@
             else {
                 delete (vm.entry['ife_chofer']);
             }
-        }
+        };
 
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -120,7 +120,7 @@
                         });
                 }
             }
-        }
+        };
 
         vm.removeCabinet = function removeCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -136,7 +136,7 @@
                     vm.cabinetList.splice(index, 1);
                 }
             }
-        }
+        };
 
         vm.clickSaveEntry = function clickSaveEntry(entry) {
             //Show warning message if the entry has unregistered cabinets
@@ -156,9 +156,9 @@
             else {
                 saveEntry(entry);
             }
-        }
+        };
 
-        vm.createCabinet = function createCabinet(cabinetID) {
+        vm.createCabinet = function createCabinet() {
             $mdDialog.show({
                 controller: 'notCapitalizedDialogController',
                 templateUrl: 'app/mainApp/inventory/notCapitalized/dialog/dialogCreateNotCapitalized.tmpl.html',
@@ -166,24 +166,23 @@
                 fullscreen: true,
                 clickOutsideToClose: true
             }).then(function (successCallback) {
-                var cabinetID = successCallback.id;
                 addCabinetToList(successCallback);
             }).catch(function (err) {
                 if (err) {
                     ErrorHandler.errorTranslate(err);
                 }
             });
-        }
+        };
 
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
             delete (vm.entry[vm.catalogues['petition'].binding]);
-        }
+        };
 
         //Internal functions
 
-        saveEntry = function saveEntry(entry) {
+        var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
             //API callback
@@ -198,15 +197,15 @@
                 .catch(function (errorCallback) {
                     ErrorHandler.errorTranslate(errorCallback);
                 });
-        }
+        };
 
-        entryHasPendingCabinets = function entryHasPendingCabinets() {
+        var entryHasPendingCabinets = function entryHasPendingCabinets() {
             return vm.cabinetList.some(function (element) {
                 return !element.cabinet;
             });
-        }
+        };
 
-        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+        var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
             if (entry.no_capitalizados_id.length) {
                 entry.no_capitalizados_id = [];
@@ -217,15 +216,15 @@
                     return element.cabinet;
                 });
             for (
-                let i = 0;
+                var i = 0;
                 i < existingCabinets.length;
                 i++) {
                 entry['no_capitalizados_id'].push(existingCabinets[i].id);
             }
             return entry;
-        }
+        };
 
-        addCabinetToList = function addCabinetToList(cabinet) {
+        var addCabinetToList = function addCabinetToList(cabinet) {
             var cabinetToAdd = {
                 promise: null,
                 cabinet: cabinet,
@@ -233,17 +232,17 @@
             };
 
             vm.cabinetList.push(cabinetToAdd);
-        }
+        };
 
         //Tab functions
 
         vm.previousTab = function () {
             vm.selectedTab = vm.selectedTab - 1;
-        }
+        };
 
         vm.nextTab = function () {
             vm.selectedTab = vm.selectedTab + 1;
-        }
+        };
     }
 
 })();

@@ -8,7 +8,7 @@
         .module('app.mainApp.inventory')
         .controller('notCapitalizedDialogController', notCapitalizedDialogController);
 
-    function notCapitalizedDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, User, URLS, $scope, noLabeled, Helper)
+    function notCapitalizedDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, User, URLS, $scope, noLabeled)
     {
         var vm = this;
         vm.user = User.getUser();
@@ -77,7 +77,7 @@
 
 
         function create() {
-            if($scope.newNCForm.$error.pattern !== undefined){
+            if(angular.isDefined($scope.newNCForm.$error.pattern)){
                 toastr.error("Llene corectamente todos los campos");
             }else{
 

@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries')
-        .service('MANUAL_ENTRIES', ManualEntriesProvider);
+        .factory('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(
         API,
@@ -10,18 +10,18 @@
         Translate,
         EnvironmentConfig
     ) {
-        const entriesUrl = API
+        var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
-        const inventoryUrl = API
+        var inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
-        const managementUrl = API
+        var managementUrl = API
             .all(URLS.management.base);
 
-        const control = URLS.management.control;
-        const entries = URLS.entries_departures.entries;
-        const inventory = URLS.management.inventory;
+        var control = URLS.management.control;
+        var entries = URLS.entries_departures.entries;
+        var inventory = URLS.management.inventory;
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -64,8 +64,8 @@
              *       +Cabinet in null, cant_enter in false, error property added to return the error response
              */
 
-            let deferred = $q.defer();
-            let response = {
+            var deferred = $q.defer();
+            var response = {
                 can_enter: false,
                 cabinet: null
             };
@@ -110,18 +110,18 @@
                 .all(id).customGET();
         }
 
-        function getEntriesByCabinet(id) {
+        function getEntriesByCabinet() {
 
         }
 
-        const warrantyEntry = {
+        var warrantyEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Garantias',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -260,14 +260,14 @@
             }
         };
 
-        const newEntry = {
+        var newEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Nuevos',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -432,14 +432,14 @@
             }
         };
 
-        const unrecognizableEntry = {
+        var unrecognizableEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'No_Capitalizados',
                     no_capitalizados_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -604,14 +604,14 @@
             }
         };
 
-        const obsoleteEntry = {
+        var obsoleteEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Obsoletos',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -765,7 +765,7 @@
             newEntry: newEntry,
             obsoleteEntry: obsoleteEntry,
             unrecognizableEntry: unrecognizableEntry
-        }
+        };
 
     }
 

@@ -17,8 +17,8 @@
         };
     }
     function maxDateValidator(value, format, dateMaxVal) {
-        if(!angular.isUndefined(dateMaxVal)) {
-            var dateMaxVal = moment(dateMaxVal, "YYYY-MM-DD", true);
+        if(angular.isDefined(dateMaxVal)) {
+            dateMaxVal = moment(dateMaxVal, "YYYY-MM-DD", true);
             var date = angular.isDate(value) ? moment(value) : moment(value, format, true);
             if (dateMaxVal.isValid() && date.isValid()) {
                 return date <= dateMaxVal;

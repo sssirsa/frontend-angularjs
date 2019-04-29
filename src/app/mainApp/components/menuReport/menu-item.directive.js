@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp')
         .directive('reportMenuItem', reportMenuItemDirective);
@@ -27,7 +26,17 @@
     }
 
     /* @ngInject */
-    function reportMenuItemController($scope, $state, Reportes, ReportSelected, menuReport, $mdSidenav, $rootScope, EVENTS_GENERAL, $filter, triBreadcrumbsService) {
+    function reportMenuItemController(
+        $scope,
+        $state,
+        Reportes,
+        ReportSelected,
+        menuReport,
+        $mdSidenav,
+        $rootScope,
+        EVENTS_GENERAL,
+        _
+    ) {
         var reportMenuItem = this;
         // load a template for this directive based on the type ( link | dropdown )
 
