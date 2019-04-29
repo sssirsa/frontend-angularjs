@@ -30,7 +30,10 @@
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
                  ng-if="vm.presurize.fecha_revision">
             <md-tab label="{{vm.title_info}}">
-                <div flex="100" layout-padding="" layout-align="center center">
+                <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
+                    <md-input-container>
+
+                    </md-input-container>
                     <md-input-container flex="30">
                         <md-switch class="md-primary" name="special" ng-model="vm.presurize.gas" required>
                         </md-switch>
