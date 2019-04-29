@@ -6,8 +6,8 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('inspectionController', inspectionController);
-    function inspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider,toastr) {
+        .controller('InspectionController', InspectionController);
+    function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log,_) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -26,9 +26,7 @@
             emplayado: false,
             vacio_mercancia: false,
             gas: false,
-            observaciones: '',
-
-
+            observaciones: ''
         };
 
         //Declaracion de Funciones como variables_______________________________________________________________________
@@ -37,7 +35,7 @@
         vm.sendCheckList = sendCheckList;
         vm.clear = clear;
 
-        const stickersURL = (EnvironmentConfig.site.rest.api)
+        var stickersURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.sticker);
         vm.catalogues = {
             sticker: {
@@ -73,25 +71,26 @@
         //--------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
         function sendInspection() {
-            vm.checklist.sucursal_id=vm.step.control.sucursal.id;
+            vm.checklist.sucursal_id = vm.step.control.sucursal.id;
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
             promiseSendInspection.then(function (response) {
+                $log.debug(response);
                 ErrorHandler.successCreation();
                 clear();
             }).catch(function (errormsg) {
-                console.log(errormsg);
+                $log.debug(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
 
         }
 
         function sendCheckList() {
-            console.log(vm.checklist);
+            $log.debug(vm.checklist);
 
         }
 
         function sendPrecheck() {
-            vm.checklist.sucursal_id=vm.step.control.sucursal.id;
+            vm.checklist.sucursal_id = vm.step.control.sucursal.id;
             vm.checklist.sintomas_detectados_id = [];
             vm.checklist.acciones_id = [];
             if (vm.checklist.insumos_lote) {
@@ -121,10 +120,11 @@
             }
             var promiseSendPreCheck = inspectionProvider.makePrecheck(vm.checklist);
             promiseSendPreCheck.then(function (response) {
+                $log.debug(response);
                 ErrorHandler.successCreation();
                 clear();
             }).catch(function (errormsg) {
-                console.log(errormsg);
+                $log.debug(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
@@ -147,7 +147,7 @@
             };
             vm.asset = undefined;
             vm.step = undefined;
-            vm.stage_for_not_stage=undefined;
+            vm.stage_for_not_stage = undefined;
         }
 
         //  Funciones para Componentes ___________________________________________________________________________ .all(URL.technical_service.catalogues.stage);______
@@ -160,31 +160,31 @@
         }
 
         function infoStep(step) {
-            vm.step=undefined;
+            vm.step = undefined;
             vm.step = step;
-            console.log("etapa del cabinet")
-            console.log(vm.step);
-            console.log("etapa envidada a la función")
-            console.log(step);
+            $log.debug("etapa del cabinet");
+            $log.debug(vm.step);
+            $log.debug("etapa envidada a la función");
+            $log.debug(step);
 
-            if(!vm.step.currentStage){
-                console.log('entre al if')
-                var promiseStep=inspectionProvider.getStep();
-                promiseStep.then(function(stage){
-                    console.log(stage);
-                    vm.stage_for_not_stage=stage.results[0];
-                    console.log("stage_for_not_stage:")
-                    console.log(vm.stage_for_not_stage);
+            if (!vm.step.currentStage) {
+                $log.debug('entre al if');
+                var promiseStep = inspectionProvider.getStep();
+                promiseStep.then(function (stage) {
+                    $log.debug(stage);
+                    vm.stage_for_not_stage = stage.results[0];
+                    $log.debug("stage_for_not_stage:");
+                    $log.debug(vm.stage_for_not_stage);
                 }).catch(function (errormsg) {
-                    console.log(errormsg);
+                    $log.debug(errormsg);
                     ErrorHandler.errorTranslate(errormsg);
                 });
             }
-            if(vm.step.currentStage.etapa.nombre!=='CheckList'||vm.stage_for_not_stage.nombre!=='CheckList'){
-                console.log("No en la etapa Correcta");
+            if (vm.step.currentStage.etapa.nombre !== 'CheckList' || vm.stage_for_not_stage.nombre !== 'CheckList') {
+                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
-                toastr.warning(NOT_CORRECT_STEP,SENT_TO+" "+vm.step.currentStage.etapa.nombre);
+                toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
                 clear();
 
             }
@@ -196,13 +196,13 @@
         }
 
         function onStickerSelect(value) {
-            //console.log(value);
+            // $log.debug(value);
             vm.checklist.sticker_id = value;
 
         }
 
         function getSymptoms(symptoms) {
-            //console.log(symptoms)
+            // $log.debug(symptoms)
             vm.symptoms = symptoms;
 
         }
