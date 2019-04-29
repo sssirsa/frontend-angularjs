@@ -13,199 +13,199 @@
 
             }
         });
-    function showInfoServiceController($mdDialog, showInfoProvider,ErrorHandler) {
+    function showInfoServiceController($mdDialog, showInfoProvider, ErrorHandler, $log,$document) {
         var vm = this;
 
-        vm.showInfoServiceDialog=showInfoServiceDialog;
+        vm.showInfoServiceDialog = showInfoServiceDialog;
         init();
         function init() {
-            console.log(vm.info);
+            $log.debug(vm.info);
             if (vm.info.currentStage) {
                 var infoserviceProvider = showInfoProvider.getService(vm.info.currentStage.servicio_cabinet);
                 infoserviceProvider.then(function (servicio) {
                     vm.service = servicio;
 
-                }).catch(function (errormsg){
+                }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
                 });
             }
         }
 
         function showInfoServiceDialog(ev) {
-            vm.meta=[
+            vm.meta = [
                 {
-                    section:"Economico",
-                    icon:'fas fa-snowflake',
-                    key:'cabinet',
-                    kind:'field'
+                    section: "Economico",
+                    icon: 'fas fa-snowflake',
+                    key: 'cabinet',
+                    kind: 'field'
 
                 },
                 {
-                    section:"Fecha de Inicio de Servicio",
-                    icon:'fas fa-snowflake',
-                    key:'fecha_inicio',
-                    kind:'field'
+                    section: "Fecha de Inicio de Servicio",
+                    icon: 'fas fa-snowflake',
+                    key: 'fecha_inicio',
+                    kind: 'field'
 
-                },{
-                    section:"Fecha de Fin de Servicio",
-                    icon:'fas fa-snowflake',
-                    key:'fecha_fin',
-                    kind:'field'
+                }, {
+                    section: "Fecha de Fin de Servicio",
+                    icon: 'fas fa-snowflake',
+                    key: 'fecha_fin',
+                    kind: 'field'
 
                 },
                 {
-                    section:"Etapa Actual",
-                    icon:'fas fa-tags',
-                    key:'etapa_actual',
-                    kind:'object',
-                    content:[
+                    section: "Etapa Actual",
+                    icon: 'fas fa-tags',
+                    key: 'etapa_actual',
+                    kind: 'object',
+                    content: [
                         {
-                            label:"Etapa",
-                            icon:'fas fa-tag',
-                            key:'etapa',
-                            type:'object',
-                            content:[
+                            label: "Etapa",
+                            icon: 'fas fa-tag',
+                            key: 'etapa',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre de Etapa',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre de Etapa',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'tipo_etapa',
-                                    label:'Tipo de Etapa',
-                                    type:'field'
+                                    key: 'tipo_etapa',
+                                    label: 'Tipo de Etapa',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            label:"Tecnico",
-                            icon:'fas fa-user',
-                            key:'persona',
-                            type:'object',
-                            content:[
+                            label: "Tecnico",
+                            icon: 'fas fa-user',
+                            key: 'persona',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'apellido_paterno',
-                                    label:'Apellido Paterno',
-                                    type:'field'
+                                    key: 'apellido_paterno',
+                                    label: 'Apellido Paterno',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'apellido_materno',
-                                    label:'Apellido Materno',
-                                    type:'field'
+                                    key: 'apellido_materno',
+                                    label: 'Apellido Materno',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            label:"Sucursal",
-                            icon:'fas fa-factory',
-                            key:'sucursal',
-                            type:'object',
-                            content:[
+                            label: "Sucursal",
+                            icon: 'fas fa-factory',
+                            key: 'sucursal',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            key:'fecha_fin',
-                            label:'Fecha Fin',
-                            type:'field'
+                            key: 'fecha_fin',
+                            label: 'Fecha Fin',
+                            type: 'field'
                         },
                         {
-                            key:'fecha_inicio',
-                            label:'Inicio de Servicio',
-                            type:'field'
+                            key: 'fecha_inicio',
+                            label: 'Inicio de Servicio',
+                            type: 'field'
                         },
                         {
-                            key:'fecha_entrada',
-                            label:'Entrada al servicio',
-                            type:'field'
+                            key: 'fecha_entrada',
+                            label: 'Entrada al servicio',
+                            type: 'field'
                         }
 
                     ]
 
                 },
                 {
-                    section:"Etapa Anterior",
-                    icon:'fas fa-tags',
-                    key:'etapa_anterior',
-                    kind:'object',
-                    content:[
+                    section: "Etapa Anterior",
+                    icon: 'fas fa-tags',
+                    key: 'etapa_anterior',
+                    kind: 'object',
+                    content: [
                         {
-                            label:"Etapa",
-                            icon:'fas fa-tag',
-                            key:'etapa',
-                            type:'object',
-                            content:[
+                            label: "Etapa",
+                            icon: 'fas fa-tag',
+                            key: 'etapa',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre de Etapa',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre de Etapa',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'tipo_etapa',
-                                    label:'Tipo de Etapa',
-                                    type:'field'
+                                    key: 'tipo_etapa',
+                                    label: 'Tipo de Etapa',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            label:"Tecnico",
-                            icon:'fas fa-user',
-                            key:'persona',
-                            type:'object',
-                            content:[
+                            label: "Tecnico",
+                            icon: 'fas fa-user',
+                            key: 'persona',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'apellido_paterno',
-                                    label:'Apellido Paterno',
-                                    type:'field'
+                                    key: 'apellido_paterno',
+                                    label: 'Apellido Paterno',
+                                    type: 'field'
                                 },
                                 {
-                                    key:'apellido_materno',
-                                    label:'Apellido Materno',
-                                    type:'field'
+                                    key: 'apellido_materno',
+                                    label: 'Apellido Materno',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            label:"Sucursal",
-                            icon:'fas fa-factory',
-                            key:'sucursal',
-                            type:'object',
-                            content:[
+                            label: "Sucursal",
+                            icon: 'fas fa-factory',
+                            key: 'sucursal',
+                            type: 'object',
+                            content: [
                                 {
-                                    key:'nombre',
-                                    label:'Nombre',
-                                    type:'field'
+                                    key: 'nombre',
+                                    label: 'Nombre',
+                                    type: 'field'
                                 }
                             ]
                         },
                         {
-                            key:'fecha_fin',
-                            label:'Fecha Fin',
-                            type:'field'
+                            key: 'fecha_fin',
+                            label: 'Fecha Fin',
+                            type: 'field'
                         },
                         {
-                            key:'fecha_inicio',
-                            label:'Inicio de Servicio',
-                            type:'field'
+                            key: 'fecha_inicio',
+                            label: 'Inicio de Servicio',
+                            type: 'field'
                         },
                         {
-                            key:'fecha_entrada',
-                            label:'Entrada al servicio',
-                            type:'field'
+                            key: 'fecha_entrada',
+                            label: 'Entrada al servicio',
+                            type: 'field'
                         }
 
                     ]
@@ -219,16 +219,17 @@
                 controllerAs: 'vm',
                 locals: {
                     array: vm.service,
-                    meta:vm.meta,
-                    title:'Información del Servicio'
+                    meta: vm.meta,
+                    title: 'Información del Servicio'
                 },
-                parent: angular.element(document.body),
+                parent: angular.element($document.body),
                 targetEvent: ev,
                 fullscreen: true,
-                focusOnOpen: false,
+                focusOnOpen: false
 
             }).then(function (answer) {
                 //Accepted
+                $log.debug(answer);
                 $mdDialog.hide();
             }, function () {
                 //Cancelled
