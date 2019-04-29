@@ -10,13 +10,13 @@
 
     function TestComponentController($log) {
         var vm = this;
-        vm.infogral=infogral;
-        vm.infoStep=infoStep;
-        vm.onStart=onStart;
-        vm.getInsumosLote=getInsumosLote;
-        vm.nextStep=nextStep;
-        vm.getFailures=getFailures;
-        vm.getUniqueAsset=getUniqueAsset;
+        vm.infogral = infogral;
+        vm.infoStep = infoStep;
+        vm.onStart = onStart;
+        vm.getInsumosLote = getInsumosLote;
+        vm.nextStep = nextStep;
+        vm.getFailures = getFailures;
+        vm.getUniqueAsset = getUniqueAsset;
 
         vm.insumos_lote = [];
 
@@ -79,39 +79,41 @@
             cantidad: "2.000"
         };
 
-        function getInsumosLote(element){
-            vm.insumos_lote=element;
-             $log.debug(vm.insumos_lote);
-        }
-        function onStart(startDate){
-             $log.debug(startDate);
+        function getInsumosLote(element) {
+            vm.insumos_lote = element;
+            $log.debug(vm.insumos_lote);
         }
 
-
+        function onStart(startDate) {
+            $log.debug(startDate);
+        }
 
 
         function infogral(cabinet) {
-            vm.asset=cabinet;
+            vm.asset = cabinet;
         }
+
         function infoStep(step) {
-            vm.step=step;
-             $log.debug("sucursal de step");
-             $log.debug(vm.step.control.sucursal);
+            vm.step = step;
+            $log.debug("sucursal de step");
+            $log.debug(vm.step.control.sucursal);
         }
+
         function nextStep(step) {
 
-             $log.debug("siguiente etapa:"+step);
+            $log.debug("siguiente etapa:" + step);
 
         }
+
         function getFailures(failures) {
             vm.failures = failures;
-             $log.debug(vm.failures);
+            $log.debug(vm.failures);
 
         }
 
-        function getUniqueAsset(element){
-             $log.debug("Insumos unicos detectados")
-             $log.debug(element);
+        function getUniqueAsset(element) {
+            $log.debug("Insumos unicos detectados");
+            $log.debug(element);
         }
     }
 
