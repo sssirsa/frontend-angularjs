@@ -14,14 +14,14 @@
 
             }
         });
-    function symptomController(Translate,URLS,ErrorHandler,EnvironmentConfig) {
+    function symptomController(Translate, URLS, ErrorHandler, EnvironmentConfig, $log) {
         var vm = this;
-        const symptomURL =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base+ '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
+        var symptomURL = (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
         vm.catalogues = {
             symptoms: {
                 catalog: {
-                    url:symptomURL,
+                    url: symptomURL,
                     name: Translate.translate('SYMTOMPS_COMPONENT.ADD_SYMTOMP'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'code',
@@ -38,25 +38,27 @@
                     reverse: false
                 },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint:Translate.translate('SYMTOMPS_COMPONENT.ADD')
+                hint: Translate.translate('SYMTOMPS_COMPONENT.ADD')
             }
         };
-        vm.sintomas_detectados=[];
+        vm.sintomas_detectados = [];
 
-        vm.onSelect=onSelect;
-        vm.addSymptom=addSymptom;
-        vm.deleteElement=deleteElement;
+        vm.onSelect = onSelect;
+        vm.addSymptom = addSymptom;
+        vm.deleteElement = deleteElement;
         function onSelect(value) {
-            console.log(value);
-            vm.element=value;
+            $log.debug(value);
+            vm.element = value;
             addSymptom();
         }
-        function addSymptom(){
+
+        function addSymptom() {
 
             getDuplicity();
             vm.sintomas_detectados.push(vm.element);
-            vm.symptoms({element:vm.sintomas_detectados});
+            vm.symptoms({element: vm.sintomas_detectados});
         }
+
         function getDuplicity() {
             var index;
             for (index = 0; index < vm.sintomas_detectados.length; ++index) {
@@ -65,14 +67,15 @@
                 }
             }
         }
-        function deleteElement(item){
+
+        function deleteElement(item) {
             var index;
             for (index = 0; index < vm.sintomas_detectados.length; ++index) {
                 if (vm.sintomas_detectados[index].code === item.code) {
                     vm.sintomas_detectados.splice(index, 1);
                 }
             }
-            vm.symptoms({element:vm.sintomas_detectados});
+            vm.symptoms({element: vm.sintomas_detectados});
         }
 
 
