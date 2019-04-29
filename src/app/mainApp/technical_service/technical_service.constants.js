@@ -9,7 +9,6 @@
                 com_incidence: 'com_incidence',
                 failure: 'failure',
                 failure_type: 'failure_type',
-                failure:'failure',
                 next_step: 'next_step',
                 stage: 'stage',
                 symptom: 'symptom'
