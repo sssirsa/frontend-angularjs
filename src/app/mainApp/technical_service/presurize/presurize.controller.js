@@ -6,8 +6,8 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('presurizeController', presurizeController);
-    function presurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr) {
+        .controller('PresurizeController', PresurizeController);
+    function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -76,10 +76,11 @@
             }
             var promiseSendPresurize = presurizeProvider.makePressurize(vm.presurize, vm.step.currentStage.id);
             promiseSendPresurize.then(function (response) {
+                $log.debug(response);
                 ErrorHandler.successCreation();
                 clear();
             }).catch(function (errormsg) {
-                console.log(errormsg);
+                $log.error(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
@@ -100,18 +101,18 @@
         }
 
         function infoStep(step) {
-            console.log(step.currentStage);
+            $log.debug(step.currentStage);
             vm.step = step;
 
             if (!vm.step) {
-                console.log();
+                $log.debug();
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
                 var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
             if (vm.step.currentStage.etapa.nombre !== 'Pinchado') {
-                console.log("No en la etapa Correcta");
+                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
