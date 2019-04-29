@@ -26,10 +26,8 @@
 
 
         function getUniqueAssetsList(barcode) {
-            console.log(barcode);
-            var filter='?no_serie__contains='+barcode;
 
-            console.log(filter);
+            var filter='?no_serie__contains='+barcode;
             return urlbase.all(URLS.inventory.catalogues.unique_asset+filter).customGET();
         }
 

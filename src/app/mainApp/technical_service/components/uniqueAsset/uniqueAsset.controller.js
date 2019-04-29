@@ -19,7 +19,7 @@
 
             }
         });
-    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS, $log) {
         var vm = this;
         vm.notDetected = [];
         vm.unique_asset_list = [];
@@ -39,7 +39,7 @@
         }
 
         function getDuplicity(unique_asset) {
-            console.log(unique_asset);
+            $log.debug(unique_asset);
             var index;
             for (index = 0; index < vm.selected_unique_assets.length; ++index) {
                 if (vm.selected_unique_assets[index].no_serie === unique_asset.no_serie) {
@@ -66,15 +66,15 @@
         }
 
         function onChange(unique_asset) {
-            //console.log(unique_asset)
+            // $log.debug(unique_asset)
             if (unique_asset.used) {
                 addElement(unique_asset);
             }
             else {
                 deleteElement(unique_asset);
             }
-            //console.log("insumos Usados:")
-            //console.log(vm.selected_unique_assets);
+            // $log.debug("insumos Usados:")
+            // $log.debug(vm.selected_unique_assets);
 
         }
 
@@ -92,16 +92,16 @@
                 else {
                     vm.notDetected.push(vm.barcode);
                 }
-                //console.log(vm.unique_asset_list);
-                //console.log(vm.notDetected);
+                // $log.debug(vm.unique_asset_list);
+                // $log.debug(vm.notDetected);
             }).catch(function (errormsg) {
-                console.log(errormsg);
+                $log.debug(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
 
         function getDuplicityOptions(unique_asset) {
-            console.log(unique_asset);
+            $log.debug(unique_asset);
             var index;
             for (index = 0; index < vm.unique_asset_list.length; ++index) {
                 if (vm.unique_asset_list[index].no_serie === unique_asset.no_serie) {
@@ -143,7 +143,7 @@
                         model: 'sucursal_id',
                         initial_value: vm.sucursal.id,
                         label: Translate.translate('UNIQUE_ASSET_COMPONENT.SUBSIDIARY'),
-                        required:true,
+                        required: true,
                         lock: true
                     }
                 ]
