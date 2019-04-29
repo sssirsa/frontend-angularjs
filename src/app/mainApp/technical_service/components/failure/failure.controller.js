@@ -10,13 +10,13 @@
             controller: failureController,
             bindings: {
                 failuresDetected: '&',
-                failures:'<'
+                failures: '<'
 
             }
         });
-    function failureController(Translate, URLS, ErrorHandler, EnvironmentConfig) {
+    function failureController(Translate, URLS, EnvironmentConfig,$log) {
         var vm = this;
-        const failure_typeURL = (EnvironmentConfig.site.rest.api)
+        var failure_typeURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
         vm.catalogues = {
             failure_type: {
@@ -67,14 +67,16 @@
         vm.onSelectType = onSelectType;
         vm.addFailure = addFailure;
         vm.deleteElement = deleteElement;
-        function getFailures(){
-            console.log("Fallas Obtenidas de la carga de información");
-            console.log(vm.failures);
-            if(vm.failures.length===0){
+        getFailures();
+        function getFailures() {
+            $log.debug.log("Fallas Obtenidas de la carga de información");
+            $log.debug.log(vm.failures);
+            if (vm.failures.length === 0) {
                 vm.failures = [];
             }
 
         }
+
         function onSelectType(value) {
 
             if (value.id) {
