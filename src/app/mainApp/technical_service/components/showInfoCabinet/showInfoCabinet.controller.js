@@ -13,7 +13,7 @@
 
             }
         });
-    function showInfoCabinetController($mdDialog) {
+    function showInfoCabinetController($mdDialog, $log, $document) {
         var vm = this;
         vm.showInfoCabinetDialog=showInfoCabinetDialog;
 
@@ -38,7 +38,6 @@
                     icon:'fas fa-hashtag',
                     key:'no_serie',
                     kind:'field'
-
                 },
                 {
                     section:"Año",
@@ -134,13 +133,13 @@
                     meta:vm.meta,
                     title:'Información del Cabinet'
                 },
-                parent: angular.element(document.body),
+                parent: angular.element($document.body),
                 targetEvent: ev,
                 fullscreen: true,
-                focusOnOpen: false,
-
+                focusOnOpen: false
             }).then(function (answer) {
                 //Accepted
+                $log.debug(answer);
                 $mdDialog.hide();
             }, function () {
                 //Cancelled
