@@ -15,7 +15,7 @@
 
             }
         });
-    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig, nextStageProvider) {
+    function nextStepController(Translate, URLS, ErrorHandler, EnvironmentConfig, nextStageProvider, $log) {
         var vm = this;
         vm.nextStepSelected = undefined;
         vm.steps = undefined;
@@ -76,7 +76,7 @@
 
                 }
                 vm.failures.forEach(function (failure) {
-                    console.log(failure.etapas_posibles);
+                    $log.debug(failure.etapas_posibles);
                     if (failure.etapas_posibles.length > 0) {
                         failure.etapas_posibles.forEach(function (stage) {
                             getDuplicity(stage);
