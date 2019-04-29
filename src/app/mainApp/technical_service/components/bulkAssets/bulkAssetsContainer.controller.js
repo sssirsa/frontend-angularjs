@@ -16,7 +16,7 @@
             }
         });
 
-    function bulkAssetsContainerController(bulkAssetsProvider,ErrorHandler, User) {
+    function bulkAssetsContainerController(bulkAssetsProvider,ErrorHandler) {
 
         var vm = this;
         vm.onElementSelect=onElementSelect;

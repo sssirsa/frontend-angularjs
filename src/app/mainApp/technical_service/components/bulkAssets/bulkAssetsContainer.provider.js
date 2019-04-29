@@ -24,8 +24,6 @@
 
 
         function getByStage(tipoEquipo, catalogoEtapa) {
-            console.log('Tipo equipo:'+tipoEquipo);
-            console.log('Catalogo Etapa:'+catalogoEtapa);
             return urlbase.all(URLS.technical_service.bulk_assets.bulksByStep+'?tipo_equipo__id='+tipoEquipo+'&catalogo_etapa__nombre='+catalogoEtapa).customGET();
         }
 
