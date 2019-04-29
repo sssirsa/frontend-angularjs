@@ -6,9 +6,9 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('testComponentController', testComponentController);
+        .controller('TestComponentController', TestComponentController);
 
-    function testComponentController() {
+    function TestComponentController($log) {
         var vm = this;
         vm.infogral=infogral;
         vm.infoStep=infoStep;
@@ -81,10 +81,10 @@
 
         function getInsumosLote(element){
             vm.insumos_lote=element;
-            console.log(vm.insumos_lote);
+             $log.debug(vm.insumos_lote);
         }
         function onStart(startDate){
-            console.log(startDate);
+             $log.debug(startDate);
         }
 
 
@@ -95,23 +95,23 @@
         }
         function infoStep(step) {
             vm.step=step;
-            console.log("sucursal de step");
-            console.log(vm.step.control.sucursal);
+             $log.debug("sucursal de step");
+             $log.debug(vm.step.control.sucursal);
         }
         function nextStep(step) {
 
-            console.log("siguiente etapa:"+step);
+             $log.debug("siguiente etapa:"+step);
 
         }
         function getFailures(failures) {
             vm.failures = failures;
-            console.log(vm.failures);
+             $log.debug(vm.failures);
 
         }
 
         function getUniqueAsset(element){
-            console.log("Insumos unicos detectados")
-            console.log(element);
+             $log.debug("Insumos unicos detectados")
+             $log.debug(element);
         }
     }
 
