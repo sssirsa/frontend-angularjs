@@ -16,10 +16,10 @@
 
             }
         });
-    function actionsController(Translate, URLS, ErrorHandler, EnvironmentConfig, actionProvider) {
+    function actionsController(URLS, ErrorHandler, EnvironmentConfig, actionProvider, $log) {
         var vm = this;
-        const actionURL = (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
+        //const actionURL = (EnvironmentConfig.site.rest.api)
+        //  .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
 
         vm.actionsDoIt = [];
 
@@ -31,7 +31,7 @@
         vm.deleteElement = deleteElement;
 
         function activate() {
-            console.log(vm.action);
+            $log.debug(vm.action);
             getActions();
             var promiseGetStage = actionProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
@@ -42,8 +42,9 @@
         }
 
         function getActions() {
-            console.log("Acciones Obtenidas de la carga de información");
-            console.log(vm.actions);
+            $log.debug("Acciones Obtenidas de la carga de información");
+            $log.debug(vm.actions);
+            var index;
             if (vm.actions) {
                 for (index = 0; index < vm.actions.length; ++index) {
                     vm.actionsDoIt.push(vm.actions[index]);
@@ -63,7 +64,7 @@
             getDuplicity();
             vm.actionsDoIt.push(vm.element);
             vm.actionsAdded({element: vm.actionsDoIt});
-            //console.log(vm.actionsDoIt);
+            // $log.debug(vm.actionsDoIt);
         }
 
         function getDuplicity() {
@@ -83,7 +84,7 @@
                 }
             }
             vm.actionsAdded({element: vm.actionsDoIt});
-            //console.log(vm.actionsDoIt);
+            // $log.debug(vm.actionsDoIt);
         }
 
 
