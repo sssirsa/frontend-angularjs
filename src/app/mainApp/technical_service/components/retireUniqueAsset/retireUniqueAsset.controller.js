@@ -16,36 +16,50 @@
 
             }
         });
-    function retireUniqueAssetController(Translate, ErrorHandler, $mdDialog, URLS, retireUniqueAssetProvider) {
+    function retireUniqueAssetController(Translate, ErrorHandler, $mdDialog, URLS, retireUniqueAssetProvider, $log) {
         var vm = this;
 
         getUniqueAssets();
 
-        vm.salvageAsset=salvageAsset;
-        vm.discardAsset=discardAsset;
+        vm.salvageAsset = salvageAsset;
+        vm.discardAsset = discardAsset;
 
-        function getUniqueAssets(){
-            console.log(vm.barcode);
-            console.log(vm.sucursal);
+        function getUniqueAssets() {
+            $log.debug(vm.barcode);
+            $log.debug(vm.sucursal);
             var promiseUniqueAssetList = retireUniqueAssetProvider.getUniqueAssetsListByCabinet(vm.barcode);
             promiseUniqueAssetList.then(function (uniqueAssets) {
-                vm.unique_asset_list=uniqueAssets.results;
+                vm.unique_asset_list = uniqueAssets.results;
 
             }).catch(function (errormsg) {
-                console.log(errormsg);
+                $log.debug(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
+
         function salvageAsset() {
             var body = {
                 disponible: true
             };
-        }function discardAsset() {
+            var promiseRemoveUnique = retireUniqueAssetProvider.removeUniqueAsset(body, vm.barcode);
+            promiseRemoveUnique.then(function (response) {
+                $log.debug(response);
+            }).catch(function (errormsg) {
+                ErrorHandler.errorTranslate(errormsg);
+            });
+        }
+
+        function discardAsset() {
             var body = {
                 disponible: false
             };
+            var promiseRemoveUnique = retireUniqueAssetProvider.removeUniqueAsset(body, vm.barcode);
+            promiseRemoveUnique.then(function (response) {
+                $log.debug(response);
+            }).catch(function (errormsg) {
+                ErrorHandler.errorTranslate(errormsg);
+            });
         }
-
 
 
     }
