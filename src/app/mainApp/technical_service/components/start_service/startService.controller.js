@@ -17,10 +17,11 @@
                 sucursal:'<'
             }
         });
-    function startServiceController($interval, startServiceProvider, ErrorHandler) {
+    function startServiceController($interval, startServiceProvider, ErrorHandler, $log) {
         var vm = this;
         vm.contador = 0;
         vm.startService = startService;
+        var promiseStartStage;
 
         function startService() {
             vm.date = new Date();
@@ -41,6 +42,7 @@
             }
             if (promiseStartStage) {
                 promiseStartStage.then(function (response) {
+                    $log.debug(response);
                     $interval(function () {
                         vm.contador = vm.contador + 1;
                         vm.segundos = vm.contador % 60;
