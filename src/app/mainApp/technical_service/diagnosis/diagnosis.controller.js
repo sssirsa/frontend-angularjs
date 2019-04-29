@@ -6,9 +6,9 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('diagnosisController', diagnosisController);
+        .controller('DiagnosisController', DiagnosisController);
 
-    function diagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider) {
+    function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log) {
         var vm = this;
 
         vm.asset = undefined;//objeto contenedor del cabinet
@@ -72,11 +72,11 @@
             vm.diagnostic.sucursal_id = vm.step.control.sucursal.id;
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
             promiseSendDiagnosis.then(function (response) {
-                console.info(response);
+                $log.info(response);
                 clear();
 
             }).catch(function (errormsg) {
-                console.error(errormsg);
+                $log.error(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
@@ -97,10 +97,10 @@
         }
 
         function infoStep(step) {
-            console.log('etapa actual:');
-            console.log(step);
-            console.log(step.currentStage.id);
-            console.log(step.currentStage.servicio_cabinet);
+            $log.debug('etapa actual:');
+            $log.debug(step);
+            $log.debug(step.currentStage.id);
+            $log.debug(step.currentStage.servicio_cabinet);
             vm.step = step;
             vm.search = false;
             if (vm.step.currentStage.diagnostico) {
@@ -112,15 +112,15 @@
                 vm.diagnostic.fallas = vm.step.currentStage.diagnostico.fallas;
                 vm.diagnostic.temp_com = parseFloat(vm.step.currentStage.diagnostico.temp_com);
                 vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
-                console.log(vm.diagnostic);
-                console.log(vm.step.currentStage.acciones);
+                $log.debug(vm.diagnostic);
+                $log.debug(vm.step.currentStage.acciones);
             }
 
-            if(vm.step.currentStage.etapa.nombre!=='Diagnostico'){
-                console.log("No en la etapa Correcta");
+            if (vm.step.currentStage.etapa.nombre !== 'Diagnostico') {
+                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
-                toastr.warning(NOT_CORRECT_STEP,SENT_TO+" "+vm.step.currentStage.etapa.nombre);
+                toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
                 clear();
 
             }
@@ -133,7 +133,7 @@
 
         function getFailures(failures) {
             vm.failures = failures;
-            console.log(vm.failures);
+            $log.debug(vm.failures);
             var index;
             if (vm.failures.length > 0) {
                 vm.diagnostic.fallas_id = [];
@@ -141,23 +141,23 @@
                     vm.diagnostic.fallas_id.push(vm.failures[index].com_code);
                 }
 
-                console.log("Fallas");
-                console.log(vm.failures)
-                console.log(vm.diagnostic.fallas_id);
+                $log.debug("Fallas");
+                $log.debug(vm.failures);
+                $log.debug(vm.diagnostic.fallas_id);
             }
 
         }
 
         function nextStep(step) {
-            console.log("siguiente etapa:");
-            console.log(step);
+            $log.debug("siguiente etapa:");
+            $log.debug(step);
             vm.diagnostic.etapa_siguiente_id = step.id;
 
         }
 
         function getActions(element) {
-            console.log('acciones detectadas:');
-            console.log(element);
+            $log.debug('acciones detectadas:');
+            $log.debug(element);
             vm.actions = element;
             vm.diagnostic.acciones_id = [];
             if (vm.actions) {
@@ -167,9 +167,9 @@
                     for (index = 0; index < vm.actions.length; ++index) {
                         vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
                     }
-                    console.log("Acciones");
-                    console.log(vm.actions);
-                    console.log(vm.diagnostic.acciones_id);
+                    $log.debug("Acciones");
+                    $log.debug(vm.actions);
+                    $log.debug(vm.diagnostic.acciones_id);
                 }
             }
 

@@ -18,7 +18,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/technical_service/inspection/inspection.tmpl.html',
-                controller: 'inspectionController',
+                controller: 'InspectionController',
                 controllerAs: 'vm'
             })
 
@@ -30,7 +30,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/technical_service/puncture/puncture.tmpl.html',
-                controller: 'punctureController',
+                controller: 'PunctureController',
                 controllerAs: 'vm'
             })
 
@@ -42,7 +42,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/technical_service/diagnosis/diagnosis.tmpl.html',
-                controller: 'diagnosisController',
+                controller: 'DiagnosisController',
                 controllerAs: 'vm'
             })
 
@@ -54,7 +54,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/technical_service/generalStage/generalStage.tmpl.html',
-                controller: 'generalStageController',
+                controller: 'GeneralStageController',
                 controllerAs: 'vm'
             })
 
@@ -66,7 +66,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/technical_service/test/testComponent.tmpl.html',
-                controller: 'testComponentController',
+                controller: 'TestComponentController',
                 controllerAs: 'vm'
             });
 
