@@ -7,9 +7,9 @@
 
     angular
         .module('app.mainApp.service')
-        .controller('generalStageController', generalStageController);
+        .controller('GeneralStageController', GeneralStageController);
 
-    function generalStageController($scope, Translate, toastr, ErrorHandler, stageProvider, $mdDialog) {
+    function GeneralStageController($scope, Translate, toastr, ErrorHandler, stageProvider, $mdDialog, $log, _) {
         var vm = this;
 
         vm.asset = undefined;//objeto contenedor del cabinet
@@ -55,7 +55,7 @@
         }
 
         function closeStage() {
-            console.log(vm.stage)
+            $log.debug(vm.stage);
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
             var confirm;
             confirm = $mdDialog.confirm()
@@ -66,29 +66,30 @@
             $mdDialog.show(confirm).then(function () {
                 var promiseSendDiagnosis = stageProvider.sendStage(vm.step.currentStage.id, vm.stage);
                 promiseSendDiagnosis.then(function (response) {
-                    console.info(response);
+                    $log.info(response);
                     clear();
 
                 }).catch(function (errormsg) {
-                    console.error(errormsg);
+                    $log.error(errormsg);
                     ErrorHandler.errorTranslate(errormsg);
                 });
             }, function () {
             });
         }
+
         function saveStage() {
-            console.log(vm.stage)
+            $log.debug(vm.stage);
             if (vm.stage.etapa_siguiente_id) {
-                vm.stage = _.omit(vm.stage, etapa_siguiente_id);
+                vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
             }
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
             var promiseSendDiagnosis = stageProvider.sendStage(vm.step.currentStage.id, vm.stage);
             promiseSendDiagnosis.then(function (response) {
-                console.info(response);
+                $log.info(response);
                 clear();
 
             }).catch(function (errormsg) {
-                console.error(errormsg);
+                $log.error(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
 
@@ -104,15 +105,14 @@
         }
 
         function infoStep(step) {
-            console.log('etapa actual:');
-            console.log(step);
-            console.log(step.currentStage.id);
-            console.log(step.currentStage.servicio_cabinet);
+            $log.debug('etapa actual:');
+            $log.debug(step);
+            $log.debug(step.currentStage.id);
+            $log.debug(step.currentStage.servicio_cabinet);
             vm.step = step;
             vm.search = false;
 
         }
-
 
 
         function getInsumosLote(element) {
@@ -120,15 +120,15 @@
         }
 
         function nextStep(step) {
-            console.log("siguiente etapa:");
-            console.log(step);
+            $log.debug("siguiente etapa:");
+            $log.debug(step);
             vm.stage.etapa_siguiente_id = step.id;
 
         }
 
         function getActions(element) {
-            console.log('acciones detectadas:');
-            console.log(element);
+            $log.debug('acciones detectadas:');
+            $log.debug(element);
             vm.actions = element;
             vm.stage.acciones_id = [];
             if (vm.actions) {
@@ -138,9 +138,9 @@
                     for (index = 0; index < vm.actions.length; ++index) {
                         vm.stage.acciones_id.push(vm.actions[index].com_code);
                     }
-                    console.log("Acciones");
-                    console.log(vm.actions);
-                    console.log(vm.stage.acciones_id);
+                    $log.debug("Acciones");
+                    $log.debug(vm.actions);
+                    $log.debug(vm.stage.acciones_id);
                 }
             }
 
