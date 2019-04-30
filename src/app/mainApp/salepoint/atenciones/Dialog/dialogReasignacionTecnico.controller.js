@@ -1,10 +1,21 @@
 (function () {
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('dialogReasignacionTecnicoController', dialogReasignacionTecnicoController);
 
-    function dialogReasignacionTecnicoController(SalePointRequests, SalePoint, toastr, Translate,
-                                               Persona_Admin, $state, salePoint, $mdDialog, ErrorHandler) {
+    function dialogReasignacionTecnicoController(
+        SalePointRequests,
+        SalePoint,
+        toastr,
+        Translate,
+        Persona_Admin,
+        $state,
+        salePoint,
+        $mdDialog,
+        ErrorHandler,
+        $log,
+        _
+    ) {
         var vm = this;
 
         //Variables
@@ -44,7 +55,7 @@
         vm.view = view;
         vm.clean = clean;
 
-        console.log(salePoint.folio);
+
         vm.id = salePoint.folio;
         activate();
 
@@ -59,7 +70,7 @@
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
-                                console.log(personaError);
+                                $log.error(personaError);
                             });
                     }
                     SalePointRequests.getByID(salePoint.solicitud)
@@ -70,7 +81,7 @@
                                     vm.store = storeSuccess;
                                 })
                                 .catch(function (storeError) {
-                                    console.log(storeError);
+                                    $log.error(storeError);
                                     toastr.error(
                                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -79,7 +90,7 @@
 
                         })
                         .catch(function (requestError) {
-                            console.log(requestError);
+                            $log.error(requestError);
                             vm.salePoint = null;
                             toastr.error(
                                 Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
@@ -87,12 +98,12 @@
                             );
                         });
                 }).catch(function (salePointError) {
-                console.log(salePointError);
-                toastr.error(
-                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                    Translate.translate('MAIN.MSG.ERROR_TITLE')
-                );
-            });
+                    $log.error(salePointError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
         }
 
         function selectedPersonChange() {
@@ -102,7 +113,7 @@
         }
 
         function searchPerson() {
-            return Persona_Admin.listPromise(vm.limit,0)
+            return Persona_Admin.listPromise(vm.limit, 0)
                 .then(function (userListSuccess) {
                     userListSuccess = userListSuccess.results;
                     vm.personList = userListSuccess;
@@ -110,8 +121,8 @@
                 })
                 .catch(function (userListError) {
                     vm.personList = null;
-                    console.log(userListError);
-                    console.log("Error al obtener personas");
+                    $log.error(userListError);
+
                     toastr.error(
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -168,7 +179,7 @@
                 return;
             }
 
-            console.log('asignedPerson: ', vm.toAsigned);
+
 
             vm.personLoading = SalePoint.assignToPerson(vm.toAsigned, vm.salePoint.folio)
                 .then(function () {
@@ -214,9 +225,6 @@
             var hora2 = hora2Num < 10 ? '0' + hora2Num.toString() : hora2Num.toString();
             var min1 = min1Num < 10 ? '0' + min1Num.toString() : min1Num.toString();
             var min2 = min2Num < 10 ? '0' + min2Num.toString() : min2Num.toString();
-
-            console.log("hora_inicio", hora1, ':', min1, ':00');
-            console.log("hora_fin", hora2, ':', min2, ':00');
 
             vm.toAsigned.hora_inicio = hora1 + ':' + min1 + ':00';
             vm.toAsigned.hora_fin = hora2 + ':' + min2 + ':00';
@@ -276,7 +284,7 @@
                     });
 
                 })
-                .catch(function (listError) {
+                .catch(function () {
                     toastr.error(
                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -285,11 +293,11 @@
         }
 
         function view(info) {
-            if(!vm.infoChip){
+            if (!vm.infoChip) {
                 vm.infoChip = info;
-            }else if(vm.infoChip.folio == info.folio){
+            } else if (vm.infoChip.folio == info.folio) {
                 vm.infoChip = null;
-            }else if(vm.infoChip.folio != info.folio){
+            } else if (vm.infoChip.folio != info.folio) {
                 vm.infoChip = info;
             }
         }

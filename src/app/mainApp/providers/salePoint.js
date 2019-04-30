@@ -10,7 +10,7 @@
         URLS
     ) {
 
-        var baseUrl = API.all(URLS.mobile.base);
+        var baseUrl = API.all(URLS.salepoint.base);
 
         var service = {
             getByID: getByID,
@@ -35,7 +35,7 @@
         }
 
         function listAllServices(limit, offset, filter) {
-            if (filter === undefined) {
+            if (angular.isUndefined(filter)) {
                 return baseUrl.all('atencion_pv' + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {

@@ -6,18 +6,21 @@
 
     /* @ngInject */
     function modifyStoreController(Stores,
-                                   toastr,
-                                   Translate,
-                                   $mdDialog,
-                                   Helper,
-                                   $log,
-                                   States,
-                                   Cities,
-                                   store,
-                                   Localities,
-                                   Segmentation,
-                                   ErrorHandler,
-                                   Geolocation) {
+        toastr,
+        Translate,
+        $mdDialog,
+        Helper,
+        $log,
+        States,
+        Cities,
+        store,
+        Localities,
+        Segmentation,
+        ErrorHandler,
+        Geolocation,
+        $window,
+        _
+    ) {
         var vm = this;
 
         //Variables
@@ -92,8 +95,8 @@
                 segmentacion_id: vm.store.segmentacion_id
             };
 
-            if(vm.store.mapa_img){
-                storeToSend.mapa_img= vm.store.mapa_img;
+            if (vm.store.mapa_img) {
+                storeToSend.mapa_img = vm.store.mapa_img;
             }
 
             vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
@@ -204,7 +207,7 @@
             for (var i = 0; i < len; i++) {
                 binary += String.fromCharCode(bytes[i]);
             }
-            return window.btoa(binary);
+            return $window.btoa(binary);
         }
 
     }

@@ -38,7 +38,7 @@
         };
         //Clona un reporte pasando el id del reporte y el nombre
         function cloneReport(request) {
-            return pathReport.all("clone_report").all("").post(request)
+            return pathReport.all("clone_report").all("").post(request);
         }
         //Obtiene todos los reportes existentes con su información básica (util para listado en CRUD)
         function getPartialReports(){
@@ -67,10 +67,11 @@
         //Obtiene solamnte los modelos relacionados (campos que son llave primaria de otro modelo)
         // con un modelo, dado un ID de modelo, y como opcion una ruta (path) y un nombre de campo (field)
         // para mapear la ruta necesaria al crear el fieldset o filterset del reporte
-        function getRelatedModels(id,requestPath,field){
-            if(requestPath!==undefined) {
-                if(field!==undefined) {
-                    var request = {
+        function getRelatedModels(id, requestPath, field) {
+            var request;
+            if(angular.isDefined(requestPath)) {
+                if(angular.isDefined(field)) {
+                    request = {
                         "model": id,
                         "path": requestPath,
                         "path_verbose": "",
@@ -78,7 +79,7 @@
                     };
                 }
                 else{
-                    var request = {
+                    request = {
                         "model": id,
                         "path": requestPath,
                         "path_verbose": "",
@@ -87,7 +88,7 @@
                 }
             }
             else{
-                var request = {
+                request = {
                     "model": id,
                     "path": "",
                     "path_verbose": "",
@@ -99,10 +100,11 @@
         //Obtiene todos los campos de un modelo, dado un ID de modelo, y como opcion una ruta (path)
         // y un nombre de campo (field) para mapear la ruta necesaria al crear el fieldset
         // o filterset del reporte
-        function getFields(id,requestPath,field){
-            if(requestPath!==undefined) {
-                if(field!==undefined) {
-                    var request = {
+        function getFields(id, requestPath, field) {
+            var request;
+            if(angular.isDefined(requestPath)) {
+                if(angular.isDefined(field)) {
+                    request = {
                         "model": id,
                         "path": requestPath,
                         "path_verbose": "",
@@ -110,7 +112,7 @@
                     };
                 }
                 else{
-                    var request = {
+                    request = {
                         "model": id,
                         "path": requestPath,
                         "path_verbose": "",
@@ -119,7 +121,7 @@
                 }
             }
             else{
-                var request = {
+                request = {
                     "model": id,
                     "path": "",
                     "path_verbose": "",

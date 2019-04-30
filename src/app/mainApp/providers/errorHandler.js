@@ -64,9 +64,9 @@
                     case 400:
                         if (response.data) {
                             if (response.data.message){
-                                console.log(response.data.message)
+                                $log.error(response.data.message);
                                 var temporal="ERRORS."+response.data.message;
-                                console.log(temporal);
+                                $log.error(temporal);
                                 translatemsg = Translate.translate(temporal);
 
                                 toastr.error(translatemsg, errorTitle);

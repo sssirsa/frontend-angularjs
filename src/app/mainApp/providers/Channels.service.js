@@ -1,29 +1,27 @@
 /**
  * Created by amezc on 21/11/2016.
  */
-(function() {
+(function () {
     'use strict';
-
     angular
         .module('app')
         .factory('Channel', Channel);
 
     /* @ngInject */
-    function Channel() {
-
+    function Channel(_) {
         var channels_reference = [];
 
         return {
-            add:add,
-            get:get,
-            all:all,
-            clear:clear
+            add: add,
+            get: get,
+            all: all,
+            clear: clear
         };
         function all() {
             return channels_reference;
         }
         function clear() {
-            channels_reference=[];
+            channels_reference = [];
         }
         function add(channel) {
             channels_reference.push(channel);
@@ -35,4 +33,4 @@
         }
     }
 
-})();
+}) ();

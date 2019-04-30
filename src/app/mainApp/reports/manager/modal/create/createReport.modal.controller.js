@@ -11,7 +11,7 @@
         .module('app.mainApp.reports')
         .controller('CreateReportModalController', CreateReportModalController);
 
-    function CreateReportModalController( Reportes, $mdDialog, $state) {
+    function CreateReportModalController( Reportes, $mdDialog) {
         var vm = this;
         //Function parsing
         vm.create = create;
@@ -27,7 +27,6 @@
 
         function activate() {
             vm.modelos = Reportes.getModels();
-            console.log(vm.modelos);
             vm.report = report;
         }
 

@@ -11,7 +11,8 @@
         Translate,
         $scope,
         URLS,
-        EnvironmentConfig
+        EnvironmentConfig,
+        _
     ) {
         var vm = this;
         vm.isClient = true;
@@ -62,8 +63,7 @@
             vm.erroNumSolConf = Translate.translate('ADMIN_PERSONA.ERROR_MESSAGE.ERRORNUMSOLCONF');
             groups.list().then(function (rest) {
                 vm.grupos = rest;
-            }).catch(function (error) {
-
+            }).catch(function () {
             });
         }
 
@@ -126,22 +126,21 @@
 
             if (vm.user_ini.sucursal == null)
                 delete vm.user_ini['sucursal'];
-            Persona_Admin.createObject(vm.user_ini).then(function (res) {
+            Persona_Admin.createObject(vm.user_ini).then(function () {
                 toastr.success(vm.successCreateMessage);
                 clean();
-                var grupo = _.findWhere(vm.grupos, { name: "Administrador" });
-                var role = null;
-                if (vm.user_ini.user.role == grupo.id && vm.user_ini.sucursal != null) {
-                    role = 0;
-                } else {
-                    role = vm.user_ini.user.role;
-                }
-                var request = {
-                    username: vm.user_ini.user.username,
-                    name: vm.user_ini.nombre + " " + vm.user_ini.apellido_paterno + " " + vm.user_ini.apellido_materno,
-                    office: vm.user_ini.sucursal,
-                    profile: role
-                };
+                //var grupo = _.findWhere(vm.grupos, { name: "Administrador" });
+                //if (vm.user_ini.user.role == grupo.id && vm.user_ini.sucursal != null) {
+                //    role = 0;
+                //} else {
+                //    role = vm.user_ini.user.role;
+                //}
+                //var request = {
+                //    username: vm.user_ini.user.username,
+                //    name: vm.user_ini.nombre + " " + vm.user_ini.apellido_paterno + " " + vm.user_ini.apellido_materno,
+                //    office: vm.user_ini.sucursal,
+                //    profile: role
+                //};
                 // NotificationPanel.createUser(request).then(function () {
                 //     toastr.success(vm.successCreateMessage, vm.successTitle);
                 //     cancel();
@@ -165,12 +164,11 @@
             vm.user_ini = _.clone(vm.user_vacio);
             vm.picFoto = null;
             vm.picIFE = null;
-            vm.ifeByPass = null
+            vm.ifeByPass = null;
             vm.fotoByPass = null;
 
-            vm.cpassword = ''
+            vm.cpassword = '';
         }
-
 
         function selectionFoto($files) {
             if ($files.length > 0) {
@@ -191,9 +189,7 @@
             } else {
                 if (vm.fotoByPass != null) {
                     vm.picFoto = vm.fotoByPass;
-                    console.log("algo");
                 }
-
             }
 
         }
@@ -217,7 +213,6 @@
             } else {
                 if (vm.ifeByPass != null) {
                     vm.picIFE = vm.ifeByPass;
-                    console.log("algo2");
                 }
 
             }

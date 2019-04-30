@@ -4,12 +4,14 @@
         .constant('MANAGEMENT', {
             administration: {
                 base: 'manage_system',
-                my_groups: 'my_groups',
+                employees:'employees',
                 groups: 'groups',
+                my_groups: 'my_groups',
                 person: {
                     base: 'persona',
                     admin: 'persona_admin',
-                    capturist: 'persona_capturista'
+                    capturist: 'persona_capturista',
+                    employees:'employees'
                 }
             },
             base: 'management',

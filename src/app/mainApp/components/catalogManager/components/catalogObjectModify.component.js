@@ -10,7 +10,7 @@
                 fields: '<'
             }
         });
-    function CatalogObjectModifyController() {
+    function CatalogObjectModifyController($log) {
         var vm = this;
 
         vm.objectToModify = vm.element;
@@ -33,19 +33,19 @@
 
         vm.filesSelected = function filesSelected(files, field) {
             //fileProcessing MUST be a function in case it exists
-            let fileProcessing = field.fileUploader['filesSelected'];
+            var fileProcessing = field.fileUploader['filesSelected'];
             if (fileProcessing) {
                 files = fileProcessing(files);
             }
             vm.objectToModify[field.model] = files;
-        }
+        };
 
         vm.onElementSelect = function onElementSelect(element, field) {
             if (element) {
                 vm.objectToModify[field.model] = element;
                 loadCatalogDependance(element, field.model);
             }
-        }
+        };
 
         function loadCatalogDependance(element, fieldName) {
             //Validating that a element has been provided
@@ -64,7 +64,7 @@
                                     field.catalog.query_value = element;
                                 }
                                 else {
-                                    console.error('No query has been provided in the catalog object of the field:'
+                                    $log.error('No query has been provided in the catalog object of the field:'
                                         + field.model + ' @function loadCatalogDependance @controller CatalogModifyDialogController');
                                 }
                             }
@@ -74,11 +74,12 @@
             }
             else {
                 //Unreachable unless code changes are done
-                console.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogModifyDialogController');
+                $log.error('No element has been provided for querying, @function loadCatalogDependance @controller CatalogModifyDialogController');
             }
         }
 
         function bindData() {
+            var catalogElement;
             angular.forEach(
                 vm.fields,
                 function bindDataRepeater(field) {
@@ -88,8 +89,8 @@
                         //&& field.type !== 'array_object'
                         && field.type !== 'fileUploader') {
                         if (field.bindTo) {
-                            vm.objectToModify[field.model] = JSON.parse(
-                                JSON.stringify(
+                            vm.objectToModify[field.model] = angular.fromJson(
+                                angular.toJson(
                                     vm.objectToModify[field.bindTo]
                                 ));
                             delete (vm.objectToModify[field.bindTo]);
@@ -98,29 +99,29 @@
                     if (field.type === 'catalog') {
                         if (field.bindTo) {
                             if (vm.objectToModify[field.bindTo]) {
-                                let catalogElement = JSON.parse(
-                                    JSON.stringify(
+                                catalogElement = angular.fromJson(
+                                    angular.toJson(
                                         vm.objectToModify[field.bindTo]
                                     ))[field.catalog.model];
                                 vm.objectToModify[field.model] = catalogElement;
                                 delete (vm.objectToModify[field.bindTo]);
                             }
                             else {
-                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.bindTo] is undefined',
+                                $log.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.bindTo] is undefined',
                                     field.bindTo,
                                     vm.objectToModify);
                             }
                         }
                         else {
                             if (vm.objectToModify[field.model]) {
-                                let catalogElement = JSON.parse(
-                                    JSON.stringify(
+                                catalogElement = angular.fromJson(
+                                    angular.toJson(
                                         vm.objectToModify[field.model]
                                     ))[field.catalog.model];
                                 vm.objectToModify[field.model] = catalogElement;
                             }
                             else {
-                                console.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.model] is undefined',
+                                $log.error('@CatalogObjectModify Component, @bindData function, vm.objectToModify[field.model] is undefined',
                                     field.model,
                                     vm.objectToModify);
                             }
@@ -139,17 +140,17 @@
                             vm.objectToModify[field.model]
                             || vm.objectToModify[field.bindTo]
                         ) {
-                            let tempCatalogArray;
+                            var tempCatalogArray;
                             if (field.bindTo) {
-                                tempCatalogArray = JSON.parse(
-                                    JSON.stringify(
+                                tempCatalogArray = angular.fromJson(
+                                    angular.toJson(
                                         vm.objectToModify[field.bindTo]
                                     ));
                                 delete (vm.objectToModify[field.bindTo]);
                             }
                             else {
-                                tempCatalogArray = JSON.parse(
-                                    JSON.stringify(
+                                tempCatalogArray = angular.fromJson(
+                                    angular.toJson(
                                         vm.objectToModify[field.model]
                                     ));
                             }
@@ -158,8 +159,8 @@
                                 vm.objectToModify[field.model] = [];
                             }
 
-                            vm[field.model + '_initial'] = JSON.parse(
-                                JSON.stringify(
+                            vm[field.model + '_initial'] = angular.fromJson(
+                                angular.toJson(
                                     tempCatalogArray
                                 ));
 
@@ -178,28 +179,28 @@
             );
         }
 
-        vm.onArrayElementSelect = function onArrayElementSelect(element, field, value) {
+        vm.onArrayElementSelect = function onArrayElementSelect(element, field) {
             if (field.hasOwnProperty('validations')
                 && field.validations.hasOwnProperty('max')
                 && !(field.validations.max <= vm.objectToModify[field.model].length)) {
-                console.error('Maximum quantity of "catalog_array" objects has been reached'
+                $log.error('Maximum quantity of "catalog_array" objects has been reached'
                     + '@function onArrayElementSelect @controller CatalogModifyDialogController');
             }
             else {
                 vm.objectToModify[field.model] = element;
             }
 
-        }
+        };
 
         vm.addObjectToArray = function addObjectToArray(field) {
             if (!vm.objectToModify[field.model]) {
                 vm.objectToModify[field.model] = [];
             }
             vm.objectToModify[field.model].push({});
-        }
+        };
 
         vm.removeObjectToArray = function removeObjectToArray(field, index) {
             vm.objectToModify[field.model].splice(index, 1);
-        }
+        };
     }
 })();

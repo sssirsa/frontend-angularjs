@@ -3,12 +3,17 @@
  */
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp.service')
         .controller('ListReportsController', ListReportsController);
 
-    function ListReportsController(Reportes, toastr, Translate,$window) {
+    function ListReportsController(
+        Reportes,
+        toastr,
+        Translate,
+        $window,
+        _
+    ) {
         var vm = this;
         vm.selectedReport = selectedReport;
         vm.downloadReport = downloadReport;
@@ -19,12 +24,12 @@
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.successRemission = Translate.translate('MAIN.MSG.SUCCESS_REPORT');
             vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.loadingPromise=Reportes.getReportsGenerated().then(function (res) {
+            vm.loadingPromise = Reportes.getReportsGenerated().then(function (res) {
                 vm.reports = res;
-                vm.reports=_.sortBy(vm.reports, 'name');
-            }).catch(function (err) {
+                vm.reports = _.sortBy(vm.reports, 'name');
+            }).catch(function () {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
-            })
+            });
 
 
         }

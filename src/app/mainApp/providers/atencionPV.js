@@ -7,18 +7,17 @@
 
     function atencionPV(
         API,
-        $window,
         URLS) {
-        //TODO:Replace with the correct constant, don't use mobile
-        //var baseUrl=API.all(URLS.mobile.base).all(URLS.atencion_pv);
-        //var insumosURL=API.all(URLS.mobile.base).all(URLS.catalogo_insumos);
+        var baseUrl = API.all(URLS.salepoint.base);
+        //TODO: change logic to use the new assets endpoints
+        //var insumosURL = API.all(URLS.mobile.base).all(URLS.catalogo_insumos);
 
         var service = {
             getByID: getByID,
             getAll: getAll,
             getInsumos: getInsumos,
             putActualiza: putActualiza,
-            getReport:getReport
+            getReport: getReport
         };
 
         function getByID(id) {
@@ -32,8 +31,9 @@
             return baseUrl.getList();
         }
 
-        function getInsumos(economico) {
-            return insumosURL.all(economico).getList();
+        function getInsumos() {
+            //TODO: change logic to use the new assets functionality and endpoints
+            //return insumosURL.all(economico).getList();
         }
 
         function putActualiza(id, data) {

@@ -10,7 +10,7 @@
     function allowPattern() {
         return {
             restrict: "A",
-            compile: function (tElement, tAttrs) {
+            compile: function () {
                 return function (scope, element, attrs) {
                     // I handle key events
                     element.bind("keypress", function (event) {

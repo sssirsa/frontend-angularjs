@@ -56,7 +56,7 @@
             //New module separation
             //Note: if a new module constant is registered,
             //then it must be added trough the mainApp config file.
-            com: {},
+            com: {}, //Add at config file
             entries_departures: {}, //Added at config file
             geoLocation: 'https://www.google.com/maps/search/?api=1&query=',
             inventory: {}, //Added at config file
@@ -75,9 +75,8 @@
             },
             credentials: 'credenciales',
             map: 'https://maps.googleapis.com/maps/api/staticmap',
-            tecnicosDisponibles: 'employees'
-            //report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
-            //reporte_insumos: 'reports/insumos',
+            report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
+            reporte_insumos: 'reports/insumos'
 
         })
         .constant('QUERIES', {
@@ -143,31 +142,30 @@
             }
         })
         .constant('SCORES',
-            [
-                {
-                    value: 0,
-                    label: '☆☆☆☆☆'
-                },
-                {
-                    value: 1,
-                    label: '★☆☆☆☆'
-                },
-                {
-                    value: 2,
-                    label: '★★☆☆☆'
-                },
-                {
-                    value: 3,
-                    label: '★★★☆☆'
-                },
-                {
-                    value: 4,
-                    label: '★★★★☆'
-                },
-                {
-                    value: 5,
-                    label: '★★★★★'
-                }]
+            [{
+                value: 0,
+                label: '☆☆☆☆☆'
+            },
+            {
+                value: 1,
+                label: '★☆☆☆☆'
+            },
+            {
+                value: 2,
+                label: '★★☆☆☆'
+            },
+            {
+                value: 3,
+                label: '★★★☆☆'
+            },
+            {
+                value: 4,
+                label: '★★★★☆'
+            },
+            {
+                value: 5,
+                label: '★★★★★'
+            }]
         )
         .constant('KEYS', {
             MAPS_KEY: 'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
@@ -176,6 +174,8 @@
             total: 'count',
             next: 'next',
             previous: 'previous',
-            elements: 'results'
+            elements: 'results',
+            limit: 'limit',
+            offset:'offset'
         });
-}) ();
+})();

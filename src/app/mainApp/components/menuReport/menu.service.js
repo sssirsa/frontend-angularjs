@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('app')
-        .service('ReportSelected', ReportSelected);
+        .factory('ReportSelected', ReportSelected);
     /* @ngInject */
     function ReportSelected() {
         this.create = function ( name) {

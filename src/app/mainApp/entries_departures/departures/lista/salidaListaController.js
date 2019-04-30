@@ -3,27 +3,38 @@
  */
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp.entries_departures.departures')
         .controller('salidaListadoController', salidaListadoController)
-        .filter('moment', momentFecha) ;
+        .filter('moment', momentFecha);
 
-    function salidaListadoController($http,CabinetEntradaSalida, EntradaSalida,$mdDialog, Helper, toastr, Translate) {
+    function salidaListadoController(
+        $http,
+        CabinetEntradaSalida,
+        EntradaSalida,
+        $mdDialog,
+        Helper,
+        toastr,
+        Translate,
+        $window,
+        $log,
+        pdfMake,
+        _
+    ) {
         var vm = this;
         vm.selectedSalida = selectedSalida;
         vm.generarRemision = generarRemision;
-        vm.selectedItemChange=selectedItemChange;
+        vm.selectedItemChange = selectedItemChange;
         vm.lookup = lookup;
         vm.querySearch = querySearch;
-        vm.remove=remove;
-        vm.selectedCabinets=[];
-        vm.myHeight=window.innerHeight-250;
-        vm.myStyle={"min-height":""+vm.myHeight+"px"};
+        vm.remove = remove;
+        vm.selectedCabinets = [];
+        vm.myHeight = $window.innerHeight - 250;
+        vm.myStyle = { "min-height": "" + vm.myHeight + "px" };
         vm.searchText = '';
         activate();
         function sortByDate(array) {
-            return _.sortBy(array, function(o) { var dt = new Date(o.fecha); return -dt; })
+            return _.sortBy(array, function (o) { var dt = new Date(o.fecha); return -dt; });
         }
 
 
@@ -32,61 +43,60 @@
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
             vm.successRemission = Translate.translate('MAIN.MSG.SUCCESS_REMISSION');
             vm.errorMessage = Translate.translate('MAIN.MSG.ERROR_MESSAGE');
-            vm.deleteButton=Translate.translate('MAIN.BUTTONS.DELETE');
-            vm.cancelButton=Translate.translate('MAIN.BUTTONS.CANCEL');
-            vm.dialogTitle=Translate.translate('MAIN.DIALOG.DELETE_TITLE');
-            vm.dialogMessage=Translate.translate('MAIN.DIALOG.DELETE_MESSAGE_CABINETS');
-            vm.successDelete=Translate.translate('OUTPUT_LIST.FORM.DIALOG.DELETED_CABIENTS');
+            vm.deleteButton = Translate.translate('MAIN.BUTTONS.DELETE');
+            vm.cancelButton = Translate.translate('MAIN.BUTTONS.CANCEL');
+            vm.dialogTitle = Translate.translate('MAIN.DIALOG.DELETE_TITLE');
+            vm.dialogMessage = Translate.translate('MAIN.DIALOG.DELETE_MESSAGE_CABINETS');
+            vm.successDelete = Translate.translate('OUTPUT_LIST.FORM.DIALOG.DELETED_CABIENTS');
             getOutput();
         }
-        function remove(ev) {
+        function remove() {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
                 .textContent(vm.dialogMessage)
                 .ariaLabel('Confirmar eliminación')
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function() {
-                var request={
-                    cabinet_entrada_salida:vm.selectedCabinets
+            $mdDialog.show(confirm).then(function () {
+                var request = {
+                    cabinet_entrada_salida: vm.selectedCabinets
                 };
-                CabinetEntradaSalida.restore(request).then(function (res) {
-                    if(vm.selectedCabinets.length==1){
+                CabinetEntradaSalida.restore(request).then(function () {
+                    if (vm.selectedCabinets.length == 1) {
                         getOutput();
-                        vm.selectedSalidaList =null;
+                        vm.selectedSalidaList = null;
                     }
 
-                    vm.selectedCabinets=[];
+                    vm.selectedCabinets = [];
                     selectedItemChange(vm.selectedSalidaList);
 
-                    toastr.success(vm.successDelete,vm.successTitle);
+                    toastr.success(vm.successDelete, vm.successTitle);
                 }).catch(function (res) {
-                    console.log(res);
+                    $log.error(res);
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
-            }, function() {
+            }, function () {
 
             });
         }
         function selectedSalida(item) {
             vm.selectedSalidaList = item;
             EntradaSalida.getCabinetsEntradaSalida(vm.selectedSalidaList.id).then(function (res) {
-                vm.cabinets=res;
-                _.each(vm.cabinets, function(element, index) {
-                    _.extend(element, {id: element.id.toString()});
+                vm.cabinets = res;
+                _.each(vm.cabinets, function (element) {
+                    _.extend(element, { id: element.id.toString() });
                 });
             });
         }
-        function selectedItemChange(item)
-        {
-            if (item!=null) {
+        function selectedItemChange(item) {
+            if (item != null) {
                 vm.selectedSalidaList = angular.copy(item);
                 EntradaSalida.getCabinetsEntradaSalida(vm.selectedSalidaList.id).then(function (res) {
-                    vm.cabinets=res;
+                    vm.cabinets = res;
                 });
 
-            }else{
-               // cancel();
+            } else {
+                // cancel();
             }
         }
         function generarRemision() {
@@ -94,9 +104,6 @@
 
             vm.loadingPromise = $http.get('app/mainApp/entries_departures/departures/lista/formato.json').then(function (col) {
                 EntradaSalida.getRemision(vm.selectedSalidaList.id).then(function (res) {
-                    console.log(col.data);
-                    console.log(col);
-                    console.log(res);
                     col.content[0].table.body[1][0].stack[2].text = res.udn.agencia + "\n" + res.udn.direccion;//Direccion UDN
                     col.content[0].table.body[1][1].stack[2].text = res.sucursal.nombre + "\n " + res.sucursal.direccion;//Almacen general
                     col.content[0].table.body[2][0].stack[2].text = res.cliente === null ? "No tiene" : res.cliente;//Datos del cliente
@@ -111,18 +118,18 @@
                     if (res.cabinets.length == 0) {
                         col.content[4].table.body.splice(0, 1);
                     }
-                    var contador=res.cabinets.length;
-                    var cabinets=_.sortBy(res.cabinets, 'economico' );
-                    res.cabinets=cabinets.reverse();
+                    var contador = res.cabinets.length;
+                    var cabinets = _.sortBy(res.cabinets, 'economico');
+                    res.cabinets = cabinets.reverse();
 
-                    res.cabinets.forEach(function (value, index) {
+                    res.cabinets.forEach(function (value) {
 
                         var arreglo = [];
                         if (value.diagnostico != null) {
                             var puertas = value.diagnostico.puertas == true ? 'Si' : 'No';
-                            arreglo = [{"text":contador.toString(),"style": "extra_small"},{"text":  value.economico,"style": "extra_small"}, {"text": value.modelo.marca.descripcion,"style": "extra_small"}, {"text": value.no_serie,"style": "extra_small"}, "",{"text": puertas,"style": "extra_small"},{"text": value.diagnostico.canastillas.toString(),"style": "extra_small"}];
+                            arreglo = [{ "text": contador.toString(), "style": "extra_small" }, { "text": value.economico, "style": "extra_small" }, { "text": value.modelo.marca.descripcion, "style": "extra_small" }, { "text": value.no_serie, "style": "extra_small" }, "", { "text": puertas, "style": "extra_small" }, { "text": value.diagnostico.canastillas.toString(), "style": "extra_small" }];
                         } else {
-                            arreglo = [{"text":contador.toString(),"style": "extra_small"}, {"text":  value.economico,"style": "extra_small"}, {"text": value.modelo.marca.descripcion,"style": "extra_small"}, {"text": value.no_serie,"style": "extra_small"}, " ", {"text":"N/A","style": "extra_small"}, {"text":"N/A","style": "extra_small"}];
+                            arreglo = [{ "text": contador.toString(), "style": "extra_small" }, { "text": value.economico, "style": "extra_small" }, { "text": value.modelo.marca.descripcion, "style": "extra_small" }, { "text": value.no_serie, "style": "extra_small" }, " ", { "text": "N/A", "style": "extra_small" }, { "text": "N/A", "style": "extra_small" }];
                         }
                         col.content[4].table.body.splice(1, 0, arreglo);
                         contador--;
@@ -131,7 +138,7 @@
                     toastr.success(vm.successRemission, vm.successTitle);
                     pdfMake.createPdf(col).download("Remision-Folio-" + vm.selectedSalidaList.id.toString() + ".pdf");
                 }).catch(function (err) {
-                    console.log(err)
+                    $log.error(err);
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
 
@@ -143,7 +150,7 @@
                 vm.salidas = res;
                 vm.salidas = sortByDate(vm.salidas);
             }).catch(function (err) {
-                console.log(err);
+                $log.log(err);
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             });
         }
@@ -162,7 +169,7 @@
     function momentFecha() {
         return function (dateString, format) {
             return moment(dateString).format(format);
-        }
+        };
     }
 
 })();

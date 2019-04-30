@@ -8,97 +8,82 @@ services:
     - docker:dind
 
 stages:
-    - dep
     - configuration
+    - lint
     - deploy
 
-
 configuration:
-  stage: configuration
-  image: quay.io/coreos/awscli:master
-  script:
-    - mkdir -p config
-    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
-    - aws s3 cp s3://file-production/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
-  cache:
-    untracked: true
-    paths:
-     - config/
-     - gulp/deploy.js
-  artifacts:
-    paths:
-     - config/
-     - gulp/deploy.js
-  only:
-    - development
-    - staging
-    - master
-    - feature/TicketCreate
-  tags:
-    - frontend
-
-deploy:
-    stage: deploy
-    image: node:10.2.1
-    before_script:
-        - npm i socket.io@2.1.1
-        - npm install fs-extra@4.0.1
-        - npm install graceful-fs@4.1.11
-        - npm i minimatch@3.0.4
-        - npm i karma@2.0.2
-        - npm install gulp
+    stage: configuration
+    image: quay.io/coreos/awscli:master
     script:
-        - rm -rf dist/
-        - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
-    dependencies:
-        - npm
-        - bower
-        - configuration
-    only:
-        - development
-        - staging
-        - master
-    tags:
-        - frontend
-
-deploy_feature:
-    stage: deploy
-    image: node:10.2.1
-    before_script:
-        - npm i socket.io@2.1.1
-        - npm install fs-extra@4.0.1
-        - npm install graceful-fs@4.1.11
-        - npm i minimatch@3.0.4
-        - npm i karma@2.0.2
-        - npm install gulp
-    script:
-        - rm -rf dist/
-        - ./node_modules/.bin/gulp deploy --env development
-    dependencies:
-        - npm
-        - bower
-        - configuration
-    only:
-        - feature/TicketCreate
-    tags:
-        - frontend
-
-npm:
-    stage: dep
-    image: node:10.2.1
-    script:
-        - npm install
+        - mkdir -p config
+        - aws s3 cp s3://${BUCKET_S3}/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/config/config.json config/config.json
+        - aws s3 cp s3://${BUCKET_S3}/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/deploy.js gulp/deploy.js
+        - aws s3 cp s3://${BUCKET_S3}/deploy/${PROJECT_BASE}/${CI_PROJECT_NAME}/scripts.js gulp/scripts.js
     cache:
         untracked: true
         paths:
-            - node_modules/
+            - config/
+            - gulp/deploy.js
+            - gulp/scripts.js
     artifacts:
         paths:
-            - node_modules/
+            - config/
+            - gulp/deploy.js
+            - gulp/scripts.js
     only:
         - development
-        - master
         - staging
+        - master
+        - merge_requests
+    tags:
+        - frontend
+
+.lint_script: &lint_script
+    stage: lint
+    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${BRANCH}
+    script:
+        - mv /usr/app/* .
+        - ./node_modules/.bin/gulp scripts
+    dependencies:
+        - configuration
+    tags:
+        - frontend
+
+lint:all:
+    <<: *lint_script
+    variables:
+        BRANCH: ${CI_COMMIT_REF_NAME}
+    only:
+        - staging
+        - development
+
+lint:test:
+    <<: *lint_script
+    variables:
+        BRANCH: ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+    only:
+        - merge_requests
+
+lint:latest:
+    <<: *lint_script
+    variables:
+        BRANCH: "latest"
+    only:
+        - master
+
+deploy:
+    stage: deploy
+    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${CI_COMMIT_REF_NAME}
+    script:
+        - mv * /usr/app
+        - cd /usr/app
+        - rm -rf dist/
+        - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
+    only:
+        - development
+        - staging
+        - master
     tags:
         - frontend
 

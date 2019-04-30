@@ -14,7 +14,9 @@
         ErrorHandler,
         States,
         Cities,
-        Localities) {
+        Localities,
+        _
+    ) {
         var vm = this;
 
         //Variables

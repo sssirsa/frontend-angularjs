@@ -4,9 +4,21 @@
     'use strict';
     angular
         .module('app.mainApp')
-        .controller('cabinetController',cabinetController);
+        .controller('CabinetController',CabinetController);
 
-    function cabinetController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler, EnvironmentConfig, QUERIES)
+    function CabinetController(
+        cabinetUC,
+        $mdDialog,
+        data,
+        $scope,
+        toastr,
+        Translate,
+        URLS,
+        ErrorHandler,
+        EnvironmentConfig,
+        QUERIES,
+        _
+    )
     {
         var vm = this;
 

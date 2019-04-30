@@ -10,7 +10,7 @@
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_brand);
         vm.name = 'Catálogo de DEMO';
 
-        const brandUrl = (EnvironmentConfig.site.rest.api)
+        var brandUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_brand);
 
         //Labels
@@ -223,13 +223,13 @@
                                 label: ''
                             }
                         ]
-                    },
+                    }
                     //{
                     //    type: 'fileUploader',
                     //    model: 'file',
                     //    fileUploader: {
                     //        filesSelected: function fileProcessing(files) {
-                    //            let processedFiles = [];
+                    //            var processedFiles = [];
                     //            angular.forEach(files, function (image) {
                     //                var base64Image = null;
                     //                var fileReader = new FileReader();
@@ -901,12 +901,10 @@
                     }
                 ]
             }
-        }
+        };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
         }
 
     }

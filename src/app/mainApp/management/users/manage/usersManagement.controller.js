@@ -11,8 +11,12 @@
         toastr,
         Translate,
         $mdDialog,
-        Persona_Admin,        
-        Persona) {
+        $document,
+        Persona_Admin,
+        //Administration,
+        Persona,
+        _
+    ) {
 
         var vm = this;
         vm.lookup = lookup;
@@ -24,10 +28,9 @@
         vm.remove = remove;
         vm.update = update;
         vm.getPersonaAdmin = getPersonaAdmin;
-        vm.addGroup = addGroup;
-        vm.removeGroup = removeGroup;
-
-        vm.loadGrupo = loadGroup;
+        //vm.addGroup = addGroup;
+        //vm.removeGroup = removeGroup;
+        //vm.loadGrupo = loadGroup;
         vm.selectedIndex = 0;
         vm.picFoto = "assets/images/modelo.svg";
         vm.search_items = [];
@@ -85,21 +88,21 @@
         }
 
         function getPersonaAdmin() {
-            vm.loadingPromise = Persona_Admin.listPromise(200,0).then(function (rest) {
+            vm.loadingPromise = Persona_Admin.listPromise(200, 0).then(function (rest) {
                 vm.personas_admin = rest.results;
                 Persona.listProfile().then(function (rest) {
                     vm.user_ini = rest;
                     vm.personas_admin = _.filter(vm.personas_admin, function (item) {
                         return item.id != vm.user_ini.id;
                     });
-                }).catch(function (error) {
+                }).catch(function () {
                 });
-            }).catch(function (error) {
+            }).catch(function () {
 
             });
         }
 
-        function remove(ev) {
+        function remove() {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
                 .textContent(vm.dialogMessage)
@@ -107,31 +110,11 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Persona_Admin.deleteData(vm.persona).then(function (rest) {
+                Persona_Admin.deleteData(vm.persona).then(function () {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     getPersonaAdmin();
                     cancel();
                     activate();
-                }).catch(function (res) {
-                    toastr.warning(vm.errorMessage, vm.errorTitle);
-                });
-            }, function () {
-
-            });
-
-        }
-
-        function removeGroup(grupo) {
-            var confirm = $mdDialog.confirm()
-                .title(vm.dialogTitle)
-                .textContent(vm.dialogDeleteGroupMessage)
-                .ariaLabel('Confirmar eliminación')
-                .ok(vm.deleteButton)
-                .cancel(vm.cancelButton);
-            $mdDialog.show(confirm).then(function () {
-                Administration.deleteGroup(grupo).then(function () {
-                    loadGroup(vm.persona.user);
-                    toastr.success(vm.successDeleteMessage, vm.successTitle);
                 }).catch(function () {
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
@@ -141,11 +124,31 @@
 
         }
 
-        function loadGroup(usuario) {
-            vm.loadingPromiseGroup = Administration.getGroups(usuario.username).then(function (groups_response) {
-                vm.grupo_user = groups_response;
-            });
-        }
+        //function removeGroup(grupo) {
+        //    var confirm = $mdDialog.confirm()
+        //        .title(vm.dialogTitle)
+        //        .textContent(vm.dialogDeleteGroupMessage)
+        //        .ariaLabel('Confirmar eliminación')
+        //        .ok(vm.deleteButton)
+        //        .cancel(vm.cancelButton);
+        //    $mdDialog.show(confirm).then(function () {
+        //        Administration.deleteGroup(grupo).then(function () {
+        //            loadGroup(vm.persona.user);
+        //            toastr.success(vm.successDeleteMessage, vm.successTitle);
+        //        }).catch(function () {
+        //            toastr.warning(vm.errorMessage, vm.errorTitle);
+        //        });
+        //    }, function () {
+
+        //    });
+
+        //}
+
+        //function loadGroup(usuario) {
+        //    vm.loadingPromiseGroup = Administration.getGroups(usuario.username).then(function (groups_response) {
+        //        vm.grupo_user = groups_response;
+        //    });
+        //}
 
         function update() {
             vm.personaUpdate.id = vm.persona.id;
@@ -156,16 +159,15 @@
             vm.personaUpdate.direccion = vm.persona.direccion;
             vm.personaUpdate.telefono = vm.persona.telefono;
 
-            Persona_Admin.modify(vm.personaUpdate).then(function (res) {
+            Persona_Admin.modify(vm.personaUpdate).then(function () {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.warning(vm.errorMessage, vm.errorTitle);
             });
 
         }
-
 
         function cancel() {
             $scope.objectForm.$setPristine();
@@ -175,33 +177,33 @@
             vm.searchText = '';
         }
 
-        function addGroup(event) {
-            var config = {
-                controller: 'assignGroupDialogController',
-                controllerAs: 'vm',
-                bindToController: true,
-                templateUrl: 'app/mainApp/management/users/modal/assignGroupDialog.tmpl.html',
-                parent: angular.element(document.body),
-                targetEvent: event,
-                clickOutsideToClose: true,
-                fullscreen: false,
-                locals: {
-                    groups_user: vm.grupo_user
-                }
-            };
-            $mdDialog.show(config).then(function (object) {
-                    vm.group_persona.grupo_id = _.pluck(object, "id");
-                    vm.group_persona.persona = vm.persona.id;
-                    Administration.createGroup(vm.group_persona).then(function () {
-                        vm.group_persona = angular.copy(group_persona);
-                        toastr.success(vm.successAddedGroupMessage, vm.successTitle);
-                        loadGroup(vm.persona.user);
-                    }).catch(function (err) {
-                        toastr.warning(vm.errorMessage, vm.errorTitle);
-                    });
-                }
-            );
-        }
+        //function addGroup(event) {
+        //    var config = {
+        //        controller: 'assignGroupDialogController',
+        //        controllerAs: 'vm',
+        //        bindToController: true,
+        //        templateUrl: 'app/mainApp/management/users/modal/assignGroupDialog.tmpl.html',
+        //        parent: angular.element($document.body),
+        //        targetEvent: event,
+        //        clickOutsideToClose: true,
+        //        fullscreen: false,
+        //        locals: {
+        //            groups_user: vm.grupo_user
+        //        }
+        //    };
+        //    $mdDialog.show(config).then(function (object) {
+        //        vm.group_persona.grupo_id = _.pluck(object, "id");
+        //        vm.group_persona.persona = vm.persona.id;
+        //        Administration.createGroup(vm.group_persona).then(function () {
+        //            vm.group_persona = angular.copy(group_persona);
+        //            toastr.success(vm.successAddedGroupMessage, vm.successTitle);
+        //            loadGroup(vm.persona.user);
+        //        }).catch(function () {
+        //            toastr.warning(vm.errorMessage, vm.errorTitle);
+        //        });
+        //    }
+        //    );
+        //}
 
         function clean() {
             $scope.objectForm.$setPristine();
@@ -247,7 +249,7 @@
 
     }
 
-    function personaSearch() {
+    function personaSearch(_) {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
                 return input;

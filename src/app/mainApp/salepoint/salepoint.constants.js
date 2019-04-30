@@ -10,6 +10,8 @@
                 segmentation:'segmentacion',
                 states: 'estado',
                 stores:'establecimiento'
-            }
+            },
+            preRequest:'pre_request',
+            requests:'request'
         });
 }) ();
