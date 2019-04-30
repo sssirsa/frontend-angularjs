@@ -7,17 +7,17 @@
 
     function Persona_Admin(
         API,
-        URLS,
-        MANAGEMENT
+        URLS
     ) {
 
-        var baseModelo = API.all(MANAGEMENT.base
-            + '/' + MANAGEMENT.administration.base
-            + '/' + MANAGEMENT.administration.person.admin);
+        var baseModelo = API.all(URLS.management.base
+            + '/' + URLS.management.administration.base
+            + '/' + URLS.management.administration.person.admin);
+        var manageSystem = API.all(URLS.management.base
+            + '/' + URLS.management.administration.base);
 
         return {
             list: list,
-            listCanonico: listCanonico,
             update: update,
             create: create,
             createObject: createObject,
@@ -40,14 +40,14 @@
             form_data.append('telefono', data.telefono);
             form_data.append('ife', data.ife);
             form_data.append('foto', data.foto);
-            if (data.sucursal != undefined)
+            if (angular.isDefined(data.sucursal))
                 form_data.append('sucursal', data.sucursal);
 
 
             //var defer= $q.defer();
             return baseModelo
-                .withHttpConfig({transformRequest: angular.identity})
-                .customPOST(form_data, "", {}, {'Content-Type': undefined});
+                .withHttpConfig({ transformRequest: angular.identity })
+                .customPOST(form_data, "", {}, { 'Content-Type': undefined });
             //.then(function(res){
             //    defer.resolve(res);
             //}).catch(function(err){
@@ -61,11 +61,10 @@
         }
 
         function list() {
-            return baseModelo.getList().$object;
-        }
-
-        function listCanonico() {
-            return baseModelo.customGET();//prueba
+            return API.all(URLS.management.base
+                + '/' + URLS.management.administration.base
+                + '/' + URLS.management.administration.person.admin)
+                .customGET();
         }
 
         function update(object) {
@@ -77,17 +76,18 @@
         }
 
         function remove(object) {
-            return baseModelo.customDELETE(object.id, null, {'content-type': 'application/json'});
+            return baseModelo.customDELETE(object.id, null, { 'content-type': 'application/json' });
         }
 
         function modify(object) {
-            return baseModelo.all(object.id).customPUT(object, null, {'content-type': 'application/json'});
+            return baseModelo.all(object.id).customPUT(object, null, { 'content-type': 'application/json' });
         }
 
         function listPromise(limit, offset) {
-            return API
-                .all(URLS.mobile.base)
-                .all(URLS.tecnicosDisponibles + '?limit=' + limit + '&offset=' + offset)
+            //return baseModelo.customGET('?limit=' + limit + '&offset=' + offset);
+            return manageSystem
+                .all(URLS.management.administration.employees
+                    + '?limit=' + limit + '&offset=' + offset)
                 .customGET();
         }
 

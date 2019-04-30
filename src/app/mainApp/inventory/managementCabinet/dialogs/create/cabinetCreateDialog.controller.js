@@ -19,7 +19,8 @@
         cabinetUC,
         MANAGEMENT,
         ErrorHandler,
-        EnvironmentConfig
+        EnvironmentConfig,
+        _
     ) {
         var vm = this;
 

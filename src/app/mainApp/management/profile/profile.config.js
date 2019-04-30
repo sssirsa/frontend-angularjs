@@ -12,7 +12,7 @@
             .state('triangular.admin-default.profile',{
                 url:'/profile',
                 templateUrl:'app/mainApp/management/profile/profileUser.html',
-                controller:'profileController',
+                controller:'ProfileController',
                 controllerAs:'vm'
             });
 

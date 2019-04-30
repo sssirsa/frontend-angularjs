@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('uniqueAssetController', UniqueAssetController)
+        .controller('uniqueAssetController', UniqueAssetController);
 
     function UniqueAssetController(
         URLS,
@@ -443,11 +443,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

@@ -129,7 +129,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/proyectos/proyectos.tmpl.html',
-                controller: 'proyectosController',
+                controller: 'ProyectosController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.categoria', {
@@ -162,7 +162,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/localities/localities.tmpl.html',
-                controller: 'localitiesController',
+                controller: 'LocalitiesController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-establecimientos', {
@@ -173,7 +173,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stores/stores.tmpl.html',
-                controller: 'storesController',
+                controller: 'StoresController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-estados', {
@@ -184,7 +184,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/states/states.tmpl.html',
-                controller: 'statesController',
+                controller: 'StatesController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogo-municipios', {
@@ -195,7 +195,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/cities/cities.tmpl.html',
-                controller: 'citiesController',
+                controller: 'CitiesController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-segmentation', {
@@ -206,7 +206,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/segmentation/segmentation.tmpl.html',
-                controller: 'segmentationController',
+                controller: 'SegmentationController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.catalogue-condicion', {
@@ -250,7 +250,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/sticker/sticker.tmpl.html',
-                controller: 'stickerController',
+                controller: 'StickerController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.consumable-category', {
@@ -305,7 +305,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/warehouse/warehouse.tmpl.html',
-                controller: 'warehouseController',
+                controller: 'WarehouseController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.reason-not-capitalized', {
@@ -338,7 +338,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/action/action.tmpl.html',
-                controller: 'actionController',
+                controller: 'ActionController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.symptom', {
@@ -349,7 +349,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/symptom/symptom.tmpl.html',
-                controller: 'symptomController',
+                controller: 'SymptomController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.failure-type', {
@@ -415,7 +415,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stages/stages.tmpl.html',
-                controller: 'stagesController',
+                controller: 'StagesController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.bulk-asset', {
@@ -628,12 +628,12 @@
                                 permission: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            //{
-                            //    name: 'MAIN.MENU.CATALOGS.STORES',
-                            //    state: 'triangular.admin-default.catalogo-establecimientos',
-                            //    permission: ['ADMINISTRADOR', 'TECNICO E'],
-                            //    type: 'link'
-                            //},
+                            {
+                                name: 'MAIN.MENU.CATALOGS.STORES',
+                                state: 'triangular.admin-default.catalogo-establecimientos',
+                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',

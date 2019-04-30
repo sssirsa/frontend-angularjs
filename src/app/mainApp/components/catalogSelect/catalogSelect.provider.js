@@ -3,20 +3,18 @@
 
     angular
         .module('app.mainApp')
-        .service('CATALOG_SELECT', CatalogSelectProvider);
+        .factory('CATALOG_SELECT', CatalogSelectProvider);
 
     function CatalogSelectProvider(
         $http,
-        $q,
-        API,
-        URLS
+        $q
     ) {
         var vm = this;
 
         vm.genericCatalog = {
             url: null,
             list: function () {
-                let deferred = $q.defer();
+                var deferred = $q.defer();
                 $http.get(
                     vm.genericCatalog.url)
                     .then(function (response) {
@@ -28,7 +26,7 @@
                 return deferred.promise;
             },
             detail: function (id) {
-                let deferred = $q.defer();
+                var deferred = $q.defer();
                 $http.get(
                     vm.genericCatalog.url + '/' + id)
                     .then(function (response) {
@@ -40,7 +38,7 @@
                 return deferred.promise;
             },
             search: function (query) {
-                let deferred = $q.defer();
+                var deferred = $q.defer();
                 $http.get(
                     vm.genericCatalog.url + '?' + query)
                     .then(function (response) {

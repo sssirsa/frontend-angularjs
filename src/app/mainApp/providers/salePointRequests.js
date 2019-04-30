@@ -10,13 +10,13 @@
         $window,
         URLS
     ) {
-        var baseUrl=API.all(URLS.mobile.base).all(URLS.solicitud_pv);
+        var baseUrl = API.all(URLS.salepoint.base).all(URLS.salepoint.requests);
 
         var service = {
             getByID: getByID,
             getAll: getAll,
             locate: locate,
-            create:create
+            create: create
         };
 
         function getByID(id) {
@@ -24,11 +24,11 @@
         }
 
         function getAll(limit, offset, filter) {
-            if (filter === undefined) {
-                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset).customGET();
+            if (angular.isUndefined(filter)) {
+                return API.all(URLS.salepoint.base).all(URLS.salepoint.requests + '/all' + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return API.all(URLS.mobile.base).all(URLS.solicitud_pv + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return API.all(URLS.salepoint.base).all(URLS.salepoint.requests + '/all' + '?limit=' + limit + '&offset=' + offset + '&' + filter).customGET();
             }
         }
 
@@ -39,7 +39,8 @@
             $window.open(url, target);
         }
 
-        function create (element){
+        //TODO: Make the proper handling for each of the different request types
+        function create(element) {
             return baseUrl.post(element);
         }
 

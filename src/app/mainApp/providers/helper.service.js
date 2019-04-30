@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp')
         .factory('Helper', Helper);
@@ -9,15 +8,18 @@
      * @author Christian Adan Israel Amezcua Aguilar <amezcua9205@gmail.com>
      * @constructor
      */
-    function Helper($rootScope,
+    function Helper(
+        $rootScope,
         $log,
         $window,
-        NotificationPanel) {
+        _
+        //NotificationPanel
+    ) {
 
         var acceptFileTypes = /(jpe?g|png|bmp|vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.ms-excel)$/i;
         return {
             acceptFile: acceptFile,
-            showNotification: showNotification,
+            //showNotification: showNotification,
             filterDeleted: filterDeleted,
             searchByField: searchByField,
             sortByAttribute: sortByAttribute,
@@ -33,7 +35,7 @@
          */
         function sortByAttribute(array, attribute) {
             return _.sortBy(array, function (obj) {
-                return obj[attribute]
+                return obj[attribute];
             });
         }
 
@@ -75,37 +77,36 @@
         /**
          * @description Se encarga de mostrar una notificación al usuario.
          * @property {Object} info Un objeto con la información para la notificación.
-         */
-        function showNotification(info, title, url) {
-            if (!("Notification" in window)) {
-                $log.info("Este navegador no soporta notificaciones de escritorio");
-            }
-            else if (Notification.permission !== "granted") {
-                Notification.requestPermission()
-            }
-            else if (Notification.permission === "granted") {
-                console.log("notificación");
-                /*var options = {
-                    body: info,
-                    icon: "https://s3-us-west-2.amazonaws.com/resources-sssirsa/logo.png",
-                    dir: "ltr"
-                };
-                new Notification("SSSIRSA", options);*/
-                Push.create(title, {
-                    body: info,
-                    icon: 'https://resources-sssirsa.s3.amazonaws.com/logo_icon_32.png',
-                    timeout: 10000,
-                    onClick: function () {
-                        window.focus();
-                        if (url != null) {
-                            $window.open(url, '_blank', '');
-                        }
-                        this.close();
-                    }
-                });
+        */
+        //function showNotification(info, title) {
+        //    if (!("Notification" in window)) {
+        //        $log.info("Este navegador no soporta notificaciones de escritorio");
+        //    }
+        //    else if (Notification.permission !== "granted") {
+        //        Notification.requestPermission();
+        //    }
+        //    else if (Notification.permission === "granted") {
+        //        /*var options = {
+        //            body: info,
+        //            icon: "https://s3-us-west-2.amazonaws.com/resources-sssirsa/logo.png",
+        //            dir: "ltr"
+        //        };
+        //        new Notification("SSSIRSA", options);*/
+        //        //Push.create(title, {
+        //        //    body: info,
+        //        //    icon: 'https://resources-sssirsa.s3.amazonaws.com/logo_icon_32.png',
+        //        //    timeout: 10000,
+        //        //    onClick: function () {
+        //        //        window.focus();
+        //        //        if (url != null) {
+        //        //            $window.open(url, '_blank', '');
+        //        //        }
+        //        //        this.close();
+        //        //    }
+        //        //});
 
-            }
-        }
+        //    }
+        //}
 
         /**
          * @description Se encarga de solicitar las notificaciones del usuario de la sesion

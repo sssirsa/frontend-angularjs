@@ -15,7 +15,12 @@
             AuthService.logout();
         }
 
-        $rootScope.$on('$locationChangeSuccess', function (evt, new_url) {
+        $rootScope.$on('$destroy',function rootScopeDestroy() {
+            locationChangeSuccess();
+            stateChangePermissionDenied();
+        });
+
+        var locationChangeSuccess = $rootScope.$on('$locationChangeSuccess', function locationChangeSuccess(evt, new_url) {
             //Required for getting roles when page Update
             var roles_JSON = $cookies.getObject('roles');
             var roles;
@@ -52,7 +57,7 @@
         });
 
         // redirect all denied permissions to 404
-        $rootScope.$on('$stateChangePermissionDenied', function () {
+        var stateChangePermissionDenied = $rootScope.$on('$stateChangePermissionDenied', function stateChangePermissionDenied() {
             $state.go('404');
             $urlRouter.sync();
         });
