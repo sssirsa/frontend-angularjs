@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.departures')
-        .service('MANUAL_DEPARTURES', ManualDeparturesProvider);
+        .factory('MANUAL_DEPARTURES', ManualDeparturesProvider);
 
     function ManualDeparturesProvider(
         API,
@@ -9,10 +9,7 @@
         URLS,
         Translate,
         EnvironmentConfig
-    ) {
-        var entriesUrl = API
-            .all(URLS.entries_departures.base)
-            .all(URLS.entries_departures.entries.base);//TODO: Delete when departures URL is provided
+    ) {        
         var departuresUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.departures.base);
@@ -82,10 +79,10 @@
             getCabinetInSubsidiary(id)
                 .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
                     //Cabinet exists in subsidiary
-
+                    var canLeave = true;
                     //TODO: Validate that the cabinet doesn't have internal restrictions to leave, such as pending service or not ready to market
                     var cabinetCanLeave = null;
-                    if (true) {
+                    if (canLeave) {
                         cabinetCanLeave = true;
                     }
                     else {
@@ -113,10 +110,9 @@
                             }
                         })
                         .catch(function cabinetErrorCallback(errorResponse) {
-                            deferred.reject(errorRresponse);
+                            deferred.reject(errorResponse);
                         });
                 })
-
                 .catch(function cabinetsInSubsiadiaryErrorCallback(apiResponseError) {
                     //Cabinet doesn't exists in any subsidiary, so it can't leave
                     if (apiResponseError.status === 404) {
@@ -161,12 +157,13 @@
 
                     //TODO: Validate that the cabinet doesn't have internal restrictions to leave, such as pending service or not ready to market
                     var cabinetCanLeave = null;
-                    if (true) {
-                        cabinetCanLeave = true;
+                    if (cabinetCanLeave) {
+                        response.can_leave = true;
                     }
                     else {
-                        cabinetCanLeave = false;
+                        response.can_leave = false;
                     }
+                    response.no_capitalizado = apiResponse;
 
                     //Getting unrecoognizable cabinet full information
                     //TODO:replace with the given URL's when known
@@ -222,10 +219,11 @@
 
         function getUnrecognizableCabinetInSubsidiary(id) {
             //TODO: Add behaviour when the URLs are provided
+            return id;
         }
 
         function getDeparturesByCabinet(id) {
-
+            return id;
         }
 
         var warrantyDeparture = {
@@ -235,7 +233,7 @@
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -381,7 +379,7 @@
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -553,7 +551,7 @@
                     no_capitalizados_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -725,7 +723,7 @@
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -871,7 +869,7 @@
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -1021,13 +1019,14 @@
             close: close,
             getCabinet: getCabinet,
             getDeparturesByCabinet: getDeparturesByCabinet,
+            getUnrecognizableCabinet: getUnrecognizableCabinet,
             //Constants
             warrantyDeparture: warrantyDeparture,
             newDeparture: newDeparture,
             obsoleteDeparture: obsoleteDeparture,
             warehouseDeparture: warehouseDeparture,
             unrecognizableDeparture: unrecognizableDeparture
-        }
+        };
 
     }
 
