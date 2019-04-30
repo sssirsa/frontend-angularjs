@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.technical_service')
         .controller('PresurizeController', PresurizeController);
     function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _) {
         var vm = this;

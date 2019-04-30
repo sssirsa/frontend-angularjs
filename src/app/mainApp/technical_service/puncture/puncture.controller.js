@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.technical_service')
         .controller('PunctureController', PunctureController);
     function PunctureController($scope, Translate, ErrorHandler, punctureProvider, toastr, $log, _) {
         var vm = this;

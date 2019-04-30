@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.technical_service')
         .controller('InspectionController', InspectionController);
     function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log,_) {
         var vm = this;

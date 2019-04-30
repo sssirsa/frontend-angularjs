@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.technical_service')
         .controller('DiagnosisController', DiagnosisController);
 
     function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log) {

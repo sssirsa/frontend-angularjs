@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.technical_service')
         .controller('GeneralStageController', GeneralStageController);
 
     function GeneralStageController($scope, Translate, toastr, ErrorHandler, stageProvider, $mdDialog, $log, _) {
