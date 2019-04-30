@@ -8,8 +8,8 @@ services:
     - docker:dind
 
 stages:
-    - lint
     - configuration
+    - lint
     - deploy
 
 configuration:
