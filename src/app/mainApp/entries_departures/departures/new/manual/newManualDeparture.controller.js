@@ -256,7 +256,7 @@
                     return element.cabinet;
                 });
             for (
-                let i = 0;
+                var i = 0;
                 i < existingCabinets.length;
                 i++) {
                 departure['cabinets_id'].push(existingCabinets[i].id);

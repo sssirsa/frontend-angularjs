@@ -71,8 +71,8 @@
              *       +Just returns the error response.
              */
 
-            let deferred = $q.defer();
-            let response = {
+            var deferred = $q.defer();
+            var response = {
                 can_leave: false,
                 cabinet: null,
                 entrance_kind: null,
@@ -84,7 +84,7 @@
                     //Cabinet exists in subsidiary
 
                     //TODO: Validate that the cabinet doesn't have internal restrictions to leave, such as pending service or not ready to market
-                    let cabinetCanLeave = null;
+                    var cabinetCanLeave = null;
                     if (true) {
                         cabinetCanLeave = true;
                     }
@@ -147,8 +147,8 @@
              *       +Just returns the error response.
              */
 
-            let deferred = $q.defer();
-            let response = {
+            var deferred = $q.defer();
+            var response = {
                 can_leave: false,
                 no_capitalizado: null,
                 entrance_kind: null,
@@ -160,7 +160,7 @@
                     //Cabinet exists in subsidiary
 
                     //TODO: Validate that the cabinet doesn't have internal restrictions to leave, such as pending service or not ready to market
-                    let cabinetCanLeave = null;
+                    var cabinetCanLeave = null;
                     if (true) {
                         cabinetCanLeave = true;
                     }

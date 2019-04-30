@@ -245,11 +245,11 @@
         //Internal functions
 
         saveDeparture = function saveDeparture(departure) {
-            let warehouseDeparture = JSON.parse(JSON.stringify(departure));
+            var warehouseDeparture = JSON.parse(JSON.stringify(departure));
             warehouseDeparture = addCabinetsToDeparture(vm.cabinetList, warehouseDeparture, false);
             warehouseDeparture = Helper.removeBlankStrings(warehouseDeparture);
 
-            let obsoleteDeparture = JSON.parse(JSON.stringify(departure));
+            var obsoleteDeparture = JSON.parse(JSON.stringify(departure));
             obsoleteDeparture = addCabinetsToDeparture(vm.cabinetList, obsoleteDeparture, true);
             obsoleteDeparture = Helper.removeBlankStrings(obsoleteDeparture);
 
@@ -306,7 +306,7 @@
                     }
                 });
             for (
-                let i = 0;
+                var i = 0;
                 i < existingCabinets.length;
                 i++) {
                 departure['cabinets_id'].push(existingCabinets[i].id);

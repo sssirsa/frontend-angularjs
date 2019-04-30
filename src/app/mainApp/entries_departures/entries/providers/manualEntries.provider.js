@@ -72,8 +72,8 @@
              *       +Cabinet in null, cant_enter in false, error property added to return the error response
              */
 
-            let deferred = $q.defer();
-            let response = {
+            var deferred = $q.defer();
+            var response = {
                 can_enter: false,
                 cabinet: null
             };

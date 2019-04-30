@@ -189,11 +189,11 @@
         //Internal functions
 
         saveEntry = function saveEntry(entry) {
-            let warehouseEntry = JSON.parse(JSON.stringify(entry));
+            var warehouseEntry = JSON.parse(JSON.stringify(entry));
             warehouseEntry = addCabinetsToEntry(vm.cabinetList, warehouseEntry, false);
             warehouseEntry = Helper.removeBlankStrings(warehouseEntry);
 
-            let obsoleteEntry = JSON.parse(JSON.stringify(entry));
+            var obsoleteEntry = JSON.parse(JSON.stringify(entry));
             obsoleteEntry = addCabinetsToEntry(vm.cabinetList, obsoleteEntry, true);
             obsoleteEntry = Helper.removeBlankStrings(obsoleteEntry);
 
@@ -203,7 +203,7 @@
                     .createWarehouse(warehouseEntry)
                     .then(function (warehouseEntrySuccessCallback) {
                         console.log(warehouseEntrySuccessCallback);
-                        for (let i = 0;
+                        for (var i = 0;
                             i < warehouseEntrySuccessCallback['cabinets'].length;
                             i++) {
                             MANUAL_ENTRIES.createAutomaticInspection(warehouseEntrySuccessCallback['cabinets'][i]);
@@ -225,7 +225,7 @@
                     .createObsolete(obsoleteEntry)
                     .then(function (obsoleteEntrySuccessCallback) {
                         console.log(obsoleteEntrySuccessCallback);
-                        for (let i = 0;
+                        for (var i = 0;
                             i < obsoleteEntrySuccessCallback['cabinets'].length;
                             i++) {
                             MANUAL_ENTRIES.createAutomaticInspection(obsoleteEntrySuccessCallback['cabinets'][i]);
@@ -260,7 +260,7 @@
                     }
                 });
             for (
-                let i = 0;
+                var i = 0;
                 i < existingCabinets.length;
                 i++) {
                 entry['cabinets_id'].push(existingCabinets[i].id);
