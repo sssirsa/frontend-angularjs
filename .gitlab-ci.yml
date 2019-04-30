@@ -41,7 +41,7 @@ configuration:
 
 .lint_script: &lint_script
     stage: lint
-    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${CI_COMMIT_REF_NAME}
+    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${BRANCH}
     script:
         - mv /usr/app/* .
         - ./node_modules/.bin/gulp scripts
