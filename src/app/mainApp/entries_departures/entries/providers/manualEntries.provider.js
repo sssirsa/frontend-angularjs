@@ -35,10 +35,6 @@
             return entriesUrl.all(entries.warranty).customPOST(element);
         }
 
-        function createObsolete(element) {
-            return entriesUrl.all(entries.obsolete).customPOST(element);
-        }
-
         function createWarehouse(element) {
             return entriesUrl.all(entries.warehouse).customPOST(element);
         }
@@ -145,7 +141,151 @@
         var warrantyEntry = {
             template: function () {
                 return {
-                    tipo_entrada: 'Garantias',
+                    cabinets_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                }
+            },
+            catalogues: function catalogues() {
+                var catalogues = {
+                    subsidiary: {
+                        binding: 'sucursal_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.SUBSIDIARY'),
+                        icon: 'fa fa-warehouse',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_line: {
+                        binding: 'linea_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'razon_social'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_LINE'),
+                        icon: 'fa fa-pallet',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    transport_kind: {
+                        binding: 'tipo_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_KIND'),
+                        icon: 'fa fa-truck',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    udn: {
+                        binding: 'udn_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    project: {
+                        binding: 'proyecto_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.project,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.PROJECT'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'descripcion'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.PROJECT'),
+                        icon: 'fa fa-book',
+                        required: true,
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                };
+                return catalogues;
+            }
+        };
+
+        var repairEntry = {
+            template: function () {
+                return {
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
@@ -291,7 +431,6 @@
         var newEntry = {
             template: function () {
                 return {
-                    tipo_entrada: 'Nuevos',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
@@ -463,7 +602,6 @@
         var unrecognizableEntry = {
             template: function () {
                 return {
-                    tipo_entrada: 'No_Capitalizados',
                     no_capitalizados_id: [],
                     descripcion: '',
                     nombre_chofer: ''
@@ -632,156 +770,9 @@
             }
         };
 
-        var obsoleteEntry = {
-            template: function () {
-                return {
-                    tipo_entrada: 'Obsoletos',
-                    cabinets_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
-                }
-            },
-            catalogues: function catalogues() {
-                var catalogues = {
-                    subsidiary: {
-                        binding: 'sucursal_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
-                                + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.SUBSIDIARY'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre'
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.SUBSIDIARY'),
-                        icon: 'fa fa-warehouse',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    transport_line: {
-                        binding: 'linea_transporte_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.TRANSPORT_LINE'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social'
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.TRANSPORT_LINE'),
-                        icon: 'fa fa-pallet',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    transport_kind: {
-                        binding: 'tipo_transporte_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.TRANSPORT_KIND'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion'
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.TRANSPORT_KIND'),
-                        icon: 'fa fa-truck',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    udn: {
-                        binding: 'udn_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.udn,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.AGENCY'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia'
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.AGENCY'),
-                        icon: 'fa fa-building',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    project: {
-                        binding: 'proyecto_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.project,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.PROJECT'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion'
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.PROJECT'),
-                        icon: 'fa fa-book',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                };
-                return catalogues;
-            }
-        };
-
         var warehouseEntry = {
             template: function () {
                 return {
-                    tipo_entrada: 'Almacen',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
@@ -927,7 +918,7 @@
         return {
             createNew: createNew,
             createWarranty: createWarranty,
-            createObsolete: createObsolete,
+            createRepair: createRepair,
             createWarehouse: createWarehouse,
             createUnrecognizable: createUnrecognizable,
             addCabinet: addCabinet,
