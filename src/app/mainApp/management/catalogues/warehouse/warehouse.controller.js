@@ -4,17 +4,17 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('warehouseController',warehouseController);
+        .controller('WarehouseController',WarehouseController);
 
-    function warehouseController(URLS, Translate, EnvironmentConfig)
+    function WarehouseController(URLS, Translate, EnvironmentConfig)
     {
 
         var vm = this;
 
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.storage);
 
-        const subsidiaryUrl =  (EnvironmentConfig.site.rest.api)
+        var subsidiaryUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.subsidiary);
 
         vm.url = managementUrl;
@@ -133,7 +133,7 @@
                             hide: 'deleted',
                             reverse: false
                         }
-                    },
+                    }
                 ],
                 dialog: {
                     title: Translate.translate('WEREHOUSE.LABELS.CREATE'),
@@ -234,7 +234,7 @@
                             hide: 'deleted',
                             reverse: false
                         }
-                    },
+                    }
                 ],
                 dialog: {
                     title: Translate.translate('WEREHOUSE.LABELS.MODIFY'),
@@ -335,11 +335,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

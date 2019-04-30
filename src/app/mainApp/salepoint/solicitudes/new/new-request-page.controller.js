@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('NewRequestPageController', NewRequestPageController);
 
     /* @ngInject */
@@ -107,7 +107,7 @@
             vm.request.sucursal = element;
         }
 
-        function onSelectedEquipmentKind(element) {
+        function onSelectedEquipmentKind() {
             vm.equipmentKind = vm.assignedEquipmentKind;
             //Remove any previos assignment
             vm.request.solicitudes_cabinet = [];

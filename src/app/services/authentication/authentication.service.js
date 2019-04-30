@@ -59,7 +59,6 @@
                                 + '/' +MANAGEMENT.administration.person.base)
                                 .customGET()
                                 .then(function (user) {
-                                    console.debug('got persona');
                                     request.resolve();
                                     User.setUser(user);
                                 })

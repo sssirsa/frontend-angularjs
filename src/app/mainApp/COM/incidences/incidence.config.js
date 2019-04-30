@@ -17,7 +17,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/COM/incidences/incidence.tmpl.html',
-                controller: 'incidencesController',
+                controller: 'IncidencesController',
                 controllerAs: 'vm'
             });
 

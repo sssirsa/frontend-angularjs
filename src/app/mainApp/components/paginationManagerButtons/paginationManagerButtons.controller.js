@@ -82,7 +82,7 @@
             }
         });
 
-    function PaginationManagerButtonsController() {
+    function PaginationManagerButtonsController($log) {
         var vm = this;
         vm.arrayButtonPage = [];
         vm.correctUse = true;
@@ -98,27 +98,27 @@
         function init() {
             if (vm.goSig == null) {
                 vm.correctUse = false;
-                console.debug('La funcion Sig() es requerida');
+                $log.debug('La funcion Sig() es requerida');
             }
             if (vm.goPrev == null) {
                 vm.correctUse = false;
-                console.debug('La funcion Prev() es requerida');
+                $log.debug('La funcion Prev() es requerida');
             }
             if (vm.goNumber == null) {
                 vm.correctUse = false;
-                console.debug('La funcion goNumberPage(number) es requerida');
+                $log.debug('La funcion goNumberPage(number) es requerida');
             }
             if (vm.limitObjects == null) {
                 vm.correctUse = false;
-                console.debug('El parametro limit es requerido');
+                $log.debug('El parametro limit es requerido');
             }
             if (vm.countObject == null) {
                 vm.correctUse = false;
-                console.debug('El parametro count es requerido');
+                $log.debug('El parametro count es requerido');
             }
             if (vm.offsetObject == null) {
                 vm.correctUse = false;
-                console.debug('El parametro offset es requerido');
+                $log.debug('El parametro offset es requerido');
             }
             if(vm.correctUse){
                 setNumberButtons();

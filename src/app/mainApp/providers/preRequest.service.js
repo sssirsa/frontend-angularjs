@@ -9,8 +9,7 @@
         API,
         $window,
         URLS) {
-        var baseUrl = API.all(URLS.external_service.base).all(URLS.external_service.pre_request.base);
-
+        var baseUrl=API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest);
         var service = {
             getByID: getByID,
             getAll: getAll,
@@ -23,11 +22,11 @@
         }
 
         function getAll(limit, offset, filter) {
-            if (filter === undefined) {
-                return baseUrl.all(URLS.external_service.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset).customGET();
+            if (angular.isUndefined(filter)) {
+                return API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return baseUrl.all(URLS.external_service.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
             }
         }
 

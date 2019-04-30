@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('DetailAttentionPageController', DetailAttentionPageController);
 
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, SCORES, atencionPV,
-                                           cabinetUC, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog) {
+                                           cabinetUC, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog, _) {
         var vm = this;
 
         //Variable declaration

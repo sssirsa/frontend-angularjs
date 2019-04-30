@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.inventory.assets')
-        .controller('bulkAssetInventoryController', BulkAssetInventoryController)
+        .controller('bulkAssetInventoryController', BulkAssetInventoryController);
 
     function BulkAssetInventoryController(
         URLS,
@@ -16,7 +16,7 @@
         vm.showSubsidiarySelector;
         vm.subsidiary;
 
-        const baseUrl = EnvironmentConfig.site.rest.api
+        var baseUrl = EnvironmentConfig.site.rest.api
             + '/' + URLS.inventory.base
             + '/' + URLS.inventory.management.base
             + '/' + URLS.inventory.management.bulk_asset_inventory;
@@ -156,12 +156,9 @@
                 });
         }
 
-        vm.onElementSelect = function onElementSelect(element) {
+        vm.onElementSelect = function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
-        }
+        };
     }
 
 })();

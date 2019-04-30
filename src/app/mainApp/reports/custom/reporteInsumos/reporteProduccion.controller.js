@@ -5,7 +5,7 @@
     "use strict";
     angular.module("app.mainApp.service").controller("reporteProduccionController", reporteProduccionController);
 
-    function reporteProduccionController(CONFIGS,Persona, MarcaCabinet, Translate, TipoEquipo,  Servicios, Helper, toastr, Sucursal, Reporte) {
+    function reporteProduccionController(CONFIGS,Persona, MarcaCabinet, Translate, TipoEquipo,  Servicios, Helper, toastr, Sucursal, Reporte, _) {
         var vm = this;
         vm.reporte = {
             fecha: ""
@@ -34,7 +34,7 @@
                 if (vm.etapas.length === 0) {
                     notifyError(1000);
                 }
-            }).catch(function (res) {
+            }).catch(function () {
                 toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
         }
@@ -51,7 +51,7 @@
             MarcaCabinet.listObject().then(function (res) {
                 vm.marcas = Helper.filterDeleted(res, true);
                 vm.marcas = Helper.sortByAttribute(vm.marcas, 'descripcion');
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.error(vm.errorMessageCatalog, vm.errorTitle);
                 vm.marcas = [];
             });
@@ -59,7 +59,7 @@
             TipoEquipo.listWitout().then(function (res) {
                 vm.tiposEquipo = Helper.filterDeleted(res, true);
                 vm.tiposEquipo = _.sortBy(vm.tiposEquipo, 'nombre');
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.error(vm.errorMessageCatalog, vm.errorTitle);
             });
 
@@ -120,14 +120,14 @@
             vm.month = CurrentDate.getMonth();
             vm.anioActual = CurrentDate.getFullYear();
             vm.anios = [];
-            for (i = 2016; i <= vm.anioActual; i++) {
+            for (var i = 2016; i <= vm.anioActual; i++) {
                 vm.anios.push(''+i);
             }
         }
 
         function saveReporte() {
             vm.reporte.fecha = (vm.meses.indexOf(vm.mes)+1) + '-' + vm.anio;
-            vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function (res) {
+            vm.loadingPromise = Reporte.reporteInsumos(vm.reporte).then(function () {
                 toastr.success(vm.successExport, vm.successTitleExport);
             }).catch(function (res) {
                 if (res.status === 404) {

@@ -20,8 +20,8 @@
         };
     }
     function minDateValidator(value, format, dateMinVal) {
-        if(!angular.isUndefined(dateMinVal)) {
-            var dateMinVal = moment(dateMinVal, "YYYY-MM-DD", true);
+        if(angular.isDefined(dateMinVal)) {
+            dateMinVal = moment(dateMinVal, "YYYY-MM-DD", true);
             var date = angular.isDate(value) ? moment(value) : moment(value, format, true);
             if (dateMinVal.isValid() && date.isValid()) {
                 return date > dateMinVal;

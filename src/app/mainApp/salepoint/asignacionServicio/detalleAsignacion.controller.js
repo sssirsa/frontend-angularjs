@@ -1,10 +1,20 @@
 (function () {
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('detalleAsignacionController', detalleAsignacionController);
 
-    function detalleAsignacionController(SalePointRequests, SalePoint, $stateParams, toastr, Translate,
-                                         Persona_Admin, $mdDialog) {
+    function detalleAsignacionController(
+        SalePointRequests,
+        SalePoint,
+        $stateParams,
+        toastr,
+        Translate,
+        Persona_Admin,
+        $mdDialog,
+        $log,
+        _,
+        $document
+    ) {
         var vm = this;
 
         //Variables
@@ -27,7 +37,7 @@
         function activate() {
             SalePoint.getByID($stateParams.id)
                 .then(function (salePoint) {
-                    console.log(salePoint);
+
                     vm.salePoint = salePoint;
                     if (salePoint.persona) {
                         vm.personLoading = Persona_Admin.get(salePoint.persona)
@@ -36,7 +46,7 @@
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
-                                console.log(personaError);
+                                $log.error(personaError);
                             });
                     }
                     SalePointRequests.getByID(salePoint.solicitud)
@@ -47,7 +57,7 @@
                                     vm.store = storeSuccess;
                                 })
                                 .catch(function (storeError) {
-                                    console.log(storeError);
+                                    $log.error(storeError);
                                     toastr.error(
                                         Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                                         Translate.translate('MAIN.MSG.ERROR_TITLE')
@@ -56,7 +66,7 @@
 
                         })
                         .catch(function (requestError) {
-                            console.log(requestError);
+                            $log.error(requestError);
                             vm.salePoint = null;
                             toastr.error(
                                 Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
@@ -64,12 +74,12 @@
                             );
                         });
                 }).catch(function (salePointError) {
-                console.log(salePointError);
-                toastr.error(
-                    Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
-                    Translate.translate('MAIN.MSG.ERROR_TITLE')
-                );
-            });
+                    $log.error(salePointError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
+                        Translate.translate('MAIN.MSG.ERROR_TITLE')
+                    );
+                });
         }
 
         function selectedPersonChange() {
@@ -85,15 +95,15 @@
                     })
                     .catch(function (userListError) {
                         vm.personList = null;
-                        console.log(userListError);
-                        console.log("Error al obtener personas");
+                        $log.error(userListError);
+
                         toastr.error(
                             Translate.translate('MAIN.MSG.ERROR_MESSAGE'),
                             Translate.translate('MAIN.MSG.ERROR_TITLE')
                         );
                     });
             }
-            else{
+            else {
                 return searchPersonCollection();
             }
 
@@ -139,11 +149,11 @@
             //         );
             //     });
 
-            console.log(vm.salePoint);
+
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
-                templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
-                parent: angular.element(document.body),
+                templateUrl: 'app.mainApp.salepoint/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -151,7 +161,7 @@
                     salePoint: vm.salePoint
                 }
             })
-                .then(function(){
+                .then(function () {
                     $mdDialog.hide();
                 });
         }

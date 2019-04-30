@@ -3,12 +3,12 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('TipoEquipoController', TipoEquipoController)
+        .controller('TipoEquipoController', TipoEquipoController);
 
     function TipoEquipoController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        const managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.equipment_type);
 
         vm.url = managementUrl;
@@ -70,7 +70,7 @@
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
@@ -162,13 +162,10 @@
                     }
                 ]
             }
-        }
+        };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
 
     }

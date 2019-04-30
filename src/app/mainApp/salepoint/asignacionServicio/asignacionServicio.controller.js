@@ -2,10 +2,18 @@
     'use strict';
 
     angular
-        .module('app.mainApp.service')
+        .module('app.mainApp.salepoint')
         .controller('asignacionServicioController', asignacionServicioController);
 
-    function asignacionServicioController(SalePoint, $state, $mdDialog, ErrorHandler) {
+    function asignacionServicioController(
+        SalePoint,
+        OPTIONS,
+        toastr,
+        Translate,
+        $state,
+        $mdDialog,
+        $document
+    ) {
         var vm = this;
 
         vm.selectedKind = 'unasigned';
@@ -33,8 +41,8 @@
         function Assing(salePoint) {
             $mdDialog.show({
                 controller: 'dialogAsignacionTecnicoController',
-                templateUrl: 'app/mainApp/service/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
-                parent: angular.element(document.body),
+                templateUrl: 'app.mainApp.salepoint/external/asignacionServicio/Dialog/dialogAsignacionTecnico.tmpl.html',
+                parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
                 focusOnOpen: true,

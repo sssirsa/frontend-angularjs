@@ -11,7 +11,7 @@
             }
         });
 
-    function CatalogObjectDisplay() {
+    function CatalogObjectDisplay($window, $log) {
         var vm = this;
         //Functions
         vm.elementSelection = elementSelection;
@@ -34,16 +34,16 @@
 
         //Treat the object fields and convert the desired property to a root property of the main object
         function treatObjectPropertyFields() {
-            for (element in vm.fields) {
+            for (var element in vm.fields) {
                 if (vm.fields[element].type === 'object_property') {
-                    let nested_properties = vm.fields[element]
+                    var nested_properties = vm.fields[element]
                         .model
                         .split('__');
-                    let actualProperty;
+                    var actualProperty;
                     if (vm.element.hasOwnProperty(nested_properties[0])) {
                         actualProperty = vm.element[nested_properties[0]];
                     } else {
-                        console.error("The property" + nested_properties[0]
+                        $log.error("The property" + nested_properties[0]
                             + " of " + vm.element
                             + " is null or undefined @function treatObjectPropertyFields @CatalogObjectDisplay component");
                     }

@@ -4,10 +4,10 @@
 (function () {
     angular
         .module('app.mainApp.management.profile')
-        .controller('profileController',profileController);
+        .controller('ProfileController',ProfileController);
 
     /* @ngInject */
-    function profileController(Persona,toastr,Helper,Translate){
+    function ProfileController(Persona,toastr,Helper,Translate){
         var vm = this;
         vm.picFoto=null;
         vm.picIFE=null;
@@ -34,7 +34,7 @@
                 vm.user_ini=rest;
                 vm.picFoto=vm.user_ini.foto;
                 vm.picIFE=vm.user_ini.ife;
-            }).catch(function (error){
+            }).catch(function (){
             });
         }
 
@@ -52,10 +52,10 @@
             else
                 vm.user_ini.ife=null;
 
-            Persona.modify(vm.user_ini).then(function (res) {
+            Persona.modify(vm.user_ini).then(function () {
                 toastr.success(vm.exitoUpdate,vm.exito);
 
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.error(vm.errorUpdate, vm.error);
 
             });

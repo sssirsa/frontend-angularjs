@@ -5,7 +5,7 @@
         .module('app.mainApp')
         .factory('AttentionReportBuilder', AttentionReportBuilder);
 
-    function AttentionReportBuilder(atencionPV, $http, $log, toastr, Translate) {
+    function AttentionReportBuilder(atencionPV, $http, $log, toastr, Translate, _, pdfMake) {
         var vm = this;
 
 
@@ -23,11 +23,11 @@
             getInfopromise.then(function (respuesta) {
                 vm.infoReport = respuesta;
 
-                $http.get('app/mainApp/service/external/atenciones/report/report.json')
+                $http.get('app.mainApp.salepoint/external/atenciones/report/report.json')
                     .then(function (reporteToPDF) {
                         vm.reportToPDF = reporteToPDF.data;
                         $log.info(vm.reportToPDF);
-                        $http.get('app/mainApp/service/external/atenciones/report/report.header.json')
+                        $http.get('app.mainApp.salepoint/external/atenciones/report/report.header.json')
                             .then(function (cabecera) {
                                 vm.cabecera = {};
                                 vm.cabecera = cabecera.data;
@@ -36,7 +36,7 @@
                                 vm.reportToPDF.content.push(vm.cabecera.header);
                                 vm.reportToPDF.content.push(vm.cabecera.break);
 
-                                $http.get('app/mainApp/service/external/atenciones/report/report.general_data.json')
+                                $http.get('app.mainApp.salepoint/external/atenciones/report/report.general_data.json')
                                     .then(function (generalData) {
                                         vm.generalData = generalData.data;
 
@@ -80,15 +80,15 @@
                                         vm.reportToPDF.content.push(vm.generalData.KILOMETERS_SCORE);
                                         vm.reportToPDF.content.push(vm.generalData.DOUBLE_BLANK);
 
-                                        $http.get('app/mainApp/service/external/atenciones/report/report_store.json')
+                                        $http.get('app.mainApp.salepoint/external/atenciones/report/report_store.json')
                                             .then(function (storeInfo) {
                                                 vm.storeInfo = storeInfo.data;
                                                 vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
                                                 vm.reportToPDF.content.push(vm.storeInfo.TITLE_STORE);
                                                 vm.reportToPDF.content.push(vm.storeInfo.BLANK_SPACE);
 
-                                               // console.log(vm.infoReport.establecimiento)
-                                                if (vm.infoReport.establecimiento==undefined) {
+                                                // console.log(vm.infoReport.establecimiento)
+                                                if (angular.isUndefined(vm.infoReport.establecimiento)) {
                                                     vm.reportToPDF.content.push(vm.storeInfo.NO_STORE);
                                                 }
                                                 else {
@@ -128,44 +128,44 @@
                                                     //Operador Ternario para asignar  el codigo postal
                                                     vm.storeInfo.ZIPCODE_CABINET.columns[0].columns[1].text = vm.infoReport.establecimiento.cp ? vm.infoReport.establecimiento.cp : 'Sin Codigo Postal';
                                                     //Operador Ternario para asignar el cabinet
-                                                    vm.storeInfo.ZIPCODE_CABINET.columns[1].columns[1].text = vm.infoReport.cabinet ?  vm.infoReport.cabinet.economico: 'Sin Economico';
+                                                    vm.storeInfo.ZIPCODE_CABINET.columns[1].columns[1].text = vm.infoReport.cabinet ? vm.infoReport.cabinet.economico : 'Sin Economico';
                                                     vm.reportToPDF.content.push(vm.storeInfo.ZIPCODE_CABINET);
 
 
                                                 }
                                                 vm.reportToPDF.content.push(vm.storeInfo.DOUBLE_BLANK);
-                                                $http.get('app/mainApp/service/external/atenciones/report/report.cabinet.json')
+                                                $http.get('app.mainApp.salepoint/external/atenciones/report/report.cabinet.json')
                                                     .then(function (cabinet) {
                                                         vm.cabinetInfo = cabinet.data;
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.CABINET_TITLE);
                                                         vm.reportToPDF.content.push(vm.cabinetInfo.BLANK_SPACE);
                                                         //console.log(vm.infoReport.cabinet);
-                                                        if (vm.infoReport.cabinet==undefined) {
+                                                        if (angular.isUndefined(vm.infoReport.cabinet)) {
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.NO_CABINET);
                                                         }
                                                         else {
 
                                                             //Operador Ternario para asignar  el economico del cabinet
-                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[0].columns[1].text =vm.infoReport.cabinet.economico  ? vm.infoReport.cabinet.economico : 'Sin Economico';
+                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[0].columns[1].text = vm.infoReport.cabinet.economico ? vm.infoReport.cabinet.economico : 'Sin Economico';
                                                             //Operador Ternario para asignar el numero de activo del cabinet
-                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.activo_id ?  vm.infoReport.cabinet.economico: 'Sin número de Activo';
+                                                            vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.activo_id ? vm.infoReport.cabinet.economico : 'Sin número de Activo';
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.IDENTIFIER_INVENTORY_NUMBER);
 
                                                             //Operador Ternario para asignar  el modelo del cabinet
-                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[0].columns[1].text =vm.infoReport.cabinet.modelo.nombre  ? vm.infoReport.cabinet.modelo.nombre : 'Sin Modelo';
+                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[0].columns[1].text = vm.infoReport.cabinet.modelo.nombre ? vm.infoReport.cabinet.modelo.nombre : 'Sin Modelo';
                                                             //Operador Ternario para asignar la antiguedad del cabinet
-                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[1].columns[1].text = vm.infoReport.cabinet.antiguedad ?  vm.infoReport.cabinet.antiguedad: 'Sin Antigüedad';
+                                                            vm.cabinetInfo.MODEL_LEVEL_ANTIQUE.columns[1].columns[1].text = vm.infoReport.cabinet.antiguedad ? vm.infoReport.cabinet.antiguedad : 'Sin Antigüedad';
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.MODEL_LEVEL_ANTIQUE);
 
                                                             //Operador Ternario para asignar  el modelo del cabinet
-                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[0].columns[1].text =vm.infoReport.cabinet.no_incidencias  ? vm.infoReport.cabinet.no_incidencias : 'Sin Incidencias';
+                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[0].columns[1].text = vm.infoReport.cabinet.no_incidencias ? vm.infoReport.cabinet.no_incidencias : 'Sin Incidencias';
                                                             //Operador Ternario para asignar la antiguedad del cabinet
-                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.no_serie ?  vm.infoReport.cabinet.no_serie: 'Sin No. de Serie';
+                                                            vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER.columns[1].columns[1].text = vm.infoReport.cabinet.no_serie ? vm.infoReport.cabinet.no_serie : 'Sin No. de Serie';
                                                             vm.reportToPDF.content.push(vm.cabinetInfo.INCIDENCES_SERIAL_NUMBER);
 
                                                         }
-                                                        $http.get('app/mainApp/service/external/atenciones/report/report_work_notes.json')
+                                                        $http.get('app.mainApp.salepoint/external/atenciones/report/report_work_notes.json')
                                                             .then(function (worknotes) {
                                                                 vm.worknotes = worknotes.data;
                                                                 vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
@@ -177,7 +177,7 @@
                                                                 vm.reportToPDF.content.push(vm.worknotes.WORK_DESCRIPTION_JOB);
                                                                 vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
                                                                 //operador ternario para asignar la descripción del trabajo
-                                                                vm.worknotes.WORK_DESCRIPTION.text= vm.infoReport.descripcion_trabajo ? vm.infoReport.descripcion_trabajo : 'Sin Notas de Trabajo';
+                                                                vm.worknotes.WORK_DESCRIPTION.text = vm.infoReport.descripcion_trabajo ? vm.infoReport.descripcion_trabajo : 'Sin Notas de Trabajo';
                                                                 vm.reportToPDF.content.push(vm.worknotes.WORK_DESCRIPTION);
 
                                                                 //Observaciones Tecnicas
@@ -185,7 +185,7 @@
                                                                 vm.reportToPDF.content.push(vm.worknotes.TECHNICAL_OBSERVATION_TITLE);
                                                                 vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
                                                                 //operador ternario para asignar la descripción del trabajo
-                                                                vm.worknotes.TECHNICAL_OBSERVATION.text= vm.infoReport.observaciones_tecnico ? vm.infoReport.observaciones_tecnico : 'Sin Observaciones del Tecnico';
+                                                                vm.worknotes.TECHNICAL_OBSERVATION.text = vm.infoReport.observaciones_tecnico ? vm.infoReport.observaciones_tecnico : 'Sin Observaciones del Tecnico';
                                                                 vm.reportToPDF.content.push(vm.worknotes.TECHNICAL_OBSERVATION);
 
                                                                 //Observaciones Cliente
@@ -193,116 +193,116 @@
                                                                 vm.reportToPDF.content.push(vm.worknotes.CLIENT_OBSERVATION_TITLE);
                                                                 vm.reportToPDF.content.push(vm.worknotes.BLANK_SPACE);
                                                                 //operador ternario para asignar la descripción del trabajo
-                                                                vm.worknotes.CLIENT_OBSERVATION.text= vm.infoReport.observaciones_cliente ? vm.infoReport.observaciones_cliente : 'Sin Observaciones del Cliente';
+                                                                vm.worknotes.CLIENT_OBSERVATION.text = vm.infoReport.observaciones_cliente ? vm.infoReport.observaciones_cliente : 'Sin Observaciones del Cliente';
                                                                 vm.reportToPDF.content.push(vm.worknotes.CLIENT_OBSERVATION);
 
                                                                 vm.reportToPDF.content.push(vm.worknotes.DOUBLE_BLANK_SPACE);
-                                                                $http.get('app/mainApp/service/external/atenciones/report/report.material.json')
+                                                                $http.get('app.mainApp.salepoint/external/atenciones/report/report.material.json')
                                                                     .then(function (materials) {
-                                                                        vm.materials=materials.data;
+                                                                        vm.materials = materials.data;
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
                                                                         vm.reportToPDF.content.push(vm.materials.MATERIAL_USED_TITLE);
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
                                                                         //console.log(vm.materials)
 
-                                                                        if(vm.infoReport.insumos_lote){
-                                                                            if(vm.infoReport.insumos_lote.length>0){
+                                                                        if (vm.infoReport.insumos_lote) {
+                                                                            if (vm.infoReport.insumos_lote.length > 0) {
 
-                                                                                var materialsToReport=[];
+                                                                                var materialsToReport = [];
                                                                                 vm.infoReport.insumos_lote.forEach(function (insumo) {
                                                                                     //Operador Ternario para asignar  el insumo lote usado
-                                                                                  //  console.log(insumo)
-                                                                                    let tmp = new Object();
+                                                                                    //  console.log(insumo)
+                                                                                    var tmp = new Object();
                                                                                     angular.copy(vm.materials.MATERIAL, tmp);
-                                                                                    let space=_.clone(vm.materials.SEPARATOR);
-                                                                                    insumo.catalogo_insumos  ? tmp.columns[0].columns[1].text = insumo.catalogo_insumos : tmp.columns[0].columns[1].text =  'Sin Nombre';
+                                                                                    var space = _.clone(vm.materials.SEPARATOR);
+                                                                                    insumo.catalogo_insumos ? tmp.columns[0].columns[1].text = insumo.catalogo_insumos : tmp.columns[0].columns[1].text = 'Sin Nombre';
                                                                                     //Operador Ternario para asignar el numero de activo del cabinet
-                                                                                   insumo.cantidad  ?   tmp.columns[1].columns[1].text = insumo.cantidad: tmp.columns[1].columns[1].text = 'Sin Cantidad';
+                                                                                    insumo.cantidad ? tmp.columns[1].columns[1].text = insumo.cantidad : tmp.columns[1].columns[1].text = 'Sin Cantidad';
                                                                                     materialsToReport.push(tmp);
                                                                                     materialsToReport.push(space);
 
                                                                                 });
-                                                                               // console.log(materialsToReport);
+                                                                                // console.log(materialsToReport);
                                                                                 vm.reportToPDF.content.push(materialsToReport);
 
-                                                                            }else{
+                                                                            } else {
                                                                                 vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
                                                                             }
 
-                                                                        }else{
+                                                                        } else {
                                                                             vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
                                                                         }
 
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
                                                                         vm.reportToPDF.content.push(vm.materials.MOTOR_COMPRESOR_TITLE);
                                                                         vm.reportToPDF.content.push(vm.materials.BLANK_SPACE);
-                                                                        if(vm.infoReport.insumos){
-                                                                            if(vm.infoReport.insumos.length>0){
+                                                                        if (vm.infoReport.insumos) {
+                                                                            if (vm.infoReport.insumos.length > 0) {
                                                                                 //Operador Ternario para asignar la descripcion del micromotor
-                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[0].columns[1].text =vm.infoReport.insumos[0].descripcion  ? vm.infoReport.insumos[0].descripcion : 'Compresor sin Nombre';
+                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[0].columns[1].text = vm.infoReport.insumos[0].descripcion ? vm.infoReport.insumos[0].descripcion : 'Compresor sin Nombre';
                                                                                 //Operador Ternario para asignar la cantidad de micromotores usados
-                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[1].columns[1].text = vm.infoReport.insumos[0].cantidad ?  vm.infoReport.insumos[0].cantidad: 'Cantidad no Especificada';
+                                                                                vm.materials.MICROMOTOR_NAME_QUANTITY.columns[1].columns[1].text = vm.infoReport.insumos[0].cantidad ? vm.infoReport.insumos[0].cantidad : 'Cantidad no Especificada';
                                                                                 vm.reportToPDF.content.push(vm.materials.MICROMOTOR_NAME_QUANTITY);
                                                                                 //Operador Ternario para asignar el no de serie
-                                                                                vm.materials.SERIAL_NUMBER_MICROMOTOR.columns[1].text = vm.infoReport.insumos[0].no_serie ? vm.infoReport.insumos[0].no_serie  : 'Sin Establecimiento';
+                                                                                vm.materials.SERIAL_NUMBER_MICROMOTOR.columns[1].text = vm.infoReport.insumos[0].no_serie ? vm.infoReport.insumos[0].no_serie : 'Sin Establecimiento';
                                                                                 vm.reportToPDF.content.push(vm.materials.SERIAL_NUMBER_MICROMOTOR);
                                                                                 //operador ternario para asignar notas al compresor
                                                                                 vm.materials.MICROMOTOR_NOTES.columns[1].text = vm.infoReport.insumos[0].notas ? vm.infoReport.insumos[0].notas : 'Sin Establecimiento';
                                                                                 vm.reportToPDF.content.push(vm.materials.MICROMOTOR_NOTES);
 
 
-                                                                            }else{
+                                                                            } else {
                                                                                 vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
                                                                             }
-                                                                        }else{
+                                                                        } else {
                                                                             vm.reportToPDF.content.push(vm.materials.NO_MATERIAL);
                                                                         }
                                                                         vm.reportToPDF.content.push(vm.materials.SEPARATOR);
-                                                                        $http.get('app/mainApp/service/external/atenciones/report/report.evidences.json')
+                                                                        $http.get('app.mainApp.salepoint/external/atenciones/report/report.evidences.json')
                                                                             .then(function (evidences) {
-                                                                                vm.evidencesInfo=evidences.data;
+                                                                                vm.evidencesInfo = evidences.data;
                                                                                 //console.log(evidences.data);
                                                                                 vm.reportToPDF.content.push(vm.evidencesInfo.BLANK_SPACE);
                                                                                 vm.reportToPDF.content.push(vm.evidencesInfo.EVIDENCES_TITLE);
-                                                                                if(vm.infoReport.evidencia) {
+                                                                                if (vm.infoReport.evidencia) {
                                                                                     if (vm.infoReport.evidencia.length > 0) {
-                                                                                        var incidencesToReport=[];
+                                                                                        var incidencesToReport = [];
                                                                                         vm.infoReport.evidencia.forEach(function (evidence) {
                                                                                             //Operador Ternario para asignar  el insumo lote usado
-                                                                                           // console.log(evidence)
-                                                                                            let tmp = new Object();
+                                                                                            // console.log(evidence)
+                                                                                            var tmp = new Object();
                                                                                             angular.copy(vm.evidencesInfo.IMAGE_EVIDENDCE, tmp);
-                                                                                            let space=_.clone(vm.evidencesInfo.SEPARATOR);
+                                                                                            var space = _.clone(vm.evidencesInfo.SEPARATOR);
                                                                                             //Operador Ternario para asignar la foto de Evidencia
-                                                                                            evidence.foto  ? tmp.image ='data:image/png;base64,'+evidence.foto : tmp.image ='data:image/png;base64,';
+                                                                                            evidence.foto ? tmp.image = 'data:image/png;base64,' + evidence.foto : tmp.image = 'data:image/png;base64,';
                                                                                             //console.log(tmp)
                                                                                             incidencesToReport.push(tmp);
                                                                                             incidencesToReport.push(space);
 
                                                                                         });
-                                                                                       // console.log(incidencesToReport);
+                                                                                        // console.log(incidencesToReport);
 
                                                                                         vm.reportToPDF.content.push(incidencesToReport);
-                                                                                    }else{
+                                                                                    } else {
                                                                                         vm.reportToPDF.content.push(vm.evidencesInfo.NO_IMAGE);
                                                                                     }
                                                                                 }
-                                                                                else{
+                                                                                else {
                                                                                     vm.reportToPDF.content.push(vm.evidencesInfo.NO_IMAGE);
                                                                                 }
 
-                                                                                $http.get('app/mainApp/service/external/atenciones/report/report_signature.json')
+                                                                                $http.get('app.mainApp.salepoint/external/atenciones/report/report_signature.json')
                                                                                     .then(function (signature) {
-                                                                                        vm.signature=signature.data;
+                                                                                        vm.signature = signature.data;
                                                                                         //Operador Ternario para asignar la firma tecnico
                                                                                         //console.log( vm.infoReport.firma_tecnico );
-                                                                                       // console.log( vm.infoReport.firma_cliente );
-                                                                                        vm.infoReport.firma_tecnico != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].image='data:image/png;base64,'+ vm.infoReport.firma_tecnico : vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].text="Sin firma";
+                                                                                        // console.log( vm.infoReport.firma_cliente );
+                                                                                        vm.infoReport.firma_tecnico != null ? vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].image = 'data:image/png;base64,' + vm.infoReport.firma_tecnico : vm.signature.SIGNATURE_SAPACE.columns[0].columns[1].text = "Sin firma";
                                                                                         //Operador Ternario para asignar la firma cliente
-                                                                                        vm.infoReport.firma_cliente != null ?  vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].image='data:image/png;base64,'+ vm.infoReport.firma_cliente : vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].text="Sin firma";
-                                                                                       // console.log(vm.signature.SIGNATURE_SAPACE);
+                                                                                        vm.infoReport.firma_cliente != null ? vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].image = 'data:image/png;base64,' + vm.infoReport.firma_cliente : vm.signature.SIGNATURE_SAPACE.columns[0].columns[3].text = "Sin firma";
+                                                                                        // console.log(vm.signature.SIGNATURE_SAPACE);
                                                                                         vm.reportToPDF.content.push(vm.signature.SIGNATURE_SAPACE);
-                                                                                       // console.log(vm.reportToPDF);
+                                                                                        // console.log(vm.reportToPDF);
                                                                                         pdfMake.createPdf(vm.reportToPDF).download("Reporte-atencion-" + vm.infoReport.folio.toString() + ".pdf");
                                                                                     });
                                                                             });
@@ -322,9 +322,9 @@
 
 
                     }).catch(function (JSONError) {
-                    $log.error(JSONError);
-                    toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.JSON_REPORT_ERROR'));
-                });
+                        $log.error(JSONError);
+                        toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.JSON_REPORT_ERROR'));
+                    });
             });
         }
 
