@@ -101,12 +101,6 @@
                         state:'triangular.admin-default.general_stage',
                         permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
-                    },
-                    {
-                        name: 'Prueba de Componentes',
-                        state: 'triangular.admin-default.componentTest',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
                     }
 
                 ]
