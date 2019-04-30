@@ -10,21 +10,21 @@
         Translate,
         EnvironmentConfig
     ) {
-        const entriesUrl = API
+        var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);//TODO: Delete when departures URL is provided
-        const departuresUrl = API
+        var departuresUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.departures.base);
-        const inventoryUrl = API
+        var inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
-        const managementUrl = API
+        var managementUrl = API
             .all(URLS.management.base);
 
-        const control = URLS.management.control;
-        const departures = URLS.entries_departures.departures;
-        const inventory = URLS.management.inventory;
+        var control = URLS.management.control;
+        var departures = URLS.entries_departures.departures;
+        var inventory = URLS.management.inventory;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -228,7 +228,7 @@
 
         }
 
-        const warrantyDeparture = {
+        var warrantyDeparture = {
             template: function () {
                 return {
                     tipo_salida: 'Garantias',
@@ -374,7 +374,7 @@
             }
         };
 
-        const newDeparture = {
+        var newDeparture = {
             template: function () {
                 return {
                     tipo_salida: 'Nuevos',
@@ -546,7 +546,7 @@
             }
         };
 
-        const unrecognizableDeparture = {
+        var unrecognizableDeparture = {
             template: function () {
                 return {
                     tipo_salida: 'No_Capitalizados',
@@ -718,7 +718,7 @@
             }
         };
         
-        const obsoleteDeparture = {
+        var obsoleteDeparture = {
             template: function () {
                 return {
                     tipo_salida: 'Obsoletos',
@@ -864,7 +864,7 @@
             }        
         };
 
-        const warehouseDeparture = {
+        var warehouseDeparture = {
             template: function () {
                 return {
                     tipo_salida: 'Almacen',

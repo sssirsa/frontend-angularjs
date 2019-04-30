@@ -11,21 +11,21 @@
         EnvironmentConfig
     ) {
 
-        const entriesDeparturesUrl = API
+        var entriesDeparturesUrl = API
             .all(URLS.entries_departures.base);
-        const entriesUrl = API
+        var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
-        const inventoryUrl = API
+        var inventoryUrl = API
             .all(URLS.management.base)
             .all(URLS.management.inventory.base);
-        const managementUrl = API
+        var managementUrl = API
             .all(URLS.management.base);
 
-        const control = URLS.management.control;
-        const entries = URLS.entries_departures.entries;
-        const inspections = URLS.entries_departures.inspections;
-        const inventory = URLS.management.inventory;
+        var control = URLS.management.control;
+        var entries = URLS.entries_departures.entries;
+        var inspections = URLS.entries_departures.inspections;
+        var inventory = URLS.management.inventory;
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -111,7 +111,7 @@
         }
 
         function createAutomaticInspection(assetID) {
-            const preliminaryInspection = {
+            var preliminaryInspection = {
                 cabinet_id: assetID,
                 sticker_id: 8,
                 rodajas: 0,
@@ -142,7 +142,7 @@
 
         }
 
-        const warrantyEntry = {
+        var warrantyEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Garantias',
@@ -288,7 +288,7 @@
             }
         };
 
-        const newEntry = {
+        var newEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Nuevos',
@@ -460,7 +460,7 @@
             }
         };
 
-        const unrecognizableEntry = {
+        var unrecognizableEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'No_Capitalizados',
@@ -632,7 +632,7 @@
             }
         };
 
-        const obsoleteEntry = {
+        var obsoleteEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Obsoletos',
@@ -778,7 +778,7 @@
             }
         };
 
-        const warehouseEntry = {
+        var warehouseEntry = {
             template: function () {
                 return {
                     tipo_entrada: 'Almacen',
