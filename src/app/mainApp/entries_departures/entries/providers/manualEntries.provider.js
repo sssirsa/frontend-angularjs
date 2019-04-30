@@ -142,8 +142,10 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
+                    ife_chofer: null,
+                    linea_transporte_id: null,
+                    nombre_chofer: '',
+                    tipo_transporte_id: null
                 }
             },
             catalogues: function catalogues() {
@@ -287,8 +289,11 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
+                    establecimiento_origen_id: null,
+                    ife_chofer: null,
+                    linea_transporte_id: null,
+                    nombre_chofer: '',
+                    tipo_transporte_id: null
                 }
             },
             catalogues: function catalogues() {
@@ -301,12 +306,12 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
+                            name: Translate.translate('ENTRIES.REPAIR.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'nombre'
                         },
-                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('ENTRIES.REPAIR.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true,
                         pagination: {
@@ -327,12 +332,12 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
+                            name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'razon_social'
                         },
-                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_LINE'),
+                        hint: Translate.translate('ENTRIES.REPAIR.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
                         required: true,
                         pagination: {
@@ -353,12 +358,12 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
+                            name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion'
                         },
-                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_KIND'),
+                        hint: Translate.translate('ENTRIES.REPAIR.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
                         required: true,
                         pagination: {
@@ -379,12 +384,12 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.udn,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
+                            name: Translate.translate('ENTRIES.REPAIR.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'agencia'
                         },
-                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.AGENCY'),
+                        hint: Translate.translate('ENTRIES.REPAIR.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true,
                         pagination: {
@@ -405,12 +410,12 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.project,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.PROJECT'),
+                            name: Translate.translate('ENTRIES.REPAIR.LABELS.PROJECT'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion'
                         },
-                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.PROJECT'),
+                        hint: Translate.translate('ENTRIES.REPAIR.HINTS.PROJECT'),
                         icon: 'fa fa-book',
                         required: true,
                         pagination: {
@@ -432,8 +437,11 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
+                    ife_chofer: null,
+                    linea_transporte_id: null,
+                    nombre_chofer: '',
+                    proveedor_origen_id: null,
+                    tipo_transporte_id: null
                 }
             },
             catalogues: function catalogues() {
@@ -602,9 +610,11 @@
         var unrecognizableEntry = {
             template: function () {
                 return {
+                    ife_chofer: null,
+                    linea_transporte_id: null,
+                    nombre_chofer: '',
                     no_capitalizados_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
+                    tipo_transporte_id:null
                 }
             },
             catalogues: function catalogues() {
@@ -774,8 +784,10 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    descripcion: '',
-                    nombre_chofer: ''
+                    ife_chofer: null,
+                    linea_transporte_id:null,
+                    nombre_chofer: '',
+                    tipo_transporte_id:null
                 }
             },
             catalogues: function catalogues() {
