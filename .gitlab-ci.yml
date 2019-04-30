@@ -12,19 +12,6 @@ stages:
     - configuration
     - deploy
 
-lint:
-    stage: lint
-    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${CI_COMMIT_REF_NAME}
-    script:
-        - mv /usr/app/* .
-        - ./node_modules/.bin/gulp scripts
-    only:
-        - development
-        - staging
-        - master
-    tags:
-        - frontend
-
 configuration:
     stage: configuration
     image: quay.io/coreos/awscli:master
@@ -48,6 +35,23 @@ configuration:
         - development
         - staging
         - master
+        - merge_requests
+    tags:
+        - frontend
+
+lint:
+    stage: lint
+    image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${CI_COMMIT_REF_NAME}
+    script:
+        - mv /usr/app/* .
+        - ./node_modules/.bin/gulp scripts
+    dependencies:
+        - configuration
+    only:
+        - development
+        - staging
+        - master
+        - merge_requests
     tags:
         - frontend
 
@@ -60,7 +64,7 @@ deploy:
         - rm -rf dist/
         - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
     dependencies:
-        - configuration
+        - lint
     only:
         - development
         - staging
