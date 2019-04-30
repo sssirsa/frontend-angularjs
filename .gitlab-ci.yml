@@ -39,7 +39,7 @@ configuration:
     tags:
         - frontend
 
-lint:
+.lint_script: &lint_script
     stage: lint
     image: gitlab.sssirsa.com:9020/docker-images/frontend-image-libraries:${CI_COMMIT_REF_NAME}
     script:
@@ -47,13 +47,30 @@ lint:
         - ./node_modules/.bin/gulp scripts
     dependencies:
         - configuration
-    only:
-        - development
-        - staging
-        - master
-        - merge_requests
     tags:
         - frontend
+
+lint:all:
+    <<: *lint_script
+    variables:
+        BRANCH: ${CI_COMMIT_REF_NAME}
+    only:
+        - staging
+        - development
+
+lint:test:
+    <<: *lint_script
+    variables:
+        BRANCH: ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
+    only:
+        - merge_requests
+
+lint:latest:
+    <<: *lint_script
+    variables:
+        BRANCH: "latest"
+    only:
+        - master
 
 deploy:
     stage: deploy
@@ -63,8 +80,6 @@ deploy:
         - cd /usr/app
         - rm -rf dist/
         - ./node_modules/.bin/gulp deploy --env ${CI_COMMIT_REF_NAME}
-    dependencies:
-        - lint
     only:
         - development
         - staging
