@@ -13,16 +13,7 @@
  *                                       If not given, then the model will be used.
  *          showModel: boolean,          (Optional) If given, the model and the option will be shown with the following template
  *                                       <b>{{model}}</b> - {{option}}
- *      },
- *      hint: string,         (Optional) Shows a message under the field
- *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
- *      lock: boolean,        (Optional) If given the catalog select will be disabled
- *      pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
- *          total: string,        (Optional) Binding for the number of total elements
- *          next: string,         (Optional) Binding for the url that brings to the next page
- *      },
- *      required: boolean,    (Optional) To be used in form validation
- *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
+ *          elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                            aka: the API returns the array of objects in an element of the response, as in pagination
  *                            Example:
  *                            {
@@ -34,12 +25,20 @@
  *                              ]
  *                            }
  *                            In this case 'elements' should receive the parameter 'results'
- *
- *      lazy: boolean,        (Optional) If given, the catalog won't load until the selector is opened
- *      softDelete: {
- *          hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
- *          reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
+ *          pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
+ *              total: string,        (Optional) Binding for the number of total elements
+ *              next: string,         (Optional) Binding for the url that brings to the next page
+ *          },
+ *          softDelete: {
+ *              hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
+ *              reverse: boolean      If true, the element will be hiden when the parameter is false rather than true
+ *          },
  *      },
+ *      hint: string,         (Optional) Shows a message under the field
+ *      icon: string,         (Optional) Shows an icon from FontAwesome or ZMDI
+ *      lock: boolean,        (Optional) If given the catalog select will be disabled
+ *      required: boolean,    (Optional) To be used in form validation
+ *      lazy: boolean,        (Optional) If given, the catalog won't load until the selector is opened
  *      
  *      initial:string,       (Optional) Must be the ID you want to be selected (if single)
  *                            Must be the elements selected with ID and option (if multiple)
@@ -61,17 +60,14 @@
             templateUrl: 'app/mainApp/components/catalogSelect/catalogSelect.tmpl.html',
             controller: CatalogSelectController,
             bindings: {
-                catalog: '<',
+                catalog: '<',//Here goes elemets, pagination and softDelete parameters
                 hint: '<',
                 icon: '<',
                 lock: '<',
                 multiple: '<',
-
-                pagination: '<',
-                elements: '<',
+                
                 lazy: '<',
                 initial: '<',
-                softDelete: '<',
                 required: '<',
                 noResults: '<',
 
@@ -106,7 +102,7 @@
                 //The catalog is not loaded in lazy mode and when no initial value is given
                 list();
             }
-            //if (vm.initial && vm.pagination) {
+            //if (vm.initial && vm.catalog.pagination) {
             //    //Warranty that lazy is true if you have initial and pagination
             //    vm.lazy = true;
             //}
@@ -121,15 +117,15 @@
                     .list()
                     .then(function (elements) {
                         //Elements list is returned in any other model
-                        if (vm.elements) {
-                            vm.catalogElements = elements[vm.elements];
+                        if (vm.catalog.elements) {
+                            vm.catalogElements = elements[vm.catalog.elements];
                         }
                         //Elements list is returned directly as an array
                         else {
                             vm.catalogElements = elements;
                         }
                         //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.softDelete) {
+                        if (vm.catalog.softDelete) {
                             vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
@@ -137,17 +133,17 @@
                         //(if pagination element present)
                         //if the 'pagination' contains the specific models,
                         //then those will be used, otherwise, the default models will.
-                        if (vm.pagination) {
+                        if (vm.catalog.pagination) {
                             //Total of elements model to be used
-                            if (vm.pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.pagination['total']];
+                            if (vm.catalog.pagination['total']) {
+                                vm.paginationHelper['total'] = elements[vm.catalog.pagination['total']];
                             }
                             else {
                                 vm.paginationHelper['total'] = elements['total'];
                             }
                             //Next page model to be used
-                            if (vm.pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.pagination['next']];
+                            if (vm.catalog.pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.catalog.pagination['next']];
                             }
                             else {
                                 vm.paginationHelper['next'] = elements['next'];
@@ -174,7 +170,7 @@
         //Called if the parameter vm.initial exists when listing the elements
         function initialValueLoad() {
             //Non paginated catalogue
-            if (!vm.pagination) {
+            if (!vm.catalog.pagination) {
                 //Multiple elements to select
                 if (vm.multiple) {
                     vm.selectedElement = vm.catalogElements
@@ -286,7 +282,7 @@
 
         function loadMore() {
             if (vm.paginationHelper.next) {
-                if (vm.pagination) {
+                if (vm.catalog.pagination) {
                     createPaginationProvider();
                 }
                 vm.PaginationProvider.url = vm.paginationHelper.next;
@@ -296,58 +292,61 @@
                         var elements = response;
                         var loadedElementList = [];
                         //Elements list is returned in any other model
-                        if (vm.elements) {
+                        if (vm.catalog.elements) {
                             //Add the returned elements after the list sanitation
-                            //vm.catalogElements = vm.catalogElements.concat(elements[vm.elements]);
-                            loadedElementList = elements[vm.elements];
+                            //vm.catalogElements = vm.catalogElements.concat(elements[vm.catalog.elements]);
+                            loadedElementList = elements[vm.catalog.elements];
                         }
                         //Elements list is returned directly as an array
                         else {
                             loadedElementList = elements;
                         }
-
+                        console.log('initial load', loadedElementList);
                         //This procedures are required because of the initial loading of the elements
-                        //And are just used in the case of pagination
-                        if (vm.multiple) {
-                            for (var selectedElementRepeater = 0;
-                                selectedElementRepeater < vm.selectedElement.length;
-                                selectedElementRepeater++) {
-                                //Validating if one of the selected elements is present in the actual page
-                                if (elementInList(vm.selectedElement[selectedElementRepeater], loadedElementList)) {
-                                    //remove vm.selectedElement[selectedElementRepeater]
+                        //Are just used in the case of pagination
+                        //and when an initial value exists
+                        if (vm.initial) {
+                            if (vm.multiple) {
+                                for (var selectedElementRepeater = 0;
+                                    selectedElementRepeater < vm.selectedElement.length;
+                                    selectedElementRepeater++) {
+                                    //Validating if one of the selected elements is present in the actual page
+                                    if (elementInList(vm.selectedElement[selectedElementRepeater], loadedElementList)) {
+                                        //remove vm.selectedElement[selectedElementRepeater]
+                                        loadedElementList.splice(
+                                            getIndexById(vm.selectedElement[selectedElementRepeater],
+                                                loadedElementList
+                                            ), 1);
+                                    }
+                                }
+
+                            }
+                            else {
+                                //Validate if selected element is present on the actual page
+                                if (elementInList(vm.selectedElement, loadedElementList)) {
+                                    //remove vm.selectedElement
                                     loadedElementList.splice(
-                                        getIndexById(vm.selectedElement[selectedElementRepeater],
+                                        getIndexById(
+                                            vm.selectedElement,
                                             loadedElementList
                                         ), 1);
                                 }
                             }
-
                         }
-                        else {
-                            //Validate if selected element is present on the actual page
-                            if (elementInList(vm.selectedElement, loadedElementList)) {
-                                //remove vm.selectedElement
-                                loadedElementList.splice(
-                                    getIndexById(
-                                        vm.selectedElement,
-                                        loadedElementList
-                                    ), 1);
-                            }
-                        }
-
+                        console.log('filtered load', loadedElementList);
                         //Appending elemets to the now sanitized list
                         vm.catalogElements = vm.catalogElements.concat(loadedElementList);
 
                         //Determine if the soft delete parameter is given, and procede with the filtering
-                        if (vm.softDelete) {
+                        if (vm.catalog.softDelete) {
                             vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
                         //Updating the pagination helper
-                        if (vm.pagination) {
+                        if (vm.catalog.pagination) {
                             //Next page model to be used
-                            if (vm.pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.pagination['next']];
+                            if (vm.catalog.pagination['next']) {
+                                vm.paginationHelper['next'] = elements[vm.catalog.pagination['next']];
                             }
                             else {
                                 vm.paginationHelper['next'] = elements['next'];
@@ -362,8 +361,8 @@
         }
 
         function filterDeleted(elements) {
-            var hide = vm.softDelete['hide'];
-            var reverse = vm.softDelete['reverse'];
+            var hide = vm.catalog.softDelete['hide'];
+            var reverse = vm.catalog.softDelete['reverse'];
             var filteredElements = [];
             elements.forEach(function (element) {
                 //Negated XOR comparison to decide whether to show or not the element
