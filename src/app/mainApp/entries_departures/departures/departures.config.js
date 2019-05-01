@@ -6,7 +6,7 @@
     function entriesConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/entries_departures/departures');
         $stateProvider
-            /* New asset entries */
+            /* New asset departures */
             .state('triangular.admin-default.departure-new-manual', {
                 url: '/salida/nuevos/manual',
                 data: {
@@ -18,7 +18,7 @@
                 controller: 'newManualDepartureController',
                 controllerAs: 'vm'
             })
-            /* Warranty asset entries */
+            /* Warranty asset departures */
             .state('triangular.admin-default.departure-warranty-manual', {
                 url: '/salida/garantias/manual',
                 data: {
@@ -30,7 +30,7 @@
                 controller: 'warrantyManualDepartureController',
                 controllerAs: 'vm'
             })
-            /* Unrecognizable asset entries */
+            /* Unrecognizable asset departures */
             .state('triangular.admin-default.departure-unrecognizable-manual', {
                 url: '/salida/no_capitalizados/manual',
                 data: {
@@ -42,7 +42,7 @@
                 controller: 'unrecognizableManualDepartureController',
                 controllerAs: 'vm'
             })
-            /* Obsolete asset entries */
+            /* Obsolete asset departures */
             .state('triangular.admin-default.departure-obsolete-manual', {
                 url: '/salida/obsoletos/manual',
                 data: {
@@ -54,7 +54,7 @@
                 controller: 'obsoleteManualDepartureController',
                 controllerAs: 'vm'
             })
-            /* Warehouse asset entries */
+            /* Warehouse asset departures */
             .state('triangular.admin-default.departure-warehouse-manual', {
                 url: '/salida/almacen/manual',
                 data: {
