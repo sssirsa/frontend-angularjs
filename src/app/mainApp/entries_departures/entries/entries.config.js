@@ -42,18 +42,6 @@
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
-            /* Obsolete asset entries */
-            .state('triangular.admin-default.entry-obsolete-manual', {
-                url: '/entrada/obsoletos/manual',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-                    }
-                },
-                templateUrl: 'app/mainApp/entries_departures/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
-                controller: 'obsoleteManualEntryController',
-                controllerAs: 'vm'
-            })
             /* Warehouse asset entries */
             .state('triangular.admin-default.entry-warehouse-manual', {
                 url: '/entrada/almacen/manual',
@@ -92,12 +80,6 @@
                         type: 'link',
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
-                    },
-                    {
-                        name: 'ENTRIES.MENU.OBSOLETE',
-                        type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-obsolete-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WAREHOUSE',
