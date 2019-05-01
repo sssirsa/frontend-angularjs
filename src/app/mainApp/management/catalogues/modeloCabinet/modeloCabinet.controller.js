@@ -69,7 +69,6 @@
                         catalog: {
                             lazy: false,
                             url: brandUrl,
-                            kind: 'management',
                             model: 'id',
                             option: 'nombre',
                             name: 'Marca',

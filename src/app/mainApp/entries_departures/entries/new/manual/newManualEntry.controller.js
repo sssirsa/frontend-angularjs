@@ -93,6 +93,12 @@
                     type: 'catalog',
                     model: 'marca',
                     label: 'Marca del cabinet',
+                    required: true,
+                    validations: {
+                        errors: {
+                            required: 'El campo es requerido.'
+                        }
+                    },
                     catalog: {
                         url: EnvironmentConfig.site.rest.api
                             + '/' + URLS.management.base
@@ -100,12 +106,11 @@
                             + '/' + URLS.management.catalogues.cabinet_brand,
                         name: 'Marca',
                         model: 'id',
-                        option: 'descripcion',
+                        option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
                         pagination: {}
                     },
-                    required: true,
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
