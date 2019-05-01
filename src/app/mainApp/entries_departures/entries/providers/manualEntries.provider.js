@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries')
-        .service('MANUAL_ENTRIES', ManualEntriesProvider);
+        .factory('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(
         API,
@@ -29,6 +29,10 @@
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
+        }
+
+        function createRepair(element) {
+            return entriesUrl.all(entries.repair).customPOST(element);
         }
 
         function createWarranty(element) {
@@ -135,7 +139,7 @@
         }
 
         function getEntriesByCabinet(id) {
-
+            return id;
         }
 
         var warrantyEntry = {
@@ -146,7 +150,7 @@
                     linea_transporte_id: null,
                     nombre_chofer: '',
                     tipo_transporte_id: null
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -294,7 +298,7 @@
                     linea_transporte_id: null,
                     nombre_chofer: '',
                     tipo_transporte_id: null
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -442,7 +446,7 @@
                     nombre_chofer: '',
                     proveedor_origen_id: null,
                     tipo_transporte_id: null
-                }
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -614,8 +618,8 @@
                     linea_transporte_id: null,
                     nombre_chofer: '',
                     no_capitalizados_id: [],
-                    tipo_transporte_id:null
-                }
+                    tipo_transporte_id: null
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -785,10 +789,10 @@
                 return {
                     cabinets_id: [],
                     ife_chofer: null,
-                    linea_transporte_id:null,
+                    linea_transporte_id: null,
                     nombre_chofer: '',
-                    tipo_transporte_id:null
-                }
+                    tipo_transporte_id: null
+                };
             },
             catalogues: function catalogues() {
                 var catalogues = {
@@ -941,11 +945,11 @@
             createAutomaticInspection: createAutomaticInspection,
             //Constants
             warrantyEntry: warrantyEntry,
+            repairEntry: repairEntry,
             newEntry: newEntry,
-            obsoleteEntry: obsoleteEntry,
             warehouseEntry: warehouseEntry,
             unrecognizableEntry: unrecognizableEntry
-        }
+        };
 
     }
 

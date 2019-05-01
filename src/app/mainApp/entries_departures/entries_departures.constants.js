@@ -23,14 +23,14 @@
                 close: 'close'
             },
             entries: {
+                addCabinet: 'add_cabinet',
                 base: 'entries',
+                close: 'close',
                 new: 'news',
-                obsolete: 'scrapped',
+                repair: 'repair',
                 unrecognizable: 'no_labeled',
                 warehouse: 'warehouse',
-                warranty: 'warranties',
-                addCabinet: 'add_cabinet',
-                close: 'close'
+                warranty: 'warranties'
             },
             inspections: {
                 base: 'inspections',
