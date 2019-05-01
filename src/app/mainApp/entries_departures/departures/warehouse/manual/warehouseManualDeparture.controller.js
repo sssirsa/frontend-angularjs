@@ -39,7 +39,7 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.selectedTab = 0
+            vm.selectedTab = 0;
             vm.showSubsidiarySelector = false;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
@@ -50,7 +50,7 @@
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
                 vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
             }
-        }
+        };
 
         vm.init();
 
@@ -58,15 +58,15 @@
 
         vm.onElementSelect = function onElementSelect(element, field) {
             vm.departure[field] = element;
-        }
+        };
 
         vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
-            vm.selectedTab = 0
+            vm.selectedTab = 0;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
 
             vm.onElementSelect(element, field);
-        }
+        };
 
         vm.selectDriverID = function selectDriverID(files) {
             if (files.length > 0) {
@@ -84,7 +84,7 @@
             else {
                 delete (vm.departure['ife_chofer']);
             }
-        }
+        };
 
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -180,7 +180,7 @@
                         });
                 }
             }
-        }
+        };
 
         vm.removeCabinet = function removeCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -196,7 +196,7 @@
                     vm.cabinetList.splice(index, 1);
                 }
             }
-        }
+        };
 
         vm.clickSaveDeparture = function clickSaveDeparture(departure) {
             //Show warning message if the departure has unregistered cabinets
@@ -216,7 +216,7 @@
             else {
                 saveDeparture(departure);
             }
-        }
+        };
 
         vm.showCabinetRestriction = function showCabinetRestriction(cabinetID) {
             //$mdDialog.show({
@@ -238,18 +238,18 @@
             //        ErrorHandler.errorTranslate(err);
             //    }
             //});
-
+            return cabinetID;
             //TODO: Cabinet restriction dialog
-        }
+        };
 
         //Internal functions
 
-        saveDeparture = function saveDeparture(departure) {
-            var warehouseDeparture = JSON.parse(JSON.stringify(departure));
+        var saveDeparture = function saveDeparture(departure) {
+            var warehouseDeparture = angular.fromJson(angular.toJson(departure));
             warehouseDeparture = addCabinetsToDeparture(vm.cabinetList, warehouseDeparture, false);
             warehouseDeparture = Helper.removeBlankStrings(warehouseDeparture);
 
-            var obsoleteDeparture = JSON.parse(JSON.stringify(departure));
+            var obsoleteDeparture = angular.fromJson(angular.toJson(departure));
             obsoleteDeparture = addCabinetsToDeparture(vm.cabinetList, obsoleteDeparture, true);
             obsoleteDeparture = Helper.removeBlankStrings(obsoleteDeparture);
 
@@ -264,7 +264,7 @@
                         );
                     })
                     .catch(function (errorCallback) {
-                        console.error(errorCallback);
+
                         ErrorHandler.errorTranslate(errorCallback);
                     });
             }
@@ -281,19 +281,19 @@
                         );
                     })
                     .catch(function (errorCallback) {
-                        console.error(errorCallback);
+
                         ErrorHandler.errorTranslate(errorCallback);
                     });
             }
-        }
+        };
 
-        departureHasPendingCabinets = function departureHasPendingCabinets() {
+        var departureHasPendingCabinets = function departureHasPendingCabinets() {
             return vm.cabinetList.some(function (element) {
                 return !element.cabinet;
             });
-        }
+        };
 
-        addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure, obsolete) {
+        var addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure, obsolete) {
             //In case the cabinets array exist, restart it
             if (departure.cabinets_id.length) {
                 departure.cabinets_id = [];
@@ -313,9 +313,9 @@
             }
             return departure;
 
-        }
+        };
 
-        addCabinetToList = function addCabinetToList(cabinet) {
+        var addCabinetToList = function addCabinetToList(cabinet) {
             var cabinetToAdd = {
                 promise: null,
                 cabinet: cabinet,
@@ -323,17 +323,17 @@
             };
 
             vm.cabinetList.push(cabinetToAdd);
-        }
+        };
 
         //Tab functions
 
         vm.previousTab = function () {
             vm.selectedTab = vm.selectedTab - 1;
-        }
+        };
 
         vm.nextTab = function () {
             vm.selectedTab = vm.selectedTab + 1;
-        }
+        };
 
     }
 
