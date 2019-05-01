@@ -109,17 +109,17 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
-                label={{'ENTRIES.UNRECOGNIZABLE.LABELS.ENTRY_DATA'|translate}}>
+                label={{'ENTRIES.UNRECOGNIZABLE.LABELS.DEPARTURE_DATA'|translate}}>
             <div layout="row"
                  layout-align="center center">
                 <p>{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.LABEL'|translate}}</p>
-                <md-switch ng-model="vm.entryFromAgency"
+                <md-switch ng-model="vm.departureFromAgency"
                            md-change="vm.changeSwitch()">
-                    <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                    <!--<p ng-if="vm.departureFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.departureFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
             </div>
-            <form name="entryForm"
+            <form name="departureForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
@@ -138,7 +138,7 @@
                                     class="md-icon-float md-block">
                     <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
-                    <input ng-model="vm.entry['descripcion']"
+                    <input ng-model="vm.departure['descripcion']"
                            name="description"
                            type="text">
                     <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.DESCRIPTION</div>
@@ -159,7 +159,7 @@
                     </catalog-select>
                     <!--Mutual excluding catalogs-->
                     <catalog-select class="full-width"
-                                    ng-if="!vm.entryFromAgency"
+                                    ng-if="!vm.departureFromAgency"
                                     catalog="vm.catalogues['petition'].catalog"
                                     hint="vm.catalogues['petition'].hint"
                                     icon="vm.catalogues['petition'].icon"
@@ -170,7 +170,7 @@
                                     on-select="vm.onElementSelect(element,vm.catalogues['petition'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
-                                    ng-if="vm.entryFromAgency"
+                                    ng-if="vm.departureFromAgency"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
@@ -214,7 +214,7 @@
                                         class="md-icon-float md-block full-width">
                         <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']"
+                        <input ng-model="vm.departure['nombre_chofer']"
                                name="driver_name"
                                ng-required="true"
                                type="text">
@@ -249,14 +249,14 @@
                         <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
-                <md-button ng-click="vm.clickSaveEntry(vm.entry)"
+                <md-button ng-click="vm.clickSaveDeparture(vm.departure)"
                            cg-busy="{
-                                     promise:vm.createEntryPromise,
+                                     promise:vm.createDeparturePromise,
                                      message:' '
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
+                           ng-disabled="departureForm.$invalid ||!vm.departure['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.SAVE'|translate}}</div>

@@ -315,15 +315,15 @@
 
         };
 
-        var addCabinetToList = function addCabinetToList(cabinet) {
-            var cabinetToAdd = {
-                promise: null,
-                cabinet: cabinet,
-                id: cabinet['economico']
-            };
+        //var addCabinetToList = function addCabinetToList(cabinet) {
+        //    var cabinetToAdd = {
+        //        promise: null,
+        //        cabinet: cabinet,
+        //        id: cabinet['economico']
+        //    };
 
-            vm.cabinetList.push(cabinetToAdd);
-        };
+        //    vm.cabinetList.push(cabinetToAdd);
+        //};
 
         //Tab functions
 
