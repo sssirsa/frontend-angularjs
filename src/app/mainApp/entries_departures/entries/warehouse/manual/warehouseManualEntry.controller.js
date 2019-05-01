@@ -50,7 +50,7 @@
             if (User.getUser().hasOwnProperty('sucursal')) {
                 vm.showSubsidiarySelector = !User.getUser().sucursal;
             }
-        }
+        };
 
         vm.init();
 
@@ -58,7 +58,7 @@
 
         vm.onElementSelect = function onElementSelect(element, field) {
             vm.entry[field] = element;
-        }
+        };
 
         vm.selectDriverID = function selectDriverID(files) {
             if (files.length > 0) {
@@ -76,7 +76,7 @@
             else {
                 delete (vm.entry['ife_chofer']);
             }
-        }
+        };
 
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -126,7 +126,7 @@
                         });
                 }
             }
-        }
+        };
 
         vm.removeCabinet = function removeCabinet(cabinetID) {
             if (cabinetID.length > 0) {
@@ -142,7 +142,7 @@
                     vm.cabinetList.splice(index, 1);
                 }
             }
-        }
+        };
 
         vm.clickSaveEntry = function clickSaveEntry(entry) {
             //Show warning message if the entry has unregistered cabinets
@@ -162,7 +162,7 @@
             else {
                 saveEntry(entry);
             }
-        }
+        };
 
         vm.createCabinet = function createCabinet(cabinetID) {
             $mdDialog.show({
@@ -184,16 +184,16 @@
                     ErrorHandler.errorTranslate(err);
                 }
             });
-        }
+        };
 
         //Internal functions
 
-        saveEntry = function saveEntry(entry) {
-            var warehouseEntry = JSON.parse(JSON.stringify(entry));
+        var saveEntry = function saveEntry(entry) {
+            var warehouseEntry = angular.fromJson(angular.toJson(entry));
             warehouseEntry = addCabinetsToEntry(vm.cabinetList, warehouseEntry, false);
             warehouseEntry = Helper.removeBlankStrings(warehouseEntry);
 
-            var obsoleteEntry = JSON.parse(JSON.stringify(entry));
+            var obsoleteEntry = angular.fromJson(angular.toJson(entry));
             obsoleteEntry = addCabinetsToEntry(vm.cabinetList, obsoleteEntry, true);
             obsoleteEntry = Helper.removeBlankStrings(obsoleteEntry);
 
@@ -202,7 +202,7 @@
                 vm.createEntryPromise = MANUAL_ENTRIES
                     .createWarehouse(warehouseEntry)
                     .then(function (warehouseEntrySuccessCallback) {
-                        console.log(warehouseEntrySuccessCallback);
+
                         for (var i = 0;
                             i < warehouseEntrySuccessCallback['cabinets'].length;
                             i++) {
@@ -224,7 +224,7 @@
                 vm.createEntryPromise = MANUAL_ENTRIES
                     .createObsolete(obsoleteEntry)
                     .then(function (obsoleteEntrySuccessCallback) {
-                        console.log(obsoleteEntrySuccessCallback);
+
                         for (var i = 0;
                             i < obsoleteEntrySuccessCallback['cabinets'].length;
                             i++) {
@@ -239,15 +239,15 @@
                         ErrorHandler.errorTranslate(errorCallback);
                     });
             }
-        }
+        };
 
-        entryHasPendingCabinets = function entryHasPendingCabinets() {
+        var entryHasPendingCabinets = function entryHasPendingCabinets() {
             return vm.cabinetList.some(function (element) {
                 return !element.cabinet;
             });
-        }
+        };
 
-        addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry, obsolete) {
+        var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry, obsolete) {
             //In case the cabinets array exist, restart it
             if (entry.cabinets_id.length) {
                 entry.cabinets_id = [];
@@ -266,17 +266,17 @@
                 entry['cabinets_id'].push(existingCabinets[i].id);
             }
             return entry;
-        }
+        };
 
         //Tab functions
 
         vm.previousTab = function () {
             vm.selectedTab = vm.selectedTab - 1;
-        }
+        };
 
         vm.nextTab = function () {
             vm.selectedTab = vm.selectedTab + 1;
-        }
+        };
 
     }
 
