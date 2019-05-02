@@ -43,7 +43,7 @@
                 <catalog-select ng-if="vm.edition && vm.editionStorage"
                                 catalog="vm.catalogues['storage_by_sucursal'].catalog"
                                 required="true"
-                                noResults="vm.catalogues['subsidiary'].noResults"
+                                no-results="vm.catalogues['subsidiary'].noResults"
                                 lazy="true"
                                 pagination="vm.catalogues['storage_by_sucursal'].pagination"
                                 elements="vm.catalogues['storage_by_sucursal'].elements"
@@ -202,7 +202,7 @@
                 <span translate="">STORAGE.SAVE</span>
             </md-button>
             <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-primary">
-                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
                 <span translate="">STORAGE.EDIT</span>
             </md-button>
         </md-card-actions>
