@@ -1,3 +1,18 @@
+/*
+    Fields for "New" entries
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        pedimento: string, (Optional)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        proveedor_origen_id: int(id), (Required)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.new')
@@ -24,7 +39,7 @@
         vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryFromAgency; //Determines which catalog to show (Petition or udn)
+        vm.entryToAgency; //Determines which catalog to show (subsidiary or udn-agency)
 
         //Validations and constraints
         vm.imageConstraints = {
