@@ -1,4 +1,21 @@
 {
+    "SALE_POINT": {
+        "MENU": {
+            "PRE_REQUEST":{
+                "TITLE": "Pre Solicitudes"
+            },
+            "REQUEST":{
+                "TITLE": "Solicitudes",
+                "NEW": "Nuevos",
+                "INCREASE": "Incremental",
+                "REMOVE": "Recolección",
+                "EXCHANGE": "Cambio",
+                "TECHNICAL_SERVICE": "Servico Técnico",
+                "LIST": "Listado de solicitudes"
+            },
+            "TITLE": "Servicio Externo"
+        }
+    },
     "PUNTOVENTA": {
         "TITLE": "Servicio en Punto de Venta",
         "PROGRESSREGISTER": "Progreso de Registro",
