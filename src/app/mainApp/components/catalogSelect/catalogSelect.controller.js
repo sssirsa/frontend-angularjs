@@ -45,7 +45,8 @@
  *                            Iy nulls the lazy parameter
  *      showModel:boolean,    (Optional) Allows to shoe the model and the option of the catalog with the following format
  *                            <b>{{model}}</b> - {{option}}
- *      multiple:boolean      (Optional) Allows to select more than one element.
+ *      multiple:boolean,     (Optional) Allows to select more than one element.
+ *      noResults: string     (Optional) Used when the url return a 0 length array, default is "No results" 
  *      ---------------------------------------
  *      RETURNS
  *      {
@@ -301,7 +302,6 @@
                         else {
                             loadedElementList = elements;
                         }
-                        console.log('initial load', loadedElementList);
                         //This procedures are required because of the initial loading of the elements
                         //Are just used in the case of pagination
                         //and when an initial value exists
@@ -333,7 +333,6 @@
                                 }
                             }
                         }
-                        console.log('filtered load', loadedElementList);
                         //Appending elemets to the now sanitized list
                         vm.catalogElements = vm.catalogElements.concat(loadedElementList);
 
