@@ -126,12 +126,13 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
-                        pagination: {}
+                        pagination: {},
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    required: true
                 },
                 {
                     type: 'catalog',
@@ -149,13 +150,13 @@
                         option: 'nombre',
                         elements: 'results',
                         pagination: {},
-                        loadMoreButtonText: 'Cargar mas...'
+                        loadMoreButtonText: 'Cargar mas...',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     },
-                    required: true,
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    required: true
                 },
                 {
                     type: 'catalog',
@@ -174,11 +175,11 @@
                             total: 'count',
                             next: 'next'
                         },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 },
                 {
@@ -198,11 +199,11 @@
                             total: 'count',
                             next: 'next'
                         },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 },
                 {
@@ -222,11 +223,11 @@
                             total: 'count',
                             next: 'next'
                         },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 },
                 {
@@ -246,11 +247,11 @@
                             total: 'count',
                             next: 'next'
                         },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 }
             ],

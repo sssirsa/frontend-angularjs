@@ -61,10 +61,7 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['marca'].catalog"
-                                    required="true"
-                                    pagination="vm.catalogues['marca'].pagination"
-                                    elements="vm.catalogues['marca'].elements"
-                                    soft-delete="vm.catalogues['marca'].softDelete"
+                                    required="vm.catalogues['marca'].required"
                                     on-select="vm.onBrandSelect(element)">
                     </catalog-select>
                 </md-input-container>
@@ -72,11 +69,8 @@
                 <md-input-container flex class="md-block">
                     <catalog-select ng-if="vm.marca"
                                     catalog="vm.catalogues['modelo_by_marca'].catalog"
-                                    required="true"
+                                    required="vm.catalogues['modelo_by_marca'].required"
                                     lazy="true"
-                                    pagination="vm.catalogues['modelo_by_marca'].pagination"
-                                    elements="vm.catalogues['modelo_by_marca'].elements"
-                                    soft-delete="vm.catalogues['modelo_by_marca'].softDelete"
                                     on-select="vm.onElementSelect(element,'modelo_id')">
                     </catalog-select>
                 </md-input-container>
@@ -87,20 +81,14 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['condicion'].catalog"
-                                    required="true"
-                                    pagination="vm.catalogues['condicion'].pagination"
-                                    elements="vm.catalogues['condicion'].elements"
-                                    soft-delete="vm.catalogues['condicion'].softDelete"
+                                    required="vm.catalogues['condicion'].required"
                                     on-select="vm.onElementSelect(element,'condicion_id')">
                     </catalog-select>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['status_unilever'].catalog"
-                                    required="true"
-                                    pagination="vm.catalogues['status_unilever'].pagination"
-                                    elements="vm.catalogues['status_unilever'].elements"
-                                    soft-delete="vm.catalogues['status_unilever'].softDelete"
+                                    required="vm.catalogues['status_unilever'].required"
                                     on-select="vm.onElementSelect(element,'estatus_unilever_id')">
                     </catalog-select>
                 </md-input-container>
@@ -109,20 +97,14 @@
             <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['status_com'].catalog"
-                                    required="true"
-                                    pagination="vm.catalogues['status_com'].pagination"
-                                    elements="vm.catalogues['status_com'].elements"
-                                    soft-delete="vm.catalogues['status_com'].softDelete"
+                                    required="vm.catalogues['status_com'].required"
                                     on-select="vm.onElementSelect(element,'estatus_com_id')">
                     </catalog-select>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="vm.catalogues['categoria'].catalog"
-                                    required="true"
-                                    pagination="vm.catalogues['categoria'].pagination"
-                                    elements="vm.catalogues['categoria'].elements"
-                                    soft-delete="vm.catalogues['categoria'].softDelete"
+                                    required="vm.catalogues['categoria'].required"
                                     on-select="vm.onElementSelect(element,'categoria_id')">
                     </catalog-select>
                 </md-input-container>

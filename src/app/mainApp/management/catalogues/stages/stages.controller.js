@@ -73,7 +73,7 @@
                         required: true,
                         lock: true,
                         initial_value: 'Reparacion',
-                        hint:'Campo no editable',
+                        hint: 'Campo no editable',
                         options: {
                             model: 'value',
                             option: 'display_name',
@@ -94,11 +94,11 @@
                             option: 'descripcion',
                             name: 'Acciones',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
@@ -115,11 +115,11 @@
                             option: 'nombre',
                             name: 'Etapas siguientes',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
@@ -137,11 +137,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],
@@ -194,7 +194,7 @@
                         type: 'catalog_array',
                         model: 'acciones_id',
                         label: 'Acciones',
-                        bindTo:'acciones',
+                        bindTo: 'acciones',
                         catalog: {
                             lazy: false,
                             url: EnvironmentConfig.site.rest.api
@@ -205,17 +205,17 @@
                             option: 'descripcion',
                             name: 'Acciones',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
                         type: 'catalog_array',
                         model: 'etapas_siguientes_id',
-                        bindTo:'etapas_siguientes',
+                        bindTo: 'etapas_siguientes',
                         label: 'Etapas Siguientes',
                         catalog: {
                             lazy: false,
@@ -227,18 +227,18 @@
                             option: 'nombre',
                             name: 'Etapas siguientes',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
                         type: 'catalog',
                         model: 'etapa_defecto_id',
                         label: 'Etapas Defecto',
-                        bindTo:'etapa_defecto',
+                        bindTo: 'etapa_defecto',
                         hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
                         catalog: {
                             lazy: false,
@@ -250,11 +250,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],
