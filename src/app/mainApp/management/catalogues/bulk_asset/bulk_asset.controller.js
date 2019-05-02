@@ -96,7 +96,7 @@
                                 reverse: false
                             }
                         },
-                        required: true,
+                        required: true
                     },
                     {
                         type: 'catalog',
