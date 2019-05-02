@@ -42,12 +42,9 @@
             <md-input-container flex="100" flex-gt-sm="45">
                 <catalog-select ng-if="vm.edition && vm.editionStorage"
                                 catalog="vm.catalogues['storage_by_sucursal'].catalog"
-                                required="true"
-                                no-results="vm.catalogues['subsidiary'].noResults"
+                                required="vm.catalogues['storage_by_sucursal'].required"
+                                noResults="vm.catalogues['subsidiary'].noResults"
                                 lazy="true"
-                                pagination="vm.catalogues['storage_by_sucursal'].pagination"
-                                elements="vm.catalogues['storage_by_sucursal'].elements"
-                                soft-delete="vm.catalogues['storage_by_sucursal'].softDelete"
                                 on-select="vm.onElementSelect(element)">
                 </catalog-select>
 

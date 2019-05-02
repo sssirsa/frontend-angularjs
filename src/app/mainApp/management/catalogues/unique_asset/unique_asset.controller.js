@@ -85,17 +85,17 @@
                             model: 'id',
                             option: 'descripcion',
                             loadMoreButtonText: 'Cargar mas...',
-                            elements: 'results'
+                            elements: 'results',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -112,17 +112,17 @@
                             model: 'id',
                             option: 'descripcion',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -137,17 +137,17 @@
                             model: 'id',
                             option: 'razon_social',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -162,17 +162,17 @@
                             model: 'id',
                             option: 'nombre',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -189,17 +189,17 @@
                             showModel: true,
                             option: 'nombre',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     }
                 ],
                 dialog: {
@@ -210,7 +210,7 @@
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
@@ -254,17 +254,17 @@
                             model: 'id',
                             option: 'descripcion',
                             loadMoreButtonText: 'Cargar mas...',
-                            elements: 'results'
+                            elements: 'results',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -282,17 +282,17 @@
                             model: 'id',
                             option: 'descripcion',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -308,17 +308,17 @@
                             model: 'id',
                             option: 'razon_social',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -334,17 +334,17 @@
                             model: 'id',
                             option: 'nombre',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     },
                     {
                         type: 'catalog',
@@ -362,17 +362,17 @@
                             showModel: true,
                             option: 'nombre',
                             elements: 'results',
-                            loadMoreButtonText: 'Cargar mas...'
+                            loadMoreButtonText: 'Cargar mas...',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         },
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        required: true,
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
+                        required: true
                     }
                 ],
                 dialog: {

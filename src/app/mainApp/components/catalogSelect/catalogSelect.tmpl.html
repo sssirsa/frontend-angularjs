@@ -18,7 +18,8 @@
                    ng-disabled="{{$ctrl.lock}}"
                    md-on-open="$ctrl.onSelectOpen()"
                    md-on-close="$ctrl.onClose()">
-            <md-option ng-repeat="element in $ctrl.catalogElements"
+            <md-option ng-if="$ctrl.catalogElements.length>0"
+                       ng-repeat="element in $ctrl.catalogElements"
                        ng-value="element">
                 <section ng-if="!$ctrl.catalog.showModel">
                     <section ng-if="$ctrl.catalog.option">
@@ -31,6 +32,10 @@
                 <section ng-if="$ctrl.catalog.showModel">
                     <b>{{element[$ctrl.catalog.model]}}</b> - {{element[$ctrl.catalog.option]}}
                 </section>
+            </md-option>
+            <md-option ng-if="$!ctrl.catalogElements.length>0">
+                <span ng-if="$ctrl.noResults">{{$ctrl.noResults}}</span>
+                <span ng-if="!$ctrl.noResults">No results</span>
             </md-option>
             <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
                        ng-if="$ctrl.paginationHelper['next']"

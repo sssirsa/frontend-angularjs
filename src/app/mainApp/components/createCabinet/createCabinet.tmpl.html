@@ -68,10 +68,7 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['marca'].catalog"
-                                    required="true"
-                                    pagination="$ctrl.catalogues['marca'].pagination"
-                                    elements="$ctrl.catalogues['marca'].elements"
-                                    soft-delete="$ctrl.catalogues['marca'].softDelete"
+                                    required="$ctrl.catalogues['marca'].required"
                                     on-select="$ctrl.onBrandSelect(element)">
                     </catalog-select>
                 </md-input-container>
@@ -79,11 +76,8 @@
                 <md-input-container flex class="md-block">
                     <catalog-select ng-if="$ctrl.marca"
                                     catalog="$ctrl.catalogues['modelo_by_marca'].catalog"
-                                    required="true"
+                                    required="$ctrl.catalogues['modelo_by_marca'].required"
                                     lazy="true"
-                                    pagination="$ctrl.catalogues['modelo_by_marca'].pagination"
-                                    elements="$ctrl.catalogues['modelo_by_marca'].elements"
-                                    soft-delete="$ctrl.catalogues['modelo_by_marca'].softDelete"
                                     on-select="$ctrl.onElementSelect(element,'modelo_id')">
                     </catalog-select>
                 </md-input-container>
@@ -92,20 +86,14 @@
             <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['condicion'].catalog"
-                                    required="true"
-                                    pagination="$ctrl.catalogues['condicion'].pagination"
-                                    elements="$ctrl.catalogues['condicion'].elements"
-                                    soft-delete="$ctrl.catalogues['condicion'].softDelete"
+                                    required="$ctrl.catalogues['condicion'].required"
                                     on-select="$ctrl.onElementSelect(element,'condicion_id')">
                     </catalog-select>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['status_unilever'].catalog"
-                                    required="true"
-                                    pagination="$ctrl.catalogues['status_unilever'].pagination"
-                                    elements="$ctrl.catalogues['status_unilever'].elements"
-                                    soft-delete="$ctrl.catalogues['status_unilever'].softDelete"
+                                    required="$ctrl.catalogues['status_unilever'].required"
                                     on-select="$ctrl.onElementSelect(element,'estatus_unilever_id')">
                     </catalog-select>
                 </md-input-container>
@@ -114,20 +102,14 @@
             <div layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['status_com'].catalog"
-                                    required="true"
-                                    pagination="$ctrl.catalogues['status_com'].pagination"
-                                    elements="$ctrl.catalogues['status_com'].elements"
-                                    soft-delete="$ctrl.catalogues['status_com'].softDelete"
+                                    required="$ctrl.catalogues['status_com'].required"
                                     on-select="$ctrl.onElementSelect(element,'estatus_com_id')">
                     </catalog-select>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <catalog-select catalog="$ctrl.catalogues['categoria'].catalog"
-                                    required="true"
-                                    pagination="$ctrl.catalogues['categoria'].pagination"
-                                    elements="$ctrl.catalogues['categoria'].elements"
-                                    soft-delete="$ctrl.catalogues['categoria'].softDelete"
+                                    required="$ctrl.catalogues['categoria'].required"
                                     on-select="$ctrl.onElementSelect(element,'categoria_id')">
                     </catalog-select>
                 </md-input-container>

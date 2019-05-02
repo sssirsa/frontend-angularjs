@@ -128,11 +128,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],
@@ -231,11 +231,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],

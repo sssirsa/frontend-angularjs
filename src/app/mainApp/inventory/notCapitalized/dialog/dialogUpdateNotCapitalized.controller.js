@@ -55,18 +55,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.STATUS'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             motivo: {
                 catalog: {
@@ -78,18 +78,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.REASON'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             }
         };
 
