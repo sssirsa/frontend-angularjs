@@ -58,18 +58,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             modelo_by_marca: {
                 catalog: {
@@ -78,18 +78,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             condicion: {
                 catalog: {
@@ -101,18 +101,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'letra'
+                    option: 'letra',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             status_unilever: {
                 catalog: {
@@ -124,18 +124,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'descripcion',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             status_com: {
                 catalog: {
@@ -147,18 +147,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'descripcion',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             categoria: {
                 catalog: {
@@ -170,18 +170,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             }
         };
 

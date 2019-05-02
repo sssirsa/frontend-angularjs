@@ -60,20 +60,14 @@
 
         <md-input-container flex class="md-block" ng-if="vm.change">
             <catalog-select catalog="vm.catalogues['estatus_no_capitalizado'].catalog"
-                            required="true"
-                            pagination="vm.catalogues['estatus_no_capitalizado'].pagination"
-                            elements="vm.catalogues['estatus_no_capitalizado'].elements"
-                            soft-delete="vm.catalogues['estatus_no_capitalizado'].softDelete"
+                            required="vm.catalogues['estatus_no_capitalizado'].required"
                             on-select="vm.onElementSelect(element,'status_id')">
             </catalog-select>
         </md-input-container>
 
         <md-input-container flex class="md-block" ng-if="vm.change">
             <catalog-select catalog="vm.catalogues['motivo'].catalog"
-                            required="true"
-                            pagination="vm.catalogues['motivo'].pagination"
-                            elements="vm.catalogues['motivo'].elements"
-                            soft-delete="vm.catalogues['motivo'].softDelete"
+                            required="vm.catalogues['motivo'].required"
                             on-select="vm.onElementSelect(element,'motivo_id')">
             </catalog-select>
         </md-input-container>
