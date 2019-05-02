@@ -553,58 +553,6 @@
                             hide: 'deleted',
                             reverse: false
                         }
-                    },
-                    project: {
-                        binding: 'proyecto_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.project,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.NEW.LABELS.PROJECT'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion'
-                        },
-                        hint: Translate.translate('ENTRIES.NEW.HINTS.PROJECT'),
-                        icon: 'fa fa-book',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    petition: {
-                        binding: 'pedimento_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.pediments,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.NEW.LABELS.PETITION'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion'
-                        },
-                        hint: Translate.translate('ENTRIES.NEW.HINTS.PETITION'),
-                        icon: 'fa fa-clipboard-check',
-                        required: true,
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
                     }
                 };
                 return catalogues;

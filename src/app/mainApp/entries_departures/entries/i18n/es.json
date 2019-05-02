@@ -34,9 +34,9 @@
                     "MODEL": "Modelo"
                 },
                 "SWITCH": {
-                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
-                    "TRUE": "La entrada proviene de una UDN-Agencia",
-                    "FALSE": "La entrada no proviene de una UDN-Agencia"
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
                 }
             },
             "HINTS": {

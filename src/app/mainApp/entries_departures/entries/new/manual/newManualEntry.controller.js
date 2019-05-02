@@ -36,10 +36,12 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showOriginSelector;
         vm.catalogues;
         vm.cabinetList;
         vm.entryToAgency; //Determines which catalog to show (subsidiary or udn-agency)
+        vm.userAgency;
+        vm.userSubsidiary;
 
         //Validations and constraints
         vm.imageConstraints = {
@@ -267,7 +269,7 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showOriginSelector = false;
             vm.cabinetList = [];
             vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
             vm.entry = MANUAL_ENTRIES.newEntry.template();
@@ -275,7 +277,7 @@
 
             //Determining whether or not to show the Subsidiary selector.
             if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
+                vm.showOriginSelector = !User.getUser().sucursal;
             }
         };
 
