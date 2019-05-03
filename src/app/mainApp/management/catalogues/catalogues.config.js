@@ -121,17 +121,6 @@
                 controller: 'MarcaCabinetController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.proyectos', {
-                url: '/catalogo/proyectos',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR']
-                    }
-                },
-                templateUrl: 'app/mainApp/management/catalogues/proyectos/proyectos.tmpl.html',
-                controller: 'ProyectosController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.categoria', {
                 url: '/catalogo/categoria',
                 data: {
@@ -467,20 +456,8 @@
                                 type: 'link'
                             },
                             {
-                                name: 'MAIN.MENU.CATALOGS.PROJECTS',
-                                state: 'triangular.admin-default.proyectos',
-                                permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
-                            {
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_TYPE',
                                 state: 'triangular.admin-default.tipo-transporte',
-                                permission: ['ADMINISTRADOR'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.UDN',
-                                state: 'triangular.admin-default.udn-catalog',
                                 permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             }
@@ -607,6 +584,12 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.SUBSIDIARY',
                                 state: 'triangular.admin-default.sucursal',
+                                permission: ['ADMINISTRADOR'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.UDN',
+                                state: 'triangular.admin-default.udn-catalog',
                                 permission: ['ADMINISTRADOR'],
                                 type: 'link'
                             }
