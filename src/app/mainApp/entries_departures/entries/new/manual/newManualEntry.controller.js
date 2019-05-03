@@ -1,5 +1,5 @@
 /*
-    Fields for "New" entries
+    Fields for "New" entries:
     entry:{
         nombre_chofer: string, (Required)
         ife_chofer: base64string, (Required) Image file
