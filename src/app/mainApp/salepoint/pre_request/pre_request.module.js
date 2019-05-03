@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('app.mainApp.external_service.pre_request', []);
+        .module('app.mainApp.salepoint.pre_request', []);
 }) ();

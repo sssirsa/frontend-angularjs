@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('app.mainApp.external_service.request', []);
+        .module('app.mainApp.salepoint.request', []);
 }) ();

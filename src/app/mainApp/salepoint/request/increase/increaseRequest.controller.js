@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.external_service.request')
+        .module('app.mainApp.salepoint.request')
         .controller('increaseRequestController', increaseRequestController);
 
     /* @ngInject */

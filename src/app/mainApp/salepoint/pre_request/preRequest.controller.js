@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.external_service.pre_request')
+        .module('app.mainApp.salepoint.pre_request')
         .controller('preRequestController', preRequestController);
 
     function preRequestController(URLS, preRequests, ErrorHandler, $state){

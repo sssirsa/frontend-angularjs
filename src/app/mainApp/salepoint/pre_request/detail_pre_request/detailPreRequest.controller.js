@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.external_service.pre_request')
+        .module('app.mainApp.salepoint.pre_request')
         .controller('detailPreRequestController', detailPreRequestController);
 
     function detailPreRequestController(preRequests, $stateParams, cabinetUC, Translate, Helper, $state, ErrorHandler, toastr,
