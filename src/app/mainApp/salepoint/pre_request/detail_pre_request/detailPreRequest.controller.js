@@ -6,7 +6,7 @@
         .controller('detailPreRequestController', detailPreRequestController);
 
     function detailPreRequestController(preRequests, $stateParams, cabinetUC, Translate, Helper, $state, ErrorHandler, toastr,
-    EnvironmentConfig, URLS, $mdDialog, Geolocation, User) {
+    EnvironmentConfig, URLS, $mdDialog, Geolocation, User, _) {
 
         var vm = this;
         vm.user = User.getUser();
@@ -23,6 +23,7 @@
         vm.photos = [];
         vm.request = {};
         vm.cabinetExist = true;
+        vm.infoCabinet = {};
 
         vm.catalogSucursal = {
             catalog: {
@@ -184,7 +185,7 @@
                     convertImages();
                     getinfoCabinet(vm.preRequest.cabinet);
                 })
-                .catch(function errInfoPre(errInfoPre) {
+                .catch(function errInfoPre() {
                     toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
                                    Translate.translate('MAIN.MSG.ERROR_TITLE'));
                 });
@@ -193,7 +194,8 @@
 
         function getinfoCabinet(id) {
             cabinetUC.getByID(id)
-                .then(function infoCabinet(info) {
+                .then(function infoCabinet(infoCabinet) {
+                    vm.infoCabinet = infoCabinet;
                 })
                 .catch(function errorInfoCabinet(errInfo) {
                     vm.cabinetExist = false;

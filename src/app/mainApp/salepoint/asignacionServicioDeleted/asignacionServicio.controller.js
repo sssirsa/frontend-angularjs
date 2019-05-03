@@ -12,7 +12,8 @@
         Translate,
         $state,
         $mdDialog,
-        $document
+        $document,
+        ErrorHandler
     ) {
         var vm = this;
 

@@ -6,7 +6,7 @@
         .controller('listRequestController', listRequestController);
 
     /* @ngInject */
-    function listRequestController($state, $log, ErrorHandler, SalePointRequests, Translate, $http, Solicitudes) {
+    function listRequestController($state, $log, ErrorHandler, SalePointRequests, Translate, $http, pdfMake) {
         var vm = this;
 
         //Function mapping
@@ -88,7 +88,7 @@
                                 formato.data.content[0].columns[1].stack[3].text = reporte.id;
                                 //Información de la solicitud
                                 //Titulo
-                                formato.data.content[1].text = 'Información de la solicitud'
+                                formato.data.content[1].text = 'Información de la solicitud';
                                 //Estatus
                                 formato.data.content[2].stack[0].columns[1].text = reporte.status;
                                 //Tipo

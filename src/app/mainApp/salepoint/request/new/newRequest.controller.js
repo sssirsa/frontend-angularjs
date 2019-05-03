@@ -109,7 +109,7 @@
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 9);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 9);
 
-            console.log(vm.request);
+            $log(vm.request);
 
 
             /*vm.savingPromise = SalePointRequests.create(vm.request)
