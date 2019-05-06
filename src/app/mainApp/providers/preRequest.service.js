@@ -9,7 +9,7 @@
         API,
         $window,
         URLS) {
-        var baseUrl=API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest);
+        var baseUrl=API.all(URLS.salepoint.base).all(URLS.salepoint.pre_request.base);
         var service = {
             getByID: getByID,
             getAll: getAll,
@@ -18,24 +18,24 @@
         };
 
         function getByID(id) {
-            return baseUrl.all(URLS.external_service.pre_request.pre_request).all(id).customGET();
+            return baseUrl.all(URLS.salepoint.pre_request.pre_request).all(id).customGET();
         }
 
         function getAll(limit, offset, filter) {
             if (angular.isUndefined(filter)) {
-                return API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest + '?limit=' + limit + '&offset=' + offset).customGET();
+                return baseUrl.all(URLS.salepoint.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset).customGET();
             }
             else {
-                return API.all(URLS.salepoint.base).all(URLS.salepoint.preRequest + '?limit=' + limit + '&offset=' + offset+'&'+filter).customGET();
+                return baseUrl.all(URLS.salepoint.pre_request.pre_request + '?limit=' + limit + '&offset=' + offset + '&' + filter).customGET();
             }
         }
 
         function createRequest (element){
-            return baseUrl.all(URLS.external_service.pre_request.new_request).post(element);
+            return baseUrl.all(URLS.salepoint.pre_request.new_request).post(element);
         }
 
         function update(element) {
-            return baseUrl.all(URLS.external_service.pre_request.pre_request).all(element.id).customPUT(element);
+            return baseUrl.all(URLS.salepoint.pre_request.pre_request).all(element.id).customPUT(element);
         }
 
         return service;

@@ -1,6 +1,19 @@
 {
     "PRE_REQUEST":{
         "TITLE": "Pre solicitud",
+        "LIST":{
+            "TYPE":{
+                "ALL": "Todas",
+                "ATTENDED": "Atendida",
+                "IN_PROCESS": "En proceso",
+                "OPEN": "Abierta"
+            },
+            "LIST_OF": "Listado de",
+            "NO_RESULTS": "Sin pre solicitudes"
+        },
+        "DETAIL": {
+            "FOLIO": "Folio"
+        },
         "EVIDENCES":{
             "TITLE": "Evidencias de la Pre solicitud",
             "NO_EVICENCES": "Sin evidencias"

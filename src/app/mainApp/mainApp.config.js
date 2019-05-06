@@ -12,7 +12,6 @@
         MANAGEMENT,
         SALEPOINT,
         TECHNICAL_SERVICE,
-        EXTERNAL_SERVICE,
         URLS,
         $provide
     ) {
@@ -21,7 +20,6 @@
         URLS.management = MANAGEMENT;
         URLS.salepoint = SALEPOINT;
         URLS.technical_service = TECHNICAL_SERVICE;
-        URLS.external_service = EXTERNAL_SERVICE;
 
         $provide.constant('URLS', URLS);
     }

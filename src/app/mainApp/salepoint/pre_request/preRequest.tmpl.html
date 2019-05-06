@@ -10,22 +10,22 @@
                  layout-xs="column">
 
                 <div layout="column" ng-if="vm.lastKindFilter != 'Abierta'">
-                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
                     <div ng-click="vm.listFilteredpreRequests('Abierta')"
                          class="Abierta"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter != 'En_proceso'">
-                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
                     <div ng-click="vm.listFilteredpreRequests('En_proceso')"
                          class="En_proceso"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter != 'Atendida'">
-                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
                     <div ng-click="vm.listFilteredpreRequests('Atendida')"
                          class="Atendida"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter != 'Todo'">
-                    <span translate>REQUESTS.LIST.ALL</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
                     <div ng-click="vm.listFilteredpreRequests('Todo')"
                          class="Todo"></div>
                 </div>
@@ -39,21 +39,21 @@
                  layout-align="space-around center"
                  layout-align-xs="center stretch"
                  layout-xs="column">
-                <span>Listado de </span>
+                <span translate>PRE_REQUEST.LIST.LIST_OF</span>
                 <div layout="column" ng-if="vm.lastKindFilter == 'Abierta'">
-                    <span translate>REQUESTS.LIST.OPEN</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
                     <div class="Abierta"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter == 'En_proceso'">
-                    <span translate>REQUESTS.LIST.IN_PROCESS</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
                     <div class="En_proceso"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter == 'Atendida'">
-                    <span translate>REQUESTS.LIST.ATTENDED</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
                     <div class="Atendida"></div>
                 </div>
                 <div layout="column" ng-if="vm.lastKindFilter == 'Todo'">
-                    <span translate>REQUESTS.LIST.ALL</span>
+                    <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
                     <div class="Todo"></div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                  layout-align="space-around center"
                  layout-align-xs="center stretch"
                  layout-xs="column">
-                <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
+                <span translate>PRE_REQUEST.LIST.NO_RESULTS</span>
             </div>
         </md-card>
     </div>
@@ -88,7 +88,7 @@
                 <div layout="column" flex-gt-md="30">
                     <div layout="column">
                         <div layout="row" layout-align="center center">
-                            <h4 translate>PREREQUEST_TRANSLATE.FOLIO</h4>
+                            <h4 translate>PRE_REQUEST.DETAIL.FOLIO</h4>
                             <h4 translate>:</h4>
                             <h4>{{item.id}}</h4>
                         </div>
