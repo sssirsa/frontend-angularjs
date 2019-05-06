@@ -2,13 +2,15 @@
     "PRE_REQUEST":{
         "TITLE": "Pre solicitud",
         "LIST":{
+            "TITLE": "Listados de pre solicitudes",
             "TYPE":{
                 "ALL": "Todas",
                 "ATTENDED": "Atendida",
                 "IN_PROCESS": "En proceso",
+                "CANCELED": "Cancelada",
                 "OPEN": "Abierta"
             },
-            "LIST_OF": "Listado de",
+            "LIST_OF": "Listado de: ",
             "NO_RESULTS": "Sin pre solicitudes"
         },
         "DETAIL": {
@@ -21,7 +23,8 @@
         "CABINET":{
             "ECONOMIC": "Económico",
             "NOT_REGISTERED": "Cabinet no registrado",
-            "NEW_REGISTER": "Registrar cabinet"
+            "NEW_REGISTER": "Registrar cabinet",
+            "SERIAL_NUMBER": "Número de serie"
         },
         "STORE":{
             "BETWEEN_1": "Entre calle 1",
@@ -42,7 +45,8 @@
         "OBSERVATIONS": "Observaciones del cliente",
         "BUTTONS": {
             "CANCEL": "Cancelar Pre Solicitud",
-            "CREATE": "Levantar Solicitud"
+            "CREATE": "Levantar Solicitud",
+            "LOAD_MORE": "Cargar mas..."
         },
         "SUBSIDIARY":{
             "TITLE": "Sucursal",

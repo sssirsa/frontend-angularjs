@@ -5,8 +5,22 @@
         .module('app.mainApp.salepoint.pre_request')
         .controller('detailPreRequestController', detailPreRequestController);
 
-    function detailPreRequestController(preRequests, $stateParams, cabinetUC, Translate, Helper, $state, ErrorHandler, toastr,
-    EnvironmentConfig, URLS, $mdDialog, Geolocation, User, _) {
+    function detailPreRequestController(
+        preRequests,
+        $stateParams,
+        cabinetUC,
+        Translate,
+        Helper,
+        $state,
+        ErrorHandler,
+        toastr,
+        EnvironmentConfig,
+        URLS,
+        $mdDialog,
+        Geolocation,
+        User,
+        _
+    ) {
 
         var vm = this;
         vm.user = User.getUser();
@@ -33,7 +47,7 @@
                 + '/' + URLS.management.catalogues.subsidiary,
                 kind: 'Generic',
                 name: Translate.translate('PRE_REQUEST.SUBSIDIARY.SELECT'),
-                loadMoreButtonText: 'Cargar mas',
+                loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                 model: 'id',
                 option: 'nombre'
             },
@@ -46,14 +60,14 @@
                 {
                     type: 'text',
                     model: 'economico',
-                    label: 'Económico',
+                    label: Translate.translate('PRE_REQUEST.CABINET.ECONOMIC'),
                     initial_value: '',
                     lock: true
                 },
                 {
                     type: 'text',
                     model: 'no_serie',
-                    label: 'Número de serie',
+                    label: Translate.translate('PRE_REQUEST.CABINET.SERIAL_NUMBER'),
                     required: true,
                     hint: 'Número de serie del cabinet',
                     validations: {
@@ -102,7 +116,7 @@
                         name: 'Marca',
                         model: 'id',
                         option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
+                        loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                         elements: 'results',
                         pagination: {}
                     },
@@ -128,7 +142,7 @@
                         option: 'nombre',
                         elements: 'results',
                         pagination: {},
-                        loadMoreButtonText: 'Cargar mas...'
+                        loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE')
                     },
                     required: true,
                     softDelete: {
@@ -148,7 +162,7 @@
                         name: 'Categoría del cabinet',
                         model: 'id',
                         option: 'nombre',
-                        loadMoreButtonText: 'Cargar mas...',
+                        loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                         pagination: {
                             total: 'count',
                             next: 'next'

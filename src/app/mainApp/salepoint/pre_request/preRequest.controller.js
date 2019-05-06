@@ -3,7 +3,13 @@
         .module('app.mainApp.salepoint.pre_request')
         .controller('preRequestController', preRequestController);
 
-    function preRequestController(URLS, preRequests, ErrorHandler, $state){
+    function preRequestController(
+        URLS,
+        preRequests,
+        ErrorHandler,
+        $state,
+        $log
+    ) {
 
         var vm = this;
 
@@ -68,7 +74,9 @@
 
         function prepareDataFunction() {
             vm.requests = vm.list.results;
-            vm.refreshPaginationButtonsComponent = true;
+            if (vm.list.count > vm.limit) {
+                vm.refreshPaginationButtonsComponent = true;
+            }
             vm.filteredActivated = false;
         }
 
