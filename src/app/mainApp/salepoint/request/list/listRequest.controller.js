@@ -6,7 +6,15 @@
         .controller('listRequestController', listRequestController);
 
     /* @ngInject */
-    function listRequestController($state, $log, ErrorHandler, SalePointRequests, Translate, $http, pdfMake) {
+    function listRequestController(
+        REQUESTS,
+        $state,
+        $log,
+        ErrorHandler,
+        Translate,
+        $http,
+        pdfMake
+    ) {
         var vm = this;
 
         //Function mapping
@@ -31,9 +39,10 @@
 
         function activate() {
             vm.refreshPaginationButtonsComponent = false;
-            vm.loadingPromise = SalePointRequests.getAll(vm.limit, vm.offset)
+            vm.loadingPromise = REQUESTS.getAll(vm.limit, vm.offset)
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
+                    $log.log(vm.allRequests);
                     prepareDataFunction();
                 })
                 .catch(function (listRequestsError) {
@@ -55,7 +64,7 @@
             }
             else {
                 var filterSTR = 'status='+requestKind;
-                vm.loadingPromise = SalePointRequests.getAll(vm.limit, vm.offset, filterSTR)
+                vm.loadingPromise = REQUESTS.getAll(vm.limit, vm.offset, filterSTR)
                     .then(function (listRequestsSuccess) {
                         vm.allRequests = listRequestsSuccess;
                         prepareDataFunction();
@@ -78,7 +87,7 @@
             $http.get('app/mainApp/service/external/solicitudes/report/formato.json')
                 .then(function (formato) {
                     if(formato) {
-                        vm.getReportPromise = SalePointRequests.getByID(requestID)
+                        vm.getReportPromise = REQUESTS.getByID(requestID)
                             .then(function (reporte) {
                                 var fecha = moment(reporte.fecha, 'DD/MM/YYYY hh:mm:ss');
                                 //Encabezado

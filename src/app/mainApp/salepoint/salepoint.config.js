@@ -264,6 +264,12 @@
                         permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         children: [
                             {
+                                name: 'SALE_POINT.MENU.REQUEST.LIST',
+                                type: 'link',
+                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                state: 'triangular.admin-default.list-request'
+                            },
+                            {
                                 name: 'SALE_POINT.MENU.REQUEST.NEW',
                                 type: 'link',
                                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
@@ -292,12 +298,6 @@
                                 type: 'link',
                                 permission: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.service-request'
-                            },
-                            {
-                                name: 'SALE_POINT.MENU.REQUEST.LIST',
-                                type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
-                                state: 'triangular.admin-default.list-request'
                             }
                         ]
 

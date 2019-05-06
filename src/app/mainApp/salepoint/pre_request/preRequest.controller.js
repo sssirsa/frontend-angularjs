@@ -5,7 +5,7 @@
 
     function preRequestController(
         URLS,
-        preRequests,
+        PREREQUESTS,
         ErrorHandler,
         $state
     ) {
@@ -33,7 +33,7 @@
         listpreRequests();
 
         function listpreRequests() {
-            vm.loadingPromise = preRequests.getAll(vm.limit, vm.offset)
+            vm.loadingPromise = PREREQUESTS.getAll(vm.limit, vm.offset)
                 .then(function(listprerequestelements){
                     vm.list=listprerequestelements;
                     prepareDataFunction();
@@ -56,7 +56,7 @@
             }
             else {
                 var filterSTR = 'status='+requestKind;
-                vm.loadingPromise = preRequests.getAll(vm.limit, vm.offset, filterSTR)
+                vm.loadingPromise = PREREQUESTS.getAll(vm.limit, vm.offset, filterSTR)
                     .then(function(listprerequestelements){
                         vm.list=listprerequestelements;
                         prepareDataFunction();

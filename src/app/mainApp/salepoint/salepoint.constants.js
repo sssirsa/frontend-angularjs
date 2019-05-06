@@ -20,7 +20,10 @@
                 base: 'request',
                 list: 'all',
                 new_request: 'register',
-                increase_request: 'increase'
+                incremental_request: 'incremental',
+                change_request: 'change',
+                retrieve_request: 'retrieve',
+                technical_service_request: 'technical_service'
             }
         });
 }) ();

@@ -3,18 +3,19 @@
 
     angular
         .module('app.mainApp')
-        .factory('preRequests', preRequests);
+        .factory('PREREQUESTS', preRequestsProvider);
 
-    function preRequests(
+    function preRequestsProvider(
         API,
         $window,
-        URLS) {
-        var baseUrl=API.all(URLS.salepoint.base).all(URLS.salepoint.pre_request.base);
+        URLS
+    ) {
+        var baseUrl = API.all(URLS.salepoint.base).all(URLS.salepoint.pre_request.base);
         var service = {
             getByID: getByID,
             getAll: getAll,
-            createRequest:createRequest,
-            update:update
+            createRequest: createRequest,
+            update: update
         };
 
         function getByID(id) {
