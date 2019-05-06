@@ -7,8 +7,7 @@
         URLS,
         preRequests,
         ErrorHandler,
-        $state,
-        $log
+        $state
     ) {
 
         var vm = this;

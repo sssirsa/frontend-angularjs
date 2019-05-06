@@ -1,5 +1,4 @@
 <div>
-
     <md-card  layout="column" ng-if="!vm.user.sucursal">
         <md-toolbar class="toolbar-default margin-bottom-10">
             <div layout-align="center center" layout="column" layout-gt-sm="row">
@@ -23,23 +22,23 @@
 
     <md-card layout="column">
         <md-toolbar class="toolbar-default margin-bottom-30">
-            <div layout-align="space-between center" layout="column" layout-gt-sm="row">
+            <div layout-padding layout-align="space-between center" layout="column" layout-gt-sm="row">
                 <div layout="column" layout-gt-sm="row">
-                    <b translate>{{vm.preRequest.id}}</b>
+                    <b>{{vm.preRequest.id}}</b>
                 </div>
                 <div layout="column" layout-gt-sm="row">
                     <div layout="row">
                         <b translate>PRE_REQUEST.CABINET.ECONOMIC</b>: &nbsp
-                        <b translate>{{vm.preRequest.cabinet}}</b>
+                        <b>{{vm.preRequest.cabinet}}</b>
                     </div>
                 </div>
                 <div layout="column" layout-gt-sm="row">
-                    <b translate>{{vm.preRequest.fecha| moment:'DD/MM/YYYY hh:mm:ss'}}</b>
+                    <b>{{vm.preRequest.fecha| amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</b>
                 </div>
             </div>
         </md-toolbar>
 
-        <div layout-gt-sm="row" layout="column" layout-align="space-between center">
+        <div layout-padding layout-gt-sm="row" layout="column" layout-align="space-between center">
             <div flex-gt-md="50" layout="column">
                 <div layout-align="center stretch"
                      layout="column"
@@ -133,12 +132,14 @@
         </div>
 
         <md-card-actions layout="column"
-                         layout-align="space-around end"
+                         layout-align="space-around stretch"
+                         layout-align-gt-xs="space-around end"
                          layout-padding>
 
-            <div layout="row"
-                 layout-align="space-around center"
-                 layout-wrap>
+            <div layout="column"
+                 layout-align="space-around stretch"
+                 layout-align-gt-xs="space-around center"
+                 layout-gt-xs="row">
 
                 <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
                     <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
