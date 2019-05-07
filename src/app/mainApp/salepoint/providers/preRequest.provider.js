@@ -15,7 +15,7 @@
             getPreRequestByID: getPreRequestByID,
             listPreRequest: listPreRequest,
             createRequest: createRequest,
-            update: update
+            updatePreRequest: updatePreRequest
         };
 
         function getPreRequestByID(id) {
@@ -41,7 +41,7 @@
             return baseUrl.all(URLS.salepoint.pre_request.new_request).post(element);
         }
 
-        function update(element) {
+        function updatePreRequest(element) {
             return baseUrl.all(URLS.salepoint.pre_request.pre_request).all(element.id).customPUT(element);
         }
 

@@ -1,6 +1,6 @@
 {
     "PRE_REQUEST":{
-        "TITLE": "Pre solicitud",
+        "TITLE": "Pre solicitudes",
         "LIST":{
             "TITLE": "Listados de pre solicitudes",
             "TYPE":{
@@ -11,20 +11,21 @@
                 "OPEN": "Abierta"
             },
             "LIST_OF": "Listado de: ",
-            "NO_RESULTS": "Sin pre solicitudes"
+            "NO_RESULTS": "No se encontrarón resultados"
         },
         "DETAIL": {
-            "FOLIO": "Folio"
-        },
-        "EVIDENCES":{
-            "TITLE": "Evidencias de la Pre solicitud",
-            "NO_EVICENCES": "Sin evidencias"
+            "FOLIO": "Folio",
+            "OBSERVATIONS": "Observaciones del cliente"
         },
         "CABINET":{
             "ECONOMIC": "Económico",
             "NOT_REGISTERED": "Cabinet no registrado",
             "NEW_REGISTER": "Registrar cabinet",
             "SERIAL_NUMBER": "Número de serie"
+        },
+        "EVIDENCES":{
+            "TITLE": "Evidencias de la Pre solicitud",
+            "NO_EVICENCES": "Sin evidencias"
         },
         "STORE":{
             "BETWEEN_1": "Entre calle 1",
@@ -42,7 +43,6 @@
             "START": "Hora inicio",
             "END": "Hora fin"
         },
-        "OBSERVATIONS": "Observaciones del cliente",
         "BUTTONS": {
             "CANCEL": "Cancelar Pre Solicitud",
             "CREATE": "Levantar Solicitud",

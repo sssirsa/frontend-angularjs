@@ -24,15 +24,15 @@
 
         //Listado de funciones
 
-        vm.listpreRequests=listpreRequests;
-        vm.listFilteredpreRequests=listFilteredpreRequests;
+        vm.listPreRequests=listPreRequests;
+        vm.listFilteredPreRequests=listFilteredPreRequests;
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
         vm.statusDetail = statusDetail;
-        listFilteredpreRequests('Abierta');
+        listFilteredPreRequests('Abierta');
 
-        function listpreRequests() {
+        function listPreRequests() {
             vm.loadingPromise = PREREQUESTS.listPreRequest(vm.limit, vm.offset)
                 .then(function(listprerequestelements){
                     vm.list=listprerequestelements;
@@ -43,7 +43,7 @@
                 });
 
         }
-        function listFilteredpreRequests(requestKind) {
+        function listFilteredPreRequests(requestKind) {
             vm.filteredActivated = true;
             vm.refreshPaginationButtonsComponent = false;
             vm.lastFilter = requestKind;
@@ -52,7 +52,7 @@
                 vm.lastKindFilter = requestKind;
             }
             if (requestKind === 'Todo') {
-                listpreRequests();
+                listPreRequests();
             }
             else {
                 var filterSTR = 'status='+requestKind;
@@ -81,17 +81,17 @@
 
         function sigPage() {
             vm.offset += vm.limit;
-            listFilteredpreRequests(vm.lastFilter);
+            listFilteredPreRequests(vm.lastFilter);
         }
 
         function prevPage() {
             vm.offset -= vm.limit;
-            listFilteredpreRequests(vm.lastFilter);
+            listFilteredPreRequests(vm.lastFilter);
         }
 
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
-            listFilteredpreRequests(vm.lastFilter);
+            listFilteredPreRequests(vm.lastFilter);
         }
 
     }

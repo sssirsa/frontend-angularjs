@@ -18,7 +18,7 @@
         var vm = this;
 
         //Function mapping
-        vm.listRequests = listRequests;
+        vm.listFilteredRequests = listFilteredRequests;
         vm.selectRequest = selectRequest;
         vm.downloadReport = downloadReport;
         vm.sig = sigPage;
@@ -31,14 +31,13 @@
         vm.offset = 0;
         vm.filteredActivated = false;
         vm.limit = 20;
-        vm.lastFilter = 'Todo';
-        vm.lastKindFilter = 'Todo';
+        vm.lastFilter = 'Abierta';
+        vm.lastKindFilter = 'Abierta';
         vm.refreshPaginationButtonsComponent = false;
 
-        activate();
+        listFilteredRequests('Abierta');
 
-        function activate() {
-            vm.refreshPaginationButtonsComponent = false;
+        function listRequest() {
             vm.loadingPromise = REQUESTS.getAll(vm.limit, vm.offset)
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
@@ -51,7 +50,7 @@
                 });
         }
 
-        function listRequests(requestKind) {
+        function listFilteredRequests(requestKind) {
             vm.refreshPaginationButtonsComponent = false;
             vm.filteredActivated = true;
             vm.lastFilter = requestKind;
@@ -60,7 +59,7 @@
                 vm.lastKindFilter = requestKind;
             }
             if (requestKind === 'Todo') {
-                activate();
+                listRequest();
             }
             else {
                 var filterSTR = 'status='+requestKind;
@@ -180,23 +179,25 @@
 
         function prepareDataFunction() {
             vm.requests = vm.allRequests.results;
+            if (vm.allRequests.count > vm.limit) {
+                vm.refreshPaginationButtonsComponent = true;
+            }
             vm.filteredActivated = false;
-            vm.refreshPaginationButtonsComponent = true;
         }
 
         function sigPage() {
             vm.offset += vm.limit;
-            listRequests(vm.lastFilter);
+            listFilteredRequests(vm.lastFilter);
         }
 
         function prevPage() {
             vm.offset -= vm.limit;
-            listRequests(vm.lastFilter);
+            listFilteredRequests(vm.lastFilter);
         }
 
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
-            listRequests(vm.lastFilter);
+            listFilteredRequests(vm.lastFilter);
         }
     }
 })();

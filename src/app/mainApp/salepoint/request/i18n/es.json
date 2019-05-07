@@ -1,5 +1,25 @@
 {
     "REQUEST":{
+        "TITLE": "Solicitudes",
+        "LIST":{
+            "TITLE": "Listado de solicitudes",
+            "TYPE":{
+                "ALL": "Todas",
+                "ATTENDED": "Atendida",
+                "CANCELED": "Cancelada",
+                "IN_PROCESS": "En proceso",
+                "OPEN": "Abierta"
+            },
+            "LIST_OF": "Listado de",
+            "NO_RESULTS": "No se encontrarón resultados"
+        },
+        "DETAIL": {
+            "FOLIO": "Folio",
+            "STATUS": "Estatus",
+            "DATE": "Fecha",
+            "INFO": "Información de la solicitud",
+            "SCORE": "Calificación"
+        },
         "CABINET":{
             "TITLE": "Tipos de cabinet",
             "KIND": "Tipo de cabinet a asignar",
@@ -13,35 +33,22 @@
             "CLIENT": "Observaciones del cliente",
             "WORKER": "Observaciones del personal"
         },
-        "EVIDENCES": "Eviudencias",
+        "EVIDENCES": {
+            "TITLE": "Eviudencias de la solicitud",
+            "NO_EVIDENCES": "Sin evidencias"
+        },
         "HOUR":{
             "START": "Hora inicio",
             "END": "Hora término",
             "MIN": "Hora mínima de inicio",
             "MAX": "Hora máxima de término"
         },
-        "INFO": "Información de la solicitud",
-        "SCORE": "Calificación",
         "TYPE":{
             "NEW": "Solicitud de Nuevos",
             "INCREASE": "Solicitud Incremental",
             "REMOVE": "Solicitud de Recolección",
             "EXCHANGE": "Solicitud de Cambio",
-            "TECHNICAL_SERVICE": "Solicitud de Servico Técnico",
-            "LIST":{
-                "TYPE":{
-                    "ALL": "Todas",
-                    "ATTENDED": "Atendida",
-                    "CANCELED": "Cancelada",
-                    "IN_PROCESS": "En proceso",
-                    "OPEN": "Abierta",
-                    "FOLIO": "Folio",
-                    "STATUS": "Estatus",
-                    "DATE": "Fecha"
-                },
-                "LIST_OF": "Listado de"
-            }
-        },
-        "NO_RESULTS": "No se encontrarón resultados"
+            "TECHNICAL_SERVICE": "Solicitud de Servico Técnico"
+        }
     }
 }

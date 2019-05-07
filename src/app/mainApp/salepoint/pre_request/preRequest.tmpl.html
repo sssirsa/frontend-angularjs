@@ -7,43 +7,43 @@
              layout-align="center center">
             <h1 translate>PRE_REQUEST.LIST.TITLE</h1>
         </div>
+
         <div layout="row"
              layout-align="space-around center"
-             layout-align-xs="center stretch"
-             layout-xs="column">
+             layout-wrap="">
 
             <div layout="column"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Abierta') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredpreRequests('Abierta')">
+                 ng-click="vm.listFilteredPreRequests('Abierta')">
                 <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
                 <div class="Abierta"></div>
             </div>
             <div layout="column"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'En_proceso') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredpreRequests('En_proceso')">
+                 ng-click="vm.listFilteredPreRequests('En_proceso')">
                 <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
                 <div class="En_proceso"></div>
             </div>
             <div layout="column"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Atendida') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredpreRequests('Atendida')">
+                 ng-click="vm.listFilteredPreRequests('Atendida')">
                 <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
                 <div class="Atendida"></div>
             </div>
             <div layout="column"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Cancelada') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredpreRequests('Cancelada')">
+                 ng-click="vm.listFilteredPreRequests('Cancelada')">
                 <span translate>PRE_REQUEST.LIST.TYPE.CANCELED</span>
                 <div class="Cancelada"></div>
             </div>
             <div layout="column"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Todo') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredpreRequests('Todo')">
+                 ng-click="vm.listFilteredPreRequests('Todo')">
                 <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
                 <div class="Todo"></div>
             </div>

@@ -6,7 +6,7 @@
         .controller('detailPreRequestController', detailPreRequestController);
 
     function detailPreRequestController(
-        preRequests,
+        PREREQUESTS,
         $stateParams,
         cabinetUC,
         Translate,
@@ -19,7 +19,8 @@
         $mdDialog,
         Geolocation,
         User,
-        _
+        _,
+        $log
     ) {
 
         var vm = this;
@@ -192,10 +193,10 @@
 
 
         function getinfo() {
-            preRequests.getPreRequestByID($stateParams.id)
+            PREREQUESTS.getPreRequestByID($stateParams.id)
                 .then(function infoPre(elementPreRequest) {
                     vm.preRequest = elementPreRequest;
-
+                    $log.log(vm.preRequest);
                     convertImages();
                     getinfoCabinet(vm.preRequest.cabinet);
                 })
@@ -260,7 +261,7 @@
             vm.request.cabinet_id = vm.preRequest.cabinet;
 
 
-            preRequests.createRequest(vm.request)
+            PREREQUESTS.createRequest(vm.request)
                 .then(function createRe(requestCreada) {
                     ErrorHandler.successCreation(requestCreada);
                     $state.go('triangular.admin-default.pre-request');
@@ -275,7 +276,7 @@
             vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
             var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
 
-            preRequests.update(prereqSinFoto)
+            PREREQUESTS.updatePreRequest(prereqSinFoto)
                 .then(function cancelPre (requestCancel) {
                     ErrorHandler.successCancel(requestCancel);
                     $state.go('triangular.admin-default.pre-request');
