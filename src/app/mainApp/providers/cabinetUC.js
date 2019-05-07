@@ -38,8 +38,8 @@
         }
 
         function list(limit, offset, querySet) {
-            if (limit !== undefined && offset !== undefined) {
-                if (querySet === undefined) {
+            if (angular.isDefined(limit) && angular.isDefined(offset)) {
+                if (angular.isUndefined(querySet)) {
                     return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.cabinet + '?limit=' + limit + '&offset=' + offset).customGET();
                 }
                 else {

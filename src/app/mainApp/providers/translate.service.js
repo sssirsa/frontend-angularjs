@@ -8,7 +8,7 @@
         .module('app')
         .factory('Translate', Translate);
 
-    function Translate($translate,localStorageService) {
+    function Translate($translate) {
         var service ={
             translate:translate
         };

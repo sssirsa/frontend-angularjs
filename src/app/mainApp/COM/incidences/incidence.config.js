@@ -17,7 +17,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/COM/incidences/incidence.tmpl.html',
-                controller: 'incidencesController',
+                controller: 'IncidencesController',
                 controllerAs: 'vm'
             });
 
@@ -26,13 +26,13 @@
                 name: 'MAIN.MENU.COM.TICKETS_INCIDENCES',
                 icon: 'fas fa-ticket-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority:10,
                 children: [
                     {
                         name: 'MAIN.MENU.COM.MANAGEMENT_NOTIFICATION',
                         state: 'triangular.admin-default.incidences_tickets',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         type: 'link'
                     }
                 ]

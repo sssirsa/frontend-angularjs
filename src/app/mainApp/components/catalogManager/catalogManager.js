@@ -41,7 +41,7 @@
                 removeFilterButtonText: '<',
 
                 //Meta object for the component
-                actions: '<',
+                actions: '<'
 
                 /*
                  *
@@ -372,7 +372,7 @@
         $window,
         $mdDialog,
         ErrorHandler,
-        $state
+        $log
     ) {
         var vm = this;
 
@@ -423,7 +423,7 @@
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
-                        console.error(errorElements);
+                        $log.error(errorElements);
                         vm.onErrorList({ error: errorElements });
                     });
             }

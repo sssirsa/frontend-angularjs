@@ -5,16 +5,21 @@
         .module('app.mainApp.reports')
         .controller('ModelsReportModalController', ModelsReportModalController);
 
-    function ModelsReportModalController(Translate, Reportes, reporte, $mdDialog) {
+    function ModelsReportModalController(
+        Translate,
+        Reportes,
+        reporte,
+        $mdDialog,
+        _) {
         var vm = this;
         //Function parsing
         vm.cancel = cancel;
         vm.thema = "blue-grey";
-        vm.create=create;
+        vm.create = create;
         vm.selectedFields = [];
         vm.selectedFilters = [];
-        vm.reporte=null;
-        vm.tableDisplayHeaders=[
+        vm.reporte = null;
+        vm.tableDisplayHeaders = [
             Translate.translate('REPORTS.MODIFY.FIELD_NAME'),
             Translate.translate('REPORTS.MODIFY.FIELD_VERBOSE'),
             Translate.translate('REPORTS.MODIFY.FIELD_TYPE'),
@@ -29,24 +34,24 @@
                 field_name: '',
                 path: '',
                 model_id: reporte.root_model,
-                related_fields:[]
+                related_fields: []
             };
-            vm.related_models_promise=Reportes.getRelatedModels(reporte.root_model).then(function (result) {
+            vm.related_models_promise = Reportes.getRelatedModels(reporte.root_model).then(function (result) {
                 root_related_field.related_fields = result;
-                vm.related_models=[root_related_field];
+                vm.related_models = [root_related_field];
             });
 
         }
         function create() {
-             _.each(vm.selectedFields, function(element, index) {
-                _.extend(element, {report: reporte.id,group:false,aggregate:"",sort:null,sort_reverse:false,total:false,display_format:null});
+            _.each(vm.selectedFields, function (element) {
+                _.extend(element, { report: reporte.id, group: false, aggregate: "", sort: null, sort_reverse: false, total: false, display_format: null });
             });
-            _.each(vm.selectedFilters, function(element, index) {
-                _.extend(element, {report: reporte.id,exclude:false,filter_value:"filtro",filter_value2:""});
+            _.each(vm.selectedFilters, function (element) {
+                _.extend(element, { report: reporte.id, exclude: false, filter_value: "filtro", filter_value2: "" });
             });
-            var respuesta={
-                filters:vm.selectedFilters,
-                fields:vm.selectedFields
+            var respuesta = {
+                filters: vm.selectedFilters,
+                fields: vm.selectedFields
             };
             $mdDialog.hide(respuesta);
         }

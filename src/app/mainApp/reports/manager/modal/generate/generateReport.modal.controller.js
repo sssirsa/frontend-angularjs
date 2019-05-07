@@ -20,7 +20,7 @@
 
 
         function exportar() {
-            Reportes.requestReport(vm.report.id,vm.formatSelected).then(function (res) {
+            Reportes.requestReport(vm.report.id,vm.formatSelected).then(function () {
                 $mdDialog.hide();
             }).catch(function (err) {
                 $mdDialog.cancel(err);

@@ -10,21 +10,24 @@
         .filter('salidaSearch', salidaSearch)
         .filter('tipoequipoSearch', tipoequipoSearch);
 
-    function salidaCrearController(EntradaSalida,
-                                   Clientes,
-                                   OPTIONS,
-                                   ModeloCabinet,
-                                   Persona,
-                                   $mdDialog,
-                                   TipoEquipo,
-                                   Helper,
-                                   Translate,
-                                   toastr,
-                                   Cabinet,
-                                   CabinetEntradaSalida,
-                                   $scope,
-                                   URLS,
-                                   PAGINATION
+    function salidaCrearController(
+        EntradaSalida,
+        Clientes,
+        OPTIONS,
+        ModeloCabinet,
+        Persona,
+        $mdDialog,
+        TipoEquipo,
+        Helper,
+        Translate,
+        toastr,
+        Cabinet,
+        CabinetEntradaSalida,
+        $scope,
+        URLS,
+        PAGINATION,
+        $log,
+        _
     ) {
         var vm = this;
 
@@ -196,7 +199,7 @@
             if (vm.salida.id != null)
                 fd.append("id", vm.salida.id);
 
-            if (vm.fotoGeneral != null && vm.fotoGeneral != "" && !(angular.isUndefined(vm.fotoGeneral)))
+            if (vm.fotoGeneral != null && vm.fotoGeneral != "" && (angular.isDefined(vm.fotoGeneral)))
                 fd.append('ife_chofer', vm.fotoGeneral);
             //Is massive upload
             if (vm.salida.file != null) {
@@ -262,11 +265,11 @@
         function lookupByEconomico() {
             if (vm.economicoFilter != '' && vm.economicoFilter != null) {
                 var status = vm.types[vm.selectedEntrada].value_service;
-                vm.disabledSearch=true;
+                vm.disabledSearch = true;
                 vm.loadingPromise = Cabinet.loadByStatus(status, vm.economicoFilter).then(function (res) {
                     vm.cabinetsEntrada = res;
 
-                    vm.disabledSearch=false;
+                    vm.disabledSearch = false;
                 });
             } else {
                 vm.cabinetsEntrada = [];
@@ -285,7 +288,7 @@
             vm.loadingPromise = EntradaSalida.postEntrada(fd).then(function (res) {
                 var selected = _.chain(vm.selectedCabinets)
                     .map(function (cabinet) {
-                        return {economico: cabinet};
+                        return { economico: cabinet };
                     }).flatten().value();
 
                 var request = {
@@ -297,22 +300,21 @@
                         toastr.success(vm.successMessage, vm.successTitle);
                         clear();
                     }).catch(function (err) {
-
-                        console.log(err);
+                        $log.error(err);
                         toastr.error(vm.errorMessage, vm.errorTitle);
                     });
                 }).catch(function (err) {
-                    console.log(err);
+                    $log.error(err);
                     toastr.error(vm.errorMessage, vm.errorTitle);
                 });
             }).catch(function (err) {
-                console.log(err);
+                $log.error(err);
                 toastr.error(vm.errorMessage, vm.errorTitle);
             });
         }
 
         function search(obj) {
-            var tiposEquipo = _.findWhere(vm.tipoEquipos, {id: obj.modelo.tipo});
+            var tiposEquipo = _.findWhere(vm.tipoEquipos, { id: obj.modelo.tipo });
             if (tiposEquipo != null) {
                 return tiposEquipo.nombre;
             } else {
@@ -361,13 +363,13 @@
             TipoEquipo.listWitout().then(function (res) {
                 vm.tipoEquipos = res;
                 vm.tipoEquipos = _.sortBy(vm.tipoEquipos, 'nombre');
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.error(vm.errorMessage, vm.errorTitle);
             });
             Clientes.listObject().then(function (res) {
                 vm.clients = res;
                 vm.clients = _.sortBy(vm.clients, 'nombre');
-            }).catch(function (err) {
+            }).catch(function () {
                 toastr.error(vm.errorMessage, vm.errorTitle);
             });
             vm.successTitle = Translate.translate('MAIN.MSG.SUCCESS_TITLE');
@@ -415,7 +417,6 @@
             vm.salida.linea_transporte = null;
             vm.salida.udn = null;
             vm.salida.tipo_transporte = null;
-            console.log(vm.salida);
             $scope.entradaForm.$setPristine();
             $scope.entradaForm.$setUntouched();
             vm.salida.no_creados = null;
@@ -446,7 +447,7 @@
         }
 
         function lookup(search_text) {
-            if (!angular.isUndefined(search_text)) {
+            if (angular.isDefined(search_text)) {
                 vm.search_items = _.filter(vm.cabinetsEntrada, function (item) {
                     return item.economico.toLowerCase().indexOf(search_text.toLowerCase()) >= 0;
                 });
@@ -462,13 +463,10 @@
         function onElementSelect(element, field) {
             vm.salida[field] = element;
         }
-        function onClearSelect(element) {
-            console.log(element)
-        }
 
         function filesSelected(files, field) {
             //fileProcessing MUST be a function in case it exists
-            let fileProcessing = field.fileUploader['filesSelected'];
+            var fileProcessing = field.fileUploader['filesSelected'];
             if (fileProcessing) {
                 files = fileProcessing(files);
             }
@@ -482,13 +480,13 @@
     }
 
     //Outside the controller
-    function tipoequipoSearch() {
+    function tipoequipoSearch(_) {
         return function (input, text, tipos) {
             if (!angular.isNumber(text) || text === '') {
                 return input;
             }
             return _.filter(input, function (item) {
-                var tiposEquipo = _.findWhere(tipos, {id: item.modelo.tipo});
+                var tiposEquipo = _.findWhere(tipos, { id: item.modelo.tipo });
                 if (tiposEquipo != null) {
                     return tiposEquipo.id == text;
                 }
@@ -497,7 +495,7 @@
         };
     }
 
-    function salidaSearch() {
+    function salidaSearch(_) {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
                 return input;

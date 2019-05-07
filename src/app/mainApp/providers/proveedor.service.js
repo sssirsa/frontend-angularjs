@@ -22,7 +22,7 @@
             remove:remove
         };
         function listObject(limit, offset) {
-            if (limit !== undefined && offset !== undefined) {
+            if (angular.isDefined(limit) && angular.isDefined(offset)) {
                 return API.all(URLS.genesis.base).all(URLS.proveedor+'?limit='+limit+'&offset='+offset).customGET();
             }
             else {

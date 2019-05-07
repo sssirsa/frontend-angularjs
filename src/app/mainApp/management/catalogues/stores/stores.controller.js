@@ -3,13 +3,13 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('storesController', storesController);
+        .controller('StoresController', StoresController);
 
     /* @ngInject */
-    function storesController(URLS,
+    function StoresController(URLS,
                               Upload,
                               EnvironmentConfig,
-                              $cookieStore,
+                              $cookies,
                               toastr,
                               $log,
                               $state,
@@ -32,7 +32,7 @@
                 var file ={file:vm.files[0]};
                 vm.uploadPromise = Upload.upload({
                     url: EnvironmentConfig.site.rest.mobile_api + '/' + URLS.massive.store,
-                    headers: {'Authorization': "Bearer " + $cookieStore.get('token')},
+                    headers: {'Authorization': "Bearer " + $cookies.get('token')},
                     method: 'POST',
                     data: file
                 })

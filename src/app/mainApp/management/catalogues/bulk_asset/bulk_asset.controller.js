@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('bulkAssetController', BulkAssetController)
+        .controller('bulkAssetController', BulkAssetController);
 
     function BulkAssetController(
         URLS,
@@ -18,7 +18,7 @@
             + '/' + URLS.inventory.catalogues.base
             + '/' + URLS.inventory.catalogues.bulk_asset;
 
-            vm.name = Translate.translate('BULK_ASSET.LABELS.TITLE');
+        vm.name = Translate.translate('BULK_ASSET.LABELS.TITLE');
 
         //Labels
         vm.totalText = 'Total de elementos';
@@ -237,7 +237,7 @@
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
@@ -497,11 +497,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

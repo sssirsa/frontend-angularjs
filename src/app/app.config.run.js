@@ -7,13 +7,9 @@
     angular
         .module('app')
         .run(Run);
-    function Run($rootScope,
-                 Channel,
-                 amMoment,
-                 Helper,
-                 OAuth,
-                 AuthService,
-                 $window) {
+    function Run(
+        amMoment
+    ) {
         amMoment.changeLocale('es');
         /*$rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if (!AuthService.isAuthenticated()) {

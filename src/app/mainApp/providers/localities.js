@@ -10,7 +10,10 @@
         Helper,
         QUERIES
     ) {
-        var baseURL = API.all(URLS.mobile.base).all(URLS.localidad);
+        var baseURL = API
+            .all(URLS.salepoint.base)
+            .all(URLS.salepoint.catalogues.base)
+            .all(URLS.salepoint.catalogues.localities);
 
         function list() {
             return baseURL.getList();
@@ -40,7 +43,10 @@
         function getByCity(cityID) {
             var defer = $q.defer();
 
-            API.all(URLS.mobile.base).all(URLS.localidad + QUERIES.locality.by_city + cityID)
+            API
+                .all(URLS.salepoint.base)
+                .all(URLS.salepoint.catalogues.base)
+                .all(URLS.salepoint.catalogues.localities + QUERIES.locality.by_city + cityID)
                 .getList()
                 .then(function (citiesList) {
                     var cities = Helper.filterDeleted(citiesList, true);

@@ -1,13 +1,23 @@
 (function () {
     'use strict';
-
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('citiesController', citiesController)
+        .controller('CitiesController', CitiesController)
         .filter('lineaSearch', custom);
 
     /* @ngInject */
-    function citiesController(Cities, States, Helper, $scope, toastr, Translate, $mdDialog, $log) {
+    function CitiesController(
+        Cities,
+        States,
+        Helper,
+        $scope,
+        toastr,
+        Translate,
+        $mdDialog,
+        $log,
+        $window,
+        _
+    ) {
 
         var vm = this;
 
@@ -27,7 +37,7 @@
         var store = null;
         vm.city = angular.copy(store);
         vm.numberBuffer = '';
-        vm.myHeight = window.innerHeight - 250;
+        vm.myHeight = $window.innerHeight - 250;
         vm.myStyle = {"min-height": "" + vm.myHeight + "px"};
         vm.toggleDeleted = true;
         vm.states = null;
@@ -63,7 +73,7 @@
             cancel();
         }
 
-        function remove(ev) {
+        function remove() {
             var confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
                 .textContent(vm.dialogMessage)
@@ -71,11 +81,11 @@
                 .ok(vm.deleteButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                Cities.remove(vm.city.id).then(function (res) {
+                Cities.remove(vm.city.id).then(function () {
                     toastr.success(vm.successDeleteMessage, vm.successTitle);
                     cancel();
                     activate();
-                }).catch(function (res) {
+                }).catch(function () {
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
             }, function () {
@@ -86,13 +96,13 @@
         function update() {
             vm.city.estado_id = vm.city.estado.id;
             delete vm.city.estado;
-            Cities.update(vm.city, vm.city.id).then(function (res) {
+            Cities.update(vm.city, vm.city.id).then(function () {
                 toastr.success(vm.successUpdateMessage, vm.successTitle);
                 cancel();
                 activate();
             }).catch(function (err) {
-                console.log(err);
-                if (err.status == 400 && err.data.nombre != undefined) {
+                $log.error(err);
+                if (err.status == 400 && angular.isDefined(err.data.nombre)) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -103,14 +113,13 @@
         function create() {
             vm.city.estado_id = vm.city.estado.id;
             delete vm.city.estado;
-            Cities.create(vm.city).then(function (res) {
+            Cities.create(vm.city).then(function () {
                 toastr.success(vm.successCreateMessage, vm.successTitle);
                 vm.city = angular.copy(store);
                 cancel();
                 activate();
             }).catch(function (err) {
-                console.log(err);
-                if (err.status == 400 && err.data.codigo_estado != undefined) {
+                if (err.status == 400 && angular.isDefined(err.data.codigo_estado)) {
                     toastr.error(vm.duplicateMessage, vm.errorTitle);
                 } else {
                     toastr.error(vm.errorMessage, vm.errorTitle);
@@ -127,11 +136,11 @@
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
                 vm.city.deleted = false;
-                Cities.update(vm.city).then(function (res) {
+                Cities.update(vm.city).then(function () {
                     toastr.success(vm.successRestoreMessage, vm.successTitle);
                     cancel();
                     activate();
-                }).catch(function (res) {
+                }).catch(function () {
                     vm.city.deleted = true;
                     toastr.warning(vm.errorMessage, vm.errorTitle);
                 });
@@ -159,7 +168,7 @@
                     vm.lineas = _.sortBy(vm.lineas, 'nombre');
                     listStates();
                 })
-                .catch(function (err) {
+                .catch(function () {
 
                 });
         }
@@ -208,7 +217,7 @@
     }
 
 //Outside the controller
-    function custom() {
+    function custom(_) {
         return function (input, text) {
             if (!angular.isString(text) || text === '') {
                 return input;

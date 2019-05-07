@@ -82,7 +82,8 @@
             }
         });
     function CatalogSelectController(
-        CATALOG_SELECT
+        CATALOG_SELECT,
+        $log
     ) {
         var vm = this;
 
@@ -159,7 +160,7 @@
                         }
                     })
                     .catch(function (errorElements) {
-                        console.error(errorElements);
+                        $log.error(errorElements);
                         vm.onErrorList({ error: errorElements });
                     });
             }
@@ -180,7 +181,7 @@
                         .filter(function (currentElement) {
                             return vm.initial.find(function (iteratedElement) {
                                 return iteratedElement === currentElement;
-                            })
+                            });
                         })[0];
                     vm.onClose();
                 }
@@ -201,7 +202,7 @@
             //Paginated catalogue
             else {
                 if (vm.multiple) {
-                    vm.selectedElement = JSON.parse(JSON.stringify(vm.initial));
+                    vm.selectedElement = angular.fromJson(angular.toJson(vm.initial));
                     //Iterating over every initial object
                     for (var selectedElementRepeater = 0;
                         selectedElementRepeater < vm.selectedElement.length;
@@ -223,7 +224,6 @@
                     createMainCatalogProvider();
                     vm.listLoader = CATALOG_SELECT.detail(vm.initial)
                         .then(function catalogSelectDetailSuccess(successCallback) {
-                            console.log("Callback", successCallback);
                             vm.selectedElement = successCallback;
                             if (!vm.catalogElements) {
                                 vm.catalogElements = [];
@@ -241,7 +241,7 @@
 
                         })
                         .catch(function catalogSelectDetailError(errorCallback) {
-                            console.error('@CatalogSelectController @list @CATALOG_SELECT.detail', errorCallback);
+                            $log.error('@CatalogSelectController @list @CATALOG_SELECT.detail', errorCallback);
                         });
 
                 }
@@ -256,8 +256,8 @@
         }
 
         function getIndexById(element, list) {
-            let index = null;
-            let listIterator = 0;
+            var index = null;
+            var listIterator = 0;
             while (listIterator < list.length && !index) {
                 if (list[listIterator][vm.catalog.model] === element[vm.catalog.model]) {
                     index = listIterator;
@@ -294,7 +294,7 @@
                     .list()
                     .then(function (response) {
                         var elements = response;
-                        let loadedElementList = [];
+                        var loadedElementList = [];
                         //Elements list is returned in any other model
                         if (vm.elements) {
                             //Add the returned elements after the list sanitation
@@ -309,7 +309,6 @@
                         //This procedures are required because of the initial loading of the elements
                         //And are just used in the case of pagination
                         if (vm.multiple) {
-                            console.log("Before splice",loadedElementList);
                             for (var selectedElementRepeater = 0;
                                 selectedElementRepeater < vm.selectedElement.length;
                                 selectedElementRepeater++) {
@@ -387,8 +386,8 @@
                 else {
                     //Makes tratment for returning the element as an id array,
                     //the value is return as is.
-                    let idArray = [];
-                    for (let elementRepeater = 0;
+                    var idArray = [];
+                    for (var elementRepeater = 0;
                         elementRepeater < vm.selectedElement.length;
                         elementRepeater++) {
                         idArray.push(vm.selectedElement[elementRepeater][vm.catalog.model]);

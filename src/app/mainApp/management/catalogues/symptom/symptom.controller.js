@@ -4,14 +4,14 @@
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('symptomController',symptomController);
+        .controller('SymptomController',SymptomController);
 
-    function symptomController(URLS, Translate, EnvironmentConfig)
+    function SymptomController(URLS, Translate, EnvironmentConfig)
     {
 
         var vm = this;
 
-        const technicalUrl =  (EnvironmentConfig.site.rest.api)
+        var technicalUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
 
         vm.url = technicalUrl;
@@ -162,11 +162,8 @@
             }
         };
 
-        function onElementSelect(element) {
+        function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
-            console.debug('Element selected');
-            console.debug(element);
-            console.log(element);
         }
     }
 

@@ -8,7 +8,19 @@
         .module('app.mainApp.inventory')
         .controller('reLabeledController', reLabeledController);
 
-    function reLabeledController($mdDialog, URLS, noLabeled, noLabeledID, Translate, toastr, MANAGEMENT, ErrorHandler, EnvironmentConfig, QUERIES) {
+    function reLabeledController(
+        $mdDialog,
+        URLS,
+        noLabeled,
+        noLabeledID,
+        Translate,
+        toastr,
+        MANAGEMENT,
+        ErrorHandler,
+        EnvironmentConfig,
+        QUERIES,
+        _
+    ) {
         var vm = this;
 
         //variables

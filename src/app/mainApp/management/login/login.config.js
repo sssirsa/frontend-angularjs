@@ -11,7 +11,7 @@
             .state('login',{
                 url:'/login',
                 templateUrl:'app/mainApp/management/login/login.tmpl.html',
-                controller:'loginController',
+                controller:'LoginController',
                 controllerAs:'vm'
 
             });

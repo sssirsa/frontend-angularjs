@@ -6,17 +6,20 @@
 
     /* @ngInject */
     function createStoreController(Stores,
-                                   toastr,
-                                   Translate,
-                                   $mdDialog,
-                                   Helper,
-                                   States,
-                                   Cities,
-                                   Localities,
-                                   Segmentation,
-                                   ErrorHandler,
-                                   Geolocation,
-                                   $log) {
+        toastr,
+        Translate,
+        $mdDialog,
+        Helper,
+        States,
+        Cities,
+        Localities,
+        Segmentation,
+        ErrorHandler,
+        Geolocation,
+        $log,
+        $window,
+        _
+    ) {
         var vm = this;
 
         //Variables
@@ -58,11 +61,11 @@
         function accept() {
 
             vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
-                .then( function (mapThumbnail){
-                    vm.store.mapa_img = 'data:image/png;base64,'+_arrayBufferToBase64(mapThumbnail.data);
+                .then(function (mapThumbnail) {
+                    vm.store.mapa_img = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
                     createStore();
                 })
-                .catch(function(errorMapThumbnail){
+                .catch(function (errorMapThumbnail) {
                     $log.error(errorMapThumbnail);
                     toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
                     createStore();
@@ -71,7 +74,7 @@
 
         }
 
-        function createStore(){
+        function createStore() {
             vm.store.localidad_id = vm.locality.id;
             vm.store.segmentacion_id = vm.segmentationSelect;
 
@@ -171,7 +174,7 @@
             for (var i = 0; i < len; i++) {
                 binary += String.fromCharCode(bytes[i]);
             }
-            return window.btoa(binary);
+            return $window.btoa(binary);
         }
 
     }
