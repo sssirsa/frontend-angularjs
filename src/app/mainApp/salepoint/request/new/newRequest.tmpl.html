@@ -55,10 +55,10 @@
                 <thead md-head>
                 <tr md-row>
                     <th md-column>
-                        <span translate>REQUEST.CABINETS.KIND</span>
+                        <span translate>REQUEST.CABINET.KIND</span>
                     </th>
                     <th md-column>
-                        <span translate>REQUEST.CABINETS.QUANTITY</span>
+                        <span translate>REQUEST.CABINET.QUANTITY</span>
                     </th>
                 </tr>
                 </thead>
@@ -80,7 +80,7 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUEST.EVIDENCES</h3>
+            <h3 translate>REQUEST.EVIDENCES.TITLE</h3>
         </div>
         <file-uploader file-formats="'image/*'"
                        validations="vm.fileValidations"
@@ -98,7 +98,7 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUEST.INFO</h3>
+            <h3 translate>REQUEST.DETAIL.INFO</h3>
         </div>
         <div flex
              layout="column"
@@ -141,14 +141,14 @@
                        ng-model="vm.endHour"
                        placeholder="HH:mm:ss"
                        ng-disabled="!vm.startHour"
-                       min="{{vm.startHour | moment:'HH:mm:ss'}}"
+                       min="{{vm.startHour | amDateFormat:'HH:mm:ss'}}"
                        max="{{vm.maximalHour}}"
                        required/>
                 <span>{{'REQUEST.HOUR.MAX'|translate}}: {{vm.maximalHour}}</span>
             </md-input-container>
 
             <md-input-container flex class="md-block">
-                <label translate>REQUEST.SCORE</label>
+                <label translate>REQUEST.DETAIL.SCORE</label>
                 <md-select
                     ng-model="vm.request.calificacion">
                     <md-option
