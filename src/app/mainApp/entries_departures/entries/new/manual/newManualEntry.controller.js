@@ -110,7 +110,6 @@
                     type: 'catalog',
                     model: 'marca',
                     label: 'Marca del cabinet',
-                    required: true,
                     validations: {
                         errors: {
                             required: 'El campo es requerido.'
@@ -272,14 +271,18 @@
             vm.selectedTab = 0;
             vm.showOriginSelector = false;
             vm.cabinetList = [];
-            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.entryToAgency = false; //Determines what catalog to show (Petition or udn)
             vm.entry = MANUAL_ENTRIES.newEntry.template();
             vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showOriginSelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showOriginSelector = !user.sucursal
+                && !User.getUser.udn;
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();
@@ -435,7 +438,7 @@
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
-            delete (vm.entry[vm.catalogues['petition'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
         };
 
         //Internal functions
