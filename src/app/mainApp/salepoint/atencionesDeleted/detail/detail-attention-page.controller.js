@@ -314,6 +314,7 @@
             $mdDialog.show(confirm).then(function () {
                 vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
                     .then(function (result) {
+                        $log.debug(result);
                         toastr.success(Translate.translate('SUCCESS.UPDATE'));
                         $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
@@ -409,7 +410,7 @@
         function seleccion() {
             vm.todosSeleccionado = [];
             vm.todosSeleccionado.push(cabinetTemporal);
-            console.log(cabinetTemporal);
+            $log.log(cabinetTemporal);
             vm.isUsed = true;
         }
 
@@ -470,7 +471,7 @@
                     vm.marcas = Helper.filterDeleted(res, true);
                 })
                 .catch(function (err) {
-
+                    $log.debug(err);
                 });
         }
 
@@ -481,7 +482,7 @@
                     models = Helper.filterDeleted(res, true);
                 })
                 .catch(function(err){
-
+                    $log.debug(err);
                 });
         }
 
@@ -573,7 +574,7 @@
                     });
                 })
                 .catch(function (err) {
-
+                    $log.debug(err);
                 });
         }
         //codigo para listar cabinets
