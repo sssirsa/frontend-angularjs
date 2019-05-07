@@ -252,54 +252,54 @@
                 name: 'SALE_POINT.MENU.TITLE',
                 icon: 'fas fa-concierge-bell',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {
                         name: 'SALE_POINT.MENU.PRE_REQUEST.TITLE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         state: 'triangular.admin-default.pre-request'
                     },
                     {
                         name: 'SALE_POINT.MENU.REQUEST.TITLE',
                         type: 'dropdown',
-                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         children: [
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.LIST',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.list-request'
                             },
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.NEW',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.new-request'
                             },
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.INCREASE',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.increase-request'
                             },
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.REMOVE',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.remove-request'
                             },
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.EXCHANGE',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.exchange-request'
                             },
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.TECHNICAL_SERVICE',
                                 type: 'link',
-                                permission: ['ADMINISTRADOR', 'TULTITLAN'],
+                                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                                 state: 'triangular.admin-default.service-request'
                             }
                         ]
@@ -316,13 +316,13 @@
                 name: 'MAIN.MENU.EXTERNAL_SERVICE',
                 icon: 'fa fa-wrench',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 7,
                 children: [
                     {
                         name: 'MAIN.MENU.SERVICE.ASSIGN',
                         state: 'triangular.admin-default.serviceAssing',
-                        permission: ['ADMINISTRADOR', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
                     },
                     {
@@ -339,7 +339,7 @@
                         }, {
                             name: 'MAIN.MENU.REQUESTS.PREREQUEST',
                             state: 'triangular.admin-default.preRequest',
-                            permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                            permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                             type: 'link'
                         }
                         ]
@@ -347,7 +347,7 @@
                     {
                         name: 'MAIN.MENU.SERVICE.MENU_TITLE',
                         state: 'triangular.admin-default.serviceList',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     }
                 ]
