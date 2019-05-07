@@ -18,8 +18,8 @@
         vm.offset = 0;
         vm.filteredActivated = false;
         vm.limit = 20;
-        vm.lastFilter = 'Todo';
-        vm.lastKindFilter = 'Todo';
+        vm.lastFilter = 'Abierta';
+        vm.lastKindFilter = 'Abierta';
         vm.refreshPaginationButtonsComponent = false;
 
         //Listado de funciones
@@ -30,10 +30,10 @@
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
         vm.statusDetail = statusDetail;
-        listpreRequests();
+        listFilteredpreRequests('Abierta');
 
         function listpreRequests() {
-            vm.loadingPromise = PREREQUESTS.getAll(vm.limit, vm.offset)
+            vm.loadingPromise = PREREQUESTS.listPreRequest(vm.limit, vm.offset)
                 .then(function(listprerequestelements){
                     vm.list=listprerequestelements;
                     prepareDataFunction();
@@ -56,7 +56,7 @@
             }
             else {
                 var filterSTR = 'status='+requestKind;
-                vm.loadingPromise = PREREQUESTS.getAll(vm.limit, vm.offset, filterSTR)
+                vm.loadingPromise = PREREQUESTS.listPreRequest(vm.limit, vm.offset, filterSTR)
                     .then(function(listprerequestelements){
                         vm.list=listprerequestelements;
                         prepareDataFunction();

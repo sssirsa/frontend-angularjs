@@ -192,7 +192,7 @@
 
 
         function getinfo() {
-            preRequests.getByID($stateParams.id)
+            preRequests.getPreRequestByID($stateParams.id)
                 .then(function infoPre(elementPreRequest) {
                     vm.preRequest = elementPreRequest;
 

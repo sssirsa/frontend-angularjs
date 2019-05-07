@@ -12,58 +12,40 @@
              layout-align-xs="center stretch"
              layout-xs="column">
 
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter != 'Abierta'">
-                <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
-                <div ng-click="vm.listFilteredpreRequests('Abierta')"
-                     class="Abierta"></div>
-            </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter != 'En_proceso'">
-                <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
-                <div ng-click="vm.listFilteredpreRequests('En_proceso')"
-                     class="En_proceso"></div>
-            </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter != 'Atendida'">
-                <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
-                <div ng-click="vm.listFilteredpreRequests('Atendida')"
-                     class="Atendida"></div>
-            </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter != 'Todo'">
-                <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
-                <div ng-click="vm.listFilteredpreRequests('Todo')"
-                     class="Todo"></div>
-            </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter != 'Cancelada'">
-                <span translate>PRE_REQUEST.LIST.TYPE.CANCELED</span>
-                <div ng-click="vm.listFilteredpreRequests('Cancelada')"
-                     class="Cancelada"></div>
-            </div>
-        </div>
-
-        <div layout="row"
-             layout-align="start center"
-             layout-xs="column">
-            <span style="width: 80px" hide-lt-md></span>
-            <span translate>PRE_REQUEST.LIST.LIST_OF</span>
-            <span style="width: 30px" hide-xs></span>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter == 'Abierta'">
+            <div layout="column"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Abierta') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredpreRequests('Abierta')">
                 <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
                 <div class="Abierta"></div>
             </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter == 'En_proceso'">
+            <div layout="column"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'En_proceso') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredpreRequests('En_proceso')">
                 <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
                 <div class="En_proceso"></div>
             </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter == 'Atendida'">
+            <div layout="column"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Atendida') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredpreRequests('Atendida')">
                 <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
                 <div class="Atendida"></div>
             </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter == 'Todo'">
-                <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
-                <div class="Todo"></div>
-            </div>
-            <div layout="column" layout-margin ng-if="vm.lastKindFilter == 'Cancelada'">
+            <div layout="column"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Cancelada') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredpreRequests('Cancelada')">
                 <span translate>PRE_REQUEST.LIST.TYPE.CANCELED</span>
                 <div class="Cancelada"></div>
+            </div>
+            <div layout="column"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Todo') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredpreRequests('Todo')">
+                <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
+                <div class="Todo"></div>
             </div>
         </div>
     </md-card>
@@ -91,14 +73,18 @@
             flex="100"
             layout="column"
             layout-gt-sm="row"
-            layout-align="space-around center" layout-padding="">
+            layout-align="space-around center"
+            layout-padding>
 
-            <img src="assets/images/request.png" class="avatar" hide-sm hide-xs>
-            <div layout="column" flex-gt-md="30">
+            <img src="assets/images/request.png"
+                 class="avatar"
+                 hide-sm
+                 hide-xs>
+            <div layout="column">
                 <div layout="column">
                     <div layout="row" layout-align="center center">
                         <h4 translate>PRE_REQUEST.DETAIL.FOLIO</h4>
-                        <h4>:</h4>
+                        <h4>:&nbsp;</h4>
                         <h4>{{item.id}}</h4>
                     </div>
 
@@ -107,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div layout="column" flex-gt-md="30" layout-align="center center">
+            <div layout="column" layout-align="center center">
                 <b>
                     {{item.establecimiento.nombre_establecimiento}}
                 </b>
@@ -118,7 +104,7 @@
                     {{item.establecimiento.localidad.nombre}}
                 </b>
             </div>
-            <div layout="column" flex-gt-md="10" >
+            <div layout="column">
                 <span style="text-align: start">{{item.status}}</span>
                 <div class="{{item.status}}"></div>
             </div>
