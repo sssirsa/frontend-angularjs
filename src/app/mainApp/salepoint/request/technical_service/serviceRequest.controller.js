@@ -7,13 +7,13 @@
 
     /* @ngInject */
     function serviceRequestController(
+        REQUESTS,
         $log,
         $state,
         toastr,
         Translate,
         SCORES,
         OPTIONS,
-        SalePointRequests,
         Helper,
         User,
         URLS,
@@ -112,7 +112,7 @@
             $log(vm.request);
 
 
-            /*vm.savingPromise = SalePointRequests.create(vm.request)
+            /*vm.savingPromise = REQUESTS.create_technical_service_request(vm.request)
                 .then(function () {
                     /*$state.go('triangular.admin-default.listRequest');
                     toastr.success(
