@@ -39,37 +39,37 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function () {
+                    //API.all(MANAGEMENT.base
+                    //    + '/' +MANAGEMENT.administration.base
+                    //    + '/' +MANAGEMENT.administration.my_groups)
+                    //    .customGET()
+                    //    .then(function (profile) {
+                    //        var roles = {};
+
+                    //        angular.forEach(profile, function (roleName) {
+                    //            roles[roleName.name.toUpperCase()] = [];
+                    //        });
+
+                    //        $cookies.putObject('roles', roles);
+
+                    //        RoleStore.defineManyRoles(roles);
+
                     API.all(MANAGEMENT.base
-                        + '/' +MANAGEMENT.administration.base
-                        + '/' +MANAGEMENT.administration.my_groups)
+                        + '/' + MANAGEMENT.administration.base
+                        + '/' + MANAGEMENT.administration.person.base)
                         .customGET()
-                        .then(function (profile) {
-                            var roles = {};
-
-                            angular.forEach(profile, function (roleName) {
-                                roles[roleName.name.toUpperCase()] = [];
-                            });
-
-                            $cookies.putObject('roles', roles);
-
-                            RoleStore.defineManyRoles(roles);
-
-                            API.all(MANAGEMENT.base
-                                + '/' +MANAGEMENT.administration.base
-                                + '/' +MANAGEMENT.administration.person.base)
-                                .customGET()
-                                .then(function (user) {
-                                    request.resolve();
-                                    User.setUser(user);
-                                })
-                                .catch(function (errorUser) {
-                                    request.reject(errorUser);
-                                });
-
+                        .then(function (user) {
+                            request.resolve();
+                            User.setUser(user);
                         })
-                        .catch(function (profileError) {
-                            request.reject(profileError);
+                        .catch(function (errorUser) {
+                            request.reject(errorUser);
                         });
+
+                    //    })
+                    //    .catch(function (profileError) {
+                    //        request.reject(profileError);
+                    //    });
                 })
                 .catch(function (error) {
                     request.reject(error);

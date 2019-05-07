@@ -94,7 +94,7 @@
                 name: 'MAIN.MENU.INVENTORY.TITLE',
                 icon: 'fa fa-archive',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR'],
+                permission_old: ['ADMINISTRADOR'],
                 priority: 8,
                 children: [{
                     name: 'MAIN.MENU.INVENTORY.CABINET_MANAGEMENT',
