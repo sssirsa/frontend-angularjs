@@ -33,7 +33,7 @@
         listFilteredPreRequests('Abierta');
 
         function listPreRequests() {
-            vm.loadingPromise = PREREQUESTS.listPreRequest(vm.limit, vm.offset)
+            vm.loadingPromise = PREREQUESTS.listPreRequests(vm.limit, vm.offset)
                 .then(function(listprerequestelements){
                     vm.list=listprerequestelements;
                     prepareDataFunction();
@@ -56,7 +56,7 @@
             }
             else {
                 var filterSTR = 'status='+requestKind;
-                vm.loadingPromise = PREREQUESTS.listPreRequest(vm.limit, vm.offset, filterSTR)
+                vm.loadingPromise = PREREQUESTS.listPreRequests(vm.limit, vm.offset, filterSTR)
                     .then(function(listprerequestelements){
                         vm.list=listprerequestelements;
                         prepareDataFunction();

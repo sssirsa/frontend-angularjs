@@ -9,11 +9,11 @@
     function listRequestController(
         REQUESTS,
         $state,
-        $log,
         ErrorHandler,
         Translate,
         $http,
-        pdfMake
+        pdfMake,
+        $log
     ) {
         var vm = this;
 
@@ -37,15 +37,13 @@
 
         listFilteredRequests('Abierta');
 
-        function listRequest() {
-            vm.loadingPromise = REQUESTS.getAll(vm.limit, vm.offset)
+        function listRequests() {
+            vm.loadingPromise = REQUESTS.listRequests(vm.limit, vm.offset)
                 .then(function (listRequestsSuccess) {
                     vm.allRequests = listRequestsSuccess;
-                    $log.log(vm.allRequests);
                     prepareDataFunction();
                 })
                 .catch(function (listRequestsError) {
-                    $log.error(listRequestsError);
                     ErrorHandler.errorTranslate(listRequestsError);
                 });
         }
@@ -59,17 +57,16 @@
                 vm.lastKindFilter = requestKind;
             }
             if (requestKind === 'Todo') {
-                listRequest();
+                listRequests();
             }
             else {
                 var filterSTR = 'status='+requestKind;
-                vm.loadingPromise = REQUESTS.getAll(vm.limit, vm.offset, filterSTR)
+                vm.loadingPromise = REQUESTS.listRequests(vm.limit, vm.offset, filterSTR)
                     .then(function (listRequestsSuccess) {
                         vm.allRequests = listRequestsSuccess;
                         prepareDataFunction();
                     })
                     .catch(function (listRequestsError) {
-                        $log.error(listRequestsError);
                         ErrorHandler.errorTranslate(listRequestsError);
                     });
             }
@@ -83,12 +80,14 @@
 
             event.stopPropagation();
 
-            $http.get('app/mainApp/service/external/solicitudes/report/formato.json')
+            $http.get('app/mainApp/salepoint/request/report/formato.json')
                 .then(function (formato) {
                     if(formato) {
-                        vm.getReportPromise = REQUESTS.getByID(requestID)
+                        vm.getReportPromise = REQUESTS.getRequestByID(requestID)
                             .then(function (reporte) {
-                                var fecha = moment(reporte.fecha, 'DD/MM/YYYY hh:mm:ss');
+                                var fecha = moment(reporte.fecha_entrada).format('DD/MM/YYYY hh:mm:ss');
+                                var persona = reporte.persona.nombre + ' ' + reporte.persona.apellido_materno;
+                                var direccion = reporte.establecimiento.localidad;
                                 //Encabezado
                                 //Titulo
                                 formato.data.content[0].columns[1].stack[2].text = 'Reporte de Solicitud';
@@ -102,11 +101,11 @@
                                 //Tipo
                                 formato.data.content[2].stack[0].columns[3].text = reporte.tipo;
                                 //Atendió
-                                formato.data.content[3].stack[0].columns[1].text = reporte.persona;
+                                formato.data.content[3].stack[0].columns[1].text = persona;
                                 //Fecha
                                 formato.data.content[3].stack[0].columns[3].text = fecha;
                                 //Sucursal
-                                formato.data.content[4].stack[0].columns[1].text = reporte.sucursal;
+                                formato.data.content[4].stack[0].columns[1].text = reporte.sucursal.nombre;
                                 //Calificación
                                 formato.data.content[4].stack[0].columns[3].text = reporte.calificacion;
                                 //Información del establecimiento
@@ -125,13 +124,13 @@
                                 //Entre call2 2
                                 formato.data.content[9].stack[0].columns[3].text = reporte.establecimiento.entre_calle2;
                                 //Estado
-                                formato.data.content[10].stack[0].columns[1].text = reporte.establecimiento.estado;
+                                formato.data.content[10].stack[0].columns[1].text = direccion.municipio.estado.nombre;
                                 //Municipio
-                                formato.data.content[10].stack[0].columns[3].text = reporte.establecimiento.municipio;
+                                formato.data.content[10].stack[0].columns[3].text = direccion.municipio.nombre;
                                 //Localidad
-                                formato.data.content[11].stack[0].columns[1].text = reporte.establecimiento.localidad;
+                                formato.data.content[11].stack[0].columns[1].text = direccion.nombre;
                                 //CP
-                                formato.data.content[11].stack[0].columns[3].text = reporte.establecimiento.cp;
+                                formato.data.content[11].stack[0].columns[3].text = direccion.codigo_postal;
                                 //Observaciones
                                 //Técnicas
                                 formato.data.content[13].columns[0].stack[1].text = reporte.observaciones_tecnico;
@@ -157,22 +156,21 @@
                                     formato.data.content.push(image);
                                 });
                                 //Generación del PDF
+                                $log.log(formato.data.content);
                                 pdfMake.createPdf(formato.data).download("Reporte-Solicitud-" + reporte.id.toString() + ".pdf");
 
                             })
                             .catch(function (reporteError) {
-                                $log.error(reporteError);
+                                $log.log(reporteError);
                                 ErrorHandler.errorTranslate(reporteError);
                             });
                     }
                     else{
-                        $log.error('Error al leer el formato.data del reporte');
                         ErrorHandler.errorTranslate("Error al leer el formato.data del reporte");
                         //toastr.error(Translate.translate('REQUESTS.LIST.TOASTR.JSON_REPORT_ERROR'));
                     }
                 })
                 .catch(function (JSONError) {
-                    $log.error(JSONError);
                     ErrorHandler.errorTranslate(JSONError);
                 });
         }

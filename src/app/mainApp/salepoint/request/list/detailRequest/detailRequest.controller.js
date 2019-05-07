@@ -6,12 +6,22 @@
         .controller('detailRequestController', detailRequestController);
 
     /* @ngInject */
-    function detailRequestController($log, $state, $stateParams, ErrorHandler, Translate, SalePointRequests, Stores,
-                                         Persona_Admin, Geolocation, SCORES) {
+    function detailRequestController(
+        REQUESTS,
+        SCORES,
+        $log,
+        $state,
+        $stateParams,
+        ErrorHandler,
+        Translate,
+        Geolocation,
+        Stores,
+        Persona_Admin
+    ) {
         var vm = this;
 
         //Function mapping
-        //vm.showStoreLocation = showStoreLocation;
+        vm.showStoreLocation = showStoreLocation;
 
         //Variable declaration
         vm.id = $stateParams.id;
@@ -26,32 +36,26 @@
         activate();
 
         function activate() {
-            vm.loadingPromise = SalePointRequests.getByID(vm.id)
+            vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
                 .then(function (requestSuccess) {
-                    $log.debug(requestSuccess);
                     vm.request = requestSuccess;
                     convertImages();
-                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento)
+                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento.no_cliente)
                         .then(function (storeSuccess) {
-                            $log.debug(storeSuccess);
                             vm.store = storeSuccess;
                         })
                         .catch(function (storeError) {
-                            $log.error(storeError);
                             ErrorHandler.errorTranslate(storeError);
                         });
-                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona)
+                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona.id)
                         .then(function (userSuccess) {
-                            $log.debug(userSuccess);
                             vm.user = userSuccess;
                         })
                         .catch(function (userError) {
-                            $log.error(userError);
                             ErrorHandler.errorTranslate(userError);
                         });
                 })
                 .catch(function (errorRequest) {
-                    $log.error(errorRequest);
                     ErrorHandler.errorTranslate(errorRequest);
                 });
         }
@@ -64,9 +68,9 @@
             vm.request.evidencia = evidences;
         }
 
-        /*function showStoreLocation() {
+        function showStoreLocation() {
             Geolocation.locate(vm.store.latitud, vm.store.longitud);
-        }*/
+        }
 
     }
 })();

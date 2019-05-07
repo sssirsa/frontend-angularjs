@@ -13,7 +13,7 @@
         var baseUrl = API.all(URLS.salepoint.base).all(URLS.salepoint.pre_request.base);
         var service = {
             getPreRequestByID: getPreRequestByID,
-            listPreRequest: listPreRequest,
+            listPreRequests: listPreRequests,
             createRequest: createRequest,
             updatePreRequest: updatePreRequest
         };
@@ -22,12 +22,10 @@
             return baseUrl.all(URLS.salepoint.pre_request.pre_request).all(id).customGET();
         }
 
-        function listPreRequest(limit, offset, filter) {
+        function listPreRequests(limit, offset, filter) {
             var preUrl = URLS.salepoint.pre_request.pre_request
-                + '?limit='
-                + limit
-                + '&offset='
-                + offset
+                + '?limit=' + limit
+                + '&offset=' + offset
                 + '&ordering=fecha';
             if (angular.isUndefined(filter)) {
                 return baseUrl.all(preUrl).customGET();

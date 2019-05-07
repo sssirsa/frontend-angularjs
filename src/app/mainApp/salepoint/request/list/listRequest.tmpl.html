@@ -6,7 +6,7 @@
 
         <div layout="column"
              layout-align="center center">
-            <h1 translate>PRE_REQUEST.LIST.TITLE</h1>
+            <h1 translate>REQUEST.LIST.TITLE</h1>
         </div>
 
         <div layout="row"
@@ -14,6 +14,7 @@
              layout-wrap="">
 
             <div layout="column"
+                 layout-align="center center"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Abierta') ? 'SelectedList' : ''"
                  ng-click="vm.listFilteredRequests('Abierta')">
@@ -21,6 +22,7 @@
                 <div class="Abierta"></div>
             </div>
             <div layout="column"
+                 layout-align="center center"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'En_proceso') ? 'SelectedList' : ''"
                  ng-click="vm.listFilteredRequests('En_proceso')">
@@ -28,6 +30,7 @@
                 <div class="En_proceso"></div>
             </div>
             <div layout="column"
+                 layout-align="center center"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Atendida') ? 'SelectedList' : ''"
                  ng-click="vm.listFilteredRequests('Atendida')">
@@ -35,6 +38,7 @@
                 <div class="Atendida"></div>
             </div>
             <div layout="column"
+                 layout-align="center center"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Cancelada') ? 'SelectedList' : ''"
                  ng-click="vm.listFilteredRequests('Cancelada')">
@@ -42,6 +46,7 @@
                 <div class="Cancelada"></div>
             </div>
             <div layout="column"
+                 layout-align="center center"
                  layout-margin
                  ng-class="(vm.lastKindFilter == 'Todo') ? 'SelectedList' : ''"
                  ng-click="vm.listFilteredRequests('Todo')">

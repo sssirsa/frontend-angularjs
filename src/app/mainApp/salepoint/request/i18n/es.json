@@ -14,6 +14,7 @@
             "NO_RESULTS": "No se encontrarón resultados"
         },
         "DETAIL": {
+            "TITLE": "Detalle de solicitud",
             "FOLIO": "Folio",
             "STATUS": "Estatus",
             "DATE": "Fecha",
@@ -34,7 +35,7 @@
             "WORKER": "Observaciones del personal"
         },
         "EVIDENCES": {
-            "TITLE": "Eviudencias de la solicitud",
+            "TITLE": "Evidencias de la solicitud",
             "NO_EVIDENCES": "Sin evidencias"
         },
         "HOUR":{
@@ -49,6 +50,15 @@
             "REMOVE": "Solicitud de Recolección",
             "EXCHANGE": "Solicitud de Cambio",
             "TECHNICAL_SERVICE": "Solicitud de Servico Técnico"
+        },
+        "USER": {
+            "TITLE": "Información de usuario",
+            "USERNAME": "Usuario",
+            "NAME": "Nombre",
+            "MIDDLE_NAME": "Primer Apellido",
+            "LAST_NAME": "Segundo Apellido",
+            "PHONE": "Telefono",
+            "EMAIL": "Correo"
         }
     }
 }

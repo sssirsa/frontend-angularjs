@@ -13,9 +13,8 @@
         var baseUrl = API.all(URLS.salepoint.base).all(URLS.salepoint.request.base);
 
         var service = {
-            getByID: getByID,
-            getAll: getAll,
-            locate: locate,
+            getRequestByID: getRequestByID,
+            listRequests: listRequests,
             create_new_request: create_new_request,
             create_incremental_request: create_incremental_request,
             create_change_request: create_change_request,
@@ -23,23 +22,20 @@
             create_technical_service_request: create_technical_service_request
         };
 
-        function getByID(id) {
+        function getRequestByID(id) {
             return baseUrl.all(URLS.salepoint.request.list).all(id).customGET();
         }
 
-        function getAll(limit, offset, filter) {
+        function listRequests(limit, offset, filter) {
+            var preUrl = URLS.salepoint.request.list
+                + '?limit=' + limit
+                + '&offset=' + offset;
             if (angular.isUndefined(filter)) {
-                return baseUrl.all(URLS.salepoint.request.list + '?limit=' + limit + '&offset=' + offset).customGET();
+                return baseUrl.all(preUrl).customGET();
             }
             else {
-                return baseUrl.all(URLS.salepoint.request.list + '?limit=' + limit + '&offset=' + offset + '&' + filter).customGET();
+                return baseUrl.all(preUrl + '&' + filter).customGET();
             }
-        }
-
-        function locate(latitude, longitude) {
-            var url = URLS.geoLocation + latitude + ',' + longitude;
-            var target = '_blank';
-            $window.open(url, target);
         }
 
         function create_new_request(element) {

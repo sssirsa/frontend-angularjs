@@ -121,6 +121,9 @@
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
+                params: {
+                    id: null
+                },
                 templateUrl: 'app/mainApp/salepoint/request/list/detailRequest/deatilRequest.tmpl.html',
                 controller: 'detailRequestController',
                 controllerAs: 'vm'

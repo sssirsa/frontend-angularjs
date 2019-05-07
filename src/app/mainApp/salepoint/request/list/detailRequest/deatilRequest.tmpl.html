@@ -7,10 +7,13 @@
              layout-xs="column"
              layout-align="space-around center"
              layout-padding>
-        <h2 translate>REQUESTS.DETAIL.TITLE</h2>
+        <h2 translate>REQUEST.DETAIL.TITLE</h2>
         <h2>{{vm.request.id}}</h2>
         <div class="{{vm.request.status}}">
-            {{vm.request.status}}
+            <span translate ng-if="vm.request.status == 'Abierta'">REQUEST.LIST.TYPE.OPEN</span>
+            <span translate ng-if="vm.request.status == 'En_proceso'">REQUEST.LIST.TYPE.IN_PROCESS</span>
+            <span translate ng-if="vm.request.status == 'Atendida'">REQUEST.LIST.TYPE.ATTENDED</span>
+            <span translate ng-if="vm.request.status == 'Cancelada'">REQUEST.LIST.TYPE.CANCELED</span>
         </div>
     </md-card>
 
@@ -20,7 +23,7 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.DETAIL.INFO</h3>
+            <h3 translate>REQUEST.DETAIL.INFO</h3>
             <h3>{{vm.request.tipo}}</h3>
         </div>
         <div flex
@@ -28,7 +31,7 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.CLIENT_COMMENTS</label>
+                <label translate>REQUEST.COMMENTS.CLIENT</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.request.observaciones_cliente"/>
@@ -39,7 +42,7 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.WORKER_COMMENTS</label>
+                <label translate>REQUEST.COMMENTS.WORKER</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.request.observaciones_tecnico"/>
@@ -50,7 +53,7 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.SCORE</label>
+                <label translate>REQUEST.DETAIL.SCORE</label>
                 <md-select
                     ng-disabled="true"
                     ng-model="vm.request.calificacion">
@@ -63,21 +66,21 @@
             </md-input-container>
         </div>
         <md-input-container ng-if="vm.request.cabinet" flex class="md-block">
-            <label translate>REQUESTS.DETAIL.CABINET</label>
+            <label translate>REQUEST.DETAIL.CABINET</label>
             <input
                 ng-disabled="true"
                 ng-model="vm.request.cabinet"/>
         </md-input-container>
         <div ng-if="vm.request.solicitudes_cabinet.length > 0" flex class="md-block">
-            <span translate>REQUESTS.DETAIL.CABINETS.TITLE</span>
+            <span translate>REQUEST.CABINET.TITLE</span>
             <table md-table flex>
                 <thead md-head>
                 <tr md-row>
                     <th md-column>
-                        <span translate>REQUESTS.DETAIL.CABINETS.KIND</span>
+                        <span translate>REQUEST.CABINET.KIND</span>
                     </th>
                     <th md-column>
-                        <span translate>REQUESTS.DETAIL.CABINETS.QUANTITY</span>
+                        <span translate>REQUEST.CABINET.QUANTITY</span>
                     </th>
                 </tr>
                 </thead>
@@ -102,7 +105,7 @@
     <md-card layout-align="center stretch"
              layout="column"
              layout-padding>
-        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
+        <h3 translate>REQUEST.EVIDENCES.TITLE</h3>
 
         <div
             layout="column"
@@ -126,7 +129,7 @@
             </div>
 
             <div ng-if="vm.request.evidencia.length===0">
-                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+                <p>{{'REQUESTS.EVIDENCES.NO_EVIDENCES'|translate}}</p>
             </div>
         </div>
 
@@ -136,19 +139,19 @@
              layout="column"
              cg-busy="{promise:vm.personaPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
              layout-padding>
-        <h3 translate>REQUESTS.DETAIL.USER.TITLE</h3>
+        <h3 translate>REQUEST.USER.TITLE</h3>
         <div flex
              layout="column"
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.USERNAME</label>
+                <label translate>REQUEST.USER.USERNAME</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.user.username"/>
             </md-input-container>
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.NAME</label>
+                <label translate>REQUEST.USER.NAME</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.nombre"/>
@@ -159,13 +162,13 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.MIDDLE_NAME</label>
+                <label translate>REQUEST.USER.MIDDLE_NAME</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.apellido_paterno"/>
             </md-input-container>
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.LAST_NAME</label>
+                <label translate>REQUEST.USER.LAST_NAME</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.apellido_materno"/>
@@ -176,13 +179,13 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.PHONE</label>
+                <label translate>REQUEST.USER.PHONE</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.telefono"/>
             </md-input-container>
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.DETAIL.USER.EMAIL</label>
+                <label translate>REQUEST.USER.EMAIL</label>
                 <input
                     ng-disabled="true"
                     ng-model="vm.user.user.email"/>
