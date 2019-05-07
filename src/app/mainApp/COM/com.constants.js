@@ -7,18 +7,18 @@
                 base: 'catalogues',
                 ticket_type: "ticket_type",
                 date_type: "date_type",
-                process_instructions:"process_instructions"
+                process_instructions: "process_instructions"
             },
             actions: {
                 base: "com",
                 message: {
                     base: "message",
                     detail: "detail",
-                    send:"send"
+                    send: "send"
                 },
                 ticket: {
                     base: "ticket",
-                    create:"create"
+                    create: "create"
                 }
 
             }

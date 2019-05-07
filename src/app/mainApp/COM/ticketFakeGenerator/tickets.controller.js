@@ -8,7 +8,17 @@
         .module('app.mainApp.com.ticketFakerGenerator')
         .controller('ticketFakerController', ticketsController);
 
-    function ticketsController(API, $mdDialog, toastr, COM, MANAGEMENT,EnvironmentConfig, URLS, TicketProvider, ErrorHandler, Translate) {
+    function ticketsController(API,
+                               $mdDialog,
+                               toastr,
+                               COM,
+                               MANAGEMENT,
+                               EnvironmentConfig,
+                               URLS,
+                               TicketProvider,
+                               ErrorHandler,
+                               Translate,
+                               $log) {
         var vm = this;
 
         vm.tickets = {};
@@ -64,7 +74,7 @@
 
 
         function list(limit, offset, querySet) {
-            if (querySet === undefined) {
+            if (angular.isUndefined(querySet)){
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
             } else {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset + '&' + querySet).customGET();
@@ -88,7 +98,7 @@
                     vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function ListError(error) {
-                    console.error(error);
+                    $log.error(error);
                 });
         }
 
@@ -249,13 +259,13 @@
                             required: 'El campo es requerido.'
                         }
                     }
-                },
+                }
             ];
             openDialog();
         }
 
         function openDialog() {
-            console.log(COM);
+            $log.log(COM);
             vm.dialog = {
                 title: Translate.translate('COM.ADDITIONAL_TEXTS.NOTIFICATION'),
                 okButton: Translate.translate('MAIN.BUTTONS.ACCEPT'),

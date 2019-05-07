@@ -17,7 +17,7 @@
                     }
                 },
                 templateUrl: 'app/mainApp/COM/tickets/tickets.tmpl.html',
-                controller: 'ticketsController',
+                controller: 'TicketsController',
                 controllerAs: 'vm'
             });
 

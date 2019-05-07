@@ -4,7 +4,7 @@
         'app.mainApp.com.catalogues',
         'app.mainApp.com.incidences',
         'app.mainApp.com.tickets',
-        'app.mainApp.com.ticketFakerGenerator',
+        'app.mainApp.com.ticketFakerGenerator'
     ]);
 
 })();

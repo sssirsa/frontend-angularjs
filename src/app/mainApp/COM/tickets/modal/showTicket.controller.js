@@ -6,7 +6,7 @@
         .module('app.mainApp')
         .controller('detailTicketController',detailTicketController);
 
-    function detailTicketController($mdDialog, data, Translate, ErrorHandler)
+    function detailTicketController($mdDialog, data)
     {
         var vm = this;
 

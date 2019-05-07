@@ -1,12 +1,12 @@
 /** Created by Alejandro Noriega on 29/01/19 */
 /** Modified by Francisco Cerda on 03/02/19 */
-
+/** Modified by Christian Amezcua*/
 (function () {
     'use strict';
 
     angular
         .module('app.mainApp.com.tickets')
-        .controller('ticketsController', ticketsController);
+        .controller('TicketsController', ticketsController);
 
     function ticketsController(API,
                                $mdDialog,
@@ -16,6 +16,8 @@
                                COM,
                                TicketProvider,
                                ErrorHandler,
+                               $log,
+                               _,
                                Translate) {
         var vm = this;
 
@@ -87,7 +89,7 @@
 
 
         function list(limit, offset, querySet) {
-            if (querySet === undefined) {
+            if (angular.isUndefined(querySet)) {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset).customGET();
             } else {
                 return API.all("com_middleware/com/ticket" + '?limit=' + vm.limit + '&offset=' + vm.offset + '&' + querySet).customGET();
@@ -111,7 +113,7 @@
                     vm.refreshPaginationButtonsComponent = true;
                 })
                 .catch(function ListError(error) {
-                    console.error(error);
+                    $log.error(error);
                 });
         }
 
@@ -153,7 +155,7 @@
             vm.tickets = null;
             vm.searchBool = true;
             listTickets();
-        }
+        };
 
         function sigPage() {
             vm.offset += vm.limit;
@@ -187,12 +189,12 @@
 
         //Aquí empieza lo de Paco
         function getTicketInfo(item, activity) {
-            // console.log(item);
+            // $log.log(item);
             vm.identificador = item.identificador;
             var TicketProviderPromise = TicketProvider.getServiceDetails(item.mensaje_com);
             TicketProviderPromise.then(function (serviceDetails) {
                 vm.serviceDetails = serviceDetails.service_details;
-                //  console.log(vm.serviceDetails);
+                //  $log.log(vm.serviceDetails);
                 if (vm.serviceDetails.length == 1) {
                     getPossibleMessages(vm.serviceDetails[0].service_task_type, activity);
                 } else {
@@ -208,11 +210,11 @@
             var messages_statusPromise = TicketProvider.getTicket_type(service_task_type);
             messages_statusPromise.then(function (message_status) {
                 vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
-                console.log(vm.messageStatusCatalog);
-                console.log(vm.messageStatusCatalog.length);
-                //console.log(message_status);
-                //console.log(activity);
-                // console.log(vm.messageStatusCatalog);
+                $log.log(vm.messageStatusCatalog);
+                $log.log(vm.messageStatusCatalog.length);
+                //$log.log(message_status);
+                //$log.log(activity);
+                // $log.log(vm.messageStatusCatalog);
                 //createMeta(activity);
             }).catch(function (error) {
                 ErrorHandler.errorTranslate(error);
@@ -230,10 +232,10 @@
             };
             if (sendServiceDetails) {
                 vm.object.notifications.push({
-                    notification_status_code:vm.notification_code.com_code,
-                    notification_extra_notes:''
+                    notification_status_code: vm.notification_code.com_code,
+                    notification_extra_notes: ''
                 });
-                vm.object.service_details = vm.serviceDetails
+                vm.object.service_details = vm.serviceDetails;
                 vm.meta_incidences = {
                     fields: [
                         {
@@ -250,14 +252,14 @@
                                     lock: true,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.com.base
-                                        + '/' + URLS.com.catalogues.base
-                                        + '/' + URLS.com.catalogues.ticket_type,
+                                            + '/' + URLS.com.base
+                                            + '/' + URLS.com.catalogues.base
+                                            + '/' + URLS.com.catalogues.ticket_type,
                                         name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_ticket_code',//campo a pasar
                                         option: 'descripcion',//campo a mostrar
-                                        elements: 'results',//elementos del promise donde iterar
+                                        elements: 'results', //elementos del promise donde iterar
                                         showModel: true,//mostrar model y option
                                         pagination: {}//manejo de Paginado
                                     }
@@ -280,27 +282,27 @@
                                 }, {
                                     type: 'string',
                                     model: 'serial_number',
-                                    required: true,
+                                    required: false,
                                     hint: Translate.translate('COM.FIELDS.SERIAL_NUMBER'),
                                     label: Translate.translate('COM.FIELDS.SERIAL_NUMBER'),
                                     lock: true
                                 }, {
                                     type: 'string',
                                     model: 'bar_code',
-                                    required: true,
+                                    required: false,
                                     hint: Translate.translate('COM.FIELDS.BAR_CODE'),
                                     label: Translate.translate('COM.FIELDS.BAR_CODE')
                                 }, {
                                     type: 'string',
                                     model: 'product_description',
-                                    required: true,
+                                    required: false,
                                     hint: Translate.translate('COM.FIELDS.PRODUCT_DESCRIPTION'),
                                     label: Translate.translate('COM.FIELDS.PRODUCT_DESCRIPTION'),
                                     lock: true
                                 }, {
                                     type: 'string',
                                     model: 'product_variant_code',
-                                    required: true,
+                                    required: false,
                                     hint: Translate.translate('COM.FIELDS.PRODUCT_VARIANT_CODE'),
                                     label: Translate.translate('COM.FIELDS.PRODUCT_VARIANT_CODE'),
                                     lock: false
@@ -313,9 +315,9 @@
                                     lock: true,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.management.base
-                                        + '/' + URLS.management.catalogues.base
-                                        + '/' + URLS.management.catalogues.condition,
+                                            + '/' + URLS.management.base
+                                            + '/' + URLS.management.catalogues.base
+                                            + '/' + URLS.management.catalogues.condition,
                                         name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_code',//campo a pasar
@@ -340,9 +342,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.com.base
-                                                + '/' + URLS.com.catalogues.base
-                                                + '/' + URLS.com.catalogues.date_type,
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.date_type,
                                                 name: Translate.translate('COM.FIELDS.DATE_TYPE'),
                                                 model: 'com_code',
                                                 option: 'nombre',
@@ -354,8 +356,7 @@
                                         {
                                             type: 'text',
                                             model: 'date',
-                                            label: Translate.translate('COM.FIELDS.DATE'),
-
+                                            label: Translate.translate('COM.FIELDS.DATE')
                                         }
                                     ]
                                 }, {
@@ -370,9 +371,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.inventory.base
-                                                + '/' + URLS.inventory.catalogues.base
-                                                + '/' + URLS.inventory.catalogues.component_type,
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.component_type,
                                                 name: Translate.translate('COM.FIELDS.COMPONENT_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -409,9 +410,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.inventory.base
-                                                + '/' + URLS.inventory.catalogues.base
-                                                + '/' + URLS.inventory.catalogues.consumable_category,
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.consumable_category,
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -455,9 +456,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.com.base
-                                                + '/' + URLS.com.catalogues.base
-                                                + '/' + URLS.com.catalogues.process_instructions,
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.process_instructions,
                                                 name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -494,9 +495,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.technical_service.base
-                                        + '/' + URLS.technical_service.catalogues.base
-                                        + '/' + URLS.technical_service.catalogues.action,
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.action,
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                         model: 'com_code',
                                         option: 'descripcion',
@@ -524,9 +525,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.technical_service.base
-                                        + '/' + URLS.technical_service.catalogues.base
-                                        + '/' + URLS.technical_service.catalogues.failure,
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.failure,
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                         model: 'com_code',
                                         option: 'nombre',
@@ -572,10 +573,10 @@
                 openDialog();
             } else {
                 vm.object.notifications.push({
-                    notification_status_code:vm.notification_code.com_code,
-                    notification_extra_notes:''
+                    notification_status_code: vm.notification_code.com_code,
+                    notification_extra_notes: ''
                 });
-                //console.log(vm.serviceDetails);
+                //$log.log(vm.serviceDetails);
                 vm.meta_incidences = {
 
                     fields: [
@@ -632,7 +633,7 @@
             };
 
 
-            console.log(vm.actions);
+            $log.log(vm.actions);
             $mdDialog.show({
                 controller: 'CatalogModifyDialogController',
                 controllerAs: 'vm',
@@ -649,24 +650,24 @@
                 }
             }).then(function () {
                 ErrorHandler.successUpdate();
-                vm.notification_code=undefined;
-                vm.messageStatusCatalog=undefined;
+                vm.notification_code = undefined;
+                vm.messageStatusCatalog = undefined;
                 listTickets();
 
             }).catch(function (errorDelete) {
                 if (errorDelete) {
                     ErrorHandler.errorTranslate(errorDelete);
                 }
-                vm.notification_code=undefined;
-                vm.messageStatusCatalog=undefined;
+                vm.notification_code = undefined;
+                vm.messageStatusCatalog = undefined;
                 listTickets();
             });
         }
 
         function openDialogCreate(ticket, messageStatus) {
-            console.log(ticket);
-            console.log(messageStatus);
-            var sendServiceDetails=messageStatus.asset;
+            $log.log(ticket);
+            $log.log(messageStatus);
+            var sendServiceDetails = messageStatus.asset;
             createMeta(sendServiceDetails);
         }
 
