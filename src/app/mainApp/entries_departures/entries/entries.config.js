@@ -60,32 +60,32 @@
                 name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A','TECNICO C', 'TULTITLAN'],
+                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority: 4,
                 children: [
                     {
                         name: 'ENTRIES.MENU.NEW',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-new-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WARRANTIES',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-warranty-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.UNRECOGNIZABLE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WAREHOUSE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO C', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-warehouse-manual'
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-obsolete-manual'
                     }
                 ]
 

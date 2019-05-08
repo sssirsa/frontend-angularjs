@@ -1,0 +1,56 @@
+{
+    "PRE_REQUEST":{
+        "TITLE": "Pre solicitudes",
+        "LIST":{
+            "TITLE": "Listados de pre solicitudes",
+            "TYPE":{
+                "ALL": "Todas",
+                "ATTENDED": "Atendida",
+                "IN_PROCESS": "En proceso",
+                "CANCELED": "Cancelada",
+                "OPEN": "Abierta"
+            },
+            "LIST_OF": "Listado de: ",
+            "NO_RESULTS": "No se encontrarón resultados"
+        },
+        "DETAIL": {
+            "FOLIO": "Folio",
+            "OBSERVATIONS": "Observaciones del cliente"
+        },
+        "CABINET":{
+            "ECONOMIC": "Económico",
+            "NOT_REGISTERED": "Cabinet no registrado",
+            "NEW_REGISTER": "Registrar cabinet",
+            "SERIAL_NUMBER": "Número de serie"
+        },
+        "EVIDENCES":{
+            "TITLE": "Evidencias de la Pre solicitud",
+            "NO_EVICENCES": "Sin evidencias"
+        },
+        "STORE":{
+            "BETWEEN_1": "Entre calle 1",
+            "BETWEEN_2": "Y entre calle 2",
+            "CITY": "Municipio",
+            "LOCATION": "Localidad",
+            "NAME": "Nombre del establecimiento",
+            "NUMBER": "Número",
+            "STATE": "Estado",
+            "STREET": "Calle"
+
+        },
+        "HOUR":{
+            "TITLE": "Horario de atención deseado",
+            "START": "Hora inicio",
+            "END": "Hora fin"
+        },
+        "BUTTONS": {
+            "CANCEL": "Cancelar Pre Solicitud",
+            "CREATE": "Levantar Solicitud",
+            "LOAD_MORE": "Cargar mas..."
+        },
+        "SUBSIDIARY":{
+            "TITLE": "Sucursal",
+            "SELECT": "Seleccione una sucursal"
+        }
+    }
+}
