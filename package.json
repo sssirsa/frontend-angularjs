@@ -3,10 +3,11 @@
   "version": "2.5.0",
   "private": true,
   "devDependencies": {
-    "browser-sync": "~2.10.1",
+    "babel-eslint": "^10.0.1",
+    "browser-sync": "~2.24.3-rc1",
     "chalk": "~1.1.1",
     "del": "~2.2.0",
-    "eslint": "^1.10.3",
+    "eslint": "^4.12.1",
     "eslint-plugin-angular": "^0.15.0",
     "gulp": "~3.9.0",
     "gulp-angular-filesort": "~1.1.1",
