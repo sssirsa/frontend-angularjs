@@ -75,31 +75,31 @@
                 name: 'MAIN.MENU.INTERNAL_SERVICE',
                 icon: 'fa fa-cogs',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 6,
                 children: [
                     {
                         name:'INSPECTION.INSPECTION_NAME_MENU',
                         state:'triangular.admin-default.inspection',
-                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },
                     {
                         name:'PUNCTURE.PUNCTURE_MENU',
                         state:'triangular.admin-default.puncture',
-                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },
                     {
                         name:'DIAGNOSIS.DIAGNOSIS',
                         state:'triangular.admin-default.diagnostic',
-                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },
                     {
                         name:'GENERAL_STAGE.TITLE',
                         state:'triangular.admin-default.general_stage',
-                        permission:['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     }
 
