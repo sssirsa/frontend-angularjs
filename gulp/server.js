@@ -51,13 +51,13 @@ gulp.task('serve:dev', ['config:dev', 'scripts', 'watch'], function () {
     paths.tmp + '/serve',
     paths.src
   ], [
-      paths.tmp + '/serve/app/**/*.css',
-      paths.src + '/app/**/*.js',
-      paths.src + 'src/assets/images/**/*',
-      paths.tmp + '/serve/*.html',
-      paths.tmp + '/serve/app/**/*.html',
-      paths.src + '/app/**/*.html'
-    ]);
+    paths.tmp + '/serve/app/**/*.css',
+    paths.src + '/app/**/*.js',
+    paths.src + 'src/assets/images/**/*',
+    paths.tmp + '/serve/*.html',
+    paths.tmp + '/serve/app/**/*.html',
+    paths.src + '/app/**/*.html'
+  ]);
 });
 
 
@@ -67,13 +67,13 @@ gulp.task('serve:stg', ['config', 'scripts', 'watch'], function () {
     paths.tmp + '/serve',
     paths.src
   ], [
-      paths.tmp + '/serve/app/**/*.css',
-      paths.src + '/app/**/*.js',
-      paths.src + 'src/assets/images/**/*',
-      paths.tmp + '/serve/*.html',
-      paths.tmp + '/serve/app/**/*.html',
-      paths.src + '/app/**/*.html'
-    ]);
+    paths.tmp + '/serve/app/**/*.css',
+    paths.src + '/app/**/*.js',
+    paths.src + 'src/assets/images/**/*',
+    paths.tmp + '/serve/*.html',
+    paths.tmp + '/serve/app/**/*.html',
+    paths.src + '/app/**/*.html'
+  ]);
 });
 
 gulp.task('serve:prod', ['config:build', 'scripts', 'watch'], function () {
@@ -81,13 +81,13 @@ gulp.task('serve:prod', ['config:build', 'scripts', 'watch'], function () {
     paths.tmp + '/serve',
     paths.src
   ], [
-      paths.tmp + '/serve/app/**/*.css',
-      paths.src + '/app/**/*.js',
-      paths.src + 'src/assets/images/**/*',
-      paths.tmp + '/serve/*.html',
-      paths.tmp + '/serve/app/**/*.html',
-      paths.src + '/app/**/*.html'
-    ]);
+    paths.tmp + '/serve/app/**/*.css',
+    paths.src + '/app/**/*.js',
+    paths.src + 'src/assets/images/**/*',
+    paths.tmp + '/serve/*.html',
+    paths.tmp + '/serve/app/**/*.html',
+    paths.src + '/app/**/*.html'
+  ]);
 });
 
 gulp.task('serve:dist', ['config','buildapp'], function () {

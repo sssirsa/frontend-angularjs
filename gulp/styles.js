@@ -44,7 +44,7 @@ gulp.task('styles', function () {
     .pipe(indexFilter.restore)
     .pipe($.sass(sassOptions))
 
-  .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']}))
+    .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']}))
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
