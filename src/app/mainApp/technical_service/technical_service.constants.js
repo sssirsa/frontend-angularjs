@@ -34,7 +34,7 @@
             type_entrie:{
                 base:'management',
                 control:'control',
-                cabinet_subsidiary:'cabinet_in_sucursal'
+                cabinet_subsidiary:'control_cabinet_capitalizado'
             },
             bulk_assets:{
                 asset:'asset',
