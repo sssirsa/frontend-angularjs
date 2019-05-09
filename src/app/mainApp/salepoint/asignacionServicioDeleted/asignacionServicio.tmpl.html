@@ -1,0 +1,198 @@
+<div layout="column"
+     cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     style="height: 100px">
+    <md-card layout="column"
+             layout-gt-sm="row"
+             layout-padding
+             layout-align="center center"
+             ng-if="vm.salePoints.length < 0">
+        <div flex-gt-sm="40" flex="100">
+            <md-input-container class="md-block">
+                <div ng-if="vm.selectedKind && !vm.salePoints">
+                    <span translate>SALEPOINT_REQUEST.ASSIGN.NO_RESULTS</span>
+                    <span> XD x2 </span>
+                </div>
+            </md-input-container>
+        </div>
+    </md-card>
+    <div
+        ng-if="vm.salePoints">
+        <div class="virtualRepeatScroll-500">
+            <md-card
+                flex="100"
+                layout="column"
+                ng-repeat="salePoint in vm.salePoints|orderBy:'fecha' "
+                layout-gt-md="row"
+                ng-click="vm.selectSalePoint(salePoint)">
+                <div layout="column" layout-align="center stretch" flex="100">
+                    <md-content>
+                        <div flex="100">
+                            <md-toolbar class="md-hue-1">
+                                <div class="md-toolbar-tools" layout-align="space-between center">
+                                    <b>{{salePoint.folio}}</b>
+                                </div>
+                            </md-toolbar>
+                        </div>
+                    </md-content>
+                    <md-content>
+
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
+                            <div layout="column">
+                                <md-icon md-svg-icon="assets/images/punto_venta.svg" class="avatar"></md-icon>
+                            </div>
+                            <div layout="column" flex="30">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.JOB_KIND</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{salePoint.tipo}}</h4>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.HOURSTART</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <div layout="column" layout-align="center center">
+                                            <h4 ng-if="salePoint.hora_cliente_inicio">
+                                                {{salePoint.hora_cliente_inicio}}</h4>
+                                            <h4 ng-if="!salePoint.hora_cliente_inicio">No Asignada</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.HOUREND</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4 ng-if="salePoint.hora_cliente_fin">
+                                            {{salePoint.hora_cliente_fin}}</h4>
+                                        <h4 ng-if="!salePoint.hora_cliente_fin">No Asignada</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div layout="column" flex="40">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STORE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{salePoint.establecimiento.nombre_establecimiento}}</h4>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.STATE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                            {{salePoint.establecimiento.localidad.municipio.estado.nombre}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.CP</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4 ng-if="salePoint.establecimiento.localidad.codigo_postal">
+                                            {{salePoint.establecimiento.localidad.codigo_postal}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.codigo_postal">No
+                                            Asignado</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div layout="column" flex="30">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.MUN</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4 ng-if="salePoint.establecimiento.localidad.municipio">
+                                            {{salePoint.establecimiento.localidad.municipio.nombre}}</h4>
+                                        <h4 ng-if="!salePoint.establecimiento.localidad.municipio">No Asignado</h4>
+                                    </div>
+                                </div>
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.LOCAL</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4>{{salePoint.establecimiento.localidad.nombre}}</h4>
+                                    </div>
+                                </div>
+
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>SALEPOINT_REQUEST.ASSIGN.LABELS.DATE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <h4 ng-if="salePoint.fecha">
+                                            {{salePoint.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                                        <h4 ng-if="!salePoint.fecha">No Asignado</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+                    <md-content ng-if="vm.selectedKind == 'unasigned' ">
+                        <div flex="100" layout="column" layout-align="end end">
+                            <div>
+                                <md-button aria-label="fab button"
+                                           ng-click="$event.stopPropagation(); vm.Assing(salePoint)"
+                                           class="md-raised md-primary">
+                                    <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </md-card>
+        </div>
+        <div ng-if="vm.refreshPaginationButtonsComponent">
+            <pagination-manager-buttons go-sig="vm.sig()"
+                                        go-prev="vm.prev()"
+                                        go-number="vm.goToNumberPage(number)"
+                                        limit-objects="vm.limit"
+                                        count-object="vm.objectAtention.count"
+                                        offset-object="vm.offset"
+                                        nex-object="vm.objectAtention.next"
+                                        prev-object="vm.objectAtention.previous">
+            </pagination-manager-buttons>
+        </div>
+    </div>
+</div>

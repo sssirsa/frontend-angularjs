@@ -1,0 +1,64 @@
+{
+    "REQUEST":{
+        "TITLE": "Solicitudes",
+        "LIST":{
+            "TITLE": "Listado de solicitudes",
+            "TYPE":{
+                "ALL": "Todas",
+                "ATTENDED": "Atendida",
+                "CANCELED": "Cancelada",
+                "IN_PROCESS": "En proceso",
+                "OPEN": "Abierta"
+            },
+            "LIST_OF": "Listado de",
+            "NO_RESULTS": "No se encontrarón resultados"
+        },
+        "DETAIL": {
+            "TITLE": "Detalle de solicitud",
+            "FOLIO": "Folio",
+            "STATUS": "Estatus",
+            "DATE": "Fecha",
+            "INFO": "Información de la solicitud",
+            "SCORE": "Calificación"
+        },
+        "CABINET":{
+            "TITLE": "Tipos de cabinet",
+            "KIND": "Tipo de cabinet a asignar",
+            "QUANTITY": "Cantidad",
+            "REMOVE": "Cabinet a retirar",
+            "SERVICE": "Cabinet a reparar",
+            "EMPTY": "Establecimiento sin cabinets",
+            "ECONOMIC": "Económico"
+        },
+        "COMMENTS":{
+            "CLIENT": "Observaciones del cliente",
+            "WORKER": "Observaciones del personal"
+        },
+        "EVIDENCES": {
+            "TITLE": "Evidencias de la solicitud",
+            "NO_EVIDENCES": "Sin evidencias"
+        },
+        "HOUR":{
+            "START": "Hora inicio",
+            "END": "Hora término",
+            "MIN": "Hora mínima de inicio",
+            "MAX": "Hora máxima de término"
+        },
+        "TYPE":{
+            "NEW": "Solicitud de Nuevos",
+            "INCREASE": "Solicitud Incremental",
+            "REMOVE": "Solicitud de Recolección",
+            "EXCHANGE": "Solicitud de Cambio",
+            "TECHNICAL_SERVICE": "Solicitud de Servico Técnico"
+        },
+        "USER": {
+            "TITLE": "Información de usuario",
+            "USERNAME": "Usuario",
+            "NAME": "Nombre",
+            "MIDDLE_NAME": "Primer Apellido",
+            "LAST_NAME": "Segundo Apellido",
+            "PHONE": "Telefono",
+            "EMAIL": "Correo"
+        }
+    }
+}

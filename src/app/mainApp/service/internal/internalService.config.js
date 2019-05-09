@@ -59,13 +59,13 @@
                 name: 'MAIN.MENU.INTERNAL_SERVICE',
                 icon: 'fa fa-cogs',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 6,
                 children: [
                     {
                         name: 'MAIN.MENU.REGISTER_STEP',
                         state: 'triangular.admin-default.etapa',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type: 'link'
                     }
                 ]
