@@ -12,8 +12,7 @@
         API,
         RoleStore,
         User,
-        $cookies,
-        MANAGEMENT
+        $cookies
     ) {
 
         var authService = {
@@ -54,9 +53,9 @@
 
                     //        RoleStore.defineManyRoles(roles);
 
-                    API.all(MANAGEMENT.base
-                        + '/' + MANAGEMENT.administration.base
-                        + '/' + MANAGEMENT.administration.person.base)
+                    API.all(URLS.management.base
+                        + '/' + URLS.management.administration.base
+                        + '/' + URLS.management.administration.profile)
                         .customGET()
                         .then(function (user) {
                             request.resolve();
