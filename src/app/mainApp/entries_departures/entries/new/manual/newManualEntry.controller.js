@@ -276,10 +276,9 @@
             vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
 
             var user = User.getUser();
-
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showOriginSelector = !user.sucursal
-                && !User.getUser.udn;
+            vm.showOriginSelector = !user['sucursal']
+                && !user['udn'];
 
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
