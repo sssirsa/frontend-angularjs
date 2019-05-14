@@ -20,7 +20,7 @@
 
             /!*if (toState.name != 'login') {
                 if (AuthService.isAuthenticated()) {
-                    //AuthService.getUser();
+                    //AuthService. getUser();
                 }
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;
