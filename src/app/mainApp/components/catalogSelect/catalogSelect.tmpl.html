@@ -33,7 +33,7 @@
                     <b>{{element[$ctrl.catalog.model]}}</b> - {{element[$ctrl.catalog.option]}}
                 </section>
             </md-option>
-            <md-option ng-if="$!ctrl.catalogElements.length>0">
+            <md-option ng-if="$ctrl.catalogElements.length>0">
                 <span ng-if="$ctrl.noResults">{{$ctrl.noResults}}</span>
                 <span ng-if="!$ctrl.noResults">No results</span>
             </md-option>
