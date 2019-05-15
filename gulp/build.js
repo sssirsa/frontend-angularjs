@@ -16,13 +16,13 @@ gulp.task('partials',['markups'] ,function () {
     paths.tmp + '/app/**/*.html'
   ])
     .pipe($.if(function(file) {
-        return $.match(file, ['!**/examples/*.html']);
-      },
-      $.minifyHtml({
-        empty: true,
-        spare: true,
-        quotes: true
-      }))
+      return $.match(file, ['!**/examples/*.html']);
+    },
+    $.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
     )
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: 'app',
@@ -112,11 +112,11 @@ gulp.task('other', function () {
   });
 
   return gulp.src([
-        path.join(paths.src, '/**/*'),
-        path.join('!' + paths.src, '/**/*.{html,css,js,styl,jade}')
-      ])
-      .pipe(fileFilter)
-      .pipe(gulp.dest(path.join(paths.dist, '/')));
+    path.join(paths.src, '/**/*'),
+    path.join('!' + paths.src, '/**/*.{html,css,js,styl,jade}')
+  ])
+    .pipe(fileFilter)
+    .pipe(gulp.dest(path.join(paths.dist, '/')));
 });
 
 
