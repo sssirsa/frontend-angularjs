@@ -14,41 +14,42 @@
         "NEW": {
             "TITLE": "Entrada de nuevos",
             "LABELS": {
-                "ENTRY_DATA": "Información de entrada",
-                "ASSET_LOADING": "Carga de cabinets",
-                "DESCRIPTION": "Descripción",
-                "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
-                "TRANSPORT_LINE": "Linea de transporte",
-                "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal",
-                "PETITION": "Pedimento",
-                "DRIVER_ID": "Identificación del operador",
-                "DRIVER_NAME": "Nombre del operador",
-                "CABINET_SEARCH": "Registro de cabinets",
+                "ASSET_LOADING": "Carga de cabinets",
                 "CABINET_ID": "Económico del cabinet",
+                "CABINET_SEARCH": "Registro de cabinets",
                 "CABINET": {
                     "ID": "Económico",
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "DESCRIPTION": "Descripción",
+                "DRIVER_NAME": "Nombre del operador",
+                "DRIVER_ID": "Identificación del operador",
+                "ENTRY_DATA": "Información de entrada",
+                "PETITION": "Pedimento",
+                "SUBSIDIARY": "Sucursal",
+                "SUPPLIER": "Proveedor",
                 "SWITCH": {
                     "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
-                }
+                },
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
-                "AGENCY": "Selecciona la agencia de procedencia",
+                "AGENCY": "Tu usuario no tiene una UDN-Agencia, selecciona una para generar la entrada",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
-                "PETITION": "Ingresa el pedimento"
+                "PETITION": "Ingresa el pedimento",
+                "SUPPLIER": "Selecciona el rpoveddor de los cabinets"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",

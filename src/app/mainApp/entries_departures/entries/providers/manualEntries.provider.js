@@ -470,13 +470,14 @@
                     ife_chofer: null,
                     linea_transporte_id: null,
                     nombre_chofer: '',
-                    tipo_transporte_id: null
+                    tipo_transporte_id: null,
+                    proveedor_origen_id: null
                 };
             },
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_id',
+                        binding: 'sucursal_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -499,6 +500,32 @@
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
+                        required: true
+                    },
+                    supplier: {
+                        binding: 'proveedor_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.inventory.base
+                                + '/' + URLS.inventory.catalogues.base
+                                + '/' + URLS.inventory.catalogues.supplier,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'razon_social',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            elements: 'results',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.SUPPLIER'),
+                        icon: 'fas fas-box',
                         required: true
                     },
                     transport_line: {
@@ -554,7 +581,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_id',
+                        binding: 'udn_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base

@@ -6,11 +6,9 @@
             catalogues: {
                 base: 'catalogues',
                 udn: 'udn',
-                project: 'project',
                 transport_line: 'transport_line',
                 transport_type: 'transport_type',
-                sticker: 'sticker',
-                pediments: 'pediments'
+                sticker: 'sticker'
             },
             departures: {
                 base: 'departures',
