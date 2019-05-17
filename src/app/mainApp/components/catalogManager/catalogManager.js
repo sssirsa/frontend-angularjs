@@ -490,10 +490,15 @@
                         vm.removeFilter();
                     }
                     else {
-                        activate();
-                        ErrorHandler.successDelete();
-                        vm.onSuccessDelete();
+                        removeElementFromList(
+                            findElementInListById(
+                                idToRemove,
+                                vm.actions['DELETE'].id)
+                        );
                     }
+                    ErrorHandler.successDelete();
+                    vm.onSuccessDelete();
+
                 }).catch(function (errorDelete) {
                     if (errorDelete) {
                         ErrorHandler.errorTranslate(errorDelete);
@@ -613,7 +618,7 @@
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
-        
+
         //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
             if (vm.paginationHelper.previous) {
@@ -767,7 +772,26 @@
             activate();
         }
 
-        
+        //Remove element from list when deleted
+        //Receives the index to remove from the list
+        function removeElementFromList(index) {
+            if (index > -1) {
+                vm.catalogElements.splice(index, 1);
+            }
+            else {
+                $log.error('@CatalogManager, function @removeElementFromList: the index ${index} provided is invalid');
+            }
+        }
+
+        //Finds a element in the displayed list by its ID
+        function findElementInListById(idToDelete, idField) {
+            var elementIndex = vm.catalogElements
+                .map(function mapRepeater(currentElement) {
+                    return currentElement[idField];
+                })
+                .indexOf(idToDelete);
+            return elementIndex;
+        }
 
     }
 })();
