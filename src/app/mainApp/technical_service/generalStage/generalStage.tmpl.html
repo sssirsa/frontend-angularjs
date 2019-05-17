@@ -25,7 +25,7 @@
 
             </div>
         </md-toolbar>
-        <div layout="row" flex="100" layout-wrap="">
+        <div layout="row" flex="100" layout-wrap="" class="minorWhite">
             <search-cabinet-step ng-if="vm.search" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <v-accordion ng-if="vm.asset" flex="100" layout-padding="" id="infogral" class="vAccordion--default"
@@ -46,7 +46,7 @@
                            sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
 
-        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
+        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
                  ng-if="vm.step.currentStage.id">
             <md-tab label="{{vm.title_info}}">
                 <md-content class="md-padding">
