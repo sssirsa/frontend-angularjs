@@ -139,7 +139,14 @@
             vm.createLoader = vm.CreateCatalogProvider
                 .create(objectToCreate)
                 .then(function (createdElement) {
-                    $mdDialog.hide(createdElement);
+                    var elementToReturn;
+                    if (createdElement) {
+                        elementToReturn = createdElement;
+                    }
+                    else {
+                        elementToReturn = objectToCreate;
+                    }
+                    $mdDialog.hide(elementToReturn);
                 })
                 .catch(function (createError) {
                     $mdDialog.cancel(createError);

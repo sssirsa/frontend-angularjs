@@ -447,12 +447,13 @@
                         fields: vm.actions['POST'].fields,
                         url: vm.url
                     }
-                }).then(function () {
+                }).then(function (createdElement) {
                     if (vm.filterApplied) {
                         vm.removeFilter();
                     }
                     else {
-                        activate();
+                        //activate();
+                        vm.catalogElements.push(createdElement);
                         ErrorHandler.successCreation();
                         vm.onSuccessCreate();
                     }

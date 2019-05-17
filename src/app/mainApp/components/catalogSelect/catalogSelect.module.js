@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('catalogSelect',[]);
+        .module('catalogSelectComponent',[]);
 }) ();
