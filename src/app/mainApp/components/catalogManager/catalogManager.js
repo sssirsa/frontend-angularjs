@@ -534,8 +534,8 @@
                     }
                     else {
                         var elementIndexInList = findIndexInListById(
-                            modifiedElement[vm.actions['PUT'].id],
-                            vm.actions['PUT'].id
+                            modifiedElement[vm.actions['PUT'].id] || modifiedElement['id'],
+                            vm.actions['PUT'].id || 'id'
                         );
                         vm.catalogElements[elementIndexInList] = angular
                             .fromJson(
