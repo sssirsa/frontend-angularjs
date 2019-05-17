@@ -62,14 +62,19 @@
         function getCabinet(id) {
             /*
              * RETURNS
-             *   -Cabinet exists in database and can enter (commonly a WARRANTY entry or a JUST Created)
+             *   -Cabinet exists in database and can enter
+             *      (a WARRANTY entry, a REPAIR
+             *      or a JUST Created a.k.a: NEW)
              *       +Cabinet full object and can_enter in true
-             *   -Cabinet exist in database and can't enter (Cabinet in any warehouse)
+             *   -Cabinet exist in database and can't enter
+             *   (Cabinet in any warehouse)
              *       +Cabinet simplified object and can_enter in false
-             *   -Cabinet doesn't exists, so it can enter (commonly WARRANTYS entry)
+             *   -Cabinet doesn't exists, so it can enter
+             *      (commonly WARRANTYS entry or NEW entry)
              *       +Cabinet in null and can_enter in true
              *   -Backend error
-             *       +Cabinet in null, cant_enter in false, error property added to return the error response
+             *       +Cabinet in null, cant_enter in false,
+             *       error property added to return the error response
              */
 
             var deferred = $q.defer();
