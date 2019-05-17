@@ -4,7 +4,7 @@
             <div class="md-toolbar-tools" layout="row">
                 <div flex="50">
                     <h2>
-                        <span flex translate="">PUNCTURE.PUNCTURE_MENU</span>
+                        <span flex translate="">PRESURIZE.PRESURIZE_MENU</span>
 
                     </h2>
                 </div>
@@ -27,33 +27,54 @@
         </div>
 
 
-        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
-                 ng-if="vm.presurize.fecha_revision">
+        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always">
+            <!-- ng-if="vm.presurize.fecha_revision">-->
             <md-tab label="{{vm.title_info}}">
                 <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
-                    <md-input-container>
+                    <div flex="100" layout="row" layout-wrap="" layout-padding="">
+                        <h3 translate="" flex="100">PRESURIZE.CHARGE_INFO</h3>
+                        <md-input-container flex="100" flex-gt-sm="50" class="md-block">
+                            <md-icon md-font-icon="fas fa-weight"></md-icon>
+                            <label translate="">PRESURIZE.CHARGE_PRESSION</label>
+                            <input type="text" ng-model="vm.presurize.presion_carga">
+                        </md-input-container>
+                        <md-input-container flex="80" flex-gt-sm="40">
+                            <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                            <label translate="">PRESURIZE.CHARGE_DATE</label>
+                            <input disabled type="text" ng-model="vm.presurize.fecha_carga">
+                        </md-input-container>
+                        <md-content flex="20" flex-gt-sm="10" layout-align="center center">
+                            <md-button class="md-fab md-primary">
+                                <md-icon md-font-icon="far fa-clock"></md-icon>
+                            </md-button>
+                            <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
+                        </md-content>
+                        <h3 translate="" flex="100">PRESURIZE.REVIEW_INFO</h3>
+                        <md-input-container flex="100" flex-gt-sm="50" class="md-block">
+                            <md-icon md-font-icon="fas fa-weight"></md-icon>
+                            <label translate="">PRESURIZE.REVISION_PRESSION</label>
+                            <input type="text" ng-model="vm.presurize.presion_revision">
+                        </md-input-container>
+                        <md-input-container flex="80" flex-gt-sm="40">
+                            <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                            <label translate="">PRESURIZE.REVISION_DATE</label>
+                            <input disabled type="text" ng-model="vm.presurize.fecha_revision">
+                        </md-input-container>
+                        <md-content flex="20" flex-gt-sm="10" layout-align="center center">
+                            <md-button class="md-fab md-primary">
+                                <md-icon md-font-icon="far fa-clock"></md-icon>
+                            </md-button>
+                            <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
+                        </md-content>
+                    </div>
 
-                    </md-input-container>
-                    <md-input-container flex="30">
-                        <md-switch class="md-primary" name="special" ng-model="vm.presurize.gas" required>
-                        </md-switch>
-                        <span ng-if="vm.presurize.gas" translate="">PUNCTURE.WITH_GAS</span>
-                        <span ng-if="!vm.presurize.gas" translate="">PUNCTURE.WITHOUT_GAS</span>
-                    </md-input-container>
-                    <md-input-container flex="70" layout-align="center center" layout-fill="" class="md-padding">
-                        <md-icon  md-font-icon=""></md-icon>
-                        <label translate="">PUNCTURE.OBSERVATIONS</label>
-                        <textarea ng-model="vm.presurize.observaciones" type="text" rows="5"  layout-fill=""></textarea>
-                    </md-input-container>
-                </div>
-                <md-content flex="100" layout-padding="">
-                    <actions-manager ng-if="vm.step"  actual-step="vm.step.currentStage.etapa" actions="vm.getActions(element)" flex="100"></actions-manager>
-                </md-content>
+
             </md-tab>
             <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
                 <md-content>
                     <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
-                                          tipo-equipo="vm.asset.modelo.tipo.id" catalogo-etapa="vm.step.currentStage.etapa.nombre"
+                                          tipo-equipo="vm.asset.modelo.tipo.id"
+                                          catalogo-etapa="vm.step.currentStage.etapa.nombre"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
 
                 </md-content>
@@ -62,7 +83,7 @@
         </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button  ng-if="vm.presurize.fecha_revision" ng-click="vm.clear()" class="md-raised">
+            <md-button ng-if="vm.presurize.fecha_revision" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>

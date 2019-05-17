@@ -44,15 +44,18 @@
     },
     "PRESURIZE": {
         "PRESURIZE_MENU": "Presurizado",
+        "CHARGE_INFO":"Información de Carga",
+        "REVIEW_INFO":"Información de Revisión",
         "WITH_GAS": "Con Gas",
         "WITHOUT_GAS": "Sin Gas",
         "MORE_INFO": "Más Información",
         "INITIAL_INFO": "Información Inicial",
         "OBSERVATIONS": "Observaciones",
         "CHARGE_DATE":"Fecha de carga",
-        "CHARGE_PRESSION":"Presión de carga",
+        "SET_CHARGE_TIME":"Realizar captura de Tiempo de la Carga",
+        "CHARGE_PRESSION":"Presión de carga al recargar",
         "REVISION_DATE":"Fecha de revisión",
-        "REVISION_PRESSION":"Presión de carga",
+        "REVISION_PRESSION":"Presión de carga al revisar",
         "ACTIONS": {
             "SAVE_PRESURIZE": "Guardar Presurizado"
         }

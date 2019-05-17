@@ -34,6 +34,18 @@
                 controllerAs: 'vm'
             })
 
+            .state('triangular.admin-default.pressurize', {
+                url: '/Presurizado',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/technical_service/presurize/presurize.tmpl.html',
+                controller: 'PresurizeController',
+                controllerAs: 'vm'
+            })
+
             .state('triangular.admin-default.diagnostic', {
                 url: '/Diagnostico',
                 data: {
@@ -87,6 +99,12 @@
                     {
                         name:'PUNCTURE.PUNCTURE_MENU',
                         state:'triangular.admin-default.puncture',
+                        permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
+                        type:'link'
+                    },
+                    {
+                        name:'PRESURIZE.PRESURIZE_MENU',
+                        state:'triangular.admin-default.pressurize',
                         permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                         type:'link'
                     },
