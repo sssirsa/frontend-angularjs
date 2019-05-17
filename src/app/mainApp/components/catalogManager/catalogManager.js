@@ -452,11 +452,10 @@
                         vm.removeFilter();
                     }
                     else {
-                        //activate();
                         vm.catalogElements.push(createdElement);
-                        ErrorHandler.successCreation();
-                        vm.onSuccessCreate();
                     }
+                    ErrorHandler.successCreation();
+                    vm.onSuccessCreate();
                 }).catch(function (errorCreate) {
                     if (errorCreate) {
                         ErrorHandler.errorTranslate(errorCreate);
@@ -492,7 +491,7 @@
                     }
                     else {
                         removeElementFromList(
-                            findElementInListById(
+                            findIndexInListById(
                                 idToRemove,
                                 vm.actions['DELETE'].id)
                         );
@@ -529,15 +528,22 @@
                         url: vm.url,
                         element: element
                     }
-                }).then(function () {
+                }).then(function (modifiedElement) {
                     if (vm.filterApplied) {
                         vm.removeFilter();
                     }
                     else {
-                        activate();
-                        ErrorHandler.successUpdate();
-                        vm.onSuccessModify();
+                        var elementIndexInList = findIndexInListById(
+                            modifiedElement[vm.actions['PUT'].id],
+                            vm.actions['PUT'].id
+                        );
+                        vm.catalogElements[elementIndexInList] = angular
+                            .fromJson(
+                                angular.toJson(modifiedElement)
+                            );
                     }
+                    ErrorHandler.successUpdate();
+                    vm.onSuccessModify();
                 }).catch(function (errorModify) {
                     if (errorModify) {
                         ErrorHandler.errorTranslate(errorModify);
@@ -785,13 +791,18 @@
         }
 
         //Finds a element in the displayed list by its ID
-        function findElementInListById(idToDelete, idField) {
-            var elementIndex = vm.catalogElements
-                .map(function mapRepeater(currentElement) {
-                    return currentElement[idField];
-                })
-                .indexOf(idToDelete);
-            return elementIndex;
+        function findIndexInListById(idToFind, idField) {
+            if (idToFind && idField) {
+                var elementIndex = vm.catalogElements
+                    .map(function mapRepeater(currentElement) {
+                        return currentElement[idField];
+                    })
+                    .indexOf(idToFind);
+                return elementIndex;
+            }
+            else {
+                return -1;
+            }
         }
 
     }

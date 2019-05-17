@@ -11,7 +11,7 @@
             'angularMoment','pascalprecht.translate','tmh.dynamicLocale', 'textAngular', 'hljs', 'md.data.table','ngMdIcons',
             'vAccordion', 'ngMaterialDatePicker', 'mdPickers', 'cgBusy', 'ADM-dateTimePicker', 'minicolors',
             'catalogManager',
-            'catalogSelect',
+            'catalogSelectComponent',
 
             angularDragula(angular), 'ngFileUpload', 'checklist-model',
 
