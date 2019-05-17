@@ -34,8 +34,8 @@
             },
             control: {
                 base: 'control',
-                cabinet_in_subsidiary: 'cabinet_in_sucursal',
-                no_labeled_in_subsidiary: 'no_capitalizado_in_sucursal'
+                cabinet_in_subsidiary: 'control_cabinet_capitalizado',
+                no_labeled_in_subsidiary: 'control_cabinet_no_capitalizado'
             },
             inventory: {
                 base: 'inventory',
