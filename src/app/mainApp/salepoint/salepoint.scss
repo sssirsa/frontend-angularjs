@@ -1,32 +1,10 @@
-.qr-icon {
-  border-radius: 4px;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0px;
-  vertical-align: middle;
-  zoom:0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform:scale(0.70);
-}
-
-.wrapperText {
-  word-wrap: break-word;
-  width: 200px;
-  height: auto;
-}
-
-
 div.Improductiva {
   background-color: #a705ed;
   border: 1px solid #a705ed;
   border-radius: 3px;
   padding: 10px;
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 div.Abierta {
@@ -35,7 +13,7 @@ div.Abierta {
   border-radius: 3px;
   padding: 10px;
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 div.Atendida {
@@ -44,7 +22,7 @@ div.Atendida {
   border-radius: 3px;
   padding: 10px;
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 div.Cancelada {
@@ -53,7 +31,7 @@ div.Cancelada {
   border-radius: 3px;
   padding: 10px;
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 div.En_proceso {
@@ -62,7 +40,7 @@ div.En_proceso {
   border-radius: 3px;
   padding: 10px;
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 div.Todo {
@@ -71,4 +49,10 @@ div.Todo {
   border-radius: 3px;
   padding: 10px;
   text-align: center;
+  width: 100px;
+}
+
+div.SelectedList {
+  border: 1px solid #b3b0b3;
+  border-radius: 5px;
 }

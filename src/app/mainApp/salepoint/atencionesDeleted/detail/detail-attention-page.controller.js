@@ -8,7 +8,7 @@
     /* @ngInject */
     function DetailAttentionPageController($log, $state, $stateParams, toastr, Translate, SalePointRequests, Stores,
                                          Persona_Admin, Geolocation, SCORES, atencionPV,
-                                           cabinetPV, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog, _) {
+                                           cabinetUC, ErrorHandler, Helper, $scope, MarcaCabinet, ModeloCabinet,$mdDialog, _) {
         var vm = this;
 
         //Variable declaration
@@ -50,16 +50,6 @@
         vm.insumoSelect = insumoSelect;
         vm.validaMax = validaMax;
         vm.enviar = enviar;
-
-        //codigo para listar cabinets
-        //datos para paginado
-        vm.objectPaginado = null;
-        vm.offset = 0;
-        vm.limit = 50;
-        vm.refreshPaginationButtonsComponent = false;
-        vm.sig = sigPage;
-        vm.prev = prevPage;
-        vm.goToNumberPage = goToNumberPage;
 
         activate();
 
@@ -323,7 +313,8 @@
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
                 vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
-                    .then(function () {
+                    .then(function (result) {
+                        $log.debug(result);
                         toastr.success(Translate.translate('SUCCESS.UPDATE'));
                         $state.go('triangular.admin-default.serviceList', {runListPendientes:true});
                     })
@@ -396,7 +387,7 @@
 
         vm.listcabinets = listcabinets;
         vm.selectCabinet = selectCabinet;
-        vm.searchCabinet = searchCabinet;
+        vm.filterCabinets = filterCabinets;
         vm.cleanForm = cleanForm;
         vm.listMarcas = listMarcas;
         vm.listModelos = listModelos;
@@ -419,6 +410,7 @@
         function seleccion() {
             vm.todosSeleccionado = [];
             vm.todosSeleccionado.push(cabinetTemporal);
+            $log.log(cabinetTemporal);
             vm.isUsed = true;
         }
 
@@ -429,7 +421,7 @@
                 no_serie: vm.cabinetSelected.no_serie.toUpperCase(),
                 antiguedad: vm.cabinetSelected.antiguedad.toUpperCase()
             };
-            cabinetPV.create(aux)
+            cabinetUC.create(aux)
                 .then(function (res) {
                     AddCabinetCreated(res);
                     ErrorHandler.successCreation();
@@ -478,8 +470,8 @@
                     res = res.results;
                     vm.marcas = Helper.filterDeleted(res, true);
                 })
-                .catch(function () {
-
+                .catch(function (err) {
+                    $log.debug(err);
                 });
         }
 
@@ -489,8 +481,8 @@
                     res = res.results;
                     models = Helper.filterDeleted(res, true);
                 })
-                .catch(function(){
-
+                .catch(function(err){
+                    $log.debug(err);
                 });
         }
 
@@ -531,29 +523,23 @@
             $scope.newcabinetFrom.$setUntouched();
         }
 
-        function searchCabinet() {
-            if(vm.searchText == '' || vm.searchText.length <= 0){
-                listcabinets();
-            }else{
-                cabinetPV.getByID(vm.searchText)
-                    .then(function (respuesta) {
-                        vm.todos = [];
-                        AddCabinetCreated(respuesta);
-                    })
-                    .catch(function (error) {
-                        ErrorHandler.errorTranslate(error);
-                    });
-            }
+        function filterCabinets() {
+            vm.todos = [];
+            vm.todos = _.filter(vm.todosprev, function (cabinet) {
+                if (!angular.isString(vm.searchText) || vm.searchText === ''){
+                    return true;
+                }
+                return cabinet.economico.toLowerCase().indexOf(vm.searchText.toLowerCase()) >= 0;
+            });
         }
 
         function listcabinets(){
             var ux = "Activo";
 
-            vm.refreshPaginationButtonsComponent = false;
-            vm.loadingPromise = cabinetPV.list(vm.limit, vm.offset)
+            vm.loadingPromise = cabinetUC.list(1000, 0)
                 .then(function (res) {
-                    vm.objectPaginado = res;
-                    vm.todosprev = Helper.filterDeleted(res.results, true);
+                    res = res.results;
+                    vm.todosprev = Helper.filterDeleted(res, true);
 
                     angular.forEach(vm.todosprev, function (cabinet) {
 
@@ -586,34 +572,12 @@
 
                         vm.todos.push(cabinetPreview);
                     });
-
-                    vm.refreshPaginationButtonsComponent = true;
                 })
-                .catch(function () {
-
+                .catch(function (err) {
+                    $log.debug(err);
                 });
         }
-
-        function sigPage() {
-            vm.offset += vm.limit;
-            vm.todos = [];
-            vm.todosprev = null;
-            listcabinets();
-        }
-
-        function prevPage() {
-            vm.offset -= vm.limit;
-            vm.todos = [];
-            vm.todosprev = null;
-            listcabinets();
-        }
-
-        function goToNumberPage(number) {
-            vm.offset = number * vm.limit;
-            vm.todos = [];
-            vm.todosprev = null;
-            listcabinets();
-        }
+        //codigo para listar cabinets
 
     }
 })();

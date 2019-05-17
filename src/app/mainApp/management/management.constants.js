@@ -6,6 +6,7 @@
                 base: 'manage_system',
                 employees:'employees',
                 groups: 'groups',
+                profile:'info_full',
                 my_groups: 'my_groups',
                 person: {
                     base: 'persona',

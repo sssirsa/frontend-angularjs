@@ -58,18 +58,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    option: 'nombre'
                 },
-                required: true
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             },
             modelo_by_marca: {
                 catalog: {
@@ -78,18 +78,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    option: 'nombre'
                 },
-                required: true
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             },
             condicion: {
                 catalog: {
@@ -101,64 +101,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'letra',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    option: 'letra'
                 },
-                required: true
-            },
-            status_unilever: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.status_unilever,
-                    kind: 'Generic',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_UNILEVER'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                pagination: {
+                    total: 'count',
+                    next: 'next'
                 },
-                required: true
-            },
-            status_com: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.status_com,
-                    kind: 'Generic',
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.STATUS_COM'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'descripcion',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                },
-                required: true
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             },
             categoria: {
                 catalog: {
@@ -170,18 +124,18 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: 'count',
-                        next: 'next'
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                    option: 'nombre'
                 },
-                required: true
+                pagination: {
+                    total: 'count',
+                    next: 'next'
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
             }
         };
 

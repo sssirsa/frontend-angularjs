@@ -36,7 +36,7 @@
                 name: 'MAIN.MENU.CRUD_USER',
                 icon: 'zmdi zmdi-account',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR'],
+                permission_old: ['ADMINISTRADOR'],
                 priority: 2,
                 children: [
                     {
