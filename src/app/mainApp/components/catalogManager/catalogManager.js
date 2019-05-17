@@ -448,9 +448,14 @@
                         url: vm.url
                     }
                 }).then(function () {
-                    activate();
-                    ErrorHandler.successCreation();
-                    vm.onSuccessCreate();
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        activate();
+                        ErrorHandler.successCreation();
+                        vm.onSuccessCreate();
+                    }
                 }).catch(function (errorCreate) {
                     if (errorCreate) {
                         ErrorHandler.errorTranslate(errorCreate);
@@ -481,9 +486,14 @@
                         url: vm.url
                     }
                 }).then(function () {
-                    activate();
-                    ErrorHandler.successDelete();
-                    vm.onSuccessDelete();
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        activate();
+                        ErrorHandler.successDelete();
+                        vm.onSuccessDelete();
+                    }
                 }).catch(function (errorDelete) {
                     if (errorDelete) {
                         ErrorHandler.errorTranslate(errorDelete);
@@ -514,9 +524,14 @@
                         element: element
                     }
                 }).then(function () {
-                    activate();
-                    ErrorHandler.successUpdate();
-                    vm.onSuccessModify();
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        activate();
+                        ErrorHandler.successUpdate();
+                        vm.onSuccessModify();
+                    }
                 }).catch(function (errorModify) {
                     if (errorModify) {
                         ErrorHandler.errorTranslate(errorModify);
@@ -546,9 +561,14 @@
                         url: vm.url
                     }
                 }).then(function () {
-                    activate();
-                    ErrorHandler.successUpdate();
-                    vm.onSuccessUpdate();
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        activate();
+                        ErrorHandler.successUpdate();
+                        vm.onSuccessUpdate();
+                    }
                 }).catch(function (errorUpdate) {
                     if (errorUpdate) {
                         ErrorHandler.errorTranslate(errorUpdate);
