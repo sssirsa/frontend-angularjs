@@ -1,5 +1,5 @@
 <div layout="column">
-    <md-card flex layout-align="center stretch">
+    <md-card flex layout-align="center stretch" class="minorWhite">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools" layout="row">
                 <div flex="50">
@@ -27,7 +27,7 @@
         </div>
 
 
-        <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always">
+        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
             <!-- ng-if="vm.presurize.fecha_revision">-->
             <md-tab label="{{vm.title_info}}">
                 <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
@@ -66,6 +66,17 @@
                             </md-button>
                             <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
                         </md-content>
+                        <md-content layout="row" flex="40" flex-gt-sm="30" layout-align="center center">
+                            <md-switch flex="40" class="md-primary" name="special" ng-model="vm.presurize.gas" required>
+                            </md-switch>
+                            <span  flex="50" ng-if="vm.presurize.gas" translate="">PUNCTURE.WITH_GAS</span>
+                            <span flex="50"  ng-if="!vm.presurize.gas" translate="">PUNCTURE.WITHOUT_GAS</span>
+                        </md-content>
+                        <md-input-container flex-gt-sm="70" flex="60" layout-align="center center" layout-fill="" class="md-padding">
+                            <md-icon  md-font-icon=""></md-icon>
+                            <label translate="">PUNCTURE.OBSERVATIONS</label>
+                            <textarea ng-model="vm.presurize.observaciones" type="text" rows="5"  layout-fill=""></textarea>
+                        </md-input-container>
                     </div>
 
 
