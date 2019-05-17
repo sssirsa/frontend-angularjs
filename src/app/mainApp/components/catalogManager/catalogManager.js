@@ -572,15 +572,22 @@
                         fields: vm.actions['PATCH'].fields,
                         url: vm.url
                     }
-                }).then(function () {
+                }).then(function (updatedElement) {
                     if (vm.filterApplied) {
                         vm.removeFilter();
                     }
                     else {
-                        activate();
-                        ErrorHandler.successUpdate();
-                        vm.onSuccessUpdate();
+                        var elementIndexInList = findIndexInListById(
+                            updatedElement[vm.actions['PATCH'].id] || updatedElement['id'],
+                            vm.actions['PATCH'].id || 'id'
+                        );
+                        vm.catalogElements[elementIndexInList] = angular
+                            .fromJson(
+                                angular.toJson(updatedElement)
+                            );
                     }
+                    ErrorHandler.successUpdate();
+                    vm.onSuccessUpdate();
                 }).catch(function (errorUpdate) {
                     if (errorUpdate) {
                         ErrorHandler.errorTranslate(errorUpdate);

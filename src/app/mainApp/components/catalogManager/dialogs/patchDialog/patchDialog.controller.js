@@ -128,8 +128,13 @@
         vm.dialog = dialog;
         vm.fields = fields;
         vm.UpdateCatalogProvider = CATALOG;
-
-        vm.id = id;
+        vm.id;
+        if (id) {
+            vm.id = id;
+        }
+        else {
+            vm.id = 'id';
+        }
         vm.url = url;
         vm.objectToUpdate = {};
 
@@ -148,9 +153,16 @@
         function modify() {
             createProvider();
             vm.modifyLoader = vm.UpdateCatalogProvider
-                .patch(id, vm.objectToUpdate)
-                .then(function (modifiedElement) {
-                    $mdDialog.hide(modifiedElement);
+                .patch(vm.id, vm.objectToUpdate)
+                .then(function (updatedElement) {
+                    var elementToReturn;
+                    if (updatedElement) {
+                        elementToReturn = updatedElement;
+                    }
+                    else {
+                        elementToReturn = vm.objectToUpdate;
+                    }
+                    $mdDialog.hide(elementToReturn);
                 })
                 .catch(function (modifyError) {
                     $mdDialog.cancel(modifyError);
