@@ -102,7 +102,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogCreateDialogController', CatalogCreateDialogController);
     function CatalogCreateDialogController(
         $mdDialog,

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .component('catalogManager', {
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,

@@ -113,7 +113,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogUpdateDialogController', CatalogUpdateDialogController);
     function CatalogUpdateDialogController(
         $mdDialog,

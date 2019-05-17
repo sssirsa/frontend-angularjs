@@ -114,7 +114,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogModifyDialogController', CatalogModifyDialogController);
     function CatalogModifyDialogController(
         $mdDialog,
