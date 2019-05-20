@@ -56,6 +56,9 @@
         "CHARGE_PRESSION":"Presión de carga al recargar",
         "REVISION_DATE":"Fecha de revisión",
         "REVISION_PRESSION":"Presión de carga al revisar",
+        "SENDED_DIAGNOSIS":"Liberado a Diagnostico",
+        "CONTINUE_IN_STEP":"Mantener en esta Etapa",
+        "RESTART_STEP":"Reiniciar la etapa de Presurizado",
         "ACTIONS": {
             "SAVE_PRESURIZE": "Guardar Presurizado"
         }

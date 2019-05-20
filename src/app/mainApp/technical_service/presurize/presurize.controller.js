@@ -44,6 +44,8 @@
 
         vm.sendPresurize = sendPresurize;
         vm.clear = clear;
+        vm.timeStampCheck=timeStampCheck;
+        vm.timeStampCharge=timeStampCharge;
 
 
         //Declaración de Funciones como variable  de Componentes________________________________________________________
@@ -83,6 +85,16 @@
                 $log.error(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
+        }
+
+        function timeStampCheck() {
+            vm.presurize.fecha_revision= new Date();
+            $log.debug( vm.presurize.fecha_revision);
+        }
+
+        function timeStampCharge() {
+            vm.presurize.fecha_carga= new Date();
+            $log.debug( vm.presurize.fecha_revision);
         }
 
         function clear() {
