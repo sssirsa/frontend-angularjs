@@ -58,7 +58,8 @@
         "REVISION_PRESSION":"Presión de carga al revisar",
         "SENDED_DIAGNOSIS":"Liberado a Diagnostico",
         "CONTINUE_IN_STEP":"Mantener en esta Etapa",
-        "RESTART_STEP":"Reiniciar la etapa de Presurizado",
+        "RESTART_STEP":"Realizar Nuevamente la etapa",
+        "OBSOLETE":"Reportar Y Enviar a Obsoleto",
         "ACTIONS": {
             "SAVE_PRESURIZE": "Guardar Presurizado"
         }

@@ -44,8 +44,8 @@
 
         vm.sendPresurize = sendPresurize;
         vm.clear = clear;
-        vm.timeStampCheck=timeStampCheck;
-        vm.timeStampCharge=timeStampCharge;
+        vm.timeStampCheck = timeStampCheck;
+        vm.timeStampCharge = timeStampCharge;
 
 
         //Declaración de Funciones como variable  de Componentes________________________________________________________
@@ -61,6 +61,29 @@
         function sendPresurize() {
             vm.presurize.sucursal_id = vm.step.control.sucursal.id;
             vm.presurize.acciones_id = [];
+            if (vm.option_to_do) {
+                switch (vm.option_to_do) {
+                    case 1:
+                        vm.presurize.liberado=true;
+                        vm.presurize.etapa_string='Diagnostico';
+                        break;
+                    case 2:
+                        vm.presurize.liberado=false;
+                        vm.presurize.etapa_string='Continuar';
+                        break;
+                    case 3:
+                        vm.presurize.liberado=true;
+                        vm.presurize.etapa_string='Presurizado';
+                        break;
+                    case 4:
+                        vm.presurize.liberado=false;
+                        vm.presurize.etapa_string='Obsoleto';
+                }
+            }
+            else{
+                vm.presurize.liberado=false;
+                vm.presurize.etapa_string='Continuar';
+            }
             if (vm.presurize.insumos_lote) {
                 if (vm.presurize.insumos_lote.length === 0) {
                     vm.presurize = _.omit(vm.presurize, 'insumos_lote');
@@ -88,13 +111,13 @@
         }
 
         function timeStampCheck() {
-            vm.presurize.fecha_revision= new Date();
-            $log.debug( vm.presurize.fecha_revision);
+            vm.presurize.fecha_revision = new Date();
+            $log.debug(vm.presurize.fecha_revision);
         }
 
         function timeStampCharge() {
-            vm.presurize.fecha_carga= new Date();
-            $log.debug( vm.presurize.fecha_revision);
+            vm.presurize.fecha_carga = new Date();
+            $log.debug(vm.presurize.fecha_revision);
         }
 
         function clear() {

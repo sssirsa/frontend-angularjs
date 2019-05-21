@@ -88,13 +88,13 @@
                             </md-button>
                             <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
                         </md-content>
-                        <md-content layout="row" flex="40" flex-gt-sm="30" layout-align="center center">
+                        <md-content layout="row" flex="100" flex-gt-sm="30" layout-align="center center">
                             <md-switch flex="40" class="md-primary" name="special" ng-model="vm.presurize.gas" required>
                             </md-switch>
                             <span flex="50" ng-if="vm.presurize.gas" translate="">PUNCTURE.WITH_GAS</span>
                             <span flex="50" ng-if="!vm.presurize.gas" translate="">PUNCTURE.WITHOUT_GAS</span>
                         </md-content>
-                        <md-input-container flex-gt-sm="70" flex="60" layout-align="center center" layout-fill=""
+                        <md-input-container flex-gt-sm="70" flex="100" layout-align="center center" layout-fill=""
                                             class="md-padding">
                             <md-icon md-font-icon=""></md-icon>
                             <label translate="">PUNCTURE.OBSERVATIONS</label>
@@ -103,22 +103,24 @@
                         </md-input-container>
                         <md-input-container layout="row" layout-wrap="" flex="100" >
                             <md-radio-group layout="row"  layout-wrap="" ng-model="vm.option_to_do" flex="100">
-                                <md-radio-button flex="100" flex-gt-sm="30" value="1" class="md-primary">
+                                <md-radio-button flex="100" flex-gt-sm="20" value="1" class="md-primary">
                                     <md-icon md-font-icon="fas fa-search"></md-icon>
                                     <span translate="">PRESURIZE.SENDED_DIAGNOSIS</span>
                                 </md-radio-button>
-                                <md-radio-button flex="100" flex-gt-sm="30" value="2" class="md-primary">
+                                <md-radio-button flex="100" flex-gt-sm="20" value="2" class="md-primary">
                                     <md-icon md-font-icon="fas fa-angle-down"></md-icon>
                                     <span translate="">PRESURIZE.CONTINUE_IN_STEP</span>
                                 </md-radio-button>
-                                <md-radio-button flex="100" flex-gt-sm="30" value="3" class="md-primary">
+                                <md-radio-button flex="100" flex-gt-sm="25" value="3" class="md-primary">
                                     <md-icon md-font-icon="fas fa-retweet"></md-icon>
                                     <span translate="">PRESURIZE.RESTART_STEP</span>
                                 </md-radio-button>
+                                <md-radio-button flex="100" flex-gt-sm="25" value="4" class="md-primary">
+                                    <md-icon md-font-icon="fas fa-ban"></md-icon>
+                                    <span translate="">PRESURIZE.OBSOLETE</span>
+                                </md-radio-button>
                             </md-radio-group>
                         </md-input-container>
-
-
                     </div>
                 </div>
 
