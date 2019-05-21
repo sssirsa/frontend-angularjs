@@ -124,7 +124,6 @@
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
-                "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
@@ -138,6 +137,11 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
                 }
             },
             "HINTS": {
@@ -146,7 +150,6 @@
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, utilizar solo si la UDN-Agencia no generó la salida de garantías",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"

@@ -1,3 +1,16 @@
+/*
+    Fields for "Warranty" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        sucursal_destino_id: int(id), (Required if !User.sucursal && !User.udn)
+        udn_origen_id: int(id), (Required if manual entry)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.warranty')
@@ -99,7 +112,7 @@
                             + '/' + URLS.management.catalogues.cabinet_brand,
                         name: 'Marca',
                         model: 'id',
-                        option: 'descripcion',
+                        option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
                         pagination: {},
@@ -160,54 +173,6 @@
                 },
                 {
                     type: 'catalog',
-                    model: 'estatus_unilever_id',
-                    label: 'Estatus unilever',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_unilever,
-                        name: 'Estatus Unilever',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'estatus_com_id',
-                    label: 'Estatus COM',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_com,
-                        name: 'Estatus COM',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
                     model: 'categoria_id',
                     label: 'Categoría',
                     catalog: {
@@ -252,10 +217,10 @@
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showOriginSelector = !user['sucursal']
+                && !user['udn'];
         };
 
         vm.init();
