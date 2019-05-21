@@ -139,7 +139,8 @@
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'ENTRIES.NEW.LABELS.ENTRY_DATA'|translate}}>
             <div layout="row"
-                 layout-align="center center">
+                 layout-align="center center"
+                 ng-if="vm.showOriginSelector">
                 <p>{{'ENTRIES.NEW.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.entryToAgency"
                            md-change="vm.changeSwitch()">
