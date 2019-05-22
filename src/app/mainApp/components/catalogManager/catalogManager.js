@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .component('catalogManager', {
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,
@@ -447,8 +447,13 @@
                         fields: vm.actions['POST'].fields,
                         url: vm.url
                     }
-                }).then(function () {
-                    activate();
+                }).then(function (createdElement) {
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        vm.catalogElements.push(createdElement);
+                    }
                     ErrorHandler.successCreation();
                     vm.onSuccessCreate();
                 }).catch(function (errorCreate) {
@@ -481,9 +486,19 @@
                         url: vm.url
                     }
                 }).then(function () {
-                    activate();
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        removeElementFromList(
+                            findIndexInListById(
+                                idToRemove,
+                                vm.actions['DELETE'].id)
+                        );
+                    }
                     ErrorHandler.successDelete();
                     vm.onSuccessDelete();
+
                 }).catch(function (errorDelete) {
                     if (errorDelete) {
                         ErrorHandler.errorTranslate(errorDelete);
@@ -513,8 +528,20 @@
                         url: vm.url,
                         element: element
                     }
-                }).then(function () {
-                    activate();
+                }).then(function (modifiedElement) {
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        var elementIndexInList = findIndexInListById(
+                            modifiedElement[vm.actions['PUT'].id] || modifiedElement['id'],
+                            vm.actions['PUT'].id || 'id'
+                        );
+                        vm.catalogElements[elementIndexInList] = angular
+                            .fromJson(
+                                angular.toJson(modifiedElement)
+                            );
+                    }
                     ErrorHandler.successUpdate();
                     vm.onSuccessModify();
                 }).catch(function (errorModify) {
@@ -545,8 +572,20 @@
                         fields: vm.actions['PATCH'].fields,
                         url: vm.url
                     }
-                }).then(function () {
-                    activate();
+                }).then(function (updatedElement) {
+                    if (vm.filterApplied) {
+                        vm.removeFilter();
+                    }
+                    else {
+                        var elementIndexInList = findIndexInListById(
+                            updatedElement[vm.actions['PATCH'].id] || updatedElement['id'],
+                            vm.actions['PATCH'].id || 'id'
+                        );
+                        vm.catalogElements[elementIndexInList] = angular
+                            .fromJson(
+                                angular.toJson(updatedElement)
+                            );
+                    }
                     ErrorHandler.successUpdate();
                     vm.onSuccessUpdate();
                 }).catch(function (errorUpdate) {
@@ -593,7 +632,7 @@
                 vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
             }
         }
-        
+
         //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
             if (vm.paginationHelper.previous) {
@@ -747,7 +786,31 @@
             activate();
         }
 
-        
+        //Remove element from list when deleted
+        //Receives the index to remove from the list
+        function removeElementFromList(index) {
+            if (index > -1) {
+                vm.catalogElements.splice(index, 1);
+            }
+            else {
+                $log.error('@CatalogManager, function @removeElementFromList: the index ${index} provided is invalid');
+            }
+        }
+
+        //Finds a element in the displayed list by its ID
+        function findIndexInListById(idToFind, idField) {
+            if (idToFind && idField) {
+                var elementIndex = vm.catalogElements
+                    .map(function mapRepeater(currentElement) {
+                        return currentElement[idField];
+                    })
+                    .indexOf(idToFind);
+                return elementIndex;
+            }
+            else {
+                return -1;
+            }
+        }
 
     }
 })();

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .factory('CATALOG', CatalogProvider);
 
     function CatalogProvider(

@@ -219,6 +219,7 @@
                     {
                         type: 'catalog',
                         model: 'etapa_defecto_id',
+                        bindTo:'etapa_defecto',
                         label: 'Etapas Defecto',
                         hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
                         catalog: {

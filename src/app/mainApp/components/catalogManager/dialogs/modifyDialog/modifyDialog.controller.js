@@ -114,7 +114,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogModifyDialogController', CatalogModifyDialogController);
     function CatalogModifyDialogController(
         $mdDialog,
@@ -159,7 +159,14 @@
             vm.modifyLoader = vm.ModifyCatalogProvider
                 .update(vm.objectToModify[id], vm.objectToModify)
                 .then(function (modifiedElement) {
-                    $mdDialog.hide(modifiedElement);
+                    var elementToReturn;
+                    if (modifiedElement) {
+                        elementToReturn = modifiedElement;
+                    }
+                    else {
+                        elementToReturn = vm.objectToModify;
+                    }
+                    $mdDialog.hide(elementToReturn);
                 })
                 .catch(function (modifyError) {
                     $mdDialog.cancel(modifyError);

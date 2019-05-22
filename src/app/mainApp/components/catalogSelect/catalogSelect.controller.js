@@ -56,7 +56,7 @@
  * */
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogSelectComponent')
         .component('catalogSelect', {
             templateUrl: 'app/mainApp/components/catalogSelect/catalogSelect.tmpl.html',
             controller: CatalogSelectController,
