@@ -54,6 +54,18 @@
                 controller: 'warehouseManualEntryController',
                 controllerAs: 'vm'
             })
+            /* Repair asset entries */
+            .state('triangular.admin-default.entry-repair-manual', {
+                url: '/entrada/reparacion/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/entries/repair/manual/repairManualEntry.tmpl.html',
+                controller: 'repairManualEntryController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
@@ -85,7 +97,13 @@
                         name: 'ENTRIES.MENU.WAREHOUSE',
                         type: 'link',
                         permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-obsolete-manual'
+                        state: 'triangular.admin-default.entry-warehouse-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.REPAIR',
+                        type: 'link',
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-repair-manual'
                     }
                 ]
 
