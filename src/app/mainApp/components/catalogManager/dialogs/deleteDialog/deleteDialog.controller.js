@@ -11,7 +11,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogDeleteDialogController', CatalogDeleteDialogController);
     function CatalogDeleteDialogController(
         $mdDialog,

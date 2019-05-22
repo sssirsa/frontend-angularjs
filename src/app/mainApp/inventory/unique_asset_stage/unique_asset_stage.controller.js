@@ -76,11 +76,11 @@
                             option: 'descripcion',
                             name: 'Insumo',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
@@ -104,11 +104,11 @@
                             option: 'descripcion',
                             name: 'Tipo de Equipo',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     },
                     {
@@ -132,11 +132,11 @@
                             option: 'nombre',
                             name: 'Etapa',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],

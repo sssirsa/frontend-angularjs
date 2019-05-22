@@ -39,7 +39,7 @@
 (function () {
     'use strict';
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogSearchDialogController', CatalogSearchDialogController);
 
     function CatalogSearchDialogController(
