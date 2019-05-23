@@ -1,20 +1,18 @@
-(function()
-{
+(function () {
     'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('comIncidenceController',comIncidenceController);
+        .controller('comIncidenceController', comIncidenceController);
 
-    function comIncidenceController(URLS, Translate, EnvironmentConfig)
-    {
+    function comIncidenceController(URLS, Translate, EnvironmentConfig) {
 
         var vm = this;
 
-        var technicalUrl =  (EnvironmentConfig.site.rest.api)
+        var technicalUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.com_incidence);
 
-        var nextStepUrl =  (EnvironmentConfig.site.rest.api)
+        var nextStepUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.next_step);
 
 
@@ -64,8 +62,8 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -90,11 +88,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
 
                     }
@@ -107,7 +105,7 @@
                 }
             },
             PUT: {
-                id:'com_code',
+                id: 'com_code',
                 fields: [
                     {
                         type: 'text',
@@ -127,8 +125,8 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -154,11 +152,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
 
                     }

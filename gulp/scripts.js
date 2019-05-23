@@ -13,5 +13,5 @@ gulp.task('scripts', function () {
   return gulp.src(path.join(paths.src, '/app/**/*.js'))
     .pipe($.eslint())
     .pipe($.eslint.format())
-    .pipe($.size())
+    .pipe($.size());
 });

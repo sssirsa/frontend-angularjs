@@ -1,0 +1,138 @@
+ <div cg-busy="{promise:vm.loadingPromise, message:'Cargando pre solicitudes...'}">
+    <md-card layout="column"
+             layout-padding
+             layout-align="center stretch">
+
+        <div layout="column"
+             layout-align="center center">
+            <h1 translate>PRE_REQUEST.LIST.TITLE</h1>
+        </div>
+
+        <div layout="row"
+             layout-align="space-around center"
+             layout-wrap="">
+
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Abierta') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredPreRequests('Abierta')">
+                <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>
+                <div class="Abierta"></div>
+            </div>
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'En_proceso') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredPreRequests('En_proceso')">
+                <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>
+                <div class="En_proceso"></div>
+            </div>
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Atendida') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredPreRequests('Atendida')">
+                <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>
+                <div class="Atendida"></div>
+            </div>
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Cancelada') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredPreRequests('Cancelada')">
+                <span translate>PRE_REQUEST.LIST.TYPE.CANCELED</span>
+                <div class="Cancelada"></div>
+            </div>
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.lastKindFilter == 'Todo') ? 'SelectedList' : ''"
+                 ng-click="vm.listFilteredPreRequests('Todo')">
+                <span translate>PRE_REQUEST.LIST.TYPE.ALL</span>
+                <div class="Todo"></div>
+            </div>
+        </div>
+    </md-card>
+    <md-card layout="column"
+             layout-padding
+             layout-align="center stretch"
+             ng-if="vm.requests.length == 0">
+
+        <div layout="row"
+             layout-align="space-around center"
+             layout-align-xs="center stretch"
+             layout-xs="column">
+            <span translate>PRE_REQUEST.LIST.NO_RESULTS</span>
+        </div>
+    </md-card>
+ </div>
+
+<div ng-if="vm.requests.length !=0 && !vm.filteredActivated">
+    <div
+        layout="row"
+        flex="100"
+        layout-align="center center"
+        ng-repeat="item in vm.requests">
+        <md-card
+            flex="100"
+            layout="column"
+            layout-gt-sm="row"
+            layout-align="space-around center"
+            layout-padding>
+
+            <img src="assets/images/request.png"
+                 class="avatar"
+                 hide-sm
+                 hide-xs>
+            <div layout="column">
+                <div layout="column">
+                    <div layout="row" layout-align="center center">
+                        <h4 translate>PRE_REQUEST.DETAIL.FOLIO</h4>
+                        <h4>:&nbsp;</h4>
+                        <h4>{{item.id}}</h4>
+                    </div>
+
+                    <div layout="column" layout-align="center center">
+                        <span>{{item.fecha| amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" layout-align="center center">
+                <b>
+                    {{item.establecimiento.nombre_establecimiento}}
+                </b>
+                <b>
+                    {{item.cabinet}}
+                </b>
+                <b>
+                    {{item.establecimiento.localidad.nombre}}
+                </b>
+            </div>
+            <div layout="column">
+                <span style="text-align: start">{{item.status}}</span>
+                <div class="{{item.status}}"></div>
+            </div>
+            <div layout="column" layout-align="center center" ng-if="item.status=='Abierta'" >
+                <md-button aria-label="fab button"
+                           ng-click="vm.statusDetail(item.id)"
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-open-in-new"></md-icon>
+                </md-button>
+            </div>
+
+        </md-card>
+    </div>
+</div>
+
+<div ng-if="vm.refreshPaginationButtonsComponent">
+    <pagination-manager-buttons go-sig="vm.sig()"
+                                go-prev="vm.prev()"
+                                go-number="vm.goToNumberPage(number)"
+                                limit-objects="vm.limit"
+                                count-object="vm.list.count"
+                                offset-object="vm.offset"
+                                nex-object="vm.list.next"
+                                prev-object="vm.list.previous">
+    </pagination-manager-buttons>
+</div>

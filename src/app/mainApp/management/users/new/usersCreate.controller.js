@@ -39,16 +39,16 @@
                     name: Translate.translate('ADMIN_PERSONA.PROPERTY.SUCURSALDEF'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 }
             }
         };

@@ -116,9 +116,6 @@
                                     required="true"
                                     ng-if="!(vm.user_ini.user.role=='5')"
                                     catalog="vm.catalogues['sucursal'].catalog"
-                                    pagination="vm.catalogues['sucursal'].pagination"
-                                    elements="vm.catalogues['sucursal'].elements"
-                                    soft-delete="vm.catalogues['sucursal'].softDelete"
                                     on-select="vm.onSubsidiarySelect(element)">
                     </catalog-select>
                     <div layout="column">

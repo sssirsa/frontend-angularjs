@@ -1,0 +1,199 @@
+<div>
+    <md-card  layout="column" ng-if="!vm.user.sucursal">
+        <md-toolbar class="toolbar-default margin-bottom-10">
+            <div layout-align="center center" layout="column" layout-gt-sm="row">
+                <b translate>PRE_REQUEST.SUBSIDIARY.TITLE</b>
+            </div>
+        </md-toolbar>
+
+        <div layout="row"
+             layout-align-xs="center stretch"
+             layout-xs="column"
+             layout-align="space-around center"
+             layout-padding>
+            <div flex-gt-sm="50" flex="100">
+                <catalog-select catalog="vm.catalogSucursal.catalog"
+                                elements="vm.catalogSucursal.elements"
+                                on-select="vm.onSelectedSucursal(element)">
+                </catalog-select>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card layout="column">
+        <md-toolbar class="toolbar-default margin-bottom-30">
+            <div layout-padding layout-align="space-between center" layout="column" layout-gt-sm="row">
+                <div layout="column" layout-gt-sm="row">
+                    <b>{{vm.preRequest.id}}</b>
+                </div>
+                <div layout="column" layout-gt-sm="row">
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.CABINET.ECONOMIC</b>: &nbsp
+                        <b>{{vm.preRequest.cabinet}}</b>
+                    </div>
+                </div>
+                <div layout="column" layout-gt-sm="row">
+                    <b>{{vm.preRequest.fecha| amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</b>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <div layout-padding layout-gt-sm="row" layout="column" layout-align="space-between center">
+            <div flex-gt-md="50" layout="column">
+                <div layout-align="center stretch"
+                     layout="column"
+                     layout-padding>
+                    <h3 translate>PRE_REQUEST.EVIDENCES.TITLE</h3>
+
+                    <div
+                        layout="column"
+                        layout-align="space-around center">
+
+                        <div ng-if="vm.preRequest.fotos" layout-fill>
+
+                            <ng-image-gallery
+                                images="vm.preRequest.fotos"
+                                thumbnails="false"
+                                thumb-size="80"
+                                inline="true"
+                                bubbles="true"
+                                bubble-size="5"
+                                img-bubbles="true"
+                                bg-close="false"
+                                piracy="false"
+                                img-anim="fadeup"
+                            ></ng-image-gallery>
+                        </div>
+
+                        <div ng-if="!vm.preRequest.fotos">
+                            <p>{{'PRE_REQUEST.EVIDENCES.NO_EVICENCES'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div flex-gt-md="50" layout="column" layout-align="center center">
+
+                <div layout-align="space-around center">
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.NAME</b>: &nbsp
+                        {{vm.preRequest.establecimiento.nombre_establecimiento}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.LOCATION</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.CITY</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.municipio.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.STATE</b>: &nbsp
+                        {{vm.preRequest.establecimiento.localidad.municipio.estado.nombre}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.STREET</b>: &nbsp
+                        {{vm.preRequest.establecimiento.calle}} &nbsp
+                        <b translate>PRE_REQUEST.STORE.NUMBER</b>: &nbsp
+                        {{vm.preRequest.establecimiento.numero}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.BETWEEN_1</b>: &nbsp
+                        {{vm.preRequest.establecimiento.entre_calle1}}
+                    </div>
+                    <div layout="row">
+                        <b translate>PRE_REQUEST.STORE.BETWEEN_2</b>: &nbsp
+                        {{vm.preRequest.establecimiento.entre_calle2}}
+                    </div>
+                </div>
+
+                <div flex-gt-md="50" flex="100" layout-fill="" layout="column" layout-align="center center">
+                    <h2 translate="">
+                        PRE_REQUEST.HOUR.TITLE
+                    </h2>
+                    <div layout="row" layout-align="space-between center">
+                        <div layout="row">
+                            <i class="fas fa-user-clock"></i> &nbsp
+                        </div>
+                        <div layout="row">
+                            <b>{{vm.preRequest.hora_cliente_inicio}}</b> &nbsp;- &nbsp;<b>{{vm.preRequest.hora_cliente_fin}}</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div layout-align="space-around center">
+                    <div layout="row" layout-wrap>
+                        <b translate="">PRE_REQUEST.OBSERVATIONS</b>
+                        {{vm.preRequest.observaciones_cliente}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <md-card-actions layout="column"
+                         layout-align="space-around stretch"
+                         layout-align-gt-xs="space-around end"
+                         layout-padding>
+
+            <div layout="column"
+                 layout-align="space-around stretch"
+                 layout-align-gt-xs="space-around center"
+                 layout-gt-xs="row">
+
+                <md-button aria-label="geolocate" ng-click="vm.showStoreLocation()" class="md-raised md-primary">
+                    <md-icon md-font-icon="fa fa-location-arrow"></md-icon>
+                    {{'MAIN.COMPONENTS.STORE_MANAGER.GEOLOCATION'|translate}}
+                </md-button>
+                &nbsp
+
+                <md-button aria-label="send" ng-if="vm.cabinetExist" ng-click="vm.createRequest()"
+                           class="md-raised md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                    {{'PRE_REQUEST.BUTTONS.CREATE'|translate}}
+                </md-button>
+                &nbsp
+
+                <md-button aria-label="cancel" ng-click="vm.cancelPreRequest()" class="md-raised md-warn">
+                    <md-icon md-font-icon="zmdi zmdi-close-circle"></md-icon>
+                    {{'PRE_REQUEST.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+            </div>
+        </md-card-actions>
+
+    </md-card>
+
+    <md-card ng-if="!vm.cabinetExist">
+        <md-toolbar class="toolbar-default">
+            <div class="md-toolbar-tools" layout-align="center center">
+                <h2>
+                    <span translate>PRE_REQUEST.CABINET.NOT_REGISTERED</span>
+                </h2>
+
+            </div>
+        </md-toolbar>
+        <section layout-gt-xs="row"
+                 layout="column"
+                 layout-align-gt-xs="space-around center"
+                 layout-align="center stretch"
+                 class="full-width not-found-cabinet"
+                 ng-click="vm.createCabinet(vm.preRequest.cabinet)">
+            <div layout="column"
+                 layout-align="center center">
+                {{vm.preRequest.cabinet}}
+            </div>
+            <div layout="column"
+                 layout-align="center center">
+                {{'PRE_REQUEST.CABINET.NEW_REGISTER'|translate}}
+            </div>
+        </section>
+    </md-card>
+
+    <div flex="100" full-width layout="row" layout-align="end center" layout-padding="">
+        <md-button class="md-raised md-primary" aria-label="back" ng-click="vm.back()">
+            <md-icon layout-align="center center" md-font-icon="zmdi zmdi-replay"></md-icon>
+        </md-button>
+
+    </div>
+</div>

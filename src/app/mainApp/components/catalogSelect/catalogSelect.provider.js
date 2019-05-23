@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp')
+        .module('catalogSelectComponent')
         .factory('CATALOG_SELECT', CatalogSelectProvider);
 
     function CatalogSelectProvider(

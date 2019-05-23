@@ -128,11 +128,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],
@@ -219,6 +219,7 @@
                     {
                         type: 'catalog',
                         model: 'etapa_defecto_id',
+                        bindTo:'etapa_defecto',
                         label: 'Etapas Defecto',
                         hint: 'La etapa defecto debe estar en el listado de etapas siguientes',
                         catalog: {
@@ -231,11 +232,11 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {}
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
+                            pagination: {},
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
                         }
                     }
                 ],

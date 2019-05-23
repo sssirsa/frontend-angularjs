@@ -1,20 +1,18 @@
-(function()
-{
+(function () {
     'use strict';
 
     angular
         .module('app.mainApp.management.catalogues')
-        .controller('WarehouseController',WarehouseController);
+        .controller('WarehouseController', WarehouseController);
 
-    function WarehouseController(URLS, Translate, EnvironmentConfig)
-    {
+    function WarehouseController(URLS, Translate, EnvironmentConfig) {
 
         var vm = this;
 
-        var managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.storage);
 
-        var subsidiaryUrl =  (EnvironmentConfig.site.rest.api)
+        var subsidiaryUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.subsidiary);
 
         vm.url = managementUrl;
@@ -50,8 +48,8 @@
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -61,8 +59,8 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: false,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -127,11 +125,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     }
                 ],
@@ -143,15 +141,15 @@
                 }
             },
             PUT: {
-                id:'id',
+                id: 'id',
                 fields: [
                     {
                         type: 'text',
                         model: 'nombre',
                         label: 'Nombre',
                         required: true,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -161,8 +159,8 @@
                         model: 'descripcion',
                         label: 'Descripción',
                         required: false,
-                        validations:{
-                            errors:{
+                        validations: {
+                            errors: {
                                 required: 'El campo es requerido.'
                             }
                         }
@@ -210,7 +208,7 @@
                     {
                         type: 'catalog',
                         model: 'sucursal_id',
-                        bindTo:'sucursal',
+                        bindTo: 'sucursal',
                         label: 'Sucursal',
                         required: true,
                         validations: {
@@ -228,11 +226,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     }
                 ],
@@ -289,7 +287,7 @@
                         type: 'object_property',
                         model: 'sucursal__nombre',
                         label: 'Sucursal',
-                        nullOrEmpty:'Sin sucursal'
+                        nullOrEmpty: 'Sin sucursal'
                     }
                 ],
                 softDelete: {

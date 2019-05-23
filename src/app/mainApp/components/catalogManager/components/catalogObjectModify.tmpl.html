@@ -121,9 +121,6 @@
                                     hint="field.hint"
                                     required="field.required"
                                     catalog="field.catalog"
-                                    pagination="field['catalog'].pagination"
-                                    elements="field['catalog'].elements"
-                                    soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
                                     initial="vm.objectToModify[field.model]"
                                     on-select="vm.onElementSelect(element,field)">
@@ -134,9 +131,6 @@
                                     lock="field.lock"
                                     hint="field.hint"
                                     required="field.required"
-                                    pagination="field['catalog'].pagination"
-                                    elements="field['catalog'].elements"
-                                    soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
                                     initial="vm.objectToModify[field.model]"
                                     on-select="vm.onElementSelect(element,field)">
@@ -173,9 +167,6 @@
                     <section ng-if="vm.objectToModify[field['catalog'].requires]">
                         <catalog-select required="field.required"
                                         catalog="field.catalog"
-                                        pagination="field['catalog'].pagination"
-                                        elements="field['catalog'].elements"
-                                        soft-delete="field.softDelete"
                                         lazy="field.catalog.requires"
                                         multiple="true"
                                         hint="field.hint"
@@ -187,9 +178,6 @@
                 <section ng-if="!field['catalog'].requires">
                     <catalog-select catalog="field.catalog"
                                     required="field.required"
-                                    pagination="field['catalog'].pagination"
-                                    elements="field['catalog'].elements"
-                                    soft-delete="field.softDelete"
                                     lazy="field.catalog.requires"
                                     multiple="true"
                                     hint="field.hint"
