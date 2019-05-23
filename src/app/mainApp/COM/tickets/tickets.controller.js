@@ -109,7 +109,6 @@
             vm.loadingPromise = list(vm.limit, vm.offset, vm.querySet)
                 .then(function listT(list) {
                     vm.tickets = list.results;
-                    vm.tickets[0].childs=list.results;
                     vm.objectPaginado = list;
                     vm.refreshPaginationButtonsComponent = true;
                     console.log(vm.tickets);

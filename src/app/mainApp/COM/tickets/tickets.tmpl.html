@@ -91,11 +91,11 @@
         </div>
 
 
-        <div class="virtualRepeatScroll-500">
+        <div class="virtualRepeatScroll-600">
             <md-card flex="100"
                      layout="column"
                      ng-repeat="item in vm.tickets"
-                     layout-gt-md="row">
+                     layout-gt-md="column">
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content ng-click="vm.showTicket(item)">
                         <div flex="100">
@@ -186,12 +186,16 @@
                                     </md-select>
                                 </md-input-container>
                             </div>
+
+
+
+
                         </div>
                     </md-content>
                 </div>
                 <!--Sección para los Tickets Hijo-->
                 <div>
-                    <v-accordion ng-if="item.childs" flex="100" layout-padding="" id="ticketsHijo"
+                    <v-accordion ng-if="item.children" flex="100" layout-padding="" id="ticketsHijo"
                                  class="vAccordion--default"
                                  control="ticketsHijo">
                         <v-pane flex="100" id="v-accordion-pane-tickets-hijo">
@@ -199,32 +203,30 @@
                                 Tickets Hijo
                             </v-pane-header>
                             <v-pane-content id="v-accordion-pane-tickets-hijo-content">
-                                <md-card flex="100"
+                                <div flex="100"
                                          layout="column"
                                          ng-repeat="ticketHijo in item.childs"
                                          layout-gt-md="row">
                                     <div layout="column" layout-align="center stretch" flex="100">
                                         <md-content ng-click="vm.showTicket(ticketHijo)">
                                             <div flex="100">
-                                                <md-toolbar class="md-hue-1">
-                                                    <div class="md-toolbar-tools" layout-align="space-between center"
+                                                <div class="md-hue-1">
+                                                    <div  layout-align="space-between center"
                                                          layout-gt-sm="row"
                                                          layout="column">
                                                         <div layout="row">
                                                             <b translate>Folio</b>: &nbsp <b>{{ticketHijo.folio}}</b>
                                                         </div>
                                                         <div layout="row">
-                                                            <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion
-                                                            |
+                                                            <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion |
                                                             date:"EEEE dd.MM.yyyy
                                                             HH:mm:ss"}}</b>
                                                         </div>
                                                         <div layout="row">
-                                                            <b translate>Estatus</b>: &nbsp
-                                                            <b>{{ticketHijo.estatus}}</b>
+                                                            <b translate>Estatus</b>: &nbsp <b>{{ticketHijo.estatus}}</b>
                                                         </div>
                                                     </div>
-                                                </md-toolbar>
+                                                </div>
                                             </div>
                                         </md-content>
 
@@ -266,8 +268,7 @@
                                                 </div>
 
                                                 <!-- Manejo con Selector -->
-                                                <div layout="colum" layout-align-sm="row"
-                                                     layout-align="space-around center"
+                                                <div layout="colum" layout-align-sm="row" layout-align="space-around center"
                                                      flex="50">
                                                     <md-input-container flex="100">
                                                         <label translate="">COM.FIELDS.TYPE_MESSAGE</label>
@@ -290,9 +291,8 @@
                                                         <label translate="">COM.FIELDS.NOTIFICATIONS</label>
                                                         <md-select ng-model="vm.notification_code"
                                                                    md-on-close="vm.openDialogCreate(ticketHijo,vm.notification_code)">
-                                                            <md-option
-                                                                ng-repeat="messageStatus in vm.messageStatusCatalog"
-                                                                ng-value="messageStatus">
+                                                            <md-option ng-repeat="messageStatus in vm.messageStatusCatalog"
+                                                                       ng-value="messageStatus">
                                                                 <div layout="column">
                                                                     <b>{{messageStatus.com_code}} -
                                                                         {{messageStatus.nombre_com}}</b>
@@ -306,8 +306,10 @@
                                                 </div>
                                             </div>
                                         </md-content>
+                                        <md-divider></md-divider>
                                     </div>
-                                </md-card>
+
+                                </div>
                             </v-pane-content>
                         </v-pane>
                     </v-accordion>
