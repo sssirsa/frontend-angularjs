@@ -203,8 +203,6 @@
                     }
                     vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
                         + '&offset=' + '0';
-                    $log.debug(vm.paginationHelper);
-
                 }
             }
         }
@@ -389,16 +387,21 @@
                             }
                             else {
                                 vm.paginationHelper['loadedPages']++;
-                                if ("query" in vm.catalog) {
-                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                        + '&limit=' + vm.catalog.pagination['pageSize'];
+                                if (vm.paginationHelper['loadedPages'] < vm.paginationHelper['totalPages']) {
+                                    if ("query" in vm.catalog) {
+                                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                            + '&limit=' + vm.catalog.pagination['pageSize'];
+                                    }
+                                    else {
+                                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                            + '?limit=' + vm.catalog.pagination['pageSize'];
+                                    }
+                                    vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
+                                        + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
                                 }
                                 else {
-                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                        + '?limit=' + vm.catalog.pagination['pageSize'];
+                                    vm.paginationHelper['nextPage'] = null;
                                 }
-                                vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
-                                    + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
                             }
                         }
 
