@@ -5,7 +5,7 @@
     angular
         .module('app.mainApp.com.incidences')
         .config(incidencesConfig);
-    function incidencesConfig($stateProvider) {
+    function incidencesConfig($stateProvider, triMenuProvider) {
 
         $stateProvider
 
