@@ -186,172 +186,137 @@
                                     </md-select>
                                 </md-input-container>
                             </div>
-
-                            <!-- Manejo con botones
-                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
-                                <div layout="column">
-                                    <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.start)">
-                                        <md-icon md-font-icon="fas fa-play"></md-icon>
-                                        <span translate>Inicio</span>
-                                    </md-button>
-                                </div>
-
-                                <div layout="column">
-                                    <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.error)">
-                                        <md-icon md-font-icon="fas fa-exclamation-triangle"></md-icon>
-                                        <span translate>Error</span>
-                                    </md-button>
-                                </div>
-                            </div>
-
-                            <div layout="colum" layout-align-sm="row" layout-align="space-around center" flex="20">
-                                <div layout="column">
-                                    <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.close)">
-                                        <md-icon md-font-icon="fas fa-times-circle"></md-icon>
-                                        <span translate>Cerrar</span>
-                                    </md-button>
-                                </div>
-
-                                <div layout="column">
-                                    <md-button class="md-raised md-primary buttonTicket"
-                                               ng-click="$event.stopPropagation(); vm.getTicketInfo(item,vm.categories.info)">
-                                        <md-icon md-font-icon="fas fa-info"></md-icon>
-                                        <span translate>Informar</span>
-                                    </md-button>
-                                </div>
-
-                            </div>
-                            -->
-
-
                         </div>
                     </md-content>
                 </div>
+                <!--Sección para los Tickets Hijo-->
+                <div>
+                    <v-accordion ng-if="item.childs" flex="100" layout-padding="" id="ticketsHijo"
+                                 class="vAccordion--default"
+                                 control="ticketsHijo">
+                        <v-pane flex="100" id="v-accordion-pane-tickets-hijo">
+                            <v-pane-header id="v-accordion-pane-tickets-hijo-header">
+                                Tickets Hijo
+                            </v-pane-header>
+                            <v-pane-content id="v-accordion-pane-tickets-hijo-content">
+                                <md-card flex="100"
+                                         layout="column"
+                                         ng-repeat="ticketHijo in item.childs"
+                                         layout-gt-md="row">
+                                    <div layout="column" layout-align="center stretch" flex="100">
+                                        <md-content ng-click="vm.showTicket(ticketHijo)">
+                                            <div flex="100">
+                                                <md-toolbar class="md-hue-1">
+                                                    <div class="md-toolbar-tools" layout-align="space-between center"
+                                                         layout-gt-sm="row"
+                                                         layout="column">
+                                                        <div layout="row">
+                                                            <b translate>Folio</b>: &nbsp <b>{{ticketHijo.folio}}</b>
+                                                        </div>
+                                                        <div layout="row">
+                                                            <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion
+                                                            |
+                                                            date:"EEEE dd.MM.yyyy
+                                                            HH:mm:ss"}}</b>
+                                                        </div>
+                                                        <div layout="row">
+                                                            <b translate>Estatus</b>: &nbsp
+                                                            <b>{{ticketHijo.estatus}}</b>
+                                                        </div>
+                                                    </div>
+                                                </md-toolbar>
+                                            </div>
+                                        </md-content>
+
+                                        <md-content>
+
+                                            <div flex="100" layout-gt-md="row" layout="column"
+                                                 layout-align-gt-md="space-around center"
+                                                 layout-md="center center">
+                                                <div layout="column" layout-align="center center" flex="5">
+                                                    <i class="fas fa-ticket-alt"></i>
+                                                </div>
+
+                                                <div layout="column" layout-align="center center" flex="25">
+                                                    <div layout="row">
+                                                        <div layout="column" layout-align="center center">
+                                                            <b translate>Folio</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <b>:&nbsp</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <h4>{{ticketHijo.folio}}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div layout="column" layout-align="center center" flex="25">
+                                                    <div layout="row">
+                                                        <div layout="column" layout-align="center center">
+                                                            <b translate>Tipo</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <b>:&nbsp</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <h4>{{ticketHijo.tipo.nombre}}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Manejo con Selector -->
+                                                <div layout="colum" layout-align-sm="row"
+                                                     layout-align="space-around center"
+                                                     flex="50">
+                                                    <md-input-container flex="100">
+                                                        <label translate="">COM.FIELDS.TYPE_MESSAGE</label>
+                                                        <md-select ng-model="typeMessage"
+                                                                   md-on-close="vm.getTicketInfo(ticketHijo,typeMessage)">
+                                                            <md-option ng-repeat="tipo in vm.categories"
+                                                                       ng-value="tipo.value">
+                                                                <md-icon md-font-icon="{{tipo.icon}}"></md-icon>
+                                                                <b translate="">{{tipo.label}}</b>
+                                                            </md-option>
+
+                                                        </md-select>
+                                                    </md-input-container>
+                                                </div>
+
+                                                <div ng-if="vm.messageStatusCatalog && typeMessage" layout="colum"
+                                                     layout-align-sm="row"
+                                                     layout-align="space-aroumessageStatusnd center" flex="50">
+                                                    <md-input-container flex="100">
+                                                        <label translate="">COM.FIELDS.NOTIFICATIONS</label>
+                                                        <md-select ng-model="vm.notification_code"
+                                                                   md-on-close="vm.openDialogCreate(ticketHijo,vm.notification_code)">
+                                                            <md-option
+                                                                ng-repeat="messageStatus in vm.messageStatusCatalog"
+                                                                ng-value="messageStatus">
+                                                                <div layout="column">
+                                                                    <b>{{messageStatus.com_code}} -
+                                                                        {{messageStatus.nombre_com}}</b>
+                                                                    <span>{{messageStatus.label}}</span>
+                                                                </div>
+                                                                <md-divider></md-divider>
+                                                            </md-option>
+
+                                                        </md-select>
+                                                    </md-input-container>
+                                                </div>
+                                            </div>
+                                        </md-content>
+                                    </div>
+                                </md-card>
+                            </v-pane-content>
+                        </v-pane>
+                    </v-accordion>
+
+
+                </div>
             </md-card>
-            <!--Sección para los Tickets Hijo-->
-            <div>
-                <v-accordion ng-if="item.childs" flex="100" layout-padding="" id="ticketsHijo"
-                             class="vAccordion--default"
-                             control="ticketsHijo">
-                    <v-pane flex="100" id="v-accordion-pane-tickets-hijo">
-                        <v-pane-header id="v-accordion-pane-tickets-hijo-header">
-                            Tickets Hijo
-                        </v-pane-header>
-                        <v-pane-content id="v-accordion-pane-tickets-hijo-content">
-                            <md-card flex="100"
-                                     layout="column"
-                                     ng-repeat="ticketHijo in item.childs"
-                                     layout-gt-md="row">
-                                <div layout="column" layout-align="center stretch" flex="100">
-                                    <md-content ng-click="vm.showTicket(ticketHijo)">
-                                        <div flex="100">
-                                            <md-toolbar class="md-hue-1">
-                                                <div class="md-toolbar-tools" layout-align="space-between center"
-                                                     layout-gt-sm="row"
-                                                     layout="column">
-                                                    <div layout="row">
-                                                        <b translate>Folio</b>: &nbsp <b>{{ticketHijo.folio}}</b>
-                                                    </div>
-                                                    <div layout="row">
-                                                        <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion |
-                                                        date:"EEEE dd.MM.yyyy
-                                                        HH:mm:ss"}}</b>
-                                                    </div>
-                                                    <div layout="row">
-                                                        <b translate>Estatus</b>: &nbsp <b>{{ticketHijo.estatus}}</b>
-                                                    </div>
-                                                </div>
-                                            </md-toolbar>
-                                        </div>
-                                    </md-content>
-
-                                    <md-content>
-
-                                        <div flex="100" layout-gt-md="row" layout="column"
-                                             layout-align-gt-md="space-around center"
-                                             layout-md="center center">
-                                            <div layout="column" layout-align="center center" flex="5">
-                                                <i class="fas fa-ticket-alt"></i>
-                                            </div>
-
-                                            <div layout="column" layout-align="center center" flex="25">
-                                                <div layout="row">
-                                                    <div layout="column" layout-align="center center">
-                                                        <b translate>Folio</b>
-                                                    </div>
-                                                    <div layout="column" layout-align="center center">
-                                                        <b>:&nbsp</b>
-                                                    </div>
-                                                    <div layout="column" layout-align="center center">
-                                                        <h4>{{ticketHijo.folio}}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div layout="column" layout-align="center center" flex="25">
-                                                <div layout="row">
-                                                    <div layout="column" layout-align="center center">
-                                                        <b translate>Tipo</b>
-                                                    </div>
-                                                    <div layout="column" layout-align="center center">
-                                                        <b>:&nbsp</b>
-                                                    </div>
-                                                    <div layout="column" layout-align="center center">
-                                                        <h4>{{ticketHijo.tipo.nombre}}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Manejo con Selector -->
-                                            <div layout="colum" layout-align-sm="row" layout-align="space-around center"
-                                                 flex="50">
-                                                <md-input-container flex="100">
-                                                    <label translate="">COM.FIELDS.TYPE_MESSAGE</label>
-                                                    <md-select ng-model="typeMessage"
-                                                               md-on-close="vm.getTicketInfo(ticketHijo,typeMessage)">
-                                                        <md-option ng-repeat="tipo in vm.categories"
-                                                                   ng-value="tipo.value">
-                                                            <md-icon md-font-icon="{{tipo.icon}}"></md-icon>
-                                                            <b translate="">{{tipo.label}}</b>
-                                                        </md-option>
-
-                                                    </md-select>
-                                                </md-input-container>
-                                            </div>
-
-                                            <div ng-if="vm.messageStatusCatalog && typeMessage" layout="colum"
-                                                 layout-align-sm="row"
-                                                 layout-align="space-aroumessageStatusnd center" flex="50">
-                                                <md-input-container flex="100">
-                                                    <label translate="">COM.FIELDS.NOTIFICATIONS</label>
-                                                    <md-select ng-model="vm.notification_code"
-                                                               md-on-close="vm.openDialogCreate(ticketHijo,vm.notification_code)">
-                                                        <md-option ng-repeat="messageStatus in vm.messageStatusCatalog"
-                                                                   ng-value="messageStatus">
-                                                            <div layout="column">
-                                                                <b>{{messageStatus.com_code}} -
-                                                                    {{messageStatus.nombre_com}}</b>
-                                                                <span>{{messageStatus.label}}</span>
-                                                            </div>
-                                                            <md-divider></md-divider>
-                                                        </md-option>
-
-                                                    </md-select>
-                                                </md-input-container>
-                                            </div>
-                                        </div>
-                                    </md-content>
-                                </div>
-                            </md-card>
-                        </v-pane-content>
-                    </v-pane>
-                </v-accordion>
 
 
-            </div>
         </div>
     </div>
 
