@@ -75,7 +75,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: 'count',
+                                limit: 'limit',
+                                offset: 'offset',
+                                pageSize: 20
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -102,7 +105,10 @@
                             name: 'Tipo',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: 'count',
+                                limit: 'limit',
+                                offset: 'offset',
+                                pageSize: 20
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -165,7 +171,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: 'count',
+                                limit: 'limit',
+                                offset: 'offset',
+                                pageSize: 20
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -193,7 +202,10 @@
                             name: 'Tipo',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: 'count',
+                                limit: 'limit',
+                                offset: 'offset',
+                                pageSize: 20
                             },
                             softDelete: {
                                 hide: 'deleted',

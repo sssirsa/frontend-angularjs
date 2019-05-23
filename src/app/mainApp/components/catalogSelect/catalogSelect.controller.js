@@ -1,6 +1,6 @@
 /*
  *      catalog:{
- *          url: string,                 Full or partial URL depending on the kind
+ *          url: string,                 Without query or pagination parameters
  *          query: string,               (Optional) query to be used if the catalog depends of other
  *                                       In this component it must be received without the value
  *                                       to use directly in the API.
@@ -26,8 +26,14 @@
  *                            }
  *                            In this case 'elements' should receive the parameter 'results'
  *          pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
- *              total: string,        (Optional) Binding for the number of total elements
+ *          //Next parameter, just used when the url is going to be used from what the API returned.
  *              next: string,         (Optional) Binding for the url that brings to the next page
+ *          //Total, limit and offset, used when the component is going to calculate and build the query,
+ *          //All of the following are required if no next parameter is given.
+ *              total: string,        (Optional) Binding for the number of total elements.
+ *              limit: string,        (Optional) Parameter used for the query building, not the number.
+ *              offset: string,       (Optional) Parameter used for the query building, not the number.
+ *              pageSize: number      (Optional) Used to determine how many results are going to be loaded per page.
  *          },
  *          softDelete: {
  *              hide: string,         Boolean property to consider in order to hide the element (hide, deleted, disabled, etc.)
@@ -66,7 +72,7 @@
                 icon: '<',
                 lock: '<',
                 multiple: '<',
-                
+
                 lazy: '<',
                 initial: '<',
                 required: '<',
@@ -87,7 +93,11 @@
         vm.Catalogrovider = null;
         vm.PaginationProvider = null;
         vm.catalogElements = [];
-        vm.paginationHelper = {};
+        vm.paginationHelper = {
+            totalPages: null,
+            loadedPages: null,
+            nextPage: null
+        };
         vm.selectedElement = null;
 
 
@@ -116,40 +126,22 @@
             if (vm.catalog) {
                 vm.listLoader = vm.CatalogProvider
                     .list()
-                    .then(function (elements) {
+                    .then(function (apiResponse) {
                         //Elements list is returned in any other model
                         if (vm.catalog.elements) {
-                            vm.catalogElements = elements[vm.catalog.elements];
+                            vm.catalogElements = apiResponse[vm.catalog.elements];
                         }
                         //Elements list is returned directly as an array
                         else {
-                            vm.catalogElements = elements;
+                            vm.catalogElements = apiResponse;
                         }
                         //Determine if the soft delete parameter is given, and procede with the filtering
                         if (vm.catalog.softDelete) {
                             vm.catalogElements = filterDeleted(vm.catalogElements);
                         }
 
-                        //Building the pagination helper
-                        //(if pagination element present)
-                        //if the 'pagination' contains the specific models,
-                        //then those will be used, otherwise, the default models will.
-                        if (vm.catalog.pagination) {
-                            //Total of elements model to be used
-                            if (vm.catalog.pagination['total']) {
-                                vm.paginationHelper['total'] = elements[vm.catalog.pagination['total']];
-                            }
-                            else {
-                                vm.paginationHelper['total'] = elements['total'];
-                            }
-                            //Next page model to be used
-                            if (vm.catalog.pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.catalog.pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['next'] = elements['next'];
-                            }
-                        }
+                        buildPaginationHelper(apiResponse);
+
                         vm.onSuccessList({ elements: vm.catalogElemets });
                         //If initial parameter is given, select (and load) the element after listing the catalogue
                         if (vm.initial) {
@@ -165,6 +157,55 @@
                 vm.onErrorList({
                     error: '"catalog" parameter is not defined'
                 });
+            }
+        }
+
+        function buildPaginationHelper(apiResponse) {
+            //Building the pagination helper just if pagination object was provided
+            if ("pagination" in vm.catalog) {
+                //Next page pagination kind is going to be used.
+                if (vm.catalog.pagination['next']) {
+                    vm.paginationHelper['nextPage'] = apiResponse[vm.catalog.pagination['next']];
+                }
+                //Query building pagination is going to be used
+                else {
+                    //Errors management
+                    if (!vm.catalog.pagination['total']) {
+                        $log.error("@CatalogSelectController, function @buildPaginationHelper << @list, parameter 'total' was not found on catalog.pagination object");
+                        return;
+                    }
+                    if (!vm.catalog.pagination['limit']) {
+                        $log.error("@CatalogSelectController, function @buildPaginationHelper << @list, parameter 'limit' was not found on catalog.pagination object");
+                        return;
+                    }
+                    if (!vm.catalog.pagination['offset']) {
+                        $log.error("@CatalogSelectController, function @buildPaginationHelper << @list, parameter 'offset' was not found on catalog.pagination object");
+                        return;
+                    }
+                    if (!vm.catalog.pagination['pageSize']) {
+                        $log.error("@CatalogSelectController, function @buildPaginationHelper << @list, parameter 'pageSize' was not found on catalog.pagination object");
+                        return;
+                    }
+
+                    //If the remainder it's not zero, it means that an aditional page should be added to the count
+                    vm.paginationHelper['totalPages'] = Math.ceil(apiResponse[vm.catalog.pagination['total']] / vm.catalog.pagination['pageSize']);
+
+                    vm.paginationHelper['loadedPages'] = 1;
+
+                    //Initial URL building
+                    if ("query" in vm.catalog) {
+                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                            + '&limit=' + vm.catalog.pagination['pageSize'];
+                    }
+                    else {
+                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                            + '?limit=' + vm.catalog.pagination['pageSize'];
+                    }
+                    vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
+                        + '&offset=' + '0';
+                    $log.debug(vm.paginationHelper);
+
+                }
             }
         }
 
@@ -282,11 +323,11 @@
         }
 
         function loadMore() {
-            if (vm.paginationHelper.next) {
+            if (vm.paginationHelper['nextPage']) {
                 if (vm.catalog.pagination) {
                     createPaginationProvider();
                 }
-                vm.PaginationProvider.url = vm.paginationHelper.next;
+                vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
                 vm.loadMoreLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
@@ -342,15 +383,25 @@
                         }
 
                         //Updating the pagination helper
-                        if (vm.catalog.pagination) {
-                            //Next page model to be used
+                        if ("pagination" in vm.catalog) {
                             if (vm.catalog.pagination['next']) {
-                                vm.paginationHelper['next'] = elements[vm.catalog.pagination['next']];
+                                vm.paginationHelper['nextPage'] = response[vm.catalog.pagination['next']];
                             }
                             else {
-                                vm.paginationHelper['next'] = elements['next'];
+                                vm.paginationHelper['loadedPages']++;
+                                if ("query" in vm.catalog) {
+                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                        + '&limit=' + vm.catalog.pagination['pageSize'];
+                                }
+                                else {
+                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                        + '?limit=' + vm.catalog.pagination['pageSize'];
+                                }
+                                vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
+                                    + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
                             }
                         }
+
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
