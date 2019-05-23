@@ -5,7 +5,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('comIncidenceController', comIncidenceController);
 
-    function comIncidenceController(URLS, Translate, EnvironmentConfig) {
+    function comIncidenceController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
 
         var vm = this;
 
@@ -87,7 +92,10 @@
                             name: 'Siguiente Paso',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -151,7 +159,10 @@
                             name: 'Siguiente Paso',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -182,7 +193,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

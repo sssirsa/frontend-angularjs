@@ -19,6 +19,7 @@
         $mdDialog,
         Geolocation,
         User,
+        PAGINATION,
         _,
         $log
     ) {
@@ -119,7 +120,12 @@
                         option: 'descripcion',
                         loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                         elements: 'results',
-                        pagination: {}
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        }
                     },
                     required: true,
                     softDelete: {
@@ -142,7 +148,12 @@
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE')
                     },
                     required: true,
@@ -165,8 +176,10 @@
                         option: 'nombre',
                         loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results'
                     },

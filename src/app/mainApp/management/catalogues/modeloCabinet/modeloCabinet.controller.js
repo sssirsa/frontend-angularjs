@@ -6,7 +6,12 @@
         .controller('ModeloCabinetController', ModeloCabinetController);
 
     /* @ngInject */
-    function ModeloCabinetController(URLS, Translate, EnvironmentConfig) {
+    function ModeloCabinetController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
 
         var vm = this;
 
@@ -75,10 +80,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                limit: 'limit',
-                                offset: 'offset',
-                                pageSize: 20
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -105,10 +110,10 @@
                             name: 'Tipo',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                limit: 'limit',
-                                offset: 'offset',
-                                pageSize: 20
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -171,10 +176,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                limit: 'limit',
-                                offset: 'offset',
-                                pageSize: 20
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -202,10 +207,10 @@
                             name: 'Tipo',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                limit: 'limit',
-                                offset: 'offset',
-                                pageSize: 20
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',

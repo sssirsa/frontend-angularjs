@@ -8,7 +8,8 @@
     function FailureCatalogController(
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -85,7 +86,12 @@
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.failure_type,
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             elements: 'results',
                             name: 'Tipo de falla',
                             softDelete: {
@@ -104,7 +110,12 @@
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.stage,
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             elements: 'results',
                             name: 'Etapas posibles',
                             softDelete: {
@@ -128,7 +139,12 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -187,7 +203,12 @@
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.failure_type,
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             elements: 'results',
                             name: 'Tipo de falla',
                             softDelete: {
@@ -207,7 +228,12 @@
                                 + '/' + URLS.technical_service.base
                                 + '/' + URLS.technical_service.catalogues.base
                                 + '/' + URLS.technical_service.catalogues.stage,
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             elements: 'results',
                             name: 'Etapas posibles',
                             softDelete: {
@@ -232,7 +258,12 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -261,7 +292,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

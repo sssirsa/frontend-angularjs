@@ -6,7 +6,11 @@
         .controller('SegmentationController', SegmentationController);
 
     /* @ngInject */
-    function SegmentationController(URLS, Translate) {
+    function SegmentationController(
+        URLS,
+        Translate,
+        PAGINATION
+    ) {
 
         var vm = this;
 
@@ -126,9 +130,12 @@
             LIST: {
                 // elements: 'results',
                 mode: 'infinite',
-                // pagination: {
-                //     total: 'count'
-                // },
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
                 fields: [
                     {
                         type: 'text',

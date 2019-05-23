@@ -25,6 +25,7 @@
         ErrorHandler,
         URLS,
         QUERIES,
+        PAGINATION,
         _
     ) {
         var vm = this;
@@ -61,8 +62,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',
@@ -81,8 +84,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',
@@ -104,8 +109,10 @@
                     option: 'letra'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',
@@ -127,8 +134,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',

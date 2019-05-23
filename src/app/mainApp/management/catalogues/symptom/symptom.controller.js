@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('SymptomController',SymptomController);
 
-    function SymptomController(URLS, Translate, EnvironmentConfig)
+    function SymptomController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
 
         var vm = this;
@@ -123,7 +128,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

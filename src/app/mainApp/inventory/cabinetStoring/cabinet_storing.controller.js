@@ -20,7 +20,8 @@
         noLabeled,
         assetStoringProvider,
         _,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
         //Variable definition
         var vm = this;
@@ -60,8 +61,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',
@@ -79,8 +82,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

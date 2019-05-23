@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('CategoriaController',CategoriaController);
 
-    function CategoriaController(URLS, Translate, EnvironmentConfig) {
+    function CategoriaController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
         var managementUrl =  (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.category);
@@ -116,7 +121,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

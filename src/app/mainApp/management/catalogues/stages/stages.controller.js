@@ -8,7 +8,8 @@
     function StagesController(
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -94,7 +95,12 @@
                             option: 'descripcion',
                             name: 'Acciones',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -115,7 +121,12 @@
                             option: 'nombre',
                             name: 'Etapas siguientes',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -137,7 +148,12 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -205,7 +221,12 @@
                             option: 'descripcion',
                             name: 'Acciones',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -227,7 +248,12 @@
                             option: 'nombre',
                             name: 'Etapas siguientes',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -250,7 +276,12 @@
                             option: 'nombre',
                             name: 'Etapa siguiente por defecto',
                             elements: 'results',
-                            pagination: {},
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -278,7 +309,12 @@
             LIST: {
                 elements: 'results',
                 mode: 'infinite',
-                pagination: {},
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
                 fields: [
                     {
                         type: 'text',

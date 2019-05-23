@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('ProveedorController',ProveedorController);
 
-    function ProveedorController(URLS, Translate, EnvironmentConfig) {
+    function ProveedorController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var inventoryUrl =  (EnvironmentConfig.site.rest.api)
@@ -237,7 +242,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

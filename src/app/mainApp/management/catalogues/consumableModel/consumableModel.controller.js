@@ -6,7 +6,12 @@
         .controller('consumableModelController', consumableModelController);
 
     /* @ngInject */
-    function consumableModelController(URLS, Translate, EnvironmentConfig) {
+    function consumableModelController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var inventoryUrl = (EnvironmentConfig.site.rest.api)
@@ -73,7 +78,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -122,7 +130,10 @@
                             name: 'Marca',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -152,7 +163,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

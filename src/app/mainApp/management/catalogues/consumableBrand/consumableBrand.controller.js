@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('consumableBrandController',consumableBrandController);
 
-    function consumableBrandController(URLS, Translate, EnvironmentConfig) {
+    function consumableBrandController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var inventoryUrl =  (EnvironmentConfig.site.rest.api)
@@ -94,7 +99,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

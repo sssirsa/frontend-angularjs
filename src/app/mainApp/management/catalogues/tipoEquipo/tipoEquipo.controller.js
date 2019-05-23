@@ -5,7 +5,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('TipoEquipoController', TipoEquipoController);
 
-    function TipoEquipoController(URLS, Translate, EnvironmentConfig) {
+    function TipoEquipoController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var managementUrl =  (EnvironmentConfig.site.rest.api)
@@ -116,7 +121,10 @@
                 elements: 'results',
                 mode: 'infinite',
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {
