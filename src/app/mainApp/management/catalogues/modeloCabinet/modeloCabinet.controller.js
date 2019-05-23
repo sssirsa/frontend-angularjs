@@ -10,11 +10,11 @@
 
         var vm = this;
 
-        var managementUrl =  (EnvironmentConfig.site.rest.api)
+        var managementUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_model);
-        var brandUrl =  (EnvironmentConfig.site.rest.api)
+        var brandUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.cabinet_brand);
-        var equipmentUrl =  (EnvironmentConfig.site.rest.api)
+        var equipmentUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.management.base + '/' + URLS.management.catalogues.base + '/' + URLS.management.catalogues.equipment_type);
 
         vm.url = managementUrl;
@@ -76,11 +76,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     },
                     {
@@ -103,11 +103,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     },
                     {
@@ -166,11 +166,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     },
                     {
@@ -194,11 +194,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     },
                     {

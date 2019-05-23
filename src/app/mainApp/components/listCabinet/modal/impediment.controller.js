@@ -42,18 +42,18 @@
                     name: Translate.translate('MAIN.MENU.CATALOGS.IMPEDIMENT_REASON'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
+                    option: 'descripcion',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             }
         };
 

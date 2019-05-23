@@ -9,9 +9,9 @@
     function consumableModelController(URLS, Translate, EnvironmentConfig) {
         var vm = this;
 
-        var inventoryUrl =  (EnvironmentConfig.site.rest.api)
+        var inventoryUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.consumable_model);
-        var brandUrl =  (EnvironmentConfig.site.rest.api)
+        var brandUrl = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.inventory.base + '/' + URLS.inventory.catalogues.base + '/' + URLS.inventory.catalogues.consumable_brand);
 
 
@@ -74,11 +74,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     }
                 ],
@@ -105,7 +105,7 @@
                     {
                         type: 'catalog',
                         model: 'marca_id',
-                        bindTo:'marca',
+                        bindTo: 'marca',
                         label: 'Marca insumo',
                         required: true,
                         validations: {
@@ -123,11 +123,11 @@
                             elements: 'results',
                             pagination: {
                                 total: 'count'
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
                             }
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
                         }
                     }
                 ],
