@@ -10,6 +10,7 @@
         "NOT_INCLUDED":"Información No Incluida",
         "CABINET":"Cabinet",
         "REPLACED_CABINET":"Cabinet de Reemplazo",
+        "NO_RESULTS":"La búsqueda No ha generado Resultados",
         "FIELDS":{
             "TYPE_MESSAGE":"Tipo de Mensaje a Enviar",
             "TICKET": "Ticket anterior",

@@ -324,6 +324,9 @@
 
         </div>
     </div>
+    <div ng-if="vm.tickets.length<=0" flex="100" layout="row" layout-align="center center">
+        <h1 translate="">COM.NO_RESULTS</h1>
+    </div>
 
     <div>
         <div ng-if="vm.objectPaginado.next || vm.objectPaginado.previous">
