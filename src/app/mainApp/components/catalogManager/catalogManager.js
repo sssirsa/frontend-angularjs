@@ -306,7 +306,7 @@
                  *      id: string            //Field name of the object to be used as id for HTTP PATCH method
                  *  },
                  *  LIST:{
-                 *      mode: string,                  (Optional) paged or infinite, default is Paged
+                 *      mode: string,                  (Optional) Pagination mode paged or infinite, default is Paged
                  *      fields:[
                  *          {
                  *              type: string,          Valid types are text, options, catalog, file, object, array_object, object_property and color //Options and catalog not yet implemented
@@ -818,8 +818,6 @@
                         + '?limit=' + vm.actions['LIST'].pagination['pageSize']
                         + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
                 }
-
-                $log.debug(vm.paginationHelper);
             }
         }
 
@@ -863,7 +861,6 @@
                         vm.paginationHelper['previousPage'] = null;
                     }
                 }
-                $log.debug(vm.paginationHelper);
             }
             else {
                 //Invalid page
