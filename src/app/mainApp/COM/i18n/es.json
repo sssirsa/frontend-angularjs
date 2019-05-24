@@ -4,6 +4,8 @@
             "LOAD_MORE":"Cargar más",
             "NOTIFICATION":"Enviar Notificacion a COM"
         },
+        "LIST_TICKETS":"Listado de Tickets",
+        "TICKET_TYPE":"Tipos de Ticket",
         "FIELDS":{
             "TYPE_MESSAGE":"Tipo de Mensaje a Enviar",
             "TICKET": "Ticket anterior",

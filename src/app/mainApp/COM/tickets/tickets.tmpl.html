@@ -1,96 +1,144 @@
 <div>
-    <div layout="column"
-         cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
-         style="height: 100px"
-         ng-if="vm.tickets.length < 0">
-        <md-card layout="column"
-                 layout-gt-sm="row"
-                 layout-padding
-                 layout-align="center center"
-                 ng-if="vm.tickets.length < 0">
-            <div flex-gt-sm="40" flex="100">
-                <md-input-container class="md-block">
-                    <div ng-if="vm.tickets.length < 0">
-                        <span translate>No se encontraron resultados</span>
-                    </div>
-                </md-input-container>
-            </div>
-        </md-card>
-    </div>
-
     <md-card>
-        <form ng-submit="vm.searchByTicketNumber(vm.searchTicketText)" flex="100" class="md-block">
-            <md-input-container flex="100"
-                                class="md-block">
-                <input placeholder="Ingrese el número de ticket..."
-                       ng-model="vm.searchTicketText">
-            </md-input-container>
-        </form>
-    </md-card>
+        <div layout="column"
+             layout-padding
+             layout-align="center stretch">
 
-    <div ng-if="vm.tickets">
-        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
-             layout-md="center center">
-            <md-card flex="50">
-                <md-input-container class="md-block">
-                    <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
-                    <md-select name="selectType"
-                               md-on-close="vm.changeSelected()"
-                               ng-model="vm.selectedKind">
-                        <md-option ng-repeat="option in vm.OPTIONS"
-                                   value="{{option.text}}">
-                            {{option.text}}
+            <div layout="column"
+                 layout-align="center center">
+                <h1 translate>COM.LIST_TICKETS</h1>
+            </div>
+
+            <div layout="row"
+                 layout-align="center center" layout-wrap="" flex="100">
+                <md-input-container flex="80">
+                    <label translate="">COM.TICKET_TYPE</label>
+                    <md-select ng-model="vm.tipo"  flex="100" md-on-close="vm.listTickets()">
+                        <md-option ng-repeat="tipo in vm.tickets_type track by tipo.com_ticket_code" ng-value="tipo.com_ticket_code" flex="100">
+                            <div layout="row" flex="100">
+                                <div flex="100" layout="column" layout-fill="">
+                                    <div flex="100" layout="row" layout-align="start center"><span
+                                        class="md-subhead"><b>{{tipo.nombre}}</b></span></div>
+                                    <div flex="100" layout="row" layout-align="start center"><span>
+                                        {{tipo.descripcion}}-<b>{{tipo.com_ticket_code}}</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
                         </md-option>
                     </md-select>
                 </md-input-container>
-            </md-card>
-
-            <md-card flex="50">
-                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
-                    <md-input-container flex="100"
-                                        class="md-block">
-                        <input ng-pattern="/^[a-zA-Z0-9]+$/"
-                               placeholder="Ingrese el economico..."
-                               ng-model="vm.searchText">
-                    </md-input-container>
-                </form>
-            </md-card>
+                <h3>{{vm.tipo}}</h3>
+            </div>
         </div>
+        <v-accordion flex="100" layout-padding="" id="otrosFiltros"
+                     class="vAccordion--default"
+                     control="otrosFiltros">
+            <v-pane flex="100" id="v-accordion-pane-otros-filtros">
+                <v-pane-header id="v-accordion-pane-otros-filtros-header">
+                    Otros Filtros
+                </v-pane-header>
+                <v-pane-content id="v-accordion-pane-otros-filtros-content">
+                    <!--Div Busqueda por Cabinet-->
+                    <div layout="column"
+                         cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+                         style="height: 100px"
+                         ng-if="vm.tickets.length < 0">
+                        <div layout="column"
+                             layout-gt-sm="row"
+                             layout-padding
+                             layout-align="center center"
+                             ng-if="vm.tickets.length < 0">
+                            <div flex-gt-sm="40" flex="100">
+                                <md-input-container class="md-block">
+                                    <div ng-if="vm.tickets.length < 0">
+                                        <span translate>No se encontraron resultados</span>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buscador por estatus de Cabinet-->
+                    <div>
+                        <form ng-submit="vm.searchByTicketNumber(vm.searchTicketText)" flex="100" class="md-block">
+                            <md-input-container flex="100"
+                                                class="md-block">
+                                <input placeholder="Ingrese el número de ticket..."
+                                       ng-model="vm.searchTicketText">
+                            </md-input-container>
+                        </form>
+                    </div>
+                    <!--Otros Filtros o quitar Filtros-->
+                    <div ng-if="vm.tickets">
+                        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column"
+                             layout-align-gt-md="space-around center"
+                             layout-md="center center">
+                            <div flex="50">
+                                <md-input-container class="md-block">
+                                    <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
+                                    <md-select name="selectType"
+                                               md-on-close="vm.changeSelected()"
+                                               ng-model="vm.selectedKind">
+                                        <md-option ng-repeat="option in vm.OPTIONS"
+                                                   value="{{option.text}}">
+                                            {{option.text}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
 
-        <div ng-if="vm.searchBool" layout="column" layout-align-gt-md="space-around center" layout-md="center center">
-            <md-toolbar layout="column"
-                        layout-gt-sm="row"
-                        layout-align="center stretch"
-                        layout-align-gt-sm="space-between center">
-                <div layout="row" layout-align="center center">
-                    <!--<span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>-->
-                    <span class="md-subtitle">Búsqueda por economico</span>
-                </div>
-                <div layout="column"
-                     layout-align="center stretch">
-                    <md-button aria-label="'Remove filter'"
-                               ng-click="vm.removeFilter()"
-                               class="md-raised">
-                        <md-icon md-font-icon="fa fa-ban"></md-icon>
-                        Quitar Filtro
-                    </md-button>
-                </div>
-            </md-toolbar>
+                            <div flex="50">
+                                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
+                                    <md-input-container flex="100"
+                                                        class="md-block">
+                                        <input ng-pattern="/^[a-zA-Z0-9]+$/"
+                                               placeholder="Ingrese el economico..."
+                                               ng-model="vm.searchText">
+                                    </md-input-container>
+                                </form>
+                            </div>
+                        </div>
 
-            <md-content flex="100" layout="column">
-                <div layout="row" layout-align="center center">
-                    <span class="md-subtitle">Cabinet (economico):</span>&nbsp
-                    <span class="md-subtitle">{{vm.searchText}}</span>
-                </div>
-                <div layout="row" layout-align="center center">
-                    <span class="md-subtitle">Estatus:</span>&nbsp
-                    <span class="md-subtitle">{{vm.selectedKind}}</span>
-                </div>
-            </md-content>
+                        <div ng-if="vm.searchBool" layout="column" layout-align-gt-md="space-around center"
+                             layout-md="center center">
+                            <md-toolbar layout="column"
+                                        layout-gt-sm="row"
+                                        layout-align="center stretch"
+                                        layout-align-gt-sm="space-between center">
+                                <div layout="row" layout-align="center center">
+                                    <!--<span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>-->
+                                    <span class="md-subtitle">Búsqueda por economico</span>
+                                </div>
+                                <div layout="column"
+                                     layout-align="center stretch">
+                                    <md-button aria-label="'Remove filter'"
+                                               ng-click="vm.removeFilter()"
+                                               class="md-raised">
+                                        <md-icon md-font-icon="fa fa-ban"></md-icon>
+                                        Quitar Filtro
+                                    </md-button>
+                                </div>
+                            </md-toolbar>
 
-        </div>
+                            <md-content flex="100" layout="column">
+                                <div layout="row" layout-align="center center">
+                                    <span class="md-subtitle">Cabinet (economico):</span>&nbsp
+                                    <span class="md-subtitle">{{vm.searchText}}</span>
+                                </div>
+                                <div layout="row" layout-align="center center">
+                                    <span class="md-subtitle">Estatus:</span>&nbsp
+                                    <span class="md-subtitle">{{vm.selectedKind}}</span>
+                                </div>
+                            </md-content>
 
-
+                        </div>
+                    </div>
+                </v-pane-content>
+            </v-pane>
+        </v-accordion>
+    </md-card>
+    <!--Tickets Section-->
+    <div ng-if="vm.tickets">
         <div class="virtualRepeatScroll-600">
             <md-card flex="100"
                      layout="column"
@@ -106,7 +154,7 @@
                                         <b translate>Folio</b>: &nbsp <b>{{item.folio}}</b>
                                     </div>
                                     <div layout="row">
-                                        <b translate>Fecha</b>: &nbsp <b>{{item.fecha_creacion | date:"EEEE dd.MM.yyyy
+                                        <b translate>Fecha</b>: &nbsp <b>{{item.fecha_creacion | date:"EEEE dd/MM/yyyy
                                         HH:mm:ss"}}</b>
                                     </div>
                                     <div layout="row">
@@ -188,14 +236,12 @@
                             </div>
 
 
-
-
                         </div>
                     </md-content>
                 </div>
                 <!--Sección para los Tickets Hijo-->
                 <div>
-                    <v-accordion ng-if="item.children" flex="100" layout-padding="" id="ticketsHijo"
+                    <v-accordion ng-if="item.children.length>0" flex="100" layout-padding="" id="ticketsHijo"
                                  class="vAccordion--default"
                                  control="ticketsHijo">
                         <v-pane flex="100" id="v-accordion-pane-tickets-hijo">
@@ -204,26 +250,28 @@
                             </v-pane-header>
                             <v-pane-content id="v-accordion-pane-tickets-hijo-content">
                                 <div flex="100"
-                                         layout="column"
-                                         ng-repeat="ticketHijo in item.childs"
-                                         layout-gt-md="row">
+                                     layout="column"
+                                     ng-repeat="ticketHijo in item.children"
+                                     layout-gt-md="row">
                                     <div layout="column" layout-align="center stretch" flex="100">
                                         <md-content ng-click="vm.showTicket(ticketHijo)">
                                             <div flex="100">
                                                 <div class="md-hue-1">
-                                                    <div  layout-align="space-between center"
+                                                    <div layout-align="space-between center"
                                                          layout-gt-sm="row"
                                                          layout="column">
                                                         <div layout="row">
                                                             <b translate>Folio</b>: &nbsp <b>{{ticketHijo.folio}}</b>
                                                         </div>
                                                         <div layout="row">
-                                                            <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion |
-                                                            date:"EEEE dd.MM.yyyy
+                                                            <b translate>Fecha</b>: &nbsp <b>{{ticketHijo.fecha_creacion
+                                                            |
+                                                            date:"EEEE dd/MM/yyyy
                                                             HH:mm:ss"}}</b>
                                                         </div>
                                                         <div layout="row">
-                                                            <b translate>Estatus</b>: &nbsp <b>{{ticketHijo.estatus}}</b>
+                                                            <b translate>Estatus</b>: &nbsp
+                                                            <b>{{ticketHijo.estatus}}</b>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -268,7 +316,8 @@
                                                 </div>
 
                                                 <!-- Manejo con Selector -->
-                                                <div layout="colum" layout-align-sm="row" layout-align="space-around center"
+                                                <div layout="colum" layout-align-sm="row"
+                                                     layout-align="space-around center"
                                                      flex="50">
                                                     <md-input-container flex="100">
                                                         <label translate="">COM.FIELDS.TYPE_MESSAGE</label>
@@ -291,8 +340,9 @@
                                                         <label translate="">COM.FIELDS.NOTIFICATIONS</label>
                                                         <md-select ng-model="vm.notification_code"
                                                                    md-on-close="vm.openDialogCreate(ticketHijo,vm.notification_code)">
-                                                            <md-option ng-repeat="messageStatus in vm.messageStatusCatalog"
-                                                                       ng-value="messageStatus">
+                                                            <md-option
+                                                                ng-repeat="messageStatus in vm.messageStatusCatalog"
+                                                                ng-value="messageStatus">
                                                                 <div layout="column">
                                                                     <b>{{messageStatus.com_code}} -
                                                                         {{messageStatus.nombre_com}}</b>
