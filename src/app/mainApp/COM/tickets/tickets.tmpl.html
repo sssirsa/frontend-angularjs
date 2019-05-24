@@ -11,10 +11,11 @@
 
             <div layout="row"
                  layout-align="center center" layout-wrap="" flex="100">
-                <md-input-container flex="80">
+                <md-input-container flex="100" flex-gt-sm="80">
                     <label translate="">COM.TICKET_TYPE</label>
-                    <md-select ng-model="vm.tipo"  flex="100" md-on-close="vm.listTickets()">
-                        <md-option ng-repeat="tipo in vm.tickets_type track by tipo.com_ticket_code" ng-value="tipo.com_ticket_code" flex="100">
+                    <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
+                        <md-option ng-repeat="tipo in vm.tickets_type track by tipo.com_ticket_code"
+                                   ng-value="tipo.com_ticket_code" flex="100">
                             <div layout="row" flex="100">
                                 <div flex="100" layout="column" layout-fill="">
                                     <div flex="100" layout="row" layout-align="start center"><span
@@ -28,7 +29,11 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <h3>{{vm.tipo}}</h3>
+                <md-input-container flex="100" flex-gt-sm="20">
+                    <md-button class="md-raised md-primary" ng-click="vm.listAll()"><i class="fas fa-list-ul"></i><span
+                        translate="">COM.LIST_ALL</span>
+                    </md-button>
+                </md-input-container>
             </div>
         </div>
         <v-accordion flex="100" layout-padding="" id="otrosFiltros"

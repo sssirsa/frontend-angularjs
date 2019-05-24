@@ -6,6 +6,7 @@
         },
         "LIST_TICKETS":"Listado de Tickets",
         "TICKET_TYPE":"Tipos de Ticket",
+        "LIST_ALL":"Consultar Todos los Tipos",
         "FIELDS":{
             "TYPE_MESSAGE":"Tipo de Mensaje a Enviar",
             "TICKET": "Ticket anterior",

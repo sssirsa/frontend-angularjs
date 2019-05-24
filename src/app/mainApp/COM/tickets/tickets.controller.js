@@ -28,7 +28,7 @@
         vm.searchTicketText = '';
         vm.tipolist = 0;
         vm.searchBool = false;
-        vm.tipo=undefined;
+        vm.tipo = undefined;
 
         vm.sig = sigPage;
         vm.prev = prevPage;
@@ -39,7 +39,8 @@
         vm.removeFilter = removeFilter;
         vm.getTicketInfo = getTicketInfo;
         vm.openDialogCreate = openDialogCreate;
-        vm.listTickets=listTickets;
+        vm.listTickets = listTickets;
+        vm.listAll=listAll;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -97,6 +98,15 @@
             listTicketsType();
         }
 
+        function listAll() {
+            vm.querySet='';
+            vm.offset = 0;
+            vm.limit = 20;
+            vm.tipo=undefined;
+            listTickets();
+
+
+        }
 
         function listTickets() {
             vm.tickets = {};
@@ -116,7 +126,7 @@
         function listTicketsType() {
             vm.promiseTicketTypeList = TicketProvider.getTicket_type()
                 .then(function (listType) {
-                    vm.tickets_type=listType.results;
+                    vm.tickets_type = listType.results;
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
                 });
@@ -156,7 +166,7 @@
         }
 
         function searchByTipoCom() {
-            if(vm.tipo) {
+            if (vm.tipo) {
                 vm.querySet = '';
                 vm.querySet = 'tipo__com_ticket_code=' + vm.tipo;
                 $log.log(vm.querySet);
