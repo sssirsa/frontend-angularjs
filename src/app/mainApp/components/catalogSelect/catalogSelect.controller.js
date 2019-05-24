@@ -160,6 +160,7 @@
             }
         }
 
+        //Initial paginationHelper building
         function buildPaginationHelper(apiResponse) {
             //Building the pagination helper just if pagination object was provided
             if ("pagination" in vm.catalog) {

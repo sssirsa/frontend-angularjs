@@ -341,8 +341,9 @@
                  *                            }
                  *                            In this case 'elements' should receive the parameter 'results'
                  *          pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
-                 *              //Next parameter, just used when the url is going to be used from what the API returned.
+                 *              //Next and previous parameters, just used when the url is going to be used from what the API returned.
                  *              next: string,         (Optional) Binding for the url that brings to the next page
+                 *              previous: string,     (Optional) Binding for the url that brings to the previous page
                  *              //Total, limit and offset, used when the component is going to calculate and build the query,
                  *              //All of the following are required if no next parameter is given.
                  *              total: string,        (Optional) Binding for the number of total elements.
@@ -392,8 +393,8 @@
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {
-            totalPages: null,
-            loadedPages: null,
+            totalPages: null, //Number
+            actualPage: null, //Number
             previousPage: null,
             nextPage: null
         };
@@ -421,7 +422,16 @@
 
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG;
-            vm.CatalogProvider.url = vm.url;
+            //Initial URL building
+            if ("pagination" in vm.actions['LIST'].pagination) {
+                //Build paginated URL
+                vm.CatalogProvider.url = vm.url
+                    + '?limit=' + vm.actions['LIST'].pagination.pageSize
+                    + '&offset=' + '0';
+            }
+            else {
+                vm.CatalogProvider.url = vm.url;
+            }
         }
 
         function createPaginationProvider() {
@@ -437,12 +447,17 @@
                     .list()
                     .then(function (response) {
                         treatResponse(response);
+                        //Determine if the pagination parameter is given, and proceed with the building of the pagination helper
+                        if (vm.actions['LIST'].pagination) {
+                            buildPaginationHelper(response);
+                        }
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
                         $log.error(errorElements);
                         vm.onErrorList({ error: errorElements });
                     });
+
             }
             else {
                 vm.onErrorList({ error: '"actions" parameter does not have the LIST element defined' });
@@ -661,6 +676,7 @@
                     .list()
                     .then(function (response) {
                         treatResponse(response);
+                        updatePaginationHelper(vm.paginationHelper.actualPage - 1, response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -682,38 +698,8 @@
                 vm.pageLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
-                        treatResponse(response);//Updating the pagination helper
-                        if ("pagination" in vm.actions['LIST']) {
-                            vm.paginationHelper['loadedPages']++;
-                            //Next page handling
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                if (vm.paginationHelper['loadedPages'] < vm.paginationHelper['totalPages']) {
-                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                        + '?limit=' + vm.catalog.pagination['pageSize']
-                                        + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
-                                }
-                                else {
-                                    vm.paginationHelper['nextPage'] = null;
-                                }
-                            }
-                            //Previous page handling
-                            if (vm.actions['LIST'].pagination['previous']) {
-                                vm.paginationHelper['previousPage'] = response[vm.actions['LIST'].pagination['previous']];
-                            }
-                            else {
-                                if (vm.paginationHelper['loadedPages'] < vm.paginationHelper['totalPages']) {
-                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                        + '?limit=' + vm.catalog.pagination['pageSize']
-                                        + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
-                                }
-                                else {
-                                    vm.paginationHelper['nextPage'] = null;
-                                }
-                            }
-                        }
+                        treatResponse(response);
+                        updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -731,28 +717,12 @@
                 if (vm.actions['LIST'].pagination) {
                     createPaginationProvider();
                 }
-                vm.PaginationProvider.url = vm.paginationHelper.next;
+                vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
                 vm.infiniteLoader = vm.PaginationProvider
                     .list()
                     .then(function (response) {
                         treatResponse(response, true);
-                        //Updating the pagination helper
-                        if ("pagination" in vm.actions['LIST']) {
-                            if (vm.actions['LIST'].pagination['next']) {
-                                vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['loadedPages']++;
-                                if (vm.paginationHelper['loadedPages'] < vm.paginationHelper['totalPages']) {
-                                    vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                        + '?limit=' + vm.catalog.pagination['pageSize']
-                                        + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
-                                }
-                                else {
-                                    vm.paginationHelper['nextPage'] = null;
-                                }
-                            }
-                        }
+                        updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
@@ -808,13 +778,9 @@
             if (vm.actions['LIST'].softDelete) {
                 vm.catalogElements = filterDeleted(vm.catalogElements);
             }
-            //Determine if the pagination parameter is given, and proceed with the building of the pagination helper
-            if (vm.actions['LIST'].pagination) {
-                buildPaginationHelper(response);
-            }
         }
 
-        //Pagination helper builder
+        //Initial Pagination helper builder after first backend query
         function buildPaginationHelper(response) {
             //Building the pagination helper just if pagination object was provided
             if ("pagination" in vm.actions['LIST']) {
@@ -845,20 +811,63 @@
                     //If the remainder it's not zero, it means that an aditional page should be added to the count,so the Math.ceil function was used for that
                     vm.paginationHelper['totalPages'] = Math.ceil(response[vm.actions['LIST'].pagination['total']] / vm.actions['LIST'].pagination['pageSize']);
 
-                    vm.paginationHelper['loadedPages'] = 1;
+                    vm.paginationHelper['actualPage'] = 1;
 
-                    //Initial URL building
-                    if ("query" in vm.catalog) {
+                    //Initial nextPage URL building
+                    vm.paginationHelper['nextPage'] = vm.url
+                        + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                        + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
+                }
+
+                $log.debug(vm.paginationHelper);
+            }
+        }
+
+        //Updates the pagination helper depending on the actual page and requestedPage
+        function updatePaginationHelper(requestedPage, response) {
+            //Valid page
+            if (requestedPage >= 1) {
+                //Next and previous page handling by returned URL(if aplicable)
+                if (vm.actions['LIST'].pagination['next']
+                    && vm.actions['LIST'].pagination['previous']) {
+                    vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['next']];
+                    vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['previous']];
+                }
+                //URL building pagination handling
+                else {
+                    //Requested next page
+                    if (requestedPage > vm.paginationHelper['actualPage']) {
+                        vm.paginationHelper['actualPage']++;
+                    }
+                    //Requested previous page
+                    if (requestedPage < vm.paginationHelper['actualPage']) {
+                        vm.paginationHelper['actualPage']--;
+                    }
+
+                    //Next page handling
+                    if (vm.paginationHelper['actualPage'] < vm.paginationHelper['totalPages']) {
                         vm.paginationHelper['nextPage'] = vm.url
-                            + '&limit=' + vm.actions['LIST'].pagination['pageSize'];
+                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                            + '&offset=' + (vm.paginationHelper['actualPage'] * vm.actions['LIST'].pagination['pageSize']);
                     }
                     else {
-                        vm.paginationHelper['nextPage'] = vm.url
-                            + '?limit=' + vm.actions['LIST'].pagination['pageSize'];
+                        vm.paginationHelper['nextPage'] = null;
                     }
-                    vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
-                        + '&offset=' + '0';
+                    //Previous page handling
+                    if (vm.paginationHelper['actualPage'] >= 2) {
+                        vm.paginationHelper['previousPage'] = vm.url
+                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                            + '&offset=' + ((vm.paginationHelper['actualPage'] - 2) * vm.actions['LIST'].pagination['pageSize']);
+                    }
+                    else {
+                        vm.paginationHelper['previousPage'] = null;
+                    }
                 }
+                $log.debug(vm.paginationHelper);
+            }
+            else {
+                //Invalid page
+                $log.error("@CatalogManager controller, @updatePAginationHelper function, requestedPage parameter is not valid, must be greater or equal to 1");
             }
         }
 
