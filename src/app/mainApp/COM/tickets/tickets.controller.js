@@ -124,7 +124,7 @@
         }
 
         function listTicketsType() {
-            vm.promiseTicketTypeList = TicketProvider.getTicket_type()
+            vm.promiseTicketTypeList = TicketProvider.getTicket_typeList()
                 .then(function (listType) {
                     vm.tickets_type = listType.results;
                 }).catch(function (errormsg) {

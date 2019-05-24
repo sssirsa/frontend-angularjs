@@ -20,13 +20,17 @@
         return {
             getTicket_type:getTicket_type,
             getServiceDetails:getServiceDetails,
-            listTicket:listTicket
+            listTicket:listTicket,
+            getTicket_typeList:getTicket_typeList
 
         };
 
 
-        function getTicket_type(){
+        function getTicket_typeList(){
             return baseCom.all(COM.catalogues.base).all(COM.catalogues.ticket_type).customGET();
+        }
+        function getTicket_type(idTipoTicket){
+            return baseCom.all(COM.catalogues.base).all(COM.catalogues.ticket_type).all(idTipoTicket).customGET();
         }
         function getServiceDetails(mensaje_com){
             return baseCom.all(COM.actions.base).all(COM.actions.message.base).all('detail').all(mensaje_com).customGET();
