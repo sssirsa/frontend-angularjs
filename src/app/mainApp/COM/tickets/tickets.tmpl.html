@@ -287,12 +287,11 @@
 
                                             <div flex="100" layout-gt-md="row" layout="column"
                                                  layout-align-gt-md="space-around center"
-                                                 layout-md="center center">
+                                                 layout-md="center center" layout-wrap="">
                                                 <div layout="column" layout-align="center center" flex="5">
                                                     <i class="fas fa-ticket-alt"></i>
                                                 </div>
-
-                                                <div layout="column" layout-align="center center" flex="25">
+                                                <div layout="column" layout-align="center center" flex="20">
                                                     <div layout="row">
                                                         <div layout="column" layout-align="center center">
                                                             <b translate>Folio</b>
@@ -317,6 +316,39 @@
                                                         <div layout="column" layout-align="center center">
                                                             <h4>{{ticketHijo.tipo.nombre}}</h4>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div layout="column" layout-align="center center" flex="25">
+                                                    <div layout="row">
+                                                        <div layout="column" layout-align="center center">
+                                                            <b translate>Cabinet</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <b>:&nbsp</b>
+                                                        </div>
+                                                        <div ng-if="ticketHijo.cabinet" layout="column" layout-align="center center">
+                                                            <h4>{{ticketHijo.cabinet}}</h4>
+                                                        </div>
+                                                        <div  ng-if="!ticketHijo.cabinet" layout="column" layout-align="center center">
+                                                            <h4 translate="">COM.NOT_INCLUDED</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div layout="column" layout-align="center center" flex="25">
+                                                    <div layout="row">
+                                                        <div layout="column" layout-align="center center">
+                                                            <b translate>Cabinet Remplazo</b>
+                                                        </div>
+                                                        <div layout="column" layout-align="center center">
+                                                            <b>:&nbsp</b>
+                                                        </div>
+                                                        <div  ng-if="ticketHijo.cabinet_reemplazo" layout="column" layout-align="center center">
+                                                            <h4>{{ticketHijo.cabinet_reemplazo}}</h4>
+                                                        </div>
+                                                        <div  ng-if="!ticketHijo.cabinet_reemplazo" layout="column" layout-align="center center">
+                                                            <h4 translate="">COM.NOT_INCLUDED</h4>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
