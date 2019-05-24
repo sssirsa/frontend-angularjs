@@ -44,26 +44,7 @@
                     Otros Filtros
                 </v-pane-header>
                 <v-pane-content id="v-accordion-pane-otros-filtros-content">
-                    <!--Div Busqueda por Cabinet-->
-                    <div layout="column"
-                         cg-busy="{promise:vm.loadingPromise,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
-                         style="height: 100px"
-                         ng-if="vm.tickets.length < 0">
-                        <div layout="column"
-                             layout-gt-sm="row"
-                             layout-padding
-                             layout-align="center center"
-                             ng-if="vm.tickets.length < 0">
-                            <div flex-gt-sm="40" flex="100">
-                                <md-input-container class="md-block">
-                                    <div ng-if="vm.tickets.length < 0">
-                                        <span translate>No se encontraron resultados</span>
-                                    </div>
-                                </md-input-container>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Buscador por estatus de Cabinet-->
+                    <!-- Buscador por numero de Ticket-->
                     <div>
                         <form ng-submit="vm.searchByTicketNumber(vm.searchTicketText)" flex="100" class="md-block">
                             <md-input-container flex="100"
@@ -72,71 +53,6 @@
                                        ng-model="vm.searchTicketText">
                             </md-input-container>
                         </form>
-                    </div>
-                    <!--Otros Filtros o quitar Filtros-->
-                    <div ng-if="vm.tickets">
-                        <div ng-if="!vm.searchBool" layout-gt-md="row" layout="column"
-                             layout-align-gt-md="space-around center"
-                             layout-md="center center">
-                            <div flex="50">
-                                <md-input-container class="md-block">
-                                    <label translate>NOT_CAPITALIZED.SEARCH.SELECT</label>
-                                    <md-select name="selectType"
-                                               md-on-close="vm.changeSelected()"
-                                               ng-model="vm.selectedKind">
-                                        <md-option ng-repeat="option in vm.OPTIONS"
-                                                   value="{{option.text}}">
-                                            {{option.text}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
-                            </div>
-
-                            <div flex="50">
-                                <form ng-submit="vm.searchCabinet()" flex="100" class="md-block">
-                                    <md-input-container flex="100"
-                                                        class="md-block">
-                                        <input ng-pattern="/^[a-zA-Z0-9]+$/"
-                                               placeholder="Ingrese el economico..."
-                                               ng-model="vm.searchText">
-                                    </md-input-container>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div ng-if="vm.searchBool" layout="column" layout-align-gt-md="space-around center"
-                             layout-md="center center">
-                            <md-toolbar layout="column"
-                                        layout-gt-sm="row"
-                                        layout-align="center stretch"
-                                        layout-align-gt-sm="space-between center">
-                                <div layout="row" layout-align="center center">
-                                    <!--<span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>-->
-                                    <span class="md-subtitle">Búsqueda por economico</span>
-                                </div>
-                                <div layout="column"
-                                     layout-align="center stretch">
-                                    <md-button aria-label="'Remove filter'"
-                                               ng-click="vm.removeFilter()"
-                                               class="md-raised">
-                                        <md-icon md-font-icon="fa fa-ban"></md-icon>
-                                        Quitar Filtro
-                                    </md-button>
-                                </div>
-                            </md-toolbar>
-
-                            <md-content flex="100" layout="column">
-                                <div layout="row" layout-align="center center">
-                                    <span class="md-subtitle">Cabinet (economico):</span>&nbsp
-                                    <span class="md-subtitle">{{vm.searchText}}</span>
-                                </div>
-                                <div layout="row" layout-align="center center">
-                                    <span class="md-subtitle">Estatus:</span>&nbsp
-                                    <span class="md-subtitle">{{vm.selectedKind}}</span>
-                                </div>
-                            </md-content>
-
-                        </div>
                     </div>
                 </v-pane-content>
             </v-pane>
