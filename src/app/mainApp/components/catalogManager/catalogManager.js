@@ -423,7 +423,7 @@
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG;
             //Initial URL building
-            if ("pagination" in vm.actions['LIST'].pagination) {
+            if ("pagination" in vm.actions['LIST']) {
                 //Build paginated URL
                 vm.CatalogProvider.url = vm.url
                     + '?limit=' + vm.actions['LIST'].pagination.pageSize

@@ -113,10 +113,6 @@
                 //The catalog is not loaded in lazy mode and when no initial value is given
                 list();
             }
-            //if (vm.initial && vm.catalog.pagination) {
-            //    //Warranty that lazy is true if you have initial and pagination
-            //    vm.lazy = true;
-            //}
         }
 
         function list() {
@@ -313,7 +309,7 @@
                 vm.CatalogProvider.url = vm.catalog.url
                     + '?' + vm.catalog.query
                     + '=' + vm.catalog.query_value;
-                if ("pagination" in vm.catalog.pagination) {
+                if ("pagination" in vm.catalog) {
                     //Build paginated URL
                     vm.CatalogProvider.url = vm.CatalogProvider.url
                         + '&limit=' + vm.catalog.pagination.pageSize
@@ -322,10 +318,10 @@
             }
             else {//Initial URL building
                 vm.CatalogProvider.url = vm.catalog.url;
-                if ("pagination" in vm.catalog.pagination) {
+                if ("pagination" in vm.catalog) {
                     //Build paginated URL
                     vm.CatalogProvider.url = vm.CatalogProvider.url
-                        + '&limit=' + vm.catalog.pagination.pageSize
+                        + '?limit=' + vm.catalog.pagination.pageSize
                         + '&offset=' + '0';
                 }
             }
@@ -396,9 +392,7 @@
                         }
 
                         //Updating the pagination helper
-                        $log.debug(vm.paginationHelper);
                         updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
-                        $log.debug(vm.paginationHelper);
 
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
