@@ -70,7 +70,7 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
                     total: PAGINATION.total,
                     limit: PAGINATION.limit,

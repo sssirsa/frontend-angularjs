@@ -151,6 +151,7 @@
             elements: 'results',
             limit: 'limit',
             offset: 'offset',
-            pageSize: 20
+            pageSize: 20,
+            mode: 'infinite'
         });
 })();

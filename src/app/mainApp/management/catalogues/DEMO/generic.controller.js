@@ -853,7 +853,7 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
                     total: 'count'
                 },
