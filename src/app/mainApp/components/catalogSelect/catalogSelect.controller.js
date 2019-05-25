@@ -95,7 +95,7 @@
         vm.catalogElements = [];
         vm.paginationHelper = {
             totalPages: null,
-            loadedPages: null,
+            actualPage: null,
             nextPage: null
         };
         vm.selectedElement = null;
@@ -191,19 +191,21 @@
                     //If the remainder it's not zero, it means that an aditional page should be added to the count
                     vm.paginationHelper['totalPages'] = Math.ceil(apiResponse[vm.catalog.pagination['total']] / vm.catalog.pagination['pageSize']);
 
-                    vm.paginationHelper['loadedPages'] = 1;
+                    vm.paginationHelper['actualPage'] = 1;
 
                     //Initial URL building
-                    if ("query" in vm.catalog) {
-                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                            + '&limit=' + vm.catalog.pagination['pageSize'];
+                    if (vm.paginationHelper['totalPages'] > vm.paginationHelper['actualPage']) {
+                        if ("query" in vm.catalog) {
+                            vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                + '&limit=' + vm.catalog.pagination['pageSize'];
+                        }
+                        else {
+                            vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                                + '?limit=' + vm.catalog.pagination['pageSize'];
+                        }
+                        vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
+                            + '&offset=' + vm.catalog.pagination['pageSize'];
                     }
-                    else {
-                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                            + '?limit=' + vm.catalog.pagination['pageSize'];
-                    }
-                    vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
-                        + '&offset=' + '0';
                 }
             }
         }
@@ -309,11 +311,23 @@
             if (vm.catalog.hasOwnProperty('query')
                 && vm.catalog.hasOwnProperty('query_value')) {
                 vm.CatalogProvider.url = vm.catalog.url
-                    + vm.catalog.query
-                    + vm.catalog.query_value;
+                    + '?' + vm.catalog.query
+                    + '=' + vm.catalog.query_value;
+                if ("pagination" in vm.catalog.pagination) {
+                    //Build paginated URL
+                    vm.CatalogProvider.url = vm.CatalogProvider.url
+                        + '&limit=' + vm.catalog.pagination.pageSize
+                        + '&offset=' + '0';
+                }
             }
-            else {
+            else {//Initial URL building
                 vm.CatalogProvider.url = vm.catalog.url;
+                if ("pagination" in vm.catalog.pagination) {
+                    //Build paginated URL
+                    vm.CatalogProvider.url = vm.CatalogProvider.url
+                        + '&limit=' + vm.catalog.pagination.pageSize
+                        + '&offset=' + '0';
+                }
             }
         }
 
@@ -382,35 +396,57 @@
                         }
 
                         //Updating the pagination helper
-                        if ("pagination" in vm.catalog) {
-                            if (vm.catalog.pagination['next']) {
-                                vm.paginationHelper['nextPage'] = response[vm.catalog.pagination['next']];
-                            }
-                            else {
-                                vm.paginationHelper['loadedPages']++;
-                                if (vm.paginationHelper['loadedPages'] < vm.paginationHelper['totalPages']) {
-                                    if ("query" in vm.catalog) {
-                                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                            + '&limit=' + vm.catalog.pagination['pageSize'];
-                                    }
-                                    else {
-                                        vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
-                                            + '?limit=' + vm.catalog.pagination['pageSize'];
-                                    }
-                                    vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
-                                        + '&offset=' + (vm.paginationHelper['loadedPages'] * vm.catalog.pagination['pageSize']);
-                                }
-                                else {
-                                    vm.paginationHelper['nextPage'] = null;
-                                }
-                            }
-                        }
+                        $log.debug(vm.paginationHelper);
+                        updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
+                        $log.debug(vm.paginationHelper);
 
                         vm.onSuccessList({ elements: vm.catalogElemets });
                     })
                     .catch(function (errorElements) {
                         vm.onErrorList({ error: errorElements });
                     });
+            }
+        }
+
+        //Just works for loading more pages.
+        function updatePaginationHelper(requestedPage, response) {
+            //Valid page
+            if (requestedPage >= 1) {
+                //Next page handling by returned URL(if aplicable)
+                if (vm.catalog.pagination['next']) {
+                    vm.paginationHelper['nextPage'] = response[vm.catalog.pagination['next']];
+                }
+                //URL building pagination handling
+                else {
+                    //Requested next page
+                    if (requestedPage > vm.paginationHelper['actualPage']) {
+                        vm.paginationHelper['actualPage']++;
+                    }
+
+                    //Next page handling
+                    if (vm.paginationHelper['actualPage'] < vm.paginationHelper['totalPages']) {
+                        if (vm.catalog.hasOwnProperty('query')
+                            && vm.catalog.hasOwnProperty('query_value')) {
+                            vm.CatalogProvider.url = vm.catalog.url
+                                + '?' + vm.catalog.query
+                                + '=' + vm.catalog.query_value
+                                + '&limit=' + vm.catalog.pagination['pageSize']
+                                + '&offset=' + (vm.paginationHelper['actualPage'] * vm.catalog.pagination['pageSize']);
+                        }
+                        else {
+                            vm.paginationHelper['nextPage'] = vm.catalog.url
+                                + '?limit=' + vm.catalog.pagination['pageSize']
+                                + '&offset=' + (vm.paginationHelper['actualPage'] * vm.catalog.pagination['pageSize']);
+                        }
+                    }
+                    else {
+                        vm.paginationHelper['nextPage'] = null;
+                    }
+                }
+            }
+            else {
+                //Invalid page
+                $log.error("@CatalogSelect controller, @updatePaginationHelper function, requestedPage parameter is not valid, must be greater or equal to 1");
             }
         }
 
