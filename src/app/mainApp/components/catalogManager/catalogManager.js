@@ -814,9 +814,11 @@
                     vm.paginationHelper['actualPage'] = 1;
 
                     //Initial nextPage URL building
-                    vm.paginationHelper['nextPage'] = vm.url
-                        + '?limit=' + vm.actions['LIST'].pagination['pageSize']
-                        + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
+                    if (vm.paginationHelper['totalPages'] > vm.paginationHelper['actualPage']) {
+                        vm.paginationHelper['nextPage'] = vm.url
+                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                            + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
+                    }
                 }
             }
         }
@@ -864,7 +866,7 @@
             }
             else {
                 //Invalid page
-                $log.error("@CatalogManager controller, @updatePAginationHelper function, requestedPage parameter is not valid, must be greater or equal to 1");
+                $log.error("@CatalogManager controller, @updatePaginationHelper function, requestedPage parameter is not valid, must be greater or equal to 1");
             }
         }
 
