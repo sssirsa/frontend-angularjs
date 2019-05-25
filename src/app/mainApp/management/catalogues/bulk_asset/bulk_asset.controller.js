@@ -110,7 +110,7 @@
                                 + '/' + URLS.inventory.base
                                 + '/' + URLS.inventory.catalogues.base
                                 + '/' + URLS.inventory.catalogues.consumable_model,
-                            query: '?marca__id=',
+                            query: 'marca__id',
                             requires: 'marca_insumo',
                             name: 'Modelo del insumo',
                             model: 'id',

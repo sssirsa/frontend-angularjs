@@ -125,7 +125,7 @@
                             + '/' + URLS.management.base
                             + '/' + URLS.management.catalogues.base
                             + '/' + URLS.management.catalogues.cabinet_model,
-                        query: '?marca__id=',
+                        query: 'marca__id',
                         requires: 'marca',
                         name: 'Modelo',
                         model: 'id',
