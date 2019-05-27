@@ -146,7 +146,7 @@
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
-            if (vm.step.currentStage.etapa.nombre !== 'Pinchado') {
+            if (vm.step.currentStage.etapa.nombre !== 'Presurizado') {
                 $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');

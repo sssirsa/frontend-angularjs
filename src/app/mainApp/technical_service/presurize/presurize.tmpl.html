@@ -27,8 +27,7 @@
         </div>
 
 
-        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
-            <!-- ng-if="vm.presurize.fecha_revision">-->
+        <md-tabs ng-if="vm.presurize.currentStage.id" class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
             <md-tab label="{{vm.title_info}}">
                 <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
                     <div flex="100" layout="row" layout-wrap="" layout-padding="">
