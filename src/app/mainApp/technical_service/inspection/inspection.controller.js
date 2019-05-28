@@ -44,18 +44,18 @@
                     name: Translate.translate('INSPECTION.CATALOGUES.STICKER'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
+                    option: 'descripcion',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
                 required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
                 hint: Translate.translate('INSPECTION.CATALOGUES.ADD')
             }
