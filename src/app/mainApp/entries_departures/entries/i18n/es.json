@@ -171,7 +171,7 @@
             }
         },
         "WAREHOUSE": {
-            "TITLE": "Entrada de almacén",
+            "TITLE": "Entrada de buen estado",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
@@ -196,7 +196,7 @@
             "HINTS": {
                 "AGENCY": "Selecciona la agencia de procedencia",
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
-                "ENTRY": "Entrada de cabinets para su almacenamiento, no pasarán a servicio",
+                "ENTRY": "Entrada de cabinets para su almacenamiento, no pasarán a servicio, estatus unilever 0001-Buen Estado",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
