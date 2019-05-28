@@ -29,10 +29,10 @@
         vm.createButtonText = Translate.translate('STAGES.LABELS.CREATE');
         vm.deleteButtonText = Translate.translate('STAGES.LABELS.DELETE');
         vm.modifyButtonText = Translate.translate('STAGES.LABELS.MODIFY');
-        vm.nextButtonText = 'STAGES.LABELS.NEXT';
-        vm.previousButtonText = 'STAGES.LABELS.PREVIOUS';
+        vm.nextButtonText = Translate.translate('STAGES.LABELS.NEXT');
+        vm.previousButtonText = Translate.translate('STAGES.LABELS.PREVIOUS');
         vm.loadMoreButtonText = Translate.translate('STAGES.LABELS.LOAD_MORE');
-        vm.removeFilterButtonText = 'STAGES.LABELS.REMOVE_FILTER';
+        vm.removeFilterButtonText = Translate.translate('STAGES.LABELS.REMOVE_FILTER');
 
         //Messages
         vm.loadingMessage = Translate.translate('STAGES.LABELS.LOADING_MESSAGE');
