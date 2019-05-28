@@ -750,7 +750,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_id',
+                        binding: 'sucursal_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -828,7 +828,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_id',
+                        binding: 'udn_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -851,32 +851,6 @@
                         },
                         hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
-                        required: true
-                    },
-                    project: {
-                        binding: 'proyecto_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.project,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.PROJECT'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            pagination: {
-                                total: 'count',
-                                next: 'next'
-                            },
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
-                        },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.PROJECT'),
-                        icon: 'fa fa-book',
                         required: true
                     }
                 };

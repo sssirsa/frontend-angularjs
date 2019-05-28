@@ -1,3 +1,16 @@
+/*
+    Fields for "Warehouse" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.warehouse')
@@ -19,7 +32,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showOriginSelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -40,16 +53,19 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showOriginSelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warehouseEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warehouseEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showOriginSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();
