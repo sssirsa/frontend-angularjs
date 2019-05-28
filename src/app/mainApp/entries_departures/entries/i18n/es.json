@@ -191,7 +191,11 @@
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
-                "OBSOLETE": "Cabinet obsoleto"
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
+                }
             },
             "HINTS": {
                 "AGENCY": "Selecciona la agencia de procedencia",

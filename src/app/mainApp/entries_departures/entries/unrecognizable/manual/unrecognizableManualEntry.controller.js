@@ -198,7 +198,7 @@
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
-            delete (vm.entry[vm.catalogues['petition'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
         };
 
         //Internal functions

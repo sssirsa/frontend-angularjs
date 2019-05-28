@@ -714,7 +714,7 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.udn,
                             kind: 'Generic',
-                            name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.AGENCY'),
+                            name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'agencia',
@@ -728,7 +728,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.AGENCY'),
+                        hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.ORIGIN_AGENCY'),
                         icon: 'fa fa-building',
                         required: true
                     }

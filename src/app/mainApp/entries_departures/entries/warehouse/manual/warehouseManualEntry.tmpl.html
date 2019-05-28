@@ -144,6 +144,16 @@
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'ENTRIES.WAREHOUSE.LABELS.ENTRY_DATA'|translate}}>
+            <div layout="row"
+                 layout-align="center center"
+                 ng-if="vm.showOriginSelector">
+                <p>{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.LABEL'|translate}}</p>
+                <md-switch ng-model="vm.entryToAgency"
+                           md-change="vm.changeSwitch()">
+                    <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.TRUE'|translate}}</p>
+            <p ng-if="!vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                </md-switch>
+            </div>
             <form name="entryForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
