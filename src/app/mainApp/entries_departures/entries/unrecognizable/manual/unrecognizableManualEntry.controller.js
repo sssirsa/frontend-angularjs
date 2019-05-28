@@ -35,7 +35,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showOriginSelector;
         vm.catalogues;
         vm.cabinetList;
         vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
@@ -56,7 +56,7 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.showSubsidiarySelector = false;
+            vm.showOriginSelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
@@ -64,10 +64,13 @@
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
             vm.selectedTab = 0;
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showOriginSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();

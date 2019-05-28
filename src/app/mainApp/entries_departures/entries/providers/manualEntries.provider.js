@@ -705,6 +705,32 @@
                         hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
+                    },
+                    origin_udn: {
+                        binding: 'udn_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.udn,
+                            kind: 'Generic',
+                            name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia',
+                            pagination: {
+                                total: 'count',
+                                next: 'next'
+                            },
+                            elements: 'results',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true
                     }
                 };
                 return catalogues;

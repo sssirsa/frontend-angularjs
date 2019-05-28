@@ -227,10 +227,12 @@
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
-                "AGENCY": "UDN-Agencia",
+                "AGENCY": "UDN-Agencia de arribo",
+                "ORIGIN_AGENCY": "UDN-Agencia de procedencia",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal",
+                "SUBSIDIARY": "Sucursal de arribo",
+                "ORIGIN_STORE": "Establecimiento de procedencia",
                 "DRIVER_ID": "Identificación del operador",
                 "DRIVER_NAME": "Nombre del operador",
                 "CABINET_SEARCH": "Registro de cabinets",
@@ -242,7 +244,7 @@
                     "REASON": "Motivo"
                 },
                 "SWITCH": {
-                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada proviene de una UDN-Agencia",
                     "FALSE": "La entrada no proviene de una UDN-Agencia"
                 },
@@ -250,11 +252,13 @@
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
-                "AGENCY": "Selecciona la agencia de procedencia",
+                "AGENCY": "Tu usuario no tiene UDN-Agencia, selecciona una para generar la entrada",
+                "ORIGIN_AGENCY": "Selecciona la UDN-Agencia de procedencia",
                 "ENTRY": "Entrada de cabinets no capitalizados desde UDN-Agencia o establecimiento",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "ORIGIN_STORE": "Selecciona el establecimiento de procedencia",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega"
             },
