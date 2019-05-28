@@ -771,7 +771,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
@@ -797,7 +797,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.TRANSPORT_LINE'),
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
                         required: true
                     },
@@ -823,7 +823,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.TRANSPORT_KIND'),
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
                         required: true
                     },
@@ -849,7 +849,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.AGENCY'),
+                        hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
                     }
