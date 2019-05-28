@@ -1,3 +1,19 @@
+/*
+    Fields for "New" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_origen_id: int(id), (Required if sucursal_destino_id)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        establecimiento_origen_id: int(id), (Required if udn_destino_id)
+        proveedor_origen_id: int(id), (Required)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.unrecognizable')

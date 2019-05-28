@@ -603,7 +603,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_id',
+                        binding: 'sucursal_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -681,7 +681,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_id',
+                        binding: 'udn_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -704,58 +704,6 @@
                         },
                         hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
-                        required: true
-                    },
-                    project: {
-                        binding: 'proyecto_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.project,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.PROJECT'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            pagination: {
-                                total: 'count',
-                                next: 'next'
-                            },
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
-                        },
-                        hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.PROJECT'),
-                        icon: 'fa fa-book',
-                        required: true
-                    },
-                    petition: {
-                        binding: 'pedimento_id',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.pediments,
-                            kind: 'Generic',
-                            name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.PETITION'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            pagination: {
-                                total: 'count',
-                                next: 'next'
-                            },
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
-                        },
-                        hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.PETITION'),
-                        icon: 'fa fa-clipboard-check',
                         required: true
                     }
                 };
