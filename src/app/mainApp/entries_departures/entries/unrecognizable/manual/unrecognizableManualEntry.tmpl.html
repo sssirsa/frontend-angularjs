@@ -172,35 +172,6 @@
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
-                                    catalog="vm.catalogues['project'].catalog"
-                                    hint="vm.catalogues['project'].hint"
-                                    icon="vm.catalogues['project'].icon"
-                                    required="vm.catalogues['project'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['project'].binding)">
-                    </catalog-select>
-                    <!--Mutual excluding catalogs-->
-                    <catalog-select class="full-width"
-                                    ng-if="!vm.entryFromAgency"
-                                    catalog="vm.catalogues['petition'].catalog"
-                                    hint="vm.catalogues['petition'].hint"
-                                    icon="vm.catalogues['petition'].icon"
-                                    required="vm.catalogues['petition'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['petition'].binding)">
-                    </catalog-select>
-                    <catalog-select class="full-width"
-                                    ng-if="vm.entryFromAgency"
-                                    catalog="vm.catalogues['udn'].catalog"
-                                    hint="vm.catalogues['udn'].hint"
-                                    icon="vm.catalogues['udn'].icon"
-                                    required="vm.catalogues['udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
-                    </catalog-select>
-                </div>
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
-                     layout-align="center stretch">
-                    <catalog-select class="full-width"
                                     catalog="vm.catalogues['transport_line'].catalog"
                                     hint="vm.catalogues['transport_line'].hint"
                                     icon="vm.catalogues['transport_line'].icon"
