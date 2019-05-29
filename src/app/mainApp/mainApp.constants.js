@@ -2,29 +2,6 @@
     angular
         .module('app.mainApp')
         .constant('OPTIONS', {
-            zone: [
-                {
-                    value: "Metro"
-                },
-                {
-                    value: "Centro"
-                },
-                {
-                    value: "Sur"
-                },
-                {
-                    value: "Norte"
-                },
-                {
-                    value: "Occidente"
-                },
-                {
-                    value: "Oriente"
-                },
-                {
-                    value: "Distribuidores"
-                }
-            ],
             salePointAssignKind: [
                 { id: 'pending', value: 'Pendientes' },
                 { id: 'all', value: 'Detalle de atención' }
@@ -167,15 +144,14 @@
                 label: '★★★★★'
             }]
         )
-        .constant('KEYS', {
-            MAPS_KEY: 'AIzaSyC0oEOvB5sbNFJDRHF_2xbp6JBnwQPM3zA'
-        })
         .constant('PAGINATION', {
             total: 'count',
             next: 'next',
             previous: 'previous',
             elements: 'results',
             limit: 'limit',
-            offset:'offset'
+            offset: 'offset',
+            pageSize: 20,
+            mode: 'infinite'
         });
 })();
