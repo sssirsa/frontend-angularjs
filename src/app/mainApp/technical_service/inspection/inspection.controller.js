@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp.technical_service')
         .controller('InspectionController', InspectionController);
-    function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log,_) {
+    function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log,_,PAGINATION) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -46,8 +46,10 @@
                     model: 'id',
                     option: 'descripcion',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

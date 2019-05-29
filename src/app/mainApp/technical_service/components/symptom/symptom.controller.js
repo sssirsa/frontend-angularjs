@@ -14,7 +14,7 @@
 
             }
         });
-    function symptomController(Translate, URLS, ErrorHandler, EnvironmentConfig, $log) {
+    function symptomController(Translate, URLS, ErrorHandler, EnvironmentConfig, $log,PAGINATION) {
         var vm = this;
         var symptomURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
@@ -27,8 +27,10 @@
                     model: 'code',
                     option: 'descripcion',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

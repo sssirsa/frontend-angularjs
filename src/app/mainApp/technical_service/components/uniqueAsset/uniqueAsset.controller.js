@@ -19,7 +19,7 @@
 
             }
         });
-    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS, $log) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS, $log,PAGINATION) {
         var vm = this;
         vm.notDetected = [];
         vm.unique_asset_list = [];
@@ -128,7 +128,12 @@
                             option: 'description',
                             elements: 'results',//elementos del promise donde iterar
                             showModel: true,//mostrar model y option
-                            pagination: {}//manejo de Paginado
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            }//manejo de Paginado
                         }
                     },
                     {
