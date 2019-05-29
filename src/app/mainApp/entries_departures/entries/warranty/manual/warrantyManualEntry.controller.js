@@ -219,7 +219,7 @@
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showOriginSelector = !user['sucursal']
+            vm.showSelector = !user['sucursal']
                 && !user['udn'];
         };
 

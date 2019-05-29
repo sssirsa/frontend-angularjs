@@ -112,10 +112,11 @@
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'ENTRIES.UNRECOGNIZABLE.LABELS.ENTRY_DATA'|translate}}>
             <div layout="row"
-                 layout-align="center center">
+                 layout-align="center center"
+                 ng-if="vm.showSelector">
                 <p>{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.entryToAgency"
-                           md-change="vm.changeSwitch()">
+                           ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.TRUE'|translate}}</p>
                     <p ng-if="!vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
@@ -124,12 +125,13 @@
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
-                <div ng-if="!vm.entryToAgency && vm.showOriginSelector"
+                <div ng-if="vm.userSubsidiary"
                      layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
+                                    ng-if="vm.showSelector"
                                     catalog="vm.catalogues['subsidiary'].catalog"
                                     hint="vm.catalogues['subsidiary'].hint"
                                     icon="vm.catalogues['subsidiary'].icon"
@@ -144,19 +146,40 @@
                                     on-select="vm.onElementSelect(element,vm.catalogues['origin_udn'].binding)">
                     </catalog-select>
                 </div>
-                <div ng-if="vm.entryToAgency && vm.showOriginSelector"
+                <div ng-if="vm.userAgency"
                      layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
+                                    ng-if="vm.showSelector"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
                                     required="vm.catalogues['udn'].required"
                                     on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
-                    <!--TODO: Store manager implementation for "establecimiento_origen_id"-->
+                    <md-input-container class="md-icon-float md-block full-width">
+                        <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_STORE</label>
+                        <md-icon class="fa fa-user"></md-icon>
+                        <input ng-model="vm.store['razon_social']"
+                               name="store_name"
+                               ng-required="true"
+                               disabled
+                               type="text">
+                        <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.ORIGIN_STORE</div>
+                    </md-input-container>
+                    <div layout="column"
+                         class="full-width">
+                        <md-button ng-click="vm.searchStore()"
+                                   aria-label="search store"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-search"></md-icon>
+                                <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.SEARCH_STORE'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </div>
                 </div>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">

@@ -140,10 +140,10 @@
                 label={{'ENTRIES.WAREHOUSE.LABELS.ENTRY_DATA'|translate}}>
             <div layout="row"
                  layout-align="center center"
-                 ng-if="vm.showOriginSelector">
+                 ng-if="vm.showSelector">
                 <p>{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.entryToAgency"
-                           md-change="vm.changeSwitch()">
+                           ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.TRUE'|translate}}</p>
             <p ng-if="!vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
@@ -157,7 +157,7 @@
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
-                                    ng-if="!vm.entryToAgency && vm.showOriginSelector"
+                                    ng-if="!vm.entryToAgency && vm.showSelector"
                                     catalog="vm.catalogues['subsidiary'].catalog"
                                     hint="vm.catalogues['subsidiary'].hint"
                                     icon="vm.catalogues['subsidiary'].icon"
@@ -165,7 +165,7 @@
                                     on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
-                                    ng-if="vm.entryToAgency && vm.showOriginSelector"
+                                    ng-if="vm.entryToAgency && vm.showSelector"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"

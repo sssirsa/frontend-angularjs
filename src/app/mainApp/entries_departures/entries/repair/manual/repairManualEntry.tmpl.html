@@ -140,10 +140,10 @@
                 label={{'ENTRIES.REPAIR.LABELS.ENTRY_DATA'|translate}}>
             <div layout="row"
                  layout-align="center center"
-                 ng-if="vm.showOriginSelector">
+                 ng-if="vm.showSelector">
                 <p>{{'ENTRIES.REPAIR.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.entryToAgency"
-                           md-change="vm.changeSwitch()">
+                           ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.REPAIR.LABELS.SWITCH.TRUE'|translate}}</p>
     <p ng-if="!vm.entryFromAgency">{{'ENTRIES.REPAIR.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
@@ -157,7 +157,7 @@
                      layout-align-gt-xs="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
-                                    ng-if="!vm.entryToAgency && vm.showOriginSelector"
+                                    ng-if="!vm.entryToAgency && vm.showSelector"
                                     catalog="vm.catalogues['subsidiary'].catalog"
                                     hint="vm.catalogues['subsidiary'].hint"
                                     icon="vm.catalogues['subsidiary'].icon"
@@ -165,13 +165,32 @@
                                     on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
-                                    ng-if="vm.entryToAgency && vm.showOriginSelector"
+                                    ng-if="vm.entryToAgency && vm.showSelector"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
                                     required="vm.catalogues['udn'].required"
                                     on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
+                    <md-input-container layout="column"
+                                        class="md-icon-float md-block full-width">
+                        <label translate>ENTRIES.REPAIR.LABELS.STORE</label>
+                        <md-icon class="fa fa-user"></md-icon>
+                        <input ng-model="vm.store['razon_social']"
+                               name="store_name"
+                               ng-required="true"
+                               disabled
+                               type="text">
+                        <div class="hint" translate>ENTRIES.REPAIR.HINTS.STORE</div>
+                    </md-input-container>
+                    <md-button ng-click="vm.searchStore()"
+                               aria-label="search store"
+                               class="md-primary md-raised">
+                        <div layout="row" layout-align="center center">
+                            <md-icon md-font-icon="fa fa-search"></md-icon>
+                            <div>{{'ENTRIES.REPAIR.BUTTONS.SEARCH_STORE'|translate}}</div>
+                        </div>
+                    </md-button>
                 </div>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">

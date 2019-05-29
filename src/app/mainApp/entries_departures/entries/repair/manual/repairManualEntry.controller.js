@@ -35,7 +35,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showOriginSelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -220,7 +220,7 @@
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showOriginSelector = !user['sucursal']
+            vm.showSelector = !user['sucursal']
                 && !user['udn'];
 
             vm.userAgency = user.udn;
@@ -370,13 +370,15 @@
             })
                 .then(function (store) {
                     //Select the store
+                    vm.store = store;
+                    vm.entry.establecimiento_origen_id = store['no_cliente'];
                 })
                 .catch(function (storeError) {
                     if (storeError) {
                         ErrorHandler.errorTranslate(storeError);
                     }
                 });
-        }
+        };
 
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed

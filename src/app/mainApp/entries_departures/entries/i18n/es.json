@@ -94,7 +94,8 @@
                     "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
-                }
+                },
+                "STORE": "Establecimiento"
             },
             "HINTS": {
                 "AGENCY": "Selecciona la agencia de procedencia",
@@ -105,13 +106,15 @@
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
-                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "STORE": "Selecciona un establecimiento"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
                 "PREVIOUS": "Anterior",
                 "SAVE": "Guardar entrada",
-                "REMOVE": "Quitar"
+                "REMOVE": "Quitar",
+                "SEARCH_STORE": "Buscar establecimiento"
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Entrada registrada correctamente",
@@ -275,7 +278,8 @@
                 "PREVIOUS": "Anterior",
                 "SAVE": "Guardar entrada",
                 "REMOVE": "Quitar",
-                "CREATE": "Nuevo cabinet"
+                "CREATE": "Nuevo cabinet",
+                "SEARCH_STORE": "Buscar establecimiento"
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Entrada registrada correctamente",

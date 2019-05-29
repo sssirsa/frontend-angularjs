@@ -34,7 +34,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showOriginSelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -216,7 +216,7 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showOriginSelector = false;
+            vm.showSelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warehouseEntry.template();
@@ -224,7 +224,7 @@
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showOriginSelector = !user['sucursal']
+            vm.showSelector = !user['sucursal']
                 && !user['udn'];
 
             vm.userAgency = user.udn;

@@ -35,10 +35,12 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showOriginSelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
+        vm.entryToAgency; //Determines what catalog to show
+        vm.userSubsidiary;
+        vm.userAgency;
 
         //Validations
         vm.imageConstraints = {
@@ -56,21 +58,26 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.showOriginSelector = false;
+            vm.showSelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.entryToAgency = false; //Determines what catalog to show 
             vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
             vm.selectedTab = 0;
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showOriginSelector = !user['sucursal']
+            vm.showSelector = !user['sucursal']
                 && !user['udn'];
 
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
+
+            if (vm.showSelector) {
+                vm.userSubsidiary = true;
+                vm.userAgency = false;
+            }
         };
 
         vm.init();
@@ -199,6 +206,14 @@
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
             delete (vm.entry[vm.catalogues['subsidiary'].binding]);
+            if (vm.entryToAgency) {
+                vm.userAgency = true;
+                vm.userSubsidiary = false;
+            }
+            else {
+                vm.userAgency = false;
+                vm.userSubsidiary = true;
+            }
         };
 
         vm.searchStore = function searchStore() {
@@ -212,13 +227,15 @@
             })
                 .then(function (store) {
                     //Select the store
+                    vm.store = store;
+                    vm.entry.establecimiento_origen_id = store['no_cliente'];
                 })
                 .catch(function (storeError) {
                     if (storeError) {
                         ErrorHandler.errorTranslate(storeError);
                     }
                 });
-        }
+        };
 
         //Internal functions
 
