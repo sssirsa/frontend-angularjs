@@ -35,7 +35,6 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    $http.defaults.headers.common['Authorization'] = 'bearer ' + loginResponse.access_token;
                     request.resolve();
                 })
                 .catch(function (errorLogin) {
