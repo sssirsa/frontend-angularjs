@@ -9,6 +9,10 @@
                     </h2>
                 </div>
                 <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-button ng-if="vm.asset"  ng-click="vm.clear()" class="md-raised">
+                        <md-icon md-font-icon="fas fa-search"></md-icon>
+                        <span translate="">INSPECTION.ACTIONS.SEARCH_NEW</span>
+                    </md-button>
                     <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
                         <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
                         <span translate="">INCIDENCE.REPORT_INCIDENCE</span>
@@ -31,7 +35,7 @@
             <md-tab label="{{vm.title_info}}" >
                 <md-content class="md-padding">
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
-                        <div flex-gt-md="30" flex-md="45" flex="100" layout-align="center center">
+                        <div flex-gt-md="33" flex-md="50" flex="100" layout-align="center center">
                             <md-input-container flex="100" layout-fill="">
                                 <catalog-select catalog="vm.catalogues['sticker'].catalog"
                                                 required="true"
@@ -42,13 +46,13 @@
                             </md-input-container>
 
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                        <div layout="row" flex-gt-md="33" flex-md="50" flex="100" layout-padding=""
                              layout-align="center center">
-                            <div layout="row" layout-align="center center">
+                            <div flex="30" layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fas fa-bullseye"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.WHEELS'|translate}}</span>
                             </div>
-                            <md-input-container flex="100" layout-align="center end">
+                            <md-input-container flex="70" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -63,13 +67,13 @@
 
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                        <div layout="row" flex-gt-md="33" flex-md="50" flex="100" layout-padding=""
                              layout-align="center center">
-                            <div layout="row" layout-align="center center">
+                            <div flex="30" layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fas fa-shopping-basket"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.BASKET'|translate}}</span>
                             </div>
-                            <md-input-container flex="100" layout-align="center end">
+                            <md-input-container flex="70" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -83,13 +87,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                        <div layout="row" flex-gt-md="33" flex-md="50" flex="100" layout-padding=""
                              layout-align="center center">
-                            <div layout="row" layout-align="center center">
+                            <div flex="30" layout="row" layout-align="center center">
                                 <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.FRONT_RACK'|translate}}</span>
                             </div>
-                            <md-input-container flex="100" layout-align="center end">
+                            <md-input-container flex="70" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -103,13 +107,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                        <div layout="row" flex-gt-md="33" flex-md="50" flex="100" layout-padding=""
                              layout-align="center center">
-                            <div layout="row" layout-align="center center">
+                            <div flex="30" layout="row" layout-align="center center">
                                 <md-icon md-font-icon="zmdi zmdi-border-all"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.BACK_RACK'|translate}}</span>
                             </div>
-                            <md-input-container flex="100" layout-align="center end">
+                            <md-input-container flex="70" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -123,13 +127,13 @@
                                 </div>
                             </md-input-container>
                         </div>
-                        <div layout="row" flex-gt-md="30" flex-md="45" flex="100" layout-margin=""
+                        <div layout="row" flex-gt-md="33" flex-md="50" flex="100" layout-padding=""
                              layout-align="center center">
-                            <div layout="row" layout-align="center center">
+                            <div flex="30" layout="row" layout-align="center center">
                                 <md-icon md-font-icon="fas fa-sticky-note"></md-icon>
                                 <span class="md-body-2">{{'INSPECTION.DOORS'|translate}}</span>
                             </div>
-                            <md-input-container flex="100" layout-align="center end">
+                            <md-input-container flex="70" layout-align="center end">
                                 <div range-spinner
                                      range-min="0"
                                      range-step="1"
@@ -146,22 +150,22 @@
 
                     </div>
                     <div layout="row" layout-wrap="" layout-padding="" layout-align="space-between center">
-                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
                             <md-icon md-font-icon="zmdi zmdi-format-color-fill"></md-icon>
                             <span class="md-body-2" translate="">INSPECTION.PAINT</span>
                             <md-checkbox ng-model="vm.checklist.pintura"></md-checkbox>
                         </div>
-                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
                             <md-icon md-font-icon="fas fa-broom"></md-icon>
                             <span class="md-body-2" translate="">INSPECTION.WASHED</span>
                             <md-checkbox ng-model="vm.checklist.lavado"></md-checkbox>
                         </div>
-                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
                             <md-icon md-font-icon="fas fa-box"></md-icon>
                             <span class="md-body-2" translate="">INSPECTION.WRAPPED</span>
                             <md-checkbox ng-model="vm.checklist.emplayado"></md-checkbox>
                         </div>
-                        <div flex-gt-md="25" flex-md="45" flex="100" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
                             <md-icon md-font-icon="fas fa-box-open"></md-icon>
                             <span class="md-body-2" translate="">INSPECTION.EMPTY</span>
                             <md-checkbox ng-model="vm.checklist.vacio_mercancia"></md-checkbox>

@@ -18,7 +18,8 @@
             "SAVE_INSPECTION": "Confirmar Entrada",
             "SAVE_PRECHECK": "Confirmar Entrada de Garantía",
             "SAVE_CHECKLIST": "Guardar Checklist",
-            "CLEAR_FIELD": "Limpiar campos"
+            "CLEAR_FIELD": "Limpiar campos",
+            "SEARCH_NEW":"Buscar otro cabinet"
         },
         "CATALOGUES": {
             "STICKER": "Etiquetas",
