@@ -81,7 +81,7 @@
         "NO_BULKS": "No hay ningún insumo asociado a esta etapa"
     },
     "SHOW_INFO_CABINET": {
-        "SHOW_INFO": "Mas información del Cabinet"
+        "SHOW_INFO": "Información del Cabinet"
     },
     "GENERAL_SHOW_INFO": {
         "NO_ELEMENTS": "Sin Información"
@@ -111,9 +111,9 @@
         "ADD_FAILURE": "Añadir falla"
     },
     "SHOW_INFO_SERVICE_COMPONENT": {
-        "PRECHECKLIST": "Inspección de Garantía",
+        "PRECHECKLIST": "Inspección de Cabinet",
         "INSPECTION": "Inspección y Confirmación de Entradas",
-        "SHOW_INFO": "Mas Información del Servicio"
+        "SHOW_INFO": "Información del Servicio"
     },
     "NEXT_STEP": {
         "NEXT_STEP": "Siguiente Etapa:",
