@@ -25,18 +25,18 @@
                     name: Translate.translate('SYMTOMPS_COMPONENT.ADD_SYMTOMP'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'code',
-                    option: 'descripcion'
-                },
-                pagination: {
-                    total: 'count',
-                    next: 'next'
+                    option: 'descripcion',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
                 required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                },
                 noResults: Translate.translate('ERRORS.NO_RESULTS'),
                 hint: Translate.translate('SYMTOMPS_COMPONENT.ADD')
             }
