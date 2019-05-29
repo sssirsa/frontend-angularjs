@@ -148,8 +148,8 @@
                 </div>
                 <div ng-if="vm.userAgency"
                      layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
+                     layout-gt-sm="row"
+                     layout-align-gt-sm="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
                                     ng-if="vm.showSelector"
@@ -170,7 +170,8 @@
                         <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.ORIGIN_STORE</div>
                     </md-input-container>
                     <div layout="column"
-                         class="full-width">
+                         layout-align-gt-sm="center stretch"
+                         layout-align="center center">
                         <md-button ng-click="vm.searchStore()"
                                    aria-label="search store"
                                    class="md-primary md-raised">

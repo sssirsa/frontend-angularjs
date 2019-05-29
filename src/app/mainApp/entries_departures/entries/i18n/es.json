@@ -107,7 +107,7 @@
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
-                "STORE": "Selecciona un establecimiento"
+                "STORE": "Selecciona el establecimiento de procedencia"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",

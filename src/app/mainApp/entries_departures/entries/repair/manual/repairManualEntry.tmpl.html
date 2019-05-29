@@ -145,7 +145,7 @@
                 <md-switch ng-model="vm.entryToAgency"
                            ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.REPAIR.LABELS.SWITCH.TRUE'|translate}}</p>
-    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.REPAIR.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.REPAIR.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
             </div>
             <form name="entryForm"
@@ -153,8 +153,8 @@
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
                 <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
+                     layout-gt-sm="row"
+                     layout-align-gt-sm="space-around center"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
                                     ng-if="!vm.entryToAgency && vm.showSelector"
@@ -183,14 +183,18 @@
                                type="text">
                         <div class="hint" translate>ENTRIES.REPAIR.HINTS.STORE</div>
                     </md-input-container>
-                    <md-button ng-click="vm.searchStore()"
-                               aria-label="search store"
-                               class="md-primary md-raised">
-                        <div layout="row" layout-align="center center">
-                            <md-icon md-font-icon="fa fa-search"></md-icon>
-                            <div>{{'ENTRIES.REPAIR.BUTTONS.SEARCH_STORE'|translate}}</div>
-                        </div>
-                    </md-button>
+                    <div layout="column"
+                         layout-align-gt-sm="center stretch"
+                         layout-align="center center">
+                        <md-button ng-click="vm.searchStore()"
+                                   aria-label="search store"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-search"></md-icon>
+                                <div>{{'ENTRIES.REPAIR.BUTTONS.SEARCH_STORE'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </div>
                 </div>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
