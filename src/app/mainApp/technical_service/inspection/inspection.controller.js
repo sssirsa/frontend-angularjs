@@ -166,7 +166,6 @@
             $log.debug(vm.step);
             $log.debug("etapa envidada a la función");
             $log.debug(step);
-
             if (!vm.step.currentStage) {
                 $log.debug('entre al if');
                 var promiseStep = inspectionProvider.getStep();
@@ -180,13 +179,15 @@
                     ErrorHandler.errorTranslate(errormsg);
                 });
             }
-            if (vm.step.currentStage.etapa.nombre !== 'CheckList' || vm.stage_for_not_stage.nombre !== 'CheckList') {
-                $log.debug("No en la etapa Correcta");
-                var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
-                var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
-                toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
-                clear();
+            if (vm.step.currentStage) {
+                if (vm.step.currentStage.etapa.nombre !== 'CheckList' || vm.stage_for_not_stage.nombre !== 'CheckList') {
+                    $log.debug("No en la etapa Correcta");
+                    var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                    var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                    toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                    clear();
 
+                }
             }
 
         }

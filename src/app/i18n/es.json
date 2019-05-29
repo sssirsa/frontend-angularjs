@@ -503,7 +503,8 @@
         "E115": "No se puede mandar el mismo usuario más de una vez",
         "E116": "No es posible mandar este tipo de mensaje en este tipo de ticket",
         "E117": "No se puede establecer etapa defecto si no se establecen etapas siguientes",
-        "E118": "El cabinet indicado ya fue inspeccionado"
+        "E118": "El cabinet indicado ya fue inspeccionado",
+        "ES-036":"Al cabinet ya se le realizó inspección preliminar"
 
     }
 }
