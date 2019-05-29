@@ -89,6 +89,11 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
                 }
             },
             "HINTS": {

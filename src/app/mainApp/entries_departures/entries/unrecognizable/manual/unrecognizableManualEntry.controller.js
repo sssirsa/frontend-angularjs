@@ -201,6 +201,25 @@
             delete (vm.entry[vm.catalogues['subsidiary'].binding]);
         };
 
+        vm.searchStore = function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    //Select the store
+                })
+                .catch(function (storeError) {
+                    if (storeError) {
+                        ErrorHandler.errorTranslate(storeError);
+                    }
+                });
+        }
+
         //Internal functions
 
         var saveEntry = function saveEntry(entry) {

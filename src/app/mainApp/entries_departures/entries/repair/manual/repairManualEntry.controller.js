@@ -35,7 +35,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showOriginSelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -218,10 +218,13 @@
             vm.entry = MANUAL_ENTRIES.repairEntry.template();
             vm.catalogues = MANUAL_ENTRIES.repairEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showOriginSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();
@@ -354,6 +357,31 @@
                     ErrorHandler.errorTranslate(errorCallback);
                 }
             });
+        };
+
+        vm.searchStore = function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    //Select the store
+                })
+                .catch(function (storeError) {
+                    if (storeError) {
+                        ErrorHandler.errorTranslate(storeError);
+                    }
+                });
+        }
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['udn'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
         };
 
         //Internal functions
