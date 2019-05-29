@@ -24,7 +24,7 @@
         </div>
     </div>
     <div layout="row" flex="40" layout-align="center start">
-        <div layout="row" flex="100">
+        <div layout="row" flex="100" ng-if="$ctrl.info.currentStage.servicio_cabinet" >
             <md-button ng-click="$ctrl.showInfoServiceDialog()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-eye"></md-icon>
                 <hint translate="">SHOW_INFO_SERVICE_COMPONENT.SHOW_INFO</hint>
