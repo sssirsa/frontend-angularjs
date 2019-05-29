@@ -215,8 +215,7 @@
                 "REMOVE": "Quitar"
             },
             "MESSAGES": {
-                "SUCCESS_CREATE_SCRAPPED": "Entrada de obsoletos registrada correctamente",
-                "SUCCESS_CREATE_WAREHOUSE": "Entrada de almacén registrada correctamente",
+                "SUCCESS_CREATE": "Entrada de buen estado registrada correctamente",
                 "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
             },
             "ERRORS": {

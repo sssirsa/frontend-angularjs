@@ -22,7 +22,9 @@
         toastr,
         ErrorHandler,
         $mdDialog,
-        Helper
+        Helper,
+        URLS,
+        EnvironmentConfig
     ) {
         var vm = this;
 
@@ -48,6 +50,167 @@
             },
             resize: { width: 4096 },
             resizeIf: '$width > 4096 || $height > 4096'
+        };
+
+        vm.createCabinetDialog = {
+            fields: [
+                {
+                    type: 'text',
+                    model: 'economico',
+                    label: 'Económico',
+                    initial_value: '',
+                    lock: true
+                },
+                {
+                    type: 'text',
+                    model: 'no_serie',
+                    label: 'Número de serie',
+                    required: true,
+                    hint: 'Número de serie del cabinet',
+                    validations: {
+                        errors: {
+                            required: 'El número de serie es obligatorio'
+                        }
+                    }
+                },
+                {
+                    type: 'text',
+                    model: 'year',
+                    label: 'Año',
+                    required: true,
+                    hint: 'Año de fabricación del cabinet',
+                    validations: {
+                        regex: '(19|20)[0-9]{2}',
+                        errors: {
+                            regex: 'Formato inválido de año',
+                            required: 'El año es obligatorio'
+                        }
+                    }
+                },
+                {
+                    type: 'text',
+                    model: 'id_unilever',
+                    label: 'Activo Unilever',
+                    required: true,
+                    hint: 'Número de identificación utilizado por Unilever',
+                    validations: {
+                        regex: '[a-zA-Z0-9]+',
+                        errors: {
+                            regex: 'Solo caracteres alfanuméricos',
+                            required: 'El activo unilever'
+                        }
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'marca',
+                    label: 'Marca del cabinet',
+                    validations: {
+                        errors: {
+                            required: 'El campo es requerido.'
+                        }
+                    },
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.cabinet_brand,
+                        name: 'Marca',
+                        model: 'id',
+                        option: 'nombre',
+                        loadMoreButtonText: 'Cargar mas...',
+                        elements: 'results',
+                        pagination: {},
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    required: true
+                },
+                {
+                    type: 'catalog',
+                    model: 'modelo_id',
+                    label: 'Modelo del cabinet',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.cabinet_model,
+                        query: '?marca__id=',
+                        requires: 'marca',
+                        name: 'Modelo',
+                        model: 'id',
+                        option: 'nombre',
+                        elements: 'results',
+                        pagination: {},
+                        loadMoreButtonText: 'Cargar mas...',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    },
+                    required: true
+                },
+                {
+                    type: 'catalog',
+                    model: 'condicion_id',
+                    label: 'Condición del cabinet',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.condition,
+                        name: 'Condición',
+                        model: 'id',
+                        option: 'letra',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                },
+                {
+                    type: 'catalog',
+                    model: 'categoria_id',
+                    label: 'Categoría',
+                    catalog: {
+                        url: EnvironmentConfig.site.rest.api
+                            + '/' + URLS.management.base
+                            + '/' + URLS.management.catalogues.base
+                            + '/' + URLS.management.catalogues.category,
+                        name: 'Categoría del cabinet',
+                        model: 'id',
+                        option: 'nombre',
+                        loadMoreButtonText: 'Cargar mas...',
+                        pagination: {
+                            total: 'count',
+                            next: 'next'
+                        },
+                        elements: 'results',
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
+                    }
+                }
+            ],
+            dialog: {
+                title: 'Información del cabinet',
+                okButton: 'Guardar',
+                cancelButton: 'Cancelar',
+                loading: 'Creando cabinet'
+            },
+            url: EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.inventory.base
+                + '/' + URLS.management.inventory.cabinet
         };
 
         // Auto invoked init function
@@ -181,23 +344,26 @@
         };
 
         vm.createCabinet = function createCabinet(cabinetID) {
+            vm.createCabinetDialog.fields[0].initial_value = cabinetID;
             $mdDialog.show({
-                controller: 'CabinetDialogController',
+                controller: 'CatalogCreateDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
+                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
                 fullscreen: true,
                 clickOutsideToClose: true,
                 focusOnOpen: true,
                 locals: {
-                    cabinetID: cabinetID
+                    dialog: vm.createCabinetDialog.dialog,
+                    fields: vm.createCabinetDialog.fields,
+                    url: vm.createCabinetDialog.url
                 }
-            }).then(function (successCallback) {
+            }).then(function successCreateCabinet(successCallback) {
                 var cabinetID = successCallback.economico;
                 vm.removeCabinet(cabinetID);
-                vm.searchCabinet(cabinetID);
-            }).catch(function (err) {
-                if (err) {
-                    ErrorHandler.errorTranslate(err);
+                addCabinetToList(successCallback);
+            }).catch(function errorCreateCabinet(errorCallback) {
+                if (errorCallback) {
+                    ErrorHandler.errorTranslate(errorCallback);
                 }
             });
         };
@@ -205,56 +371,20 @@
         //Internal functions
 
         var saveEntry = function saveEntry(entry) {
-            var warehouseEntry = angular.fromJson(angular.toJson(entry));
-            warehouseEntry = addCabinetsToEntry(vm.cabinetList, warehouseEntry, false);
-            warehouseEntry = Helper.removeBlankStrings(warehouseEntry);
-
-            var obsoleteEntry = angular.fromJson(angular.toJson(entry));
-            obsoleteEntry = addCabinetsToEntry(vm.cabinetList, obsoleteEntry, true);
-            obsoleteEntry = Helper.removeBlankStrings(obsoleteEntry);
-
+            entry = addCabinetsToEntry(vm.cabinetList, entry);
+            entry = Helper.removeBlankStrings(entry);
             //API callback
-            if (warehouseEntry.cabinets_id.length > 0) {
-                vm.createEntryPromise = MANUAL_ENTRIES
-                    .createWarehouse(warehouseEntry)
-                    .then(function (warehouseEntrySuccessCallback) {
-
-                        for (var i = 0;
-                            i < warehouseEntrySuccessCallback['cabinets'].length;
-                            i++) {
-                            MANUAL_ENTRIES.createAutomaticInspection(warehouseEntrySuccessCallback['cabinets'][i]);
-                        }
-                        vm.init();
-                        toastr.success(
-                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_WAREHOUSE')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
-
-            obsoleteEntry.tipo_entrada = 'Obsoletos';
-
-            if (obsoleteEntry.cabinets_id.length > 0) {
-                vm.createEntryPromise = MANUAL_ENTRIES
-                    .createObsolete(obsoleteEntry)
-                    .then(function (obsoleteEntrySuccessCallback) {
-
-                        for (var i = 0;
-                            i < obsoleteEntrySuccessCallback['cabinets'].length;
-                            i++) {
-                            MANUAL_ENTRIES.createAutomaticInspection(obsoleteEntrySuccessCallback['cabinets'][i]);
-                        }
-                        vm.init();
-                        toastr.success(
-                            Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE_SCRAPPED')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
+            vm.createEntryPromise = MANUAL_ENTRIES
+                .createWarehouse(entry)
+                .then(function () {
+                    vm.init();
+                    toastr.success(
+                        Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
+                    );
+                })
+                .catch(function (errorCallback) {
+                    ErrorHandler.errorTranslate(errorCallback);
+                });
         };
 
         var entryHasPendingCabinets = function entryHasPendingCabinets() {
@@ -263,17 +393,15 @@
             });
         };
 
-        var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry, obsolete) {
+        var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
             if (entry.cabinets_id.length) {
                 entry.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
-                    //Filtering to just add the cabinets that exist and have the obsolete flag
-                    if (element.obsolete == obsolete) {
-                        return element.cabinet;
-                    }
+                    //Filtering to just add the cabinets that exist
+                    return element.cabinet;
                 });
             for (
                 var i = 0;
@@ -282,6 +410,16 @@
                 entry['cabinets_id'].push(existingCabinets[i].id);
             }
             return entry;
+        };
+
+        var addCabinetToList = function addCabinetToList(cabinet) {
+            var cabinetToAdd = {
+                promise: null,
+                cabinet: cabinet,
+                id: cabinet['economico']
+            };
+
+            vm.cabinetList.push(cabinetToAdd);
         };
 
         //Tab functions
