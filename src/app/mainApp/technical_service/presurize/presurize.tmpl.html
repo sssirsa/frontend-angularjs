@@ -19,7 +19,7 @@
             </div>
         </md-toolbar>
         <div layout="row" flex="100" layout-wrap="">
-            <search-cabinet-step flex="100" info-gral="vm.infogral(element)"
+            <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
@@ -138,7 +138,7 @@
         </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-if="vm.presurize.fecha_revision" ng-click="vm.clear()" class="md-raised">
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>

@@ -94,6 +94,13 @@
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
+            if(!vm.step.currentStage){
+                $log.debug("No tiene etapa actual");
+                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.SENT_TO_CHECK');
+                toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                clear();
+            }
             if (vm.step.currentStage.etapa.nombre !== 'Pinchado') {
                 $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
