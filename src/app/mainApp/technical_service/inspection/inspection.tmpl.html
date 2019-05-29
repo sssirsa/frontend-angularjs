@@ -18,17 +18,17 @@
 
             </div>
         </md-toolbar>
-        <div layout="row" flex="100" layout-wrap="">
-            <search-cabinet-step flex="100" info-gral="vm.infogral(element)"
+        <div layout="column" layout-gt-sm="row" flex="100" layout-wrap="" layout-padding="" >
+            <search-cabinet-step  ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
-            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
-            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="100" flex-gt-sm="50"></show-info-asset>
+            <show-info-servicio ng-if="vm.step" info="vm.step" flex="100" flex-gt-sm="50"></show-info-servicio>
         </div>
 
 
-        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
+        <md-tabs class="md-primary coverheight" minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
                  ng-if="vm.asset.economico">
-            <md-tab label="{{vm.title_info}}">
+            <md-tab label="{{vm.title_info}}" >
                 <md-content class="md-padding">
                     <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
                         <div flex-gt-md="30" flex-md="45" flex="100" layout-align="center center">
