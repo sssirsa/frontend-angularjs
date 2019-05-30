@@ -29,16 +29,20 @@
                     layout-align="center stretch"
                     md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}">
-                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
-                    <md-select ng-model="vm.state"
-                               md-on-close="vm.selectState()">
-                        <md-option ng-repeat="state in vm.states"
-                                   ng-value="{{state.id}}">
-                            {{state.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                <catalog-select class="full-width"
+                                catalog="vm.catalogues['states'].catalog"
+                                on-select="vm.selectState(element)">
+                </catalog-select>
+                <!--<md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
+        <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
+        <md-select ng-model="vm.state"
+                   md-on-close="vm.selectState()">
+            <md-option ng-repeat="state in vm.states"
+                       ng-value="{{state.id}}">
+                {{state.nombre}}
+            </md-option>
+        </md-select>
+    </md-input-container>-->
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
                     <md-select ng-model="vm.city"

@@ -12,9 +12,9 @@
         Helper,
         $log,
         ErrorHandler,
-        States,
-        Cities,
-        Localities,
+        EnvironmentConfig,
+        URLS,
+        PAGINATION,
         _
     ) {
         var vm = this;
@@ -50,6 +50,30 @@
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
+
+        vm.catalogues = {
+            states: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
+                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre',
+                    pagination: {
+                        total: 'count',
+                        next: 'next'
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                }
+            }
+        };
 
         activate();
 

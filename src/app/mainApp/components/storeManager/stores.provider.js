@@ -41,23 +41,23 @@
         }
 
         function getByLocality(LocalityID, limit, offset){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_locality + LocalityID, limit, offset);
+            return querySearch(QUERIES.store.by_locality + LocalityID, limit, offset);
         }
 
         function getByCity(cityID, limit, offset){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_city + cityID, limit, offset);
+            return querySearch(QUERIES.store.by_city + cityID, limit, offset);
         }
 
         function getByState(stateID, limit, offset){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_state + stateID, limit, offset);
+            return querySearch(QUERIES.store.by_state + stateID, limit, offset);
         }
 
         function getByPostalCode(postalCode, limit, offset){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_postal_code + postalCode, limit, offset);
+            return querySearch(QUERIES.store.by_postal_code + postalCode, limit, offset);
         }
 
         function getByEconomic(economic, limit, offset){
-            return querySearch(URLS.establecimiento + QUERIES.store.by_economic + economic + '?', limit, offset);
+            return querySearch(QUERIES.store.by_economic + economic + '?', limit, offset);
         }
 
         function querySearch(query, limit, offset){
@@ -66,7 +66,7 @@
             API
                 .all(URLS.salepoint.base)
                 .all(URLS.salepoint.catalogues.base)
-                .all(URLS.salepoint.catalogues.stores).all(query+'&limit='+limit+'&offset='+offset)
+                .all(URLS.salepoint.catalogues.stores + query + '&limit=' + limit + '&offset=' + offset)
                 .customGET()
                 .then(function (list) {
                     defer.resolve(list);
