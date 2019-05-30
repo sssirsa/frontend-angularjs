@@ -14,6 +14,8 @@
         "EMPTY": "Vacío de Mercancía",
         "MORE_INFO": "Más Información",
         "OBSERVATIONS": "Observaciones",
+        "FINISHED":"Terminado",
+        "READY":"Listo_para_salida",
         "ACTIONS": {
             "SAVE_INSPECTION": "Confirmar Entrada",
             "SAVE_PRECHECK": "Confirmar Entrada de Garantía",

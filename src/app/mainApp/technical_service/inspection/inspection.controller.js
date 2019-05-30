@@ -26,7 +26,13 @@
             emplayado: false,
             vacio_mercancia: false,
             gas: false,
+            terminado: false,
+            listo_para_salida: false,
             observaciones: ''
+
+        };
+        vm.stage = {
+            sucursal_id: undefined
         };
 
         //Declaracion de Funciones como variables_______________________________________________________________________
@@ -70,7 +76,8 @@
         vm.onStickerSelect = onStickerSelect;
         vm.getSymptoms = getSymptoms;
         vm.getActions = getActions;
-        //--------------------------------------------------------------------------------------------------------------
+        vm.nextStep = nextStep;
+        //-------------------------------------------------------------------------------------------------------------
         //Funciones Propias de la Pantalla
         function sendInspection() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
@@ -87,7 +94,47 @@
         }
 
         function sendCheckList() {
-            $log.debug(vm.checklist);
+            $log.debug(vm.step.control.sucursal.id);
+            vm.checklist.sucursal_id = vm.step.control.sucursal.id;
+            vm.checklist.sintomas_detectados_id = [];
+            vm.checklist.acciones_id = [];
+            if (vm.checklist.insumos_lote) {
+                if (vm.checklist.insumos_lote.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'insumos_lote');
+                }
+            }
+            if (vm.symptoms.length === 0) {
+                vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
+            } else {
+                var index;
+                for (index = 0; index < vm.symptoms.length; ++index) {
+                    if (vm.symptoms[index].code) {
+                        vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
+                    }
+                }
+            }
+            if (vm.actions.length === 0) {
+                vm.checklist = _.omit(vm.checklist, 'acciones_id');
+            } else {
+                var index2;
+                for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                    if (vm.actions[index2].com_code) {
+                        vm.checklist.acciones_id.push(vm.actions[index2].com_code);
+                    }
+                }
+            }
+            if (!vm.checklist.etapa_siguiente_id) {
+                vm.checklist = _.omit(vm.checklist, 'etapa_siguiente_id');
+            }
+            var promiseSendCheck = inspectionProvider.makeChecklist(vm.checklist,vm.step.currentStage.id);
+            promiseSendCheck.then(function (response) {
+                $log.debug(response);
+                ErrorHandler.successCreation();
+                clear();
+            }).catch(function (errormsg) {
+                $log.debug(errormsg);
+                ErrorHandler.errorTranslate(errormsg);
+            });
 
         }
 
@@ -213,6 +260,12 @@
         function getActions(element) {
             //console.log(element);
             vm.actions = element;
+        }
+        function nextStep(step) {
+            $log.debug("siguiente etapa:");
+            $log.debug(step);
+            vm.checklist.etapa_siguiente_id = step.id;
+
         }
 
         //--------------------------------------------------------------------------------------------------------------

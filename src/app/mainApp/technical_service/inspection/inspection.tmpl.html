@@ -171,11 +171,28 @@
                             <md-checkbox ng-model="vm.checklist.vacio_mercancia"></md-checkbox>
                         </div>
                     </div>
+                    <div ng-if="vm.step.currentStage.id" layout="row" layout-wrap="" layout-padding="" layout-align="space-between center">
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="zmdi zmdi-format-color-fill"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.FINISHED</span>
+                            <md-checkbox ng-model="vm.checklist.terminado"></md-checkbox>
+                        </div>
+                        <div flex-gt-md="25" flex-md="50" flex="100" layout-align="space-between center">
+                            <md-icon md-font-icon="fas fa-broom"></md-icon>
+                            <span class="md-body-2" translate="">INSPECTION.READY</span>
+                            <md-checkbox ng-model="vm.checklist.listo_para_salida"></md-checkbox>
+                        </div>
+                    </div>
                     <div flex="100">
                         <md-input-container flex="100" layout-align="center center" layout-fill="">
                             <label translate=""><md-icon  md-font-icon=""></md-icon>INSPECTION.OBSERVATIONS</label>
                             <textarea ng-model="vm.checklist.observaciones" type="text" rows="5" ></textarea>
                         </md-input-container>
+                    </div>
+                    <div flex="100" ng-if="vm.step.currentStage.id">
+                        <next-step  flex="100"
+                                   next-step="vm.nextStep(element)"
+                                   actual-step="vm.step.currentStage.etapa"></next-step>
                     </div>
 
                 </md-content>
