@@ -35,6 +35,8 @@ gulp.task('configuration',function () {
     run('config:build')();
   }else if (enviroment=='development'){
     run('config')();
+  }else if (enviroment=='pre-qa'){
+    run('config:pre-qa')();
   }else if (enviroment=='server'){
     run('config:server')();
   }

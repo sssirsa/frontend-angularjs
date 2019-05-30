@@ -1,23 +1,21 @@
 /*
-    Fields for "New" entries:
+    Fields for "Warehouse" entries:
     entry:{
         nombre_chofer: string, (Required)
         ife_chofer: base64string, (Required) Image file
         descripcion: string, (Optional)
         linea_transporte_id: int(id), (Required)
         tipo_transporte_id: int(id), (Required)
-        pedimento: string, (Optional)
         sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
         udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
-        proveedor_origen_id: int(id), (Required)
         cabinets_id: array[id] (Required, not empty, validated)
     }
 */
 (function () {
     angular
-        .module('app.mainApp.entries_departures.entries.new')
-        .controller('newManualEntryController', NewManualEntryController);
-    function NewManualEntryController(
+        .module('app.mainApp.entries_departures.entries.warehouse')
+        .controller('warehouseManualEntryController', WarehouseManualEntryController);
+    function WarehouseManualEntryController(
         MANUAL_ENTRIES,
         User,
         Translate,
@@ -25,9 +23,8 @@
         ErrorHandler,
         $mdDialog,
         Helper,
-        EnvironmentConfig,
         URLS,
-        PAGINATION
+        EnvironmentConfig
     ) {
         var vm = this;
 
@@ -40,11 +37,8 @@
         vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryToAgency; //Determines which catalog to show (subsidiary or udn-agency)
-        vm.userAgency;
-        vm.userSubsidiary;
 
-        //Validations and constraints
+        //Validations
         vm.imageConstraints = {
             validations: {
                 size: {
@@ -126,12 +120,7 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
+                        pagination: {},
                         softDelete: {
                             hide: 'deleted',
                             reverse: false
@@ -148,18 +137,13 @@
                             + '/' + URLS.management.base
                             + '/' + URLS.management.catalogues.base
                             + '/' + URLS.management.catalogues.cabinet_model,
-                        query: 'marca__id',
+                        query: '?marca__id=',
                         requires: 'marca',
                         name: 'Modelo',
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
+                        pagination: {},
                         loadMoreButtonText: 'Cargar mas...',
                         softDelete: {
                             hide: 'deleted',
@@ -182,10 +166,8 @@
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
+                            total: 'count',
+                            next: 'next'
                         },
                         elements: 'results',
                         softDelete: {
@@ -208,10 +190,8 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
+                            total: 'count',
+                            next: 'next'
                         },
                         elements: 'results',
                         softDelete: {
@@ -237,10 +217,10 @@
         vm.init = function init() {
             vm.selectedTab = 0;
             vm.showSelector = false;
+            vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entryToAgency = false; //Determines what catalog to show (Petition or udn)
-            vm.entry = MANUAL_ENTRIES.newEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
+            vm.entry = MANUAL_ENTRIES.warehouseEntry.template();
+            vm.catalogues = MANUAL_ENTRIES.warehouseEntry.catalogues();
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
@@ -286,13 +266,14 @@
                     //Cleaning the search bar
                     vm.cabinetID = '';
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.NEW.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_ENTRIES
                             .getCabinet(cabinetID),
                         cabinet: null,
+                        obsolete: false,
                         id: null
                     };
 
@@ -307,27 +288,13 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            //Cabinet can enter
                             if (cabinetSuccessCallback.can_enter) {
-                                //Cabinet exist in database
-                                if (cabinetSuccessCallback.cabinet) {
-                                    //Cabinet it's new
-                                    if (cabinetSuccessCallback.cabinet.nuevo) {
-                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                    }
-                                    else {
-                                        //Cabinet can´t enter because it's not new
-                                        toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER_NOT_NEW'), cabinetID);
-                                        vm.removeCabinet(cabinetID);
-                                    }
-                                }
-                                //else {
-                                //    //The cabinet is added to be created (you do nothing)
-                                //}
+                                //Cabinet can enter
+                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                             }
                             else {
-                                //Cabinet can't enter because it's in a warehouse
-                                toastr.error(Translate.translate('ENTRIES.NEW.ERRORS.CANT_ENTER_IN_WAREHOUSE'), cabinetID);
+                                //Cabinet can´t enter because it already has a subsidiary assigned
+                                toastr.error(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -348,7 +315,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.NEW.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.WAREHOUSE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -361,8 +328,8 @@
             if (entryHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.NEW.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.NEW.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -414,11 +381,11 @@
             entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createNew(entry)
+                .createWarehouse(entry)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('ENTRIES.NEW.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('ENTRIES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {
