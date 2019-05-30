@@ -1,29 +1,43 @@
 <md-card layout-padding>
     <div layout="column"
          layout-align="center center">
-        <h1 translate>ENTRIES.UNRECOGNIZABLE.TITLE</h1>
-        <span translate>ENTRIES.UNRECOGNIZABLE.HINTS.ENTRY</span>
+        <h1 translate>DEPARTURES.WAREHOUSE.TITLE</h1>
     </div>
     <md-tabs md-dynamic-height="true"
              md-selected="vm.selectedTab">
         <md-tab layout="column"
                 layout-align="center stretch"
-                label={{'ENTRIES.UNRECOGNIZABLE.LABELS.ASSET_LOADING'|translate}}>
+                label={{'DEPARTURES.WAREHOUSE.LABELS.ASSET_LOADING'|translate}}>
+            <catalog-select class="full-width"
+                            ng-if="vm.showSubsidiarySelector"
+                            catalog="vm.catalogues['subsidiary'].catalog"
+                            hint="vm.catalogues['subsidiary'].hint"
+                            icon="vm.catalogues['subsidiary'].icon"
+                            required="vm.catalogues['subsidiary'].required"
+                            pagination="vm.catalogues['subsidiary'].pagination"
+                            elements="vm.catalogues['subsidiary'].elements"
+                            soft-delete="vm.catalogues['subsidiary'].softDelete"
+                            on-select="vm.onSubsidiarySelect(element,vm.catalogues['subsidiary'].binding)">
+            </catalog-select>
             <!--Cabinet search bar-->
             <md-actions layout-gt-xs="row"
                         layout="column"
                         layout-align-gt-xs="space-around center"
-                        layout-align="center stretch">
-                <h3>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET_SEARCH'|translate}}</h3>
-
-                <md-button ng-click="vm.createCabinet()"
-                           aria-label="create cabinet"
-                           class="md-primary md-raised">
-                    <div layout="row" layout-align="center center">
-                        <md-icon md-font-icon="fa fa-plus"></md-icon>
-                        <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.CREATE'|translate}}</div>
-                    </div>
-                </md-button>
+                        layout-align="center stretch"
+                        ng-if="!vm.showSubsidiarySelector
+                        || vm.departure[vm.catalogues['subsidiary'].binding]">
+                <h3>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <form name="cabinetSearch"
+                      ng-submit="vm.searchCabinet(vm.cabinetID)">
+                    <md-input-container class="md-block">
+                        <label>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET_ID'|translate}}</label>
+                        <input name="cabinetID"
+                               type="text"
+                               digits-only
+                               md-max-length="10"
+                               ng-model="vm.cabinetID" />
+                    </md-input-container>
+                </form>
             </md-actions>
             <div layout="row"
                  layout-align="space-between center">
@@ -32,50 +46,80 @@
                          layout-padding
                          class="full-width">
                     <p>Cabinets</p>
-                    <md-virtual-repeat-container class="cabinet-container">
+                    <md-virtual-repeat-container class="departures-cabinet-container">
                         <md-list>
                             <md-list-item layout-align="center stretch"
                                           md-virtual-repeat="element in vm.cabinetList">
                                 <div layout="column"
                                      layout-align="center stretch"
                                      class="full-width"
-                                    <!--Created cabinets-->
+                                     cg-busy="{
+                                     promise:element.promise,
+                                     message:'Buscando cabinet '+element.id
+                                     }">
+                                    <!--Cabinets that can leave-->
                                     <section layout-gt-xs="row"
                                              layout="column"
                                              layout-align-gt-xs="space-between center"
                                              layout-align="center stretch"
-                                             class="full-width found-cabinet"
-                                             ng-if="element.cabinet">
+                                             class="full-width can-leave-cabinet"
+                                             ng-if="element.can_leave">
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.ID'|translate}}</b>
-                                            {{element.cabinet.id}}
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.NUMBER'|translate}}</b>
-                                            <md-chips ng-model="element.cabinet.economicos"
-                                                      ng-if="element.cabinet.economicos.length>0"
-                                                      readonly="true"></md-chips>
-                                                <div ng-if="!element.cabinet.economicos.length>0">{{'ENTRIES.UNRECOGNIZABLE.LABELS.UNKNOWN'|translate}}</div>
-                                        </div>
-                                        <div layout="column"
-                                             layout-align="center center">
-                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
-                                            <div ng-if="!element.cabinet.no_serie">{{'ENTRIES.UNRECOGNIZABLE.LABELS.UNKNOWN'|translate}}</div>
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.STATUS'|translate}}</b>
-                                            {{element.cabinet.status.nombre}}
-                                            <div ng-if="!element.cabinet.status">{{'ENTRIES.UNRECOGNIZABLE.LABELS.UNKNOWN'|translate}}</div>
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'ENTRIES.UNRECOGNIZABLE.LABELS.CABINET.REASON'|translate}}</b>
-                                            {{element.cabinet.motivo.nombre}}
-                                            <div ng-if="!element.cabinet.motivo.nombre">{{'ENTRIES.UNRECOGNIZABLE.LABELS.UNKNOWN'|translate}}</div>
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            {{element.cabinet.modelo.nombre}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                                       aria-label="remove cabinet"
+                                                       class="md-icon-button">
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <!--Cant leave cabinets-->
+                                    <section layout-gt-xs="row"
+                                             layout="column"
+                                             layout-align-gt-xs="space-between center"
+                                             layout-align="center stretch"
+                                             class="full-width cant-leave-cabinet"
+                                             ng-if="!element.can_leave"
+                                             ng-click="vm.showCabinetRestriction(element.id)">
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.economico}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            {{element.cabinet.no_serie}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            {{element.cabinet.modelo.marca.descripcion}}
+                                        </div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <b>{{'DEPARTURES.WAREHOUSE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
@@ -102,7 +146,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                        <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.NEXT'|translate}}</div>
+                        <div>{{'DEPARTURES.WAREHOUSE.BUTTONS.NEXT'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
@@ -110,87 +154,33 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
-                label={{'ENTRIES.UNRECOGNIZABLE.LABELS.ENTRY_DATA'|translate}}>
-            <div layout="row"
-                 layout-align="center center"
-                 ng-if="vm.showSelector">
-                <p>{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.LABEL'|translate}}</p>
-                <md-switch ng-model="vm.entryToAgency"
-                           ng-change="vm.changeSwitch()">
-                    <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.FALSE'|translate}}</p>-->
-                </md-switch>
-            </div>
-            <form name="entryForm"
+                label={{'DEPARTURES.WAREHOUSE.LABELS.DEPARTURE_DATA'|translate}}>
+            <form name="departureForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
-                <div ng-if="vm.userSubsidiary"
-                     layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block">
+                    <label translate>DEPARTURES.WAREHOUSE.LABELS.DESCRIPTION</label>
+                    <md-icon class="fa fa-edit"></md-icon>
+                    <input ng-model="vm.departure['descripcion']"
+                           name="description"
+                           type="text">
+                    <div class="hint" translate>DEPARTURES.WAREHOUSE.HINTS.DESCRIPTION</div>
+                </md-input-container>
+                <div layout="column"
                      layout-align="center stretch">
                     <catalog-select class="full-width"
-                                    ng-if="vm.showSelector"
-                                    catalog="vm.catalogues['subsidiary'].catalog"
-                                    hint="vm.catalogues['subsidiary'].hint"
-                                    icon="vm.catalogues['subsidiary'].icon"
-                                    required="vm.catalogues['subsidiary'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
-                    </catalog-select>
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['origin_udn'].catalog"
-                                    hint="vm.catalogues['origin_udn'].hint"
-                                    icon="vm.catalogues['origin_udn'].icon"
-                                    required="vm.catalogues['origin_udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['origin_udn'].binding)">
-                    </catalog-select>
-                </div>
-                <div ng-if="vm.userAgency"
-                     layout="column"
-                     layout-gt-sm="row"
-                     layout-align-gt-sm="space-around center"
-                     layout-align="center stretch">
-                    <catalog-select class="full-width"
-                                    ng-if="vm.showSelector"
                                     catalog="vm.catalogues['udn'].catalog"
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
                                     required="vm.catalogues['udn'].required"
+                                    pagination="vm.catalogues['udn'].pagination"
+                                    elements="vm.catalogues['udn'].elements"
+                                    soft-delete="vm.catalogues['udn'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
-                    <md-input-container class="md-icon-float md-block full-width">
-                        <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_STORE</label>
-                        <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.store['razon_social']"
-                               name="store_name"
-                               ng-required="true"
-                               disabled
-                               type="text">
-                        <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.ORIGIN_STORE</div>
-                    </md-input-container>
-                    <div layout="column"
-                         layout-align-gt-sm="center stretch"
-                         layout-align="center center">
-                        <md-button ng-click="vm.searchStore()"
-                                   aria-label="search store"
-                                   class="md-primary md-raised">
-                            <div layout="row" layout-align="center center">
-                                <md-icon md-font-icon="fa fa-search"></md-icon>
-                                <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.SEARCH_STORE'|translate}}</div>
-                            </div>
-                        </md-button>
-                    </div>
                 </div>
-                <md-input-container layout="column"
-                                    class="md-icon-float md-block">
-                    <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.DESCRIPTION</label>
-                    <md-icon class="fa fa-edit"></md-icon>
-                    <input ng-model="vm.entry['descripcion']"
-                           name="description"
-                           type="text">
-                    <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.DESCRIPTION</div>
-                </md-input-container>
                 <div layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
@@ -200,6 +190,9 @@
                                     hint="vm.catalogues['transport_line'].hint"
                                     icon="vm.catalogues['transport_line'].icon"
                                     required="vm.catalogues['transport_line'].required"
+                                    pagination="vm.catalogues['transport_line'].pagination"
+                                    elements="vm.catalogues['transport_line'].elements"
+                                    soft-delete="vm.catalogues['transport_line'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['transport_line'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
@@ -207,6 +200,9 @@
                                     hint="vm.catalogues['transport_kind'].hint"
                                     icon="vm.catalogues['transport_kind'].icon"
                                     required="vm.catalogues['transport_kind'].required"
+                                    pagination="vm.catalogues['transport_kind'].pagination"
+                                    elements="vm.catalogues['transport_kind'].elements"
+                                    soft-delete="vm.catalogues['transport_kind'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
                     </catalog-select>
                 </div>
@@ -216,13 +212,13 @@
                      layout-align="center stretch">
                     <md-input-container layout="column"
                                         class="md-icon-float md-block full-width">
-                        <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.DRIVER_NAME</label>
+                        <label translate>DEPARTURES.WAREHOUSE.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']"
+                        <input ng-model="vm.departure['nombre_chofer']"
                                name="driver_name"
                                ng-required="true"
                                type="text">
-                        <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.DRIVER_NAME</div>
+                        <div class="hint" translate>DEPARTURES.WAREHOUSE.HINTS.DRIVER_NAME</div>
                     </md-input-container>
                     <md-input-container layout="column"
                                         layout-align="start center"
@@ -232,14 +228,14 @@
                             <div>
                                 <md-icon class="far fa-id-card"></md-icon>
                             </div>
-                            <div translate>ENTRIES.UNRECOGNIZABLE.LABELS.DRIVER_ID</div>
+                            <div translate>DEPARTURES.WAREHOUSE.LABELS.DRIVER_ID</div>
                         </div>
                         <file-uploader files-selected="vm.selectDriverID(files)"
                                        file-formats="'image/*'"
                                        validations="vm.imageConstraints.validations"
                                        resize-if="vm.imageConstraints.resizeIf"
                                        resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.DRIVER_ID</div>
+                        <div class="hint" translate>DEPARTURES.WAREHOUSE.HINTS.DRIVER_ID</div>
                     </md-input-container>
                 </div>
             </form>
@@ -250,20 +246,20 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                        <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.PREVIOUS'|translate}}</div>
+                        <div>{{'DEPARTURES.WAREHOUSE.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
-                <md-button ng-click="vm.clickSaveEntry(vm.entry)"
+                <md-button ng-click="vm.clickSaveDeparture(vm.departure)"
                            cg-busy="{
-                                     promise:vm.createEntryPromise,
+                                     promise:vm.createDeparturePromise,
                                      message:' '
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
+                           ng-disabled="departureForm.$invalid ||!vm.departure['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
-                        <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.SAVE'|translate}}</div>
+                        <div>{{'DEPARTURES.WAREHOUSE.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>

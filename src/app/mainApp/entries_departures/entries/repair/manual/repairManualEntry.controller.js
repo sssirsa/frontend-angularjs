@@ -1,8 +1,22 @@
+/*
+    Fields for "Repair" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        establecimiento_origen_id: int(id), (Required)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
-        .module('app.mainApp.entries_departures.entries.obsolete')
-        .controller('obsoleteManualEntryController', ObsoleteManualEntryController);
-    function ObsoleteManualEntryController(
+        .module('app.mainApp.entries_departures.entries.repair')
+        .controller('repairManualEntryController', RepairManualEntryController);
+    function RepairManualEntryController(
         MANUAL_ENTRIES,
         User,
         Translate,
@@ -21,7 +35,7 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -160,54 +174,6 @@
                 },
                 {
                     type: 'catalog',
-                    model: 'estatus_unilever_id',
-                    label: 'Estatus unilever',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_unilever,
-                        name: 'Estatus Unilever',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'estatus_com_id',
-                    label: 'Estatus COM',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_com,
-                        name: 'Estatus COM',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results'
-                    },
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                },
-                {
-                    type: 'catalog',
                     model: 'categoria_id',
                     label: 'Categoría',
                     catalog: {
@@ -249,13 +215,16 @@
             vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entry = MANUAL_ENTRIES.obsoleteEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.obsoleteEntry.catalogues();
+            vm.entry = MANUAL_ENTRIES.repairEntry.template();
+            vm.catalogues = MANUAL_ENTRIES.repairEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();
@@ -291,7 +260,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.REPAIR.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
@@ -317,8 +286,8 @@
                                 cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                             }
                             else {
-                                //Cabinet can´t enter because it already has a subsidiary assigned
-                                toastr.error(Translate.translate('ENTRIES.OBSOLETE.ERRORS.CANT_ENTER'), cabinetID);
+                                //Cabinet can´t enter because it's in a warehouse
+                                toastr.error(Translate.translate('ENTRIES.REPAIR.ERRORS.CANT_ENTER'), cabinetID);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -337,7 +306,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.OBSOLETE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('ENTRIES.REPAIR.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -350,8 +319,8 @@
             if (entryHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.OBSOLETE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('ENTRIES.REPAIR.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('ENTRIES.REPAIR.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -390,6 +359,33 @@
             });
         };
 
+        vm.searchStore = function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    //Select the store
+                    vm.store = store;
+                    vm.entry.establecimiento_origen_id = store['no_cliente'];
+                })
+                .catch(function (storeError) {
+                    if (storeError) {
+                        ErrorHandler.errorTranslate(storeError);
+                    }
+                });
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['udn'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
+        };
+
         //Internal functions
 
         var saveEntry = function saveEntry(entry) {
@@ -397,11 +393,11 @@
             entry = Helper.removeBlankStrings(entry);
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
-                .createObsolete(entry)
+                .createRepair(entry)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('ENTRIES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('ENTRIES.REPAIR.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {
@@ -413,6 +409,16 @@
             return vm.cabinetList.some(function (element) {
                 return !element.cabinet;
             });
+        };
+
+        var addCabinetToList = function addCabinetToList(cabinet) {
+            var cabinetToAdd = {
+                promise: null,
+                cabinet: cabinet,
+                id: cabinet['economico']
+            };
+
+            vm.cabinetList.push(cabinetToAdd);
         };
 
         var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
@@ -432,16 +438,6 @@
                 entry['cabinets_id'].push(existingCabinets[i].id);
             }
             return entry;
-        };
-
-        var addCabinetToList = function addCabinetToList(cabinet) {
-            var cabinetToAdd = {
-                promise: null,
-                cabinet: cabinet,
-                id: cabinet['economico']
-            };
-
-            vm.cabinetList.push(cabinetToAdd);
         };
 
         //Tab functions

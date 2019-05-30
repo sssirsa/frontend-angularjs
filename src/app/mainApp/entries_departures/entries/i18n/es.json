@@ -6,48 +6,51 @@
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",
             "WARRANTIES": "Garantías",
+            "REPAIR": "Reparación",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
-            "OBSOLETE": "Obsoletos"
+            "WAREHOUSE": "Buen estado"
         },
         "NEW": {
             "TITLE": "Entrada de nuevos",
             "LABELS": {
-                "ENTRY_DATA": "Información de entrada",
-                "ASSET_LOADING": "Carga de cabinets",
-                "DESCRIPTION": "Descripción",
-                "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
-                "TRANSPORT_LINE": "Linea de transporte",
-                "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal",
-                "PETITION": "Pedimento",
-                "DRIVER_ID": "Identificación del operador",
-                "DRIVER_NAME": "Nombre del operador",
-                "CABINET_SEARCH": "Registro de cabinets",
+                "ASSET_LOADING": "Carga de cabinets",
                 "CABINET_ID": "Económico del cabinet",
+                "CABINET_SEARCH": "Registro de cabinets",
                 "CABINET": {
                     "ID": "Económico",
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "DESCRIPTION": "Descripción",
+                "DRIVER_NAME": "Nombre del operador",
+                "DRIVER_ID": "Identificación del operador",
+                "ENTRY_DATA": "Información de entrada",
+                "PETITION": "Pedimento",
+                "SUBSIDIARY": "Sucursal",
+                "SUPPLIER": "Proveedor",
                 "SWITCH": {
-                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
-                    "TRUE": "La entrada proviene de una UDN-Agencia",
-                    "FALSE": "La entrada no proviene de una UDN-Agencia"
-                }
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
+                },
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte"
             },
             "HINTS": {
+                "AGENCY": "Tu usuario no tiene una UDN-Agencia, selecciona una para generar la entrada",
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "ENTRY": "Entrada de cabinets nuevos desde un proveedor",
+                "PETITION": "Ingresa el pedimento",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
-                "AGENCY": "Selecciona la agencia de procedencia",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
-                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega",
-                "PETITION": "Ingresa el pedimento"
+                "SUPPLIER": "Selecciona el proveedor de los cabinets"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
@@ -66,8 +69,8 @@
                 "CANT_ENTER_IN_WAREHOUSE": "El cabinet ya se encuentra en almacén"
             }
         },
-        "WARRANTY": {
-            "TITLE": "Entrada de garantías",
+        "REPAIR": {
+            "TITLE": "Entrada de reparación",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
@@ -86,17 +89,78 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                }
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
+                },
+                "STORE": "Establecimiento"
             },
             "HINTS": {
-                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "AGENCY": "Selecciona la agencia de procedencia",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "ENTRY": "Entrada de cabinets provenientes de establecimientos",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "STORE": "Selecciona el establecimiento de procedencia"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar entrada",
+                "REMOVE": "Quitar",
+                "SEARCH_STORE": "Buscar establecimiento"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "NOT_FOUND_ID": "Económico no encontrado",
+                "CANT_ENTER": "El cabinet ya tiene una entrada"
+            }
+        },
+        "WARRANTY": {
+            "TITLE": "Entrada de garantías",
+            "LABELS": {
+                "ENTRY_DATA": "Información de entrada",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
+                }
+            },
+            "HINTS": {
+                "AGENCY": "Selecciona la agencia de procedencia",
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, utilizar solo si la UDN-Agencia no generó la salida de garantías",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
@@ -114,8 +178,8 @@
                 "CANT_ENTER": "El cabinet ya tiene una entrada"
             }
         },
-        "OBSOLETE": {
-            "TITLE": "Entrada de obsoletos",
+        "WAREHOUSE": {
+            "TITLE": "Entrada de buen estado",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
@@ -134,17 +198,23 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
+                    "TRUE": "La entrada es a una UDN-Agencia",
+                    "FALSE": "La entrada es a una sucursal"
                 }
             },
             "HINTS": {
-                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "AGENCY": "Selecciona la agencia de procedencia",
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
+                "ENTRY": "Entrada de cabinets para su almacenamiento, no pasarán a servicio, estatus unilever 0001-Buen Estado",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
-                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
-                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
@@ -153,7 +223,7 @@
                 "REMOVE": "Quitar"
             },
             "MESSAGES": {
-                "SUCCESS_CREATE": "Entrada registrada correctamente",
+                "SUCCESS_CREATE": "Entrada de buen estado registrada correctamente",
                 "PENDING_CABINETS": "Aun tienes cabinets no encontrados en sistema, dentro del listado de económicos. Estos cabinets no se considerarán en la entrada"
             },
             "ERRORS": {
@@ -168,12 +238,12 @@
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
-                "PROJECT": "Proyecto",
-                "AGENCY": "UDN-Agencia",
+                "AGENCY": "UDN-Agencia de arribo",
+                "ORIGIN_AGENCY": "UDN-Agencia de procedencia",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal",
-                "PETITION": "Pedimento",
+                "SUBSIDIARY": "Sucursal de arribo",
+                "ORIGIN_STORE": "Establecimiento de procedencia",
                 "DRIVER_ID": "Identificación del operador",
                 "DRIVER_NAME": "Nombre del operador",
                 "CABINET_SEARCH": "Registro de cabinets",
@@ -185,7 +255,7 @@
                     "REASON": "Motivo"
                 },
                 "SWITCH": {
-                    "LABEL": "Activa si la entrada proviene de una UDN-Agencia",
+                    "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada proviene de una UDN-Agencia",
                     "FALSE": "La entrada no proviene de una UDN-Agencia"
                 },
@@ -193,21 +263,23 @@
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
-                "AGENCY": "Selecciona la agencia de procedencia",
+                "AGENCY": "Tu usuario no tiene UDN-Agencia, selecciona una para generar la entrada",
+                "ORIGIN_AGENCY": "Selecciona la UDN-Agencia de procedencia",
+                "ENTRY": "Entrada de cabinets no capitalizados desde UDN-Agencia o establecimiento",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
+                "ORIGIN_STORE": "Selecciona el establecimiento de procedencia",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega",
-                "PETITION": "Ingresa el pedimento"
+                "DRIVER_NAME": "Operador del transporte de entrega"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
                 "PREVIOUS": "Anterior",
                 "SAVE": "Guardar entrada",
                 "REMOVE": "Quitar",
-                "CREATE": "Nuevo cabinet"
+                "CREATE": "Nuevo cabinet",
+                "SEARCH_STORE": "Buscar establecimiento"
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Entrada registrada correctamente",
