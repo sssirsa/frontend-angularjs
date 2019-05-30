@@ -86,18 +86,10 @@
         function infoStep(step) {
             $log.debug(step.currentStage);
             vm.step = step;
-
             if (!vm.step) {
                 $log.debug();
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
                 var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
-                toastr.warning(NOT_STEP, SENT_TO_CHECK);
-                clear();
-            }
-            if(!vm.step.currentStage){
-                $log.debug("No tiene etapa actual");
-                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.SENT_TO_CHECK');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
