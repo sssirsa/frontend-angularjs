@@ -192,11 +192,11 @@
                     //Initial URL building
                     if (vm.paginationHelper['totalPages'] > vm.paginationHelper['actualPage']) {
                         if ("query" in vm.catalog) {
-                            vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                            vm.paginationHelper['nextPage'] = vm.catalog.url
                                 + '&limit=' + vm.catalog.pagination['pageSize'];
                         }
                         else {
-                            vm.paginationHelper['nextPage'] = vm.CatalogProvider.url
+                            vm.paginationHelper['nextPage'] = vm.catalog.url
                                 + '?limit=' + vm.catalog.pagination['pageSize'];
                         }
                         vm.paginationHelper['nextPage'] = vm.paginationHelper['nextPage']
