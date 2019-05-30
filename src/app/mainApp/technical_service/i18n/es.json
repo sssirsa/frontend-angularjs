@@ -32,6 +32,8 @@
         "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
         "GO_TO": "Enviar a:",
         "NOT_STEP":"Este cabinet requiere una Inspección Previa",
+        "REVIEWED":"Este cabinet Posse una Inspección Previa",
+        "DENEGATE":"Imposible realizar esta operación",
         "SENT_TO_CHECK":"Enviar a Inspección"
     },
     "PUNCTURE": {

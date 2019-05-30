@@ -227,6 +227,17 @@
                     $log.debug(errormsg);
                     ErrorHandler.errorTranslate(errormsg);
                 });
+                if (vm.step.control.inspeccionado){
+                    if(vm.step.control.inspeccionado.estado){
+                        if (vm.step.control.inspeccionado.estado==='Confirmado'){
+                            $log.debug("Cabinet ya Inspeccionado");
+                            var DENEGATE = Translate.translate('ERROR_STEP.DENEGATE');
+                            var REVIEWED = Translate.translate('ERROR_STEP.REVIEWED');
+                            toastr.warning(DENEGATE, REVIEWED);
+                            clear();
+                        }
+                    }
+                }
             }
             if (vm.step.currentStage) {
                 if (vm.step.currentStage.etapa.nombre !== 'CheckList' || vm.stage_for_not_stage.nombre !== 'CheckList') {
@@ -238,6 +249,7 @@
 
                 }
             }
+
 
         }
 
