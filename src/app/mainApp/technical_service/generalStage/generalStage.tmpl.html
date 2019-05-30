@@ -16,6 +16,10 @@
 
                 </div>
                 <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
+                    <md-button ng-if="vm.asset"  ng-click="vm.clear()" class="md-raised">
+                        <md-icon md-font-icon="fas fa-search"></md-icon>
+                        <span translate="">INSPECTION.ACTIONS.SEARCH_NEW</span>
+                    </md-button>
                     <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
                         <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
                         <span translate="">INCIDENCE.REPORT_INCIDENCE</span>
