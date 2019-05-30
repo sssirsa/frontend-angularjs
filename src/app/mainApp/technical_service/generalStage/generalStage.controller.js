@@ -110,6 +110,13 @@
             $log.debug(step.currentStage.id);
             $log.debug(step.currentStage.servicio_cabinet);
             vm.step = step;
+            if (!vm.step) {
+                $log.debug();
+                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                clear();
+            }
             vm.search = false;
 
         }
