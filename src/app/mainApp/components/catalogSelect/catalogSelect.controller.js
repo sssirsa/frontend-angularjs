@@ -256,7 +256,7 @@
                     vm.onClose();
                 }
                 else {
-                    createMainCatalogProvider();
+                    createMainCatalogProvider(true);
                     vm.listLoader = CATALOG_SELECT.detail(vm.initial)
                         .then(function catalogSelectDetailSuccess(successCallback) {
                             vm.selectedElement = successCallback;
@@ -302,14 +302,14 @@
             return index;
         }
 
-        function createMainCatalogProvider() {
+        function createMainCatalogProvider(detailRequest) {
             vm.CatalogProvider = CATALOG_SELECT;
             if (vm.catalog.hasOwnProperty('query')
                 && vm.catalog.hasOwnProperty('query_value')) {
                 vm.CatalogProvider.url = vm.catalog.url
                     + '?' + vm.catalog.query
                     + '=' + vm.catalog.query_value;
-                if ("pagination" in vm.catalog) {
+                if ("pagination" in vm.catalog && !detailRequest) {
                     //Build paginated URL
                     vm.CatalogProvider.url = vm.CatalogProvider.url
                         + '&limit=' + vm.catalog.pagination.pageSize
@@ -318,7 +318,7 @@
             }
             else {//Initial URL building
                 vm.CatalogProvider.url = vm.catalog.url;
-                if ("pagination" in vm.catalog) {
+                if ("pagination" in vm.catalog && !detailRequest) {
                     //Build paginated URL
                     vm.CatalogProvider.url = vm.CatalogProvider.url
                         + '?limit=' + vm.catalog.pagination.pageSize
