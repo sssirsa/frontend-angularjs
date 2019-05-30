@@ -9,7 +9,8 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        User
+        User,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -69,8 +70,13 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
-                pagination: {},
+                mode: PAGINATION.mode,
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
                 fields: [
                     {
                         type: 'text',
@@ -139,8 +145,10 @@
                         option: 'nombre',
                         icon: 'fa fa-warehouse',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {

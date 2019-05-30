@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('MarcaCabinetController',MarcaCabinetController);
 
-    function MarcaCabinetController(URLS, Translate, EnvironmentConfig) {
+    function MarcaCabinetController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var managementUrl =  (EnvironmentConfig.site.rest.api)
@@ -116,9 +121,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

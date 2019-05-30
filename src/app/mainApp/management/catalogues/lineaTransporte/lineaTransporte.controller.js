@@ -6,7 +6,12 @@
         .controller('LineaTransporteController', LineaTransporteController);
 
     /* @ngInject */
-    function LineaTransporteController(URLS, Translate, EnvironmentConfig) {
+    function LineaTransporteController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
         var vm = this;
 
         var entriesUrl =  (EnvironmentConfig.site.rest.api)
@@ -143,9 +148,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

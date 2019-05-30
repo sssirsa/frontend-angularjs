@@ -8,7 +8,8 @@
         $q,
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var entriesDeparturesUrl = API
@@ -172,8 +173,10 @@
                             model: 'id',
                             option: 'nombre',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -198,8 +201,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -224,8 +229,10 @@
                             model: 'id',
                             option: 'descripcion',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -250,8 +257,10 @@
                             model: 'id',
                             option: 'agencia',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -294,8 +303,10 @@
                             model: 'id',
                             option: 'nombre',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -320,8 +331,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -346,8 +359,10 @@
                             model: 'id',
                             option: 'descripcion',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -372,8 +387,10 @@
                             model: 'id',
                             option: 'agencia',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -468,8 +485,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -494,8 +513,10 @@
                             model: 'id',
                             option: 'descripcion',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -563,8 +584,10 @@
                             model: 'id',
                             option: 'nombre',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -589,8 +612,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -615,8 +640,10 @@
                             model: 'id',
                             option: 'descripcion',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -641,8 +668,10 @@
                             model: 'id',
                             option: 'agencia',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -667,8 +696,10 @@
                             model: 'id',
                             option: 'agencia',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -710,8 +741,10 @@
                             model: 'id',
                             option: 'nombre',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -736,8 +769,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -762,8 +797,10 @@
                             model: 'id',
                             option: 'descripcion',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
@@ -788,8 +825,10 @@
                             model: 'id',
                             option: 'agencia',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {

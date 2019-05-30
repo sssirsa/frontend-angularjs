@@ -5,7 +5,11 @@
         .module('app.mainApp.management.catalogues')
         .controller('StatesController', StatesController);
 
-    function StatesController(URLS, Translate)
+    function StatesController(
+        URLS,
+        Translate,
+        PAGINATION
+    )
     {
 
         var vm = this;
@@ -89,10 +93,13 @@
             },
             LIST: {
                 // elements: 'results',
-                mode: 'infinite',
-                // pagination: {
-                //     total: 'count'
-                // },
+                mode: PAGINATION.mode,
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
                 fields: [
                     {
                         type: 'text',
