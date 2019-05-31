@@ -22,7 +22,7 @@
         };
 
         function sendStage(id,body) {
-            return urlrepair.all(URLS.technical_service.services.diagnose).all(id).customPATCH(body);
+            return urlrepair.all(URLS.technical_service.services.stage).all(id).customPATCH(body);
         }
 
 
