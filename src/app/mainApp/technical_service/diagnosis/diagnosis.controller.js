@@ -164,7 +164,7 @@
 
 
         function getInsumosLote(element) {
-            vm.checklist.insumos_lote = element;
+            vm.diagnostic.insumos_lote_usados = element;
         }
 
         function getFailures(failures) {

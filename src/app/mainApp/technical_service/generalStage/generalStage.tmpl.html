@@ -44,6 +44,8 @@
                                           tipo-equipo="vm.asset.modelo.tipo.id"
                                           catalogo-etapa="vm.step.currentStage.etapa.nombre"
                                           bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+                    <unique-asset ng-if="vm.step" flex="100" sucursal="vm.step.control.sucursal"
+                                  unique-asset-loaded="vm.getUniqueAsset(element)"></unique-asset>
 
                 </md-content>
             </md-tab>
@@ -68,7 +70,8 @@
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.CLEAR</span>
             </md-button>
-            <md-button  ng-if="!vm.stage.etapa_siguiente_id && vm.asset" ng-click="vm.saveStage()" class="md-raised md-primary">
+            <md-button ng-if="!vm.stage.etapa_siguiente_id && vm.asset" ng-click="vm.saveStage()"
+                       class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.SAVE</span>
             </md-button>

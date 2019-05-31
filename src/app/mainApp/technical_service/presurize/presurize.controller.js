@@ -164,7 +164,7 @@
         }
 
         function getInsumosLote(element) {
-            vm.presurize.insumos_lote = element;
+            vm.presurize.insumos_lote_usados = element;
         }
 
         function onStart(startDate) {

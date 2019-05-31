@@ -164,7 +164,10 @@
 
 
         function getInsumosLote(element) {
-            vm.checklist.insumos_lote = element;
+            //console.log(element);
+            vm.stage.insumos_lote = element;
+            $log.debug(vm.stage.insumos_lote_usados);
+
         }
 
         function nextStep(step) {
