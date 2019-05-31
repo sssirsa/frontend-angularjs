@@ -164,7 +164,11 @@
         "ACTIONS":{
             "SAVE":"Guardar Etapa",
             "CLOSE":"Cerrar Etapa",
-            "CLEAR":"Limpiar Campos"
+            "CLEAR":"Limpiar Campos",
+            "CONFIRM":"Esta seguro de que desea cerrar la presente etapa una vez cerrada no será modificable",
+            "ACCEPT":"Aceptar",
+            "CANCEL":"Cancelar"
+
         }
     },
     "RETIRE_ASSET_COMPONENT":{

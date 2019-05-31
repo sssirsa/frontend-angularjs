@@ -105,7 +105,12 @@
 
         function selectStep() {
             if (vm.endService) {
+                if(vm.nextStepSelected){
                 vm.nextStep({element: vm.nextStepSelected});
+                }
+                else{
+                    vm.nextStep({element:  vm.step});
+                }
             }
             vm.step = vm.nextStepSelected;
 

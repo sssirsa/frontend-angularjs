@@ -70,6 +70,41 @@
 
         function sendDiagnosis() {
             vm.diagnostic.sucursal_id = vm.step.control.sucursal.id;
+            if (vm.diagnostic.insumos_lote) {
+                if (vm.diagnostic.insumos_lote.length === 0) {
+                    vm.diagnostic = _.omit(vm.presurize, 'insumos_lote');
+                }
+            }
+            if (!vm.actions){
+                vm.diagnostic = _.omit(vm.diagnostic, 'acciones_id');
+            }
+            if (vm.actions) {
+                if (vm.actions.length === 0) {
+                    vm.diagnostic = _.omit(vm.diagnostic, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.diagnostic.acciones_id.push(vm.actions[index2].com_code);
+                        }
+                    }
+                }
+            }
+            if (!vm.failures){
+                vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
+            }
+            if (vm.failures) {
+                if (vm.failures.length === 0) {
+                    vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.failures.length; ++index2) {
+                        if (vm.failures[index2].com_code) {
+                            vm.diagnostic.fallas_id.push(vm.failures[index2].com_code);
+                        }
+                    }
+                }
+            }
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
             promiseSendDiagnosis.then(function (response) {
                 $log.info(response);

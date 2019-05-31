@@ -8,14 +8,8 @@
 
                     </h2>
                 </div>
-                <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-button ng-if="!vm.search" ng-click="vm.enableSearch()" class="md-raised md-primary">
-                        <md-icon md-font-icon="fas fa-search"></md-icon>
-                        <span translate="">GENERAL_STAGE.SEARCH</span>
-                    </md-button>
 
-                </div>
-                <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
+                <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
                     <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                         <md-icon md-font-icon="fas fa-search"></md-icon>
                         <span translate="">INSPECTION.ACTIONS.SEARCH_NEW</span>
@@ -30,7 +24,7 @@
             </div>
         </md-toolbar>
         <div layout="row" flex="100" layout-wrap="" class="minorWhite" layout-padding="">
-            <search-cabinet-step ng-if="vm.search" flex="100" info-gral="vm.infogral(element)"
+            <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
 
             <div layout="row" flex="100" layout-wrap="">
@@ -55,11 +49,12 @@
             </md-tab>
             <md-tab label="{{vm.assets_info}}">
                 <md-content>
-
                     <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
-                                     actions="vm.getActions(element)" flex="100"></actions-manager>
+                                     actions-added="vm.getActions(element)"
+                                     actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
 
                 </md-content>
+
                 <next-step ng-if="vm.step" flex="100"
                            next-step="vm.nextStep(element)"
                            actual-step="vm.step.currentStage.etapa"></next-step>
@@ -71,9 +66,9 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
-                <span translate="">GENERAL_STAGE.ACTIONS.CLEAR_FIELD</span>
+                <span translate="">GENERAL_STAGE.ACTIONS.CLEAR</span>
             </md-button>
-            <md-button ng-click="vm.saveStage()" class="md-raised md-primary">
+            <md-button  ng-if="!vm.stage.etapa_siguiente_id && vm.asset" ng-click="vm.saveStage()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.SAVE</span>
             </md-button>
@@ -81,6 +76,7 @@
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">GENERAL_STAGE.ACTIONS.CLOSE</span>
             </md-button>
+
         </md-card-actions>
     </md-card>
 </div>

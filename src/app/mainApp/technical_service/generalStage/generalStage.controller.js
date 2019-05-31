@@ -16,6 +16,11 @@
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('GENERAL_STAGE.BULK_ASSET');
         vm.assets_info = Translate.translate('GENERAL_STAGE.ACTIONS_MADE');
+        vm.dialogTitle=Translate.translate('GENERAL_STAGE.ACTIONS.CLOSE');
+        vm.confirmUpdate=Translate.translate('GENERAL_STAGE.ACTIONS.CONFIRM');
+        vm.accept=Translate.translate('GENERAL_STAGE.ACTIONS.ACCEPT');
+        vm.cancel=Translate.translate('GENERAL_STAGE.ACTIONS.CANCEL');
+
 
         vm.stage = {
             sucursal_id: undefined
@@ -57,6 +62,25 @@
         function closeStage() {
             $log.debug(vm.stage);
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
+            if (!vm.stage.etapa_siguiente_id) {
+                vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
+            }
+            vm.stage.sucursal_id = vm.step.control.sucursal.id;
+            if (!vm.actions){
+                vm.stage = _.omit(vm.stage, 'acciones_id');
+            }
+            if (vm.actions) {
+                if (vm.actions.length === 0) {
+                    vm.stage = _.omit(vm.stage, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.stage.acciones_id.push(vm.actions[index2].com_code);
+                        }
+                    }
+                }
+            }
             var confirm;
             confirm = $mdDialog.confirm()
                 .title(vm.dialogTitle)
@@ -67,6 +91,7 @@
                 var promiseSendDiagnosis = stageProvider.sendStage(vm.step.currentStage.id, vm.stage);
                 promiseSendDiagnosis.then(function (response) {
                     $log.info(response);
+                    ErrorHandler.successCreation();
                     clear();
 
                 }).catch(function (errormsg) {
@@ -79,13 +104,29 @@
 
         function saveStage() {
             $log.debug(vm.stage);
-            if (vm.stage.etapa_siguiente_id) {
+            if (!vm.stage.etapa_siguiente_id) {
                 vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
             }
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
+            if (!vm.actions){
+                vm.stage = _.omit(vm.stage, 'acciones_id');
+            }
+            if (vm.actions) {
+                if (vm.actions.length === 0) {
+                    vm.stage = _.omit(vm.stage, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.stage.acciones_id.push(vm.actions[index2].com_code);
+                        }
+                    }
+                }
+            }
             var promiseSendDiagnosis = stageProvider.sendStage(vm.step.currentStage.id, vm.stage);
             promiseSendDiagnosis.then(function (response) {
                 $log.info(response);
+                ErrorHandler.successCreation();
                 clear();
 
             }).catch(function (errormsg) {
@@ -133,9 +174,10 @@
 
         }
 
+
+
+
         function getActions(element) {
-            $log.debug('acciones detectadas:');
-            $log.debug(element);
             vm.actions = element;
             vm.stage.acciones_id = [];
             if (vm.actions) {
