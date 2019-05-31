@@ -73,6 +73,7 @@
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
             promiseSendDiagnosis.then(function (response) {
                 $log.info(response);
+                ErrorHandler.successCreation();
                 clear();
 
             }).catch(function (errormsg) {
