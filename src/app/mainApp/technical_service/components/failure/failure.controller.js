@@ -14,7 +14,7 @@
 
             }
         });
-    function failureController(Translate, URLS, EnvironmentConfig,$log,PAGINATION) {
+    function failureController(Translate, URLS, EnvironmentConfig, $log, PAGINATION) {
         var vm = this;
         var failure_typeURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure_type);
@@ -25,23 +25,23 @@
                     name: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
 
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    },
+                    noResults: Translate.translate('ERRORS.NO_RESULTS'),
+                    hint: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE_FOR')
                 },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                },
-                noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE_TYPE_FOR')
+                required: true
             },
             failure: {
                 catalog: {
@@ -49,23 +49,24 @@
                     name: Translate.translate('FAILURES_COMPONENT.SELECT_FAILURE'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'com_code',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
 
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    },
+                    noResults: Translate.translate('ERRORS.NO_RESULTS'),
+                    hint: Translate.translate('FAILURES_COMPONENT.ADD_FAILURE')
                 },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                },
-                noResults: Translate.translate('ERRORS.NO_RESULTS'),
-                hint: Translate.translate('FAILURES_COMPONENT.ADD_FAILURE')
+
+                required: true
             }
         };
 
@@ -75,9 +76,14 @@
         vm.deleteElement = deleteElement;
         getFailures();
         function getFailures() {
-            $log.debug.log("Fallas Obtenidas de la carga de información");
-            $log.debug.log(vm.failures);
-            if (vm.failures.length === 0) {
+            $log.debug("Fallas Obtenidas de la carga de información");
+            $log.debug(vm.failures);
+            if (vm.failures) {
+                if (vm.failures.length === 0) {
+                    vm.failures = [];
+                }
+            }
+            else {
                 vm.failures = [];
             }
 

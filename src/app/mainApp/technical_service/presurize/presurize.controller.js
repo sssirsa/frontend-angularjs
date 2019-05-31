@@ -61,8 +61,6 @@
         function sendPresurize() {
             vm.presurize.sucursal_id = vm.step.control.sucursal.id;
             vm.presurize.acciones_id = [];
-            console.log("Opción seleccionada:");
-            console.log(vm.option_to_do);
             if (vm.option_to_do) {
                 switch (vm.option_to_do) {
                     case '1':
