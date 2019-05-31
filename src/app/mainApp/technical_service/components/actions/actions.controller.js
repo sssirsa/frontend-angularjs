@@ -56,8 +56,11 @@
 
 
         function onSelectAction(value) {
-            vm.element = value;
-            addAction();
+            if (value) {
+                $log.debug(value);
+                vm.element = value;
+                addAction();
+            }
         }
 
         function addAction() {
