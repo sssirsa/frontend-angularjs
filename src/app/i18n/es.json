@@ -504,7 +504,24 @@
         "E116": "No es posible mandar este tipo de mensaje en este tipo de ticket",
         "E117": "No se puede establecer etapa defecto si no se establecen etapas siguientes",
         "E118": "El cabinet indicado ya fue inspeccionado",
-        "ES-036":"Al cabinet ya se le realizó inspección preliminar"
+        "ES-036":"Al cabinet ya se le realizó inspección preliminar",
+        "ES-037":"No se puede hacer inspección preliminar a un cabinet que entró por Garantías o Reparación ",
+        "ES-038":"No se puede hacer Prechecklist a un cabinet que entró por algo diferente a Garantías o Reparación ",
+        "ES-039":"No hay existencias del insumo ",
+        "ES-040":"El insumo no se puede usar en esta etapa",
+        "ES-041":"No se puede usar esa cantidad del insumo ",
+        "TS-001":"La etapa por defecto debe estar en las etapas posibles",
+        "TS-002":"Se debe enviar etapas siguientes",
+        "TS-003":"Las etapas siguientes deben pertenecer a la misma sucursal",
+        "TS-004":"No se puede cambiar la sucursal de una etapa ",
+        "TS-005":"La etapa indicada no está disponible para la sucursal ",
+        "TS-006":"La sucursal no cuenta con inventario del insumo solicitado ",
+        "TS-007":"El insumo no puede ser usado en esta etapa ",
+        "TS-008":"La cantidad especificada no puede ser usada en esta etapa ",
+        "TS-009":"La etapa siguiente no es válida ",
+        "TS-010":"La etapa especificada ya está cerrada ",
+        "TS-011":"La sucursal provista no coincide con la sucursal del cabinet",
+        "TS-012":"El cabinet no es atendible por un impedimento existente "
 
     }
 }
