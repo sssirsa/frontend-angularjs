@@ -28,7 +28,7 @@
             amp_trab: undefined,
             etapa_siguiente_id: undefined,
             acciones_id: [],
-            insumos_lote: [],
+            insumos_lote_usados: [],
             sucursal_id: undefined
         };
         vm.search = true;
@@ -60,7 +60,7 @@
                 amp_trab: undefined,
                 etapa_siguiente_id: undefined,
                 acciones_id: [],
-                insumos_lote: [],
+                insumos_lote_usados: [],
                 sucursal_id: undefined
             };
             vm.asset = undefined;
@@ -70,9 +70,9 @@
 
         function sendDiagnosis() {
             vm.diagnostic.sucursal_id = vm.step.control.sucursal.id;
-            if (vm.diagnostic.insumos_lote) {
-                if (vm.diagnostic.insumos_lote.length === 0) {
-                    vm.diagnostic = _.omit(vm.presurize, 'insumos_lote');
+            if (vm.diagnostic.insumos_lote_usados) {
+                if (vm.diagnostic.insumos_lote_usados.length === 0) {
+                    vm.diagnostic = _.omit(vm.presurize, 'insumos_lote_usados');
                 }
             }
             if (!vm.actions){

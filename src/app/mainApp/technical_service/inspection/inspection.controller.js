@@ -98,9 +98,9 @@
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
             vm.checklist.sintomas_detectados_id = [];
             vm.checklist.acciones_id = [];
-            if (vm.checklist.insumos_lote) {
-                if (vm.checklist.insumos_lote.length === 0) {
-                    vm.checklist = _.omit(vm.checklist, 'insumos_lote');
+            if (vm.checklist.insumos_lote_usados) {
+                if (vm.checklist.insumos_lote_usados.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'insumos_lote_usados');
                 }
             }
             if (vm.symptoms.length === 0) {
@@ -142,9 +142,9 @@
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
             vm.checklist.sintomas_detectados_id = [];
             vm.checklist.acciones_id = [];
-            if (vm.checklist.insumos_lote) {
-                if (vm.checklist.insumos_lote.length === 0) {
-                    vm.checklist = _.omit(vm.checklist, 'insumos_lote');
+            if (vm.checklist.insumos_lote_usados) {
+                if (vm.checklist.insumos_lote_usados.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'insumos_lote_usados');
                 }
             }
             if (vm.symptoms.length === 0) {
@@ -254,7 +254,7 @@
         }
 
         function getInsumosLote(element) {
-            vm.checklist.insumos_lote = element;
+            vm.checklist.insumos_lote_usados = element;
         }
 
         function onStickerSelect(value) {

@@ -46,7 +46,7 @@
             vm.stage = {
                 etapa_siguiente_id: undefined,
                 acciones_id: [],
-                insumos_lote: [],
+                insumos_lote_usados: [],
                 sucursal_id: undefined
             };
             vm.asset = undefined;
@@ -165,7 +165,7 @@
 
         function getInsumosLote(element) {
             //console.log(element);
-            vm.stage.insumos_lote = element;
+            vm.stage.insumos_lote_usados = element;
             $log.debug(vm.stage.insumos_lote_usados);
 
         }
