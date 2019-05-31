@@ -47,13 +47,18 @@
                     vm.puncture = _.omit(vm.puncture, 'insumos_lote');
                 }
             }
-            if (vm.actions.length === 0) {
+            if (!vm.actions) {
                 vm.puncture = _.omit(vm.puncture, 'acciones_id');
-            } else {
-                var index2;
-                for (index2 = 0; index2 < vm.actions.length; ++index2) {
-                    if (vm.actions[index2].com_code) {
-                        vm.puncture.acciones_id.push(vm.actions[index2].com_code);
+            }
+            if (vm.actions) {
+                if (vm.actions.length === 0) {
+                    vm.puncture = _.omit(vm.puncture, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.puncture.acciones_id.push(vm.actions[index2].com_code);
+                        }
                     }
                 }
             }

@@ -27,12 +27,12 @@
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-            <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)"></start-service>
+            <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)" puncture="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id"></start-service>
         </div>
 
 
         <md-tabs class="md-primary coverheight" md-selected="selectedTabIndex" md-stretch-tabs="always"
-                 ng-if="vm.puncture.fecha_revision">
+                 ng-if="vm.step.currentStage">
             <md-tab label="{{vm.title_info}}">
                     <div flex="100" layout-padding="" layout-align="center center">
                         <md-input-container flex="30">
@@ -63,13 +63,13 @@
         </md-tabs>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button  ng-if="vm.puncture.fecha_revision" ng-click="vm.clear()" class="md-raised">
+            <md-button  ng-if="vm.step" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>
             <md-button ng-if="vm.step.currentStage" ng-click="vm.sendPuncture()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
+                <span translate="">PUNCTURE.ACTIONS.SAVE_PUNCTURE</span>
             </md-button>
         </md-card-actions>
     </md-card>
