@@ -8,7 +8,7 @@
         .module('app.mainApp.technical_service')
         .controller('DiagnosisController', DiagnosisController);
 
-    function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log) {
+    function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log,_) {
         var vm = this;
 
         vm.asset = undefined;//objeto contenedor del cabinet
@@ -97,10 +97,10 @@
                 if (vm.failures.length === 0) {
                     vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
                 } else {
-                    var index2;
-                    for (index2 = 0; index2 < vm.failures.length; ++index2) {
-                        if (vm.failures[index2].com_code) {
-                            vm.diagnostic.fallas_id.push(vm.failures[index2].com_code);
+                    var index3;
+                    for (index3 = 0; index3 < vm.failures.length; ++index3) {
+                        if (vm.failures[index3].com_code) {
+                            vm.diagnostic.fallas_id.push(vm.failures[index3].com_code);
                         }
                     }
                 }
