@@ -116,7 +116,7 @@
                 $log.debug(vm.step.currentStage.acciones);
             }
 
-            if (vm.step.currentStage.etapa.nombre !== 'Diagnostico') {
+            if (vm.step.currentStage.etapa.tipo_etapa !== 'Diagnostico') {
                 $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
