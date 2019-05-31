@@ -27,7 +27,7 @@
                 icon: 'fas fa-ticket-alt',
                 type: 'link',
                 state: 'triangular.admin-default.list-tickets',
-                permission: ['ADMINISTRADOR', 'TULTITLAN']
+                permission_old: ['ADMINISTRADOR', 'TULTITLAN']
             }
         );
     }

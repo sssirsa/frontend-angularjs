@@ -4,10 +4,9 @@
     'use strict';
     angular
         .module('app.mainApp')
-        .controller('detailTicketController',detailTicketController);
+        .controller('detailTicketController', detailTicketController);
 
-    function detailTicketController($mdDialog, data)
-    {
+    function detailTicketController($mdDialog, data) {
         var vm = this;
 
         //variables
@@ -18,7 +17,7 @@
         //funciones
         vm.cerrar = cerrar;
         vm.view = view;
-        vm.clean =  clean;
+        vm.clean = clean;
 
         init();
 
@@ -30,17 +29,28 @@
             angular.forEach(vm.infoTicket.message_set, function Menssages(msj) {
                 msj.com_code = msj.tipo_com.com_code;
                 msj.text = msj.tipo_com.label;
-                msj.nombre_com =  msj.tipo_com.nombre_com;
+                msj.nombre_com = msj.tipo_com.nombre_com;
+                if (msj.confirmado) {
+                    msj.css = "green";
+                }
+                else {
+                    if (msj.num_intentos > 4) {
+                        msj.css = "yellow";
+                    }
+                    else {
+                        msj.css = "red";
+                    }
+                }
                 vm.chip.push(msj);
             });
         }
 
         function view(info) {
-            if(!vm.infoChip){
+            if (!vm.infoChip) {
                 vm.infoChip = info;
-            }else if(vm.infoChip.identificador == info.identificador){
+            } else if (vm.infoChip.identificador == info.identificador) {
                 vm.infoChip = null;
-            }else if(vm.infoChip.identificador != info.identificador){
+            } else if (vm.infoChip.identificador != info.identificador) {
                 vm.infoChip = info;
             }
         }
