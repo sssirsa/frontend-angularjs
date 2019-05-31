@@ -38,26 +38,28 @@
         //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
             getStock();
-            var stock = Number(vm.stock[0].cantidad);
-            var used = Number(vm.bulkAsset.cantidad);
-            if (used < 1) {
-                vm.showSelector = true;
-                if (stock < used) {
-                    if (stock > 0) {
-                        vm.maxUseAccepted = stock;
+            if(vm.stock[0]) {
+                var stock = Number(vm.stock[0].cantidad);
+                var used = Number(vm.bulkAsset.cantidad);
+                if (used < 1) {
+                    vm.showSelector = true;
+                    if (stock < used) {
+                        if (stock > 0) {
+                            vm.maxUseAccepted = stock;
 
+                        }
+                        else {
+                            vm.notStock = true;
+                        }
+                    } else {
+                        vm.maxUseAccepted = used;
                     }
-                    else {
+                } else {
+                    if (stock < used) {
                         vm.notStock = true;
+                    } else {
+                        vm.maxUseAccepted = used;
                     }
-                } else {
-                    vm.maxUseAccepted = used;
-                }
-            } else {
-                if (stock < used) {
-                    vm.notStock = true;
-                } else {
-                    vm.maxUseAccepted = used;
                 }
             }
 
