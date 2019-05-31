@@ -25,13 +25,13 @@
 
             </div>
         </md-toolbar>
-        <div layout="row" flex="100" layout-wrap=""  class="minorWhite" layout-padding="">
+        <div layout="row" flex="100" layout-wrap="" class="minorWhite" layout-padding="">
             <search-cabinet-step ng-if="vm.search" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
-                        <div layout="row" flex="100" layout-wrap="">
-                            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
-                            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-                        </div>
+            <div layout="row" flex="100" layout-wrap="">
+                <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+                <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            </div>
             <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id"
                            sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
@@ -111,18 +111,20 @@
                     <v-accordion id="failures_and_actions"
                                  class="vAccordion--default"
                                  control="failures_and_actions">
-                        <v-pane id="actions" >
+                        <v-pane id="actions">
                             <v-pane-header id="actions-header">Acciones Realizadas</v-pane-header>
                             <v-pane-content id="actions-content">
                                 <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
-                                                 actions-added="vm.getActions(element)"  actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
+                                                 actions-added="vm.getActions(element)"
+                                                 actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
                             </v-pane-content>
                         </v-pane>
 
                         <v-pane id="failures">
                             <v-pane-header id="failures-header">Fallas Detectadas</v-pane-header>
                             <v-pane-content id="failures-content">
-                                <fault-manager flex="100" failures-detected="vm.getFailures(element)" failures="vm.step.currentStage.diagnostico.fallas"></fault-manager>
+                                <fault-manager flex="100" failures-detected="vm.getFailures(element)"
+                                               failures="vm.step.currentStage.diagnostico.fallas"></fault-manager>
                             </v-pane-content>
                         </v-pane>
 

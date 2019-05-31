@@ -16,7 +16,7 @@
 
                 </div>
                 <div flex="25" layout="column" layout-gt-sm="row" layout-align="end center">
-                    <md-button ng-if="vm.asset"  ng-click="vm.clear()" class="md-raised">
+                    <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                         <md-icon md-font-icon="fas fa-search"></md-icon>
                         <span translate="">INSPECTION.ACTIONS.SEARCH_NEW</span>
                     </md-button>
@@ -29,23 +29,15 @@
 
             </div>
         </md-toolbar>
-        <div layout="row" flex="100" layout-wrap="" class="minorWhite">
+        <div layout="row" flex="100" layout-wrap="" class="minorWhite" layout-padding="">
             <search-cabinet-step ng-if="vm.search" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
-            <v-accordion ng-if="vm.asset" flex="100" layout-padding="" id="infogral" class="vAccordion--default"
-                         control="infogral">
-                <v-pane flex="100" id="v-accordion-pane-info-gral">
-                    <v-pane-header id="v-accordion-pane-info-gral-header">
-                        Información General
-                    </v-pane-header>
-                    <v-pane-content id="v-accordion-pane-info-gral-content">
-                        <div layout="row" flex="100" layout-wrap="">
-                            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
-                            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-                        </div>
-                    </v-pane-content>
-                </v-pane>
-            </v-accordion>
+
+            <div layout="row" flex="100" layout-wrap="">
+                <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+                <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            </div>
+
             <start-service flex="100" ng-if="vm.step.currentStage.id" stage="vm.step.currentStage.id"
                            sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
         </div>
