@@ -61,41 +61,48 @@
         function sendPresurize() {
             vm.presurize.sucursal_id = vm.step.control.sucursal.id;
             vm.presurize.acciones_id = [];
+            console.log("Opción seleccionada:");
+            console.log(vm.option_to_do);
             if (vm.option_to_do) {
                 switch (vm.option_to_do) {
-                    case 1:
-                        vm.presurize.liberado=true;
-                        vm.presurize.etapa_string='Diagnostico';
+                    case '1':
+                        vm.presurize.liberado = true;
+                        vm.presurize.etapa_string = 'Diagnostico';
                         break;
-                    case 2:
-                        vm.presurize.liberado=false;
-                        vm.presurize.etapa_string='Continuar';
+                    case '2':
+                        vm.presurize.liberado = false;
+                        vm.presurize.etapa_string = 'Continuar';
                         break;
-                    case 3:
-                        vm.presurize.liberado=true;
-                        vm.presurize.etapa_string='Presurizado';
+                    case '3':
+                        vm.presurize.liberado = true;
+                        vm.presurize.etapa_string = 'Presurizado';
                         break;
-                    case 4:
-                        vm.presurize.liberado=false;
-                        vm.presurize.etapa_string='Obsoleto';
+                    case '4':
+                        vm.presurize.liberado = false;
+                        vm.presurize.etapa_string = 'Obsoleto';
                 }
             }
-            else{
-                vm.presurize.liberado=false;
-                vm.presurize.etapa_string='Continuar';
+            else {
+                vm.presurize.liberado = false;
+                vm.presurize.etapa_string = 'Continuar';
             }
             if (vm.presurize.insumos_lote) {
                 if (vm.presurize.insumos_lote.length === 0) {
                     vm.presurize = _.omit(vm.presurize, 'insumos_lote');
                 }
             }
-            if (vm.actions.length === 0) {
+            if (!vm.actions){
                 vm.presurize = _.omit(vm.presurize, 'acciones_id');
-            } else {
-                var index2;
-                for (index2 = 0; index2 < vm.actions.length; ++index2) {
-                    if (vm.actions[index2].com_code) {
-                        vm.presurize.acciones_id.push(vm.actions[index2].com_code);
+            }
+            if (vm.actions) {
+                if (vm.actions.length === 0) {
+                    vm.presurize = _.omit(vm.presurize, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.presurize.acciones_id.push(vm.actions[index2].com_code);
+                        }
                     }
                 }
             }
@@ -124,6 +131,7 @@
             vm.presurize = undefined;
             vm.asset = undefined;
             vm.step = undefined;
+            vm.option_to_do=undefined;
         }
 
         //  Funciones para Componentes _________________________________________________________________________________

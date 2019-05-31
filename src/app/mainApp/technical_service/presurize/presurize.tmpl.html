@@ -22,16 +22,16 @@
 
             </div>
         </md-toolbar>
-        <div layout="row" flex="100" layout-wrap="">
+        <div layout="row" flex="100" layout-wrap="" layout-padding="">
             <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-            <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)"></start-service>
+            <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)" presurize="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id"></start-service>
         </div>
 
 
-        <md-tabs ng-if="vm.presurize.currentStage.id" class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
+        <md-tabs ng-if="vm.step.currentStage.id" class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
             <md-tab label="{{vm.title_info}}">
                 <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
                     <div flex="100" layout="row" layout-wrap="" layout-padding="">
@@ -148,7 +148,7 @@
             </md-button>
             <md-button ng-if="vm.step.currentStage" ng-click="vm.sendPresurize()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
+                <span translate="">PRESURIZE.ACTIONS.SAVE_PRESURIZE</span>
             </md-button>
         </md-card-actions>
     </md-card>
