@@ -3,7 +3,7 @@
         <div layout="row" layout-align="center center" flex="60" layout-padding="">
 
             <md-input-container>
-                <md-checkbox ng-change="$ctrl.selectElement()" ng-model="$ctrl.use_asset" ng-disabled="$ctrl.notStock" >
+                <md-checkbox  ng-disabled="$ctrl.notStock" ng-change="$ctrl.selectElement()" ng-model="$ctrl.use_asset" ng-disabled="$ctrl.notStock" >
                 </md-checkbox>
             </md-input-container>
 
@@ -20,7 +20,7 @@
             <div layout="row" layout-align="center center" ng-click="$ctrl.validaMax($index)">
                 <md-input-container>
                     <div range-spinner
-                         range-min="1"
+                         range-min="0"
                          range-step="1"
                          range-max="100"
                          range-default-value="{{$ctrl.maxUseAccepted}}"
@@ -31,14 +31,15 @@
                          id-of-field="rangeFieldId">
                     </div>
                 </md-input-container>
-                <div ng-if="$ctrl.notStock">
-                    <span translate="" class="RED">BULK_ASSET_COMPONENT.NOT_ENOUGHT_ASSET</span></h3>
-                </div>
             </div>
-            <div ng-if="$ctrl.maxUseAccepted<$ctrl.finalAssetBulk.cantidad">
+            <div ng-if="$ctrl.notStock">
+                <span translate="" class="RED">BULK_ASSET_COMPONENT.NOT_ENOUGHT_ASSET</span></h3>
+            </div>
+            <div ng-if="$ctrl.maxUseAccepted < $ctrl.finalAssetBulk.cantidad">
                 <span class="RED"> <b translate>MAIN.GENERAL.MAX </b><b>{{$ctrl.maxUseAccepted}}</b></span>
             </div>
         </div>
 
     </div>
+
 </div>

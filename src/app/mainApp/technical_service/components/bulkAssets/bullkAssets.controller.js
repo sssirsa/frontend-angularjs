@@ -15,7 +15,7 @@
             }
         });
 
-    function bulkAssetsController() {
+    function bulkAssetsController($log) {
 
         var vm = this;
         vm.finalAssetBulk = {};
@@ -38,7 +38,9 @@
         //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
             getStock();
-            if(vm.stock[0]) {
+            $log.debug("STOCK:");
+            $log.debug(vm.stock);
+            if (vm.stock[0]) {
                 var stock = Number(vm.stock[0].cantidad);
                 var used = Number(vm.bulkAsset.cantidad);
                 if (used < 1) {
@@ -46,7 +48,6 @@
                     if (stock < used) {
                         if (stock > 0) {
                             vm.maxUseAccepted = stock;
-
                         }
                         else {
                             vm.notStock = true;
@@ -67,9 +68,20 @@
 
 //Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
-            vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
-                return element.sucursal.id === vm.sucursal.id;
-            });
+            $log.debug("función get stock");
+            $log.debug(vm.bulkAsset);
+            if (vm.bulkAsset.catalogo_insumo_lote.stock) {
+                if (vm.bulkAsset.catalogo_insumo_lote.stock.length == 0) {
+                    vm.notStock = true;
+                    vm.maxUseAccepted = 0;
+                    vm.stock=[];
+                }
+                else {
+                    vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
+                        return element.sucursal.id === vm.sucursal.id;
+                    });
+                }
+            }
         }
 
 //Function that validate the max value of the bulk assets acceptec
@@ -83,16 +95,14 @@
         function selectElement() {
 
             if (vm.use_asset) {
-                var assetSelected={};
-                assetSelected.insumo_lote_id=vm.bulkAsset.id;
-                assetSelected.cantidad=vm.finalAssetBulk.cantidad;
-                vm.onSelect({element:assetSelected});
+                var assetSelected = {};
+                assetSelected.insumo_lote_id = vm.bulkAsset.id;
+                assetSelected.cantidad = vm.finalAssetBulk.cantidad;
+                vm.onSelect({element: assetSelected});
 
             }
 
         }
-
-
 
 
     }
