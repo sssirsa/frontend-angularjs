@@ -96,9 +96,11 @@
             }
             vm.fallasCargadas = false;
             var failure_URL = (EnvironmentConfig.site.rest.api)
-                .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure + '?clasificador_falla__id=').concat(vm.idType);
+                .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.failure);
 
             vm.catalogues.failure.catalog.url = failure_URL;
+            vm.catalogues.failure.catalog.query='clasificador_falla__id';
+            vm.catalogues.failure.catalog.query_value=vm.idType;
             vm.fallasCargadas = true;
         }
 
