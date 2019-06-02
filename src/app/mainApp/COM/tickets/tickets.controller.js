@@ -9,16 +9,16 @@
         .controller('TicketsController', ticketsController);
 
     function ticketsController(API,
-                               $mdDialog,
-                               toastr,
-                               EnvironmentConfig,
-                               URLS,
-                               COM,
-                               TicketProvider,
-                               ErrorHandler,
-                               $log,
-                               _,
-                               Translate) {
+        $mdDialog,
+        toastr,
+        EnvironmentConfig,
+        URLS,
+        COM,
+        TicketProvider,
+        ErrorHandler,
+        $log,
+        _,
+        Translate) {
         var vm = this;
 
         vm.tickets = {};
@@ -40,7 +40,7 @@
         vm.getTicketInfo = getTicketInfo;
         vm.openDialogCreate = openDialogCreate;
         vm.listTickets = listTickets;
-        vm.listAll=listAll;
+        vm.listAll = listAll;
 
         //datos para paginado
         vm.objectPaginado = null;
@@ -99,10 +99,10 @@
         }
 
         function listAll() {
-            vm.querySet='';
+            vm.querySet = '';
             vm.offset = 0;
             vm.limit = 20;
-            vm.tipo=undefined;
+            vm.tipo = undefined;
             listTickets();
 
 
@@ -233,7 +233,7 @@
         function getPossibleMessages(service_task_type, activity) {
             var messages_statusPromise = TicketProvider.getTicket_type(service_task_type);
             messages_statusPromise.then(function (message_status) {
-                vm.messageStatusCatalog = _.where(message_status.messages_status, {categoria: activity});
+                vm.messageStatusCatalog = _.where(message_status.messages_status, { categoria: activity });
                 $log.log(vm.messageStatusCatalog);
                 $log.log(vm.messageStatusCatalog.length);
                 //$log.log(message_status);
@@ -276,9 +276,9 @@
                                     lock: true,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.com.base
-                                        + '/' + URLS.com.catalogues.base
-                                        + '/' + URLS.com.catalogues.ticket_type,
+                                            + '/' + URLS.com.base
+                                            + '/' + URLS.com.catalogues.base
+                                            + '/' + URLS.com.catalogues.ticket_type,
                                         name: Translate.translate('COM.FIELDS.SERVICE_TASK_TYPE'),
                                         loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
                                         model: 'com_ticket_code',//campo a pasar
@@ -330,34 +330,35 @@
                                     hint: Translate.translate('COM.FIELDS.PRODUCT_VARIANT_CODE'),
                                     label: Translate.translate('COM.FIELDS.PRODUCT_VARIANT_CODE'),
                                     lock: false
-                                }, {
-                                    type: 'catalog',
-                                    model: 'asset_condition',
-                                    required: true,
-                                    hint: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
-                                    label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
-                                    lock: true,
-                                    catalog: {
-                                        url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.management.base
-                                        + '/' + URLS.management.catalogues.base
-                                        + '/' + URLS.management.catalogues.condition,
-                                        name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
-                                        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
-                                        model: 'com_code',//campo a pasar
-                                        option: 'descripcion',//campo a mostrar
-                                        elements: 'results',//elementos del promise donde iterar
-                                        showModel: true,//mostrar model y option
-                                        pagination: {}//manejo de Paginado
-
-                                    }
-
                                 },
+                                //{
+                                //    type: 'catalog',
+                                //    model: 'asset_condition',
+                                //    required: false,
+                                //    hint: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
+                                //    label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
+                                //    lock: true,
+                                //    catalog: {
+                                //        url: EnvironmentConfig.site.rest.api
+                                //            + '/' + URLS.management.base
+                                //            + '/' + URLS.management.catalogues.base
+                                //            + '/' + URLS.management.catalogues.condition,
+                                //        name: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
+                                //        loadMoreButtonText: Translate.translate('COM.ADDITIONAL_TEXTS.LOAD_MORE'),
+                                //        model: 'com_code',//campo a pasar
+                                //        option: 'descripcion',//campo a mostrar
+                                //        elements: 'results',//elementos del promise donde iterar
+                                //        showModel: true,//mostrar model y option
+                                //        pagination: {}//manejo de Paginado
+
+                                //    }
+
+                                //},
                                 {
                                     type: 'array_object',
                                     model: 'service_dates',
-                                    label: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
-                                    hint: Translate.translate('COM.FIELDS.ASSET_CONDITION'),
+                                    label: Translate.translate('COM.FIELDS.SERVICE_DATES'),
+                                    hint: Translate.translate('COM.FIELDS.SERVICE_DATES'),
                                     fields: [
                                         {
                                             type: 'catalog',
@@ -366,9 +367,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.com.base
-                                                + '/' + URLS.com.catalogues.base
-                                                + '/' + URLS.com.catalogues.date_type,
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.date_type,
                                                 name: Translate.translate('COM.FIELDS.DATE_TYPE'),
                                                 model: 'com_code',
                                                 option: 'nombre',
@@ -395,9 +396,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.inventory.base
-                                                + '/' + URLS.inventory.catalogues.base
-                                                + '/' + URLS.inventory.catalogues.component_type,
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.component_type,
                                                 name: Translate.translate('COM.FIELDS.COMPONENT_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -434,9 +435,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.inventory.base
-                                                + '/' + URLS.inventory.catalogues.base
-                                                + '/' + URLS.inventory.catalogues.consumable_category,
+                                                    + '/' + URLS.inventory.base
+                                                    + '/' + URLS.inventory.catalogues.base
+                                                    + '/' + URLS.inventory.catalogues.consumable_category,
                                                 name: Translate.translate('COM.FIELDS.ASSET_TYPE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -480,9 +481,9 @@
                                             required: true,
                                             catalog: {
                                                 url: EnvironmentConfig.site.rest.api
-                                                + '/' + URLS.com.base
-                                                + '/' + URLS.com.catalogues.base
-                                                + '/' + URLS.com.catalogues.process_instructions,
+                                                    + '/' + URLS.com.base
+                                                    + '/' + URLS.com.catalogues.base
+                                                    + '/' + URLS.com.catalogues.process_instructions,
                                                 name: Translate.translate('COM.FIELDS.PROCESS_INSTRUCTION_CODE'),
                                                 model: 'com_code',
                                                 option: 'descripcion',
@@ -519,9 +520,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.technical_service.base
-                                        + '/' + URLS.technical_service.catalogues.base
-                                        + '/' + URLS.technical_service.catalogues.action,
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.action,
                                         name: Translate.translate('COM.FIELDS.REPAIR_ACTION_CODE'),
                                         model: 'com_code',
                                         option: 'descripcion',
@@ -549,9 +550,9 @@
                                     required: false,
                                     catalog: {
                                         url: EnvironmentConfig.site.rest.api
-                                        + '/' + URLS.technical_service.base
-                                        + '/' + URLS.technical_service.catalogues.base
-                                        + '/' + URLS.technical_service.catalogues.failure,
+                                            + '/' + URLS.technical_service.base
+                                            + '/' + URLS.technical_service.catalogues.base
+                                            + '/' + URLS.technical_service.catalogues.failure,
                                         name: Translate.translate('COM.FIELDS.FAULT_CODE'),
                                         model: 'com_code',
                                         option: 'nombre',
