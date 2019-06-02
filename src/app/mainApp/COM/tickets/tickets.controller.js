@@ -18,6 +18,7 @@
                                ErrorHandler,
                                $log,
                                _,
+                               PAGINATION,
                                Translate) {
         var vm = this;
 
@@ -285,7 +286,12 @@
                                         option: 'descripcion',//campo a mostrar
                                         elements: 'results', //elementos del promise donde iterar
                                         showModel: true,//mostrar model y option
-                                        pagination: {}//manejo de Paginado
+                                        pagination: {
+                                            total: PAGINATION.total,
+                                            limit: PAGINATION.limit,
+                                            offset: PAGINATION.offset,
+                                            pageSize: PAGINATION.pageSize
+                                        }//manejo de Paginado
                                     }
                                 }, {
                                     type: 'string',
@@ -348,7 +354,12 @@
                                         option: 'descripcion',//campo a mostrar
                                         elements: 'results',//elementos del promise donde iterar
                                         showModel: true,//mostrar model y option
-                                        pagination: {}//manejo de Paginado
+                                        pagination: {
+                                            total: PAGINATION.total,
+                                            limit: PAGINATION.limit,
+                                            offset: PAGINATION.offset,
+                                            pageSize: PAGINATION.pageSize
+                                        }//manejo de Paginado
 
                                     }
 
@@ -374,7 +385,12 @@
                                                 option: 'nombre',
                                                 elements: 'results',//elementos del promise donde iterar
                                                 showModel: true,//mostrar model y option
-                                                pagination: {}//manejo de Paginado
+                                                pagination: {
+                                                    total: PAGINATION.total,
+                                                    limit: PAGINATION.limit,
+                                                    offset: PAGINATION.offset,
+                                                    pageSize: PAGINATION.pageSize
+                                                }//manejo de Paginado
                                             }
                                         },
                                         {
@@ -403,7 +419,12 @@
                                                 option: 'descripcion',
                                                 elements: 'results',//elementos del promise donde iterar
                                                 showModel: true,//mostrar model y option
-                                                pagination: {}//manejo de Paginado
+                                                pagination: {
+                                                    total: PAGINATION.total,
+                                                    limit: PAGINATION.limit,
+                                                    offset: PAGINATION.offset,
+                                                    pageSize: PAGINATION.pageSize
+                                                }//manejo de Paginado
                                             }
                                         },
                                         {
@@ -442,7 +463,12 @@
                                                 option: 'descripcion',
                                                 elements: 'results',//elementos del promise donde iterar
                                                 showModel: true,//mostrar model y option
-                                                pagination: {}//manejo de Paginado
+                                                pagination: {
+                                                    total: PAGINATION.total,
+                                                    limit: PAGINATION.limit,
+                                                    offset: PAGINATION.offset,
+                                                    pageSize: PAGINATION.pageSize
+                                                }//manejo de Paginado
                                             }
                                         },
                                         {
@@ -488,7 +514,12 @@
                                                 option: 'descripcion',
                                                 elements: 'results',//elementos del promise donde iterar
                                                 showModel: true,//mostrar model y option
-                                                pagination: {}//manejo de Paginado
+                                                pagination: {
+                                                    total: PAGINATION.total,
+                                                    limit: PAGINATION.limit,
+                                                    offset: PAGINATION.offset,
+                                                    pageSize: PAGINATION.pageSize
+                                                }//manejo de Paginado
                                             }
                                         },
                                         {
@@ -527,7 +558,12 @@
                                         option: 'descripcion',
                                         elements: 'results',//elementos del promise donde iterar
                                         showModel: true,//mostrar model y option
-                                        pagination: {}//manejo de Paginado
+                                        pagination: {
+                                            total: PAGINATION.total,
+                                            limit: PAGINATION.limit,
+                                            offset: PAGINATION.offset,
+                                            pageSize: PAGINATION.pageSize
+                                        }//manejo de Paginado
                                     }
                                 },
                                 {
@@ -557,7 +593,12 @@
                                         option: 'nombre',
                                         elements: 'results',//elementos del promise donde iterar
                                         showModel: true,//mostrar model y option
-                                        pagination: {}//manejo de Paginado
+                                        pagination: {
+                                            total: PAGINATION.total,
+                                            limit: PAGINATION.limit,
+                                            offset: PAGINATION.offset,
+                                            pageSize: PAGINATION.pageSize
+                                        }//manejo de Paginado
                                     }
                                 },
                                 {
