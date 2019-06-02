@@ -43,6 +43,10 @@ button, select, html, textarea, input {
 .no-margin {
   margin: 0 0 0 0 !important;
 }
+.imgselect{
+  max-width: 25px;
+  max-height: 25px;
+}
 
 @import "scss/custom";
 

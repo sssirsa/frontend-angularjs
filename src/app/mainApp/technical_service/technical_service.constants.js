@@ -7,7 +7,7 @@
                 base: 'catalogues',
                 action: 'action',
                 com_incidence: 'com_incidence',
-                failure: 'failure',
+                failure:'failure',
                 failure_type: 'failure_type',
                 next_step: 'next_step',
                 stage: 'stage',

@@ -43,7 +43,7 @@
  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
  *                                       If not given, then the model will be used
- *                               
+ *
  *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
  *                  //Next parameter, just used when the url is going to be used from what the API returned.
  *                      next: string,         (Optional) Binding for the url that brings to the next page
@@ -129,7 +129,7 @@
         //Functions
         vm.create = create;
         vm.cancel = cancel;
-        
+
 
         function createProvider() {
             if (vm.hasOwnProperty('url')) {
