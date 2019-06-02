@@ -6,16 +6,23 @@
         .module('app.mainApp.management.catalogues')
         .controller('UDNController',UDNController);
 
-    function UDNController(URLS, Translate, OPTIONS, EnvironmentConfig)
+    function UDNController(
+        URLS,
+        Translate,
+        OPTIONS,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
 
         var vm = this;
 
-        var entriesUrl =  (EnvironmentConfig.site.rest.api)
-            .concat('/' + URLS.entries_departures.base + '/' + URLS.entries_departures.catalogues.base + '/' + URLS.entries_departures.catalogues.udn);
+        var entriesUrl = EnvironmentConfig.site.rest.api
+            + '/' + URLS.management.base
+            + '/' + URLS.management.catalogues.base
+            + '/' + URLS.management.catalogues.udn;
 
         vm.url = entriesUrl;
-        vm.kind = 'entries_departures';
         vm.name = Translate.translate('UDN_CATALOG.title');
         vm.options = OPTIONS.zone;
 
@@ -200,9 +207,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

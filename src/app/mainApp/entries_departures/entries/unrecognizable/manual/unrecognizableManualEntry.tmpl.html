@@ -2,6 +2,7 @@
     <div layout="column"
          layout-align="center center">
         <h1 translate>ENTRIES.UNRECOGNIZABLE.TITLE</h1>
+        <span translate>ENTRIES.UNRECOGNIZABLE.HINTS.ENTRY</span>
     </div>
     <md-tabs md-dynamic-height="true"
              md-selected="vm.selectedTab">
@@ -111,10 +112,11 @@
                 ng-disabled="!vm.cabinetList.length>0"
                 label={{'ENTRIES.UNRECOGNIZABLE.LABELS.ENTRY_DATA'|translate}}>
             <div layout="row"
-                 layout-align="center center">
+                 layout-align="center center"
+                 ng-if="vm.showSelector">
                 <p>{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.LABEL'|translate}}</p>
-                <md-switch ng-model="vm.entryFromAgency"
-                           md-change="vm.changeSwitch()">
+                <md-switch ng-model="vm.entryToAgency"
+                           ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.TRUE'|translate}}</p>
                     <p ng-if="!vm.entryFromAgency">{{'ENTRIES.UNRECOGNIZABLE.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
@@ -123,14 +125,63 @@
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
-                <catalog-select class="full-width"
-                                ng-if="vm.showSubsidiarySelector"
-                                catalog="vm.catalogues['subsidiary'].catalog"
-                                hint="vm.catalogues['subsidiary'].hint"
-                                icon="vm.catalogues['subsidiary'].icon"
-                                required="vm.catalogues['subsidiary'].required"
-                                on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
-                </catalog-select>
+                <div ng-if="vm.userSubsidiary"
+                     layout="column"
+                     layout-gt-xs="row"
+                     layout-align-gt-xs="space-around center"
+                     layout-align="center stretch">
+                    <catalog-select class="full-width"
+                                    ng-if="vm.showSelector"
+                                    catalog="vm.catalogues['subsidiary'].catalog"
+                                    hint="vm.catalogues['subsidiary'].hint"
+                                    icon="vm.catalogues['subsidiary'].icon"
+                                    required="vm.catalogues['subsidiary'].required"
+                                    on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+                    </catalog-select>
+                    <catalog-select class="full-width"
+                                    catalog="vm.catalogues['origin_udn'].catalog"
+                                    hint="vm.catalogues['origin_udn'].hint"
+                                    icon="vm.catalogues['origin_udn'].icon"
+                                    required="vm.catalogues['origin_udn'].required"
+                                    on-select="vm.onElementSelect(element,vm.catalogues['origin_udn'].binding)">
+                    </catalog-select>
+                </div>
+                <div ng-if="vm.userAgency"
+                     layout="column"
+                     layout-gt-sm="row"
+                     layout-align-gt-sm="space-around center"
+                     layout-align="center stretch">
+                    <catalog-select class="full-width"
+                                    ng-if="vm.showSelector"
+                                    catalog="vm.catalogues['udn'].catalog"
+                                    hint="vm.catalogues['udn'].hint"
+                                    icon="vm.catalogues['udn'].icon"
+                                    required="vm.catalogues['udn'].required"
+                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                    </catalog-select>
+                    <md-input-container class="md-icon-float md-block full-width">
+                        <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_STORE</label>
+                        <md-icon class="fa fa-user"></md-icon>
+                        <input ng-model="vm.store['razon_social']"
+                               name="store_name"
+                               ng-required="true"
+                               disabled
+                               type="text">
+                        <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.ORIGIN_STORE</div>
+                    </md-input-container>
+                    <div layout="column"
+                         layout-align-gt-sm="center stretch"
+                         layout-align="center center">
+                        <md-button ng-click="vm.searchStore()"
+                                   aria-label="search store"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-search"></md-icon>
+                                <div>{{'ENTRIES.UNRECOGNIZABLE.BUTTONS.SEARCH_STORE'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </div>
+                </div>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
                     <label translate>ENTRIES.UNRECOGNIZABLE.LABELS.DESCRIPTION</label>
@@ -140,35 +191,6 @@
                            type="text">
                     <div class="hint" translate>ENTRIES.UNRECOGNIZABLE.HINTS.DESCRIPTION</div>
                 </md-input-container>
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
-                     layout-align="center stretch">
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['project'].catalog"
-                                    hint="vm.catalogues['project'].hint"
-                                    icon="vm.catalogues['project'].icon"
-                                    required="vm.catalogues['project'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['project'].binding)">
-                    </catalog-select>
-                    <!--Mutual excluding catalogs-->
-                    <catalog-select class="full-width"
-                                    ng-if="!vm.entryFromAgency"
-                                    catalog="vm.catalogues['petition'].catalog"
-                                    hint="vm.catalogues['petition'].hint"
-                                    icon="vm.catalogues['petition'].icon"
-                                    required="vm.catalogues['petition'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['petition'].binding)">
-                    </catalog-select>
-                    <catalog-select class="full-width"
-                                    ng-if="vm.entryFromAgency"
-                                    catalog="vm.catalogues['udn'].catalog"
-                                    hint="vm.catalogues['udn'].hint"
-                                    icon="vm.catalogues['udn'].icon"
-                                    required="vm.catalogues['udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
-                    </catalog-select>
-                </div>
                 <div layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"

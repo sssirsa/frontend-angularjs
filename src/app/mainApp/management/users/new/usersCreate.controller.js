@@ -3,7 +3,8 @@
         .module('app.mainApp.management.users')
         .controller('usersCreateController', UsersCreateController);
 
-    function UsersCreateController(groups,
+    function UsersCreateController(
+        groups,
         NotificationPanel,
         Persona_Admin,
         toastr,
@@ -12,6 +13,7 @@
         $scope,
         URLS,
         EnvironmentConfig,
+        PAGINATION,
         _
     ) {
         var vm = this;
@@ -41,8 +43,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

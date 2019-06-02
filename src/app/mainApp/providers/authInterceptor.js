@@ -9,7 +9,7 @@
         .factory('AuthInterceptor', AuthInterceptor);
 
     /* @ngInject */
-    function AuthInterceptor($injector, $q, EnvironmentConfig) {
+    function AuthInterceptor($injector, $q, EnvironmentConfig, $cookies) {
         var inFlightGet = null;
         var inFlightRefresh = null;
         return {
@@ -20,16 +20,12 @@
 
         function request(config) {
             var deferred = $q.defer();
-            if (config.url.indexOf(EnvironmentConfig.site.rest.mobile_api) !== -1 ||
-                config.url.indexOf(EnvironmentConfig.site.rest.api_reports) !== -1 ||
-                config.url.indexOf(EnvironmentConfig.site.rest.web_api) !== -1) {
-                if(config.url.indexOf('oauth') === -1)
-                {
-                    if (!inFlightGet) {
-                        inFlightGet = $injector.get('AuthService').getToken();
-                        config.headers.Authorization = 'Bearer ' + inFlightGet;
-                        inFlightGet = null;
-                    }
+            if(config.url.indexOf('oauth') === -1)
+            {
+                if (!inFlightGet) {
+                    inFlightGet = $injector.get('AuthService').getToken();
+                    config.headers.Authorization = 'Bearer ' + inFlightGet;
+                    inFlightGet = null;
                 }
             }
             deferred.resolve(config);
@@ -50,6 +46,7 @@
                 }
                 inFlightRefresh.then(function () {
                     inFlightRefresh = null;
+                    response.config.headers.Authorization = 'Bearer ' + $cookies.getObject('token');
                     $http(response.config).then(deferred.resolve, deferred.reject);
                 });
                 return deferred.promise;

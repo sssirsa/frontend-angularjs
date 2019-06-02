@@ -38,7 +38,7 @@
                 <span ng-if="!$ctrl.noResults">No results</span>
             </md-option>
             <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
-                       ng-if="$ctrl.paginationHelper['next']"
+                       ng-if="$ctrl.paginationHelper['nextPage']"
                        ng-click="$ctrl.loadMore()"
                        aria-label="{{$ctrl.loadMoreButtonText}}"
                        class="md-primary md-raised">
@@ -73,7 +73,7 @@
                 </section>
             </md-option>
             <md-button cg-busy="{promise:$ctrl.loadMoreLoader, message:' ' }"
-                       ng-if="$ctrl.paginationHelper['next']"
+                       ng-if="$ctrl.paginationHelper['nextPage']"
                        ng-click="$ctrl.loadMore()"
                        aria-label="{{$ctrl.loadMoreButtonText}}"
                        class="md-primary md-raised">
