@@ -6,7 +6,13 @@
         .module('app.mainApp.management.catalogues')
         .controller('componentTypeController',componentTypeController);
 
-    function componentTypeController(URLS, Translate, OPTIONS, EnvironmentConfig)
+    function componentTypeController(
+        URLS,
+        Translate,
+        OPTIONS,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
 
         var vm = this;
@@ -145,9 +151,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

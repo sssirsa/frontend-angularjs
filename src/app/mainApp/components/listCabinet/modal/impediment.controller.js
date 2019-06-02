@@ -6,7 +6,18 @@
         .module('app.mainApp')
         .controller('modalImpedimentController',modalImpedimentController);
 
-    function modalImpedimentController(cabinetUC, $mdDialog, data, $scope, toastr, Translate, URLS, ErrorHandler, EnvironmentConfig)
+    function modalImpedimentController(
+        cabinetUC,
+        $mdDialog,
+        data,
+        $scope,
+        toastr,
+        Translate,
+        URLS,
+        ErrorHandler,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
         var vm = this;
 
@@ -44,8 +55,10 @@
                     model: 'id',
                     option: 'descripcion',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

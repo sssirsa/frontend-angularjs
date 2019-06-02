@@ -8,7 +8,18 @@
         .module('app.mainApp.inventory')
         .controller('notCapitalizedDialogController', notCapitalizedDialogController);
 
-    function notCapitalizedDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, User, URLS, $scope, noLabeled)
+    function notCapitalizedDialogController(
+        $mdDialog,
+        MANAGEMENT,
+        EnvironmentConfig,
+        Translate,
+        toastr,
+        User,
+        URLS,
+        $scope,
+        noLabeled,
+        PAGINATION
+    )
     {
         var vm = this;
         vm.user = User.getUser();
@@ -39,8 +50,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {
@@ -62,8 +75,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

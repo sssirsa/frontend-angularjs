@@ -1,3 +1,19 @@
+/*
+    Fields for "New" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_origen_id: int(id), (Required if sucursal_destino_id)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        establecimiento_origen_id: int(id), (Required if udn_destino_id)
+        proveedor_origen_id: int(id), (Required)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.unrecognizable')
@@ -19,10 +35,12 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryFromAgency; //Determines what catalog to show (Petition or udn)
+        vm.entryToAgency; //Determines what catalog to show
+        vm.userSubsidiary;
+        vm.userAgency;
 
         //Validations
         vm.imageConstraints = {
@@ -40,17 +58,25 @@
 
         // Auto invoked init function
         vm.init = function init() {
-            vm.showSubsidiarySelector = false;
+            vm.showSelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
-            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.entryToAgency = false; //Determines what catalog to show 
             vm.entry = MANUAL_ENTRIES.unrecognizableEntry.template();
             vm.catalogues = MANUAL_ENTRIES.unrecognizableEntry.catalogues();
             vm.selectedTab = 0;
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
+
+            if (vm.showSelector) {
+                vm.userSubsidiary = true;
+                vm.userAgency = false;
             }
         };
 
@@ -86,6 +112,8 @@
                     return element.id;
                 }).indexOf(cabinetID);
                 if (index !== -1) {
+                    //Cleaning the search bar
+                    vm.cabinetID = '';
                     //Cabinet already in list
                     toastr.warning(Translate.translate('ENTRIES.UNRECOGNIZABLE.ERRORS.REPEATED_ID'), cabinetID);
                 }
@@ -177,7 +205,36 @@
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
-            delete (vm.entry[vm.catalogues['petition'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
+            if (vm.entryToAgency) {
+                vm.userAgency = true;
+                vm.userSubsidiary = false;
+            }
+            else {
+                vm.userAgency = false;
+                vm.userSubsidiary = true;
+            }
+        };
+
+        vm.searchStore = function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    //Select the store
+                    vm.store = store;
+                    vm.entry.establecimiento_origen_id = store['no_cliente'];
+                })
+                .catch(function (storeError) {
+                    if (storeError) {
+                        ErrorHandler.errorTranslate(storeError);
+                    }
+                });
         };
 
         //Internal functions

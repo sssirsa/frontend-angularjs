@@ -134,7 +134,7 @@
                              ng-if="$ctrl.actions['LIST'].mode==='paged'"
                              cg-busy="{promise:$ctrl.pageLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Previous page button -->
-                        <md-button ng-disabled="!$ctrl.paginationHelper['previous']"
+                        <md-button ng-disabled="!$ctrl.paginationHelper['previousPage']"
                                    ng-click="$ctrl.previousPage()"
                                    aria-label="{{$ctrl.previousButtonText}}"
                                    class="md-primary md-raised">
@@ -145,7 +145,7 @@
                             </div>
                         </md-button>
                         <!-- Next page button -->
-                        <md-button ng-disabled="!$ctrl.paginationHelper['next']"
+                        <md-button ng-disabled="!$ctrl.paginationHelper['nextPage']"
                                    ng-click="$ctrl.nextPage()"
                                    aria-label="{{$ctrl.nextButtonText}}"
                                    class="md-primary md-raised">
@@ -162,7 +162,7 @@
                              ng-if="$ctrl.actions['LIST'].mode==='infinite'"
                              cg-busy="{promise:$ctrl.infiniteLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                         <!-- Load more results button -->
-                        <md-button ng-if="$ctrl.paginationHelper['next']"
+                        <md-button ng-if="$ctrl.paginationHelper['nextPage']"
                                    ng-click="$ctrl.loadMore()"
                                    aria-label="{{$ctrl.loadMoreButtonText}}"
                                    class="md-primary md-raised">

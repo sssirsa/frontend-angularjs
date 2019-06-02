@@ -1,3 +1,18 @@
+/*
+    Fields for "New" entries:
+    entry:{
+        nombre_chofer: string, (Required)
+        ife_chofer: base64string, (Required) Image file
+        descripcion: string, (Optional)
+        linea_transporte_id: int(id), (Required)
+        tipo_transporte_id: int(id), (Required)
+        pedimento: string, (Optional)
+        sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
+        udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
+        proveedor_origen_id: int(id), (Required)
+        cabinets_id: array[id] (Required, not empty, validated)
+    }
+*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.entries.new')
@@ -11,7 +26,8 @@
         $mdDialog,
         Helper,
         EnvironmentConfig,
-        URLS
+        URLS,
+        PAGINATION
     ) {
         var vm = this;
 
@@ -21,10 +37,12 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.entryFromAgency; //Determines which catalog to show (Petition or udn)
+        vm.entryToAgency; //Determines which catalog to show (subsidiary or udn-agency)
+        vm.userAgency;
+        vm.userSubsidiary;
 
         //Validations and constraints
         vm.imageConstraints = {
@@ -93,6 +111,11 @@
                     type: 'catalog',
                     model: 'marca',
                     label: 'Marca del cabinet',
+                    validations: {
+                        errors: {
+                            required: 'El campo es requerido.'
+                        }
+                    },
                     catalog: {
                         url: EnvironmentConfig.site.rest.api
                             + '/' + URLS.management.base
@@ -100,10 +123,15 @@
                             + '/' + URLS.management.catalogues.cabinet_brand,
                         name: 'Marca',
                         model: 'id',
-                        option: 'descripcion',
+                        option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         softDelete: {
                             hide: 'deleted',
                             reverse: false
@@ -120,13 +148,18 @@
                             + '/' + URLS.management.base
                             + '/' + URLS.management.catalogues.base
                             + '/' + URLS.management.catalogues.cabinet_model,
-                        query: '?marca__id=',
+                        query: 'marca__id',
                         requires: 'marca',
                         name: 'Modelo',
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         loadMoreButtonText: 'Cargar mas...',
                         softDelete: {
                             hide: 'deleted',
@@ -149,56 +182,10 @@
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'estatus_unilever_id',
-                    label: 'Estatus unilever',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_unilever,
-                        name: 'Estatus Unilever',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'estatus_com_id',
-                    label: 'Estatus COM',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.status_com,
-                        name: 'Estatus COM',
-                        model: 'id',
-                        option: 'descripcion',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
@@ -221,8 +208,10 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
@@ -247,16 +236,19 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showSelector = false;
             vm.cabinetList = [];
-            vm.entryFromAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.entryToAgency = false; //Determines what catalog to show (Petition or udn)
             vm.entry = MANUAL_ENTRIES.newEntry.template();
             vm.catalogues = MANUAL_ENTRIES.newEntry.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         vm.init();
@@ -291,6 +283,8 @@
                     return element.id;
                 }).indexOf(cabinetID);
                 if (index !== -1) {
+                    //Cleaning the search bar
+                    vm.cabinetID = '';
                     //Cabinet already in list
                     toastr.warning(Translate.translate('ENTRIES.NEW.ERRORS.REPEATED_ID'), cabinetID);
                 }
@@ -338,6 +332,8 @@
                             }
                         })
                         .catch(function setCabinetToAddError(error) {
+                            //Cleaning the search bar
+                            vm.cabinetID = '';
                             ErrorHandler.errorTranslate(error);
                         });
                 }
@@ -408,7 +404,7 @@
         vm.changeSwitch = function changeSwitch() {
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
-            delete (vm.entry[vm.catalogues['petition'].binding]);
+            delete (vm.entry[vm.catalogues['subsidiary'].binding]);
         };
 
         //Internal functions

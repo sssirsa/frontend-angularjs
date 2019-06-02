@@ -6,23 +6,34 @@
             catalogues: {
                 base: 'catalogues',
                 udn: 'udn',
-                project: 'project',
                 transport_line: 'transport_line',
                 transport_type: 'transport_type',
-                sticker: 'sticker',
-                pediments: 'pediments'
+                sticker: 'sticker'
             },
-            departures: {},
-            entries: {
-                base: 'entries',
+            departures: {
+                base: 'departures',
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
                 warranty: 'warranties',
                 addCabinet: 'add_cabinet',
                 close: 'close'
             },
-            inspections: {},
+            entries: {
+                addCabinet: 'add_cabinet',
+                base: 'entries',
+                close: 'close',
+                new: 'news',
+                repair: 'repair',
+                unrecognizable: 'no_labeled',
+                warehouse: 'warehouse',
+                warranty: 'warranties'
+            },
+            inspections: {
+                base: 'inspections',
+                preliminary_inspection:'preliminary_inspection'
+            },
             subsidiary_change: {}
         });
 })();

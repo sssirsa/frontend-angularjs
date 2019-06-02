@@ -8,7 +8,8 @@
     function UniqueAssetController(
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -87,8 +88,10 @@
                             loadMoreButtonText: 'Cargar mas...',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -106,7 +109,7 @@
                                 + '/' + URLS.inventory.base
                                 + '/' + URLS.inventory.catalogues.base
                                 + '/' + URLS.inventory.catalogues.consumable_model,
-                            query: '?marca__id=',
+                            query: 'marca__id',
                             requires: 'marca_insumo',
                             name: 'Modelo del insumo',
                             model: 'id',
@@ -114,8 +117,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -139,8 +144,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -164,8 +171,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -191,8 +200,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -256,8 +267,10 @@
                             loadMoreButtonText: 'Cargar mas...',
                             elements: 'results',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -284,8 +297,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -310,8 +325,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -336,8 +353,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -364,8 +383,10 @@
                             elements: 'results',
                             loadMoreButtonText: 'Cargar mas...',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -394,8 +415,13 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
-                pagination: {},
+                mode: PAGINATION.mode,
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
                 fields: [
                     {
                         type: 'text',
