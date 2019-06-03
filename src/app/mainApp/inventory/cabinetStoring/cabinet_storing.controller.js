@@ -19,6 +19,7 @@
         User,
         noLabeled,
         assetStoringProvider,
+        PAGINATION,
         _,
         EnvironmentConfig
     ) {
@@ -108,8 +109,9 @@
                 EnvironmentConfig.site.rest.api
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.storage
-                + '?sucursal__id=' + vm.subsidiary;
+                + '/' + URLS.management.catalogues.storage;
+            vm.catalogues.storage_by_sucursal.catalog.query='sucursal__id';
+            vm.catalogues.storage_by_sucursal.catalog.query_value= vm.subsidiary;
         }
 
         function onLoad() {
