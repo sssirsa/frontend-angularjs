@@ -61,7 +61,7 @@ lint:all:
 lint:test:
     <<: *lint_script
     variables:
-        BRANCH: ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+        BRANCH: "development"
     only:
         - merge_requests
 

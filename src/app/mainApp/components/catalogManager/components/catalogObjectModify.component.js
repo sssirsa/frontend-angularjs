@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .component('catalogObjectModify', {
             templateUrl: 'app/mainApp/components/catalogManager/components/catalogObjectModify.tmpl.html',
             controller: CatalogObjectModifyController,
@@ -117,7 +117,7 @@
                                 catalogElement = angular.fromJson(
                                     angular.toJson(
                                         vm.objectToModify[field.model]
-                                    ))[field.catalog.model];
+                                    ));
                                 vm.objectToModify[field.model] = catalogElement;
                             }
                             else {

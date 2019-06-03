@@ -54,8 +54,14 @@
  *                                       If not given, then the model will be used
  *                               
  *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
- *                      total: string,        (Optional) Binding for the number of total elements
+ *                  //Next parameter, just used when the url is going to be used from what the API returned.
  *                      next: string,         (Optional) Binding for the url that brings to the next page
+ *                  //Total, limit and offset, used when the component is going to calculate and build the query,
+ *                  //All of the following are required if no next parameter is given.
+ *                      total: string,        (Optional) Binding for the number of total elements.
+ *                      limit: string,        (Optional) Parameter used for the query building, not the number.
+ *                      offset: string,       (Optional) Parameter used for the query building, not the number.
+ *                      pageSize: number      (Optional) Used to determine how many results are going to be loaded per page.
  *                  },
  *                  required: boolean,    (Optional) To be used in form validation
  *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
@@ -113,7 +119,7 @@
 
 (function () {
     angular
-        .module('app.mainApp')
+        .module('catalogManager')
         .controller('CatalogUpdateDialogController', CatalogUpdateDialogController);
     function CatalogUpdateDialogController(
         $mdDialog,
@@ -128,8 +134,13 @@
         vm.dialog = dialog;
         vm.fields = fields;
         vm.UpdateCatalogProvider = CATALOG;
-
-        vm.id = id;
+        vm.id;
+        if (id) {
+            vm.id = id;
+        }
+        else {
+            vm.id = 'id';
+        }
         vm.url = url;
         vm.objectToUpdate = {};
 
@@ -148,9 +159,16 @@
         function modify() {
             createProvider();
             vm.modifyLoader = vm.UpdateCatalogProvider
-                .patch(id, vm.objectToUpdate)
-                .then(function (modifiedElement) {
-                    $mdDialog.hide(modifiedElement);
+                .patch(vm.id, vm.objectToUpdate)
+                .then(function (updatedElement) {
+                    var elementToReturn;
+                    if (updatedElement) {
+                        elementToReturn = updatedElement;
+                    }
+                    else {
+                        elementToReturn = vm.objectToUpdate;
+                    }
+                    $mdDialog.hide(elementToReturn);
                 })
                 .catch(function (modifyError) {
                     $mdDialog.cancel(modifyError);

@@ -1,0 +1,130 @@
+<md-dialog class="dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <!--<h2>{{'MAIN.COMPONENTS.CABINET.INFO_IMPEDIMENT'|translate}}</h2>-->
+            <h2>Información del ticket</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+
+        <md-content
+            layout="column"
+            layout-align="center stretch"
+            layout-padding
+        >
+
+            <div layout="column" layout-align="center stretch" ng-if="!vm.infoChip">
+                <md-input-container layout="row">
+                    <label translate>Identificador</label>
+                    <input name="identificador" ng-disabled="true" ng-model="vm.infoTicket.identificador"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Folio</label>
+                    <input name="folio" ng-disabled="true" ng-model="vm.infoTicket.folio"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Cabinet</label>
+                    <input name="economico" ng-disabled="true" ng-model="vm.infoTicket.cabinet.economico"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Código COM</label>
+                    <input name="com_code" ng-disabled="true" ng-model="vm.infoTicket.tipo.com_ticket_code"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Descripción</label>
+                    <input name="ticket_descripcion" ng-disabled="true" ng-model="vm.infoTicket.tipo.descripcion"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Status del Ticket</label>
+                    <input name="ticket_status" ng-disabled="true" ng-model="vm.infoTicket.estatus"/>
+                </md-input-container>
+
+                <md-content layout="column">
+                    <span class="md-body-1 label" translate>Fecha de creación del ticket</span>
+                    <span class="label">{{vm.infoTicket.fecha_creacion| date:"EEEE dd/MM/yyyy
+                HH:mm:ss"}}</span>
+                </md-content>
+
+                <md-content layout="column">
+                    <span class="md-body-1 label" translate>Fecha de confirmación</span>
+                    <span ng-if="vm.infoTicket.fecha_confirmacion" class="label">{{vm.infoTicket.fecha_confirmacion | date:"EEEE dd/MM/yyyy
+                HH:mm:ss"}}</span>
+                    <span ng-if="!vm.infoTicket.fecha_confirmacion" class="label" translate="">COM.NOT_INCLUDED</span>
+
+                </md-content>
+
+                <md-input-container layout="row">
+                    <label translate>Mensaje COM</label>
+                    <input name="ticket_msj" ng-disabled="true" ng-model="vm.infoTicket.mensaje_com"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Ticket Padre</label>
+                    <input name="ticket_padre" ng-disabled="true" ng-model="vm.infoTicket.ticket_padre"/>
+                </md-input-container>
+
+                <md-input-container layout="row">
+                    <label translate>Ticket Anterior</label>
+                    <input name="ticket_padre" ng-disabled="true" ng-model="vm.infoTicket.ticket_anterior"/>
+                </md-input-container>
+
+                <md-chips class="custom-chips" ng-model="vm.chip" readonly="true" ng-if="vm.chip.length > 0">
+                    <md-chip-template ng-click="vm.view($chip)">
+                        <span>
+                            <span class="{{$chip.css}}" layout-align="center center">
+                                <strong>&nbsp;{{$chip.num_intentos}}</strong>
+                            </span>
+                            <strong>{{$chip.com_code}}</strong>
+                            <strong>{{$chip.nombre_com}}</strong>
+                        </span>
+                    </md-chip-template>
+                </md-chips>
+            </div>
+
+            <div layout="row" ng-if="vm.infoChip" layout-padding>
+                <md-card flex layout-padding>
+                    <div layout="row" layout-align="space-between start">
+                        <div layout="column">
+                            <div layout="row" layout-align="space-between center">
+                                <div layout-align="start start" class="md-list-item-text">
+                                    <h5>Ticket:&nbsp{{vm.infoChip.ticket}}</h5>
+                                    <h5>Identificador MSJ:&nbsp{{vm.infoChip.identificador}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div layout="colum" layout-align="start start">
+                            <div ng-click="vm.clean()">x</div>
+                        </div>
+                    </div>
+                    <div class="md-list-item-text">
+                        <h6>Código COM:&nbsp{{vm.infoChip.com_code}}</h6>
+                        <h6>Nombre COM:&nbsp{{vm.infoChip.nombre_code}}</h6>
+                        <h6>Mensaje:&nbsp{{vm.infoChip.text}}</h6>
+                        <h6>Fecha creación:&nbsp{{vm.infoChip.fecha_creacion}}</h6>
+                        <h6>Tipo:&nbsp{{vm.infoChip.tipo}}</h6>
+                        <h6>Estatus:&nbsp{{vm.infoChip.estatus}}</h6>
+                        <h6>No. Intentos:&nbsp{{vm.infoChip.num_intentos}}</h6>
+                    </div>
+                </md-card>
+            </div>
+
+            <md-actions layout="row" layout-align="end center">
+                <md-button
+                    ng-click="vm.cerrar()"
+                    class="md-raised md-primary">
+                    <md-icon md-font-icon="fas fa-ban"></md-icon>
+                    CERRAR
+                </md-button>
+            </md-actions>
+
+        </md-content>
+    </md-toolbar>
+</md-dialog>

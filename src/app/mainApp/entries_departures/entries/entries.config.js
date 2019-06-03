@@ -42,16 +42,28 @@
                 controller: 'unrecognizableManualEntryController',
                 controllerAs: 'vm'
             })
-            /* Obsolete asset entries */
-            .state('triangular.admin-default.entry-obsolete-manual', {
-                url: '/entrada/obsoletos/manual',
+            /* Warehouse asset entries */
+            .state('triangular.admin-default.entry-warehouse-manual', {
+                url: '/entrada/almacen/manual',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
                     }
                 },
-                templateUrl: 'app/mainApp/entries_departures/entries/obsolete/manual/obsoleteManualEntry.tmpl.html',
-                controller: 'obsoleteManualEntryController',
+                templateUrl: 'app/mainApp/entries_departures/entries/warehouse/manual/warehouseManualEntry.tmpl.html',
+                controller: 'warehouseManualEntryController',
+                controllerAs: 'vm'
+            })
+            /* Repair asset entries */
+            .state('triangular.admin-default.entry-repair-manual', {
+                url: '/entrada/reparacion/manual',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/entries/repair/manual/repairManualEntry.tmpl.html',
+                controller: 'repairManualEntryController',
                 controllerAs: 'vm'
             })
             ;
@@ -82,10 +94,16 @@
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
                     },
                     {
-                        name: 'ENTRIES.MENU.OBSOLETE',
+                        name: 'ENTRIES.MENU.WAREHOUSE',
                         type: 'link',
                         permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
-                        state: 'triangular.admin-default.entry-obsolete-manual'
+                        state: 'triangular.admin-default.entry-warehouse-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.REPAIR',
+                        type: 'link',
+                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        state: 'triangular.admin-default.entry-repair-manual'
                     }
                 ]
 

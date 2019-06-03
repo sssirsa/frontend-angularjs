@@ -8,7 +8,18 @@
         .module('app.mainApp.inventory')
         .controller('notCapitalizedUpdateDialogController', notCapitalizedUpdateDialogController);
 
-    function notCapitalizedUpdateDialogController($mdDialog, MANAGEMENT, EnvironmentConfig, Translate, toastr, URLS, $scope, noLabeled, data)
+    function notCapitalizedUpdateDialogController(
+        $mdDialog,
+        MANAGEMENT,
+        EnvironmentConfig,
+        Translate,
+        toastr,
+        URLS,
+        $scope,
+        noLabeled,
+        data,
+        PAGINATION
+    )
     {
         var vm = this;
         vm.no_labeled = {};
@@ -57,8 +68,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {
@@ -80,8 +93,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {

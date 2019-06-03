@@ -7,19 +7,21 @@
         .module('app.mainApp.inventory')
         .controller('cabinetStorageController', cabinetStorageController);
 
-    function cabinetStorageController($scope,
-                                      Translate,
-                                      toastr,
-                                      Helper,
-                                      URLS,
-                                      CATALOG,
-                                      ErrorHandler,
-                                      cabinetUC,
-                                      User,
-                                      noLabeled,
-                                      assetStoringProvider,
-                                      _,
-                                      EnvironmentConfig) {
+    function cabinetStorageController(
+        $scope,
+        Translate,
+        toastr,
+        Helper,
+        URLS,
+        CATALOG,
+        ErrorHandler,
+        cabinetUC,
+        User,
+        noLabeled,
+        assetStoringProvider,
+        _,
+        EnvironmentConfig
+    ) {
         //Variable definition
         var vm = this;
         vm.asset_location = {}; // Objeto de localización de Cabinet
@@ -30,6 +32,7 @@
 
 
         //funciones
+        vm.onSubsidiarySelect = onSubsidiarySelect;
         vm.onElementSelect = onElementSelect;
         vm.increment_element = increment_element;
         vm.decrement_element = decrement_element;
@@ -47,7 +50,29 @@
 
         //Blank variables templates
         vm.catalogues = {
-            storage_by_sucursal: {
+            subsidiary: {
+                catalog: {
+                    url: URLS.management.catalogues.subsidiary,
+                    kind: 'Management',
+                    name: Translate.translate('STORAGE.SUCURSAL'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre'
+                },
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
+                required: true,
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                },
+                noResults: Translate.translate('ERRORS.NO_RESULTS')
+            }, storage_by_sucursal: {
                 catalog: {
                     url: null,
                     kind: 'Management',
@@ -56,8 +81,10 @@
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {
@@ -209,7 +236,6 @@
             vm.edition = true; // Booleano que permite mostrar los campos de seleccion de sucursal y/ó bodega
 
         }
-
         function changeStorage() {
             vm.editionStorage = !vm.editionStorage;
 

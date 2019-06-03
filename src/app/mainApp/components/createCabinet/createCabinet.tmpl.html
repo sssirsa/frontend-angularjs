@@ -26,8 +26,7 @@
                     <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
                     <md-icon class="fas fa-hashtag"></md-icon>
                     <div class="hint" translate>MAIN.COMPONENTS.CABINET.SERIAL</div>
-                    <input name="serial" maxlength="25"
-                           ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.no_serie"/>
+                    <input name="serial" maxlength="100" required ng-model="$ctrl.no_serie"/>
                     <div ng-messages="newcabinetForm.serial.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
@@ -52,8 +51,7 @@
                     <label translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</label>
                     <md-icon class="fas fa-hashtag"></md-icon>
                     <div class="hint" translate>MAIN.COMPONENTS.CABINET.ACTIVE_UNILEVER</div>
-                    <input name="unilever" maxlength="25"
-                           ng-pattern="/^[a-zA-Z0-9]+$/" required ng-model="$ctrl.id_unilever"/>
+                    <input name="unilever" maxlength="100"required ng-model="$ctrl.id_unilever"/>
                     <div ng-messages="newcabinetForm.unilever.$error">
                         <div ng-message="pattern">
                             {{'MAIN.LABEL.ALFANUMERIC'|translate}}
