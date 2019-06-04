@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('nextStepController',nextStepController);
 
-    function nextStepController(URLS, Translate, EnvironmentConfig)
+    function nextStepController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
 
         var vm = this;
@@ -95,9 +100,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

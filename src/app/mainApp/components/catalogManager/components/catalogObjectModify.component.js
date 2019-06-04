@@ -117,7 +117,7 @@
                                 catalogElement = angular.fromJson(
                                     angular.toJson(
                                         vm.objectToModify[field.model]
-                                    ))[field.catalog.model];
+                                    ));
                                 vm.objectToModify[field.model] = catalogElement;
                             }
                             else {

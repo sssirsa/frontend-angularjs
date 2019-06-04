@@ -17,6 +17,7 @@
         ErrorHandler,
         EnvironmentConfig,
         QUERIES,
+        PAGINATION,
         _
     )
     {
@@ -99,8 +100,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',
@@ -119,8 +122,10 @@
                     option: 'nombre'
                 },
                 pagination: {
-                    total: 'count',
-                    next: 'next'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 required: true,
                 elements: 'results',

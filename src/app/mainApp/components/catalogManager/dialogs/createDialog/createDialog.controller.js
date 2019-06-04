@@ -43,10 +43,16 @@
  *                  model: string,       From the catalog object, which element will be sent (aka: id, name, etc.)
  *                  option: string       (Optional) From the catalog object, which element will be shown in the list (ake: name, description, etc)
  *                                       If not given, then the model will be used
- *                               
+ *
  *                  pagination: {         (Optional) If present, the component asumes that the catalog API uses pagination
- *                      total: string,        (Optional) Binding for the number of total elements
+ *                  //Next parameter, just used when the url is going to be used from what the API returned.
  *                      next: string,         (Optional) Binding for the url that brings to the next page
+ *                  //Total, limit and offset, used when the component is going to calculate and build the query,
+ *                  //All of the following are required if no next parameter is given.
+ *                      total: string,        (Optional) Binding for the number of total elements.
+ *                      limit: string,        (Optional) Parameter used for the query building, not the number.
+ *                      offset: string,       (Optional) Parameter used for the query building, not the number.
+ *                      pageSize: number      (Optional) Used to determine how many results are going to be loaded per page.
  *                  },
  *                  elements: string,     (Optional) Model used if the elements are not returned at the root of the response
  *                                        aka: the API returns the array of objects in an element of the response, as in pagination
@@ -123,7 +129,7 @@
         //Functions
         vm.create = create;
         vm.cancel = cancel;
-        
+
 
         function createProvider() {
             if (vm.hasOwnProperty('url')) {

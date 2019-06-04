@@ -5,7 +5,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('WarehouseController', WarehouseController);
 
-    function WarehouseController(URLS, Translate, EnvironmentConfig) {
+    function WarehouseController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    ) {
 
         var vm = this;
 
@@ -124,7 +129,10 @@
                             name: 'Sucursal',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -225,7 +233,10 @@
                             name: 'Sucursal',
                             elements: 'results',
                             pagination: {
-                                total: 'count'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             softDelete: {
                                 hide: 'deleted',
@@ -253,9 +264,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

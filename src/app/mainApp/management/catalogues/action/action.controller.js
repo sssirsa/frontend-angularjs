@@ -6,7 +6,12 @@
         .module('app.mainApp.management.catalogues')
         .controller('ActionController',ActionController);
 
-    function ActionController(URLS, Translate, EnvironmentConfig)
+    function ActionController(
+        URLS,
+        Translate,
+        EnvironmentConfig,
+        PAGINATION
+    )
     {
 
         var vm = this;
@@ -121,9 +126,12 @@
             },
             LIST: {
                 elements: 'results',
-                mode: 'infinite',
+                mode: PAGINATION.mode,
                 pagination: {
-                    total: 'count'
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
                 },
                 fields: [
                     {

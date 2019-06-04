@@ -24,7 +24,8 @@
         $mdDialog,
         Helper,
         EnvironmentConfig,
-        URLS
+        URLS,
+        PAGINATION
     ) {
         var vm = this;
 
@@ -115,7 +116,12 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         softDelete: {
                             hide: 'deleted',
                             reverse: false
@@ -132,13 +138,18 @@
                             + '/' + URLS.management.base
                             + '/' + URLS.management.catalogues.base
                             + '/' + URLS.management.catalogues.cabinet_model,
-                        query: '?marca__id=',
+                        query: 'marca__id',
                         requires: 'marca',
                         name: 'Modelo',
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         loadMoreButtonText: 'Cargar mas...',
                         softDelete: {
                             hide: 'deleted',
@@ -161,8 +172,10 @@
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
@@ -185,8 +198,10 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
