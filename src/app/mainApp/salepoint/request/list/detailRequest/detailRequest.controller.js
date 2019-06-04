@@ -36,28 +36,33 @@
         activate();
 
         function activate() {
-            vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
-                .then(function (requestSuccess) {
-                    vm.request = requestSuccess;
-                    convertImages();
-                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento.no_cliente)
-                        .then(function (storeSuccess) {
-                            vm.store = storeSuccess;
-                        })
-                        .catch(function (storeError) {
-                            ErrorHandler.errorTranslate(storeError);
-                        });
-                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona.id)
-                        .then(function (userSuccess) {
-                            vm.user = userSuccess;
-                        })
-                        .catch(function (userError) {
-                            ErrorHandler.errorTranslate(userError);
-                        });
-                })
-                .catch(function (errorRequest) {
-                    ErrorHandler.errorTranslate(errorRequest);
-                });
+            if (vm.id === null) {
+                $state.go('triangular.admin-default.list-request');
+            }
+            else {
+                vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
+                    .then(function (requestSuccess) {
+                        vm.request = requestSuccess;
+                        convertImages();
+                        vm.storePromise = Stores.getByID(requestSuccess.establecimiento.no_cliente)
+                            .then(function (storeSuccess) {
+                                vm.store = storeSuccess;
+                            })
+                            .catch(function (storeError) {
+                                ErrorHandler.errorTranslate(storeError);
+                            });
+                        vm.personaPromise = Persona_Admin.get(requestSuccess.persona.id)
+                            .then(function (userSuccess) {
+                                vm.user = userSuccess;
+                            })
+                            .catch(function (userError) {
+                                ErrorHandler.errorTranslate(userError);
+                            });
+                    })
+                    .catch(function (errorRequest) {
+                        ErrorHandler.errorTranslate(errorRequest);
+                    });
+            }
         }
 
         function convertImages() {
