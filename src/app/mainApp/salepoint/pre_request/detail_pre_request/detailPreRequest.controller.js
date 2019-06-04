@@ -43,18 +43,22 @@
 
         vm.catalogSucursal = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.subsidiary,
-                kind: 'Generic',
+                url: EnvironmentConfig.site.rest.api +
+                    '/' + URLS.management.base +
+                    '/' + URLS.management.catalogues.base +
+                    '/' + URLS.management.catalogues.subsidiary,
                 name: Translate.translate('PRE_REQUEST.SUBSIDIARY.SELECT'),
-                loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                 model: 'id',
-                option: 'nombre'
-            },
-            elements: 'results'
-
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
+            }
         };
 
         vm.createCabinetDialog = {
@@ -206,18 +210,22 @@
 
 
         function getinfo() {
-            PREREQUESTS.getPreRequestByID($stateParams.id)
-                .then(function infoPre(elementPreRequest) {
-                    vm.preRequest = elementPreRequest;
-                    $log.log(vm.preRequest);
-                    convertImages();
-                    getinfoCabinet(vm.preRequest.cabinet);
-                })
-                .catch(function errInfoPre() {
-                    toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
-                                   Translate.translate('MAIN.MSG.ERROR_TITLE'));
-                });
-
+            if($stateParams.id === null) {
+                $state.go('triangular.admin-default.pre-request');
+            }
+            else {
+                PREREQUESTS.getPreRequestByID($stateParams.id)
+                    .then(function infoPre(elementPreRequest) {
+                        vm.preRequest = elementPreRequest;
+                        $log.log(vm.preRequest);
+                        convertImages();
+                        getinfoCabinet(vm.preRequest.cabinet);
+                    })
+                    .catch(function errInfoPre() {
+                        toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
+                            Translate.translate('MAIN.MSG.ERROR_TITLE'));
+                    });
+            }
         }
 
         function getinfoCabinet(id) {
