@@ -15,21 +15,21 @@
         EnvironmentConfig,
         URLS,
         PAGINATION,
-        _
+        QUERIES
+        //PAGINATION
     ) {
         var vm = this;
 
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
         vm.client_id = null;
-        vm.states = null;
-        vm.cities = null;
-        vm.localities = null;
+
         vm.state = null;
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
         vm.economic = null;
+
         vm.selectedTab = 0;
         vm.stores = null;
         vm.limit = 20;
@@ -40,11 +40,9 @@
         //Functions
         vm.accept = accept;
         vm.cancel = cancel;
-        vm.listStates = listStates;
-        vm.listCities = listCities;
-        vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectCity = selectCity;
+        vm.selectLocality = selectLocality;
         vm.search = search;
         vm.changeTab = changeTab;
         vm.sig = sigPage;
@@ -55,16 +53,64 @@
             states: {
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.management.base
-                        + '/' + URLS.management.catalogues.base
-                        + '/' + URLS.management.catalogues.subsidiary,
+                        + '/' + URLS.salepoint.base
+                        + '/' + URLS.salepoint.catalogues.base
+                        + '/' + URLS.salepoint.catalogues.states,
                     name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre',
                     pagination: {
-                        total: 'count',
-                        next: 'next'
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                }
+            },
+            cities: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.salepoint.base
+                        + '/' + URLS.salepoint.catalogues.base
+                        + '/' + URLS.salepoint.catalogues.cities,
+                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                }
+            },
+            localities: {
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.salepoint.base
+                        + '/' + URLS.salepoint.catalogues.base
+                        + '/' + URLS.salepoint.catalogues.localities,
+                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY'),
+                    loadMoreButtonText: 'Cargar mas',
+                    model: 'id',
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
                     },
                     elements: 'results',
                     softDelete: {
@@ -78,7 +124,7 @@
         activate();
 
         function activate() {
-            listStates();
+            //Initial handling
         }
 
 
@@ -90,72 +136,26 @@
             $mdDialog.cancel(null);
         }
 
-        function listStates() {
-            if (!vm.states) {
-                vm.loadingStates = States.list()
-                    .then(function (stateList) {
-                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
-                    })
-                    .catch(function (stateListError) {
-                        $log.error(stateListError);
-                        vm.states = null;
-                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
-                    });
-            }
-        }
-
-        function listCities(state) {
-            if (state) {
-                return Cities.getByState(state)
-                    .then(function (citiesList) {
-                        vm.cities = _.sortBy(Helper.filterDeleted(citiesList, true), 'nombre');
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-            else {
-                return Cities.list()
-                    .then(function (citiesList) {
-                        vm.cities = Helper.filterDeleted(citiesList, true);
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-        }
-
-        function listLocalities(city) {
-            if (city) {
-                return Localities.getByCity(city)
-                    .then(function (localitiesList) {
-                        vm.localities = _.sortBy(Helper.filterDeleted(localitiesList, true), 'nombre');
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-            else {
-                return Localities.list()
-                    .then(function (localitiesList) {
-                        vm.cities = Helper.filterDeleted(localitiesList, true);
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-        }
-
-        function selectState() {
+        function selectState(state) {
+            vm.state = state;
             vm.city = null;
             vm.locality = null;
             vm.cities = null;
             vm.localities = null;
+            vm.catalogues['cities'].catalog.query = QUERIES.city.by_state;
+            vm.catalogues['cities'].catalog.query_value = vm.state;
         }
 
-        function selectCity() {
+        function selectCity(city) {
+            vm.city = city;
             vm.locality = null;
             vm.localities = null;
+            vm.catalogues['localities'].catalog.query = QUERIES.locality.by_city;
+            vm.catalogues['localities'].catalog.query_value = vm.city;
+        }
+
+        function selectLocality(locality) {
+            vm.locality = locality;
         }
 
         function search() {

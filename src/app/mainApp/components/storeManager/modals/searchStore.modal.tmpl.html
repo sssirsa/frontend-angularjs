@@ -43,20 +43,35 @@
             </md-option>
         </md-select>
     </md-input-container>-->
-                <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
-                    <md-select ng-model="vm.city"
-                               md-on-open="vm.listCities(vm.state)"
-                               md-on-close="vm.selectCity()"
-                               ng-disabled="!vm.state">
-                        <md-option ng-repeat="city in vm.cities"
-                                   ng-value="city.id">
-                            {{city.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
+                <catalog-select class="full-width"
+                                ng-if="vm.state"
+                                catalog="vm.catalogues['cities'].catalog"
+                                lazy="true"
+                                on-select="vm.selectCity(element)">
+                </catalog-select>
+                <!--<md-input-container flex class="md-block">
+        <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
+        <md-select ng-model="vm.city"
+                   md-on-open="vm.listCities(vm.state)"
+                   md-on-close="vm.selectCity()"
+                   ng-disabled="!vm.state">
+            <md-option ng-repeat="city in vm.cities"
+                       ng-value="city.id">
+                {{city.nombre}}
+            </md-option>
+        </md-select>
+    </md-input-container>-->
+
+                <catalog-select class="full-width"
+                                ng-if="vm.city"
+                                catalog="vm.catalogues['localities'].catalog"
+                                lazy="true"
+                                on-select="vm.selectLocality(element)">
+                </catalog-select>
+                <!--<md-input-container flex class="md-block">
+                    s=
+
+                    <label translate>raMAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
                     <md-select ng-model="vm.locality"
                                md-on-open="vm.listLocalities(vm.city)"
                                ng-disabled="!vm.city">
@@ -65,7 +80,7 @@
                             {{locality.nombre}}
                         </md-option>
                     </md-select>
-                </md-input-container>
+                </md-input-container>-->
             </md-tab>
             <md-tab md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_POSTAL_CODE'|translate}}">
