@@ -33,54 +33,18 @@
                                 catalog="vm.catalogues['states'].catalog"
                                 on-select="vm.selectState(element)">
                 </catalog-select>
-                <!--<md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
-        <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
-        <md-select ng-model="vm.state"
-                   md-on-close="vm.selectState()">
-            <md-option ng-repeat="state in vm.states"
-                       ng-value="{{state.id}}">
-                {{state.nombre}}
-            </md-option>
-        </md-select>
-    </md-input-container>-->
                 <catalog-select class="full-width"
                                 ng-if="vm.state"
                                 catalog="vm.catalogues['cities'].catalog"
                                 lazy="true"
                                 on-select="vm.selectCity(element)">
                 </catalog-select>
-                <!--<md-input-container flex class="md-block">
-        <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
-        <md-select ng-model="vm.city"
-                   md-on-open="vm.listCities(vm.state)"
-                   md-on-close="vm.selectCity()"
-                   ng-disabled="!vm.state">
-            <md-option ng-repeat="city in vm.cities"
-                       ng-value="city.id">
-                {{city.nombre}}
-            </md-option>
-        </md-select>
-    </md-input-container>-->
-
                 <catalog-select class="full-width"
                                 ng-if="vm.city"
                                 catalog="vm.catalogues['localities'].catalog"
                                 lazy="true"
                                 on-select="vm.selectLocality(element)">
                 </catalog-select>
-                <!--<md-input-container flex class="md-block">
-                    s=
-
-                    <label translate>raMAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
-                    <md-select ng-model="vm.locality"
-                               md-on-open="vm.listLocalities(vm.city)"
-                               ng-disabled="!vm.city">
-                        <md-option ng-repeat="locality in vm.localities"
-                                   ng-value="locality.id">
-                            {{locality.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>-->
             </md-tab>
             <md-tab md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_POSTAL_CODE'|translate}}">
@@ -150,7 +114,7 @@
                 </pagination-manager-buttons>
             </div>
         </div>
-        <div ng-if="vm.selectedTab===2">
+        <div ng-if="vm.selectedTab===3">
             <md-card layout-gt-sm="row"
                      layout="column"
                      layout-align-gt-sm="space-around center"
@@ -184,5 +148,6 @@
                 </pagination-manager-buttons>
             </div>
         </div>
+        
     </md-content>
 </div>
