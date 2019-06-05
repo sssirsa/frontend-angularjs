@@ -19,9 +19,9 @@
         User,
         noLabeled,
         assetStoringProvider,
+        PAGINATION,
         _,
-        EnvironmentConfig,
-        PAGINATION
+        EnvironmentConfig
     ) {
         //Variable definition
         var vm = this;
@@ -109,8 +109,9 @@
                 EnvironmentConfig.site.rest.api
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.storage
-                + '?sucursal__id=' + vm.subsidiary;
+                + '/' + URLS.management.catalogues.storage;
+            vm.catalogues.storage_by_sucursal.catalog.query='sucursal__id';
+            vm.catalogues.storage_by_sucursal.catalog.query_value= vm.subsidiary;
         }
 
         function onLoad() {
@@ -123,9 +124,12 @@
 
 
         function onElementSelect(element) {
-
-            CATALOG.management.url = URLS.management.catalogues.storage;
-            var promise_storage = CATALOG.management.getByID(element);
+            var catalog_service = CATALOG;
+            catalog_service.url = EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.catalogues.base
+                + '/' + URLS.management.catalogues.storage;//agregar la ruta completa
+            var promise_storage = catalog_service.getByID(element);
             promise_storage.then(function (response_storage) {
                 vm.storage = response_storage;
                 vm.storage = _.pick(vm.storage, 'descripcion', 'estiba_max', 'nombre', 'pasillo_max', 'profundidad_max', 'id');
