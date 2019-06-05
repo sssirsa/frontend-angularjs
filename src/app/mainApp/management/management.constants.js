@@ -2,20 +2,16 @@
     angular
         .module('app.mainApp.management')
         .constant('MANAGEMENT', {
+            base: 'management',
             administration: {
                 base: 'manage_system',
-                employees:'employees',
-                groups: 'groups',
+                app: 'app',
+                error_message: 'error_message',
+                module: 'module',
+                person: 'persona',
                 profile:'info_full',
-                my_groups: 'my_groups',
-                person: {
-                    base: 'persona',
-                    admin: 'persona_admin',
-                    capturist: 'persona_capturista',
-                    employees:'employees'
-                }
+                project: 'project'
             },
-            base: 'management',
             catalogues: {
                 base: 'catalogues',
                 cabinet_brand: 'marca_cabinet',
@@ -48,8 +44,6 @@
             oauth: {
                 base: 'oauth',
                 login: 'token/'
-            },
-            restrictions: {},
-            users: {}
+            }
         });
 })();
