@@ -19,7 +19,7 @@
 
             }
         });
-    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog,$log, URLS,PAGINATION) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, $log, URLS, PAGINATION) {
         var vm = this;
         vm.notDetected = [];
         vm.unique_asset_list = [];
@@ -119,7 +119,7 @@
                             url: EnvironmentConfig.site.rest.api
                             + '/' + URLS.inventory.base
                             + '/' + URLS.management.base
-                            + '/unique_asset_branch',
+                            + '/' + URLS.management.unique_asset_inventory,
                             name: Translate.translate('UNIQUE_ASSET_COMPONENT.CATALOG_UNIQUE_ASSET_BRANCH'),
                             model: 'id',
                             option: 'description',
@@ -153,7 +153,7 @@
             vm.url = EnvironmentConfig.site.rest.api
                 + '/' + URLS.inventory.base
                 + '/' + URLS.management.base
-                + '/unique_asset';
+                + '/' + URLS.inventory.catalogues.unique_asset;
             vm.actions = {
                 POST: {
 

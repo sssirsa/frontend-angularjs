@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp.technical_service')
         .controller('PresurizeController', PresurizeController);
-    function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _) {
+    function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _,OPTIONS) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -21,24 +21,7 @@
 
 
         };
-        vm.options = [
-            {
-                name: "Corregida la fuga",
-                value: "Diagnostico"
-            },
-            {
-                name: "Necesario Obsoletizar",
-                value: "Obsoleto"
-            },
-            {
-                name: "Requiere una nueva Carga de Gas y reparación",
-                value: "Presurizado"
-            },
-            {
-                name: "Requiere una Revisión Posterior",
-                value: "Continuar"
-            }
-        ];
+        vm.options = OPTIONS.technical_service.presurize_options;
 
         //Declaracion de Funciones como variables_______________________________________________________________________
 

@@ -27,7 +27,28 @@
                     id: 'Servicio Técnico',
                     label: 'Servicio técnico'
                 }
-            ]
+            ],
+            technical_service:{
+                presurize_options:[
+
+                    {
+                        name: "Corregida la fuga",
+                        value: "Diagnostico"
+                    },
+                    {
+                        name: "Necesario Obsoletizar",
+                        value: "Obsoleto"
+                    },
+                    {
+                        name: "Requiere una nueva Carga de Gas y reparación",
+                        value: "Presurizado"
+                    },
+                    {
+                        name: "Requiere una Revisión Posterior",
+                        value: "Continuar"
+                    }
+                ]
+            }
         })
         .constant('URLS', {
             //New module separation
