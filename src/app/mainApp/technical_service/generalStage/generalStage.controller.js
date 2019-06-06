@@ -146,6 +146,12 @@
         function infoStep(step) {
 
             vm.step = step;
+            if (!vm.step.currentStage) {
+                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                clear();
+            }
             if (!vm.step) {
 
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');

@@ -45,7 +45,7 @@
         }
 
         function getEntrie(economico){
-            return  infoTipoEtapa.all(URLS.technical_service.type_entrie.control).all(URLS.technical_service.type_entrie.cabinet_subsidiary).all(economico).customGET();
+            return  infoTipoEtapa.all(URLS.management.control.base).all(URLS.management.control.cabinet_in_subsidiary).all(economico).customGET();
         }
 
     }
