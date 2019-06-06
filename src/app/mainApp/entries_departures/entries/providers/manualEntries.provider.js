@@ -291,7 +291,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_id',
+                        binding: 'sucursal_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -375,7 +375,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_id',
+                        binding: 'udn_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
