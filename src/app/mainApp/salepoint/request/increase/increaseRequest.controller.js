@@ -117,10 +117,10 @@
         }
 
         function save() {
-            vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 9);
-            vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 9);
+            vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
+            vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-            $log(vm.request);
+            $log.log(vm.request);
 
 
             /*vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
