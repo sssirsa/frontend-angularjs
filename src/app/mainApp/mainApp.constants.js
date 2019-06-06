@@ -6,6 +6,32 @@
                 { id: 'pending', value: 'Pendientes' },
                 { id: 'all', value: 'Detalle de atención' }
             ],
+            management: {
+                catalogues: {
+                    udn: {
+                        zone: [
+                            {
+                                value: "Centro"
+                            },
+                            {
+                                value: "Sur"
+                            },
+                            {
+                                value: "Norte"
+                            },
+                            {
+                                value: "Occidente (Oeste)"
+                            },
+                            {
+                                value: "Oriente (Este)"
+                            },
+                            {
+                                value: "Metropolitana"
+                            }
+                        ]
+                    }
+                }
+            },
             requestKinds: [
                 {
                     id: 'Nuevos',
