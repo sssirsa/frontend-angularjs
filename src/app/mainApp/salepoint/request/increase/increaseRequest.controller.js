@@ -89,7 +89,7 @@
                     offset: PAGINATION.offset,
                     pageSize: PAGINATION.pageSize
                 }
-            },
+            }
         };
 
         function onSelectedSucursal(element) {
