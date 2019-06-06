@@ -16,10 +16,10 @@
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('GENERAL_STAGE.BULK_ASSET');
         vm.assets_info = Translate.translate('GENERAL_STAGE.ACTIONS_MADE');
-        vm.dialogTitle=Translate.translate('GENERAL_STAGE.ACTIONS.CLOSE');
-        vm.confirmUpdate=Translate.translate('GENERAL_STAGE.ACTIONS.CONFIRM');
-        vm.accept=Translate.translate('GENERAL_STAGE.ACTIONS.ACCEPT');
-        vm.cancel=Translate.translate('GENERAL_STAGE.ACTIONS.CANCEL');
+        vm.dialogTitle = Translate.translate('GENERAL_STAGE.ACTIONS.CLOSE');
+        vm.confirmUpdate = Translate.translate('GENERAL_STAGE.ACTIONS.CONFIRM');
+        vm.accept = Translate.translate('GENERAL_STAGE.ACTIONS.ACCEPT');
+        vm.cancel = Translate.translate('GENERAL_STAGE.ACTIONS.CANCEL');
 
 
         vm.stage = {
@@ -65,7 +65,7 @@
                 vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
             }
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
-            if (!vm.actions){
+            if (!vm.actions) {
                 vm.stage = _.omit(vm.stage, 'acciones_id');
             }
             if (vm.actions) {
@@ -106,7 +106,7 @@
                 vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
             }
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
-            if (!vm.actions){
+            if (!vm.actions) {
                 vm.stage = _.omit(vm.stage, 'acciones_id');
             }
             if (vm.actions) {
@@ -146,12 +146,6 @@
         function infoStep(step) {
 
             vm.step = step;
-            if (!vm.step.currentStage) {
-                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
-                toastr.warning(NOT_STEP, SENT_TO_CHECK);
-                clear();
-            }
             if (!vm.step) {
 
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
@@ -159,6 +153,22 @@
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
+            if (vm.step){
+                if (!vm.step.currentStage) {
+                    var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                    var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                    toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                    clear();
+                }
+                if ((vm.step.currentStage.etapa.tipo_etapa === 'Checklist') || (vm.step.currentStage.etapa.tipo_etapa === 'Diagnostico')) {
+                    var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                    var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                    toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                    clear();
+
+                }
+            }
+
             vm.search = false;
 
         }
@@ -174,8 +184,6 @@
         function nextStep(step) {
             vm.stage.etapa_siguiente_id = step.id;
         }
-
-
 
 
         function getActions(element) {
