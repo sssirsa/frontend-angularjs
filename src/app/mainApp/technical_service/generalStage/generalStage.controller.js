@@ -60,7 +60,6 @@
         }
 
         function closeStage() {
-            $log.debug(vm.stage);
             vm.stage.sucursal_id = vm.step.control.sucursal.id;
             if (!vm.stage.etapa_siguiente_id) {
                 vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
@@ -103,7 +102,6 @@
         }
 
         function saveStage() {
-            $log.debug(vm.stage);
             if (!vm.stage.etapa_siguiente_id) {
                 vm.stage = _.omit(vm.stage, 'etapa_siguiente_id');
             }
@@ -146,13 +144,10 @@
         }
 
         function infoStep(step) {
-            $log.debug('etapa actual:');
-            $log.debug(step);
-            $log.debug(step.currentStage.id);
-            $log.debug(step.currentStage.servicio_cabinet);
+
             vm.step = step;
             if (!vm.step) {
-                $log.debug();
+
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
                 var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
@@ -166,15 +161,12 @@
         function getInsumosLote(element) {
             //console.log(element);
             vm.stage.insumos_lote_usados = element;
-            $log.debug(vm.stage.insumos_lote_usados);
+
 
         }
 
         function nextStep(step) {
-            $log.debug("siguiente etapa:");
-            $log.debug(step);
             vm.stage.etapa_siguiente_id = step.id;
-
         }
 
 
@@ -190,9 +182,6 @@
                     for (index = 0; index < vm.actions.length; ++index) {
                         vm.stage.acciones_id.push(vm.actions[index].com_code);
                     }
-                    $log.debug("Acciones");
-                    $log.debug(vm.actions);
-                    $log.debug(vm.stage.acciones_id);
                 }
             }
 

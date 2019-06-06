@@ -106,8 +106,7 @@
                 }
             }
             var promiseSendDiagnosis = diagnosisProvider.sendDiagnosis(vm.step.currentStage.id, vm.diagnostic);
-            promiseSendDiagnosis.then(function (response) {
-                $log.info(response);
+            promiseSendDiagnosis.then(function () {
                 ErrorHandler.successCreation();
                 clear();
 
@@ -133,10 +132,7 @@
         }
 
         function infoStep(step) {
-            $log.debug('etapa actual:');
-            $log.debug(step);
-            $log.debug(step.currentStage.id);
-            $log.debug(step.currentStage.servicio_cabinet);
+
             vm.step = step;
             vm.search = false;
             if (vm.step.currentStage.diagnostico) {
@@ -148,12 +144,10 @@
                 vm.diagnostic.fallas = vm.step.currentStage.diagnostico.fallas;
                 vm.diagnostic.temp_com = parseFloat(vm.step.currentStage.diagnostico.temp_com);
                 vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
-                $log.debug(vm.diagnostic);
-                $log.debug(vm.step.currentStage.acciones);
+
             }
 
             if (vm.step.currentStage.etapa.tipo_etapa !== 'Diagnostico') {
-                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
@@ -169,7 +163,6 @@
 
         function getFailures(failures) {
             vm.failures = failures;
-            $log.debug(vm.failures);
             var index;
             if (vm.failures.length > 0) {
                 vm.diagnostic.fallas_id = [];
@@ -177,23 +170,16 @@
                     vm.diagnostic.fallas_id.push(vm.failures[index].com_code);
                 }
 
-                $log.debug("Fallas");
-                $log.debug(vm.failures);
-                $log.debug(vm.diagnostic.fallas_id);
             }
 
         }
 
         function nextStep(step) {
-            $log.debug("siguiente etapa:");
-            $log.debug(step);
             vm.diagnostic.etapa_siguiente_id = step.id;
 
         }
 
         function getActions(element) {
-            $log.debug('acciones detectadas:');
-            $log.debug(element);
             vm.actions = element;
             vm.diagnostic.acciones_id = [];
             if (vm.actions) {
@@ -203,9 +189,6 @@
                     for (index = 0; index < vm.actions.length; ++index) {
                         vm.diagnostic.acciones_id.push(vm.actions[index].com_code);
                     }
-                    $log.debug("Acciones");
-                    $log.debug(vm.actions);
-                    $log.debug(vm.diagnostic.acciones_id);
                 }
             }
 

@@ -226,7 +226,7 @@
                 fullscreen: true,
                 focusOnOpen: false
 
-            }).then(function (answer) {
+            }).then(function () {
                 //Accepted
                 $mdDialog.hide();
             }, function () {

@@ -16,7 +16,7 @@
 
             }
         });
-    function actionsController(URLS, ErrorHandler, EnvironmentConfig, actionProvider, $log) {
+    function actionsController(URLS, ErrorHandler, EnvironmentConfig, actionProvider) {
         var vm = this;
 
         vm.actionsDoIt = [];

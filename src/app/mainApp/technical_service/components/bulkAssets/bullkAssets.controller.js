@@ -15,7 +15,7 @@
             }
         });
 
-    function bulkAssetsController($log) {
+    function bulkAssetsController() {
 
         var vm = this;
         vm.finalAssetBulk = {};

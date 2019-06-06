@@ -41,7 +41,7 @@
                 promiseStartStage = startServiceProvider.startStage(vm.stage,vm.body);
             }
             if (promiseStartStage) {
-                promiseStartStage.then(function (response) {
+                promiseStartStage.then(function () {
 
                     $interval(function () {
                         vm.contador = vm.contador + 1;

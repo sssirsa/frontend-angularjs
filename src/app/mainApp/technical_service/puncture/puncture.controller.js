@@ -64,7 +64,7 @@
             }
             var promiseSendPuncture = punctureProvider.makePuncture(vm.puncture, vm.step.currentStage.id);
             promiseSendPuncture.then(function (response) {
-                $log.debug(response);
+
                 ErrorHandler.successCreation();
                 clear();
             }).catch(function (errormsg) {
@@ -89,17 +89,14 @@
         }
 
         function infoStep(step) {
-            $log.debug(step.currentStage);
             vm.step = step;
             if (!vm.step) {
-                $log.debug();
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
                 var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
             if (vm.step.currentStage.etapa.nombre !== 'Pinchado') {
-                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);

@@ -105,8 +105,7 @@
                 }
             }
             var promiseSendPresurize = presurizeProvider.makePressurize(vm.presurize, vm.step.currentStage.id);
-            promiseSendPresurize.then(function (response) {
-                $log.debug(response);
+            promiseSendPresurize.then(function () {
                 ErrorHandler.successCreation();
                 clear();
             }).catch(function (errormsg) {
@@ -117,12 +116,10 @@
 
         function timeStampCheck() {
             vm.presurize.fecha_revision = new Date();
-            $log.debug(vm.presurize.fecha_revision);
         }
 
         function timeStampCharge() {
             vm.presurize.fecha_carga = new Date();
-            $log.debug(vm.presurize.fecha_revision);
         }
 
         function clear() {
@@ -142,18 +139,15 @@
         }
 
         function infoStep(step) {
-            $log.debug(step.currentStage);
             vm.step = step;
 
             if (!vm.step) {
-                $log.debug();
                 var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
                 var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
             if (vm.step.currentStage.etapa.nombre !== 'Presurizado') {
-                $log.debug("No en la etapa Correcta");
                 var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                 var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);

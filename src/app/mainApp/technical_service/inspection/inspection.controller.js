@@ -211,26 +211,17 @@
         function infoStep(step) {
             vm.step = undefined;
             vm.step = step;
-            $log.debug("etapa del cabinet");
-            $log.debug(vm.step);
-            $log.debug("etapa envidada a la función");
-            $log.debug(step);
+
             if (!vm.step.currentStage) {
-                $log.debug('entre al if');
                 var promiseStep = inspectionProvider.getStep();
                 promiseStep.then(function (stage) {
-                    $log.debug(stage);
                     vm.stage_for_not_stage = stage.results[0];
-                    $log.debug("stage_for_not_stage:");
-                    $log.debug(vm.stage_for_not_stage);
                 }).catch(function (errormsg) {
-                    $log.debug(errormsg);
                     ErrorHandler.errorTranslate(errormsg);
                 });
                 if (vm.step.control.inspeccionado){
                     if(vm.step.control.inspeccionado.estado){
                         if (vm.step.control.inspeccionado.estado==='Confirmado'){
-                            $log.debug("Cabinet ya Inspeccionado");
                             var DENEGATE = Translate.translate('ERROR_STEP.DENEGATE');
                             var REVIEWED = Translate.translate('ERROR_STEP.REVIEWED');
                             toastr.warning(DENEGATE, REVIEWED);
@@ -241,7 +232,6 @@
             }
             if (vm.step.currentStage) {
                 if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist') ||( vm.stage_for_not_stage.nombre !== 'CheckList')) {
-                    $log.debug("No en la etapa Correcta");
                     var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                     var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                     toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
@@ -258,24 +248,22 @@
         }
 
         function onStickerSelect(value) {
-            // $log.debug(value);
+
             vm.checklist.sticker_id = value;
 
         }
 
         function getSymptoms(symptoms) {
-            // $log.debug(symptoms)
+
             vm.symptoms = symptoms;
 
         }
 
         function getActions(element) {
-            //console.log(element);
+
             vm.actions = element;
         }
         function nextStep(step) {
-            $log.debug("siguiente etapa:");
-            $log.debug(step);
             vm.checklist.etapa_siguiente_id = step.id;
 
         }
