@@ -6,7 +6,7 @@
         .controller('NotificationsPanelController', NotificationsPanelController);
 
     /* @ngInject */
-    function NotificationsPanelController($scope, $window,$mdDialog,Reportes, $mdSidenav,NotificationPanel,Helper) {
+    function NotificationsPanelController($scope, $window,$mdDialog, /*Reportes,*/ $mdSidenav,NotificationPanel,Helper) {
         var vm = this;
         // sets the current active tab
         vm.close = close;
@@ -21,7 +21,7 @@
             vm.currentTab = tab;
         });
         function click(notification) {
-            var id=parseInt(notification.notification.idObject);
+            /*var id=parseInt(notification.notification.idObject);
             if(notification.type==="Reporte"){
 
                 Reportes.getReportObject(id).then(function (res) {
@@ -40,7 +40,7 @@
                     }
                 };
                 $mdDialog.show(config);
-            }
+            }*/
 
             NotificationPanel.markNotification(notification._id).then(function () {
                 Helper.getNotificationsByUser();
