@@ -24,7 +24,7 @@
 
         vm.url = entriesUrl;
         vm.name = Translate.translate('UDN_CATALOG.title');
-        vm.options = OPTIONS.zone;
+        vm.options = OPTIONS.management.catalogues.udn.zone;
 
         //Labels
         vm.totalText = 'Total de elementos';
