@@ -63,7 +63,7 @@
                 }
             }
             var promiseSendPuncture = punctureProvider.makePuncture(vm.puncture, vm.step.currentStage.id);
-            promiseSendPuncture.then(function (response) {
+            promiseSendPuncture.then(function () {
 
                 ErrorHandler.successCreation();
                 clear();
