@@ -7,7 +7,7 @@
     angular
         .module('app.mainApp.technical_service')
         .controller('InspectionController', InspectionController);
-    function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log,_,PAGINATION) {
+    function InspectionController($scope, Translate, ErrorHandler, EnvironmentConfig, URLS, inspectionProvider, toastr, $log, _, PAGINATION) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
@@ -126,7 +126,7 @@
             if (!vm.checklist.etapa_siguiente_id) {
                 vm.checklist = _.omit(vm.checklist, 'etapa_siguiente_id');
             }
-            var promiseSendCheck = inspectionProvider.makeChecklist(vm.checklist,vm.step.currentStage.id);
+            var promiseSendCheck = inspectionProvider.makeChecklist(vm.checklist, vm.step.currentStage.id);
             promiseSendCheck.then(function (response) {
                 $log.debug(response);
                 ErrorHandler.successCreation();
@@ -219,9 +219,9 @@
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
                 });
-                if (vm.step.control.inspeccionado){
-                    if(vm.step.control.inspeccionado.estado){
-                        if (vm.step.control.inspeccionado.estado==='Confirmado'){
+                if (vm.step.control.inspeccionado) {
+                    if (vm.step.control.inspeccionado.estado) {
+                        if (vm.step.control.inspeccionado.estado === 'Confirmado') {
                             var DENEGATE = Translate.translate('ERROR_STEP.DENEGATE');
                             var REVIEWED = Translate.translate('ERROR_STEP.REVIEWED');
                             toastr.warning(DENEGATE, REVIEWED);
@@ -230,13 +230,16 @@
                     }
                 }
             }
-            if (vm.step.currentStage) {
-                if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist') ||( vm.stage_for_not_stage.nombre !== 'CheckList')) {
-                    var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
-                    var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
-                    toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
-                    clear();
+            if (vm.step) {
+                if (angular.isDefined(vm.step.currentStage)) {
 
+                    if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist') || ( vm.stage_for_not_stage.nombre !== 'CheckList')) {
+                        var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                        var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                        toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                        clear();
+
+                    }
                 }
             }
 
@@ -263,6 +266,7 @@
 
             vm.actions = element;
         }
+
         function nextStep(step) {
             vm.checklist.etapa_siguiente_id = step.id;
 
