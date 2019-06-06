@@ -240,7 +240,7 @@
                 }
             }
             if (vm.step.currentStage) {
-                if (vm.step.currentStage.etapa.nombre !== 'CheckList' || vm.stage_for_not_stage.nombre !== 'CheckList') {
+                if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist') ||( vm.stage_for_not_stage.nombre !== 'CheckList')) {
                     $log.debug("No en la etapa Correcta");
                     var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                     var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
