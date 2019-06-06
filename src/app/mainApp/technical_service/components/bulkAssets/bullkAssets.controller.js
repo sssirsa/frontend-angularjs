@@ -38,8 +38,6 @@
         //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
             getStock();
-            $log.debug("STOCK:");
-            $log.debug(vm.stock);
             if (vm.stock[0]) {
                 var stock = Number(vm.stock[0].cantidad);
                 var used = Number(vm.bulkAsset.cantidad);
@@ -68,8 +66,6 @@
 
 //Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
-            $log.debug("función get stock");
-            $log.debug(vm.bulkAsset);
             if (vm.bulkAsset.catalogo_insumo_lote.stock) {
                 if (vm.bulkAsset.catalogo_insumo_lote.stock.length == 0) {
                     vm.notStock = true;

@@ -13,13 +13,12 @@
 
             }
         });
-    function showInfoServiceController($mdDialog, showInfoProvider, ErrorHandler, $log,$document) {
+    function showInfoServiceController($mdDialog, showInfoProvider, ErrorHandler,$document) {
         var vm = this;
 
         vm.showInfoServiceDialog = showInfoServiceDialog;
         init();
         function init() {
-            $log.debug(vm.info);
             if (vm.info.currentStage) {
                 var infoserviceProvider = showInfoProvider.getService(vm.info.currentStage.servicio_cabinet);
                 infoserviceProvider.then(function (servicio) {
@@ -229,7 +228,6 @@
 
             }).then(function (answer) {
                 //Accepted
-                $log.debug(answer);
                 $mdDialog.hide();
             }, function () {
                 //Cancelled

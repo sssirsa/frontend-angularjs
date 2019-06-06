@@ -16,7 +16,7 @@
 
             }
         });
-    function retireUniqueAssetController(Translate, ErrorHandler, $mdDialog, URLS, retireUniqueAssetProvider, $log) {
+    function retireUniqueAssetController(ErrorHandler, retireUniqueAssetProvider, $log) {
         var vm = this;
 
         getUniqueAssets();
@@ -25,8 +25,6 @@
         vm.discardAsset = discardAsset;
 
         function getUniqueAssets() {
-            $log.debug(vm.barcode);
-            $log.debug(vm.sucursal);
             var promiseUniqueAssetList = retireUniqueAssetProvider.getUniqueAssetsListByCabinet(vm.barcode);
             promiseUniqueAssetList.then(function (uniqueAssets) {
                 vm.unique_asset_list = uniqueAssets.results;
@@ -58,6 +56,7 @@
                 $log.debug(response);
             }).catch(function (errormsg) {
                 ErrorHandler.errorTranslate(errormsg);
+                $log.error(errormsg);
             });
         }
 

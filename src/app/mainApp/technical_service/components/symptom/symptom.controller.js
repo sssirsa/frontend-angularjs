@@ -14,7 +14,7 @@
 
             }
         });
-    function symptomController(Translate, URLS, ErrorHandler, EnvironmentConfig, $log,PAGINATION) {
+    function symptomController(Translate, URLS, EnvironmentConfig,PAGINATION) {
         var vm = this;
         var symptomURL = (EnvironmentConfig.site.rest.api)
             .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.symptom);
@@ -49,7 +49,6 @@
         vm.addSymptom = addSymptom;
         vm.deleteElement = deleteElement;
         function onSelect(value) {
-            $log.debug(value);
             vm.element = value;
             addSymptom();
         }

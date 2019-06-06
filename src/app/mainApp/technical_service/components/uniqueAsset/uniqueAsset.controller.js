@@ -19,7 +19,7 @@
 
             }
         });
-    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog, URLS, $log,PAGINATION) {
+    function uniqueAssetController(Translate, ErrorHandler, uniqueAssetProvider, EnvironmentConfig, $mdDialog,$log, URLS,PAGINATION) {
         var vm = this;
         vm.notDetected = [];
         vm.unique_asset_list = [];
@@ -39,7 +39,6 @@
         }
 
         function getDuplicity(unique_asset) {
-            $log.debug(unique_asset);
             var index;
             for (index = 0; index < vm.selected_unique_assets.length; ++index) {
                 if (vm.selected_unique_assets[index].no_serie === unique_asset.no_serie) {
@@ -66,15 +65,14 @@
         }
 
         function onChange(unique_asset) {
-            // $log.debug(unique_asset)
+
             if (unique_asset.used) {
                 addElement(unique_asset);
             }
             else {
                 deleteElement(unique_asset);
             }
-            // $log.debug("insumos Usados:")
-            // $log.debug(vm.selected_unique_assets);
+
 
         }
 
@@ -92,16 +90,15 @@
                 else {
                     vm.notDetected.push(vm.barcode);
                 }
-                // $log.debug(vm.unique_asset_list);
-                // $log.debug(vm.notDetected);
+
             }).catch(function (errormsg) {
-                $log.debug(errormsg);
+                $log.error(errormsg);
                 ErrorHandler.errorTranslate(errormsg);
             });
         }
 
         function getDuplicityOptions(unique_asset) {
-            $log.debug(unique_asset);
+
             var index;
             for (index = 0; index < vm.unique_asset_list.length; ++index) {
                 if (vm.unique_asset_list[index].no_serie === unique_asset.no_serie) {

@@ -42,7 +42,7 @@
             }
             if (promiseStartStage) {
                 promiseStartStage.then(function (response) {
-                    $log.debug(response);
+
                     $interval(function () {
                         vm.contador = vm.contador + 1;
                         vm.segundos = vm.contador % 60;
@@ -53,6 +53,7 @@
                     vm.onStart({element: vm.date});
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
+                    $log.error(errormsg);
                 });
             }
 

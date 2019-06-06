@@ -18,8 +18,6 @@
         });
     function actionsController(URLS, ErrorHandler, EnvironmentConfig, actionProvider, $log) {
         var vm = this;
-        //const actionURL = (EnvironmentConfig.site.rest.api)
-        //  .concat('/' + URLS.technical_service.base + '/' + URLS.technical_service.catalogues.base + '/' + URLS.technical_service.catalogues.action);
 
         vm.actionsDoIt = [];
 
@@ -31,7 +29,6 @@
         vm.deleteElement = deleteElement;
 
         function activate() {
-            $log.debug(vm.action);
             getActions();
             var promiseGetStage = actionProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
@@ -42,8 +39,6 @@
         }
 
         function getActions() {
-            $log.debug("Acciones Obtenidas de la carga de información");
-            $log.debug(vm.actions);
             var index;
             if (vm.actions) {
                 for (index = 0; index < vm.actions.length; ++index) {
@@ -57,7 +52,6 @@
 
         function onSelectAction(value) {
             if (value) {
-                $log.debug(value);
                 vm.element = value;
                 addAction();
             }

@@ -76,8 +76,6 @@
         vm.deleteElement = deleteElement;
         getFailures();
         function getFailures() {
-            $log.debug("Fallas Obtenidas de la carga de información");
-            $log.debug(vm.failures);
             if (vm.failures) {
                 if (vm.failures.length === 0) {
                     vm.failures = [];

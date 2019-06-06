@@ -14,7 +14,7 @@
 
             }
         });
-    function searchCabinetStepController($scope, Translate, toastr, searchCabinetStepProvider, ErrorHandler) {
+    function searchCabinetStepController( Translate, searchCabinetStepProvider, ErrorHandler) {
         var vm = this;
         vm.asset = {};//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
