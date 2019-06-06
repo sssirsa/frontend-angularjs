@@ -24,6 +24,7 @@
         $mdDialog,
         Helper,
         URLS,
+        PAGINATION,
         EnvironmentConfig
     ) {
         var vm = this;
@@ -120,7 +121,12 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         softDelete: {
                             hide: 'deleted',
                             reverse: false
@@ -143,7 +149,12 @@
                         model: 'id',
                         option: 'nombre',
                         elements: 'results',
-                        pagination: {},
+                        pagination: {
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
+                        },
                         loadMoreButtonText: 'Cargar mas...',
                         softDelete: {
                             hide: 'deleted',
@@ -166,8 +177,10 @@
                         option: 'letra',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
@@ -190,8 +203,10 @@
                         option: 'nombre',
                         loadMoreButtonText: 'Cargar mas...',
                         pagination: {
-                            total: 'count',
-                            next: 'next'
+                            total: PAGINATION.total,
+                            limit: PAGINATION.limit,
+                            offset: PAGINATION.offset,
+                            pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
                         softDelete: {
