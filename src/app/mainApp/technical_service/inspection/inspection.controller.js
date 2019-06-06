@@ -194,9 +194,9 @@
                 gas: false,
                 observaciones: ''
             };
-            vm.asset = undefined;
-            vm.step = undefined;
-            vm.stage_for_not_stage = undefined;
+            vm.asset = null;
+            vm.step = null;
+            vm.stage_for_not_stage = null;
         }
 
         //  Funciones para Componentes ___________________________________________________________________________ .all(URL.technical_service.catalogues.stage);______
