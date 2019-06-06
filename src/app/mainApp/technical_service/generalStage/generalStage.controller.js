@@ -146,17 +146,19 @@
         function infoStep(step) {
 
             vm.step = step;
+            var NOT_STEP = null;
+            var SENT_TO_CHECK = null;
             if (!vm.step) {
 
-                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                 toastr.warning(NOT_STEP, SENT_TO_CHECK);
                 clear();
             }
-            if (vm.step){
+            if (vm.step) {
                 if (!vm.step.currentStage) {
-                    var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                    var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                    NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                    SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
                     toastr.warning(NOT_STEP, SENT_TO_CHECK);
                     clear();
                 }
