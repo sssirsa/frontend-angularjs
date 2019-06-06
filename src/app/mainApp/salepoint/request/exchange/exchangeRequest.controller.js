@@ -17,7 +17,8 @@
         Helper,
         User,
         URLS,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -52,33 +53,43 @@
 
         vm.catalogSucursal = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.subsidiary,
-                kind: 'Generic',
-                name: 'Sucursal',
-                loadMoreButtonText: 'Cargar mas',
+                url: EnvironmentConfig.site.rest.api +
+                '/' + URLS.management.base +
+                '/' + URLS.management.catalogues.base +
+                '/' + URLS.management.catalogues.subsidiary,
+                name: Translate.translate('REQUEST.SUBSIDIARY.SELECT'),
                 model: 'id',
-                option: 'nombre'
-            },
-            elements: 'results'
-
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
+            }
         };
+
         vm.catalogEquipmentKind = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.equipment_type,
+                url: EnvironmentConfig.site.rest.api +
+                '/' + URLS.management.base +
+                '/' + URLS.management.catalogues.base +
+                '/' + URLS.management.catalogues.equipment_type,
                 kind: 'Generic',
-                name: 'Tipo Equipo a asignar',
-                loadMoreButtonText: 'Cargar mas',
+                name: Translate.translate('REQUEST.EQUIPMENT.SELECT'),
                 model: 'id',
-                option: 'nombre'
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
             },
-            elements: 'results'
-
         };
 
         function onSelectedSucursal(element) {

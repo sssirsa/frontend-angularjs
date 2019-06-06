@@ -59,6 +59,18 @@
             "LAST_NAME": "Segundo Apellido",
             "PHONE": "Telefono",
             "EMAIL": "Correo"
+        },
+        "SUBSIDIARY":{
+            "TITLE": "Sucursal",
+            "SELECT": "Seleccione una sucursal"
+        },
+        "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "CREATE": "Levantar",
+            "LOAD_MORE": "Cargar mas..."
+        },
+        "EQUIPMENT": {
+            "SELECT": "Seleccione el Tipo de Equipo"
         }
     }
 }
