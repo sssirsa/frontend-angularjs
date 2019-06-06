@@ -11,25 +11,25 @@
     function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log,_) {
         var vm = this;
 
-        vm.asset = undefined;//objeto contenedor del cabinet
+        vm.asset = null;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('DIAGNOSIS.DIAGNOSIS_INFO');
         vm.failures_and_actions = Translate.translate('DIAGNOSIS.FAILURES_ACTIONS');
         vm.bulkAssets = Translate.translate('DIAGNOSIS.BULK_ASSETS');
 
         vm.diagnostic = {
-            nombre_corto: undefined,
-            descripcion: undefined,
+            nombre_corto: null,
+            descripcion: null,
             fallas_id: [],
             en_tiempo: true,
-            temp_com: undefined,
-            temp_int: undefined,
-            amp_arran: undefined,
-            amp_trab: undefined,
-            etapa_siguiente_id: undefined,
+            temp_com: null,
+            temp_int: null,
+            amp_arran: null,
+            amp_trab: null,
+            etapa_siguiente_id: null,
             acciones_id: [],
             insumos_lote_usados: [],
-            sucursal_id: undefined
+            sucursal_id: null
         };
         vm.search = true;
 
@@ -50,21 +50,21 @@
         //Funciones Propias de la Pantalla
         function clear() {
             vm.diagnostic = {
-                nombre_corto: undefined,
-                descripcion: undefined,
+                nombre_corto: null,
+                descripcion: null,
                 fallas_id: [],
                 en_tiempo: true,
-                temp_com: undefined,
-                temp_int: undefined,
-                amp_arran: undefined,
-                amp_trab: undefined,
-                etapa_siguiente_id: undefined,
+                temp_com: null,
+                temp_int: null,
+                amp_arran: null,
+                amp_trab: null,
+                etapa_siguiente_id: null,
                 acciones_id: [],
                 insumos_lote_usados: [],
-                sucursal_id: undefined
+                sucursal_id: null
             };
-            vm.asset = undefined;
-            vm.step = undefined;
+            vm.asset = null;
+            vm.step = null;
             vm.search = true;
         }
 

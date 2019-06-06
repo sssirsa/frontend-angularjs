@@ -14,13 +14,13 @@
         vm.title_info = Translate.translate('INSPECTION.CHECKLIST');
         vm.assets_info = Translate.translate('INSPECTION.MORE_INFO');
         vm.checklist = {
-            cabinet_id: undefined,
-            sticker_id: undefined,
-            rodajas: undefined,
-            canastillas: undefined,
-            rejillas_traseras: undefined,
-            rejillas_delanteras: undefined,
-            puertas: undefined,
+            cabinet_id: null,
+            sticker_id: null,
+            rodajas: null,
+            canastillas: null,
+            rejillas_traseras: null,
+            rejillas_delanteras: null,
+            puertas: null,
             pintura: false,
             lavado: false,
             emplayado: false,
@@ -32,7 +32,7 @@
 
         };
         vm.stage = {
-            sucursal_id: undefined
+            sucursal_id: null
         };
 
         //Declaracion de Funciones como variables_______________________________________________________________________
@@ -180,13 +180,13 @@
 
         function clear() {
             vm.checklist = {
-                cabinet_id: undefined,
-                sticker_id: undefined,
-                rodajas: undefined,
-                canastillas: undefined,
-                rejillas_traseras: undefined,
-                rejillas_delanteras: undefined,
-                puertas: undefined,
+                cabinet_id: null,
+                sticker_id: null,
+                rodajas: null,
+                canastillas: null,
+                rejillas_traseras: null,
+                rejillas_delanteras: null,
+                puertas: null,
                 pintura: false,
                 lavado: false,
                 emplayado: false,

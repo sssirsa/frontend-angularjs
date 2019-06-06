@@ -10,15 +10,15 @@
         .controller('PunctureController', PunctureController);
     function PunctureController($scope, Translate, ErrorHandler, punctureProvider, toastr, $log, _) {
         var vm = this;
-        vm.asset = undefined;//objeto contenedor del cabinet
+        vm.asset = null;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('PUNCTURE.INITIAL_INFO');
         vm.assets_info = Translate.translate('PUNCTURE.MORE_INFO');
         vm.puncture = {
-            cabinet_id: undefined,
+            cabinet_id: null,
             gas: false,
             observaciones: '',
-            fecha_revision: undefined
+            fecha_revision: null
 
 
         };
@@ -74,9 +74,9 @@
         }
 
         function clear() {
-            vm.puncture = undefined;
-            vm.asset = undefined;
-            vm.step = undefined;
+            vm.puncture = null;
+            vm.asset = null;
+            vm.step = null;
         }
 
         //  Funciones para Componentes _________________________________________________________________________________

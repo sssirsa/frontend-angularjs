@@ -12,7 +12,7 @@
     function GeneralStageController($scope, Translate, toastr, ErrorHandler, stageProvider, $mdDialog, $log, _) {
         var vm = this;
 
-        vm.asset = undefined;//objeto contenedor del cabinet
+        vm.asset = null;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('GENERAL_STAGE.BULK_ASSET');
         vm.assets_info = Translate.translate('GENERAL_STAGE.ACTIONS_MADE');
@@ -23,7 +23,7 @@
 
 
         vm.stage = {
-            sucursal_id: undefined
+            sucursal_id: null
         };
         vm.search = true;
 
@@ -44,13 +44,13 @@
         //Funciones Propias de la Pantalla
         function clear() {
             vm.stage = {
-                etapa_siguiente_id: undefined,
+                etapa_siguiente_id: null,
                 acciones_id: [],
                 insumos_lote_usados: [],
-                sucursal_id: undefined
+                sucursal_id: null
             };
-            vm.asset = undefined;
-            vm.step = undefined;
+            vm.asset = null;
+            vm.step = null;
         }
 
         function enableSearch() {

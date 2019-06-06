@@ -14,10 +14,10 @@
         vm.title_info = Translate.translate('PUNCTURE.INITIAL_INFO');
         vm.assets_info = Translate.translate('PUNCTURE.MORE_INFO');
         vm.presurize = {
-            cabinet_id: undefined,
+            cabinet_id:  null,
             gas: false,
             observaciones: '',
-            fecha_revision: undefined
+            fecha_revision:  null
 
 
         };
@@ -123,10 +123,10 @@
         }
 
         function clear() {
-            vm.presurize = undefined;
-            vm.asset = undefined;
-            vm.step = undefined;
-            vm.option_to_do=undefined;
+            vm.presurize =  null;
+            vm.asset =  null;
+            vm.step =  null;
+            vm.option_to_do=null;
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
