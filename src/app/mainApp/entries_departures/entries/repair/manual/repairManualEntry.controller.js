@@ -179,10 +179,10 @@
                             pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 },
                 {
@@ -205,10 +205,10 @@
                             pageSize: PAGINATION.pageSize
                         },
                         elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
+                        softDelete: {
+                            hide: 'deleted',
+                            reverse: false
+                        }
                     }
                 }
             ],
