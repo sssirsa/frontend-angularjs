@@ -5,7 +5,9 @@
             templateUrl: 'app/mainApp/components/catalogManager/catalogManager.tmpl.html',
             controller: CatalogManagerController,
             bindings: {
-                url: '<', //Full URL
+                url: '<', //Full URL without parameters
+                query: '<',
+                queryValue: '<',
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
@@ -423,15 +425,35 @@
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG;
             //Initial URL building
-            if ("pagination" in vm.actions['LIST']) {
-                //Build paginated URL
-                vm.CatalogProvider.url = vm.url
-                    + '?limit=' + vm.actions['LIST'].pagination.pageSize
-                    + '&offset=' + '0';
+            if (vm.query
+                && vm.queryValue) {
+                if ("pagination" in vm.actions['LIST']) {
+                    //Build paginated URL
+                    vm.CatalogProvider.url = vm.url
+                        + '?limit=' + vm.actions['LIST'].pagination.pageSize
+                        + '&offset=' + '0'
+                        + '&' + vm.query
+                        + '=' + vm.queryValue;
+                }
+                else {
+                    vm.CatalogProvider.url = vm.url
+                        + '?' + vm.query
+                        + '=' + vm.queryValue;
+                }
             }
             else {
-                vm.CatalogProvider.url = vm.url;
+                if ("pagination" in vm.actions['LIST']) {
+                    //Build paginated URL
+                    vm.CatalogProvider.url = vm.url
+                        + '?limit=' + vm.actions['LIST'].pagination.pageSize
+                        + '&offset=' + '0';
+                }
+                else {
+                    vm.CatalogProvider.url = vm.url;
+                }
             }
+
+
         }
 
         function createPaginationProvider() {
