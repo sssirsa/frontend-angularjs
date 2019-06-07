@@ -84,6 +84,7 @@
                 <div ng-repeat="element in $ctrl.catalogElements"
                      layout="column">
                     <catalog-object-display element="element"
+                                            on-element-select="$ctrl.elementSelection(element)"
                                             fields="$ctrl.actions['LIST'].fields"></catalog-object-display>
                     <!-- Action buttons bar -->
                     <div layout="row"
@@ -180,6 +181,7 @@
             <section ng-if="!$ctrl.actions['LIST'].pagination">
                 <!-- Repeat per each element in the results -->
                 <catalog-object-display element="element"
+                                        on-element-select="$ctrl.elementSelection(element)"
                                         fields="$ctrl.actions['LIST'].fields"></catalog-object-display>
                 <md-toolbar layout="column"
                             layout-gt-sm="row"

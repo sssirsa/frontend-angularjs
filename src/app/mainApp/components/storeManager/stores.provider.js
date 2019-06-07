@@ -40,22 +40,6 @@
             }
         }
 
-        //function getByLocality(LocalityID, limit, offset){
-        //    return querySearch(QUERIES.store.by_locality + LocalityID, limit, offset);
-        //}
-
-        //function getByCity(cityID, limit, offset){
-        //    return querySearch(QUERIES.store.by_city + cityID, limit, offset);
-        //}
-
-        //function getByState(stateID, limit, offset){
-        //    return querySearch(QUERIES.store.by_state + stateID, limit, offset);
-        //}
-
-        function getByPostalCode(postalCode, limit, offset){
-            return querySearch(QUERIES.store.by_postal_code + postalCode, limit, offset);
-        }
-
         function getByEconomic(economic, limit, offset){
             return querySearch(QUERIES.store.by_economic + economic + '?', limit, offset);
         }
@@ -88,10 +72,6 @@
             create: create,
             remove: remove,
             update: update,
-            //getByLocality: getByLocality,
-            //getByCity: getByCity,
-            //getByState:getByState,
-            getByPostalCode:getByPostalCode,
             getByEconomic:getByEconomic,
             getPDF:getPDF
         };
