@@ -21,7 +21,7 @@
             fallas_id: [],
             en_tiempo: true,
             acciones_id: [],
-            insumos_lote_usados: [],
+            insumos_lote_usados: []
         };
         vm.search = true;
 
