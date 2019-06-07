@@ -18,18 +18,10 @@
         vm.bulkAssets = Translate.translate('DIAGNOSIS.BULK_ASSETS');
 
         vm.diagnostic = {
-            nombre_corto: null,
-            descripcion: null,
             fallas_id: [],
             en_tiempo: true,
-            temp_com: null,
-            temp_int: null,
-            amp_arran: null,
-            amp_trab: null,
-            etapa_siguiente_id: null,
             acciones_id: [],
             insumos_lote_usados: [],
-            sucursal_id: null
         };
         vm.search = true;
 
@@ -69,10 +61,11 @@
         }
 
         function sendDiagnosis() {
+
             vm.diagnostic.sucursal_id = vm.step.control.sucursal.id;
             if (vm.diagnostic.insumos_lote_usados) {
                 if (vm.diagnostic.insumos_lote_usados.length === 0) {
-                    vm.diagnostic = _.omit(vm.presurize, 'insumos_lote_usados');
+                    vm.diagnostic = _.omit(vm.diagnostic, 'insumos_lote_usados');
                 }
             }
             if (!vm.actions){
@@ -83,6 +76,7 @@
                     vm.diagnostic = _.omit(vm.diagnostic, 'acciones_id');
                 } else {
                     var index2;
+                    vm.diagnostic.acciones_id=[];
                     for (index2 = 0; index2 < vm.actions.length; ++index2) {
                         if (vm.actions[index2].com_code) {
                             vm.diagnostic.acciones_id.push(vm.actions[index2].com_code);
@@ -98,6 +92,7 @@
                     vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
                 } else {
                     var index3;
+                    vm.diagnostic.fallas_id=[];
                     for (index3 = 0; index3 < vm.failures.length; ++index3) {
                         if (vm.failures[index3].com_code) {
                             vm.diagnostic.fallas_id.push(vm.failures[index3].com_code);
