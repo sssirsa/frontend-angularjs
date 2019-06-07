@@ -51,7 +51,7 @@
                 promiseCabinetEntrada.then(function (control) {
 
                     vm.infoStep.control=control;
-                    if (control.tipo_entrada === "Garantias") {
+                    if (control.tipo_entrada === "Garantias"||control.tipo_entrada==="Reparacion") {
                         vm.infoStep.makeInspection = false;
                         var promiseGetCurrentStage = searchCabinetStepProvider.getCurrentStage(vm.asset.economico);
                         promiseGetCurrentStage.then(function (currentStage) {
