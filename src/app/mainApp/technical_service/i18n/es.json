@@ -31,7 +31,7 @@
     "ERROR_STEP": {
         "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
         "GO_TO": "Enviar a:",
-        "NOT_STEP":"Este cabinet requiere una Inspección Previa",
+        "NOT_STEP":"Este cabinet requiere una Inspección Previa, o Bien es un cabinet al cual no se le puede dar servicio",
         "REVIEWED":"Este cabinet Posse una Inspección Previa",
         "DENEGATE":"Imposible realizar esta operación",
         "SENT_TO_CHECK":"Enviar a Inspección"
