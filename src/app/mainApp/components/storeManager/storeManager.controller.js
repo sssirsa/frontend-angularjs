@@ -22,7 +22,6 @@
                                     Geolocation,
                                     $mdDialog,
                                     Stores,
-                                    Segmentation,
                                     ErrorHandler) {
         var vm = this;
 
@@ -41,7 +40,6 @@
         //edit by Alex
         vm.showCredential = showCredential;
         vm.showPDF = showPDF;
-        vm.selectSegmentation = selectSegmentation;
 
 
         function searchStore() {
@@ -56,8 +54,7 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store: store});
-                    showPDF();
-                    selectSegmentation();
+                    //showPDF();
                 })
                 .catch(function (storeError) {
                     if (storeError) {
@@ -78,8 +75,7 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store: store});
-                    showPDF();
-                    selectSegmentation();
+                    //showPDF();
                 })
                 .catch(function (storeError) {
                     if (storeError) {
@@ -104,7 +100,6 @@
                     vm.store = store;
                     vm.storeSelected({store: store});
                     showPDF();
-                    selectSegmentation();
                 })
                 .catch(function (storeError) {
                     if (storeError) {
@@ -167,17 +162,6 @@
                 })
                 .catch(function (pdfFileError) {
                     ErrorHandler.errorTranslate(pdfFileError);
-                });
-        }
-
-        function selectSegmentation() {
-            Segmentation.list()
-                .then(function (segmentations) {
-                    vm.storeSegmentation = segmentations;
-                    vm.segmentationSelect = vm.store.segmentacion.id;
-                })
-                .catch(function (errorSegmentations) {
-                    ErrorHandler.errorTranslate(errorSegmentations);
                 });
         }
 

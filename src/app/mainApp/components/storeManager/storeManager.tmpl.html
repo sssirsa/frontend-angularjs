@@ -82,18 +82,8 @@
 
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.SEGMENTATION</label>
-                    <md-select
-                        ng-model="$ctrl.segmentationSelect"
-                        required
-                        ng-disabled="true"
-                    >
-                        <md-option
-                            ng-repeat="segmentation in $ctrl.storeSegmentation"
-                            ng-value="segmentation.id"
-                        >
-                            {{segmentation.nombre}}
-                        </md-option>
-                    </md-select>
+                    <input ng-disabled="true"
+                           ng-model="$ctrl.store.segmentacion.nombre" />
                 </md-input-container>
             </div>
             <div flex
