@@ -94,10 +94,10 @@
                 by_city: 'municipio__id'
             },
             store: {
-                by_state: '?localidad__municipio__estado__id=',
-                by_city: '?localidad__municipio__id=',
-                by_locality: '?localidad__id=',
-                by_postal_code: '?localidad__codigo_postal=',
+                by_state: 'localidad__municipio__estado__id',
+                by_city: 'localidad__municipio__id',
+                by_locality: 'localidad__id',
+                by_postal_code: 'localidad__codigo_postal',
                 by_economic: '/lookup/'
             }
         })

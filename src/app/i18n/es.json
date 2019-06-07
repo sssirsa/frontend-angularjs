@@ -189,6 +189,7 @@
                         "BY_POSTAL_CODE": "Por código postal",
                         "BY_ADDRESS": "Por dirección",
                         "BUTTON": "Buscar",
+                        "SEARCHING": "Buscando establecimientos",
                         "HINTS": {
                             "ECONOMIC": "Ingrese un económico de cabinet",
                             "ZIP_CODE": "Ingrese un código postal",
@@ -197,7 +198,8 @@
                         "ERRORS": {
                             "NO_RESULTS": "No se encontraron establecimientos",
                             "GENERIC": "Error al obtener establecimientos"
-                        }
+                        },
+                        "NO_PHONE": "Sin teléfono"
                     },
                     "NEW": {
                         "TITLE": "Nuevo establecimiento",
@@ -343,8 +345,10 @@
             "CLEAR_FIELDS": "Limpiar campos",
             "DOWNLOAD": "Descargar",
             "LOAD_MORE": "Cargar mas elementos",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
             "CLOSE": "Cerrar",
-            "SEARCH": "bUSCAR"
+            "SEARCH": "Buscar"
         },
         "GENERAL": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",

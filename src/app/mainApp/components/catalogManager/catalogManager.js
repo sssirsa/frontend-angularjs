@@ -327,7 +327,8 @@
                  *              },
                  *              fields:{                 (Optional) Used when object and array_object
                  *                                       Nest the same kind of fields object in order to show the required fields
-                 *              }
+                 *              },
+                 *              nullOrEmpty:string       (Optional) Used when no value is returned, otherwise the field will not be shown
                  *          }
                  *      ],
                  *      elements: string,     (Optional) Model used if the elements are not returned at the root of the response
