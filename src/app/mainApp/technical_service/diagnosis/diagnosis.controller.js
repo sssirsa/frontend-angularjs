@@ -142,27 +142,29 @@
                     toastr.warning(NOT_STEP, SENT_TO_CHECK);
                     clear();
                 }
-                if (angular.isDefined(vm.step.currentStage)){
-                    if (angular.isDefined(vm.step.currentStage.diagnostico)&& vm.step.currentStage.diagnostico!==null) {
-                        vm.diagnostic.nombre_corto = vm.step.currentStage.diagnostico.nombre_corto;
-                        vm.diagnostic.amp_arran = parseFloat(vm.step.currentStage.diagnostico.amp_arran);
-                        vm.diagnostic.amp_trab = parseFloat(vm.step.currentStage.diagnostico.amp_trab);
-                        vm.diagnostic.descripcion = vm.step.currentStage.diagnostico.descripcion;
-                        vm.diagnostic.en_tiempo = vm.step.currentStage.diagnostico.en_tiempo;
-                        vm.diagnostic.fallas = vm.step.currentStage.diagnostico.fallas;
-                        vm.diagnostic.temp_com = parseFloat(vm.step.currentStage.diagnostico.temp_com);
-                        vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
+                if (vm.step != null) {
+                    if (angular.isDefined(vm.step.currentStage)) {
+                        if (angular.isDefined(vm.step.currentStage.diagnostico) && vm.step.currentStage.diagnostico !== null) {
+                            vm.diagnostic.nombre_corto = vm.step.currentStage.diagnostico.nombre_corto;
+                            vm.diagnostic.amp_arran = parseFloat(vm.step.currentStage.diagnostico.amp_arran);
+                            vm.diagnostic.amp_trab = parseFloat(vm.step.currentStage.diagnostico.amp_trab);
+                            vm.diagnostic.descripcion = vm.step.currentStage.diagnostico.descripcion;
+                            vm.diagnostic.en_tiempo = vm.step.currentStage.diagnostico.en_tiempo;
+                            vm.diagnostic.fallas = vm.step.currentStage.diagnostico.fallas;
+                            vm.diagnostic.temp_com = parseFloat(vm.step.currentStage.diagnostico.temp_com);
+                            vm.diagnostic.temp_int = parseFloat(vm.step.currentStage.diagnostico.temp_int);
 
-                    }
+                        }
 
 
-                    if(angular.isDefined(vm.step.currentStage)) {
-                        if (vm.step.currentStage.etapa.tipo_etapa !== 'Diagnostico') {
-                            var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
-                            var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
-                            toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
-                            clear();
+                        if (angular.isDefined(vm.step.currentStage)) {
+                            if (vm.step.currentStage.etapa.tipo_etapa !== 'Diagnostico') {
+                                var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                                var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                                toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                                clear();
 
+                            }
                         }
                     }
                 }

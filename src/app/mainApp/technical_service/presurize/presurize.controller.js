@@ -7,17 +7,17 @@
     angular
         .module('app.mainApp.technical_service')
         .controller('PresurizeController', PresurizeController);
-    function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _,OPTIONS) {
+    function PresurizeController($scope, Translate, ErrorHandler, presurizeProvider, toastr, $log, _, OPTIONS) {
         var vm = this;
         vm.asset = undefined;//objeto contenedor del cabinet
         vm.asset_id = ''; //asset identifier
         vm.title_info = Translate.translate('PUNCTURE.INITIAL_INFO');
         vm.assets_info = Translate.translate('PUNCTURE.MORE_INFO');
         vm.presurize = {
-            cabinet_id:  null,
+            cabinet_id: null,
             gas: false,
             observaciones: '',
-            fecha_revision:  null
+            fecha_revision: null
 
 
         };
@@ -72,7 +72,7 @@
                     vm.presurize = _.omit(vm.presurize, 'insumos_lote');
                 }
             }
-            if (!vm.actions){
+            if (!vm.actions) {
                 vm.presurize = _.omit(vm.presurize, 'acciones_id');
             }
             if (vm.actions) {
@@ -106,10 +106,10 @@
         }
 
         function clear() {
-            vm.presurize =  null;
-            vm.asset =  null;
-            vm.step =  null;
-            vm.option_to_do=null;
+            vm.presurize = null;
+            vm.asset = null;
+            vm.step = null;
+            vm.option_to_do = null;
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
@@ -125,7 +125,7 @@
             vm.step = step;
             if (angular.isDefined(vm.step)) {
 
-                if(angular.isDefined(vm.step.currentStage)) {
+                if (angular.isDefined(vm.step.currentStage)) {
                     if (vm.step.currentStage.etapa.nombre !== 'Presurizado') {
                         var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                         var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
@@ -134,11 +134,13 @@
 
                     }
                 }
-                if (angular.isUndefined(vm.step.currentStage)) {
-                    var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                    var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
-                    toastr.warning(NOT_STEP, SENT_TO_CHECK);
-                    clear();
+                if (vm.step != null) {
+                    if (angular.isUndefined(vm.step.currentStage)) {
+                        var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                        var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                        toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                        clear();
+                    }
                 }
             }
 
