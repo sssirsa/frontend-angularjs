@@ -103,23 +103,27 @@
                     vm.checklist = _.omit(vm.checklist, 'insumos_lote_usados');
                 }
             }
-            if (vm.symptoms.length === 0) {
-                vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
-            } else {
-                var index;
-                for (index = 0; index < vm.symptoms.length; ++index) {
-                    if (vm.symptoms[index].code) {
-                        vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
+            if (angular.isDefined(vm.symptoms)) {
+                if (vm.symptoms.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
+                } else {
+                    var index;
+                    for (index = 0; index < vm.symptoms.length; ++index) {
+                        if (vm.symptoms[index].code) {
+                            vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
+                        }
                     }
                 }
             }
-            if (vm.actions.length === 0) {
-                vm.checklist = _.omit(vm.checklist, 'acciones_id');
-            } else {
-                var index2;
-                for (index2 = 0; index2 < vm.actions.length; ++index2) {
-                    if (vm.actions[index2].com_code) {
-                        vm.checklist.acciones_id.push(vm.actions[index2].com_code);
+            if (angular.isDefined(vm.actions)) {
+                if (vm.actions.length === 0) {
+                    vm.checklist = _.omit(vm.checklist, 'acciones_id');
+                } else {
+                    var index2;
+                    for (index2 = 0; index2 < vm.actions.length; ++index2) {
+                        if (vm.actions[index2].com_code) {
+                            vm.checklist.acciones_id.push(vm.actions[index2].com_code);
+                        }
                     }
                 }
             }
