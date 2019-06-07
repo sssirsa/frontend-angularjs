@@ -81,6 +81,9 @@
         //Funciones Propias de la Pantalla
         function sendInspection() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
+            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+                vm.checklist = _.omit(vm.checklist, 'observaciones');
+            }
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
             promiseSendInspection.then(function (response) {
                 $log.debug(response);
@@ -95,8 +98,9 @@
 
         function sendCheckList() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            vm.checklist.sintomas_detectados_id = [];
-            vm.checklist.acciones_id = [];
+            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+                vm.checklist = _.omit(vm.checklist, 'observaciones');
+            }
             if (vm.checklist.insumos_lote_usados) {
                 if (vm.checklist.insumos_lote_usados.length === 0) {
                     vm.checklist = _.omit(vm.checklist, 'insumos_lote_usados');
@@ -107,6 +111,7 @@
                     vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
                 } else {
                     var index;
+                    vm.checklist.sintomas_detectados_id = [];
                     for (index = 0; index < vm.symptoms.length; ++index) {
                         if (vm.symptoms[index].code) {
                             vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
@@ -119,6 +124,7 @@
                     vm.checklist = _.omit(vm.checklist, 'acciones_id');
                 } else {
                     var index2;
+                    vm.checklist.acciones_id = [];
                     for (index2 = 0; index2 < vm.actions.length; ++index2) {
                         if (vm.actions[index2].com_code) {
                             vm.checklist.acciones_id.push(vm.actions[index2].com_code);
@@ -143,8 +149,9 @@
 
         function sendPrecheck() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            vm.checklist.sintomas_detectados_id = [];
-            vm.checklist.acciones_id = [];
+            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+                vm.checklist = _.omit(vm.checklist, 'observaciones');
+            }
             if (vm.checklist.insumos_lote_usados) {
                 if (vm.checklist.insumos_lote_usados.length === 0) {
                     vm.checklist = _.omit(vm.checklist, 'insumos_lote_usados');
@@ -155,6 +162,7 @@
                     vm.checklist = _.omit(vm.checklist, 'sintomas_detectados_id');
                 } else {
                     var index;
+                    vm.checklist.sintomas_detectados_id = [];
                     for (index = 0; index < vm.symptoms.length; ++index) {
                         if (vm.symptoms[index].code) {
                             vm.checklist.sintomas_detectados_id.push(vm.symptoms[index].code);
@@ -167,6 +175,7 @@
                     vm.checklist = _.omit(vm.checklist, 'acciones_id');
                 } else {
                     var index2;
+                    vm.checklist.acciones_id = [];
                     for (index2 = 0; index2 < vm.actions.length; ++index2) {
                         if (vm.actions[index2].com_code) {
                             vm.checklist.acciones_id.push(vm.actions[index2].com_code);
