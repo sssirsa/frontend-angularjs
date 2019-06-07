@@ -235,28 +235,12 @@
                                 vm.catalogManager.url = storeUrl;
                                 vm.catalogManager.query = QUERIES.store.by_locality;
                                 vm.catalogManager.queryValue = vm.locality;
-                                //vm.loadingPromise = Stores.getByLocality(vm.locality, vm.limit, vm.offset)
-                                //    .then(function (storeList) {
-                                //        prepareDataFunction(storeList);
-                                //    })
-                                //    .catch(function (storeListError) {
-                                //        $log.error(storeListError);
-                                //        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                                //    });
                             }
                             else {
                                 //Look up by city
                                 vm.catalogManager.url = storeUrl;
                                 vm.catalogManager.query = QUERIES.store.by_city;
                                 vm.catalogManager.queryValue = vm.city;
-                                //vm.loadingPromise = Stores.getByCity(vm.city, vm.limit, vm.offset)
-                                //    .then(function (storeList) {
-                                //        prepareDataFunction(storeList);
-                                //    })
-                                //    .catch(function (storeListError) {
-                                //        $log.error(storeListError);
-                                //        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                                //    });
                             }
                         }
                         else {
@@ -264,26 +248,13 @@
                             vm.catalogManager.url = storeUrl;
                             vm.catalogManager.query = QUERIES.store.by_state;
                             vm.catalogManager.queryValue = vm.state;
-                            //vm.loadingPromise = Stores.getByState(vm.state, vm.limit, vm.offset)
-                            //    .then(function (storeList) {
-                            //        prepareDataFunction(storeList);
-                            //    })
-                            //    .catch(function (storeListError) {
-                            //        $log.error(storeListError);
-                            //        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                            //    });
                         }
                     }
                     break;
                 case 2:
-                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code, vm.limit, vm.offset)
-                        .then(function (storeList) {
-                            prepareDataFunction(storeList);
-                        })
-                        .catch(function (storeListError) {
-                            $log.error(storeListError);
-                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                        });
+                    vm.catalogManager.url = storeUrl;
+                    vm.catalogManager.query = QUERIES.store.by_postal_code;
+                    vm.catalogManager.queryValue = vm.postal_code;
                     break;
                 case 3:
                     vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
@@ -316,13 +287,6 @@
             vm.catalogManager.query = null;
             vm.catalogManager.queryValue = null;
             //vm.fullStores = null;
-        }
-
-        function prepareDataFunction(Stores) {
-            //vm.fullStores = Stores;
-            var list = Stores.results;
-            vm.stores = Helper.filterDeleted(list, true);
-            vm.refreshPaginationButtonsComponent = true;
         }
     }
 
