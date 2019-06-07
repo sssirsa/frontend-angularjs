@@ -157,7 +157,7 @@
             }
             if (angular.isDefined(vm.step)) {
                 if (angular.isDefined(vm.step.currentStage)) {
-                    if ((vm.step.currentStage.etapa.tipo_etapa === 'Checklist') || (vm.step.currentStage.etapa.tipo_etapa === 'Diagnostico')) {
+                    if ((vm.step.currentStage.etapa.tipo_etapa === 'Checklist') || (vm.step.currentStage.etapa.tipo_etapa === 'Diagnostico')|| (vm.step.currentStage.etapa.tipo_etapa === 'Pinchado')|| (vm.step.currentStage.etapa.tipo_etapa === 'Presurizado')) {
                         var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                         var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                         toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
