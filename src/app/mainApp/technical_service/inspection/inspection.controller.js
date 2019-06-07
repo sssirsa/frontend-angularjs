@@ -81,7 +81,7 @@
         //Funciones Propias de la Pantalla
         function sendInspection() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
@@ -98,7 +98,7 @@
 
         function sendCheckList() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             if (vm.checklist.insumos_lote_usados) {
@@ -149,7 +149,7 @@
 
         function sendPrecheck() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || vm.checklist.observaciones===undefined ||vm.checklist.observaciones==='' ){
+            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             if (vm.checklist.insumos_lote_usados) {
