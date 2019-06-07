@@ -20,7 +20,7 @@
         vm.nextStepSelected = undefined;
         vm.steps = undefined;
         vm.step = undefined;
-        vm.endService = false;
+        vm.endService = true;
         vm.selectStep = selectStep;
         vm.activate = activate;
         activate();
@@ -36,12 +36,12 @@
             }
         }
 
+
 //Función que obtiene las etapas siguientes a partir de la etapa actual
         function getStagesByActualStage() {
             var promiseGetStage = nextStageProvider.getStage(vm.actualStep.id);
             promiseGetStage.then(function (currentStage) {
                 vm.steps = currentStage.etapas_siguientes;
-
                 //condición que obtiene la etapa defecto en caso de que exista una etapa defecto
                 //a partir de la etapa actual
                 if (currentStage.etapa_defecto) {
