@@ -12,7 +12,7 @@
             toolbarSize: 'default',
             toolbarShrink: true,
             toolbarClass: '',
-            contentClass: '',
+            contentClass: 'full-image-background bg-01',
             innerContentClass: '',
             sideMenuSize: 'full',
             showToolbar: true,
