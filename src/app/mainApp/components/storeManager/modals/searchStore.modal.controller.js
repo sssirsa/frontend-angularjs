@@ -5,17 +5,17 @@
         .controller('searchStoreController', searchStoreController);
 
     /* @ngInject */
-    function searchStoreController(Stores,
+    function searchStoreController(
+        Stores,
         toastr,
         Translate,
         $mdDialog,
         Helper,
         $log,
         ErrorHandler,
-        EnvironmentConfig,
-        URLS,
-        PAGINATION,
-        QUERIES
+        environmentConfig,
+        QUERIES,
+        URLS
     ) {
         var vm = this;
 
@@ -30,8 +30,6 @@
         vm.economic = null;
 
         vm.selectedTab = 0;
-        //vm.fullStores = null;
-        vm.refreshPaginationButtonsComponent = false;
 
         //Functions
         vm.accept = accept;
@@ -42,121 +40,9 @@
         vm.search = search;
         vm.changeTab = changeTab;
 
-        vm.catalogManager = {
-            actions: {
-                LIST: {
-                    elements: 'results',
-                    mode: PAGINATION.mode,
-                    pagination: {
-                        total: PAGINATION.total,
-                        limit: PAGINATION.limit,
-                        offset: PAGINATION.offset,
-                        pageSize: PAGINATION.pageSize
-                    },
-                    fields: [
-                        {
-                            type: 'text',
-                            model: 'nombre_establecimiento',
-                            label: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME')
-                        },
-                        {
-                            type: 'text',
-                            model: 'nombre_encargado',
-                            label: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER')
-                        },
-                        {
-                            type: 'text',
-                            model: 'telefono_encargado',
-                            label: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE'),
-                            nullOrEmpty: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.NO_PHONE')
-                        }
-                    ],
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                }
-            },
-            loadingMessage: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.SEARCHING'),
-            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-            nextButtonText: Translate.translate('MAIN.BUTTONS.NEXT'),
-            previousButtonText: Translate.translate('MAIN.BUTTONS.PREVIOUS'),
-            query: '',
-            queryValue: '',
-            url: null
-        };
+        vm.catalogManager = Stores.manager;
 
-        vm.catalogues = {
-            states: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.salepoint.base
-                        + '/' + URLS.salepoint.catalogues.base
-                        + '/' + URLS.salepoint.catalogues.states,
-                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: PAGINATION.total,
-                        limit: PAGINATION.limit,
-                        offset: PAGINATION.offset,
-                        pageSize: PAGINATION.pageSize
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                }
-            },
-            cities: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.salepoint.base
-                        + '/' + URLS.salepoint.catalogues.base
-                        + '/' + URLS.salepoint.catalogues.cities,
-                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: PAGINATION.total,
-                        limit: PAGINATION.limit,
-                        offset: PAGINATION.offset,
-                        pageSize: PAGINATION.pageSize
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                }
-            },
-            localities: {
-                catalog: {
-                    url: EnvironmentConfig.site.rest.api
-                        + '/' + URLS.salepoint.base
-                        + '/' + URLS.salepoint.catalogues.base
-                        + '/' + URLS.salepoint.catalogues.localities,
-                    name: Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'nombre',
-                    pagination: {
-                        total: PAGINATION.total,
-                        limit: PAGINATION.limit,
-                        offset: PAGINATION.offset,
-                        pageSize: PAGINATION.pageSize
-                    },
-                    elements: 'results',
-                    softDelete: {
-                        hide: 'deleted',
-                        reverse: false
-                    }
-                }
-            }
-        };
+        vm.catalogues = Stores.catalogues;
 
         activate();
 
@@ -257,21 +143,21 @@
                     vm.catalogManager.queryValue = vm.postal_code;
                     break;
                 case 3:
-                    vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
-                        .then(function (storeList) {
-                            vm.fullStores = storeList;
-                            var justStores = [];
-                            angular.forEach(storeList.results, function (item) {
-                                if (!item.fecha_salida)
-                                    justStores.push(item.establecimiento_obj);
-                            });
-                            vm.stores = Helper.filterDeleted(justStores, true);
-                            vm.refreshPaginationButtonsComponent = true;
-                        })
-                        .catch(function (storeListError) {
-                            $log.error(storeListError);
-                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                        });
+                    //vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
+                    //    .then(function (storeList) {
+                    //        vm.fullStores = storeList;
+                    //        var justStores = [];
+                    //        angular.forEach(storeList.results, function (item) {
+                    //            if (!item.fecha_salida)
+                    //                justStores.push(item.establecimiento_obj);
+                    //        });
+                    //        vm.stores = Helper.filterDeleted(justStores, true);
+                    //        vm.refreshPaginationButtonsComponent = true;
+                    //    })
+                    //    .catch(function (storeListError) {
+                    //        $log.error(storeListError);
+                    //        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
+                    //    });
                     break;
             }
         }
