@@ -15,7 +15,11 @@
         },
         "DETAIL": {
             "FOLIO": "Folio",
-            "OBSERVATIONS": "Observaciones del cliente"
+            "OBSERVATIONS": "Observaciones del cliente",
+            "CANCEL" : {
+                "TITLE":  "¿Seguro qué desea cancelar la pre solicitud?",
+                "BODY": "Recuerde que la acción de cancelar no se puede deshacer"
+            }
         },
         "CABINET":{
             "ECONOMIC": "Económico",
@@ -46,7 +50,8 @@
         "BUTTONS": {
             "CANCEL": "Cancelar Pre Solicitud",
             "CREATE": "Levantar Solicitud",
-            "LOAD_MORE": "Cargar mas..."
+            "LOAD_MORE": "Cargar mas...",
+            "NOTHING": "No hacer nada"
         },
         "SUBSIDIARY":{
             "TITLE": "Sucursal",

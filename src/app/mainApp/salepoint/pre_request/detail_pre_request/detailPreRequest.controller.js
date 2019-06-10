@@ -20,8 +20,7 @@
         Geolocation,
         User,
         PAGINATION,
-        _,
-        $log
+        _
     ) {
 
         var vm = this;
@@ -217,7 +216,6 @@
                 PREREQUESTS.getPreRequestByID($stateParams.id)
                     .then(function infoPre(elementPreRequest) {
                         vm.preRequest = elementPreRequest;
-                        $log.log(vm.preRequest);
                         convertImages();
                         getinfoCabinet(vm.preRequest.cabinet);
                     })
@@ -292,20 +290,31 @@
                 });
         }
 
-        function cancelPreRequest() {
-            vm.preRequest.cancelacion = true;
-            vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
-            var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
+        function cancelPreRequest(ev) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title(Translate.translate('PRE_REQUEST.DETAIL.CANCEL.TITLE'))
+                .textContent(Translate.translate('PRE_REQUEST.DETAIL.CANCEL.BODY'))
+                .targetEvent(ev)
+                .ok(Translate.translate('PRE_REQUEST.BUTTONS.CANCEL'))
+                .cancel(Translate.translate('PRE_REQUEST.BUTTONS.NOTHING'));
 
-            PREREQUESTS.updatePreRequest(prereqSinFoto)
-                .then(function cancelPre (requestCancel) {
-                    ErrorHandler.successCancel(requestCancel);
-                    $state.go('triangular.admin-default.pre-request');
-                })
-                .catch(function errCancelPre(err) {
-                    ErrorHandler.errorTranslate(err);
-                });
+            $mdDialog.show(confirm).then(function() {
+                vm.preRequest.cancelacion = true;
+                vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
+                var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
 
+                PREREQUESTS.updatePreRequest(prereqSinFoto)
+                    .then(function cancelPre (requestCancel) {
+                        ErrorHandler.successCancel(requestCancel);
+                        $state.go('triangular.admin-default.pre-request');
+                    })
+                    .catch(function errCancelPre(err) {
+                        ErrorHandler.errorTranslate(err);
+                    });
+            }, function() {
+
+            });
         }
 
         function back() {
