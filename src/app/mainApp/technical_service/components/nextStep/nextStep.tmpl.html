@@ -1,8 +1,8 @@
 <div  class="minorWhite">
     <div flex="100">
         <md-checkbox ng-model="$ctrl.endService" >
-            <b class="md-caption" ng-if="$ctrl.endService" translate="">NEXT_STEP.CLOSE_SERVICE</b>
-            <b class="md-caption" ng-if="!$ctrl.endService" translate="">NEXT_STEP.SAVE_SERVICE_WITHOUT_CLOSE</b>
+            <b class="md-caption"  translate="">NEXT_STEP.CLOSE_SERVICE</b>
+            <!--<b class="md-caption" ng-if="!$ctrl.endService" translate="">NEXT_STEP.SAVE_SERVICE_WITHOUT_CLOSE</b>-->
         </md-checkbox>
     </div>
     <div flex="100" ng-if="$ctrl.endService">
@@ -15,8 +15,8 @@
                 <div layout="row">
                     &nbsp;
                     <md-checkbox ng-model="$ctrl.edit_next_step">
-                        <b class="md-caption" ng-if="$ctrl.edit_next_step" translate="">NEXT_STEP.EDIT_NEXT_STEP</b>
-                        <b class="md-caption" ng-if="!$ctrl.edit_next_step" translate="">NEXT_STEP.NOT_EDIT</b>
+                        <b class="md-caption"  translate="">NEXT_STEP.EDIT_NEXT_STEP</b>
+                        <!--<b class="md-caption" ng-if="!$ctrl.edit_next_step" translate="">NEXT_STEP.NOT_EDIT</b>-->
                     </md-checkbox>
                 </div>
             </div>
