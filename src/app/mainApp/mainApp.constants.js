@@ -91,7 +91,8 @@
             },
             locality: {
                 by_state: 'municipio__estado__id',
-                by_city: 'municipio__id'
+                by_city: 'municipio__id',
+                by_postal_code: 'codigo_postal'
             },
             store: {
                 by_state: 'localidad__municipio__estado__id',

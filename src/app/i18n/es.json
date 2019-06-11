@@ -176,6 +176,7 @@
                     "CITY": "Municipio",
                     "LOCALITY": "Localidad",
                     "ZIP_CODE": "Código postal",
+                    "KNOWN_ZIP_CODE": "Se conoce el código postal",
                     "CLIENT_ID": "Número de cliente",
                     "SEGMENTATION": "Segmentación",
                     "ECONOMIC": "Económico",

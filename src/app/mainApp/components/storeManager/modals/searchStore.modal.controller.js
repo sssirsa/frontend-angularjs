@@ -13,7 +13,7 @@
         Helper,
         $log,
         ErrorHandler,
-        environmentConfig,
+        EnvironmentConfig,
         QUERIES,
         URLS
     ) {
