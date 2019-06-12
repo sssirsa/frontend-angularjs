@@ -39,7 +39,6 @@
                 </md-input-container>
                 <catalog-select class="full-width"
                                 catalog="vm.catalogues['segmentations'].catalog"
-                                lazy="true"
                                 on-select="vm.selectSegmentation(element)">
                 </catalog-select>
             </div>
@@ -142,6 +141,7 @@
                 <catalog-select class="full-width"
                                 ng-if="vm.city || vm.postalCode"
                                 catalog="vm.catalogues['localities'].catalog"
+                                required="true"
                                 lazy="true"
                                 on-select="vm.selectLocality(element)">
                 </catalog-select>

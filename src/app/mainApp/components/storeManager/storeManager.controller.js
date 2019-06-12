@@ -99,7 +99,7 @@
                 .then(function (store) {
                     vm.store = store;
                     vm.storeSelected({store: store});
-                    showPDF();
+                    //showPDF();
                 })
                 .catch(function (storeError) {
                     if (storeError) {
