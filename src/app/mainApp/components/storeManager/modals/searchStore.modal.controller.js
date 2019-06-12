@@ -22,14 +22,18 @@
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
         vm.client_id = null;
-
         vm.state = null;
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
         vm.economic = null;
-
         vm.selectedTab = 0;
+
+        //Translates
+        vm.noResultsMessage = Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS');
+        vm.nextButtonText = Translate.translate('MAIN.BUTTONS.NEXT');
+        vm.previousButtonText = Translate.translate('MAIN.BUTTONS.PREVIOUS');
+        vm.loadMoreButtonText = Translate.translate('MAIN.BUTTONS.LOAD_MORE');
 
         //Functions
         vm.accept = accept;

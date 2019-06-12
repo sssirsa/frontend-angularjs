@@ -39,7 +39,7 @@
                  templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
 
             <!--No results section-->
-            <section>
+            <section ng-if="$ctrl.catalogElements.length==0">
                 <div layout="row"
                      layout-align-gt-sm="start center"
                      layout-align="center center">
