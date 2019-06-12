@@ -209,10 +209,11 @@
                     {{'MAIN.COMPONENTS.STORE_MANAGER.CREDENTIAL'|translate}}
                 </md-button>
 
-                <md-button class="md-primary md-raised">
+                <!-- Se oculta el boton, ya que no tiene correcta funcionalidad y por lo menos se ve mal -->
+                <!--<md-button class="md-primary md-raised">
                     <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
                     <a href="{{$ctrl.urlPDF.url}}" download="{{$ctrl.no_cliente}}.pdf" target="_blank">{{'MAIN.BUTTONS.DOWNLOAD'|translate}}</a>
-                </md-button>
+                </md-button>-->
                 <!--Aquí termina lo que agrego Alex-->
 
                 <md-button aria-label="geolocate" ng-click="$ctrl.showStoreLocation()" class="md-raised md-primary">
