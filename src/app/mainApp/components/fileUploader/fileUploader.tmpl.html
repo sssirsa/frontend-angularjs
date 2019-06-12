@@ -37,7 +37,8 @@
                    ngf-multiple="$ctrl.multipleFiles"
                    ngf-allow-dir="$ctrl.allowFolders"
                    ngf-keep="{{$ctrl.keep}}"
-                   class="md-primary md-raised">
+                   class="md-primary md-raised"
+                   aria-label="upload">
             <md-icon md-font-icon="fa fa-folder-open"></md-icon>
             <span ng-if="$ctrl.multipleFiles">
                 {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.MULTIPLE_FILES'|translate}}
