@@ -2,17 +2,64 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('app.mainApp.salepoint')
         .factory('REQUESTS', RequestsProvider);
 
     function RequestsProvider(
         API,
-        $window,
-        URLS
+        URLS,
+        _
     ) {
-        var baseUrl = API.all(URLS.salepoint.base).all(URLS.salepoint.request.base);
+        var RequestBaseUrl = API
+            .all(URLS.salepoint.base)
+            .all(URLS.salepoint.request.base);
 
-        var service = {
+        function listRequests(limit, offset, filter) {
+            var params = {limit: limit, offset: offset};
+            if (angular.isDefined(filter)) {
+                params = _.extend(params, filter);
+            }
+            return RequestBaseUrl
+                .customGET(URLS.salepoint.request.list, params);
+        }
+
+        function getRequestByID(requestID) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.list)
+                .customGET(requestID);
+        }
+
+        function create_new_request(requestData) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.new_request)
+                .post(requestData);
+        }
+
+        function create_incremental_request(requestData) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.incremental_request)
+                .post(requestData);
+        }
+
+        function create_change_request(requestData) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.change_request)
+                .post(requestData);
+        }
+
+        function create_retrieve_request(requestData) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.retrieve_request)
+                .post(requestData);
+        }
+
+        function create_technical_service_request(requestData) {
+            return RequestBaseUrl
+                .all(URLS.salepoint.request.technical_service_request)
+                .post(requestData);
+        }
+
+        return {
             getRequestByID: getRequestByID,
             listRequests: listRequests,
             create_new_request: create_new_request,
@@ -21,44 +68,6 @@
             create_retrieve_request: create_retrieve_request,
             create_technical_service_request: create_technical_service_request
         };
-
-        function getRequestByID(id) {
-            return baseUrl.all(URLS.salepoint.request.list).all(id).customGET();
-        }
-
-        function listRequests(limit, offset, filter) {
-            var preUrl = URLS.salepoint.request.list
-                + '?limit=' + limit
-                + '&offset=' + offset;
-            if (angular.isUndefined(filter)) {
-                return baseUrl.all(preUrl).customGET();
-            }
-            else {
-                return baseUrl.all(preUrl + '&' + filter).customGET();
-            }
-        }
-
-        function create_new_request(element) {
-            return baseUrl.all(URLS.salepoint.request.new_request).post(element);
-        }
-
-        function create_incremental_request(element) {
-            return baseUrl.all(URLS.salepoint.request.incremental_request).post(element);
-        }
-
-        function create_change_request(element) {
-            return baseUrl.all(URLS.salepoint.request.change_request).post(element);
-        }
-
-        function create_retrieve_request(element) {
-            return baseUrl.all(URLS.salepoint.request.retrieve_request).post(element);
-        }
-
-        function create_technical_service_request(element) {
-            return baseUrl.all(URLS.salepoint.request.technical_service_request).post(element);
-        }
-
-        return service;
     }
 
 })();
