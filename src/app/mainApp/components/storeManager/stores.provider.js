@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .factory('Stores', Stores);
 
     function Stores(

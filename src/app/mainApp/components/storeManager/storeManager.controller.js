@@ -1,7 +1,7 @@
 (function () {
 
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .component('storeManager', {
             templateUrl: 'app/mainApp/components/storeManager/storeManager.tmpl.html',
             controller: storeManagerController,

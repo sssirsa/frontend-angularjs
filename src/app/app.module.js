@@ -12,6 +12,7 @@
             'vAccordion', 'ngMaterialDatePicker', 'mdPickers', 'cgBusy', 'ADM-dateTimePicker', 'minicolors',
             'catalogManager',
             'catalogSelectComponent',
+            'storeManager',
 
             angularDragula(angular), 'ngFileUpload', 'checklist-model',
 

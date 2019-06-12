@@ -1,7 +1,7 @@
 (function () {
     'use_strict';
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .controller('modifyStoreController', modifyStoreController);
 
     /* @ngInject */
