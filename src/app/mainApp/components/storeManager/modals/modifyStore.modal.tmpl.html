@@ -11,7 +11,7 @@
     <md-content layout="column"
                 layout-align="center stretch"
                 layout-padding>
-        <form name="storeFrom">
+        <form name="storeForm">
 
             <div flex
                  layout="column"
@@ -192,7 +192,7 @@
 
         <md-actions layout="row"
                     layout-align="end center">
-            <md-button ng-disabled="storeFrom.$invalid"
+            <md-button ng-disabled="storeForm.$invalid"
                        ng-click="vm.accept()"
                        class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
