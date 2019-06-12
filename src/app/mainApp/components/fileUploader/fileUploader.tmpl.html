@@ -70,7 +70,7 @@
         <img
             class="file-thumb"
             ng-if="file.type==='image/jpeg' || file.type==='image/png' || file.type==='image/bmp'"
-            src="{{file.$ngfBlobUrl}}">
+            ng-src="{{file.$ngfBlobUrl}}">
 
         <md-button
             ng-click="$ctrl.removeFile($index)"
