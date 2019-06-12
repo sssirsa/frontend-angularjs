@@ -11,8 +11,7 @@
     <md-content layout="column"
                 layout-align="center stretch"
                 layout-padding>
-        <form name="storeFrom">
-
+        <form name="storeForm">
             <div flex
                  layout="column"
                  layout-gt-sm="row"
@@ -38,6 +37,7 @@
                            ng-model="vm.store.nombre_establecimiento" />
                 </md-input-container>
                 <catalog-select class="full-width"
+                                required
                                 catalog="vm.catalogues['segmentations'].catalog"
                                 on-select="vm.selectSegmentation(element)">
                 </catalog-select>
@@ -59,6 +59,7 @@
                     <input name="telefono_encargado"
                            required
                            digits-only
+
                            maxlength="10"
                            ng-model="vm.store.telefono_encargado" />
                 </md-input-container>
@@ -126,8 +127,7 @@
             </div>
             <div flex
                  layout="column"
-                 layout-gt-sm="row"
-                 layout-align-gt-sm="center stretch">
+                 layout-align="center stretch">
                 <md-input-container flex
                                     ng-if="vm.knownPostalCode"
                                     class="md-block">
@@ -187,7 +187,7 @@
 
         <md-actions layout="row"
                     layout-align="end center">
-            <md-button ng-disabled="storeFrom.$invalid"
+            <md-button ng-disabled="storeForm.$invalid"
                        ng-click="vm.accept()"
                        class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
