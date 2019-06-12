@@ -13,6 +13,7 @@
                 totalText: '<', //If not given, the word 'Total' will be used
                 totalFilteredText: '<', //If not given 'Total filtered' will be used
                 loadingMessage: '<',
+                noResults:'<', //Message to shown when no results were returned from the query, default is 'No resuls'
 
                 //Functions
                 onSuccessList: '&',
