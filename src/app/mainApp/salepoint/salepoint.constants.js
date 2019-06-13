@@ -33,6 +33,6 @@
                 change_request: 'change',
                 retrieve_request: 'retrieve',
                 technical_service_request: 'technical_service'
-            },
+            }
         });
 }) ();

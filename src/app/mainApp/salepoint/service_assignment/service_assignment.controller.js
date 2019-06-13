@@ -95,8 +95,8 @@
             listAttentions();
         }
 
-        function selectAttention(salePoint) {
-            // $state.go('triangular.admin-default.', {id: salePoint.folio, type: salePoint.tipo});
+        function selectAttention(attention) {
+            $state.go('triangular.admin-default.service-assignment-detail', {id: attention.folio, type: attention.tipo});
         }
 
     }

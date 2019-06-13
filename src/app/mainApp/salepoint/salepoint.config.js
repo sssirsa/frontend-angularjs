@@ -142,6 +142,22 @@
                 controller: 'serviceAssignmentController',
                 controllerAs: 'vm'
             })
+
+            .state('triangular.admin-default.service-assignment-detail', {
+                url: 'salepoint/atencion/:id',
+                data: {
+                    permissions: {
+                        only: ['ADMINISTRADOR', 'TECNICO E']
+                    }
+                },
+                templateUrl: 'app/mainApp/salepoint/atenciones/detail/detail-attention-page-tmpl.html',
+                controller: 'DetailAttentionPageController',
+                controllerAs: 'vm',
+                params: {
+                    id: null,
+                    tipo: null
+                }
+            })
         ;
 
         /*
@@ -173,20 +189,7 @@
                     runListTodos: null
                 }
             })
-            .state('triangular.admin-default.attentionDetail', {
-                url: '/atencion/:id',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/salepoint/atenciones/detail/detail-attention-page-tmpl.html',
-                controller: 'DetailAttentionPageController',
-                controllerAs: 'vm',
-                params: {
-                    id: null,
-                    tipo: null
-                }
+
             }); */
 
         triMenuProvider.addMenu(
@@ -252,7 +255,7 @@
                         state: 'triangular.admin-default.service-assignment',
                         permission_old: ['ADMINISTRADOR', 'TECNICO E'],
                         type: 'link'
-                    },
+                    }
                 ]
 
             }
