@@ -23,7 +23,7 @@
         // pagination initial variables
         vm.offset = 0;
         vm.limit = PAGINATION.pageSize;
-        vm.filerParams = {persona__nombre: null, ordering: 'fecha_creacion'};
+        vm.filerParams = {persona__nombre: 'null', ordering: 'fecha_creacion'};
         vm.refreshPaginationButtonsComponent = false;
 
         // binging functions
