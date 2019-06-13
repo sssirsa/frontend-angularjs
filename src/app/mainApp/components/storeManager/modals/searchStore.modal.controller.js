@@ -1,60 +1,57 @@
 (function () {
     'use_strict';
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .controller('searchStoreController', searchStoreController);
 
     /* @ngInject */
-    function searchStoreController(Stores,
+    function searchStoreController(
+        Stores,
         toastr,
         Translate,
         $mdDialog,
         Helper,
         $log,
         ErrorHandler,
-        States,
-        Cities,
-        Localities,
-        _
+        EnvironmentConfig,
+        QUERIES,
+        URLS
     ) {
         var vm = this;
 
         //Variables
         vm.translateRoot = 'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH';
         vm.client_id = null;
-        vm.states = null;
-        vm.cities = null;
-        vm.localities = null;
         vm.state = null;
         vm.city = null;
         vm.locality = null;
         vm.postal_code = null;
         vm.economic = null;
         vm.selectedTab = 0;
-        vm.stores = null;
-        vm.limit = 20;
-        vm.offset = 0;
-        vm.fullStores = null;
-        vm.refreshPaginationButtonsComponent = false;
+
+        //Translates
+        vm.noResultsMessage = Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS');
+        vm.nextButtonText = Translate.translate('MAIN.BUTTONS.NEXT');
+        vm.previousButtonText = Translate.translate('MAIN.BUTTONS.PREVIOUS');
+        vm.loadMoreButtonText = Translate.translate('MAIN.BUTTONS.LOAD_MORE');
 
         //Functions
         vm.accept = accept;
         vm.cancel = cancel;
-        vm.listStates = listStates;
-        vm.listCities = listCities;
-        vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectCity = selectCity;
+        vm.selectLocality = selectLocality;
         vm.search = search;
         vm.changeTab = changeTab;
-        vm.sig = sigPage;
-        vm.prev = prevPage;
-        vm.goToNumberPage = goToNumberPage;
+
+        vm.catalogManager = Stores.manager;
+
+        vm.catalogues = Stores.catalogues;
 
         activate();
 
         function activate() {
-            listStates();
+            //Initial handling
         }
 
 
@@ -66,77 +63,44 @@
             $mdDialog.cancel(null);
         }
 
-        function listStates() {
-            if (!vm.states) {
-                vm.loadingStates = States.list()
-                    .then(function (stateList) {
-                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
-                    })
-                    .catch(function (stateListError) {
-                        $log.error(stateListError);
-                        vm.states = null;
-                        toastr.error(Translate.translate('CITIES.TOASTR.ERROR_STATE_LIST'));
-                    });
-            }
-        }
-
-        function listCities(state) {
-            if (state) {
-                return Cities.getByState(state)
-                    .then(function (citiesList) {
-                        vm.cities = _.sortBy(Helper.filterDeleted(citiesList, true), 'nombre');
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-            else {
-                return Cities.list()
-                    .then(function (citiesList) {
-                        vm.cities = Helper.filterDeleted(citiesList, true);
-                    })
-                    .catch(function (citiesListError) {
-                        $log.error(citiesListError);
-                    });
-            }
-        }
-
-        function listLocalities(city) {
-            if (city) {
-                return Localities.getByCity(city)
-                    .then(function (localitiesList) {
-                        vm.localities = _.sortBy(Helper.filterDeleted(localitiesList, true), 'nombre');
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-            else {
-                return Localities.list()
-                    .then(function (localitiesList) {
-                        vm.cities = Helper.filterDeleted(localitiesList, true);
-                    })
-                    .catch(function (localitiesListError) {
-                        $log.error(localitiesListError);
-                    });
-            }
-        }
-
-        function selectState() {
+        function selectState(state) {
+            vm.catalogManager.url = null;
+            vm.catalogManager.query = null;
+            vm.catalogManager.queryValue = null;
+            vm.state = state;
             vm.city = null;
             vm.locality = null;
             vm.cities = null;
             vm.localities = null;
+            vm.catalogues['cities'].catalog.query = QUERIES.city.by_state;
+            vm.catalogues['cities'].catalog.query_value = vm.state;
         }
 
-        function selectCity() {
+        function selectCity(city) {
+            vm.catalogManager.url = null;
+            vm.catalogManager.query = null;
+            vm.catalogManager.queryValue = null;
+            vm.city = city;
             vm.locality = null;
             vm.localities = null;
+            vm.catalogues['localities'].catalog.query = QUERIES.locality.by_city;
+            vm.catalogues['localities'].catalog.query_value = vm.city;
+        }
+
+        function selectLocality(locality) {
+            vm.catalogManager.url = null;
+            vm.catalogManager.query = null;
+            vm.catalogManager.queryValue = null;
+            vm.locality = locality;
         }
 
         function search() {
-            vm.stores = null;
-            vm.refreshPaginationButtonsComponent = false;
+            //vm.stores = null;
+            //vm.refreshPaginationButtonsComponent = false;
+            var storeUrl = EnvironmentConfig.site.rest.api
+                + '/' + URLS.salepoint.base
+                + '/' + URLS.salepoint.catalogues.base
+                + '/' + URLS.salepoint.catalogues.stores;
             switch (vm.selectedTab) {
                 case 0:
                     vm.loadingPromise = Stores.getByID(vm.client_id)
@@ -158,66 +122,46 @@
                         if (vm.city) {
                             if (vm.locality) {
                                 //Look up by locality
-                                vm.loadingPromise = Stores.getByLocality(vm.locality, vm.limit, vm.offset)
-                                    .then(function (storeList) {
-                                        prepareDataFunction(storeList);
-                                    })
-                                    .catch(function (storeListError) {
-                                        $log.error(storeListError);
-                                        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                                    });
+                                vm.catalogManager.url = storeUrl;
+                                vm.catalogManager.query = QUERIES.store.by_locality;
+                                vm.catalogManager.queryValue = vm.locality;
                             }
                             else {
                                 //Look up by city
-                                vm.loadingPromise = Stores.getByCity(vm.city, vm.limit, vm.offset)
-                                    .then(function (storeList) {
-                                        prepareDataFunction(storeList);
-                                    })
-                                    .catch(function (storeListError) {
-                                        $log.error(storeListError);
-                                        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                                    });
+                                vm.catalogManager.url = storeUrl;
+                                vm.catalogManager.query = QUERIES.store.by_city;
+                                vm.catalogManager.queryValue = vm.city;
                             }
                         }
                         else {
                             //Look up by state
-                            vm.loadingPromise = Stores.getByState(vm.state, vm.limit, vm.offset)
-                                .then(function (storeList) {
-                                    prepareDataFunction(storeList);
-                                })
-                                .catch(function (storeListError) {
-                                    $log.error(storeListError);
-                                    toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                                });
+                            vm.catalogManager.url = storeUrl;
+                            vm.catalogManager.query = QUERIES.store.by_state;
+                            vm.catalogManager.queryValue = vm.state;
                         }
                     }
                     break;
                 case 2:
-                    vm.loadingPromise = Stores.getByPostalCode(vm.postal_code, vm.limit, vm.offset)
-                        .then(function (storeList) {
-                            prepareDataFunction(storeList);
-                        })
-                        .catch(function (storeListError) {
-                            $log.error(storeListError);
-                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                        });
+                    vm.catalogManager.url = storeUrl;
+                    vm.catalogManager.query = QUERIES.store.by_postal_code;
+                    vm.catalogManager.queryValue = vm.postal_code;
                     break;
                 case 3:
-                    vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
-                        .then(function (storeList) {
-                            vm.fullStores = storeList;
-                            var justStores = [];
-                            angular.forEach(storeList.results, function (item) {
-                                if (!item.fecha_salida)
-                                    justStores.push(item.establecimiento_obj);
-                            });
-                            vm.stores = Helper.filterDeleted(justStores, true);
-                            vm.refreshPaginationButtonsComponent = true;
-                        })
-                        .catch(function (storeListError) {
-                            $log.error(storeListError);
-                            toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
-                        });
+                    //vm.loadingPromise = Stores.getByEconomic(vm.economic, vm.limit, vm.offset)
+                    //    .then(function (storeList) {
+                    //        vm.fullStores = storeList;
+                    //        var justStores = [];
+                    //        angular.forEach(storeList.results, function (item) {
+                    //            if (!item.fecha_salida)
+                    //                justStores.push(item.establecimiento_obj);
+                    //        });
+                    //        vm.stores = Helper.filterDeleted(justStores, true);
+                    //        vm.refreshPaginationButtonsComponent = true;
+                    //    })
+                    //    .catch(function (storeListError) {
+                    //        $log.error(storeListError);
+                    //        toastr.error(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS'));
+                    //    });
                     break;
             }
         }
@@ -229,32 +173,10 @@
             vm.client_id = null;
             vm.postal_code = null;
             vm.economic = null;
-            vm.stores = null;
-            vm.fullStores = null;
-            vm.offset = 0;
-            vm.refreshPaginationButtonsComponent = false;
-        }
-
-        function prepareDataFunction(Stores) {
-            vm.fullStores = Stores;
-            var list = Stores.results;
-            vm.stores = Helper.filterDeleted(list, true);
-            vm.refreshPaginationButtonsComponent = true;
-        }
-
-        function sigPage() {
-            vm.offset += vm.limit;
-            search();
-        }
-
-        function prevPage() {
-            vm.offset -= vm.limit;
-            search();
-        }
-
-        function goToNumberPage(number) {
-            vm.offset = number * vm.limit;
-            search();
+            vm.catalogManager.url = null;
+            vm.catalogManager.query = null;
+            vm.catalogManager.queryValue = null;
+            //vm.fullStores = null;
         }
     }
 
