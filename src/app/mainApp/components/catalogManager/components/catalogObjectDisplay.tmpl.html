@@ -48,7 +48,7 @@
                    ng-disabled="true"
                    type="color"
                    name="{{field.model}}"
-                   value="{{$ctrl.element[field.model]}}">
+                   ng-value="{{$ctrl.element[field.model]}}">
         </section>
         <!-- Just show this section when the field is options -->
         <section ng-if="field.type==='options'">

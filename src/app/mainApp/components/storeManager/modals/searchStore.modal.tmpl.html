@@ -29,39 +29,22 @@
                     layout-align="center stretch"
                     md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ADDRESS'|translate}}">
-                <md-input-container flex class="md-block" cg-busy="{promise:vm.loadingStates, message:'Cargando estados...'}">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.STATE</label>
-                    <md-select ng-model="vm.state"
-                               md-on-close="vm.selectState()">
-                        <md-option ng-repeat="state in vm.states"
-                                   ng-value="{{state.id}}">
-                            {{state.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.CITY</label>
-                    <md-select ng-model="vm.city"
-                               md-on-open="vm.listCities(vm.state)"
-                               md-on-close="vm.selectCity()"
-                               ng-disabled="!vm.state">
-                        <md-option ng-repeat="city in vm.cities"
-                                   ng-value="city.id">
-                            {{city.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container flex class="md-block">
-                    <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.LOCALITY</label>
-                    <md-select ng-model="vm.locality"
-                               md-on-open="vm.listLocalities(vm.city)"
-                               ng-disabled="!vm.city">
-                        <md-option ng-repeat="locality in vm.localities"
-                                   ng-value="locality.id">
-                            {{locality.nombre}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                <catalog-select class="full-width"
+                                catalog="vm.catalogues['states'].catalog"
+                                on-select="vm.selectState(element)">
+                </catalog-select>
+                <catalog-select class="full-width"
+                                ng-if="vm.state"
+                                catalog="vm.catalogues['cities'].catalog"
+                                lazy="true"
+                                on-select="vm.selectCity(element)">
+                </catalog-select>
+                <catalog-select class="full-width"
+                                ng-if="vm.city"
+                                catalog="vm.catalogues['localities'].catalog"
+                                lazy="true"
+                                on-select="vm.selectLocality(element)">
+                </catalog-select>
             </md-tab>
             <md-tab md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_POSTAL_CODE'|translate}}">
@@ -72,7 +55,7 @@
                     <div class="hint" translate>MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.HINTS.ZIP_CODE</div>
                 </md-input-container>
             </md-tab>
-            <md-tab md-on-select="vm.changeTab()"
+            <!--<md-tab md-on-select="vm.changeTab()"
                     label="{{'MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.BY_ECONOMIC'|translate}}">
                 <md-input-container flex class="md-block">
                     <label translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.ECONOMIC</label>
@@ -80,7 +63,7 @@
                            md-maxlength="10">
                     <div class="hint" translate>MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.HINTS.ECONOMIC</div>
                 </md-input-container>
-            </md-tab>
+            </md-tab>-->
         </md-tabs>
 
         <md-actions layout="row"
@@ -97,42 +80,22 @@
              translate>
             MAIN.COMPONENTS.STORE_MANAGER.MODALS.SEARCH.ERRORS.NO_RESULTS
         </div>
-        <div ng-if="vm.selectedTab===0||vm.selectedTab===1">
-            <!--TODO: falta agregar botones y logica para paginado-->
-            <md-card layout-gt-sm="row"
-                     layout="column"
-                     layout-align-gt-sm="space-around center"
-                     layout-align="center stretch"
-                     layout-wrap
-                     ng-click="vm.accept(store)"
-                     ng-repeat="store in vm.stores">
-                <div layout="column" layout-padding>
-                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.NAME</strong>
-                    {{store.nombre_establecimiento}}
-                </div>
-                <div layout="column" layout-padding>
-                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER</strong>
-                    {{store.nombre_encargado}}
-                </div>
-                <div layout="column" layout-padding>
-                    <strong translate>MAIN.COMPONENTS.STORE_MANAGER.LABELS.MANAGER_PHONE</strong>
-                    {{store.telefono_encargado}}
-                </div>
-            </md-card>
-            <div ng-if="vm.refreshPaginationButtonsComponent">
-                <pagination-manager-buttons go-sig="vm.sig()"
-                                            go-prev="vm.prev()"
-                                            go-number="vm.goToNumberPage(number)"
-                                            limit-objects="vm.limit"
-                                            count-object="vm.fullStores.count"
-                                            offset-object="vm.offset"
-                                            nex-object="vm.fullStores.next"
-                                            prev-object="vm.fullStores.previous">
-                </pagination-manager-buttons>
-            </div>
+        <div ng-if="vm.selectedTab===0||vm.selectedTab===1||vm.selectedTab===2">
+            <catalog-manager url="vm.catalogManager.url"
+                             query="vm.catalogManager.query"
+                             query-value="vm.catalogManager.queryValue"
+                             ng-if="vm.catalogManager.url"
+                             actions="vm.catalogManager.actions"
+                             next-button-text="vm.nextButtonText"
+                             previous-button-text="vm.previousButtonText"
+                             load-more-button-text="vm.loadMoreButtonText"
+                             loading-message="vm.loadingMessage"
+                             no-results="vm.noResultsMessage"
+                             on-element-select="vm.accept(element)">
+            </catalog-manager>
         </div>
-        <div ng-if="vm.selectedTab===2">
-            <md-card layout-gt-sm="row"
+        <div ng-if="vm.selectedTab===3">
+            <!--<md-card layout-gt-sm="row"
                      layout="column"
                      layout-align-gt-sm="space-around center"
                      layout-align="center stretch"
@@ -163,7 +126,8 @@
                                             nex-object="vm.fullStores.next"
                                             prev-object="vm.fullStores.previous">
                 </pagination-manager-buttons>
-            </div>
+            </div>-->
         </div>
+
     </md-content>
 </div>

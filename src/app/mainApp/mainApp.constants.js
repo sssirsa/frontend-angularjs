@@ -87,17 +87,18 @@
                 by_brand: '?marca__id='
             },
             city: {
-                by_state: '?estado__id='
+                by_state: 'estado__id'
             },
             locality: {
-                by_state: '?municipio__estado__id=',
-                by_city: '?municipio__id='
+                by_state: 'municipio__estado__id',
+                by_city: 'municipio__id',
+                by_postal_code: 'codigo_postal'
             },
             store: {
-                by_state: '?localidad__municipio__estado_id=',
-                by_city: '?localidad__municipio_id=',
-                by_locality: '?localidad_id=',
-                by_postal_code: '?localidad__codigo_postal=',
+                by_state: 'localidad__municipio__estado__id',
+                by_city: 'localidad__municipio__id',
+                by_locality: 'localidad__id',
+                by_postal_code: 'localidad__codigo_postal',
                 by_economic: '/lookup/'
             }
         })
