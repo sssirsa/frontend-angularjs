@@ -9,13 +9,15 @@
     function SegmentationController(
         URLS,
         Translate,
+        EnvironmentConfig,
         PAGINATION
     ) {
-
         var vm = this;
+        var salePointUrl =  (EnvironmentConfig.site.rest.api)
+            .concat('/' + URLS.salepoint.base + '/' + URLS.salepoint.catalogues.base + '/' + URLS.salepoint.catalogues.segmentation);
 
-        vm.url = URLS.segmentation;
-        vm.kind = 'Mobile';
+        vm.url = salePointUrl;
+        vm.kind = 'sale_point';
         vm.name = Translate.translate('SEGMENTATION.LABELS.TITLE');
 
         //Labels
@@ -128,7 +130,7 @@
                 }
             },
             LIST: {
-                // elements: 'results',
+                elements: 'results',
                 mode: PAGINATION.mode,
                 pagination: {
                     total: PAGINATION.total,
