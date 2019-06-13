@@ -596,6 +596,24 @@
                         ]
                     },
                     {
+                        name: 'MAIN.MENU.CATALOGS.LABELS.SALE_POINT',
+                        type: 'dropdown',
+                        children:[
+                            {
+                                name: 'MAIN.MENU.CATALOGS.STORES',
+                                state: 'triangular.admin-default.catalogo-establecimientos',
+                                permission_old: ['ADMINISTRADOR', 'TECNICO E'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
+                                state: 'triangular.admin-default.catalogue-segmentation',
+                                permission_old: ['ADMINISTRADOR'],
+                                type: 'link'
+                            }
+                        ]
+                    },
+                    {
                         name: 'MAIN.MENU.CATALOGS.LABELS.TECHNICAL_SERVICE',
                         type: 'dropdown',
                         children:[
@@ -608,12 +626,6 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.FAILURE_TYPE',
                                 state: 'triangular.admin-default.failure-type',
-                                permission_old: ['ADMINISTRADOR', 'TECNICO E'],
-                                type: 'link'
-                            },
-                            {
-                                name: 'MAIN.MENU.CATALOGS.STORES',
-                                state: 'triangular.admin-default.catalogo-establecimientos',
                                 permission_old: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
@@ -635,12 +647,6 @@
                                 permission_old: ['ADMINISTRADOR', 'TECNICO E'],
                                 type: 'link'
                             },
-                            //{
-                            //    name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
-                            //    state: 'triangular.admin-default.catalogue-segmentation',
-                            //    permission_old: ['ADMINISTRADOR'],
-                            //    type: 'link'
-                            //},
                             {
                                 name: 'MAIN.MENU.CATALOGS.SYMPTOM',
                                 state: 'triangular.admin-default.symptom',
