@@ -1,0 +1,62 @@
+{
+    "ATTENTIONS": {
+        "TITLE": "Atenciones",
+        "LIST": {
+            "TITLE": "Listado de Atenciones",
+            "TYPE":{
+                "ALL": "Todas",
+                "ATTENDED": "Atendida",
+                "CANCELED": "Cancelada",
+                "IN_PROCESS": "En proceso",
+                "OPEN": "Abierta"
+            },
+            "LIST_OF": "Listado de",
+            "NO_RESULTS": "No se encontrarón resultados"
+        },
+        "ASSIGN": {
+            "TITLE": "Asignación de servicios",
+            "NO_SELECTION": "Seleccione un tipo de servicio",
+            "LABELS": {
+                "KIND": "Tipo de servicio",
+                "FOLIO": "Folio",
+                "DATE": "Fecha",
+                "JOB_KIND": "Tipo de trabajo",
+                "DETAIL": "Detalle",
+                "STATE": "Estado",
+                "ROUTE": "Ruta",
+                "STORE": "Establecimiento",
+                "MUN": "Municipio",
+                "LOCAL": "Localidad",
+                "CP": "Código Postal",
+                "HOURATEND": "Horarios de atencion",
+                "HOURSTART": "Hora inicial",
+                "HOUREND": "Hora final"
+            },
+            "ASSIGNED": "Servicios asignados",
+            "NO_RESULTS": "Sin asignaciones"
+        },
+        "ASSIGN_DETAIL": {
+            "TITLE": "Detalle de Servicio",
+            "STORE": "Establecimiento",
+            "REQUEST": "Solicitud",
+            "PERSON": "Asigna persona",
+            "PERSON_ASSIGN": "Persona a asignar",
+            "NO_RESULTS": "No se encontraron resultados para",
+            "REQUESTED_CABINETS": "Cabinets solicitados",
+            "TOASTR_SUCCESS": "Usuario asignado correctamente a Servicio Punto de Venta",
+            "LABEL": {
+                "STORE_NAME": "Nombre del establecimiento",
+                "OWNER": "Encargado",
+                "STREET": "Calle",
+                "BETWEEN_1": "Entre calle",
+                "BETWEEN_2": "Y calle",
+                "ZIP_CODE": "CP",
+                "NUMBER": "Número",
+                "PHONE": "Teléfono",
+                "LOCALITY": "Localidad",
+                "ROUTE": "Ruta",
+                "REQUESTED_CABINETS": "Cabinets solicitados"
+            }
+        }
+    }
+}

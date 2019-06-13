@@ -20,7 +20,7 @@
                 params = _.extend(params, filter);
             }
             return AttentionBaseURL
-                .customGET(URLS.salepoint.attention.all, params);
+                .customGET(URLS.salepoint.attention.list, params);
         }
 
         function getAttention(attentionID) {

@@ -13,6 +13,9 @@
                 "TECHNICAL_SERVICE": "Servico Técnico",
                 "LIST": "Listado de solicitudes"
             },
+            "ASSIGMENT": {
+                "TITLE": "Asignación de Servicio"
+            },
             "TITLE": "Punto de Venta"
         }
     },

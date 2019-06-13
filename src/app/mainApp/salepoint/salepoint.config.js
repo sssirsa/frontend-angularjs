@@ -10,6 +10,7 @@
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint');
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/pre_request');
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/request');
+        $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/service_assignment');
 
         $stateProvider
 
@@ -129,21 +130,23 @@
                 controllerAs: 'vm'
             })
 
-        ;
-
-        /*
-        $stateProvider
-            .state('triangular.admin-default.serviceAssing', {
-                url: '/asignarServicio',
+            // Atenciones
+            .state('triangular.admin-default.service-assignment', {
+                url: '/salepoint/asignar-servicio',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'TECNICO E']
                     }
                 },
-                templateUrl: 'app/mainApp/salepoint/asignacionServicio/asignacionServicio.tmpl.html',
-                controller: 'asignacionServicioController',
+                templateUrl: 'app/mainApp/salepoint/service_assignment/service_assignment.tmpl.html',
+                controller: 'serviceAssignmentController',
                 controllerAs: 'vm'
             })
+        ;
+
+        /*
+        $stateProvider
+
             .state('triangular.admin-default.serviceAssignDetail', {
                 url: '/detalleServicio/:id',
                 data: {
@@ -168,67 +171,6 @@
                 params: {
                     runListPendientes: null,
                     runListTodos: null
-                }
-            })
-            .state('triangular.admin-default.newRequest', {
-                url: '/request/new',
-                templateUrl: 'app/mainApp/salepoint/solicitudes/new/new-request-page.tmpl.html',
-                controller: 'NewRequestPageController',
-                controllerAs: 'vm',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                }
-            })
-            .state('triangular.admin-default.listRequest', {
-                url: '/request/list',
-                templateUrl: 'app/mainApp/salepoint/solicitudes/list/list-requests-page.tmpl.html',
-                controller: 'ListRequestPageController',
-                controllerAs: 'vm',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                }
-            })
-            .state('triangular.admin-default.detailRequest', {
-                url: '/request/detail/:id',
-                templateUrl: 'app/mainApp/salepoint/solicitudes/detail/detail-request-page.tmpl.html',
-                controller: 'DetailRequestPageController',
-                controllerAs: 'vm',
-                params: {
-                    id: null
-                },
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                }
-            })
-            .state('triangular.admin-default.preRequest', {
-                url: '/prerequest/list',
-                templateUrl: 'app/mainApp/salepoint/preRequestsDeleted/preRequest.tmpl.html',
-                controller: 'preRequestListController',
-                controllerAs: 'vm',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                }
-            })
-            .state('triangular.admin-default.preRequestDetail', {
-                url: '/prerequest-detail:idPreRequest/',
-                templateUrl: 'app/mainApp/salepoint/preRequestsDeleted/preRequest-detail.tmpl.html',
-                controller: 'preRequestDetailController',
-                controllerAs: 'vm',
-                params: {
-                    idPreRequest: null
-                },
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
                 }
             })
             .state('triangular.admin-default.attentionDetail', {
@@ -304,7 +246,13 @@
                             }
                         ]
 
-                    }
+                    },
+                    {
+                        name: 'SALE_POINT.MENU.ASSIGMENT.TITLE',
+                        state: 'triangular.admin-default.service-assignment',
+                        permission_old: ['ADMINISTRADOR', 'TECNICO E'],
+                        type: 'link'
+                    },
                 ]
 
             }
@@ -319,31 +267,6 @@
                 permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
                 priority: 7,
                 children: [
-                    {
-                        name: 'MAIN.MENU.SERVICE.ASSIGN',
-                        state: 'triangular.admin-default.serviceAssing',
-                        permission_old: ['ADMINISTRADOR', 'TECNICO E'],
-                        type: 'link'
-                    },
-                    {
-                        name: 'MAIN.MENU.REQUESTS.TITLE',
-                        type: 'dropdown',
-                        children: [{
-                            name: 'MAIN.MENU.REQUESTS.NEW',
-                            state: 'triangular.admin-default.newRequest',
-                            type: 'link'
-                        }, {
-                            name: 'MAIN.MENU.REQUESTS.LIST',
-                            state: 'triangular.admin-default.listRequest',
-                            type: 'link'
-                        }, {
-                            name: 'MAIN.MENU.REQUESTS.PREREQUEST',
-                            state: 'triangular.admin-default.preRequest',
-                            permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                            type: 'link'
-                        }
-                        ]
-                    },
                     {
                         name: 'MAIN.MENU.SERVICE.MENU_TITLE',
                         state: 'triangular.admin-default.serviceList',
