@@ -15,7 +15,7 @@
         </div>
     </md-card>
     <div ng-if="vm.attentions">
-        <div class="virtualRepeatScroll-500">
+        <div>
             <md-card
                 flex="100"
                 layout="column"
@@ -158,9 +158,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4 ng-if="attention.fecha">
-<!--                                            {{attention.fecha | moment:'DD/MM/YYYY hh:mm:ss'}}</h4>-->
-                                        <h4 ng-if="!attention.fecha">No Asignado</h4>
+                                        <h4 ng-if="attention.fecha_creacion">
+                                            {{attention.fecha_creacion | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</h4>
+                                        <h4 ng-if="!attention.fecha_creacion">No Asignado</h4>
                                     </div>
                                 </div>
                             </div>
