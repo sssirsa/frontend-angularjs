@@ -17,7 +17,6 @@
             .concat('/' + URLS.salepoint.base + '/' + URLS.salepoint.catalogues.base + '/' + URLS.salepoint.catalogues.segmentation);
 
         vm.url = salePointUrl;
-        vm.kind = 'sale_point';
         vm.name = Translate.translate('SEGMENTATION.LABELS.TITLE');
 
         //Labels
