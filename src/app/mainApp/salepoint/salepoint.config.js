@@ -253,7 +253,7 @@
                 icon: 'fas fa-concierge-bell',
                 type: 'dropdown',
                 permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
-                priority: 4,
+                priority: 7,
                 children: [
                     {
                         name: 'SALE_POINT.MENU.PRE_REQUEST.TITLE',
