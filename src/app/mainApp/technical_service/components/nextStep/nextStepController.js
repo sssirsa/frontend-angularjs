@@ -23,6 +23,7 @@
         vm.endService = true;
         vm.selectStep = selectStep;
         vm.activate = activate;
+        vm.closeService=closeService;
         activate();
         function activate() {
 
@@ -36,7 +37,12 @@
             }
         }
 
-
+        function closeService() {
+            vm.endService=!vm.endService;
+            if(!vm.endService){
+                vm.nextStep({element: undefined});
+            }
+        }
 //Función que obtiene las etapas siguientes a partir de la etapa actual
         function getStagesByActualStage() {
             var promiseGetStage = nextStageProvider.getStage(vm.actualStep.id);

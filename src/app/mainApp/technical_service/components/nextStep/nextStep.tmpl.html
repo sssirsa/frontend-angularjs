@@ -1,6 +1,6 @@
 <div  class="minorWhite">
     <div flex="100">
-        <md-checkbox ng-model="$ctrl.endService" >
+        <md-checkbox ng-model="$ctrl.endService" ng-click="vm.closeService()">
             <b class="md-caption"  translate="">NEXT_STEP.CLOSE_SERVICE</b>
             <!--<b class="md-caption" ng-if="!$ctrl.endService" translate="">NEXT_STEP.SAVE_SERVICE_WITHOUT_CLOSE</b>-->
         </md-checkbox>
