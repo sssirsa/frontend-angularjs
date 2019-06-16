@@ -8,7 +8,7 @@
         .module('app.mainApp.technical_service')
         .controller('DiagnosisController', DiagnosisController);
 
-    function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log,_) {
+    function DiagnosisController($scope, Translate, toastr, ErrorHandler, diagnosisProvider, $log, _) {
         var vm = this;
 
         vm.asset = null;//objeto contenedor del cabinet
@@ -68,7 +68,7 @@
                     vm.diagnostic = _.omit(vm.diagnostic, 'insumos_lote_usados');
                 }
             }
-            if (!vm.actions){
+            if (!vm.actions) {
                 vm.diagnostic = _.omit(vm.diagnostic, 'acciones_id');
             }
             if (vm.actions) {
@@ -76,7 +76,7 @@
                     vm.diagnostic = _.omit(vm.diagnostic, 'acciones_id');
                 } else {
                     var index2;
-                    vm.diagnostic.acciones_id=[];
+                    vm.diagnostic.acciones_id = [];
                     for (index2 = 0; index2 < vm.actions.length; ++index2) {
                         if (vm.actions[index2].com_code) {
                             vm.diagnostic.acciones_id.push(vm.actions[index2].com_code);
@@ -84,7 +84,7 @@
                     }
                 }
             }
-            if (!vm.failures){
+            if (!vm.failures) {
                 vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
             }
             if (vm.failures) {
@@ -92,7 +92,7 @@
                     vm.diagnostic = _.omit(vm.diagnostic, 'fallas_id');
                 } else {
                     var index3;
-                    vm.diagnostic.fallas_id=[];
+                    vm.diagnostic.fallas_id = [];
                     for (index3 = 0; index3 < vm.failures.length; ++index3) {
                         if (vm.failures[index3].com_code) {
                             vm.diagnostic.fallas_id.push(vm.failures[index3].com_code);
@@ -130,12 +130,25 @@
 
             vm.step = step;
             vm.search = false;
-            if(vm.step) {
-                if (angular.isUndefined(vm.step.currentStage)||vm.step=== null) {
-                    var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                    var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
-                    toastr.warning(NOT_STEP, SENT_TO_CHECK);
-                    clear();
+            if (vm.step) {
+                if (angular.isUndefined(vm.step.currentStage) || vm.step === null) {
+                    vm.title_No_Service = Translate.translate('SEARCH_INFO_CABINET_COMPONENT.NO_SERVICE');
+                    vm.messsage_No_Repair = Translate.translate('SEARCH_INFO_CABINET_COMPONENT.CABINET_NO_REPAIR');
+                    if (vm.step.control.tipo_entrada === "Nuevos" && vm.step.control.inspeccionado.estado === "Confirmado") {
+                        toastr.error(vm.title_No_Service, vm.messsage_No_Repair);
+                        clear();
+                    } else {
+                        if (vm.step.control.tipo_entrada === "Buen Estado" && vm.step.control.inspeccionado.estado === "Confirmado") {
+                            toastr.error(vm.title_No_Service, vm.messsage_No_Repair);
+                            clear();
+                        } else {
+                            var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                            var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                            toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                            clear();
+                        }
+                    }
+
                 }
                 if (vm.step != null) {
                     if (angular.isDefined(vm.step.currentStage)) {
