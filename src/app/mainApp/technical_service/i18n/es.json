@@ -31,7 +31,7 @@
     "ERROR_STEP": {
         "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
         "GO_TO": "Enviar a:",
-        "NOT_STEP":"Este cabinet requiere una Inspección Previa, o Bien es un cabinet al cual no se le puede dar servicio",
+        "NOT_STEP":"Este cabinet requiere una Inspección Previa",
         "REVIEWED":"Este cabinet Posse una Inspección Previa",
         "DENEGATE":"Imposible realizar esta operación",
         "SENT_TO_CHECK":"Enviar a Inspección"
@@ -189,5 +189,11 @@
         "CREATE_UNIQUE":"Crear Insumo único",
         "BARCODE":"No de Serie",
         "SUBSIDIARY":"Sucursal"
+    },
+    "SEARCH_INFO_CABINET_COMPONENT":{
+        "NOT_IN_THIS_SUBSIDIARY":"El cabinet NO se encuentra en tu sucursal o udn",
+        "NOT_IN_THIS_SUBSIDIARY_TITLE":"NO en el lugar correcto",
+        "NO_SERVICE":"No es posible Realizar el Sevicio",
+        "CABINET_NO_REPAIR":"Este cabinet no puede pasar por un flujo de Reparación"
     }
 }
