@@ -17,7 +17,7 @@
         vm.puncture = {
             cabinet_id: null,
             gas: false,
-            observaciones: '',
+            observaciones: null,
             fecha_revision: null
 
 
@@ -74,7 +74,14 @@
         }
 
         function clear() {
-            vm.puncture = null;
+            vm.puncture = {
+                cabinet_id: null,
+                gas: false,
+                observaciones: null,
+                fecha_revision: null
+
+
+            };
             vm.asset = null;
             vm.step = null;
         }

@@ -28,7 +28,7 @@
             gas: false,
             terminado: false,
             listo_para_salida: false,
-            observaciones: ''
+            observaciones: null
 
         };
         vm.stage = {
@@ -208,7 +208,7 @@
                 emplayado: false,
                 vacio_mercancia: false,
                 gas: false,
-                observaciones: ''
+                observaciones: null
             };
             vm.asset = null;
             vm.step = null;

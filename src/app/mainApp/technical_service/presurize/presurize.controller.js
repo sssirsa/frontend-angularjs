@@ -16,7 +16,7 @@
         vm.presurize = {
             cabinet_id: null,
             gas: false,
-            observaciones: '',
+            observaciones: null,
             fecha_revision: null
 
 
@@ -106,10 +106,17 @@
         }
 
         function clear() {
-            vm.presurize = null;
             vm.asset = null;
             vm.step = null;
             vm.option_to_do = null;
+            vm.presurize = {
+                cabinet_id: null,
+                gas: false,
+                observaciones: null,
+                fecha_revision: null
+
+
+            };
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
