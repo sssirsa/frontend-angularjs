@@ -29,7 +29,7 @@
         </div>
 
 
-        <md-tabs class="md-primary tabTechnicalService" minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
+        <md-tabs class="md-primary tabTechnicalService minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
                  ng-if="vm.asset.economico">
             <md-tab label="{{vm.title_info}}" >
                 <md-content class="md-padding">
@@ -214,17 +214,20 @@
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>
-            <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendInspection()" class="md-raised md-primary">
+            <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendInspection()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
+                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
-            <md-button ng-if="vm.step.makePrecheck" ng-click="vm.sendPrecheck()" class="md-raised md-primary">
+            <md-button ng-if="vm.step.makePrecheck" ng-click="vm.sendPrecheck()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_PRECHECK</span>
+                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
-            <md-button ng-if="vm.currentStage" ng-click="vm.sendCheckList()" class="md-raised md-primary">
+            <md-button ng-if="vm.currentStage" ng-click="vm.sendCheckList()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
+                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
         </md-card-actions>
     </md-card>

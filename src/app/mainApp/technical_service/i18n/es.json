@@ -16,6 +16,7 @@
         "OBSERVATIONS": "Observaciones",
         "FINISHED":"Terminado",
         "READY":"Listo_para_salida",
+        "LABEL_REQUIRED":"Seleccione etiqueta antes de confirmar entrada",
         "ACTIONS": {
             "SAVE_INSPECTION": "Confirmar Entrada",
             "SAVE_PRECHECK": "Confirmar Entrada de Garantía",
