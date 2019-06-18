@@ -15,7 +15,7 @@
             }
         });
 
-    function bulkAssetsController() {
+    function bulkAssetsController($log) {
 
         var vm = this;
         vm.finalAssetBulk = {};
@@ -38,7 +38,7 @@
         //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
             getStock();
-            if (vm.stock.length===0){
+            if (vm.stock.length === 0) {
                 vm.notStock = true;
                 vm.maxUseAccepted = 0;
             }
@@ -77,9 +77,25 @@
                     vm.stock = [];
                 }
                 else {
-                    vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
-                        return element.sucursal.id === vm.sucursal.id;
-                    });
+                    if (angular.isArray(vm.bulkAsset.catalogo_insumo_lote.stock)) {
+                        vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
+                            return element.sucursal.id === vm.sucursal.id;
+                        });
+                    }
+                    else if (angular.isObject(vm.bulkAsset.catalogo_insumo_lote.stock)) {
+                        if (vm.bulkAsset.catalogo_insumo_lote.stock.id === null) {
+                            vm.notStock = true;
+                            vm.maxUseAccepted = 0;
+                            vm.stock = [];
+                        }
+                        else {
+                            $log.error("El objeto de stock contiene un formato raro");
+                            $log.error(vm.bulkAsset.catalogo_insumo_lote.stock);
+                        }
+                    } else {
+                        $log.error("EL campo de stock devuelve algo no esperado");
+                        $log.error(vm.bulkAsset.catalogo_insumo_lote.stock);
+                    }
                 }
 
             }
