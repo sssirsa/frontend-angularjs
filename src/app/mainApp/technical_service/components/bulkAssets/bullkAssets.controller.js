@@ -38,9 +38,17 @@
         //the stock and the max value usable for the differents assets is considered.
         function getMaxValue() {
             getStock();
+            if (vm.stock.length===0){
+                vm.notStock = true;
+                vm.maxUseAccepted = 0;
+            }
             if (vm.stock[0]) {
                 var stock = Number(vm.stock[0].cantidad);
                 var used = Number(vm.bulkAsset.cantidad);
+                console.log("stock:");
+                console.log(stock);
+                console.log("used:");
+                console.log(used);
                 if (used < 1) {
                     vm.showSelector = true;
                     if (stock < used) {
@@ -66,21 +74,24 @@
 
 //Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
+            console.log(vm.bulkAsset.catalogo_insumo_lote);
             if (vm.bulkAsset.catalogo_insumo_lote.stock) {
                 if (vm.bulkAsset.catalogo_insumo_lote.stock.length == 0) {
                     vm.notStock = true;
                     vm.maxUseAccepted = 0;
-                    vm.stock=[];
+                    vm.stock = [];
                 }
                 else {
                     vm.stock = vm.bulkAsset.catalogo_insumo_lote.stock.filter(function (element) {
                         return element.sucursal.id === vm.sucursal.id;
                     });
                 }
+                console.log(vm.stock);
+
             }
         }
 
-//Function that validate the max value of the bulk assets acceptec
+//Function that validate the max value of the bulk assets acceptes
         function validaMax() {
             if (parseFloat(vm.finalAssetBulk.cantidad) > parseFloat(vm.maxUseAccepted)) {
                 vm.finalAssetBulk.cantidad = vm.maxUseAccepted;
