@@ -119,7 +119,7 @@
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
                             if (cabinetSuccessCallback['subsidiary']) {
                                 //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'] === vm.departure[vm.catalogues['subsidiary'].binding]) {
+                                if (cabinetSuccessCallback['subsidiary'].id === vm.departure[vm.catalogues['subsidiary'].binding]) {
                                     //The subsidiary of the cabinet is the same as the user one.
                                     if ((cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida'])) {
                                         //The departure matches the Departure kind)
