@@ -18,30 +18,6 @@
                 controller: 'newManualDepartureController',
                 controllerAs: 'vm'
             })
-            /* Warranty asset departures */
-            //.state('triangular.admin-default.departure-warranty-manual', {
-            //    url: '/salida/garantias/manual',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries_departures/departures/warranty/manual/warrantyManualDeparture.tmpl.html',
-            //    controller: 'warrantyManualDepartureController',
-            //    controllerAs: 'vm'
-            //})
-            /* Unrecognizable asset departures */
-            //.state('triangular.admin-default.departure-unrecognizable-manual', {
-            //    url: '/salida/no_capitalizados/manual',
-            //    data: {
-            //        permissions: {
-            //            only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
-            //        }
-            //    },
-            //    templateUrl: 'app/mainApp/entries_departures/departures/unrecognizable/manual/unrecognizableManualDeparture.tmpl.html',
-            //    controller: 'unrecognizableManualDepartureController',
-            //    controllerAs: 'vm'
-            //})
             /* Obsolete asset departures */
             .state('triangular.admin-default.departure-obsolete-manual', {
                 url: '/salida/obsoletos/manual',
@@ -81,18 +57,6 @@
                         permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
                         state: 'triangular.admin-default.departure-new-manual'
                     },
-                    //{
-                    //    name: 'DEPARTURES.MENU.WARRANTIES',
-                    //    type: 'link',
-                    //    permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
-                    //    state: 'triangular.admin-default.departure-warranty-manual'
-                    //},
-                    //{
-                    //    name: 'DEPARTURES.MENU.UNRECOGNIZABLE',
-                    //    type: 'link',
-                    //    permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
-                    //    state: 'triangular.admin-default.departure-unrecognizable-manual'
-                    //},
                     {
                         name: 'DEPARTURES.MENU.OBSOLETE',
                         type: 'link',
