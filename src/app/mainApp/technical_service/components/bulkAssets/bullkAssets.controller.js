@@ -45,10 +45,6 @@
             if (vm.stock[0]) {
                 var stock = Number(vm.stock[0].cantidad);
                 var used = Number(vm.bulkAsset.cantidad);
-                console.log("stock:");
-                console.log(stock);
-                console.log("used:");
-                console.log(used);
                 if (used < 1) {
                     vm.showSelector = true;
                     if (stock < used) {
@@ -74,7 +70,6 @@
 
 //Function with the objective of get the stock of the bulk asset in the subsidary given
         function getStock() {
-            console.log(vm.bulkAsset.catalogo_insumo_lote);
             if (vm.bulkAsset.catalogo_insumo_lote.stock) {
                 if (vm.bulkAsset.catalogo_insumo_lote.stock.length == 0) {
                     vm.notStock = true;
@@ -86,7 +81,6 @@
                         return element.sucursal.id === vm.sucursal.id;
                     });
                 }
-                console.log(vm.stock);
 
             }
         }
