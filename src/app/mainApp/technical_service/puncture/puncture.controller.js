@@ -17,7 +17,6 @@
         vm.puncture = {
             cabinet_id: null,
             gas: false,
-            observaciones: null,
             fecha_revision: null
 
 
@@ -77,7 +76,7 @@
             vm.puncture = {
                 cabinet_id: null,
                 gas: false,
-                observaciones: null,
+                observaciones: undefined,
                 fecha_revision: null
 
 
