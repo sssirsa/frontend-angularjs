@@ -70,9 +70,12 @@
                         vm.infoStepToDo({element: vm.infoStep});
                     }).catch(function (errormsg) {
                         if (errormsg.status === 404) {
-                            vm.infoStep.makePrecheck = true;
-                            vm.infoStep.makeInspection = false;
-                            vm.infoStepToDo({element: vm.infoStep});
+                            if (vm.infoStep.control.tipo_entrada === "Garantias" || vm.infoStep.control.tipo_entrada === "Reparacion") {
+                                vm.infoStep.makePrecheck = true;
+                                vm.infoStep.makeInspection = false;
+                                vm.infoStepToDo({element: vm.infoStep});
+                            }
+
 
                         }
                         else {
