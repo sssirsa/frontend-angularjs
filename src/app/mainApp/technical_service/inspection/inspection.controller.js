@@ -227,6 +227,8 @@
         function infoStep(step) {
             vm.step = undefined;
             vm.step = step;
+            $log.log("Etapa");
+            $log.log(vm.step);
 
             if (!vm.step.currentStage) {
                 var promiseStep = inspectionProvider.getStep();
@@ -237,11 +239,13 @@
                 });
                 if (vm.step.control.inspeccionado) {
                     if (vm.step.control.inspeccionado.estado) {
+                        $log.log(vm.step.control.inspeccionado.estado);
                         if (vm.step.control.inspeccionado.estado === 'Confirmado') {
                             var DENEGATE = Translate.translate('ERROR_STEP.DENEGATE');
                             var REVIEWED = Translate.translate('ERROR_STEP.REVIEWED');
-                            toastr.warning(DENEGATE, REVIEWED);
                             clear();
+                            toastr.warning(DENEGATE, REVIEWED);
+
                         }
                     }
                 }
