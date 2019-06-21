@@ -227,9 +227,6 @@
         function infoStep(step) {
             vm.step = undefined;
             vm.step = step;
-            $log.log("Etapa");
-            $log.log(vm.step);
-
             if (!vm.step.currentStage) {
                 var promiseStep = inspectionProvider.getStep();
                 promiseStep.then(function (stage) {
