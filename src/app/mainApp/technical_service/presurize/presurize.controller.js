@@ -44,6 +44,16 @@
         function sendPresurize() {
             vm.presurize.sucursal_id = vm.step.control.sucursal.id;
             vm.presurize.acciones_id = [];
+            if(vm.presurize.observaciones===null){
+                vm.presurize = _.omit(vm.presurize, 'observaciones');
+            }
+            if(vm.presurize.observaciones===''){
+                vm.presurize = _.omit(vm.presurize, 'observaciones');
+            }
+            if(angular.isUndefined(vm.presurize.observaciones)){
+                vm.presurize = _.omit(vm.presurize, 'observaciones');
+            }
+
             if (vm.option_to_do) {
                 switch (vm.option_to_do) {
                     case '1':
