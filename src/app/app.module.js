@@ -19,11 +19,7 @@
             'app.translate',
             'toastr',
             'restangular',
-
-            // only need one language?  if you want to turn off translations
-            // comment out or remove the 'app.translate', line above
-            //'app.examples',
-            //'app.permission',
+            'app.permission',
             'app.mainApp',
 
             //galeria de imagenes
