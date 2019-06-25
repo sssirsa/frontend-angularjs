@@ -15,7 +15,7 @@
                 url: '/bienvenida',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'CAPTURISTA', 'CLIENTE', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['AUTHENTICATED']
                     }
                 },
                 templateUrl: 'app/mainApp/welcome/welcome.tmpl.html',
@@ -29,6 +29,7 @@
                 icon: 'zmdi zmdi-home',
                 type: 'link',
                 priority: 1,
+                permission:['AUTHENTICATED'],
                 state: 'triangular.admin-default.welcome'
             }
         );
