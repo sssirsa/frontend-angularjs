@@ -13,7 +13,6 @@
                 templateUrl:'app/mainApp/management/login/login.tmpl.html',
                 controller:'LoginController',
                 controllerAs:'vm'
-
             });
 
     }

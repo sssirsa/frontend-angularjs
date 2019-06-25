@@ -71,7 +71,7 @@
                 name: 'MAIN.MENU.REPORTS.TITLE',
                 icon: 'fa fa-chart-line',
                 type: 'dropdown',
-                permission_old: ["ADMINISTRADOR"],
+                permission: ["ADMINISTRADOR"],
                 priority: 9,
                 children: [
                     {
