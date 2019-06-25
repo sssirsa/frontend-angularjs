@@ -6,7 +6,7 @@
         .run(permissionRun);
 
     /* @ngInject */
-    function permissionRun($rootScope, $state, AuthService, $urlRouter, RoleStore, $cookies) {
+    function permissionRun($rootScope, $state, AuthService, $urlRouter) {
 
         // default redirect if access is denied
         function accessDenied() {
@@ -22,10 +22,10 @@
 
         var locationChangeSuccess = $rootScope.$on('$locationChangeSuccess', function locationChangeSuccess(evt, new_url) {
             //Required for getting roles when page Update
-            var roles_JSON = $cookies.getObject('roles');
-            var roles;
-            roles_JSON ? roles = roles_JSON : null;
-            roles_JSON ? RoleStore.defineManyRoles(roles) : null;
+            //var roles_JSON = $cookies.getObject('roles');
+            //var roles;
+            //roles_JSON ? roles = roles_JSON : null;
+            //roles_JSON ? RoleStore.defineManyRoles(roles) : null;
 
             evt.preventDefault();
             if (

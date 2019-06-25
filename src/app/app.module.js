@@ -10,6 +10,7 @@
             'ui.router', 'googlechart', 'chart.js', 'linkify', 'ui.calendar',
             'angularMoment','pascalprecht.translate','tmh.dynamicLocale', 'textAngular', 'hljs', 'md.data.table','ngMdIcons',
             'vAccordion', 'ngMaterialDatePicker', 'mdPickers', 'cgBusy', 'ADM-dateTimePicker', 'minicolors',
+
             'catalogManager',
             'catalogSelectComponent',
             'storeManager',

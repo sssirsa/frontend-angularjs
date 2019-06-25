@@ -10,7 +10,7 @@
         $q,
         URLS,
         API,
-        RoleStore,
+        //PermRoleStore,
         User,
         $cookies,
         Person
@@ -34,7 +34,7 @@
         }
 
         function login(credentials) {
-            RoleStore.clearStore();
+            //PermRoleStore.clearStore();
             var request = $q.defer();
             OAuth
                 .getToken(credentials.username, credentials.password)
@@ -60,7 +60,7 @@
         }
 
         function logout() {
-            RoleStore.clearStore();
+            //PermRoleStore.clearStore();
             return OAuth.revokeToken();
         }
 
@@ -71,7 +71,7 @@
                     .refreshToken()
                     .then(function () {
                         var roles = $cookies.getObject('roles');
-                        RoleStore.defineManyRoles(roles);
+                        //PermRoleStore.defineManyRoles(roles);
                         request.resolve();
                     })
                     .catch(function (errorRefreshToken) {

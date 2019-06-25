@@ -8,15 +8,12 @@
 
     function WelcomeController(
         User,
-        RoleStore,
         Sucursal,
-        $log,
-        _
+        $log
     ) {
         var vm = this;
 
         vm.user = User.getUser();
-        vm.roles = _.keys(RoleStore.getStore());
         vm.sucursal = null;
 
         activate();
