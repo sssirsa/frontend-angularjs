@@ -26,7 +26,7 @@
 
     </div>
     <md-list flex="100" layout="row" layout-wrap="">
-        <md-list-item flex="50" ng-repeat="item in $ctrl.actionsDoIt" ng-click="$ctrl.deleteElement(item)">
+        <md-list-item flex="100" flex-gt-sm="50" ng-repeat="item in $ctrl.actionsDoIt" ng-click="$ctrl.deleteElement(item)">
             <div flex="20">
                 <img ng-src="assets/images/action.png" class="imgList" alt="{{item.code}}"/>
             </div>
