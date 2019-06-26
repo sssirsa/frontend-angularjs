@@ -6,6 +6,7 @@
             'sssirsa.config',
             'triangular',
             'permission',
+            'permission.ui',
             'ngAnimate', 'ngCookies', 'ngSanitize', 'ngMessages', 'ngMaterial',
             'ui.router', 'googlechart', 'chart.js', 'linkify', 'ui.calendar',
             'angularMoment','pascalprecht.translate','tmh.dynamicLocale', 'textAngular', 'hljs', 'md.data.table','ngMdIcons',
