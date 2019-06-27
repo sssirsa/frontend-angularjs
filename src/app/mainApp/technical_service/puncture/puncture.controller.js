@@ -16,9 +16,7 @@
         vm.assets_info = Translate.translate('PUNCTURE.MORE_INFO');
         vm.puncture = {
             cabinet_id: null,
-            gas: false,
-            fecha_revision: null
-
+            gas: false
 
         };
 
@@ -77,7 +75,7 @@
                 cabinet_id: null,
                 gas: false,
                 observaciones: undefined,
-                fecha_revision: null
+                fecha_revision: undefined
 
 
             };
