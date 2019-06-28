@@ -87,7 +87,6 @@
             $cookies.remove('token');
             $cookies.remove('refreshToken');
             $cookies.remove('expiration');
-            $cookies.remove('roles');
             $cookies.remove('keepSession');
         }
 

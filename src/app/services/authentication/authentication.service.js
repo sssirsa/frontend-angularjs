@@ -13,7 +13,8 @@
         PermRoleStore,
         User,
         $cookies,
-        Person
+        Person,
+        PERMISSION
     ) {
 
         var authService = {
@@ -39,12 +40,11 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function () {
-                    PermRoleStore.defineRole('AUTHENTICATED', []);
-
                     Person.getMyProfile()
                         .then(function requestGetMyProfile(user) {
                             request.resolve();
                             User.setUser(user);
+                            PERMISSION.definePermissions();
                         })
                         .catch(function (errorUser) {
                             request.reject(errorUser);
@@ -73,12 +73,11 @@
                 OAuth
                     .refreshToken()
                     .then(function () {
-                        PermRoleStore.defineRole('AUTHENTICATED', []);
-
                         Person.getMyProfile()
                             .then(function requestGetMyProfile(user) {
                                 request.resolve();
                                 User.setUser(user);
+                                PERMISSION.definePermissions();
                             })
                             .catch(function (errorUser) {
                                 request.reject(errorUser);

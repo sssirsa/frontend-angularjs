@@ -6,7 +6,12 @@
         .run(permissionRun);
 
     /* @ngInject */
-    function permissionRun(AuthService, $transitions, $state) {
+    function permissionRun(
+        AuthService,
+        $transitions,
+        $state,
+        PERMISSION
+    ) {
 
         // default redirect if access is denied
         function accessDenied() {
@@ -14,23 +19,30 @@
             AuthService.logout();
         }
 
-        //$rootScope.$on('$destroy', function rootScopeDestroy() {
-        //    locationChangeSuccess();
-        //    stateChangePermissionDenied();
-        //});
-
         $transitions.onCreate({}, function (transition) {
             if (transition.to().name !== 'splash'
                 && transition.to().name !== 'login') {
                 //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {
+                    //User not athenticated
                     if (AuthService.canRefreshSession()) {
-                        //return AuthService
-                        //    .refreshToken();
+                        AuthService
+                            .refreshToken()
+                            .then(function () {
+                                return true;
+                            })
+                            .catch(function () {
+                                return false;
+                            })
                     }
                     else {
                         accessDenied();
                     }
+                }
+                else {
+                    //User is authenticated
+                    PERMISSION.definePermissions();
+                    return true;
                 }
             }
         });
