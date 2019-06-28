@@ -61,7 +61,8 @@
                     "ENTRIES_DEPARTURES": "Entradas y Salidas",
                     "INVENTORY": "Inventario",
                     "MANAGEMENT": "Gestion de proceso",
-                    "TECHNICAL_SERVICE": "Servicio Técnico"
+                    "TECHNICAL_SERVICE": "Servicio Técnico",
+                    "SALE_POINT": "Punto de Venta"
                 },
                 "ACTION": "Acción",
                 "BULK_ASSET": "Insumos Lote",
