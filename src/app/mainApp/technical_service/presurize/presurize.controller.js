@@ -16,7 +16,6 @@
         vm.presurize = {
             cabinet_id: null,
             gas: false,
-            observaciones: null,
             fecha_revision: null
 
 
@@ -122,11 +121,8 @@
             vm.presurize = {
                 cabinet_id: null,
                 gas: false,
-                observaciones: null,
-                fecha_revision: null
-
-
             };
+            vm.presurize=_.omit(vm.presurize,['observaciones','fecha_revision']);
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
