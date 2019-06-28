@@ -41,7 +41,10 @@
                 }
                 else {
                     //User is authenticated
-                    PERMISSION.definePermissions();
+                    if (!transition.from().name) {
+                    //Just define roles if page has been updated
+                        PERMISSION.definePermissions();
+                    }
                     return true;
                 }
             }
