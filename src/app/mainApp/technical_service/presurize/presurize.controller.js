@@ -120,7 +120,7 @@
             vm.option_to_do = null;
             vm.presurize = {
                 cabinet_id: null,
-                gas: false,
+                gas: false
             };
             vm.presurize=_.omit(vm.presurize,['observaciones','fecha_revision']);
         }
