@@ -11,11 +11,8 @@
         $transitions,
         $state,
         PERMISSION,
-        User,
-        $permissionProvider
+        User
     ) {
-
-        $permissionProvider.suppressUndefinedPermissionWarning(true);
 
         //Redirect if access is denied
         function accessDenied() {
