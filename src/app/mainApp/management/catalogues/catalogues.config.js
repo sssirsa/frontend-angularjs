@@ -9,115 +9,80 @@
     function cataloguesConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/mainApp/management/catalogues');
         $stateProvider
-            .state('triangular.admin-default.generic-catalogue', {
-                // set the url of this page
-                url: '/catalogo/DEMO',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'CAPTURISTA']
-                    }
-                },
-                // set the html template to show on this page
-                templateUrl: 'app/mainApp/management/catalogues/DEMO/generic.tmpl.html',
-                // set the controller to load for this page
-                controller: 'GenericCatalogueController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.proveedor', {
-                // set the url of this page
                 url: '/catalogo/proveedor',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR', 'CAPTURISTA']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/proveedor/proveedor.tmpl.html',
-                // set the controller to load for this page
                 controller: 'ProveedorController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.linea-transporte', {
-                // set the url of this page
                 url: '/catalogo/linea_transporte',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/lineaTransporte/lineaTransporte.tmpl.html',
-                // set the controller to load for this page
                 controller: 'LineaTransporteController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.tipo-transporte', {
-                // set the url of this page
                 url: '/catalogo/tipo_transporte',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/tipoTransporte/tipoTransporte.tmpl.html',
-                // set the controller to load for this page
                 controller: 'TipoTransporteController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.udn-catalog', {
-                // set the url of this page
                 url: '/catalogo/udn',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/udn/udn.tmpl.html',
-                // set the controller to load for this page
                 controller: 'UDNController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.sucursal', {
-                // set the url of this page
                 url: '/catalogo/sucursal',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/sucursal/sucursal.tmpl.html',
-                // set the controller to load for this page
                 controller: 'SucursalController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.model-cabinet', {
-                // set the url of this page
                 url: '/catalogo/modelo_cabinet',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/modeloCabinet/modeloCabinet.tmpl.html',
-                // set the controller to load for this page
                 controller: 'ModeloCabinetController',
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.marca-cabinet', {
-                // set the url of this page
                 url: '/catalogo/marca_cabinet',
                 data: {
                     permissions: {
                         only: ['ADMINISTRADOR']
                     }
                 },
-                // set the html template to show on this page
                 templateUrl: 'app/mainApp/management/catalogues/marcaCabinet/marcaCabinet.tmpl.html',
-                // set the controller to load for this page
                 controller: 'MarcaCabinetController',
                 controllerAs: 'vm'
             })
@@ -235,7 +200,7 @@
                 url: '/catalogo/etiqueta',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['entries_departures__catalogues__sticker']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/sticker/sticker.tmpl.html',
@@ -436,29 +401,62 @@
                 name: 'MAIN.MENU.CATALOGS.TITLE',
                 icon: 'fa fa-book',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'CAPTURISTA', 'TECNICO E'],
+                permission: [
+                    //Entries Departures
+                    'entries_departures__catalogues__transport_line',
+                    'entries_departures__catalogues__transport_type',
+                    //Inventory
+                    'inventory__catalogues__bulk_asset',
+                    'inventory__catalogues__categoria_insumo',
+                    'management__catalogues__device_kind',
+                    'management__catalogues__marca_cabinet',
+                    'inventory__catalogues__marca_insumo',
+                    'management__catalogues__modelo_cabinet',
+                    'inventory__catalogues__modelo_insumo',
+                    'inventory__catalogues__proveedor',
+                    'inventory__catalogues__tipo_componente',
+                    'inventory__catalogues__unique_asset',
+                    'management__catalogues__warehouse',
+                    //Management
+                    'management__catalogues__category',
+                    'management__catalogues__condition',
+                    'management__catalogues__reason_impeded',
+                    'management__catalogues__reason_no_labeled',
+                    'management__catalogues__status_no_labeled',
+                    'management__catalogues__unilever_status',
+                    'management__catalogues__subsidiary',
+                    'management__catalogues__udn',
+                    //Salepoint
+                    //Technical service
+                    'technical_services__catalogues__action',
+                    'technical_services__catalogues__com_incidence',
+                    'technical_services__catalogues__diagnose_failure',
+                    'technical_services__catalogues__failure_kind',
+                    'technical_services__catalogues__next_step',
+                    'technical_services__catalogues__stage',
+                    'entries_departures__catalogues__sticker',
+                    'technical_services__catalogues__symptom'
+                ],
                 priority: 3,
                 children: [
-                     //{
-                     //    name: 'DEMO Generic Catalog',
-                     //    state: 'triangular.admin-default.generic-catalogue',
-                     //    permission: ['ADMINISTRADOR'],
-                     //    type: 'link'
-                     //},
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.ENTRIES_DEPARTURES',
                         type: 'dropdown',
+                        permission: [
+                            'entries_departures__catalogues__transport_line',
+                            'entries_departures__catalogues__transport_type'
+                        ],
                         children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_LINE',
                                 state: 'triangular.admin-default.linea-transporte',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['entries_departures__catalogues__transport_line'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.TRANSPORT_TYPE',
                                 state: 'triangular.admin-default.tipo-transporte',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['entries_departures__catalogues__transport_type'],
                                 type: 'link'
                             }
                         ]
@@ -466,71 +464,84 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.INVENTORY',
                         type: 'dropdown',
-                        children:[
+                        permission: [
+                            'inventory__catalogues__bulk_asset',
+                            'inventory__catalogues__categoria_insumo',
+                            'management__catalogues__device_kind',
+                            'management__catalogues__marca_cabinet',
+                            'inventory__catalogues__marca_insumo',
+                            'management__catalogues__modelo_cabinet',
+                            'inventory__catalogues__modelo_insumo',
+                            'inventory__catalogues__proveedor',
+                            'inventory__catalogues__tipo_componente',
+                            'inventory__catalogues__unique_asset',
+                            'management__catalogues__warehouse'
+                        ],
+                        children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.WEREHOUSE',
                                 state: 'triangular.admin-default.warehouse',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['management__catalogues__warehouse'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_CATEGORY',
                                 state: 'triangular.admin-default.consumable-category',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['inventory__catalogues__categoria_insumo'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.BULK_ASSET',
                                 state: 'triangular.admin-default.bulk-asset',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['inventory__catalogues__bulk_asset'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.UNIQUE_ASSET',
                                 state: 'triangular.admin-default.unique-asset',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['inventory__catalogues__unique_asset'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CABINET_BRAND',
                                 state: 'triangular.admin-default.marca-cabinet',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['management__catalogues__marca_cabinet'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CABINET_MODEL',
                                 state: 'triangular.admin-default.model-cabinet',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['management__catalogues__modelo_cabinet'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_BRAND',
                                 state: 'triangular.admin-default.consumable-brand',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['inventory__catalogues__marca_insumo'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CONSUMABLE_MODEL',
                                 state: 'triangular.admin-default.consumable-model',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['inventory__catalogues__modelo_insumo'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.PROVIDER',
                                 state: 'triangular.admin-default.proveedor',
-                                permission: ['ADMINISTRADOR', 'CAPTURISTA'],
+                                permission: ['inventory__catalogues__proveedor'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.COMPONENT_TYPE',
                                 state: 'triangular.admin-default.component-type',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['inventory__catalogues__tipo_componente'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.EQUIPMENT_TYPE',
                                 state: 'triangular.admin-default.catalogo-tipo-equipo',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['management__catalogues__device_kind'],
                                 type: 'link'
                             }
                         ]
@@ -538,17 +549,27 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.MANAGEMENT',
                         type: 'dropdown',
-                        children:[
+                        permission: [
+                            'management__catalogues__category',
+                            'management__catalogues__condition',
+                            'management__catalogues__reason_impeded',
+                            'management__catalogues__reason_no_labeled',
+                            'management__catalogues__status_no_labeled',
+                            'management__catalogues__unilever_status',
+                            'management__catalogues__subsidiary',
+                            'management__catalogues__udn'
+                        ],
+                        children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.CATEGORY',
                                 state: 'triangular.admin-default.categoria',
-                                permission: ['ADMINISTRADOR', 'CAPTURISTA'],
+                                permission: ['management__catalogues__category'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.CONDITION',
                                 state: 'triangular.admin-default.catalogue-condicion',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['management__catalogues__condition'],
                                 type: 'link'
                             },
                             {
@@ -560,37 +581,37 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.STATUS_NOT_LABELED',
                                 state: 'triangular.admin-default.status-not-capitalized',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['management__catalogues__status_no_labeled'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.STATUS_UNILEVER',
                                 state: 'triangular.admin-default.catalogue-status-unilever',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['management__catalogues__unilever_status'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.IMPEDIMENT_REASON',
                                 state: 'triangular.admin-default.impediment-reason',
-                                permission: ['ADMINISTRATOR'],
+                                permission: ['management__catalogues__reason_impeded'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.REASON_NOT_LABELED',
                                 state: 'triangular.admin-default.reason-not-capitalized',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['management__catalogues__reason_no_labeled'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.SUBSIDIARY',
                                 state: 'triangular.admin-default.sucursal',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['management__catalogues__subsidiary'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.UDN',
                                 state: 'triangular.admin-default.udn-catalog',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['management__catalogues__udn'],
                                 type: 'link'
                             }
                         ]
@@ -598,17 +619,18 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.SALE_POINT',
                         type: 'dropdown',
-                        children:[
+                        permission:['salepoint'],
+                        children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.STORES',
                                 state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['salepoint'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
                                 state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['salepoint'],
                                 type: 'link'
                             }
                         ]
@@ -616,53 +638,63 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.TECHNICAL_SERVICE',
                         type: 'dropdown',
-                        children:[
+                        permission: [
+                            'technical_services__catalogues__action',
+                            'technical_services__catalogues__com_incidence',
+                            'technical_services__catalogues__diagnose_failure',
+                            'technical_services__catalogues__failure_kind',
+                            'technical_services__catalogues__next_step',
+                            'technical_services__catalogues__stage',
+                            'entries_departures__catalogues__sticker',
+                            'technical_services__catalogues__symptom'
+                        ],
+                        children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.ACTION',
                                 state: 'triangular.admin-default.action',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__action'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.FAILURE_TYPE',
                                 state: 'triangular.admin-default.failure-type',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__failure_kind'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.STAGES',
                                 state: 'triangular.admin-default.stages',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__stage'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.FAILURE',
                                 state: 'triangular.admin-default.failures',
-                                permission: ['ADMINISTRADOR'],
+                                permission: ['technical_services__catalogues__diagnose_failure'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.COM_INCIDENCE',
                                 state: 'triangular.admin-default.com-incidence',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__com_incidence'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.SYMPTOM',
                                 state: 'triangular.admin-default.symptom',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__symptom'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.NEXT_STEP',
                                 state: 'triangular.admin-default.next-step',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['technical_services__catalogues__next_step'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.STICKER',
                                 state: 'triangular.admin-default.catalogue-sticker',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['entries_departures__catalogues__sticker'],
                                 type: 'link'
                             }
                         ]
