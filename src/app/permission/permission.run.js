@@ -11,10 +11,13 @@
         $transitions,
         $state,
         PERMISSION,
-        User
+        User,
+        $permissionProvider
     ) {
 
-        // default redirect if access is denied
+        $permissionProvider.suppressUndefinedPermissionWarning(true);
+
+        //Redirect if access is denied
         function accessDenied() {
             $state.go('404');
             AuthService.logout();
