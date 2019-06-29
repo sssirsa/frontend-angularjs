@@ -10,7 +10,6 @@
     function WelcomeModuleConfig($stateProvider,$translatePartialLoaderProvider, triMenuProvider){
         $translatePartialLoaderProvider.addPart('app/mainApp/welcome');
         $stateProvider
-
             .state('triangular.admin-default.welcome', {
                 url: '/bienvenida',
                 data: {

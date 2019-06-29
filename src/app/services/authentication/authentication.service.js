@@ -42,9 +42,9 @@
                 .then(function () {
                     Person.getMyProfile()
                         .then(function requestGetMyProfile(user) {
-                            request.resolve();
+                            PERMISSION.definePermissions(user['permissions']);
                             User.setUser(user);
-                            PERMISSION.definePermissions();
+                            request.resolve();
                         })
                         .catch(function (errorUser) {
                             request.reject(errorUser);
@@ -75,9 +75,9 @@
                     .then(function () {
                         Person.getMyProfile()
                             .then(function requestGetMyProfile(user) {
-                                request.resolve();
                                 User.setUser(user);
-                                PERMISSION.definePermissions();
+                                PERMISSION.definePermissions(user['permissions']);
+                                request.resolve();
                             })
                             .catch(function (errorUser) {
                                 request.reject(errorUser);

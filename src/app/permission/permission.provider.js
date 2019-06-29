@@ -6,45 +6,75 @@
         API,
         PermRoleStore,
         PermPermissionStore,
-        User,
         $log,
         OAuth
     ) {
-        return {
-            definePermissions: definePermissions
-        };
-
-        function definePermissions() {
+        var vm = this;
+        
+        function definePermissions(rawPermissions) {
             if (OAuth.isValidToken()) {
-                var roles = PermRoleStore.getRoleDefinition('AUTHENTICATED');
+                PermRoleStore.clearStore();
+                //Base role definition
+                PermRoleStore.defineRole('AUTHENTICATED', []);
 
-                if (!roles) {
-                    //Just define roles if not already defined
+                if (rawPermissions) {
+                    if (rawPermissions.length > 0) {
+                        angular.forEach(rawPermissions,
+                            function rawPermissionsIterator(value) {
 
-                    //Defining base role
-                    PermRoleStore.defineRole('AUTHENTICATED', []);
+                                var projectName = '';
+                                var appName = '';
+                                var moduleName = '';
 
-                    var user = User.getUser();
-                    var rawPermissions = user['permissions'];
+                                if (value['module']) {
+                                    //Module is defined
+                                    if (value.module['name']) {
+                                        moduleName = '__' + value.module['name'].toLowerCase();
+                                    }
+                                    if (value.module['app']) {
+                                        //App is defined
+                                        if (value.module.app['name']) {
+                                            appName = '__' + value.module.app['name'].toLowerCase();
+                                        }
+                                        if (value.module.app['project']) {
+                                            //Project is defined
+                                            if (value.module.app.project['name']) {
+                                                projectName = value.module.app.project['name'].toLowerCase();
+                                            }
+                                        }
+                                    }
+                                }
+                                //Building permission string
+                                var permissionName = projectName
+                                    + appName
+                                    + moduleName;
+                                //Not an empty string
+                                if (permissionName) {
+                                    //permissionsObject[permissionName] = [];
+                                    PermRoleStore.defineRole(permissionName, []);
+                                }
 
-                    if (rawPermissions) {
-                        if (rawPermissions.length > 0) {
-                            //New permissions var initializing
-                            var permissionsArray = [];
-                        }
-                        else {
-                            $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User has no permissions');
-                        }
+                            });
                     }
                     else {
-                        $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User has no permissions array');
+                        $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User has no permissions');
                     }
+                }
+                else {
+                    $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
             }
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
             }
+            $log.debug(PermRoleStore.getStore());
         }
 
+        vm.permissions = {};
+
+        return {
+            definePermissions: definePermissions,
+            permissions: vm.permissions
+        };
     }
 })();

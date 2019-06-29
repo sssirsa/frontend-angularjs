@@ -10,7 +10,8 @@
         AuthService,
         $transitions,
         $state,
-        PERMISSION
+        PERMISSION,
+        User
     ) {
 
         // default redirect if access is denied
@@ -21,11 +22,13 @@
 
         $transitions.onCreate({}, function (transition) {
             if (transition.to().name !== 'splash'
+                && transition.to().name !== '404'
                 && transition.to().name !== 'login') {
                 //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {
                     //User not athenticated
                     if (AuthService.canRefreshSession()) {
+                        //Permission redefining is managed in AuthService.refreshToken function
                         AuthService
                             .refreshToken()
                             .then(function () {
@@ -33,7 +36,7 @@
                             })
                             .catch(function () {
                                 return false;
-                            })
+                            });
                     }
                     else {
                         accessDenied();
@@ -42,8 +45,8 @@
                 else {
                     //User is authenticated
                     if (!transition.from().name) {
-                    //Just define roles if page has been updated
-                        PERMISSION.definePermissions();
+                        //Just define role and permissions if page has been updated
+                        PERMISSION.definePermissions(User.getUser()['permissions']);
                     }
                     return true;
                 }

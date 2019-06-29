@@ -20,8 +20,9 @@
         }
 
         function setUser(user) {
+            vm.user = angular.fromJson(angular.toJson(user));
+            delete user['permissions'];
             $cookies.putObject('user', user);
-            vm.user = user;
         }
 
     }
