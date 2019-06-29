@@ -81,7 +81,7 @@
         //Funciones Propias de la Pantalla
         function sendInspection() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
+            if (vm.checklist.observaciones === null || angular.isUndefined(vm.checklist.observaciones) || vm.checklist.observaciones === '') {
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             var promiseSendInspection = inspectionProvider.makeInspection(vm.checklist);
@@ -98,7 +98,7 @@
 
         function sendCheckList() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
+            if (vm.checklist.observaciones === null || angular.isUndefined(vm.checklist.observaciones) || vm.checklist.observaciones === '') {
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             if (vm.checklist.insumos_lote_usados) {
@@ -149,7 +149,7 @@
 
         function sendPrecheck() {
             vm.checklist.sucursal_id = vm.step.control.sucursal.id;
-            if(vm.checklist.observaciones===null || angular.isUndefined(vm.checklist.observaciones) ||vm.checklist.observaciones==='' ){
+            if (vm.checklist.observaciones === null || angular.isUndefined(vm.checklist.observaciones) || vm.checklist.observaciones === '') {
                 vm.checklist = _.omit(vm.checklist, 'observaciones');
             }
             if (vm.checklist.insumos_lote_usados) {
@@ -250,12 +250,23 @@
             if (vm.step) {
                 if (angular.isDefined(vm.step.currentStage)) {
                     if (angular.isDefined(vm.step.currentStage.etapa)) {
-                        if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist') || ( vm.stage_for_not_stage.nombre !== 'CheckList')) {
+                        if ((vm.step.currentStage.etapa.tipo_etapa !== 'Checklist')) {
                             var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
                             var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
                             toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
                             clear();
 
+                        }
+                        if (angular.isDefined(vm.stage_for_not_stage)) {
+                            if (vm.stage_for_not_stage !== null) {
+                                if (vm.stage_for_not_stage.nombre !== 'CheckList') {
+                                    var NOT_CORRECT_STEP = Translate.translate('ERROR_STEP.NOT_CORRECT_STEP');
+                                    var SENT_TO = Translate.translate('ERROR_STEP.GO_TO');
+                                    toastr.warning(NOT_CORRECT_STEP, SENT_TO + " " + vm.step.currentStage.etapa.nombre);
+                                    clear();
+
+                                }
+                            }
                         }
                     }
                 }
