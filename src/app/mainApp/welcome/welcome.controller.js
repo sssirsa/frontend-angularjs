@@ -20,7 +20,7 @@
 
         function activate() {
             if (vm.user.sucursal) {
-                Sucursal.getByID(vm.user.sucursal)
+                Sucursal.getByID(vm.user.sucursal.id)
                     .then(function (sucursal) {
                         vm.sucursal = sucursal;
                     })
