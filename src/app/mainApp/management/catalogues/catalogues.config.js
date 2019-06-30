@@ -13,7 +13,7 @@
                 url: '/catalogo/proveedor',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                        only: ['inventory__catalogues__proveedor']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/proveedor/proveedor.tmpl.html',
@@ -24,7 +24,7 @@
                 url: '/catalogo/linea_transporte',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['entries_departures__catalogues__transport_line']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/lineaTransporte/lineaTransporte.tmpl.html',
@@ -35,7 +35,7 @@
                 url: '/catalogo/tipo_transporte',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['entries_departures__catalogues__transport_type']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/tipoTransporte/tipoTransporte.tmpl.html',
@@ -46,7 +46,7 @@
                 url: '/catalogo/udn',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['management__catalogues__udn']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/udn/udn.tmpl.html',
@@ -57,7 +57,7 @@
                 url: '/catalogo/sucursal',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['management__catalogues__subsidiary']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/sucursal/sucursal.tmpl.html',
@@ -68,7 +68,7 @@
                 url: '/catalogo/modelo_cabinet',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['management__catalogues__modelo_cabinet']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/modeloCabinet/modeloCabinet.tmpl.html',
@@ -79,7 +79,7 @@
                 url: '/catalogo/marca_cabinet',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['management__catalogues__marca_cabinet']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/marcaCabinet/marcaCabinet.tmpl.html',
@@ -90,7 +90,7 @@
                 url: '/catalogo/categoria',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'CAPTURISTA']
+                        only: ['management__catalogues__category']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/categoria/categoria.tmpl.html',
@@ -101,7 +101,7 @@
                 url: '/catalogo/tipo_equipo',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['management__catalogues__device_kind']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/tipoEquipo/tipoEquipo.tmpl.html',
@@ -167,7 +167,7 @@
                 url: '/catalogo/condicion',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__condition']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/condicion/condicion.tmpl.html',
@@ -178,7 +178,7 @@
                 url: '/catalogo/estatus_unilever',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__unilever_status']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/estatusUnilever/estatusUnilever.tmpl.html',
@@ -211,7 +211,7 @@
                 url: '/catalogo/categoria_insumo',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['inventory__catalogues__categoria_insumo']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/consumableCategory/consumableCategory.tmpl.html',
@@ -222,7 +222,7 @@
                 url: '/catalogo/tipo_componente',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['inventory__catalogues__tipo_componente']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/componentType/componentType.tmpl.html',
@@ -233,7 +233,7 @@
                 url: '/catalogo/marca_insumo',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['inventory__catalogues__marca_insumo']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/consumableBrand/consumableBrand.tmpl.html',
@@ -244,7 +244,7 @@
                 url: '/catalogo/modelo_insumo',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['inventory__catalogues__modelo_insumo']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/consumableModel/consumableModel.tmpl.html',
@@ -255,7 +255,7 @@
                 url: '/catalogo/bodega',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__warehouse']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/warehouse/warehouse.tmpl.html',
@@ -266,7 +266,7 @@
                 url: '/catalogo/motivo_no_capitalizado',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__reason_no_labeled']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/reasonNotLabeled/reasonNotLabeled.tmpl.html',
@@ -277,7 +277,7 @@
                 url: '/catalogo/estatus_no_capitalizado',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__status_no_labeled']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/statusNotLabeled/statusNotLabeled.tmpl.html',
@@ -288,7 +288,7 @@
                 url: '/catalogo/accion',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['technical_services__catalogues__action']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/action/action.tmpl.html',
@@ -299,7 +299,7 @@
                 url: '/catalogo/sintoma',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['technical_services__catalogues__symptom']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/symptom/symptom.tmpl.html',
@@ -310,7 +310,7 @@
                 url: '/catalogo/tipo_falla',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['technical_services__catalogues__failure_kind']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/failureType/failureType.tmpl.html',
@@ -321,7 +321,7 @@
                 url: '/catalogo/siguiente_paso',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['technical_services__catalogues__next_step']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/nextStep/nextStep.tmpl.html',
@@ -332,7 +332,7 @@
                 url: '/catalogo/incidencia_com',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['technical_services__catalogues__com_incidence']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/comIncidence/comIncidence.tmpl.html',
@@ -343,7 +343,7 @@
                 url: '/catalogo/motivo_impedimento_salida',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['management__catalogues__reason_impeded']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/impediment/impedimentReason.tmpl.html',
@@ -354,7 +354,7 @@
                 url: '/catalogo/falla',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['technical_services__catalogues__diagnose_failure']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/failure/failure.tmpl.html',
@@ -365,7 +365,7 @@
                 url: '/catalogo/etapas',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['technical_services__catalogues__stage']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stages/stages.tmpl.html',
@@ -376,7 +376,7 @@
                 url: '/catalogo/insumo_lote',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['inventory__catalogues__bulk_asset']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/bulk_asset/bulk_asset.tmpl.html',
@@ -387,7 +387,7 @@
                 url: '/catalogo/insumo_unico',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR']
+                        only: ['inventory__catalogues__unique_asset']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/unique_asset/unique_asset.tmpl.html',
@@ -575,7 +575,7 @@
                             {
                                 name: 'MAIN.MENU.CATALOGS.STATUS_COM',
                                 state: 'triangular.admin-default.catalogue-status-com',
-                                permission: ['ADMINISTRADOR', 'TECNICO E'],
+                                permission: ['com__catalogues__status'],
                                 type: 'link'
                             },
                             {
