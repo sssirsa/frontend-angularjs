@@ -37,8 +37,6 @@
         vm.LogOut = LogOut;
 
         vm.user = User.getUser();
-        console.log('user',vm.user);
-        ////////////////
 
         function openSideNav(navID) {
             $mdUtil.debounce(function () {

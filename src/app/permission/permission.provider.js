@@ -12,10 +12,12 @@
     ) {
         var vm = this;
 
+        vm.permissions = [];
         //Used for backend returned permissions
         function definePermissions(rawPermissions) {
             if (OAuth.isValidToken()) {
                 PermRoleStore.clearStore();
+                vm.permissions = [];
                 //Base role definition
                 PermRoleStore.defineRole('AUTHENTICATED', []);
 
@@ -66,11 +68,11 @@
                 else {
                     $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
+                $cookies.putObject('permissions', vm.permissions);
             }
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
             }
-            $cookies.putObject('permissions', vm.permissions);
         }
 
         //Used for getting frontend optimized permissions
@@ -96,8 +98,6 @@
                 $log.error('@setPermissions function, @permissionProvider function, @PERMISSION provider: Empty permissions array');
             }
         }
-
-        vm.permissions = [];
 
         return {
             definePermissions: definePermissions,
