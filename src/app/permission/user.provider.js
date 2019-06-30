@@ -33,7 +33,8 @@
                 //permissions:user['permissions'],
                 sucursal: user['sucursal'],
                 telefono: user['telefono'],
-                udn: user['udn']
+                udn: user['udn'],
+                user:user['user']
             };
             $cookies.putObject('user', vm.user);
         }
