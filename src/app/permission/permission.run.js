@@ -10,8 +10,7 @@
         AuthService,
         $transitions,
         $state,
-        PERMISSION,
-        User
+        PERMISSION
     ) {
 
         //Redirect if access is denied
@@ -46,7 +45,7 @@
                     //User is authenticated
                     if (!transition.from().name) {
                         //Just define role and permissions if page has been updated
-                        PERMISSION.definePermissions(User.getUser()['permissions']);
+                        PERMISSION.setPermissions(PERMISSION.getPermissions());
                     }
                     return true;
                 }

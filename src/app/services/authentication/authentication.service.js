@@ -63,6 +63,8 @@
 
         function logout() {
             PermRoleStore.clearStore();
+            $cookies.remove('permissions');
+            $cookies.remove('user');
             return OAuth.revokeToken();
         }
 

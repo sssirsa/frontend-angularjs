@@ -20,9 +20,22 @@
         }
 
         function setUser(user) {
-            vm.user = angular.fromJson(angular.toJson(user));
-            delete user['permissions'];
-            $cookies.putObject('user', user);
+        //User object sanitizing 
+            vm.user = {
+                apellido_materno: user['apellido_materno'],
+                apellido_paterno: user['apellido_paterno'],
+                direccion: user['direccion'],
+                establecimiento: user['establecimiento'],
+                foto: user['foto'],
+                id: user['id'],
+                ife: user['ife'],
+                nombre: user['nombre'],
+                //permissions:user['permissions'],
+                sucursal: user['sucursal'],
+                telefono: user['telefono'],
+                udn: user['udn']
+            };
+            $cookies.putObject('user', vm.user);
         }
 
     }

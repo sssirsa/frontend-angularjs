@@ -7,10 +7,12 @@
         PermRoleStore,
         PermPermissionStore,
         $log,
-        OAuth
+        OAuth,
+        $cookies
     ) {
         var vm = this;
-        
+
+        //Used for backend returned permissions
         function definePermissions(rawPermissions) {
             if (OAuth.isValidToken()) {
                 PermRoleStore.clearStore();
@@ -52,6 +54,7 @@
                                 if (permissionName) {
                                     //permissionsObject[permissionName] = [];
                                     PermRoleStore.defineRole(permissionName, []);
+                                    vm.permissions.push(permissionName);
                                 }
 
                             });
@@ -67,14 +70,39 @@
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
             }
-            $log.debug(PermRoleStore.getStore());
+            $cookies.putObject('permissions', vm.permissions);
         }
 
-        vm.permissions = {};
+        //Used for getting frontend optimized permissions
+        function getPermissions() {
+            if (OAuth.isValidToken()) {
+                if (vm.permissions.length === 0) {
+                    vm.permissions = $cookies.getObject('permissions');
+                    //Base role
+                    vm.permissions.push('AUTHENTICATED');
+                }
+            }
+            return vm.permissions;
+        }
+
+        //Used for setting frontend optimized permissions
+        function setPermissions(permissions) {
+            if (permissions.length > 0) {
+                angular.forEach(permissions, function permissionIterator(permissionName) {
+                    PermRoleStore.defineRole(permissionName, []);
+                });
+            }
+            else {
+                $log.error('@setPermissions function, @permissionProvider function, @PERMISSION provider: Empty permissions array');
+            }
+        }
+
+        vm.permissions = [];
 
         return {
             definePermissions: definePermissions,
-            permissions: vm.permissions
+            getPermissions: getPermissions,
+            setPermissions: setPermissions
         };
     }
 })();
