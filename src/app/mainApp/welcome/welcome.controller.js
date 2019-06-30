@@ -8,27 +8,11 @@
 
     function WelcomeController(
         User,
-        Sucursal,
         $log
     ) {
         var vm = this;
 
         vm.user = User.getUser();
-        vm.sucursal = null;
-
-        activate();
-
-        function activate() {
-            if (vm.user.sucursal) {
-                Sucursal.getByID(vm.user.sucursal.id)
-                    .then(function (sucursal) {
-                        vm.sucursal = sucursal;
-                    })
-                    .catch(function (errorSucursal) {
-                        $log.error(errorSucursal);
-                    });
-            }
-        }
 
     }
 
