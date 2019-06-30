@@ -7,6 +7,8 @@
 
     /* @ngInject */
     function SplashController($state, AuthService, $timeout, $cookies) {
+        var vm = this;
+
         $timeout(function(){
             if($cookies.getObject('keepSession')) {
                 if (AuthService.isAuthenticated()) {
@@ -14,7 +16,7 @@
                 }
                 else {
                     if (AuthService.canRefreshSession()) {
-                        var refreshTokenPromise =AuthService
+                        vm.refreshTokenPromise =AuthService
                             .refreshToken()
                             .then(function () {
                                 $state.go('triangular.admin-default.welcome');
