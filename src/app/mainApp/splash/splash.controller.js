@@ -14,17 +14,19 @@
                 }
                 else {
                     if (AuthService.canRefreshSession()) {
-                        AuthService
+                        var refreshTokenPromise =AuthService
                             .refreshToken()
                             .then(function () {
                                 $state.go('triangular.admin-default.welcome');
                             })
                             .catch(function () {
                                 $state.go('login');
+                                AuthService.logout();
                             });
                     }
                     else {
                         $state.go('login');
+                        AuthService.logout();
                     }
                 }
             }
