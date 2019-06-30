@@ -7,8 +7,7 @@
         .controller('WelcomeController', WelcomeController);
 
     function WelcomeController(
-        User,
-        $log
+        User
     ) {
         var vm = this;
 
