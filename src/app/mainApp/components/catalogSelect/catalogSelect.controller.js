@@ -191,8 +191,11 @@
 
                     //Initial URL building
                     if (vm.paginationHelper['totalPages'] > vm.paginationHelper['actualPage']) {
-                        if ("query" in vm.catalog) {
+                        if (vm.catalog['query']
+                            && vm.catalog['query_value']) {
                             vm.paginationHelper['nextPage'] = vm.catalog.url
+                                + '?' + vm.catalog.query
+                                + '=' + vm.catalog.query_value
                                 + '&limit=' + vm.catalog.pagination['pageSize'];
                         }
                         else {
@@ -304,25 +307,30 @@
 
         function createMainCatalogProvider(detailRequest) {
             vm.CatalogProvider = CATALOG_SELECT;
-            if (vm.catalog.hasOwnProperty('query')
-                && vm.catalog.hasOwnProperty('query_value')) {
-                vm.CatalogProvider.url = vm.catalog.url
-                    + '?' + vm.catalog.query
-                    + '=' + vm.catalog.query_value;
-                if ("pagination" in vm.catalog && !detailRequest) {
-                    //Build paginated URL
-                    vm.CatalogProvider.url = vm.CatalogProvider.url
-                        + '&limit=' + vm.catalog.pagination.pageSize
-                        + '&offset=' + '0';
-                }
-            }
-            else {//Initial URL building
+            if (detailRequest) {
                 vm.CatalogProvider.url = vm.catalog.url;
-                if ("pagination" in vm.catalog && !detailRequest) {
-                    //Build paginated URL
-                    vm.CatalogProvider.url = vm.CatalogProvider.url
-                        + '?limit=' + vm.catalog.pagination.pageSize
-                        + '&offset=' + '0';
+            }
+            else {
+                if (vm.catalog['query']
+                    && vm.catalog['query_value']) {
+                    vm.CatalogProvider.url = vm.catalog.url
+                        + '?' + vm.catalog.query
+                        + '=' + vm.catalog.query_value;
+                    if ("pagination" in vm.catalog) {
+                        //Build paginated URL
+                        vm.CatalogProvider.url = vm.CatalogProvider.url
+                            + '&limit=' + vm.catalog.pagination.pageSize
+                            + '&offset=' + '0';
+                    }
+                }
+                else {//Initial URL building
+                    vm.CatalogProvider.url = vm.catalog.url;
+                    if ("pagination" in vm.catalog) {
+                        //Build paginated URL
+                        vm.CatalogProvider.url = vm.CatalogProvider.url
+                            + '?limit=' + vm.catalog.pagination.pageSize
+                            + '&offset=' + '0';
+                    }
                 }
             }
         }
@@ -419,9 +427,9 @@
 
                     //Next page handling
                     if (vm.paginationHelper['actualPage'] < vm.paginationHelper['totalPages']) {
-                        if (vm.catalog.hasOwnProperty('query')
-                            && vm.catalog.hasOwnProperty('query_value')) {
-                            vm.CatalogProvider.url = vm.catalog.url
+                        if (vm.catalog['query']
+                            && vm.catalog['query_value']) {
+                            vm.paginationHelper['nextPage'] = vm.catalog.url
                                 + '?' + vm.catalog.query
                                 + '=' + vm.catalog.query_value
                                 + '&limit=' + vm.catalog.pagination['pageSize']

@@ -1,107 +1,62 @@
 (function () {
     'use_strict';
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .controller('modifyStoreController', modifyStoreController);
 
     /* @ngInject */
-    function modifyStoreController(Stores,
+    function modifyStoreController(
+        Stores,
+        store,
         toastr,
         Translate,
         $mdDialog,
         Helper,
         $log,
-        States,
-        Cities,
-        store,
-        Localities,
-        Segmentation,
         ErrorHandler,
-        Geolocation,
-        $window,
-        _
+        QUERIES
     ) {
         var vm = this;
 
         //Variables
-        activate();
-
-        vm.states = null;
-        vm.cities = null;
-        vm.localities = null;
+        vm.store = angular.fromJson(angular.toJson(store));
         vm.state = null;
         vm.city = null;
-        vm.locality = null;
-        vm.postal_code = null;
-
-        //Control variables
-        vm.changedLocation = null;
+        vm.canLoadLocalities = false;
+        vm.postalCode = null;
+        vm.postalCodeQuery = null;
+        vm.knownPostalCode = true;
+        vm.catalogues = Stores.catalogues;
+        vm.changedAddresElements = false;
 
         //Functions
         vm.accept = accept;
         vm.cancel = cancel;
-        vm.listStates = listStates;
-        vm.listCities = listCities;
-        vm.listLocalities = listLocalities;
         vm.selectState = selectState;
         vm.selectCity = selectCity;
+        vm.selectLocality = selectLocality;
         vm.selectSegmentation = selectSegmentation;
-        vm.changeLocation = changeLocation;
+        vm.changeSwitch = changeSwitch;
+        vm.changePostalCode = changePostalCode;
 
         activate();
 
         function activate() {
-            vm.store = store;
             vm.store.latitud = parseFloat(vm.store.latitud);
             vm.store.longitud = parseFloat(vm.store.longitud);
-            listStates();
-            selectSegmentation();
+            vm.postalCodeQuery = vm.store.localidad.codigo_postal;
+            vm.postalCode = vm.store.localidad.codigo_postal;
+            changePostalCode();
         }
 
-
         function accept() {
-            if (vm.changedLocation || !vm.store.mapa) {
-                vm.loadingPromise = Geolocation.getMap(vm.store.latitud, vm.store.longitud)
-                    .then(function (mapThumbnail) {
-                        vm.store.mapa_img = 'data:image/png;base64,' + _arrayBufferToBase64(mapThumbnail.data);
-                        modifyStore();
-                    })
-                    .catch(function (errorMapThumbnail) {
-                        $log.error(errorMapThumbnail);
-                        toastr.warning(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.WARNING_IMAGE'));
-                        modifyStore();
-                    });
-            }
-            else {
-                modifyStore();
-            }
+            modifyStore();
         }
 
         function modifyStore() {
-            vm.store.segmentacion_id = vm.segmentationSelect;
-
-            var storeToSend = {
-                no_cliente: vm.store.no_cliente,
-                localidad_id: vm.store.localidad.id,
-                nombre_establecimiento: vm.store.nombre_establecimiento,
-                calle: vm.store.calle,
-                numero: vm.store.numero,
-                entre_calle1: vm.store.entre_calle1,
-                entre_calle2: vm.store.entre_calle2,
-                latitud: vm.store.latitud,
-                longitud: vm.store.longitud,
-                nombre_encargado: vm.store.nombre_encargado,
-                telefono_encargado: vm.store.telefono_encargado,
-                segmentacion_id: vm.store.segmentacion_id
-            };
-
-            if (vm.store.mapa_img) {
-                storeToSend.mapa_img = vm.store.mapa_img;
-            }
-
-            vm.loadingPromise = Stores.update(storeToSend, vm.store.no_cliente)
+            vm.loadingPromise = Stores.update(vm.store, vm.store.no_cliente)
                 .then(function (createdStore) {
-                    toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.UPDATE_SUCCESS'));
+                    toastr.success(Translate.translate('MAIN.COMPONENTS.STORE_MANAGER.TOASTR.CREATE_SUCCESS'));
                     $mdDialog.hide(createdStore);
                 })
                 .catch(function (errorCreateStore) {
@@ -113,101 +68,60 @@
             $mdDialog.cancel(null);
         }
 
-        function listStates() {
-            if (!vm.states) {
-                vm.loadingStates = States.list()
-                    .then(function (stateList) {
-                        vm.states = _.sortBy(Helper.filterDeleted(stateList, true), 'nombre');
-                        vm.state = vm.store.localidad.municipio.estado.id;
-                        listCities(vm.state);
-                    })
-                    .catch(function (stateListError) {
-                        ErrorHandler.errorTranslate(stateListError);
-                        vm.states = null;
-                    });
+        function selectState(state) {
+            vm.catalogues['cities'].catalog.query = QUERIES.city.by_state;
+            vm.catalogues['cities'].catalog.query_value = state;
+            vm.state = state;
+            if (state !== vm.store.localidad.municipio.estado.id) {
+                vm.changedAddresElements = true;
+                vm.city = null;
+                vm.store['localidad_id'] = null;
             }
         }
 
-        function listCities(state) {
-            if (state) {
-                vm.loadingCities = Cities.getByState(state)
-                    .then(function (citiesList) {
-                        vm.cities = _.sortBy(Helper.filterDeleted(citiesList, true), 'nombre');
-                        vm.city = vm.store.localidad.municipio.id;
-
-                        angular.forEach(vm.states, function (stado) {
-                            if (stado.id == state) {
-                                vm.estado_nombre = stado.nombre;
-                            }
-                        });
-                        listLocalities(vm.city);
-                    })
-                    .catch(function (citiesListError) {
-                        ErrorHandler.errorTranslate(citiesListError);
-                        vm.cities = null;
-                    });
+        function selectCity(city) {
+            vm.catalogues['localities'].catalog.query = QUERIES.locality.by_city;
+            vm.catalogues['localities'].catalog.query_value = city;
+            vm.city = city;
+            if (city !== vm.store.localidad.municipio.id) {
+                vm.changedAddresElements = true;
+                vm.store['localidad_id'] = null;
             }
         }
 
-        function listLocalities(city) {
-            if (city) {
-                vm.loadingLocalities = Localities.getByCity(city)
-                    .then(function (localitiesList) {
-                        vm.localities = _.sortBy(Helper.filterDeleted(localitiesList, true), 'nombre');
-                        vm.locality = vm.store.localidad.id;
-                        vm.codigo_postal = vm.store.localidad.codigo_postal;
-
-                        angular.forEach(vm.cities, function (ciudad) {
-                            if (ciudad.id == city) {
-                                vm.municipio_nombre = ciudad.nombre;
-                            }
-                        });
-
-                    })
-                    .catch(function (localitiesListError) {
-                        ErrorHandler.errorTranslate(localitiesListError);
-                        vm.localities = null;
-                    });
+        function selectLocality(locality) {
+            vm.store['localidad_id'] = locality;
+            if (locality !== vm.store.localidad.id) {
+                vm.changedAddresElements = true;
             }
         }
 
-        function selectState() {
-            listCities(vm.state);
-            vm.city = null;
-            vm.locality = null;
-            vm.cities = null;
-            vm.localities = null;
+        function selectSegmentation(segmentation) {
+            vm.store['segmentacion_id'] = segmentation;
         }
 
-        function selectCity() {
-            listLocalities(vm.city);
-            //vm.locality = null;
-            //vm.localities = null;
-        }
-
-        function selectSegmentation() {
-            Segmentation.list()
-                .then(function (listSegments) {
-                    vm.storeSegmentation = listSegments;
-                    vm.segmentationSelect = vm.store.segmentacion.id;
-                })
-                .catch(function (errorListSegments) {
-                    ErrorHandler.errorTranslate(errorListSegments);
-                });
-        }
-
-        function changeLocation() {
-            vm.changedLocation = true;
-        }
-
-        function _arrayBufferToBase64(buffer) {
-            var binary = '';
-            var bytes = new Uint8Array(buffer);
-            var len = bytes.byteLength;
-            for (var i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
+        function changeSwitch() {
+            if (vm.changedAddresElements) {
+                vm.state = null;
+                vm.city = null;
+                vm.store['localidad'] = null;
+                vm.postalCode = null;
+                vm.postalCodeQuery = null;
             }
-            return $window.btoa(binary);
+        }
+
+        function changePostalCode() {
+            if (vm.postalCodeQuery.length === 5) {
+                vm.postalCode = vm.postalCodeQuery;
+                vm.catalogues['localities'].catalog.query = QUERIES.locality.by_postal_code;
+                vm.catalogues['localities'].catalog.query_value = vm.postalCode;
+                if (vm.store.localidad.codigo_postal !== vm.postalCode) {
+                    vm.changedAddresElements = true;
+                }
+            }
+            else {
+                vm.postalCode = null;
+            }
         }
 
     }

@@ -37,7 +37,8 @@
                    ngf-multiple="$ctrl.multipleFiles"
                    ngf-allow-dir="$ctrl.allowFolders"
                    ngf-keep="{{$ctrl.keep}}"
-                   class="md-primary md-raised">
+                   class="md-primary md-raised"
+                   aria-label="upload">
             <md-icon md-font-icon="fa fa-folder-open"></md-icon>
             <span ng-if="$ctrl.multipleFiles">
                 {{'MAIN.COMPONENTS.FILE_UPLOADER.BUTTONS.MULTIPLE_FILES'|translate}}
@@ -70,7 +71,7 @@
         <img
             class="file-thumb"
             ng-if="file.type==='image/jpeg' || file.type==='image/png' || file.type==='image/bmp'"
-            src="{{file.$ngfBlobUrl}}">
+            ng-src="{{file.$ngfBlobUrl}}">
 
         <md-button
             ng-click="$ctrl.removeFile($index)"

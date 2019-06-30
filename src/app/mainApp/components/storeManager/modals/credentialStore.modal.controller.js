@@ -3,7 +3,7 @@
 (function () {
     'use strict';
     angular
-        .module('app.mainApp')
+        .module('storeManager')
         .controller('credentialStoreController',credentialStoreController);
 
     function credentialStoreController(Helper, $mdDialog, data)

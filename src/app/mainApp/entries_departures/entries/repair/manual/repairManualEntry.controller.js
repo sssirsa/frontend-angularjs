@@ -39,6 +39,7 @@
         vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
+        vm.store;
 
         //Validations
         vm.imageConstraints = {
@@ -231,6 +232,7 @@
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.repairEntry.template();
+            vm.store = null;
             vm.catalogues = MANUAL_ENTRIES.repairEntry.catalogues();
 
             var user = User.getUser();
