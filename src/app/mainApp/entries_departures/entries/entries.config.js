@@ -23,7 +23,7 @@
                 url: '/entrada/garantias/manual',
                 data: {
                     permissions: {
-                        only: ['entrties_departures__entries__warranties_entries']
+                        only: ['entries_departures__entries__warranties_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/warranty/manual/warrantyManualEntry.tmpl.html',
