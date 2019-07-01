@@ -44,8 +44,8 @@
             //Limpiamos las variables antes de hacer una nueva búsqueda
             clear();
             //Search in cabinets location
-            var promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset_id);
-            promiseCabinetEntrada.then(function (control) {
+            vm.promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset_id);
+            vm.promiseCabinetEntrada.then(function (control) {
                 vm.infoStep.control = control;
                 if (control.tipo_entrada === "Garantias" || control.tipo_entrada === "Reparacion") {
                     vm.infoStep.makeInspection = false;

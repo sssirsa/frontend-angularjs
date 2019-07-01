@@ -1,4 +1,4 @@
-<div layout="column" layout-align="center center"  class="minorWhite">
+<div cg-busy="{promise:$ctrl.promiseCabinetEntrada,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}" layout="column" layout-align="center center"  class="minorWhite">
     <form name="searchCabinetStorage" ng-submit="$ctrl.search_asset()">
         <div layout="row" layout-padding="">
             <md-input-container>
@@ -11,6 +11,7 @@
                  </md-button>
             </md-input-container>
         </div>
+        <div ></div>
     </form>
 </div>
 
