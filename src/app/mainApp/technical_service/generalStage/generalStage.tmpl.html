@@ -66,16 +66,16 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
-                <span translate="">GENERAL_STAGE.ACTIONS.CLEAR</span>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.CLEAR</span>
             </md-button>
             <md-button ng-if="!vm.stage.etapa_siguiente_id && vm.asset" ng-click="vm.saveStage()"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                <span translate="">GENERAL_STAGE.ACTIONS.SAVE</span>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.SAVE</span>
             </md-button>
             <md-button ng-if="vm.stage.etapa_siguiente_id" ng-click="vm.closeStage()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                <span translate="">GENERAL_STAGE.ACTIONS.CLOSE</span>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.CLOSE</span>
             </md-button>
 
         </md-card-actions>

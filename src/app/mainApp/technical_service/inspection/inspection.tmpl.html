@@ -210,22 +210,22 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>
             <md-button ng-if="vm.step.makeInspection" ng-click="vm.sendInspection()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
-                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.SAVE_INSPECTION</span>
+                <div class="hint" hide-xs hide-sm><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
             <md-button ng-if="vm.step.makePrecheck" ng-click="vm.sendPrecheck()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_PRECHECK</span>
-                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.SAVE_PRECHECK</span>
+                <div class="hint"hide-xs hide-sm ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
             <md-button ng-if="vm.step.currentStage" ng-click="vm.sendCheckList()" class="md-raised md-primary" ng-disabled="!vm.checklist.sticker_id">
                 <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
-                <span translate="">INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
-                <div class="hint" ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.SAVE_CHECKLIST</span>
+                <div class="hint" hide-xs hide-sm ><span translate="">INSPECTION.LABEL_REQUIRED</span></div>
             </md-button>
         </md-card-actions>
     </md-card>
