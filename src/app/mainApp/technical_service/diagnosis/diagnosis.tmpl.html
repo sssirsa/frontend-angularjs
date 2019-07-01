@@ -159,7 +159,7 @@
                 <md-icon md-font-icon="fas fa-eraser"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.CLEAR_FIELD</span>
             </md-button>
-            <md-button ng-click="vm.sendDiagnosis()" class="md-raised md-primary">
+            <md-button ng-if="vm.step.currentStage.id" ng-click="vm.sendDiagnosis()" class="md-raised md-primary">
                 <md-icon md-font-icon="fas fa-save"></md-icon>
                 <span translate="">INSPECTION.ACTIONS.SAVE_INSPECTION</span>
             </md-button>
