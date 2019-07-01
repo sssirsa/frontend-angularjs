@@ -27,7 +27,7 @@
                                  info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
             <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
             <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
-            <start-service flex="100" ng-if="vm.asset" on-start="vm.onStart(element)" presurize="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id"></start-service>
+            <start-service ng-if="vm.step.currentStage.id" on-start="vm.onStart(element)" presurize="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id"></start-service>
         </div>
 
 
