@@ -7,31 +7,11 @@
         .controller('WelcomeController', WelcomeController);
 
     function WelcomeController(
-        User,
-        RoleStore,
-        Sucursal,
-        $log,
-        _
+        User
     ) {
         var vm = this;
 
         vm.user = User.getUser();
-        vm.roles = _.keys(RoleStore.getStore());
-        vm.sucursal = null;
-
-        activate();
-
-        function activate() {
-            if (vm.user.sucursal) {
-                Sucursal.getByID(vm.user.sucursal)
-                    .then(function (sucursal) {
-                        vm.sucursal = sucursal;
-                    })
-                    .catch(function (errorSucursal) {
-                        $log.error(errorSucursal);
-                    });
-            }
-        }
 
     }
 

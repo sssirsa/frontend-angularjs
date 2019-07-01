@@ -20,8 +20,23 @@
         }
 
         function setUser(user) {
-            $cookies.putObject('user', user);
-            vm.user = user;
+        //User object sanitizing 
+            vm.user = {
+                apellido_materno: user['apellido_materno'],
+                apellido_paterno: user['apellido_paterno'],
+                direccion: user['direccion'],
+                establecimiento: user['establecimiento'],
+                foto: user['foto'],
+                id: user['id'],
+                ife: user['ife'],
+                nombre: user['nombre'],
+                //permissions:user['permissions'],
+                sucursal: user['sucursal'],
+                telefono: user['telefono'],
+                udn: user['udn'],
+                user:user['user']
+            };
+            $cookies.putObject('user', vm.user);
         }
 
     }
