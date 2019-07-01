@@ -236,7 +236,6 @@
                 });
                 if (vm.step.control.inspeccionado) {
                     if (vm.step.control.inspeccionado.estado) {
-                        $log.log(vm.step.control.inspeccionado.estado);
                         if (vm.step.control.inspeccionado.estado === 'Confirmado') {
                             var DENEGATE = Translate.translate('ERROR_STEP.DENEGATE');
                             var REVIEWED = Translate.translate('ERROR_STEP.REVIEWED');
