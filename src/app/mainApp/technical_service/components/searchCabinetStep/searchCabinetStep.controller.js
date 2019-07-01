@@ -43,7 +43,7 @@
         function search_asset() {
             //Limpiamos las variables antes de hacer una nueva búsqueda
             clear();
-            //Search in cabinets location
+            //Search in cabinets location.
             vm.promiseCabinetEntrada = searchCabinetStepProvider.getEntrie(vm.asset_id);
             vm.promiseCabinetEntrada.then(function (control) {
                 vm.infoStep.control = control;
