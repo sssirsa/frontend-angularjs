@@ -10,10 +10,11 @@
         $q,
         URLS,
         API,
-        RoleStore,
+        PermRoleStore,
         User,
         $cookies,
-        Person
+        Person,
+        PERMISSION
     ) {
 
         var authService = {
@@ -34,15 +35,16 @@
         }
 
         function login(credentials) {
-            RoleStore.clearStore();
+            PermRoleStore.clearStore();
             var request = $q.defer();
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function () {
                     Person.getMyProfile()
                         .then(function requestGetMyProfile(user) {
-                            request.resolve();
+                            PERMISSION.definePermissions(user['permissions']);
                             User.setUser(user);
+                            request.resolve();
                         })
                         .catch(function (errorUser) {
                             request.reject(errorUser);
@@ -60,19 +62,28 @@
         }
 
         function logout() {
-            RoleStore.clearStore();
+            PermRoleStore.clearStore();
+            $cookies.remove('permissions');
+            $cookies.remove('user');
             return OAuth.revokeToken();
         }
 
         function refreshToken() {
+            PermRoleStore.clearStore();
             var request = $q.defer();
             if (OAuth.canRefresh()) {
                 OAuth
                     .refreshToken()
                     .then(function () {
-                        var roles = $cookies.getObject('roles');
-                        RoleStore.defineManyRoles(roles);
-                        request.resolve();
+                        Person.getMyProfile()
+                            .then(function requestGetMyProfile(user) {
+                                User.setUser(user);
+                                PERMISSION.definePermissions(user['permissions']);
+                                request.resolve();
+                            })
+                            .catch(function (errorUser) {
+                                request.reject(errorUser);
+                            });
                     })
                     .catch(function (errorRefreshToken) {
                         request.reject(errorRefreshToken);

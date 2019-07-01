@@ -26,13 +26,13 @@
                 name: 'MAIN.MENU.COM.TICKETS_INCIDENCES',
                 icon: 'fas fa-ticket-alt',
                 type: 'dropdown',
-                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TULTITLAN'],
                 priority:10,
                 children: [
                     {
                         name: 'MAIN.MENU.COM.MANAGEMENT_NOTIFICATION',
                         state: 'triangular.admin-default.incidences_tickets',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['ADMINISTRADOR', 'TULTITLAN'],
                         type: 'link'
                     }
                 ]
