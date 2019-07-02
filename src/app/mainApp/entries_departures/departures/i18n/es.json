@@ -34,6 +34,7 @@
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Selecciona la agencia de arrivo",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
