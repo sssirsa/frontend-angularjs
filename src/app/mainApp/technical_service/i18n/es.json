@@ -1,0 +1,200 @@
+{
+    "INSPECTION": {
+        "INSPECTION_NAME_MENU": "Inspección de Cabinet",
+        "CHECKLIST": "Lista de Verificación (Check)",
+        "STICKER": "Sticker",
+        "WHEELS": "Rodajas",
+        "BASKET": "Canastillas",
+        "FRONT_RACK": "Rejillas Delanteras",
+        "BACK_RACK": "Rejillas Traseras",
+        "DOORS": "Puertas",
+        "PAINT": "Pintura",
+        "WASHED": "Lavado",
+        "WRAPPED": "Emplayado",
+        "EMPTY": "Vacío de Mercancía",
+        "MORE_INFO": "Más Información",
+        "OBSERVATIONS": "Observaciones",
+        "FINISHED":"Terminado",
+        "READY":"Listo_para_salida",
+        "LABEL_REQUIRED":"Seleccione etiqueta antes de confirmar entrada",
+        "ACTIONS": {
+            "SAVE_INSPECTION": "Confirmar Entrada",
+            "SAVE_PRECHECK": "Confirmar Entrada de Garantía",
+            "SAVE_CHECKLIST": "Guardar Checklist",
+            "CLEAR_FIELD": "Limpiar campos",
+            "SEARCH_NEW":"Buscar otro cabinet"
+        },
+        "CATALOGUES": {
+            "STICKER": "Etiquetas",
+            "STICKER_HINT": "Agregar tipo de etiqueta"
+        }
+    },
+    "ERROR_STEP": {
+        "NOT_CORRECT_STEP": "No se encuentra en la Etapa Correcta",
+        "GO_TO": "Enviar a:",
+        "NOT_STEP":"Este cabinet requiere una Inspección Previa",
+        "REVIEWED":"Este cabinet Posse una Inspección Previa",
+        "DENEGATE":"Imposible realizar esta operación",
+        "SENT_TO_CHECK":"Enviar a Inspección"
+    },
+    "PUNCTURE": {
+        "PUNCTURE_MENU": "Pinchado",
+        "WITH_GAS": "Con Gas",
+        "WITHOUT_GAS": "Sin Gas",
+        "MORE_INFO": "Más Información",
+        "INITIAL_INFO": "Información Inicial",
+        "OBSERVATIONS": "Observaciones",
+        "ACTIONS": {
+            "SAVE_PUNCTURE": "Guardar Pinchado"
+        }
+    },
+    "PRESURIZE": {
+        "PRESURIZE_MENU": "Presurizado",
+        "CHARGE_INFO":"Información de Carga",
+        "REVIEW_INFO":"Información de Revisión",
+        "WITH_GAS": "Con Gas",
+        "WITHOUT_GAS": "Sin Gas",
+        "MORE_INFO": "Más Información",
+        "INITIAL_INFO": "Información Inicial",
+        "OBSERVATIONS": "Observaciones",
+        "CHARGE_DATE":"Fecha de carga",
+        "SET_CHARGE_TIME":"Realizar captura de Tiempo de la Carga",
+        "CHARGE_PRESSION":"Presión de carga al recargar",
+        "REVISION_DATE":"Fecha de revisión",
+        "REVISION_PRESSION":"Presión de carga al revisar",
+        "SENDED_DIAGNOSIS":"Liberado a Diagnostico",
+        "CONTINUE_IN_STEP":"Mantener en esta Etapa",
+        "RESTART_STEP":"Realizar Nuevamente la etapa",
+        "OBSOLETE":"Reportar Y Enviar a Obsoleto",
+        "ACTIONS": {
+            "SAVE_PRESURIZE": "Guardar Presurizado"
+        }
+    },
+    "SERVICES": {
+        "INFO_CABINET": "Información del Cabinet",
+        "INFO_SERVICE": "Información del Servicio Actual",
+        "PAST_SERVICES": "Servicios Anteriores"
+    },
+    "INCIDENCE": {
+        "REPORT_INCIDENCE": "Levantar incidencia"
+    },
+    "BULK_ASSET_COMPONENT": {
+        "BULK_ASSET": " Insumo: ",
+        "NOT_ENOUGHT_ASSET": "No hay suficiente en inventario.",
+        "TITLE": "Insumos Utilizados"
+    },
+    "BULK_ASSET_CONTAINER_COMPONENT": {
+        "NO_BULKS": "No hay ningún insumo asociado a esta etapa"
+    },
+    "SHOW_INFO_CABINET": {
+        "SHOW_INFO": "Información del Cabinet"
+    },
+    "GENERAL_SHOW_INFO": {
+        "NO_ELEMENTS": "Sin Información"
+    },
+    "START_SERVICE_COMPONENT": {
+        "START": "Iniciar Servicio",
+        "ELAPSED_TIME": "  Tiempo Transcurrido"
+    },
+    "SYMTOMPS_COMPONENT": {
+        "TITLE": "Sintomas Detectados",
+        "REMOVE": "Quitar elemento.",
+        "ADD": "Seleccione el sintoma a agregar",
+        "ADD_SYMTOMP": "Añadir sintoma detectado"
+    },
+    "ACTIONS_COMPONENT": {
+        "TITLE": "Acciones Realizadas",
+        "REMOVE": "Quitar elemento.",
+        "ADD": "Seleccione el reparación a realizada",
+        "ADD_ACTION": "Añadir acción realizada"
+    },
+    "FAILURES_COMPONENT": {
+        "TITLE": "Fallas Detectadas",
+        "SELECT_FAILURE_TYPE": "Seleccione el Tipo de Falla",
+        "SELECT_FAILURE_TYPE_FOR": "Seleccione el Tipo de Falla para poder seleccionar la falla detectada",
+        "SELECT_FAILURE": "Seleccione la Falla Detectada",
+        "REMOVE": "Quitar elemento.",
+        "ADD_FAILURE": "Añadir falla"
+    },
+    "SHOW_INFO_SERVICE_COMPONENT": {
+        "PRECHECKLIST": "Inspección de Cabinet",
+        "INSPECTION": "Inspección y Confirmación de Entradas",
+        "SHOW_INFO": "Información del Servicio"
+    },
+    "NEXT_STEP": {
+        "NEXT_STEP": "Siguiente Etapa:",
+        "EDIT_NEXT_STEP": "Editar etapa siguiente",
+        "NOT_EDIT": "Mantener etapa defecto",
+        "SELECT_STEP": "Seleccione a que etapa será enviada el cabinet",
+        "CLOSE_SERVICE":"Cerrar Etapa",
+        "SAVE_SERVICE_WITHOUT_CLOSE":"Guardar Etapa Sin Cerrar"
+    },
+    "DIAGNOSIS": {
+        "DIAGNOSIS": "Diagnóstico de Cabinet",
+        "DIAGNOSIS_INFO": "Información del Diagnóstico",
+        "SEARCH_CABINET": "Buscar Cabinet",
+        "ASSET_DIAGNOSIS": "Proceso de Diagnóstico de Cabinet",
+        "SHORT_NAME": "Nombre corto",
+        "SHORT_NAME_DESC": "Nombre corto que define la falla del Cabinet en pocas palabras",
+        "DESCRIPTION": "Descripción",
+        "DESCRIPTION_DESC": "Descripción detallada de la falla, no considerada en el catálogo de fallas",
+        "IN_TIME": "Terminación en tiempo",
+        "NO_TIME":"No se terminará en tiempo",
+        "IN_TIME_DESC": "Define si el trabajo podrá ser terminado en el tiempo previsto",
+        "TEMP_COM": "Temperatura Compresor",
+        "TEMP_COM_DESC": "Temperatura Compresor en grados ºC",
+        "INT_TEMP": "Temperatura Interna",
+        "INT_TEMP_DESC": "Temperatura Interna en grados ºC",
+        "AMP_ARRAN": "Amperaje de Arranque",
+        "AMP_DESC": "Amperaje de Arranque en Amperes",
+        "AMP_TRAB": "Amperaje de Trabajo",
+        "AMP_TRAB_DESC": "Amperaje de Trabajo en Amperes",
+        "ACTIONS": "Acciones Realizadas",
+        "ACTIONS_DESC": "Acciones Realizadas en la etapa",
+        "FAILURES": "Fallas Detectadas",
+        "FAILURES_ACTIONS":"Fallas y Acciones",
+        "BULK_ASSETS":"Insumos Usados",
+        "FAILURES_DESC": "Fallas detectadas en el diagnostico"
+    },
+    "GENERAL_STAGE":{
+        "GENERAL_INFO":"Información General",
+        "SEARCH":"Buscar Nuevamente",
+        "TITLE":"Etapa de Reparación",
+        "BULK_ASSET":"Insumos usados en la Reparación",
+        "ACTIONS_MADE":"Acciones Realizadas",
+        "ACTIONS":{
+            "SAVE":"Guardar Etapa",
+            "CLOSE":"Cerrar Etapa",
+            "CLEAR":"Limpiar Campos",
+            "CONFIRM":"Esta seguro de que desea cerrar la presente etapa una vez cerrada no será modificable",
+            "ACCEPT":"Aceptar",
+            "CANCEL":"Cancelar"
+
+        }
+    },
+    "RETIRE_ASSET_COMPONENT":{
+        "DISCARD_ASSET":"Desechar Insumo Único",
+        "SALVAGE_ASSET":"Recuperar Insumo Único",
+        "TITLE":"Insumos Únicos asociados al Cabinet",
+        "NOT_UNIQUE_ASSETS":"No hay insumos Únicos, asociados al cabinet",
+        "UNIQUE_ASSETS":"Insumos únicos asociados al cabinet"
+    },
+    "UNIQUE_ASSET_COMPONENT":{
+        "NOT_FOUND":"Insumo No Encontrado",
+        "TITLE":"Insumos Unicos",
+        "RESULTS":"Resultados de la búsqueda",
+        "CODE_BAR":"Introduzca el número de serie del insumo a utilizar",
+        "SERIAL_NUMBER":"Número de Serie",
+        "CATEGORY":"Categoría",
+        "CATALOG_UNIQUE_ASSET_BRANCH":"Seleccione el insumo unico a utilizar",
+        "CREATE_UNIQUE":"Crear Insumo único",
+        "BARCODE":"No de Serie",
+        "SUBSIDIARY":"Sucursal"
+    },
+    "SEARCH_INFO_CABINET_COMPONENT":{
+        "NOT_IN_THIS_SUBSIDIARY":"El cabinet NO se encuentra en tu sucursal o udn",
+        "NOT_IN_THIS_SUBSIDIARY_TITLE":"NO en el lugar correcto",
+        "NO_SERVICE":"No es posible Realizar el Sevicio",
+        "CABINET_NO_REPAIR":"Este cabinet no puede pasar por un flujo de Reparación"
+    }
+}

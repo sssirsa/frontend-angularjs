@@ -1,0 +1,168 @@
+<div layout="column">
+    <md-card flex layout-align="center stretch">
+        <div class="toolbar">
+            <div layout-padding="" layout="row" layout-wrap="">
+                <div flex="100" flex-gt-md="50">
+                    <h2>
+                        <span flex translate="">DIAGNOSIS.DIAGNOSIS</span>
+
+                    </h2>
+                </div>
+                <div flex="100" layout-gt-sm="row" layout-align="center end" flex-gt-md="50">
+                    <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                        <md-button ng-if="!vm.search" ng-click="vm.enableSearch()" class="md-raised md-primary">
+                            <md-icon md-font-icon="fas fa-search"></md-icon>
+                            <span translate="" hide-xs hide-sm>GENERAL_STAGE.SEARCH</span>
+                        </md-button>
+
+                    </div>
+                    <div flex="50" layout="column" layout-gt-sm="row" layout-align="end center">
+                        <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
+                            <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
+                            <span translate="" hide-xs hide-sm>INCIDENCE.REPORT_INCIDENCE</span>
+                        </md-button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div layout="row" flex="100" layout-wrap="" class="minorWhite" layout-padding="">
+            <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
+                                 info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+            <div layout="row" flex="100" layout-wrap="">
+                <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+                <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            </div>
+            <start-service flex="100" ng-if="vm.step.currentStage.id" diagnosis="vm.step.currentStage.id"
+                           sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
+        </div>
+
+        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
+                 ng-if="vm.step.currentStage.id">
+            <md-tab label="{{vm.title_info}}">
+                <md-content class="md-padding">
+                    <h3 translate="">DIAGNOSIS.ASSET_DIAGNOSIS</h3>
+                    <div flex="100" layout="row" layout-wrap="" layout-align="space-between center">
+                        <div layout="row" flex="100" layout-margin="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
+                                <input type="text" ng-model="vm.diagnostic.nombre_corto"
+                                       placeholder="{{'DIAGNOSIS.SHORT_NAME'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.SHORT_NAME_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="fas fa-thermometer-half"></md-icon>
+                                <input type="number" ng-model="vm.diagnostic.temp_com"
+                                       pattern="([0-9]+[.]+[0-9]+)|([0-9])"
+                                       placeholder="{{'DIAGNOSIS.TEMP_COM'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.TEMP_COM_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="fas fa-thermometer-empty"></md-icon>
+                                <input type="number" ng-model="vm.diagnostic.temp_int"
+                                       placeholder="{{'DIAGNOSIS.INT_TEMP'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.INT_TEMP_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="fas fa-bolt"></md-icon>
+                                <input type="number" ng-model="vm.diagnostic.amp_arran"
+                                       placeholder="{{'DIAGNOSIS.AMP_ARRAN'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.AMP_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex-gt-md="50" flex="100" layout-padding="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="fas fa-bolt"></md-icon>
+                                <input type="number" ng-model="vm.diagnostic.amp_trab"
+                                       placeholder="{{'DIAGNOSIS.AMP_TRAB'|translate}}">
+                                <md-tooltip><span translate="">DIAGNOSIS.AMP_TRAB_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex="100" layout-margin="">
+                            <md-input-container md-no-float class="md-block" layout-fill="">
+                                <md-icon md-font-icon="zmdi zmdi-wrench"></md-icon>
+                                <textarea rows="5" ng-model="vm.diagnostic.descripcion"
+                                          placeholder="{{'DIAGNOSIS.DESCRIPTION'|translate}}"></textarea>
+                                <md-tooltip><span translate="">DIAGNOSIS.DESCRIPTION_DESC</span></md-tooltip>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" flex="100" layout-margin="">
+                            <md-input-container layout-align="center center">
+                                <md-switch class="md-primary" ng-model="vm.diagnostic.en_tiempo"
+                                           aria-label="{{DIAGNOSIS.IN_TIME|translate}}"
+                                           ng-init="vm.diagnostic.en_tiempo = true">
+                                    <b ng-if="vm.diagnostic.en_tiempo" translate="">DIAGNOSIS.IN_TIME</b>
+                                    <b ng-if="!vm.diagnostic.en_tiempo" translate="">DIAGNOSIS.NO_TIME</b>
+                                </md-switch>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="{{vm.failures_and_actions}}">
+                <md-content layout-padding="">
+                    <v-accordion id="failures_and_actions"
+                                 class="vAccordion--default"
+                                 control="failures_and_actions">
+                        <v-pane id="actions">
+                            <v-pane-header id="actions-header">Acciones Realizadas</v-pane-header>
+                            <v-pane-content id="actions-content">
+                                <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
+                                                 actions-added="vm.getActions(element)"
+                                                 actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
+                            </v-pane-content>
+                        </v-pane>
+
+                        <v-pane id="failures">
+                            <v-pane-header id="failures-header">Fallas Detectadas</v-pane-header>
+                            <v-pane-content id="failures-content">
+                                <fault-manager flex="100" failures-detected="vm.getFailures(element)"
+                                               failures="vm.step.currentStage.diagnostico.fallas"></fault-manager>
+                            </v-pane-content>
+                        </v-pane>
+
+                        <v-pane id="nextStep">
+                            <v-pane-header id="nextStep-header">Siguiente Etapa</v-pane-header>
+                            <v-pane-content id="nextStep-content">
+                                <next-step ng-if="vm.step || vm.failures.length>0" failures="vm.failures" flex="100"
+                                           next-step="vm.nextStep(element)"
+                                           actual-step="vm.step.currentStage.etapa"></next-step>
+                            </v-pane-content>
+                        </v-pane>
+                    </v-accordion>
+                </md-content>
+            </md-tab>
+            <md-tab label="{{vm.bulkAssets}}">
+                <md-content>
+                    <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
+                                          tipo-equipo="vm.asset.modelo.tipo.id"
+                                          catalogo-etapa="vm.step.currentStage.etapa.nombre"
+                                          bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+
+                </md-content>
+
+            </md-tab>
+
+
+        </md-tabs>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                <md-icon md-font-icon="fas fa-eraser"></md-icon>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.CLEAR_FIELD</span>
+            </md-button>
+            <md-button ng-if="vm.step.currentStage.id" ng-click="vm.sendDiagnosis()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.SAVE_INSPECTION</span>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</div>

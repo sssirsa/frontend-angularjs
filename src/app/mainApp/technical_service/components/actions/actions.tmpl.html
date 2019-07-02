@@ -1,0 +1,49 @@
+<div flex="100" class="minorWhite">
+    <md-toolbar flex="100" class="Subtitle">
+        <div layout="row" layout-align="center center">
+            <div flex="10" class="toolbarSubtitleIcon" layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-wrench"></md-icon>
+            </div>
+            <div flex="90" class="toolbarSubtitle" layout-padding="" layout-align="center center">
+                <b translate="">ACTIONS_COMPONENT.TITLE</b>
+            </div>
+        </div>
+    </md-toolbar>
+    <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center" >
+        <md-input-container flex="100" layout-fill=""layout-padding="">
+
+            <label translate="" ng-if="!$ctrl.nextStepSelected">ACTIONS_COMPONENT.ADD</label>
+            <md-select layout-fill="" ng-model="$ctrl.actionSelected"  md-on-close="$ctrl.onSelectAction($ctrl.actionSelected)">
+                <md-option ng-repeat="action in $ctrl.actions track by action.com_code" layout-padding="" ng-value="action">
+                    <md-icon  md-font-icon="fas fa-wrench"></md-icon>
+                    <b>{{action.descripcion}}</b>-<span class="md-caption">{{action.com_code}}</span>
+                </md-option>
+            </md-select>
+            <div class="hint">
+                <span translate="">ACTIONS_COMPONENT.ADD_ACTION</span>
+            </div>
+        </md-input-container>
+
+    </div>
+    <md-list flex="100" layout="row" layout-wrap="">
+        <md-list-item flex="100" flex-gt-sm="50" ng-repeat="item in $ctrl.actionsDoIt" ng-click="$ctrl.deleteElement(item)">
+            <div flex="20">
+                <img ng-src="assets/images/action.png" class="imgList" alt="{{item.code}}"/>
+            </div>
+            <div flex="80" class="md-list-item-text" layout="row">
+                <div layout="column" flex="90">
+                    <h3>{{ item.com_code }}</h3>
+                    <h4>{{ item.descripcion }}</h4>
+                </div>
+                <div flex="10">
+                    <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="$ctrl.deleteElement(item)">
+                        <md-icon md-font-icon="fas fa-times"></md-icon>
+                        <md-tooltip><span translate="">ACTIONS_COMPONENT.REMOVE</span></md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+</div>
+
