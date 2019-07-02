@@ -11,7 +11,7 @@
                 url: '/salida/nuevos/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__departures__new_departures']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/departures/new/manual/newManualDeparture.tmpl.html',
@@ -23,7 +23,7 @@
                 url: '/salida/obsoletos/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__departures__scrapped_departures']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/departures/obsolete/manual/obsoleteManualDeparture.tmpl.html',
@@ -35,7 +35,7 @@
                 url: '/salida/almacen/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__departures__warehouse_departures']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/departures/warehouse/manual/warehouseManualDeparture.tmpl.html',
@@ -48,25 +48,29 @@
                 name: 'DEPARTURES.MENU.TITLE',
                 icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
+                permission: [
+                    'entries_departures__departures__new_departures',
+                    'entries_departures__departures__scrapped_departures',
+                    'entries_departures__departures__warehouse_departures'
+                ],
                 priority: 5,
                 children: [
                     {
                         name: 'DEPARTURES.MENU.NEW',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission: ['entries_departures__departures__new_departures'],
                         state: 'triangular.admin-default.departure-new-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.OBSOLETE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TULTITLAN'],
+                        permission: ['entries_departures__departures__scrapped_departures'],
                         state: 'triangular.admin-default.departure-obsolete-manual'
                     },
                     {
                         name: 'DEPARTURES.MENU.WAREHOUSE',
                         type: 'link',
-                        permission: ['ADMINISTRADOR', 'TECNICO C', 'TULTITLAN'],
+                        permission: ['entries_departures__departures__warehouse_departures'],
                         state: 'triangular.admin-default.departure-warehouse-manual'
                     }
                 ]
