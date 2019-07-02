@@ -69,15 +69,17 @@
                 cabinet: null,
                 entrance_kind: null,
                 restriction: null,
+                status: null,
                 subsidiary: null
             };
             getCabinetInSubsidiary(id)
                 .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
                     //Cabinet exists in subsidiary
                     var cabinetCanLeave = true;
-
+                    //Response filling
                     response['subsidiary'] = apiResponse['sucursal'];
                     response['agency'] = apiResponse['udn'];
+
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
                     if (subsidiary) {
@@ -101,20 +103,23 @@
                     //Getting cabinet full information
                     inventoryUrl.all(inventory.cabinet).all(id).customGET()
                         .then(function cabinetSuccessCallback(apiCabinet) {
+                            //Full cabinet information
                             response.cabinet = apiCabinet;
+
+                            //Remaining cabinet data
                             response.entrance_kind = apiResponse['tipo_entrada'];
+                            response['status'] = apiResponse['estatus_cabinet'];
 
                             //Cabinet can leave
                             if (cabinetCanLeave) {
                                 response.can_leave = true;
-                                deferred.resolve(response);
                             }
 
                             //Cabinet can't leave
                             else {
                                 response.can_leave = false;
-                                deferred.resolve(response);
                             }
+                            deferred.resolve(response);
                         })
                         .catch(function cabinetErrorCallback(errorResponse) {
                             deferred.reject(errorResponse);
