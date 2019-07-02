@@ -11,7 +11,7 @@
                 url: '/salida/nuevos/manual',
                 data: {
                     permissions: {
-                        only: ['entries_departures__departures__new_departures']
+                        only: ['entries_departures__departures__news_departures']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/departures/new/manual/newManualDeparture.tmpl.html',
@@ -49,7 +49,7 @@
                 icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
                 permission: [
-                    'entries_departures__departures__new_departures',
+                    'entries_departures__departures__news_departures',
                     'entries_departures__departures__scrapped_departures',
                     'entries_departures__departures__warehouse_departures'
                 ],
@@ -58,7 +58,7 @@
                     {
                         name: 'DEPARTURES.MENU.NEW',
                         type: 'link',
-                        permission: ['entries_departures__departures__new_departures'],
+                        permission: ['entries_departures__departures__news_departures'],
                         state: 'triangular.admin-default.departure-new-manual'
                     },
                     {
