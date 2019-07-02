@@ -1,0 +1,34 @@
+<div  class="minorWhite">
+    <div flex="100">
+        <md-checkbox ng-model="$ctrl.endService" ng-click="vm.closeService()">
+            <b class="md-caption"  translate="">NEXT_STEP.CLOSE_SERVICE</b>
+            <!--<b class="md-caption" ng-if="!$ctrl.endService" translate="">NEXT_STEP.SAVE_SERVICE_WITHOUT_CLOSE</b>-->
+        </md-checkbox>
+    </div>
+    <div flex="100" ng-if="$ctrl.endService">
+        <div layout="row" class="grayclass" layout-align="center center">
+            <div flex="10" class="subtitleIcon" layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-sign-out-alt"></md-icon>
+            </div>
+            <div flex="" class="nextStep" layout-align="center start" layout="column">
+                <div layout="row" >&nbsp;<b translate="">NEXT_STEP.NEXT_STEP</b><b>{{$ctrl.step.nombre}}</b></div>
+                <div layout="row">
+                    &nbsp;
+                    <md-checkbox ng-model="$ctrl.edit_next_step">
+                        <b class="md-caption"  translate="">NEXT_STEP.EDIT_NEXT_STEP</b>
+                        <!--<b class="md-caption" ng-if="!$ctrl.edit_next_step" translate="">NEXT_STEP.NOT_EDIT</b>-->
+                    </md-checkbox>
+                </div>
+            </div>
+            <md-input-container class="nextStep" flex="45" ng-if="$ctrl.edit_next_step" layout="row" layout-align="end center">
+                <label translate="" ng-if="!$ctrl.nextStepSelected">NEXT_STEP.SELECT_STEP</label>
+                <md-select layout-fill="" ng-model="$ctrl.nextStepSelected"  md-on-open="$ctrl.activate()" md-on-close="$ctrl.selectStep()">
+                    <md-option ng-repeat="step in $ctrl.steps" layout-padding="" ng-value="step">
+                        <md-icon  md-font-icon="fas fa-bezier-curve"></md-icon>
+                        <b>{{step.nombre}}</b>-<span class="md-caption">{{step.tipo_etapa}}</span>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+</div>

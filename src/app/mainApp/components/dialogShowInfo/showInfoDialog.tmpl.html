@@ -1,0 +1,136 @@
+<md-dialog class="mobile-fullwidth-dialog" flex="100" flex-xs="100">
+    <div flex class="card1">
+        <md-toolbar class="md-medium-tall">
+            <div class="md-toolbar-tools" layout-align="space-between center" layout="row" layout-sm="column"
+                 layout-xs="column">
+                <div>
+                    <h2>
+                        <span translate>{{vm.title}}</span>
+                    </h2>
+                </div>
+                <div layout="row" layout-align="space-between end">
+                    <md-button
+                        ng-click="vm.closeDialog()">
+                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-toolbar>
+        <div layout="row" flex="100" layout-padding="" layout-wrap="">
+            <div flex="100" flex-md="50" flex-gt-md="33" layout="column" ng-repeat="field in vm.meta">
+                <!--Manejo del titulo del campo -->
+                <md-content
+                    ng-if="field.section && field.kind==='field' || field.kind==='file'||field.kind==='image'||field.kind==='multiple'">
+                    <md-icon ng-if="field.icon" md-font-icon="{{field.icon}}"></md-icon>
+                    <b ng-if="field.section">{{field.section}}</b>
+                    <b ng-if="!field.section">{{field.key}}</b>
+                </md-content>
+                <!--Valor del  campo del  Objeto tipo field -->
+                <md-content ng-if="field.section && field.kind==='field'">
+                    <span ng-if="vm.array[field.key]">{{vm.array[field.key]}}</span>
+                </md-content>
+                <!--Valor del  campo del  Objeto tipo multiple-->
+                <div ng-if="field.kind==='multiple'" ng-repeat="item2 in vm.array[field.key] track by $index">
+                    <span ng-if="item2">{{item2}}</span>
+                    <span ng-if="!item2" translate="">GENERAL_SHOW_INFO.NO_ELEMENTS</span>
+                </div>
+                <!--Valor del  campo del  Objeto tipo Archivo-->
+                <md-content ng-if="field.kind==='file'">
+                    <a href="{{vm.array[field.key]}}" target="_blank">
+                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                        <span>{{field.section}}</span>
+                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                    </a>
+                </md-content>
+                <!--Valor del  campo del  Objeto tipo image-->
+                <md-content class="md-media-xl card-media" ng-if="field.kind==='image'" layout="center center">
+                    <img ng-src="{{vm.array[field.key]}}" class="dialogImage" alt="QR">
+                </md-content>
+                <!--Valor del  campo del  Objeto tipo Objeto-->
+                <md-content flex="100" ng-if="field.section && field.kind==='object'">
+                    <!--Manejo del titulo del Objeto -->
+                    <md-icon md-font-icon="{{field.icon}}"></md-icon>
+                    <b ng-if="field.section">{{field.section}}</b>
+                    <b ng-if="!field.section">{{field.key}}</b>
+                    <!--Valor del  campo de los campos del  Objeto-->
+                    <div flex="100" ng-if="field.section && field.kind==='object'"
+                         layout="column" ng-repeat="subfield in field.content">
+                        <!--titulo del  subcampo   Objeto-->
+                        <md-content
+                            ng-if="subfield.label && subfield.type==='field'||subfield.type==='multiple'||field.type==='file'||field.type==='image'">
+                            <b ng-if="subfield.label">{{subfield.label}}</b>
+                            <b ng-if="!subfield.label">{{subfield.key}}</b>
+                        </md-content>
+                        <!--valor del  subcampo   Objeto tipo field-->
+                        <md-content ng-if="subfield.type==='field'">
+                            <span>{{vm.array[field.key][subfield.key]}}</span>
+                        </md-content>
+                        <!--valor del  subcampo   Objeto tipo multiple-->
+                        <div ng-if="subfield.type==='multiple'"
+                             ng-repeat="item in vm.array[field.key][subfield.key] track by $index">
+                            <span>{{item}}</span>
+                        </div>
+                        <!--valor del  subcampo   Objeto tipo Archivo-->
+                        <md-content ng-if="subfield.type==='file'">
+                            <a href="{{vm.array[field.key][subfield.key]}}" target="_blank">
+                                <md-icon md-font-icon="fas fa-download"></md-icon>
+                                <span>{{subfield.label}}</span>
+                                <md-icon md-font-icon="fas fa-download"></md-icon>
+                            </a>
+                        </md-content>
+                        <!--valor del  subcampo   Objeto tipo Image-->
+                        <md-content class="md-media-xl card-media" ng-if="subfield.type==='image'"
+                                    layout="center center">
+                            <img ng-src="{{vm.array[field.key][subfield.key]}}" class="dialogImage" alt="QR">
+                        </md-content>
+
+
+                        <!--Titulo del  subcampo del  tipo Objeto-->
+                        <md-content flex="100" ng-if="subfield.label && subfield.type==='object'">
+                            <md-icon md-font-icon="{{subfield.icon}}"></md-icon>
+                            <b ng-if="subfield.label">{{subfield.label}}</b>
+                            <b ng-if="!subfield.label">{{subfield.key}}</b>
+
+                            <!--Valor del  subcampo del  tipo Objeto-->
+                            <div flex="100" ng-if="subfield.label && subfield.type==='object'"
+                                 layout="column" ng-repeat="subsubfield in subfield.content">
+                                <!--Titulo del  subsubcampo del  tipo Objeto-->
+                                <md-content
+                                    ng-if="subsubfield.label && subsubfield.type==='field'||subsubfield.type==='multiple'||subsubfield.type==='file'||subsubfield.type==='image'">
+                                    <b ng-if="subsubfield.label">{{subsubfield.label}}</b>
+                                    <b ng-if="!subsubfield.label">{{subsubfield.key}}</b>
+                                </md-content>
+
+                                <!--valor del  subsubcampo   Objeto tipo field-->
+                                <md-content ng-if="subsubfield.type==='field'">
+                                    <span>{{vm.array[field.key][subfield.key][subsubfield.key]}}</span>
+                                </md-content>
+                                <!--valor del  subsubcampo   Objeto tipo multiple-->
+                                <div ng-if="subsubfield.type==='multiple'"
+                                     ng-repeat="item3 in vm.array[field.key][subfield.key][subsubfield.key] track by $index">
+                                    <span>{{item3}}</span>
+                                </div>
+                                <!--valor del  subsubcampo   Objeto tipo Archivo-->
+                                <md-content ng-if="subfield.type==='file'">
+                                    <a href="{{vm.array[field.key][subfield.key][subsubfield.key]}}" target="_blank">
+                                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                                        <span>{{subsubfield.label}}</span>
+                                        <md-icon md-font-icon="fas fa-download"></md-icon>
+                                    </a>
+                                </md-content>
+                                <!--valor del  subsubcampo   Objeto tipo Image-->
+                                <md-content class="md-media-xl card-media" ng-if="subsubfield.type==='image'"
+                                            layout="center center">
+                                    <img ng-src="{{vm.array[field.key][subfield.key][subsubfield.key]}}"
+                                         class="dialogImage"
+                                         alt="QR">
+                                </md-content>
+                            </div>
+                        </md-content>
+
+                    </div>
+                </md-content>
+            </div>
+        </div>
+    </div>
+</md-dialog>

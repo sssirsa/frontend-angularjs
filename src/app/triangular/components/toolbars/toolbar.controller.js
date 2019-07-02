@@ -23,7 +23,7 @@
                                       toastr,
                                       User) {
         var vm = this;
-        vm.no_solicitudes = 2;
+
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
         vm.emailNew = false;
         vm.languages = triSettings.languages;
@@ -37,8 +37,6 @@
         vm.LogOut = LogOut;
 
         vm.user = User.getUser();
-
-        ////////////////
 
         function openSideNav(navID) {
             $mdUtil.debounce(function () {

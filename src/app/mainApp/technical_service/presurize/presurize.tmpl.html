@@ -1,0 +1,156 @@
+<div layout="column">
+    <md-card flex layout-align="center stretch" class="minorWhite">
+        <div class="toolbar">
+            <div layout-padding="" layout="row" layout-wrap="">
+                <div flex="100" flex-gt-md="50">
+                    <h2>
+                        <span flex translate="">PRESURIZE.PRESURIZE_MENU</span>
+
+                    </h2>
+                </div>
+                <div flex="100" layout-gt-sm="row" layout-align="center end" flex-gt-md="50">
+                    <md-button ng-if="vm.asset"  ng-click="vm.clear()" class="md-raised">
+                        <md-icon md-font-icon="fas fa-search"></md-icon>
+                        <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.SEARCH_NEW</span>
+                    </md-button>
+                    <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
+                        <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
+                        <span translate="" hide-xs hide-sm>INCIDENCE.REPORT_INCIDENCE</span>
+                    </md-button>
+
+                </div>
+
+            </div>
+        </div>
+        <div layout="row" flex="100" layout-wrap="" layout-padding="">
+            <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
+                                 info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+            <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+            <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            <start-service ng-if="vm.step.currentStage.id" on-start="vm.onStart(element)" presurize="vm.step.currentStage.id" sucursal="vm.step.control.sucursal.id"></start-service>
+        </div>
+
+
+        <md-tabs ng-if="vm.step.currentStage.id" class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always">
+            <md-tab label="{{vm.title_info}}">
+                <div flex="100" layout-padding="" layout-align="center center" layout-wrap="">
+                    <div flex="100" layout="row" layout-wrap="" layout-padding="">
+                        <span translate="" class="md-subhead" flex="100">PRESURIZE.CHARGE_INFO</span>
+                        <md-input-container flex="100" flex-gt-sm="50" class="md-block">
+                            <md-icon md-font-icon="fas fa-weight"></md-icon>
+                            <label translate="">PRESURIZE.CHARGE_PRESSION</label>
+                            <input type="text" ng-model="vm.presurize.presion_carga">
+                        </md-input-container>
+                        <div flex="80" flex-gt-sm="40">
+                            <div  layout-align="center center" layout-padding=""  layout-wrap=""  layout="row">
+                                <div layout="row">
+                                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                                    <label translate="">PRESURIZE.CHARGE_DATE</label>
+                                </div>
+                                <span  ng-if="vm.presurize.fecha_carga" layout="row" layout-align="end center">
+                                     <md-icon md-font-icon="far fa-clock"></md-icon>
+                                    {{vm.presurize.fecha_carga | date:"HH:mm:ss" }}
+                                </span>
+                                <span  ng-if="vm.presurize.fecha_carga" layout="row" layout-align="end center">
+                                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                                    {{ vm.presurize.fecha_carga | date:"EEEE dd.MM.yyyy" }}
+                                </span>
+                            </div>
+                        </div>
+                        <md-content flex="20" flex-gt-sm="10" layout-align="center center">
+                            <md-button class="md-fab md-primary" ng-click="vm.timeStampCharge()">
+                                <md-icon md-font-icon="far fa-clock"></md-icon>
+                            </md-button>
+                            <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
+                        </md-content>
+                        <span class="md-subhead" translate="" flex="100">PRESURIZE.REVIEW_INFO</span>
+                        <md-input-container flex="100" flex-gt-sm="50" class="md-block">
+                            <md-icon md-font-icon="fas fa-weight"></md-icon>
+                            <label translate="">PRESURIZE.REVISION_PRESSION</label>
+                            <input type="text" ng-model="vm.presurize.presion_revision">
+                        </md-input-container>
+                        <div flex="80" flex-gt-sm="40" >
+                            <div  layout-align="center center" layout-padding=""  layout-wrap=""  layout="row">
+                                <div layout="row">
+                                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                                    <label translate="">PRESURIZE.REVISION_DATE</label>
+                                </div>
+                                <span  ng-if="vm.presurize.fecha_revision" layout="row" layout-align="end center">
+                                     <md-icon md-font-icon="far fa-clock"></md-icon>
+                                    {{vm.presurize.fecha_revision | date:"HH:mm:ss" }}
+                                </span>
+                                <span  ng-if="vm.presurize.fecha_revision" layout="row" layout-align="end center">
+                                    <md-icon md-font-icon="far fa-calendar-alt"></md-icon>
+                                    {{ vm.presurize.fecha_revision | date:"EEEE dd.MM.yyyy" }}
+                                </span>
+                            </div>
+                        </div>
+                        <md-content flex="20" flex-gt-sm="10" layout-align="center center">
+                            <md-button class="md-fab md-primary" ng-click="vm.timeStampCheck()">
+                                <md-icon md-font-icon="far fa-clock"></md-icon>
+                            </md-button>
+                            <md-tooltip><span translate="">PRESURIZE.SET_CHARGE_TIME</span></md-tooltip>
+                        </md-content>
+                        <md-content layout="row" flex="100" flex-gt-sm="30" layout-align="center center">
+                            <md-switch flex="40" class="md-primary" name="special" ng-model="vm.presurize.gas" required>
+                            </md-switch>
+                            <span flex="50" ng-if="vm.presurize.gas" translate="">PUNCTURE.WITH_GAS</span>
+                            <span flex="50" ng-if="!vm.presurize.gas" translate="">PUNCTURE.WITHOUT_GAS</span>
+                        </md-content>
+                        <md-input-container flex-gt-sm="70" flex="100" layout-align="center center" layout-fill=""
+                                            class="md-padding">
+                            <md-icon md-font-icon=""></md-icon>
+                            <label translate="">PUNCTURE.OBSERVATIONS</label>
+                            <textarea ng-model="vm.presurize.observaciones" type="text" rows="5"
+                                      layout-fill=""></textarea>
+                        </md-input-container>
+                        <md-input-container layout="row" layout-wrap="" flex="100" >
+                            <md-radio-group layout="row"  layout-wrap="" ng-model="vm.option_to_do" flex="100">
+                                <md-radio-button flex="100" flex-gt-sm="20" value="1" class="md-primary">
+                                    <md-icon md-font-icon="fas fa-search"></md-icon>
+                                    <span translate="">PRESURIZE.SENDED_DIAGNOSIS</span>
+                                </md-radio-button>
+                                <md-radio-button flex="100" flex-gt-sm="20" value="2" class="md-primary">
+                                    <md-icon md-font-icon="fas fa-angle-down"></md-icon>
+                                    <span translate="">PRESURIZE.CONTINUE_IN_STEP</span>
+                                </md-radio-button>
+                                <md-radio-button flex="100" flex-gt-sm="25" value="3" class="md-primary">
+                                    <md-icon md-font-icon="fas fa-retweet"></md-icon>
+                                    <span translate="">PRESURIZE.RESTART_STEP</span>
+                                </md-radio-button>
+                                <md-radio-button flex="100" flex-gt-sm="25" value="4" class="md-primary">
+                                    <md-icon md-font-icon="fas fa-ban"></md-icon>
+                                    <span translate="">PRESURIZE.OBSOLETE</span>
+                                </md-radio-button>
+                            </md-radio-group>
+                        </md-input-container>
+                    </div>
+                </div>
+
+
+            </md-tab>
+            <md-tab ng-if="!vm.step.makeInspection" label="{{vm.assets_info}}">
+                <md-content>
+                    <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
+                                          tipo-equipo="vm.asset.modelo.tipo.id"
+                                          catalogo-etapa="vm.step.currentStage.etapa.nombre"
+                                          bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                <md-icon md-font-icon="fas fa-eraser"></md-icon>
+                <span translate="" hide-xs hide-sm>INSPECTION.ACTIONS.CLEAR_FIELD</span>
+            </md-button>
+            <md-button ng-if="vm.step.currentStage" ng-click="vm.sendPresurize()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-pencil-alt"></md-icon>
+                <span translate="" hide-xs hide-sm>PRESURIZE.ACTIONS.SAVE_PRESURIZE</span>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</div>
+

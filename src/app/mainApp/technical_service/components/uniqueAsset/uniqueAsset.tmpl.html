@@ -1,0 +1,85 @@
+<div flex="100"  class="minorWhite">
+    <md-toolbar flex="100" class="Subtitle">
+        <div layout="row" layout-align="center center">
+            <div flex="10" class="toolbarSubtitleIcon" layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-box-open"></md-icon>
+            </div>
+            <div flex="90" class="toolbarSubtitle" layout-padding="" layout-align="center center">
+                <b translate="">UNIQUE_ASSET_COMPONENT.TITLE</b>
+            </div>
+        </div>
+    </md-toolbar>
+    <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
+        <form flex="100" name="searchUniqueAsset" ng-submit="$ctrl.search_unique_asset()">
+            <div layout="row" layout-padding="" layout-align="center center">
+                <md-input-container flex="90">
+                    <label translate="">UNIQUE_ASSET_COMPONENT.CODE_BAR</label>
+                    <input type="text" ng-model="$ctrl.barcode" required md-maxlength="20">
+                </md-input-container>
+                <md-input-container flex="10">
+                    <md-button class="md-fab md-primary md-hue-2" ng-click="$ctrl.search_unique_asset()">
+                        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                    </md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </div>
+    <div flex="100" layout="row" layout-wrap="">
+        <md-subheader ng-if="$ctrl.unique_asset_list.length!=0||$ctrl.notDetected!=0" flex="100" class="md-no-sticky"><span translate="">UNIQUE_ASSET_COMPONENT.RESULTS</span></md-subheader>
+        <md-list-item flex="100" flex-gt-sm="50"  class="md-3-line" ng-repeat="unique_asset in $ctrl.unique_asset_list " ng-click="null" flex="50" ng-if="unique_asset.disponible">
+            <md-input-container>
+                <md-checkbox md-no-ink ng-model="unique_asset.used" ng-change="$ctrl.onChange(unique_asset)"  class="md-primary">
+                </md-checkbox>
+            </md-input-container>
+            <img ng-src="assets/images/compressor.png" class="md-avatar" />
+            <div class="md-list-item-text" layout="column">
+                <md-content><h3><b>{{unique_asset.catalogo_insumo_unico.descripcion}}</b></h3></md-content>
+                <md-content>
+                    <h3><span translate="">UNIQUE_ASSET_COMPONENT.SERIAL_NUMBER</span>:<b>{{unique_asset.no_serie}}</b>
+                    </h3>
+                </md-content>
+                <md-content layout="column">
+                    <h4>
+                        <b>{{unique_asset.catalogo_insumo_unico.modelo_insumo.descripcion}}
+                        - {{unique_asset.catalogo_insumo_unico.modelo_insumo.marca.descripcion}}</b>
+                    </h4>
+                </md-content>
+                <md-content layout="column">
+                    <h4><span translate="">UNIQUE_ASSET_COMPONENT.CATEGORY</span>:
+                        <span><b>{{unique_asset.catalogo_insumo_unico.categoria_insumo.nombre}}</b>
+                        {{unique_asset.catalogo_insumo_unico.categoria_insumo.com_code}}</span>
+                    </h4>
+                </md-content>
+                <p>{{ item.notes }}</p>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>
+    </div>
+    <div flex="100"  ng-repeat="element in $ctrl.notDetected">
+    <section layout-gt-xs="row"
+             layout="column"
+             layout-align-gt-xs="space-between center"
+             layout-align="center stretch"
+             class="full-width not-found-cabinet"
+             ng-if="!element.cabinet"
+             ng-click="$ctrl.createUnique(element)" layout-padding="">
+        <div layout="column"
+             layout-align="center center">
+            {{element}}
+        </div>
+        <div layout="column"
+             layout-align="center center">
+            <span translate="">UNIQUE_ASSET_COMPONENT.NOT_FOUND</span>
+        </div>
+        <div layout="column"
+             layout-align="center center">
+            <md-button ng-click="$event.stopPropagation(); $ctrl.removePossibleUniqueAsset(element)"
+                       aria-label="remove insumo único"
+                       class="md-icon-button">
+                <md-icon md-font-icon="fa fa-times"></md-icon>
+            </md-button>
+        </div>
+    </section>
+    <md-divider></md-divider>
+    </div>
+</div>

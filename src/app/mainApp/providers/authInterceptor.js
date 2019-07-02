@@ -1,7 +1,7 @@
 /**
  * Created by Christian amezcua on 17/10/16.
  */
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -20,8 +20,7 @@
 
         function request(config) {
             var deferred = $q.defer();
-            if(config.url.indexOf('oauth') === -1)
-            {
+            if (config.url.indexOf('oauth') === -1) {
                 if (!inFlightGet) {
                     inFlightGet = $injector.get('AuthService').getToken();
                     config.headers.Authorization = 'Bearer ' + inFlightGet;
@@ -38,7 +37,11 @@
         }
 
         function responseError(response) {
-            if (response.status === 401 && response.statusText == 'Unauthorized' && !response.data.error_description) {
+            if (response.status === 401
+                && response.statusText === 'Unauthorized'
+                && !response.data.error_description
+                && !response.congif.url.endsWith('oauth/token/')
+            ) {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
                 if (!inFlightRefresh) {

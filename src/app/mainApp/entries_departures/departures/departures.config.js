@@ -48,7 +48,7 @@
                 name: 'DEPARTURES.MENU.TITLE',
                 icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
-                permission_old: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
+                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN'],
                 priority: 5,
                 children: [
                     {

@@ -1,7 +1,11 @@
-<div
-    class="full-height full-image-background bg-01"
-    layout-align="center center"
-    layout="row">
+<div class="full-height full-image-background bg-01"
+     cg-busy="{
+        promise:vm.refreshTokenPromise,
+        message:'Recuperando sesión',
+        templateUrl:'app/mainApp/directives/loading.tmpl.html'
+    }"
+     layout-align="center center"
+     layout="row">
     <div layout="column" layout-align="center center">
         <img id="snowflake"
              src="assets/images/logo.svg" />

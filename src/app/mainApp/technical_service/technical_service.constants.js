@@ -13,6 +13,33 @@
                 stage: 'stage',
                 symptom: 'symptom'
             },
+            inspections:{
+                base:'inspections',
+                preliminary_inspection:'preliminary_inspection',
+                pre_checklist:'pre_checklist'
+            },
+            services:{
+                base:'repair',
+                service:'cabinet_service',
+                current_stage:'current_stage',
+                checklist:'checklist',
+                stage:'stage',
+                diagnose:'diagnose',
+                puncture:'puncture',
+                pressurize:'pressurize'
+            },
+            puncture:{
+                base:'puncture'
+            },
+            type_entrie:{
+                base:'management',
+                control:'control',
+                cabinet_subsidiary:'control_cabinet_capitalizado'
+            },
+            bulk_assets:{
+                asset:'asset',
+                bulksByStep:'bulk_asset_process'
+            },
             choices: {
                 tipo_etapa: [
                     {
