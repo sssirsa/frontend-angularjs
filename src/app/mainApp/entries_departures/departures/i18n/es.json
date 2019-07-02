@@ -16,6 +16,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "AGENCY": "UDN-Agencia",
                 "DESCRIPTION": "Descripción",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
