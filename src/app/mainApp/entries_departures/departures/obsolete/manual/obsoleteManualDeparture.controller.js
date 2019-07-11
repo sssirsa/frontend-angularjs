@@ -120,29 +120,50 @@
                                 //a.k.a. The cabinet exists in the selected subsidiary
                                 if (cabinetSuccessCallback['subsidiary'].id === vm.departure[vm.catalogues['subsidiary'].binding]) {
                                     //The subsidiary of the cabinet is the same as the user one.
-                                    if (cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida']) {
-                                        //The departure matches the entrance kind
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
+                                    if (cabinetSuccessCallback['can_leave']) {
+                                        //The cabinet doesn't have internal restrictions to leave
+                                        if (cabinetSuccessCallback['cabinet'].inspeccionado.estado === 'Confirmado') {
+                                            //Cabinet entry has been confirmed
+                                            if (cabinetSuccessCallback['stage'].tipo === 'Obsoleto') {
+                                                //Just depart from this departure if the asset if obsolete
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                //Finally add the cabinet to the list
+                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            }
+                                            else {
+                                                toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.STAGE_ERROR')
+                                                    + ', '
+                                                    + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.AT_STAGE')
+                                                    + ' '
+                                                    + cabinetSuccessCallback['stage'].nombre
+                                                    , cabinetSuccessCallback.cabinet.economico
+                                                );
+                                                vm.removeCabinet(cabinetID);
+                                            }
                                         }
                                         else {
-                                            toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                             vm.removeCabinet(cabinetID);
                                         }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
                                         vm.removeCabinet(cabinetID);
                                     }
+
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    toastr.error(
+                                        Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_YOUR_SUBSIDIARY')
+                                        + ', '
+                                        + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.IS_AT')
+                                        + ' '
+                                        + cabinetSuccessCallback['subsidiary'].nombre
+                                        , cabinetSuccessCallback.cabinet.economico
+                                    );
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
