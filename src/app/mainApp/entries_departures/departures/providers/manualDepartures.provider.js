@@ -21,12 +21,12 @@
         var managementUrl = API
             .all(URLS.management.base);
         var technicalUrl = API
-            .all(URLS.tecnical_service);
+            .all(URLS.technical_service.base);
 
         var control = URLS.management.control;
         var departures = URLS.entries_departures.departures;
         var inventory = URLS.management.inventory;
-        var technical = URLS.tecnical_service.services;
+        var service = URLS.technical_service.services;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -128,11 +128,12 @@
                             //Getting cabinet stage
                             getCabinetStage(id)
                                 .then(function stageSuccessCallback(stageResponse) {
-                                    if (stageResponse.lenght > 0) {
+                                    if (stageResponse[PAGINATION.elements].length > 0) {
                                         //There is a result, we just care abput the first one
                                         //bacause there should only be one
-                                        var service = stageResponse[0];
-                                        response['stage'] = stageResponse.etapa_actual.etapa;
+                                        var results = stageResponse[PAGINATION.elements];
+                                        var service = results[0];
+                                        response['stage'] = service.etapa_actual.etapa;
                                     }
                                 })
                                 .catch(function stageErrorCallback(stageError) {
@@ -181,9 +182,13 @@
         }
 
         function getCabinetStage(id) {
+            var query = service.service
+                + '?' + QUERIES.service.by_cabinet
+                + '=' + id;
             return technicalUrl
-                .all(technical.base)
-                .get(QUERIES.service.by_cabinet);
+                .all(service.base)
+                .all(query)
+                .customGET();
         }
 
         //Constants
