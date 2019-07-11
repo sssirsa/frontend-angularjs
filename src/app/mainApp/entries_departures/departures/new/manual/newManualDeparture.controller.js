@@ -158,14 +158,22 @@
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(
-                                        Translate.translate('DEPARTURES.NEW.ERRORS.NOT_YOUR_SUBSIDIARY')
-                                        + ', '
-                                        + Translate.translate('DEPARTURES.NEW.ERRORS.IS_AT')
-                                        + ' '
-                                        + cabinetSuccessCallback['subsidiary'].nombre
-                                        , cabinetSuccessCallback.cabinet.economico
-                                    );
+                                    var message = Translate.translate('DEPARTURES.NEW.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    if (cabinetSuccessCallback['subsidiary']) {
+                                        message = message
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.NEW.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['subsidiary'].nombre;
+                                    }
+                                    if (cabinetSuccessCallback['agency']) {
+                                        message = message
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.NEW.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['agency'].agencia;
+                                    }
+                                    toastr.error(message, cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
