@@ -46,9 +46,12 @@
             vm.catalogues = MANUAL_DEPARTURES.obsoleteDeparture.catalogues();
 
             vm.user = User.getUser();
-            //Determining whether or not to show the Subsidiary selector.
-            vm.showSubsidiarySelector = !vm.user['sucursal'];
-            vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'];
+            //Determining whether or not to show the Subsidiary or Agency selector.
+            vm.showSubsidiarySelector = !vm.user['sucursal'] && !vm.user['udn'];
+
+            //Bindging user subsidiary or agency to entry if user happens to have one.
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'] : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'] : null;
         };
 
         vm.init();
@@ -115,9 +118,19 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback['subsidiary']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'].id === vm.departure[vm.catalogues['subsidiary'].binding]) {
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                //a.k.a. The cabinet exists in the selected subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        === vm.departure[vm.catalogues['subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency'].id
+                                        === vm.departure[vm.catalogues['udn'].binding]
+                                        : false)
+                                ) {
                                     //The subsidiary of the cabinet is the same as the user one.
                                     if (cabinetSuccessCallback['can_leave']) {
                                         //The cabinet doesn't have internal restrictions to leave
