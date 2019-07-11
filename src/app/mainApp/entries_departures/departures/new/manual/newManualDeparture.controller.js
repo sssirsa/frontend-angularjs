@@ -130,7 +130,7 @@
                                         //The departure matches the entrance kind
                                         if (cabinetSuccessCallback['can_leave']) {
                                             //The cabinet doesn't have internal restrictions to leave
-                                            if (cabinetSuccessCallback['cabinet'].inspeccionado.estado === 'Confirmado') {
+                                            if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                                 //Cabinet entry has been confirmed
 
                                                 //Finally add the cabinet to the list

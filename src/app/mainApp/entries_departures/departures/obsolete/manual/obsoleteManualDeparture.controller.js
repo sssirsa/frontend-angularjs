@@ -45,11 +45,10 @@
             vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.obsoleteDeparture.catalogues();
 
+            vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-                vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
-            }
+            vm.showSubsidiarySelector = !vm.user['sucursal'];
+            vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'];
         };
 
         vm.init();
@@ -98,7 +97,7 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID),
+                            .getCabinet(cabinetID, vm.user['sucursal'], vm.user['udn']),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -122,7 +121,7 @@
                                     //The subsidiary of the cabinet is the same as the user one.
                                     if (cabinetSuccessCallback['can_leave']) {
                                         //The cabinet doesn't have internal restrictions to leave
-                                        if (cabinetSuccessCallback['cabinet'].inspeccionado.estado === 'Confirmado') {
+                                        if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
                                             if (cabinetSuccessCallback['stage'].tipo === 'Obsoleto') {
                                                 //Just depart from this departure if the asset if obsolete

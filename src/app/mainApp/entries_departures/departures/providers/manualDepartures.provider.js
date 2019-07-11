@@ -72,6 +72,7 @@
                 can_leave: false,
                 cabinet: null,
                 entrance_kind: null,
+                inspection: null,
                 restriction: null,
                 status: null,
                 stage: null,
@@ -84,6 +85,7 @@
                     //Response filling
                     response['subsidiary'] = apiResponse['sucursal'];
                     response['agency'] = apiResponse['udn'];
+                    response['inspection'] = apiResponse['inspeccionado'];
 
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
