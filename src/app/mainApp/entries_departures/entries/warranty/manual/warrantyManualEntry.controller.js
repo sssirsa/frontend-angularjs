@@ -35,7 +35,6 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
 
@@ -226,7 +225,6 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();

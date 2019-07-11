@@ -19,7 +19,8 @@
         //Variables
         vm.selectedTab;
         vm.departure;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
+        vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
 
@@ -47,7 +48,7 @@
 
             vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
-            vm.showSubsidiarySelector = !vm.user['sucursal'] && !vm.user['udn'];
+            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
             vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'] : null;
@@ -250,6 +251,14 @@
             //});
             return cabinetID;
             //TODO: Cabinet restriction dialog
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['udn'].binding]);
+            delete (vm.departure[vm.catalogues['subsidiary'].binding]);
+            vm.departure['cabinets_id'] = [];
+            vm.cabinetList = [];
         };
 
         //Internal functions
