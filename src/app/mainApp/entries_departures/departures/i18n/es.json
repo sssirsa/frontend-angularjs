@@ -55,7 +55,9 @@
                 "CANT_LEAVE": "El cabinet aún no puede salir",
                 "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
                 "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada"
             }
         },
         "WARRANTY": {
