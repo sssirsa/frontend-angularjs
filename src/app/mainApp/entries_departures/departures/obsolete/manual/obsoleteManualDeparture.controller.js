@@ -131,7 +131,7 @@
                                         === vm.departure[vm.catalogues['udn'].binding]
                                         : false)
                                 ) {
-                                    //The subsidiary of the cabinet is the same as the user one.
+                                    //The subsidiary or agency of the asset is the same as departure's
                                     if (cabinetSuccessCallback['can_leave']) {
                                         //The cabinet doesn't have internal restrictions to leave
                                         if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {

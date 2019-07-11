@@ -138,7 +138,7 @@
                                         response['stage'] = service.etapa_actual.etapa;
                                     }
                                 })
-                                .catch(function stageErrorCallback(stageError) {
+                                .catch(function stageErrorCallback() {
                                     //Error getting the stage
                                     response['stage'] = null;
                                 })
