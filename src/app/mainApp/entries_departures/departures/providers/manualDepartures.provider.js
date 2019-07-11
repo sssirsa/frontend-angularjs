@@ -7,6 +7,7 @@
         API,
         $q,
         URLS,
+        QUERIES,
         Translate,
         EnvironmentConfig,
         PAGINATION
@@ -19,10 +20,13 @@
             .all(URLS.management.inventory.base);
         var managementUrl = API
             .all(URLS.management.base);
+        var technicalUrl = API
+            .all(URLS.tecnical_service);
 
         var control = URLS.management.control;
         var departures = URLS.entries_departures.departures;
         var inventory = URLS.management.inventory;
+        var technical = URLS.tecnical_service.services;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -70,6 +74,7 @@
                 entrance_kind: null,
                 restriction: null,
                 status: null,
+                stage: null,
                 subsidiary: null
             };
             getCabinetInSubsidiary(id)
@@ -119,7 +124,26 @@
                             else {
                                 response.can_leave = false;
                             }
-                            deferred.resolve(response);
+
+                            //Getting cabinet stage
+                            getCabinetStage(id)
+                                .then(function stageSuccessCallback(stageResponse) {
+                                    if (stageResponse.lenght > 0) {
+                                        //There is a result, we just care abput the first one
+                                        //bacause there should only be one
+                                        var service = stageResponse[0];
+                                        response['stage'] = stageResponse.etapa_actual.etapa;
+                                    }
+                                })
+                                .catch(function stageErrorCallback(stageError) {
+                                    //Error getting the stage
+                                    response['stage'] = null;
+                                })
+                                .finally(function cabinetStageResolver() {
+                                    //Resolve the promise whether or not a current stage was found
+                                    deferred.resolve(response);
+                                });
+
                         })
                         .catch(function cabinetErrorCallback(errorResponse) {
                             deferred.reject(errorResponse);
@@ -155,6 +179,14 @@
             //TODO: Add behaviour when the URLs are provided
             return id;
         }
+
+        function getCabinetStage(id) {
+            return technicalUrl
+                .all(technical.base)
+                .get(QUERIES.service.by_cabinet);
+        }
+
+        //Constants
 
         var newDeparture = {
             template: function () {
