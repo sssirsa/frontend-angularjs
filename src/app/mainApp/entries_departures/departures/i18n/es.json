@@ -131,7 +131,8 @@
                     "LABEL": "Activa si la salida es desde una UDN-Agencia",
                     "TRUE": "Salida desde una UDN-Agencia",
                     "FALSE": "Salida desde una sucursal"
-                }
+                },
+                "SUPPLIER": "Proveedor"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
@@ -140,7 +141,8 @@
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "SUPPLIER": "Seleccione el proveedor de destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",

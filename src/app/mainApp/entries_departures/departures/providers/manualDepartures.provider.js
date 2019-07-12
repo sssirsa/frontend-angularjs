@@ -452,7 +452,7 @@
                                 + '/' + URLS.inventory.base
                                 + '/' + URLS.inventory.catalogues.base
                                 + '/' + URLS.inventory.catalogues.supplier,
-                            name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
+                            name: Translate.translate('ENTRIES.OBSOLETE.LABELS.SUPPLIER'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'razon_social',
@@ -466,7 +466,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('ENTRIES.NEW.HINTS.SUPPLIER'),
+                        hint: Translate.translate('ENTRIES.OBSOLETE.HINTS.SUPPLIER'),
                         icon: 'fas fas-box',
                         required: true
                     }
