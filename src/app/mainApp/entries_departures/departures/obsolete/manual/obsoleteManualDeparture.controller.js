@@ -102,8 +102,8 @@
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
                             .getCabinet(cabinetID,
-                            vm.departure[vm.catalogues['subsidiary'].binding],
-                            vm.departure[vm.catalogues['udn'].binding]                            
+                                vm.departure[vm.catalogues['subsidiary'].binding],
+                                vm.departure[vm.catalogues['udn'].binding]
                             ),
                         cabinet: null,
                         id: null,
@@ -169,7 +169,8 @@
                                     }
                                     else {
                                         toastr.error(Translate.translate('DEPARTURES.OBSOLETE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
-                                        vm.removeCabinet(cabinetID);
+                                        //TODO: Add them and show the restriction
+                                        //vm.removeCabinet(cabinetID);
                                     }
 
                                 }
