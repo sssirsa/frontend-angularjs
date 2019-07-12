@@ -384,6 +384,11 @@
                         hint: Translate.translate('ENTRIES.REPAIR.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
+                    },
+                    store: {
+                        binding: 'establecimiento_origen_id',
+                        model: 'no_cliente',
+                        option: 'nombre_establecimiento'
                     }
                 };
                 return catalogues;
