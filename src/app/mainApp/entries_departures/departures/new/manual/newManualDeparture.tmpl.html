@@ -11,6 +11,7 @@
                 label={{'DEPARTURES.NEW.LABELS.ASSET_LOADING'|translate}}>
             <catalog-select class="full-width"
                             ng-if="vm.showSubsidiarySelector"
+                            lock="vm.cabinetList.length>0"
                             catalog="vm.catalogues['subsidiary'].catalog"
                             hint="vm.catalogues['subsidiary'].hint"
                             icon="vm.catalogues['subsidiary'].icon"

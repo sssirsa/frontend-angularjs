@@ -41,18 +41,18 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showSelector = false;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.obsoleteDeparture.catalogues();
 
-            vm.user = User.getUser();
+            var user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
-            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+            vm.showSelector = !user['sucursal'] && !user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
-            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'].id : null;
+            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal'].id : null;
+            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn'].id : null;
         };
 
         vm.init();
@@ -63,7 +63,7 @@
             vm.departure[field] = element;
         };
 
-        vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
+        vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
@@ -140,7 +140,7 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
-                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo === 'Obsoleto' : false) {
+                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : false) {
                                                 //Just depart from this departure if the asset if obsolete
                                                 //Also validate stage existence
 
@@ -320,17 +320,7 @@
             }
             return departure;
         };
-
-        //var addCabinetToList = function addCabinetToList(cabinet) {
-        //    var cabinetToAdd = {
-        //        promise: null,
-        //        cabinet: cabinet,
-        //        id: cabinet['economico']
-        //    };
-
-        //    vm.cabinetList.push(cabinetToAdd);
-        //};
-
+        
         //Tab functions
 
         vm.previousTab = function () {
