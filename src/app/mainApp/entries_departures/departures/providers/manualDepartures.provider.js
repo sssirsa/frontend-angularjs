@@ -620,6 +620,11 @@
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
+                    },
+                    store: {
+                        binding: 'establecimiento_destino_id',
+                        model: 'no_cliente',
+                        option:'nombre_establecimiento'
                     }
                 };
                 return catalogues;

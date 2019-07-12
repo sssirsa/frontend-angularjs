@@ -184,6 +184,16 @@
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
+                "DESTINATION_SWITCH": {
+                    "LABEL": "Activa si la salida es a un Establecimiento",
+                    "TRUE": "Salida hacia un Establecimiento",
+                    "FALSE": "Salida hacia una Agencia-UDN"
+                },
                 "STORE": "Establecimiento"
             },
             "HINTS": {
@@ -210,9 +220,12 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de almacén u obsoletos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal o udn seleccionada",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "STAGE_ERROR": "El cabinet no está listo para mercado",
+                "AT_STAGE": "se encuentra en la etapa"
             }
         },
         "UNRECOGNIZABLE": {
