@@ -593,6 +593,33 @@
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
+                    },
+                    destination_udn: {
+                        binding: 'udn_destino_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.udn,
+                            name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia',
+                            elements: 'results',
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            },
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            }
+                        },
+                        hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true
                     }
                 };
                 return catalogues;
