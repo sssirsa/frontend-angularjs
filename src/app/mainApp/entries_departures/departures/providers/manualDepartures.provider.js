@@ -90,13 +90,13 @@
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
                     if (subsidiary) {
-                        if (apiResponse['sucursal'].id !== subsidiary) {
+                        if (apiResponse['sucursal'] ? apiResponse['sucursal'].id !== subsidiary : false) {
                             cabinetCanLeave = false;
                         }
                     }
                     //Validating agency of the cabinet
                     if (agency) {
-                        if (apiResponse['udn'].id !== agency) {
+                        if (apiResponse['udn'] ? apiResponse['udn'].id !== agency : null) {
                             cabinetCanLeave = false;
                         }
                     }
