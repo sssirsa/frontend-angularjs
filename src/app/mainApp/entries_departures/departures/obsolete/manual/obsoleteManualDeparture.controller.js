@@ -51,8 +51,8 @@
             vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'] : null;
-            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'] : null;
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'].id : null;
         };
 
         vm.init();
@@ -101,7 +101,10 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID, vm.user['sucursal'], vm.user['udn']),
+                            .getCabinet(cabinetID,
+                            vm.departure[vm.catalogues['subsidiary'].binding],
+                            vm.departure[vm.catalogues['udn'].binding]                            
+                            ),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -172,22 +175,22 @@
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector.
-                                    var message = Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    var locationMessage = Translate.translate('DEPARTURES.OBSOLETE.ERRORS.NOT_YOUR_SUBSIDIARY');
                                     if (cabinetSuccessCallback['subsidiary']) {
-                                        message = message
+                                        locationMessage = locationMessage
                                             + ', '
                                             + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['subsidiary'].nombre;
                                     }
                                     if (cabinetSuccessCallback['agency']) {
-                                        message = message
+                                        locationMessage = locationMessage
                                             + ', '
                                             + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['agency'].agencia;
                                     }
-                                    toastr.error(message, cabinetSuccessCallback.cabinet.economico);
+                                    toastr.error(locationMessage, cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }

@@ -58,7 +58,7 @@
              *   -Cabinet exists in database and can leave (Restriction, subsidiary and agency validation)
              *       +Cabinet full object and can_leave in true
              *   -Cabinet exist in database and can't leave (Because of restriction or inproper inventory location)
-             *       +Cabinet full object and can_leave in false, restriction id or object(when applies)
+             *       +Cabinet partial object and can_leave in false, restriction id or object(when applies)
              *       and inventory location (agency or subsidiary)
              *   -Cabinet doesn't exists, so it can't leave (wrong ID)
              *       +Cabinet in partial object {id:id}, can leave in false, all fields in null.
@@ -107,50 +107,57 @@
                         response['restricion'] = apiResponse['impedimento'];
                     }
 
-                    //Getting cabinet full information
-                    inventoryUrl.all(inventory.cabinet).all(id).customGET()
-                        .then(function cabinetSuccessCallback(apiCabinet) {
-                            //Full cabinet information
-                            response.cabinet = apiCabinet;
+                    if (cabinetCanLeave) {
+                        //Getting cabinet full information
+                        inventoryUrl.all(inventory.cabinet).all(id).customGET()
+                            .then(function cabinetSuccessCallback(apiCabinet) {
+                                //Full cabinet information
+                                response.cabinet = apiCabinet;
 
-                            //Remaining cabinet data
-                            response.entrance_kind = apiResponse['tipo_entrada'];
-                            response['status'] = apiResponse['estatus_cabinet'];
+                                //Remaining cabinet data
+                                response.entrance_kind = apiResponse['tipo_entrada'];
+                                response['status'] = apiResponse['estatus_cabinet'];
 
-                            //Cabinet can leave
-                            if (cabinetCanLeave) {
-                                response.can_leave = true;
-                            }
+                                //Cabinet can leave
+                                if (cabinetCanLeave) {
+                                    response.can_leave = true;
+                                }
 
-                            //Cabinet can't leave
-                            else {
-                                response.can_leave = false;
-                            }
+                                //Cabinet can't leave
+                                else {
+                                    response.can_leave = false;
+                                }
 
-                            //Getting cabinet stage
-                            getCabinetStage(id)
-                                .then(function stageSuccessCallback(stageResponse) {
-                                    if (stageResponse[PAGINATION.elements].length > 0) {
-                                        //There is a result, we just care abput the first one
-                                        //bacause there should only be one
-                                        var results = stageResponse[PAGINATION.elements];
-                                        var service = results[0];
-                                        response['stage'] = service.etapa_actual.etapa;
-                                    }
-                                })
-                                .catch(function stageErrorCallback() {
-                                    //Error getting the stage
-                                    response['stage'] = null;
-                                })
-                                .finally(function cabinetStageResolver() {
-                                    //Resolve the promise whether or not a current stage was found
-                                    deferred.resolve(response);
-                                });
+                                //Getting cabinet stage
+                                getCabinetStage(id)
+                                    .then(function stageSuccessCallback(stageResponse) {
+                                        if (stageResponse[PAGINATION.elements].length > 0) {
+                                            //There is a result, we just care abput the first one
+                                            //bacause there should only be one
+                                            var results = stageResponse[PAGINATION.elements];
+                                            var service = results[0];
+                                            response['stage'] = service.etapa_actual.etapa;
+                                        }
+                                    })
+                                    .catch(function stageErrorCallback() {
+                                        //Error getting the stage
+                                        response['stage'] = null;
+                                    })
+                                    .finally(function cabinetStageResolver() {
+                                        //Resolve the promise whether or not a current stage was found
+                                        deferred.resolve(response);
+                                    });
 
-                        })
-                        .catch(function cabinetErrorCallback(errorResponse) {
-                            deferred.reject(errorResponse);
-                        });
+                            })
+                            .catch(function cabinetErrorCallback(errorResponse) {
+                                deferred.reject(errorResponse);
+                            });
+                    }
+                    else {
+                        response.can_leave = false;
+                        response['cabinet'] = { economico: id };
+                        deferred.resolve(response);
+                    }
                 })
                 .catch(function cabinetsInSubsiadiaryErrorCallback(apiResponseError) {
                     //Cabinet doesn't exists in any subsidiary, so it can't leave

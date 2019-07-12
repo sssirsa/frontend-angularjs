@@ -49,7 +49,7 @@
             vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary selector.
             vm.showSubsidiarySelector = !vm.user['sucursal'];
-            vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'];
+            vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id;
 
         };
 
