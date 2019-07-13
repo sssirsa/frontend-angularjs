@@ -133,7 +133,7 @@
                     "TRUE": "Salida desde una UDN-Agencia",
                     "FALSE": "Salida desde una sucursal"
                 },
-                "SUPPLIER": "Proveedor"
+                "DESTINATION_SUBSIDIARY": "Sucursal destino"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
