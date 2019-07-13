@@ -225,7 +225,9 @@
                 "IS_AT": "se encuentra en",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
                 "STAGE_ERROR": "El cabinet no está listo para mercado",
-                "AT_STAGE": "se encuentra en la etapa"
+                "AT_STAGE": "se encuentra en la etapa",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0001-Buen estado",
+                "STATUS_IS": "su estado es"
             }
         },
         "UNRECOGNIZABLE": {

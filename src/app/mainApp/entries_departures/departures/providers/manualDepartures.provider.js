@@ -86,6 +86,7 @@
                     response['subsidiary'] = apiResponse['sucursal'];
                     response['agency'] = apiResponse['udn'];
                     response['inspection'] = apiResponse['inspeccionado'];
+                    response['status'] = apiResponse['estatus_cabinet'];
 
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
@@ -150,6 +151,16 @@
 
                             })
                             .catch(function cabinetErrorCallback(errorResponse) {
+                                //Cabinet in ohter subsidiary or agency, so it can't leave
+                                if (errorResponse.status === 404) {
+                                    //Cabinet doesn't exists
+                                    response.cabinet = { economico: id };
+                                    deferred.resolve(response);
+                                }
+                                else {
+                                    //Any other error from backend
+                                    deferred.reject(errorResponse);
+                                }
                                 deferred.reject(errorResponse);
                             });
                     }
@@ -160,7 +171,7 @@
                     }
                 })
                 .catch(function cabinetsInSubsiadiaryErrorCallback(apiResponseError) {
-                    //Cabinet doesn't exists in any subsidiary, so it can't leave
+                    //Cabinet doesn't exists in any subsidiary or agency, so it can't leave
                     if (apiResponseError.status === 404) {
                         //Cabinet doesn't exists
                         response.cabinet = { economico: id };
