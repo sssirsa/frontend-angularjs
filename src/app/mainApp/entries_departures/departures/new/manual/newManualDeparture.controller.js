@@ -22,7 +22,10 @@
         vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
-        vm.user;
+
+        vm.canView = true;
+
+        vm.user = User.getUser();
 
         //Validations
         vm.imageConstraints = {
@@ -45,15 +48,14 @@
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.newDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.newDeparture.catalogues();
-
-            vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary selector.
             vm.showSubsidiarySelector = !vm.user['sucursal'];
-            vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id;
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
 
         };
 
-        vm.init();
+        //Just load if user is not from an Agency
+        vm.user['udn'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 

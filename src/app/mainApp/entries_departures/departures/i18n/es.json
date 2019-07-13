@@ -57,7 +57,8 @@
                 "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
                 "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada",
                 "IS_AT": "se encuentra en",
-                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada"
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "AGENCY_USER": "Funcionalidad no disponible para los usuarios de Agencia-UDN"
             }
         },
         "WARRANTY": {
