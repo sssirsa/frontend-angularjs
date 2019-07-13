@@ -2,21 +2,21 @@
 <md-card layout-padding>
     <div layout="column"
          layout-align="center center">
-        <h1 translate>DEPARTURES.OBSOLETE.TITLE</h1>
+        <h1 translate>DEPARTURES.WARRANTY.TITLE</h1>
     </div>
     <md-tabs md-dynamic-height="true"
              md-selected="vm.selectedTab">
         <md-tab layout="column"
                 layout-align="center stretch"
-                label={{'DEPARTURES.OBSOLETE.LABELS.ASSET_LOADING'|translate}}>
+                label={{'DEPARTURES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
             <div layout="row"
                  layout-align="center center"
                  ng-if="vm.showSelector">
-                <p>{{'DEPARTURES.OBSOLETE.LABELS.SWITCH.LABEL'|translate}}</p>
+                <p>{{'DEPARTURES.WARRANTY.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.departureFromAgency"
                            ng-change="vm.changeSwitch()">
-                    <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.OBSOLETE.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.OBSOLETE.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                    <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.FALSE'|translate}}</p>-->
                 </md-switch>
             </div>
             <catalog-select class="full-width"
@@ -46,11 +46,11 @@
                         ng-if="!vm.showSelector
                         || vm.departure[vm.catalogues['subsidiary'].binding]
                         || vm.departure[vm.catalogues['udn'].binding]">
-                <h3>{{'DEPARTURES.OBSOLETE.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <h3>{{'DEPARTURES.WARRANTY.LABELS.CABINET_SEARCH'|translate}}</h3>
                 <form name="cabinetSearch"
                       ng-submit="vm.searchCabinet(vm.cabinetID)">
                     <md-input-container class="md-block">
-                        <label>{{'DEPARTURES.OBSOLETE.LABELS.CABINET_ID'|translate}}</label>
+                        <label>{{'DEPARTURES.WARRANTY.LABELS.CABINET_ID'|translate}}</label>
                         <input name="cabinetID"
                                type="text"
                                digits-only
@@ -86,22 +86,22 @@
                                              ng-if="element.can_leave">
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.ID'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column"
@@ -123,22 +123,22 @@
                                              ng-click="vm.showCabinetRestriction(element.id)">
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.ID'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
                                         <div layout="column"
                                              layout-align="center center">
-                                            <b>{{'DEPARTURES.OBSOLETE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            <b>{{'DEPARTURES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column"
@@ -166,7 +166,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                        <div>{{'DEPARTURES.OBSOLETE.BUTTONS.NEXT'|translate}}</div>
+                        <div>{{'DEPARTURES.WARRANTY.BUTTONS.NEXT'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
@@ -174,19 +174,19 @@
         <md-tab layout="column"
                 layout-align="center stretch"
                 ng-disabled="!vm.cabinetList.length>0"
-                label={{'DEPARTURES.OBSOLETE.LABELS.DEPARTURE_DATA'|translate}}>
+                label={{'DEPARTURES.WARRANTY.LABELS.DEPARTURE_DATA'|translate}}>
             <form name="departureForm"
                   layout="column"
                   ng-if="vm.cabinetList.length>0"
                   layout-align="center stretch">
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
-                    <label translate>DEPARTURES.OBSOLETE.LABELS.DESCRIPTION</label>
+                    <label translate>DEPARTURES.WARRANTY.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
                     <input ng-model="vm.departure['descripcion']"
                            name="description"
                            type="text">
-                    <div class="hint" translate>DEPARTURES.OBSOLETE.HINTS.DESCRIPTION</div>
+                    <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column"
                      layout-align="center stretch">
@@ -232,13 +232,13 @@
                      layout-align="center stretch">
                     <md-input-container layout="column"
                                         class="md-icon-float md-block full-width">
-                        <label translate>DEPARTURES.OBSOLETE.LABELS.DRIVER_NAME</label>
+                        <label translate>DEPARTURES.WARRANTY.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
                         <input ng-model="vm.departure['nombre_chofer']"
                                name="driver_name"
                                ng-required="true"
                                type="text">
-                        <div class="hint" translate>DEPARTURES.OBSOLETE.HINTS.DRIVER_NAME</div>
+                        <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DRIVER_NAME</div>
                     </md-input-container>
                     <md-input-container layout="column"
                                         layout-align="start center"
@@ -248,14 +248,14 @@
                             <div>
                                 <md-icon class="far fa-id-card"></md-icon>
                             </div>
-                            <div translate>DEPARTURES.OBSOLETE.LABELS.DRIVER_ID</div>
+                            <div translate>DEPARTURES.WARRANTY.LABELS.DRIVER_ID</div>
                         </div>
                         <file-uploader files-selected="vm.selectDriverID(files)"
                                        file-formats="'image/*'"
                                        validations="vm.imageConstraints.validations"
                                        resize-if="vm.imageConstraints.resizeIf"
                                        resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>DEPARTURES.OBSOLETE.HINTS.DRIVER_ID</div>
+                        <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DRIVER_ID</div>
                     </md-input-container>
                 </div>
             </form>
@@ -266,7 +266,7 @@
                            class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                        <div>{{'DEPARTURES.OBSOLETE.BUTTONS.PREVIOUS'|translate}}</div>
+                        <div>{{'DEPARTURES.WARRANTY.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
                 <md-button ng-click="vm.clickSaveDeparture(vm.departure)"
@@ -279,7 +279,7 @@
                            ng-disabled="departureForm.$invalid ||!vm.departure['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
-                        <div>{{'DEPARTURES.OBSOLETE.BUTTONS.SAVE'|translate}}</div>
+                        <div>{{'DEPARTURES.WARRANTY.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>

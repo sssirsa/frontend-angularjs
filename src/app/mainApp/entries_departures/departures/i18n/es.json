@@ -143,7 +143,7 @@
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
-                "SUPPLIER": "Seleccione el proveedor destino"
+                "DESTINATION_SUBSIDIARY": "Seleccione la sucursal destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
