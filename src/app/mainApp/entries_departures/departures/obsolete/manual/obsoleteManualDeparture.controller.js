@@ -140,7 +140,7 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
-                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : false) {
+                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : true) {
                                                 //Just depart from this departure if the asset if obsolete
                                                 //Also validate stage existence, or no stage
                                                 if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' || cabinetSuccessCallback['status'].code === '0008' : false) {
