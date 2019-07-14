@@ -54,7 +54,7 @@
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
                 "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
                 "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal",
                 "IS_AT": "se encuentra en",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",

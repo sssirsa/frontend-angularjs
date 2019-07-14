@@ -51,6 +51,7 @@
             //Determining whether or not to show the Subsidiary selector.
             vm.showSubsidiarySelector = !vm.user['sucursal'];
             vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'].id : null;
 
         };
 
@@ -106,7 +107,10 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID, vm.user['sucursal'], null),
+                            .getCabinet(cabinetID,
+                            vm.departure[vm.catalogues['subsidiary'].binding],
+                            vm.departure[vm.catalogues['udn'].binding]
+                            ),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -124,10 +128,20 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback['subsidiary']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'].id === vm.departure[vm.catalogues['subsidiary'].binding]) {
-                                    //The subsidiary of the cabinet is the same as the user one.
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                //a.k.a. The cabinet exists in any subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        === vm.departure[vm.catalogues['subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency'].id
+                                        === vm.departure[vm.catalogues['udn'].binding]
+                                        : false)
+                                ) {
+                                    //The subsidiary or agency of the asset is the same as departure's
                                     if (cabinetSuccessCallback['entrance_kind'] === vm.departure['tipo_salida']) {
                                         //The departure matches the entrance kind
                                         if (cabinetSuccessCallback['can_leave']) {

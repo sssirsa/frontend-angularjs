@@ -127,7 +127,7 @@
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
                             if (cabinetSuccessCallback['subsidiary']
                                 || cabinetSuccessCallback['agency']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary or agency
+                                //a.k.a. The cabinet exists in any subsidiary or agency
                                 if (
                                     (cabinetSuccessCallback['subsidiary']
                                         ? cabinetSuccessCallback['subsidiary'].id

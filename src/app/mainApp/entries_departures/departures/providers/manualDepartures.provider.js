@@ -91,6 +91,8 @@
                     response['agency'] = apiResponse['udn'];
                     response['inspection'] = apiResponse['inspeccionado'];
                     response['status'] = apiResponse['estatus_cabinet'];
+                    response.entrance_kind = apiResponse['tipo_entrada'];
+                    response['status'] = apiResponse['estatus_cabinet'];
 
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
@@ -118,10 +120,6 @@
                             .then(function cabinetSuccessCallback(apiCabinet) {
                                 //Full cabinet information
                                 response.cabinet = apiCabinet;
-
-                                //Remaining cabinet data
-                                response.entrance_kind = apiResponse['tipo_entrada'];
-                                response['status'] = apiResponse['estatus_cabinet'];
 
                                 //Cabinet can leave
                                 if (cabinetCanLeave) {
