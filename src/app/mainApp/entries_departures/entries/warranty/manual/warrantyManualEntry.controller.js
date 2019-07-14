@@ -38,6 +38,8 @@
         vm.catalogues;
         vm.cabinetList;
 
+        vm.user = User.getUser();
+
         vm.canView = true;
 
         //Validations
@@ -231,11 +233,9 @@
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
-
-            var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showSelector = !user['sucursal']
-                && !user['udn'];
+            vm.showSelector = !vm.user['sucursal']
+                && !vm.user['udn'];
         };
 
         //Just load if user is not from an Agency
