@@ -5,7 +5,7 @@
             "MANUAL": "Manual",
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",
-            "WARRANTIES": "Garantías",
+            "WARRANTY": "Garantías",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
             "OBSOLETE": "Obsoletos",
@@ -54,8 +54,8 @@
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
                 "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal",
                 "IS_AT": "se encuentra en",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
                 "AGENCY_USER": "Funcionalidad no disponible para los usuarios de Agencia-UDN"
@@ -80,16 +80,18 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                }
+                },
+                "DESTINATION_SUBSIDIARY": "Sucursal destino"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
-                "AGENCY": "Selecciona la agencia de arrivo",
+                "AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet de la salida",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "DESTINATION_SUBSIDIARY": "Selecciona la sucursal destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
@@ -104,8 +106,13 @@
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
                 "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0001-Buen estado",
+                "STATUS_IS": "su estado es",
+                "STAGE_ERROR": "El cabinet no está listo para mercado",
+                "AT_STAGE": "se encuentra en la etapa",
+                "IS_AT": "se encuentra en"
             }
         },
         "OBSOLETE": {
@@ -157,8 +164,8 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal o udn",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal o udn seleccionada",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
                 "IS_AT": "se encuentra en",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
                 "STAGE_ERROR": "El cabinet no es obsoleto",
@@ -221,8 +228,8 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal o udn",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal o udn seleccionada",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
                 "IS_AT": "se encuentra en",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
                 "STAGE_ERROR": "El cabinet no está listo para mercado",

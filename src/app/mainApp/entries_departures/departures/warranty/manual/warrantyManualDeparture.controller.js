@@ -1,8 +1,8 @@
 (function () {
     angular
         .module('app.mainApp.entries_departures.departures.warranty')
-        .controller('obsoleteManualDepartureController', ObsoleteManualDepartureController);
-    function ObsoleteManualDepartureController(
+        .controller('warrantyManualDepartureController', WarrantyManualDepartureController);
+    function WarrantyManualDepartureController(
         MANUAL_DEPARTURES,
         User,
         Translate,
@@ -43,8 +43,8 @@
             vm.selectedTab = 0;
             vm.showSelector = false;
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
-            vm.catalogues = MANUAL_DEPARTURES.obsoleteDeparture.catalogues();
+            vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
+            vm.catalogues = MANUAL_DEPARTURES.warrantyDeparture.catalogues();
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
@@ -66,7 +66,7 @@
         vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
+            vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
 
             vm.onElementSelect(element, field);
         };
@@ -140,14 +140,30 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
-                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : false) {
-                                                //Just depart from this departure if the asset if obsolete
+                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa !== 'Obsoleto' : true) {
+                                                //Just avoid depart from this departure if the asset if obsolete
                                                 //Also validate stage existence
+                                                //No stage just applies to Agency
+                                                if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0003' : false) {
+                                                    //Finally add the cabinet to the list
+                                                    cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                    cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                    cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                }
+                                                else {
+                                                    //Building error message
+                                                    var statusMessage =
+                                                        Translate.translate('DEPARTURES.WARRANTY.ERRORS.WRONG_STATUS');
+                                                    //Just add status info if available
+                                                    cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                                        + ', ' + Translate.translate('DEPARTURES.WARRANTY.ERRORS.STATUS_IS')
+                                                        + ': ' + cabinetSuccessCallback['status'].code
+                                                        + '-' + cabinetSuccessCallback['status'].descripcion
+                                                        : null;
 
-                                                //Finally add the cabinet to the list
-                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                    toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                                    vm.removeCabinet(cabinetID);
+                                                }
                                             }
                                             else {
                                                 var message = Translate.translate('DEPARTURES.WARRANTY.ERRORS.STAGE_ERROR');
@@ -283,7 +299,7 @@
             departure = Helper.removeBlankStrings(departure);
             //API callback
             vm.createDeparturePromise = MANUAL_DEPARTURES
-                .createObsolete(departure)
+                .createWarranty(departure)
                 .then(function () {
                     vm.init();
                     toastr.success(
