@@ -189,7 +189,7 @@
                                     else {
                                         toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
                                         //TODO: Add them and show the restriction
-                                        //vm.removeCabinet(cabinetID);
+                                        vm.removeCabinet(cabinetID);
                                     }
 
                                 }
