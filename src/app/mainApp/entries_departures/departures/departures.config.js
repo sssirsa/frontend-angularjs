@@ -32,7 +32,7 @@
             })
             /* Warehouse asset departures */
             .state('triangular.admin-default.departure-warehouse-manual', {
-                url: '/salida/almacen/manual',
+                url: '/salida/buen_estado/manual',
                 data: {
                     permissions: {
                         only: ['entries_departures__departures__warehouse_departures']
@@ -40,6 +40,18 @@
                 },
                 templateUrl: 'app/mainApp/entries_departures/departures/warehouse/manual/warehouseManualDeparture.tmpl.html',
                 controller: 'warehouseManualDepartureController',
+                controllerAs: 'vm'
+            })
+            /* Warranty asset departures */
+            .state('triangular.admin-default.departure-warranty-manual', {
+                url: '/salida/garantias/manual',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__departures__warranties_departures']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/departures/warranty/manual/warrantyManualDeparture.tmpl.html',
+                controller: 'warrantyManualDepartureController',
                 controllerAs: 'vm'
             })
             ;
@@ -72,6 +84,12 @@
                         type: 'link',
                         permission: ['entries_departures__departures__warehouse_departures'],
                         state: 'triangular.admin-default.departure-warehouse-manual'
+                    },
+                    {
+                        name: 'DEPARTURES.MENU.WARRANTY',
+                        type: 'link',
+                        permission: ['entries_departures__departures__warranties_departures'],
+                        state: 'triangular.admin-default.departure-warranty-manual'
                     }
                 ]
 
