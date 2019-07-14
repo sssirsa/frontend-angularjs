@@ -38,6 +38,8 @@
         vm.catalogues;
         vm.cabinetList;
 
+        vm.canView = true;
+
         //Validations
         vm.imageConstraints = {
             validations: {
@@ -236,7 +238,8 @@
                 && !user['udn'];
         };
 
-        vm.init();
+        //Just load if user is not from an Agency
+        vm.user['udn'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 
