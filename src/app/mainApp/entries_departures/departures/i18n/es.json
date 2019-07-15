@@ -116,7 +116,7 @@
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
                 "WRONG_STATUS": "El cabinet no tiene estatus 0003-Reparación",
                 "STATUS_IS": "su estado es",
-                "STAGE_ERROR": "El cabinet no está listo para mercado",
+                "STAGE_ERROR": "El cabinet no puede salir de esta etapa",
                 "AT_STAGE": "se encuentra en la etapa",
                 "IS_AT": "se encuentra en"
             }
