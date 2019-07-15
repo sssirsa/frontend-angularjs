@@ -124,6 +124,9 @@
                 by_locality: 'localidad__id',
                 by_postal_code: 'localidad__codigo_postal',
                 by_economic: '/lookup/'
+            },
+            user: {
+                by_existing_email:'user__email__not'
             }
         })
         .constant('CONFIGS', {

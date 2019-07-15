@@ -1,3 +1,21 @@
 {
-    "USERS": {}
+    "USERS": {
+        "MANAGE": {
+            "LABELS": {
+                "TITLE": "Administración de usuarios",
+                "BUTTONS": {
+                    "SEARCH": "Buscar usuarios",
+                    "CREATE": "Nuevo usuario",
+                    "DELETE": "Eliminar usuario",
+                    "MODIFY": "Modificar usuario",
+                    "NEXT": "Siguiente",
+                    "PREVIOUS": "Anterior",
+                    "LOAD_MORE": "Cargar mas...",
+                    "REMOVE_FILTER": "Quitar filtro"
+                },
+                "NO_RESULTS": "No se encontraron usuarios",
+                "LOAGIND_MESSAGE": "Cargando usuarios"
+            }
+        }
+    }
 }
