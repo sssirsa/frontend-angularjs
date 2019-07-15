@@ -19,9 +19,12 @@
         //Variables
         vm.selectedTab;
         vm.departure;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
+        vm.departureFromAgency;
+        vm.departureToStore;
         vm.catalogues;
         vm.cabinetList;
+        vm.store;
 
         //Validations
         vm.imageConstraints = {
@@ -40,16 +43,19 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showSelector = false;
             vm.cabinetList = [];
+            vm.store = null;
             vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.warehouseDeparture.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-                vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or Agency selector.
+            vm.showSelector = !user['sucursal'] && !user['udn'];
+
+            //Bindging user subsidiary or agency to entry if user happens to have one.
+            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal'].id : null;
+            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn'].id : null;
         };
 
         vm.init();
@@ -60,7 +66,7 @@
             vm.departure[field] = element;
         };
 
-        vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
+        vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
@@ -98,12 +104,14 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID),
+                            .getCabinet(cabinetID,
+                                vm.departure[vm.catalogues['subsidiary'].binding],
+                                vm.departure[vm.catalogues['udn'].binding]
+                            ),
                         cabinet: null,
                         id: null,
                         can_leave: null,
-                        restriction: null,
-                        obsolete: false
+                        restriction: null
                     };
 
                     //Adding element to the list
@@ -117,55 +125,92 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback['subsidiary']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'] === vm.departure[vm.catalogues['subsidiary'].binding]) {
-                                    //The subsidiary of the cabinet is the same as the user one.
-                                    if ((cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida'])) {
-                                        //The departure matches the Departure kind)
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                //a.k.a. The cabinet exists in any subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        === vm.departure[vm.catalogues['subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency'].id
+                                        === vm.departure[vm.catalogues['udn'].binding]
+                                        : false)
+                                ) {
+                                    //The subsidiary or agency of the asset is the same as departure's
+                                    if (cabinetSuccessCallback['can_leave']) {
+                                        //The cabinet doesn't have internal restrictions to leave
+                                        if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                            //Cabinet entry has been confirmed
+                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Mercado' : vm.departure[vm.catalogues['udn'].binding]) {
+                                                //Just depart from this departure if the asset if Ready
+                                                //Also validate stage existence
+                                                //No stage scenario just applies to Agency
+                                                if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
+                                                    //Finally add the cabinet to the list
+                                                    cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                    cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                    cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                }
+                                                else {
+                                                    //Building error message
+                                                    var statusMessage =
+                                                        Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_STATUS');
+                                                    //Just add status info if available
+                                                    cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                                        + ', ' + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STATUS_IS')
+                                                        + ': ' + cabinetSuccessCallback['status'].code
+                                                        + '-' + cabinetSuccessCallback['status'].descripcion
+                                                        : null;
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                    toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                                    vm.removeCabinet(cabinetID);
+                                                }
+                                            }
+                                            else {
+                                                var message = Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STAGE_ERROR');
+                                                if (cabinetSuccessCallback['stage']) {
+                                                    message = message
+                                                        + ', '
+                                                        + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.AT_STAGE')
+                                                        + ' '
+                                                        + cabinetSuccessCallback['stage'].nombre;
+                                                }
+                                                toastr.error(message, cabinetSuccessCallback.cabinet.economico);
+                                                vm.removeCabinet(cabinetID);
+                                            }
                                         }
                                         else {
-                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
-                                    }
-                                    //else {
-                                    //    toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
-                                    //    vm.removeCabinet(cabinetID);
-                                    //}
-                                    if ((cabinetSuccessCallback['entrance_kind'] === 'Obsoletos')) {
-                                        //Repeated logic for 'Obsoleto' entrance kind
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
-
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-
-                                            //Add the obsolete flag to the cabinet object
-                                            cabinetToAdd.obsolete = true;
-                                        }
-                                        else {
-                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                             vm.removeCabinet(cabinetID);
                                         }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                        //TODO: Add them and show the restriction
                                         vm.removeCabinet(cabinetID);
                                     }
+
                                 }
                                 else {
-                                    //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    //Just reachable when the user had seleced a subsidiary through the selector.
+                                    var locationMessage = Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    if (cabinetSuccessCallback['subsidiary']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['subsidiary'].nombre;
+                                    }
+                                    if (cabinetSuccessCallback['agency']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['agency'].agencia;
+                                    }
+                                    toastr.error(locationMessage, cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
@@ -242,49 +287,60 @@
             //TODO: Cabinet restriction dialog
         };
 
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['udn'].binding]);
+            delete (vm.departure[vm.catalogues['subsidiary'].binding]);
+            vm.departure['cabinets_id'] = [];
+            vm.cabinetList = [];
+            vm.changeDestinationSwitch();
+        };
+
+        vm.changeDestinationSwitch = function changeDestinationSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['destination_udn'].binding]);
+            delete (vm.departure[vm.catalogues['store'].binding]);
+            vm.store = null;
+        };
+
+        vm.searchStore = function searchStore() {
+            $mdDialog.show({
+                controller: 'searchStoreController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true
+            })
+                .then(function (store) {
+                    //Select the store
+                    vm.store = store;
+                    vm.departure[vm.catalogues['store'].binding] = store[vm.catalogues['store'].model];
+                })
+                .catch(function (storeError) {
+                    if (storeError) {
+                        ErrorHandler.errorTranslate(storeError);
+                    }
+                });
+        };
         //Internal functions
 
         var saveDeparture = function saveDeparture(departure) {
-            var warehouseDeparture = angular.fromJson(angular.toJson(departure));
-            warehouseDeparture = addCabinetsToDeparture(vm.cabinetList, warehouseDeparture, false);
-            warehouseDeparture = Helper.removeBlankStrings(warehouseDeparture);
+            departure = addCabinetsToDeparture(vm.cabinetList, departure);
+            departure = Helper.removeBlankStrings(departure);
+            //API callback
+            vm.createDeparturePromise = MANUAL_DEPARTURES
+                .createWarehouse(departure)
+                .then(function () {
+                    vm.init();
+                    toastr.success(
+                        Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
+                    );
+                })
+                .catch(function (errorCallback) {
 
-            var obsoleteDeparture = angular.fromJson(angular.toJson(departure));
-            obsoleteDeparture = addCabinetsToDeparture(vm.cabinetList, obsoleteDeparture, true);
-            obsoleteDeparture = Helper.removeBlankStrings(obsoleteDeparture);
-
-            //API callbacks
-            if (warehouseDeparture.cabinets_id.length > 0) {
-                vm.createDeparturePromise = MANUAL_DEPARTURES
-                    .createWarehouse(warehouseDeparture)
-                    .then(function () {
-                        vm.init();
-                        toastr.success(
-                            Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
-
-            obsoleteDeparture.tipo_salida = 'Obsoletos';
-
-            if (obsoleteDeparture.cabinets_id.length > 0) {
-                vm.createDeparturePromise = MANUAL_DEPARTURES
-                    .createObsolete(obsoleteDeparture)
-                    .then(function () {
-                        vm.init();
-                        toastr.success(
-                            Translate.translate('DEPARTURES.OBSOLETE.MESSAGES.SUCCESS_CREATE')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
+                    ErrorHandler.errorTranslate(errorCallback);
+                });
         };
 
         var departureHasPendingCabinets = function departureHasPendingCabinets() {
@@ -293,17 +349,15 @@
             });
         };
 
-        var addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure, obsolete) {
+        var addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure) {
             //In case the cabinets array exist, restart it
             if (departure.cabinets_id.length) {
                 departure.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
-                    //Filtering to just add the cabinets that exist and matches obsolete flag
-                    if (element.obsolete == obsolete) {
-                        return element.cabinet;
-                    }
+                    //Filtering to just add the cabinets that exist
+                    return element.cabinet;
                 });
             for (
                 var i = 0;
@@ -312,18 +366,7 @@
                 departure['cabinets_id'].push(existingCabinets[i].id);
             }
             return departure;
-
         };
-
-        //var addCabinetToList = function addCabinetToList(cabinet) {
-        //    var cabinetToAdd = {
-        //        promise: null,
-        //        cabinet: cabinet,
-        //        id: cabinet['economico']
-        //    };
-
-        //    vm.cabinetList.push(cabinetToAdd);
-        //};
 
         //Tab functions
 

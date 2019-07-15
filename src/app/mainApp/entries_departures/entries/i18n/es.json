@@ -175,7 +175,8 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "NOT_FOUND_ID": "Económico no encontrado",
-                "CANT_ENTER": "El cabinet ya tiene una entrada"
+                "CANT_ENTER": "El cabinet ya tiene una entrada",
+                "AGENCY_USER": "Funcionalidad no disponible para usuarios de UDN-Agencia"
             }
         },
         "WAREHOUSE": {

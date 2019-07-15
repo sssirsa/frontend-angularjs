@@ -54,8 +54,8 @@
                     label: 'Servicio técnico'
                 }
             ],
-            technical_service:{
-                presurize_options:[
+            technical_service: {
+                presurize_options: [
 
                     {
                         name: "Corregida la fuga",
@@ -114,6 +114,9 @@
                 by_state: 'municipio__estado__id',
                 by_city: 'municipio__id',
                 by_postal_code: 'codigo_postal'
+            },
+            service: {
+                by_cabinet: 'cabinet__economico'
             },
             store: {
                 by_state: 'localidad__municipio__estado__id',

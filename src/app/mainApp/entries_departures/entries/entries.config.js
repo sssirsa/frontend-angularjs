@@ -94,7 +94,7 @@
                     {
                         name: 'ENTRIES.MENU.UNRECOGNIZABLE',
                         type: 'link',
-                        permission: ['entries_departures__entries__no_labeed_entries'],
+                        permission: ['entries_departures__entries__no_labeled_entries'],
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
                     },
                     {
