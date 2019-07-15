@@ -81,6 +81,11 @@
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
                 "DESTINATION_SUBSIDIARY": "Sucursal destino"
             },
             "HINTS": {
