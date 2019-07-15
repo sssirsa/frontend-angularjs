@@ -94,16 +94,22 @@
                 "LIST": "Listado",
                 "PREREQUEST":"Pre solicitudes"
             },
-            "COM":{
-                "TICKETS_INCIDENCES":"Tickets e Incidencias",
-                "MANAGEMENT_NOTIFICATION":"Notificación de",
-                "ERROR":"Errores",
-                "START":"Inicio de Trabajo",
-                "NOTIFICATION":"Mensajes de Trabajo",
-                "CLOSE":"Cierre de Ticket",
+            "COM": {
+                "TICKETS_INCIDENCES": "Tickets e Incidencias",
+                "MANAGEMENT_NOTIFICATION": "Notificación de",
+                "ERROR": "Errores",
+                "START": "Inicio de Trabajo",
+                "NOTIFICATION": "Mensajes de Trabajo",
+                "CLOSE": "Cierre de Ticket",
                 "MANAGEMENT_TICKETS": "Gestión de Tickets",
                 "FAKE_TICKET": "Crear Tickets Fake"
 
+            },
+            "MANAGEMENT": {
+                "USERS": {
+                    "TITLE": "Usuarios",
+                    "MANAGE_USERS": "Gestión de usuarios"
+                }
             }
         },
         "COMPONENTS": {
