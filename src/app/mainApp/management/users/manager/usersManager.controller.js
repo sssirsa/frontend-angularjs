@@ -20,8 +20,8 @@
             + '/' + URLS.management.administration.base
             + '/' + URLS.management.administration.person;
 
-        vm.query = QUERIES.user.by_existing_email;
-        vm.queryValue = ' ';
+        vm.queries = [];
+        vm.queries.push(QUERIES.user.by_existing_email);
 
         vm.name = Translate.translate('USERS.MANAGE.LABELS.TITLE');
 
@@ -96,13 +96,13 @@
                         type: 'text',
                         model: 'apellido_paterno',
                         label: 'Apellido Paterno',
-                        nullOrEmpty:'Sin apellido paterno'
+                        nullOrEmpty: 'Sin apellido paterno'
                     },
                     {
                         type: 'text',
                         model: 'apellido_materno',
                         label: 'Apellido Materno',
-                        nullOrEmpty:'Sin apellido materno'
+                        nullOrEmpty: 'Sin apellido materno'
                     },
                     {
                         type: 'object_property',
