@@ -14,7 +14,18 @@
                     "REMOVE_FILTER": "Quitar filtro"
                 },
                 "NO_RESULTS": "No se encontraron usuarios",
-                "LOAGIND_MESSAGE": "Cargando usuarios"
+                "LOADING_MESSAGE": "Cargando usuarios"
+            },
+            "DIALOG": {
+                "DELETE": {
+                    "TITLE": "Eliminar usuario",
+                    "MESSAGE": "Confirma la eliminación del usuario",
+                    "LOADING": "Eliminando usuario"
+                },
+                "SEARCH": {
+                    "TITLE": "Búsqueda de usuarios",
+                    "LOADING": "Buscando usuarios"
+                }
             }
         }
     }
