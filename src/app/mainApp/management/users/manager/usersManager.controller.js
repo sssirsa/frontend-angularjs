@@ -18,8 +18,10 @@
         vm.url = EnvironmentConfig.site.rest.api
             + '/' + URLS.management.base
             + '/' + URLS.management.administration.base
-            + '/' + URLS.management.administration.person
-            + '?' + QUERIES.user.by_existing_email;
+            + '/' + URLS.management.administration.person;
+
+        vm.query = QUERIES.user.by_existing_email;
+        vm.queryValue = ' ';
 
         vm.name = Translate.translate('USERS.MANAGE.LABELS.TITLE');
 
