@@ -104,6 +104,10 @@
                 "MANAGEMENT_TICKETS": "Gestión de Tickets",
                 "FAKE_TICKET": "Crear Tickets Fake"
 
+            },
+            "MASSIVE_CHARGE":{
+                "HISTORICAL":"Historial",
+                "TITLE":"Cargas Massivas"
             }
         },
         "COMPONENTS": {
