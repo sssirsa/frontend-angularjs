@@ -6,14 +6,15 @@
             controller: CatalogManagerController,
             bindings: {
                 url: '<', //Full URL without parameters
-                query: '<',
-                queryValue: '<',
+                query: '<',//Legacy support for individual query
+                queryValue: '<', //Legacy support for individual query
+                queries: '<', //(NEW) Query array, must be an array of strings, with well conformed queries
 
                 //Labels
                 totalText: '<', //If not given, the word 'Total' will be used
                 totalFilteredText: '<', //If not given 'Total filtered' will be used
                 loadingMessage: '<',
-                noResults:'<', //Message to shown when no results were returned from the query, default is 'No resuls'
+                noResults: '<', //Message to shown when no results were returned from the query, default is 'No resuls'
 
                 //Functions
                 onSuccessList: '&',
@@ -393,7 +394,6 @@
     ) {
         var vm = this;
 
-        activate();
         vm.totalText ? null : vm.totalText = 'Total';
 
         vm.paginationHelper = {
@@ -407,6 +407,7 @@
         vm.CatalogProvider = null;
         vm.PaginationProvider = null;
         vm.filterApplied = null;
+        vm.queryArray = [];
 
         //Function mapping
         vm.create = create;
@@ -424,38 +425,23 @@
             list();
         }
 
+        activate();
+
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG;
-            //Initial URL building
+            vm.CatalogProvider.url = vm.url;
+            if (vm.queries) {
+                vm.queryArray = vm.queryArray.concat(vm.queries);
+            }
+            //Initial Query building
             if (vm.query
                 && vm.queryValue) {
-                if ("pagination" in vm.actions['LIST']) {
-                    //Build paginated URL
-                    vm.CatalogProvider.url = vm.url
-                        + '?limit=' + vm.actions['LIST'].pagination.pageSize
-                        + '&offset=' + '0'
-                        + '&' + vm.query
-                        + '=' + vm.queryValue;
-                }
-                else {
-                    vm.CatalogProvider.url = vm.url
-                        + '?' + vm.query
-                        + '=' + vm.queryValue;
-                }
+                vm.queryArray.push(vm.query + '=' + vm.queryValue);
             }
-            else {
-                if ("pagination" in vm.actions['LIST']) {
-                    //Build paginated URL
-                    vm.CatalogProvider.url = vm.url
-                        + '?limit=' + vm.actions['LIST'].pagination.pageSize
-                        + '&offset=' + '0';
-                }
-                else {
-                    vm.CatalogProvider.url = vm.url;
-                }
+            if ("pagination" in vm.actions['LIST']) {
+                vm.queryArray.push('limit=' + vm.actions['LIST'].pagination.pageSize);
+                vm.queryArray.push('offset=' + '0');
             }
-
-
         }
 
         function createPaginationProvider() {
@@ -468,7 +454,7 @@
             vm.catalogElements = [];
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
-                    .list()
+                    .list(vm.queryArray)
                     .then(function (response) {
                         treatResponse(response);
                         //Determine if the pagination parameter is given, and proceed with the building of the pagination helper
@@ -671,8 +657,7 @@
                         dialog: vm.actions['SEARCH'].dialog,
                         filters: vm.actions['SEARCH'].filters,
                         url: vm.url,
-                        query: vm.query,
-                        queryValue: vm.queryValue
+                        queries: vm.queryArray
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);
