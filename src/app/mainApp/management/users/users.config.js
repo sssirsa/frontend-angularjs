@@ -12,7 +12,7 @@
                 url: '/gestion/usuarios',
                 data: {
                     permissions: {
-                        only: ['AUTHENTICATED']
+                        only: ['management__manage_system__persona']
                     }
                 },
                 templateUrl: 'app/mainApp/management/users/manager/usersManager.tmpl.html',
@@ -25,13 +25,14 @@
                 name: 'MAIN.MENU.MANAGEMENT.USERS.TITLE',
                 icon: 'zmdi zmdi-account',
                 type: 'dropdown',
-                permission: ['AUTHENTICATED'],
+                permission: ['management__manage_system__persona'],
                 priority: 10,
                 children: [
                     {
                         name: 'MAIN.MENU.MANAGEMENT.USERS.MANAGE_USERS',
                         state: 'triangular.admin-default.usersManagement',
-                        type: 'link'
+                        type: 'link',
+                        permission: ['management__manage_system__persona']
                     }
                 ]
             }
