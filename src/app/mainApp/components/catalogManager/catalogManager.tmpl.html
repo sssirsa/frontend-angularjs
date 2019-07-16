@@ -147,7 +147,7 @@
                                  ng-if="$ctrl.actions['LIST'].mode==='paged'"
                                  cg-busy="{promise:$ctrl.pageLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                             <!-- Previous page button -->
-                            <md-button ng-disabled="!$ctrl.paginationHelper['previousPage']"
+                            <md-button ng-disabled="!$ctrl.paginationHelper['previousPage'] && $ctrl.paginationHelper['previousPageQueries'].length===0"
                                        ng-click="$ctrl.previousPage()"
                                        aria-label="{{$ctrl.previousButtonText}}"
                                        class="md-primary md-raised">
@@ -158,7 +158,7 @@
                                 </div>
                             </md-button>
                             <!-- Next page button -->
-                            <md-button ng-disabled="!$ctrl.paginationHelper['nextPage']"
+                            <md-button ng-disabled="!$ctrl.paginationHelper['nextPage'] && $ctrl.paginationHelper['nextPageQueries'].length==0"
                                        ng-click="$ctrl.nextPage()"
                                        aria-label="{{$ctrl.nextButtonText}}"
                                        class="md-primary md-raised">
@@ -175,7 +175,7 @@
                                  ng-if="$ctrl.actions['LIST'].mode==='infinite'"
                                  cg-busy="{promise:$ctrl.infiniteLoader, message:$ctrl.loadingMessage, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
                             <!-- Load more results button -->
-                            <md-button ng-if="$ctrl.paginationHelper['nextPage']"
+                            <md-button ng-if="$ctrl.paginationHelper['nextPage'] || $ctrl.paginationHelper['nextPageQueries'].length>0"
                                        ng-click="$ctrl.loadMore()"
                                        aria-label="{{$ctrl.loadMoreButtonText}}"
                                        class="md-primary md-raised">

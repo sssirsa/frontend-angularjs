@@ -399,8 +399,10 @@
         vm.paginationHelper = {
             totalPages: null, //Number
             actualPage: null, //Number
-            previousPage: null,
-            nextPage: null
+            previousPage: null, //URL returned from API
+            nextPage: null, //URL returned from API
+            previousPageQueries: [],
+            nextPageQueries: []
         };
         vm.catalogElements = [];
         vm.selectedElement = null;
@@ -438,10 +440,6 @@
                 && vm.queryValue) {
                 vm.queryArray.push(vm.query + '=' + vm.queryValue);
             }
-            if ("pagination" in vm.actions['LIST']) {
-                vm.queryArray.push('limit=' + vm.actions['LIST'].pagination.pageSize);
-                vm.queryArray.push('offset=' + '0');
-            }
         }
 
         function createPaginationProvider() {
@@ -449,12 +447,18 @@
         }
 
         function list() {
-            //List behaviour handling (initial loading)
             createMainCatalogProvider();
+            var queryArray = [];
+            if ("pagination" in vm.actions['LIST']) {
+                queryArray.push('limit=' + vm.actions['LIST'].pagination.pageSize);
+                queryArray.push('offset=' + '0');
+            }
+            queryArray = queryArray.concat(vm.queryArray);
+            //List behaviour handling (just initial loading)
             vm.catalogElements = [];
             if (vm.actions['LIST']) {
                 vm.listLoader = vm.CatalogProvider
-                    .list(vm.queryArray)
+                    .list(queryArray)
                     .then(function (response) {
                         treatResponse(response);
                         //Determine if the pagination parameter is given, and proceed with the building of the pagination helper
@@ -672,19 +676,30 @@
             }
             else {
                 ErrorHandler.errorTranslate({ status: -1 });
-                vm.onErrorCreate({ error: '"actions" parameter does not have the POST element defined' });
+                vm.onErrorSearch({ error: '"actions" parameter does not have the SEARCH element defined' });
             }
         }
 
         //Load the previous page of results qhen the pagination is Paged
         function previousPage() {
-            if (vm.paginationHelper['previousPage']) {
+            if (vm.paginationHelper['previousPage'] || vm.paginationHelper['previousPageQueries']) {
+                var queryArray = [];
+                //Building the query array with any existing query                                
+                queryArray = queryArray.concat(vm.queryArray);
+
                 if (vm.actions['LIST'].pagination) {
                     createPaginationProvider();
                 }
-                vm.PaginationProvider.url = vm.paginationHelper['previousPage'];
+                if (vm.paginationHelper['previousPage']) {
+                    vm.PaginationProvider.url = vm.paginationHelper['previousPage'];
+                }
+                else {
+                    vm.PaginationProvider.url = vm.url;
+                    //Adding pagination queries to queryArray
+                    queryArray = queryArray.concat(vm.paginationHelper['previousPageQueries']);
+                }
                 vm.pageLoader = vm.PaginationProvider
-                    .list()
+                    .list(queryArray)
                     .then(function (response) {
                         treatResponse(response);
                         updatePaginationHelper(vm.paginationHelper.actualPage - 1, response);
@@ -695,19 +710,32 @@
                     });
             }
             else {
-                vm.onErrorList({ error: 'No previous page URL found' });
+                var error = 'No previous page URL or queries found';
+                vm.onErrorList({ error: error });
+                throw (error);
             }
         }
 
         //Load the next page of results when the pagination is Paged
         function nextPage() {
-            if (vm.paginationHelper['nextPage']) {
+            if (vm.paginationHelper['nextPage'] || vm.paginationHelper['nextPageQueries']) {
+                var queryArray = [];
+                //Building the query array with any existing query                                
+                queryArray = queryArray.concat(vm.queryArray);
+
                 if (vm.actions['LIST'].pagination) {
                     createPaginationProvider();
                 }
-                vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
+                if (vm.paginationHelper['nextPage']) {
+                    vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
+                }
+                else {
+                    vm.PaginationProvider.url = vm.url;
+                    //Adding pagination queries to queryArray
+                    queryArray = queryArray.concat(vm.paginationHelper['nextPageQueries']);
+                }
                 vm.pageLoader = vm.PaginationProvider
-                    .list()
+                    .list(queryArray)
                     .then(function (response) {
                         treatResponse(response);
                         updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
@@ -718,19 +746,32 @@
                     });
             }
             else {
-                vm.onErrorList({ error: 'No next page URL found' });
+                var error = 'No next page URL or queries found';
+                vm.onErrorList({ error: error });
+                throw (error);
             }
         }
 
         //Load more elements when pagination is infinite
         function loadMore() {
-            if (vm.paginationHelper['nextPage']) {
+            if (vm.paginationHelper['nextPage'] || vm.paginationHelper['nextPageQueries']) {
+                var queryArray = [];
+                //Building the query array with any existing query                                
+                queryArray = queryArray.concat(vm.queryArray);
+
                 if (vm.actions['LIST'].pagination) {
                     createPaginationProvider();
                 }
-                vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
+                if (vm.paginationHelper['nextPage']) {
+                    vm.PaginationProvider.url = vm.paginationHelper['nextPage'];
+                }
+                else {
+                    vm.PaginationProvider.url = vm.url;
+                    //Adding pagination queries to queryArray
+                    queryArray = queryArray.concat(vm.paginationHelper['nextPageQueries']);
+                }
                 vm.infiniteLoader = vm.PaginationProvider
-                    .list()
+                    .list(queryArray)
                     .then(function (response) {
                         treatResponse(response, true);
                         updatePaginationHelper(vm.paginationHelper.actualPage + 1, response);
@@ -740,9 +781,12 @@
                         ErrorHandler.errorTranslate(errorElements);
                         vm.onErrorList({ error: errorElements });
                     });
+
             }
             else {
-                vm.onErrorList({ error: 'No next page URL found' });
+                var error = 'No next page URL or queries found';
+                vm.onErrorList({ error: error });
+                throw (error);
             }
         }
 
@@ -824,11 +868,13 @@
 
                     vm.paginationHelper['actualPage'] = 1;
 
-                    //Initial nextPage URL building
+                    //Initial nextPageQueries building
                     if (vm.paginationHelper['totalPages'] > vm.paginationHelper['actualPage']) {
-                        vm.paginationHelper['nextPage'] = vm.url
-                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
-                            + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
+                        vm.paginationHelper['nextPageQueries'].push('limit=' + vm.actions['LIST'].pagination['pageSize']);
+                        vm.paginationHelper['nextPageQueries'].push('offset=' + vm.actions['LIST'].pagination['pageSize']);
+                        //vm.paginationHelper['nextPage'] = vm.url
+                        //    + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                        //    + '&offset=' + vm.actions['LIST'].pagination['pageSize'];
                     }
                 }
             }
@@ -842,10 +888,14 @@
                 if (vm.actions['LIST'].pagination['next']
                     && vm.actions['LIST'].pagination['previous']) {
                     vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['next']];
-                    vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['previous']];
+                    vm.paginationHelper['previousPage'] = response[vm.actions['LIST'].pagination['previous']];
                 }
                 //URL building pagination handling
                 else {
+                    //Helper queries cleaning
+                    vm.paginationHelper['nextPageQueries'] = [];
+                    vm.paginationHelper['previousPageQueries'] = [];
+
                     //Requested next page
                     if (requestedPage > vm.paginationHelper['actualPage']) {
                         vm.paginationHelper['actualPage']++;
@@ -857,21 +907,20 @@
 
                     //Next page handling
                     if (vm.paginationHelper['actualPage'] < vm.paginationHelper['totalPages']) {
-                        vm.paginationHelper['nextPage'] = vm.url
-                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
-                            + '&offset=' + (vm.paginationHelper['actualPage'] * vm.actions['LIST'].pagination['pageSize']);
-                    }
-                    else {
-                        vm.paginationHelper['nextPage'] = null;
+                        vm.paginationHelper['nextPageQueries'].push('limit=' + vm.actions['LIST'].pagination['pageSize']);
+                        vm.paginationHelper['nextPageQueries'].push('offset=' + (vm.paginationHelper['actualPage'] * vm.actions['LIST'].pagination['pageSize']));
+                        //vm.paginationHelper['nextPage'] = vm.url
+                        //    + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                        //    + '&offset=' + (vm.paginationHelper['actualPage'] * vm.actions['LIST'].pagination['pageSize']);
                     }
                     //Previous page handling
                     if (vm.paginationHelper['actualPage'] >= 2) {
-                        vm.paginationHelper['previousPage'] = vm.url
-                            + '?limit=' + vm.actions['LIST'].pagination['pageSize']
-                            + '&offset=' + ((vm.paginationHelper['actualPage'] - 2) * vm.actions['LIST'].pagination['pageSize']);
-                    }
-                    else {
-                        vm.paginationHelper['previousPage'] = null;
+                        vm.paginationHelper['previousPageQueries'].push('limit=' + vm.actions['LIST'].pagination['pageSize']);
+                        vm.paginationHelper['previousPageQueries'].push('offset=' + ((vm.paginationHelper['actualPage'] - 2) * vm.actions['LIST'].pagination['pageSize']));
+
+                        //vm.paginationHelper['previousPage'] = vm.url
+                        //    + '?limit=' + vm.actions['LIST'].pagination['pageSize']
+                        //    + '&offset=' + ((vm.paginationHelper['actualPage'] - 2) * vm.actions['LIST'].pagination['pageSize']);
                     }
                 }
             }

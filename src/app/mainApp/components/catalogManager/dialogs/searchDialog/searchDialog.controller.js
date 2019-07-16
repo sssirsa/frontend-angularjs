@@ -98,7 +98,7 @@
                 .search(queryArray)
                 .then(function (response) {
                     filter.search = vm.searchAuxVar;
-                    $mdDialog.hide({ response: response, filter: filter });
+                    $mdDialog.hide({ response: response, filter: filter, queries: queryArray });
                 })
                 .catch(function (errorSearch) {
                     $mdDialog.close(errorSearch);
