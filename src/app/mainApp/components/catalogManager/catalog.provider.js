@@ -128,12 +128,6 @@
                         }
                     });
                 }
-                else {
-                    throw ('@CATALOG provider, @buildQueryString function: The queries array length is 0');
-                }
-            }
-            else {
-                throw ('@CATALOG provider, @buildQueryString function: No "queries" parameter has been provided');
             }
             return queryString;
         };
