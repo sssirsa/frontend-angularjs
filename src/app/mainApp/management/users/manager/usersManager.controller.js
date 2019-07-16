@@ -131,9 +131,36 @@
                 filters: [
                     {
                         type: 'icontains',
-                        model: 'descripcion',
-                        header: 'por Descripción',
-                        label: 'Descripción',
+                        model: QUERIES.user.by_username,
+                        header: 'por Usuario',
+                        label: 'Nombre de usuario',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'icontains',
+                        model: QUERIES.user.by_name,
+                        header: 'por Nombre',
+                        label: 'Nombre de la persona',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'icontains',
+                        model: QUERIES.user.by_middlename,
+                        header: 'por Apellido paterno',
+                        label: 'Apellido paterno de la persona',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'icontains',
+                        model: QUERIES.user.by_lastname,
+                        header: 'por Apellido materno',
+                        label: 'Apellido materno de la persona',
                         field: {
                             type: 'text'
                         }

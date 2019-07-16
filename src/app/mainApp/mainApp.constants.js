@@ -126,7 +126,11 @@
                 by_economic: '/lookup/'
             },
             user: {
-                by_existing_email:'apellido_paterno__not'
+                by_existing_email: 'apellido_paterno__not',
+                by_username: 'user__username',
+                by_name: 'nombre',
+                by_middlename: 'apellido_paterno',
+                by_lastname:'apellido_materno'
             }
         })
         .constant('CONFIGS', {
