@@ -396,14 +396,15 @@
 
         vm.totalText ? null : vm.totalText = 'Total';
 
-        vm.paginationHelper = {
-            totalPages: null, //Number
-            actualPage: null, //Number
-            previousPage: null, //URL returned from API
-            nextPage: null, //URL returned from API
-            previousPageQueries: [],
-            nextPageQueries: []
-        };
+        vm.paginationHelper;
+        //{
+        //    totalPages: null, //Number
+        //    actualPage: null, //Number
+        //    previousPage: null, //URL returned from API
+        //    nextPage: null, //URL returned from API
+        //    previousPageQueries: [],
+        //    nextPageQueries: []
+        //};
         vm.catalogElements = [];
         vm.selectedElement = null;
         vm.CatalogProvider = null;
@@ -432,6 +433,7 @@
         function createMainCatalogProvider() {
             vm.CatalogProvider = CATALOG;
             vm.CatalogProvider.url = vm.url;
+            vm.queryArray = [];
             if (vm.queries) {
                 vm.queryArray = vm.queryArray.concat(vm.queries);
             }
@@ -664,8 +666,10 @@
                         queries: vm.queryArray
                     }
                 }).then(function (successCallback) {
+                    vm.queryArray = successCallback.queries;
                     treatResponse(successCallback.response);
                     vm.filterApplied = successCallback.filter;
+                    buildPaginationHelper(successCallback.response);
                     vm.onSuccessSearch({ elements: vm.catalogElements });
                 }).catch(function (errorSearch) {
                     if (errorSearch) {
@@ -839,6 +843,15 @@
         function buildPaginationHelper(response) {
             //Building the pagination helper just if pagination object was provided
             if ("pagination" in vm.actions['LIST']) {
+            //Pagination helper initialization
+                vm.paginationHelper = {
+                    totalPages: null, //Number
+                    actualPage: null, //Number
+                    previousPage: null, //URL returned from API
+                    nextPage: null, //URL returned from API
+                    previousPageQueries: [],
+                    nextPageQueries: []
+                };
                 //Next page pagination kind is going to be used.
                 if (vm.actions['LIST'].pagination['next']) {
                     vm.paginationHelper['nextPage'] = response[vm.actions['LIST'].pagination['next']];

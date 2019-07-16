@@ -9,7 +9,7 @@
         <div layout="row"
              layout-align="space-around center"
              layout-wrap>
-            <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements"
+            <md-button ng-if="$ctrl.actions['SEARCH'] && $ctrl.catalogElements && !$ctrl.filterApplied"
                        ng-click="$ctrl.search()"
                        aria-label="{{$ctrl.searchButtonText}}"
                        class="md-primary md-raised">
