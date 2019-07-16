@@ -670,7 +670,9 @@
                     locals: {
                         dialog: vm.actions['SEARCH'].dialog,
                         filters: vm.actions['SEARCH'].filters,
-                        url: vm.url
+                        url: vm.url,
+                        query: vm.query,
+                        queryValue: vm.queryValue
                     }
                 }).then(function (successCallback) {
                     treatResponse(successCallback.response);

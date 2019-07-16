@@ -47,7 +47,9 @@
         CATALOG,
         dialog,
         filters,
-        url
+        url,
+        query,
+        queryValue
     ) {
         var vm = this;
 
@@ -65,8 +67,8 @@
         vm.cancel = cancel;
 
         function createProvider() {
-            if (vm.hasOwnProperty('url')) {
-                vm.CatalogProvider.url = vm.url;
+            if (vm.url) {
+                vm.CatalogProvider.url = url;
             }
             else {
                 $mdDialog.cancel('"url" parameter was not provided');
