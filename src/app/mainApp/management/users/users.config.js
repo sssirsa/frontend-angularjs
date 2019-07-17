@@ -5,7 +5,11 @@
         .module('app.mainApp.management.users')
         .config(UsersConfig);
 
-    function UsersConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
+    function UsersConfig(
+        $stateProvider,
+        $translatePartialLoaderProvider,
+        triMenuProvider
+    ) {
         $translatePartialLoaderProvider.addPart('app/mainApp/management/users');
         $stateProvider
             .state('triangular.admin-default.usersManagement', {
@@ -17,6 +21,21 @@
                 },
                 templateUrl: 'app/mainApp/management/users/manager/usersManager.tmpl.html',
                 controller: 'usersManagementController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.userDetail', {
+                url: '/gestion/usuarios/detalle/{{personId}}',
+                data: {
+                    permissions: {
+                        only: ['management__manage_system__persona']
+                    }
+                },
+                params: {
+                    personId: null,
+                    person:null
+                },
+                templateUrl: 'app/mainApp/management/users/detail/userDetail.tmpl.html',
+                controller: 'userDetailController',
                 controllerAs: 'vm'
             });
 

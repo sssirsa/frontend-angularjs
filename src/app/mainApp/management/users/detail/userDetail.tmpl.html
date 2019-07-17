@@ -1,0 +1,38 @@
+<md-card layout-padding>
+    <div layout="column"
+         layout-align="center center">
+        <h1>{{'USERS.DETAIL.TITLE'|translate}}</h1>
+        <div layout="column"
+             layout-align="center center">
+            <img class="make-round avatar"
+                 src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"
+                 width="100" height="100" />
+            <h3>
+                ({{vm.user['user'].username}})
+            </h3>
+            <h3>
+                {{vm.user.nombre}}
+                {{vm.user.apellido_paterno}}
+                {{vm.user.apellido_materno}}
+            </h3>
+            <div layout="row">
+                <md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon>
+                <div ng-if="vm.user.sucursal">
+                    {{'USERS.DETAIL.LABELS.SUBSIDIARY'|translate}}:
+                    {{vm.user.sucursal.nombre}}
+                </div>
+                <div ng-if="vm.user.udn">
+                    {{'USERS.DETAIL.LABELS.AGENCY'|translate}}:
+                    {{vm.user.udn.agencia}}
+                </div>
+                <div ng-if="vm.user.establecimiento">
+                    {{'USERS.DETAIL.LABELS.STORE'|translate}}:
+                    {{vm.user.establecimiento.nombre}}
+                </div>
+                <div ng-if="!vm.user.sucursal && !vm.user.udn">
+                    {{'USERS.DETAIL.LABELS.NO_LOCATION'|translate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</md-card>

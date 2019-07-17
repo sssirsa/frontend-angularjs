@@ -27,6 +27,15 @@
                     "LOADING": "Buscando usuarios"
                 }
             }
+        },
+        "DETAIL": {
+            "TITLE": "Detalle de usuario",
+            "LABELS": {
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "Agencia-UDN",
+                "STORE": "Establecimiento",
+                "NO_LOCATION": "Sin Sucursal, UDN-Agencia o Establecimiento asignado"
+            }
         }
     }
 }

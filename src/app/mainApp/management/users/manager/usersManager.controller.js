@@ -10,7 +10,8 @@
         Translate,
         EnvironmentConfig,
         PAGINATION,
-        QUERIES
+        QUERIES,
+        $state
     ) {
 
         var vm = this;
@@ -169,8 +170,11 @@
             }
         };
 
-        function onElementSelect() {
-            //Here goes the handling for element selection, such as detail page navigation
+        function onElementSelect(element) {
+            $state.go('triangular.admin-default.userDetail', {
+                personId: element.id,
+                person: element
+            });
         }
     }
 
