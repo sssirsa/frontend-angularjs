@@ -172,8 +172,7 @@
 
         function onElementSelect(element) {
             $state.go('triangular.admin-default.userDetail', {
-                personId: element.id,
-                person: element
+                personId: element.id
             });
         }
     }

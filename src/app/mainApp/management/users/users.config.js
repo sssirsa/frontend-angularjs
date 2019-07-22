@@ -31,8 +31,7 @@
                     }
                 },
                 params: {
-                    personId: null,
-                    person:null
+                    personId: null
                 },
                 templateUrl: 'app/mainApp/management/users/detail/userDetail.tmpl.html',
                 controller: 'userDetailController',
