@@ -34,7 +34,32 @@
                 "SUBSIDIARY": "Sucursal",
                 "AGENCY": "Agencia-UDN",
                 "STORE": "Establecimiento",
-                "NO_LOCATION": "Sin Sucursal, UDN-Agencia o Establecimiento asignado"
+                "NO_LOCATION": "Sin Sucursal, UDN-Agencia o Establecimiento asignado",
+                "ADDRESS": "Dirección",
+                "NO_ADDRESS": "Sin dirección",
+                "PHONE": "Teléfono",
+                "NO_PHONE": "Sin teléfono",
+                "NAME": "Nombre",
+                "MIDDLE_NAME": "Apellido paterno",
+                "LAST_NAME": "Apellido materno",
+                "ID": "Identificación",
+                "PHOTO": "Imagen de perfil"
+            },
+            "HINTS": {
+                "NAME": "Nombre del usuario",
+                "MIDDLE_NAME": "Primer apellido del usuario",
+                "LAST_NAME": "(Opcional) Segundo apellido del usuario",
+                "ADDRESS": "Domicilio del usuario",
+                "PHONE": "Teléfono personal del usuario",
+                "ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "PHOTO": "Tamaño máximo 5MB y 4096px x 4096px"
+            },
+            "BUTTONS": {
+                "MODIFY": "Modificar usuario",
+                "SAVE": "Guardar cambios",
+                "CANCEL": "Descartar cambios",
+                "CHANGE_PHOTO": "Cambiar foto",
+                "CHANGE_ID": "Cambiar identificación"
             }
         }
     }

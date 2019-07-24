@@ -3,9 +3,9 @@
         .module('app.mainApp.management.users')
         .factory('USERS', UsersProvider);
     function UsersProvider(
-    API,
-    EnvironmentConfig,
-    URLS
+        API,
+        EnvironmentConfig,
+        URLS
     ) {
 
         var personUrl = API.all(URLS.management.base
@@ -16,8 +16,13 @@
             return personUrl.customGET(id);
         };
 
+        var modifyPerson = function modifyPerson(id, element) {
+            return personUrl.all(id).customPUT(element);
+        };
+
         return {
-            getUserDetail: getUserDetail
+            getUserDetail: getUserDetail,
+            modifyPerson: modifyPerson
         };
 
     }

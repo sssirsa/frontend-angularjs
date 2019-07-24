@@ -1,38 +1,294 @@
-<md-card layout-padding>
+<md-card layout-padding
+         layout="column"
+         layout-align="center stretch"
+         cg-busy="{promise:vm.userPromise, message:'Cargando datos de usuario'}">
     <div layout="column"
-         layout-align="center center">
-        <h1>{{'USERS.DETAIL.TITLE'|translate}}</h1>
+         ng-if="vm.user"
+         layout-align="start stretch">
+        <div layout-align="center center"
+             layout="column">
+            <h1>{{'USERS.DETAIL.TITLE'|translate}}</h1>
+        </div>
         <div layout="column"
-             layout-align="center center">
+             layout-align="start center">
             <img class="make-round avatar"
-                 src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"
+                 ng-if="!vm.modifying"
+                 ng-click="vm.pictureClick(vm.user.foto)"
+                 alt="Error loading photo"
+                 ng-src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"
                  width="100" height="100" />
             <h3>
                 ({{vm.user['user'].username}})
             </h3>
-            <h3>
-                {{vm.user.nombre}}
-                {{vm.user.apellido_paterno}}
-                {{vm.user.apellido_materno}}
-            </h3>
-            <div layout="row">
-                <md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon>
-                <div ng-if="vm.user.sucursal">
-                    {{'USERS.DETAIL.LABELS.SUBSIDIARY'|translate}}:
-                    {{vm.user.sucursal.nombre}}
+            <div class="md-caption">
+                {{vm.user['user'].email}}
+            </div>
+        </div>
+        <!--Visualization section-->
+        <section layout="column"
+                 layout-align="start stretch"
+                 ng-if="!vm.modifying">
+            <div layout="column"
+                 layout-align="center center">
+                <h3>
+                    {{vm.user.nombre}}
+                    {{vm.user.apellido_paterno}}
+                    {{vm.user.apellido_materno}}
+                </h3>
+            </div>
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center center"
+                 layout-align-gt-sm="space-around stretch">
+                <div layout="row"
+                     layout-align="start center">
+                    <md-icon md-font-icon="fas fa-map-marked-alt"></md-icon>
+                    <div ng-if="vm.user.sucursal">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.SUBSIDIARY'|translate}}:
+                        </b>
+                        {{vm.user.sucursal.nombre}}
+                    </div>
+                    <div ng-if="vm.user.udn">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.AGENCY'|translate}}:
+                        </b>
+                        {{vm.user.udn.agencia}}
+                    </div>
+                    <div ng-if="vm.user.establecimiento">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.STORE'|translate}}:
+                        </b>
+                        {{vm.user.establecimiento.nombre}}
+                    </div>
+                    <div ng-if="!vm.user.sucursal && !vm.user.udn &&!vm.user.establecimiento">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.NO_LOCATION'|translate}}
+                        </b>
+                    </div>
                 </div>
-                <div ng-if="vm.user.udn">
-                    {{'USERS.DETAIL.LABELS.AGENCY'|translate}}:
-                    {{vm.user.udn.agencia}}
+                <div layout="row"
+                     layout-align="start center">
+                    <md-icon md-font-icon="fas fa-map"></md-icon>
+                    <div ng-if="vm.user.direccion">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.ADDRESS'|translate}}:
+                        </b>
+                        {{vm.user.direccion}}
+                    </div>
+                    <div ng-if="!vm.user.direccion">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.NO_ADDRESS'|translate}}:
+                        </b>
+                        {{vm.user.direccion}}
+                    </div>
                 </div>
-                <div ng-if="vm.user.establecimiento">
-                    {{'USERS.DETAIL.LABELS.STORE'|translate}}:
-                    {{vm.user.establecimiento.nombre}}
-                </div>
-                <div ng-if="!vm.user.sucursal && !vm.user.udn">
-                    {{'USERS.DETAIL.LABELS.NO_LOCATION'|translate}}
+                <div layout="row"
+                     layout-align="start center">
+                    <md-icon md-font-icon="fas fa-phone"></md-icon>
+                    <div ng-if="vm.user.telefono">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.PHONE'|translate}}:
+                        </b>
+                        {{vm.user.telefono}}
+                    </div>
+                    <div ng-if="!vm.user.telefono">
+                        <b>
+                            {{'USERS.DETAIL.LABELS.NO_PHONE'|translate}}:
+                        </b>
+                        {{vm.user.telefono}}
+                    </div>
                 </div>
             </div>
+            <div layout="row"
+                 layout-align="center center">
+                <div layout="column"
+                     layout-align="center center">
+                    <b>{{'USERS.DETAIL.LABELS.ID'|translate}}</b>
+                    <img ng-src="{{vm.user.ife!=null?vm.user.ife:'assets/images/id.png'}}"
+                         ng-click="vm.pictureClick(vm.user.ife)"
+                         alt="Error loading ID"
+                         class="thumbnails" />
+                </div>
+            </div>
+        </section>
+
+        <!--Modification section-->
+        <section layout="column"
+                 layout-align="start stretch"
+                 ng-if="vm.modifying">
+            <div layout-gt-sm="row"
+                 layout="column"
+                 layout-align="center center"
+                 layout-align-gt-sm="space-around center">
+                <div layout="column"
+                     layout-align="center center">
+                    <b>{{'USERS.DETAIL.LABELS.PHOTO'|translate}}</b>
+                    <section ng-if="!vm.changingPhoto"
+                             layout="column"
+                             layout-align="center center">
+                        <img ng-src="{{vm.user.foto!=null?vm.user.foto:'assets/images/id.png'}}"
+                             ng-click="vm.pictureClick(vm.user.foto)"
+                             alt="Error loading photo"
+                             class="thumbnails" />
+                        <md-button ng-click="vm.changePhotoButtonPressed()"
+                                   aria-label="change user photo"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.CHANGE_PHOTO'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </section>
+                    <section ng-if="vm.changingPhoto"
+                             layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectPicture(files, 'foto')"
+                                       file-formats="'image/*'"
+                                       validations="vm.imageConstraints.validations"
+                                       resize-if="vm.imageConstraints.resizeIf"
+                                       resize="vm.imageConstraints.resize"></file-uploader>
+                        <div class="hint" translate>USERS.DETAIL.HINTS.PHOTO</div>
+                        <md-button ng-click="vm.changePhotoCancelPressed()"
+                                   aria-label="cancel change user photo"
+                                   class="md-warn md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                <div hide-xs hide-sm>{{'MAIN.BUTTONS.CANCEL'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </section>
+                </div>
+                <div layout="column"
+                     layout-align="center center">
+                    <b>{{'USERS.DETAIL.LABELS.ID'|translate}}</b>
+                    <section ng-if="!vm.changingId"
+                             layout="column"
+                             layout-align="center center">
+                        <img ng-src="{{vm.user.ife!=null?vm.user.ife:'assets/images/id.png'}}"
+                             ng-click="vm.pictureClick(vm.user.ife)"
+                             alt="Error loading ID"
+                             class="thumbnails" />
+                        <md-button ng-click="vm.changeIdButtonPressed()"
+                                   aria-label="change user id"
+                                   class="md-primary md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                                <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.CHANGE_ID'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </section>
+                    <section ng-if="vm.changingId"
+                             layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectPicture(files, 'ife')"
+                                       file-formats="'image/*'"
+                                       validations="vm.imageConstraints.validations"
+                                       resize-if="vm.imageConstraints.resizeIf"
+                                       resize="vm.imageConstraints.resize"></file-uploader>
+                        <div class="hint" translate>USERS.DETAIL.HINTS.ID</div>
+                        <md-button ng-click="vm.changeIdCancelPressed()"
+                                   aria-label="cancel change id photo"
+                                   class="md-warn md-raised">
+                            <div layout="row" layout-align="center center">
+                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                <div hide-xs hide-sm>{{'MAIN.BUTTONS.CANCEL'|translate}}</div>
+                            </div>
+                        </md-button>
+                    </section>
+                </div>
+            </div>
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.DETAIL.LABELS.NAME</label>
+                    <md-icon class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['nombre']"
+                           name="nombre"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.DETAIL.HINTS.NAME</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.DETAIL.LABELS.MIDDLE_NAME</label>
+                    <md-icon hide-gt-sm class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['apellido_paterno']"
+                           name="apellido_paterno"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.DETAIL.HINTS.MIDDLE_NAME</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.DETAIL.LABELS.LAST_NAME</label>
+                    <md-icon hide-gt-sm class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['apellido_materno']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.DETAIL.HINTS.LAST_NAME</div>
+                </md-input-container>
+            </div>
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.DETAIL.LABELS.ADDRESS</label>
+                    <md-icon class="fas fa-map"></md-icon>
+                    <input ng-model="vm.editableUser['direccion']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.DETAIL.HINTS.ADDRESS</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.DETAIL.LABELS.PHONE</label>
+                    <md-icon class="fas fa-phone"></md-icon>
+                    <input ng-model="vm.editableUser['telefono']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.DETAIL.HINTS.PHONE</div>
+                </md-input-container>
+            </div>
+        </section>
+
+        <div layout-gt-sm="row"
+             layout-align-gt-sm="space-around center"
+             layout="column"
+             layout-align="center center">
+            <md-button ng-click="vm.modifyButtonPressed()"
+                       ng-if="!vm.modifying"
+                       aria-label="modify user"
+                       class="md-primary md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-edit"></md-icon>
+                    <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.MODIFY'|translate}}</div>
+                </div>
+            </md-button>
+            <md-button ng-click="vm.discardChanges()"
+                       ng-if="vm.modifying"
+                       aria-label="save modified user"
+                       class="md-warn md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-times"></md-icon>
+                    <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.CANCEL'|translate}}</div>
+                </div>
+            </md-button>
+            <md-button ng-click="vm.modifyPerson()"
+                       ng-if="vm.modifying"
+                       aria-label="save modified user"
+                       cg-busy="{promise:vm.savePromise, message:' '}"
+                       class="md-primary md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-save"></md-icon>
+                    <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.SAVE'|translate}}</div>
+                </div>
+            </md-button>
         </div>
     </div>
 </md-card>
