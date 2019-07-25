@@ -37,7 +37,7 @@
                 controller: 'userDetailController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.userCreate', {
+            .state('triangular.admin-default.usersCreate', {
                 url: '/gestion/usuarios/crear',
                 data: {
                     permissions: {
