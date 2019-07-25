@@ -167,7 +167,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -195,7 +195,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -221,7 +221,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -247,7 +247,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -291,7 +291,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -317,7 +317,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -343,7 +343,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -369,7 +369,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -418,7 +418,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -444,7 +444,7 @@
                                 + '/' + URLS.inventory.base
                                 + '/' + URLS.inventory.catalogues.base
                                 + '/' + URLS.inventory.catalogues.supplier,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -470,7 +470,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -496,7 +496,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -522,7 +522,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -565,7 +565,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -591,7 +591,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -617,7 +617,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -643,7 +643,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -669,7 +669,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -712,7 +712,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -738,7 +738,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -764,7 +764,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -790,7 +790,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            kind: 'Generic',
+                            
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
