@@ -470,8 +470,10 @@
                             model: 'id',
                             option: 'razon_social',
                             pagination: {
-                                total: 'count',
-                                next: 'next'
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
                             },
                             elements: 'results',
                             softDelete: {
