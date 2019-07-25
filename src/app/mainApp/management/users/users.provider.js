@@ -5,7 +5,9 @@
     function UsersProvider(
         API,
         EnvironmentConfig,
-        URLS
+        URLS,
+        Translate,
+        PAGINATION
     ) {
 
         var personUrl = API.all(URLS.management.base
@@ -23,11 +25,69 @@
         var createPerson = function createPerson(element) {
             return personUrl.customPOST(element);
         };
+        
+        var catalogues = {
+            subsidiary: {
+                binding: 'sucursal_id',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
+                    
+                    name: Translate.translate('USERS.CREATE.LABELS.SUBSIDIARY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: 'id',
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                hint: Translate.translate('USERS.CREATE.HINTS.SUBSIDIARY'),
+                icon: 'fa fa-warehouse',
+                required: true
+            },
+            udn: {
+                binding: 'udn_id',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.udn,
+                    
+                    name: Translate.translate('USERS.CREATE.LABELS.AGENCY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: 'id',
+                    option: 'agencia',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
+                },
+                hint: Translate.translate('USERS.CREATE.HINTS.AGENCY'),
+                icon: 'fa fa-building',
+                required: true
+            }
+        };
 
         return {
             getUserDetail: getUserDetail,
             modifyPerson: modifyPerson,
-            createPerson: createPerson
+            createPerson: createPerson,
+            catalogues: catalogues
         };
 
     }

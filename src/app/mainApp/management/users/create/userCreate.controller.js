@@ -4,10 +4,13 @@
         .controller('userCreateController', UserCreateController);
     function UserCreateController(
         USERS,
+        User,
         ErrorHandler,
         $window,
         toastr,
-        Translate
+        Translate,
+        //$scope,
+        $state
     ) {
         var vm = this;
 
@@ -16,9 +19,13 @@
         vm.changingId;
         vm.editableUser;
         vm.newPassword;
+        vm.showSelector = false;
+        vm.userToAgency = false;
+
+        vm.catalogues = USERS.catalogues;
 
         //Constructors
-        var user = function () {
+        var userTemplate = function () {
             var vm = this;
 
             vm.nombre = '';
@@ -50,7 +57,15 @@
 
         function init() {
             vm.newPassword = '';
-            vm.editableUser = new user();
+            vm.editableUser = new userTemplate();
+
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         }
         init();
 
@@ -62,12 +77,16 @@
                     toastr.success(Translate.translate(
                         'USERS.CREATE.MESSAGES.SUCCESS_CREATE'
                     ));
-                    init();
+                    //$scope.createUserForm.$setPristine();
+                    //$scope.createUserForm.$setUntouched();
+                    //init();
+                    $state.go('triangular.admin-default.usersManagement');
                 })
                 .catch(function errorCreateUser(error) {
                     ErrorHandler.errorTranslate(error);
                 });
         };
+
         vm.selectPicture = function selectPicture(files, model) {
             if (files.length > 0) {
                 var file = files[0];
@@ -86,5 +105,14 @@
             }
         };
 
+        vm.onElementSelect = function onElementSelect(element, field) {
+            vm.editableUser[field] = element;
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.editableUser[vm.catalogues['udn'].binding]);
+            delete (vm.editableUser[vm.catalogues['subsidiary'].binding]);
+        };
     }
 })();

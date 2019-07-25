@@ -78,20 +78,27 @@
                 "USERNAME": "Nombre de usuario",
                 "EMAIL": "Correo electrónico",
                 "PASSWORD": "Contraseña",
-                "CONFIRM_PASSWORD": "Confirmación de contraseña"
+                "CONFIRM_PASSWORD": "Confirmación de contraseña",
+                "SWITCH": {
+                    "LABEL": "Activa si el usuario será asignado a una UDN-Agencia",
+                    "TRUE": "El usuario será asignado a una UDN-Agencia",
+                    "FALSE": "l usuario será asignado a una sucursal"
+                }
             },
             "HINTS": {
                 "NAME": "Nombre del usuario",
                 "MIDDLE_NAME": "Primer apellido del usuario",
                 "LAST_NAME": "(Opcional) Segundo apellido del usuario",
                 "ADDRESS": "Domicilio del usuario",
-                "PHONE": "Teléfono personal del usuario",
+                "PHONE": "Teléfono ########## (a 10 digitos) ext. ####",
                 "ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "PHOTO": "Tamaño máximo 5MB y 4096px x 4096px",
                 "USERNAME": "Identificador para iniciar sesión",
                 "EMAIL": "Correo electrónico del usuario",
-                "PASSWORD": "Al menos 8 caracteres, debe conetenr números y letras",
-                "CONFIRM_PASSWORD": "Deberá coincidir con la contraseña ingresada"
+                "PASSWORD": "Al menos 8 caracteres, contener alguno de los siguientes caracteres !@#\\$%^&*. números y letras",
+                "CONFIRM_PASSWORD": "Deberá coincidir con la contraseña ingresada",
+                "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una para el usuario que crearás",
+                "AGENCY": "Tu usuario no tiene Agencua-UDN, selecciona una para el usuario que crearás"
             },
             "BUTTONS": {
                 "SAVE": "Guardar cambios",
@@ -99,6 +106,16 @@
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Usuario registrado exitosamente"
+            },
+            "ERRORS": {
+                "USERNAME_LENGTH": "El nombre de usuario no debe exceder los 50 caracteres",
+                "PASSWORD_REGEX": "Formato inválido de contraseña",
+                "PASSWORD_UNMATCH": "Las contraseñas ingresadas no coinciden",
+                "NAME_LENGTH": "El nombre no debe contener mas de 50 caracteres",
+                "MIDDLE_NAME_LENGTH": "El apellido paterno de debe tener mas de 50 caracteres",
+                "LAST_NAME_LENGTH": "EL apellido materno debe tener mas de 50 caracteres",
+                "ADDRESS_LENGTH": "La dirección no debe tener mas de 200 caracteres",
+                "PHONE_REGEX": "Teléfono con fomrato inválido"
             }
         }
     }

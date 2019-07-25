@@ -7,9 +7,43 @@
              layout="column">
             <h1>{{'USERS.CREATE.TITLE'|translate}}</h1>
         </div>
+        <div layout="row"
+             layout-align="center center"
+             ng-if="vm.showSelector">
+            <p>{{'USERS.CREATE.LABELS.SWITCH.LABEL'|translate}}</p>
+            <md-switch ng-model="vm.userToAgency"
+                       ng-change="vm.changeSwitch()">
+                <!--<p ng-if="vm.userToAgency">{{'USERS.CREATE.LABELS.SWITCH.TRUE'|translate}}</p>
+    <p ng-if="!vm.userToAgency">{{'USERS.CREATE.LABELS.SWITCH.FALSE'|translate}}</p>-->
+            </md-switch>
+        </div>
         <!--Creation section-->
-        <section layout="column"
-                 layout-align="start stretch">
+        <form layout="column"
+              autocomplete="off"
+              layout-align="start stretch"
+              name="createUserForm">
+            <!--Location selectors-->
+            <div layout="column"
+                 layout-gt-xs="row"
+                 layout-align-gt-xs="space-around center"
+                 layout-align="center stretch">
+                <catalog-select class="full-width"
+                                ng-if="!vm.userToAgency && vm.showSelector"
+                                catalog="vm.catalogues['subsidiary'].catalog"
+                                hint="vm.catalogues['subsidiary'].hint"
+                                icon="vm.catalogues['subsidiary'].icon"
+                                required="vm.catalogues['subsidiary'].required"
+                                on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+                </catalog-select>
+                <catalog-select class="full-width"
+                                ng-if="vm.userToAgency && vm.showSelector"
+                                catalog="vm.catalogues['udn'].catalog"
+                                hint="vm.catalogues['udn'].hint"
+                                icon="vm.catalogues['udn'].icon"
+                                required="vm.catalogues['udn'].required"
+                                on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                </catalog-select>
+            </div>
             <!--User section-->
             <div layout="column"
                  layout-gt-sm="row"
@@ -20,20 +54,30 @@
                     <label translate>USERS.CREATE.LABELS.USERNAME</label>
                     <md-icon class="fas fa-id-badge"></md-icon>
                     <input ng-model="vm.editableUser['user'].username"
-                           name="nombre de usuario"
+                           name="username"
+                           autocomplete="off"
                            ng-required="true"
+                           md-maxlength="50"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.USERNAME</div>
+                    <div ng-messages="createUserForm.username.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="md-maxlength" translate>USERS.CREATE.ERRORS.USERNAME_LENGTH</div>
+                    </div>
                 </md-input-container>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
                     <label translate>USERS.CREATE.LABELS.EMAIL</label>
                     <md-icon class="fas fa-at"></md-icon>
                     <input ng-model="vm.editableUser['user'].email"
-                           name="nombre de usuario"
+                           name="email"
+                           autocomplete="off"
                            ng-required="true"
-                           type="text">
+                           type="email">
                     <div class="hint" translate>USERS.CREATE.HINTS.EMAIL</div>
+                    <div ng-messages="createUserForm.email.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                    </div>
                 </md-input-container>
             </div>
             <!--Password section-->
@@ -44,24 +88,37 @@
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
                     <label translate>USERS.CREATE.LABELS.PASSWORD</label>
-                    <md-icon hide-gt-sm
-                             class="fas fa-user-shield"></md-icon>
+                    <md-icon class="fas fa-user-shield"></md-icon>
                     <input ng-model="vm.newPassword"
                            name="new_password"
+                           autocomplete="off"
                            ng-required="true"
-                           type="text">
+                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.]).{8,}$"
+                           type="password">
                     <div class="hint" translate>USERS.CREATE.HINTS.PASSWORD</div>
+                    <div ng-messages="createUserForm.new_password.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="pattern" translate>USERS.CREATE.ERRORS.PASSWORD_REGEX</div>
+                    </div>
                 </md-input-container>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
                     <label translate>USERS.CREATE.LABELS.CONFIRM_PASSWORD</label>
-                    <md-icon hide-gt-sm
-                             class="fas fa-user-shield"></md-icon>
+                    <md-icon ng-hide="vm.newPassword===vm.editableUser['user'].password" class="fas fa-lock-open"></md-icon>
+                    <md-icon ng-hide="vm.newPassword!==vm.editableUser['user'].password" class="fas fa-lock"></md-icon>
                     <input ng-model="vm.editableUser['user'].password"
                            name="password_validate"
                            ng-required="true"
-                           type="text">
+                           autocomplete="off"
+                           ng-disabled="createUSerForm.new_password.$error || !vm.newPassword"
+                           type="password">
                     <div class="hint" translate>USERS.CREATE.HINTS.CONFIRM_PASSWORD</div>
+                    <div ng-messages="createUserForm.password_validate.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-if="vm.newPassword!==vm.editableUser['user'].password" style="opacity: 1;margin-top: 0px;" translate="">
+                            USERS.CREATE.ERRORS.PASSWORD_UNMATCH
+                        </div>
+                    </div>
                 </md-input-container>
             </div>
             <!--Images section-->
@@ -107,9 +164,15 @@
                     <md-icon class="fas fa-user"></md-icon>
                     <input ng-model="vm.editableUser['nombre']"
                            name="nombre"
+                           autocomplete="off"
+                           md-maxlength="50"
                            ng-required="true"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.NAME</div>
+                    <div ng-messages="createUserForm.nombre.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="md-maxlength" translate>USERS.CREATE.ERRORS.NAME_LENGTH</div>
+                    </div>
                 </md-input-container>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
@@ -117,9 +180,15 @@
                     <md-icon hide-gt-sm class="fas fa-user"></md-icon>
                     <input ng-model="vm.editableUser['apellido_paterno']"
                            name="apellido_paterno"
+                           autocomplete="off"
+                           md-maxlength="50"
                            ng-required="true"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.MIDDLE_NAME</div>
+                    <div ng-messages="createUserForm.apellido_paterno.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="md-maxlength" translate>USERS.CREATE.ERRORS.MIDDLE_NAME_LENGTH</div>
+                    </div>
                 </md-input-container>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
@@ -127,8 +196,13 @@
                     <md-icon hide-gt-sm class="fas fa-user"></md-icon>
                     <input ng-model="vm.editableUser['apellido_materno']"
                            name="apellido_materno"
+                           autocomplete="off"
+                           md-maxlength="50"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.LAST_NAME</div>
+                    <div ng-messages="createUserForm.apellido_materno.$error" role="alert">
+                        <div ng-message="md-maxlength" translate>USERS.CREATE.ERRORS.LAST_NAME_LENGTH</div>
+                    </div>
                 </md-input-container>
             </div>
             <!--Data section-->
@@ -142,9 +216,15 @@
                     <md-icon class="fas fa-map"></md-icon>
                     <input ng-model="vm.editableUser['direccion']"
                            name="direccion"
+                           autocomplete="off"
+                           md-maxlength="200"
                            ng-required="true"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.ADDRESS</div>
+                    <div ng-messages="createUserForm.direccion.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="md-maxlength" translate>USERS.CREATE.ERRORS.ADDRESS_LENGTH</div>
+                    </div>
                 </md-input-container>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
@@ -152,12 +232,18 @@
                     <md-icon class="fas fa-phone"></md-icon>
                     <input ng-model="vm.editableUser['telefono']"
                            name="telefono"
+                           autocomplete="off"
                            ng-required="true"
+                           pattern="^\d{10}(.)*$"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.PHONE</div>
+                    <div ng-messages="createUserForm.telefono.$error" role="alert">
+                        <div ng-message="required" translate>MAIN.VALIDATIONS.REQUIRED_FIELD</div>
+                        <div ng-message="pattern" translate>USERS.CREATE.ERRORS.PHONE_REGEX</div>
+                    </div>
                 </md-input-container>
             </div>
-        </section>
+        </form>
 
         <div layout-gt-sm="row"
              layout-align-gt-sm="space-around center"
@@ -165,6 +251,10 @@
              layout-align="center center">
             <md-button ng-click="vm.createPerson()"
                        aria-label="save modified user"
+                       ng-disabled="createUserForm.$invalid
+                       || !vm.editableUser['foto']
+                       || !vm.editableUser['ife']
+                       || vm.newPassword!==vm.editableUser['user'].password"
                        cg-busy="{promise:vm.savePromise, message:' '}"
                        class="md-primary md-raised">
                 <div layout="row" layout-align="center center">
