@@ -61,6 +61,45 @@
                 "CHANGE_PHOTO": "Cambiar foto",
                 "CHANGE_ID": "Cambiar identificación"
             }
+        },
+        "CREATE": {
+            "TITLE": "Creación de usuario",
+            "LABELS": {
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "Agencia-UDN",
+                "STORE": "Establecimiento",
+                "ADDRESS": "Dirección",
+                "PHONE": "Teléfono",
+                "NAME": "Nombre",
+                "MIDDLE_NAME": "Apellido paterno",
+                "LAST_NAME": "Apellido materno",
+                "ID": "Identificación",
+                "PHOTO": "Imagen de perfil",
+                "USERNAME": "Nombre de usuario",
+                "EMAIL": "Correo electrónico",
+                "PASSWORD": "Contraseña",
+                "CONFIRM_PASSWORD": "Confirmación de contraseña"
+            },
+            "HINTS": {
+                "NAME": "Nombre del usuario",
+                "MIDDLE_NAME": "Primer apellido del usuario",
+                "LAST_NAME": "(Opcional) Segundo apellido del usuario",
+                "ADDRESS": "Domicilio del usuario",
+                "PHONE": "Teléfono personal del usuario",
+                "ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "PHOTO": "Tamaño máximo 5MB y 4096px x 4096px",
+                "USERNAME": "Identificador para iniciar sesión",
+                "EMAIL": "Correo electrónico del usuario",
+                "PASSWORD": "Al menos 8 caracteres, debe conetenr números y letras",
+                "CONFIRM_PASSWORD": "Deberá coincidir con la contraseña ingresada"
+            },
+            "BUTTONS": {
+                "SAVE": "Guardar cambios",
+                "CANCEL": "Limpiar campos"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Usuario registrado exitosamente"
+            }
         }
     }
 }

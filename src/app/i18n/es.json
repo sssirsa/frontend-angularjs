@@ -108,7 +108,8 @@
             "MANAGEMENT": {
                 "USERS": {
                     "TITLE": "Usuarios",
-                    "MANAGE_USERS": "Gestión de usuarios"
+                    "MANAGE_USERS": "Gestión de usuarios",
+                    "CREATE_USERS": "Nuevo usuario"
                 }
             }
         },

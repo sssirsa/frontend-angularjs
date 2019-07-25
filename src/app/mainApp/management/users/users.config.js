@@ -36,6 +36,17 @@
                 templateUrl: 'app/mainApp/management/users/detail/userDetail.tmpl.html',
                 controller: 'userDetailController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.userCreate', {
+                url: '/gestion/usuarios/crear',
+                data: {
+                    permissions: {
+                        only: ['management__manage_system__persona']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/users/create/userCreate.tmpl.html',
+                controller: 'userCreateController',
+                controllerAs: 'vm'
             });
 
         triMenuProvider.addMenu(
@@ -46,6 +57,12 @@
                 permission: ['management__manage_system__persona'],
                 priority: 10,
                 children: [
+                    {
+                        name: 'MAIN.MENU.MANAGEMENT.USERS.CREATE_USERS',
+                        state: 'triangular.admin-default.usersCreate',
+                        type: 'link',
+                        permission: ['management__manage_system__persona']
+                    },
                     {
                         name: 'MAIN.MENU.MANAGEMENT.USERS.MANAGE_USERS',
                         state: 'triangular.admin-default.usersManagement',

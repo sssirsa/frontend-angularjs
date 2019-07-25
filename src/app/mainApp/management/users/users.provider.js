@@ -20,9 +20,14 @@
             return personUrl.all(id).customPUT(element);
         };
 
+        var createPerson = function createPerson(element) {
+            return personUrl.customPOST(element);
+        };
+
         return {
             getUserDetail: getUserDetail,
-            modifyPerson: modifyPerson
+            modifyPerson: modifyPerson,
+            createPerson: createPerson
         };
 
     }

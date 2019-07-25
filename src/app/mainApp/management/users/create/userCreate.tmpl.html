@@ -1,0 +1,174 @@
+<md-card layout-padding
+         layout="column"
+         layout-align="center stretch">
+    <div layout="column"
+         layout-align="start stretch">
+        <div layout-align="center center"
+             layout="column">
+            <h1>{{'USERS.CREATE.TITLE'|translate}}</h1>
+        </div>
+        <!--Creation section-->
+        <section layout="column"
+                 layout-align="start stretch">
+            <!--User section-->
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.USERNAME</label>
+                    <md-icon class="fas fa-id-badge"></md-icon>
+                    <input ng-model="vm.editableUser['user'].username"
+                           name="nombre de usuario"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.USERNAME</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.EMAIL</label>
+                    <md-icon class="fas fa-at"></md-icon>
+                    <input ng-model="vm.editableUser['user'].email"
+                           name="nombre de usuario"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.EMAIL</div>
+                </md-input-container>
+            </div>
+            <!--Password section-->
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.PASSWORD</label>
+                    <md-icon hide-gt-sm class="fas fa-key"></md-icon>
+                    <input ng-model="vm.newPassword"
+                           name="new_password"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.PASSWORD</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.CONFIRM_PASSWORD</label>
+                    <md-icon ng-if="vm.newPassword!==vm.editableUser['user'].password" hide-gt-sm class="fas fa-lock-open"></md-icon>
+                    <md-icon ng-if="vm.newPassword===vm.editableUser['user'].password" hide-gt-sm class="fas fa-lock"></md-icon>
+                    <input ng-model="vm.editableUser['user'].password"
+                           name="password_validate"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.CONFIRM_PASSWORD</div>
+                </md-input-container>
+            </div>
+            <!--Images section-->
+            <div layout-gt-sm="row"
+                 layout="column"
+                 layout-align="center center"
+                 layout-align-gt-sm="space-around center">
+                <div layout="column"
+                     layout-align="center center">
+                    <b>{{'USERS.CREATE.LABELS.PHOTO'|translate}}</b>
+                    <section layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectPicture(files, 'foto')"
+                                       file-formats="'image/*'"
+                                       validations="vm.imageConstraints.validations"
+                                       resize-if="vm.imageConstraints.resizeIf"
+                                       resize="vm.imageConstraints.resize"></file-uploader>
+                        <div class="hint" translate>USERS.CREATE.HINTS.PHOTO</div>
+                    </section>
+                </div>
+                <div layout="column"
+                     layout-align="center center">
+                    <b>{{'USERS.CREATE.LABELS.ID'|translate}}</b>
+                    <section layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectPicture(files, 'ife')"
+                                       file-formats="'image/*'"
+                                       validations="vm.imageConstraints.validations"
+                                       resize-if="vm.imageConstraints.resizeIf"
+                                       resize="vm.imageConstraints.resize"></file-uploader>
+                        <div class="hint" translate>USERS.CREATE.HINTS.ID</div>
+                    </section>
+                </div>
+            </div>
+            <!--Name section-->
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.NAME</label>
+                    <md-icon class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['nombre']"
+                           name="nombre"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.NAME</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.MIDDLE_NAME</label>
+                    <md-icon hide-gt-sm class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['apellido_paterno']"
+                           name="apellido_paterno"
+                           ng-required="true"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.MIDDLE_NAME</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.LAST_NAME</label>
+                    <md-icon hide-gt-sm class="fas fa-user"></md-icon>
+                    <input ng-model="vm.editableUser['apellido_materno']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.LAST_NAME</div>
+                </md-input-container>
+            </div>
+            <!--Data section-->
+            <div layout="column"
+                 layout-gt-sm="row"
+                 layout-align="center stretch"
+                 layout-align-gt-sm="center stretch">
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.ADDRESS</label>
+                    <md-icon class="fas fa-map"></md-icon>
+                    <input ng-model="vm.editableUser['direccion']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.ADDRESS</div>
+                </md-input-container>
+                <md-input-container layout="column"
+                                    class="md-icon-float md-block full-width">
+                    <label translate>USERS.CREATE.LABELS.PHONE</label>
+                    <md-icon class="fas fa-phone"></md-icon>
+                    <input ng-model="vm.editableUser['telefono']"
+                           name="apellido_materno"
+                           type="text">
+                    <div class="hint" translate>USERS.CREATE.HINTS.PHONE</div>
+                </md-input-container>
+            </div>
+        </section>
+
+        <div layout-gt-sm="row"
+             layout-align-gt-sm="space-around center"
+             layout="column"
+             layout-align="center center">
+            <md-button ng-click="vm.createPerson()"
+                       aria-label="save modified user"
+                       cg-busy="{promise:vm.savePromise, message:' '}"
+                       class="md-primary md-raised">
+                <div layout="row" layout-align="center center">
+                    <md-icon md-font-icon="fa fa-save"></md-icon>
+                    <div hide-xs hide-sm>{{'USERS.CREATE.BUTTONS.SAVE'|translate}}</div>
+                </div>
+            </md-button>
+        </div>
+    </div>
+</md-card>

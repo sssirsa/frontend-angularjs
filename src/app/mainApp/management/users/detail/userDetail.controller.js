@@ -79,7 +79,7 @@
                     init();
                 })
                 .catch(function errorModifyUser(error) {
-                    errorHandler.errorTranslate(error);
+                    ErrorHandler.errorTranslate(error);
                 });
         };
 
@@ -126,7 +126,7 @@
             else {
                 delete (vm.editableUser[model]);
             }
-        }
+        };
 
     }
 })();
