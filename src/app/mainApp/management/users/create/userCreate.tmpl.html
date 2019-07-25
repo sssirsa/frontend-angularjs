@@ -44,7 +44,8 @@
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
                     <label translate>USERS.CREATE.LABELS.PASSWORD</label>
-                    <md-icon hide-gt-sm class="fas fa-key"></md-icon>
+                    <md-icon hide-gt-sm
+                             class="fas fa-user-shield"></md-icon>
                     <input ng-model="vm.newPassword"
                            name="new_password"
                            ng-required="true"
@@ -54,8 +55,8 @@
                 <md-input-container layout="column"
                                     class="md-icon-float md-block full-width">
                     <label translate>USERS.CREATE.LABELS.CONFIRM_PASSWORD</label>
-                    <md-icon ng-if="vm.newPassword!==vm.editableUser['user'].password" hide-gt-sm class="fas fa-lock-open"></md-icon>
-                    <md-icon ng-if="vm.newPassword===vm.editableUser['user'].password" hide-gt-sm class="fas fa-lock"></md-icon>
+                    <md-icon hide-gt-sm
+                             class="fas fa-user-shield"></md-icon>
                     <input ng-model="vm.editableUser['user'].password"
                            name="password_validate"
                            ng-required="true"
@@ -140,7 +141,8 @@
                     <label translate>USERS.CREATE.LABELS.ADDRESS</label>
                     <md-icon class="fas fa-map"></md-icon>
                     <input ng-model="vm.editableUser['direccion']"
-                           name="apellido_materno"
+                           name="direccion"
+                           ng-required="true"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.ADDRESS</div>
                 </md-input-container>
@@ -149,7 +151,8 @@
                     <label translate>USERS.CREATE.LABELS.PHONE</label>
                     <md-icon class="fas fa-phone"></md-icon>
                     <input ng-model="vm.editableUser['telefono']"
-                           name="apellido_materno"
+                           name="telefono"
+                           ng-required="true"
                            type="text">
                     <div class="hint" translate>USERS.CREATE.HINTS.PHONE</div>
                 </md-input-container>
