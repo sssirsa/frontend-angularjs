@@ -93,12 +93,12 @@
                 vm.savePromise = USERS.modifyPerson(
                     vm.user['id'],
                     vm.editableUser
-                )
+                );
             }
             else {
                 vm.savePromise = USERS.modifyProfile(
                     vm.editableUser
-                )
+                );
             }
             vm.savePromise
                 .then(function successModifyUser() {
