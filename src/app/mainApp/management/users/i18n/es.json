@@ -43,7 +43,12 @@
                 "MIDDLE_NAME": "Apellido paterno",
                 "LAST_NAME": "Apellido materno",
                 "ID": "Identificación",
-                "PHOTO": "Imagen de perfil"
+                "PHOTO": "Imagen de perfil",
+                "SWITCH": {
+                    "LABEL": "Activa si el usuario será asignado a una UDN-Agencia",
+                    "TRUE": "El usuario será asignado a una UDN-Agencia",
+                    "FALSE": "l usuario será asignado a una sucursal"
+                }
             },
             "HINTS": {
                 "NAME": "Nombre del usuario",
@@ -59,7 +64,10 @@
                 "SAVE": "Guardar cambios",
                 "CANCEL": "Descartar cambios",
                 "CHANGE_PHOTO": "Cambiar foto",
-                "CHANGE_ID": "Cambiar identificación"
+                "CHANGE_ID": "Cambiar identificación",
+                "CHANGE_LOCATION": "Cambiar ubicación",
+                "ASSIGN_LOCATION": "Asignar ubicación",
+                "REMOVE_LOCATION": "Quitar ubicación"
             }
         },
         "CREATE": {
@@ -97,8 +105,8 @@
                 "EMAIL": "Correo electrónico del usuario",
                 "PASSWORD": "Al menos 8 caracteres, contener alguno de los siguientes caracteres !@#\\$%^&*. números y letras",
                 "CONFIRM_PASSWORD": "Deberá coincidir con la contraseña ingresada",
-                "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una para el usuario que crearás",
-                "AGENCY": "Tu usuario no tiene Agencua-UDN, selecciona una para el usuario que crearás"
+                "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una para el usuario",
+                "AGENCY": "Tu usuario no tiene Agencua-UDN, selecciona una para el usuario"
             },
             "BUTTONS": {
                 "SAVE": "Guardar cambios",

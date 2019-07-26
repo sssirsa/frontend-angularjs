@@ -114,9 +114,108 @@
         </section>
 
         <!--Modification section-->
-        <section layout="column"
-                 layout-align="start stretch"
-                 ng-if="vm.modifying">
+        <div layout="column"
+             layout-align="start stretch"
+             ng-if="vm.modifying">
+            <!--Location section-->
+            <section layout="column"
+                     layout-align="center stretch">
+                <!--Viewing location-->
+                <div layout-gt-sm="row"
+                     layout="column"
+                     layout-align-gt-sm="center stretch"
+                     layout-align="center center">
+                    <div layout="row"
+                         layout-align="center center"
+                         ng-if="!vm.changingLocation">
+                        <md-icon md-font-icon="fas fa-map-marked-alt"></md-icon>
+                        <div ng-if="vm.editableUser.sucursal">
+                            <b>
+                                {{'USERS.DETAIL.LABELS.SUBSIDIARY'|translate}}:
+                            </b>
+                            {{vm.editableUser.sucursal.nombre}}
+                        </div>
+                        <div ng-if="vm.useditableUserer.udn">
+                            <b>
+                                {{'USERS.DETAIL.LABELS.AGENCY'|translate}}:
+                            </b>
+                            {{vm.editableUser.udn.agencia}}
+                        </div>
+                        <div ng-if="vm.editableUser.establecimiento">
+                            <b>
+                                {{'USERS.DETAIL.LABELS.STORE'|translate}}:
+                            </b>
+                            {{vm.editableUser.establecimiento.nombre}}
+                        </div>
+                        <div ng-if="!vm.editableUser.sucursal && !vm.editableUser.udn &&!vm.editableUser.establecimiento">
+                            <b>
+                                {{'USERS.DETAIL.LABELS.NO_LOCATION'|translate}}
+                            </b>
+                        </div>
+                    </div>
+                    <md-button ng-click="vm.changeLocation()"
+                               ng-if="!vm.changingLocation && vm.showSelector"
+                               aria-label="change location"
+                               class="md-primary md-raised">
+                        <div layout="row" layout-align="center center">
+                            <md-icon md-font-icon="fa fa-edit"></md-icon>
+                            <div ng-if="(vm.editableUser['sucursal']||vm.editableUser['udn'])" hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.CHANGE_LOCATION'|translate}}</div>
+                            <div ng-if="!(vm.editableUser['sucursal']||vm.editableUser['udn'])" hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.ASSIGN_LOCATION'|translate}}</div>
+                        </div>
+                    </md-button>
+                    <md-button ng-click="vm.removeLocation()"
+                               ng-if="!vm.changingLocation
+                               && vm.showSelector
+                               && (vm.editableUser['sucursal']||vm.editableUser['udn'])"
+                               aria-label="change location"
+                               class="md-warn md-raised">
+                        <div layout="row" layout-align="center center">
+                            <md-icon md-font-icon="fa fa-times"></md-icon>
+                            <div hide-xs hide-sm>{{'USERS.DETAIL.BUTTONS.REMOVE_LOCATION'|translate}}</div>
+                        </div>
+                    </md-button>
+                </div>
+                <!--Changing location section-->
+                <div layout="column"
+                     layout-align="start stretch"
+                     ng-if="vm.changingLocation">
+                    <!--Switch-->
+                    <div layout="row"
+                         layout-align="center center"
+                         ng-if="vm.showSelector">
+                        <p>{{'USERS.DETAIL.LABELS.SWITCH.LABEL'|translate}}</p>
+                        <md-switch ng-model="vm.userToAgency"
+                                   ng-change="vm.changeSwitch()">
+                            <!--<p ng-if="vm.userToAgency">{{'USERS.DETAIL.LABELS.SWITCH.TRUE'|translate}}</p>
+                            <p ng-if="!vm.userToAgency">{{'USERS.DETAIL.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                        </md-switch>
+                    </div>
+                      <!--Location selectors-->
+                    <div layout="column"
+                         layout-gt-xs="row"
+                         layout-align-gt-xs="space-around center"
+                         layout-align="center stretch"
+                         ng-if="vm.showSelector">
+                        <catalog-select class="full-width"
+                                        ng-if="!vm.userToAgency && vm.showSelector"
+                                        catalog="vm.catalogues['subsidiary'].catalog"
+                                        hint="vm.catalogues['subsidiary'].hint"
+                                        icon="vm.catalogues['subsidiary'].icon"
+                                        required="vm.catalogues['subsidiary'].required"
+                                        on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+                        </catalog-select>
+                        <catalog-select class="full-width"
+                                        ng-if="vm.userToAgency && vm.showSelector"
+                                        catalog="vm.catalogues['udn'].catalog"
+                                        hint="vm.catalogues['udn'].hint"
+                                        icon="vm.catalogues['udn'].icon"
+                                        required="vm.catalogues['udn'].required"
+                                        on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                        </catalog-select>
+                    </div>
+                </div>
+            </section>
+            <!--Images section-->
             <div layout-gt-sm="row"
                  layout="column"
                  layout-align="center center"
@@ -198,6 +297,7 @@
                     </section>
                 </div>
             </div>
+            <!--Name section-->
             <div layout="column"
                  layout-gt-sm="row"
                  layout-align="center stretch"
@@ -232,6 +332,7 @@
                     <div class="hint" translate>USERS.DETAIL.HINTS.LAST_NAME</div>
                 </md-input-container>
             </div>
+            <!--Data section-->
             <div layout="column"
                  layout-gt-sm="row"
                  layout-align="center stretch"
@@ -255,7 +356,7 @@
                     <div class="hint" translate>USERS.DETAIL.HINTS.PHONE</div>
                 </md-input-container>
             </div>
-        </section>
+        </div>
 
         <div layout-gt-sm="row"
              layout-align-gt-sm="space-around center"

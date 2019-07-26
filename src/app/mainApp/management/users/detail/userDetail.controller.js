@@ -5,6 +5,7 @@
     function UserDetailController(
         $stateParams,
         USERS,
+        User,
         ErrorHandler,
         $window
     ) {
@@ -15,10 +16,14 @@
         vm.modifying;
         vm.changingPhoto;
         vm.changingId;
+        vm.changingLocation;
+        vm.userToAgency;
         vm.editableUser;
 
+        vm.catalogues = USERS.catalogues;
+
         //Constructors
-        var user = function (data) {
+        var userTemplate = function (data) {
             var vm = this;
             if (data) {
                 vm.nombre = data['nombre'];
@@ -54,6 +59,8 @@
             vm.modifying = false;
             vm.changingPhoto = false;
             vm.changingId = false;
+            vm.changingLocation = false;
+            vm.userToAgency = false;
             //Getting the user 
             vm.userPromise = USERS.getUserDetail($stateParams.personId)
                 .then(function userSuccess(user) {
@@ -62,12 +69,23 @@
                 .catch(function userError(error) {
                     ErrorHandler.errorTranslate(error);
                 });
+
+
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         }
         init();
 
         vm.modifyButtonPressed = function modifyButtonPressed() {
             vm.modifying = true;
-            vm.editableUser = new user(vm.user);
+            vm.editableUser = new userTemplate(vm.user);
+            vm.editableUser['udn'] = vm.user['udn'];
+            vm.editableUser['sucursal'] = vm.user['sucursal'];
         };
 
         vm.modifyPerson = function modifyPerson() {
@@ -85,7 +103,7 @@
 
         vm.discardChanges = function discardChanges() {
             vm.modifying = false;
-            vm.editableUser = new user();
+            vm.editableUser = new userTemplate();
         };
 
         vm.pictureClick = function pictureClick(url) {
@@ -128,5 +146,27 @@
             }
         };
 
+        vm.changeLocation = function changeLocation() {
+            vm.changingLocation = true;
+        };
+
+
+        vm.onElementSelect = function onElementSelect(element, field) {
+            vm.editableUser[field] = element;
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.editableUser[vm.catalogues['udn'].binding]);
+            delete (vm.editableUser[vm.catalogues['subsidiary'].binding]);
+        };
+
+        vm.removeLocation = function removeLocation() {
+            //Removing location
+            delete (vm.editableUser[vm.catalogues['udn'].binding]);
+            delete (vm.editableUser['udn']);
+            delete (vm.editableUser[vm.catalogues['subsidiary'].binding]);
+            delete (vm.editableUser['sucursal']);
+        };
     }
 })();
