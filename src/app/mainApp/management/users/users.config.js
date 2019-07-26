@@ -37,6 +37,21 @@
                 controller: 'userDetailController',
                 controllerAs: 'vm'
             })
+            .state('triangular.admin-default.userProfile', {
+                url: '/gestion/usuarios/detalle/{{personId}}/{{own}}',
+                data: {
+                    permissions: {
+                        only: ['AUTHENTICATED']
+                    }
+                },
+                params: {
+                    personId: null,
+                    own: 'true'
+                },
+                templateUrl: 'app/mainApp/management/users/detail/userDetail.tmpl.html',
+                controller: 'userDetailController',
+                controllerAs: 'vm'
+            })
             .state('triangular.admin-default.usersCreate', {
                 url: '/gestion/usuarios/crear',
                 data: {

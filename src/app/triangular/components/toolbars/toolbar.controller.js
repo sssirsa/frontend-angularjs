@@ -7,21 +7,21 @@
 
     /* @ngInject */
     function DefaultToolbarController($scope,
-                                      $injector,
-                                      $rootScope,
-                                      $mdMedia,
-                                      $state,
-                                      AuthService,
-                                      $filter,
-                                      $mdUtil,
-                                      $mdSidenav,
-                                      $mdToast,
-                                      $document,
-                                      triBreadcrumbsService,
-                                      triSettings,
-                                      triLayout,
-                                      toastr,
-                                      User) {
+        $injector,
+        $rootScope,
+        $mdMedia,
+        $state,
+        AuthService,
+        $filter,
+        $mdUtil,
+        $mdSidenav,
+        $mdToast,
+        $document,
+        triBreadcrumbsService,
+        triSettings,
+        triLayout,
+        toastr,
+        User) {
         var vm = this;
 
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
@@ -106,7 +106,7 @@
         }
 
         vm.openProfile = function () {
-            $state.go('triangular.admin-default.userDetail', {
+            $state.go('triangular.admin-default.userProfile', {
                 personId: vm.user.id
             });
         };

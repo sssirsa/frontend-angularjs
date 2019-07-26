@@ -14,8 +14,16 @@
             + '/' + URLS.management.administration.base
             + '/' + URLS.management.administration.person);
 
+        var profileUrl = API.all(URLS.management.base
+            + '/' + URLS.management.administration.base
+            + '/' + URLS.management.administration.profile);
+
         var getUserDetail = function getUserDetail(id) {
             return personUrl.customGET(id);
+        };
+
+        var modifyProfile = function modifyProfile(element) {
+            return profileUrl.customPUT(element);
         };
 
         var modifyPerson = function modifyPerson(id, element) {
@@ -86,6 +94,7 @@
         return {
             getUserDetail: getUserDetail,
             modifyPerson: modifyPerson,
+            modifyProfile: modifyProfile,
             createPerson: createPerson,
             catalogues: catalogues
         };
