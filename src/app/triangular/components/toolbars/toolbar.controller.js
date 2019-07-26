@@ -105,6 +105,12 @@
 
         }
 
+        vm.openProfile = function () {
+            $state.go('triangular.admin-default.userDetail', {
+                personId: vm.user.id
+            });
+        };
+
         $scope.$on('newMailNotification', function () {
             vm.emailNew = true;
         });
