@@ -93,7 +93,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.cabinet_brand,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -115,7 +115,7 @@
             modelo_by_marca: {
                 catalog: {
                     url: null,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
