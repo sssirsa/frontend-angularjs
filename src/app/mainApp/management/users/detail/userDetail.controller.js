@@ -84,12 +84,16 @@
         vm.modifyButtonPressed = function modifyButtonPressed() {
             vm.modifying = true;
             vm.editableUser = new userTemplate(vm.user);
-            vm.editableUser['udn'] = vm.user['udn'];
-            vm.editableUser['sucursal'] = vm.user['sucursal'];
+            if (vm.user['udn']) {
+                vm.editableUser['udn'] = vm.user['udn'];
+            }
+            if (vm.user['sucursal']) {
+                vm.editableUser['sucursal'] = vm.user['sucursal'];
+            }
         };
 
         vm.modifyPerson = function modifyPerson() {
-            if ($stateParams.own) {
+            if (!$stateParams.own) {
                 vm.savePromise = USERS.modifyPerson(
                     vm.user['id'],
                     vm.editableUser
@@ -111,6 +115,10 @@
 
         vm.discardChanges = function discardChanges() {
             vm.modifying = false;
+            vm.changingPhoto = false;
+            vm.changingId = false;
+            vm.changingLocation = false;
+            vm.userToAgency = false;
             vm.editableUser = new userTemplate();
         };
 
