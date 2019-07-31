@@ -55,7 +55,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.cabinet_brand,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -77,7 +77,7 @@
             modelo_by_marca: {
                 catalog: {
                     url: null,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -102,7 +102,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.condition,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -127,7 +127,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.category,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',

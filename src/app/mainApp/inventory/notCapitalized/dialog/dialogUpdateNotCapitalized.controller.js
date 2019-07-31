@@ -62,7 +62,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.status_not_labeled,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.STATUS'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -87,7 +87,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.reason_not_labeled,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.COMPONENTS.NO_LABELED.REASON'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',

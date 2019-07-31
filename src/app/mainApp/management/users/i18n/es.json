@@ -1,62 +1,130 @@
 {
-  "ADMIN": {
-    "MANAGE": {
-      "MANAGEMENT_USER": "Nuevo Usuario",
-      "BUSQUEDA_USUARIO":"Administración de Usuarios",
-      "INFO_USUARIO":"Información del Usuario",
-      "DATAUSER":"Datos de Contacto",
-      "DATAPER":"Datos Personales",
-      "AUTOCOMPLETE":"Busca a un Usuario",
-      "NOTFOUND":"No se encontro el usuario"
+    "USERS": {
+        "MANAGE": {
+            "LABELS": {
+                "TITLE": "Administración de usuarios",
+                "BUTTONS": {
+                    "SEARCH": "Buscar usuarios",
+                    "CREATE": "Nuevo usuario",
+                    "DELETE": "Eliminar usuario",
+                    "MODIFY": "Modificar usuario",
+                    "NEXT": "Siguiente",
+                    "PREVIOUS": "Anterior",
+                    "LOAD_MORE": "Cargar mas...",
+                    "REMOVE_FILTER": "Quitar filtro"
+                },
+                "NO_RESULTS": "No se encontraron usuarios",
+                "LOADING_MESSAGE": "Cargando usuarios"
+            },
+            "DIALOG": {
+                "DELETE": {
+                    "TITLE": "Eliminar usuario",
+                    "MESSAGE": "Confirma la eliminación del usuario",
+                    "LOADING": "Eliminando usuario"
+                },
+                "SEARCH": {
+                    "TITLE": "Búsqueda de usuarios",
+                    "LOADING": "Buscando usuarios"
+                }
+            }
+        },
+        "DETAIL": {
+            "TITLE": "Detalle de usuario",
+            "LABELS": {
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "Agencia-UDN",
+                "STORE": "Establecimiento",
+                "NO_LOCATION": "Sin Sucursal, UDN-Agencia o Establecimiento asignado",
+                "ADDRESS": "Dirección",
+                "NO_ADDRESS": "Sin dirección",
+                "PHONE": "Teléfono",
+                "NO_PHONE": "Sin teléfono",
+                "NAME": "Nombre",
+                "MIDDLE_NAME": "Apellido paterno",
+                "LAST_NAME": "Apellido materno",
+                "ID": "Identificación",
+                "PHOTO": "Imagen de perfil",
+                "SWITCH": {
+                    "LABEL": "Activa si el usuario será asignado a una UDN-Agencia",
+                    "TRUE": "El usuario será asignado a una UDN-Agencia",
+                    "FALSE": "l usuario será asignado a una sucursal"
+                }
+            },
+            "HINTS": {
+                "NAME": "Nombre del usuario",
+                "MIDDLE_NAME": "Primer apellido del usuario",
+                "LAST_NAME": "(Opcional) Segundo apellido del usuario",
+                "ADDRESS": "Domicilio del usuario",
+                "PHONE": "Teléfono personal del usuario",
+                "ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "PHOTO": "Tamaño máximo 5MB y 4096px x 4096px"
+            },
+            "BUTTONS": {
+                "MODIFY": "Modificar usuario",
+                "SAVE": "Guardar cambios",
+                "CANCEL": "Descartar cambios",
+                "CHANGE_PHOTO": "Cambiar foto",
+                "CHANGE_ID": "Cambiar identificación",
+                "CHANGE_LOCATION": "Cambiar ubicación",
+                "ASSIGN_LOCATION": "Asignar ubicación",
+                "REMOVE_LOCATION": "Quitar ubicación"
+            }
+        },
+        "CREATE": {
+            "TITLE": "Creación de usuario",
+            "LABELS": {
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "Agencia-UDN",
+                "STORE": "Establecimiento",
+                "ADDRESS": "Dirección",
+                "PHONE": "Teléfono",
+                "NAME": "Nombre",
+                "MIDDLE_NAME": "Apellido paterno",
+                "LAST_NAME": "Apellido materno",
+                "ID": "Identificación",
+                "PHOTO": "Imagen de perfil",
+                "USERNAME": "Nombre de usuario",
+                "EMAIL": "Correo electrónico",
+                "PASSWORD": "Contraseña",
+                "CONFIRM_PASSWORD": "Confirmación de contraseña",
+                "SWITCH": {
+                    "LABEL": "Activa si el usuario será asignado a una UDN-Agencia",
+                    "TRUE": "El usuario será asignado a una UDN-Agencia",
+                    "FALSE": "l usuario será asignado a una sucursal"
+                }
+            },
+            "HINTS": {
+                "NAME": "Nombre del usuario",
+                "MIDDLE_NAME": "Primer apellido del usuario",
+                "LAST_NAME": "(Opcional) Segundo apellido del usuario",
+                "ADDRESS": "Domicilio del usuario",
+                "PHONE": "Teléfono ########## (a 10 digitos) ext. ####",
+                "ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "PHOTO": "Tamaño máximo 5MB y 4096px x 4096px",
+                "USERNAME": "Identificador para iniciar sesión",
+                "EMAIL": "Correo electrónico del usuario",
+                "PASSWORD": "Al menos 8 caracteres, contener alguno de los siguientes caracteres !@#\\$%^&*. números y letras",
+                "CONFIRM_PASSWORD": "Deberá coincidir con la contraseña ingresada",
+                "SUBSIDIARY": "Tu usuario no tiene sucursal, selecciona una para el usuario",
+                "AGENCY": "Tu usuario no tiene Agencua-UDN, selecciona una para el usuario"
+            },
+            "BUTTONS": {
+                "SAVE": "Guardar cambios",
+                "CANCEL": "Limpiar campos"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Usuario registrado exitosamente"
+            },
+            "ERRORS": {
+                "USERNAME_LENGTH": "El nombre de usuario no debe exceder los 50 caracteres",
+                "PASSWORD_REGEX": "Formato inválido de contraseña",
+                "PASSWORD_UNMATCH": "Las contraseñas ingresadas no coinciden",
+                "NAME_LENGTH": "El nombre no debe contener mas de 50 caracteres",
+                "MIDDLE_NAME_LENGTH": "El apellido paterno de debe tener mas de 50 caracteres",
+                "LAST_NAME_LENGTH": "EL apellido materno debe tener mas de 50 caracteres",
+                "ADDRESS_LENGTH": "La dirección no debe tener mas de 200 caracteres",
+                "PHONE_REGEX": "Teléfono con fomrato inválido"
+            }
+        }
     }
-  },
-  "ADMIN_PERSONA": {
-    "PROPERTY": {
-      "NOMBRE": "Nombre",
-      "AP_PATERNO": "Apellido Paterno",
-      "AP_MATERNO": "Apellido Materno ",
-      "DIRECCION": "Dirección",
-      "TELEFONO": "Telefono",
-      "USERNAME": "Nombre de Usuario",
-      "EMAIL": "Correo Electrónico",
-      "PASSWORD":"Contraseña",
-      "CPASSWORD":"Confirmación de Contraseña",
-      "ARCHIVO":"Seleccionar Archivo",
-      "INE":"Carga INE",
-      "FOTO":"Carga Foto",
-      "SUCURSALDEF":"Elige una sucursal",
-      "ROLDEF":"Elige el rol"
-    },
-    "PERSONA": {
-
-    },
-      "GROUP":{
-          "NOT_FOUND":"No tiene grupos asignados",
-          "MANAGE":"Manejo de Grupos",
-          "ADD":"Agregar Grupo",
-          "SEARCH":"Búsqueda de grupos"
-      },
-    "ERROR_MESSAGE": {
-      "NOMBRE": "El nombre solo puede contener letras",
-      "AP_PATERNO": "El apellido paterno solo puede contener letras",
-      "AP_MATERNO": "El apellido materno solo puede contener letras ",
-      "DIRECCION": "La Direccion no puede tener caracteres especiales",
-      "EMAIL": "Se debe de ingresar un correo electrónico válido",
-      "PASSWORD":"El password debe contener al menos 8 elementos y solo símbolos validos",
-      "PASSWORD_LENGTH":"El password debe contener al menos 8 elementos",
-      "CPASSWORD":"El password no coincide",
-      "TELEFONO":"",
-      "DIGITOS":"El password no puede contener solo dígitos",
-      "ERRORNUMSOLCONF":"El usuario ya existe",
-      "MINLENGTH":"El telefono no tienen un mínimo de 8 números",
-      "USERNAME":"El Usuario no puede comenzar con un digito y solo puede usar caracteres validos"
-    },
-      "MESSAGE":
-      {
-          "SUCCESS_GROUP_ADD": "Se agregaron grupo(s) exitosamente",
-          "DELETE_GROUP": "¿Esta seguro de eliminar el siguiente grupo?, Una vez hecho esto no podrá recibir notificaciones"
-      }
-  }
-
-
 }

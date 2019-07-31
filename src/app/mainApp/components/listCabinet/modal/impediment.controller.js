@@ -49,7 +49,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.impediment,
-                    kind: 'Generic',
+                    
                     name: Translate.translate('MAIN.MENU.CATALOGS.IMPEDIMENT_REASON'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
