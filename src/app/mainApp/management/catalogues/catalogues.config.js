@@ -123,7 +123,7 @@
                 url: '/catalogo/establecimientos',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['salepoint__catalogues__establecimientos']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stores/stores.tmpl.html',
@@ -156,7 +156,7 @@
                 url: '/catalogo/segmentacion',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
+                        only: ['salepoint__catalogues__segmentacion']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/segmentation/segmentation.tmpl.html',
@@ -619,18 +619,18 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.SALE_POINT',
                         type: 'dropdown',
-                        permission:['salepoint'],
+                        permission: ['salepoint__catalogues__establecimiento', 'salepoint__catalogues__segmentacion'],
                         children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.STORES',
                                 state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['salepoint'],
+                                permission: ['salepoint__catalogues__establecimiento'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
                                 state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['salepoint'],
+                                permission: ['salepoint__catalogues__segmentacion'],
                                 type: 'link'
                             }
                         ]
