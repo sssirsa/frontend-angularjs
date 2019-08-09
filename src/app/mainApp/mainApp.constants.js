@@ -53,7 +53,28 @@
                     id: 'Servicio Técnico',
                     label: 'Servicio técnico'
                 }
-            ]
+            ],
+            technical_service: {
+                presurize_options: [
+
+                    {
+                        name: "Corregida la fuga",
+                        value: "Diagnostico"
+                    },
+                    {
+                        name: "Necesario Obsoletizar",
+                        value: "Obsoleto"
+                    },
+                    {
+                        name: "Requiere una nueva Carga de Gas y reparación",
+                        value: "Presurizado"
+                    },
+                    {
+                        name: "Requiere una Revisión Posterior",
+                        value: "Continuar"
+                    }
+                ]
+            }
         })
         .constant('URLS', {
             //New module separation
@@ -94,12 +115,22 @@
                 by_city: 'municipio__id',
                 by_postal_code: 'codigo_postal'
             },
+            service: {
+                by_cabinet: 'cabinet__economico'
+            },
             store: {
                 by_state: 'localidad__municipio__estado__id',
                 by_city: 'localidad__municipio__id',
                 by_locality: 'localidad__id',
                 by_postal_code: 'localidad__codigo_postal',
                 by_economic: '/lookup/'
+            },
+            user: {
+                by_existing_email: 'user__email__not',
+                by_username: 'user__username',
+                by_name: 'nombre',
+                by_middlename: 'apellido_paterno',
+                by_lastname:'apellido_materno'
             }
         })
         .constant('CONFIGS', {

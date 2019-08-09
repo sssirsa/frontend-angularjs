@@ -6,44 +6,35 @@
         .run(permissionRun);
 
     /* @ngInject */
-    function permissionRun($rootScope, $state, AuthService, $urlRouter, RoleStore, $cookies) {
+    function permissionRun(
+        AuthService,
+        $transitions,
+        $state,
+        PERMISSION
+    ) {
 
-        // default redirect if access is denied
+        //Redirect if access is denied
         function accessDenied() {
             $state.go('404');
-            $urlRouter.sync();
             AuthService.logout();
         }
 
-        $rootScope.$on('$destroy',function rootScopeDestroy() {
-            locationChangeSuccess();
-            stateChangePermissionDenied();
-        });
-
-        var locationChangeSuccess = $rootScope.$on('$locationChangeSuccess', function locationChangeSuccess(evt, new_url) {
-            //Required for getting roles when page Update
-            var roles_JSON = $cookies.getObject('roles');
-            var roles;
-            roles_JSON ? roles = roles_JSON : null;
-            roles_JSON ? RoleStore.defineManyRoles(roles) : null;
-
-            evt.preventDefault();
-            if (
-                !new_url.endsWith("#!") &&
-                !new_url.endsWith("/") &&
-                !new_url.endsWith("login") &&
-                !new_url.endsWith("404") &&
-                !new_url.endsWith("main")
-            ) {
+        $transitions.onCreate({}, function (transition) {
+            if (transition.to().name !== 'splash'
+                && transition.to().name !== '404'
+                && transition.to().name !== 'login') {
+                //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {
+                    //User not athenticated
                     if (AuthService.canRefreshSession()) {
+                        //Permission redefining is managed in AuthService.refreshToken function
                         AuthService
                             .refreshToken()
                             .then(function () {
-                                $urlRouter.sync();
+                                return true;
                             })
                             .catch(function () {
-                                accessDenied();
+                                return false;
                             });
                     }
                     else {
@@ -51,15 +42,19 @@
                     }
                 }
                 else {
-                    $urlRouter.sync();
+                    //User is authenticated
+                    if (!transition.from().name) {
+                        //Just define role and permissions if page has been updated
+                        PERMISSION.setPermissions(PERMISSION.getPermissions());
+                    }
+                    return true;
                 }
             }
         });
 
-        // redirect all denied permissions to 404
-        var stateChangePermissionDenied = $rootScope.$on('$stateChangePermissionDenied', function stateChangePermissionDenied() {
-            $state.go('404');
-            $urlRouter.sync();
+        //Transition aborted due to permissions validation
+        $transitions.onError({}, function () {
+            accessDenied();
         });
 
     }

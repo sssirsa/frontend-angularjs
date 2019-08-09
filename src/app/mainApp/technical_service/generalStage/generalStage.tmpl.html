@@ -1,0 +1,83 @@
+<div layout="column">
+    <md-card flex layout-align="center stretch" class="minorWhite">
+        <div class="toolbar">
+            <div layout-padding="" layout="row" layout-wrap="">
+                <div flex="100" flex-gt-md="50">
+                    <h2>
+                        <span flex translate="">GENERAL_STAGE.TITLE</span>
+
+                    </h2>
+                </div>
+
+                <div flex="100" layout-gt-sm="row" layout-align="end center" flex-gt-md="50">
+                    <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                        <md-icon md-font-icon="fas fa-search"></md-icon>
+                        <span translate=""  hide-xs hide-sm>INSPECTION.ACTIONS.SEARCH_NEW</span>
+                    </md-button>
+                    <md-button ng-if="!vm.edition" ng-click="vm.enableEdition()" class="md-raised md-warn">
+                        <md-icon md-font-icon="fa fa-exclamation-triangle"></md-icon>
+                        <span translate=""  hide-xs hide-sm>INCIDENCE.REPORT_INCIDENCE</span>
+                    </md-button>
+
+                </div>
+
+            </div>
+        </div>
+        <div layout="row" flex="100" layout-wrap="" class="minorWhite" layout-padding="">
+            <search-cabinet-step ng-if="!vm.asset" flex="100" info-gral="vm.infogral(element)"
+                                 info-step-to-do="vm.infoStep(element)"></search-cabinet-step>
+
+            <div layout="row" flex="100" layout-wrap="">
+                <show-info-asset asset="vm.asset" ng-if="vm.asset" flex="50"></show-info-asset>
+                <show-info-servicio ng-if="vm.step" info="vm.step" flex="50"></show-info-servicio>
+            </div>
+
+            <start-service flex="100" ng-if="vm.step.currentStage.id" stage="vm.step.currentStage.id"
+                           sucursal="vm.step.control.sucursal.id" on-start="vm.onStart(element)"></start-service>
+        </div>
+
+        <md-tabs class="md-primary coverheight minorWhite" md-selected="selectedTabIndex" md-stretch-tabs="always"
+                 ng-if="vm.step.currentStage.id">
+            <md-tab label="{{vm.title_info}}">
+                <md-content>
+                    <bulk-asset-container flex="100" ng-if="vm.step" sucursal="vm.step.control.sucursal"
+                                          tipo-equipo="vm.asset.modelo.tipo.id"
+                                          catalogo-etapa="vm.step.currentStage.etapa.nombre"
+                                          bulk-assets="vm.getInsumosLote(element)"></bulk-asset-container>
+
+                </md-content>
+            </md-tab>
+            <md-tab label="{{vm.assets_info}}">
+                <md-content>
+                    <actions-manager ng-if="vm.step" actual-step="vm.step.currentStage.etapa"
+                                     actions-added="vm.getActions(element)"
+                                     actions="vm.step.currentStage.acciones" flex="100"></actions-manager>
+
+                </md-content>
+
+                <next-step ng-if="vm.step" flex="100"
+                           next-step="vm.nextStep(element)"
+                           actual-step="vm.step.currentStage.etapa"></next-step>
+
+            </md-tab>
+
+
+        </md-tabs>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-if="vm.asset" ng-click="vm.clear()" class="md-raised">
+                <md-icon md-font-icon="fas fa-eraser"></md-icon>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.CLEAR</span>
+            </md-button>
+            <md-button ng-if="!vm.stage.etapa_siguiente_id && vm.asset" ng-click="vm.saveStage()"
+                       class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.SAVE</span>
+            </md-button>
+            <md-button ng-if="vm.stage.etapa_siguiente_id" ng-click="vm.closeStage()" class="md-raised md-primary">
+                <md-icon md-font-icon="fas fa-save"></md-icon>
+                <span translate="" hide-xs hide-sm>GENERAL_STAGE.ACTIONS.CLOSE</span>
+            </md-button>
+
+        </md-card-actions>
+    </md-card>
+</div>

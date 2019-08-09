@@ -1,0 +1,50 @@
+<div flex="100"  class="minorWhite">
+    <md-toolbar flex="100" class="Subtitle">
+        <div layout="row" layout-align="center center">
+            <div flex="10" class="toolbarSubtitleIcon" layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-notes-medical"></md-icon>
+            </div>
+            <div flex="90" class="toolbarSubtitle" layout-padding="" layout-align="center center">
+                <b translate="">SYMTOMPS_COMPONENT.TITLE</b>
+            </div>
+        </div>
+    </md-toolbar>
+    <div layout=row layout-padding="" flex="100" layout="com" layout-align="center center">
+        <md-input-container flex="100" layout-fill="">
+            <catalog-select catalog="$ctrl.catalogues['symptoms'].catalog"
+                            required="true"
+                            noResults="$ctrl.catalogues['symptoms'].noResults"
+                            on-select="$ctrl.onSelect(value)"
+                            hint="$ctrl.catalogues['symptoms'].hint">
+            </catalog-select>
+        </md-input-container>
+        <!--
+        <md-input-container flex="10" layout-align="center center">
+            <md-button class="md-fab md-mini md-primary" ng-click="$ctrl.addSymptom()">
+                <md-icon md-font-icon="fas fa-plus"></md-icon>
+                <md-tooltip><span translate="">SYMTOMPS_COMPONENT.ADD</span></md-tooltip>
+            </md-button>
+        </md-input-container>
+           -->
+    </div>
+    <md-list flex="100" layout="row" layout-wrap="">
+        <md-list-item flex="50" ng-repeat="item in $ctrl.sintomas_detectados" ng-click="$ctrl.deleteElement(item)">
+            <div flex="20">
+                <img ng-src="assets/images/repairSSSIR.png" class="imgList" alt="{{item.code}}"/>
+            </div>
+            <div flex="80" class="md-list-item-text" layout="row">
+                <div layout="column" flex="90">
+                    <h3>{{ item.code }}</h3>
+                    <h4>{{ item.descripcion }}</h4>
+                </div>
+                <div flex="10">
+                    <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="$ctrl.deleteElement(item)">
+                        <md-icon md-font-icon="fas fa-times"></md-icon>
+                        <md-tooltip><span translate="">SYMTOMPS_COMPONENT.REMOVE</span></md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+</div>

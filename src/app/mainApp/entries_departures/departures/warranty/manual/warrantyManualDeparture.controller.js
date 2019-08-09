@@ -19,7 +19,8 @@
         //Variables
         vm.selectedTab;
         vm.departure;
-        vm.showSubsidiarySelector;
+        vm.showSelector;
+        vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
 
@@ -40,16 +41,18 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
+            vm.showSelector = false;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.warrantyDeparture.catalogues();
 
-            //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-                vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
-            }
+            var user = User.getUser();
+            //Determining whether or not to show the Subsidiary or Agency selector.
+            vm.showSelector = !user['sucursal'] && !user['udn'];
+
+            //Bindging user subsidiary or agency to entry if user happens to have one.
+            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal'].id : null;
+            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn'].id : null;
         };
 
         vm.init();
@@ -60,7 +63,7 @@
             vm.departure[field] = element;
         };
 
-        vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
+        vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
@@ -98,7 +101,10 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID),
+                            .getCabinet(cabinetID,
+                                vm.departure[vm.catalogues['subsidiary'].binding],
+                                vm.departure[vm.catalogues['udn'].binding]
+                            ),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -116,33 +122,92 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback['subsidiary']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'] == vm.departure[vm.catalogues['subsidiary'].binding]) {
-                                    //The subsidiary of the cabinet is the same as the user one.
-                                    if (cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida']) {
-                                        //The departure matches the entrance kind
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                //a.k.a. The cabinet exists in the selected subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        === vm.departure[vm.catalogues['subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency'].id
+                                        === vm.departure[vm.catalogues['udn'].binding]
+                                        : false)
+                                ) {
+                                    //The subsidiary or agency of the asset is the same as departure's
+                                    if (cabinetSuccessCallback['can_leave']) {
+                                        //The cabinet doesn't have internal restrictions to leave
+                                        if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                            //Cabinet entry has been confirmed
+                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa !== 'Obsoleto' : true) {
+                                                //Just avoid depart from this departure if the asset if obsolete
+                                                //Also validate stage existence
+                                                //No stage just applies to Agency
+                                                if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0003' : false) {
+                                                    //Finally add the cabinet to the list
+                                                    cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                    cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                    cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                }
+                                                else {
+                                                    //Building error message
+                                                    var statusMessage =
+                                                        Translate.translate('DEPARTURES.WARRANTY.ERRORS.WRONG_STATUS');
+                                                    //Just add status info if available
+                                                    cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                                        + ', ' + Translate.translate('DEPARTURES.WARRANTY.ERRORS.STATUS_IS')
+                                                        + ': ' + cabinetSuccessCallback['status'].code
+                                                        + '-' + cabinetSuccessCallback['status'].descripcion
+                                                        : null;
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                    toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                                    vm.removeCabinet(cabinetID);
+                                                }
+                                            }
+                                            else {
+                                                var message = Translate.translate('DEPARTURES.WARRANTY.ERRORS.STAGE_ERROR');
+                                                if (cabinetSuccessCallback['stage']) {
+                                                    message = message
+                                                        + ', '
+                                                        + Translate.translate('DEPARTURES.WARRANTY.ERRORS.AT_STAGE')
+                                                        + ' '
+                                                        + cabinetSuccessCallback['stage'].nombre;
+                                                }
+                                                toastr.error(message, cabinetSuccessCallback.cabinet.economico);
+                                                vm.removeCabinet(cabinetID);
+                                            }
                                         }
                                         else {
-                                            toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                             vm.removeCabinet(cabinetID);
                                         }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                        //TODO: Add them and show the restriction
                                         vm.removeCabinet(cabinetID);
                                     }
+
                                 }
                                 else {
-                                    //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    //Just reachable when the user had seleced a subsidiary through the selector.
+                                    var locationMessage = Translate.translate('DEPARTURES.WARRANTY.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    if (cabinetSuccessCallback['subsidiary']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.WARRANTY.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['subsidiary'].nombre;
+                                    }
+                                    if (cabinetSuccessCallback['agency']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.WARRANTY.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['agency'].agencia;
+                                    }
+                                    toastr.error(locationMessage, cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
@@ -219,6 +284,14 @@
             //TODO: Cabinet restriction dialog
         };
 
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['udn'].binding]);
+            delete (vm.departure[vm.catalogues['subsidiary'].binding]);
+            vm.departure['cabinets_id'] = [];
+            vm.cabinetList = [];
+        };
+
         //Internal functions
 
         var saveDeparture = function saveDeparture(departure) {
@@ -263,17 +336,7 @@
             }
             return departure;
         };
-
-        //var addCabinetToList = function addCabinetToList(cabinet) {
-        //    var cabinetToAdd = {
-        //        promise: null,
-        //        cabinet: cabinet,
-        //        id: cabinet['economico']
-        //    };
-
-        //    vm.cabinetList.push(cabinetToAdd);
-        //};
-
+        
         //Tab functions
 
         vm.previousTab = function () {

@@ -11,7 +11,7 @@
                 url: '/entrada/nuevos/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__entries__new_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/new/manual/newManualEntry.tmpl.html',
@@ -23,7 +23,7 @@
                 url: '/entrada/garantias/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__entries__warranties_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/warranty/manual/warrantyManualEntry.tmpl.html',
@@ -35,7 +35,7 @@
                 url: '/entrada/no_capitalizados/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__entries__no_labeled_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/unrecognizable/manual/unrecognizableManualEntry.tmpl.html',
@@ -47,7 +47,7 @@
                 url: '/entrada/almacen/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__entries__warehouse_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/warehouse/manual/warehouseManualEntry.tmpl.html',
@@ -59,7 +59,7 @@
                 url: '/entrada/reparacion/manual',
                 data: {
                     permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E', 'TULTITLAN']
+                        only: ['entries_departures__entries__repair_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/repair/manual/repairManualEntry.tmpl.html',
@@ -72,37 +72,41 @@
                 name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
-                permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                permission: ['entries_departures__entries__new_entries',
+                    'entries_departures__entries__warranties_entries',
+                    'entries_departures__entries__no_labeled_entries',
+                    'entries_departures__entries__warehouse_entries',
+                    'entries_departures__entries__repair_entries'],
                 priority: 4,
                 children: [
                     {
                         name: 'ENTRIES.MENU.NEW',
                         type: 'link',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['entries_departures__entries__new_entries'],
                         state: 'triangular.admin-default.entry-new-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WARRANTIES',
                         type: 'link',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['entries_departures__entries__warranties_entries'],
                         state: 'triangular.admin-default.entry-warranty-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.UNRECOGNIZABLE',
                         type: 'link',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['entries_departures__entries__no_labeled_entries'],
                         state: 'triangular.admin-default.entry-unrecognizable-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.WAREHOUSE',
                         type: 'link',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['entries_departures__entries__warehouse_entries'],
                         state: 'triangular.admin-default.entry-warehouse-manual'
                     },
                     {
                         name: 'ENTRIES.MENU.REPAIR',
                         type: 'link',
-                        permission_old: ['ADMINISTRADOR', 'TULTITLAN'],
+                        permission: ['entries_departures__entries__repair_entries'],
                         state: 'triangular.admin-default.entry-repair-manual'
                     }
                 ]

@@ -43,11 +43,21 @@ button, select, html, textarea, input {
 .no-margin {
   margin: 0 0 0 0 !important;
 }
+.coverheight{
+  height: 450px ;
+}
 .imgselect{
   max-width: 25px;
   max-height: 25px;
 }
 
+.RED{
+  color:DarkRed
+}
+.dialogImage{
+  max-height: 150px;
+  max-width: 150px;
+}
 @import "scss/custom";
 
 

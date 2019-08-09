@@ -138,7 +138,7 @@
                             + '/' + URLS.management.base
                             + '/' + URLS.management.catalogues.base
                             + '/' + URLS.management.catalogues.subsidiary,
-                        kind: 'Generic',
+                        
                         name: Translate.translate('UNIQUE_ASSET_INVENTORY.LABELS.SUBSIDIARY'),
                         loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                         model: 'id',

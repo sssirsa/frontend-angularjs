@@ -7,23 +7,23 @@
 
     /* @ngInject */
     function DefaultToolbarController($scope,
-                                      $injector,
-                                      $rootScope,
-                                      $mdMedia,
-                                      $state,
-                                      AuthService,
-                                      $filter,
-                                      $mdUtil,
-                                      $mdSidenav,
-                                      $mdToast,
-                                      $document,
-                                      triBreadcrumbsService,
-                                      triSettings,
-                                      triLayout,
-                                      toastr,
-                                      User) {
+        $injector,
+        $rootScope,
+        $mdMedia,
+        $state,
+        AuthService,
+        $filter,
+        $mdUtil,
+        $mdSidenav,
+        $mdToast,
+        $document,
+        triBreadcrumbsService,
+        triSettings,
+        triLayout,
+        toastr,
+        User) {
         var vm = this;
-        vm.no_solicitudes = 2;
+
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
         vm.emailNew = false;
         vm.languages = triSettings.languages;
@@ -37,8 +37,6 @@
         vm.LogOut = LogOut;
 
         vm.user = User.getUser();
-
-        ////////////////
 
         function openSideNav(navID) {
             $mdUtil.debounce(function () {
@@ -106,6 +104,12 @@
             $state.go('login');
 
         }
+
+        vm.openProfile = function () {
+            $state.go('triangular.admin-default.userProfile', {
+                personId: vm.user.id
+            });
+        };
 
         $scope.$on('newMailNotification', function () {
             vm.emailNew = true;
