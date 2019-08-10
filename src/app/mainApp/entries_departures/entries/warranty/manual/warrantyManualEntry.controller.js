@@ -35,9 +35,12 @@
         //Variables
         vm.selectedTab;
         vm.entry;
-        vm.showSubsidiarySelector;
         vm.catalogues;
         vm.cabinetList;
+
+        vm.user = User.getUser();
+
+        vm.canView = true;
 
         //Validations
         vm.imageConstraints = {
@@ -226,19 +229,17 @@
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
-            vm.showSubsidiarySelector = false;
             vm.catalogues = {};
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
-
-            var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showSelector = !user['sucursal']
-                && !user['udn'];
+            vm.showSelector = !vm.user['sucursal']
+                && !vm.user['udn'];
         };
 
-        vm.init();
+        //Just load if user is not from an Agency
+        vm.user['udn'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 

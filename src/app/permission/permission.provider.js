@@ -25,39 +25,41 @@
                     if (rawPermissions.length > 0) {
                         angular.forEach(rawPermissions,
                             function rawPermissionsIterator(value) {
+                                var permissionName = value.module;
+                                PermRoleStore.defineRole(permissionName, []);
+                                vm.permissions.push(permissionName);
+                                //var projectName = '';
+                                //var appName = '';
+                                //var moduleName = '';
 
-                                var projectName = '';
-                                var appName = '';
-                                var moduleName = '';
-
-                                if (value['module']) {
-                                    //Module is defined
-                                    if (value.module['name']) {
-                                        moduleName = '__' + value.module['name'].toLowerCase();
-                                    }
-                                    if (value.module['app']) {
-                                        //App is defined
-                                        if (value.module.app['name']) {
-                                            appName = '__' + value.module.app['name'].toLowerCase();
-                                        }
-                                        if (value.module.app['project']) {
-                                            //Project is defined
-                                            if (value.module.app.project['name']) {
-                                                projectName = value.module.app.project['name'].toLowerCase();
-                                            }
-                                        }
-                                    }
-                                }
-                                //Building permission string
-                                var permissionName = projectName
-                                    + appName
-                                    + moduleName;
-                                //Not an empty string
-                                if (permissionName) {
-                                    //permissionsObject[permissionName] = [];
-                                    PermRoleStore.defineRole(permissionName, []);
-                                    vm.permissions.push(permissionName);
-                                }
+                                //if (value['module']) {
+                                //    //Module is defined
+                                //    if (value.module['name']) {
+                                //        moduleName = '__' + value.module['name'].toLowerCase();
+                                //    }
+                                //    if (value.module['app']) {
+                                //        //App is defined
+                                //        if (value.module.app['name']) {
+                                //            appName = '__' + value.module.app['name'].toLowerCase();
+                                //        }
+                                //        if (value.module.app['project']) {
+                                //            //Project is defined
+                                //            if (value.module.app.project['name']) {
+                                //                projectName = value.module.app.project['name'].toLowerCase();
+                                //            }
+                                //        }
+                                //    }
+                                //}
+                                ////Building permission string
+                                //var permissionName = projectName
+                                //    + appName
+                                //    + moduleName;
+                                ////Not an empty string
+                                //if (permissionName) {
+                                //    //permissionsObject[permissionName] = [];
+                                //    PermRoleStore.defineRole(permissionName, []);
+                                //    vm.permissions.push(permissionName);
+                                //}
 
                             });
                     }

@@ -176,9 +176,8 @@
                                         class="md-icon-float md-block full-width">
                         <label translate>ENTRIES.REPAIR.LABELS.STORE</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.store['nombre_establecimiento']"
+                        <input ng-model="vm.store[vm.catalogues['store'].option]"
                                name="store_name"
-                               ng-required="true"
                                disabled
                                type="text">
                         <div class="hint" translate>ENTRIES.REPAIR.HINTS.STORE</div>

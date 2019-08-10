@@ -3,14 +3,6 @@
         "MENU": {
             "WELCOME": "Bienvenida",
             "START": "Inicio",
-            "CRUD_USER": "Gestión de Usuarios",
-            "ADMIN_USER": "Administración de Usuarios",
-            "NEW_USER": "Nuevo Usuario",
-            "SEARCH_USER": "Buscar Usuarios",
-            "SOLICITUD": "Solicitudes",
-            "SEARCH_SOLICITUD": "Buscar Solicitudes",
-            "CREATES_SOLICITUD": "Crear Solicitud",
-            "CALENDAR": "Calendario",
             "SERVICES": "Servicios",
             "INTERNAL_SERVICE":"Servicio Interno",
             "EXTERNAL_SERVICE":"Servicio Externo",
@@ -21,41 +13,11 @@
                 "INFOPV": "Información del cabinet PV"
             },
             "SERVICEAWAY": "Punto de Venta",
-            "IN": "Entradas",
-            "OUT": {
-                "TITLE": "Salidas",
-                "NEW": "Registro",
-                "LIST": "Listado"
-            },
-            "REMISSION": "Remisión de salida",
             "REGISTER_STEP": "Registro de Etapa",
             "PRECHECK": "Pre - Checklist",
             "CHECKLIST": "Fase de Depuración",
             "DIAGNOSTIC": "Diagnostico",
             "LINE": "Asignación de Linea",
-            "BOOKS": "Catalogos",
-            "LINE_TRANSPORT": "Linea de Transporte",
-            "TYPE_TRANSPORT": "Tipo de Transporte",
-            "UDN": "Agencia",
-            "SUCURSAL": "Sucursal",
-            "CABINET_BRANCH": "Marca de Cabinet",
-            "CABINET_MODEL": "Modelo de Cabinet",
-            "PROJECTS": "Proyectos",
-            "CLIENT": "Cliente",
-            "STOCK": "Inventarios",
-            "CABINETS": "Cabinets",
-            "REPORTS": {
-                "TITLE": "Reportes",
-                "ADMIN": "Gestión",
-                "LIST": "Listado de Reportes",
-                "CUSTOM": {
-                    "TITLE": "Personalizados",
-                    "PRODUCTION": "Producción"
-                }
-            },
-            "CATEGORY_INSUMS": "Categoria de Insumos",
-            "BOOK_INSUMS": "Cátalogo de Insumos",
-            "PROVIDER": "Proveedor",
             "CATALOGS": {
                 "LABELS": {
                     "ENTRIES_DEPARTURES": "Entradas y Salidas",
@@ -132,16 +94,23 @@
                 "LIST": "Listado",
                 "PREREQUEST":"Pre solicitudes"
             },
-            "COM":{
-                "TICKETS_INCIDENCES":"Tickets e Incidencias",
-                "MANAGEMENT_NOTIFICATION":"Notificación de",
-                "ERROR":"Errores",
-                "START":"Inicio de Trabajo",
-                "NOTIFICATION":"Mensajes de Trabajo",
-                "CLOSE":"Cierre de Ticket",
+            "COM": {
+                "TICKETS_INCIDENCES": "Tickets e Incidencias",
+                "MANAGEMENT_NOTIFICATION": "Notificación de",
+                "ERROR": "Errores",
+                "START": "Inicio de Trabajo",
+                "NOTIFICATION": "Mensajes de Trabajo",
+                "CLOSE": "Cierre de Ticket",
                 "MANAGEMENT_TICKETS": "Gestión de Tickets",
                 "FAKE_TICKET": "Crear Tickets Fake"
 
+            },
+            "MANAGEMENT": {
+                "USERS": {
+                    "TITLE": "Usuarios",
+                    "MANAGE_USERS": "Gestión de usuarios",
+                    "CREATE_USERS": "Nuevo usuario"
+                }
             }
         },
         "COMPONENTS": {
@@ -352,14 +321,14 @@
             "CLOSE": "Cerrar",
             "SEARCH": "Buscar"
         },
-        "GENERAL": {
+        "VALIDATIONS": {
             "JUST_INTEGERS": "Solo se aceptan números enteros",
             "REQUIRED_FIELD": "Campo Requerido",
             "MIN_NUMBER": "Se necesita que el número sea al menos ",
             "MAX_NUMBER": "Se necesita que el número sea a lo más  ",
             "MAX": "Máximo: ",
             "PHONE_REGEX": "El campo debe tener un formato (xx)xxxxxxxx",
-            "PATTERN_EMAIL_FIELD": "El campo debe ser un correo electrónico",
+            "EMAIL": "El campo debe ser un correo electrónico",
             "PATTERN_RFC_FIELD": "El campo debe tener formato RFC",
             "PATTERN_CABINET": "El campo debe tener números, letras, guión bajo o espacios",
             "YEAR_FIELD": "El campo debe ser una fecha válida."

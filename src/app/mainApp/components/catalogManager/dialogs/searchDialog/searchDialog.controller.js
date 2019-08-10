@@ -34,6 +34,8 @@
  *          }
  *      ], *
  *      url:string,                 URL of the API for creation.
+ *      queries:array (Optional)    If sent, this queries are allways applied to the API request, independently from the selected filter
+ *                                  Must be a string array, with well conformed queries
 */
 
 (function () {
@@ -47,7 +49,8 @@
         CATALOG,
         dialog,
         filters,
-        url
+        url,
+        queries
     ) {
         var vm = this;
 
@@ -58,6 +61,7 @@
         vm.filters = filters;
         vm.searchAuxVar = null;
         vm.url = url;
+        vm.queries = queries;
 
         //Functions
         vm.search = search;
@@ -65,8 +69,8 @@
         vm.cancel = cancel;
 
         function createProvider() {
-            if (vm.hasOwnProperty('url')) {
-                vm.CatalogProvider.url = vm.url;
+            if (vm.url) {
+                vm.CatalogProvider.url = url;
             }
             else {
                 $mdDialog.cancel('"url" parameter was not provided');
@@ -76,6 +80,7 @@
         function search(filter) {
             createProvider();
             var query = filter.model;
+            var queryArray = [];
             if (filter.type !== 'equals') {
                 query = query + "__" + filter.type + "=";
             }
@@ -83,14 +88,20 @@
                 query = query + "=";
             }
             query = query + vm.searchAuxVar;
+            queryArray.push(query);
+            //Aditional queries, appart from the filters.
+            if (vm.queries) {
+                queryArray = queryArray.concat(vm.queries);
+            }
+
             vm.searchingPromise = vm.CatalogProvider
-                .search(query)
+                .search(queryArray)
                 .then(function (response) {
                     filter.search = vm.searchAuxVar;
-                    $mdDialog.hide({ response: response, filter: filter });
+                    $mdDialog.hide({ response: response, filter: filter, queries: queryArray });
                 })
                 .catch(function (errorSearch) {
-                    $mdDialog(errorSearch);
+                    $mdDialog.close(errorSearch);
                 });
         }
 

@@ -23,6 +23,10 @@
         vm.catalogues;
         vm.cabinetList;
 
+        vm.canView = true;
+
+        vm.user = User.getUser();
+
         //Validations
         vm.imageConstraints = {
             validations: {
@@ -44,15 +48,15 @@
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.newDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.newDeparture.catalogues();
-
             //Determining whether or not to show the Subsidiary selector.
-            if (User.getUser().hasOwnProperty('sucursal')) {
-                vm.showSubsidiarySelector = !User.getUser().sucursal;
-                vm.departure[vm.catalogues['subsidiary'].binding] = User.getUser().sucursal;
-            }
+            vm.showSubsidiarySelector = !vm.user['sucursal'];
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'].id : null;
+
         };
 
-        vm.init();
+        //Just load if user is not from an Agency
+        vm.user['udn'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 
@@ -63,7 +67,12 @@
         vm.onSubsidiarySelect = function onSubsidiarySelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.newDeparture.template();
+            //Cloning clean departure object
+            vm.departure = angular.fromJson(
+                angular.toJson(
+                    MANUAL_DEPARTURES.newDeparture.template()
+                )
+            );
 
             vm.onElementSelect(element, field);
         };
@@ -98,7 +107,10 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID),
+                            .getCabinet(cabinetID,
+                            vm.departure[vm.catalogues['subsidiary'].binding],
+                            vm.departure[vm.catalogues['udn'].binding]
+                            ),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -116,19 +128,36 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback['subsidiary']) {
-                                //a.k.a. The cabinet exists in the selected subsidiary
-                                if (cabinetSuccessCallback['subsidiary'] == vm.departure[vm.catalogues['subsidiary'].binding]) {
-                                    //The subsidiary of the cabinet is the same as the user one.
-                                    if (cabinetSuccessCallback['entrance_kind'] == vm.departure['tipo_salida']) {
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                //a.k.a. The cabinet exists in any subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        === vm.departure[vm.catalogues['subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency'].id
+                                        === vm.departure[vm.catalogues['udn'].binding]
+                                        : false)
+                                ) {
+                                    //The subsidiary or agency of the asset is the same as departure's
+                                    if (cabinetSuccessCallback['entrance_kind'] === vm.departure['tipo_salida']) {
                                         //The departure matches the entrance kind
                                         if (cabinetSuccessCallback['can_leave']) {
                                             //The cabinet doesn't have internal restrictions to leave
+                                            if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                                //Cabinet entry has been confirmed
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                                //Finally add the cabinet to the list
+                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            }
+                                            else {
+                                                toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                                vm.removeCabinet(cabinetID);
+                                            }
                                         }
                                         else {
                                             toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
@@ -136,18 +165,39 @@
                                         }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.WRONG_DEPARTURE_KIND'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(
+                                            Translate.translate('DEPARTURES.NEW.ERRORS.WRONG_DEPARTURE_KIND')
+                                            , cabinetSuccessCallback.cabinet.economico
+                                        );
                                         vm.removeCabinet(cabinetID);
                                     }
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector. 
-                                    toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_YOUR_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                    var message = Translate.translate('DEPARTURES.NEW.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    if (cabinetSuccessCallback['subsidiary']) {
+                                        message = message
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.NEW.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['subsidiary'].nombre;
+                                    }
+                                    if (cabinetSuccessCallback['agency']) {
+                                        message = message
+                                            + ', '
+                                            + Translate.translate('DEPARTURES.NEW.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['agency'].agencia;
+                                    }
+                                    toastr.error(message, cabinetSuccessCallback.cabinet.economico);
                                     vm.removeCabinet(cabinetID);
                                 }
                             }
                             else {
-                                toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                toastr.error(
+                                    Translate.translate('DEPARTURES.NEW.ERRORS.NOT_IN_SUBSIDIARY')
+                                    , cabinetSuccessCallback.cabinet.economico
+                                );
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -262,16 +312,6 @@
             }
             return departure;
         };
-
-        //var addCabinetToList = function addCabinetToList(cabinet) {
-        //    var cabinetToAdd = {
-        //        promise: null,
-        //        cabinet: cabinet,
-        //        id: cabinet['economico']
-        //    };
-
-        //    vm.cabinetList.push(cabinetToAdd);
-        //};
 
         //Tab functions
 

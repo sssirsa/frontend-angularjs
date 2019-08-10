@@ -5,64 +5,19 @@
             "MANUAL": "Manual",
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",
-            "WARRANTIES": "Garantías",
+            "WARRANTY": "Garantías",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
             "OBSOLETE": "Obsoletos",
-            "WAREHOUSE": "Almacén"
+            "WAREHOUSE": "Buen estado"
         },
         "NEW": {
             "TITLE": "Salida de nuevos",
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
-                "DESCRIPTION": "Descripción",
-                "TRANSPORT_LINE": "Linea de transporte",
-                "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal",
-                "DRIVER_ID": "Identificación del operador",
-                "DRIVER_NAME": "Nombre del operador",
-                "CABINET_SEARCH": "Registro de cabinets",
-                "CABINET_ID": "Económico del cabinet",
-                "CABINET": {
-                    "ID": "Económico",
-                    "SERIAL_NUMBER": "Número de serie",
-                    "BRAND": "Marca",
-                    "MODEL": "Modelo"
-                }
-            },
-            "HINTS": {
-                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
-                "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
-                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
-                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
-            },
-            "BUTTONS": {
-                "NEXT": "Siguiente",
-                "PREVIOUS": "Anterior",
-                "SAVE": "Guardar salida",
-                "REMOVE": "Quitar"
-            },
-            "MESSAGES": {
-                "SUCCESS_CREATE": "Salida registrada correctamente"
-            },
-            "ERRORS": {
-                "REPEATED_ID": "Ya se encuentra en la lista",
-                "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
-            }
-        },
-        "WARRANTY": {
-            "TITLE": "Salida de garantías",
-            "LABELS": {
-                "DEPARTURE_DATA": "Información de salida",
-                "ASSET_LOADING": "Carga de cabinets",
-                "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "DESCRIPTION": "Descripción",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -98,9 +53,72 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
+                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de nuevos",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "AGENCY_USER": "Funcionalidad no disponible para los usuarios de Agencia-UDN"
+            }
+        },
+        "WARRANTY": {
+            "TITLE": "Salida de garantías",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
+                "DESTINATION_SUBSIDIARY": "Sucursal destino"
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet de la salida",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "DESTINATION_SUBSIDIARY": "Selecciona la sucursal destino"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
                 "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de garantías",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0003-Reparación",
+                "STATUS_IS": "su estado es",
+                "STAGE_ERROR": "El cabinet no puede salir de esta etapa",
+                "AT_STAGE": "se encuentra en la etapa",
+                "IS_AT": "se encuentra en"
             }
         },
         "OBSOLETE": {
@@ -122,7 +140,13 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                }
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
+                "DESTINATION_SUBSIDIARY": "Sucursal destino"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
@@ -131,7 +155,8 @@
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "DESTINATION_SUBSIDIARY": "Seleccione la sucursal destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
@@ -145,13 +170,18 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de obsoletos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "STAGE_ERROR": "El cabinet no es obsoleto",
+                "AT_STAGE": "se encuentra en la etapa",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0004 o 0008 de obsoleto",
+                "STATUS_IS": "su estado es"
             }
         },
         "WAREHOUSE": {
-            "TITLE": "Salida de almacén",
+            "TITLE": "Salida de buen estado",
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
@@ -169,22 +199,36 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
-                }
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
+                "DESTINATION_SWITCH": {
+                    "LABEL": "Activa si la salida es a un Establecimiento",
+                    "TRUE": "Salida hacia un Establecimiento",
+                    "FALSE": "Salida hacia una Agencia-UDN"
+                },
+                "STORE": "Establecimiento"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
-                "AGENCY": "Selecciona la UDN-Agencia de arrivo",
+                "AGENCY": "Selecciona la UDN-Agencia",
+                "DESTINATION_AGENCY": "Selecciona la UDN-Agencia destino",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-                "DRIVER_NAME": "Operador del transporte de entrega"
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "STORE": "Selecciona el establecimiento destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",
                 "PREVIOUS": "Anterior",
                 "SAVE": "Guardar salida",
-                "REMOVE": "Quitar"
+                "REMOVE": "Quitar",
+                "SEARCH_STORE": "Buscar establecimiento"
             },
             "MESSAGES": {
                 "SUCCESS_CREATE": "Salida registrada correctamente"
@@ -192,9 +236,14 @@
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista",
                 "CANT_LEAVE": "El cabinet aún no puede salir",
-                "WRONG_DEPARTURE_KIND": "El cabinet no tuvo una entrada de almacén u obsoletos",
-                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en esta sucursal",
-                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de la sucursal seleccionada"
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "STAGE_ERROR": "El cabinet no está listo para mercado",
+                "AT_STAGE": "se encuentra en la etapa",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0001-Buen estado",
+                "STATUS_IS": "su estado es"
             }
         },
         "UNRECOGNIZABLE": {

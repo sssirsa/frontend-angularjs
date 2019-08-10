@@ -47,7 +47,7 @@
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
                 + '/' + URLS.management.catalogues.subsidiary,
-                kind: 'Generic',
+                
                 name: Translate.translate('PRE_REQUEST.SUBSIDIARY.SELECT'),
                 loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                 model: 'id',

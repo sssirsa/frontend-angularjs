@@ -50,7 +50,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.subsidiary,
-                kind: 'Generic',
+                
                 name: 'Sucursal',
                 loadMoreButtonText: 'Cargar mas',
                 model: 'id',
@@ -65,7 +65,7 @@
                     + '/' + URLS.management.base
                     + '/' + URLS.management.catalogues.base
                     + '/' + URLS.management.catalogues.equipment_type,
-                kind: 'Generic',
+                
                 name: 'Tipo Equipo a asignar',
                 loadMoreButtonText: 'Cargar mas',
                 model: 'id',
