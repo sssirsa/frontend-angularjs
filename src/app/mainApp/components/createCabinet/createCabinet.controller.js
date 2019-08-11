@@ -50,100 +50,116 @@
         //Blank variables templates
         vm.catalogues = {
             marca: {
+                type: 'catalog',
+                model: 'marca',
+                label: 'Marca del cabinet',
+                validations: {
+                    errors: {
+                        required: 'El campo es requerido.'
+                    }
+                },
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.cabinet_brand,
-                    
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
-                    loadMoreButtonText: 'Cargar mas',
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.cabinet_brand,
+                    name: 'Marca',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    loadMoreButtonText: 'Cargar mas...',
+                    elements: 'results',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             },
             modelo_by_marca: {
-                catalog: {
-                    url: null,
-                    
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
-                    loadMoreButtonText: 'Cargar mas',
-                    model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
-            },
-            condicion: {
+                type: 'catalog',
+                model: 'modelo_id',
+                label: 'Modelo del cabinet',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.condition,
-                    
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
-                    loadMoreButtonText: 'Cargar mas',
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.cabinet_model,
+                    query: 'marca__id',
+                    requires: 'marca',
+                    name: 'Modelo',
                     model: 'id',
-                    option: 'letra'
+                    option: 'nombre',
+                    elements: 'results',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    loadMoreButtonText: 'Cargar mas...',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
+                required: true
+            },
+            condicion: {
+                type: 'catalog',
+                model: 'condicion_id',
+                label: 'Condición del cabinet',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.condition,
+                    name: 'Condición',
+                    model: 'id',
+                    option: 'letra',
+                    loadMoreButtonText: 'Cargar mas...',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 }
             },
             categoria: {
+                type: 'catalog',
+                model: 'categoria_id',
+                label: 'Categoría',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.category,
-                    
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
-                    loadMoreButtonText: 'Cargar mas',
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.category,
+                    name: 'Categoría del cabinet',
                     model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
+                    option: 'nombre',
+                    loadMoreButtonText: 'Cargar mas...',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 }
             }
         };

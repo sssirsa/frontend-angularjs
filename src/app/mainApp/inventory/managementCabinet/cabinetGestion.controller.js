@@ -67,7 +67,6 @@
         }
 
         function prepareFinalObjects() {
-            ("prev", vm.todosprev);
             angular.forEach(vm.todosprev, function (cabinet) {
                 cabinet.marca = cabinet.modelo.marca.nombre;
                 cabinet.id_modelo = cabinet.modelo.id;
