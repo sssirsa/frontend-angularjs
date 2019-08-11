@@ -4,7 +4,16 @@
             "TITLE": "Reportes"
         },
         "NEW": {
-            "TITLE": "Generación de reportes"
+            "TITLE": "Generación de reportes",
+            "DESCRIPTION": "Listado de reportes disponibles",
+            "LABELS": {
+                "SEARCH": "Buscar reporte",
+                "PREVIOUS": "Anterior",
+                "NEXT": "Siguiente",
+                "LOAD_MORE": "Cargar mas...",
+                "REMOVE_FILTER": "Quitar filtro",
+                "LOADING_MESSAGE": "Cargando reportes"
+            }
         },
         "HISTORICAL": {
             "TITLE": "Listado de reportes solicitados",

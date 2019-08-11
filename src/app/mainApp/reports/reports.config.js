@@ -9,21 +9,21 @@
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart("app/mainApp/reports");
         $stateProvider
-        /* List of report */
-            .state('triangular.admin-default.report', {
-                url: '/reports/new',
+        /* Available reports list */
+            .state('triangular.admin-default.reports-list', {
+                url: '/reportes/listado',
                 data: {
                     permissions: {
                         only: ['report_manager__report__reports']
                     }
                 },
-                templateUrl: 'app/mainApp/reports/report/report.tmpl.html',
-                controller: 'reportGenerateController',
+                templateUrl: 'app/mainApp/reports/list/reportList.tmpl.html',
+                controller: 'reportsListController',
                 controllerAs: 'vm'
             })
             /* Historical reports generated*/
             .state('triangular.admin-default.historical-report', {
-                url: '/reports/historical',
+                url: '/reportes/historico',
                 data: {
                     permissions: {
                         only: ['report_manager__report__history']
@@ -46,7 +46,7 @@
                 children: [
                     {
                         name: 'REPORT_META.NEW.TITLE',
-                        state: 'triangular.admin-default.report',
+                        state: 'triangular.admin-default.reports-list',
                         permission: ['report_manager__report__reports'],
                         type: 'link'
                     },
