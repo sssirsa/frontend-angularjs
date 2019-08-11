@@ -16,6 +16,9 @@
             }
         },
         "REQUEST": {
+            "BUTTONS": {
+                "SAVE": "Generar reporte"
+            }
         },
         "HISTORICAL": {
             "TITLE": "Listado de reportes solicitados",

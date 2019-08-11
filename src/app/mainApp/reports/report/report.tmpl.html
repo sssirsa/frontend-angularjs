@@ -8,4 +8,17 @@
             </span>
         </div>
     </md-card>
+    <!-- Here goes the filter-manager -->
+    <md-card layout-align-gt-xs="end center"
+             layout-align="center stretch"
+             layout-gt-xs="row"
+             layout="column">
+        <md-button class="md-primary md-raised"
+                   ng-click="vm.generate()">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                <div hide-xs>{{'REPORT_META.REQUEST.BUTTONS.SAVE'|translate}}</div>
+            </div>
+        </md-button>
+    </md-card>
 </div>
