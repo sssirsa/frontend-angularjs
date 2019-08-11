@@ -7,7 +7,8 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        $state
     ) {
         var vm = this;
 
@@ -91,8 +92,10 @@
             }
         };
 
-        function onElementSelect() {
-            //Here goes the handling for element selection, such as detail page navigation
+        function onElementSelect(element) {
+            $state.go('triangular.admin-default.report-request', {
+                reportId: element.id
+            });
         }
     }
 

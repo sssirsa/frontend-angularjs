@@ -1,0 +1,11 @@
+<div cg-busy="{promise:vm.loadingPromise, message:'Cargando reporte'}">
+    <md-card layout-padding>
+        <div layout="column"
+             layout-align="center center">
+            <h1 class="text-center">{{vm.reportTemplate.name}}</h1>
+            <span class="text-center" ng-if="vm.reportTemplate.description">
+                {{vm.reportTemplate.description}}
+            </span>
+        </div>
+    </md-card>
+</div>

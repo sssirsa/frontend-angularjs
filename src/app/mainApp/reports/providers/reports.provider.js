@@ -13,7 +13,9 @@
 
         var service = {
             getHistoricalByID: getHistoricalByID,
-            listHistoricalReports: listHistoricalReports
+            listHistoricalReports: listHistoricalReports,
+            getReportByID: getReportByID,
+            requestReportByID: requestReportByID
         };
 
         function getHistoricalByID(id) {
@@ -31,6 +33,26 @@
                 return baseUrl.all(preUrl + '&' + filter).customGET();
             }
         }
+
+        function getReportByID(id) {
+            return baseUrl.all(URLS.reports.report.new.base).customGET(id);
+        }
+
+        function requestReportByID(id, filters) {
+            /*
+             * Filters object
+             *  filters:{
+             *      query:value
+             *  }
+             *  Example:
+             *  filters:{
+             *      field__property__filter_type:{{filterValue}}
+             *  }
+             */
+            return baseUrl.all(URLS.reports.report.new.request)
+                .customGET(id, filters);
+        }
+
 
         return service;
     }
