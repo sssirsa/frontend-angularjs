@@ -1,0 +1,39 @@
+<!--Listing filters section-->
+<section>
+    <ul id="filters-container">
+        <li ng-repeat="appliedFilter in vm.appliedFilters">
+            <!--Filter verbose as header-->
+            <header class="text-center">
+                <strong>{{appliedFilter['verbose']}}</strong>
+            </header>
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-wrap>
+                <!-- Modify button -->
+                <md-button ng-click="vm.modifyFilter($index)"
+                           aria-label="modify filter"
+                           class="md-primary md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-edit"></md-icon>
+                        <div ng-if="vm.modifyButton" hide-xs hide-sm>{{vm.modifyButton}}</div>
+                        <div ng-if="!vm.modifyButton" hide-xs hide-sm>Modify</div>
+                    </div>
+                </md-button>
+                <!-- Delete button -->
+                <md-button ng-click="vm.removeFilter($index)"
+                           aria-label="remove filter"
+                           class="md-warn md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                        <div ng-if="vm.deleteButton" hide-xs hide-sm>{{vm.deleteButton}}</div>
+                        <div ng-if="!vm.deleteButton" hide-xs hide-sm>Remove</div>
+                    </div>
+                </md-button>
+            </div>
+        </li>
+    </ul>
+</section>
+<!--Editing-Adding filters section-->
+<section></section>
+<!--Footer section used for adding more filters-->
+<footer></footer>
