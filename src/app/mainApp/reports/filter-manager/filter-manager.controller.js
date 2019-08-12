@@ -24,6 +24,8 @@
                 addButton: '<',    //Default is "Add"
                 removeButton: '<', //Default is "Remove"
                 modifyButton: '<', //Default is "Modify"
+                cancelButton: '<', //Default is "Cancel"
+                saveButton: '<',   //Default is "Save"
                 //Field labels
                 fieldLabel: '<',    //Default is "field"
                 propertyLabel: '<', //Default is "property"
@@ -71,6 +73,7 @@
          *      }
          * ]
          */
+        vm.editingIndex;
 
         var init = function () {
             //Demo data
@@ -102,17 +105,31 @@
                     }
                 }
             ];
+            vm.editingIndex = -1;
         };
         init();
 
         //Functions
 
         vm.modifyFilter = function modifyFilter(index) {
-            return index;
+            vm.editingIndex = index;
+        };
+
+        vm.cancelAddModify = function cancelAddModify() {
+            vm.editingIndex = -1;
         };
 
         vm.removeFilter = function removeFilter(index) {
             vm.appliedFilters.splice(index, 1);
+        };
+
+        vm.addFilter = function addFilter() {
+            if (vm.appliedFilters.length) {
+                vm.editingIndex = vm.appliedFilters.length + 1;
+            }
+            else {
+                vm.editingIndex = 0;
+            }
         };
 
     }
