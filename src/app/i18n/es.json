@@ -246,7 +246,8 @@
                 "WORTHY": "Atendible",
                 "IMPEDIMENT_DATE": "Fecha de impedimento",
                 "RELEASE_DATE": "Fecha de liberación",
-                "NOT_RELEASED": "No liberado"
+                "NOT_RELEASED": "No liberado",
+                "OBSOLETE": "Obsoletizar"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",

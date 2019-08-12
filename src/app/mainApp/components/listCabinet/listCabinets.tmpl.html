@@ -82,6 +82,15 @@
                                 {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
                             </md-button>
                         </div>
+
+                        <div layout="column" layout-align="end center">
+                            <md-button
+                                ng-click="$ctrl.showImpediment(item.impedimento_id)"
+                                class="md-raised md-primary">
+                                <md-icon md-font-icon="fas fa-wrench"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.OBSOLETE'|translate}}
+                            </md-button>
+                        </div>
                     </div>
 
                 </div>

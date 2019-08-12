@@ -44,7 +44,6 @@
 
 
         function info(item) {
-            ("Antes", item);
             vm.toModel = angular.copy(item);
             $mdDialog.show({
                 controller: 'CabinetController',

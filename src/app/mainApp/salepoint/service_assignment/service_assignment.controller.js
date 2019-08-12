@@ -60,7 +60,7 @@
         function AssignationTechnician(attention) {
             $mdDialog.show({
                 controller: '',
-                templateUrl: '',
+                templateUrl: 'app/mainApp/salepoint/service_assignment/dialog/dialogAssignationTechnician.tmpl.html',
                 parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,

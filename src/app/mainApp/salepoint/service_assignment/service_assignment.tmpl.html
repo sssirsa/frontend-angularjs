@@ -21,7 +21,7 @@
                 layout="column"
                 ng-repeat="attention in vm.attentions"
                 layout-gt-md="row"
-                ng-click="vm.selectAttention(attention)">
+                ng-click="">
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content>
                         <div flex="100">
@@ -170,7 +170,7 @@
                         <div flex="100" layout="column" layout-align="end end">
                             <div>
                                 <md-button aria-label="fab button"
-                                           ng-click="$event.stopPropagation(); vm.Assing(attention)"
+                                           ng-click="$event.stopPropagation(); vm.AssignationTechnician(attention)"
                                            class="md-raised md-primary">
                                     <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
                                 </md-button>
