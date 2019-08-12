@@ -1,3 +1,19 @@
 {
-
+    "MASSIVE_CHARGE":{
+        "HISTORICAL_CHARGES":"Historico de Cargas Masivas",
+        "KIND_OF_MASSIVE":"Tipo de Carga Masiva",
+        "PROGRESS":"Progreso",
+        "DATE":"Fecha de inicio de Carga",
+        "END_DATE":"Fecha de Fin de Carga",
+        "STATUS":"Estado",
+        "TEMPLATE_FILE":"Plantilla de Carga",
+        "ERROR_FILE":"Archivo de Informe de Errores",
+        "KIND_OF_MASSIVE_OBJECT":{
+            "TASK_NAME":"Nombre de la Tarea",
+            "NAME":"Descripción de la Tarea",
+            "DESCRIPTION":"Descripción a detalle",
+            "CREATED_AT":"Creado en",
+            "UPDATED_AT":"Actualizado en",
+        }
+    }
 }
