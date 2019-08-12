@@ -8,12 +8,13 @@
         "STATUS":"Estado",
         "TEMPLATE_FILE":"Plantilla de Carga",
         "ERROR_FILE":"Archivo de Informe de Errores",
+        "DOWNLOAD":"Descargar",
         "KIND_OF_MASSIVE_OBJECT":{
             "TASK_NAME":"Nombre de la Tarea",
             "NAME":"Descripción de la Tarea",
             "DESCRIPTION":"Descripción a detalle",
             "CREATED_AT":"Creado en",
-            "UPDATED_AT":"Actualizado en",
+            "UPDATED_AT":"Actualizado en"
         }
     }
 }
