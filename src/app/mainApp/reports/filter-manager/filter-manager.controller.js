@@ -40,22 +40,80 @@
         //Globals
         vm.appliedFilters;
         /*
-         * {
-         *      query: string,
-         *      verbose: string
-         * }
+         *      //Field can or can't have the property field,
+         *      //in case it doesn't, the filter field and value  properties
+         *      //are at the same level of the field_name
+         * [
+         *      {
+         *           query: string,
+         *           verbose: string,
+         *           filter: {
+         *               field: {
+         *                   name: 'field_name',
+         *                   property: {
+         *                       name: 'property_name',
+         *                       filter: '',
+         *                       value: ''
+         *                   }
+         *               }
+         *           }
+         *      },
+         *      {
+         *           query: string,
+         *           verbose: string,
+         *           filter: {
+         *               field: {
+         *                   name: 'field_name',
+         *                   filter: '',
+         *                   value: ''
+         *               }
+         *           }
+         *      }
+         * ]
          */
 
         var init = function () {
+            //Demo data
+            //vm.appliedFilters=[];
             vm.appliedFilters = [
                 {
-                    query: "this is the query",
-                    verbose: "a verbose for the filter"
+                    query: "field_name__property_name__contains=value",
+                    verbose: "La propiedad 'property_name' del campo 'field_name' contiene 'value'",
+                    filter: {
+                        field: {
+                            name: 'field_name',
+                            property: {
+                                name: 'property_name',
+                                filter: 'contains',
+                                value: 'value'
+                            }
+                        }
+                    }
+                },
+                {
+                    query: "field_name=value",
+                    verbose: "El campo 'field_name' es igual a 'value'",
+                    filter: {
+                        field: {
+                            name: 'field_name',
+                            filter: 'equals',
+                            value: 'value'
+                        }
+                    }
                 }
             ];
         };
         init();
 
+        //Functions
+
+        vm.modifyFilter = function modifyFilter(index) {
+            return index;
+        };
+
+        vm.removeFilter = function removeFilter(index) {
+            vm.appliedFilters.splice(index, 1);
+        };
 
     }
 })();

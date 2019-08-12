@@ -9,7 +9,15 @@
         </div>
     </md-card>
     <md-card>
-        <filter-manager>
+        <filter-manager filters="vm.reportTemplate.filters_type"
+                        queries="vm.queries"
+                        add-button="vm.translates.addButton"
+                        remove-button="vm.translates.removeButton"
+                        modify-button="vm.translates.modifyButton"
+                        field-label="vm.translates.fieldLabel"
+                        property-label="vm.translates.propertyLabel"
+                        filter-label="vm.translates.filterLabel"
+                        value-label="vm.translates.valueLabel">
         </filter-manager>
     </md-card>
     <md-card layout-align-gt-xs="end center"

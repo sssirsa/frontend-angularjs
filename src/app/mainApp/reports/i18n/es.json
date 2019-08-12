@@ -17,7 +17,16 @@
         },
         "REQUEST": {
             "BUTTONS": {
-                "SAVE": "Generar reporte"
+                "SAVE": "Generar reporte",
+                "ADD": "Presiona aquí para añadir filtro",
+                "REMOVE": "Quitar filtro",
+                "MODIFY": "Modificar filtro"
+            },
+            "LABELS": {
+                "FIELD": "Campo",
+                "PROPERTY": "Propiedad",
+                "FILTER": "Filtro a aplicar",
+                "VALUE": "Valor del filtro"
             }
         },
         "HISTORICAL": {
