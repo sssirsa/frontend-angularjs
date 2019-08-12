@@ -28,12 +28,12 @@
                 fieldLabel: '<',    //Default is "field"
                 propertyLabel: '<', //Default is "property"
                 filtersLabel: '<',  //Default is "Filter to apply"
-                valueLabel: '<',     //Default is "value"
+                valueLabel: '<'     //Default is "value"
             }
         });
 
     function filterManagerController(
-        $log
+        //$log
     ) {
         var vm = this;
 

@@ -33,6 +33,6 @@
         //Functions
         vm.generate = function generate() {
             //TODO: Handle generate funcitonality
-        }
+        };
     }
 })();
