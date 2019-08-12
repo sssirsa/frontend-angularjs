@@ -6,9 +6,9 @@
 
     angular
         .module('app.mainApp')
-        .factory('TicketProvider',TicketProvider);
+        .factory('MassiveLoadProvider',MassiveLoadProvider);
 
-    function TicketProvider(
+    function MassiveLoadProvider(
         API,
         MASSIVE_CHARGE
     ) {
