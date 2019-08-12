@@ -5,6 +5,10 @@
     angular
         .module('app.mainApp.massiveCharge')
         .constant('MASSIVE_CHARGE', {
-
+            base: 'bulk-manager',
+            actions: {
+                bulk: 'bulk',
+                bulk_load_history:'bulk-load-history'
+            }
         });
 })();
