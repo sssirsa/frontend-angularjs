@@ -7,8 +7,7 @@
         PermRoleStore,
         PermPermissionStore,
         $log,
-        OAuth,
-        $cookies
+        OAuth
     ) {
         var vm = this;
 
@@ -70,18 +69,18 @@
                 else {
                     $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
-                $cookies.putObject('permissions', vm.permissions);
+                localStorage['permissions'] = angular.toJson(vm.permissions);
             }
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
             }
         }
 
-        //Used for getting frontend optimized permissions
+        //Used for getting frontend optimized permissions (string array)
         function getPermissions() {
             if (OAuth.isValidToken()) {
                 if (vm.permissions.length === 0) {
-                    vm.permissions = $cookies.getObject('permissions');
+                    vm.permissions = angular.fromJson(localStorage['permissions']);
                     //Base role
                     vm.permissions.push('AUTHENTICATED');
                 }
@@ -89,7 +88,7 @@
             return vm.permissions;
         }
 
-        //Used for setting frontend optimized permissions
+        //Used for setting frontend optimized permissions (string array)
         function setPermissions(permissions) {
             if (permissions.length > 0) {
                 angular.forEach(permissions, function permissionIterator(permissionName) {
