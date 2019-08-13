@@ -12,7 +12,7 @@
             <div layout="row"
                  layout-align="center center" layout-wrap="" flex="100">
                 <md-input-container flex="100" flex-gt-sm="80">
-                    <label translate="">COM.TICKET_TYPE</label>
+                    <label translate="">MASSIVE_CHARGE.TICKET_TYPE</label>
                     <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
                         <md-option ng-repeat="tipo in vm.massive_charge_kind track by tipo.id"
                                    ng-value="tipo.id" flex="100">
@@ -46,17 +46,11 @@
                                 <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-sm="row"
                                      layout="column">
                                     <div layout="row">
-                                        <b translate>MASSIVE_CHARGE.KIND_OF_MASSIVE</b>: &nbsp <b>{{item.bulk_load.name}}</b>
+                                        <b translate hide-xs="">MASSIVE_CHARGE.KIND_OF_MASSIVE</b>: &nbsp <b>{{item.bulk_load.name}}</b>
                                     </div>
                                     <div layout="row">
-                                        <b translate>MASSIVE_CHARGE.DATE</b>: &nbsp <b>{{item.date | date:"EEEE dd/MM/yyyy
-                                        HH:mm:ss"}}</b>
+                                        <b translate hide-xs="">MASSIVE_CHARGE.STATUS</b>: &nbsp <h4>{{item.status}}</h4>
                                     </div>
-                                    <div layout="row">
-                                        <b translate>MASSIVE_CHARGE.END_DATE</b>: &nbsp <b>{{item.end_date | date:"EEEE dd/MM/yyyy
-                                        HH:mm:ss"}}</b>
-                                    </div>
-
                                 </div>
                             </md-toolbar>
                         </div>
@@ -67,17 +61,34 @@
                             <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
-                                        <b translate>MASSIVE_CHARGE.STATUS</b>
+                                        <b translate>MASSIVE_CHARGE.DATE</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <h4>{{item.status}}</h4>
+                                        <b>{{item.date | date:"EEEE dd/MM/yyyy
+                                            HH:mm:ss"}}</b>
                                     </div>
                                 </div>
                             </div>
-
+                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>MASSIVE_CHARGE.END_DATE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>{{item.end_date | date:"EEEE dd/MM/yyyy
+                                            HH:mm:ss"}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
+                             layout-md="center center">
                             <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
                                 <div layout="row">
                                     <div layout="column" layout-align="center center">
@@ -87,20 +98,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <md-progress-linear class="md-accent margin-bottom-20" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
-                                    </div>
-                                </div>
-                            </div>
-                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
-                                <div layout="row">
-                                    <div layout="column" layout-align="center center">
-                                        <b translate>MASSIVE_CHARGE.TEMPLATE_FILE</b>
-                                    </div>
-                                    <div layout="column" layout-align="center center">
-                                        <b>:&nbsp</b>
-                                    </div>
-                                    <div layout="column" layout-align="center center">
-                                        <a href="{{item.template_file}}" target="_blank"><h4 translate="">MASSIVE_CHARGE.DOWNLOAD</h4></a>
+                                        <span> <b>{{item.progress}}</b><b>%</b></span>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +111,8 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <a href="{{item.error_file}}" target="_blank"><h4 translate="">MASSIVE_CHARGE.DOWNLOAD</h4></a>
+                                        <a href="{{item.error_file}}" target="_blank"><h4 translate="">
+                                            MASSIVE_CHARGE.DOWNLOAD</h4></a>
                                     </div>
                                 </div>
                             </div>

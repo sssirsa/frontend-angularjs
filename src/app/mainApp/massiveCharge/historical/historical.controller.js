@@ -12,6 +12,7 @@
     function historicalController($scope, Translate, toastr, ErrorHandler, $log, $mdDialog, EnvironmentConfig, URLS, MASSIVE_CHARGE, PAGINATION,MassiveLoadProvider) {
         var vm = this;
         vm.massive_loads = {};
+        vm.porcentaje=40;
         vm.loadingPromise = {};
         vm.selectedKind = '';
         //datos para paginado
