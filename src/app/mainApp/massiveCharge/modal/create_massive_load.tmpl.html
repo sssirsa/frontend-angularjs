@@ -8,4 +8,42 @@
             </md-button>
         </div>
     </md-toolbar>
+    <div layout-padding="">
+        <div layout="row"
+             layout-align="center center" layout-wrap="" flex="100">
+            <md-input-container flex="100" flex-gt-sm="80">
+                <label translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE</label>
+                <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
+                    <md-option ng-repeat="tipo in vm.massive_charge_kind track by tipo.id"
+                               ng-value="tipo" flex="100">
+                        <div layout="row" flex="100">
+                            <div flex="100" layout="column" layout-fill="">
+                                <div flex="100" layout="row" layout-align="start center"><span
+                                    class="md-subhead"><b>{{tipo.name}}</b></span></div>
+                                <div flex="100" layout="row" layout-align="start center"><span>
+                                        {{tipo.descripcion}}-<b>{{tipo.task_name}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row" flex="100" layout-wrap="" ng-if="vm.tipo">
+            <div flex="100">
+                <span class="md-title"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.NAME</b><b>:</b>{{vm.tipo.name}}</span>
+            </div>
+            <div flex="100" ng-if="vm.tipo.task_name">
+                <span class="md-subhead"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TASK_NAME</b><b>:</b>{{vm.tipo.task_name}}</span>
+            </div>
+            <div flex="100" ng-if="vm.tipo.description">
+                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.DESCRIPTION</b><b>:</b>{{vm.tipo.description}}</span>
+            </div>
+            <div flex="100">
+                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TEMPLATE_FILE</b><b>:</b><a href="{{item.template_file}}" target="_blank"><span translate="">
+                                            MASSIVE_CHARGE.DOWNLOAD</span></a></span>
+            </div>
+        </div>
+    </div>
 </md-dialog>

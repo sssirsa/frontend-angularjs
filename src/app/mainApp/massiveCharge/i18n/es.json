@@ -16,7 +16,8 @@
             "NAME":"Descripción de la Tarea",
             "DESCRIPTION":"Descripción a detalle",
             "CREATED_AT":"Creado en",
-            "UPDATED_AT":"Actualizado en"
+            "UPDATED_AT":"Actualizado en",
+            "TEMPLATE_FILE":"Plantilla de Carga"
         }
     }
 }
