@@ -82,13 +82,25 @@
                                 {{'MAIN.COMPONENTS.CABINET.IMPEDIMENT'|translate}}
                             </md-button>
                         </div>
+                    </div>
 
-                        <div layout="column" layout-align="end center">
+                    <div layout="column" layout-align="end center">
+                        <div layout="column" flex="100" layout-align="end center">
                             <md-button
-                                ng-click="$ctrl.showImpediment(item.impedimento_id)"
+                                ng-click="$ctrl.showObsolete(item)"
                                 class="md-raised md-primary">
-                                <md-icon md-font-icon="fas fa-wrench"></md-icon>
-                                {{'MAIN.COMPONENTS.CABINET.OBSOLETE'|translate}}
+                                <div ng-if="item.status_unilever != '0008' || '0004'">
+                                    <md-icon md-font-icon="fas fa-wrench"></md-icon>
+                                    {{'MAIN.COMPONENTS.CABINET.SEND_TO_OBSOLETE'|translate}}
+                                </div>
+                                <div ng-if="item.status_unilever == '0008'">
+                                    <md-icon md-font-icon="fas fa-check-square-o"></md-icon>
+                                    {{'MAIN.COMPONENTS.CABINET.AGREE_OBSOLETE'|translate}}
+                                </div>
+                                <div ng-if="item.status_unilever == '0004'">
+                                    <md-icon md-font-icon="fas fa-info-circle"></md-icon>
+                                    {{'MAIN.COMPONENTS.CABINET.OBSOLETE'|translate}}
+                                </div>
                             </md-button>
                         </div>
                     </div>

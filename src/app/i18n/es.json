@@ -247,7 +247,9 @@
                 "IMPEDIMENT_DATE": "Fecha de impedimento",
                 "RELEASE_DATE": "Fecha de liberación",
                 "NOT_RELEASED": "No liberado",
-                "OBSOLETE": "Obsoletizar"
+                "OBSOLETE": "Obsoleto",
+                "AGREE_OBSOLETE": "Aprobar Obsolesencia",
+                "SEND_TO_OBSOLETE": "Obsoletizar"
             },
             "NO_LABELED":{
                 "ECONOMICS": "Economicos",
@@ -351,7 +353,9 @@
             "ATTENTION_MESSAGE": "¿Seguro qué desea concluir la atención?",
             "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
             "CANCEL_ATTENTION_MESSAGE":"¿Seguro qué desea cancelar la atencion?",
-            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?"
+            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?",
+            "SEND_TO_OBSOLETE": "El cabinet quedará pendeinte de aprovación de obsoletizaje. ¿Desea continuar?",
+            "AGREE_OBSOLETE": "¿Aceptar obsoletización?"
         }
     },
     "SUCCESS":{

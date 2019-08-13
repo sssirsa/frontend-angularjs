@@ -41,6 +41,7 @@
         vm.impediment = impediment;
         vm.removeFilter = removeFilter;
         vm.showImpediment = showImpediment;
+        vm.showObsolete = showObsolete;
 
 
         function info(item) {
@@ -136,6 +137,31 @@
                 .catch(function () {
 
                 });
+        }
+
+        function showObsolete(item) {
+            if (item.estatus_unilever !== '0004') {
+                vm.toModel = angular.copy(item);
+                $mdDialog.show({
+                    controller: 'modalObsoleteController',
+                    controllerAs: 'vm',
+                    templateUrl: 'app/mainApp/components/listCabinet/Obsolete/obsolete.tmpl.html',
+                    fullscreen: true,
+                    clickOutsideToClose: true,
+                    focusOnOpen: true,
+                    locals: {
+                        data: vm.toModel
+                    }
+                })
+                    .then(function () {
+                        vm.todosprev = null;
+                        vm.todos = [];
+                        vm.up();
+                    })
+                    .catch(function () {
+
+                    });
+            }
         }
 
         function showImpediment(id) {
