@@ -40,11 +40,67 @@
     <header class="text-center">
         <strong>{{vm.appliedFilters[vm.editingIndex].verbose}}</strong>
     </header>
+    <form name="filter-form"
+          layout-padding
+          layout="column"
+          layout-gt-sm="row"
+          layout-align="center stretch"
+          layout-align-gt-sm="space-around center">
+        <!--Field and property selectors-->
+        <div class="full-width" layout="column" layout-align="center stretch">
+            <md-input-container class="md-block">
+                <label ng-if="vm.fieldLabel">{{vm.fieldLabel}}</label>
+                <label ng-if="!vm.fieldLabel">Field</label>
+                <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.name"
+                           aria-label="select field"
+                           md-on-close="vm.getPropertiesOfField(vm.appliedFilters[vm.editingIndex].filter.field.name)">
+                    <md-option ng-repeat="field in vm.rootFields" value="{{field}}">{{field}}</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container ng-if="vm.appliedFilters[vm.editingIndex].filter.field.name
+            && !vm.filters[vm.appliedFilters[vm.editingIndex].filter.field.name].filter.length"
+                                class="md-block">
+                <label ng-if="vm.fieldLabel">{{vm.propertyLabel}}</label>
+                <label ng-if="!vm.fieldLabel">Property</label>
+                <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.property_name"
+                           aria-label="select property"
+                           md-on-close="vm.setFiltersFromProperty(vm.editingIndex)">
+                    <md-option ng-repeat="property in vm.propertiesOfField" value="{{property}}">{{property}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <!--Filter selector-->
+        <div class="full-width" layout="column" layout-align="center stretch">
+            <md-input-container class="md-block">
+                <label ng-if="vm.filtersLabel">{{vm.filtersLabel}}</label>
+                <label ng-if="!vm.filtersLabel">Filter to apply</label>
+                <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.filter_type"
+                           aria-label="select filter to apply"
+                           ng-disabled="!vm.translatedFilters">
+                    <md-option ng-repeat="filter in vm.translatedFilters" value="{{filter.value}}">{{filter.verbose}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <!--Filter value-->
+        <div class="full-width" layout="column" layout-align="center stretch">
+            <md-input-container class="md-block">
+                <label ng-if="vm.valueLabel">{{vm.valueLabel}}</label>
+                <label ng-if="!vm.valueLabel">Value</label>
+                <input ng-model="vm.appliedFilters[vm.editingIndex].filter.field.value"
+                       type="text"
+                       aria-label="filter value"
+                       ng-disabled="!vm.appliedFilters[vm.editingIndex].filter.field.filter_type"/>
+
+
+            </md-input-container>
+        </div>
+    </form>
     <div layout="row"
          layout-align="space-around center"
          layout-wrap>
         <!-- Cancel button -->
-        <md-button ng-click="vm.cancelAddModify()"
+        <md-button ng-click="vm.cancelAddModify(vm.editingIndex)"
                    aria-label="remove filter"
                    class="md-warn md-raised">
             <div layout="row" layout-align="center center">
@@ -66,7 +122,7 @@
     </div>
 </section>
 <!--Footer section used for adding more filters-->
-<footer layout="column" layout-align="center center">
+<footer ng-if="vm.editingIndex<0" layout="column" layout-align="center center">
     <!-- Add button -->
     <md-button ng-click="vm.addFilter()"
                aria-label="add filter"

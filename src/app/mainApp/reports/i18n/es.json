@@ -20,13 +20,27 @@
                 "SAVE": "Generar reporte",
                 "ADD": "Presiona aquí para añadir filtro",
                 "REMOVE": "Quitar filtro",
-                "MODIFY": "Modificar filtro"
+                "MODIFY": "Modificar filtro",
+                "CANCEL": "Cancelar",
+                "SAVE_FILTER": "Guardar"
             },
             "LABELS": {
                 "FIELD": "Campo",
                 "PROPERTY": "Propiedad",
                 "FILTER": "Filtro a aplicar",
                 "VALUE": "Valor del filtro"
+            },
+            "FILTERS": {
+                "NOT": "Distinto de",
+                "GT": "Mayor que",
+                "LT": "Menor que",
+                "GTE": "Mayor o igual que",
+                "LTE": "Menor o igual que",
+                "CONTAINS": "Contiene (sensible a mayúsculas y minúsculas)",
+                "ICONTAINS": "Contiene (insensible a mayúsculas y minúsculas)",
+                "STARTSWITH": "Empieza con (sensible a mayúsculas y minúsculas)",
+                "ISTARTSWITH": "Empieza con (insensible a mayúsculas y minúsculas)",
+                "EQUALS": "Igual a"
             }
         },
         "HISTORICAL": {
