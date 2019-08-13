@@ -36,6 +36,7 @@
         vm.listAll = listAll;
         vm.removeFilter=removeFilter;
         vm.cancel=cancel;
+        vm.openDialog=openDialog;
 
         //Funciones Propias de la Pantalla
         init();
@@ -112,8 +113,27 @@
                     ErrorHandler.errorTranslate(errormsg);
                 });
         }
+        function openDialog() {
+            $mdDialog.show({
+                controller: 'createMassiveLoadController',
+                controllerAs: 'vm',
+                templateUrl: 'app/mainApp/massiveCharge/modal/create_massive_load.tmpl.html',
+                fullscreen: true,
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                }
+            }).then(function () {
+                ErrorHandler.successCreate();
+                listMassiveLoads();
 
-
+            }).catch(function (errorDelete) {
+                if (errorDelete) {
+                    ErrorHandler.errorTranslate(errorDelete);
+                }
+                listMassiveLoads();
+            });
+        }
 
         //  Funciones para Componentes _________________________________________________________________________________
 
