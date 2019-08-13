@@ -13,7 +13,7 @@
         MASSIVE_CHARGE
     ) {
 
-        var baseMassiveCharge = API.all(MASSIVE_CHARGE.base);
+        var baseMassiveCharge = API.all(MASSIVE_CHARGE.project).all(MASSIVE_CHARGE.base);
 
         return {
             getMassiveLoadType:getMassiveLoadType,

@@ -5,6 +5,7 @@
     angular
         .module('app.mainApp.massiveCharge')
         .constant('MASSIVE_CHARGE', {
+            project:'bulk-load',
             base: 'bulk-manager',
             actions: {
                 bulk: 'bulk',
