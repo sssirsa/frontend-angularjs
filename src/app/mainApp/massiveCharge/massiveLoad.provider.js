@@ -33,7 +33,8 @@
             return baseMassiveCharge.all(MASSIVE_CHARGE.actions.bulk).customGET();
         }
         function cancelMassiveLoad(id){
-            return baseMassiveCharge.all(MASSIVE_CHARGE.actions.bulk).all(id).customPATCH();
+            var object={};
+            return baseMassiveCharge.all(MASSIVE_CHARGE.actions.bulk).all(id).customPUT(object);
         }
         function getMassiveLoad(id){
             return baseMassiveCharge.all(MASSIVE_CHARGE.actions.bulk).all(id).customGET();
