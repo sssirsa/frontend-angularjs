@@ -6,12 +6,13 @@
         $stateParams,
         REPORT,
         ErrorHandler,
-        Translate
+        Translate,
+        toastr
     ) {
         var vm = this;
         //Globals
         vm.reportTemplate;
-        vm.queries = [];
+        vm.queries = {};
 
 
         //Translates
@@ -59,7 +60,17 @@
 
         //Functions
         vm.generate = function generate() {
-            //TODO: Handle generate funcitonality
+            vm.savingPromise = REPORT
+                .requestReportByID(
+                    $stateParams.reportId,
+                    vm.queries
+                )
+                .then(function reportSuccess() {
+                    toastr.success(Translate.translate('REPORT_META.REQUEST.MESSAGES.SUCCESS'));
+                })
+                .catch(function reportError(error) {
+                    ErrorHandler.errorTranslate(error);
+                });
         };
     }
 })();

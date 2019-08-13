@@ -30,7 +30,7 @@
             bindings: {
                 //Main Parameters
                 filters: '<',      //The filter array returned by the API
-                queries: '=',      //Bidirectional binding for the query parameters object, should be passed as an empty array
+                queries: '=',      //Bidirectional binding for the query parameters object, should be passed as an empty object
                 //Button Labels
                 addButton: '<',    //Default is "Add"
                 removeButton: '<', //Default is "Remove"
@@ -96,6 +96,7 @@
         //Functions
 
         //Called for enabling filter modification
+        //TODO: Finish it, not yet implemented
         vm.modifyFilter = function modifyFilter(index) {
             vm.editingIndex = index;
             vm.originalFilter = angular.copy(vm.appliedFilters[vm.editingIndex]);
@@ -161,6 +162,7 @@
         };
 
         vm.setFiltersFromProperty = function setFiltersFromProperty(index) {
+            vm.filterTypes = [];
             var rootTemplate = vm.appliedFilters[index];
             var rootFilter = vm.filters[rootTemplate.filter.field.name];
             if (rootFilter.filter) {
@@ -185,10 +187,17 @@
             vm.propertiesOfField = null;
             vm.filterType = null;
             vm.translatedFilters = null;
+            addQueryToList(index);
             vm.editingIndex = -1;
         };
 
         //Internal functions
+
+        var addQueryToList = function addQueryToList(index) {
+            var query = vm.appliedFilters[index].query;
+            var value = vm.appliedFilters[index].filter.field.value;
+            vm.queries[query] = value;
+        };
 
         var translateFilters = function translateFilters() {
             if (vm.filterTypes.length) {
@@ -249,7 +258,7 @@
 
             }
             if (filterToApply.value) {
-                vm.valueLabel ? verbose += ' ' + vm.valueLabel+': ' : verbose += ' Value: ';
+                vm.valueLabel ? verbose += ' ' + vm.valueLabel + ': ' : verbose += ' Value: ';
                 verbose += filterToApply.value;
             }
             vm.appliedFilters[index].verbose = verbose;
@@ -268,10 +277,6 @@
                 if (filterToApply.filter_type !== 'equals') {
                     query += '__' + filterToApply.filter_type;
                 }
-                query += '=';
-            }
-            if (filterToApply.value) {
-                query += filterToApply.value;
             }
             vm.appliedFilters[index].query = query;
         };

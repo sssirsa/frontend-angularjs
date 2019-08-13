@@ -41,6 +41,9 @@
                 "STARTSWITH": "Empieza con (sensible a mayúsculas y minúsculas)",
                 "ISTARTSWITH": "Empieza con (insensible a mayúsculas y minúsculas)",
                 "EQUALS": "Igual a"
+            },
+            "MESSAGES": {
+                "SUCCESS": "Reporte solicitado correctamente"
             }
         },
         "HISTORICAL": {

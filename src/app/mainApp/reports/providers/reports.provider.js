@@ -49,7 +49,9 @@
              *      field__property__filter_type:{{filterValue}}
              *  }
              */
-            return baseUrl.all(URLS.reports.report.new.request)
+            return baseUrl
+                .all(URLS.reports.report.new.base)
+                .all(URLS.reports.report.new.request)
                 .customGET(id, filters);
         }
 

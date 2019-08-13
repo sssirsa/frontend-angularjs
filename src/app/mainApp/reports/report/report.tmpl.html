@@ -27,7 +27,8 @@
     <md-card layout-align-gt-xs="end center"
              layout-align="center stretch"
              layout-gt-xs="row"
-             layout="column">
+             layout="column"
+             cg-busy="{promise:vm.savingPromise, message:'Solicitando reporte'}">
         <md-button class="md-primary md-raised"
                    ng-click="vm.generate()">
             <div layout="row" layout-align="center center">
