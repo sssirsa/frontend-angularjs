@@ -108,6 +108,11 @@
                 fields: [
                     {
                         type: 'text',
+                        model: 'code',
+                        label: 'Código'
+                    },
+                    {
+                        type: 'text',
                         model: 'descripcion',
                         label: 'Descripción'
                     }

@@ -23,7 +23,8 @@
                 base: 'management',
                 bulk_asset_inventory: 'bulk_asset_branch',
                 unique_asset_inventory:'unique_asset_branch',
-                recover_asset:'recover_asset'
+                recover_asset:'recover_asset',
+                obsolete: 'obsoleto'
             }
         });
 })();
