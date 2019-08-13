@@ -143,7 +143,7 @@
                 controllerAs: 'vm'
             })
 
-            .state('triangular.admin-default.service-assignment-detail', {
+            /*.state('triangular.admin-default.service-assignment-detail', {
                 url: 'salepoint/atencion/:id',
                 data: {
                     permissions: {
@@ -151,13 +151,13 @@
                     }
                 },
                 templateUrl: 'app/mainApp/salepoint/service_assignment/dialog/dialogAssignationTechnician.tmpl.html',
-                controller: 'DetailAttentionPageController',
+                controller: 'dialogAsignationTechnicianController',
                 controllerAs: 'vm',
                 params: {
                     id: null,
                     tipo: null
                 }
-            })
+            })*/
         ;
 
         /*

@@ -59,7 +59,7 @@
 
         function AssignationTechnician(attention) {
             $mdDialog.show({
-                controller: '',
+                controller: 'dialogAsignationTechnicianController',
                 templateUrl: 'app/mainApp/salepoint/service_assignment/dialog/dialogAssignationTechnician.tmpl.html',
                 parent: angular.element($document.body),
                 controllerAs: 'vm',
@@ -95,9 +95,9 @@
             listAttentions();
         }
 
-        function selectAttention(attention) {
+        /*function selectAttention(attention) {
             $state.go('triangular.admin-default.service-assignment-detail', {id: attention.folio, type: attention.tipo});
-        }
+        }*/
 
     }
 })();
