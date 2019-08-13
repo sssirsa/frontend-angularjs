@@ -4,7 +4,7 @@
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
     function dialogAsignationTechnicianController(ATTENTIONS, REQUESTS, $state, $mdDialog, $document, ErrorHandler, $stateParams, attention, Stores,
-        Person, Persona_Admin) {
+        Person, Persona_Admin, SalePoint) {
         var vm = this;
 
         console.log("el controler", attention);
@@ -78,17 +78,17 @@
         }
 
         function activate() {
-            vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
+            vm.salePoint = REQUESTS.getRequestByID(vm.id)
                 .then(function (requestSuccess) {
                     vm.request = requestSuccess;
                     if (requestSuccess.persona) {
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
-                                vm.user = userSuccess;
+                                vm.assignedPerson = userSuccess;
+                                console.log(vm.assignedPerson);
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
-                                $log.error(personaError);
                             });
                     } else {
                         preSearchPerson();
@@ -106,9 +106,11 @@
         }
 
         function preSearchPerson() {
+            console.log("entre");
             Persona_Admin.listPromise(0,0)
                 .then(function (userList) {
                     vm.limit = userList.count;
+                    console.log(vm.limit);
                     searchPerson();
                 })
                 .catch(function () {
@@ -216,9 +218,11 @@
         }
 
         function worklist(persona) {
+            console.log("worklist");
             vm.chip = [];
-            /*vm.worklistLoading = SalePoint.assignedTo(persona)
+            vm.worklistLoading = SalePoint.assignedTo(persona)
                 .then(function (list) {
+                    console.log("listatrabajo", list);
 
                     angular.forEach(list.results, function (solicitud) {
                         var aux = {
@@ -232,8 +236,9 @@
 
                 })
                 .catch(function () {
+                    console.log("nada");
                     ErrorHandler.error();
-                });*/
+                });
         }
 
     }

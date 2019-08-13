@@ -31,7 +31,7 @@
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
-        vm.selectAttention = selectAttention;
+        //vm.selectAttention = selectAttention;
 
         // control functions
         initialFunctionAttentions();
