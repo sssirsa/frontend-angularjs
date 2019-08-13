@@ -16,6 +16,7 @@
         //funciones
         vm.cerrar = cerrar;
         vm.clean = clean;
+        vm.selectFiles=selectFiles;
 
         init();
 
@@ -34,9 +35,14 @@
                     ErrorHandler.errorTranslate(errormsg);
                 });
         }
+        function selectFiles(files) {
+            vm.files = files;
+        }
 
         function clean() {
             vm.infoMassiveLoad = null;
+            vm.tipo=null;
+            vm.files=null;
         }
 
     }

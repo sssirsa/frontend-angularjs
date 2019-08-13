@@ -20,9 +20,6 @@
                             <div flex="100" layout="column" layout-fill="">
                                 <div flex="100" layout="row" layout-align="start center"><span
                                     class="md-subhead"><b>{{tipo.name}}</b></span></div>
-                                <div flex="100" layout="row" layout-align="start center"><span>
-                                        {{tipo.descripcion}}-<b>{{tipo.task_name}}</b></span>
-                                </div>
                             </div>
                         </div>
                         <md-divider></md-divider>
@@ -43,6 +40,21 @@
             <div flex="100">
                 <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TEMPLATE_FILE</b><b>:</b><a href="{{item.template_file}}" target="_blank"><span translate="">
                                             MASSIVE_CHARGE.DOWNLOAD</span></a></span>
+            </div>
+            <div flex="100">
+                <div layout="column"
+                     layout-align="center center">
+                    <b translate="">MASSIVE_CHARGE.UPLOAD_FILE</b>
+                    <section layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectFiles(files)"
+                                       file-formats="'.xlsx, application/vnd.ms-excel'"></file-uploader>
+                    </section>
+                </div>
+            </div>
+            <div layout="row" layout-align="end center" flex="100">
+                <md-button class="md-raised " ng-click="vm.clean()"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
+                <md-button class="md-raised md-primary" ng-click="vm.save()"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
             </div>
         </div>
     </div>
