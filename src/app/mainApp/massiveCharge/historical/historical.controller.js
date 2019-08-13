@@ -35,6 +35,7 @@
         vm.listMassiveLoads = listMassiveLoads;
         vm.listAll = listAll;
         vm.removeFilter=removeFilter;
+        vm.cancel=cancel;
 
         //Funciones Propias de la Pantalla
         init();
@@ -61,6 +62,7 @@
                 })
                 .catch(function ListError(error) {
                     $log.error(error);
+                    ErrorHandler.errorTranslate(error);
                 });
         }
 
@@ -101,6 +103,14 @@
             vm.selectedKind = '';
             vm.searchText = '';
             listMassiveLoads();
+        }
+        function cancel(item) {
+            vm.promiseCancelMassiveLoad = MassiveLoadProvider.cancelMassiveLoad(item.id)
+                .then(function () {
+                    ErrorHandler.successCancel();
+                }).catch(function (errormsg) {
+                    ErrorHandler.errorTranslate(errormsg);
+                });
         }
 
 

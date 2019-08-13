@@ -2,6 +2,8 @@
     "MASSIVE_CHARGE":{
         "HISTORICAL_CHARGES":"Historico de Cargas Masivas",
         "KIND_OF_MASSIVE":"Tipo de Carga Masiva",
+        "NEW_MASSIVE_LOAD":"Nueva carga masiva",
+        "CANCEL_MASSIVE_LOAD":"Cancelar carga Masiva",
         "PROGRESS":"Progreso",
         "DATE":"Fecha de inicio de Carga",
         "END_DATE":"Fecha de Fin de Carga",

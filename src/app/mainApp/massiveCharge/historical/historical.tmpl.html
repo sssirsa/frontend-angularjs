@@ -1,4 +1,7 @@
 <div>
+    <div layout="row" layout-align="end center" flex="100">
+        <md-button class="md-raised md-primary"><md-icon md-font-icon="fas fa-upload"></md-icon> <span translate="">MASSIVE_CHARGE.NEW_MASSIVE_LOAD</span></md-button>
+    </div>
     <md-card>
         <div layout="column"
              layout-padding
@@ -12,7 +15,7 @@
             <div layout="row"
                  layout-align="center center" layout-wrap="" flex="100">
                 <md-input-container flex="100" flex-gt-sm="80">
-                    <label translate="">MASSIVE_CHARGE.TICKET_TYPE</label>
+                    <label translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE</label>
                     <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
                         <md-option ng-repeat="tipo in vm.massive_charge_kind track by tipo.id"
                                    ng-value="tipo.id" flex="100">
@@ -119,6 +122,11 @@
                         </div>
                     </md-content>
                 </div>
+                <md-card-actions>
+                    <div layout="row" layout-align="end center" flex="100" ng-if="item.status!='Finalizado'">
+                    <md-button ng-click="vm.cancel(item)"><md-icon md-font-icon="fas fa-ban"></md-icon> <span translate="">MASSIVE_CHARGE.CANCEL_MASSIVE_LOAD</span></md-button>
+                    </div>
+                </md-card-actions>
             </md-card>
 
 
