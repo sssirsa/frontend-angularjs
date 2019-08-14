@@ -97,42 +97,46 @@
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
-                },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
                 required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
             },
             modelo_by_marca: {
                 catalog: {
-                    url: null,
-                    
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.cabinet_model,
+                    query: 'marca__id',
+                    requires: 'marca',
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
-                    option: 'nombre'
+                    option: 'nombre',
+                    pagination: {
+                        total: PAGINATION.total,
+                        limit: PAGINATION.limit,
+                        offset: PAGINATION.offset,
+                        pageSize: PAGINATION.pageSize
+                    },
+                    elements: 'results',
+                    softDelete: {
+                        hide: 'deleted',
+                        reverse: false
+                    }
                 },
-                pagination: {
-                    total: PAGINATION.total,
-                    limit: PAGINATION.limit,
-                    offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
-                },
-                required: true,
-                elements: 'results',
-                softDelete: {
-                    hide: 'deleted',
-                    reverse: false
-                }
+                required: true
             }
         };
 
@@ -147,11 +151,11 @@
         function onBrandSelect(element) {
             vm.modelo = null;
             vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
+            /*vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
                 + '/' + URLS.management.catalogues.cabinet_model
-                + QUERIES.cabinet.by_brand + element;
+                + QUERIES.cabinet.by_brand + element;*/
         }
 
         function onElementSelect(element, field) {
