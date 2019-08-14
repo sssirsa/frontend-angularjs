@@ -4,7 +4,7 @@
     'use strict';
     angular
         .module('app.mainApp')
-        .controller('CabinetController',CabinetController);
+        .controller('CabinetController', CabinetController);
 
     function CabinetController(
         cabinetUC,
@@ -19,8 +19,7 @@
         QUERIES,
         PAGINATION,
         _
-    )
-    {
+    ) {
         var vm = this;
 
         //variables
@@ -31,33 +30,32 @@
         vm.id_unilever = data.id_unilever;
         vm.marcaP = data.marca;
         vm.modeloP = data.modelo;
-        vm.marca = null;
         vm.modelos = [];
         vm.urlQR = data.qr_code;
 
 
         //variable con consideraciones especiales
-        if(data.estatus_unilever){
+        if (data.estatus_unilever) {
             vm.estatus_unilever = data.estatus_unilever.descripcion;
-        }else{
+        } else {
             vm.estatus_unilever = "Sin asignar";
         }
 
-        if(data.estatus_com){
+        if (data.estatus_com) {
             vm.estatus_com = data.estatus_com.descripcion;
-        }else{
+        } else {
             vm.estatus_com = "Sin asignar";
         }
 
-        if(data.condicion){
+        if (data.condicion) {
             vm.condicion = data.condicion.letra;
-        }else{
+        } else {
             vm.condicion = "Sin asignar";
         }
 
-        if(data.categoria){
+        if (data.categoria) {
             vm.categoria = data.categoria.nombre;
-        }else{
+        } else {
             vm.categoria = "Sin asignar";
         }
 
@@ -90,10 +88,10 @@
             marca: {
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
-                    + '/' + URLS.management.base
-                    + '/' + URLS.management.catalogues.base
-                    + '/' + URLS.management.catalogues.cabinet_brand,
-                    
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.cabinet_brand,
+
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -110,7 +108,7 @@
                         reverse: false
                     }
                 },
-                required: true,
+                required: true
             },
             modelo_by_marca: {
                 catalog: {
@@ -119,7 +117,7 @@
                         + '/' + URLS.management.catalogues.base
                         + '/' + URLS.management.catalogues.cabinet_model,
                     query: 'marca__id',
-                    requires: 'marca',
+                    query_value: null,
                     name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
                     loadMoreButtonText: 'Cargar mas',
                     model: 'id',
@@ -141,16 +139,15 @@
         };
 
         function changeTrademark() {
-            if(vm.sw1 === true){
+            if (vm.sw1 === true) {
                 vm.changeModel = "1";
-            }else{
+            } else {
                 vm.changeModel = "";
             }
         }
 
         function onBrandSelect(element) {
-            vm.modelo = null;
-            vm.marca = element;
+            vm.catalogues.modelo_by_marca.catalog.query_value = element;
             /*vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
                 + '/' + URLS.management.base
                 + '/' + URLS.management.catalogues.base
@@ -170,13 +167,13 @@
 
             validate = _.contains(_.values(vm.cabinet), undefined);
 
-            if(validate){
+            if (validate) {
                 toastr.error("Llene corectamente todos los campos");
-            }else{
+            } else {
 
-                if(vm.sw1 === true){
+                if (vm.sw1 === true) {
                     vm.cabinet['modelo_id'] = vm.cabinet['modelo_id'];
-                }else{
+                } else {
                     vm.cabinet.modelo_id = data.id_modelo;
                 }
 
