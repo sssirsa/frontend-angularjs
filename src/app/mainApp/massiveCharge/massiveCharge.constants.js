@@ -8,6 +8,7 @@
             project:'bulk-load',
             base: 'bulk-manager',
             filtertype:'&bulk_load__id=',
+            filter_end:'&status=Finalizado',
             actions: {
                 bulk: 'bulk',
                 bulk_load_history:'bulk-load-history'

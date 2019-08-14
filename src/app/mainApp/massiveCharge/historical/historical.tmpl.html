@@ -38,6 +38,11 @@
                     <md-button class="md-raised md-primary" ng-click="vm.listAll()"><md-icon md-font-icon="fas fa-sync"></md-icon> <span translate="">MASSIVE_CHARGE.REFRESH</span></md-button>
                     </div>
                 </md-input-container>
+                <md-input-container flex="100" layout-align="center center">
+                    <md-switch class="md-primary" ng-model="vm.ended" aria-label="Primary Switch" ng-init="vm.ended = false">
+                        <span translate="">MASSIVE_CHARGE.ENDED</span>
+                    </md-switch>
+                </md-input-container>
             </div>
         </div>
     </md-card>

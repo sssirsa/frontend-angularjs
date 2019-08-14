@@ -15,6 +15,7 @@
         "START":"Iniciar Carga Masiva",
         "CLEAN":"Limpiar",
         "SEARCH":"Buscar",
+        "ENDED":"Solo Finalizados",
         "REFRESH":"Volver a listar",
         "KIND_OF_MASSIVE_OBJECT":{
             "TASK_NAME":"Nombre de la Tarea",

@@ -53,6 +53,11 @@
             else{
                 vm.querySet = '';
             }
+            console.log(vm.ended)
+            if(vm.ended){
+                vm.querySet=vm.querySet+MASSIVE_CHARGE.filter_end;
+                console.log(vm.querySet);
+            }
             vm.offset = 0;
             vm.limit = 20;
             vm.tipo = undefined;
