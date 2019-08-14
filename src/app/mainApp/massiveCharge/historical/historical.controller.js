@@ -47,7 +47,12 @@
         }
 
         function listAll() {
-            vm.querySet = '';
+            if(vm.tipo) {
+                vm.querySet = MASSIVE_CHARGE.filtertype+vm.tipo;
+            }
+            else{
+                vm.querySet = '';
+            }
             vm.offset = 0;
             vm.limit = 20;
             vm.tipo = undefined;

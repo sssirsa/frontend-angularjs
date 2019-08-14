@@ -32,6 +32,12 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
+                <md-input-container flex="100" flex-gt-sm="20">
+                    <div layout="column">
+                    <md-button ng-disabled="!vm.tipo" class="md-raised md-primary" ng-click="vm.listAll()"><md-icon md-font-icon="fas fa-search"></md-icon> <span translate="">MASSIVE_CHARGE.SEARCH</span></md-button>
+                    <md-button class="md-raised md-primary" ng-click="vm.listAll()"><md-icon md-font-icon="fas fa-sync"></md-icon> <span translate="">MASSIVE_CHARGE.REFRESH</span></md-button>
+                    </div>
+                </md-input-container>
             </div>
         </div>
     </md-card>

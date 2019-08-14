@@ -7,6 +7,7 @@
         .constant('MASSIVE_CHARGE', {
             project:'bulk-load',
             base: 'bulk-manager',
+            filtertype:'&bulk_load__id=',
             actions: {
                 bulk: 'bulk',
                 bulk_load_history:'bulk-load-history'
