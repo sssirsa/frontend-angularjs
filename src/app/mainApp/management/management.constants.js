@@ -39,6 +39,7 @@
                 unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
                 asset_location: 'asset_location',
                 impediment: 'impedimento',
+                obsolete: 'obsoleto',
                 label: 'label'
             },
             oauth: {
