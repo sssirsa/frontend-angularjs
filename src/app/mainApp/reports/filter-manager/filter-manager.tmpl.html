@@ -40,7 +40,7 @@
     <header class="text-center">
         <strong>{{vm.appliedFilters[vm.editingIndex].verbose}}</strong>
     </header>
-    <form name="filter-form"
+    <form name="filterForm"
           layout-padding
           layout="column"
           layout-gt-sm="row"
@@ -53,6 +53,7 @@
                 <label ng-if="!vm.fieldLabel">Field</label>
                 <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.name"
                            aria-label="select field"
+                           required
                            md-on-close="vm.getPropertiesOfField(vm.appliedFilters[vm.editingIndex].filter.field.name)">
                     <md-option ng-repeat="field in vm.rootFields" value="{{field}}">{{field}}</md-option>
                 </md-select>
@@ -65,6 +66,7 @@
                 <label ng-if="!vm.fieldLabel">Property</label>
                 <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.property_name"
                            aria-label="select property"
+                           required
                            md-on-close="vm.setFiltersFromProperty(vm.editingIndex)">
                     <md-option ng-repeat="property in vm.propertiesOfField" value="{{property}}">{{property}}</md-option>
                 </md-select>
@@ -77,6 +79,8 @@
                 <label ng-if="!vm.filtersLabel">Filter to apply</label>
                 <md-select ng-model="vm.appliedFilters[vm.editingIndex].filter.field.filter_type"
                            aria-label="select filter to apply"
+                           required
+                           md-on-close="vm.filterChanged(vm.editingIndex)"
                            ng-disabled="!vm.translatedFilters">
                     <md-option ng-repeat="filter in vm.translatedFilters" value="{{filter.value}}">{{filter.verbose}}</md-option>
                 </md-select>
@@ -89,8 +93,9 @@
                 <label ng-if="!vm.valueLabel">Value</label>
                 <input ng-model="vm.appliedFilters[vm.editingIndex].filter.field.value"
                        type="text"
+                       required
                        aria-label="filter value"
-                       ng-disabled="!vm.appliedFilters[vm.editingIndex].filter.field.filter_type"/>
+                       ng-disabled="!vm.appliedFilters[vm.editingIndex].filter.field.filter_type" />
 
 
             </md-input-container>
@@ -112,6 +117,7 @@
         <!-- Modify button -->
         <md-button ng-click="vm.saveFilter(vm.editingIndex)"
                    aria-label="save filter"
+                   ng-disabled="filterForm.$invalid"
                    class="md-primary md-raised">
             <div layout="row" layout-align="center center">
                 <md-icon md-font-icon="fa fa-edit"></md-icon>

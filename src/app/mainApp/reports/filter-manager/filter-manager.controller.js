@@ -136,6 +136,11 @@
         vm.getPropertiesOfField = function getPropertiesOfField(field) {
             //A field has been selected
             if (field) {
+                //Reseting property, filter and value fields
+                vm.appliedFilters[vm.editingIndex].filter.field.property_name = '';
+                vm.appliedFilters[vm.editingIndex].filter.field.filter_type = '';
+                vm.appliedFilters[vm.editingIndex].filter.field.value = '';
+
                 if (vm.filters[field].filter) {
                     //Has property filter
                     //AKA: No properties nested at this level
@@ -165,20 +170,31 @@
             vm.filterTypes = [];
             var rootTemplate = vm.appliedFilters[index];
             var rootFilter = vm.filters[rootTemplate.filter.field.name];
-            if (rootFilter.filter) {
-                //Has property filter
-                //AKA: No properties nested at this level
-                if (!rootFilter.filter.length) {
-                    //Filter has subproperties inside filter property
-                    vm.filterTypes = rootFilter.filter[rootTemplate.filter.field.property_name];
+            var propertyName = rootTemplate.filter.field.property_name;
+            if (propertyName) {
+                //A property has been selected
+                //Reseting filter and value field
+                vm.appliedFilters[index].filter.field.filter_type = '';
+                vm.appliedFilters[index].filter.field.value = '';
+                if (rootFilter.filter) {
+                    //Has property filter
+                    //AKA: No properties nested at this level
+                    if (!rootFilter.filter.length) {
+                        //Filter has subproperties inside filter property
+                        vm.filterTypes = rootFilter.filter[propertyName];
+                    }
                 }
+                else {
+                    //Properties nested at this level
+                    vm.filterTypes = rootFilter[propertyName].filter;
+                }
+                vm.filterTypes.unshift('equals');
+                translateFilters();
             }
-            else {
-                //Properties nested at this level
-                vm.filterTypes = rootFilter[rootTemplate.filter.field.property_name].filter;
-            }
-            vm.filterTypes.unshift('equals');
-            translateFilters();
+        };
+
+        vm.filterChanged = function filterChanged(index) {
+            vm.appliedFilters[index].filter.field.value = '';
         };
 
         vm.saveFilter = function saveFilter(index) {

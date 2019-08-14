@@ -4,6 +4,7 @@
         .controller('reportRequestController', ReportRequestController);
     function ReportRequestController(
         $stateParams,
+        $state,
         REPORT,
         ErrorHandler,
         Translate,
@@ -67,6 +68,7 @@
                 )
                 .then(function reportSuccess() {
                     toastr.success(Translate.translate('REPORT_META.REQUEST.MESSAGES.SUCCESS'));
+                    $state.go('triangular.admin-default.historical-report');
                 })
                 .catch(function reportError(error) {
                     ErrorHandler.errorTranslate(error);
