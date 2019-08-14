@@ -53,7 +53,7 @@
             else{
                 vm.querySet = '';
             }
-           
+
             if(vm.ended){
                 vm.querySet=vm.querySet+MASSIVE_CHARGE.filter_end;
 
