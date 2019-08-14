@@ -16,6 +16,10 @@
             "ASSIGMENT": {
                 "TITLE": "Asignación de Servicio"
             },
+            "ATTENTION": {
+                "TITLE": "Atenciones",
+                "LIST": "Listado de atenciones"
+            },
             "TITLE": "Punto de Venta"
         }
     },
@@ -145,5 +149,10 @@
         }
 
 
+    },
+    "ATENTION": {
+        "LIST": {
+            "NO_RESULTS": "No se encontró ninguna atención con el folio proporcionado"
+        }
     }
 }

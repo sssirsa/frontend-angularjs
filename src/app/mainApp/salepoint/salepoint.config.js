@@ -130,7 +130,7 @@
                 controllerAs: 'vm'
             })
 
-            // Atenciones
+            // Asignación
             .state('triangular.admin-default.service-assignment', {
                 url: '/salepoint/asignar-servicio',
                 data: {
@@ -140,6 +140,19 @@
                 },
                 templateUrl: 'app/mainApp/salepoint/service_assignment/service_assignment.tmpl.html',
                 controller: 'serviceAssignmentController',
+                controllerAs: 'vm'
+            })
+
+            //Atenciones
+            .state('triangular.admin-default.list-attention', {
+                url: '/salepoint/atenciones',
+                data: {
+                    permissions: {
+                        only: ['sale_point__attentions__attention_all']
+                    }
+                },
+                templateUrl: 'app/mainApp/salepoint/attentions/list_attentions.tmpl.html',
+                controller: 'listAttentionController',
                 controllerAs: 'vm'
             })
 
@@ -257,28 +270,22 @@
                         state: 'triangular.admin-default.service-assignment',
                         permission: ['sale_point__attentions__attention_asign'],
                         type: 'link'
+                    },
+                    {
+                        name: 'SALE_POINT.MENU.ATTENTION.TITLE',
+                        type: 'dropdown',
+                        permission: ['sale_point__attentions__attention_all'],
+                        children: [
+                            {
+                                name: 'SALE_POINT.MENU.ATTENTION.LIST',
+                                type: 'link',
+                                permission: ['sale_point__attentions__attention_all'],
+                                state: 'triangular.admin-default.list-attention'
+                            }
+                        ]
                     }
                 ]
             }
         );
-
-        /*
-        triMenuProvider.addMenu(
-            {
-                name: 'MAIN.MENU.EXTERNAL_SERVICE',
-                icon: 'fa fa-wrench',
-                type: 'dropdown',
-                permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                priority: 7,
-                children: [
-                    {
-                        name: 'MAIN.MENU.SERVICE.MENU_TITLE',
-                        state: 'triangular.admin-default.serviceList',
-                        permission: ['ADMINISTRADOR', 'TECNICO A', 'TECNICO B', 'TECNICO C', 'TECNICO D', 'TECNICO E'],
-                        type: 'link'
-                    }
-                ]
-            }
-        ); */
     }
 })();
