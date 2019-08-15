@@ -1,0 +1,58 @@
+<md-dialog class="dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 translate="">MASSIVE_CHARGE.NEW_MASSIVE_LOAD</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div layout-padding="">
+        <div layout="row"
+             layout-align="center center" layout-wrap="" flex="100">
+            <md-input-container flex="100" flex-gt-sm="80">
+                <label translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE</label>
+                <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
+                    <md-option ng-repeat="tipo in vm.massive_charge_kind track by tipo.id"
+                               ng-value="tipo" flex="100">
+                        <div layout="row" flex="100">
+                            <div flex="100" layout="column" layout-fill="">
+                                <div flex="100" layout="row" layout-align="start center"><span
+                                    class="md-subhead"><b>{{tipo.name}}</b></span></div>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row" flex="100" layout-wrap="" ng-if="vm.tipo">
+            <div flex="100">
+                <span class="md-title"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.NAME</b><b>:</b>{{vm.tipo.name}}</span>
+            </div>
+            <div flex="100" ng-if="vm.tipo.description">
+                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.DESCRIPTION</b><b>:</b>{{vm.tipo.description}}</span>
+            </div>
+            <div flex="100">
+                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TEMPLATE_FILE</b><b>:</b><a href="{{vm.tipo.template_file}}" target="_blank"><span translate="">
+                                            MASSIVE_CHARGE.DOWNLOAD</span></a></span>
+            </div>
+            <div flex="100">
+                <div layout="column"
+                     layout-align="center center">
+                    <b translate="">MASSIVE_CHARGE.UPLOAD_FILE</b>
+                    <section layout="column"
+                             layout-align="center center">
+                        <file-uploader files-selected="vm.selectFiles(files)"
+                                       file-formats="'.xlsx, application/vnd.ms-excel'"></file-uploader>
+                    </section>
+                </div>
+            </div>
+            <div layout="row" layout-align="end center" flex="100">
+                <md-button class="md-raised " ng-click="vm.clean()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
+                <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
+            </div>
+        </div>
+    </div>
+</md-dialog>
