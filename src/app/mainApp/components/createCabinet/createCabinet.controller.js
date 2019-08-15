@@ -7,7 +7,7 @@
             templateUrl: 'app/mainApp/components/createCabinet/createCabinet.tmpl.html',
             controller: createCabinetController,
             controllerAs: '$ctrl',
-            bindings:{
+            bindings: {
                 toRefresh: '&'
             }
         });
@@ -63,17 +63,18 @@
                         + '/' + URLS.management.base
                         + '/' + URLS.management.catalogues.base
                         + '/' + URLS.management.catalogues.cabinet_brand,
-                    name: 'Marca',
+
+                    name: Translate.translate('MAIN.COMPONENTS.CABINET.TRADEMARK'),
+                    loadMoreButtonText: 'Cargar mas',
                     model: 'id',
                     option: 'nombre',
-                    loadMoreButtonText: 'Cargar mas...',
-                    elements: 'results',
                     pagination: {
                         total: PAGINATION.total,
                         limit: PAGINATION.limit,
                         offset: PAGINATION.offset,
                         pageSize: PAGINATION.pageSize
                     },
+                    elements: 'results',
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -134,7 +135,8 @@
                         hide: 'deleted',
                         reverse: false
                     }
-                }
+                },
+                required: true
             },
             categoria: {
                 type: 'catalog',
@@ -160,7 +162,8 @@
                         hide: 'deleted',
                         reverse: false
                     }
-                }
+                },
+                required: true
             }
         };
 
@@ -168,18 +171,14 @@
         function onBrandSelect(element) {
             vm.modelo = null;
             vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.url = EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.cabinet_model
-                + QUERIES.cabinet.by_brand + element;
+            vm.catalogues.modelo_by_marca.catalog.query = element;
         }
 
         function onElementSelect(element, field) {
             vm.cabinet[field] = element;
         }
 
-        function limpiar(){
+        function limpiar() {
             validate = true;
             vm.cabinet = {};
             vm.economico = null;
@@ -204,9 +203,9 @@
 
             validate = _.contains(_.values(vm.cabinet), undefined);
 
-            if(validate){
+            if (validate) {
                 toastr.error("Llene corectamente todos los campos");
-            }else{
+            } else {
                 vm.clear = "";
                 cabinetUC.create(vm.cabinet)
                     .then(function (cabinetCreated) {

@@ -88,7 +88,7 @@
                     </md-input-container>
 
                     <md-input-container flex class="md-block">
-                        <catalog-select ng-if="vm.marca"
+                        <catalog-select ng-if="vm.catalogues.modelo_by_marca.catalog.query_value"
                                         catalog="vm.catalogues['modelo_by_marca'].catalog"
                                         required="true"
                                         lazy="true"
