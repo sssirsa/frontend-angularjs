@@ -26,6 +26,7 @@
         }
 
         function init() {
+            vm.files=null;
             listMassiveLoadsType();
         }
         function listMassiveLoadsType() {

@@ -31,14 +31,11 @@
             <div flex="100">
                 <span class="md-title"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.NAME</b><b>:</b>{{vm.tipo.name}}</span>
             </div>
-            <div flex="100" ng-if="vm.tipo.task_name">
-                <span class="md-subhead"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TASK_NAME</b><b>:</b>{{vm.tipo.task_name}}</span>
-            </div>
             <div flex="100" ng-if="vm.tipo.description">
                 <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.DESCRIPTION</b><b>:</b>{{vm.tipo.description}}</span>
             </div>
             <div flex="100">
-                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TEMPLATE_FILE</b><b>:</b><a href="{{item.template_file}}" target="_blank"><span translate="">
+                <span class="md-body-1"><b translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE_OBJECT.TEMPLATE_FILE</b><b>:</b><a href="{{vm.tipo.template_file}}" target="_blank"><span translate="">
                                             MASSIVE_CHARGE.DOWNLOAD</span></a></span>
             </div>
             <div flex="100">
@@ -53,8 +50,8 @@
                 </div>
             </div>
             <div layout="row" layout-align="end center" flex="100">
-                <md-button class="md-raised " ng-click="vm.clean()"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
-                <md-button class="md-raised md-primary" ng-click="vm.save()"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
+                <md-button class="md-raised " ng-click="vm.clean()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
+                <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
             </div>
         </div>
     </div>

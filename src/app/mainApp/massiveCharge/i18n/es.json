@@ -10,6 +10,7 @@
         "STATUS":"Estado",
         "TEMPLATE_FILE":"Plantilla de Carga",
         "ERROR_FILE":"Archivo de Informe de Errores",
+        "NOT_ERROR_FILE":"Sin archivo de errores",
         "DOWNLOAD":"Descargar",
         "UPLOAD_FILE":"Subir archivo a Cargar",
         "START":"Iniciar Carga Masiva",

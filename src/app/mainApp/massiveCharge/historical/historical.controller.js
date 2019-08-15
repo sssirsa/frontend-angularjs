@@ -12,7 +12,6 @@
     function historicalController($scope, Translate, toastr, ErrorHandler, $log, $mdDialog, EnvironmentConfig, URLS, MASSIVE_CHARGE, PAGINATION,MassiveLoadProvider) {
         var vm = this;
         vm.massive_loads = {};
-        vm.porcentaje=40;
         vm.loadingPromise = {};
         vm.selectedKind = '';
         //datos para paginado
@@ -20,7 +19,6 @@
         vm.offset = 0;
         vm.limit = 20;
         vm.refreshPaginationButtonsComponent = false;
-        vm.objectPaginado = null;
 
 
         //Declaración de Funciones como variable  de Componentes________________________________________________________
@@ -67,7 +65,8 @@
             vm.massive_loads = {};
             vm.loadingPromise = MassiveLoadProvider.getMassiveLoadHistory(vm.limit, vm.offset, vm.querySet)
                 .then(function listT(list) {
-                    vm.massive_loads = list.results;
+
+                    vm.massive_loads =list.results.sort(function(a, b){return b.id-a.id;});
                     vm.objectPaginado = list;
                     vm.refreshPaginationButtonsComponent = true;
                 })
@@ -119,8 +118,11 @@
             vm.promiseCancelMassiveLoad = MassiveLoadProvider.cancelMassiveLoad(item.id)
                 .then(function () {
                     ErrorHandler.successCancel();
+                    listMassiveLoads();
+
                 }).catch(function (errormsg) {
                     ErrorHandler.errorTranslate(errormsg);
+                    listMassiveLoads();
                 });
         }
         function openDialog() {

@@ -24,7 +24,7 @@
                                     <div flex="100" layout="row" layout-align="start center"><span
                                         class="md-subhead"><b>{{tipo.name}}</b></span></div>
                                     <div flex="100" layout="row" layout-align="start center"><span>
-                                        {{tipo.descripcion}}-<b>{{tipo.task_name}}</b></span>
+                                        <b>{{tipo.descripcion}}</b></span>
                                     </div>
                                 </div>
                             </div>
@@ -56,17 +56,17 @@
                 <div layout="column" layout-align="center stretch" flex="100">
                     <md-content ng-click="vm.show_massive_load(item)">
                         <div flex="100">
-                            <md-toolbar class="md-hue-1">
-                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-sm="row"
+                            <div class="toolbar">
+                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-xs="row"
                                      layout="column">
                                     <div layout="row">
-                                        <b translate hide-xs="" hide-sm="">MASSIVE_CHARGE.KIND_OF_MASSIVE</b>: &nbsp <b>{{item.bulk_load.name}}</b>
+                                        <b translate hide-xs="" >MASSIVE_CHARGE.KIND_OF_MASSIVE</b><span hide-xs="">: &nbsp</span> <b>{{item.bulk_load.name}}</b>
                                     </div>
                                     <div layout="row">
-                                        <span><b translate hide-xs="" hide-sm="">MASSIVE_CHARGE.STATUS</b>: &nbsp <b>{{item.status}}</b></span>
+                                        <span><b translate hide-xs="" >MASSIVE_CHARGE.STATUS</b><span hide-xs="">: &nbsp</span> <b>{{item.status}}</b></span>
                                     </div>
                                 </div>
-                            </md-toolbar>
+                            </div>
                         </div>
                     </md-content>
                     <md-content>
@@ -81,8 +81,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <b>{{item.date | date:"EEEE dd/MM/yyyy
-                                            HH:mm:ss"}}</b>
+                                        <b>{{item.date | date:"EEEE dd/MM/yyyy HH:mm:ss"}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +94,7 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <b>{{item.end_date | date:"EEEE dd/MM/yyyy
-                                            HH:mm:ss"}}</b>
+                                        <b>{{item.end_date | date:"EEEE dd/MM/yyyy HH:mm:ss"}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -125,8 +123,9 @@
                                         <b>:&nbsp</b>
                                     </div>
                                     <div layout="column" layout-align="center center">
-                                        <a href="{{item.error_file}}" target="_blank"><h4 translate="">
+                                        <a ng-if="item.error_file!=null" href="{{item.error_file}}" target="_blank"><h4 translate="">
                                             MASSIVE_CHARGE.DOWNLOAD</h4></a>
+                                        <b ng-if="item.error_file===null" translate="">MASSIVE_CHARGE.NOT_ERROR_FILE</b>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +133,7 @@
                     </md-content>
                 </div>
                 <md-card-actions>
-                    <div layout="row" layout-align="end center" flex="100" ng-if="item.status!='Finalizado'">
+                    <div layout="row" layout-align="end center" flex="100" ng-if="item.status!='Finalizado'&& item.status!='Cancelado'">
                     <md-button ng-click="vm.cancel(item)"><md-icon md-font-icon="fas fa-ban"></md-icon> <span translate="">MASSIVE_CHARGE.CANCEL_MASSIVE_LOAD</span></md-button>
                     </div>
                 </md-card-actions>
