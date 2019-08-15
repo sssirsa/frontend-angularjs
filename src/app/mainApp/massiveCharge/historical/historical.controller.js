@@ -65,7 +65,7 @@
 
             }
             vm.offset = 0;
-            vm.limit =PAGINATION.pageSize;;
+            vm.limit =PAGINATION.pageSize;
             vm.tipo = null;
             listMassiveLoads();
         }
