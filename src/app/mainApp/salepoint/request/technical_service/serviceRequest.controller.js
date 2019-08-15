@@ -123,19 +123,19 @@
             $log.log(vm.request);
 
 
-            /*vm.savingPromise = REQUESTS.create_technical_service_request(vm.request)
+            vm.savingPromise = REQUESTS.create_technical_service_request(vm.request)
                 .then(function () {
-                    /*$state.go('triangular.admin-default.listRequest');
+                    $state.go('triangular.admin-default.listRequest');
                     toastr.success(
                         Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE')
-                    );*/
-            /*})
-            .catch(function (requestSuccessError) {
-                $log.error(requestSuccessError);
-                toastr.error(
-                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                );
-            });*/
+                    );
+                })
+                .catch(function (requestSuccessError) {
+                    $log.error(requestSuccessError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
         }
 
         function filesSelected(files) {

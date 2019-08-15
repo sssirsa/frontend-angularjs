@@ -99,11 +99,11 @@
         function onSelectedEquipmentKind(element) {
             vm.equipmentKind = element;
             //Remove any previos assignment
-            vm.request.solicitudes_cabinet = [];
+            vm.request.cabinets_solicitud = [];
             //Assign new kind, quantity limited to 1 due to actual constraint
-            vm.request.solicitudes_cabinet = [{
+            vm.request.cabinets_solicitud = [{
                 id_tipo: vm.equipmentKind.id,
-                tipo: vm.equipmentKind.nombre,
+                antiguedad: "",
                 cantidad: 1
             }];
         }
@@ -114,28 +114,32 @@
                 vm.request.cabinet = null;
             }
             vm.request.establecimiento = store.no_cliente;
+            vm.request.establecimiento_id = store.id;
         }
 
         function save() {
+
+            validar()
+
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
             $log.log(vm.request);
 
 
-            /*vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
+            vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
                 .then(function () {
-                    /*$state.go('triangular.admin-default.listRequest');
+                    $state.go('triangular.admin-default.listRequest');
                     toastr.success(
                         Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE')
-                    );*/
-            /*})
-            .catch(function (requestSuccessError) {
-                $log.error(requestSuccessError);
-                toastr.error(
-                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                );
-            });*/
+                    );
+                })
+                .catch(function (requestSuccessError) {
+                    $log.error(requestSuccessError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
         }
 
         function filesSelected(files) {
