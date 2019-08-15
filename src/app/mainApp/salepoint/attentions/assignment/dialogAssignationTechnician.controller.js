@@ -4,7 +4,7 @@
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
     function dialogAsignationTechnicianController(ATTENTIONS, REQUESTS, $state, $mdDialog, $document, ErrorHandler, $stateParams, attention, Stores,
-        Person, Persona_Admin, SalePoint) {
+        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION) {
         var vm = this;
 
         console.log("el controler", attention);
@@ -34,10 +34,13 @@
         vm.id = attention.folio;
 
         vm.limit = 0;
+        vm.noResults = null;
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
-        vm.searchPerson = searchPerson;
+        vm.preSearchPerson = preSearchPerson;
+        vm.onElementSelect = onElementSelect;
+        vm.clearVar = clearVar;
         vm.assign = assign;
         vm.cancel = cancel;
         vm.view = view;
@@ -45,6 +48,38 @@
 
         setLimitHours();
         activate();
+
+        vm.personal = {
+            type: 'catalog',
+            model: 'user__username',
+            label: 'Nombre de usuario',
+            catalog: {
+                url: EnvironmentConfig.site.rest.api
+                + '/' + URLS.management.base
+                + '/' + URLS.management.administration.base
+                + '/' + URLS.management.administration.person,
+                name: "Trabajador",
+                loadMoreButtonText: 'Cargar mas',
+                model: 'id',
+                option: 'nombre',
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                },
+                elements: 'results',
+                softDelete: {
+                    hide: 'deleted',
+                    reverse: false
+                }
+            },
+            required: true
+        };
+
+        function clearVar() {
+            vm.personList = null;
+        }
 
         function setLimitHours() {
             //limit min hour
@@ -105,6 +140,7 @@
                 });
         }
 
+
         function selectedPersonChange() {
             vm.salePoint.persona = vm.assignedPerson.id;
             vm.infoChip = null;
@@ -112,33 +148,37 @@
         }
 
         function searchPerson() {
-            if(vm.limit !== 0){
-                if (!vm.personList) {
-                    return Person.listPromise(vm.limit,0)
-                        .then(function (userListSuccess) {
-                            userListSuccess = userListSuccess.results;
-                            vm.personList = userListSuccess;
-                            return searchPersonCollection();
-                        })
-                        .catch(function (userListError) {
-                            vm.personList = null;
-                            $log.error(userListError);
-                        });
-                } else {
-                    return searchPersonCollection();
-                }
-            }
+            Persona_Admin.list(vm.limit, 0, vm.searchText)
+                .then(function (userListSuccess) {
+                    userListSuccess = userListSuccess.results;
+                    vm.personList = userListSuccess;
+                })
+                .catch(function () {
+                    vm.personList = null;
+                });
         }
 
         function preSearchPerson() {
-            Person.listPromise(100,0)
+            Persona_Admin.list(0, 0, vm.searchText)
                 .then(function (userList) {
                     vm.limit = userList.count;
-                    searchPerson();
+                    if (vm.limit == 0) {
+                        vm.noResults = true;
+                    } else {
+                        vm.noResults = false;
+                        searchPerson();
+                    }
                 })
                 .catch(function () {
-
+                    vm.noResults = true;
                 });
+        }
+
+        function onElementSelect(element) {
+            vm.assignedPerson.id = element;
+            vm.salePoint.persona = vm.assignedPerson.id;
+            vm.infoChip = null;
+            worklist(vm.salePoint.persona);
         }
 
         function searchPersonCollection() {

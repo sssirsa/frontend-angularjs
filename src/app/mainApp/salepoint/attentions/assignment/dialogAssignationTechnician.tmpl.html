@@ -18,37 +18,33 @@
 
                 <md-content>
                     <div>
-                        <md-autocomplete md-input-name="persona"
-                                         md-no-cache="true"
-                                         flex="100"
-                                         md-min-length="0"
-                                         md-selected-item="vm.assignedPerson"
-                                         md-selected-item-change="vm.selectedPersonChange()"
-                                         md-search-text="vm.personSearchText"
-                                         md-items="item in vm.searchPerson()"
-                                         md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
-                                         md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
-                                         md-menu-class="autocomplete-custom-template"
-                                         required>
-                            <md-item-template>
-                            <span class="item-title" title="{{item.nombre}}">
-                            <md-icon md-font-icon="fa fa-id-card-o"></md-icon>
-                            <span>
-                                <b>{{item.user.username}}</b>
-                            </span>
-                            </span>
-                                <span class="md-caption">
-                            {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_paterno}}
-                            </span>
-                            </md-item-template>
-                            <md-not-found>
-                        <span class="item-title">
-                            <span>
-                                {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.searchText}}"
-                            </span>
-                        </span>
-                            </md-not-found>
-                        </md-autocomplete>
+                        <div layout="colum">
+                            <md-input-container flex class="md-block">
+                                <label>Buscar Trabajador por nombre</label>
+                                <input type="text" ng-model="vm.searchText" ng-keypress="vm.clearVar()"/>
+                            </md-input-container>
+                            <md-button ng-click="vm.preSearchPerson()">buscar</md-button>
+                        </div>
+                        <md-input-container flex class="md-block" ng-if="!vm.searchText">
+                            <catalog-select catalog="vm.personal.catalog"
+                                            required="false"
+                                            pagination="vm.personal.pagination"
+                                            elements="vm.personal.elements"
+                                            soft-delete="vm.personal.softDelete"
+                                            on-select="vm.onElementSelect(element)">
+                            </catalog-select>
+                        </md-input-container>
+                        <md-input-container flex class="md-block" ng-if="vm.searchText && vm.personList">
+                            <label>Resultado de la busqueda</label>
+                            <md-select ng-model="vm.personList">
+                                <md-option ng-repeat="employe in vm.personList" ng-value="employe.id">
+                                    {{employe.nombre}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <div ng-if="vm.searchText && !vm.personList">
+                            <label>No se encontraron coincidencias</label>
+                        </div>
                     </div>
                     <div>
                         <md-slider-container>

@@ -238,24 +238,24 @@
                             <md-button aria-label="fab button"
                                        ng-click="$event.stopPropagation(); vm.AssignationTechnician(attention)"
                                        class="md-raised md-primary"
-                                       ng-if="attention.persona">
+                                       ng-if="!attention.persona">
                                 <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
                             </md-button>
                             <md-button aria-label="fab button"
-                                       ng-click="$event.stopPropagation(); vm.Editing(salePoint)"
+                                       ng-click="$event.stopPropagation(); vm.AssignationTechnician(attention)"
                                        class="md-raised md-primary"
-                                       ng-if="!attention.persona">
+                                       ng-if="attention.persona">
                                 <md-icon md-font-icon="zmdi zmdi-face"></md-icon>
                                 <md-icon md-font-icon="zmdi zmdi-swap"></md-icon>
                                 <md-icon md-font-icon="zmdi zmdi-face"></md-icon>
                             </md-button>
                             <md-button aria-label="fab button"
-                                       ng-click="$event.stopPropagation(); vm.Atending(salePoint)"
+                                       ng-click="$event.stopPropagation(); vm.Atending(attention)"
                                        class="md-raised md-primary">
                                 <md-icon md-font-icon="zmdi zmdi-assignment-check"></md-icon>
                             </md-button>
                             <md-button aria-label="fab button"
-                                       ng-click="$event.stopPropagation(); vm.Cancel(salePoint)"
+                                       ng-click="$event.stopPropagation(); vm.Cancel(attention)"
                                        class="md-raised md-warn">
                                 <md-icon md-font-icon="zmdi zmdi-block"></md-icon>
                             </md-button>
