@@ -1,5 +1,5 @@
 /**
- * Created by Emmanuel on 16/10/2016.
+ * Created by Adan on 14/07/2019
  */
 (function () {
     angular
@@ -9,91 +9,67 @@
     function moduleConfig($stateProvider, $translatePartialLoaderProvider, triMenuProvider) {
         $translatePartialLoaderProvider.addPart("app/mainApp/reports");
         $stateProvider
-            .state("triangular.admin-default.reports", {
-                url: "/reports",
+            /* Available reports list */
+            .state('triangular.admin-default.reports-list', {
+                url: '/reportes/listado',
                 data: {
                     permissions: {
-                        only: ["ADMINISTRADOR"]
+                        only: ['report_manager__report__reports']
                     }
                 },
-                params: {
-                    id: null
-                },
-                templateUrl: "app/mainApp/reports/manager/reportesCRUD.tmpl.html",
-                controller: "ReportesCrudController",
-                controllerAs: "vm"
+                templateUrl: 'app/mainApp/reports/list/reportList.tmpl.html',
+                controller: 'reportsListController',
+                controllerAs: 'vm'
             })
-            .state("triangular.admin-default.reportModify", {
-                url: "/reportsCrear/:id/",
+            /* Report request page */
+            .state('triangular.admin-default.report-request', {
+                url: '/reportes/solicitar/{{reportId}}',
                 data: {
                     permissions: {
-                        only: ["ADMINISTRADOR"]
+                        only: ['report_manager__report__reports']
                     }
                 },
                 params: {
-                    id: null
+                    reportId: null
                 },
-                templateUrl: "app/mainApp/reports/edicion/reportEdicion.tmpl.html",
-                controller: "reportEditionController",
-                controllerAs: "vm"
+                templateUrl: 'app/mainApp/reports/report/report.tmpl.html',
+                controller: 'reportRequestController',
+                controllerAs: 'vm'
             })
-            .state("triangular.admin-default.list", {
-                url: "/list",
+            /* Historical reports generated*/
+            .state('triangular.admin-default.historical-report', {
+                url: '/reportes/historico',
                 data: {
                     permissions: {
-                        only: ["ADMINISTRADOR"]
+                        only: ['report_manager__report__history']
                     }
                 },
-                params: {
-                    id: null
-                },
-                templateUrl: "app/mainApp/reports/list/listReports.tmpl.html",
-                controller: "ListReportsController",
-                controllerAs: "vm"
-            })
-            .state("triangular.admin-default.reporteProduccion", {
-                url: "/reporte",
-                data: {
-                    permissions: {
-                        only: ["ADMINISTRADOR"]
-                    }
-                },
-                params: {
-                    id: null
-                },
-                templateUrl: "app/mainApp/reports/custom/reporteInsumos/reporteProduccion.tmpl.html",
-                controller: "reporteProduccionController",
-                controllerAs: "vm"
+                templateUrl: 'app/mainApp/reports/historical/historical.tmpl.html',
+                controller: 'historicalReportController',
+                controllerAs: 'vm'
             });
-
         triMenuProvider.addMenu(
             {
-                name: 'MAIN.MENU.REPORTS.TITLE',
+                name: 'REPORT_META.REPORT.TITLE',
                 icon: 'fa fa-chart-line',
                 type: 'dropdown',
-                permission: ["ADMINISTRADOR"],
+                permission: [
+                    "report_manager__report__reports",
+                    "report_manager__report__history"
+                ],
                 priority: 9,
                 children: [
                     {
-                        name: 'MAIN.MENU.REPORTS.ADMIN',
-                        state: 'triangular.admin-default.reports',
+                        name: 'REPORT_META.NEW.TITLE',
+                        state: 'triangular.admin-default.reports-list',
+                        permission: ['report_manager__report__reports'],
                         type: 'link'
                     },
                     {
-                        name: 'MAIN.MENU.REPORTS.LIST',
-                        state: 'triangular.admin-default.list',
+                        name: 'REPORT_META.HISTORICAL.TITLE',
+                        state: 'triangular.admin-default.historical-report',
+                        permission: ['report_manager__report__history'],
                         type: 'link'
-                    },
-                    {
-                        name: 'MAIN.MENU.REPORTS.CUSTOM.TITLE',
-                        type: 'dropdown',
-                        children: [
-                            {
-                                name: 'MAIN.MENU.REPORTS.CUSTOM.PRODUCTION',
-                                state: 'triangular.admin-default.reporteProduccion',
-                                type: 'link'
-                            }
-                        ]
                     }
                 ]
             }

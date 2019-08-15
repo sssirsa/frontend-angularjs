@@ -1,0 +1,163 @@
+<div>
+    <div layout="row" layout-align="end center" flex="100">
+        <md-button class="md-raised md-primary" ng-click="vm.openDialog()"><md-icon md-font-icon="fas fa-upload"></md-icon> <span translate="">MASSIVE_CHARGE.NEW_MASSIVE_LOAD</span></md-button>
+    </div>
+    <md-card>
+        <div layout="column"
+             layout-padding
+             layout-align="center stretch">
+
+            <div layout="column"
+                 layout-align="center center">
+                <h1 translate>MASSIVE_CHARGE.HISTORICAL_CHARGES</h1>
+            </div>
+
+            <div layout="row"
+                 layout-align="center center" layout-wrap="" flex="100">
+                <md-input-container flex="100" flex-gt-sm="80">
+                    <label translate="">MASSIVE_CHARGE.KIND_OF_MASSIVE</label>
+                    <md-select ng-model="vm.tipo" flex="100" md-on-close="vm.listTickets()">
+                        <md-option ng-repeat="tipo in vm.massive_charge_kind track by tipo.id"
+                                   ng-value="tipo.id" flex="100">
+                            <div layout="row" flex="100">
+                                <div flex="100" layout="column" layout-fill="">
+                                    <div flex="100" layout="row" layout-align="start center"><span
+                                        class="md-subhead"><b>{{tipo.name}}</b></span></div>
+                                    <div flex="100" layout="row" layout-align="start center"><span>
+                                        <b>{{tipo.descripcion}}</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="100" flex-gt-sm="20">
+                    <div layout="column">
+                    <md-button ng-disabled="!vm.tipo" class="md-raised md-primary" ng-click="vm.listAll()"><md-icon md-font-icon="fas fa-search"></md-icon> <span translate="">MASSIVE_CHARGE.SEARCH</span></md-button>
+                    <md-button class="md-raised md-primary" ng-click="vm.listAll()"><md-icon md-font-icon="fas fa-sync"></md-icon> <span translate="">MASSIVE_CHARGE.REFRESH</span></md-button>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="100" layout-align="center center">
+                    <md-switch class="md-primary" ng-model="vm.ended" aria-label="Primary Switch" ng-init="vm.ended = false">
+                        <span translate="">MASSIVE_CHARGE.ENDED</span>
+                    </md-switch>
+                </md-input-container>
+            </div>
+        </div>
+    </md-card>
+    <!--Massive loads-->
+    <div ng-if="vm.massive_loads">
+        <div class="virtualRepeatScroll-600">
+            <md-card flex="100"
+                     layout="column"
+                     ng-repeat="item in vm.massive_loads"
+                     layout-gt-md="column">
+                <div layout="column" layout-align="center stretch" flex="100">
+                    <md-content ng-click="vm.show_massive_load(item)">
+                        <div flex="100">
+                            <div class="toolbar">
+                                <div class="md-toolbar-tools" layout-align="space-between center" layout-gt-xs="row"
+                                     layout="column">
+                                    <div layout="row">
+                                        <b translate hide-xs="" >MASSIVE_CHARGE.KIND_OF_MASSIVE</b><span hide-xs="">: &nbsp</span> <b>{{item.bulk_load.name}}</b>
+                                    </div>
+                                    <div layout="row">
+                                        <span><b translate hide-xs="" >MASSIVE_CHARGE.STATUS</b><span hide-xs="">: &nbsp</span> <b>{{item.status}}</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+                    <md-content>
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
+                             layout-md="center center">
+                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>MASSIVE_CHARGE.DATE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>{{item.date | date:"EEEE dd/MM/yyyy HH:mm:ss"}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>MASSIVE_CHARGE.END_DATE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>{{item.end_date | date:"EEEE dd/MM/yyyy HH:mm:ss"}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div flex="100" layout-gt-md="row" layout="column" layout-align-gt-md="space-around center"
+                             layout-md="center center">
+                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>MASSIVE_CHARGE.PROGRESS</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <span> <b>{{item.progress}}</b><b>%</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="column" layout-align="center center" flex="100" flex-gt-sm="50">
+                                <div layout="row">
+                                    <div layout="column" layout-align="center center">
+                                        <b translate>MASSIVE_CHARGE.ERROR_FILE</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <b>:&nbsp</b>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <a ng-if="item.error_file!=null" href="{{item.error_file}}" target="_blank"><h4 translate="">
+                                            MASSIVE_CHARGE.DOWNLOAD</h4></a>
+                                        <b ng-if="item.error_file===null" translate="">MASSIVE_CHARGE.NOT_ERROR_FILE</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+                <md-card-actions>
+                    <div layout="row" layout-align="end center" flex="100" ng-if="item.status!='Finalizado'&& item.status!='Cancelado'">
+                    <md-button ng-click="vm.cancel(item)"><md-icon md-font-icon="fas fa-ban"></md-icon> <span translate="">MASSIVE_CHARGE.CANCEL_MASSIVE_LOAD</span></md-button>
+                    </div>
+                </md-card-actions>
+            </md-card>
+
+
+        </div>
+    </div>
+    <div ng-if="vm.massive_loads.length<=0" flex="100" layout="row" layout-align="center center">
+        <h1 translate="">COM.NO_RESULTS</h1>
+    </div>
+
+    <div>
+        <div ng-if="vm.objectPaginado.next || vm.objectPaginado.previous">
+            <pagination-manager-buttons go-sig="vm.sig()"
+                                        go-prev="vm.prev()"
+                                        go-number="vm.goToNumberPage(number)"
+                                        limit-objects="vm.limit"
+                                        count-object="vm.massive_loads"
+                                        offset-object="vm.offset"
+                                        nex-object="vm.objectPaginado.next"
+                                        prev-object="vm.objectPaginado.previous">
+            </pagination-manager-buttons>
+        </div>
+    </div>
+
+</div>

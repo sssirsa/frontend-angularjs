@@ -76,7 +76,7 @@
             }
         }
 
-        //Used for getting frontend optimized permissions
+        //Used for getting frontend optimized permissions (string array)
         function getPermissions() {
             if (OAuth.isValidToken()) {
                 if (vm.permissions.length === 0) {
@@ -88,7 +88,7 @@
             return vm.permissions;
         }
 
-        //Used for setting frontend optimized permissions
+        //Used for setting frontend optimized permissions (string array)
         function setPermissions(permissions) {
             if (permissions.length > 0) {
                 angular.forEach(permissions, function permissionIterator(permissionName) {

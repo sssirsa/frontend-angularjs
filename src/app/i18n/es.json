@@ -111,6 +111,10 @@
                     "MANAGE_USERS": "Gestión de usuarios",
                     "CREATE_USERS": "Nuevo usuario"
                 }
+            },
+            "MASSIVE_CHARGE":{
+                "HISTORICAL":"Historial",
+                "TITLE":"Cargas Massivas"
             }
         },
         "COMPONENTS": {
