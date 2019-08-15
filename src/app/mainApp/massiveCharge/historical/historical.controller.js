@@ -9,7 +9,7 @@
         .module('app.mainApp.massiveCharge')
         .controller('HistoricalController', historicalController);
 
-    function historicalController( $scope, ErrorHandler, $log, $mdDialog, MASSIVE_CHARGE,MassiveLoadProvider,$timeout) {
+    function historicalController( $scope, ErrorHandler, $log, $mdDialog, MASSIVE_CHARGE,MassiveLoadProvider,$timeout, PAGINATION) {
         var vm = this;
         vm.massive_loads = {};
         vm.loadingPromise = {};
@@ -17,7 +17,7 @@
         //datos para paginado
         vm.objectPaginado = null;
         vm.offset = 0;
-        vm.limit = 20;
+        vm.limit = PAGINATION.pageSize;
         vm.refreshPaginationButtonsComponent = false;
 
         //variables server pooling
@@ -65,8 +65,8 @@
 
             }
             vm.offset = 0;
-            vm.limit = 20;
-            vm.tipo = undefined;
+            vm.limit =PAGINATION.pageSize;;
+            vm.tipo = null;
             listMassiveLoads();
         }
         function listMassiveLoads() {
@@ -112,6 +112,7 @@
                     ErrorHandler.errorTranslate(errormsg);
                 });
         }
+        //funciones para paginado
         function sigPage() {
             vm.offset += vm.limit;
             paginadoRefresh();
@@ -121,7 +122,6 @@
             vm.offset -= vm.limit;
             paginadoRefresh();
         }
-
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
             paginadoRefresh();
@@ -175,6 +175,9 @@
         }
 
         //  Funciones para Componentes _________________________________________________________________________________
+
+
+
 
         //--------------------------------------------------------------------------------------------------------------
 
