@@ -9,7 +9,7 @@
         .module('app.mainApp.massiveCharge')
         .controller('HistoricalController', historicalController);
 
-    function historicalController($scope, Translate, toastr, ErrorHandler, $log, $mdDialog, EnvironmentConfig, URLS, MASSIVE_CHARGE, PAGINATION,MassiveLoadProvider) {
+    function historicalController( $scope, ErrorHandler, $log, $mdDialog, MASSIVE_CHARGE,MassiveLoadProvider,$timeout) {
         var vm = this;
         vm.massive_loads = {};
         vm.loadingPromise = {};
@@ -20,9 +20,16 @@
         vm.limit = 20;
         vm.refreshPaginationButtonsComponent = false;
 
+        //variables server pooling
+        var loadTime = 60000, //Load the data every second
+            errorCount = 0, //Counter for the server errors
+            loadPromise; //Pointer to the promise created by the Angular $timout service
 
-        //Declaración de Funciones como variable  de Componentes________________________________________________________
 
+        //Declaración de Funciones como variable  de pool request________________________________________________________
+        $scope.$on('$destroy', function() {
+            cancelNextLoad();
+        });
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +49,7 @@
         function init() {
             listMassiveLoads();
             listMassiveLoadsType();
+
         }
 
         function listAll() {
@@ -69,12 +77,31 @@
                     vm.massive_loads =list.results.sort(function(a, b){return b.id-a.id;});
                     vm.objectPaginado = list;
                     vm.refreshPaginationButtonsComponent = true;
+                    errorCount = 0;
+                    nextLoad();
+
                 })
                 .catch(function ListError(error) {
                     $log.error(error);
                     ErrorHandler.errorTranslate(error);
+                    nextLoad(++errorCount * 2 * loadTime);
                 });
         }
+
+        //Funciones para el pool request
+        var cancelNextLoad = function() {
+            $timeout.cancel(loadPromise);
+        };
+
+        var nextLoad = function(mill) {
+            mill = mill || loadTime;
+
+            //Always make sure the last timeout is cleared before starting a new one
+            cancelNextLoad();
+            loadPromise = $timeout(vm.listMassiveLoads, mill);
+        };
+
+        //terminan funciones pool request
 
 
         function listMassiveLoadsType() {
