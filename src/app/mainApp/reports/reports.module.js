@@ -1,4 +1,6 @@
 (function () {
-    angular.module('app.mainApp.reports', []);
+    angular.module('app.mainApp.reports', [
+    ]);
 
 })();
+
