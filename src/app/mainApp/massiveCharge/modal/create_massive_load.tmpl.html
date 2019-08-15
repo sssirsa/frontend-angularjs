@@ -50,8 +50,8 @@
                 </div>
             </div>
             <div layout="row" layout-align="end center" flex="100">
-                <md-button class="md-raised " ng-click="vm.clean()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
-                <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="vm.files===null"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
+                <md-button class="md-raised " ng-click="vm.clean()"  ng-disabled="vm.files===null||vm.files.length==0"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.CLEAN</span></md-button>
+                <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="vm.files===null||vm.files.length==0"><md-icon md-font-icon="fas fa-save"></md-icon> <span translate="">MASSIVE_CHARGE.START</span></md-button>
             </div>
         </div>
     </div>
