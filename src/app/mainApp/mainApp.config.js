@@ -13,6 +13,7 @@
         MANAGEMENT,
         SALEPOINT,
         TECHNICAL_SERVICE,
+        REPORTS,
         URLS,
         $provide
     ) {
@@ -22,6 +23,7 @@
         URLS.salepoint = SALEPOINT;
         URLS.technical_service = TECHNICAL_SERVICE;
         URLS.com = COM;
+        URLS.reports = REPORTS;
 
         $provide.constant('URLS', URLS);
     }

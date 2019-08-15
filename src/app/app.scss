@@ -22,7 +22,8 @@ button, select, html, textarea, input {
 
 // Add your CSS here
 .card1.md-blue-grey-theme {
-  background-color: #eeeeee; }
+  background-color: #eeeeee;
+}
 
 .hint {
   /* Position the hint */
@@ -43,21 +44,29 @@ button, select, html, textarea, input {
 .no-margin {
   margin: 0 0 0 0 !important;
 }
-.coverheight{
-  height: 450px ;
+
+.coverheight {
+  height: 450px;
 }
-.imgselect{
+
+.imgselect {
   max-width: 25px;
   max-height: 25px;
 }
 
-.RED{
-  color:DarkRed
+.RED {
+  color: DarkRed
 }
-.dialogImage{
+
+.dialogImage {
   max-height: 150px;
   max-width: 150px;
 }
+
+.text-center {
+  text-align: center;
+}
+
 @import "scss/custom";
 
 
