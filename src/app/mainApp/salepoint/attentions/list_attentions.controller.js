@@ -5,7 +5,7 @@
         .module('app.mainApp.salepoint')
         .controller('listAttentionController', listAttentionController);
 
-    function listAttentionController(ATTENTIONS, ErrorHandler) {
+    function listAttentionController(ATTENTIONS, ErrorHandler, $document, $mdDialog) {
         var vm = this;
 
         //Listado de Variables
@@ -20,13 +20,16 @@
 
         //Listado de funciones
 
-        vm.listAttentions=listAttentions;
-        vm.listFilteredAttentions=listFilteredAttentions;
+        vm.listAttentions = listAttentions;
+        vm.listFilteredAttentions = listFilteredAttentions;
+        vm.AssignationTechnician = AssignationTechnician;
+
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
         //vm.statusDetail = statusDetail;
-        listFilteredAttentions('Abierta');
+
+        listFilteredAttentions('Todo');
 
         function listFilteredAttentions(requestKind) {
             vm.filteredActivated = true;
@@ -40,7 +43,7 @@
                 listAttentions();
             }
             else {
-                var filterSTR = 'status='+requestKind;
+                var filterSTR = {status: requestKind};
                 vm.loadingPromise = ATTENTIONS.listAttentions(vm.limit, vm.offset, filterSTR)
                     .then(function(listprerequestelements){
                         vm.list=listprerequestelements;
@@ -56,7 +59,7 @@
             vm.loadingPromise = ATTENTIONS.listAttentions(vm.limit, vm.offset)
                 .then(function(listprerequestelements){
                     vm.list=listprerequestelements;
-                    //prepareDataFunction();
+                    prepareDataFunction();
                 })
                 .catch(function (errCarga) {
                     ErrorHandler.errorTranslate(errCarga);
@@ -85,6 +88,24 @@
         function goToNumberPage(number) {
             vm.offset = number * vm.limit;
             listFilteredAttentions(vm.lastFilter);
+        }
+
+        //funcion para asignar
+        function AssignationTechnician(attention) {
+            $mdDialog.show({
+                controller: 'dialogAsignationTechnicianController',
+                templateUrl: 'app/mainApp/salepoint/attentions/assignment/dialogAssignationTechnician.tmpl.html',
+                parent: angular.element($document.body),
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    attention: attention
+                }
+            })
+                .then(function () {
+                    vm.listAttentions();
+                });
         }
 
         /*function selectRequest(request) {

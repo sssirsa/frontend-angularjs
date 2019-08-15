@@ -25,7 +25,7 @@
                                          md-selected-item="vm.assignedPerson"
                                          md-selected-item-change="vm.selectedPersonChange()"
                                          md-search-text="vm.personSearchText"
-                                         md-items="item in vm.searchPerson(item)"
+                                         md-items="item in vm.searchPerson()"
                                          md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
                                          md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
                                          md-menu-class="autocomplete-custom-template"
@@ -44,7 +44,7 @@
                             <md-not-found>
                         <span class="item-title">
                             <span>
-                                {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.units.searchText}}"
+                                {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.searchText}}"
                             </span>
                         </span>
                             </md-not-found>

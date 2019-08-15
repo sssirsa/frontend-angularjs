@@ -60,7 +60,7 @@
                 listRequests();
             }
             else {
-                var filterSTR = 'status='+requestKind;
+                var filterSTR = {status: requestKind};
                 vm.loadingPromise = REQUESTS.listRequests(vm.limit, vm.offset, filterSTR)
                     .then(function (listRequestsSuccess) {
                         vm.allRequests = listRequestsSuccess;

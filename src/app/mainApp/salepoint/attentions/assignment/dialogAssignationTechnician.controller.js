@@ -85,10 +85,10 @@
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
                                 vm.assignedPerson = userSuccess;
-                                console.log(vm.assignedPerson);
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
+                                $log.error(personaError);
                             });
                     } else {
                         preSearchPerson();
@@ -105,19 +105,6 @@
                 });
         }
 
-        function preSearchPerson() {
-            console.log("entre");
-            Persona_Admin.listPromise(0,0)
-                .then(function (userList) {
-                    vm.limit = userList.count;
-                    console.log(vm.limit);
-                    searchPerson();
-                })
-                .catch(function () {
-
-                });
-        }
-
         function selectedPersonChange() {
             vm.salePoint.persona = vm.assignedPerson.id;
             vm.infoChip = null;
@@ -127,7 +114,7 @@
         function searchPerson() {
             if(vm.limit !== 0){
                 if (!vm.personList) {
-                    return Persona_Admin.listPromise(vm.limit,0)
+                    return Person.listPromise(vm.limit,0)
                         .then(function (userListSuccess) {
                             userListSuccess = userListSuccess.results;
                             vm.personList = userListSuccess;
@@ -143,10 +130,22 @@
             }
         }
 
+        function preSearchPerson() {
+            Person.listPromise(100,0)
+                .then(function (userList) {
+                    vm.limit = userList.count;
+                    searchPerson();
+                })
+                .catch(function () {
+
+                });
+        }
+
         function searchPersonCollection() {
             if (!vm.personSearchText) {
                 return vm.personList;
-            } else {
+            }
+            else {
                 return _.filter(vm.personList, function (item) {
                     return item.user.username.toLowerCase().includes(vm.personSearchText.toLowerCase())
                         || item.nombre.toLowerCase().includes(vm.personSearchText.toLowerCase())
@@ -170,7 +169,7 @@
                 .then(function () {
                     ErrorHandler.success();
                     $mdDialog.hide();
-                    $state.go('triangular.admin-default.serviceAssing');
+                    //$state.go('triangular.admin-default.serviceAssing');
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
@@ -218,11 +217,9 @@
         }
 
         function worklist(persona) {
-            console.log("worklist");
             vm.chip = [];
             vm.worklistLoading = SalePoint.assignedTo(persona)
                 .then(function (list) {
-                    console.log("listatrabajo", list);
 
                     angular.forEach(list.results, function (solicitud) {
                         var aux = {
@@ -236,7 +233,6 @@
 
                 })
                 .catch(function () {
-                    console.log("nada");
                     ErrorHandler.error();
                 });
         }

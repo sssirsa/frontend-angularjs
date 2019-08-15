@@ -130,20 +130,7 @@
                 controllerAs: 'vm'
             })
 
-            // Asignación
-            .state('triangular.admin-default.service-assignment', {
-                url: '/salepoint/asignar-servicio',
-                data: {
-                    permissions: {
-                        only: ['sale_point__attentions__attention_asign']
-                    }
-                },
-                templateUrl: 'app/mainApp/salepoint/service_assignment/service_assignment.tmpl.html',
-                controller: 'serviceAssignmentController',
-                controllerAs: 'vm'
-            })
-
-            //Atenciones
+            //Atenciones y asignación
             .state('triangular.admin-default.list-attention', {
                 url: '/salepoint/atenciones',
                 data: {
@@ -155,55 +142,7 @@
                 controller: 'listAttentionController',
                 controllerAs: 'vm'
             })
-
-            /*.state('triangular.admin-default.service-assignment-detail', {
-                url: 'salepoint/atencion/:id',
-                data: {
-                    permissions: {
-                        only: ['sale_point__attentions__attention_asign']
-                    }
-                },
-                templateUrl: 'app/mainApp/salepoint/service_assignment/dialog/dialogAssignationTechnician.tmpl.html',
-                controller: 'dialogAsignationTechnicianController',
-                controllerAs: 'vm',
-                params: {
-                    id: null,
-                    tipo: null
-                }
-            })*/
         ;
-
-        /*
-        $stateProvider
-
-            .state('triangular.admin-default.serviceAssignDetail', {
-                url: '/detalleServicio/:id',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/salepoint/asignacionServicio/detalleAsignacion.tmpl.html',
-                controller: 'detalleAsignacionController',
-                controllerAs: 'vm'
-            })
-            .state('triangular.admin-default.serviceList', {
-                url: '/listarServicios',
-                data: {
-                    permissions: {
-                        only: ['ADMINISTRADOR', 'TECNICO E']
-                    }
-                },
-                templateUrl: 'app/mainApp/salepoint/atenciones/list/list-atention-page.tmpl.html',
-                controller: 'listAtentionController',
-                controllerAs: 'vm',
-                params: {
-                    runListPendientes: null,
-                    runListTodos: null
-                }
-            })
-
-            }); */
 
         triMenuProvider.addMenu(
             {
@@ -266,23 +205,10 @@
 
                     },
                     {
-                        name: 'SALE_POINT.MENU.ASSIGMENT.TITLE',
-                        state: 'triangular.admin-default.service-assignment',
-                        permission: ['sale_point__attentions__attention_asign'],
-                        type: 'link'
-                    },
-                    {
                         name: 'SALE_POINT.MENU.ATTENTION.TITLE',
-                        type: 'dropdown',
+                        type: 'link',
                         permission: ['sale_point__attentions__attention_all'],
-                        children: [
-                            {
-                                name: 'SALE_POINT.MENU.ATTENTION.LIST',
-                                type: 'link',
-                                permission: ['sale_point__attentions__attention_all'],
-                                state: 'triangular.admin-default.list-attention'
-                            }
-                        ]
+                        state: 'triangular.admin-default.list-attention'
                     }
                 ]
             }

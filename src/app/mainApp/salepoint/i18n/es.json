@@ -150,9 +150,10 @@
 
 
     },
-    "ATENTION": {
+    "ATTENTION": {
         "LIST": {
-            "NO_RESULTS": "No se encontró ninguna atención con el folio proporcionado"
+            "TITLE": "Listado de atenciones",
+            "NO_RESULTS": "No se encontró ninguna atención con los parametros seleccionados"
         }
     }
 }

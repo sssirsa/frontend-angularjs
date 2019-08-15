@@ -8,7 +8,8 @@
                 "ATTENDED": "Atendida",
                 "IN_PROCESS": "En proceso",
                 "CANCELED": "Cancelada",
-                "OPEN": "Abierta"
+                "OPEN": "Abierta",
+                "IMPRODUCTIVE": "Improductiva"
             },
             "LIST_OF": "Listado de: ",
             "NO_RESULTS": "No se encontrarón resultados"
