@@ -25,40 +25,26 @@
                         angular.forEach(rawPermissions,
                             function rawPermissionsIterator(value) {
                                 var permissionName = value.module;
+                                var permissionActions = value.permission;
                                 PermRoleStore.defineRole(permissionName, []);
+                                //Base permission assignment
                                 vm.permissions.push(permissionName);
-                                //var projectName = '';
-                                //var appName = '';
-                                //var moduleName = '';
-
-                                //if (value['module']) {
-                                //    //Module is defined
-                                //    if (value.module['name']) {
-                                //        moduleName = '__' + value.module['name'].toLowerCase();
-                                //    }
-                                //    if (value.module['app']) {
-                                //        //App is defined
-                                //        if (value.module.app['name']) {
-                                //            appName = '__' + value.module.app['name'].toLowerCase();
-                                //        }
-                                //        if (value.module.app['project']) {
-                                //            //Project is defined
-                                //            if (value.module.app.project['name']) {
-                                //                projectName = value.module.app.project['name'].toLowerCase();
-                                //            }
-                                //        }
-                                //    }
-                                //}
-                                ////Building permission string
-                                //var permissionName = projectName
-                                //    + appName
-                                //    + moduleName;
-                                ////Not an empty string
-                                //if (permissionName) {
-                                //    //permissionsObject[permissionName] = [];
-                                //    PermRoleStore.defineRole(permissionName, []);
-                                //    vm.permissions.push(permissionName);
-                                //}
+                                //Specific permission assignment
+                                if (permissionActions['POST']) {
+                                    vm.permissions.push(permissionName + '__post');
+                                }
+                                if (permissionActions['GET']) {
+                                    vm.permissions.push(permissionName + '__get');
+                                }
+                                if (permissionActions['PUT']) {
+                                    vm.permissions.push(permissionName + '__put');
+                                }
+                                if (permissionActions['PATCH']) {
+                                    vm.permissions.push(permissionName + '__patch');
+                                }
+                                if (permissionActions['DELETE']) {
+                                    vm.permissions.push(permissionName + '__delete');
+                                }
 
                             });
                     }
