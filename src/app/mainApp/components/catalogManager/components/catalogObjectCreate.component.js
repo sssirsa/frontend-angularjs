@@ -100,9 +100,9 @@
         vm.onArrayElementSelect = function onArrayElementSelect(element, field) {
             if (field.hasOwnProperty('validations')
                 && field.validations.hasOwnProperty('max')
-                && !(field.validations.max <= vm.objectToModify[field.model].length)) {
+                && !(field.validations.max <= vm.objectToCreate[field.model].length)) {
                 $log.error('Maximum quantity of "catalog_array" objects has been reached'
-                    + '@function onArrayElementSelect @controller CatalogModifyDialogController');
+                    + '@function onArrayElementSelect @controller CatalogCreateDialogController');
             }
             else {
                 vm.objectToCreate[field.model] = element;
