@@ -393,6 +393,17 @@
                 templateUrl: 'app/mainApp/management/catalogues/unique_asset/unique_asset.tmpl.html',
                 controller: 'uniqueAssetController',
                 controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.permission-templates', {
+                url: '/catalogo/plantillas_permisos',
+                data: {
+                    permissions: {
+                        only: ['management__manage_system__persona']
+                    }
+                },
+                templateUrl: 'app/mainApp/management/catalogues/templates/templates.tmpl.html',
+                controller: 'TemplatesController',
+                controllerAs: 'vm'
             });
 
 
@@ -552,6 +563,7 @@
                         permission: [
                             'management__catalogues__category',
                             'management__catalogues__condition',
+                            'management__manage_system__persona',
                             'management__catalogues__reason_impeded',
                             'management__catalogues__reason_no_labeled',
                             'management__catalogues__status_no_labeled',
@@ -600,6 +612,12 @@
                                 name: 'MAIN.MENU.CATALOGS.REASON_NOT_LABELED',
                                 state: 'triangular.admin-default.reason-not-capitalized',
                                 permission: ['management__catalogues__reason_no_labeled'],
+                                type: 'link'
+                            },
+                            {
+                                name: 'MAIN.MENU.MANAGEMENT.TEMPLATES.TITLE',
+                                state: 'triangular.admin-default.permission-templates',
+                                permission: ['management__manage_system__persona'],
                                 type: 'link'
                             },
                             {

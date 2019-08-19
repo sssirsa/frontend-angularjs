@@ -14,18 +14,22 @@
             },
             catalogues: {
                 base: 'catalogues',
+                app:'app',
                 cabinet_brand: 'marca_cabinet',
                 cabinet_model: 'modelo_cabinet',
                 category: 'category',
                 condition: 'condition',
                 equipment_type: 'tipo_equipo',
                 impediment: 'motivo_impedimento_salida',
+                module:'module',
+                project:'project',
                 reason_not_labeled: 'motivo_no_capitalizado',
                 status_unilever: 'status_unilever',
                 status_com: 'status_com',
                 status_not_labeled: 'estatus_no_capitalizado',
                 storage: 'warehouse',
                 subsidiary: 'subsidiary',
+                template:'template',
                 udn:'udn'
             },
             control: {

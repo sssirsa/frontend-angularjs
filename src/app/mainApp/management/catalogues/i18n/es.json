@@ -213,6 +213,20 @@
             "TITLE": "Etapas"
         }
     },
+    "TEMPLATES": {
+        "LABELS": {
+            "CREATE": "Crear plantilla",
+            "DELETE": "Borrar plantilla",
+            "LOAD_MORE": "Cargar mas plantillas...",
+            "LOADING_MESSAGE": "Cargando plantillas",
+            "MODIFY": "Modificar plantilla",
+            "NEXT": "Siguiente",
+            "PREVIOUS": "Anterior",
+            "REMOVE_FILTER": "Quitar filtro",
+            "SEARCH": "Buscar plantilla",
+            "TITLE": "Plantillas de Permisos"
+        }
+    },
     "Transport_Kind": {
         "title": "Tipo de Transporte",
         "info": "Información de tipo de transporte",
