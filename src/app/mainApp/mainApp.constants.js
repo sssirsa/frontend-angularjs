@@ -98,9 +98,7 @@
                 store: 'massive/store'
             },
             credentials: 'credenciales',
-            map: 'https://maps.googleapis.com/maps/api/staticmap',
-            report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
-            reporte_insumos: 'reports/insumos'
+            map: 'https://maps.googleapis.com/maps/api/staticmap'
 
         })
         .constant('QUERIES', {

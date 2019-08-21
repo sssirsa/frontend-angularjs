@@ -21,8 +21,9 @@
                 close: 'close'
             },
             entries: {
-                addCabinet: 'add_cabinet',
                 base: 'entries',
+                addCabinet: 'add_cabinet',
+                all:'all',
                 close: 'close',
                 new: 'news',
                 repair: 'repair',
