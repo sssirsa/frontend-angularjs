@@ -11,9 +11,7 @@
         EnvironmentConfig,
         PAGINATION
     ) {
-
-        var entriesDeparturesUrl = API
-            .all(URLS.entries_departures.base);
+    
         var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
@@ -25,7 +23,6 @@
 
         var control = URLS.management.control;
         var entries = URLS.entries_departures.entries;
-        var inspections = URLS.entries_departures.inspections;
         var inventory = URLS.management.inventory;
 
         function createNew(element) {

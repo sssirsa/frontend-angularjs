@@ -9,7 +9,8 @@
             "REPAIR": "Reparación",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
-            "WAREHOUSE": "Buen estado"
+            "WAREHOUSE": "Buen estado",
+            "LIST": "Listado de entradas"
         },
         "NEW": {
             "TITLE": "Entrada de nuevos",

@@ -66,6 +66,22 @@
                 controller: 'repairManualEntryController',
                 controllerAs: 'vm'
             })
+            /* List entries */
+            .state('triangular.admin-default.entries-list', {
+                url: '/entrada/listado',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__entries__new_entries',
+                            'entries_departures__entries__warranties_entries',
+                            'entries_departures__entries__no_labeled_entries',
+                            'entries_departures__entries__warehouse_entries',
+                            'entries_departures__entries__repair_entries']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/entries/list/entriesList.tmpl.html',
+                controller: 'entriesListController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
@@ -108,6 +124,16 @@
                         type: 'link',
                         permission: ['entries_departures__entries__repair_entries'],
                         state: 'triangular.admin-default.entry-repair-manual'
+                    },
+                    {
+                        name: 'ENTRIES.MENU.LIST',
+                        type: 'link',
+                        permission: ['entries_departures__entries__new_entries',
+                            'entries_departures__entries__warranties_entries',
+                            'entries_departures__entries__no_labeled_entries',
+                            'entries_departures__entries__warehouse_entries',
+                            'entries_departures__entries__repair_entries'],
+                        state: 'triangular.admin-default.entries-list'
                     }
                 ]
 
