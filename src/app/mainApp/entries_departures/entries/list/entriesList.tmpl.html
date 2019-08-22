@@ -2,57 +2,59 @@
          layout-padding
          layout="column"
          laoyut-align="center-stretch">
-    <h1 translate>ENTRIES.LIST.TITLE</h1>
+    <header layout="column" layout-align="center center">
+        <h1 translate>ENTRIES.LIST.TITLE</h1>
+    </header>
     <div layout="row"
          layout-align="space-around center"
          layout-wrap="">
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'new-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'new-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('new-entries')">
             <span translate>ENTRIES.LIST.FILTERS.NEW</span>
-            <div class="new-entries"></div>
+            <div class="new-entries entries-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'repair-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'repair-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('repair-entries')">
             <span translate>ENTRIES.LIST.FILTERS.REPAIR</span>
-            <div class="repair-entries"></div>
+            <div class="repair-entries entries-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'unrecognizble-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'unrecognizble-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('unrecognizble-entries')">
             <span translate>ENTRIES.LIST.FILTERS.UNRECOGNIZABLE</span>
-            <div class="unrecognizble-entries"></div>
+            <div class="unrecognizble-entries entries-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'warehouse-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'warehouse-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('warehouse-entries')">
             <span translate>ENTRIES.LIST.FILTERS.WAREHOUSE</span>
-            <div class="warehouse-entries"></div>
+            <div class="warehouse-entries entries-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'warranty-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'warranty-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('warranty-entries')">
             <span translate>ENTRIES.LIST.FILTERS.WARRANTY</span>
-            <div class="warranty-entries"></div>
+            <div class="warranty-entries entries-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
              layout-margin
-             ng-class="(vm.lastKindFilter == 'all-entries') ? 'SelectedList' : ''"
+             ng-class="(vm.lastKindFilter === 'all-entries') ? 'SelectedList' : ''"
              ng-click="vm.listFilteredEntries('all-entries')">
             <span translate>ENTRIES.LIST.FILTERS.ALL</span>
-            <div class="all-entries"></div>
+            <div class="all-entries entries-filter"></div>
         </div>
     </div>
 </md-card>
