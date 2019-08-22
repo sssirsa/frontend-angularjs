@@ -1,5 +1,16 @@
 {
     "ENTRIES": {
+        "LIST": {
+            "TITLE": "Listado de entradas",
+            "FILTERS": {
+                "ALL": "Todas",
+                "NEW": "Nuevos",
+                "REPAIR": "Reparación",
+                "UNRECOGNIZABLE": "No capitalizados",
+                "WAREHOUSE": "Buen estado",
+                "WARRANTY": "Garantías"
+            }
+        },
         "MENU": {
             "TITLE": "Entradas",
             "MANUAL": "Manual",

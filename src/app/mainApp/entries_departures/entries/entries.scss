@@ -10,3 +10,30 @@
 .not-found-cabinet {
   background-color: #FFCCAA;
 }
+
+div.new-entries {
+  background-color: #AAA;
+}
+div.repair-entries {
+  background-color: #BBB;
+}
+div.unrecognizble-entries {
+  background-color: #CCC;
+}
+div.warehouse-entries {
+  background-color: #DDD;
+}
+div.warranty-entries {
+  background-color: #EEE;
+}
+div.all-entries {
+  background-color: #FFF;
+}
+
+div.entries-filter {
+  border: 1px solid #3bb270;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+}
