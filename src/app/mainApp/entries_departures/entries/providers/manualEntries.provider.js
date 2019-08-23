@@ -126,7 +126,7 @@
             if (page) {
                 params = {
                     limit: PAGINATION.pageSize,
-                    offset: PAGINATION.pageSize * page
+                    offset: PAGINATION.pageSize * (page-1)
                 };
                 //Adding ordering parameter
                 params[QUERIES.ordering] = 'fecha';
