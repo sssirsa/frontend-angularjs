@@ -11,11 +11,20 @@
   background-color: #FFCCAA;
 }
 
+.not-confirmed-entry {
+  border-style: solid;
+  border-color: #FE0;
+  border-width: .5em;
+}
+strong.not_confirmed_entry{
+color:#FE0;
+}
+
 div.new-entries {
   background-color: #0AF;
 }
 div.repair-entries {
-  background-color: #FF0;
+  background-color: #A00;
 }
 div.unrecognizable-entries {
   background-color: #AAA;
@@ -27,7 +36,7 @@ div.warranty-entries {
   background-color: #FA0;
 }
 div.all-entries {
-  background-color: #000;
+  background-color: #FFF;
 }
 
 div.entries-filter {

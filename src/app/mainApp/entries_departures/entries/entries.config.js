@@ -71,11 +71,7 @@
                 url: '/entrada/listado',
                 data: {
                     permissions: {
-                        only: ['entries_departures__entries__new_entries',
-                            'entries_departures__entries__warranties_entries',
-                            'entries_departures__entries__no_labeled_entries',
-                            'entries_departures__entries__warehouse_entries',
-                            'entries_departures__entries__repair_entries']
+                        only: ['entries_departures__entries__list_all_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/list/entriesList.tmpl.html',
@@ -153,11 +149,7 @@
                         name: 'ENTRIES.MENU.LIST',
                         type: 'link',
                         icon: 'fa fa-archive',
-                        permission: ['entries_departures__entries__new_entries',
-                            'entries_departures__entries__warranties_entries',
-                            'entries_departures__entries__no_labeled_entries',
-                            'entries_departures__entries__warehouse_entries',
-                            'entries_departures__entries__repair_entries'],
+                        permission: ['entries_departures__entries__list_all_entries'],
                         state: 'triangular.admin-default.entries-list'
                     }
                 ]

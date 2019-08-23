@@ -44,6 +44,14 @@
                 });
         };
 
+        vm.addAssetCliecked = function () {
+        //TODO:Add asset dialog
+        };
+
+        vm.generatePDF = function () {
+        //TODO:Create functionality for PDF
+        };
+
         //Internal functions
         function loadEntries(filter, page) {
             vm.entries = [];

@@ -68,7 +68,10 @@
                     layout-align-gt-xs="space-between center"
                     layout="column"
                     layout-align="center center"
-                    layout-padding>
+                    layout-padding
+                    ng-class="(!entry.confirmada )? 'not-confirmed-entry' : ''">
+
+            <strong class="not_confirmed_entry" ng-if="!entry.confirmada" translate>ENTRIES.LIST.LABELS.NOT_CONFIRMED_ENTRY</strong>
             <span>
                 <strong translate="">ENTRIES.LIST.LABELS.ID</strong>
                 {{entry.id}}
@@ -83,20 +86,110 @@
                 {{entry.tipo_entrada}}
             </span>
         </md-toolbar>
-        <section>
-            entry info
+        <section layout="column" layout-align="center center">
+            <!--Open or closed entry-->
+            <span ng-if="!entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock-open"></md-icon>
+                <span translate>ENTRIES.LIST.LABELS.OPEN</span>
+            </span>
+            <span ng-if="entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock"></md-icon>
+                <span translate>ENTRIES.LIST.LABELS.CLOSED</span>
+            </span>
+
+            <span ng-if="entry.fecha">
+                <strong translate>ENTRIES.LIST.LABELS.DATE</strong>
+                <span>{{entry.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            </span>
+            <span ng-if="entry.pedimento" layout-margin>
+                <strong translate>ENTRIES.LIST.LABELS.ORDER</strong>
+                <span>{{entry.pedimento}}</span>
+            </span>
+            <!--Transport section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="entry.nombre_chofer" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
+                    <span>{{entry.nombre_chofer}}</span>
+                </span>
+                <span flex="33" ng-if="entry.linea_transporte.razon_social" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{entry.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="entry.tipo_transporte.descripcion" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_KIND</strong>
+                    <span>{{entry.tipo_transporte.descripcion}}</span>
+                </span>
+            </section>
         </section>
-        <md-actions>actions</md-actions>
+        <section layout="row" layout-align="space-around center">
+            <div>
+                <!--Origin section-->
+                <span ng-if="entry.establecimiento_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_STORE</strong>
+                    <span>{{entry.establecimiento_origen.nombre_establecimiento}}</span>
+                </span>
+                <span ng-if="entry.proveedor_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_PROVIDER</strong>
+                    <span>{{entry.proveedor_origen.razon_social}}</span>
+                </span>
+                <span ng-if="entry.udn_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_AGENCY</strong>
+                    <span>{{entry.udn_origen.agencia}}</span>
+                </span>
+            </div>
+            <div>
+                <!--Destination section-->
+                <span ng-if="entry.sucursal_destino" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
+                    <span>{{entry.sucursal_destino.nombre}}</span>
+                </span>
+                <span ng-if="entry.udn_destino" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_AGENCY</strong>
+                    <span>{{entry.udn_destino.agencia}}</span>
+                </span>
+            </div>
+        </section>
+        <span ng-if="entry.descripcion" layout-margin>
+            <strong translate>ENTRIES.LIST.LABELS.DESCRIPTION</strong>
+            <span>{{entry.descripcion}}</span>
+        </span>
+        <md-actions layout="row" layout-align="end center">
+            <!--Allow adding cabinets just if the entry is still open-->
+            <md-button aria-label="Add asset button"
+                       ng-click="vm.addAssetClicked()"
+                       ng-if="!entry.cerrada"
+                       class="md-raised">
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.ADD_ASSET"|translate}}</span>
+            </md-button>
+            <!--Allow closing just if the entry is still open-->
+            <md-button aria-label="close entry button"
+                       ng-click="vm.closeEntryClicked()"
+                       ng-if="!entry.cerrada"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-lock"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.CLOSE"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the document just if the entry is closed-->
+            <md-button aria-label="download document button"
+                       ng-click="vm.generatePDF()"
+                       ng-if="entry.cerrada"
+                       disabled
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+        </md-actions>
     </md-card>
 </section>
 <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
-layout="column"
-layout-align="center center">
-    <md-button aria-label="Load more elements"
-    cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
+         layout="column"
+         layout-align="center center">
+    <md-button aria-label="Load more elements button"
+               cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
                ng-click="vm.loadMore()"
                class="md-primary md-raised">
         <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-        {{"ENTRIES.LIST.BUTTONS.LOAD_MORE"|translate}}
+        <span hide-xs>{{"ENTRIES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
     </md-button>
 </section>

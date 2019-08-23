@@ -4,13 +4,13 @@
         .factory('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(
-        API,
         $q,
-        URLS,
-        Translate,
+        API,
         EnvironmentConfig,
         PAGINATION,
-        QUERIES
+        QUERIES,
+        Translate,
+        URLS
     ) {
     
         var entriesUrl = API
@@ -126,10 +126,10 @@
             if (page) {
                 params = {
                     limit: PAGINATION.pageSize,
-                    offset: PAGINATION.pageSize * (page-1)
+                    offset: PAGINATION.pageSize * (page - 1)
                 };
                 //Adding ordering parameter
-                params[QUERIES.ordering] = 'fecha';
+                params[QUERIES.ordering] = '-fecha';
             }
             if (entryKind) {
                 //An entry kind has been provided
