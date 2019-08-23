@@ -17,7 +17,7 @@
             totalPages: 0
         };
 
-        vm.entries;
+        vm.entries=[];
 
         function init() {
             vm.entryKindFilter = 'all-entries';

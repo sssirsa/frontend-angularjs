@@ -12,7 +12,8 @@
             },
             "LABELS": {
                 "ID": "Folio:",
-                "KIND": "Tipo:"
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados"
             }
         },
         "MENU": {

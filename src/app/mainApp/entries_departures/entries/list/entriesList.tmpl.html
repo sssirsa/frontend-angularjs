@@ -59,7 +59,10 @@
     </div>
 </md-card>
 <section cg-busy="{promise:vm.loadingEntries, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-    <md-card 
+<md-card ng-if="!vm.entries.length">
+<strong translate>ENTRIES.LIST.LABELS.NO_RESULTS</strong>
+</md-card>
+<md-card ng-if="vm.entries.length"
              ng-repeat="entry in vm.entries">
         <md-toolbar layout-gt-xs="row"
                     layout-align-gt-xs="space-between center"
