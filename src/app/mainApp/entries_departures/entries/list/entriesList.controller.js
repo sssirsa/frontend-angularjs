@@ -12,6 +12,7 @@
 
         //Variables
         vm.entryKindFilter;
+        vm.entryKindList;
         vm.paginationHelper = {
             page: 0,
             totalPages: 0
@@ -29,36 +30,47 @@
         vm.filterChange = function (filter) {
             vm.entryKindFilter = filter;
             loadEntries(filter);
-        }
+        };
+
+        vm.loadMore = function () {
+            vm.loadingMoreEntries = MANUAL_ENTRIES
+                .listEntries(vm.entryKindList, vm.paginationHelper.page + 1)
+                .then(function (entriesList) {
+                    vm.paginationHelper.page++;
+                    vm.entries = vm.entries.concat(entriesList[PAGINATION.elements]);
+                })
+                .catch(function (entriesListError) {
+                    ErrorHandler.errorTranslate(entriesListError);
+                });
+        };
 
         //Internal functions
         function loadEntries(filter, page) {
             vm.entries = [];
             page ? null : page = 1;
-            var entryKind;
             switch (filter) {
                 case 'all-entries':
-                    entryKind = null;
+                    vm.entryKindList = null;
                     break;
                 case 'new-entries':
-                    entryKind = 'new';
+                    vm.entryKindList = 'new';
                     break;
                 case 'repair-entries':
-                    entryKind = 'repair';
+                    vm.entryKindList = 'repair';
                     break;
                 case 'unrecognizable-entries':
-                    entryKind = 'unrecognizable';
+                    vm.entryKindList = 'unrecognizable';
                     break;
                 case 'warehouse-entries':
-                    entryKind = 'warehouse';
+                    vm.entryKindList = 'warehouse';
                     break;
                 case 'warranty-entries':
-                    entryKind = 'warranty';
+                    vm.entryKindList = 'warranty';
                     break;
             }
 
             vm.loadingEntries = MANUAL_ENTRIES
-                .listEntries(entryKind, 1)
+                .listEntries(vm.entryKindList, 1)
                 .then(function (entriesList) {
                     vm.entries = entriesList[PAGINATION.elements];
                     vm.paginationHelper.page = page;

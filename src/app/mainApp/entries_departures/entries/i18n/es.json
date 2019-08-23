@@ -2,6 +2,9 @@
     "ENTRIES": {
         "LIST": {
             "TITLE": "Listado de entradas",
+            "BUTTONS": {
+            "LOAD_MORE": "Cargar mas entradas..."
+            },
             "FILTERS": {
                 "ALL": "Todas",
                 "NEW": "Nuevos",
