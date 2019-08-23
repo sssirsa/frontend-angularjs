@@ -78,6 +78,26 @@
                 controller: 'entriesListController',
                 controllerAs: 'vm'
             })
+            /* Entry detail */
+            .state('triangular.admin-default.entry-detail', {
+                url: '/entrada/detalle/:entryId',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__entries__new_entries',
+                            'entries_departures__entries__warranties_entries',
+                            'entries_departures__entries__no_labeled_entries',
+                            'entries_departures__entries__warehouse_entries',
+                            'entries_departures__entries__repair_entries']
+                    }
+                },
+                params: {
+                    entryId: null,
+                    entry:null
+                },
+                templateUrl: 'app/mainApp/entries_departures/entries/detail/entryDetail.tmpl.html',
+                controller: 'entryDetailController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {

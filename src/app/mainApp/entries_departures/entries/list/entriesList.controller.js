@@ -6,7 +6,8 @@
     function EntriesListController(
         MANUAL_ENTRIES,
         PAGINATION,
-        ErrorHandler
+        ErrorHandler,
+        $state
     ) {
         var vm = this;
 
@@ -50,6 +51,13 @@
 
         vm.generatePDF = function () {
         //TODO:Create functionality for PDF
+        };
+
+        vm.navigateToDetail = function (entry) {
+            $state.go('triangular.admin-default.entry-detail', {
+                entryId: entry.id,
+                entry:entry
+            });
         };
 
         //Internal functions
