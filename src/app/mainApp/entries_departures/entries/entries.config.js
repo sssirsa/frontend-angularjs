@@ -96,38 +96,63 @@
                 priority: 4,
                 children: [
                     {
-                        name: 'ENTRIES.MENU.NEW',
-                        type: 'link',
-                        permission: ['entries_departures__entries__new_entries'],
-                        state: 'triangular.admin-default.entry-new-manual'
+                        name: 'ENTRIES.MENU.MANUAL',
+                        type: 'dropdown',
+                        icon: 'fa fa-hand-paper',
+                        permission: ['entries_departures__entries__new_entries',
+                            'entries_departures__entries__warranties_entries',
+                            'entries_departures__entries__no_labeled_entries',
+                            'entries_departures__entries__warehouse_entries',
+                            'entries_departures__entries__repair_entries'],
+                        children: [
+
+                            {
+                                name: 'ENTRIES.MENU.NEW',
+                                type: 'link',
+                                permission: ['entries_departures__entries__new_entries'],
+                                state: 'triangular.admin-default.entry-new-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.WARRANTIES',
+                                type: 'link',
+                                permission: ['entries_departures__entries__warranties_entries'],
+                                state: 'triangular.admin-default.entry-warranty-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.UNRECOGNIZABLE',
+                                type: 'link',
+                                permission: ['entries_departures__entries__no_labeled_entries'],
+                                state: 'triangular.admin-default.entry-unrecognizable-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.WAREHOUSE',
+                                type: 'link',
+                                permission: ['entries_departures__entries__warehouse_entries'],
+                                state: 'triangular.admin-default.entry-warehouse-manual'
+                            },
+                            {
+                                name: 'ENTRIES.MENU.REPAIR',
+                                type: 'link',
+                                permission: ['entries_departures__entries__repair_entries'],
+                                state: 'triangular.admin-default.entry-repair-manual'
+                            }
+                        ]
                     },
-                    {
-                        name: 'ENTRIES.MENU.WARRANTIES',
-                        type: 'link',
-                        permission: ['entries_departures__entries__warranties_entries'],
-                        state: 'triangular.admin-default.entry-warranty-manual'
-                    },
-                    {
-                        name: 'ENTRIES.MENU.UNRECOGNIZABLE',
-                        type: 'link',
-                        permission: ['entries_departures__entries__no_labeled_entries'],
-                        state: 'triangular.admin-default.entry-unrecognizable-manual'
-                    },
-                    {
-                        name: 'ENTRIES.MENU.WAREHOUSE',
-                        type: 'link',
-                        permission: ['entries_departures__entries__warehouse_entries'],
-                        state: 'triangular.admin-default.entry-warehouse-manual'
-                    },
-                    {
-                        name: 'ENTRIES.MENU.REPAIR',
-                        type: 'link',
-                        permission: ['entries_departures__entries__repair_entries'],
-                        state: 'triangular.admin-default.entry-repair-manual'
-                    },
+                    //{
+                    //    name: 'ENTRIES.MENU.MASSIVE',
+                    //    type: 'dropdown',
+                    //    icon: 'fa fa-file-csv',
+                    //    permission: ['entries_departures__entries__new_entries',
+                    //        'entries_departures__entries__warranties_entries',
+                    //        'entries_departures__entries__no_labeled_entries',
+                    //        'entries_departures__entries__warehouse_entries',
+                    //        'entries_departures__entries__repair_entries'],
+                    //    children: []
+                    //},
                     {
                         name: 'ENTRIES.MENU.LIST',
                         type: 'link',
+                        icon: 'fa fa-archive',
                         permission: ['entries_departures__entries__new_entries',
                             'entries_departures__entries__warranties_entries',
                             'entries_departures__entries__no_labeled_entries',
