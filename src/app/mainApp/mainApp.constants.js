@@ -113,6 +113,7 @@
                 by_city: 'municipio__id',
                 by_postal_code: 'codigo_postal'
             },
+            ordering:'ordering',
             service: {
                 by_cabinet: 'cabinet__economico'
             },

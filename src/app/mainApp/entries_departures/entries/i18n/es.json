@@ -9,6 +9,10 @@
                 "UNRECOGNIZABLE": "No capitalizados",
                 "WAREHOUSE": "Buen estado",
                 "WARRANTY": "Garantías"
+            },
+            "LABELS": {
+                "ID": "Folio:",
+                "KIND": "Tipo:"
             }
         },
         "MENU": {

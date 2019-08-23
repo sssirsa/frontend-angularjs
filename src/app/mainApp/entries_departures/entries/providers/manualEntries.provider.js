@@ -9,7 +9,8 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        QUERIES
     ) {
     
         var entriesUrl = API
@@ -127,33 +128,36 @@
                     limit: PAGINATION.pageSize,
                     offset: PAGINATION.pageSize * page
                 };
+                //Adding ordering parameter
+                params[QUERIES.ordering] = 'fecha';
             }
             if (entryKind) {
                 //An entry kind has been provided
                 switch (entryKind) {
                     case 'new':
-                        url = url.all(entries.new, params);
+                        url = url.all(entries.new);
                         break;
                     case 'warehouse':
-                        url = url.all(entries.warehouse, params);
+                        url = url.all(entries.warehouse);
                         break;
                     case 'repair':
-                        url = url.all(entries.repair, params);
+                        url = url.all(entries.repair);
                         break;
                     case 'unrecognizable':
-                        url = url.all(entries.unrecognizable, params);
+                        url = url.all(entries.unrecognizable);
                         break;
                     case 'warranty':
-                        url = url.all(entries.warranty, params);
+                        url = url.all(entries.warranty);
                         break;
                     default:
-                        url = url.all(entries.all, params);
+                        url = url.all(entries.all);
                 }
             }
             else {
                 //Entry kind not provided, so return all
-                url = url.all(entries.all, params);
+                url = url.all(entries.all);
             }
+            return url.customGET(null, params);
         }
 
         //Internal functions
