@@ -108,12 +108,16 @@
             city: {
                 by_state: 'estado__id'
             },
+            entries_departures: {
+                by_agency: 'udn_destino__id',
+                by_subsidiary: 'sucursal_destino__id'
+            },
             locality: {
                 by_state: 'municipio__estado__id',
                 by_city: 'municipio__id',
                 by_postal_code: 'codigo_postal'
             },
-            ordering:'ordering',
+            ordering: 'ordering',
             service: {
                 by_cabinet: 'cabinet__economico'
             },
@@ -129,7 +133,7 @@
                 by_username: 'user__username',
                 by_name: 'nombre',
                 by_middlename: 'apellido_paterno',
-                by_lastname:'apellido_materno'
+                by_lastname: 'apellido_materno'
             }
         })
         .constant('CONFIGS', {

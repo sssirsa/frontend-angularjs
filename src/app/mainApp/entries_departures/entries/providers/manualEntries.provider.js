@@ -10,7 +10,8 @@
         PAGINATION,
         QUERIES,
         Translate,
-        URLS
+        URLS,
+        User
     ) {
     
         var entriesUrl = API
@@ -25,6 +26,8 @@
         var control = URLS.management.control;
         var entries = URLS.entries_departures.entries;
         var inventory = URLS.management.inventory;
+
+        var user = User.getUser();
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -129,7 +132,14 @@
                     offset: PAGINATION.pageSize * (page - 1)
                 };
                 //Adding ordering parameter
-                params[QUERIES.ordering] = '-fecha';
+                params[QUERIES.ordering] = '-id';
+            }
+            console.log(user);
+            if (user.sucursal) {
+                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
+            }
+            if (user.udn) {
+                params[QUERIES.entries_departures.by_agency] = user['udn'].id;
             }
             if (entryKind) {
                 //An entry kind has been provided
