@@ -55,6 +55,17 @@
             return entriesUrl.all(entries.all).all(id).customGET();
         }
 
+        function getAssetStatus(entryId, page) {
+            var params;
+            if (page) {
+                params = {
+                    limit: PAGINATION.pageSize,
+                    offset: PAGINATION.pageSize * (page - 1)
+                };
+            }
+            return entriesUrl.all(entries.close).all(entryId).customGET(null, params);
+        }
+
         function close(id, element) {
             return entriesUrl.all(entries.close).all(id).customPUT(element);
         }
@@ -855,6 +866,7 @@
             createUnrecognizable: createUnrecognizable,
             addCabinet: addCabinet,
             detail: detail,
+            getAssetStatus: getAssetStatus,
             close: close,
             getCabinet: getCabinet,
             getEntriesByCabinet: getEntriesByCabinet,

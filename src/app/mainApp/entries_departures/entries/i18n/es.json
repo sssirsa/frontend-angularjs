@@ -5,9 +5,14 @@
             "BUTTONS": {
                 "ADD_ASSET": "Añadir cabinet",
                 "CLOSE": "Cerrar entrada",
-                "PDF": "Generar remisión"
+                "MISSING": "Cabinet faltante",
+                "PDF": "Generar remisión",
+                "UNMISSING": "Cabinet no faltante"
             },
             "LABELS": {
+                "ASSET": "Económico",
+                "ASSET_LIST": "Cabinets",
+                "ASSET_STATUS": "Estado",
                 "ID": "Folio:",
                 "CLOSED": "Entrada cerrada",
                 "DATE": "Fecha:",
