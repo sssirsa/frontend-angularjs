@@ -1,5 +1,32 @@
 {
     "ENTRIES": {
+        "DETAIL": {
+            "TITLE": "Detalle de entrada",
+            "BUTTONS": {
+                "ADD_ASSET": "Añadir cabinet",
+                "CLOSE": "Cerrar entrada",
+                "PDF": "Generar remisión"
+            },
+            "LABELS": {
+                "ID": "Folio:",
+                "CLOSED": "Entrada cerrada",
+                "DATE": "Fecha:",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "UDN-Agencia destino:",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino:",
+                "DRIVER": "Operador:",
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados",
+                "NOT_CONFIRMED_ENTRY": "Entrada no confirmada",
+                "OPEN": "Entrada abierta",
+                "ORDER": "Pedimento",
+                "ORIGIN_AGENCY": "UDN-Agencia de origen:",
+                "ORIGIN_PROVIDER": "Proveedor de origen:",
+                "ORIGIN_STORE": "Establecimiento de origen:",
+                "TRANSPORT_KIND": "Tipo de transporte:",
+                "TRANSPORT_LINE": "Linea de Transporte:"
+            }
+        },
         "LIST": {
             "TITLE": "Listado de entradas",
             "BUTTONS": {
