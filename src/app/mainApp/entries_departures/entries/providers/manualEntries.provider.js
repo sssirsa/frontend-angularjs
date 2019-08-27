@@ -52,7 +52,7 @@
         }
 
         function detail(id) {
-            return entriesUrl.all(id).customGET();
+            return entriesUrl.all(entries.all).all(id).customGET();
         }
 
         function close(id, element) {
