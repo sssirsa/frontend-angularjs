@@ -107,7 +107,8 @@
             </md-button>
             <!--Allow closing just if the entry is still open-->
             <md-button aria-label="close vm.entry button"
-                       ng-click="$event.stopPropagation(); vm.closeEntryClicked()"
+                       cg-busy="{promise:vm.closingEntry, message:' '}"
+                       ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()"
                        ng-if="!vm.entry.cerrada"
                        class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-lock"></md-icon>
@@ -190,18 +191,18 @@
                         </md-actions>
                     </section>
                     <md-divider></md-divider>
-                    <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
-                             layout="column"
-                             layout-align="center center">
-                        <md-button aria-label="Load more elements button"
-                                   cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
-                                   ng-click="$event.stopPropagation(); vm.loadMore()"
-                                   class="md-primary md-raised">
-                            <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-                            <span hide-xs>{{"ENTRIES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
-                        </md-button>
-                    </section>
                 </md-list-item>
+                <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
+                         layout="column"
+                         layout-align="center center">
+                    <md-button aria-label="Load more elements button"
+                               cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
+                               ng-click="$event.stopPropagation(); vm.loadMoreAssetStatus()"
+                               class="md-primary md-raised">
+                        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+                        <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.LOAD_MORE"|translate}}</span>
+                    </md-button>
+                </section>
             </md-list>
         </md-virtual-repeat-container>
     </md-card>

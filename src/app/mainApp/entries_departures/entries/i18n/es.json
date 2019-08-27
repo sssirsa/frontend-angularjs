@@ -5,9 +5,18 @@
             "BUTTONS": {
                 "ADD_ASSET": "Añadir cabinet",
                 "CLOSE": "Cerrar entrada",
+                "LOAD_MORE": "Cargar mas cabinets",
                 "MISSING": "Cabinet faltante",
                 "PDF": "Generar remisión",
                 "UNMISSING": "Cabinet no faltante"
+            },
+            "DIALOGS": {
+                "CONFIRM": {
+                    "TITLE": "Cerrar entrada",
+                    "CONTENT": "Al cerrar la entrada no se podrán añadir mas cabinets ni modificar sus estados ¿Continuar?",
+                    "OK": "Aceptar",
+                    "CANCEL": "Cancelar"
+                }
             },
             "LABELS": {
                 "ASSET": "Económico",
@@ -30,6 +39,9 @@
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:"
+            },
+            "MESSAGES": {
+                "SUCCESS": "Entrada cerrada correctamente"
             }
         },
         "LIST": {
