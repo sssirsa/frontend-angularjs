@@ -13,7 +13,7 @@
         URLS,
         User
     ) {
-    
+
         var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
@@ -26,8 +26,6 @@
         var control = URLS.management.control;
         var entries = URLS.entries_departures.entries;
         var inventory = URLS.management.inventory;
-
-        var user = User.getUser();
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -123,6 +121,7 @@
         //Page parameter is used for pagination,
         //without it just first page is provided
         function listEntries(entryKind, page) {
+            var user = User.getUser();
             var url = entriesUrl;
             var params;
             //Pagination params building
@@ -134,7 +133,7 @@
                 //Adding ordering parameter
                 params[QUERIES.ordering] = '-id';
             }
-            console.log(user);
+            //Subsidiary or Agency query
             if (user.sucursal) {
                 params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
             }
