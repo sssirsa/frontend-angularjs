@@ -107,6 +107,7 @@
             </md-button>
             <!--Allow closing just if the entry is still open-->
             <md-button aria-label="close vm.entry button"
+                       permission-only="['entries_departures__entries__close_entries']"
                        cg-busy="{promise:vm.closingEntry, message:' '}"
                        ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()"
                        ng-if="!vm.entry.cerrada"
