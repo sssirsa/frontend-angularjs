@@ -53,21 +53,30 @@
         };
 
         vm.showConfirmCloseDialog = function () {
-            var confirm = $mdDialog.confirm()
-                .title(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.TITLE'))
-                .textContent(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.CONTENT'))
-                .ariaLabel('Confirm entry closing')
-                .ok(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.OK'))
-                .cancel(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.CANCEL'));
+            if (entryHasPendingCabinets()) {
+                toastr.info(Translate.translate('ENTRIES.DETAIL.MESSAGES.PENDING_ASSETS'));
+            }
+            else {
+                var confirm = $mdDialog.confirm()
+                    .title(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.TITLE'))
+                    .textContent(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.CONTENT'))
+                    .ariaLabel('Confirm entry closing')
+                    .ok(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.OK'))
+                    .cancel(Translate.translate('ENTRIES.DETAIL.DIALOGS.CONFIRM.CANCEL'));
 
-            $mdDialog.show(confirm)
-                .then(function () {
-                    closeEntry();
-                });
+                $mdDialog.show(confirm)
+                    .then(function () {
+                        closeEntry();
+                    });
+            }
         };
 
         //Private functions
         function loadEntry(forceReload) {
+            if (vm.assets) {
+                //Re-setting assets variable
+                vm.assets = [];
+            }
             if (!$stateParams.entry || forceReload) {
                 vm.loadingEntry = MANUAL_ENTRIES
                     .detail(vm.entryId)
@@ -105,7 +114,7 @@
                 });
         }
 
-        //Called when entry initial laod is performed or when more assets are loaded
+        //Called when entry initial load is performed or when more assets are loaded
         function updateMissingAssetsArray(assets) {
             angular.forEach(assets, function (asset) {
                 if (asset.estado === 'Faltante') {
@@ -135,6 +144,12 @@
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
                 });
+        }
+
+        function entryHasPendingCabinets() {
+            return vm.assets.some(function (asset) {
+                return asset.estado === 'Pendiente';
+            });
         }
     }
 })();

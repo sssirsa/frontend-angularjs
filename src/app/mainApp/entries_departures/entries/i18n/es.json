@@ -41,7 +41,8 @@
                 "TRANSPORT_LINE": "Linea de Transporte:"
             },
             "MESSAGES": {
-                "SUCCESS": "Entrada cerrada correctamente"
+                "SUCCESS": "Entrada cerrada correctamente",
+                "PENDING_ASSETS": "No se puede cerrar una entrada con cabinets pendientes"
             }
         },
         "LIST": {
