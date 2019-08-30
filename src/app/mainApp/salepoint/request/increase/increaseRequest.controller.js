@@ -102,7 +102,7 @@
             vm.request.cabinets_solicitud = [];
             //Assign new kind, quantity limited to 1 due to actual constraint
             vm.request.cabinets_solicitud = [{
-                id_tipo: vm.equipmentKind.id,
+                tipo_id: vm.equipmentKind.id,
                 antiguedad: "",
                 cantidad: 1
             }];
@@ -113,13 +113,10 @@
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.no_cliente;
-            vm.request.establecimiento_id = store.id;
+            vm.request.establecimiento_id = store.no_cliente;
         }
 
         function save() {
-
-            validar()
 
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);

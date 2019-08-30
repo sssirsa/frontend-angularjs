@@ -60,11 +60,17 @@
             return baseModelo.get(id);
         }
 
-        function list(limit, offset, filter) {
+        /*function list(limit, offset, filter) {
             var params = {nombre__icontains: filter};
             return API.all(URLS.management.base
                 + '/' + URLS.management.administration.base)
                 .customGET(URLS.management.administration.person, params);
+        }*/
+        function list(limit, offset, filter) {
+            return API.all(URLS.management.base
+                + '/' + URLS.management.administration.base + '/' +
+                URLS.management.administration.person + '?nombre__icontains=' + filter +'&user__email__not')
+                .customGET();
         }
 
         function update(object) {

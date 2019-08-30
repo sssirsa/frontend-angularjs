@@ -4,7 +4,7 @@
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
     function dialogAsignationTechnicianController(ATTENTIONS, REQUESTS, $state, $mdDialog, $document, ErrorHandler, $stateParams, attention, Stores,
-        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION) {
+        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION, QUERIES) {
         var vm = this;
 
         console.log("el controler", attention);
@@ -66,7 +66,7 @@
                     total: PAGINATION.total,
                     limit: PAGINATION.limit,
                     offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize
+                    pageSize: PAGINATION.pageSize,
                 },
                 elements: 'results',
                 softDelete: {

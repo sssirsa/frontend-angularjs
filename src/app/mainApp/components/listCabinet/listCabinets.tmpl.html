@@ -89,15 +89,15 @@
                             <md-button
                                 ng-click="$ctrl.showObsolete(item)"
                                 class="md-raised md-primary">
-                                <div ng-if="item.status_unilever != '0008' || '0004'">
+                                <div ng-if="item.estatus_unilever.id != 8 && item.estatus_unilever.id != 4">
                                     <md-icon md-font-icon="fas fa-wrench"></md-icon>
                                     {{'MAIN.COMPONENTS.CABINET.SEND_TO_OBSOLETE'|translate}}
                                 </div>
-                                <div ng-if="item.status_unilever == '0008'">
+                                <div ng-if="item.estatus_unilever.id == 8">
                                     <md-icon md-font-icon="fas fa-check-square-o"></md-icon>
                                     {{'MAIN.COMPONENTS.CABINET.AGREE_OBSOLETE'|translate}}
                                 </div>
-                                <div ng-if="item.status_unilever == '0004'">
+                                <div ng-if="item.estatus_unilever.id == 4">
                                     <md-icon md-font-icon="fas fa-info-circle"></md-icon>
                                     {{'MAIN.COMPONENTS.CABINET.OBSOLETE'|translate}}
                                 </div>
