@@ -68,11 +68,12 @@
 
         //Private functions
         function loadEntry(forceReload) {
-            if (!$stateParams.entry||forceReload) {
+            if (!$stateParams.entry || forceReload) {
                 vm.loadingEntry = MANUAL_ENTRIES
                     .detail(vm.entryId)
                     .then(function (entry) {
                         vm.entry = entry;
+                        loadAssetStatus();
                     })
                     .catch(function (entryError) {
                         ErrorHandler.errorTranslate(entryError);
@@ -80,8 +81,8 @@
             }
             else {
                 vm.entry = $stateParams.entry;
+                loadAssetStatus();
             }
-            loadAssetStatus();
         }
 
         function loadAssetStatus(page) {
@@ -90,12 +91,13 @@
             }
             page ? null : page = 1;
             vm.assetStatusPromise = MANUAL_ENTRIES
-                .getAssetStatus(vm.entryId, page)
+                .getAssetStatus(vm.entryId, page, vm.entry.cabinets.length)
                 .then(function (assetsStatus) {
                     vm.assets = vm.assets.concat(assetsStatus[PAGINATION.elements]);
+                    updateMissingAssetsArray(assetsStatus[PAGINATION.elements]);
                     vm.paginationHelper.page = page;
                     vm.paginationHelper.totalPages = Math.ceil(
-                        assetsStatus[PAGINATION.total] / PAGINATION.pageSize
+                        assetsStatus[PAGINATION.total] / vm.entry.cabinets.length
                     );
                 })
                 .catch(function (assetStatusError) {
@@ -103,10 +105,27 @@
                 });
         }
 
+        //Called when entry initial laod is performed or when more assets are loaded
+        function updateMissingAssetsArray(assets) {
+            angular.forEach(assets, function (asset) {
+                if (asset.estado === 'Faltante') {
+                    if (!vm.missingAssets) {
+                        vm.missingAssets = [];
+                    }
+                    vm.missingAssets.push(asset.cabinet);
+                }
+            });
+        }
+
         function closeEntry() {
+            //Initializing empty array (backend requires empty array, even if no assets are missing)
             var closeElement = {
-                cabinets_faltantes: vm.missingAssets
+                cabinets_faltantes: []
             };
+            //Concatenating the missing assets array if it exists
+            if (vm.missingAssets) {
+                closeElement.cabinets_faltantes = closeElement.cabinets_faltantes.concat(vm.missingAssets);
+            }
             vm.closingEntry = MANUAL_ENTRIES
                 .close(vm.entryId, closeElement)
                 .then(function () {

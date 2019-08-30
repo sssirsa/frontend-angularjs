@@ -55,12 +55,12 @@
             return entriesUrl.all(entries.all).all(id).customGET();
         }
 
-        function getAssetStatus(entryId, page) {
+        function getAssetStatus(entryId, page, pageSize) {
             var params;
             if (page) {
                 params = {
-                    limit: PAGINATION.pageSize,
-                    offset: PAGINATION.pageSize * (page - 1)
+                    limit: (pageSize),
+                    offset: (pageSize) * (page - 1)
                 };
             }
             return entriesUrl.all(entries.close).all(entryId).customGET(null, params);
