@@ -20,7 +20,7 @@
         "REFRESH":"Volver a listar",
         "KIND_OF_MASSIVE_OBJECT":{
             "TASK_NAME":"Nombre de la Tarea",
-            "NAME":"Descripción de la Tarea",
+            "NAME":"Nombre de la Carga",
             "DESCRIPTION":"Descripción a detalle",
             "CREATED_AT":"Creado en",
             "UPDATED_AT":"Actualizado en",
