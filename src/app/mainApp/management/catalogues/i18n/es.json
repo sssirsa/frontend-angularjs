@@ -211,6 +211,9 @@
             "REMOVE_FILTER": "Quitar filtro",
             "SEARCH": "Buscar Etapa",
             "TITLE": "Etapas"
+        },
+        "MESSAGES": {
+            "AGENCY_USER": "Funcionalidad no disponible para usuarios de UDN-Agencia"
         }
     },
     "Transport_Kind": {

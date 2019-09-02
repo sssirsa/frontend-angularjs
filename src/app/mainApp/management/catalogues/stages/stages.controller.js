@@ -9,10 +9,14 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        User
     ) {
 
         var vm = this;
+
+        vm.userSubsidiary;
+        vm.userAgency;
 
         vm.url = EnvironmentConfig.site.rest.api
             + '/' + URLS.technical_service.base
@@ -365,6 +369,75 @@
                 ]
             }
         };
+
+        function init() {
+            var user = User.getUser();
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
+
+            //Show subsidiary selector if user has no subsidiary
+            if (!vm.userAgency && !vm.userSubsidiary) {
+                var subsidiaryCatalogPost =
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        label: 'Sucursal',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: PAGINATION.elements,
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        }
+                    };
+                var subsidiaryCatalogPut =
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        bindTo:'sucursal',
+                        label: 'Sucursal',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: PAGINATION.elements,
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        }
+                    };
+                vm.actions.POST.fields.push(subsidiaryCatalogPost);
+                vm.actions.PUT.fields.push(subsidiaryCatalogPut);
+            }
+        }
+        init();
 
         function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
