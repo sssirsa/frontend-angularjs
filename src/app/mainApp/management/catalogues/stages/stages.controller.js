@@ -334,6 +334,11 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción'
+                    },
+                    {
+                        type: 'object_property',
+                        model: 'sucursal__nombre',
+                        label: 'Sucursal'
                     }
                 ],
                 softDelete: {
@@ -362,6 +367,15 @@
                         model: 'tipo_etapa',
                         header: 'por Tipo de Etapa',
                         label: 'Tipo de Etapa',
+                        field: {
+                            type: 'text'
+                        }
+                    },
+                    {
+                        type: 'icontains',
+                        model: 'sucursal__nombre',
+                        header: 'por Sucursal',
+                        label: 'Sucursal',
                         field: {
                             type: 'text'
                         }
