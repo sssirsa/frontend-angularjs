@@ -390,6 +390,16 @@
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
 
+            addSubsidiarySelector();
+        }
+        init();
+
+        function onElementSelect() {
+            //Here goes the handling for element selection, such as detail page navigation
+        }
+
+        //Private functions
+        function addSubsidiarySelector() {
             //Show subsidiary selector if user has no subsidiary
             if (!vm.userAgency && !vm.userSubsidiary) {
                 var subsidiaryCatalogPost =
@@ -423,7 +433,7 @@
                     {
                         type: 'catalog',
                         model: 'sucursal_id',
-                        bindTo:'sucursal',
+                        bindTo: 'sucursal',
                         label: 'Sucursal',
                         catalog: {
                             lazy: false,
@@ -447,14 +457,37 @@
                             }
                         }
                     };
-                vm.actions.POST.fields.push(subsidiaryCatalogPost);
-                vm.actions.PUT.fields.push(subsidiaryCatalogPut);
-            }
-        }
-        init();
+                //Add subsidiary selector
+                vm.actions.POST.fields.unshift(subsidiaryCatalogPost);
+                vm.actions.PUT.fields.unshift(subsidiaryCatalogPut);
 
-        function onElementSelect() {
-            //Here goes the handling for element selection, such as detail page navigation
+                //Add subsidiary dependency
+                var postNextStageIndex = vm.actions.POST.fields.findIndex(function (field) {
+                    return field.model === 'etapas_siguientes_id';
+                });
+                vm.actions.POST.fields[postNextStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.POST.fields[postNextStageIndex].catalog.requires = 'sucursal_id';
+
+                var postDefaultStageIndex = vm.actions.POST.fields.findIndex(function (field) {
+                    return field.model === 'etapa_defecto_id';
+                });
+                vm.actions.POST.fields[postDefaultStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.POST.fields[postDefaultStageIndex].catalog.requires = 'sucursal_id';
+
+                var putNextStageIndex = vm.actions.PUT.fields.findIndex(function (field) {
+                    return field.model === 'etapas_siguientes_id';
+                });
+                vm.actions.PUT.fields[putNextStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.PUT.fields[putNextStageIndex].catalog.requires = 'sucursal_id';
+
+                var putDefaultStageIndex = vm.actions.PUT.fields.findIndex(function (field) {
+                    return field.model === 'etapa_defecto_id';
+                });
+                vm.actions.PUT.fields[putDefaultStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.PUT.fields[putDefaultStageIndex].catalog.requires = 'sucursal_id';
+
+
+            }
         }
     }
 
