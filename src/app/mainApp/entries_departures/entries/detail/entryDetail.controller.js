@@ -71,6 +71,22 @@
             }
         };
 
+        vm.addAssetClicked = function () {
+            var dialog = {
+                controller: 'addCabinetToEntryDialogController',
+                templateUrl: 'app/mainApp/entries_departures/entries/detail/modal/addCabinetDialog.tmpl.html',
+                clickOutsideToClose: true,
+                fullscreen: true,
+                controllerAs: 'vm'
+            };
+
+            $mdDialog.show(dialog)
+                .then(function (asset) {
+                    addAsset(asset);
+                });
+
+        };
+
         //Private functions
         function loadEntry(forceReload) {
             if (vm.assets) {
@@ -150,6 +166,14 @@
             return vm.assets.some(function (asset) {
                 return asset.estado === 'Pendiente';
             });
+        }
+
+        function addAsset(asset) {
+            if (!vm.assets) {
+                vm.assets = [];
+            }
+            //TODO: Add logic
+            vm.assets.unshift(asset);
         }
     }
 })();

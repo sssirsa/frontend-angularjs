@@ -2,6 +2,20 @@
     angular
         .module('app.mainApp')
         .constant('OPTIONS', {
+            entries_departures: {
+                entries: {
+                    addCabinetKind: [
+                        {
+                            value: 'No_Esperado',
+                            verbose: 'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUSES.NOT_EXPECTED'
+                        },
+                        {
+                            value: 'Pendiente',
+                            verbose: 'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUSES.PENDING'
+                        }
+                    ]
+                }
+            },
             salePointAssignKind: [
                 { id: 'pending', value: 'Pendientes' },
                 { id: 'all', value: 'Detalle de atención' }

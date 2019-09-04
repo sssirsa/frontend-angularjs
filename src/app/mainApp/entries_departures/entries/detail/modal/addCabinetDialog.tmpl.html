@@ -1,0 +1,54 @@
+<div layout="column"
+     cg-busy="{promise:vm.createLoader, message:vm.dialog.loading, templateUrl:'app/mainApp/directives/loading.tmpl.html'}">
+    <md-toolbar layout="row"
+                layout-align="space-between center">
+        <div layout-padding ng-if="!vm.dialog.title" class="md-title">Create element</div>
+        <md-button class="md-icon-button"
+                   ng-click="vm.cancel()"
+                   aria-label="exit dialog">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </md-toolbar>
+    <form name="addCabinetForm" layout="column" layout="center center" layout-padding>
+        <md-input-container layout="column"
+                            class="md-icon-float md-block">
+            <label translate>ENTRIES.DETAIL.DIALOGS.ADD_ASSET.ID</label>
+            <md-icon class="fa fa-barcode"></md-icon>
+            <input ng-model="vm.cabinetToAdd['cabinet_id']"
+                   name="assetID"
+                   type="text">
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+            <label translate>ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUS</label>
+            <md-icon class="fa fa-list"></md-icon>
+            <md-select name="selectStatus"
+                       ng-model="vm.cabinetToAdd['estado']">
+                <md-option ng-repeat="status in vm.cabinetStatuses"
+                           value="{{status.value}}">
+                    {{status.verbose|translate}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </form>
+    <md-actions layout="row"
+                layout-align="space-between center">
+        <md-button ng-click="vm.cancel()"
+                   aria-label="cancel"
+                   class="md-warn md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fas fa-ban"></md-icon>
+                <div>{{'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.CANCEL'|translate}}</div>
+            </div>
+        </md-button>
+        <md-button ng-click="vm.addAsset(vm.cabinetToAdd)"
+                   ng-disabled="addCabinetForm.$invalid"
+                   aria-label="{{vm.dialog.okButton}}"
+                   class="md-primary md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                <div>{{'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.OK'|translate}}</div>
+            </div>
+        </md-button>
+    </md-actions>
+</div>

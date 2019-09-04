@@ -16,6 +16,17 @@
                     "CONTENT": "Al cerrar la entrada no se podrán añadir mas cabinets ni modificar sus estados ¿Continuar?",
                     "OK": "Aceptar",
                     "CANCEL": "Cancelar"
+                },
+                "ADD_ASSET": {
+                    "TITLE": "Añadir cabinet",
+                    "ID": "Económico",
+                    "STATUS": "Estado",
+                    "OK": "Agregar",
+                    "CANCEL": "Cancelar",
+                    "STATUSES": {
+                        "NOT_EXPECTED": "No esperado",
+                        "PENDING": "Pendiente"
+                    }
                 }
             },
             "LABELS": {
