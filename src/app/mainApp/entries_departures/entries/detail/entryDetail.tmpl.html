@@ -99,6 +99,7 @@
         <md-actions layout="row" layout-align="end center">
             <!--Allow adding cabinets just if the entry is still open-->
             <md-button aria-label="Add asset button"
+                       permission-only="['entries_departures__entries__add_cabinet_entries']"
                        ng-click="vm.addAssetClicked();$event.stopPropagation() "
                        ng-if="!vm.entry.cerrada"
                        class="md-raised">
