@@ -21,7 +21,7 @@
 
         vm.addAsset = function () {
             $mdDialog.hide(vm.cabinetToAdd);
-        }
+        };
 
     }
 })();

@@ -6,7 +6,7 @@
                 entries: {
                     addCabinetKind: [
                         {
-                            value: 'No_Esperado',
+                            value: 'No_esperado',
                             verbose: 'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUSES.NOT_EXPECTED'
                         },
                         {

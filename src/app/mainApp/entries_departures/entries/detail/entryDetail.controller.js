@@ -173,7 +173,19 @@
                 vm.assets = [];
             }
             //TODO: Add logic
-            vm.assets.unshift(asset);
+            vm.loadingEntry = MANUAL_ENTRIES
+                .addCabinet(vm.entryId, asset)
+                .then(function () {
+                    var assetToAdd = {
+                        cabinet: asset.cabinet_id,
+                        estado: asset.estado
+                    };
+                    vm.assets.unshift(assetToAdd);
+                })
+                .catch(function (addAssetErrorResponse) {
+                    ErrorHandler.errorTranslate(addAssetErrorResponse);
+                });
+            //vm.assets.unshift(asset);
         }
     }
 })();
