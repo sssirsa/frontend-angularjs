@@ -67,6 +67,8 @@
         };
 
         //Globals
+        vm.queryResult = '';
+        vm.newComponent = true;
 
         //Auxiliary variables for creating and modifying filters
         vm.rootFields;

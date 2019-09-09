@@ -34,6 +34,7 @@
         </li>
     </ul>
 </section>
+<p>{{vm.queryResult}}</p>
 <!--Editing-Adding filters section-->
 <section ng-if="vm.editingIndex>-1">
     <!--Filter verbose as header-->
@@ -47,7 +48,16 @@
           layout-align="center stretch"
           layout-align-gt-sm="space-around center">
         <!--Field and property selectors-->
-        <div class="full-width" layout="column" layout-align="center stretch">
+        <div class="full-width" layout="column" layout-align="center stretch" ng-if="vm.newComponent">
+            <filter-selectors
+                filters="vm.filters"
+                querie="vm.queryResult"
+                field-label="vm.fieldLabel"
+                property-label="vm.propertyLabel">
+            </filter-selectors>
+        </div>
+
+        <div class="full-width" layout="column" layout-align="center stretch" ng-if="!vm.newComponent">
             <md-input-container class="md-block">
                 <label ng-if="vm.fieldLabel">{{vm.fieldLabel}}</label>
                 <label ng-if="!vm.fieldLabel">Field</label>
