@@ -1,0 +1,20 @@
+ <md-input-container class="md-block" ng-repeat="(idx, selector) in vm.filterControl">
+    <label ng-if="vm.fieldLabel">{{vm.fieldLabel}}</label>
+    <label ng-if="!vm.fieldLabel">Field</label>
+    <md-select ng-model="vm.modelFilters[idx]"
+               aria-label="select field"
+               required
+               md-on-close="vm.changeSelector(idx, vm.modelFilters[idx])">
+        <md-option ng-repeat="(key, value) in selector" value="{{key}}">{{key}}</md-option>
+    </md-select>
+</md-input-container>
+ <md-input-container class="md-block" ng-repeat="(idx, selector) in vm.propertiesControl">
+     <label ng-if="vm.propertyLabel">{{vm.propertyLabel}}</label>
+     <label ng-if="!vm.propertyLabel">Property</label>
+     <md-select ng-model="vm.modelProperties[idx]"
+                aria-label="select field"
+                required
+                md-on-close="vm.changeSelectorProp(idx, vm.modelProperties[idx])">
+         <md-option ng-repeat="(key, value) in selector" value="{{key}}">{{key}}</md-option>
+     </md-select>
+ </md-input-container>
