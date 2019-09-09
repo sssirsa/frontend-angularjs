@@ -9,6 +9,7 @@
             base: 'bulk-manager',
             filtertype:'&bulk_load__id=',
             filter_end:'&status=Finalizado',
+            filter_ordering_by_date:'&ordering=date',
             actions: {
                 bulk: 'bulk',
                 bulk_load_history:'bulk-load-history'

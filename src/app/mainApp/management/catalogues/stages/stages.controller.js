@@ -9,10 +9,14 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        User
     ) {
 
         var vm = this;
+
+        vm.userSubsidiary;
+        vm.userAgency;
 
         vm.url = EnvironmentConfig.site.rest.api
             + '/' + URLS.technical_service.base
@@ -330,6 +334,11 @@
                         type: 'text',
                         model: 'descripcion',
                         label: 'Descripción'
+                    },
+                    {
+                        type: 'object_property',
+                        model: 'sucursal__nombre',
+                        label: 'Sucursal'
                     }
                 ],
                 softDelete: {
@@ -361,13 +370,124 @@
                         field: {
                             type: 'text'
                         }
+                    },
+                    {
+                        type: 'icontains',
+                        model: 'sucursal__nombre',
+                        header: 'por Sucursal',
+                        label: 'Sucursal',
+                        field: {
+                            type: 'text'
+                        }
                     }
                 ]
             }
         };
 
+        function init() {
+            var user = User.getUser();
+
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
+
+            addSubsidiarySelector();
+        }
+        init();
+
         function onElementSelect() {
             //Here goes the handling for element selection, such as detail page navigation
+        }
+
+        //Private functions
+        function addSubsidiarySelector() {
+            //Show subsidiary selector if user has no subsidiary
+            if (!vm.userAgency && !vm.userSubsidiary) {
+                var subsidiaryCatalogPost =
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        label: 'Sucursal',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: PAGINATION.elements,
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        }
+                    };
+                var subsidiaryCatalogPut =
+                    {
+                        type: 'catalog',
+                        model: 'sucursal_id',
+                        bindTo: 'sucursal',
+                        label: 'Sucursal',
+                        catalog: {
+                            lazy: false,
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            model: 'id',
+                            option: 'nombre',
+                            name: 'Sucursal',
+                            elements: PAGINATION.elements,
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        }
+                    };
+                //Add subsidiary selector
+                vm.actions.POST.fields.unshift(subsidiaryCatalogPost);
+                vm.actions.PUT.fields.unshift(subsidiaryCatalogPut);
+
+                //Add subsidiary dependency
+                var postNextStageIndex = vm.actions.POST.fields.findIndex(function (field) {
+                    return field.model === 'etapas_siguientes_id';
+                });
+                vm.actions.POST.fields[postNextStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.POST.fields[postNextStageIndex].catalog.requires = 'sucursal_id';
+
+                var postDefaultStageIndex = vm.actions.POST.fields.findIndex(function (field) {
+                    return field.model === 'etapa_defecto_id';
+                });
+                vm.actions.POST.fields[postDefaultStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.POST.fields[postDefaultStageIndex].catalog.requires = 'sucursal_id';
+
+                var putNextStageIndex = vm.actions.PUT.fields.findIndex(function (field) {
+                    return field.model === 'etapas_siguientes_id';
+                });
+                vm.actions.PUT.fields[putNextStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.PUT.fields[putNextStageIndex].catalog.requires = 'sucursal_id';
+
+                var putDefaultStageIndex = vm.actions.PUT.fields.findIndex(function (field) {
+                    return field.model === 'etapa_defecto_id';
+                });
+                vm.actions.PUT.fields[putDefaultStageIndex].catalog.query = 'sucursal__id';
+                vm.actions.PUT.fields[putDefaultStageIndex].catalog.requires = 'sucursal_id';
+
+
+            }
         }
     }
 
