@@ -126,7 +126,7 @@
             return deferred.promise;
         }
 
-        //Entry Kind must be onoe pf the following
+        //Entry Kind must be one pf the following
         //new, warehouse, repair, unrecognizable, warranty
         //Otherwise, all entries are returned
         //Page parameter is used for pagination,

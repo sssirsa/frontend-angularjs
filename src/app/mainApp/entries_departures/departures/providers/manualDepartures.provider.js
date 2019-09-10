@@ -189,6 +189,60 @@
             return deferred.promise;
         }
 
+        //Departure Kind must be one pf the following
+        //new, warehouse, obsolete, unrecognizable, warranty
+        //Otherwise, all departures are returned
+        //Page parameter is used for pagination,
+        //without it just first page is provided
+        function listDepartures(departureKind, page) {
+            var user = User.getUser();
+            var url = departuresUrl;
+            var params;
+            //Pagination params building
+            if (page) {
+                params = {
+                    limit: PAGINATION.pageSize,
+                    offset: PAGINATION.pageSize * (page - 1)
+                };
+                //Adding ordering parameter
+                params[QUERIES.ordering] = '-id';
+            }
+            //Subsidiary or Agency query
+            if (user.sucursal) {
+                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
+            }
+            if (user.udn) {
+                params[QUERIES.entries_departures.by_agency] = user['udn'].id;
+            }
+            if (departureKind) {
+                //An departure kind has been provided
+                switch (departureKind) {
+                    case 'new':
+                        url = url.all(departures.new);
+                        break;
+                    case 'warehouse':
+                        url = url.all(departures.warehouse);
+                        break;
+                    case 'obsolete':
+                        url = url.all(departures.obsolete);
+                        break;
+                    case 'unrecognizable':
+                        url = url.all(departures.unrecognizable);
+                        break;
+                    case 'warranty':
+                        url = url.all(departures.warranty);
+                        break;
+                    default:
+                        url = url.all(departures.all);
+                }
+            }
+            else {
+                //Entry kind not provided, so return all
+                url = url.all(departures.all);
+            }
+            return url.customGET(null, params);
+        }
+
         //Internal functions
 
         function getCabinetInSubsidiary(id) {
