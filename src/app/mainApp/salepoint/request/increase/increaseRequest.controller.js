@@ -93,7 +93,7 @@
         };
 
         function onSelectedSucursal(element) {
-            vm.request.sucursal = element;
+            vm.request.sucursal_id = element;
         }
 
         function onSelectedEquipmentKind(element) {
@@ -103,7 +103,7 @@
             //Assign new kind, quantity limited to 1 due to actual constraint
             vm.request.cabinets_solicitud = [{
                 tipo_id: vm.equipmentKind.id,
-                antiguedad: "",
+                antiguedad: "A",
                 cantidad: 1
             }];
         }
@@ -121,7 +121,7 @@
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-            $log.log(vm.request);
+            console.log(vm.request);
 
 
             vm.savingPromise = REQUESTS.create_incremental_request(vm.request)

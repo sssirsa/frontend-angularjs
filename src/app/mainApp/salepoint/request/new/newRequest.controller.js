@@ -93,7 +93,7 @@
         };
 
         function onSelectedSucursal(element) {
-            vm.request.sucursal = element;
+            vm.request.sucursal_id = element;
         }
 
         function onSelectedEquipmentKind(element) {
@@ -120,7 +120,7 @@
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-            $log.log(vm.request);
+            console.log(vm.request);
 
 
             vm.savingPromise = REQUESTS.create_new_request(vm.request)

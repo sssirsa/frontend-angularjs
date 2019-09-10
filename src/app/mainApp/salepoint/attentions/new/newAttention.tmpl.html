@@ -1,0 +1,618 @@
+<div class="bg-01"
+     cg-busy="{promise:vm.loadingPromise && vm.loadingPromise2,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+     layout="column">
+
+    <md-card layout="column" layout-align="center stretch" layout-gt-sm="row" layout-align-gt-sm="space-around center" layout-padding>
+        <h2 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.TITLE</h2>
+
+        <md-content>
+            <div layout="row">
+                <div layout="column" layout-align="center center">
+                    <b translate>Folio</b>
+                </div>
+                <div layout="column" layout-align="center center">
+                    <b>:&nbsp</b>
+                </div>
+                <div layout="column" layout-align="center center">
+                    {{vm.request.folio}}
+                </div>
+            </div>
+
+            <div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <b translate>Técnico asignado</b>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <b>:&nbsp</b>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        {{vm.user.nombre+' '+vm.user.apellido_paterno+' '+vm.user.apellido_materno}}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div layout="row">
+                    <div layout="column" layout-align="center center">
+                        <b translate>Tipo</b>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <b>:&nbsp</b>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        {{vm.request.tipo}}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div layout="row">
+
+                    <div layout="column" layout-align="center center">
+                        <b translate>Status</b>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                        <b>:&nbsp</b>
+                    </div>
+
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Abierta'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.OPEN</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="Abierta"></div>
+                        </div>
+                    </div>
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'En_proceso'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.IN_PROCESS</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="En_proceso"></div>
+                        </div>
+                    </div>
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Atendida'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.ATTENDED</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="Atendida"></div>
+                        </div>
+                    </div>
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Cancelada'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.CANCELED</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="Cancelada"></div>
+                        </div>
+                    </div>
+                    <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Improductiva'">
+                        <div layout="row">
+                            <span translate>REQUESTS.LIST.UNPRODUCTIVE</span>&nbsp
+                        </div>
+                        <div layout="row">
+                            <div class="Improductiva"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+
+    </md-card>
+
+    <md-card
+        layout="column"
+        layout-align="center stretch"
+        cg-busy="{promise:vm.storeLoading,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}"
+        layout-padding>
+        <h3 translate>SALEPOINT_REQUEST.ASSIGN_DETAIL.STORE</h3>
+
+        <store-manager
+            store="vm.store"
+        ></store-manager>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <h3 translate>REQUEST.EVIDENCES.TITLE</h3>
+
+        <div
+            layout="column"
+            layout-align="space-around center">
+
+            <div ng-if="vm.solicitudDetalles.evidencia.length > 0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.solicitudDetalles.evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.solicitudDetalles.evidencia.length === 0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding
+             ng-if="!vm.visible">
+        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
+
+        <div
+            layout="column"
+            layout-align="space-around center">
+
+            <div ng-if="vm.request.evidencia.length > 0" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.evidencia"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div ng-if="vm.request.evidencia.length===0">
+                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+            </div>
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             layout-padding>
+        <h3 translate>Servicio</h3>
+
+        <md-input-container class="md-block">
+            <input ng-model="vm.km" type="text" placeholder="km (required)"
+                   ng-required="true" maxlength="6" ng-disabled="!vm.visible" only-digits>
+        </md-input-container>
+
+        <div layout-align="center stretch"
+             layout="column"
+             layout-padding>
+
+            <div  flex class="md-block">
+                <table md-table flex>
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column>
+                            <span translate>REQUEST.CABINET.KIND</span>
+                        </th>
+                        <th md-column>
+                            <span translate>REQUEST.CABINET.QUANTITY</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row
+                        ng-repeat="cabinet in vm.solicitudDetalles.solicitudes_cabinet">
+                        <td md-cell>{{cabinet.tipo}}</td>
+                        <td md-cell>{{cabinet.cantidad}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div>
+                <!--  codigo a copiar  -->
+                <div flex class="md-block" ng-if="vm.isUsed">
+                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
+                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>Cabinet seleccionado</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+                            <div class="virtualRepeatScroll">
+                                <md-list-item class="md-3-line" ng-repeat="item in vm.todosSeleccionado">
+                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
+                                    <div class="md-list-item-text" layout="column">
+                                        <h2>Económico: {{ item.economico }}</h2>
+                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
+                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
+                                        <p>Estado: {{ item.estado }}</p>
+                                    </div>
+                                    <md-button class="md-secondary" ng-click="vm.unUsedCabinet()">
+                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </div>
+
+                        </md-content>
+                    </div>
+                </div>
+
+
+                <div flex class="md-block" ng-if="vm.isUsed">
+                    <div>
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+                            <form name="newcabinetFrom">
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
+                                        <input name="economico" required digits-only MAXLENGTH="20"
+                                               ng-model="vm.cabinetSelected.economico"
+                                               ng-disabled="vm.isSelected"/>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
+                                        <input name="serial" maxlength="25"
+                                               ng-pattern="/^[a-zA-Z0-9]+$/"
+                                               required
+                                               ng-model="vm.cabinetSelected.no_serie"
+                                               ng-disabled="vm.isSelected"/>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="pattern">
+                                                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
+                                            </div>
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
+                                        <md-select ng-model="vm.cabinetSelected.marca"
+                                                   required
+                                                   ng-change="vm.changeTrademark()"
+                                                   ng-disabled="vm.isSelected">
+                                            <md-option ng-repeat="marca in vm.marcas" value="{{marca.id}}">
+                                                {{marca.descripcion}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
+                                        <md-select ng-model="vm.cabinetSelected.modelo_id"
+                                                   required
+                                                   ng-disabled="!vm.modelos || vm.isSelected">
+                                            <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">
+                                                {{modelo.nombre}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="newcabinetFrom.serial.$error">
+                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                                    <md-input-container flex class="md-block">
+                                        <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
+                                        <input name="antiguedad"
+                                               maxlength="1"
+                                               only-text
+                                               ng-model="vm.cabinetSelected.antiguedad"
+                                               ng-disabled="vm.isSelected"/>
+                                    </md-input-container>
+                                </div>
+                            </form>
+
+                            <md-actions
+                                layout="row"
+                                layout-align="end center">
+                                <md-button
+                                    ng-click="vm.accept()"
+                                    class="md-primary md-raised"
+                                    ng-if="!vm.isSelected">
+                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                                    {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}
+                                </md-button>
+                                <md-button
+                                    ng-click="vm.seleccion()"
+                                    class="md-primary md-raised"
+                                    ng-if="vm.isSelected">
+                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                                    Usar cabinet
+                                </md-button>
+                                <md-button
+                                    ng-click="vm.cleanForm()"
+                                    class="md-primary md-raised">
+                                    Limpiar campos
+                                </md-button>
+                            </md-actions>
+                        </md-content>
+                    </div>
+                </div>
+
+                <div flex class="md-block" ng-if="!vm.isUsed">
+                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
+                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>{{'MAIN.MENU.PREREQUESTS.LISTPV'|translate}}</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+                        <md-content
+                            layout="column"
+                            layout-align="center stretch"
+                            layout-padding
+                        >
+
+                            <div layout="row" layout-align="space-around center" layout-padding="" ng-if="vm.todosprev.length>1">
+                                <md-input-container
+                                    flex="80"
+                                    class="md-block">
+                                    <form ng-click="vm.searchCabinet()">
+                                        <input placeholder="Búsqueda por economico" ng-model="vm.searchText">
+                                    </form>
+                                </md-input-container>
+
+                            </div>
+
+                            <div class="virtualRepeatScroll-300">
+                                <md-list-item class="md-3-line" ng-repeat="item in vm.todos" ng-click="vm.selectCabinet(item)">
+                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
+                                    <div class="md-list-item-text" layout="column">
+                                        <h2>Económico: {{ item.economico }}</h2>
+                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
+                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
+                                        <p>Estado: {{ item.estado }}</p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+                        </md-content>
+                    </div>
+
+                    <div ng-if="vm.refreshPaginationButtonsComponent">
+                        <pagination-manager-buttons go-sig="vm.sig()"
+                                                    go-prev="vm.prev()"
+                                                    go-number="vm.goToNumberPage(number)"
+                                                    limit-objects="vm.limit"
+                                                    count-object="vm.objectPaginado.count"
+                                                    offset-object="vm.offset"
+                                                    nex-object="vm.objectPaginado.next"
+                                                    prev-object="vm.objectPaginado.previous">
+                        </pagination-manager-buttons>
+                    </div>
+                </div>
+                <!--  codigo a copiar  -->
+            </div>
+        </div>
+
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo && vm.visible"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+        </div>
+        <file-uploader file-formats="'image/*'"
+                       validations="vm.fileValidations"
+                       allow-folders="true"
+                       max-files="5"
+                       multiple-files="true"
+                       keep="true"
+                       files-selected="vm.filesSelected(files,1)"
+        ></file-uploader>
+    </md-card>
+
+    <md-card layout-align="space-around center"
+             layout="row"
+             ng-if="vm.request.tipo && vm.visible"
+             layout-padding>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+            </div>
+            <file-uploader file-formats="'image/*'"
+                           validations="vm.fileValidations"
+                           allow-folders="false"
+                           max-files="1"
+                           multiple-files="false"
+                           keep="true"
+                           files-selected="vm.filesSelected(files,2)">
+            </file-uploader>
+        </div>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+            </div>
+            <file-uploader file-formats="'image/*'"
+                           validations="vm.fileValidations"
+                           allow-folders="false"
+                           max-files="1"
+                           multiple-files="false"
+                           keep="true"
+                           files-selected="vm.filesSelected(files,3)"
+            ></file-uploader>
+        </div>
+    </md-card>
+
+    <md-card layout-align="space-around center"
+             layout="row"
+             ng-if="!vm.visible"
+             layout-padding>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+            </div>
+
+            <div ng-if="vm.request.firma_cliente" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.firma_cliente"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center" ng-if="!vm.request.firma_cliente">
+                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
+            </div>
+
+        </div>
+        <div flex-gt-sm="50" flex="100">
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center">
+                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+            </div>
+
+            <div ng-if="vm.request.firma_tecnico" layout-fill>
+
+                <ng-image-gallery
+                    images="vm.request.firma_tecnico"
+                    thumbnails="false"
+                    thumb-size="80"
+                    inline="true"
+                    bubbles="true"
+                    bubble-size="5"
+                    img-bubbles="true"
+                    bg-close="false"
+                    piracy="false"
+                    img-anim="fadeup"
+                ></ng-image-gallery>
+                <!--<img ng-repeat="evidence in vm.request.evidencia" ngf-src="evidence.foto" class="thumbnails" layout-padding/>-->
+            </div>
+
+            <div flex
+                 layout="row"
+                 layout-align-gt-sm="space-around center"
+                 ng-if="!vm.request.firma_tecnico">
+                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
+            </div>
+
+        </div>
+    </md-card>
+
+    <md-card layout-align="center stretch"
+             layout="column"
+             ng-if="vm.request.tipo"
+             layout-padding>
+        <div flex
+             layout="row"
+             layout-align-gt-sm="space-around center">
+            <h3 translate>Información de la atención</h3>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.CLIENT_COMMENTS</label>
+                <input
+                    ng-model="vm.request.observaciones_cliente"
+                    ng-disabled="!vm.visible"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.WORKER_COMMENTS</label>
+                <input
+                    ng-model="vm.request.observaciones_tecnico"
+                    ng-disabled="!vm.visible"/>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             layout-gt-sm="row"
+             layout-align-gt-sm="center stretch">
+
+            <md-input-container flex class="md-block">
+                <label translate>REQUESTS.NEW.SCORE</label>
+                <md-select
+                    ng-model="vm.request.calificacion"
+                    ng-disabled="!vm.visible">
+                    <md-option
+                        ng-repeat="score in vm.scores"
+                        ng-value="score.value">
+                        {{score.label}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout="row"
+             layout-align="end end"
+             layout-sm="column"
+             layout-xs="column"
+             layout-align-sm="start stretch"
+             layout-align-xs="start stretch"
+             ng-if="vm.visible"
+             cg-busy="{promise:vm.promiseLoader,templateUrl:'app/mainApp/directives/loading_repeater.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+            <md-button
+                cg-busy="{promise:vm.savingPromise, message:''}"
+                aria-label="assign" ng-click="vm.enviar()"
+                class="md-raised md-primary">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+            </md-button>
+        </div>
+
+    </md-card>
+
+</div>

@@ -83,7 +83,7 @@
             layout="column"
             ng-repeat="attention in vm.requests"
             layout-gt-md="row"
-            ng-click="">
+            ng-click="vm.selectType(attention.tipo, attention.folio)">
             <div layout="column" layout-align="center stretch" flex="100">
                 <md-content>
                     <div flex="100">

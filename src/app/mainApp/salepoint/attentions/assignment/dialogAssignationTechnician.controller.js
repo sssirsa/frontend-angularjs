@@ -7,7 +7,6 @@
         Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION, QUERIES) {
         var vm = this;
 
-        console.log("el controler", attention);
         //Variables
         vm.chip = [];
         vm.request = null;
@@ -35,12 +34,13 @@
 
         vm.limit = 0;
         vm.noResults = null;
+        vm.filtro = false;
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
         vm.preSearchPerson = preSearchPerson;
         vm.onElementSelect = onElementSelect;
-        vm.clearVar = clearVar;
+        vm.change = change;
         vm.assign = assign;
         vm.cancel = cancel;
         vm.view = view;
@@ -77,8 +77,8 @@
             required: true
         };
 
-        function clearVar() {
-            vm.personList = null;
+        function change() {
+            vm.filtro = !vm.filtro;
         }
 
         function setLimitHours() {
@@ -143,7 +143,7 @@
 
         function selectedPersonChange() {
             vm.salePoint.persona = vm.assignedPerson.id;
-            vm.infoChip = null;
+            vm.chip = null;
             worklist(vm.salePoint.persona);
         }
 
@@ -159,6 +159,9 @@
         }
 
         function preSearchPerson() {
+            vm.personList = [];
+            vm.chip = [];
+
             Persona_Admin.list(0, 0, vm.searchText)
                 .then(function (userList) {
                     vm.limit = userList.count;
@@ -177,23 +180,8 @@
         function onElementSelect(element) {
             vm.assignedPerson.id = element;
             vm.salePoint.persona = vm.assignedPerson.id;
-            vm.infoChip = null;
+            vm.chip = null;
             worklist(vm.salePoint.persona);
-        }
-
-        function searchPersonCollection() {
-            if (!vm.personSearchText) {
-                return vm.personList;
-            }
-            else {
-                return _.filter(vm.personList, function (item) {
-                    return item.user.username.toLowerCase().includes(vm.personSearchText.toLowerCase())
-                        || item.nombre.toLowerCase().includes(vm.personSearchText.toLowerCase())
-                        || item.apellido_paterno.toLowerCase().includes(vm.personSearchText.toLowerCase())
-                        || item.apellido_materno.toLowerCase().includes(vm.personSearchText.toLowerCase());
-
-                });
-            }
         }
 
         function assign() {
@@ -203,13 +191,10 @@
                 return;
             }
 
-
-
-            vm.personLoading = ATTENTIONS.assignationTechnician(vm.toAsigned, vm.id)
+            vm.personLoading = ATTENTIONS.assignationTechnician(vm.id, vm.toAsigned)
                 .then(function () {
                     ErrorHandler.success();
                     $mdDialog.hide();
-                    //$state.go('triangular.admin-default.serviceAssing');
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
@@ -231,9 +216,9 @@
             var min1 = min1Num < 10 ? '0' + min1Num.toString() : min1Num.toString();
             var min2 = min2Num < 10 ? '0' + min2Num.toString() : min2Num.toString();
 
-            vm.toAsigned.horaInicio = hora1 + ':' + min1 + ':00';
-            vm.toAsigned.horaFin = hora2 + ':' + min2 + ':00';
-            vm.toAsigned.persona = vm.assignedPerson.id;
+            vm.toAsigned.hora_inicio = hora1 + ':' + min1 + ':00';
+            vm.toAsigned.hora_fin = hora2 + ':' + min2 + ':00';
+            vm.toAsigned.persona_id = vm.assignedPerson.id;
 
             return false;
         }
@@ -260,15 +245,16 @@
             vm.chip = [];
             vm.worklistLoading = SalePoint.assignedTo(persona)
                 .then(function (list) {
-
                     angular.forEach(list.results, function (solicitud) {
-                        var aux = {
-                            servicio: solicitud.hora_tecnico_inicio + ' - ' + solicitud.hora_tecnico_fin,
-                            folio: solicitud.folio,
-                            nombreEstablecimiento: solicitud.establecimiento.nombre_establecimiento,
-                            direccion: solicitud.establecimiento.calle
-                        };
-                        vm.chip.push(aux);
+                        if (solicitud.status == "En_proceso" || solicitud.status == "Abierta") {
+                            var aux = {
+                                servicio: solicitud.hora_tecnico_inicio + ' - ' + solicitud.hora_tecnico_fin,
+                                folio: solicitud.folio,
+                                nombreEstablecimiento: solicitud.solicitud.establecimiento.nombre_establecimiento,
+                                direccion: solicitud.solicitud.establecimiento.calle
+                            };
+                            vm.chip.push(aux);
+                        }
                     });
 
                 })
