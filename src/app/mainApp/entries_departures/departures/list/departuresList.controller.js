@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.entries_departures')
+        .module('app.mainApp.entries_departures.departures')
         .controller('departuresListController', DeparturesListController);
 
     function DeparturesListController(

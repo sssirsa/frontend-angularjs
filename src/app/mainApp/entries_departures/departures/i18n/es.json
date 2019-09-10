@@ -7,6 +7,8 @@
                 "PDF": "Generar remisión"
             },
             "LABELS": {
+                "ASSET_LIST": "Cabinets de la salida",
+                "ASSET": "Económico",
                 "ID": "Folio:",
                 "DATE": "Fecha:",
                 "DESCRIPTION": "Descripción",

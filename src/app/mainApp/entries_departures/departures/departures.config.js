@@ -66,6 +66,26 @@
                 controller: 'departuresListController',
                 controllerAs: 'vm'
             })
+            /* Entry detail */
+            .state('triangular.admin-default.departure-detail', {
+                url: '/salida/detalle/:departureId',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__departures__new_departures',
+                            'entries_departures__departures__warranties_departures',
+                            'entries_departures__departures__no_labeled_departures',
+                            'entries_departures__departures__warehouse_departures',
+                            'entries_departures__departures__repair_departures']
+                    }
+                },
+                params: {
+                    departureId: null,
+                    departure: null
+                },
+                templateUrl: 'app/mainApp/entries_departures/departures/detail/departureDetail.tmpl.html',
+                controller: 'departureDetailController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
