@@ -121,7 +121,12 @@
             }
             page ? null : page = 1;
             var length;
-            vm.entry.cabinets ? length = vm.entry.cabinets.length : length = vm.entry.no_capitalizados.length;
+            if (vm.entry.cabinets) {
+                vm.entry.cabinets.length ? length = vm.entry.cabinets.length : null;
+            }
+            if (vm.entry.no_capitalizados) {
+                vm.entry.no_capitalizados.length ? length = vm.entry.no_capitalizados.length : null;
+            }
             vm.assetStatusPromise = MANUAL_ENTRIES
                 .getAssetStatus(vm.entryId, page, length)
                 .then(function (assetsStatus) {
