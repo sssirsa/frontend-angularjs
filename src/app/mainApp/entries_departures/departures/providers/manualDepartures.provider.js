@@ -10,7 +10,8 @@
         QUERIES,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        User
     ) {
         var departuresUrl = API
             .all(URLS.entries_departures.base)
@@ -861,6 +862,7 @@
             close: close,
             getCabinet: getCabinet,
             getDeparturesByCabinet: getDeparturesByCabinet,
+            listDepartures: listDepartures,
             //Constants
             newDeparture: newDeparture,
             obsoleteDeparture: obsoleteDeparture,

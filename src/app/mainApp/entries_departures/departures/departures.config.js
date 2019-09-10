@@ -54,6 +54,18 @@
                 controller: 'warrantyManualDepartureController',
                 controllerAs: 'vm'
             })
+            /* List entries */
+            .state('triangular.admin-default.departures-list', {
+                url: '/salida/listado',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__departures__list_all_departures']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/departures/list/departuresList.tmpl.html',
+                controller: 'departuresListController',
+                controllerAs: 'vm'
+            })
             ;
         triMenuProvider.addMenu(
             {
@@ -62,37 +74,68 @@
                 type: 'dropdown',
                 permission: [
                     'entries_departures__departures__news_departures',
+                    'entries_departures__departures__no_labeled_departures',
                     'entries_departures__departures__scrapped_departures',
                     'entries_departures__departures__warehouse_departures'
                 ],
                 priority: 5,
                 children: [
                     {
-                        name: 'DEPARTURES.MENU.NEW',
-                        type: 'link',
-                        permission: ['entries_departures__departures__news_departures'],
-                        state: 'triangular.admin-default.departure-new-manual'
+                        name: 'DEPARTURES.MENU.MANUAL',
+                        type: 'dropdown',
+                        icon: 'fa fa-hand-paper',
+                        permission: [
+                            'entries_departures__departures__news_departures',
+                            'entries_departures__departures__no_labeled_departures',
+                            'entries_departures__departures__scrapped_departures',
+                            'entries_departures__departures__warehouse_departures'
+                        ],
+                        children: [
+                            {
+                                name:'DEPARTURES.MENU.NEW',
+                                type: 'link',
+                                permission: ['entries_departures__departures__news_departures'],
+                                state: 'triangular.admin-default.departure-new-manual'
+                            },
+                            {
+                                name: 'DEPARTURES.MENU.OBSOLETE',
+                                type: 'link',
+                                permission: ['entries_departures__departures__scrapped_departures'],
+                                state: 'triangular.admin-default.departure-obsolete-manual'
+                            },
+                            {
+                                name: 'DEPARTURES.MENU.WAREHOUSE',
+                                type: 'link',
+                                permission: ['entries_departures__departures__warehouse_departures'],
+                                state: 'triangular.admin-default.departure-warehouse-manual'
+                            },
+                            {
+                                name: 'DEPARTURES.MENU.WARRANTY',
+                                type: 'link',
+                                permission: ['entries_departures__departures__warranties_departures'],
+                                state: 'triangular.admin-default.departure-warranty-manual'
+                            }
+                        ]
                     },
+                    //{
+                    //    name: 'DEPARTURES.MENU.MASSIVE',
+                    //    type: 'dropdown',
+                    //    icon: 'fa fa-file-csv',
+                    //    permission: ['entries_departures__departures__new_departures',
+                    //        'entries_departures__departures__warranties_departures',
+                    //        'entries_departures__departures__no_labeled_departures',
+                    //        'entries_departures__departures__scrapped_departures',
+                    //        'entries_departures__departures__repair_departures'],
+                    //    children: []
+                    //},
                     {
-                        name: 'DEPARTURES.MENU.OBSOLETE',
+                        name: 'DEPARTURES.MENU.LIST',
                         type: 'link',
-                        permission: ['entries_departures__departures__scrapped_departures'],
-                        state: 'triangular.admin-default.departure-obsolete-manual'
-                    },
-                    {
-                        name: 'DEPARTURES.MENU.WAREHOUSE',
-                        type: 'link',
-                        permission: ['entries_departures__departures__warehouse_departures'],
-                        state: 'triangular.admin-default.departure-warehouse-manual'
-                    },
-                    {
-                        name: 'DEPARTURES.MENU.WARRANTY',
-                        type: 'link',
-                        permission: ['entries_departures__departures__warranties_departures'],
-                        state: 'triangular.admin-default.departure-warranty-manual'
+                        icon: 'fa fa-archive',
+                        permission: ['entries_departures__departures__list_all_departures'],
+                        state: 'triangular.admin-default.departures-list'
                     }
                 ]
-
             }
         );
     }

@@ -33,7 +33,7 @@
             "FILTERS": {
                 "ALL": "Todas",
                 "NEW": "Nuevos",
-                "REPAIR": "Reparación",
+                "OBSOLETE": "Obsoletos",
                 "UNRECOGNIZABLE": "No capitalizados",
                 "WAREHOUSE": "Buen estado",
                 "WARRANTY": "Garantías"
@@ -58,6 +58,7 @@
         },
         "MENU": {
             "TITLE": "Salidas",
+            "LIST": "Listado",
             "MANUAL": "Manual",
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",
