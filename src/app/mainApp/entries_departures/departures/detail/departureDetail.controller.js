@@ -7,8 +7,7 @@
         ErrorHandler,
         Translate,
         toastr,
-        MANUAL_DEPARTURES,
-        PAGINATION
+        MANUAL_DEPARTURES
     ) {
         var vm = this;
         vm.departureId;

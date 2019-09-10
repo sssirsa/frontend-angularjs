@@ -26,7 +26,8 @@
                     "STATUSES": {
                         "NOT_EXPECTED": "No esperado",
                         "PENDING": "Pendiente"
-                    }
+                    },
+                    "UNRECOGNIZABLE_ID": "Id no capitalizado"
                 }
             },
             "LABELS": {
@@ -49,7 +50,8 @@
                 "ORIGIN_PROVIDER": "Proveedor de origen:",
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
-                "TRANSPORT_LINE": "Linea de Transporte:"
+                "TRANSPORT_LINE": "Linea de Transporte:",
+                "UNRECOGNIZABLE": "Id no capitalizado"
             },
             "MESSAGES": {
                 "SUCCESS": "Entrada cerrada correctamente",

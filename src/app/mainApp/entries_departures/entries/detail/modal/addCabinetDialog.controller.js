@@ -4,12 +4,14 @@
         .controller('addCabinetToEntryDialogController', AddCabinetToEntryDialogController);
     function AddCabinetToEntryDialogController(
         $mdDialog,
-        OPTIONS
+        OPTIONS,
+        unrecognizable //Boolean
     ) {
         var vm = this;
 
         //Globals
         vm.cabinetToAdd;
+        vm.unrecognizable = unrecognizable;
 
         //Constants
         vm.cabinetStatuses = OPTIONS.entries_departures.entries.addCabinetKind;

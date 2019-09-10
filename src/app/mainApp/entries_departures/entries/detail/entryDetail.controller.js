@@ -72,17 +72,22 @@
         };
 
         vm.addAssetClicked = function () {
+            var unrecognizableEntry;
+            vm.entry.tipo_entrada === 'No_Capitalizados' ? unrecognizableEntry = true : unrecognizableEntry = false;
             var dialog = {
                 controller: 'addCabinetToEntryDialogController',
                 templateUrl: 'app/mainApp/entries_departures/entries/detail/modal/addCabinetDialog.tmpl.html',
                 clickOutsideToClose: true,
                 fullscreen: true,
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                locals: {
+                    unrecognizable: unrecognizableEntry
+                }
             };
 
             $mdDialog.show(dialog)
                 .then(function (asset) {
-                    addAsset(asset);
+                    addAsset(asset, unrecognizableEntry);
                 });
 
         };
@@ -115,19 +120,22 @@
                 vm.assets = [];
             }
             page ? null : page = 1;
+            var length;
+            vm.entry.cabinets ? length = vm.entry.cabinets.length : length = vm.entry.no_capitalizados.length;
             vm.assetStatusPromise = MANUAL_ENTRIES
-                .getAssetStatus(vm.entryId, page, vm.entry.cabinets.length)
+                .getAssetStatus(vm.entryId, page, length)
                 .then(function (assetsStatus) {
                     vm.assets = vm.assets.concat(assetsStatus[PAGINATION.elements]);
                     updateMissingAssetsArray(assetsStatus[PAGINATION.elements]);
                     vm.paginationHelper.page = page;
                     vm.paginationHelper.totalPages = Math.ceil(
-                        assetsStatus[PAGINATION.total] / vm.entry.cabinets.length
+                        assetsStatus[PAGINATION.total] / length
                     );
                 })
                 .catch(function (assetStatusError) {
                     ErrorHandler.errorTranslate(assetStatusError);
                 });
+
         }
 
         //Called when entry initial load is performed or when more assets are loaded
@@ -168,7 +176,7 @@
             });
         }
 
-        function addAsset(asset) {
+        function addAsset(asset, unrecognizable) {
             if (!vm.assets) {
                 vm.assets = [];
             }
@@ -176,10 +184,13 @@
             vm.loadingEntry = MANUAL_ENTRIES
                 .addCabinet(vm.entryId, asset)
                 .then(function () {
-                    var assetToAdd = {
+                    var assetToAdd;
+                    assetToAdd = {
                         cabinet: asset.cabinet_id,
-                        estado: asset.estado
+                        estado: asset.estado,
+                        no_capitalizado: asset.no_capitalizado_id
                     };
+
                     vm.assets.unshift(assetToAdd);
                 })
                 .catch(function (addAssetErrorResponse) {
