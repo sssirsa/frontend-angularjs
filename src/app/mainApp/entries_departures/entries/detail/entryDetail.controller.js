@@ -72,6 +72,8 @@
         };
 
         vm.addAssetClicked = function () {
+            var unrecognizableEntry;
+            vm.entry.tipo_entrada === 'No_Capitalizados' ? unrecognizableEntry = true : unrecognizableEntry = false;
             var dialog = {
                 controller: 'addCabinetToEntryDialogController',
                 templateUrl: 'app/mainApp/entries_departures/entries/detail/modal/addCabinetDialog.tmpl.html',
