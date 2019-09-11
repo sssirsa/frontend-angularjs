@@ -93,7 +93,6 @@
         };
 
         function onElementSelect(element) {
-            console.log(element.filters_type)
             $state.go('triangular.admin-default.report-request', {
                 reportId: element.id
             });

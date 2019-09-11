@@ -60,11 +60,22 @@
         init();
 
         //Functions
+        vm.prepareDataToSend = function prepareDataToSend() {
+            var dataSend = [];
+            angular.forEach(vm.queries, function (value) {
+                var dataObject = {};
+                dataObject[value.query] = value.value;
+                dataSend.push(dataObject);
+            });
+            return dataSend;
+        };
+
         vm.generate = function generate() {
+            var dataSend = vm.prepareDataToSend();
             vm.savingPromise = REPORT
                 .requestReportByID(
                     $stateParams.reportId,
-                    vm.queries
+                    dataSend
                 )
                 .then(function reportSuccess() {
                     toastr.success(Translate.translate('REPORT_META.REQUEST.MESSAGES.SUCCESS'));

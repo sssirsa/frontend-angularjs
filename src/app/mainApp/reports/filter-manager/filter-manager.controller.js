@@ -23,6 +23,23 @@
 (function () {
     angular
         .module('app.mainApp.reports')
+        .filter('translateFilter', function(Translate) {
+            var filterTranslations = {
+                not:Translate.translate('REPORT_META.REQUEST.FILTERS.NOT'),
+                gt:Translate.translate('REPORT_META.REQUEST.FILTERS.GT'),
+                lt:Translate.translate('REPORT_META.REQUEST.FILTERS.LT'),
+                gte:Translate.translate('REPORT_META.REQUEST.FILTERS.GTE'),
+                lte:Translate.translate('REPORT_META.REQUEST.FILTERS.LTE'),
+                contains:Translate.translate('REPORT_META.REQUEST.FILTERS.CONTAINS'),
+                icontains:Translate.translate('REPORT_META.REQUEST.FILTERS.ICONTAINS'),
+                startswith:Translate.translate('REPORT_META.REQUEST.FILTERS.STARTSWITH'),
+                istartswith:Translate.translate('REPORT_META.REQUEST.FILTERS.ISTARTSWITH'),
+                equals: Translate.translate('REPORT_META.REQUEST.FILTERS.EQUALS')
+            };
+            return function(input) {
+                return filterTranslations[input];
+            };
+        })
         .component('filterManager', {
             templateUrl: 'app/mainApp/reports/filter-manager/filter-manager.tmpl.html',
             controller: filterManagerController,
@@ -41,13 +58,12 @@
                 fieldLabel: '<',    //Default is "Field"
                 propertyLabel: '<', //Default is "Property"
                 filtersLabel: '<',  //Default is "Filter to apply"
-                valueLabel: '<',     //Default is "Value"
-                filterTranslations: '<' //Default is no translations
+                valueLabel: '<'     //Default is "Value"
             }
         });
 
     function filterManagerController(
-        //$log
+        $filter
     ) {
         var vm = this;
 
@@ -68,60 +84,30 @@
 
         //Globals
         vm.queryResult = '';
+        vm.queryPropertyResult = null;
+        vm.queryValueResult = null;
         vm.newComponent = true;
-
-        //Auxiliary variables for creating and modifying filters
-        vm.rootFields;
-        vm.propertiesOfField;
-        //Extracted directly from the API as a string array
-        vm.filterTypes;
-        //Converted to a key-value pair to handle filter ans translation
-        vm.translatedFilters;
-
-        //Used when modifying
-
-        vm.originalFilter;
+        vm.translatedFilters = null;
 
         //Standarized filters array
-        vm.appliedFilters;
-        vm.editingIndex;
-
-        var init = function () {
-            //Demo data
-            //vm.appliedFilters=[];
-            vm.appliedFilters = [];
-            vm.editingIndex = -1;
-            vm.rootFields = Object.keys(vm.filters);
-        };
-        init();
+        vm.appliedFilters = [];
+        vm.editingIndex = -1;
 
         //Functions
-
-        //Called for enabling filter modification
-        //TODO: Finish it, not yet implemented
-        vm.modifyFilter = function modifyFilter(index) {
-            vm.editingIndex = index;
-            vm.originalFilter = angular.copy(vm.appliedFilters[vm.editingIndex]);
+        vm.cleanModels = function cleanModels() {
+            vm.queryPropertyResult = null;
         };
 
-        vm.cancelAddModify = function cancelAddModify(index) {
+        vm.cancelAddModify = function cancelAddModify() {
+            vm.queryResult = '';
+            vm.queryPropertyResult = null;
+            vm.queryValueResult = null;
             vm.editingIndex = -1;
-            vm.propertiesOfField = null;
-            vm.filterType = null;
-            vm.translatedFilters = null;
-            if (!vm.originalFilter) {
-                //Was not editing
-                vm.appliedFilters.splice(index, 1);
-            }
-            else {
-                //Was editing
-                angular.copy(vm.originalFilter, vm.appliedFilters[index]);
-            }
-            vm.originalFilter = null;
         };
 
         vm.removeFilter = function removeFilter(index) {
             vm.appliedFilters.splice(index, 1);
+            vm.queries = vm.appliedFilters;
         };
 
         //Called for enabling the adding filter feature
@@ -132,171 +118,22 @@
             else {
                 vm.editingIndex = 0;
             }
-            vm.appliedFilters.push(new vm.template());
         };
 
-        vm.getPropertiesOfField = function getPropertiesOfField(field) {
-            //A field has been selected
-            if (field) {
-                //Reseting property, filter and value fields
-                vm.appliedFilters[vm.editingIndex].filter.field.property_name = '';
-                vm.appliedFilters[vm.editingIndex].filter.field.filter_type = '';
-                vm.appliedFilters[vm.editingIndex].filter.field.value = '';
-
-                if (vm.filters[field].filter) {
-                    //Has property filter
-                    //AKA: No properties nested at this level
-                    if (vm.filters[field].filter.length) {
-                        //Filters are defined a this level
-                        vm.filterTypes = vm.filters[field].filter;
-                        if (!vm.filterTypes.push) {
-                            //Is not an array
-                            vm.filterTypes = [];
-                        }
-                        vm.filterTypes.unshift('equals');
-                        translateFilters();
-                    }
-                    else {
-                        //Filter has subproperties inside filter property
-                        vm.propertiesOfField = Object.keys(vm.filters[field].filter);
-                    }
-                }
-                else {
-                    //Properties nested at this level
-                    vm.propertiesOfField = Object.keys(vm.filters[field]);
-                }
-            }
+        vm.getFinalQuery = function getFinalQuery() {
+            var string = vm.queryResult + vm.queryPropertyResult;
+            var verbose = 'Filtro: "' + vm.queryResult.replace(/__/g,' -> ') + $filter('translateFilter')(vm.queryPropertyResult) + '"';
+            verbose += ' Valor: "' + vm.queryValueResult + '"';
+            vm.appliedFilters.push({'query':string, 'value': vm.queryValueResult, 'verbose':verbose});
+            vm.queries = vm.appliedFilters;
         };
 
-        vm.setFiltersFromProperty = function setFiltersFromProperty(index) {
-            vm.filterTypes = [];
-            var rootTemplate = vm.appliedFilters[index];
-            var rootFilter = vm.filters[rootTemplate.filter.field.name];
-            var propertyName = rootTemplate.filter.field.property_name;
-            if (propertyName) {
-                //A property has been selected
-                //Reseting filter and value field
-                vm.appliedFilters[index].filter.field.filter_type = '';
-                vm.appliedFilters[index].filter.field.value = '';
-                if (rootFilter.filter) {
-                    //Has property filter
-                    //AKA: No properties nested at this level
-                    if (!rootFilter.filter.length) {
-                        //Filter has subproperties inside filter property
-                        vm.filterTypes = rootFilter.filter[propertyName];
-                    }
-                }
-                else {
-                    //Properties nested at this level
-                    vm.filterTypes = rootFilter[propertyName].filter;
-                }
-                vm.filterTypes.unshift('equals');
-                translateFilters();
-            }
-        };
-
-        vm.filterChanged = function filterChanged(index) {
-            vm.appliedFilters[index].filter.field.value = '';
-        };
-
-        vm.saveFilter = function saveFilter(index) {
-            generateVerbose(index);
-            generateQuery(index);
-            vm.propertiesOfField = null;
-            vm.filterType = null;
-            vm.translatedFilters = null;
-            addQueryToList(index);
+        vm.saveFilter = function saveFilter() {
+            vm.getFinalQuery();
+            vm.queryResult = '';
+            vm.queryPropertyResult = null;
+            vm.queryValueResult = null;
             vm.editingIndex = -1;
-        };
-
-        //Internal functions
-
-        var addQueryToList = function addQueryToList(index) {
-            var query = vm.appliedFilters[index].query;
-            var value = vm.appliedFilters[index].filter.field.value;
-            vm.queries[query] = value;
-        };
-
-        var translateFilters = function translateFilters() {
-            if (vm.filterTypes.length) {
-                //Has elements to iterate
-                //Var initialize
-                vm.translatedFilters = [];
-                if (vm.filterTranslations) {
-                    //You can translate the filters
-                    angular.forEach(vm.filterTypes, function (filterType) {
-                        if (vm.filterTranslations[filterType]) {
-                            //The translation for the filter exist
-                            vm.translatedFilters.push({
-                                value: filterType,
-                                verbose: vm.filterTranslations[filterType]
-                            });
-                        }
-                        else {
-                            //No translation available so just put
-                            //the same value as the filter in the verbose
-                            vm.translatedFilters.push({
-                                value: filterType,
-                                verbose: filterType
-                            });
-                        }
-                    });
-                }
-                else {
-                    //Can't translate so assing the same value to the filter
-                    angular.forEach(vm.filterTypes, function (filterType) {
-                        vm.translatedFilters.push({
-                            value: filterType,
-                            verbose: filterType
-                        });
-                    });
-                }
-            }
-        };
-
-        var generateVerbose = function generateVerbose(index) {
-            var verbose = '';
-            var filterToApply = vm.appliedFilters[index].filter.field;
-            if (filterToApply.name) {
-                vm.fieldLabel ? verbose += vm.fieldLabel + ': ' : verbose += 'Field: ';
-                verbose += filterToApply.name + ',';
-            }
-            if (filterToApply.property_name) {
-                vm.propertyLabel ? verbose += ' ' + vm.propertyLabel + ': ' : verbose += ' Property: ';
-                verbose += filterToApply.property_name + ',';
-            }
-            if (filterToApply.filter_type) {
-                vm.filtersLabel ? verbose += ' ' + vm.filtersLabel + ': ' : verbose += ' Filter to apply: ';
-                vm.filterTranslations ?
-                    vm.filterTranslations[filterToApply.filter_type] ?
-                        verbose += vm.filterTranslations[filterToApply.filter_type]
-                        : verbose += filterToApply.filter_type
-                    : verbose += filterToApply.filter_type;
-                verbose += ',';
-
-            }
-            if (filterToApply.value) {
-                vm.valueLabel ? verbose += ' ' + vm.valueLabel + ': ' : verbose += ' Value: ';
-                verbose += filterToApply.value;
-            }
-            vm.appliedFilters[index].verbose = verbose;
-        };
-
-        var generateQuery = function generateQuery(index) {
-            var query = '';
-            var filterToApply = vm.appliedFilters[index].filter.field;
-            if (filterToApply.name) {
-                query += filterToApply.name;
-            }
-            if (filterToApply.property_name) {
-                query += '__' + filterToApply.property_name;
-            }
-            if (filterToApply.filter_type) {
-                if (filterToApply.filter_type !== 'equals') {
-                    query += '__' + filterToApply.filter_type;
-                }
-            }
-            vm.appliedFilters[index].query = query;
         };
 
     }
