@@ -72,8 +72,6 @@
         };
 
         vm.addAssetClicked = function () {
-            var unrecognizableEntry;
-            vm.entry.tipo_entrada === 'No_Capitalizados' ? unrecognizableEntry = true : unrecognizableEntry = false;
             var dialog = {
                 controller: 'addCabinetToEntryDialogController',
                 templateUrl: 'app/mainApp/entries_departures/entries/detail/modal/addCabinetDialog.tmpl.html',
@@ -87,7 +85,7 @@
 
             $mdDialog.show(dialog)
                 .then(function (asset) {
-                    addAsset(asset, unrecognizableEntry);
+                    addAsset(asset);
                 });
 
         };
@@ -181,7 +179,7 @@
             });
         }
 
-        function addAsset(asset, unrecognizable) {
+        function addAsset(asset) {
             if (!vm.assets) {
                 vm.assets = [];
             }
