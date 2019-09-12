@@ -61,11 +61,9 @@
 
         //Functions
         vm.prepareDataToSend = function prepareDataToSend() {
-            var dataSend = [];
+            var dataSend = {};
             angular.forEach(vm.queries, function (value) {
-                var dataObject = {};
-                dataObject[value.query] = value.value;
-                dataSend.push(dataObject);
+                dataSend[value.query] = value.value;
             });
             return dataSend;
         };
