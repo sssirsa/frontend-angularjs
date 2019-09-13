@@ -49,9 +49,7 @@
                         hint: 'Cantidad a utilizar del insumo',
                         required: true,
                         validations: {
-                            regex: '([1-9]{1})\d*',
                             errors: {
-                                regex: 'Cantidad debe estar entre 1 y 99',
                                 required: 'La cantidad es obligatoria'
                             }
                         }
