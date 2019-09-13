@@ -3,10 +3,10 @@
 
     angular
         .module('app.mainApp.salepoint')
-        .controller('newAttentionController', newAttentionController);
+        .controller('changeAttentionController', changeAttentionController);
 
     /* @ngInject */
-    function newAttentionController(
+    function changeAttentionController(
         User,
         REQUESTS,
         ATTENTIONS,

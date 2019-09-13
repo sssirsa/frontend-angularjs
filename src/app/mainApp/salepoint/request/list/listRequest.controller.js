@@ -13,11 +13,14 @@
         Translate,
         $http,
         pdfMake,
-        $log
+        $log,
+        $mdDialog,
+        $document
     ) {
         var vm = this;
 
         //Function mapping
+        vm.AssignationTechnician = AssignationTechnician;
         vm.listFilteredRequests = listFilteredRequests;
         vm.selectRequest = selectRequest;
         vm.downloadReport = downloadReport;
@@ -74,6 +77,23 @@
 
         function selectRequest(request) {
             $state.go('triangular.admin-default.detail-request', {id: request.id});
+        }
+
+        function AssignationTechnician(attention) {
+            $mdDialog.show({
+                controller: 'dialogAsignationTechnicianController',
+                templateUrl: 'app/mainApp/salepoint/attentions/assignment/dialogAssignationTechnician.tmpl.html',
+                parent: angular.element($document.body),
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                focusOnOpen: true,
+                locals: {
+                    attention: attention
+                }
+            })
+                .then(function () {
+                    vm.listAttentions();
+                });
         }
 
         function downloadReport(requestID, event) {

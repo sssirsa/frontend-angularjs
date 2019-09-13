@@ -43,7 +43,7 @@
                                                  md-min-length="0"
                                                  md-selected-item="vm.assignedPerson"
                                                  md-selected-item-change="vm.selectedPersonChange()"
-                                                 md-search-text="personSearchText"
+                                                 md-search-text="vm.personSearchText"
                                                  md-items="item in vm.personList"
                                                  md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
                                                  md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"

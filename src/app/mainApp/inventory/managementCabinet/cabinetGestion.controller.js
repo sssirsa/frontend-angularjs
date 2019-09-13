@@ -18,7 +18,8 @@
 
         vm.aRefresh = aRefresh;
         vm.listcabinets = listcabinets;
-        vm.setPagination = setPagination;vm.sig = sigPage;
+        vm.setPagination = setPagination;
+        vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
 

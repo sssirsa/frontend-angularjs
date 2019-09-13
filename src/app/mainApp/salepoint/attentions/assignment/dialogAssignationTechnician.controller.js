@@ -15,10 +15,10 @@
         vm.personList = null;
         vm.store = null;
         vm.toAsigned = {
-            persona: null,
+            persona_id: null,
             prioridad: 4,
-            horaInicio: '09:00:00',
-            horaFin: '18:00:00'
+            hora_inicio: '09:00:00',
+            hora_fin: '18:00:00'
         };
         vm.horainicio = null;
         vm.horafin = null;
@@ -30,7 +30,12 @@
 
         vm.horaminPrev = attention.hora_cliente_inicio;
         vm.horamaxPrev = attention.hora_cliente_fin;
-        vm.id = attention.folio;
+
+        if (attention.folio) {
+            vm.id = attention.folio;
+        } else {
+            vm.id = attention.id;
+        }
 
         vm.limit = 0;
         vm.noResults = null;
@@ -51,24 +56,24 @@
 
         vm.personal = {
             type: 'catalog',
-            model: 'user__username',
-            label: 'Nombre de usuario',
+            model: 'id',
+            label: 'Trabajadores',
             catalog: {
                 url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.administration.base
-                + '/' + URLS.management.administration.person,
-                name: "Trabajador",
-                loadMoreButtonText: 'Cargar mas',
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.administration.base
+                    + '/' + URLS.management.administration.person,
+                name: 'Trabajador',
                 model: 'id',
                 option: 'nombre',
+                elements: 'results',
                 pagination: {
                     total: PAGINATION.total,
                     limit: PAGINATION.limit,
                     offset: PAGINATION.offset,
-                    pageSize: PAGINATION.pageSize,
+                    pageSize: PAGINATION.pageSize
                 },
-                elements: 'results',
+                loadMoreButtonText: 'Cargar mas...',
                 softDelete: {
                     hide: 'deleted',
                     reverse: false
@@ -120,6 +125,7 @@
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
                                 vm.assignedPerson = userSuccess;
+                                worklist(vm.assignedPerson.id);
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
@@ -143,7 +149,7 @@
 
         function selectedPersonChange() {
             vm.salePoint.persona = vm.assignedPerson.id;
-            vm.chip = null;
+            vm.infoChip = null;
             worklist(vm.salePoint.persona);
         }
 
@@ -152,6 +158,7 @@
                 .then(function (userListSuccess) {
                     userListSuccess = userListSuccess.results;
                     vm.personList = userListSuccess;
+                    return searchPersonCollection();
                 })
                 .catch(function () {
                     vm.personList = null;
@@ -159,9 +166,6 @@
         }
 
         function preSearchPerson() {
-            vm.personList = [];
-            vm.chip = [];
-
             Persona_Admin.list(0, 0, vm.searchText)
                 .then(function (userList) {
                     vm.limit = userList.count;
@@ -177,10 +181,25 @@
                 });
         }
 
+        function searchPersonCollection() {
+            if (!vm.personSearchText) {
+                return vm.personList;
+            }
+            else {
+                return _.filter(vm.personList, function (item) {
+                    return item.user.username.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                        || item.nombre.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                        || item.apellido_paterno.toLowerCase().includes(vm.personSearchText.toLowerCase())
+                        || item.apellido_materno.toLowerCase().includes(vm.personSearchText.toLowerCase());
+
+                });
+            }
+        }
+
         function onElementSelect(element) {
             vm.assignedPerson.id = element;
             vm.salePoint.persona = vm.assignedPerson.id;
-            vm.chip = null;
+            vm.infoChip = null;
             worklist(vm.salePoint.persona);
         }
 
@@ -191,6 +210,7 @@
                 return;
             }
 
+            console.log("vm.toAsigned", vm.toAsigned);
             vm.personLoading = ATTENTIONS.assignationTechnician(vm.id, vm.toAsigned)
                 .then(function () {
                     ErrorHandler.success();

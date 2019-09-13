@@ -169,7 +169,7 @@
                     id: null
                 },
                 templateUrl: 'app/mainApp/salepoint/attentions/retrive/retriveAttention.tmpl.html',
-                controller: '',
+                controller: 'retriveAttentionController',
                 controllerAs: 'vm'
             })
 
@@ -184,7 +184,7 @@
                     id: null
                 },
                 templateUrl: 'app/mainApp/salepoint/attentions/change/changeAttention.html',
-                controller: '',
+                controller: 'changeAttentionController',
                 controllerAs: 'vm'
             })
 

@@ -58,7 +58,7 @@
 
                     <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Abierta'">
                         <div layout="row">
-                            <span translate>REQUESTS.LIST.OPEN</span>&nbsp
+                            <span translate>PRE_REQUEST.LIST.TYPE.OPEN</span>&nbsp
                         </div>
                         <div layout="row">
                             <div class="Abierta"></div>
@@ -66,7 +66,7 @@
                     </div>
                     <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'En_proceso'">
                         <div layout="row">
-                            <span translate>REQUESTS.LIST.IN_PROCESS</span>&nbsp
+                            <span translate>PRE_REQUEST.LIST.TYPE.IN_PROCESS</span>&nbsp
                         </div>
                         <div layout="row">
                             <div class="En_proceso"></div>
@@ -74,7 +74,7 @@
                     </div>
                     <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Atendida'">
                         <div layout="row">
-                            <span translate>REQUESTS.LIST.ATTENDED</span>&nbsp
+                            <span translate>PRE_REQUEST.LIST.TYPE.ATTENDED</span>&nbsp
                         </div>
                         <div layout="row">
                             <div class="Atendida"></div>
@@ -82,7 +82,7 @@
                     </div>
                     <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Cancelada'">
                         <div layout="row">
-                            <span translate>REQUESTS.LIST.CANCELED</span>&nbsp
+                            <span translate>PRE_REQUEST.LIST.TYPE.CANCELED</span>&nbsp
                         </div>
                         <div layout="row">
                             <div class="Cancelada"></div>
@@ -90,7 +90,7 @@
                     </div>
                     <div layout="colum" layout-align="center center" ng-if="vm.request.status == 'Improductiva'">
                         <div layout="row">
-                            <span translate>REQUESTS.LIST.UNPRODUCTIVE</span>&nbsp
+                            <span translate>PRE_REQUEST.LIST.TYPE.UNPRODUCTIVE</span>&nbsp
                         </div>
                         <div layout="row">
                             <div class="Improductiva"></div>
@@ -142,7 +142,7 @@
             </div>
 
             <div ng-if="vm.solicitudDetalles.evidencia.length === 0">
-                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+                <p>{{'REQUEST.DETAIL.NO_EVIDENCES'|translate}}</p>
             </div>
         </div>
     </md-card>
@@ -151,7 +151,7 @@
              layout="column"
              layout-padding
              ng-if="!vm.visible">
-        <h3 translate>REQUESTS.DETAIL.EVIDENCES</h3>
+        <h3 translate>ATTENTION.EVIDENCE.TITLE</h3>
 
         <div
             layout="column"
@@ -175,7 +175,7 @@
             </div>
 
             <div ng-if="vm.request.evidencia.length===0">
-                <p>{{'REQUESTS.DETAIL.NO_EVIDENCES'|translate}}</p>
+                <p>{{'REQUEST.EVIDENCES.NO_EVIDENCES'|translate}}</p>
             </div>
         </div>
     </md-card>
@@ -189,6 +189,7 @@
             <input ng-model="vm.km" type="text" placeholder="km (required)"
                    ng-required="true" maxlength="6" ng-disabled="!vm.visible" only-digits>
         </md-input-container>
+
 
         <div layout-align="center stretch"
              layout="column"
@@ -208,217 +209,83 @@
                     </thead>
                     <tbody md-body>
                     <tr md-row
-                        ng-repeat="cabinet in vm.solicitudDetalles.solicitudes_cabinet">
+                        ng-repeat="cabinet in vm.solicitudDetalles.cabinets_solicitud">
                         <td md-cell>{{cabinet.tipo}}</td>
                         <td md-cell>{{cabinet.cantidad}}</td>
                     </tr>
                     </tbody>
                 </table>
-
-
             </div>
-            <div>
-                <!--  codigo a copiar  -->
-                <div flex class="md-block" ng-if="vm.isUsed">
-                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
-                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
-                        <md-toolbar>
-                            <div class="md-toolbar-tools">
-                                <h2>Cabinet seleccionado</h2>
-                                <span flex></span>
-                            </div>
-                        </md-toolbar>
-                        <md-content
-                            layout="column"
-                            layout-align="center stretch"
-                            layout-padding
-                        >
-                            <div class="virtualRepeatScroll">
-                                <md-list-item class="md-3-line" ng-repeat="item in vm.todosSeleccionado">
-                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                                    <div class="md-list-item-text" layout="column">
-                                        <h2>Económico: {{ item.economico }}</h2>
-                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
-                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
-                                        <p>Estado: {{ item.estado }}</p>
-                                    </div>
-                                    <md-button class="md-secondary" ng-click="vm.unUsedCabinet()">
-                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
-                                    </md-button>
-                                </md-list-item>
-                            </div>
+            <!-- nuevo cabinet -->
+            <md-content layout="column" layout-align="center stretch" layout-padding ng-if="vm.visible">
 
-                        </md-content>
+                <div layout="row" layout-align="space-around center" layout-padding="" ng-if="!vm.searchBool">
+                    <form ng-submit="vm.searchCabinet()" flex="80" class="md-block">
+                        <md-input-container
+                            flex="80"
+                            class="md-block">
+                            <label>{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</label>
+                            <input
+                                only-digits
+                                ng-model="vm.searchText">
+                        </md-input-container>
+                    </form>
+                </div>
+
+                <div flex="40" ng-if="vm.searchBool">
+                    <md-toolbar layout="column"
+                                layout-gt-sm="row"
+                                layout-align="center stretch"
+                                layout-align-gt-sm="space-between center">
+                        <div layout="row" layout-align="center center">
+                            <span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCH_BY_ECONOMIC'|translate}}</span>
+                        </div>
+                        <div layout="column"
+                             layout-align="center stretch">
+                            <md-button aria-label="'Remove filter'"
+                                       ng-click="vm.removeFilter()"
+                                       class="md-raised">
+                                <md-icon md-font-icon="fa fa-ban"></md-icon>
+                                {{'MAIN.COMPONENTS.CABINET.REMOVE_FILTER'|translate}}
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+
+                    <div layout="row" layout-align="center center">
+                        <span class="md-subtitle">{{'MAIN.COMPONENTS.CABINET.SEARCHED_ITEM'|translate}}:</span>&nbsp
+                        <span class="md-subtitle">{{vm.searchText}}</span>
                     </div>
                 </div>
 
+                <div ng-if="vm.todos.length > 0">
+                    <md-list-item class="md-3-line" ng-repeat="item in vm.todos"">
+                        <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
 
-                <div flex class="md-block" ng-if="vm.isUsed">
-                    <div>
-                        <md-toolbar>
-                            <div class="md-toolbar-tools">
-                                <h2>{{'MAIN.MENU.PREREQUESTS.NEWCABINET'|translate}}</h2>
-                                <span flex></span>
+                        <div flex="100" layout="column" layout-gt-sm="row" layout-align="space-between center">
+                            <div layout="column" layout-align="start center">
+                                <div class="md-list-item-text" layout="column">
+                                    <h2>Económico: {{ item.economico }}</h2>
+                                    <h3>Modelo: {{ item.modelo }}</h3>
+                                    <h4>Número de Serie: {{ item.no_serie }}</h4>
+                                    <p>Estado: {{ item.estado }}</p>
+                                </div>
                             </div>
-                        </md-toolbar>
-                        <md-content
-                            layout="column"
-                            layout-align="center stretch"
-                            layout-padding
-                        >
-                            <form name="newcabinetFrom">
-                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                    <md-input-container flex class="md-block">
-                                        <label translate>MAIN.COMPONENTS.CABINET.ECONOMIC</label>
-                                        <input name="economico" required digits-only MAXLENGTH="20"
-                                               ng-model="vm.cabinetSelected.economico"
-                                               ng-disabled="vm.isSelected"/>
-                                        <div ng-messages="newcabinetFrom.serial.$error">
-                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                        </div>
-                                    </md-input-container>
+                        </div>
 
-                                    <md-input-container flex class="md-block">
-                                        <label translate>MAIN.COMPONENTS.CABINET.SERIAL</label>
-                                        <input name="serial" maxlength="25"
-                                               ng-pattern="/^[a-zA-Z0-9]+$/"
-                                               required
-                                               ng-model="vm.cabinetSelected.no_serie"
-                                               ng-disabled="vm.isSelected"/>
-                                        <div ng-messages="newcabinetFrom.serial.$error">
-                                            <div ng-message="pattern">
-                                                {{'MAIN.LABEL.ALFANUMERIC'|translate}}
-                                            </div>
-                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-
-                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                    <md-input-container flex class="md-block">
-                                        <label translate>MAIN.COMPONENTS.CABINET.TRADEMARK</label>
-                                        <md-select ng-model="vm.cabinetSelected.marca"
-                                                   required
-                                                   ng-change="vm.changeTrademark()"
-                                                   ng-disabled="vm.isSelected">
-                                            <md-option ng-repeat="marca in vm.marcas" value="{{marca.id}}">
-                                                {{marca.descripcion}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="newcabinetFrom.serial.$error">
-                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                        </div>
-                                    </md-input-container>
-
-                                    <md-input-container flex class="md-block">
-                                        <label translate>MAIN.COMPONENTS.CABINET.MODEL</label>
-                                        <md-select ng-model="vm.cabinetSelected.modelo_id"
-                                                   required
-                                                   ng-disabled="!vm.modelos || vm.isSelected">
-                                            <md-option ng-repeat="modelo in vm.modelos" value="{{modelo.id}}">
-                                                {{modelo.nombre}}
-                                            </md-option>
-                                        </md-select>
-                                        <div ng-messages="newcabinetFrom.serial.$error">
-                                            <div ng-message="required">{{'MAIN.LABEL.REQUIRED'|translate}}</div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-
-                                <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
-                                    <md-input-container flex class="md-block">
-                                        <label translate>MAIN.COMPONENTS.CABINET.ANTIQUITY</label>
-                                        <input name="antiguedad"
-                                               maxlength="1"
-                                               only-text
-                                               ng-model="vm.cabinetSelected.antiguedad"
-                                               ng-disabled="vm.isSelected"/>
-                                    </md-input-container>
-                                </div>
-                            </form>
-
-                            <md-actions
-                                layout="row"
-                                layout-align="end center">
-                                <md-button
-                                    ng-click="vm.accept()"
-                                    class="md-primary md-raised"
-                                    ng-if="!vm.isSelected">
-                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
-                                    {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}
-                                </md-button>
-                                <md-button
-                                    ng-click="vm.seleccion()"
-                                    class="md-primary md-raised"
-                                    ng-if="vm.isSelected">
-                                    <md-icon md-font-icon="fa fa-plus"></md-icon>
-                                    Usar cabinet
-                                </md-button>
-                                <md-button
-                                    ng-click="vm.cleanForm()"
-                                    class="md-primary md-raised">
-                                    Limpiar campos
-                                </md-button>
-                            </md-actions>
-                        </md-content>
-                    </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
                 </div>
 
-                <div flex class="md-block" ng-if="!vm.isUsed">
-                    <md-progress-linear ng-if="vm.todosprev == null" md-mode="indeterminate"></md-progress-linear>
-                    <div ng-if="vm.todosprev.length != null" style="height: 500px">
-                        <md-toolbar>
-                            <div class="md-toolbar-tools">
-                                <h2>{{'MAIN.MENU.PREREQUESTS.LISTPV'|translate}}</h2>
-                                <span flex></span>
-                            </div>
-                        </md-toolbar>
-                        <md-content
-                            layout="column"
-                            layout-align="center stretch"
-                            layout-padding
-                        >
-
-                            <div layout="row" layout-align="space-around center" layout-padding="" ng-if="vm.todosprev.length>1">
-                                <md-input-container
-                                    flex="80"
-                                    class="md-block">
-                                    <form ng-click="vm.searchCabinet()">
-                                        <input placeholder="Búsqueda por economico" ng-model="vm.searchText">
-                                    </form>
-                                </md-input-container>
-
-                            </div>
-
-                            <div class="virtualRepeatScroll-300">
-                                <md-list-item class="md-3-line" ng-repeat="item in vm.todos" ng-click="vm.selectCabinet(item)">
-                                    <img ng-src="{{item.qr_code}}" class="qr-icon" alt="{{item.economico}}" />
-                                    <div class="md-list-item-text" layout="column">
-                                        <h2>Económico: {{ item.economico }}</h2>
-                                        <h3>Modelo: {{ item.modelo.nombre }}</h3>
-                                        <h4>Número de Serie: {{ item.no_serie }}</h4>
-                                        <p>Estado: {{ item.estado }}</p>
-                                    </div>
-                                </md-list-item>
-                            </div>
-
-                        </md-content>
-                    </div>
-
-                    <div ng-if="vm.refreshPaginationButtonsComponent">
-                        <pagination-manager-buttons go-sig="vm.sig()"
-                                                    go-prev="vm.prev()"
-                                                    go-number="vm.goToNumberPage(number)"
-                                                    limit-objects="vm.limit"
-                                                    count-object="vm.objectPaginado.count"
-                                                    offset-object="vm.offset"
-                                                    nex-object="vm.objectPaginado.next"
-                                                    prev-object="vm.objectPaginado.previous">
-                        </pagination-manager-buttons>
-                    </div>
+                <div ng-if="vm.todos.length == 0 && vm.searchBool">
+                    <md-button aria-label="'Crear cabinet'"
+                               ng-click="vm.createCabinet(vm.searchText)"
+                               class="md-raised">
+                        <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        {{'MAIN.COMPONENTS.CABINET.CREATE'|translate}}: {{vm.searchText}}
+                    </md-button>
                 </div>
-                <!--  codigo a copiar  -->
-            </div>
+            </md-content>
+            <!-- fin -->
         </div>
 
     </md-card>
@@ -430,7 +297,7 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>REQUESTS.NEW.EVIDENCES</h3>
+            <h3 translate>ATTENTION.EVIDENCE.TITLE</h3>
         </div>
         <file-uploader file-formats="'image/*'"
                        validations="vm.fileValidations"
@@ -450,7 +317,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center">
-                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+                <h3 translate>ATTENTION.EVIDENCE.FIRM_CLIENT</h3>
             </div>
             <file-uploader file-formats="'image/*'"
                            validations="vm.fileValidations"
@@ -465,7 +332,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center">
-                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+                <h3 translate>ATTENTION.EVIDENCE.FIRM_TECHNICAL</h3>
             </div>
             <file-uploader file-formats="'image/*'"
                            validations="vm.fileValidations"
@@ -486,7 +353,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center">
-                <h3 translate>REQUESTS.NEW.FIRM_CLIENT</h3>
+                <h3 translate>ATTENTION.EVIDENCE.FIRM_CLIENT</h3>
             </div>
 
             <div ng-if="vm.request.firma_cliente" layout-fill>
@@ -509,7 +376,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center" ng-if="!vm.request.firma_cliente">
-                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
+                <p>{{'ATTENTION.EVIDENCE.NO_FIRM'|translate}}</p>
             </div>
 
         </div>
@@ -517,7 +384,7 @@
             <div flex
                  layout="row"
                  layout-align-gt-sm="space-around center">
-                <h3 translate>REQUESTS.NEW.FIRM_TECHNICAL</h3>
+                <h3 translate>ATTENTION.EVIDENCE.FIRM_TECHNICAL</h3>
             </div>
 
             <div ng-if="vm.request.firma_tecnico" layout-fill>
@@ -541,7 +408,7 @@
                  layout="row"
                  layout-align-gt-sm="space-around center"
                  ng-if="!vm.request.firma_tecnico">
-                <p>{{'REQUESTS.DETAIL.NO_FIRM'|translate}}</p>
+                <p>{{'ATTENTION.EVIDENCE.NO_FIRM'|translate}}</p>
             </div>
 
         </div>
@@ -554,14 +421,14 @@
         <div flex
              layout="row"
              layout-align-gt-sm="space-around center">
-            <h3 translate>Información de la atención</h3>
+            <h3 translate>ATTENTION.EVIDENCE.INFO_ATENTTION</h3>
         </div>
         <div flex
              layout="column"
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.CLIENT_COMMENTS</label>
+                <label translate>ATTENTION.EVIDENCE.CLIENT_COMMENTS</label>
                 <input
                     ng-model="vm.request.observaciones_cliente"
                     ng-disabled="!vm.visible"/>
@@ -572,7 +439,7 @@
              layout-gt-sm="row"
              layout-align-gt-sm="center stretch">
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.WORKER_COMMENTS</label>
+                <label translate>ATTENTION.EVIDENCE.TECHNICAL_COMMENTS</label>
                 <input
                     ng-model="vm.request.observaciones_tecnico"
                     ng-disabled="!vm.visible"/>
@@ -584,7 +451,7 @@
              layout-align-gt-sm="center stretch">
 
             <md-input-container flex class="md-block">
-                <label translate>REQUESTS.NEW.SCORE</label>
+                <label translate>ATTENTION.EVIDENCE.SCORE</label>
                 <md-select
                     ng-model="vm.request.calificacion"
                     ng-disabled="!vm.visible">

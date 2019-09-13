@@ -112,20 +112,19 @@
         function selectType(tipo, request) {
             switch (tipo) {
                 case 'Alta':
-                    console.log("alta");
                     $state.go('triangular.admin-default.new-attention', {id: request});
                     break;
 
                 case 'Cambio':
-                    console.log("Cambio");
+                    $state.go('triangular.admin-default.change-attention', {id: request});
                     break;
 
                 case 'Reparacion':
-                    console.log("Reparacion");
+                    $state.go('triangular.admin-default.service-attention', {id: request});
                     break;
 
                 case 'Retiro':
-                    console.log("Retiro");
+                    $state.go('triangular.admin-default.retrieve-attention', {id: request});
                     break;
 
                 default:
@@ -133,10 +132,6 @@
                     break;
             }
         }
-        /*function selectRequest(request) {
-            $state.go('triangular.admin-default.attentionDetail', {id: request, tipo: vm.selectedKind});
-        }*/
-
     }
 
 })();
