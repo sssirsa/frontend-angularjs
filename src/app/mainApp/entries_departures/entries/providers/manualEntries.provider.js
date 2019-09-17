@@ -71,7 +71,7 @@
              *   (Cabinet in any warehouse)
              *       +Cabinet simplified object and can_enter in false
              *   -Cabinet doesn't exists, so it can enter
-             *      (commonly WARRANTYS entry or NEW entry)
+             *      (commonly WARRANTY entry or NEW entry)
              *       +Cabinet in null and can_enter in true
              *   -Backend error
              *       +Cabinet in null, cant_enter in false,
@@ -178,7 +178,7 @@
                                 offset: PAGINATION.offset,
                                 pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -204,7 +204,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -230,7 +230,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -256,7 +256,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -300,7 +300,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -326,7 +326,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -352,7 +352,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -378,7 +378,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -427,7 +427,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -453,7 +453,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -479,7 +479,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -505,7 +505,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -531,7 +531,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -574,7 +574,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -600,7 +600,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -626,7 +626,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -652,7 +652,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -678,7 +678,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -721,7 +721,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -747,7 +747,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -773,7 +773,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
@@ -799,7 +799,7 @@
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
                             },
-                            elements: 'results',
+                            elements: PAGINATION.elements,
                             softDelete: {
                                 hide: 'deleted',
                                 reverse: false
