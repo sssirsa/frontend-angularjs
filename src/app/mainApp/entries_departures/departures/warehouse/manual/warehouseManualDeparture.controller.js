@@ -143,7 +143,7 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
-                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Mercado' : vm.departure[vm.catalogues['udn'].binding]) {
+                                            //if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Mercado' : vm.departure[vm.catalogues['udn'].binding]) {
                                                 //Just depart from this departure if the asset if Ready
                                                 //Also validate stage existence
                                                 //No stage scenario just applies to Agency
@@ -167,19 +167,19 @@
                                                     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
                                                     vm.removeCabinet(cabinetID);
                                                 }
-                                            }
-                                            else {
-                                                var message = Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STAGE_ERROR');
-                                                if (cabinetSuccessCallback['stage']) {
-                                                    message = message
-                                                        + ', '
-                                                        + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.AT_STAGE')
-                                                        + ' '
-                                                        + cabinetSuccessCallback['stage'].nombre;
-                                                }
-                                                toastr.error(message, cabinetSuccessCallback.cabinet.economico);
-                                                vm.removeCabinet(cabinetID);
-                                            }
+                                            //}
+                                            //else {
+                                            //    var message = Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STAGE_ERROR');
+                                            //    if (cabinetSuccessCallback['stage']) {
+                                            //        message = message
+                                            //            + ', '
+                                            //            + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.AT_STAGE')
+                                            //            + ' '
+                                            //            + cabinetSuccessCallback['stage'].nombre;
+                                            //    }
+                                            //    toastr.error(message, cabinetSuccessCallback.cabinet.economico);
+                                            //    vm.removeCabinet(cabinetID);
+                                            //}
                                         }
                                         else {
                                             toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
