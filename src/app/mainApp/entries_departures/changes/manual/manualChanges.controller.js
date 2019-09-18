@@ -1,6 +1,6 @@
 /*
     Fields for Changes:
-    entry:{
+    change:{
         nombre_chofer: string, (Required)
         ife_chofer: base64string, (Required) Image file
         descripcion: string, (Optional)
@@ -9,7 +9,7 @@
 
         //Next 2 fields required if change is from subsidiary to subsidiary
         sucursal_destino_id: int(id), (Required if !User.sucursal && !User.udn)
-        sucursal_origen_id: int(id), (Required if manual entry)
+        sucursal_origen_id: int(id), (Required if manual change)
 
         //Next 2 fields required if change is from agency to agency
         udn_destino_id: int(id),
@@ -23,16 +23,13 @@
         .module('app.mainApp.entries_departures.changes')
         .controller('manualChangesController', ManualChangesController);
     function ManualChangesController(
-        MANUAL_ENTRIES,
+        MANUAL_CHANGES,
         User,
         Translate,
         toastr,
         ErrorHandler,
         $mdDialog,
-        Helper,
-        EnvironmentConfig,
-        URLS,
-        PAGINATION
+        Helper
     ) {
         var vm = this;
 
@@ -41,9 +38,10 @@
 
         //Variables
         vm.selectedTab;
-        vm.entry;
+        vm.change;
         vm.catalogues;
         vm.cabinetList;
+        vm.changeFromAgency;
 
         vm.user = User.getUser();
 
@@ -63,195 +61,72 @@
             resizeIf: '$width > 4096 || $height > 4096'
         };
 
-        vm.createCabinetDialog = {
-            fields: [
-                {
-                    type: 'text',
-                    model: 'economico',
-                    label: 'Económico',
-                    initial_value: '',
-                    lock: true
-                },
-                {
-                    type: 'text',
-                    model: 'no_serie',
-                    label: 'Número de serie',
-                    required: true,
-                    hint: 'Número de serie del cabinet',
-                    validations: {
-                        errors: {
-                            required: 'El número de serie es obligatorio'
-                        }
-                    }
-                },
-                {
-                    type: 'text',
-                    model: 'year',
-                    label: 'Año',
-                    required: true,
-                    hint: 'Año de fabricación del cabinet',
-                    validations: {
-                        regex: '(19|20)[0-9]{2}',
-                        errors: {
-                            regex: 'Formato inválido de año',
-                            required: 'El año es obligatorio'
-                        }
-                    }
-                },
-                {
-                    type: 'text',
-                    model: 'id_unilever',
-                    label: 'Activo Unilever',
-                    required: true,
-                    hint: 'Número de identificación utilizado por Unilever',
-                    validations: {
-                        regex: '[a-zA-Z0-9]+',
-                        errors: {
-                            regex: 'Solo caracteres alfanuméricos',
-                            required: 'El activo unilever'
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'marca',
-                    label: 'Marca del cabinet',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.cabinet_brand,
-                        name: 'Marca',
-                        model: 'id',
-                        option: 'nombre',
-                        loadMoreButtonText: 'Cargar mas...',
-                        elements: 'results',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    required: true
-                },
-                {
-                    type: 'catalog',
-                    model: 'modelo_id',
-                    label: 'Modelo del cabinet',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.cabinet_model,
-                        query: 'marca__id',
-                        requires: 'marca',
-                        name: 'Modelo',
-                        model: 'id',
-                        option: 'nombre',
-                        elements: 'results',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
-                        loadMoreButtonText: 'Cargar mas...',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    },
-                    required: true
-                },
-                {
-                    type: 'catalog',
-                    model: 'condicion_id',
-                    label: 'Condición del cabinet',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.condition,
-                        name: 'Condición',
-                        model: 'id',
-                        option: 'letra',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                },
-                {
-                    type: 'catalog',
-                    model: 'categoria_id',
-                    label: 'Categoría',
-                    catalog: {
-                        url: EnvironmentConfig.site.rest.api
-                            + '/' + URLS.management.base
-                            + '/' + URLS.management.catalogues.base
-                            + '/' + URLS.management.catalogues.category,
-                        name: 'Categoría del cabinet',
-                        model: 'id',
-                        option: 'nombre',
-                        loadMoreButtonText: 'Cargar mas...',
-                        pagination: {
-                            total: PAGINATION.total,
-                            limit: PAGINATION.limit,
-                            offset: PAGINATION.offset,
-                            pageSize: PAGINATION.pageSize
-                        },
-                        elements: 'results',
-                        softDelete: {
-                            hide: 'deleted',
-                            reverse: false
-                        }
-                    }
-                }
-            ],
-            dialog: {
-                title: 'Información del cabinet',
-                okButton: 'Guardar',
-                cancelButton: 'Cancelar',
-                loading: 'Creando cabinet'
-            },
-            url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.inventory.base
-                + '/' + URLS.management.inventory.cabinet
-        };
-
         // Auto invoked init function
-        vm.init = function init() {
+        function init() {
             vm.selectedTab = 0;
             vm.catalogues = {};
-            vm.cabinetList = [];
-            vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
-            vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
-            //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showSelector = !vm.user['sucursal']
-                && !vm.user['udn'];
-        };
 
-        //Just load if user is not from an Agency
-        vm.user['udn'] ? vm.canView = false : vm.init();
+            vm.change['cabinets_id'] = [];
+            vm.cabinetList = [];
+            //Determining whether or not to show the Subsidiary or Agency selector.
+            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+
+            //Bindging user subsidiary or agency to change if user happens to have one.
+            vm.user['sucursal'] ? vm.change[vm.catalogues['origin_subsidiary'].binding] = vm.user['sucursal'].id : null;
+            vm.user['udn'] ? vm.change[vm.catalogues['origin_udn'].binding] = vm.user['udn'].id : null;
+
+            if (vm.showSelector) {
+                //Initializing as Subsidiary change when the user has no origin                
+                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
+                vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
+            }
+            else {
+                if (vm.user.udn) {
+                    //The user is from an agency
+                    vm.change = MANUAL_CHANGES.agencyChange.template();
+                    vm.catalogues = MANUAL_CHANGES.agencyChange.catalogues();
+                }
+                if (vm.user.sucursal) {
+                    //The user is from a subsidiary
+                    vm.change = MANUAL_CHANGES.subsidiaryChange.template();
+                    vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
+                }
+            }
+        }
+        init();
+
 
         //Controller global functions
-
         vm.onElementSelect = function onElementSelect(element, field) {
-            vm.entry[field] = element;
+            vm.change[field] = element;
+        };
+
+        vm.onOriginSelect = function onOriginSelect(element, field) {
+            vm.selectedTab = 0;
+            vm.cabinetList = [];
+
+            vm.onElementSelect(element, field);
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            //delete (vm.change[vm.catalogues['origin_udn'].binding]);
+            //delete (vm.change[vm.catalogues['origin_subsidiary'].binding]);
+
+            vm.change['cabinets_id'] = [];
+            vm.cabinetList = [];
+            if (vm.changeFromAgency) {
+                //The user selected the change is from an agency
+                vm.change = MANUAL_CHANGES.agencyChange.template();
+                vm.change = MANUAL_CHANGES.agencyChange.template();
+                vm.catalogues = MANUAL_CHANGES.agencyChange.catalogues();
+            }
+            else {
+                //The user selected the change is from a subsidiary
+                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
+                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
+                vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
+            }
         };
 
         vm.selectDriverID = function selectDriverID(files) {
@@ -263,12 +138,12 @@
                 fileReader.readAsDataURL(file);
                 fileReader.onloadend = function () {
                     base64Image = fileReader.result;
-                    vm.entry['ife_chofer'] = base64Image;
+                    vm.change['ife_chofer'] = base64Image;
                 };
 
             }
             else {
-                delete (vm.entry['ife_chofer']);
+                delete (vm.change['ife_chofer']);
             }
         };
 
@@ -279,12 +154,18 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('ENTRIES.WARRANTY.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('CHANGES.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
+                    var subsidiary, agency;
+                    vm.catalogues['origin_subsidiary'] ? subsidiary = vm.catalogues['origin_subsidiary'] : subsidiary = null;
+                    vm.catalogues['origin_udn'] ? agency = vm.catalogues['origin_udn'] : agency = null;
                     var cabinetToAdd = {
-                        promise: MANUAL_ENTRIES
-                            .getCabinet(cabinetID),
+                        promise: MANUAL_CHANGES
+                            .getCabinet(cabinetID,
+                                vm.change[subsidiary],
+                                vm.change[agency]
+                            ),
                         cabinet: null,
                         id: null
                     };
@@ -300,18 +181,71 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            if (cabinetSuccessCallback.can_enter) {
-                                //Cabinet can enter
-                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                            if (cabinetSuccessCallback['subsidiary']
+                                || cabinetSuccessCallback['agency']) {
+                                if (cabinetSuccessCallback['can_leave']) {
+                                    //The cabinet doesn't have internal restrictions to leave
+                                    //a.k.a. The cabinet exists in the selected subsidiary or agency
+                                    if (
+                                        (cabinetSuccessCallback['subsidiary']
+                                            ? cabinetSuccessCallback['subsidiary'].id
+                                            === vm.change[vm.catalogues['origin_subsidiary'].binding]
+                                            : false)
+                                        || (cabinetSuccessCallback['agency']
+                                            ? cabinetSuccessCallback['agency'].id
+                                            === vm.change[vm.catalogues['origin_udn'].binding]
+                                            : false)
+                                    ) {
+                                        //The subsidiary or agency of the asset is the same as change's
+                                        if (cabinetSuccessCallback['can_leave']) {
+                                            //The cabinet doesn't have internal restrictions to leave
+                                            if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                                //Cabinet change has been confirmed
+                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            }
+                                            else {
+                                                toastr.error(Translate.translate('CHANGES.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                                vm.removeCabinet(cabinetID);
+                                            }
+                                        }
+                                        else {
+                                            toastr.error(Translate.translate('CHANGES.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                            vm.removeCabinet(cabinetID);
+                                        }
+                                    }
+
+                                }
+                                else {
+                                    //Just reachable when the user had seleced a subsidiary through the selector.
+                                    var locationMessage = Translate.translate('CHANGES.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    if (cabinetSuccessCallback['subsidiary']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('CHANGES.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['subsidiary'].nombre;
+                                    }
+                                    if (cabinetSuccessCallback['agency']) {
+                                        locationMessage = locationMessage
+                                            + ', '
+                                            + Translate.translate('CHANGES.ERRORS.IS_AT')
+                                            + ' '
+                                            + cabinetSuccessCallback['agency'].agencia;
+                                    }
+                                    toastr.error(locationMessage, cabinetSuccessCallback.cabinet.economico);
+                                    vm.removeCabinet(cabinetID);
+                                }
                             }
                             else {
-                                //Cabinet can´t enter because it's in a warehouse
-                                toastr.error(Translate.translate('ENTRIES.WARRANTY.ERRORS.CANT_ENTER'), cabinetID);
+                                toastr.error(Translate.translate('CHANGES.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
                         .catch(function setCabinetToAddError(error) {
                             ErrorHandler.errorTranslate(error);
+                            vm.removeCabinet(cabinetID);
                         });
                 }
             }
@@ -325,98 +259,77 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('ENTRIES.WARRANTY.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('CHANGES.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
                 }
             }
         };
-
-        vm.clickSaveEntry = function clickSaveEntry(entry) {
-            //Show warning message if the entry has unregistered cabinets
-            if (entryHasPendingCabinets()) {
+        vm.clickSaveChange = function clickSaveChange(change) {
+            //Show warning message if the change has unregistered cabinets
+            if (changeHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('ENTRIES.WARRANTY.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('ENTRIES.WARRANTY.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('CHANGES.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('CHANGES.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
                 $mdDialog.show(confirm)
                     .then(function () {
-                        saveEntry(entry);
+                        saveChange(change);
                     });
             }
             else {
-                saveEntry(entry);
+                saveChange(change);
             }
-        };
-
-        vm.createCabinet = function createCabinet(cabinetID) {
-            vm.createCabinetDialog.fields[0].initial_value = cabinetID;
-            $mdDialog.show({
-                controller: 'CatalogCreateDialogController',
-                controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/catalogManager/dialogs/createDialog/createDialog.tmpl.html',
-                fullscreen: true,
-                clickOutsideToClose: true,
-                focusOnOpen: true,
-                locals: {
-                    dialog: vm.createCabinetDialog.dialog,
-                    fields: vm.createCabinetDialog.fields,
-                    url: vm.createCabinetDialog.url
-                }
-            }).then(function successCreateCabinet(successCallback) {
-                var cabinetID = successCallback.economico;
-                vm.removeCabinet(cabinetID);
-                addCabinetToList(successCallback);
-            }).catch(function errorCreateCabinet(errorCallback) {
-                if (errorCallback) {
-                    ErrorHandler.errorTranslate(errorCallback);
-                }
-            });
         };
 
         //Internal functions
 
-        var saveEntry = function saveEntry(entry) {
-            entry = addCabinetsToEntry(vm.cabinetList, entry);
-            entry = Helper.removeBlankStrings(entry);
+        var saveChange = function saveChange(change) {
+            change = addCabinetsToChange(vm.cabinetList, change);
+            change = Helper.removeBlankStrings(change);
             //API callback
-            vm.createEntryPromise = MANUAL_ENTRIES
-                .createWarranty(entry)
-                .then(function () {
-                    vm.init();
-                    toastr.success(
-                        Translate.translate('ENTRIES.WARRANTY.MESSAGES.SUCCESS_CREATE')
-                    );
-                })
-                .catch(function (errorCallback) {
-                    ErrorHandler.errorTranslate(errorCallback);
-                });
+            if (vm.changeFromAgency || vm.user['udn']) {
+                vm.createChangePromise = MANUAL_CHANGES
+                    .createAgency(change)
+                    .then(function () {
+                        init();
+                        toastr.success(
+                            Translate.translate('CHANGES.MESSAGES.SUCCESS_CREATE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
+            else{
+                vm.createChangePromise = MANUAL_CHANGES
+                    .createSubsidiary(change)
+                    .then(function () {
+                        init();
+                        toastr.success(
+                            Translate.translate('CHANGES.MESSAGES.SUCCESS_CREATE')
+                        );
+                    })
+                    .catch(function (errorCallback) {
+                        ErrorHandler.errorTranslate(errorCallback);
+                    });
+            }
         };
 
-        var entryHasPendingCabinets = function entryHasPendingCabinets() {
+        var changeHasPendingCabinets = function changeHasPendingCabinets() {
             return vm.cabinetList.some(function (element) {
                 return !element.cabinet;
             });
         };
 
-        var addCabinetToList = function addCabinetToList(cabinet) {
-            var cabinetToAdd = {
-                promise: null,
-                cabinet: cabinet,
-                id: cabinet['economico']
-            };
-
-            vm.cabinetList.push(cabinetToAdd);
-        };
-
-        var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
+        var addCabinetsToChange = function addCabinetsToChange(cabinets, change) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (change.cabinets_id.length) {
+                change.cabinets_id = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -427,9 +340,9 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                change['cabinets_id'].push(existingCabinets[i].id);
             }
-            return entry;
+            return change;
         };
 
         //Tab functions
