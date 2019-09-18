@@ -117,9 +117,9 @@
 
         function list() {
             //List behaviour handling (initial loading)
-            createMainCatalogProvider();
-            vm.catalogElements = [];
             if (vm.catalog) {
+                createMainCatalogProvider();
+                vm.catalogElements = [];
                 vm.listLoader = vm.CatalogProvider
                     .list()
                     .then(function (apiResponse) {
@@ -153,6 +153,7 @@
                 vm.onErrorList({
                     error: '"catalog" parameter is not defined'
                 });
+                throw new Error('"catalog" parameter was not provided');
             }
         }
 
