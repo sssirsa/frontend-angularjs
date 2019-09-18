@@ -66,7 +66,6 @@
             vm.selectedTab = 0;
             vm.catalogues = {};
 
-            vm.change['cabinets_id'] = [];
             vm.cabinetList = [];
             //Determining whether or not to show the Subsidiary or Agency selector.
             vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
