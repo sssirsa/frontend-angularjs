@@ -319,7 +319,6 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    establecimiento_origen_id: null,
                     ife_chofer: null,
                     linea_transporte_id: null,
                     nombre_chofer: '',
