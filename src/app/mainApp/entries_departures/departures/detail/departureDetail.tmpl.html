@@ -1,0 +1,126 @@
+<div cg-busy="{promise:vm.loadingDeparture, message:' '}">
+    <md-card layout-padding
+             layout="column"
+             laoyut-align="center-stretch">
+        <header layout="column" layout-align="center center">
+            <h1 translate>DEPARTURES.DETAIL.TITLE</h1>
+        </header>
+    </md-card>
+    <md-card ng-if="vm.departure">
+        <md-toolbar layout-gt-xs="row"
+                    layout-align-gt-xs="space-between center"
+                    layout="column"
+                    layout-align="center center"
+                    layout-padding>            
+            <span>
+                <strong translate="">DEPARTURES.DETAIL.LABELS.ID</strong>
+                {{vm.departure.id}}
+            </span>
+            <div ng-if="vm.departure.tipo_salida==='Nuevos'" class="new-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Onsoletos'" class="obsolete-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Almacen'" class="warehouse-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Garantias'" class="warranty-departures departures-filter"></div>
+            <span>
+                <strong translate="">DEPARTURES.DETAIL.LABELS.KIND</strong>
+                {{vm.departure.tipo_salida}}
+            </span>
+        </md-toolbar>
+        <section layout="column" layout-align="center center">
+            <span ng-if="vm.departure.fecha">
+                <strong translate>DEPARTURES.DETAIL.LABELS.DATE</strong>
+                <span>{{vm.departure.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            </span>
+            <span ng-if="vm.departure.pedimento" layout-margin>
+                <strong translate>DEPARTURES.DETAIL.LABELS.ORDER</strong>
+                <span>{{vm.departure.pedimento}}</span>
+            </span>
+            <!--Transport section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="vm.departure.nombre_chofer" layout-padding>
+                    <strong translate>DEPARTURES.DETAIL.LABELS.DRIVER</strong>
+                    <span>{{vm.departure.nombre_chofer}}</span>
+                </span>
+                <span flex="33" ng-if="vm.departure.linea_transporte.razon_social" layout-padding>
+                    <strong translate>DEPARTURES.DETAIL.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.departure.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="vm.departure.tipo_transporte.descripcion" layout-padding>
+                    <strong translate>DEPARTURES.DETAIL.LABELS.TRANSPORT_KIND</strong>
+                    <span>{{vm.departure.tipo_transporte.descripcion}}</span>
+                </span>
+            </section>
+        </section>
+        <section layout="row" layout-align="space-around center">
+            <div>
+                <!--Origin section-->
+                <span ng-if="departure.udn_origen" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.ORIGIN_AGENCY</strong>
+                    <span>{{departure.udn_origen.agencia}}</span>
+                </span>
+                <span ng-if="departure.sucursal_origen" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.ORIGIN_SUBSIDIARY</strong>
+                    <span>{{departure.sucursal_origen.nombre}}</span>
+                </span>
+            </div>
+            <div>
+                <!--Destination section-->
+                <span ng-if="departure.sucursal_destino" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
+                    <span>{{departure.sucursal_destino.nombre}}</span>
+                </span>
+                <span ng-if="departure.udn_destino" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_AGENCY</strong>
+                    <span>{{departure.udn_destino.agencia}}</span>
+                </span>
+                <span ng-if="departure.proveedor_destino" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_PROVIDER</strong>
+                    <span>{{departure.proveedor_destino.razon_social}}</span>
+                </span>
+                <span ng-if="departure.establecimiento_destino" layout-margin>
+                    <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_STORE</strong>
+                    <span>{{departure.establecimiento_destino.nombre_establecimiento}}</span>
+                </span>
+            </div>
+        </section>
+        <span ng-if="vm.departure.descripcion" layout-margin>
+            <strong translate>DEPARTURES.DETAIL.LABELS.DESCRIPTION</strong>
+            <span>{{vm.departure.descripcion}}</span>
+        </span>
+        <md-actions layout="row" layout-align="end center">
+            <md-button aria-label="download document button"
+                       ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       disabled
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"DEPARTURES.DETAIL.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+        </md-actions>
+    </md-card>
+
+    <md-card ng-if="vm.departure">
+        <div layout-padding layout-align="center center" layout="column">
+            <strong>{{'DEPARTURES.DETAIL.LABELS.ASSET_LIST'|translate}}</strong>
+        </div>
+        <!--Departure assets-->
+        <md-virtual-repeat-container class="cabinet-container">
+            <md-list>
+                <md-list-item layout-align="center stretch"
+                              md-virtual-repeat="element in vm.assets">
+                    <section layout-gt-xs="row"
+                             layout="column"
+                             layout-align-gt-xs="space-between center"
+                             layout-align="center stretch"
+                             class="full-width">
+                        <div layout="column"
+                             layout-align="center center">
+                            <b>{{'DEPARTURES.DETAIL.LABELS.ASSET'|translate}}</b>
+                            {{element}}
+                        </div>
+                    </section>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-virtual-repeat-container>
+    </md-card>
+</div>

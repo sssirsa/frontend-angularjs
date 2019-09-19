@@ -1,7 +1,66 @@
 {
     "DEPARTURES": {
+        "DETAIL": {
+            "TITLE": "Detalle de salida",
+            "BUTTONS": {
+                "LOAD_MORE": "Cargar mas cabinets",
+                "PDF": "Generar remisión"
+            },
+            "LABELS": {
+                "ASSET_LIST": "Cabinets de la salida",
+                "ASSET": "Económico",
+                "ID": "Folio:",
+                "DATE": "Fecha:",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "UDN-Agencia destino:",
+                "DESTINATION_PROVIDER": "Proveedor destino:",
+                "DESTINATION_STORE": "Establecimiento destino:",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino:",
+                "DRIVER": "Operador:",
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados",
+                "ORDER": "Pedimento",
+                "ORIGIN_AGENCY": "UDN-Agencia de origen:",
+                "ORIGIN_SUBSIDIARY": "Sucursal origen",
+                "TRANSPORT_KIND": "Tipo de transporte:",
+                "TRANSPORT_LINE": "Linea de Transporte:"
+            }
+        },
+        "LIST": {
+            "TITLE": "Listado de salidas",
+            "BUTTONS": {
+                "LOAD_MORE": "Cargar mas salidas...",
+                "PDF": "Generar remisión"
+            },
+            "FILTERS": {
+                "ALL": "Todas",
+                "NEW": "Nuevos",
+                "OBSOLETE": "Obsoletos",
+                "UNRECOGNIZABLE": "No capitalizados",
+                "WAREHOUSE": "Buen estado",
+                "WARRANTY": "Garantías"
+            },
+            "LABELS": {
+                "ID": "Folio:",
+                "DATE": "Fecha:",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "UDN-Agencia destino:",
+                "DESTINATION_PROVIDER": "Proveedor destino:",
+                "DESTINATION_STORE": "Establecimiento destino:",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino:",
+                "DRIVER": "Operador:",
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados",
+                "ORDER": "Pedimento",
+                "ORIGIN_AGENCY": "UDN-Agencia de origen:",
+                "ORIGIN_SUBSIDIARY": "Sucursal origen",
+                "TRANSPORT_KIND": "Tipo de transporte:",
+                "TRANSPORT_LINE": "Linea de Transporte:"
+            }
+        },
         "MENU": {
             "TITLE": "Salidas",
+            "LIST": "Listado",
             "MANUAL": "Manual",
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",

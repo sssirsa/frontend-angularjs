@@ -12,6 +12,7 @@
             },
             departures: {
                 base: 'departures',
+                all: 'all',
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
@@ -21,8 +22,9 @@
                 close: 'close'
             },
             entries: {
-                addCabinet: 'add_cabinet',
                 base: 'entries',
+                addCabinet: 'add_cabinet',
+                all: 'all',
                 close: 'close',
                 new: 'news',
                 repair: 'repair',
@@ -32,7 +34,7 @@
             },
             inspections: {
                 base: 'inspections',
-                preliminary_inspection:'preliminary_inspection'
+                preliminary_inspection: 'preliminary_inspection'
             },
             subsidiary_change: {}
         });

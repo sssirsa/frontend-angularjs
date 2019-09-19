@@ -1,0 +1,229 @@
+<div cg-busy="{promise:vm.loadingEntry, message:' '}">
+    <md-card layout-padding
+             layout="column"
+             laoyut-align="center-stretch">
+        <header layout="column" layout-align="center center">
+            <h1 translate>ENTRIES.DETAIL.TITLE</h1>
+        </header>
+    </md-card>
+    <md-card ng-if="vm.entry">
+        <md-toolbar layout-gt-xs="row"
+                    layout-align-gt-xs="space-between center"
+                    layout="column"
+                    layout-align="center center"
+                    layout-padding
+                    ng-class="(!vm.entry.confirmada )? 'not-confirmed-entry' : ''">
+
+            <strong class="not_confirmed_entry" ng-if="!vm.entry.confirmada" translate>ENTRIES.DETAIL.LABELS.NOT_CONFIRMED_ENTRY</strong>
+            <span>
+                <strong translate="">ENTRIES.DETAIL.LABELS.ID</strong>
+                {{vm.entry.id}}
+            </span>
+            <div ng-if="vm.entry.tipo_entrada==='Nuevos'" class="new-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Reparacion'" class="repair-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Almacen'" class="warehouse-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Garantias'" class="warranty-entries entries-filter"></div>
+            <span>
+                <strong translate="">ENTRIES.DETAIL.LABELS.KIND</strong>
+                {{vm.entry.tipo_entrada}}
+            </span>
+        </md-toolbar>
+        <section layout="column" layout-align="center center">
+            <!--Open or closed entry-->
+            <span ng-if="!vm.entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock-open"></md-icon>
+                <span translate>ENTRIES.DETAIL.LABELS.OPEN</span>
+            </span>
+            <span ng-if="vm.entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock"></md-icon>
+                <span translate>ENTRIES.DETAIL.LABELS.CLOSED</span>
+            </span>
+
+            <span ng-if="vm.entry.fecha">
+                <strong translate>ENTRIES.DETAIL.LABELS.DATE</strong>
+                <span>{{vm.entry.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            </span>
+            <span ng-if="vm.entry.pedimento" layout-margin>
+                <strong translate>ENTRIES.DETAIL.LABELS.ORDER</strong>
+                <span>{{vm.entry.pedimento}}</span>
+            </span>
+            <!--Transport section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="vm.entry.nombre_chofer" layout-padding>
+                    <strong translate>ENTRIES.DETAIL.LABELS.DRIVER</strong>
+                    <span>{{vm.entry.nombre_chofer}}</span>
+                </span>
+                <span flex="33" ng-if="vm.entry.linea_transporte.razon_social" layout-padding>
+                    <strong translate>ENTRIES.DETAIL.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.entry.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="vm.entry.tipo_transporte.descripcion" layout-padding>
+                    <strong translate>ENTRIES.DETAIL.LABELS.TRANSPORT_KIND</strong>
+                    <span>{{vm.entry.tipo_transporte.descripcion}}</span>
+                </span>
+            </section>
+        </section>
+        <section layout="row" layout-align="space-around center">
+            <div>
+                <!--Origin section-->
+                <span ng-if="vm.entry.establecimiento_origen" layout-margin>
+                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_STORE</strong>
+                    <span>{{vm.entry.establecimiento_origen.nombre_establecimiento}}</span>
+                </span>
+                <span ng-if="vm.entry.proveedor_origen" layout-margin>
+                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_PROVIDER</strong>
+                    <span>{{vm.entry.proveedor_origen.razon_social}}</span>
+                </span>
+                <span ng-if="vm.entry.udn_origen" layout-margin>
+                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_AGENCY</strong>
+                    <span>{{vm.entry.udn_origen.agencia}}</span>
+                </span>
+            </div>
+            <div>
+                <!--Destination section-->
+                <span ng-if="vm.entry.sucursal_destino" layout-margin>
+                    <strong translate>ENTRIES.DETAIL.LABELS.DESTINATION_SUBSIDIARY</strong>
+                    <span>{{vm.entry.sucursal_destino.nombre}}</span>
+                </span>
+                <span ng-if="vm.entry.udn_destino" layout-margin>
+                    <strong translate>ENTRIES.DETAIL.LABELS.DESTINATION_AGENCY</strong>
+                    <span>{{vm.entry.udn_destino.agencia}}</span>
+                </span>
+            </div>
+        </section>
+        <span ng-if="vm.entry.descripcion" layout-margin>
+            <strong translate>ENTRIES.DETAIL.LABELS.DESCRIPTION</strong>
+            <span>{{vm.entry.descripcion}}</span>
+        </span>
+        <md-actions layout="row" layout-align="end center">
+            <!--Allow adding cabinets just if the entry is still open-->
+            <md-button aria-label="Add asset button"
+                       permission-only="['entries_departures__entries__add_cabinet_entries']"
+                       ng-click="vm.addAssetClicked();$event.stopPropagation() "
+                       ng-if="!vm.entry.cerrada"
+                       class="md-raised">
+                <md-icon md-font-icon="fa fa-plus"></md-icon>
+                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.ADD_ASSET"|translate}}</span>
+            </md-button>
+            <!--Allow closing just if the entry is still open-->
+            <md-button aria-label="close vm.entry button"
+                       permission-only="['entries_departures__entries__close_entries']"
+                       cg-busy="{promise:vm.closingEntry, message:' '}"
+                       ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()"
+                       ng-if="!vm.entry.cerrada"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-lock"></md-icon>
+                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.CLOSE"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the document just if the entry is closed-->
+            <md-button aria-label="download document button"
+                       ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       ng-if="vm.entry.cerrada"
+                       disabled
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+        </md-actions>
+    </md-card>
+
+    <md-card ng-if="vm.entry">
+        <div layout-padding layout-align="center center" layout="column">
+            <strong>{{'ENTRIES.DETAIL.LABELS.ASSET_LIST'|translate}}</strong>
+        </div>
+        <!--Entries assets-->
+        <md-virtual-repeat-container class="cabinet-container">
+            <md-list>
+                <!--Pending and confirmed assets-->
+                <md-list-item layout-align="center stretch"
+                              md-virtual-repeat="element in vm.assets">
+                    <section layout-gt-xs="row"
+                             layout="column"
+                             layout-align-gt-xs="space-between center"
+                             layout-align="center stretch"
+                             ng-if="element.estado!=='Faltante'"
+                             class="full-width">
+                        <!--Normal asset-->
+                        <div layout="column"
+                             ng-if="element.cabinet"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
+                            {{element.cabinet}}
+                        </div>
+                        <!--Unrecognizable asset-->
+                        <div layout="column"
+                             ng-if="element.no_capitalizado"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
+                            {{element.no_capitalizado}}
+                        </div>
+                        <div layout="column"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
+                            {{element.estado}}
+                        </div>
+                        <md-actions layout="row"
+                                    layout-align="end center"
+                                    ng-if="!vm.entry.cerrada && element.estado==='Pendiente'">
+                            <md-button ng-click="$event.stopPropagation(); vm.setAssetAsMissing(element.cabinet, $index)"
+                                       aria-label="remove cabinet"
+                                       class="md-warn md-raised">
+                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                <span translate>ENTRIES.DETAIL.BUTTONS.MISSING</span>
+                            </md-button>
+                        </md-actions>
+                    </section>
+                    <section layout-gt-xs="row"
+                             layout="column"
+                             layout-align-gt-xs="space-between center"
+                             layout-align="center stretch"
+                             ng-if="element.estado==='Faltante'"
+                             class="full-width not-found-cabinet">
+                        <!--Normal asset-->
+                        <div layout="column"
+                             ng-if="element.cabinet"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
+                            {{element.cabinet}}
+                        </div>
+                        <!--Unrecognizable asset-->
+                        <div layout="column"
+                             ng-if="element.no_capitalizado"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
+                            {{element.no_capitalizado}}
+                        </div>
+                        <div layout="column"
+                             layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
+                            {{element.estado}}
+                        </div>
+                        <md-actions layout="row"
+                                    layout-align="end center"
+                                    ng-if="!vm.entry.cerrada && element.estado==='Faltante'">
+                            <md-button ng-click="$event.stopPropagation(); vm.unsetAssetAsMissing(element.cabinet, $index)"
+                                       aria-label="remove cabinet"
+                                       class="md-warn md-raised">
+                                <md-icon md-font-icon="fa fa-check"></md-icon>
+                                <span translate>ENTRIES.DETAIL.BUTTONS.UNMISSING</span>
+                            </md-button>
+                        </md-actions>
+                    </section>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
+                         layout="column"
+                         layout-align="center center">
+                    <md-button aria-label="Load more elements button"
+                               cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
+                               ng-click="$event.stopPropagation(); vm.loadMoreAssetStatus()"
+                               class="md-primary md-raised">
+                        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+                        <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.LOAD_MORE"|translate}}</span>
+                    </md-button>
+                </section>
+            </md-list>
+        </md-virtual-repeat-container>
+    </md-card>
+</div>

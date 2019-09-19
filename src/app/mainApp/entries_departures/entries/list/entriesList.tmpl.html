@@ -1,0 +1,180 @@
+<md-card class="full-width"
+         layout-padding
+         layout="column"
+         laoyut-align="center-stretch">
+    <header layout="column" layout-align="center center">
+        <h1 translate>ENTRIES.LIST.TITLE</h1>
+    </header>
+    <div layout="row"
+         layout-align="space-around center"
+         layout-wrap="">
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'new-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('new-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.NEW</span>
+            <div class="new-entries entries-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'repair-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('repair-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.REPAIR</span>
+            <div class="repair-entries entries-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'unrecognizble-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('unrecognizable-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.UNRECOGNIZABLE</span>
+            <div class="unrecognizable-entries entries-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'warehouse-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('warehouse-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.WAREHOUSE</span>
+            <div class="warehouse-entries entries-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'warranty-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('warranty-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.WARRANTY</span>
+            <div class="warranty-entries entries-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.entryKindFilter === 'all-entries') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('all-entries')">
+            <span translate>ENTRIES.LIST.FILTERS.ALL</span>
+            <div class="all-entries entries-filter"></div>
+        </div>
+    </div>
+</md-card>
+<section cg-busy="{promise:vm.loadingEntries, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+    <md-card ng-if="!vm.entries.length">
+        <strong translate>ENTRIES.LIST.LABELS.NO_RESULTS</strong>
+    </md-card>
+    <md-card ng-if="vm.entries.length"
+             ng-click="vm.navigateToDetail(entry)"
+             ng-repeat="entry in vm.entries">
+        <md-toolbar layout-gt-xs="row"
+                    layout-align-gt-xs="space-between center"
+                    layout="column"
+                    layout-align="center center"
+                    layout-padding
+                    ng-class="(!entry.confirmada )? 'not-confirmed-entry' : ''">
+
+            <strong class="not_confirmed_entry" ng-if="!entry.confirmada" translate>ENTRIES.LIST.LABELS.NOT_CONFIRMED_ENTRY</strong>
+            <span>
+                <strong translate="">ENTRIES.LIST.LABELS.ID</strong>
+                {{entry.id}}
+            </span>
+            <div ng-if="entry.tipo_entrada==='Nuevos'" class="new-entries entries-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Reparacion'" class="repair-entries entries-filter"></div>
+            <div ng-if="entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries entries-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Almacen'" class="warehouse-entries entries-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Garantias'" class="warranty-entries entries-filter"></div>
+            <span>
+                <strong translate="">ENTRIES.LIST.LABELS.KIND</strong>
+                {{entry.tipo_entrada}}
+            </span>
+        </md-toolbar>
+        <section layout="column" layout-align="center center">
+            <!--Open or closed entry-->
+            <span ng-if="!entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock-open"></md-icon>
+                <span translate>ENTRIES.LIST.LABELS.OPEN</span>
+            </span>
+            <span ng-if="entry.cerrada">
+                <md-icon md-font-icon="fa fa-lock"></md-icon>
+                <span translate>ENTRIES.LIST.LABELS.CLOSED</span>
+            </span>
+
+            <span ng-if="entry.fecha">
+                <strong translate>ENTRIES.LIST.LABELS.DATE</strong>
+                <span>{{entry.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            </span>
+            <span ng-if="entry.pedimento" layout-margin>
+                <strong translate>ENTRIES.LIST.LABELS.ORDER</strong>
+                <span>{{entry.pedimento}}</span>
+            </span>
+            <!--Transport section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="entry.nombre_chofer" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
+                    <span>{{entry.nombre_chofer}}</span>
+                </span>
+                <span flex="33" ng-if="entry.linea_transporte.razon_social" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{entry.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="entry.tipo_transporte.descripcion" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_KIND</strong>
+                    <span>{{entry.tipo_transporte.descripcion}}</span>
+                </span>
+            </section>
+        </section>
+        <section layout="row" layout-align="space-around center">
+            <div>
+                <!--Origin section-->
+                <span ng-if="entry.establecimiento_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_STORE</strong>
+                    <span>{{entry.establecimiento_origen.nombre_establecimiento}}</span>
+                </span>
+                <span ng-if="entry.proveedor_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_PROVIDER</strong>
+                    <span>{{entry.proveedor_origen.razon_social}}</span>
+                </span>
+                <span ng-if="entry.udn_origen" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_AGENCY</strong>
+                    <span>{{entry.udn_origen.agencia}}</span>
+                </span>
+            </div>
+            <div>
+                <!--Destination section-->
+                <span ng-if="entry.sucursal_destino" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
+                    <span>{{entry.sucursal_destino.nombre}}</span>
+                </span>
+                <span ng-if="entry.udn_destino" layout-margin>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_AGENCY</strong>
+                    <span>{{entry.udn_destino.agencia}}</span>
+                </span>
+            </div>
+        </section>
+        <span ng-if="entry.descripcion" layout-margin>
+            <strong translate>ENTRIES.LIST.LABELS.DESCRIPTION</strong>
+            <span>{{entry.descripcion}}</span>
+        </span>
+        <md-actions layout="row" layout-align="end center">            
+            <!--Allow to generate the document just if the entry is closed-->
+            <md-button aria-label="download document button"
+                       ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       ng-if="entry.cerrada"
+                       disabled
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+        </md-actions>
+    </md-card>
+</section>
+<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
+         layout="column"
+         layout-align="center center">
+    <md-button aria-label="Load more elements button"
+               cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
+               ng-click="$event.stopPropagation(); vm.loadMore()"
+               class="md-primary md-raised">
+        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+        <span hide-xs>{{"ENTRIES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
+    </md-button>
+</section>
