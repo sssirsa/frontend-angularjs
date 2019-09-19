@@ -388,7 +388,9 @@
                 .then(function (store) {
                     //Select the store
                     vm.store = store;
-                    vm.entry[vm.catalogues['store'].binding] = store[vm.catalogues['store'].model];
+                    if (vm.store) {
+                        vm.entry[vm.catalogues['store'].binding] = store[vm.catalogues['store'].model];
+                    }
                 })
                 .catch(function (storeError) {
                     if (storeError) {
