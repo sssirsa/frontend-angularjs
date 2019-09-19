@@ -1,0 +1,124 @@
+<!--Listing filters section-->
+<section ng-if="vm.editingIndex<0">
+    <ul id="filters-container" layout-padding>
+        <li ng-repeat="appliedFilter in vm.appliedFilters">
+            <!--Filter verbose as header-->
+            <header class="text-center">
+                <strong>{{appliedFilter['verbose']}}</strong>
+            </header>
+            <div layout="row"
+                 layout-align="space-around center"
+                 layout-wrap>
+                <!-- Modify button -->
+                <!--<md-button ng-click="vm.modifyFilter($index)"
+                           aria-label="modify filter"
+                           class="md-primary md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-edit"></md-icon>
+                        <div ng-if="vm.modifyButton" hide-xs hide-sm>{{vm.modifyButton}}</div>
+                        <div ng-if="!vm.modifyButton" hide-xs hide-sm>Modify</div>
+                    </div>
+                </md-button>-->
+                <!-- Delete button -->
+                <md-button ng-click="vm.removeFilter($index)"
+                           aria-label="remove filter"
+                           class="md-warn md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                        <div ng-if="vm.removeButton" hide-xs hide-sm>{{vm.removeButton}}</div>
+                        <div ng-if="!vm.removeButton" hide-xs hide-sm>Remove</div>
+                    </div>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+        </li>
+    </ul>
+</section>
+<!--Editing-Adding filters section-->
+<section ng-if="vm.editingIndex>-1">
+    <!--Filter verbose as header-->
+    <header class="text-center">
+        <strong>{{vm.appliedFilters[vm.editingIndex].verbose}}</strong>
+    </header>
+    <form name="filterForm"
+          layout-padding
+          layout="column"
+          layout-gt-sm="row"
+          layout-align="center stretch"
+          layout-align-gt-sm="space-around center">
+        <!--Field and property selectors-->
+        <div class="full-width" layout="column" layout-align="center stretch" ng-if="vm.newComponent">
+            <filter-selectors
+                filters="vm.filters"
+                querie="vm.translatedFilters"
+                results="vm.queryResult"
+                field-label="vm.fieldLabel"
+                property-label="vm.propertyLabel"
+                clean-models="vm.cleanModels">
+            </filter-selectors>
+        </div>
+        <!--Filter selector-->
+        <div class="full-width" layout="column" layout-align="center stretch">
+            <md-input-container class="md-block">
+                <label ng-if="vm.filtersLabel">{{vm.filtersLabel}}</label>
+                <label ng-if="!vm.filtersLabel">Filter to apply</label>
+                <md-select ng-model="vm.queryPropertyResult"
+                           aria-label="select filter to apply"
+                           required
+                           ng-disabled="!vm.translatedFilters">
+                    <md-option ng-repeat="filter in vm.translatedFilters" value="{{filter}}">{{filter | translateFilter}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <!--Filter value-->
+        <div class="full-width" layout="column" layout-align="center stretch">
+            <md-input-container class="md-block">
+                <label ng-if="vm.valueLabel">{{vm.valueLabel}}</label>
+                <label ng-if="!vm.valueLabel">Value</label>
+                <input ng-model="vm.queryValueResult"
+                       type="text"
+                       required
+                       aria-label="filter value"
+                       ng-disabled="!vm.queryPropertyResult" />
+            </md-input-container>
+        </div>
+    </form>
+    <div layout="row"
+         layout-align="space-around center"
+         layout-wrap>
+        <!-- Cancel button -->
+        <md-button ng-click="vm.cancelAddModify(vm.editingIndex)"
+                   aria-label="remove filter"
+                   class="md-warn md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-ban"></md-icon>
+                <div ng-if="vm.cancelButton" hide-xs hide-sm>{{vm.cancelButton}}</div>
+                <div ng-if="!vm.cancelButton" hide-xs hide-sm>Cancel</div>
+            </div>
+        </md-button>
+        <!-- Save button -->
+        <md-button ng-click="vm.saveFilter(vm.editingIndex)"
+                   aria-label="save filter"
+                   ng-disabled="filterForm.$invalid"
+                   class="md-primary md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-edit"></md-icon>
+                <div ng-if="vm.saveButton" hide-xs hide-sm>{{vm.saveButton}}</div>
+                <div ng-if="!vm.saveButton" hide-xs hide-sm>Save</div>
+            </div>
+        </md-button>
+    </div>
+</section>
+<!--Footer section used for adding more filters-->
+<footer ng-if="vm.editingIndex<0" layout="column" layout-align="center center">
+    <!-- Add button -->
+    <md-button ng-click="vm.addFilter()"
+               aria-label="add filter"
+               class="md-primary md-raised">
+        <div layout="row" layout-align="center center">
+            <md-icon md-font-icon="fa fa-plus"></md-icon>
+            <div ng-if="vm.addButton" hide-xs hide-sm>{{vm.addButton}}</div>
+            <div ng-if="!vm.addButton" hide-xs hide-sm>Add</div>
+        </div>
+    </md-button>
+</footer>

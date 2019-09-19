@@ -1,0 +1,39 @@
+<div cg-busy="{promise:vm.loadingPromise, message:'Cargando reporte'}">
+    <md-card layout-padding>
+        <div layout="column"
+             layout-align="center center">
+            <h1 class="text-center">{{vm.reportTemplate.name}}</h1>
+            <span class="text-center" ng-if="vm.reportTemplate.description">
+                {{vm.reportTemplate.description}}
+            </span>
+        </div>
+    </md-card>
+    <md-card>
+        <filter-manager ng-if="vm.reportTemplate"
+                        filters="vm.reportTemplate.filters_type"
+                        queries="vm.queries"
+                        add-button="vm.translates.addButton"
+                        remove-button="vm.translates.removeButton"
+                        modify-button="vm.translates.modifyButton"
+                        cancel-button="vm.translates.cancelButton"
+                        save-button="vm.translates.saveButton"
+                        field-label="vm.translates.fieldLabel"
+                        property-label="vm.translates.propertyLabel"
+                        filters-label="vm.translates.filtersLabel"
+                        value-label="vm.translates.valueLabel">
+        </filter-manager>
+    </md-card>
+    <md-card layout-align-gt-xs="end center"
+             layout-align="center stretch"
+             layout-gt-xs="row"
+             layout="column"
+             cg-busy="{promise:vm.savingPromise, message:'Solicitando reporte'}">
+        <md-button class="md-primary md-raised"
+                   ng-click="vm.generate()">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-save"></md-icon>
+                <div hide-xs>{{'REPORT_META.REQUEST.BUTTONS.SAVE'|translate}}</div>
+            </div>
+        </md-button>
+    </md-card>
+</div>

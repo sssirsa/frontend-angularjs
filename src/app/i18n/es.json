@@ -114,6 +114,10 @@
                 "TEMPLATES": {
                     "TITLE": "Plantillas de permisos"
                 }
+            },
+            "MASSIVE_CHARGE":{
+                "HISTORICAL":"Historial",
+                "TITLE":"Cargas Massivas"
             }
         },
         "COMPONENTS": {

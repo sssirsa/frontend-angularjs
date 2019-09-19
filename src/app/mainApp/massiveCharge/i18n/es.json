@@ -1,0 +1,30 @@
+{
+    "MASSIVE_CHARGE":{
+        "HISTORICAL_CHARGES":"Historico de Cargas Masivas",
+        "KIND_OF_MASSIVE":"Tipo de Carga Masiva",
+        "NEW_MASSIVE_LOAD":"Nueva carga masiva",
+        "CANCEL_MASSIVE_LOAD":"Cancelar carga Masiva",
+        "PROGRESS":"Progreso",
+        "DATE":"Fecha de inicio de Carga",
+        "END_DATE":"Fecha de Fin de Carga",
+        "STATUS":"Estado",
+        "TEMPLATE_FILE":"Plantilla de Carga",
+        "ERROR_FILE":"Archivo de Informe de Errores",
+        "NOT_ERROR_FILE":"Sin archivo de errores",
+        "DOWNLOAD":"Descargar",
+        "UPLOAD_FILE":"Subir archivo a Cargar",
+        "START":"Iniciar Carga Masiva",
+        "CLEAN":"Limpiar",
+        "SEARCH":"Buscar",
+        "ENDED":"Solo Finalizados",
+        "REFRESH":"Volver a listar",
+        "KIND_OF_MASSIVE_OBJECT":{
+            "TASK_NAME":"Nombre de la Tarea",
+            "NAME":"Nombre de la Carga",
+            "DESCRIPTION":"Descripción a detalle",
+            "CREATED_AT":"Creado en",
+            "UPDATED_AT":"Actualizado en",
+            "TEMPLATE_FILE":"Plantilla de Carga"
+        }
+    }
+}

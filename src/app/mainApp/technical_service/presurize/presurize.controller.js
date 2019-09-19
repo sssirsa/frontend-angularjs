@@ -155,14 +155,21 @@
                             toastr.error(vm.title_No_Service, vm.messsage_No_Repair);
                             clear();
                         }else {
-                            if (vm.step.control.tipo_entrada === "Buen Estado" && vm.step.control.inspeccionado.estado === "Confirmado") {
+                            if (vm.step.control.tipo_entrada === "Almacen" && vm.step.control.inspeccionado.estado === "Confirmado") {
                                 toastr.error(vm.title_No_Service, vm.messsage_No_Repair);
                                 clear();
                             } else {
-                                var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
-                                var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
-                                toastr.warning(NOT_STEP, SENT_TO_CHECK);
-                                clear();
+                                if (vm.step.control.tipo_entrada === "No_Capitalizados" && vm.step.control.inspeccionado.estado === "Confirmado") {
+                                    toastr.error(vm.title_No_Service, vm.messsage_No_Repair);
+                                    clear();
+                                } else {
+
+                                    var NOT_STEP = Translate.translate('ERROR_STEP.NOT_STEP');
+                                    var SENT_TO_CHECK = Translate.translate('ERROR_STEP.GO_TO');
+                                    toastr.warning(NOT_STEP, SENT_TO_CHECK);
+                                    clear();
+
+                                }
                             }
                         }
 
