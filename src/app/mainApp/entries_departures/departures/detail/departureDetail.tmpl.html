@@ -16,14 +16,14 @@
                 <strong translate="">DEPARTURES.DETAIL.LABELS.ID</strong>
                 {{vm.departure.id}}
             </span>
-            <div ng-if="vm.departure.tipo_entrada==='Nuevos'" class="new-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_entrada==='Onsoletos'" class="obsolete-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_entrada==='No_Capitalizados'" class="unrecognizable-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_entrada==='Almacen'" class="warehouse-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_entrada==='Garantias'" class="warranty-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Nuevos'" class="new-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Onsoletos'" class="obsolete-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Almacen'" class="warehouse-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Garantias'" class="warranty-departures departures-filter"></div>
             <span>
                 <strong translate="">DEPARTURES.DETAIL.LABELS.KIND</strong>
-                {{vm.departure.tipo_entrada}}
+                {{vm.departure.tipo_salida}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
