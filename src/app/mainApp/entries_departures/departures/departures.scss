@@ -10,3 +10,35 @@
 .cant-leave-cabinet {
   background-color: #FFCCAA;
 }
+
+div.new-departures {
+  background-color: #0AF;
+}
+
+div.obsolete-departures {
+  background-color: #A00;
+}
+
+div.unrecognizable-departures {
+  background-color: #AAA;
+}
+
+div.warehouse-departures {
+  background-color: #0A0;
+}
+
+div.warranty-departures {
+  background-color: #FA0;
+}
+
+div.all-departures {
+  background-color: #FFF;
+}
+
+div.departures-filter {
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+}

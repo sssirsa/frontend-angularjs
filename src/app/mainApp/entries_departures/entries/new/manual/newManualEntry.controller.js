@@ -355,7 +355,7 @@
                 }
             }
         };
-
+        
         vm.clickSaveEntry = function clickSaveEntry(entry) {
             //Show warning message if the entry has unregistered cabinets
             if (entryHasPendingCabinets()) {

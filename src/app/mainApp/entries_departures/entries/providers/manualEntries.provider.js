@@ -4,16 +4,16 @@
         .factory('MANUAL_ENTRIES', ManualEntriesProvider);
 
     function ManualEntriesProvider(
-        API,
         $q,
-        URLS,
-        Translate,
+        API,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        QUERIES,
+        Translate,
+        URLS,
+        User
     ) {
 
-        var entriesDeparturesUrl = API
-            .all(URLS.entries_departures.base);
         var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
@@ -25,7 +25,6 @@
 
         var control = URLS.management.control;
         var entries = URLS.entries_departures.entries;
-        var inspections = URLS.entries_departures.inspections;
         var inventory = URLS.management.inventory;
 
         function createNew(element) {
@@ -53,7 +52,18 @@
         }
 
         function detail(id) {
-            return entriesUrl.all(id).customGET();
+            return entriesUrl.all(entries.all).all(id).customGET();
+        }
+
+        function getAssetStatus(entryId, page, pageSize) {
+            var params;
+            if (page) {
+                params = {
+                    limit: (pageSize),
+                    offset: (pageSize) * (page - 1)
+                };
+            }
+            return entriesUrl.all(entries.close).all(entryId).customGET(null, params);
         }
 
         function close(id, element) {
@@ -116,24 +126,58 @@
             return deferred.promise;
         }
 
-        function createAutomaticInspection(assetID) {
-            var preliminaryInspection = {
-                cabinet_id: assetID,
-                sticker_id: 8,
-                rodajas: 0,
-                canastillas: 0,
-                rejillas_traseras: 0,
-                rejillas_delanteras: 0,
-                puertas: 0,
-                pintura: true,
-                lavado: true,
-                emplayado: false,
-                vacio_mercancia: true
-            };
-            return entriesDeparturesUrl
-                .all(inspections.base)
-                .all(inspections.preliminary_inspection)
-                .customPOST(preliminaryInspection);
+        //Entry Kind must be one pf the following
+        //new, warehouse, repair, unrecognizable, warranty
+        //Otherwise, all entries are returned
+        //Page parameter is used for pagination,
+        //without it just first page is provided
+        function listEntries(entryKind, page) {
+            var user = User.getUser();
+            var url = entriesUrl;
+            var params;
+            //Pagination params building
+            if (page) {
+                params = {
+                    limit: PAGINATION.pageSize,
+                    offset: PAGINATION.pageSize * (page - 1)
+                };
+                //Adding ordering parameter
+                params[QUERIES.ordering] = '-id';
+            }
+            //Subsidiary or Agency query
+            if (user.sucursal) {
+                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
+            }
+            if (user.udn) {
+                params[QUERIES.entries_departures.by_agency] = user['udn'].id;
+            }
+            if (entryKind) {
+                //An entry kind has been provided
+                switch (entryKind) {
+                    case 'new':
+                        url = url.all(entries.new);
+                        break;
+                    case 'warehouse':
+                        url = url.all(entries.warehouse);
+                        break;
+                    case 'repair':
+                        url = url.all(entries.repair);
+                        break;
+                    case 'unrecognizable':
+                        url = url.all(entries.unrecognizable);
+                        break;
+                    case 'warranty':
+                        url = url.all(entries.warranty);
+                        break;
+                    default:
+                        url = url.all(entries.all);
+                }
+            }
+            else {
+                //Entry kind not provided, so return all
+                url = url.all(entries.all);
+            }
+            return url.customGET(null, params);
         }
 
         //Internal functions
@@ -167,7 +211,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            
+
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -195,7 +239,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            
+
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -221,7 +265,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            
+
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -247,7 +291,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -275,7 +319,6 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    establecimiento_origen_id: null,
                     ife_chofer: null,
                     linea_transporte_id: null,
                     nombre_chofer: '',
@@ -291,7 +334,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            
+
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -317,7 +360,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            
+
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -343,7 +386,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            
+
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -369,7 +412,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -418,7 +461,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            
+
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -444,7 +487,7 @@
                                 + '/' + URLS.inventory.base
                                 + '/' + URLS.inventory.catalogues.base
                                 + '/' + URLS.inventory.catalogues.supplier,
-                            
+
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -470,7 +513,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            
+
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -496,7 +539,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            
+
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -522,7 +565,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -565,7 +608,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            
+
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -591,7 +634,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            
+
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -617,7 +660,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            
+
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -643,7 +686,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -669,7 +712,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.UNRECOGNIZABLE.LABELS.ORIGIN_AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -712,7 +755,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
-                            
+
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -738,7 +781,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
-                            
+
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -764,7 +807,7 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-                            
+
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -790,7 +833,7 @@
                                 + '/' + URLS.management.base
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-                            
+
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
@@ -822,10 +865,11 @@
             createUnrecognizable: createUnrecognizable,
             addCabinet: addCabinet,
             detail: detail,
+            getAssetStatus: getAssetStatus,
             close: close,
             getCabinet: getCabinet,
             getEntriesByCabinet: getEntriesByCabinet,
-            createAutomaticInspection: createAutomaticInspection,
+            listEntries: listEntries,
             //Constants
             warrantyEntry: warrantyEntry,
             repairEntry: repairEntry,
