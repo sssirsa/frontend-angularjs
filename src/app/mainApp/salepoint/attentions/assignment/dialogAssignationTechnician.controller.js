@@ -45,7 +45,7 @@
         vm.selectedPersonChange = selectedPersonChange;
         vm.preSearchPerson = preSearchPerson;
         vm.onElementSelect = onElementSelect;
-        vm.change = change;
+        vm.clearText = clearText;
         vm.assign = assign;
         vm.cancel = cancel;
         vm.view = view;
@@ -82,8 +82,9 @@
             required: true
         };
 
-        function change() {
-            vm.filtro = !vm.filtro;
+        function clearText() {
+            vm.personList = null;
+            vm.chip = [];
         }
 
         function setLimitHours() {
@@ -124,6 +125,7 @@
                     if (requestSuccess.persona) {
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
+                                console.log(vm.assignedPerson);
                                 vm.assignedPerson = userSuccess;
                                 worklist(vm.assignedPerson.id);
                             })
@@ -148,6 +150,7 @@
 
 
         function selectedPersonChange() {
+            vm.chip = [];
             vm.salePoint.persona = vm.assignedPerson.id;
             vm.infoChip = null;
             worklist(vm.salePoint.persona);
@@ -166,6 +169,7 @@
         }
 
         function preSearchPerson() {
+            vm.personList = null;
             Persona_Admin.list(0, 0, vm.searchText)
                 .then(function (userList) {
                     vm.limit = userList.count;
@@ -197,6 +201,7 @@
         }
 
         function onElementSelect(element) {
+            vm.chip = [];
             vm.assignedPerson.id = element;
             vm.salePoint.persona = vm.assignedPerson.id;
             vm.infoChip = null;
@@ -210,7 +215,6 @@
                 return;
             }
 
-            console.log("vm.toAsigned", vm.toAsigned);
             vm.personLoading = ATTENTIONS.assignationTechnician(vm.id, vm.toAsigned)
                 .then(function () {
                     ErrorHandler.success();

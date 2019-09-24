@@ -21,7 +21,7 @@
                         <div layout="colum">
                             <md-input-container flex class="md-block">
                                 <label>Buscar Trabajador por nombre</label>
-                                <input type="text" ng-model="vm.searchText" ng-keypress="vm.clearVar()"/>
+                                <input type="text" ng-model="vm.searchText" ng-keypress="vm.clearText()" ng-keyup="vm.clearText()" ng-keydown="vm.clearText()"/>
                             </md-input-container>
                             <md-button ng-click="vm.preSearchPerson()">buscar</md-button>
                         </div>
@@ -34,42 +34,14 @@
                                             on-select="vm.onElementSelect(element)">
                             </catalog-select>
                         </md-input-container>
-                        <md-input-container flex class="md-block" ng-if="vm.searchText && vm.personList">
 
-                            <div>
-                                <md-autocomplete md-input-name="persona"
-                                                 md-no-cache="true"
-                                                 flex="100"
-                                                 md-min-length="0"
-                                                 md-selected-item="vm.assignedPerson"
-                                                 md-selected-item-change="vm.selectedPersonChange()"
-                                                 md-search-text="vm.personSearchText"
-                                                 md-items="item in vm.personList"
-                                                 md-item-text="'(' + item.user.username +') ' + item.nombre + ' ' + item.apellido_paterno + ' ' + item.apellido_materno"
-                                                 md-floating-label="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}"
-                                                 md-menu-class="autocomplete-custom-template"
-                                                 required>
-                                    <md-item-template>
-                            <span class="item-title" title="{{item.nombre}}">
-                            <md-icon md-font-icon="fa fa-id-card-o"></md-icon>
-                            <span>
-                                <b>{{item.user.username}}</b>
-                            </span>
-                            </span>
-                                        <span class="md-caption">
-                            {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_paterno}}
-                            </span>
-                                    </md-item-template>
-                                    <md-not-found>
-                        <span class="item-title">
-                            <span>
-                                {{'SALEPOINT_REQUEST.ASSIGN_DETAIL.NO_RESULTS'|translate}}: "{{vm.searchText}}"
-                            </span>
-                        </span>
-                                    </md-not-found>
-                                </md-autocomplete>
-                            </div>
-
+                        <div layout="column" flex class="md-block" ng-if="vm.personList">
+                            <md-select placeholder="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}" ng-model="vm.assignedPerson" ng-change="vm.selectedPersonChange()">
+                                <md-option ng-value="item" ng-repeat="item in vm.personList">
+                                    ({{item.user.username}}) {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}}
+                                </md-option>
+                            </md-select>
+                        </div>
                     </div>
                     <div>
                         <md-slider-container>
