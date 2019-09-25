@@ -2,8 +2,9 @@
     "CHANGES": {
         "MENU": {
             "TITLE": "Cambios",
-            "AGENCY": "entre Agencias-UDN",
-            "SUBSIDIARY": "entre Sucursales"
+            "CREATE": "Crear cambio",
+            "LIST":"Listado",
+            "MANUAL":"Manual"
         },        
         "TITLE": "Cambios",
         "LABELS": {

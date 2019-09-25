@@ -1,8 +1,8 @@
 (function () {
     angular
-        .module('app.mainApp.entries_departures.departures')
-        .controller('departureDetailController', DepartureDetailController);
-    function DepartureDetailController(
+        .module('app.mainApp.entries_departures.changes')
+        .controller('changesDetailController', ChangesDetailController);
+    function ChangesDetailController(
         $stateParams,
         ErrorHandler,
         MANUAL_DEPARTURES
