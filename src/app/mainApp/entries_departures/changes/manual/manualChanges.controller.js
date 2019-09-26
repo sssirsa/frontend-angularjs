@@ -153,7 +153,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('CHANGES.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('CHANGES.CREATE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var subsidiary, agency;
@@ -205,12 +205,12 @@
                                                 cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                             }
                                             else {
-                                                toastr.error(Translate.translate('CHANGES.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                                toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                                 vm.removeCabinet(cabinetID);
                                             }
                                         }
                                         else {
-                                            toastr.error(Translate.translate('CHANGES.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                             vm.removeCabinet(cabinetID);
                                         }
                                     }
@@ -218,18 +218,18 @@
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector.
-                                    var locationMessage = Translate.translate('CHANGES.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    var locationMessage = Translate.translate('CHANGES.CREATE.ERRORS.NOT_YOUR_SUBSIDIARY');
                                     if (cabinetSuccessCallback['subsidiary']) {
                                         locationMessage = locationMessage
                                             + ', '
-                                            + Translate.translate('CHANGES.ERRORS.IS_AT')
+                                            + Translate.translate('CHANGES.CREATE.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['subsidiary'].nombre;
                                     }
                                     if (cabinetSuccessCallback['agency']) {
                                         locationMessage = locationMessage
                                             + ', '
-                                            + Translate.translate('CHANGES.ERRORS.IS_AT')
+                                            + Translate.translate('CHANGES.CREATE.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['agency'].agencia;
                                     }
@@ -238,7 +238,7 @@
                                 }
                             }
                             else {
-                                toastr.error(Translate.translate('CHANGES.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -258,7 +258,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('CHANGES.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('CHANGES.CREATE.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -270,8 +270,8 @@
             if (changeHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('CHANGES.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('CHANGES.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('CHANGES.CREATE.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('CHANGES.CREATE.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -297,7 +297,7 @@
                     .then(function () {
                         init();
                         toastr.success(
-                            Translate.translate('CHANGES.MESSAGES.SUCCESS_CREATE')
+                            Translate.translate('CHANGES.CREATE.MESSAGES.SUCCESS_CREATE')
                         );
                     })
                     .catch(function (errorCallback) {
@@ -310,7 +310,7 @@
                     .then(function () {
                         init();
                         toastr.success(
-                            Translate.translate('CHANGES.MESSAGES.SUCCESS_CREATE')
+                            Translate.translate('CHANGES.CREATE.MESSAGES.SUCCESS_CREATE')
                         );
                     })
                     .catch(function (errorCallback) {

@@ -3,61 +3,66 @@
         "MENU": {
             "TITLE": "Cambios",
             "CREATE": "Crear cambio",
-            "LIST":"Listado",
-            "MANUAL":"Manual"
-        },        
-        "TITLE": "Cambios",
-        "LABELS": {
-            "CHANGE_DATA": "Información del cambio",
-            "ASSET_LOADING": "Carga de cabinets",
-            "DESCRIPTION": "Descripción",
-            "AGENCY": "UDN-Agencia",
-            "TRANSPORT_LINE": "Linea de transporte",
-            "TRANSPORT_KIND": "Tipo de transporte",
-            "SUBSIDIARY": "Sucursal",
-            "DRIVER_ID": "Identificación del operador",
-            "DRIVER_NAME": "Nombre del operador",
-            "CABINET_SEARCH": "Registro de cabinets",
-            "CABINET_ID": "Económico del cabinet",
-            "CABINET": {
-                "ID": "Económico",
-                "SERIAL_NUMBER": "Número de serie",
-                "BRAND": "Marca",
-                "MODEL": "Modelo"
+            "LIST": "Listado",
+            "MANUAL": "Manual",
+            "MASSIVE": ""
+        },
+        "CREATE": {
+            "TITLE": "Cambios",
+            "LABELS": {
+                "AGENCY": "UDN-Agencia",
+                "ASSET_LOADING": "Carga de cabinets",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "CHANGE_DATA": "Información del cambio",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "Agencia destino",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "SWITCH": {
+                    "LABEL": "Activa si el cambio es desde una UDN-Agencia",
+                    "TRUE": "Cambio desde una UDN-Agencia",
+                    "FALSE": "Cambio desde una Sucursal"
+                }
             },
-            "SWITCH": {
-                "LABEL": "Activa si el cambio es desde una UDN-Agencia",
-                "TRUE": "Cambio desde una UDN-Agencia",
-                "FALSE": "Cambio desde una Sucursal"
+            "HINTS": {
+                "AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet de la salida",
+                "CHANGE": "Movimientos internos de equipos entre Agencias-UDN o sucursales",
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "DESTINATION_AGENCY": "Selecciona la agencia destino",
+                "DESTINATION_SUBSIDIARY": "Selecciona la sucursal destino",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida"
             },
-            "DESTINATION_SUBSIDIARY": "Sucursal destino"
-        },
-        "HINTS": {
-            "AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet de la salida",
-            "CHANGE": "Movimientos internos de equipos entre Agencias-UDN o sucursales",
-            "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
-            "DESTINATION_SUBSIDIARY": "Selecciona la sucursal destino",
-            "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
-            "DRIVER_NAME": "Operador del transporte de entrega",
-            "TRANSPORT_LINE": "Selecciona la linea de transporte",
-            "TRANSPORT_KIND": "Selecciona el tipo de transporte",
-            "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida"
-        },
-        "BUTTONS": {
-            "NEXT": "Siguiente",
-            "PREVIOUS": "Anterior",
-            "SAVE": "Guardar cambio",
-            "REMOVE": "Quitar"
-        },
-        "MESSAGES": {
-            "SUCCESS_CREATE": "Cambio registrada correctamente"
-        },
-        "ERRORS": {
-            "REPEATED_ID": "Ya se encuentra en la lista",
-            "CANT_LEAVE": "El cabinet aún no puede salir",
-            "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
-            "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
-            "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada"
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar cambio",
+                "REMOVE": "Quitar"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Cambio registrado correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada"
+            }
         }
     }
 }
