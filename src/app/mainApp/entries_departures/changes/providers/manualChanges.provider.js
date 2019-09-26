@@ -8,7 +8,8 @@
         URLS,
         Translate,
         EnvironmentConfig,
-        PAGINATION
+        PAGINATION,
+        QUERIES
     ) {
         var changesUrl = API
             .all(URLS.entries_departures.base)
@@ -143,6 +144,33 @@
             return deferred.promise;
         }
 
+        function getAgency(page, destinationAgencyId, originAgencyId) {
+            var params = {};
+            //Pagination params building
+            if (page) {
+                params.limit = PAGINATION.pageSize;
+                params.offset = PAGINATION.pageSize * (page - 1);
+                //Adding ordering parameter
+                params[QUERIES.ordering] = '-id';
+            }
+            destinationAgencyId ? params[QUERIES.changes.by_destination_agency] = destinationAgencyId : null;
+            originAgencyId ? params[QUERIES.changes.by_origin_agency] = originAgencyId : null;
+            return changesUrl.customGET(changes.agency, params);
+        }
+
+        function getSubsidiary(page, destinationSubsidiaryId, originSubsidiaryId) {
+            var params = {};
+            //Pagination params building
+            if (page) {
+                params.limit = PAGINATION.pageSize;
+                params.offset = PAGINATION.pageSize * (page - 1);
+                //Adding ordering parameter
+                params[QUERIES.ordering] = '-id';
+            }
+            destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
+            originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
+            return changesUrl.all(changes.subsidiary).customGET(element);
+        }
         //Internal functions
 
         function getCabinetInLocation(id) {
@@ -173,7 +201,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
-                            name: Translate.translate('CHANGES.LABELS.SUBSIDIARY'),
+                            name: Translate.translate('CHANGES.LABELS.DESTINATION_SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'nombre',
@@ -189,7 +217,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('CHANGES.HINTS.DESTINATION_SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
@@ -350,7 +378,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
-                            name: Translate.translate('CHANGES.LABELS.AGENCY'),
+                            name: Translate.translate('CHANGES.LABELS.DESTINATION_AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'agencia',
@@ -364,7 +392,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.AGENCY'),
+                        hint: Translate.translate('CHANGES.HINTS.DESTINATION_AGENCY'),
                         icon: 'fa fa-building',
                         required: true
                     },
@@ -402,6 +430,8 @@
         return {
             createAgency: createAgency,
             createSubsidiary: createSubsidiary,
+            getAgency: getAgency,
+            getSubsidiary: getSubsidiary,
             getCabinet: getCabinet,
             //Constants
             subsidiaryChange: subsidiaryChange,

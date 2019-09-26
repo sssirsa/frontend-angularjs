@@ -119,6 +119,12 @@
             cabinet: {
                 by_brand: '?marca__id='
             },
+            changes:{
+                by_destination_agency:'udn_destino__id',
+                by_destination_subsidiary:'sucursal_origen__id',
+                by_origin_agency:'udn_origen__id',
+                by_origin_subsidiary:'sucursal_origen__id'
+            },
             city: {
                 by_state: 'estado__id'
             },

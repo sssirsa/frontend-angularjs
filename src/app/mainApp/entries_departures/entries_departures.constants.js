@@ -42,7 +42,6 @@
             inspections: {
                 base: 'inspections',
                 preliminary_inspection: 'preliminary_inspection'
-            },
-            subsidiary_change: {}
+            }
         });
 })();
