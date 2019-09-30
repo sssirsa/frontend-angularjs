@@ -169,7 +169,7 @@
             }
             destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
             originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
-            return changesUrl.all(changes.subsidiary).customGET(element);
+            return changesUrl.customGET(changes.subsidiary, params);
         }
         //Internal functions
 
@@ -201,7 +201,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
-                            name: Translate.translate('CHANGES.LABELS.DESTINATION_SUBSIDIARY'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.DESTINATION_SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'nombre',
@@ -217,7 +217,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.DESTINATION_SUBSIDIARY'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.DESTINATION_SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
@@ -229,7 +229,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
-                            name: Translate.translate('CHANGES.LABELS.SUBSIDIARY'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'nombre',
@@ -245,7 +245,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
@@ -257,7 +257,7 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
 
-                            name: Translate.translate('CHANGES.LABELS.TRANSPORT_LINE'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'razon_social',
@@ -271,7 +271,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.TRANSPORT_LINE'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
                         required: true
                     },
@@ -283,7 +283,7 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
 
-                            name: Translate.translate('CHANGES.LABELS.TRANSPORT_KIND'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion',
@@ -297,7 +297,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.TRANSPORT_KIND'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
                         required: true
                     }
@@ -326,7 +326,7 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
 
-                            name: Translate.translate('CHANGES.LABELS.TRANSPORT_LINE'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'razon_social',
@@ -340,7 +340,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.TRANSPORT_LINE'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
                         required: true
                     },
@@ -352,7 +352,7 @@
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
 
-                            name: Translate.translate('CHANGES.LABELS.TRANSPORT_KIND'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion',
@@ -366,7 +366,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.TRANSPORT_KIND'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
                         required: true
                     },
@@ -378,7 +378,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
-                            name: Translate.translate('CHANGES.LABELS.DESTINATION_AGENCY'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.DESTINATION_AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'agencia',
@@ -392,7 +392,7 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.DESTINATION_AGENCY'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.DESTINATION_AGENCY'),
                         icon: 'fa fa-building',
                         required: true
                     },
@@ -404,7 +404,7 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
-                            name: Translate.translate('CHANGES.LABELS.AGENCY'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'agencia',
@@ -418,8 +418,120 @@
                                 reverse: false
                             }
                         },
-                        hint: Translate.translate('CHANGES.HINTS.AGENCY'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
+                        required: true
+                    }
+                };
+                return catalogues;
+            }
+        };
+
+        var listChanges = {
+            catalogues: function catalogues() {
+                var catalogues = {
+                    destination_udn: {
+                        binding: 'udn_destino_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.udn,
+
+                            name: Translate.translate('CHANGES.LIST.LABELS.DESTINATION_AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia',
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
+                            },
+                            elements: PAGINATION.elements,
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('CHANGES.LIST.HINTS.DESTINATION_AGENCY'),
+                        required: true
+                    },
+                    origin_udn: {
+                        binding: 'udn_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.udn,
+
+                            name: Translate.translate('CHANGES.LIST.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'agencia',
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
+                            },
+                            elements: PAGINATION.elements,
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('CHANGES.LIST.HINTS.AGENCY'),
+                        required: true
+                    },
+                    destination_subsidiary: {
+                        binding: 'sucursal_destino_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+
+                            name: Translate.translate('CHANGES.LIST.LABELS.DESTINATION_SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'nombre',
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            elements: PAGINATION.elements,
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('CHANGES.LIST.HINTS.DESTINATION_SUBSIDIARY'),
+                        required: true
+                    },
+                    origin_subsidiary: {
+                        binding: 'sucursal_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+
+                            name: Translate.translate('CHANGES.LIST.LABELS.SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: 'id',
+                            option: 'nombre',
+                            pagination: {
+                                total: PAGINATION.total,
+                                limit: PAGINATION.limit,
+                                offset: PAGINATION.offset,
+                                pageSize: PAGINATION.pageSize
+                            },
+                            elements: PAGINATION.elements,
+                            softDelete: {
+                                hide: 'deleted',
+                                reverse: false
+                            }
+                        },
+                        hint: Translate.translate('CHANGES.LIST.HINTS.SUBSIDIARY'),
                         required: true
                     }
                 };
@@ -433,9 +545,12 @@
             getAgency: getAgency,
             getSubsidiary: getSubsidiary,
             getCabinet: getCabinet,
+            agencyDetail:agencyDetail,
+            subsidiaryDetail:subsidiaryDetail,
             //Constants
             subsidiaryChange: subsidiaryChange,
-            agencyChange: agencyChange
+            agencyChange: agencyChange,
+            listChanges: listChanges
         };
     }
 })();

@@ -63,6 +63,67 @@
                 "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
                 "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada"
             }
+        },
+        "DETAIL": {
+            "TITLE": "Detalle de Cambio",
+            "LABELS": {
+                "AGENCY": "UDN-Agencia origen",
+                "DATE": "Fecha",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "Agencia destino",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino",
+                "DRIVER_NAME": "Nombre del operador",
+                "ID": "Folio",
+                "NO_RESULTS": "Sin resultados",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal origen",
+                "SWITCH": {
+                    "LABEL": "Activa si quieres listar los cambios de UDN-Agencia",
+                    "TRUE": "Cambios de UDN-Agencia",
+                    "FALSE": "Cambios de Sucursal"
+                }
+            },
+            "BUTTONS": {
+                "LOAD_MORE": "Cargar mas...",
+                "PDF": "Generar remisión"
+            }
+        },
+        "LIST": {
+            "TITLE": "Listado de Cambios",
+            "LABELS": {
+                "AGENCY": "UDN-Agencia origen",
+                "DATE": "Fecha",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "Agencia destino",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino",
+                "DRIVER_NAME": "Nombre del operador",
+                "ID": "Folio",
+                "NO_RESULTS": "Sin resultados",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal origen",
+                "SWITCH": {
+                    "LABEL": "Activa si quieres listar los cambios de UDN-Agencia",
+                    "TRUE": "Cambios de UDN-Agencia",
+                    "FALSE": "Cambios de Sucursal"
+                }
+            },
+            "HINTS": {
+                "AGENCY": "Agencia-UDN de la cual salieron los equipos",
+                "DESTINATION_AGENCY": "Agencia-UDN destino",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino",
+                "SUBSIDIARY": "Sucursal origen",
+                "SWITCH": {
+                    "LABEL": "Activa si el cambio es desde una UDN-Agencia",
+                    "TRUE": "Cambio desde una UDN-Agencia",
+                    "FALSE": "Cambio desde una Sucursal"
+                }
+            },
+            "BUTTONS": {
+                "LOAD_MORE": "Cargar mas...",
+                "PDF": "Generar remisión"
+            }
         }
     }
 }

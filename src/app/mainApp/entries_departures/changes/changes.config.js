@@ -73,7 +73,6 @@
                         children: [
                             {
                                 name: 'CHANGES.MENU.CREATE',
-                                icon: 'fas fa-exchange-alt',
                                 type: 'link',
                                 permission: [
                                     'entries_departures__changes__subsidiary'
@@ -82,6 +81,13 @@
                             }
                         ]
                     },
+                    // {
+                    //     name:'DEPARTURES.MENU.MASSIVE',
+                    //     type:'dropdown',
+                    //     icon:'fa fa-file-csv',
+                    //     permission:['entries_departures__changes__subsidiary'],
+                    //     children:[]
+                    // },
                     {
                         name: 'CHANGES.MENU.LIST',
                         icon: 'fa fa-archive',

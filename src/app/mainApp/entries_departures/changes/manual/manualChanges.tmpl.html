@@ -1,12 +1,12 @@
 <md-card layout-padding>
     <div layout="column" layout-align="center center">
-        <h1 translate>CHANGES.TITLE</h1>
-        <span translate>CHANGES.HINTS.CHANGE</span>
+        <h1 translate>CHANGES.CREATE.TITLE</h1>
+        <span translate>CHANGES.CREATE.HINTS.CHANGE</span>
     </div>
     <md-tabs md-dynamic-height="true" md-selected="vm.selectedTab">
-        <md-tab layout="column" layout-align="center stretch" label={{'CHANGES.LABELS.ASSET_LOADING'|translate}}>
+        <md-tab layout="column" layout-align="center stretch" label={{'CHANGES.CREATE.LABELS.ASSET_LOADING'|translate}}>
             <div layout="row" layout-align="center center" ng-if="vm.showSelector">
-                <p>{{'CHANGES.LABELS.SWITCH.LABEL'|translate}}</p>
+                <p>{{'CHANGES.CREATE.LABELS.SWITCH.LABEL'|translate}}</p>
                 <md-switch ng-model="vm.changeFromAgency" ng-change="vm.changeSwitch()">
                     <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.TRUE'|translate}}</p>
                    <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.FALSE'|translate}}</p>-->
@@ -29,11 +29,11 @@
                 layout-align="center stretch" ng-if="!vm.showSelector
                         || vm.change[vm.catalogues['origin_subsidiary'].binding]
                         || vm.change[vm.catalogues['origin_udn'].binding]">
-                <h3>{{'CHANGES.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <h3>{{'CHANGES.CREATE.LABELS.CABINET_SEARCH'|translate}}</h3>
                 <form name="cabinetSearch" ng-submit="vm.searchCabinet(vm.cabinetID)">
                     <div layout="row">
                         <md-input-container class="md-block">
-                            <label>{{'CHANGES.LABELS.CABINET_ID'|translate}}</label>
+                            <label>{{'CHANGES.CREATE.LABELS.CABINET_ID'|translate}}</label>
                             <input name="cabinetID" type="text" digits-only md-max-length="10"
                                 ng-model="vm.cabinetID" />
                         </md-input-container>
@@ -60,19 +60,19 @@
                                         layout-align-gt-xs="space-between center" layout-align="center stretch"
                                         class="full-width found-cabinet" ng-if="element.cabinet">
                                         <div layout="column" layout-align="center center">
-                                            <b>{{'CHANGES.LABELS.CABINET.ID'|translate}}</b>
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.ID'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
                                         <div layout="column" layout-align="center center">
-                                            <b>{{'CHANGES.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
                                         <div layout="column" layout-align="center center">
-                                            <b>{{'CHANGES.LABELS.CABINET.BRAND'|translate}}</b>
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
                                         <div layout="column" layout-align="center center">
-                                            <b>{{'CHANGES.LABELS.CABINET.MODEL'|translate}}</b>
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
                                         <div layout="column" layout-align="center center">
@@ -91,7 +91,7 @@
                                             {{element.id}}
                                         </div>
                                         <div layout="column" layout-align="center center">
-                                            {{'CHANGES.ERRORS.NOT_FOUND_ID'|translate}}
+                                            {{'CHANGES.CREATE.ERRORS.NOT_FOUND_ID'|translate}}
                                         </div>
                                         <div layout="column" layout-align="center center">
                                             <md-button ng-click="$event.stopPropagation(); vm.removeCabinet(element.id)"
@@ -113,13 +113,13 @@
                     class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
-                        <div>{{'CHANGES.BUTTONS.NEXT'|translate}}</div>
+                        <div>{{'CHANGES.CREATE.BUTTONS.NEXT'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
         </md-tab>
         <md-tab layout="column" layout-align="center stretch" ng-disabled="!vm.cabinetList.length>0"
-            label={{'CHANGES.LABELS.CHANGE_DATA'|translate}}>
+            label={{'CHANGES.CREATE.LABELS.CHANGE_DATA'|translate}}>
             <form name="changeForm" layout="column" ng-if="vm.cabinetList.length>0" layout-align="center stretch">
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
                     layout-align="center stretch">
@@ -135,10 +135,10 @@
                     </catalog-select>
                 </div>
                 <md-input-container layout="column" class="md-icon-float md-block">
-                    <label translate>CHANGES.LABELS.DESCRIPTION</label>
+                    <label translate>CHANGES.CREATE.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
                     <input ng-model="vm.change['descripcion']" name="description" type="text">
-                    <div class="hint" translate>CHANGES.HINTS.DESCRIPTION</div>
+                    <div class="hint" translate>CHANGES.CREATE.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
                     layout-align="center stretch">
@@ -156,10 +156,10 @@
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around start"
                     layout-align="center stretch">
                     <md-input-container layout="column" class="md-icon-float md-block full-width">
-                        <label translate>CHANGES.LABELS.DRIVER_NAME</label>
+                        <label translate>CHANGES.CREATE.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
                         <input ng-model="vm.change['nombre_chofer']" name="driver_name" ng-required="true" type="text">
-                        <div class="hint" translate>CHANGES.HINTS.DRIVER_NAME</div>
+                        <div class="hint" translate>CHANGES.CREATE.HINTS.DRIVER_NAME</div>
                     </md-input-container>
                     <md-input-container layout="column" layout-align="start center"
                         class="md-icon-float md-block full-width">
@@ -167,12 +167,12 @@
                             <div>
                                 <md-icon class="far fa-id-card"></md-icon>
                             </div>
-                            <div translate>CHANGES.LABELS.DRIVER_ID</div>
+                            <div translate>CHANGES.CREATE.LABELS.DRIVER_ID</div>
                         </div>
                         <file-uploader files-selected="vm.selectDriverID(files)" file-formats="'image/*'"
                             validations="vm.imageConstraints.validations" resize-if="vm.imageConstraints.resizeIf"
                             resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>CHANGES.HINTS.DRIVER_ID</div>
+                        <div class="hint" translate>CHANGES.CREATE.HINTS.DRIVER_ID</div>
                     </md-input-container>
                 </div>
             </form>
@@ -180,7 +180,7 @@
                 <md-button ng-click="vm.previousTab()" aria-label="previous tab" class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
-                        <div>{{'CHANGES.BUTTONS.PREVIOUS'|translate}}</div>
+                        <div>{{'CHANGES.CREATE.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
                 <md-button ng-click="vm.clickSaveChange(vm.change)" cg-busy="{
@@ -190,7 +190,7 @@
                     ng-disabled="changeForm.$invalid ||!vm.change['ife_chofer']">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
-                        <div>{{'CHANGES.BUTTONS.SAVE'|translate}}</div>
+                        <div>{{'CHANGES.CREATE.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>

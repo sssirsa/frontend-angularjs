@@ -5,38 +5,38 @@
     function ChangesDetailController(
         $stateParams,
         ErrorHandler,
-        MANUAL_DEPARTURES
+        MANUAL_CHANGES
     ) {
         var vm = this;
-        vm.departureId;
-        vm.departure;
+        vm.changeId;
+        vm.change;
         vm.assets;
 
         function init() {
-            vm.departureId = $stateParams.departureId;
-            loadDeparture();
+            vm.changeId = $stateParams.changeId;
+            loadChange();
         }
         init();
 
         //Private functions
-        function loadDeparture(forceReload) {
+        function loadChange(forceReload) {
             if (vm.assets) {
                 //Re-setting assets variable
                 vm.assets = [];
             }
-            if (!$stateParams.departure || forceReload) {
-                vm.loadingDeparture = MANUAL_DEPARTURES
-                    .detail(vm.departureId)
-                    .then(function (departure) {
-                        vm.departure = departure;
+            if (!$stateParams.change || forceReload) {
+                vm.loadingChange = MANUAL_CHANGES
+                    .detail(vm.changeId)
+                    .then(function (change) {
+                        vm.change = change;
                         loadAssetStatus();
                     })
-                    .catch(function (departureError) {
-                        ErrorHandler.errorTranslate(departureError);
+                    .catch(function (changeError) {
+                        ErrorHandler.errorTranslate(changeError);
                     });
             }
             else {
-                vm.departure = $stateParams.departure;
+                vm.change = $stateParams.change;
                 loadAssetStatus();
             }
         }
@@ -45,7 +45,7 @@
             if (!vm.assets) {
                 vm.assets = [];
             }
-            vm.assets = vm.departure.cabinets;
+            vm.assets = vm.change.cabinets;
         }
 
     }
