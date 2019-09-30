@@ -36,7 +36,7 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.change-detail', {
-                url: '/cambios/detalle/:changeId',
+                url: '/cambios/:changeKind/detalle/:changeId',
                 data: {
                     permissions: {
                         only: [
@@ -46,6 +46,7 @@
                 },
                 params: {
                     changeId: null,
+                    changeKind: null,
                     change: null
                 },
                 templateUrl: 'app/mainApp/entries_departures/changes/detail/changeDetail.tmpl.html',

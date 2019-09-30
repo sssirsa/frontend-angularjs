@@ -63,8 +63,16 @@
         };
 
         vm.navigateToDetail = function (change) {
+            var changeKind;
+            if (vm.agencyChange) {
+                changeKind = 'agencia';
+            }
+            else {
+                changeKind = 'sucursal';
+            }
             $state.go('triangular.admin-default.change-detail', {
                 changeId: change.id,
+                changeKind: changeKind,
                 change: change
             });
         };
@@ -109,6 +117,7 @@
                 }
                 if (vm.user['udn']) {
                     //Agency user
+                    vm.agencyChange = true;
                     vm.loadingChanges = MANUAL_CHANGES.getAgency(page,
                         vm.filters[vm.catalogues['destination_udn'].binding],
                         vm.filters[vm.catalogues['origin_udn'].binding]

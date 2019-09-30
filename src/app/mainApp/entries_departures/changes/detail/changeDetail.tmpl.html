@@ -16,15 +16,6 @@
                 <strong translate="">CHANGES.DETAIL.LABELS.ID</strong>
                 {{vm.change.id}}
             </span>
-            <div ng-if="vm.change.tipo_salida==='Nuevos'" class="new-changes changes-filter"></div>
-            <div ng-if="vm.change.tipo_salida==='Obsoletos'" class="obsolete-changes changes-filter"></div>
-            <div ng-if="vm.change.tipo_salida==='No_Capitalizados'" class="unrecognizable-changes changes-filter"></div>
-            <div ng-if="vm.change.tipo_salida==='Almacen'" class="warehouse-changes changes-filter"></div>
-            <div ng-if="vm.change.tipo_salida==='Garantias'" class="warranty-changes changes-filter"></div>
-            <span>
-                <strong translate="">CHANGES.DETAIL.LABELS.KIND</strong>
-                {{vm.change.tipo_salida}}
-            </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
             <span ng-if="vm.change.fecha">
@@ -38,7 +29,7 @@
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
                 <span flex="33" ng-if="vm.change.nombre_chofer" layout-padding>
-                    <strong translate>CHANGES.DETAIL.LABELS.DRIVER</strong>
+                    <strong translate>CHANGES.DETAIL.LABELS.DRIVER_NAME</strong>
                     <span>{{vm.change.nombre_chofer}}</span>
                 </span>
                 <span flex="33" ng-if="vm.change.linea_transporte.razon_social" layout-padding>

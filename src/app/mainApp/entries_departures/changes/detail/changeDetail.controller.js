@@ -9,11 +9,13 @@
     ) {
         var vm = this;
         vm.changeId;
+        vm.changeKind;
         vm.change;
         vm.assets;
 
         function init() {
             vm.changeId = $stateParams.changeId;
+            vm.changeKind = $stateParams.changeKind;
             loadChange();
         }
         init();
@@ -25,15 +27,25 @@
                 vm.assets = [];
             }
             if (!$stateParams.change || forceReload) {
-                vm.loadingChange = MANUAL_CHANGES
-                    .detail(vm.changeId)
-                    .then(function (change) {
-                        vm.change = change;
-                        loadAssetStatus();
-                    })
-                    .catch(function (changeError) {
-                        ErrorHandler.errorTranslate(changeError);
-                    });
+                if (vm.changeKind === 'sucursal') {
+                    vm.loadingChange = MANUAL_CHANGES.subsidiaryDetail(vm.changeId);
+                }
+                if (vm.changeKind === 'agencia') {
+                    vm.loadingChange = MANUAL_CHANGES.agencyDetail(vm.changeId);
+                }
+                if (vm.loadingChange) {
+                    vm.loadingChange
+                        .then(function (change) {
+                            vm.change = change;
+                            loadAssetStatus();
+                        })
+                        .catch(function (changeError) {
+                            ErrorHandler.errorTranslate(changeError);
+                        });
+                }
+                else {
+                    throw new Error('Parameter "changeKind" was not provided on the url');
+                }
             }
             else {
                 vm.change = $stateParams.change;

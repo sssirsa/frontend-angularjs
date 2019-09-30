@@ -68,6 +68,8 @@
             "TITLE": "Detalle de Cambio",
             "LABELS": {
                 "AGENCY": "UDN-Agencia origen",
+                "ASSET":"Económico",
+                "ASSET_LIST":"Listado de cábinets",
                 "DATE": "Fecha",
                 "DESCRIPTION": "Descripción",
                 "DESTINATION_AGENCY": "Agencia destino",

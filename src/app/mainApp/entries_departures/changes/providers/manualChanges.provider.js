@@ -171,6 +171,15 @@
             originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
             return changesUrl.customGET(changes.subsidiary, params);
         }
+
+        function agencyDetail(id) {
+            return changesUrl.all(changes.agency).customGET(id);
+        }
+
+        function subsidiaryDetail(id) {
+            return changesUrl.all(changes.subsidiary).customGET(id);
+        }
+
         //Internal functions
 
         function getCabinetInLocation(id) {
@@ -545,8 +554,8 @@
             getAgency: getAgency,
             getSubsidiary: getSubsidiary,
             getCabinet: getCabinet,
-            agencyDetail:agencyDetail,
-            subsidiaryDetail:subsidiaryDetail,
+            agencyDetail: agencyDetail,
+            subsidiaryDetail: subsidiaryDetail,
             //Constants
             subsidiaryChange: subsidiaryChange,
             agencyChange: agencyChange,
