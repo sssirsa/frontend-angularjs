@@ -5,8 +5,6 @@
     function DepartureDetailController(
         $stateParams,
         ErrorHandler,
-        Translate,
-        toastr,
         MANUAL_DEPARTURES
     ) {
         var vm = this;

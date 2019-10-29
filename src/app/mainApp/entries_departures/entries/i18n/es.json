@@ -252,7 +252,7 @@
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
-                "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, utilizar solo si la UDN-Agencia no generó la salida de garantías",
+                "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, para movimientos internos utilize cambio de Sucursal",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
