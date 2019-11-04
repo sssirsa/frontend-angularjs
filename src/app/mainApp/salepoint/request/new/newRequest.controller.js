@@ -93,16 +93,16 @@
         };
 
         function onSelectedSucursal(element) {
-            vm.request.sucursal = element;
+            vm.request.sucursal_id = element;
         }
 
         function onSelectedEquipmentKind(element) {
             vm.equipmentKind = element;
             //Remove any previos assignment
-            vm.request.solicitudes_cabinet = [];
+            vm.request.cabinets_solicitud = [];
             //Assign new kind, quantity limited to 1 due to actual constraint
-            vm.request.solicitudes_cabinet = [{
-                id_tipo: vm.equipmentKind.id,
+            vm.request.cabinets_solicitud = [{
+                tipo_id: vm.equipmentKind.id,
                 tipo: vm.equipmentKind.nombre,
                 cantidad: 1
             }];
@@ -113,14 +113,14 @@
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.no_cliente;
+            vm.request.establecimiento_id = store.no_cliente;
         }
 
         function save() {
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-            $log.log(vm.request);
+            console.log(vm.request);
 
 
             vm.savingPromise = REQUESTS.create_new_request(vm.request)

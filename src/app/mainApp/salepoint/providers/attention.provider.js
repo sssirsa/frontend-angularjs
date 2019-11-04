@@ -25,8 +25,7 @@
 
         function getAttention(attentionID) {
             return AttentionBaseURL
-                .all(URLS.salepoint.attention.all)
-                .customGET(attentionID);
+                .customGET(URLS.salepoint.attention.list + '/' + attentionID);
         }
 
         function createRegisterAttention(attentionData) {

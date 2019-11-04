@@ -91,13 +91,25 @@
             <h3 translate>REQUEST.DETAIL.DATE</h3>
             <span>{{request.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
         </div>
-        <div layout="column" layout-align="center center">
+        <!--<div layout="column" layout-align="center center">
             <md-button aria-label="fab button"
                        ng-click="vm.downloadReport(request.id, $event); $event.stopPropagation();"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="far fa-file-pdf"></md-icon>
             </md-button>
-        </div>
+        </div>-->
+        <md-content  ng-if="request.status == 'Abierta'">
+            <div flex="100" layout="column" layout-align="end end">
+                <div>
+                    <md-button aria-label="fab button"
+                               ng-click="$event.stopPropagation(); vm.AssignationTechnician(request)"
+                               class="md-raised md-primary"
+                               ng-if="request.persona">
+                        <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-content>
     </md-card>
 
 </div>

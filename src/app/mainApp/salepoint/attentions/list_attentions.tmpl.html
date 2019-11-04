@@ -83,7 +83,7 @@
             layout="column"
             ng-repeat="attention in vm.requests"
             layout-gt-md="row"
-            ng-click="">
+            ng-click="vm.selectType(attention.tipo, attention.folio)">
             <div layout="column" layout-align="center stretch" flex="100">
                 <md-content>
                     <div flex="100">
@@ -235,12 +235,6 @@
                 <md-content  ng-if="attention.status == 'Abierta' || attention.status == 'En_proceso' ">
                     <div flex="100" layout="column" layout-align="end end">
                         <div>
-                            <md-button aria-label="fab button"
-                                       ng-click="$event.stopPropagation(); vm.AssignationTechnician(attention)"
-                                       class="md-raised md-primary"
-                                       ng-if="!attention.persona">
-                                <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
-                            </md-button>
                             <md-button aria-label="fab button"
                                        ng-click="$event.stopPropagation(); vm.AssignationTechnician(attention)"
                                        class="md-raised md-primary"

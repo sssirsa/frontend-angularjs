@@ -21,7 +21,7 @@
                         <div layout="colum">
                             <md-input-container flex class="md-block">
                                 <label>Buscar Trabajador por nombre</label>
-                                <input type="text" ng-model="vm.searchText" ng-keypress="vm.clearVar()"/>
+                                <input type="text" ng-model="vm.searchText" ng-keypress="vm.clearText()" ng-keyup="vm.clearText()" ng-keydown="vm.clearText()"/>
                             </md-input-container>
                             <md-button ng-click="vm.preSearchPerson()">buscar</md-button>
                         </div>
@@ -34,16 +34,13 @@
                                             on-select="vm.onElementSelect(element)">
                             </catalog-select>
                         </md-input-container>
-                        <md-input-container flex class="md-block" ng-if="vm.searchText && vm.personList">
-                            <label>Resultado de la busqueda</label>
-                            <md-select ng-model="vm.personList">
-                                <md-option ng-repeat="employe in vm.personList" ng-value="employe.id">
-                                    {{employe.nombre}}
+
+                        <div layout="column" flex class="md-block" ng-if="vm.personList">
+                            <md-select placeholder="{{'SALEPOINT_REQUEST.ASSIGN_DETAIL.PERSON_ASSIGN'|translate}}" ng-model="vm.assignedPerson" ng-change="vm.selectedPersonChange()">
+                                <md-option ng-value="item" ng-repeat="item in vm.personList">
+                                    ({{item.user.username}}) {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}}
                                 </md-option>
                             </md-select>
-                        </md-input-container>
-                        <div ng-if="vm.searchText && !vm.personList">
-                            <label>No se encontraron coincidencias</label>
                         </div>
                     </div>
                     <div>

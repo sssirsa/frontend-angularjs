@@ -154,6 +154,17 @@
         "LIST": {
             "TITLE": "Listado de atenciones",
             "NO_RESULTS": "No se encontró ninguna atención con los parametros seleccionados"
+        },
+        "EVIDENCE": {
+            "TITLE": "Evidencias de la atención",
+            "FIRM_CLIENT": "Firma del cliente",
+            "FIRM_TECHNICAL": "Firma del técnico",
+            "NO_FIRM": "No se encontró firma",
+            "NO_EVIDENCES": "Sin evidencias",
+            "INFO_ATENTTION": "Información de la atención",
+            "CLIENT_COMMENTS": "Comentarios del cliente",
+            "TECHNICAL_COMMENTS": "Comentarios del trabajador",
+            "SCORE": "Calificación"
         }
     }
 }

@@ -5,7 +5,7 @@
         .module('app.mainApp.salepoint')
         .controller('listAttentionController', listAttentionController);
 
-    function listAttentionController(ATTENTIONS, ErrorHandler, $document, $mdDialog) {
+    function listAttentionController(ATTENTIONS, ErrorHandler, $document, $mdDialog, $state) {
         var vm = this;
 
         //Listado de Variables
@@ -27,6 +27,7 @@
         vm.sig = sigPage;
         vm.prev = prevPage;
         vm.goToNumberPage = goToNumberPage;
+        vm.selectType = selectType;
         //vm.statusDetail = statusDetail;
 
         listFilteredAttentions('Todo');
@@ -108,10 +109,29 @@
                 });
         }
 
-        /*function selectRequest(request) {
-            $state.go('triangular.admin-default.attentionDetail', {id: request, tipo: vm.selectedKind});
-        }*/
+        function selectType(tipo, request) {
+            switch (tipo) {
+                case 'Alta':
+                    $state.go('triangular.admin-default.new-attention', {id: request});
+                    break;
 
+                case 'Cambio':
+                    $state.go('triangular.admin-default.change-attention', {id: request});
+                    break;
+
+                case 'Reparacion':
+                    $state.go('triangular.admin-default.service-attention', {id: request});
+                    break;
+
+                case 'Retiro':
+                    $state.go('triangular.admin-default.retrieve-attention', {id: request});
+                    break;
+
+                default:
+                    console.log("default");
+                    break;
+            }
+        }
     }
 
 })();

@@ -142,6 +142,66 @@
                 controller: 'listAttentionController',
                 controllerAs: 'vm'
             })
+
+            .state('triangular.admin-default.new-attention', {
+                url: '/salepoint/atencion/alta',
+                data: {
+                    permissions: {
+                        only: ['sale_point__attentions__attention_cabinet']
+                    }
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/salepoint/attentions/new/newAttention.tmpl.html',
+                controller: 'newAttentionController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.retrieve-attention', {
+                url: '/salepoint/atencion/retiro',
+                data: {
+                    permissions: {
+                        only: ['sale_point__attentions__attention_retrieve']
+                    }
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/salepoint/attentions/retrive/retriveAttention.tmpl.html',
+                controller: 'retriveAttentionController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.change-attention', {
+                url: '/salepoint/atencion/cambio',
+                data: {
+                    permissions: {
+                        only: ['sale_point__attentions__attention_change']
+                    }
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/salepoint/attentions/change/changeAttention.html',
+                controller: 'changeAttentionController',
+                controllerAs: 'vm'
+            })
+
+            .state('triangular.admin-default.service-attention', {
+                url: '/salepoint/atencion/servicio_tecnico',
+                data: {
+                    permissions: {
+                        only: ['sale_point__attentions__attention_service']
+                    }
+                },
+                params: {
+                    id: null
+                },
+                templateUrl: 'app/mainApp/salepoint/attentions/service/serviceAttention.tmpl.html',
+                controller: '',
+                controllerAs: 'vm'
+            })
         ;
 
         triMenuProvider.addMenu(
@@ -207,7 +267,11 @@
                     {
                         name: 'SALE_POINT.MENU.ATTENTION.TITLE',
                         type: 'link',
-                        permission: ['sale_point__attentions__attention_all'],
+                        permission: ['sale_point__attentions__attention_all',
+                            'sale_point__attentions__attention_cabinet',
+                            'sale_point__attentions__attention_retrive',
+                            'sale_point__attentions__attention_change',
+                            'sale_point__attentions__attention_service'],
                         state: 'triangular.admin-default.list-attention'
                     }
                 ]

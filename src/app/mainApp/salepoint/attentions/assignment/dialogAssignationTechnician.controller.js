@@ -4,10 +4,9 @@
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
     function dialogAsignationTechnicianController(ATTENTIONS, REQUESTS, $state, $mdDialog, $document, ErrorHandler, $stateParams, attention, Stores,
-        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION) {
+        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION, QUERIES) {
         var vm = this;
 
-        console.log("el controler", attention);
         //Variables
         vm.chip = [];
         vm.request = null;
@@ -16,10 +15,10 @@
         vm.personList = null;
         vm.store = null;
         vm.toAsigned = {
-            persona: null,
+            persona_id: null,
             prioridad: 4,
-            horaInicio: '09:00:00',
-            horaFin: '18:00:00'
+            hora_inicio: '09:00:00',
+            hora_fin: '18:00:00'
         };
         vm.horainicio = null;
         vm.horafin = null;
@@ -31,16 +30,22 @@
 
         vm.horaminPrev = attention.hora_cliente_inicio;
         vm.horamaxPrev = attention.hora_cliente_fin;
-        vm.id = attention.folio;
+
+        if (attention.folio) {
+            vm.id = attention.folio;
+        } else {
+            vm.id = attention.id;
+        }
 
         vm.limit = 0;
         vm.noResults = null;
+        vm.filtro = false;
 
         //Functions
         vm.selectedPersonChange = selectedPersonChange;
         vm.preSearchPerson = preSearchPerson;
         vm.onElementSelect = onElementSelect;
-        vm.clearVar = clearVar;
+        vm.clearText = clearText;
         vm.assign = assign;
         vm.cancel = cancel;
         vm.view = view;
@@ -51,24 +56,24 @@
 
         vm.personal = {
             type: 'catalog',
-            model: 'user__username',
-            label: 'Nombre de usuario',
+            model: 'id',
+            label: 'Trabajadores',
             catalog: {
                 url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.administration.base
-                + '/' + URLS.management.administration.person,
-                name: "Trabajador",
-                loadMoreButtonText: 'Cargar mas',
+                    + '/' + URLS.management.base
+                    + '/' + URLS.management.administration.base
+                    + '/' + URLS.management.administration.person,
+                name: 'Trabajador',
                 model: 'id',
                 option: 'nombre',
+                elements: 'results',
                 pagination: {
                     total: PAGINATION.total,
                     limit: PAGINATION.limit,
                     offset: PAGINATION.offset,
                     pageSize: PAGINATION.pageSize
                 },
-                elements: 'results',
+                loadMoreButtonText: 'Cargar mas...',
                 softDelete: {
                     hide: 'deleted',
                     reverse: false
@@ -77,8 +82,9 @@
             required: true
         };
 
-        function clearVar() {
+        function clearText() {
             vm.personList = null;
+            vm.chip = [];
         }
 
         function setLimitHours() {
@@ -119,7 +125,9 @@
                     if (requestSuccess.persona) {
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
+                                console.log(vm.assignedPerson);
                                 vm.assignedPerson = userSuccess;
+                                worklist(vm.assignedPerson.id);
                             })
                             .catch(function (personaError) {
                                 vm.assignedPerson = null;
@@ -142,6 +150,7 @@
 
 
         function selectedPersonChange() {
+            vm.chip = [];
             vm.salePoint.persona = vm.assignedPerson.id;
             vm.infoChip = null;
             worklist(vm.salePoint.persona);
@@ -152,6 +161,7 @@
                 .then(function (userListSuccess) {
                     userListSuccess = userListSuccess.results;
                     vm.personList = userListSuccess;
+                    return searchPersonCollection();
                 })
                 .catch(function () {
                     vm.personList = null;
@@ -159,6 +169,7 @@
         }
 
         function preSearchPerson() {
+            vm.personList = null;
             Persona_Admin.list(0, 0, vm.searchText)
                 .then(function (userList) {
                     vm.limit = userList.count;
@@ -172,13 +183,6 @@
                 .catch(function () {
                     vm.noResults = true;
                 });
-        }
-
-        function onElementSelect(element) {
-            vm.assignedPerson.id = element;
-            vm.salePoint.persona = vm.assignedPerson.id;
-            vm.infoChip = null;
-            worklist(vm.salePoint.persona);
         }
 
         function searchPersonCollection() {
@@ -196,6 +200,14 @@
             }
         }
 
+        function onElementSelect(element) {
+            vm.chip = [];
+            vm.assignedPerson.id = element;
+            vm.salePoint.persona = vm.assignedPerson.id;
+            vm.infoChip = null;
+            worklist(vm.salePoint.persona);
+        }
+
         function assign() {
 
             if (prepareObjectSend()) {
@@ -203,13 +215,10 @@
                 return;
             }
 
-
-
-            vm.personLoading = ATTENTIONS.assignationTechnician(vm.toAsigned, vm.id)
+            vm.personLoading = ATTENTIONS.assignationTechnician(vm.id, vm.toAsigned)
                 .then(function () {
                     ErrorHandler.success();
                     $mdDialog.hide();
-                    //$state.go('triangular.admin-default.serviceAssing');
                 })
                 .catch(function (error) {
                     ErrorHandler.errorTranslate(error);
@@ -231,9 +240,9 @@
             var min1 = min1Num < 10 ? '0' + min1Num.toString() : min1Num.toString();
             var min2 = min2Num < 10 ? '0' + min2Num.toString() : min2Num.toString();
 
-            vm.toAsigned.horaInicio = hora1 + ':' + min1 + ':00';
-            vm.toAsigned.horaFin = hora2 + ':' + min2 + ':00';
-            vm.toAsigned.persona = vm.assignedPerson.id;
+            vm.toAsigned.hora_inicio = hora1 + ':' + min1 + ':00';
+            vm.toAsigned.hora_fin = hora2 + ':' + min2 + ':00';
+            vm.toAsigned.persona_id = vm.assignedPerson.id;
 
             return false;
         }
@@ -260,15 +269,16 @@
             vm.chip = [];
             vm.worklistLoading = SalePoint.assignedTo(persona)
                 .then(function (list) {
-
                     angular.forEach(list.results, function (solicitud) {
-                        var aux = {
-                            servicio: solicitud.hora_tecnico_inicio + ' - ' + solicitud.hora_tecnico_fin,
-                            folio: solicitud.folio,
-                            nombreEstablecimiento: solicitud.establecimiento.nombre_establecimiento,
-                            direccion: solicitud.establecimiento.calle
-                        };
-                        vm.chip.push(aux);
+                        if (solicitud.status == "En_proceso" || solicitud.status == "Abierta") {
+                            var aux = {
+                                servicio: solicitud.hora_tecnico_inicio + ' - ' + solicitud.hora_tecnico_fin,
+                                folio: solicitud.folio,
+                                nombreEstablecimiento: solicitud.solicitud.establecimiento.nombre_establecimiento,
+                                direccion: solicitud.solicitud.establecimiento.calle
+                            };
+                            vm.chip.push(aux);
+                        }
                     });
 
                 })
