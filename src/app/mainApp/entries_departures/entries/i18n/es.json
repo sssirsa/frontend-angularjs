@@ -1,5 +1,99 @@
 {
     "ENTRIES": {
+        "DETAIL": {
+            "TITLE": "Detalle de entrada",
+            "BUTTONS": {
+                "ADD_ASSET": "Añadir cabinet",
+                "CLOSE": "Cerrar entrada",
+                "LOAD_MORE": "Cargar mas cabinets",
+                "MISSING": "Cabinet faltante",
+                "PDF": "Generar remisión",
+                "UNMISSING": "Cabinet no faltante"
+            },
+            "DIALOGS": {
+                "CONFIRM": {
+                    "TITLE": "Cerrar entrada",
+                    "CONTENT": "Al cerrar la entrada no se podrán añadir mas cabinets ni modificar sus estados ¿Continuar?",
+                    "OK": "Aceptar",
+                    "CANCEL": "Cancelar"
+                },
+                "ADD_ASSET": {
+                    "TITLE": "Añadir cabinet",
+                    "ID": "Económico",
+                    "STATUS": "Estado",
+                    "OK": "Agregar",
+                    "CANCEL": "Cancelar",
+                    "STATUSES": {
+                        "NOT_EXPECTED": "No esperado",
+                        "PENDING": "Pendiente"
+                    },
+                    "UNRECOGNIZABLE_ID": "Id no capitalizado"
+                }
+            },
+            "LABELS": {
+                "ASSET": "Económico",
+                "ASSET_LIST": "Cabinets",
+                "ASSET_STATUS": "Estado",
+                "ID": "Folio:",
+                "CLOSED": "Entrada cerrada",
+                "DATE": "Fecha:",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "UDN-Agencia destino:",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino:",
+                "DRIVER": "Operador:",
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados",
+                "NOT_CONFIRMED_ENTRY": "Entrada no confirmada",
+                "OPEN": "Entrada abierta",
+                "ORDER": "Pedimento",
+                "ORIGIN_AGENCY": "UDN-Agencia de origen:",
+                "ORIGIN_PROVIDER": "Proveedor de origen:",
+                "ORIGIN_STORE": "Establecimiento de origen:",
+                "TRANSPORT_KIND": "Tipo de transporte:",
+                "TRANSPORT_LINE": "Linea de Transporte:",
+                "UNRECOGNIZABLE": "Id no capitalizado"
+            },
+            "MESSAGES": {
+                "SUCCESS": "Entrada cerrada correctamente",
+                "PENDING_ASSETS": "No se puede cerrar una entrada con cabinets pendientes"
+            }
+        },
+        "LIST": {
+            "TITLE": "Listado de entradas",
+            "BUTTONS": {
+                "ADD_ASSET": "Añadir cabinet",
+                "CLOSE": "Cerrar entrada",
+                "LOAD_MORE": "Cargar mas entradas...",
+                "PDF": "Generar remisión"
+            },
+            "FILTERS": {
+                "ALL": "Todas",
+                "NEW": "Nuevos",
+                "REPAIR": "Reparación",
+                "UNRECOGNIZABLE": "No capitalizados",
+                "WAREHOUSE": "Buen estado",
+                "WARRANTY": "Garantías"
+            },
+            "LABELS": {
+                "ID": "Folio:",
+                "CLOSED": "Entrada cerrada",
+                "DATE": "Fecha:",
+                "DESCRIPTION": "Descripción",
+                "DESTINATION_AGENCY": "UDN-Agencia destino:",
+                "DESTINATION_SUBSIDIARY": "Sucursal destino:",
+                "DRIVER": "Operador:",
+                "KIND": "Tipo:",
+                "NO_RESULTS": "Sin resultados",
+                "NOT_CONFIRMED_ENTRY": "Entrada no confirmada",
+                "OPEN": "Entrada abierta",
+                "ORDER": "Pedimento",
+                "ORIGIN_AGENCY": "UDN-Agencia de origen:",
+                "ORIGIN_PROVIDER": "Proveedor de origen:",
+                "ORIGIN_STORE": "Establecimiento de origen:",
+                "TRANSPORT_KIND": "Tipo de transporte:",
+                "TRANSPORT_LINE": "Linea de Transporte:"
+            }
+        },
         "MENU": {
             "TITLE": "Entradas",
             "MANUAL": "Manual",
@@ -9,7 +103,8 @@
             "REPAIR": "Reparación",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
-            "WAREHOUSE": "Buen estado"
+            "WAREHOUSE": "Buen estado",
+            "LIST": "Listado de entradas"
         },
         "NEW": {
             "TITLE": "Entrada de nuevos",
@@ -157,7 +252,7 @@
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
-                "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, utilizar solo si la UDN-Agencia no generó la salida de garantías",
+                "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, para movimientos internos utilize cambio de Sucursal",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"

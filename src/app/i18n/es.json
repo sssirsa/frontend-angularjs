@@ -4,9 +4,9 @@
             "WELCOME": "Bienvenida",
             "START": "Inicio",
             "SERVICES": "Servicios",
-            "INTERNAL_SERVICE":"Servicio Interno",
-            "EXTERNAL_SERVICE":"Servicio Externo",
-            "PREREQUESTS":{
+            "INTERNAL_SERVICE": "Servicio Interno",
+            "EXTERNAL_SERVICE": "Servicio Externo",
+            "PREREQUESTS": {
                 "TITLE": "Pre Solicitudes",
                 "NEWCABINET": "Gestión cabinet PV",
                 "LISTPV": "Cabinets PV",
@@ -92,7 +92,7 @@
                 "TITLE": "Solicitudes",
                 "NEW": "Nueva",
                 "LIST": "Listado",
-                "PREREQUEST":"Pre solicitudes"
+                "PREREQUEST": "Pre solicitudes"
             },
             "COM": {
                 "TICKETS_INCIDENCES": "Tickets e Incidencias",
@@ -112,9 +112,9 @@
                     "CREATE_USERS": "Nuevo usuario"
                 }
             },
-            "MASSIVE_CHARGE":{
-                "HISTORICAL":"Historial",
-                "TITLE":"Cargas Massivas"
+            "MASSIVE_CHARGE": {
+                "HISTORICAL": "Historial",
+                "TITLE": "Cargas Massivas"
             }
         },
         "COMPONENTS": {
@@ -127,7 +127,7 @@
                 "DELETE": "Eliminar establecimiento",
                 "TITLE": "Establecimiento",
                 "SUBTITLE": "Información de Establecimiento",
-                "LOAD":"Cargar",
+                "LOAD": "Cargar",
                 "MASSIVE_UPLOAD": {
                     "TITLE": "Carga masiva",
                     "BROWSE": "Examinar",
@@ -213,10 +213,10 @@
                 "BUTTONS": {
                     "SINGLE_FILE": "Selecciona archivo",
                     "MULTIPLE_FILES": "Selecciona archivos",
-                    "REMOVE":"Eliminar archivo"
+                    "REMOVE": "Eliminar archivo"
                 }
             },
-            "CABINET":{
+            "CABINET": {
                 "TITLE": "Información del cabinet",
                 "TRADEMARK": "Marca",
                 "NEW_TRADEMARK": "Nueva marca",
@@ -255,7 +255,7 @@
                 "AGREE_OBSOLETE": "Aprobar Obsolesencia",
                 "SEND_TO_OBSOLETE": "Obsoletizar"
             },
-            "NO_LABELED":{
+            "NO_LABELED": {
                 "ECONOMICS": "Economicos",
                 "STATUS": "Estatus no capitalizado",
                 "REASON": "Motivo no capitalizado",
@@ -362,15 +362,15 @@
             "AGREE_OBSOLETE": "¿Aceptar obsoletización?"
         }
     },
-    "SUCCESS":{
-        "CANCEL":"Cancelación efectuada correctamente",
-        "CREATE":"Creación de registro efectuada correctamente",
-        "DELETE":"Eliminación de registro efectuada correctamente",
-        "UPDATE":"Actualización de registro efectuada correctamente",
-        "UPLOAD":"Carga de registro efectuada correctamente"
+    "SUCCESS": {
+        "CANCEL": "Cancelación efectuada correctamente",
+        "CREATE": "Creación de registro efectuada correctamente",
+        "DELETE": "Eliminación de registro efectuada correctamente",
+        "UPDATE": "Actualización de registro efectuada correctamente",
+        "UPLOAD": "Carga de registro efectuada correctamente"
     },
     "ERRORS": {
-        "NO_RESULTS":"Sin Resultados",
+        "NO_RESULTS": "Sin Resultados",
         "UNEXPECTED": "Error inesperado, intente más tarde.",
         "SESSION_EXPIRED": "Usted no cuenta con el permiso necesario para acceder a este recurso, o su sesión ha expirado.",
         "E001": "Se envió una solicitud de Prospectación “Nuevos” sin anexar solicitudes de Cabinet",
@@ -491,24 +491,60 @@
         "E116": "No es posible mandar este tipo de mensaje en este tipo de ticket",
         "E117": "No se puede establecer etapa defecto si no se establecen etapas siguientes",
         "E118": "El cabinet indicado ya fue inspeccionado",
-        "ES-036":"Al cabinet ya se le realizó inspección preliminar",
-        "ES-037":"No se puede hacer inspección preliminar a un cabinet que entró por Garantías o Reparación ",
-        "ES-038":"No se puede hacer Prechecklist a un cabinet que entró por algo diferente a Garantías o Reparación ",
-        "ES-039":"No hay existencias del insumo ",
-        "ES-040":"El insumo no se puede usar en esta etapa",
-        "ES-041":"No se puede usar esa cantidad del insumo ",
-        "TS-001":"La etapa por defecto debe estar en las etapas posibles",
-        "TS-002":"Se debe enviar etapas siguientes",
-        "TS-003":"Las etapas siguientes deben pertenecer a la misma sucursal",
-        "TS-004":"No se puede cambiar la sucursal de una etapa ",
-        "TS-005":"La etapa indicada no está disponible para la sucursal ",
-        "TS-006":"La sucursal no cuenta con inventario del insumo solicitado ",
-        "TS-007":"El insumo no puede ser usado en esta etapa ",
-        "TS-008":"La cantidad especificada no puede ser usada en esta etapa ",
-        "TS-009":"La etapa siguiente no es válida ",
-        "TS-010":"La etapa especificada ya está cerrada ",
-        "TS-011":"La sucursal provista no coincide con la sucursal del cabinet",
-        "TS-012":"El cabinet no es atendible por un impedimento existente "
+        "ES-001": "Los campos sucursal destino y  udn destino no pueden ser mandados juntos",
+        "ES-002": "Se requiere el campo sucursal destino o el campo udn destino",
+        "ES-003": "Se debe mandar por lo menos un cabinet",
+        "ES-004": "Un cabinet no es nuevo",
+        "ES-005": "Un cabinet ya se encuentra asignado a un establecimiento",
+        "ES-006": "Un cabinet ya se encuentra asignado a una sucursal o udn",
+        "ES-007": "En entrada de nuevos los cabinets no pueden tener estatus unilever",
+        "ES-008": "En entrada de buen estado solo se aceptan cabinets sin estatus unilever o en prospectacion (estado 0005)",
+        "ES-009": "El campo udn origen es requerido",
+        "ES-010": "El campo de establecimiento origen es requerido",
+        "ES-011": "Un cabinet enviado como no capitalizado ya se encuentra capitalizado",
+        "ES-012": "Un cabinet no capitalizado ya se encuentra asignado a una sucursal",
+        "ES-013": "El campo sucursal destino es requerido",
+        "ES-014": "Los unicos estados permitidos son: Pendiente y No_esperado",
+        "ES-015": "Los campos 'cabinets_id' y 'no_capitalizados_id' son mutuamente excluyentes",
+        "ES-016": "Se require el campo 'cabinets_id' o el campo 'no_capitalizados_id'",
+        "ES-017": "El cabinet ya existe en la entrada",
+        "ES-018": "La entrada no existe",
+        "ES-019": "La entrada ya se encuentra cerrada",
+        "ES-020": "Un cabinet fijo no puede tener entrada",
+        "ES-021": "Un cabinet no pertenece a la sucursal origen especificada",
+        "ES-022": "Un cabinet no pertenece a la udn origen especificada",
+        "ES-023": "Un cabinet no capitalizado no pertenece a la udn especificada",
+        "ES-024": "Un cabinet no capitalizado no pertenece a ninguna udn",
+        "ES-025": "Un cabinet no se encuentra asignado a una entrada",
+        "ES-026": "Un cabinet no esta catalogado como nuevo",
+        "ES-027": "Un cabinet no ha pasado por la inspección",
+        "ES-028": "Un cabinet no esta catalogado como “Buen estado”",
+        "ES-029": "Un cabinet no esta catalogado como “Obsoleto”",
+        "ES-030": "El campo de sucursal origen es requerido",
+        "ES-031": "El campo de udn destino es requerido",
+        "ES-032": "Los campos establecimiento destino y  udn destino no pueden ser mandados juntos",
+        "ES-033": "Es requerido o el campo establecimiento destino o el campo udn destino",
+        "ES-034": "Un cabinet no capitalizado no se encuentra asignado a una entrada",
+        "ES-035": "Un cabinet no capitalizado ya se encuentra capitalizado",
+        "ES-036": "Al cabinet ya se le realizó inspección preliminar",
+        "ES-037": "No se puede hacer inspección preliminar a un cabinet que entró por Garantías o Reparación ",
+        "ES-038": "No se puede hacer Prechecklist a un cabinet que entró por algo diferente a Garantías o Reparación ",
+        "ES-039": "No hay existencias del insumo ",
+        "ES-040": "El insumo no se puede usar en esta etapa",
+        "ES-041": "No se puede usar esa cantidad del insumo ",
+        "ES-042": "Un cabinet no esta catalogado como “Reparación”",
+        "TS-001": "La etapa por defecto debe estar en las etapas posibles",
+        "TS-002": "Se debe enviar etapas siguientes",
+        "TS-003": "Las etapas siguientes deben pertenecer a la misma sucursal",
+        "TS-004": "No se puede cambiar la sucursal de una etapa ",
+        "TS-005": "La etapa indicada no está disponible para la sucursal ",
+        "TS-006": "La sucursal no cuenta con inventario del insumo solicitado ",
+        "TS-007": "El insumo no puede ser usado en esta etapa ",
+        "TS-008": "La cantidad especificada no puede ser usada en esta etapa ",
+        "TS-009": "La etapa siguiente no es válida ",
+        "TS-010": "La etapa especificada ya está cerrada ",
+        "TS-011": "La sucursal provista no coincide con la sucursal del cabinet",
+        "TS-012": "El cabinet no es atendible por un impedimento existente "
 
     }
 }

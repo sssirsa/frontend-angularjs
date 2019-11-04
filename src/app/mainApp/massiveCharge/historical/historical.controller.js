@@ -54,14 +54,14 @@
 
         function listAll() {
             if(vm.tipo) {
-                vm.querySet = MASSIVE_CHARGE.filtertype+vm.tipo;
+                vm.querySet = MASSIVE_CHARGE.filtertype+vm.tipo+MASSIVE_CHARGE.filter_ordering_by_date;
             }
             else{
                 vm.querySet = '';
             }
 
             if(vm.ended){
-                vm.querySet=vm.querySet+MASSIVE_CHARGE.filter_end;
+                vm.querySet=vm.querySet+MASSIVE_CHARGE.filter_end+MASSIVE_CHARGE.filter_ordering_by_date;
 
             }
             vm.offset = 0;

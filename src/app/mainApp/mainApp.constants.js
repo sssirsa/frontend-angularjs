@@ -2,6 +2,20 @@
     angular
         .module('app.mainApp')
         .constant('OPTIONS', {
+            entries_departures: {
+                entries: {
+                    addCabinetKind: [
+                        {
+                            value: 'No_esperado',
+                            verbose: 'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUSES.NOT_EXPECTED'
+                        },
+                        {
+                            value: 'Pendiente',
+                            verbose: 'ENTRIES.DETAIL.DIALOGS.ADD_ASSET.STATUSES.PENDING'
+                        }
+                    ]
+                }
+            },
             salePointAssignKind: [
                 { id: 'pending', value: 'Pendientes' },
                 { id: 'all', value: 'Detalle de atención' }
@@ -98,23 +112,32 @@
                 store: 'massive/store'
             },
             credentials: 'credenciales',
-            map: 'https://maps.googleapis.com/maps/api/staticmap',
-            report_builder: 'report_builder', //TODO: Plata, esto te toca arreglarlo a tí
-            reporte_insumos: 'reports/insumos'
+            map: 'https://maps.googleapis.com/maps/api/staticmap'
 
         })
         .constant('QUERIES', {
             cabinet: {
                 by_brand: '?marca__id='
             },
+            changes:{
+                by_destination_agency:'udn_destino__id',
+                by_destination_subsidiary:'sucursal_origen__id',
+                by_origin_agency:'udn_origen__id',
+                by_origin_subsidiary:'sucursal_origen__id'
+            },
             city: {
                 by_state: 'estado__id'
+            },
+            entries_departures: {
+                by_agency: 'udn_destino__id',
+                by_subsidiary: 'sucursal_destino__id'
             },
             locality: {
                 by_state: 'municipio__estado__id',
                 by_city: 'municipio__id',
                 by_postal_code: 'codigo_postal'
             },
+            ordering: 'ordering',
             service: {
                 by_cabinet: 'cabinet__economico'
             },
@@ -130,7 +153,7 @@
                 by_username: 'user__username',
                 by_name: 'nombre',
                 by_middlename: 'apellido_paterno',
-                by_lastname:'apellido_materno'
+                by_lastname: 'apellido_materno'
             }
         })
         .constant('CONFIGS', {
