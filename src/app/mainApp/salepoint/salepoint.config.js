@@ -212,7 +212,7 @@
                 permission: ['sale_point__pre_request__pre_request',
                     'sale_point__request__request',
                     'sale_point__attentions__attention_asign'],
-                priority: 4,
+                priority: 7,
                 children: [
                     {
                         name: 'SALE_POINT.MENU.PRE_REQUEST.TITLE',
