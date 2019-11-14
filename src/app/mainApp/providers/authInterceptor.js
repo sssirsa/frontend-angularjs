@@ -9,7 +9,7 @@
         .factory('AuthInterceptor', AuthInterceptor);
 
     /* @ngInject */
-    function AuthInterceptor($injector, $q, EnvironmentConfig, $cookies) {
+    function AuthInterceptor($injector, $q) {
         var inFlightGet = null;
         var inFlightRefresh = null;
         return {
@@ -22,6 +22,7 @@
             var deferred = $q.defer();
             if (config.url.indexOf('oauth') === -1) {
                 if (!inFlightGet) {
+                    //Adding authorization header to every request that is not from oauth
                     inFlightGet = $injector.get('AuthService').getToken();
                     config.headers.Authorization = 'Bearer ' + inFlightGet;
                     inFlightGet = null;
@@ -40,7 +41,7 @@
             if (response.status === 401
                 && response.statusText === 'Unauthorized'
                 && !response.data.error_description
-                && !response.congif.url.endsWith('oauth/token/')
+                && !response.config.url.endsWith('oauth/token/')
             ) {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
@@ -49,7 +50,8 @@
                 }
                 inFlightRefresh.then(function () {
                     inFlightRefresh = null;
-                    response.config.headers.Authorization = 'Bearer ' + $cookies.getObject('token');
+                    // response.config.headers.Authorization = 'Bearer ' + $cookies.getObject('token');
+                    response.config.headers.Authorization = 'Bearer ' + $injector.get('AuthService').getToken();
                     $http(response.config).then(deferred.resolve, deferred.reject);
                 });
                 return deferred.promise;
