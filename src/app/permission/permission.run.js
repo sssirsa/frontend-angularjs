@@ -34,14 +34,18 @@
                 if (!AuthService.isAuthenticated()) {
                     //User not athenticated
                     if (AuthService.canRefreshSession()) {
+                        var to = transition.to();
+                        transition.abort();
                         //Permission redefining is managed in AuthService.refreshToken function
                         AuthService
                             .refreshToken()
                             .then(function () {
-                                return true;
+                                $state.go(to);
+                                //return true;
                             })
                             .catch(function () {
-                                return false;
+                                accessDenied();
+                                //return false;
                             });
                     }
                     else {
