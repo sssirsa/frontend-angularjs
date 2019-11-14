@@ -19,6 +19,10 @@
             AuthService.logout();
         }
 
+        function transitionErrored(){            
+            $state.go('500');
+        }
+
         $transitions.onCreate({}, function (transition) {
             if(transition.from()===transition.to()){
                 //Abort transitions to the same state, to avoid errors
@@ -41,11 +45,9 @@
                             .refreshToken()
                             .then(function () {
                                 $state.go(to);
-                                //return true;
                             })
                             .catch(function () {
                                 accessDenied();
-                                //return false;
                             });
                     }
                     else {
@@ -65,7 +67,7 @@
 
         //Transition aborted due to permissions validation
         $transitions.onError({}, function () {
-            accessDenied();
+            transitionErrored();
         });
 
     }
