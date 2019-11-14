@@ -15,13 +15,16 @@
 
         //Redirect if access is denied
         function accessDenied() {
-            $state.go('404');
+            $state.go('401');
             AuthService.logout();
         }
 
         $transitions.onCreate({}, function (transition) {
             if (transition.to().name !== 'splash'
+                && transition.to().name !== '401'
                 && transition.to().name !== '404'
+                && transition.to().name !== '500'
+                && transition.to().name !== 'main'
                 && transition.to().name !== 'login') {
                 //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {

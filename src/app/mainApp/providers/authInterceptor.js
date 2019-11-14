@@ -9,7 +9,7 @@
         .factory('AuthInterceptor', AuthInterceptor);
 
     /* @ngInject */
-    function AuthInterceptor($injector, $q, EnvironmentConfig, $cookies) {
+    function AuthInterceptor($injector, $q, $cookies) {
         var inFlightGet = null;
         var inFlightRefresh = null;
         return {
@@ -40,7 +40,7 @@
             if (response.status === 401
                 && response.statusText === 'Unauthorized'
                 && !response.data.error_description
-                && !response.congif.url.endsWith('oauth/token/')
+                && !response.config.url.endsWith('oauth/token/')
             ) {
                 var deferred = $q.defer();
                 var $http = $injector.get('$http');
