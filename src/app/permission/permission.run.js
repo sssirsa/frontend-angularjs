@@ -20,6 +20,10 @@
         }
 
         $transitions.onCreate({}, function (transition) {
+            if(transition.from()===transition.to()){
+                //Abort transitions to the same state, to avoid errors
+                transition.abort();
+            }
             if (transition.to().name !== 'splash'
                 && transition.to().name !== '401'
                 && transition.to().name !== '404'
