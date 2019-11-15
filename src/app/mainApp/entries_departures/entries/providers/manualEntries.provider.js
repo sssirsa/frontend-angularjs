@@ -142,7 +142,7 @@
                     offset: PAGINATION.pageSize * (page - 1)
                 };
                 //Adding ordering parameter
-                params[QUERIES.ordering] = '-id';
+                params[QUERIES.ordering] = '-fecha';
             }
             //Subsidiary or Agency query
             if (user.sucursal) {
