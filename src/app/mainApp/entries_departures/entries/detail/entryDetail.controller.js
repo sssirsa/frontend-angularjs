@@ -92,6 +92,10 @@
 
         };
 
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(vm.entryId);
+        };
+
         //Private functions
         function loadEntry(forceReload) {
             if (vm.assets) {
@@ -203,5 +207,6 @@
                 });
             //vm.assets.unshift(asset);
         }
+
     }
 })();

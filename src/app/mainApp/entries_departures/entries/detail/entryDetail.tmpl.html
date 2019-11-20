@@ -1,20 +1,15 @@
 <div cg-busy="{promise:vm.loadingEntry, message:' '}">
-    <md-card layout-padding
-             layout="column"
-             laoyut-align="center-stretch">
+    <md-card layout-padding layout="column" laoyut-align="center-stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>ENTRIES.DETAIL.TITLE</h1>
         </header>
     </md-card>
     <md-card ng-if="vm.entry">
-        <md-toolbar layout-gt-xs="row"
-                    layout-align-gt-xs="space-between center"
-                    layout="column"
-                    layout-align="center center"
-                    layout-padding
-                    ng-class="(!vm.entry.confirmada )? 'not-confirmed-entry' : ''">
+        <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
+            layout-align="center center" layout-padding ng-class="(!vm.entry.confirmada )? 'not-confirmed-entry' : ''">
 
-            <strong class="not_confirmed_entry" ng-if="!vm.entry.confirmada" translate>ENTRIES.DETAIL.LABELS.NOT_CONFIRMED_ENTRY</strong>
+            <strong class="not_confirmed_entry" ng-if="!vm.entry.confirmada"
+                translate>ENTRIES.DETAIL.LABELS.NOT_CONFIRMED_ENTRY</strong>
             <span>
                 <strong translate="">ENTRIES.DETAIL.LABELS.ID</strong>
                 {{vm.entry.id}}
@@ -99,31 +94,31 @@
         <md-actions layout="row" layout-align="end center">
             <!--Allow adding cabinets just if the entry is still open-->
             <md-button aria-label="Add asset button"
-                       permission-only="['entries_departures__entries__add_cabinet_entries']"
-                       ng-click="vm.addAssetClicked();$event.stopPropagation() "
-                       ng-if="!vm.entry.cerrada"
-                       class="md-raised">
+                permission-only="['entries_departures__entries__add_cabinet_entries']"
+                ng-click="vm.addAssetClicked();$event.stopPropagation() " ng-if="!vm.entry.cerrada" class="md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.ADD_ASSET"|translate}}</span>
             </md-button>
             <!--Allow closing just if the entry is still open-->
             <md-button aria-label="close vm.entry button"
-                       permission-only="['entries_departures__entries__close_entries']"
-                       cg-busy="{promise:vm.closingEntry, message:' '}"
-                       ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()"
-                       ng-if="!vm.entry.cerrada"
-                       class="md-primary md-raised">
+                permission-only="['entries_departures__entries__close_entries']"
+                cg-busy="{promise:vm.closingEntry, message:' '}"
+                ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()" ng-if="!vm.entry.cerrada"
+                class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-lock"></md-icon>
                 <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.CLOSE"|translate}}</span>
             </md-button>
-            <!--Allow to generate the document just if the entry is closed-->
-            <md-button aria-label="download document button"
-                       ng-click="$event.stopPropagation(); vm.generatePDF()"
-                       ng-if="vm.entry.cerrada"
-                       disabled
-                       class="md-primary md-raised">
+            <!--Allow to generate the PDF document just if the entry is closed-->
+            <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
+                ng-if="vm.entry.cerrada" disabled class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
                 <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the excel document at anytime-->
+            <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                ng-click="$event.stopPropagation(); vm.generateXLSX()" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>
@@ -136,75 +131,55 @@
         <md-virtual-repeat-container class="cabinet-container">
             <md-list>
                 <!--Pending and confirmed assets-->
-                <md-list-item layout-align="center stretch"
-                              md-virtual-repeat="element in vm.assets">
-                    <section layout-gt-xs="row"
-                             layout="column"
-                             layout-align-gt-xs="space-between center"
-                             layout-align="center stretch"
-                             ng-if="element.estado!=='Faltante'"
-                             class="full-width">
+                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.assets">
+                    <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
+                        layout-align="center stretch" ng-if="element.estado!=='Faltante'" class="full-width">
                         <!--Normal asset-->
-                        <div layout="column"
-                             ng-if="element.cabinet"
-                             layout-align="center center">
+                        <div layout="column" ng-if="element.cabinet" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
                             {{element.cabinet}}
                         </div>
                         <!--Unrecognizable asset-->
-                        <div layout="column"
-                             ng-if="element.no_capitalizado"
-                             layout-align="center center">
+                        <div layout="column" ng-if="element.no_capitalizado" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
                             {{element.no_capitalizado}}
                         </div>
-                        <div layout="column"
-                             layout-align="center center">
+                        <div layout="column" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
                             {{element.estado}}
                         </div>
-                        <md-actions layout="row"
-                                    layout-align="end center"
-                                    ng-if="!vm.entry.cerrada && element.estado==='Pendiente'">
-                            <md-button ng-click="$event.stopPropagation(); vm.setAssetAsMissing(element.cabinet, $index)"
-                                       aria-label="remove cabinet"
-                                       class="md-warn md-raised">
+                        <md-actions layout="row" layout-align="end center"
+                            ng-if="!vm.entry.cerrada && element.estado==='Pendiente'">
+                            <md-button
+                                ng-click="$event.stopPropagation(); vm.setAssetAsMissing(element.cabinet, $index)"
+                                aria-label="remove cabinet" class="md-warn md-raised">
                                 <md-icon md-font-icon="fa fa-times"></md-icon>
                                 <span translate>ENTRIES.DETAIL.BUTTONS.MISSING</span>
                             </md-button>
                         </md-actions>
                     </section>
-                    <section layout-gt-xs="row"
-                             layout="column"
-                             layout-align-gt-xs="space-between center"
-                             layout-align="center stretch"
-                             ng-if="element.estado==='Faltante'"
-                             class="full-width not-found-cabinet">
+                    <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
+                        layout-align="center stretch" ng-if="element.estado==='Faltante'"
+                        class="full-width not-found-cabinet">
                         <!--Normal asset-->
-                        <div layout="column"
-                             ng-if="element.cabinet"
-                             layout-align="center center">
+                        <div layout="column" ng-if="element.cabinet" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
                             {{element.cabinet}}
                         </div>
                         <!--Unrecognizable asset-->
-                        <div layout="column"
-                             ng-if="element.no_capitalizado"
-                             layout-align="center center">
+                        <div layout="column" ng-if="element.no_capitalizado" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
                             {{element.no_capitalizado}}
                         </div>
-                        <div layout="column"
-                             layout-align="center center">
+                        <div layout="column" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
                             {{element.estado}}
                         </div>
-                        <md-actions layout="row"
-                                    layout-align="end center"
-                                    ng-if="!vm.entry.cerrada && element.estado==='Faltante'">
-                            <md-button ng-click="$event.stopPropagation(); vm.unsetAssetAsMissing(element.cabinet, $index)"
-                                       aria-label="remove cabinet"
-                                       class="md-warn md-raised">
+                        <md-actions layout="row" layout-align="end center"
+                            ng-if="!vm.entry.cerrada && element.estado==='Faltante'">
+                            <md-button
+                                ng-click="$event.stopPropagation(); vm.unsetAssetAsMissing(element.cabinet, $index)"
+                                aria-label="remove cabinet" class="md-warn md-raised">
                                 <md-icon md-font-icon="fa fa-check"></md-icon>
                                 <span translate>ENTRIES.DETAIL.BUTTONS.UNMISSING</span>
                             </md-button>
@@ -212,13 +187,11 @@
                     </section>
                     <md-divider></md-divider>
                 </md-list-item>
-                <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
-                         layout="column"
-                         layout-align="center center">
+                <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column"
+                    layout-align="center center">
                     <md-button aria-label="Load more elements button"
-                               cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
-                               ng-click="$event.stopPropagation(); vm.loadMoreAssetStatus()"
-                               class="md-primary md-raised">
+                        cg-busy="{promise:vm.loadingMoreEntries, message:' '}"
+                        ng-click="$event.stopPropagation(); vm.loadMoreAssetStatus()" class="md-primary md-raised">
                         <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
                         <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.LOAD_MORE"|translate}}</span>
                     </md-button>

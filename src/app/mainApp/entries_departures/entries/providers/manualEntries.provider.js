@@ -11,7 +11,8 @@
         QUERIES,
         Translate,
         URLS,
-        User
+        User,
+        XLSX
     ) {
 
         var entriesUrl = API
@@ -178,6 +179,20 @@
                 url = url.all(entries.all);
             }
             return url.customGET(null, params);
+        }
+
+        function generateReport(entryId) {
+            var data = [
+                { name: "Barack Obama", pres: 44 },
+                { name: "Donald Trump", pres: 45 }
+            ];
+            var ws = XLSX.utils.json_to_sheet(data);
+            /* add to workbook */
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+
+            /* write workbook and force a download */
+            XLSX.writeFile(wb, name ? name : "reporte_entrada" + ".xlsx");
         }
 
         //Internal functions
@@ -870,6 +885,7 @@
             getCabinet: getCabinet,
             getEntriesByCabinet: getEntriesByCabinet,
             listEntries: listEntries,
+            generateReport: generateReport,
             //Constants
             warrantyEntry: warrantyEntry,
             repairEntry: repairEntry,

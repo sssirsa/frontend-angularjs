@@ -60,6 +60,10 @@
             });
         };
 
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(vm.entryId);
+        };
+
         //Internal functions
         function loadEntries(filter, page) {
             vm.entries = [];

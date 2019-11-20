@@ -8,7 +8,8 @@
                 "LOAD_MORE": "Cargar mas cabinets",
                 "MISSING": "Cabinet faltante",
                 "PDF": "Generar remisión",
-                "UNMISSING": "Cabinet no faltante"
+                "UNMISSING": "Cabinet no faltante",
+                "XLSX":"Generar reporte"
             },
             "DIALOGS": {
                 "CONFIRM": {
@@ -64,7 +65,8 @@
                 "ADD_ASSET": "Añadir cabinet",
                 "CLOSE": "Cerrar entrada",
                 "LOAD_MORE": "Cargar mas entradas...",
-                "PDF": "Generar remisión"
+                "PDF": "Generar remisión",
+                "XLSX":"Generar reporte"
             },
             "FILTERS": {
                 "ALL": "Todas",
