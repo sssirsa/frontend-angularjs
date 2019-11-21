@@ -85,6 +85,13 @@
                 <strong translate>ENTRIES.LIST.LABELS.ORDER</strong>
                 <span>{{entry.pedimento}}</span>
             </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="entry.cabinets" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{entry.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
                 <span flex="33" ng-if="entry.nombre_chofer" layout-padding>

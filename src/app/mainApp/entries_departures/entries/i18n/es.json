@@ -93,7 +93,8 @@
                 "ORIGIN_PROVIDER": "Proveedor de origen:",
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
-                "TRANSPORT_LINE": "Linea de Transporte:"
+                "TRANSPORT_LINE": "Linea de Transporte:",
+                "ASSET_QUANTITY":"Equipos recibidos:"
             }
         },
         "MENU": {
