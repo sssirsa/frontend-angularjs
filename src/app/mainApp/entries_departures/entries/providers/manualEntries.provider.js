@@ -269,6 +269,12 @@
                         A: " "
                     });
 
+                    //Add asset count
+                    entryData.push({
+                        A: "Total de equipos",
+                        B: entryDetail.cabinets.length
+                    });
+
                     var ws = XLSX.utils.json_to_sheet(entryData, {
                         header: ["A", "B", "C", "D"],
                         skipHeader: true
@@ -276,28 +282,50 @@
                     //Initialize variable with table headers
                     var assetData = [{
                         A: "Económico",
-                        B: "Serie",
-                        C: "Modelo",
-                        D: "Tipo"
+                        B: "Activo",
+                        C: "Serie",
+                        D: "Modelo",
+                        E: "Tipo"
                     }];
 
+                    var assetPromises = [];
+
                     angular.forEach(entryDetail.cabinets, function (value) {
-                        assetData.push({
-                            A: value
-                        });
+                        var assetPromise = getCabinetInfo(value);
+                        assetPromises.push(assetPromise);
+                        assetPromise
+                            .then(function (cabinetInfo) {
+                                assetData.push({
+                                    A: cabinetInfo.economico,
+                                    B: cabinetInfo.id_unilever,
+                                    C: cabinetInfo.no_serie,
+                                    D: cabinetInfo.modelo.descripcion,
+                                    E: cabinetInfo.modelo.tipo.nombre
+                                });
+                            })
+                            .catch(function (getCabinetInfoError) {
+                                defer.reject(getCabinetInfoError);
+                            });
+
                     });
 
-                    XLSX.utils.sheet_add_json(ws,
-                        assetData,
-                        { header: ["A", "B", "C", "D"], skipHeader: true, origin: { c: 0, r: 14 } });
+                    $q.all(assetPromises)
+                        .then(function () {
+                            XLSX.utils.sheet_add_json(ws,
+                                assetData,
+                                { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
 
-                    /* add to workbook */
-                    var wb = XLSX.utils.book_new();
-                    XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+                            /* add to workbook */
+                            var wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, "Entrada");
 
-                    /* write workbook and force a download */
-                    XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
-                    defer.resolve();
+                            /* write workbook and force a download */
+                            XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                            defer.resolve();
+                        })
+                        .catch(function (errorResponse) {
+                            defer.reject(errorResponse);
+                        });
                 })
                 .catch(function (entryError) {
                     defer.reject(entryError);
@@ -317,7 +345,15 @@
         }
 
         function getEntriesByCabinet(id) {
+            //TODO:Make real logic
             return id;
+        }
+
+        function getCabinetInfo(id) {
+            return inventoryUrl
+                .all(inventory.cabinet)
+                .all(id)
+                .customGET();
         }
 
         //Constants
