@@ -142,7 +142,7 @@
             </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
-                ng-click="$event.stopPropagation(); vm.generateXLSX()" class="md-primary md-raised">
+                ng-click="$event.stopPropagation(); vm.generateXLSX(entry.id)" class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-excel"></md-icon>
                 <span hide-xs>{{"ENTRIES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>

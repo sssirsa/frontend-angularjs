@@ -12,7 +12,8 @@
         Translate,
         URLS,
         User,
-        XLSX
+        XLSX,
+        moment
     ) {
 
         var entriesUrl = API
@@ -182,17 +183,129 @@
         }
 
         function generateReport(entryId) {
-            var data = [
-                { name: "Barack Obama", pres: 44 },
-                { name: "Donald Trump", pres: 45 }
-            ];
-            var ws = XLSX.utils.json_to_sheet(data);
-            /* add to workbook */
-            var wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+            var defer = $q.defer();
 
-            /* write workbook and force a download */
-            XLSX.writeFile(wb, name ? name : "reporte_entrada" + ".xlsx");
+            detail(entryId)
+                .then(function (entryDetail) {
+
+                    var entryData = [
+                        {
+                            A: "Folio",
+                            B: entryDetail.id
+                        },
+                        {
+                            A: "Fecha",
+                            B: moment(entryDetail.fecha).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                        },
+                        {
+                            A: "Tipo de entrada",
+                            B: entryDetail.tipo_entrada
+                        },
+                        {
+                            A: "Linea de transporte",
+                            B: entryDetail.linea_transporte.razon_social
+                        },
+                        {
+                            A: "Tipo de transporte",
+                            B: entryDetail.tipo_transporte.descripcion
+                        },
+                        {
+                            A: "Nombre del operador",
+                            B: entryDetail.nombre_chofer
+                        },
+                        {
+                            A: ""
+                        }
+                    ];
+                    //Adding origin   
+                    if (entryDetail.pedimento) {
+                        entryData.push({
+                            A: "Pedimento",
+                            B: entryDetail.pedimento
+                        });
+                    }
+
+                    if (entryDetail.establecimiento_origen) {
+                        entryData.push({
+                            A: "Establecimiento origen",
+                            B: entryDetail.establecimiento_origen.nombre_establecimiento
+                        });
+                    }
+
+                    if (entryDetail.proveedor_origen) {
+                        entryData.push({
+                            A: "Proveedor origen",
+                            B: entryDetail.proveedor_origen.razon_social
+                        });
+                    }
+
+                    if (entryDetail.udn_origen) {
+                        entryData.push({
+                            A: "UDN-Agencia origen",
+                            B: entryDetail.udn_origen.agencia
+                        });
+                    }
+                    //Add spacing
+                    entryData.push({
+                        A: " "
+                    });
+                    //Adding destination
+                    if (entryDetail.sucursal_destino) {
+                        entryData.push({
+                            A: "Sucursal destino",
+                            B: entryDetail.sucursal_destino.nombre
+                        });
+                    }
+
+                    if (entryDetail.udn_destino) {
+                        entryData.push({
+                            A: "UDN-Agencia Destino",
+                            B: entryDetail.udn_destino.razon_social
+                        });
+                    }
+
+                    //Add spacing
+                    entryData.push({
+                        A: " "
+                    });
+
+                    var ws = XLSX.utils.json_to_sheet(entryData, {
+                        header: ["A", "B", "C", "D"],
+                        skipHeader: true
+                    });
+                    //Initialize variable with table headers
+                    var assetData = [{
+                        A: "Económico",
+                        B: "Serie",
+                        C: "Modelo",
+                        D: "Tipo"
+                    }];
+
+                    angular.forEach(entryDetail.cabinets, function (value) {
+                        assetData.push({
+                            A: value
+                        });
+                    });
+
+                    XLSX.utils.sheet_add_json(ws,
+                        assetData,
+                        { header: ["A", "B", "C", "D"], skipHeader: true, origin: { c: 0, r: 14 } });
+
+                    /* add to workbook */
+                    var wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+
+                    /* write workbook and force a download */
+                    XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                    defer.resolve();
+                })
+                .catch(function (entryError) {
+                    defer.reject(entryError);
+                });
+
+
+
+            return defer.promise;
         }
 
         //Internal functions
@@ -207,6 +320,7 @@
             return id;
         }
 
+        //Constants
         var warrantyEntry = {
             template: function () {
                 return {
