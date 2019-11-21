@@ -11,7 +11,9 @@
         QUERIES,
         Translate,
         URLS,
-        User
+        User,
+        XLSX,
+        moment
     ) {
 
         var entriesUrl = API
@@ -180,6 +182,160 @@
             return url.customGET(null, params);
         }
 
+        function generateReport(entryId) {
+            var defer = $q.defer();
+
+            detail(entryId)
+                .then(function (entryDetail) {
+
+                    var entryData = [
+                        {
+                            A: "Folio",
+                            B: entryDetail.id
+                        },
+                        {
+                            A: "Fecha",
+                            B: moment(entryDetail.fecha).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                        },
+                        {
+                            A: "Tipo de entrada",
+                            B: entryDetail.tipo_entrada
+                        },
+                        {
+                            A: "Linea de transporte",
+                            B: entryDetail.linea_transporte.razon_social
+                        },
+                        {
+                            A: "Tipo de transporte",
+                            B: entryDetail.tipo_transporte.descripcion
+                        },
+                        {
+                            A: "Nombre del operador",
+                            B: entryDetail.nombre_chofer
+                        },
+                        {
+                            A: ""
+                        }
+                    ];
+                    //Adding origin   
+                    if (entryDetail.pedimento) {
+                        entryData.push({
+                            A: "Pedimento",
+                            B: entryDetail.pedimento
+                        });
+                    }
+
+                    if (entryDetail.establecimiento_origen) {
+                        entryData.push({
+                            A: "Establecimiento origen",
+                            B: entryDetail.establecimiento_origen.nombre_establecimiento
+                        });
+                    }
+
+                    if (entryDetail.proveedor_origen) {
+                        entryData.push({
+                            A: "Proveedor origen",
+                            B: entryDetail.proveedor_origen.razon_social
+                        });
+                    }
+
+                    if (entryDetail.udn_origen) {
+                        entryData.push({
+                            A: "UDN-Agencia origen",
+                            B: entryDetail.udn_origen.agencia
+                        });
+                    }
+                    //Add spacing
+                    entryData.push({
+                        A: " "
+                    });
+                    //Adding destination
+                    if (entryDetail.sucursal_destino) {
+                        entryData.push({
+                            A: "Sucursal destino",
+                            B: entryDetail.sucursal_destino.nombre
+                        });
+                    }
+
+                    if (entryDetail.udn_destino) {
+                        entryData.push({
+                            A: "UDN-Agencia Destino",
+                            B: entryDetail.udn_destino.razon_social
+                        });
+                    }
+
+                    //Add spacing
+                    entryData.push({
+                        A: " "
+                    });
+
+                    //Add asset count
+                    entryData.push({
+                        A: "Total de equipos",
+                        B: entryDetail.cabinets.length
+                    });
+
+                    var ws = XLSX.utils.json_to_sheet(entryData, {
+                        header: ["A", "B", "C", "D"],
+                        skipHeader: true
+                    });
+                    //Initialize variable with table headers
+                    var assetData = [{
+                        A: "Económico",
+                        B: "Activo",
+                        C: "Serie",
+                        D: "Modelo",
+                        E: "Tipo"
+                    }];
+
+                    var assetPromises = [];
+
+                    angular.forEach(entryDetail.cabinets, function (value) {
+                        var assetPromise = getCabinetInfo(value);
+                        assetPromises.push(assetPromise);
+                        assetPromise
+                            .then(function (cabinetInfo) {
+                                assetData.push({
+                                    A: cabinetInfo.economico,
+                                    B: cabinetInfo.id_unilever,
+                                    C: cabinetInfo.no_serie,
+                                    D: cabinetInfo.modelo.descripcion,
+                                    E: cabinetInfo.modelo.tipo.nombre
+                                });
+                            })
+                            .catch(function (getCabinetInfoError) {
+                                defer.reject(getCabinetInfoError);
+                            });
+
+                    });
+
+                    $q.all(assetPromises)
+                        .then(function () {
+                            XLSX.utils.sheet_add_json(ws,
+                                assetData,
+                                { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
+
+                            /* add to workbook */
+                            var wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+
+                            /* write workbook and force a download */
+                            XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                            defer.resolve();
+                        })
+                        .catch(function (errorResponse) {
+                            defer.reject(errorResponse);
+                        });
+                })
+                .catch(function (entryError) {
+                    defer.reject(entryError);
+                });
+
+
+
+            return defer.promise;
+        }
+
         //Internal functions
         function getCabinetInSubsidiary(id) {
             return managementUrl
@@ -189,9 +345,18 @@
         }
 
         function getEntriesByCabinet(id) {
+            //TODO:Make real logic
             return id;
         }
 
+        function getCabinetInfo(id) {
+            return inventoryUrl
+                .all(inventory.cabinet)
+                .all(id)
+                .customGET();
+        }
+
+        //Constants
         var warrantyEntry = {
             template: function () {
                 return {
@@ -870,6 +1035,7 @@
             getCabinet: getCabinet,
             getEntriesByCabinet: getEntriesByCabinet,
             listEntries: listEntries,
+            generateReport: generateReport,
             //Constants
             warrantyEntry: warrantyEntry,
             repairEntry: repairEntry,
