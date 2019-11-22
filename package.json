@@ -80,7 +80,6 @@
     "karma-firefox-launcher": "^1.0.0",
     "moment": "^2.24.0",
     "run-sequence": "^1.2.2",
-    "xlsx": "^0.15.2",
     "yargs": "^3.32.0"
   }
 }
