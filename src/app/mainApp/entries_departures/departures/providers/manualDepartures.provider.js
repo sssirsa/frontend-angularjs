@@ -11,7 +11,8 @@
         Translate,
         EnvironmentConfig,
         PAGINATION,
-        User
+        User,
+        XLSX
     ) {
         var departuresUrl = API
             .all(URLS.entries_departures.base)
@@ -50,7 +51,10 @@
         }
 
         function detail(id) {
-            return departuresUrl.all(id).customGET();
+            // return departuresUrl.customGET({id:id});
+            API
+                .all(URLS.entries_departures.base)
+                .all(URLS.entries_departures.departures.base + '?id=' + id).customGET();
         }
 
         function close(id, element) {
@@ -244,6 +248,152 @@
             return url.customGET(null, params);
         }
 
+        function generateReport(departureDetail) {
+            var defer = $q.defer();
+
+            var entryData = [
+                {
+                    A: "Folio",
+                    B: departureDetail.id
+                },
+                {
+                    A: "Fecha",
+                    B: moment(departureDetail.fecha).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                },
+                {
+                    A: "Tipo de salida",
+                    B: departureDetail.tipo_salida
+                },
+                {
+                    A: "Linea de transporte",
+                    B: departureDetail.linea_transporte.razon_social
+                },
+                {
+                    A: "Tipo de transporte",
+                    B: departureDetail.tipo_transporte.descripcion
+                },
+                {
+                    A: "Nombre del operador",
+                    B: departureDetail.nombre_chofer
+                },
+                {
+                    A: ""
+                }
+            ];
+            //Adding origin
+
+            if (departureDetail.udn_origen) {
+                entryData.push({
+                    A: "UDN-Agencia origen",
+                    B: departureDetail.udn_origen.agencia
+                });
+            }
+
+            if (departureDetail.sucursal_origen) {
+                entryData.push({
+                    A: "Sucursal origen",
+                    B: departureDetail.sucursal_origen.nombre
+                });
+            }
+            //Add spacing
+            entryData.push({
+                A: " "
+            });
+            //Adding destination
+            if (departureDetail.sucursal_destino) {
+                entryData.push({
+                    A: "Sucursal destino",
+                    B: departureDetail.sucursal_destino.nombre
+                });
+            }
+
+            if (departureDetail.udn_destino) {
+                entryData.push({
+                    A: "UDN-Agencia destino",
+                    B: departureDetail.udn_destino.razon_social
+                });
+            }
+
+            if (departureDetail.establecimiento_destino) {
+                entryData.push({
+                    A: "Establecimiento destino",
+                    B: departureDetail.establecimiento_destino.nombre_establecimiento
+                });
+            }
+
+            if (departureDetail.proveedor_destino) {
+                entryData.push({
+                    A: "Proveedor destino",
+                    B: departureDetail.proveedor_destino.razon_social
+                });
+            }
+
+            //Add spacing
+            entryData.push({
+                A: " "
+            });
+
+            //Add asset count
+            entryData.push({
+                A: "Total de equipos",
+                B: departureDetail.cabinets.length
+            });
+
+            var ws = XLSX.utils.json_to_sheet(entryData, {
+                header: ["A", "B", "C", "D"],
+                skipHeader: true
+            });
+            //Initialize variable with table headers
+            var assetData = [{
+                A: "Económico",
+                B: "Activo",
+                C: "Serie",
+                D: "Modelo",
+                E: "Tipo"
+            }];
+
+            var assetPromises = [];
+
+            angular.forEach(departureDetail.cabinets, function (value) {
+                var assetPromise = getCabinetInfo(value);
+                assetPromises.push(assetPromise);
+                assetPromise
+                    .then(function (cabinetInfo) {
+                        assetData.push({
+                            A: cabinetInfo.economico,
+                            B: cabinetInfo.id_unilever,
+                            C: cabinetInfo.no_serie,
+                            D: cabinetInfo.modelo.descripcion,
+                            E: cabinetInfo.modelo.tipo.nombre
+                        });
+                    })
+                    .catch(function (getCabinetInfoError) {
+                        defer.reject(getCabinetInfoError);
+                    });
+
+            });
+
+            $q.all(assetPromises)
+                .then(function () {
+                    XLSX.utils.sheet_add_json(ws,
+                        assetData,
+                        { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
+
+                    /* add to workbook */
+                    var wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Salida");
+
+                    /* write workbook and force a download */
+                    XLSX.writeFile(wb, name ? name : "reporte_salida " + moment(departureDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                    defer.resolve();
+                })
+                .catch(function (errorResponse) {
+                    defer.reject(errorResponse);
+                });
+
+            return defer.promise;
+        }
+
         //Internal functions
 
         function getCabinetInSubsidiary(id) {
@@ -265,6 +415,13 @@
             return technicalUrl
                 .all(service.base)
                 .all(query)
+                .customGET();
+        }
+
+        function getCabinetInfo(id) {
+            return inventoryUrl
+                .all(inventory.cabinet)
+                .all(id)
                 .customGET();
         }
 
@@ -863,6 +1020,7 @@
             getCabinet: getCabinet,
             getDeparturesByCabinet: getDeparturesByCabinet,
             listDepartures: listDepartures,
+            generateReport: generateReport,
             //Constants
             newDeparture: newDeparture,
             obsoleteDeparture: obsoleteDeparture,

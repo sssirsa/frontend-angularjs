@@ -56,6 +56,13 @@
             });
         };
 
+        vm.generateXLSX = function (departureId) {
+            vm.generateReportPromise = MANUAL_DEPARTURES.generateReport(departureId)
+                .catch(function (errorResponse) {
+                    ErrorHandler.errorTranslate(errorResponse);
+                });
+        };
+
         //Internal functions
         function loadDepartures(filter, page) {
             vm.departures = [];

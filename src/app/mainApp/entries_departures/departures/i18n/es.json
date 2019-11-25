@@ -30,7 +30,8 @@
             "TITLE": "Listado de salidas",
             "BUTTONS": {
                 "LOAD_MORE": "Cargar mas salidas...",
-                "PDF": "Generar remisión"
+                "PDF": "Generar remisión",
+                "XLSX":"Generar reporte"
             },
             "FILTERS": {
                 "ALL": "Todas",
