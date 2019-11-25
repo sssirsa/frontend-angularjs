@@ -56,7 +56,8 @@
                 "ORIGIN_AGENCY": "UDN-Agencia de origen:",
                 "ORIGIN_SUBSIDIARY": "Sucursal origen",
                 "TRANSPORT_KIND": "Tipo de transporte:",
-                "TRANSPORT_LINE": "Linea de Transporte:"
+                "TRANSPORT_LINE": "Linea de Transporte:",
+                "ASSET_QUANTITY":"Equipos enviados:"
             }
         },
         "MENU": {

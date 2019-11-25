@@ -89,10 +89,13 @@
                 <strong translate>DEPARTURES.LIST.LABELS.DATE</strong>
                 <span>{{departure.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
-            <span ng-if="departure.pedimento" layout-margin>
-                <strong translate>DEPARTURES.LIST.LABELS.ORDER</strong>
-                <span>{{departure.pedimento}}</span>
-            </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="departure.cabinets" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{departure.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
                 <span flex="33" ng-if="departure.nombre_chofer" layout-padding>
