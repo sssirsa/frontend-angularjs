@@ -19,7 +19,7 @@
             totalPages: 0
         };
 
-        vm.entries=[];
+        vm.entries = [];
 
         function init() {
             vm.entryKindFilter = 'all-entries';
@@ -46,18 +46,25 @@
         };
 
         vm.addAssetCliecked = function () {
-        //TODO:Add asset dialog
+            //TODO:Add asset dialog
         };
 
         vm.generatePDF = function () {
-        //TODO:Create functionality for PDF
+            //TODO:Create functionality for PDF
         };
 
         vm.navigateToDetail = function (entry) {
             $state.go('triangular.admin-default.entry-detail', {
                 entryId: entry.id,
-                entry:entry
+                entry: entry
             });
+        };
+
+        vm.generateXLSX = function (entryId) {
+            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(entryId)
+                .catch(function (errorResponse) {
+                    ErrorHandler.errorTranslate(errorResponse);
+                });
         };
 
         //Internal functions

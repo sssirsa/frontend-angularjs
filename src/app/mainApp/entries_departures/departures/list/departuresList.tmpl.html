@@ -89,10 +89,13 @@
                 <strong translate>DEPARTURES.LIST.LABELS.DATE</strong>
                 <span>{{departure.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
-            <span ng-if="departure.pedimento" layout-margin>
-                <strong translate>DEPARTURES.LIST.LABELS.ORDER</strong>
-                <span>{{departure.pedimento}}</span>
-            </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="departure.cabinets" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{departure.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
                 <span flex="33" ng-if="departure.nombre_chofer" layout-padding>
@@ -146,12 +149,19 @@
             <span>{{departure.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
+            <!--Allow to generate the document just if the entry is closed-->
             <md-button aria-label="download document button"
                        ng-click="$event.stopPropagation(); vm.generatePDF()"
                        disabled
                        class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
                 <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the excel document at anytime-->
+            <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                ng-click="$event.stopPropagation(); vm.generateXLSX(departure)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>

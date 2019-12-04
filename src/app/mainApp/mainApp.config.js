@@ -15,7 +15,9 @@
         TECHNICAL_SERVICE,
         REPORTS,
         URLS,
-        $provide
+        $provide,
+        moment,
+        CONFIGS
     ) {
         URLS.entries_departures = ENTRIES_DEPARTURES;
         URLS.inventory = INVENTORY;
@@ -26,6 +28,7 @@
         URLS.reports = REPORTS;
 
         $provide.constant('URLS', URLS);
+        moment.locale('es', CONFIGS.moment);
     }
 
 })();

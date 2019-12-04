@@ -157,46 +157,66 @@
             }
         })
         .constant('CONFIGS', {
-            ADTConfig: {
-                calType: 'gregorian',
-                dtpType: 'date',
-                format: 'DD/MM/YYYY',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                todayStr: 'Hoy',
-                hideTimeSelector: true,
-                position: 'top',
-                isReadOnly: true,
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            ADTConfigBottom: {
-                calType: 'gregorian',
-                dtpType: 'date',
-                format: 'DD/MM/YYYY',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                todayStr: 'Hoy',
-                hideTimeSelector: true,
-                position: 'Bottom',
-                isReadOnly: true,
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            },
-            ADTConfigTime: {
-                calType: 'gregorian',
-                dtpType: 'date&time',
-                format: 'DD/MM/YYYY hh:mm',
-                default: 'today',
-                autoClose: true,
-                multiple: false,
-                isReadOnly: true,
-                todayStr: 'Hoy',
-                position: 'top',
-                daysNames: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            moment:{
+                months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+                monthsShort : 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sep._Oct._Nov._Dic.'.split('_'),
+                monthsParseExact : true,
+                weekdays : 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+                weekdaysShort : 'Dom._Lun._Mar._Mie._Jue._Vie._Sab.'.split('_'),
+                weekdaysMin : 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_'),
+                weekdaysParseExact : true,
+                longDateFormat : {
+                    LT : 'HH:mm',
+                    LTS : 'HH:mm:ss',
+                    L : 'DD/MM/YYYY',
+                    LL : 'D MMMM YYYY',
+                    LLL : 'D MMMM YYYY HH:mm',
+                    LLLL : 'dddd D MMMM YYYY HH:mm'
+                },
+                calendar : {
+                    sameDay : '[Hoy] LT',
+                    nextDay : '[Mañana] LT',
+                    nextWeek : 'dddd [Siguiente semana] LT',
+                    lastDay : '[Ayer] LT',
+                    lastWeek : 'dddd [Semana pasada] LT',
+                    sameElse : 'L'
+                },
+                relativeTime : {
+                    future : 'hasta %s',
+                    past : 'desde %s',
+                    s : 'cualquier segundo',
+                    m : 'un minuto',
+                    mm : '%d minutos',
+                    h : 'una hora',
+                    hh : '%d horas',
+                    d : 'una hora',
+                    dd : '%d horas',
+                    M : 'un mes',
+                    MM : '%d meses',
+                    y : 'un año',
+                    yy : '%d años'
+                },
+                //dayOfMonthOrdinalParse : /\d{1,2}(er|e)/,
+                ordinal : function (number) {
+                    //return number + (number === 1 ? 'er' : 'e');
+                    return number;
+                },
+                meridiemParse : /PM|AM/,
+                isPM : function (input) {
+                    return input.charAt(0) === 'M';
+                },
+                // In case the meridiem units are not separated around 12, then implement
+                // this function (look at locale/id.js for an example).
+                // meridiemHour : function (hour, meridiem) {
+                //     return /* 0-23 hour, given meridiem token and hour 1-12 */ ;
+                // },
+                meridiem : function (hours) {
+                    return hours < 12 ? 'AM' : 'PM';
+                },
+                week : {
+                    dow : 1, // Monday is the first day of the week.
+                    doy : 4  // Used to determine first week of the year.
+                }
             }
         })
         .constant('SCORES',

@@ -15,26 +15,39 @@
 
         //Redirect if access is denied
         function accessDenied() {
-            $state.go('404');
+            $state.go('401');
             AuthService.logout();
         }
 
+        function transitionErrored(){            
+            $state.go('500');
+        }
+
         $transitions.onCreate({}, function (transition) {
+            if(transition.from()===transition.to()){
+                //Abort transitions to the same state, to avoid errors
+                transition.abort();
+            }
             if (transition.to().name !== 'splash'
+                && transition.to().name !== '401'
                 && transition.to().name !== '404'
+                && transition.to().name !== '500'
+                && transition.to().name !== 'main'
                 && transition.to().name !== 'login') {
                 //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {
                     //User not athenticated
                     if (AuthService.canRefreshSession()) {
+                        var to = transition.to();
+                        transition.abort();
                         //Permission redefining is managed in AuthService.refreshToken function
                         AuthService
                             .refreshToken()
                             .then(function () {
-                                return true;
+                                $state.go(to);
                             })
                             .catch(function () {
-                                return false;
+                                accessDenied();
                             });
                     }
                     else {
@@ -54,7 +67,7 @@
 
         //Transition aborted due to permissions validation
         $transitions.onError({}, function () {
-            accessDenied();
+            transitionErrored();
         });
 
     }
