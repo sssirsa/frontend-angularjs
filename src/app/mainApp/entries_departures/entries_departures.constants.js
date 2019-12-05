@@ -10,8 +10,16 @@
                 transport_type: 'transport_type',
                 sticker: 'sticker'
             },
+            changes: {
+                base: 'changes',
+                agency: 'udn',
+                agency_confirm: 'confirm_udn',
+                subsidiary: 'subsidiary',
+                subsidiary_confirm: 'confirm_subsidiary'
+            },
             departures: {
                 base: 'departures',
+                all: 'all',
                 new: 'news',
                 obsolete: 'scrapped',
                 unrecognizable: 'no_labeled',
@@ -21,8 +29,9 @@
                 close: 'close'
             },
             entries: {
-                addCabinet: 'add_cabinet',
                 base: 'entries',
+                addCabinet: 'add_cabinet',
+                all: 'all',
                 close: 'close',
                 new: 'news',
                 repair: 'repair',
@@ -32,8 +41,7 @@
             },
             inspections: {
                 base: 'inspections',
-                preliminary_inspection:'preliminary_inspection'
-            },
-            subsidiary_change: {}
+                preliminary_inspection: 'preliminary_inspection'
+            }
         });
 })();

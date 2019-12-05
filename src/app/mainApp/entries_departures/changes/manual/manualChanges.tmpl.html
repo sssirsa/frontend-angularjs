@@ -1,0 +1,199 @@
+<md-card layout-padding>
+    <div layout="column" layout-align="center center">
+        <h1 translate>CHANGES.CREATE.TITLE</h1>
+        <span translate>CHANGES.CREATE.HINTS.CHANGE</span>
+    </div>
+    <md-tabs md-dynamic-height="true" md-selected="vm.selectedTab">
+        <md-tab layout="column" layout-align="center stretch" label={{'CHANGES.CREATE.LABELS.ASSET_LOADING'|translate}}>
+            <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+                <p>{{'CHANGES.CREATE.LABELS.SWITCH.LABEL'|translate}}</p>
+                <md-switch ng-model="vm.changeFromAgency" ng-change="vm.changeSwitch()">
+                    <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.TRUE'|translate}}</p>
+                   <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.FALSE'|translate}}</p>-->
+                </md-switch>
+            </div>
+            <catalog-select class="full-width" ng-if="!vm.changeFromAgency && vm.showSelector"
+                lock="vm.cabinetList.length>0" catalog="vm.catalogues['origin_subsidiary'].catalog"
+                hint="vm.catalogues['origin_subsidiary'].hint" icon="vm.catalogues['origin_subsidiary'].icon"
+                required="vm.catalogues['origin_subsidiary'].required"
+                on-select="vm.onOriginSelect(element,vm.catalogues['origin_subsidiary'].binding)">
+            </catalog-select>
+            <catalog-select class="full-width" ng-if="vm.changeFromAgency && vm.showSelector"
+                lock="vm.cabinetList.length>0" catalog="vm.catalogues['origin_udn'].catalog"
+                hint="vm.catalogues['origin_udn'].hint" icon="vm.catalogues['origin_udn'].icon"
+                required="vm.catalogues['origin_udn'].required"
+                on-select="vm.onOriginSelect(element,vm.catalogues['origin_udn'].binding)">
+            </catalog-select>
+            <!--Cabinet search bar-->
+            <md-actions layout-gt-xs="row" layout="column" layout-align-gt-xs="space-around center"
+                layout-align="center stretch" ng-if="!vm.showSelector
+                        || vm.change[vm.catalogues['origin_subsidiary'].binding]
+                        || vm.change[vm.catalogues['origin_udn'].binding]">
+                <h3>{{'CHANGES.CREATE.LABELS.CABINET_SEARCH'|translate}}</h3>
+                <form name="cabinetSearch" ng-submit="vm.searchCabinet(vm.cabinetID)">
+                    <div layout="row">
+                        <md-input-container class="md-block">
+                            <label>{{'CHANGES.CREATE.LABELS.CABINET_ID'|translate}}</label>
+                            <input name="cabinetID" type="text" digits-only md-max-length="10"
+                                ng-model="vm.cabinetID" />
+                        </md-input-container>
+                        <md-button ng-click="vm.searchCabinet(vm.cabinetID)" class="md-fab md-mini md-primary"
+                            aria-label="Add Cabinet">
+                            <md-icon md-font-icon="fa fa-plus"></md-icon>
+                        </md-button>
+                    </div>
+                </form>
+            </md-actions>
+            <div layout="row" layout-align="space-between center">
+                <!--Cabinets list-->
+                <section ng-if="vm.cabinetList.length>0" layout-padding class="full-width">
+                    <p>Cabinets</p>
+                    <md-virtual-repeat-container class="cabinet-container">
+                        <md-list>
+                            <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.cabinetList">
+                                <div layout="column" layout-align="center stretch" class="full-width" cg-busy="{
+                                     promise:element.promise,
+                                     message:'Buscando cabinet '+element.id
+                                     }">
+                                    <!--Existing cabinets-->
+                                    <section layout-gt-xs="row" layout="column"
+                                        layout-align-gt-xs="space-between center" layout-align="center stretch"
+                                        class="full-width found-cabinet" ng-if="element.cabinet">
+                                        <div layout="column" layout-align="center center">
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.ID'|translate}}</b>
+                                            {{element.cabinet.economico}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                            {{element.cabinet.no_serie}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.BRAND'|translate}}</b>
+                                            {{element.cabinet.modelo.marca.descripcion}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            <b>{{'CHANGES.CREATE.LABELS.CABINET.MODEL'|translate}}</b>
+                                            {{element.cabinet.modelo.nombre}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            <md-button ng-click="vm.removeCabinet(element.id)"
+                                                aria-label="remove cabinet" class="md-icon-button">
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <!--Non existing cabinet-->
+                                    <section layout-gt-xs="row" layout="column"
+                                        layout-align-gt-xs="space-between center" layout-align="center stretch"
+                                        class="full-width not-found-cabinet" ng-if="!element.cabinet"
+                                        ng-click="vm.createCabinet(element.id)">
+                                        <div layout="column" layout-align="center center">
+                                            {{element.id}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            {{'CHANGES.CREATE.ERRORS.NOT_FOUND_ID'|translate}}
+                                        </div>
+                                        <div layout="column" layout-align="center center">
+                                            <md-button ng-click="$event.stopPropagation(); vm.removeCabinet(element.id)"
+                                                aria-label="remove cabinet" class="md-icon-button">
+                                                <md-icon md-font-icon="fa fa-times"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </section>
+                                    <md-divider></md-divider>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-virtual-repeat-container>
+                </section>
+            </div>
+
+            <md-actions layout="row" layout-align="end center">
+                <md-button ng-click="vm.nextTab()" ng-disabled="!vm.cabinetList.length>0" aria-label="next tab"
+                    class="md-primary md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
+                        <div>{{'CHANGES.CREATE.BUTTONS.NEXT'|translate}}</div>
+                    </div>
+                </md-button>
+            </md-actions>
+        </md-tab>
+        <md-tab layout="column" layout-align="center stretch" ng-disabled="!vm.cabinetList.length>0"
+            label={{'CHANGES.CREATE.LABELS.CHANGE_DATA'|translate}}>
+            <form name="changeForm" layout="column" ng-if="vm.cabinetList.length>0" layout-align="center stretch">
+                <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
+                    layout-align="center stretch">
+                    <catalog-select class="full-width" ng-if="!vm.changeFromAgency && vm.showSelector"
+                        catalog="vm.catalogues['destination_subsidiary'].catalog" hint="vm.catalogues['destination_subsidiary'].hint"
+                        icon="vm.catalogues['destination_subsidiary'].icon" required="vm.catalogues['destination_subsidiary'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['destination_subsidiary'].binding)">
+                    </catalog-select>
+                    <catalog-select class="full-width" ng-if="vm.changeFromAgency && vm.showSelector"
+                        catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
+                        icon="vm.catalogues['destination_udn'].icon" required="vm.catalogues['destination_udn'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['destination_udn'].binding)">
+                    </catalog-select>
+                </div>
+                <md-input-container layout="column" class="md-icon-float md-block">
+                    <label translate>CHANGES.CREATE.LABELS.DESCRIPTION</label>
+                    <md-icon class="fa fa-edit"></md-icon>
+                    <input ng-model="vm.change['descripcion']" name="description" type="text">
+                    <div class="hint" translate>CHANGES.CREATE.HINTS.DESCRIPTION</div>
+                </md-input-container>
+                <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
+                    layout-align="center stretch">
+                    <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
+                        hint="vm.catalogues['transport_line'].hint" icon="vm.catalogues['transport_line'].icon"
+                        required="vm.catalogues['transport_line'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_line'].binding)">
+                    </catalog-select>
+                    <catalog-select class="full-width" catalog="vm.catalogues['transport_kind'].catalog"
+                        hint="vm.catalogues['transport_kind'].hint" icon="vm.catalogues['transport_kind'].icon"
+                        required="vm.catalogues['transport_kind'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
+                    </catalog-select>
+                </div>
+                <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around start"
+                    layout-align="center stretch">
+                    <md-input-container layout="column" class="md-icon-float md-block full-width">
+                        <label translate>CHANGES.CREATE.LABELS.DRIVER_NAME</label>
+                        <md-icon class="fa fa-user"></md-icon>
+                        <input ng-model="vm.change['nombre_chofer']" name="driver_name" ng-required="true" type="text">
+                        <div class="hint" translate>CHANGES.CREATE.HINTS.DRIVER_NAME</div>
+                    </md-input-container>
+                    <md-input-container layout="column" layout-align="start center"
+                        class="md-icon-float md-block full-width">
+                        <div layout="row" layout-align="start center">
+                            <div>
+                                <md-icon class="far fa-id-card"></md-icon>
+                            </div>
+                            <div translate>CHANGES.CREATE.LABELS.DRIVER_ID</div>
+                        </div>
+                        <file-uploader files-selected="vm.selectDriverID(files)" file-formats="'image/*'"
+                            validations="vm.imageConstraints.validations" resize-if="vm.imageConstraints.resizeIf"
+                            resize="vm.imageConstraints.resize"></file-uploader>
+                        <div class="hint" translate>CHANGES.CREATE.HINTS.DRIVER_ID</div>
+                    </md-input-container>
+                </div>
+            </form>
+            <md-actions layout="row" layout-align="space-between center">
+                <md-button ng-click="vm.previousTab()" aria-label="previous tab" class="md-primary md-raised">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
+                        <div>{{'CHANGES.CREATE.BUTTONS.PREVIOUS'|translate}}</div>
+                    </div>
+                </md-button>
+                <md-button ng-click="vm.clickSaveChange(vm.change)" cg-busy="{
+                                     promise:vm.createChangePromise,
+                                     message:' '
+                                     }" aria-label="previous tab" class="md-primary md-raised"
+                    ng-disabled="changeForm.$invalid ||!vm.change['ife_chofer']">
+                    <div layout="row" layout-align="center center">
+                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                        <div>{{'CHANGES.CREATE.BUTTONS.SAVE'|translate}}</div>
+                    </div>
+                </md-button>
+            </md-actions>
+        </md-tab>
+    </md-tabs>
+</md-card>

@@ -52,7 +52,8 @@
     "ng-image-gallery": "^2.1.2",
     "angular-minicolors": "^0.0.11",
     "v-accordion": "^1.6.0",
-    "angular-permission": "^6.0.0"
+    "angular-permission": "^6.0.0",
+    "js-xlsx": "^0.15.2"
   },
   "devDependencies": {
     "angular-mocks": "1.6.3"
