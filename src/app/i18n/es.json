@@ -565,7 +565,7 @@
         "SP-018":"La persona ya tiene asignada una atención en ese horario",
         "SP-019":"El horario no se encuentra dentro del propuesto por el cliente",
         "SP-020":"La atención no tiene horarios",
-        "SP-021":"Un usuario con UDN no puede attender servicios técnicos",
+        "SP-021":"Un usuario con UDN no puede attender servicios técnicos"
 
     }
 }

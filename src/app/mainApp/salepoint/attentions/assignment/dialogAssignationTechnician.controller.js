@@ -3,8 +3,26 @@
         .module('app.mainApp.salepoint')
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
-    function dialogAsignationTechnicianController(ATTENTIONS, REQUESTS, $state, $mdDialog, $document, ErrorHandler, $stateParams, attention, Stores,
-        Person, Persona_Admin, SalePoint, EnvironmentConfig, URLS, PAGINATION, QUERIES) {
+    function dialogAsignationTechnicianController(
+    ATTENTIONS,
+    REQUESTS,
+    $state,
+    $mdDialog,
+    $document,
+    ErrorHandler,
+    $stateParams,
+    attention,
+    Stores,
+    Person,
+    Persona_Admin,
+    SalePoint,
+    EnvironmentConfig,
+    URLS,
+    PAGINATION,
+    QUERIES,
+    toastr,
+    Translate
+    ) {
         var vm = this;
 
         //Variables
@@ -210,14 +228,14 @@
 
         function assign() {
 
-            if (prepareObjectSend()) {
-                ErrorHandler.error();
+            if (!prepareObjectSend()) {
+                toastr.warning(Translate.translate('SALEPOINT_REQUEST.ASSIGN.MESSAGES.HOUR_ERROR'));
                 return;
             }
 
             vm.personLoading = ATTENTIONS.assignationTechnician(vm.id, vm.toAsigned)
                 .then(function () {
-                    ErrorHandler.success();
+                    toastr.success(Translate.translate('SALEPOINT_REQUEST.ASSIGN.MESSAGES.CORRECT_ASSIGNMENT'));
                     $mdDialog.hide();
                 })
                 .catch(function (error) {
@@ -225,14 +243,15 @@
                 });
         }
 
+        //Prepares the object hours and returns a bool to indicate is the convertion was correct or not
         function prepareObjectSend() {
             var hora1Num = vm.horainicio.getHours();
             var hora2Num = vm.horafin.getHours();
             var min1Num = vm.horainicio.getMinutes();
             var min2Num = vm.horafin.getMinutes();
 
-            if (vm.horainicio >= vm.horafin) {
-                return true;
+            if (vm.horainicio > vm.horafin) {
+                return false;
             }
 
             var hora1 = hora1Num < 10 ? '0' + hora1Num.toString() : hora1Num.toString();
@@ -244,7 +263,7 @@
             vm.toAsigned.hora_fin = hora2 + ':' + min2 + ':00';
             vm.toAsigned.persona_id = vm.assignedPerson.id;
 
-            return false;
+            return true;
         }
 
         function cancel() {
@@ -283,7 +302,7 @@
 
                 })
                 .catch(function () {
-                    ErrorHandler.error();
+                    ErrorHandler.errorTranslate();
                 });
         }
 

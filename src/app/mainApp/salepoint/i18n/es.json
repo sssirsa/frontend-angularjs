@@ -91,7 +91,11 @@
                 "HOUREND": "Hora final"
             },
             "ASSIGNED": "Servicios asignados",
-            "NO_RESULTS": "Sin asignaciones"
+            "NO_RESULTS": "Sin asignaciones",
+            "MESSAGES":{
+                "HOUR_ERROR":"La hora inicio no puede ser mayor a la hora fin",
+                "CORRECT_ASSIGMENT": "Solocitud asignada correctamente"
+            }
         },
         "ASSIGN_DETAIL": {
             "TITLE": "Detalle de Servicio",

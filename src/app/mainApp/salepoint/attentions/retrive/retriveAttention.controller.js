@@ -92,6 +92,10 @@
 
                         case 'En_proceso':
                             vm.visible = true;
+                            break;                            
+
+                        case 'Asignada':
+                            vm.visible = true;
                             break;
 
                         default:
@@ -212,7 +216,7 @@
                 .ok(vm.aceptButton)
                 .cancel(vm.cancelButton);
             $mdDialog.show(confirm).then(function () {
-                vm.promiseLoader = atencionPV.putActualiza(vm.request.folio, data)
+                vm.promiseLoader = ATTENTIONS.performRetrieveAttention(vm.request.folio, data)
                     .then(function (result) {
                         $log.debug(result);
                         toastr.success(Translate.translate('SUCCESS.UPDATE'));

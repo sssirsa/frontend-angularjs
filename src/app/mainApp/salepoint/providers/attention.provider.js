@@ -28,28 +28,32 @@
                 .customGET(URLS.salepoint.attention.list + '/' + attentionID);
         }
 
-        function createRegisterAttention(attentionData) {
+        function performRegisterAttention(attentionId, attentionData) {
             return AttentionBaseURL
                 .all(URLS.salepoint.attention.register_attention)
-                .post(attentionData);
+                .all(attentionId)
+                .patch(attentionData);
         }
 
-        function createChangeAttention(attentionData) {
+        function performChangeAttention(attentionId, attentionData) {
             return AttentionBaseURL
                 .all(URLS.salepoint.attention.change_attention)
-                .post(attentionData);
+                .all(attentionId)
+                .patch(attentionData);
         }
 
-        function createRetrieveAttention(attentionData) {
+        function performRetrieveAttention(aattentionId, attentionData) {
             return AttentionBaseURL
                 .all(URLS.salepoint.attention.retrieve_attention)
-                .post(attentionData);
+                .all(attentionId)
+                .patch(attentionData);
         }
 
-        function createTechnicalServiceAttention(attentionData) {
+        function performTechnicalServiceAttention(attentionId, attentionData) {
             return AttentionBaseURL
                 .all(URLS.salepoint.attention.technical_service_attention)
-                .post(attentionData);
+                .all(attentionId)
+                .patch(attentionData);
         }
         
         function assignationTechnician(serviceID, technicianData) {
@@ -62,10 +66,10 @@
         return {
             listAttentions: listAttentions,
             getAttention: getAttention,
-            createRegisterAttention: createRegisterAttention,
-            createChangeAttention: createChangeAttention,
-            createRetrieveAttention: createRetrieveAttention,
-            createTechnicalServiceAttention: createTechnicalServiceAttention,
+            performRegisterAttention: performRegisterAttention,
+            performChangeAttention: performChangeAttention,
+            performRetrieveAttention: performRetrieveAttention,
+            performTechnicalServiceAttention: performTechnicalServiceAttention,
             assignationTechnician: assignationTechnician
         };
 
