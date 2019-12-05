@@ -290,7 +290,10 @@
                             vm.visible = false;
                             break;
                     }
-
+                    
+                    if(vm.visible &&!vm.user.sucursal && !vm.user.udn){
+                        toastr.warning(Translate.translate('ATTENTION.DETAIL.ERRORS.ADMIN_USER'));
+                    }
                     urlEvidencia();
                     convertImages();
                     convertFirm();
@@ -344,6 +347,9 @@
         }
 
         function enviar(){
+            if(!vm.user.sucursal && !vm.user.udn){
+                toastr.error(Translate.translate('ATTENTION.DETAIL.ERRORS.ADMIN_USER'));
+            }
             if(validar()){
                 vm.insumosUsados = [];
 
@@ -372,7 +378,8 @@
                         firma_tecnico: vm.firmaT,
                         evidencia: vm.evidenciaNueva,
                         calificacion: vm.request.calificacion,
-                        cancelacion: false
+                        cancelacion: false,
+                        status:'Atendida
                     };
 
                     confirmacion(vm.objetoAtencion);

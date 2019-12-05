@@ -159,6 +159,11 @@
             "TITLE": "Listado de atenciones",
             "NO_RESULTS": "No se encontró ninguna atención con los parametros seleccionados"
         },
+        "DETAIL":{
+            "ERRORS":{
+                "ADMIN_USER":"Un usuario administrador no puede atender un servicio"
+            }
+        },
         "EVIDENCE": {
             "TITLE": "Evidencias de la atención",
             "FIRM_CLIENT": "Firma del cliente",
