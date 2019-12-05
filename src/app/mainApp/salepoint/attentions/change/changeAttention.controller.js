@@ -379,7 +379,7 @@
                         evidencia: vm.evidenciaNueva,
                         calificacion: vm.request.calificacion,
                         cancelacion: false,
-                        status:'Atendida
+                        status:'Atendida'
                     };
 
                     confirmacion(vm.objetoAtencion);
