@@ -1,13 +1,8 @@
- <div cg-busy="{promise:vm.loadingRequests, message:'Cargando solicitudes...'}">
+    <md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
 
-    <md-card layout="column"
-             layout-padding
-             layout-align="center stretch">
-
-        <div layout="column"
-             layout-align="center center">
-            <h1 translate>REQUEST.LIST.TITLE</h1>
-        </div>
+    <header layout="column" layout-align="center center">
+        <h1 translate>REQUEST.LIST.TITLE</h1>
+        </header>
 
         <div layout="row"
              layout-align="space-around center"
@@ -63,29 +58,19 @@
             </div>
         </div>
     </md-card>
-    <md-card layout="column"
-             layout-padding
-             layout-align="center stretch"
-             ng-if="vm.requests.length == 0">
-
-        <div layout="row"
-             layout-align="space-around center"
-             layout-align-xs="center stretch"
-             layout-xs="column">
-            <span translate>REQUEST.LIST.NO_RESULTS</span>
-        </div>
+<section cg-busy="{promise:vm.loadingRequests,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+    <md-card ng-if="!vm.requests.length">
+        <strong translate>REQUEST.LIST.NO_RESULTS</strong>
     </md-card>
-</div>
-
-<div cg-busy="{promise:vm.getReportPromise, message:'Generando reporte...'}"
-     ng-if="vm.requests.length != 0 && !vm.filteredActivated">
-
     <md-card
-        layout="column"
+        ng-if="vm.requests.length"
         ng-repeat="request in vm.requests"
-        layout-gt-xs="row"
-        ng-click="vm.navigateToDetail(request)"
-        layout-align="space-around center">
+        ng-click="vm.navigateToDetail(request)">
+
+
+
+
+
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.FOLIO</h3>
             <span>{{request.id}}</span>
@@ -123,7 +108,7 @@
             </div>
         </md-content>
     </md-card>
-</div>
+</section>
 <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
     <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreRequests, message:' '}"
         ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">

@@ -64,7 +64,6 @@
             $mdDialog.show({
                 controller: 'dialogAsignationTechnicianController',
                 templateUrl: 'app/mainApp/salepoint/attentions/assignment/dialogAssignationTechnician.tmpl.html',
-                parent: angular.element($document.body),
                 controllerAs: 'vm',
                 clickOutsideToClose: true,
                 focusOnOpen: true,
@@ -75,7 +74,7 @@
                 .then(function () {
                     vm.listAttentions();
                 });
-        }
+        };
 
         //Internal functions
         function loadRequests(filter, page) {
