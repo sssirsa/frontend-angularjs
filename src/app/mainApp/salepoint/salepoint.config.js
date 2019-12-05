@@ -144,7 +144,7 @@
             })
 
             .state('triangular.admin-default.new-attention', {
-                url: '/salepoint/atencion/alta',
+                url: '/salepoint/atencion/alta/{{id}}',
                 data: {
                     permissions: {
                         only: ['sale_point__attentions__attention_cabinet']
@@ -159,7 +159,7 @@
             })
 
             .state('triangular.admin-default.retrieve-attention', {
-                url: '/salepoint/atencion/retiro',
+                url: '/salepoint/atencion/retiro/{{id}}',
                 data: {
                     permissions: {
                         only: ['sale_point__attentions__attention_retrieve']
@@ -174,7 +174,7 @@
             })
 
             .state('triangular.admin-default.change-attention', {
-                url: '/salepoint/atencion/cambio',
+                url: '/salepoint/atencion/cambio/{{id}}',
                 data: {
                     permissions: {
                         only: ['sale_point__attentions__attention_change']
@@ -189,7 +189,7 @@
             })
 
             .state('triangular.admin-default.service-attention', {
-                url: '/salepoint/atencion/servicio_tecnico',
+                url: '/salepoint/atencion/servicio_tecnico/{{id}}',
                 data: {
                     permissions: {
                         only: ['sale_point__attentions__attention_service']
