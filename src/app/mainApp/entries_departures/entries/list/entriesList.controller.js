@@ -45,7 +45,7 @@
                 });
         };
 
-        vm.addAssetCliecked = function () {
+        vm.addAssetClicked = function () {
             //TODO:Add asset dialog
         };
 

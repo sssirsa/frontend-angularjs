@@ -3,12 +3,19 @@
         "TITLE": "Solicitudes",
         "LIST":{
             "TITLE": "Listado de solicitudes",
-            "TYPE":{
+            "FILTERS":{
                 "ALL": "Todas",
                 "ATTENDED": "Atendida",
+                "ASSIGNED": "Asignada",
                 "CANCELED": "Cancelada",
                 "IN_PROCESS": "En proceso",
                 "OPEN": "Abierta"
+            },
+            "LABELS":{
+                
+            },
+            "BUTTONS":{
+                "LOAD_MORE":"Cargar mas solicitudes"
             },
             "LIST_OF": "Listado de",
             "NO_RESULTS": "No se encontrarón resultados"

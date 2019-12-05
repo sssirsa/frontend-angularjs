@@ -7,45 +7,32 @@ div.Improductiva {
   width: 100px;
 }
 
-div.Abierta {
-  background-color: cornflowerblue;
-  border: 1px solid #6394ec;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.open-requests {
+  background-color: #0AF;
 }
 
-div.Atendida {
-  background-color: mediumseagreen;
-  border: 1px solid #3bb270;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.closed-requests {
+  background-color: #0A0;
 }
 
-div.Cancelada {
-  background-color: indianred;
-  border: 1px solid #cc5b5b;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.cancelled-requests {
+  background-color: #F00;
 }
 
-div.En_proceso {
-  background-color: #ffb400;
-  border: 1px solid #ffb400;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.in-process-requests {
+  background-color: #AAA;
 }
 
-div.Todo {
-  background-color: #000000;
-  border: 1px solid #000000;
+div.assigned-requests {
+  background-color: #FA0;
+}
+
+div.all-requests {
+  background-color: #FFF;
+}
+
+div.requests-filter {
+  border: 1px solid #000;
   border-radius: 3px;
   padding: 10px;
   text-align: center;

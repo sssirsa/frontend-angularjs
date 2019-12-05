@@ -138,6 +138,16 @@
                 by_postal_code: 'codigo_postal'
             },
             ordering: 'ordering',
+            salepoint:{
+                by_status:{
+                    base:'status',
+                    assigned:'Asignada',
+                    cancelled:'Cancelada',
+                    closed:'Atendida',
+                    in_process:'En_proceso',
+                    open:'Abierta'                    
+                }
+            },
             service: {
                 by_cabinet: 'cabinet__economico'
             },

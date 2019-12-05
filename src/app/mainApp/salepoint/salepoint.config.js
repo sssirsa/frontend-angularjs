@@ -116,7 +116,7 @@
             })
 
             .state('triangular.admin-default.detail-request', {
-                url: '/salepoint/solicitud/detalle',
+                url: '/salepoint/solicitud/detalle/{{id}}',
                 data: {
                     permissions: {
                         only: ['sale_point__clients__info_service']
