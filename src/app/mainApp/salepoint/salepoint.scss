@@ -1,11 +1,25 @@
-div.Improductiva {
+div.unproductive-attentions {
   background-color: #a705ed;
-  border: 1px solid #a705ed;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
 }
+div.open-attentions {
+  background-color: #0AF;
+}
+
+div.closed-attentions {
+  background-color: #0A0;
+}
+
+div.cancelled-attentions {
+  background-color: #A00;
+}
+
+div.in-process-attentions {
+  background-color: #AAA;
+}
+div.all-attentions {
+  background-color: #FFF;
+}
+
 
 div.open-requests {
   background-color: #0AF;
@@ -16,7 +30,7 @@ div.closed-requests {
 }
 
 div.cancelled-requests {
-  background-color: #F00;
+  background-color: #A00;
 }
 
 div.in-process-requests {
@@ -31,13 +45,6 @@ div.all-requests {
   background-color: #FFF;
 }
 
-div.requests-filter {
-  border: 1px solid #000;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
-}
 
 div.SelectedList {
   border: 1px solid #b3b0b3;

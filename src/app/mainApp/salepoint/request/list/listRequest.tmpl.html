@@ -14,7 +14,7 @@
                  ng-class="(vm.requestsKindFilter == 'open-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('open-requests')">
                 <span translate>REQUEST.LIST.FILTERS.OPEN</span>
-                <div class="open-requests requests-filter"></div>
+                <div class="open-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
@@ -22,7 +22,7 @@
                  ng-class="(vm.requestsKindFilter == 'assigned-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('assigned-requests')">
                 <span translate>REQUEST.LIST.FILTERS.ASSIGNED</span>
-                <div class="assigned-requests requests-filter"></div>
+                <div class="assigned-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
@@ -30,7 +30,7 @@
                  ng-class="(vm.requestsKindFilter == 'in-process-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('in-process-requests')">
                 <span translate>REQUEST.LIST.FILTERS.IN_PROCESS</span>
-                <div class="in-process-requests requests-filter"></div>
+                <div class="in-process-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
@@ -38,7 +38,7 @@
                  ng-class="(vm.requestsKindFilter == 'closed-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('closed-requests')">
                 <span translate>REQUEST.LIST.FILTERS.ATTENDED</span>
-                <div class="closed-requests requests-filter"></div>
+                <div class="closed-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
@@ -46,7 +46,7 @@
                  ng-class="(vm.requestsKindFilter == 'cancelled-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('cancelled-requests')">
                 <span translate>REQUEST.LIST.FILTERS.CANCELED</span>
-                <div class="cancelled-requests requests-filter"></div>
+                <div class="cancelled-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
@@ -54,7 +54,7 @@
                  ng-class="(vm.requestsKindFilter == 'all-requests') ? 'SelectedList' : ''"
                  ng-click="vm.filterChange('all-requests')">
                 <span translate>REQUEST.LIST.FILTERS.ALL</span>
-                <div class="all-requests requests-filter"></div>
+                <div class="all-requests selectable-filter"></div>
             </div>
         </div>
     </md-card>
@@ -78,11 +78,11 @@
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.STATUS</h3>
             
-            <div ng-if="request.status==='Abierta'" class="open-requests requests-filter"></div>
-            <div ng-if="request.status==='En_proceso'" class="in-process-requests requests-filter"></div>
-            <div ng-if="request.status==='Atendida'" class="closed-requests requests-filter"></div>
-            <div ng-if="request.status==='Cancelada'" class="cancelled-requests requests-filter"></div>
-            <div ng-if="request.status==='Asignada'" class="assigned-requests requests-filter"></div>
+            <div ng-if="request.status==='Abierta'" class="open-requests selectable-filter"></div>
+            <div ng-if="request.status==='En_proceso'" class="in-process-requests selectable-filter"></div>
+            <div ng-if="request.status==='Atendida'" class="closed-requests selectable-filter"></div>
+            <div ng-if="request.status==='Cancelada'" class="cancelled-requests selectable-filter"></div>
+            <div ng-if="request.status==='Asignada'" class="assigned-requests selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.DATE</h3>

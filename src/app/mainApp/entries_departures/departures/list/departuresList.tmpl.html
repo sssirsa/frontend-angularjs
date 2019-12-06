@@ -14,7 +14,7 @@
              ng-class="(vm.departureKindFilter === 'new-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('new-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.NEW</span>
-            <div class="new-departures departures-filter"></div>
+            <div class="new-departures selectable-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
@@ -22,7 +22,7 @@
              ng-class="(vm.departureKindFilter === 'obsolete-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('obsolete-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.OBSOLETE</span>
-            <div class="obsolete-departures departures-filter"></div>
+            <div class="obsolete-departures selectable-filter"></div>
         </div>
         <!--<div layout="column"
              layout-align="center center"
@@ -30,7 +30,7 @@
              ng-class="(vm.departureKindFilter === 'unrecognizble-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('unrecognizable-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.UNRECOGNIZABLE</span>
-            <div class="unrecognizable-departures departures-filter"></div>
+            <div class="unrecognizable-departures selectable-filter"></div>
         </div>-->
         <div layout="column"
              layout-align="center center"
@@ -38,7 +38,7 @@
              ng-class="(vm.departureKindFilter === 'warehouse-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('warehouse-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.WAREHOUSE</span>
-            <div class="warehouse-departures departures-filter"></div>
+            <div class="warehouse-departures selectable-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
@@ -46,7 +46,7 @@
              ng-class="(vm.departureKindFilter === 'warranty-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('warranty-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.WARRANTY</span>
-            <div class="warranty-departures departures-filter"></div>
+            <div class="warranty-departures selectable-filter"></div>
         </div>
         <div layout="column"
              layout-align="center center"
@@ -54,7 +54,7 @@
              ng-class="(vm.departureKindFilter === 'all-departures') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('all-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.ALL</span>
-            <div class="all-departures departures-filter"></div>
+            <div class="all-departures selectable-filter"></div>
         </div>
     </div>
 </md-card>
@@ -74,11 +74,11 @@
                 <strong translate="">DEPARTURES.LIST.LABELS.ID</strong>
                 {{departure.id}}
             </span>
-            <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures departures-filter"></div>
-            <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures departures-filter"></div>
-            <div ng-if="departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures departures-filter"></div>
-            <div ng-if="departure.tipo_salida==='Almacen'" class="warehouse-departures departures-filter"></div>
-            <div ng-if="departure.tipo_salida==='Garantias'" class="warranty-departures departures-filter"></div>
+            <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='Almacen'" class="warehouse-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='Garantias'" class="warranty-departures selectable-filter"></div>
             <span>
                 <strong translate="">DEPARTURES.LIST.LABELS.KIND</strong>
                 {{departure.tipo_salida}}
