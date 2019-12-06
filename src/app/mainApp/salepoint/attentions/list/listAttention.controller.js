@@ -3,11 +3,11 @@
 
     angular
         .module('app.mainApp.salepoint.request')
-        .controller('listRequestController', ListRequestController);
+        .controller('listAttentionController', ListAttentionController);
 
     /* @ngInject */
-    function ListRequestController(
-        REQUESTS,
+    function ListAttentionController(
+        ATTENTIONS,
         PAGINATION,
         ErrorHandler,
         $state,
@@ -23,29 +23,29 @@
             totalPages: 0
         };
 
-        vm.requests = [];
+        vm.attentions = [];
 
         function init() {
-            vm.requestsKindFilter = 'all-requests';
-            loadRequests(vm.requestKindFilter);
+            vm.attentionsKindFilter = 'all-attentions';
+            loadAttentions(vm.requestKindFilter);
         }
         init();
 
         //Functions
         vm.filterChange = function (filter) {
             vm.requestKindFilter = filter;
-            loadRequests(filter);
+            loadAttentions(filter);
         };
 
         vm.loadMore = function () {
-            vm.loadingMoreRequests = REQUESTS
-                .listRequests(vm.requestKindList, vm.paginationHelper.page + 1)
-                .then(function (requestsList) {
+            vm.loadingMoreAttentions = ATTENTIONS
+                .listAttentions(vm.requestKindList, vm.paginationHelper.page + 1)
+                .then(function (attentionsList) {
                     vm.paginationHelper.page++;
-                    vm.requests = vm.requests.concat(requestsList[PAGINATION.elements]);
+                    vm.attentions = vm.attentions.concat(attentionsList[PAGINATION.elements]);
                 })
-                .catch(function (requestsListError) {
-                    ErrorHandler.errorTranslate(requestsListError);
+                .catch(function (attentionsListError) {
+                    ErrorHandler.errorTranslate(attentionsListError);
                 });
         };
 
@@ -77,41 +77,41 @@
         };
 
         //Internal functions
-        function loadRequests(filter, page) {
-            vm.requests = [];
+        function loadAttentions(filter, page) {
+            vm.attentions = [];
             page ? null : page = 1;
             switch (filter) {
-                case 'all-requests':
+                case 'all-attentions':
                     vm.requestKindList = null;
                     break;
-                case 'open-requests':
+                case 'open-attentions':
                     vm.requestKindList = 'open';
                     break;
-                case 'assigned-requests':
+                case 'assigned-attentions':
                     vm.requestKindList = 'assigned';
                     break;
-                case 'in-process-requests':
+                case 'in-process-attentions':
                     vm.requestKindList = 'in-process';
                     break;
-                case 'closed-requests':
+                case 'closed-attentions':
                     vm.requestKindList = 'closed';
                     break;
-                case 'cancelled-requests':
+                case 'cancelled-attentions':
                     vm.requestKindList = 'cancelled';
                     break;
             }
 
-            vm.loadingRequests = REQUESTS
-                .listRequests(vm.requestKindList, 1)
-                .then(function (requestsList) {
-                    vm.requests = requestsList[PAGINATION.elements];
+            vm.loadingAttentions = ATTENTIONS
+                .listAttentions(vm.requestKindList, 1)
+                .then(function (attentionsList) {
+                    vm.attentions = attentionsList[PAGINATION.elements];
                     vm.paginationHelper.page = page;
                     vm.paginationHelper.totalPages = Math.ceil(
-                        requestsList[PAGINATION.total] / PAGINATION.pageSize
+                        attentionsList[PAGINATION.total] / PAGINATION.pageSize
                     );
                 })
-                .catch(function (requestsListError) {
-                    ErrorHandler.errorTranslate(requestsListError);
+                .catch(function (attentionsListError) {
+                    ErrorHandler.errorTranslate(attentionsListError);
                 });
         }
 

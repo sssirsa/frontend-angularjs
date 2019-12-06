@@ -8,6 +8,7 @@
         triMenuProvider
     ) {
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint');
+        $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/attentions');
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/pre_request');
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/request');
         $translatePartialLoaderProvider.addPart('app/mainApp/salepoint/service_assignment');
@@ -138,7 +139,7 @@
                         only: ['sale_point__attentions__attention_all']
                     }
                 },
-                templateUrl: 'app/mainApp/salepoint/attentions/list_attentions.tmpl.html',
+                templateUrl: 'app/mainApp/salepoint/attentions/list/listAttention.tmpl.html',
                 controller: 'listAttentionController',
                 controllerAs: 'vm'
             })

@@ -9,8 +9,7 @@
         API,
         URLS,
         PAGINATION,
-        QUERIES,
-        _
+        QUERIES
     ) {
         var requestsUrl = API
             .all(URLS.salepoint.base)
@@ -20,7 +19,7 @@
         //open, in-process, closed, cancelled
         //Otherwise, all requests are returned
         //Page parameter is used for pagination,
-        //without it just first page is provided
+        //without it, just the first page is provided
         function listRequests(requestKind, page) {
             var url = requestsUrl.all(URLS.salepoint.request.list);
             var params;
@@ -54,15 +53,6 @@
                 }
             }
             return url.customGET(null, params);
-        }
-
-        function lllllistRequests(limit, offset, filter) {
-            var params = {limit: limit, offset: offset};
-            if (angular.isDefined(filter)) {
-                params = _.extend(params, filter);
-            }
-            return requestsUrl
-                .customGET(URLS.salepoint.request.list, params);
         }
 
         function getRequestByID(requestID) {

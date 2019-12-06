@@ -3,7 +3,7 @@
 
     angular
         .module('app.mainApp.salepoint')
-        .controller('listAttentionController', listAttentionController);
+        .controller('llllistAttentionController', listAttentionController);
 
     function listAttentionController(ATTENTIONS, ErrorHandler, $document, $mdDialog, $state) {
         var vm = this;

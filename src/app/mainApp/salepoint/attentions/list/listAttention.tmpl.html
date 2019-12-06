@@ -58,13 +58,13 @@
         </div>
     </div>
 </md-card>
-<section cg-busy="{promise:vm.loadingRequests,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+<section cg-busy="{promise:vm.loadingAttentions,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
     <md-card ng-if="!vm.attentions.length">
         <strong translate>ATTENTIONS.LIST.NO_RESULTS</strong>
     </md-card>
     <md-card ng-if="vm.attentions.length"
-             ng-repeat="request in vm.attentions"
-             ng-click="vm.navigateToDetail(request)">
+             ng-repeat="attention in vm.attentions"
+             ng-click="vm.navigateToDetail(attention)">
 
 
 
@@ -72,35 +72,35 @@
 
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.FOLIO</h3>
-            <span>{{request.id}}</span>
+            <span>{{attention.id}}</span>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.STATUS</h3>
 
-            <div ng-if="request.status==='Abierta'" class="open-attentions selectable-filter"></div>
-            <div ng-if="request.status==='En_proceso'" class="in-process-attentions selectable-filter"></div>
-            <div ng-if="request.status==='Atendida'" class="closed-attentions selectable-filter"></div>
-            <div ng-if="request.status==='Cancelada'" class="cancelled-attentions selectable-filter"></div>
-            <div ng-if="request.status==='Improductiva'" class="unproductive-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Abierta'" class="open-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='En_proceso'" class="in-process-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Atendida'" class="closed-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Cancelada'" class="cancelled-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Improductiva'" class="unproductive-attentions selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.DATE</h3>
-            <span>{{request.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
+            <span>{{attention.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
         </div>
         <!--<div layout="column" layout-align="center center">
             <md-button aria-label="fab button"
-                       ng-click="vm.downloadReport(request.id, $event); $event.stopPropagation();"
+                       ng-click="vm.downloadReport(attention.id, $event); $event.stopPropagation();"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="far fa-file-pdf"></md-icon>
             </md-button>
         </div>-->
-        <md-content ng-if="request.status == 'Abierta'">
+        <md-content ng-if="attention.status == 'Abierta'">
             <div flex="100" layout="column" layout-align="end end">
                 <div>
                     <md-button aria-label="fab button"
-                               ng-click="$event.stopPropagation(); vm.assignTechnician(request)"
+                               ng-click="$event.stopPropagation(); vm.assignTechnician(attention)"
                                class="md-raised md-primary"
-                               ng-if="request.persona">
+                               ng-if="attention.persona">
                         <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
                     </md-button>
                 </div>
@@ -109,7 +109,7 @@
     </md-card>
 </section>
 <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
-    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreRequests, message:' '}"
+    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreAttentions, message:' '}"
                ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
         <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
         <span hide-xs>{{"ATTENTIONS.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
