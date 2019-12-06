@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.salepoint.request')
+        .module('app.mainApp.salepoint.attention')
         .controller('listAttentionController', ListAttentionController);
 
     /* @ngInject */
@@ -16,8 +16,8 @@
         var vm = this;
 
         //Variables
-        vm.requestKindFilter;
-        vm.requestKindList;
+        vm.attentionKindFilter;
+        vm.attentionKindList;
         vm.paginationHelper = {
             page: 0,
             totalPages: 0
@@ -27,19 +27,19 @@
 
         function init() {
             vm.attentionsKindFilter = 'all-attentions';
-            loadAttentions(vm.requestKindFilter);
+            loadAttentions(vm.attentionKindFilter);
         }
         init();
 
         //Functions
         vm.filterChange = function (filter) {
-            vm.requestKindFilter = filter;
+            vm.attentionKindFilter = filter;
             loadAttentions(filter);
         };
 
         vm.loadMore = function () {
             vm.loadingMoreAttentions = ATTENTIONS
-                .listAttentions(vm.requestKindList, vm.paginationHelper.page + 1)
+                .listAttentions(vm.attentionKindList, vm.paginationHelper.page + 1)
                 .then(function (attentionsList) {
                     vm.paginationHelper.page++;
                     vm.attentions = vm.attentions.concat(attentionsList[PAGINATION.elements]);
@@ -53,11 +53,31 @@
             //TODO:Create functionality for PDF
         };
 
-        vm.navigateToDetail = function (request) {
-            $state.go('triangular.admin-default.detail-request', {
-                id: request.id,
-                request: request
-            });
+        vm.navigateToDetail = function (attention) {
+            switch (attention.tipo) {
+                case 'Alta':
+                    $state.go('triangular.admin-default.new-attention', { id: attention.folio });
+                    break;
+
+                case 'Cambio':
+                    $state.go('triangular.admin-default.change-attention', { id: attention.folio });
+                    break;
+
+                case 'Reparacion':
+                    $state.go('triangular.admin-default.service-attention', { id: attention.folio });
+                    break;
+
+                case 'Retiro':
+                    $state.go('triangular.admin-default.retrieve-attention', { id: attention.folio });
+                    break;
+
+                default:
+                    throw new Error('@ListAttentionController,  @navigateToDetail function, "attention.tipo field is not a valid choice"');
+            }
+            //$state.go('triangular.admin-default.detail-attention', {
+            //    id: attention.id,
+            //    attention: attention
+            //});
         };
 
         vm.assignTechnician = function (attention) {
@@ -72,7 +92,7 @@
                 }
             })
                 .then(function () {
-                    vm.listAttentions();
+                    vm.loadAttentions();
                 });
         };
 
@@ -82,27 +102,27 @@
             page ? null : page = 1;
             switch (filter) {
                 case 'all-attentions':
-                    vm.requestKindList = null;
+                    vm.attentionKindList = null;
                     break;
                 case 'open-attentions':
-                    vm.requestKindList = 'open';
+                    vm.attentionKindList = 'open';
                     break;
                 case 'assigned-attentions':
-                    vm.requestKindList = 'assigned';
+                    vm.attentionKindList = 'assigned';
                     break;
                 case 'in-process-attentions':
-                    vm.requestKindList = 'in-process';
+                    vm.attentionKindList = 'in-process';
                     break;
                 case 'closed-attentions':
-                    vm.requestKindList = 'closed';
+                    vm.attentionKindList = 'closed';
                     break;
                 case 'cancelled-attentions':
-                    vm.requestKindList = 'cancelled';
+                    vm.attentionKindList = 'cancelled';
                     break;
             }
 
             vm.loadingAttentions = ATTENTIONS
-                .listAttentions(vm.requestKindList, 1)
+                .listAttentions(vm.attentionKindList, 1)
                 .then(function (attentionsList) {
                     vm.attentions = attentionsList[PAGINATION.elements];
                     vm.paginationHelper.page = page;

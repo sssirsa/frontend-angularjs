@@ -19,6 +19,14 @@
         <div layout="column"
              layout-align="center center"
              layout-margin
+             ng-class="(vm.attentionsKindFilter == 'assigned-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('assigned-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.ASSIGNED</span>
+            <div class="assigned-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
              ng-class="(vm.attentionsKindFilter == 'in-process-attentions') ? 'SelectedList' : ''"
              ng-click="vm.filterChange('in-process-attentions')">
             <span translate>ATTENTIONS.LIST.FILTERS.IN_PROCESS</span>
@@ -72,12 +80,13 @@
 
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.FOLIO</h3>
-            <span>{{attention.id}}</span>
+            <span>{{attention.folio}}</span>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.STATUS</h3>
 
             <div ng-if="attention.status==='Abierta'" class="open-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Asignada'" class="assigned-attentions selectable-filter"></div>
             <div ng-if="attention.status==='En_proceso'" class="in-process-attentions selectable-filter"></div>
             <div ng-if="attention.status==='Atendida'" class="closed-attentions selectable-filter"></div>
             <div ng-if="attention.status==='Cancelada'" class="cancelled-attentions selectable-filter"></div>
@@ -85,7 +94,7 @@
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>ATTENTIONS.DETAIL.DATE</h3>
-            <span>{{attention.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
+            <span>{{attention.fecha_creacion | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
         </div>
         <!--<div layout="column" layout-align="center center">
             <md-button aria-label="fab button"

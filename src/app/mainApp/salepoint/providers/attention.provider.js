@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.mainApp.salepoint')
+        .module('app.mainApp.salepoint.attention')
         .factory('ATTENTIONS', attentionProvider);
 
     function attentionProvider(
@@ -37,6 +37,9 @@
                 switch (attentionKind) {
                     case 'open':
                         params[QUERIES.salepoint.by_status.base] = QUERIES.salepoint.by_status.open;
+                        break;
+                    case 'assigned':
+                        params[QUERIES.salepoint.by_status.base] = QUERIES.salepoint.by_status.assigned;
                         break;
                     case 'unproductive':
                         params[QUERIES.salepoint.by_status.base] = QUERIES.salepoint.by_status.unproductive;
