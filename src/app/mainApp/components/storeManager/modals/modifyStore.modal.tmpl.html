@@ -11,6 +11,14 @@
     <md-content layout="column"
                 layout-align="center stretch"
                 layout-padding>
+
+        <div layout="row"
+             layout-align="center center">
+            <p>{{'MAIN.COMPONENTS.STORE_MANAGER.LABELS.NEW_STORE'|translate}}</p>
+            <md-switch ng-model="vm.store.nuevo">
+            </md-switch>
+        </div>
+
         <form name="storeForm">
 
             <div flex

@@ -154,7 +154,8 @@
                     "CLIENT_ID": "Número de cliente",
                     "SEGMENTATION": "Segmentación",
                     "ECONOMIC": "Económico",
-                    "CLIENT": "Número de cliente"
+                    "CLIENT": "Número de cliente",
+                    "NEW_STORE": "El cliente es nuevo"
                 },
                 "MODALS": {
                     "SEARCH": {
