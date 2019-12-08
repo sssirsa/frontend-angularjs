@@ -147,7 +147,8 @@
                     in_process: 'En_proceso',
                     open: 'Abierta',
                     unproductive: 'Improductiva'
-                }
+                },
+                by_user:'persona__id'
             },
             service: {
                 by_cabinet: 'cabinet__economico'

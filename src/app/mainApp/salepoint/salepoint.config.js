@@ -15,7 +15,7 @@
 
         $stateProvider
 
-        //Pre Solicitudes
+            //Pre Solicitudes
             .state('triangular.admin-default.pre-request', {
                 url: '/salepoint/pre-solicitud',
                 data: {
@@ -108,7 +108,7 @@
                 url: '/salepoint/solicitud/listado',
                 data: {
                     permissions: {
-                        only: ['sale_point__request__request']
+                        only: ['sale_point__request__request', 'sale_point__request__requests_own']
                     }
                 },
                 templateUrl: 'app/mainApp/salepoint/request/list/listRequest.tmpl.html',
@@ -120,7 +120,7 @@
                 url: '/salepoint/solicitud/detalle/{{id}}',
                 data: {
                     permissions: {
-                        only: ['sale_point__clients__info_service']
+                        only: ['sale_point__clients__info_service', 'sale_point__request__requests_own']
                     }
                 },
                 params: {
@@ -136,7 +136,7 @@
                 url: '/salepoint/atenciones',
                 data: {
                     permissions: {
-                        only: ['sale_point__attentions__attention_all']
+                        only: ['sale_point__attentions__attention_all__get', 'sale_point__attentions__attention_own__get']
                     }
                 },
                 templateUrl: 'app/mainApp/salepoint/attentions/list/listAttention.tmpl.html',
@@ -203,7 +203,7 @@
                 controller: '',
                 controllerAs: 'vm'
             })
-        ;
+            ;
 
         triMenuProvider.addMenu(
             {
@@ -212,7 +212,10 @@
                 type: 'dropdown',
                 permission: ['sale_point__pre_request__pre_request',
                     'sale_point__request__request',
-                    'sale_point__attentions__attention_asign'],
+                    'sale_point__attentions__attention_asign',
+                    'sale_point__request__requests_own',
+                    'sale_point__attentions__attention_all'
+                ],
                 priority: 7,
                 children: [
                     {
@@ -224,12 +227,12 @@
                     {
                         name: 'SALE_POINT.MENU.REQUEST.TITLE',
                         type: 'dropdown',
-                        permission: ['sale_point__request__request'],
+                        permission: ['sale_point__request__request', 'sale_point__request__requests_own'],
                         children: [
                             {
                                 name: 'SALE_POINT.MENU.REQUEST.LIST',
                                 type: 'link',
-                                permission: ['sale_point__request__request'],
+                                permission: ['sale_point__request__request', 'sale_point__request__requests_own'],
                                 state: 'triangular.admin-default.list-request'
                             },
                             {
@@ -269,6 +272,7 @@
                         name: 'SALE_POINT.MENU.ATTENTION.TITLE',
                         type: 'link',
                         permission: ['sale_point__attentions__attention_all',
+                            'sale_point__attentions__attention_own',
                             'sale_point__attentions__attention_cabinet',
                             'sale_point__attentions__attention_retrive',
                             'sale_point__attentions__attention_change',

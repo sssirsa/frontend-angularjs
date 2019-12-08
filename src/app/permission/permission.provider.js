@@ -76,7 +76,8 @@
 
         //Used for validating if a user has an specific permission
         function hasPermission(permissionName) {
-            if (PermRoleStore.getRoleDefinition(permissionName)) {
+            var permission = PermRoleStore.getRoleDefinition(permissionName);
+            if (permission) {
                 return true;
             }
             else {
