@@ -23,7 +23,7 @@
         //Page parameter is used for pagination,
         //without it, just the first page is provided
         //
-        //Proveder determines if all the requests are returned
+        //Proveder determines if all the attentions are returned
         //or just the ones the user have created given their permissions
         function listAttentions(attentionKind, page) {
             var url = attentionsUrl.all(URLS.salepoint.attention.list);
