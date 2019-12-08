@@ -4,24 +4,26 @@
         .controller('dialogAsignationTechnicianController', dialogAsignationTechnicianController);
 
     function dialogAsignationTechnicianController(
-    ATTENTIONS,
-    REQUESTS,
-    $state,
-    $mdDialog,
-    $document,
-    ErrorHandler,
-    $stateParams,
-    attention,
-    Stores,
-    Person,
-    Persona_Admin,
-    SalePoint,
-    EnvironmentConfig,
-    URLS,
-    PAGINATION,
-    QUERIES,
-    toastr,
-    Translate
+        ATTENTIONS,
+        REQUESTS,
+        $state,
+        $mdDialog,
+        $document,
+        ErrorHandler,
+        $stateParams,
+        attention,
+        Stores,
+        Person,
+        Persona_Admin,
+        SalePoint,
+        EnvironmentConfig,
+        URLS,
+        PAGINATION,
+        QUERIES,
+        toastr,
+        Translate,
+        $log,
+        _
     ) {
         var vm = this;
 
@@ -143,7 +145,6 @@
                     if (requestSuccess.persona) {
                         Person.getPerson(vm.request.persona.id)
                             .then(function (userSuccess) {
-                                console.log(vm.assignedPerson);
                                 vm.assignedPerson = userSuccess;
                                 worklist(vm.assignedPerson.id);
                             })
@@ -271,11 +272,11 @@
         }
 
         function view(info) {
-            if(!vm.infoChip){
+            if (!vm.infoChip) {
                 vm.infoChip = info;
-            }else if(vm.infoChip.folio == info.folio){
+            } else if (vm.infoChip.folio == info.folio) {
                 vm.infoChip = null;
-            }else if(vm.infoChip.folio != info.folio){
+            } else if (vm.infoChip.folio != info.folio) {
                 vm.infoChip = info;
             }
         }

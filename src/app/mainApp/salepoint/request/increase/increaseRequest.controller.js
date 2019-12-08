@@ -121,9 +121,6 @@
             vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
             vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-            console.log(vm.request);
-
-
             vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
                 .then(function () {
                     $state.go('triangular.admin-default.listRequest');

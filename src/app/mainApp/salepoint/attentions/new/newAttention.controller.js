@@ -254,12 +254,6 @@
                 + '/' + URLS.management.inventory.cabinet
         };
 
-        function onBrandSelect(element) {
-            vm.modelo = null;
-            vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.query = element;
-        }
-
         activate();
 
         function activate() {
@@ -507,7 +501,6 @@
         }
 
         function createCabinet(economico) {
-            console.log("Creado and Reload");
             vm.createCabinetDialog.fields[0].initial_value = economico;
             $mdDialog.show({
                 controller: 'CatalogCreateDialogController',
