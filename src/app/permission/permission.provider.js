@@ -74,6 +74,16 @@
             return vm.permissions;
         }
 
+        //Used for validating if a user has an specific permission
+        function hasPermission(permissionName) {
+            if (PermRoleStore.getRoleDefinition(permissionName)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
         //Used for setting frontend optimized permissions (string array)
         function setPermissions(permissions) {
             if (permissions.length > 0) {
@@ -89,6 +99,7 @@
         return {
             definePermissions: definePermissions,
             getPermissions: getPermissions,
+            hasPermission: hasPermission,
             setPermissions: setPermissions
         };
     }
