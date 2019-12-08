@@ -230,8 +230,8 @@
                                             <v-pane id="v-accordion-pane">
                                                 <v-pane-header id="v-accordion-header">{{field.label}} {{$index}}</v-pane-header>
                                                 <v-pane-content id="v-accordion-content">
-                                                    <catalog-object-modify element="arrayElement"
-                                                                           fields="field['fields']"></catalog-object-modify>
+                                                    <catalog-object-create element="arrayElement"
+                                                                           fields="field['fields']"></catalog-object-create>
                                                     <div layout="column"
                                                          layout-align="center stretch">
                                                         <md-button ng-click="vm.removeObjectToArray(field, $index)"

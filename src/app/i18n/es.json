@@ -110,6 +110,9 @@
                     "TITLE": "Usuarios",
                     "MANAGE_USERS": "Gestión de usuarios",
                     "CREATE_USERS": "Nuevo usuario"
+                },
+                "TEMPLATES": {
+                    "TITLE": "Plantillas de permisos"
                 }
             },
             "MASSIVE_CHARGE": {
