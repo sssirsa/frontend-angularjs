@@ -93,7 +93,7 @@
         };
 
         function onSelectedSucursal(element) {
-            vm.request.sucursal = element;
+            vm.request.sucursal_id = element;
         }
 
         function onSelectedEquipmentKind(element) {
@@ -113,7 +113,7 @@
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.no_cliente;
+            vm.request.establecimiento_id = store.no_cliente;
         }
 
         function save() {
