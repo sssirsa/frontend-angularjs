@@ -7,37 +7,37 @@
             ng-class="(vm.entryKindFilter === 'new-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('new-entries')">
             <span translate>ENTRIES.LIST.FILTERS.NEW</span>
-            <div class="new-entries entries-filter"></div>
+            <div class="new-entries selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'repair-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('repair-entries')">
             <span translate>ENTRIES.LIST.FILTERS.REPAIR</span>
-            <div class="repair-entries entries-filter"></div>
+            <div class="repair-entries selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'unrecognizble-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('unrecognizable-entries')">
             <span translate>ENTRIES.LIST.FILTERS.UNRECOGNIZABLE</span>
-            <div class="unrecognizable-entries entries-filter"></div>
+            <div class="unrecognizable-entries selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'warehouse-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('warehouse-entries')">
             <span translate>ENTRIES.LIST.FILTERS.WAREHOUSE</span>
-            <div class="warehouse-entries entries-filter"></div>
+            <div class="warehouse-entries selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'warranty-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('warranty-entries')">
             <span translate>ENTRIES.LIST.FILTERS.WARRANTY</span>
-            <div class="warranty-entries entries-filter"></div>
+            <div class="warranty-entries selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'all-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('all-entries')">
             <span translate>ENTRIES.LIST.FILTERS.ALL</span>
-            <div class="all-entries entries-filter"></div>
+            <div class="all-entries selectable-filter"></div>
         </div>
     </div>
 </md-card>
@@ -56,11 +56,11 @@
                 <strong translate="">ENTRIES.LIST.LABELS.ID</strong>
                 {{entry.id}}
             </span>
-            <div ng-if="entry.tipo_entrada==='Nuevos'" class="new-entries entries-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Reparacion'" class="repair-entries entries-filter"></div>
-            <div ng-if="entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries entries-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Almacen'" class="warehouse-entries entries-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Garantias'" class="warranty-entries entries-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Nuevos'" class="new-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Reparacion'" class="repair-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Almacen'" class="warehouse-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Garantias'" class="warranty-entries selectable-filter"></div>
             <span>
                 <strong translate="">ENTRIES.LIST.LABELS.KIND</strong>
                 {{entry.tipo_entrada}}

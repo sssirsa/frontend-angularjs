@@ -26,7 +26,7 @@
                             function rawPermissionsIterator(value) {
                                 var permissionName = value.module;
                                 var permissionActions = value.permission;
-                                PermRoleStore.defineRole(permissionName, []);
+                                //PermRoleStore.defineRole(permissionName, []);
                                 //Base permission assignment
                                 vm.permissions.push(permissionName);
                                 //Specific permission assignment
@@ -56,6 +56,7 @@
                     $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
                 localStorage['permissions'] = angular.toJson(vm.permissions);
+                setPermissions(vm.permissions);
             }
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
@@ -74,6 +75,17 @@
             return vm.permissions;
         }
 
+        //Used for validating if a user has an specific permission
+        function hasPermission(permissionName) {
+            var permission = PermRoleStore.getRoleDefinition(permissionName);
+            if (permission) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
         //Used for setting frontend optimized permissions (string array)
         function setPermissions(permissions) {
             if (permissions.length > 0) {
@@ -89,6 +101,7 @@
         return {
             definePermissions: definePermissions,
             getPermissions: getPermissions,
+            hasPermission: hasPermission,
             setPermissions: setPermissions
         };
     }

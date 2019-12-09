@@ -50,6 +50,14 @@
         //Blank variables templates
         vm.catalogues = {
             marca: {
+                type: 'catalog',
+                model: 'marca',
+                label: 'Marca del cabinet',
+                validations: {
+                    errors: {
+                        required: 'El campo es requerido.'
+                    }
+                },
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
                         + '/' + URLS.management.base
@@ -75,24 +83,27 @@
                 required: true
             },
             modelo_by_marca: {
+                type: 'catalog',
+                model: 'modelo_id',
+                label: 'Modelo del cabinet',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
                         + '/' + URLS.management.base
                         + '/' + URLS.management.catalogues.base
                         + '/' + URLS.management.catalogues.cabinet_model,
                     query: 'marca__id',
-                    query_value: null,
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.MODEL'),
-                    loadMoreButtonText: 'Cargar mas',
+                    requires: 'marca',
+                    name: 'Modelo',
                     model: 'id',
                     option: 'nombre',
+                    elements: 'results',
                     pagination: {
                         total: PAGINATION.total,
                         limit: PAGINATION.limit,
                         offset: PAGINATION.offset,
                         pageSize: PAGINATION.pageSize
                     },
-                    elements: 'results',
+                    loadMoreButtonText: 'Cargar mas...',
                     softDelete: {
                         hide: 'deleted',
                         reverse: false
@@ -101,16 +112,18 @@
                 required: true
             },
             condicion: {
+                type: 'catalog',
+                model: 'condicion_id',
+                label: 'Condición del cabinet',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
                         + '/' + URLS.management.base
                         + '/' + URLS.management.catalogues.base
                         + '/' + URLS.management.catalogues.condition,
-
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CONDITION'),
-                    loadMoreButtonText: 'Cargar mas',
+                    name: 'Condición',
                     model: 'id',
                     option: 'letra',
+                    loadMoreButtonText: 'Cargar mas...',
                     pagination: {
                         total: PAGINATION.total,
                         limit: PAGINATION.limit,
@@ -126,16 +139,18 @@
                 required: true
             },
             categoria: {
+                type: 'catalog',
+                model: 'categoria_id',
+                label: 'Categoría',
                 catalog: {
                     url: EnvironmentConfig.site.rest.api
                         + '/' + URLS.management.base
                         + '/' + URLS.management.catalogues.base
                         + '/' + URLS.management.catalogues.category,
-
-                    name: Translate.translate('MAIN.COMPONENTS.CABINET.CATEGORY'),
-                    loadMoreButtonText: 'Cargar mas',
+                    name: 'Categoría del cabinet',
                     model: 'id',
                     option: 'nombre',
+                    loadMoreButtonText: 'Cargar mas...',
                     pagination: {
                         total: PAGINATION.total,
                         limit: PAGINATION.limit,
@@ -154,8 +169,9 @@
 
 
         function onBrandSelect(element) {
+            vm.modelo = null;
             vm.marca = element;
-            vm.catalogues.modelo_by_marca.catalog.query_value = element;
+            vm.catalogues.modelo_by_marca.catalog.query = element;
         }
 
         function onElementSelect(element, field) {

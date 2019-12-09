@@ -20,8 +20,7 @@
         Geolocation,
         User,
         PAGINATION,
-        _,
-        $log
+        _
     ) {
 
         var vm = this;
@@ -43,18 +42,22 @@
 
         vm.catalogSucursal = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.subsidiary,
-                
+                url: EnvironmentConfig.site.rest.api +
+                    '/' + URLS.management.base +
+                    '/' + URLS.management.catalogues.base +
+                    '/' + URLS.management.catalogues.subsidiary,
                 name: Translate.translate('PRE_REQUEST.SUBSIDIARY.SELECT'),
-                loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
                 model: 'id',
-                option: 'nombre'
-            },
-            elements: 'results'
-
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('PRE_REQUEST.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
+            }
         };
 
         vm.createCabinetDialog = {
@@ -206,18 +209,21 @@
 
 
         function getinfo() {
-            PREREQUESTS.getPreRequestByID($stateParams.id)
-                .then(function infoPre(elementPreRequest) {
-                    vm.preRequest = elementPreRequest;
-                    $log.log(vm.preRequest);
-                    convertImages();
-                    getinfoCabinet(vm.preRequest.cabinet);
-                })
-                .catch(function errInfoPre() {
-                    toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
-                                   Translate.translate('MAIN.MSG.ERROR_TITLE'));
-                });
-
+            if($stateParams.id === null) {
+                $state.go('triangular.admin-default.pre-request');
+            }
+            else {
+                PREREQUESTS.getPreRequestByID($stateParams.id)
+                    .then(function infoPre(elementPreRequest) {
+                        vm.preRequest = elementPreRequest;
+                        convertImages();
+                        getinfoCabinet(vm.preRequest.cabinet);
+                    })
+                    .catch(function errInfoPre() {
+                        toastr.warning(Translate.translate('PREREQUEST_TRANSLATE.MSG.PREREQUESTNOTFOUND'),
+                            Translate.translate('MAIN.MSG.ERROR_TITLE'));
+                    });
+            }
         }
 
         function getinfoCabinet(id) {
@@ -284,20 +290,31 @@
                 });
         }
 
-        function cancelPreRequest() {
-            vm.preRequest.cancelacion = true;
-            vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
-            var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
+        function cancelPreRequest(ev) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title(Translate.translate('PRE_REQUEST.DETAIL.CANCEL.TITLE'))
+                .textContent(Translate.translate('PRE_REQUEST.DETAIL.CANCEL.BODY'))
+                .targetEvent(ev)
+                .ok(Translate.translate('PRE_REQUEST.BUTTONS.CANCEL'))
+                .cancel(Translate.translate('PRE_REQUEST.BUTTONS.NOTHING'));
 
-            PREREQUESTS.updatePreRequest(prereqSinFoto)
-                .then(function cancelPre (requestCancel) {
-                    ErrorHandler.successCancel(requestCancel);
-                    $state.go('triangular.admin-default.pre-request');
-                })
-                .catch(function errCancelPre(err) {
-                    ErrorHandler.errorTranslate(err);
-                });
+            $mdDialog.show(confirm).then(function() {
+                vm.preRequest.cancelacion = true;
+                vm.preRequest.establecimiento_id = vm.preRequest.establecimiento.no_cliente;
+                var prereqSinFoto = _.omit(vm.preRequest, 'fotos');
 
+                PREREQUESTS.updatePreRequest(prereqSinFoto)
+                    .then(function cancelPre (requestCancel) {
+                        ErrorHandler.successCancel(requestCancel);
+                        $state.go('triangular.admin-default.pre-request');
+                    })
+                    .catch(function errCancelPre(err) {
+                        ErrorHandler.errorTranslate(err);
+                    });
+            }, function() {
+
+            });
         }
 
         function back() {

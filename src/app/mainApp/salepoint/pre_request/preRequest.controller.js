@@ -55,7 +55,7 @@
                 listPreRequests();
             }
             else {
-                var filterSTR = 'status='+requestKind;
+                var filterSTR = {status: requestKind};
                 vm.loadingPromise = PREREQUESTS.listPreRequests(vm.limit, vm.offset, filterSTR)
                     .then(function(listprerequestelements){
                         vm.list=listprerequestelements;

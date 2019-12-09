@@ -26,7 +26,8 @@
             dlete: dlete,
             notDepartures: notDepartures,
             getCabinetInSubsidiary: getCabinetInSubsidiary,
-            getImpediment: getImpediment
+            getImpediment: getImpediment,
+            obsolete: obsolete
         };
 
         function create(data) {
@@ -70,6 +71,10 @@
 
         function getImpediment(id) {
             return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.impediment).all(id).customGET();
+        }
+
+        function obsolete(data) {
+            return API.all(URLS.management.base).all(URLS.management.inventory.base + '/' + URLS.management.inventory.obsolete).customPOST(data);
         }
 
     }

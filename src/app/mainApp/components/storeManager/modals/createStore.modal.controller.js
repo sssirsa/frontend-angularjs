@@ -18,7 +18,9 @@
         var vm = this;
 
         //Variables
-        vm.store = {};
+        vm.store = {
+            nuevo:true
+        };
         vm.state = null;
         vm.city = null;
         vm.canLoadLocalities = false;

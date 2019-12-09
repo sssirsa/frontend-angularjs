@@ -1,0 +1,79 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2 ng-if="vm.cabinet.estatus_unilever != 4 || vm.cabinet.estatus_unilever != 8">
+            {{'MAIN.COMPONENTS.CABINET.SEND_TO_OBSOLETE'|translate}}
+        </h2>
+        <h2 ng-if="vm.cabinet.estatus_unilever == 8">
+            {{'MAIN.COMPONENTS.CABINET.AGREE_OBSOLETE'|translate}}
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cerrar()" aria-label="cancel">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </div>
+
+    <md-content
+        layout="column"
+        layout-align="center stretch"
+        layout-padding
+    >
+        <div ng-if="!vm.confirmation">
+
+            <div flex layout="column" layout-align-gt-sm="center stretch">
+                <md-input-container flex class="md-block">
+                    <label translate>
+                        MAIN.COMPONENTS.CABINET.ECONOMIC
+                    </label>
+                    <input name="economico" ng-disabled="true" ng-model="vm.cabinet.economico"/>
+                </md-input-container>
+
+                <md-input-container flex class="md-block">
+                    <label translate>
+                        MAIN.COMPONENTS.CABINET.STATUS_UNILEVER
+                    </label>
+                    <input name="status_unilever" ng-disabled="true" ng-model="vm.cabinet.estatus_unilever.id"/>
+                </md-input-container>
+            </div>
+
+            <md-actions layout="row" layout-align="end center">
+                <md-button
+                    ng-click="vm.cerrar()"
+                    class="md-raised">
+                    <md-icon md-font-icon="fas fa-ban"></md-icon>
+                    {{'MAIN.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.toObsolete()"
+                    class="md-raised md-warn"
+                    ng-if="vm.cabinet.estatus_unilever.id != 4">
+                    <md-icon md-font-icon="fas fa-lock"></md-icon>
+                    {{'MAIN.BUTTONS.ACCEPT'|translate}}
+                </md-button>
+            </md-actions>
+        </div>
+
+        <div ng-if="vm.confirmation">
+            <label translate ng-if="vm.cabinet.estatus_unilever.id != 4 && vm.cabinet.estatus_unilever.id != 8">
+                MAIN.DIALOG.SEND_TO_OBSOLETE
+            </label>
+            <label translate ng-if="vm.cabinet.estatus_unilever.id == 8">
+                MAIN.DIALOG.AGREE_OBSOLETE
+            </label>
+            <div flex layout="column" layout-gt-sm="row" layout-align-gt-sm="center stretch">
+                <md-button
+                    ng-click="vm.cancelConfirm()"
+                    class="md-raised">
+                    {{'MAIN.BUTTONS.CANCEL'|translate}}
+                </md-button>
+
+                <md-button
+                    ng-click="vm.acceptConfirm()"
+                    class="md-raised md-warn">
+                    {{'MAIN.BUTTONS.ACCEPT'|translate}}
+                </md-button>
+            </div>
+        </div>
+
+    </md-content>
+</md-toolbar>

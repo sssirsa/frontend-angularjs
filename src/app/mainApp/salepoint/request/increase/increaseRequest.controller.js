@@ -17,7 +17,8 @@
         Helper,
         User,
         URLS,
-        EnvironmentConfig
+        EnvironmentConfig,
+        PAGINATION
     ) {
 
         var vm = this;
@@ -52,47 +53,57 @@
 
         vm.catalogSucursal = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.subsidiary,
-                
-                name: 'Sucursal',
-                loadMoreButtonText: 'Cargar mas',
+                url: EnvironmentConfig.site.rest.api +
+                    '/' + URLS.management.base +
+                    '/' + URLS.management.catalogues.base +
+                    '/' + URLS.management.catalogues.subsidiary,
+                name: Translate.translate('REQUEST.SUBSIDIARY.SELECT'),
                 model: 'id',
-                option: 'nombre'
-            },
-            elements: 'results'
-
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
+            }
         };
+
         vm.catalogEquipmentKind = {
             catalog: {
-                url: EnvironmentConfig.site.rest.api
-                + '/' + URLS.management.base
-                + '/' + URLS.management.catalogues.base
-                + '/' + URLS.management.catalogues.equipment_type,
-                
-                name: 'Tipo Equipo a asignar',
-                loadMoreButtonText: 'Cargar mas',
+                url: EnvironmentConfig.site.rest.api +
+                    '/' + URLS.management.base +
+                    '/' + URLS.management.catalogues.base +
+                    '/' + URLS.management.catalogues.equipment_type,
+                kind: 'Generic',
+                name: Translate.translate('REQUEST.EQUIPMENT.SELECT'),
                 model: 'id',
-                option: 'nombre'
-            },
-            elements: 'results'
-
+                option: 'nombre',
+                elements: 'results',
+                loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                pagination: {
+                    total: PAGINATION.total,
+                    limit: PAGINATION.limit,
+                    offset: PAGINATION.offset,
+                    pageSize: PAGINATION.pageSize
+                }
+            }
         };
 
         function onSelectedSucursal(element) {
-            vm.request.sucursal = element;
+            vm.request.sucursal_id = element;
         }
 
         function onSelectedEquipmentKind(element) {
             vm.equipmentKind = element;
             //Remove any previos assignment
-            vm.request.solicitudes_cabinet = [];
+            vm.request.cabinets_solicitud = [];
             //Assign new kind, quantity limited to 1 due to actual constraint
-            vm.request.solicitudes_cabinet = [{
-                id_tipo: vm.equipmentKind.id,
-                tipo: vm.equipmentKind.nombre,
+            vm.request.cabinets_solicitud = [{
+                tipo_id: vm.equipmentKind.id,
+                antiguedad: "A",
                 cantidad: 1
             }];
         }
@@ -102,29 +113,27 @@
             if (vm.request.cabinet) {
                 vm.request.cabinet = null;
             }
-            vm.request.establecimiento = store.no_cliente;
+            vm.request.establecimiento_id = store.no_cliente;
         }
 
         function save() {
-            vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 9);
-            vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 9);
 
-            $log(vm.request);
+            vm.request.hora_cliente_inicio = vm.startHour.toTimeString().substring(0, 8);
+            vm.request.hora_cliente_fin = vm.endHour.toTimeString().substring(0, 8);
 
-
-            /*vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
+            vm.savingPromise = REQUESTS.create_incremental_request(vm.request)
                 .then(function () {
-                    /*$state.go('triangular.admin-default.listRequest');
+                    $state.go('triangular.admin-default.listRequest');
                     toastr.success(
                         Translate.translate('MAIN.MSG.GENERIC_SUCCESS_CREATE')
-                    );*/
-            /*})
-            .catch(function (requestSuccessError) {
-                $log.error(requestSuccessError);
-                toastr.error(
-                    Translate.translate('MAIN.MSG.ERROR_MESSAGE')
-                );
-            });*/
+                    );
+                })
+                .catch(function (requestSuccessError) {
+                    $log.error(requestSuccessError);
+                    toastr.error(
+                        Translate.translate('MAIN.MSG.ERROR_MESSAGE')
+                    );
+                });
         }
 
         function filesSelected(files) {

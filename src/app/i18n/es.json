@@ -157,7 +157,8 @@
                     "CLIENT_ID": "Número de cliente",
                     "SEGMENTATION": "Segmentación",
                     "ECONOMIC": "Económico",
-                    "CLIENT": "Número de cliente"
+                    "CLIENT": "Número de cliente",
+                    "NEW_STORE": "El cliente es nuevo"
                 },
                 "MODALS": {
                     "SEARCH": {
@@ -253,7 +254,10 @@
                 "WORTHY": "Atendible",
                 "IMPEDIMENT_DATE": "Fecha de impedimento",
                 "RELEASE_DATE": "Fecha de liberación",
-                "NOT_RELEASED": "No liberado"
+                "NOT_RELEASED": "No liberado",
+                "OBSOLETE": "Obsoleto",
+                "AGREE_OBSOLETE": "Aprobar Obsolesencia",
+                "SEND_TO_OBSOLETE": "Obsoletizar"
             },
             "NO_LABELED": {
                 "ECONOMICS": "Economicos",
@@ -356,8 +360,10 @@
             "ATTENTION_TITLE": "Confirmación de Atención",
             "ATTENTION_MESSAGE": "¿Seguro qué desea concluir la atención?",
             "CANCEL_ATTENTION_TITLE": "Condirmación de Cancelación",
-            "CANCEL_ATTENTION_MESSAGE": "¿Seguro qué desea cancelar la atencion?",
-            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?"
+            "CANCEL_ATTENTION_MESSAGE":"¿Seguro qué desea cancelar la atencion?",
+            "IMPEDIMENT_MESSAGE": "¿Seguro qué desea impedir la salida del cabinet?",
+            "SEND_TO_OBSOLETE": "El cabinet quedará pendeinte de aprovación de obsoletizaje. ¿Desea continuar?",
+            "AGREE_OBSOLETE": "¿Aceptar obsoletización?"
         }
     },
     "SUCCESS": {
@@ -542,7 +548,28 @@
         "TS-009": "La etapa siguiente no es válida ",
         "TS-010": "La etapa especificada ya está cerrada ",
         "TS-011": "La sucursal provista no coincide con la sucursal del cabinet",
-        "TS-012": "El cabinet no es atendible por un impedimento existente "
+        "TS-012": "El cabinet no es atendible por un impedimento existente ",
+        "SP-001":"Existe una atención activa sobre ese establecimiento",
+        "SP-002":"El tiempo de fin es previo al de inicio",
+        "SP-003":"El tiempo no se encuentra en el rango máximo",
+        "SP-004":"Se debe enviar cuando menos una solicitud de cabinet",
+        "SP-005":"El cabinet no se encuentra en establecimiento",
+        "SP-006":"El cabinet se encuentra en sucursal",
+        "SP-007":"El cabinet se encuentra en otro establecimiento",
+        "SP-008":"El establecimiento debe ser nuevo",
+        "SP-009":"El establecimiento no puede ser nuevo",
+        "SP-010":"No se puede asignar una atención a un Administrador",
+        "SP-011":"El establecimiento no está eliminado",
+        "SP-012":"No se enviaron todos los campos requeriedos",
+        "SP-013":"La atención ya está cerrada",
+        "SP-014":"La sucursal o UDN no coincide con la de la solicitud",
+        "SP-015":"Los campos específicos de la atención están erroneos",
+        "SP-016":"No se enviaron los cabinets",
+        "SP-017":"El estado del cabinet no es válido",
+        "SP-018":"La persona ya tiene asignada una atención en ese horario",
+        "SP-019":"El horario no se encuentra dentro del propuesto por el cliente",
+        "SP-020":"La atención no tiene horarios",
+        "SP-021":"Un usuario con UDN no puede attender servicios técnicos"
 
     }
 }

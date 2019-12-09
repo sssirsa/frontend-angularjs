@@ -1,0 +1,126 @@
+<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
+
+    <header layout="column" layout-align="center center">
+        <h1 translate>ATTENTIONS.LIST.TITLE</h1>
+    </header>
+
+    <div layout="row"
+         layout-align="space-around center"
+         layout-wrap="">
+
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'open-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('open-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.OPEN</span>
+            <div class="open-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'assigned-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('assigned-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.ASSIGNED</span>
+            <div class="assigned-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'in-process-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('in-process-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.IN_PROCESS</span>
+            <div class="in-process-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'closed-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('closed-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.ATTENDED</span>
+            <div class="closed-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'unproductive-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('unproductive-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.UNPRODUCTIVE</span>
+            <div class="unproductive-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'cancelled-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('cancelled-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.CANCELED</span>
+            <div class="cancelled-attentions selectable-filter"></div>
+        </div>
+        <div layout="column"
+             layout-align="center center"
+             layout-margin
+             ng-class="(vm.attentionsKindFilter == 'all-attentions') ? 'SelectedList' : ''"
+             ng-click="vm.filterChange('all-attentions')">
+            <span translate>ATTENTIONS.LIST.FILTERS.ALL</span>
+            <div class="all-attentions selectable-filter"></div>
+        </div>
+    </div>
+</md-card>
+<section cg-busy="{promise:vm.loadingAttentions,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+    <md-card ng-if="!vm.attentions.length">
+        <strong translate>ATTENTIONS.LIST.NO_RESULTS</strong>
+    </md-card>
+    <md-card ng-if="vm.attentions.length"
+             ng-repeat="attention in vm.attentions"
+             ng-click="vm.navigateToDetail(attention)">
+
+
+
+
+
+        <div layout="column" layout-align="center center">
+            <h3 translate>ATTENTIONS.DETAIL.FOLIO</h3>
+            <span>{{attention.folio}}</span>
+        </div>
+        <div layout="column" layout-align="center center">
+            <h3 translate>ATTENTIONS.DETAIL.STATUS</h3>
+
+            <div ng-if="attention.status==='Abierta'" class="open-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Asignada'" class="assigned-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='En_proceso'" class="in-process-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Atendida'" class="closed-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Cancelada'" class="cancelled-attentions selectable-filter"></div>
+            <div ng-if="attention.status==='Improductiva'" class="unproductive-attentions selectable-filter"></div>
+        </div>
+        <div layout="column" layout-align="center center">
+            <h3 translate>ATTENTIONS.DETAIL.DATE</h3>
+            <span>{{attention.fecha_creacion | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
+        </div>
+        <!--<div layout="column" layout-align="center center">
+            <md-button aria-label="fab button"
+                       ng-click="vm.downloadReport(attention.id, $event); $event.stopPropagation();"
+                       class="md-raised md-primary">
+                <md-icon md-font-icon="far fa-file-pdf"></md-icon>
+            </md-button>
+        </div>-->
+        <md-content ng-if="attention.status == 'Abierta'">
+            <div flex="100" layout="column" layout-align="end end">
+                <div>
+                    <md-button aria-label="fab button"
+                               ng-click="$event.stopPropagation(); vm.assignTechnician(attention)"
+                               class="md-raised md-primary"
+                               ng-if="attention.persona">
+                        <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-content>
+    </md-card>
+</section>
+<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
+    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreAttentions, message:' '}"
+               ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
+        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+        <span hide-xs>{{"ATTENTIONS.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
+    </md-button>
+</section>

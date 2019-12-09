@@ -1,58 +1,91 @@
-div.Improductiva {
+div.unproductive-attentions {
   background-color: #a705ed;
-  border: 1px solid #a705ed;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+}
+div.open-attentions {
+  background-color: #0AF;
 }
 
-div.Abierta {
-  background-color: cornflowerblue;
-  border: 1px solid #6394ec;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.closed-attentions {
+  background-color: #0A0;
 }
 
-div.Atendida {
-  background-color: mediumseagreen;
-  border: 1px solid #3bb270;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.cancelled-attentions {
+  background-color: #A00;
 }
 
-div.Cancelada {
-  background-color: indianred;
-  border: 1px solid #cc5b5b;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.in-process-attentions {
+  background-color: #AAA;
+}
+div.all-attentions {
+  background-color: #FFF;
+}
+div.assigned-attentions {
+  background-color: #FA0;
 }
 
-div.En_proceso {
-  background-color: #ffb400;
-  border: 1px solid #ffb400;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+
+div.open-requests {
+  background-color: #0AF;
 }
 
-div.Todo {
-  background-color: #000000;
-  border: 1px solid #000000;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
+div.closed-requests {
+  background-color: #0A0;
 }
+
+div.cancelled-requests {
+  background-color: #A00;
+}
+
+div.in-process-requests {
+  background-color: #AAA;
+}
+
+div.assigned-requests {
+  background-color: #FA0;
+}
+
+div.all-requests {
+  background-color: #FFF;
+}
+
 
 div.SelectedList {
   border: 1px solid #b3b0b3;
   border-radius: 5px;
+}
+
+.virtualRepeatScroll-100{
+  max-height: 100px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.virtualRepeatScroll-200{
+  max-height: 200px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.virtualRepeatScroll-300{
+  max-height: 300px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.virtualRepeatScroll-400{
+  max-height: 400px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.virtualRepeatScroll-500{
+  max-height: 500px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.virtualRepeatScroll-600{
+  max-height: 600px;
+  width: 100%;
+  overflow-y: auto;
 }

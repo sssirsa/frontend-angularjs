@@ -16,7 +16,7 @@
         Translate,
         Geolocation,
         Stores,
-        Persona_Admin
+        Person
     ) {
         var vm = this;
 
@@ -36,28 +36,30 @@
         activate();
 
         function activate() {
-            vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
-                .then(function (requestSuccess) {
-                    vm.request = requestSuccess;
-                    convertImages();
-                    vm.storePromise = Stores.getByID(requestSuccess.establecimiento.no_cliente)
-                        .then(function (storeSuccess) {
-                            vm.store = storeSuccess;
-                        })
-                        .catch(function (storeError) {
-                            ErrorHandler.errorTranslate(storeError);
-                        });
-                    vm.personaPromise = Persona_Admin.get(requestSuccess.persona.id)
-                        .then(function (userSuccess) {
-                            vm.user = userSuccess;
-                        })
-                        .catch(function (userError) {
-                            ErrorHandler.errorTranslate(userError);
-                        });
-                })
-                .catch(function (errorRequest) {
-                    ErrorHandler.errorTranslate(errorRequest);
-                });
+            if (vm.id === null) {
+                $state.go('triangular.admin-default.list-request');
+            }
+            else {
+                vm.loadingPromise = REQUESTS.getRequestByID(vm.id)
+                    .then(function (requestSuccess) {
+                        vm.request = requestSuccess;
+                        convertImages();
+                        vm.storePromise = Stores.getByID(requestSuccess.establecimiento.no_cliente);
+                        return vm.storePromise;
+                    })
+                    .then(function (storeSuccess) {
+                        vm.store = storeSuccess;
+                        vm.personaPromise = Person.getPerson(vm.request.persona.id);
+                        return vm.personaPromise;
+                    })
+                    .then(function (userSuccess) {
+                        vm.user = userSuccess;
+                    })
+                    .catch(function (errors) {
+                        $log.error('@Controller:detailRequestController\n@Function:activate\n@detail: ' + errors);
+                        ErrorHandler.errorTranslate(errors);
+                    });
+            }
         }
 
         function convertImages() {

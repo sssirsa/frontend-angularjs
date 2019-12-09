@@ -1,13 +1,8 @@
- <div cg-busy="{promise:vm.loadingPromise, message:'Cargando solicitudes...'}">
+    <md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
 
-    <md-card layout="column"
-             layout-padding
-             layout-align="center stretch">
-
-        <div layout="column"
-             layout-align="center center">
-            <h1 translate>REQUEST.LIST.TITLE</h1>
-        </div>
+    <header layout="column" layout-align="center center">
+        <h1 translate>REQUEST.LIST.TITLE</h1>
+        </header>
 
         <div layout="row"
              layout-align="space-around center"
@@ -16,99 +11,108 @@
             <div layout="column"
                  layout-align="center center"
                  layout-margin
-                 ng-class="(vm.lastKindFilter == 'Abierta') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredRequests('Abierta')">
-                <span translate>REQUEST.LIST.TYPE.OPEN</span>
-                <div class="Abierta"></div>
+                 ng-class="(vm.requestsKindFilter == 'open-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('open-requests')">
+                <span translate>REQUEST.LIST.FILTERS.OPEN</span>
+                <div class="open-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
                  layout-margin
-                 ng-class="(vm.lastKindFilter == 'En_proceso') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredRequests('En_proceso')">
-                <span translate>REQUEST.LIST.TYPE.IN_PROCESS</span>
-                <div class="En_proceso"></div>
+                 ng-class="(vm.requestsKindFilter == 'assigned-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('assigned-requests')">
+                <span translate>REQUEST.LIST.FILTERS.ASSIGNED</span>
+                <div class="assigned-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
                  layout-margin
-                 ng-class="(vm.lastKindFilter == 'Atendida') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredRequests('Atendida')">
-                <span translate>REQUEST.LIST.TYPE.ATTENDED</span>
-                <div class="Atendida"></div>
+                 ng-class="(vm.requestsKindFilter == 'in-process-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('in-process-requests')">
+                <span translate>REQUEST.LIST.FILTERS.IN_PROCESS</span>
+                <div class="in-process-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
                  layout-margin
-                 ng-class="(vm.lastKindFilter == 'Cancelada') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredRequests('Cancelada')">
-                <span translate>REQUEST.LIST.TYPE.CANCELED</span>
-                <div class="Cancelada"></div>
+                 ng-class="(vm.requestsKindFilter == 'closed-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('closed-requests')">
+                <span translate>REQUEST.LIST.FILTERS.ATTENDED</span>
+                <div class="closed-requests selectable-filter"></div>
             </div>
             <div layout="column"
                  layout-align="center center"
                  layout-margin
-                 ng-class="(vm.lastKindFilter == 'Todo') ? 'SelectedList' : ''"
-                 ng-click="vm.listFilteredRequests('Todo')">
-                <span translate>REQUEST.LIST.TYPE.ALL</span>
-                <div class="Todo"></div>
+                 ng-class="(vm.requestsKindFilter == 'cancelled-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('cancelled-requests')">
+                <span translate>REQUEST.LIST.FILTERS.CANCELED</span>
+                <div class="cancelled-requests selectable-filter"></div>
+            </div>
+            <div layout="column"
+                 layout-align="center center"
+                 layout-margin
+                 ng-class="(vm.requestsKindFilter == 'all-requests') ? 'SelectedList' : ''"
+                 ng-click="vm.filterChange('all-requests')">
+                <span translate>REQUEST.LIST.FILTERS.ALL</span>
+                <div class="all-requests selectable-filter"></div>
             </div>
         </div>
     </md-card>
-    <md-card layout="column"
-             layout-padding
-             layout-align="center stretch"
-             ng-if="vm.requests.length == 0">
-
-        <div layout="row"
-             layout-align="space-around center"
-             layout-align-xs="center stretch"
-             layout-xs="column">
-            <span translate>REQUEST.NO_RESULTS</span>
-        </div>
+<section cg-busy="{promise:vm.loadingRequests,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+    <md-card ng-if="!vm.requests.length">
+        <strong translate>REQUEST.LIST.NO_RESULTS</strong>
     </md-card>
-</div>
-
-<div cg-busy="{promise:vm.getReportPromise, message:'Generando reporte...'}"
-     ng-if="vm.requests.length != 0 && !vm.filteredActivated">
-
     <md-card
-        layout="column"
-        ng-repeat="request in (vm.requests | orderBy:'-fecha')"
-        layout-gt-xs="row"
-        ng-click="vm.selectRequest(request)"
-        layout-align="space-around center">
+        ng-if="vm.requests.length"
+        ng-repeat="request in vm.requests"
+        ng-click="vm.navigateToDetail(request)">
+
+
+
+
+
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.FOLIO</h3>
             <span>{{request.id}}</span>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.STATUS</h3>
-            <div class="{{request.status}}">
-            </div>
+            
+            <div ng-if="request.status==='Abierta'" class="open-requests selectable-filter"></div>
+            <div ng-if="request.status==='En_proceso'" class="in-process-requests selectable-filter"></div>
+            <div ng-if="request.status==='Atendida'" class="closed-requests selectable-filter"></div>
+            <div ng-if="request.status==='Cancelada'" class="cancelled-requests selectable-filter"></div>
+            <div ng-if="request.status==='Asignada'" class="assigned-requests selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center">
             <h3 translate>REQUEST.DETAIL.DATE</h3>
             <span>{{request.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
         </div>
-        <div layout="column" layout-align="center center">
+        <!--<div layout="column" layout-align="center center">
             <md-button aria-label="fab button"
                        ng-click="vm.downloadReport(request.id, $event); $event.stopPropagation();"
                        class="md-raised md-primary">
                 <md-icon md-font-icon="far fa-file-pdf"></md-icon>
             </md-button>
-        </div>
+        </div>-->
+        <md-content  ng-if="request.status == 'Abierta'">
+            <div flex="100" layout="column" layout-align="end end">
+                <div>
+                    <md-button aria-label="fab button"
+                               ng-click="$event.stopPropagation(); vm.assignTechnician(request)"
+                               class="md-raised md-primary"
+                               ng-if="request.persona">
+                        <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-content>
     </md-card>
-
-</div>
-<div ng-if="vm.refreshPaginationButtonsComponent">
-    <pagination-manager-buttons go-sig="vm.sig()"
-                                go-prev="vm.prev()"
-                                go-number="vm.goToNumberPage(number)"
-                                limit-objects="vm.limit"
-                                count-object="vm.allRequests.count"
-                                offset-object="vm.offset"
-                                nex-object="vm.allRequests.next"
-                                prev-object="vm.allRequests.previous">
-    </pagination-manager-buttons>
-</div>
+</section>
+<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
+    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreRequests, message:' '}"
+        ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
+        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
+        <span hide-xs>{{"REQUEST.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
+    </md-button>
+</section>

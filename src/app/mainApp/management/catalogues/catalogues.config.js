@@ -123,7 +123,7 @@
                 url: '/catalogo/establecimientos',
                 data: {
                     permissions: {
-                        only: ['salepoint__catalogues__establecimientos']
+                        only: ['sale_point__catalogues__store']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/stores/stores.tmpl.html',
@@ -156,7 +156,7 @@
                 url: '/catalogo/segmentacion',
                 data: {
                     permissions: {
-                        only: ['salepoint__catalogues__segmentacion']
+                        only: ['sale_point__catalogues__segmentation']
                     }
                 },
                 templateUrl: 'app/mainApp/management/catalogues/segmentation/segmentation.tmpl.html',
@@ -437,7 +437,7 @@
                     'management__catalogues__unilever_status',
                     'management__catalogues__subsidiary',
                     'management__catalogues__udn',
-                    //Salepoint
+                    //SalePoint
                     //Technical service
                     'technical_services__catalogues__action',
                     'technical_services__catalogues__com_incidence',
@@ -637,18 +637,18 @@
                     {
                         name: 'MAIN.MENU.CATALOGS.LABELS.SALE_POINT',
                         type: 'dropdown',
-                        permission: ['salepoint__catalogues__establecimiento', 'salepoint__catalogues__segmentacion'],
+                        permission: ['sale_point__catalogues__store', 'sale_point__catalogues__segmentation'],
                         children: [
                             {
                                 name: 'MAIN.MENU.CATALOGS.STORES',
                                 state: 'triangular.admin-default.catalogo-establecimientos',
-                                permission: ['salepoint__catalogues__establecimiento'],
+                                permission: ['sale_point__catalogues__store'],
                                 type: 'link'
                             },
                             {
                                 name: 'MAIN.MENU.CATALOGS.SEGMENTATION',
                                 state: 'triangular.admin-default.catalogue-segmentation',
-                                permission: ['salepoint__catalogues__segmentacion'],
+                                permission: ['sale_point__catalogues__segmentation'],
                                 type: 'link'
                             }
                         ]

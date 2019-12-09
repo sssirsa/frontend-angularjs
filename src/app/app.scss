@@ -41,6 +41,14 @@ button, select, html, textarea, input {
   text-overflow: ellipsis;
 }
 
+div.selectable-filter {
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+}
+
 .no-margin {
   margin: 0 0 0 0 !important;
 }

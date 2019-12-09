@@ -13,6 +13,13 @@
                 "TECHNICAL_SERVICE": "Servico Técnico",
                 "LIST": "Listado de solicitudes"
             },
+            "ASSIGMENT": {
+                "TITLE": "Asignación de Servicio"
+            },
+            "ATTENTION": {
+                "TITLE": "Atenciones",
+                "LIST": "Listado de atenciones"
+            },
             "TITLE": "Punto de Venta"
         }
     },
@@ -84,7 +91,11 @@
                 "HOUREND": "Hora final"
             },
             "ASSIGNED": "Servicios asignados",
-            "NO_RESULTS": "Sin asignaciones"
+            "NO_RESULTS": "Sin asignaciones",
+            "MESSAGES":{
+                "HOUR_ERROR":"La hora inicio no puede ser mayor a la hora fin",
+                "CORRECT_ASSIGMENT": "Solocitud asignada correctamente"
+            }
         },
         "ASSIGN_DETAIL": {
             "TITLE": "Detalle de Servicio",
@@ -142,5 +153,23 @@
         }
 
 
+    },
+    "ATTENTION": {
+        "DETAIL":{
+            "ERRORS":{
+                "ADMIN_USER":"Un usuario administrador no puede atender un servicio"
+            }
+        },
+        "EVIDENCE": {
+            "TITLE": "Evidencias de la atención",
+            "FIRM_CLIENT": "Firma del cliente",
+            "FIRM_TECHNICAL": "Firma del técnico",
+            "NO_FIRM": "No se encontró firma",
+            "NO_EVIDENCES": "Sin evidencias",
+            "INFO_ATENTTION": "Información de la atención",
+            "CLIENT_COMMENTS": "Comentarios del cliente",
+            "TECHNICAL_COMMENTS": "Comentarios del trabajador",
+            "SCORE": "Calificación"
+        }
     }
 }
