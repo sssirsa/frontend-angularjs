@@ -166,6 +166,8 @@
         <md-actions layout="row" layout-align="end center">
             <!--Allow to generate the document just if the entry is closed-->
             <md-button aria-label="reassign technician button"
+                       ng-if="attention.status==='Abierta' || attention.status==='Asignada'"
+                       permission-only="['sale_point__attentions__attention_asign__put']"
                        ng-click="$event.stopPropagation(); vm.assignTechnician(attention)"
                        class="md-primary md-raised">
                 <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
