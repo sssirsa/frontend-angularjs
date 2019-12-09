@@ -136,7 +136,7 @@
                 url: '/salepoint/atenciones',
                 data: {
                     permissions: {
-                        only: ['sale_point__attentions__attention_all__get', 'sale_point__attentions__attention_own__get']
+                        only: ['sale_point__attentions__attention_all', 'sale_point__attentions__attention_own']
                     }
                 },
                 templateUrl: 'app/mainApp/salepoint/attentions/list/listAttention.tmpl.html',

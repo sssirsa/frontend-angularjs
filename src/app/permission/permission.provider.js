@@ -26,7 +26,7 @@
                             function rawPermissionsIterator(value) {
                                 var permissionName = value.module;
                                 var permissionActions = value.permission;
-                                PermRoleStore.defineRole(permissionName, []);
+                                //PermRoleStore.defineRole(permissionName, []);
                                 //Base permission assignment
                                 vm.permissions.push(permissionName);
                                 //Specific permission assignment
@@ -56,6 +56,7 @@
                     $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
                 localStorage['permissions'] = angular.toJson(vm.permissions);
+                setPermissions(vm.permissions);
             }
             else {
                 $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: User is not authenticated');
