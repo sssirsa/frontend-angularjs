@@ -32,7 +32,6 @@
         vm.id = $stateParams.id;
 
         vm.statusNew = 'Atendida';
-        vm.user = null;
         vm.request = null;
         vm.solicitudDetalles = null;
         vm.store = null;
@@ -80,7 +79,7 @@
             vm.loadingPromise = ATTENTIONS.getAttention(vm.id)
                 .then(function (requestSuccess) {
                     vm.request = requestSuccess;
-                    vm.user = vm.request.solicitud.persona;
+                    //vm.user = vm.request.solicitud.persona;
                     vm.store = vm.request.solicitud.establecimiento;
                     vm.km = vm.request.km;
                     vm.solicitudDetalles = vm.request.solicitud;
@@ -155,7 +154,7 @@
                 vm.insumosUsados = [];
 
                 if (vm.improductivo === true) {
-                    var economico = [];
+                    //var economico = [];
 
                     if(!vm.request.observaciones_cliente){
                         vm.request.observaciones_cliente = "Sin observaciones";
@@ -170,7 +169,7 @@
                     }                    
 
                     vm.objetoAtencion = {
-                        cabinets: economico,
+                        //cabinets: economico,
                         descripcion_trabajo: vm.request.tipo,
                         observaciones_cliente: vm.request.observaciones_cliente,
                         observaciones_tecnico: vm.request.observaciones_tecnico,
