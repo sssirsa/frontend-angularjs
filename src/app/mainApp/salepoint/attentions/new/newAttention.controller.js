@@ -351,7 +351,7 @@
                 if (vm.improductivo === true) {
                     var economicos = [];
 
-                    economicos.push(vm.economico);
+                    economicos[0]=vm.economico;
 
                     if(!vm.request.observaciones_cliente){
                         vm.request.observaciones_cliente = "Sin observaciones";
