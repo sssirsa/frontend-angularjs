@@ -70,8 +70,6 @@
     <md-card ng-if="!vm.attentions.length">
         <strong translate>ATTENTIONS.LIST.NO_RESULTS</strong>
     </md-card>
-
-
     <md-card ng-if="vm.attentions.length"
              ng-repeat="attention in vm.attentions"
              ng-click="vm.navigateToDetail(attention)">

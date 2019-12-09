@@ -58,57 +58,117 @@
             </div>
         </div>
     </md-card>
-<section cg-busy="{promise:vm.loadingRequests,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-    <md-card ng-if="!vm.requests.length">
-        <strong translate>REQUEST.LIST.NO_RESULTS</strong>
-    </md-card>
-    <md-card
-        ng-if="vm.requests.length"
-        ng-repeat="request in vm.requests"
-        ng-click="vm.navigateToDetail(request)">
+    <section cg-busy="{promise:vm.loadingRequests,  message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+        <md-card ng-if="!vm.requests.length">
+            <strong translate>REQUEST.LIST.NO_RESULTS</strong>
+        </md-card>
 
 
+        <md-card ng-if="vm.requests.length"
+                 ng-repeat="request in vm.requests"
+                 ng-click="vm.navigateToDetail(request)">
+            <md-toolbar layout-gt-xs="row"
+                        layout-align-gt-xs="space-between center"
+                        layout="column"
+                        layout-align="center center" layout-padding>
+                <span>
+                    <strong translate="">REQUEST.LIST.LABELS.ID</strong>
+                    {{request.id}}
+                </span>
 
+                <div ng-if="request.status==='Abierta'" class="open-requests selectable-filter"></div>
+                <div ng-if="request.status==='En_proceso'" class="in-process-requests selectable-filter"></div>
+                <div ng-if="request.status==='Atendida'" class="closed-requests selectable-filter"></div>
+                <div ng-if="request.status==='Cancelada'" class="cancelled-requests selectable-filter"></div>
+                <div ng-if="request.status==='Asignada'" class="assigned-requests selectable-filter"></div>
 
-
-        <div layout="column" layout-align="center center">
-            <h3 translate>REQUEST.DETAIL.FOLIO</h3>
-            <span>{{request.id}}</span>
-        </div>
-        <div layout="column" layout-align="center center">
-            <h3 translate>REQUEST.DETAIL.STATUS</h3>
-            
-            <div ng-if="request.status==='Abierta'" class="open-requests selectable-filter"></div>
-            <div ng-if="request.status==='En_proceso'" class="in-process-requests selectable-filter"></div>
-            <div ng-if="request.status==='Atendida'" class="closed-requests selectable-filter"></div>
-            <div ng-if="request.status==='Cancelada'" class="cancelled-requests selectable-filter"></div>
-            <div ng-if="request.status==='Asignada'" class="assigned-requests selectable-filter"></div>
-        </div>
-        <div layout="column" layout-align="center center">
-            <h3 translate>REQUEST.DETAIL.DATE</h3>
-            <span>{{request.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
-        </div>
-        <!--<div layout="column" layout-align="center center">
-            <md-button aria-label="fab button"
-                       ng-click="vm.downloadReport(request.id, $event); $event.stopPropagation();"
-                       class="md-raised md-primary">
-                <md-icon md-font-icon="far fa-file-pdf"></md-icon>
-            </md-button>
-        </div>-->
-        <md-content  ng-if="request.status == 'Abierta'">
-            <div flex="100" layout="column" layout-align="end end">
-                <div>
-                    <md-button aria-label="fab button"
-                               ng-click="$event.stopPropagation(); vm.assignTechnician(request)"
-                               class="md-raised md-primary"
-                               ng-if="request.persona">
-                        <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
-                    </md-button>
-                </div>
+                <span>
+                    <strong translate="">REQUEST.LIST.LABELS.KIND</strong>
+                    {{request.tipo}}
+                </span>
+            </md-toolbar>
+            <div layout-padding>
+                <!--Dates section-->
+                <section 
+                         layout="column"
+                         layout-align="center center">
+                    <span ng-if="request.fecha_entrada">
+                        <strong translate>REQUEST.LIST.LABELS.DATE_CREATE</strong>
+                        <span>{{request.fecha_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                    </span>
+                </section>
+                <section 
+                         layout="column"
+                         layout-align="center center">
+                    <div>
+                        <!--Origin section-->
+                        <span ng-if="request.sucursal" layout-margin>
+                            <strong translate>REQUEST.LIST.LABELS.SUBSIDIARY</strong>
+                            <span>{{request.sucursal.nombre}}</span>
+                        </span>
+                        <span ng-if="request.udn" layout-margin>
+                            <strong translate>REQUEST.LIST.LABELS.AGENCY</strong>
+                            <span>{{request.udn.agencia}}</span>
+                        </span>
+                    </div>
+                </section>
+                <!--Store section-->
+                <section layout-gt-xs="row"
+                         layout-align-gt-xs="space-between center"
+                         layout="column"
+                         layout-align="center center">
+                    <span ng-if="request.establecimiento" layout-margin>
+                        <strong translate>REQUEST.LIST.LABELS.STORE</strong>
+                        <span>{{request.establecimiento.nombre_establecimiento}}</span>
+                    </span>
+                    <span ng-if="request.establecimiento" layout-margin>
+                        <strong translate>REQUEST.LIST.LABELS.STORE_ADDRESS</strong>
+                        <span>
+                            {{request.establecimiento.calle}}
+                            {{request.establecimiento.numero}},
+                            {{request.establecimiento.localidad.codigo_postal}},
+                            {{request.establecimiento.localidad.nombre}},
+                            {{request.establecimiento.localidad.municipio.nombre}},
+                            {{request.establecimiento.localidad.municipio.estado.nombre}}
+                        </span>
+                    </span>
+                </section>
+                <!--Person section-->
+                <section layout-gt-xs="row"
+                         layout-align-gt-xs="space-between center"
+                         layout="column"
+                         layout-align="center center">
+                    <span ng-if="request.persona" layout-margin>
+                        <strong translate>REQUEST.LIST.LABELS.PERSON</strong>
+                        <span>{{request.persona.nombre}} {{request.persona.apellido_paterno}} {{request.persona.apellido_materno}}</span>
+                    </span>
+                </section>
             </div>
-        </md-content>
-    </md-card>
-</section>
+            <md-actions layout="row" layout-align="end center">
+                <!--Allow to generate the document just if the entry is closed-->
+                <md-button aria-label="reassign technician button"
+                           ng-if="request.status==='Abierta' || request.status==='Asignada'"
+                           permission-only="['sale_point__requests__request_asign__put']"
+                           ng-click="$event.stopPropagation(); vm.assignTechnician(request)"
+                           class="md-primary md-raised">
+                    <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                    <span hide-xs>{{"REQUEST.LIST.BUTTONS.ASSIGN"|translate}}</span>
+                </md-button>
+                <!--Allow to generate the document just if the entry is closed-->
+                <!--<md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       ng-if="entry.cerrada" disabled class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.PDF"|translate}}</span>
+            </md-button>-->
+                <!--Allow to generate the excel document at anytime-->
+                <!--<md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                       ng-click="$event.stopPropagation(); vm.generateXLSX(entry.id)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.XLSX"|translate}}</span>
+            </md-button>-->
+            </md-actions>
+        </md-card>
+    </section>
 <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
     <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreRequests, message:' '}"
         ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
