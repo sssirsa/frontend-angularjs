@@ -13,10 +13,20 @@
                 "UNPRODUCTIVE": "Improductiva"
             },
             "LABELS":{
-                
+                "ID": "Folio:",
+                "KIND": "Tipo de atención:",
+                "DATE_CREATE": "Fecha de creación: ",
+                "DATE_STARTED": "Fecha de inicio:",
+                "DATE_FINISHED": "Fecha de finalización:",
+                "SUBSIDIARY": "Sucursal:",
+                "AGENCY": "Agencia-UDN:",
+                "STORE": "Establecimiento:",
+                "ASSIGNED": "Persona asignada:",
+                "STORE_ADDRESS": "Dirección: "
             },
             "BUTTONS":{
-                "LOAD_MORE":"Cargar mas solicitudes"
+                "LOAD_MORE": "Cargar mas solicitudes",
+                "REASSIGN": "Reasignar técnico"
             },
             "LIST_OF": "Listado de",
             "NO_RESULTS": "No se encontrarón resultados"

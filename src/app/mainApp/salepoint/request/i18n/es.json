@@ -12,10 +12,18 @@
                 "OPEN": "Abierta"
             },
             "LABELS":{
-                
+                "ID": "Folio:",
+                "KIND": "Tipo:",
+                "DATE_CREATE": "Fecha de creación:",
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "Agencia-UDN",
+                "STORE": "Establecimiento:",
+                "STORE_ADDRESS": "Dirección:",
+                "PERSON": "Creada por:"
             },
             "BUTTONS":{
-                "LOAD_MORE":"Cargar mas solicitudes"
+                "LOAD_MORE": "Cargar mas solicitudes",
+                "ASSIGN": "Asignar técnico"
             },
             "LIST_OF": "Listado de",
             "NO_RESULTS": "No se encontrarón resultados"

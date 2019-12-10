@@ -73,17 +73,14 @@
     <md-card ng-if="vm.attentions.length"
              ng-repeat="attention in vm.attentions"
              ng-click="vm.navigateToDetail(attention)">
-
-
-
-
-
-        <div layout="column" layout-align="center center">
-            <h3 translate>ATTENTIONS.DETAIL.FOLIO</h3>
-            <span>{{attention.folio}}</span>
-        </div>
-        <div layout="column" layout-align="center center">
-            <h3 translate>ATTENTIONS.DETAIL.STATUS</h3>
+        <md-toolbar layout-gt-xs="row"
+                    layout-align-gt-xs="space-between center"
+                    layout="column"
+                    layout-align="center center" layout-padding>
+            <span>
+                <strong translate="">ATTENTIONS.LIST.LABELS.ID</strong>
+                {{attention.folio}}
+            </span>
 
             <div ng-if="attention.status==='Abierta'" class="open-attentions selectable-filter"></div>
             <div ng-if="attention.status==='Asignada'" class="assigned-attentions selectable-filter"></div>
@@ -91,30 +88,102 @@
             <div ng-if="attention.status==='Atendida'" class="closed-attentions selectable-filter"></div>
             <div ng-if="attention.status==='Cancelada'" class="cancelled-attentions selectable-filter"></div>
             <div ng-if="attention.status==='Improductiva'" class="unproductive-attentions selectable-filter"></div>
-        </div>
-        <div layout="column" layout-align="center center">
-            <h3 translate>ATTENTIONS.DETAIL.DATE</h3>
-            <span>{{attention.fecha_creacion | amDateFormat:'DD/MM/YYYY hh:mm:ss'}}</span>
-        </div>
-        <!--<div layout="column" layout-align="center center">
-            <md-button aria-label="fab button"
-                       ng-click="vm.downloadReport(attention.id, $event); $event.stopPropagation();"
-                       class="md-raised md-primary">
-                <md-icon md-font-icon="far fa-file-pdf"></md-icon>
-            </md-button>
-        </div>-->
-        <md-content ng-if="attention.status == 'Abierta'">
-            <div flex="100" layout="column" layout-align="end end">
+
+            <span>
+                <strong translate="">ATTENTIONS.LIST.LABELS.KIND</strong>
+                {{attention.tipo}}
+            </span>
+        </md-toolbar>
+        <div layout-padding>
+            <!--Dates section-->
+            <section layout-gt-xs="row"
+                     layout-align-gt-xs="space-between center"
+                     layout="column"
+                     layout-align="center center">
+                <span ng-if="attention.fecha_creacion">
+                    <strong translate>ATTENTIONS.LIST.LABELS.DATE_CREATE</strong>
+                    <span>{{attention.fecha_creacion | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                </span>
+                <span ng-if="attention.fecha_inicio">
+                    <strong translate>ATTENTIONS.LIST.LABELS.DATE_STARTED</strong>
+                    <span>{{attention.fecha_inicio | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                </span>
+                <span ng-if="attention.fecha_fin">
+                    <strong translate>ATTENTIONS.LIST.LABELS.DATE_FINISHED</strong>
+                    <span>{{attention.fecha_fin | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                </span>
+            </section>
+            <section layout-gt-xs="row"
+                     layout-align-gt-xs="space-between center"
+                     layout="column"
+                     layout-align="center center">
                 <div>
-                    <md-button aria-label="fab button"
-                               ng-click="$event.stopPropagation(); vm.assignTechnician(attention)"
-                               class="md-raised md-primary"
-                               ng-if="attention.persona">
-                        <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
-                    </md-button>
+                    <!--Origin section-->
+                    <span ng-if="attention.sucursal" layout-margin>
+                        <strong translate>ATTENTIONS.LIST.LABELS.SUBSIDIARY</strong>
+                        <span>{{attention.sucursal.nombre}}</span>
+                    </span>
+                    <span ng-if="attention.udn" layout-margin>
+                        <strong translate>ATTENTIONS.LIST.LABELS.AGENCY</strong>
+                        <span>{{attention.udn.agencia}}</span>
+                    </span>
                 </div>
-            </div>
-        </md-content>
+            </section>
+            <!--Store section-->
+            <section layout-gt-xs="row"
+                     layout-align-gt-xs="space-between center"
+                     layout="column"
+                     layout-align="center center">
+                <span ng-if="attention.solicitud" layout-margin>
+                    <strong translate>ATTENTIONS.LIST.LABELS.STORE</strong>
+                    <span>{{attention.solicitud.establecimiento.nombre_establecimiento}}</span>
+                </span>
+                <span ng-if="attention.solicitud" layout-margin>
+                    <strong translate>ATTENTIONS.LIST.LABELS.STORE_ADDRESS</strong>
+                    <span>
+                        {{attention.solicitud.establecimiento.calle}}
+                        {{attention.solicitud.establecimiento.numero}},
+                        {{attention.solicitud.establecimiento.localidad.codigo_postal}},
+                        {{attention.solicitud.establecimiento.localidad.nombre}},
+                        {{attention.solicitud.establecimiento.localidad.municipio.nombre}},
+                        {{attention.solicitud.establecimiento.localidad.municipio.estado.nombre}}
+                    </span>
+                </span>
+            </section>
+            <!--Person section-->
+            <section layout-gt-xs="row"
+                     layout-align-gt-xs="space-between center"
+                     layout="column"
+                     layout-align="center center">
+                <span ng-if="attention.persona" layout-margin>
+                    <strong translate>ATTENTIONS.LIST.LABELS.ASSIGNED</strong>
+                    <span>{{attention.persona.nombre}} {{attention.persona.apellido_paterno}} {{attention.persona.apellido_materno}}</span>
+                </span>
+            </section>
+        </div>
+        <md-actions layout="row" layout-align="end center">
+            <!--Allow to generate the document just if the entry is closed-->
+            <md-button aria-label="reassign technician button"
+                       ng-if="attention.status==='Abierta' || attention.status==='Asignada'"
+                       permission-only="['sale_point__attentions__attention_asign__put']"
+                       ng-click="$event.stopPropagation(); vm.assignTechnician(attention)"
+                       class="md-primary md-raised">
+                <md-icon md-font-icon="zmdi zmdi-accounts-list-alt"></md-icon>
+                <span hide-xs>{{"ATTENTIONS.LIST.BUTTONS.REASSIGN"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the document just if the entry is closed-->
+            <!--<md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       ng-if="entry.cerrada" disabled class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.PDF"|translate}}</span>
+            </md-button>-->
+            <!--Allow to generate the excel document at anytime-->
+            <!--<md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                       ng-click="$event.stopPropagation(); vm.generateXLSX(entry.id)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.XLSX"|translate}}</span>
+            </md-button>-->
+        </md-actions>
     </md-card>
 </section>
 <section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
