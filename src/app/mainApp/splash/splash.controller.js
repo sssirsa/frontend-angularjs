@@ -15,21 +15,22 @@
                     $state.go('triangular.admin-default.welcome');
                 }
                 else {
-                    if (AuthService.canRefreshSession()) {
-                        vm.refreshTokenPromise =AuthService
-                            .refreshToken()
-                            .then(function () {
-                                $state.go('triangular.admin-default.welcome');
-                            })
-                            .catch(function () {
-                                $state.go('login');
-                                AuthService.logout();
-                            });
-                    }
-                    else {
-                        $state.go('login');
-                        AuthService.logout();
-                    }
+                    $state.go('login');
+                    // if (AuthService.canRefreshSession()) {
+                    //     vm.refreshTokenPromise =AuthService
+                    //         .refreshToken()
+                    //         .then(function () {
+                    //             $state.go('triangular.admin-default.welcome');
+                    //         })
+                    //         .catch(function () {
+                    //             $state.go('login');
+                    //             AuthService.logout();
+                    //         });
+                    // }
+                    // else {
+                    //     $state.go('login');
+                    //     AuthService.logout();
+                    // }
                 }
             }
             else {
