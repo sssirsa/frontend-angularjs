@@ -19,12 +19,12 @@
             AuthService.logout();
         }
 
-        function transitionErrored(){            
+        function transitionErrored() {
             $state.go('500');
         }
 
         $transitions.onCreate({}, function (transition) {
-            if(transition.from()===transition.to()){
+            if (transition.from() === transition.to()) {
                 //Abort transitions to the same state, to avoid errors
                 transition.abort();
             }
@@ -36,23 +36,24 @@
                 && transition.to().name !== 'login') {
                 //Any other state that requires login
                 if (!AuthService.isAuthenticated()) {
-                    //User not athenticated
-                    if (AuthService.canRefreshSession()) {
-                        var to = transition.to();
-                        transition.abort();
-                        //Permission redefining is managed in AuthService.refreshToken function
-                        AuthService
-                            .refreshToken()
-                            .then(function () {
-                                $state.go(to);
-                            })
-                            .catch(function () {
-                                accessDenied();
-                            });
-                    }
-                    else {
-                        accessDenied();
-                    }
+                    accessDenied();
+                    //User not athenticated 
+                    // if (AuthService.canRefreshSession()) {
+                    //     var to = transition.to();
+                    //     transition.abort();
+                    //     //Permission redefining is managed in AuthService.refreshToken function
+                    //     AuthService
+                    //         .refreshToken()
+                    //         .then(function () {
+                    //             $state.go(to);
+                    //         })
+                    //         .catch(function () {
+                    //             accessDenied();
+                    //         });
+                    // }
+                    // else {
+                    //     accessDenied();
+                    // }
                 }
                 else {
                     //User is authenticated
