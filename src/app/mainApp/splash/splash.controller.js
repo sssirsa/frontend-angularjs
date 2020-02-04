@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function SplashController($state, AuthService, $timeout, $cookies) {
-        var vm = this;
 
         $timeout(function(){
             if($cookies.getObject('keepSession')) {
