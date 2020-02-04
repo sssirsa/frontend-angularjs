@@ -42,7 +42,9 @@
                 .then(function (response) {
                     Person.getMyProfile(response.person)
                         .then(function requestGetMyProfile(user) {
-                            PERMISSION.definePermissions(user['permissions']);
+                            //PERMISSION.definePermissions(user['permissions']);
+                            user['permissions'].push('AUTHENTICATED');
+                            PERMISSION.setPermissions(user['permissions']);
                             User.setUser(user);
                             request.resolve();
                         })
@@ -79,7 +81,9 @@
                         Person.getMyProfile()
                             .then(function requestGetMyProfile(user) {
                                 User.setUser(user);
-                                PERMISSION.definePermissions(user['permissions']);
+                                //PERMISSION.definePermissions(user['permissions']);
+                                user['permissions'].push('AUTHENTICATED');
+                                PERMISSION.setPermissions(user['permissions']);
                                 request.resolve();
                             })
                             .catch(function (errorUser) {
