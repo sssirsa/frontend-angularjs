@@ -47,8 +47,8 @@
                 label: 'label'
             },
             oauth: {
-                base: 'oauth',
-                login: 'token/'
+                base: 'authentication',
+                login: 'login'
             }
         });
 })();
