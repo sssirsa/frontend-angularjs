@@ -91,7 +91,7 @@
             vm.loadingDepartures = MANUAL_DEPARTURES
                 .listDepartures(vm.departureKindList, 1)
                 .then(function (departuresList) {
-                    vm.departures = departuresList[PAGINATION.elements];
+                    vm.departures = departuresList;
                     vm.paginationHelper.page = page;
                     vm.paginationHelper.totalPages = Math.ceil(
                         departuresList[PAGINATION.total] / PAGINATION.pageSize

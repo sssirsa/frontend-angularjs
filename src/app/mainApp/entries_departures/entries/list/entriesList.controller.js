@@ -95,7 +95,7 @@
             vm.loadingEntries = MANUAL_ENTRIES
                 .listEntries(vm.entryKindList, 1)
                 .then(function (entriesList) {
-                    vm.entries = entriesList[PAGINATION.elements];
+                    vm.entries = entriesList;
                     vm.paginationHelper.page = page;
                     vm.paginationHelper.totalPages = Math.ceil(
                         entriesList[PAGINATION.total] / PAGINATION.pageSize

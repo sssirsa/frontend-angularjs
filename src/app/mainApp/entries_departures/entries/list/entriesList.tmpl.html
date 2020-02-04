@@ -48,13 +48,10 @@
     </md-card>
     <md-card ng-if="vm.entries.length" ng-click="vm.navigateToDetail(entry)" ng-repeat="entry in vm.entries">
         <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
-            layout-align="center center" layout-padding ng-class="(!entry.confirmada )? 'not-confirmed-entry' : ''">
-
-            <strong class="not_confirmed_entry" ng-if="!entry.confirmada"
-                translate>ENTRIES.LIST.LABELS.NOT_CONFIRMED_ENTRY</strong>
+            layout-align="center center" layout-padding>
             <span>
                 <strong translate="">ENTRIES.LIST.LABELS.ID</strong>
-                {{entry.id}}
+                {{entry._id}}
             </span>
             <div ng-if="entry.tipo_entrada==='Nuevos'" class="new-entries selectable-filter"></div>
             <div ng-if="entry.tipo_entrada==='Reparacion'" class="repair-entries selectable-filter"></div>

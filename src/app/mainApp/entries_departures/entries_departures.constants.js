@@ -6,8 +6,9 @@
             catalogues: {
                 base: 'catalogues',
                 udn: 'udn',
-                transport_line: 'transport_line',
-                transport_type: 'transport_type',
+                transport_driver: 'transport-driver',
+                transport_line: 'transport-line',
+                transport_type: 'transport-type',
                 sticker: 'sticker'
             },
             changes: {
@@ -19,25 +20,25 @@
             },
             departures: {
                 base: 'departures',
-                all: 'all',
-                new: 'news',
-                obsolete: 'scrapped',
+                all: 'all-departures',
+                new: 'new-departures',
+                obsolete: 'obsolete-departures',
                 unrecognizable: 'no_labeled',
-                warehouse: 'warehouse',
-                warranty: 'warranties',
+                warehouse: 'warehouse-departures',
+                warranty: 'warranty-departures',
                 addCabinet: 'add_cabinet',
                 close: 'close'
             },
             entries: {
                 base: 'entries',
                 addCabinet: 'add_cabinet',
-                all: 'all',
+                all: 'all-entries',
                 close: 'close',
-                new: 'news',
-                repair: 'repair',
+                new: 'new-entries',
+                salepoint: 'salepoint-entries',
                 unrecognizable: 'no_labeled',
-                warehouse: 'warehouse',
-                warranty: 'warranties'
+                warehouse: 'warehouse-entries',
+                warranty: 'warranty-entries'
             },
             inspections: {
                 base: 'inspections',
