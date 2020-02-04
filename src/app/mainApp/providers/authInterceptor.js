@@ -1,6 +1,3 @@
-/**
- * Created by Christian amezcua on 17/10/16.
- */
 (function () {
     'use strict';
 

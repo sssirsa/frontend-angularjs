@@ -39,8 +39,9 @@
             var request = $q.defer();
             OAuth
                 .getToken(credentials.username, credentials.password)
-                .then(function () {
-                    Person.getMyProfile()
+                .then(function (response) {
+                    console.log(response);
+                    Person.getMyProfile(response.person)
                         .then(function requestGetMyProfile(user) {
                             PERMISSION.definePermissions(user['permissions']);
                             User.setUser(user);

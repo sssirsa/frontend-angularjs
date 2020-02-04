@@ -36,7 +36,7 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    request.resolve();
+                    request.resolve(loginResponse);
                 })
                 .catch(function (errorLogin) {
                     request.reject(errorLogin);

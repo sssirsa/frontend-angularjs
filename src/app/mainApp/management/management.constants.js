@@ -9,28 +9,28 @@
                 error_message: 'error_message',
                 module: 'module',
                 person: 'persona',
-                profile:'info_full',
+                profile: 'info_full',
                 project: 'project'
             },
             catalogues: {
                 base: 'catalogues',
-                app:'app',
+                app: 'app',
                 cabinet_brand: 'marca_cabinet',
                 cabinet_model: 'modelo_cabinet',
                 category: 'category',
                 condition: 'condition',
                 equipment_type: 'tipo_equipo',
                 impediment: 'motivo_impedimento_salida',
-                module:'module',
-                project:'project',
+                module: 'module',
+                project: 'project',
                 reason_not_labeled: 'motivo_no_capitalizado',
                 status_unilever: 'status_unilever',
                 status_com: 'status_com',
                 status_not_labeled: 'estatus_no_capitalizado',
                 storage: 'warehouse',
                 subsidiary: 'subsidiary',
-                template:'template',
-                udn:'udn'
+                template: 'template',
+                udn: 'udn'
             },
             control: {
                 base: 'control',
@@ -48,7 +48,8 @@
             },
             oauth: {
                 base: 'authentication',
-                login: 'login'
+                login: 'login',
+                person: 'person'
             }
         });
 })();
