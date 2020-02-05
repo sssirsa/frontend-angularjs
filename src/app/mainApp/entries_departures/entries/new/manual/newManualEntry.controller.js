@@ -259,24 +259,6 @@
             vm.entry[field] = element;
         };
 
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.entry['ife_chofer'] = base64Image;
-                };
-
-            }
-            else {
-                delete (vm.entry['ife_chofer']);
-            }
-        };
-
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList.map(function (element) {
@@ -355,7 +337,7 @@
                 }
             }
         };
-        
+
         vm.clickSaveEntry = function clickSaveEntry(entry) {
             //Show warning message if the entry has unregistered cabinets
             if (entryHasPendingCabinets()) {
@@ -412,6 +394,12 @@
         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
+            if (vm.userAgency) {
+                entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
+            }
+            if (vm.userSubsidiary) {
+                entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
+            }
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createNew(entry)

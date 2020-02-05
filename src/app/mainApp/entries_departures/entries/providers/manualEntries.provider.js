@@ -25,7 +25,6 @@
         var managementUrl = API
             .all(URLS.management.base);
 
-        var control = URLS.management.control;
         var entries = URLS.entries_departures.entries;
         var inventory = URLS.management.inventory;
 
@@ -606,7 +605,7 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
-                            model: 'id',
+                            model: '_id',
                             option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.SUBSIDIARY'),
@@ -621,7 +620,7 @@
                                 + '/' + URLS.management.catalogues.cabinet_brand,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
-                            model: 'id',
+                            model: '_id',
                             option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.SUPPLIER'),
@@ -638,7 +637,7 @@
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
+                            model: '_id',
                             option: 'razon_social'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_LINE'),
@@ -654,7 +653,7 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
-                            model: 'id',
+                            model: '_id',
                             option: 'descripcion'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_KIND'),
@@ -669,7 +668,7 @@
                                 + '/' + URLS.management.catalogues.udn,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
-                            model: 'id',
+                            model: '_id',
                             option: 'agencia'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.AGENCY'),
