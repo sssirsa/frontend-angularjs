@@ -39,7 +39,7 @@
             },
             inventory: {
                 base: 'inventory',
-                cabinet: 'cabinet_unilever',
+                cabinet: 'fridge',
                 unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
                 asset_location: 'asset_location',
                 impediment: 'impedimento',

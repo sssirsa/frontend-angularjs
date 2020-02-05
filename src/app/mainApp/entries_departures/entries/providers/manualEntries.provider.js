@@ -95,35 +95,50 @@
                 can_enter: false,
                 cabinet: null
             };
-            getCabinetInSubsidiary(id)
-                .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
-                    //Cabinet can't enter
-                    response.can_enter = false;
-                    response.cabinet = apiResponse.cabinet;
+            managementUrl
+                .all(inventory.cabinet)
+                .customGET(id)
+                .then(function (fridge) {
+                    response.cabinet = fridge;
+                    if (fridge.sucursal || fridge.udn) {
+                        //Located in any place
+                        response.can_enter = false;
+                    }
+                    response.can_enter = true;
                     deferred.resolve(response);
                 })
-                .catch(function cabinetsInSubsiadiaryErrorCallback() {
-                    //Cabinet can enter
-                    response.can_enter = true;
-                    inventoryUrl.all(inventory.cabinet).all(id).customGET()
-                        .then(function cabinetSuccessCallback(apiCabinet) {
-                            //Cabinet exists
-                            response.cabinet = apiCabinet;
-                            deferred.resolve(response);
-                        })
-                        .catch(function cabinetErrorCallback(errorResponse) {
-                            if (errorResponse.status === 404) {
-                                //Cabinet doesn't exists
-                                response.cabinet = null;
-                                deferred.resolve(response);
-                            }
-                            else {
-                                //Any other error from backend
-                                response.error = errorResponse;
-                                deferred.reject(response);
-                            }
-                        });
+                .catch(function (error) {
+                    deferred.reject(error);
                 });
+            // getCabinetInSubsidiary(id)
+            //     .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
+            //         //Cabinet can't enter
+            //         response.can_enter = false;
+            //         response.cabinet = apiResponse.cabinet;
+            //         deferred.resolve(response);
+            //     })
+            //     .catch(function cabinetsInSubsiadiaryErrorCallback() {
+            //         //Cabinet can enter
+            //         response.can_enter = true;
+            //         inventoryUrl.all(inventory.cabinet).all(id).customGET()
+            //             .then(function cabinetSuccessCallback(apiCabinet) {
+            //                 //Cabinet exists
+            //                 response.cabinet = apiCabinet;
+            //                 deferred.resolve(response);
+            //             })
+            //             .catch(function cabinetErrorCallback(errorResponse) {
+            //                 if (errorResponse.status === 404) {
+            //                     //Cabinet doesn't exists
+            //                     response.cabinet = null;
+            //                     deferred.resolve(response);
+            //                 }
+            //                 else {
+            //                     //Any other error from backend
+            //                     response.error = errorResponse;
+            //                     deferred.reject(response);
+            //                 }
+            //             });
+            //     });
 
             return deferred.promise;
         }
