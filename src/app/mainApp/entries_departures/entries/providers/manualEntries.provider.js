@@ -598,7 +598,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_destino_id',
+                        binding: 'sucursal_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -613,7 +613,7 @@
                         required: true
                     },
                     supplier: {
-                        binding: 'proveedor_origen_id',
+                        binding: 'proveedor_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -628,7 +628,7 @@
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -645,7 +645,7 @@
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -661,7 +661,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_destino_id',
+                        binding: 'udn_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base

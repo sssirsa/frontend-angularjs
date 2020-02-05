@@ -391,7 +391,7 @@
 
         //Internal functions
 
-        var saveEntry = function saveEntry(entry) {
+         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
             if (vm.userAgency) {
