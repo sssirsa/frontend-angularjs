@@ -1,7 +1,6 @@
 (function () {
 
     angular.module('app.mainApp', [
-        'app.mainApp.com',
         'app.mainApp.entries_departures',
         'app.mainApp.inventory',
         'app.mainApp.management',

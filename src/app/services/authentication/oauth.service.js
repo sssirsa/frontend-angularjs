@@ -23,10 +23,11 @@
             var request = $q.defer();
 
             API
-                .all(URLS.management.base)
                 .all(URLS.management.oauth.base)
+                .all(URLS.management.base)
                 .all(URLS.management.oauth.login)
-                .customPOST({'content-type': 'application/json'}, null, params)
+                //.customPOST({ 'content-type': 'application/json' }, null, params)
+                .customPOST(params)
                 .then(function (loginResponse) {
                     $cookies.putObject('token', loginResponse.access_token);
                     $cookies.putObject('refreshToken', loginResponse.refresh_token);
@@ -35,7 +36,7 @@
                         .setSeconds(expiration.getSeconds() + loginResponse.expires_in);
                     $cookies
                         .putObject('expiration', expiration);
-                    request.resolve();
+                    request.resolve(loginResponse);
                 })
                 .catch(function (errorLogin) {
                     request.reject(errorLogin);
@@ -45,25 +46,31 @@
         }
 
         function getToken(userName, password) {
+            // var data = {
+            //     grant_type: 'password',
+            //     client_id: EnvironmentConfig.site.oauth.clientId,
+            //     client_secret: EnvironmentConfig.site.oauth.clientSecret,
+            //     username: userName,
+            //     password: password
+            // };
             var data = {
-                grant_type: 'password',
-                client_id: EnvironmentConfig.site.oauth.clientId,
-                client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 username: userName,
                 password: password
-            }; 
+            };
 
             return authenticate(data);
         }
 
         function refreshToken() {
+            // var data = {
+            //     grant_type: 'refresh_token',
+            //     client_id: EnvironmentConfig.site.oauth.clientId,
+            //     client_secret: EnvironmentConfig.site.oauth.clientSecret,
+            //     refresh_token: $cookies.getObject('refreshToken')
+            // };
             var data = {
-                grant_type: 'refresh_token',
-                client_id: EnvironmentConfig.site.oauth.clientId,
-                client_secret: EnvironmentConfig.site.oauth.clientSecret,
                 refresh_token: $cookies.getObject('refreshToken')
             };
-
             return authenticate(data);
         }
 

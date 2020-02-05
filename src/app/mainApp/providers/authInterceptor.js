@@ -1,6 +1,3 @@
-/**
- * Created by Christian amezcua on 17/10/16.
- */
 (function () {
     'use strict';
 
@@ -51,7 +48,7 @@
                 inFlightRefresh.then(function () {
                     inFlightRefresh = null;
                     // response.config.headers.Authorization = 'Bearer ' + $cookies.getObject('token');
-                    response.config.headers.Authorization = 'Bearer ' + $injector.get('AuthService').getToken();
+                    //response.config.headers.Authorization = 'Bearer ' + $injector.get('AuthService').getToken();
                     $http(response.config).then(deferred.resolve, deferred.reject);
                 });
                 return deferred.promise;

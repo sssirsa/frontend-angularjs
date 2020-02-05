@@ -11,16 +11,19 @@
         _
     ) {
         var PersonBaseURL = API
-            .all(URLS.management.base)
-            .all(URLS.management.administration.base);
+            .all(URLS.management.oauth.base)
+            .all(URLS.management.base);
 
-        function getMyProfile() {
+        function getMyProfile(personID) {
+
+            var queryString = '?id=' + personID;
             return PersonBaseURL
-                .customGET(URLS.management.administration.profile);
+                .all(URLS.management.oauth.person + queryString)
+                .customGET(null);
         }
-        
+
         function listPersons(limit, offset, filter) {
-            var params = {limit: limit, offset: offset};
+            var params = { limit: limit, offset: offset };
             if (angular.isDefined(filter)) {
                 params = _.extend(params, filter);
             }

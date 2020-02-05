@@ -25,14 +25,9 @@
                     $state.go('triangular.admin-default.welcome');
                 })
                 .catch(function (loginError) {
-                    if(loginError.data.error_description==='Invalid credentials given.'){
-                        toastr.warning('Usuario o contraseña inválidos');
-                    }
-                    else {
-                        toastr.error('Error al iniciar sesión');
-                    }
                     $log.error('Error login');
                     $log.error(loginError);
+                    toastr.error('Error al iniciar sesión');
                 });
 
         }
