@@ -8,7 +8,7 @@
                 udn: 'udn',
                 transport_driver: 'transport-driver',
                 transport_line: 'transport-line',
-                transport_type: 'transport-type',
+                transport_type: 'transport-kind',
                 sticker: 'sticker'
             },
             changes: {

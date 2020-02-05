@@ -15,7 +15,7 @@
             catalogues: {
                 base: 'catalogues',
                 app: 'app',
-                cabinet_brand: 'marca_cabinet',
+                cabinet_brand: 'fridgebrand',
                 cabinet_model: 'modelo_cabinet',
                 category: 'category',
                 condition: 'condition',
@@ -30,7 +30,7 @@
                 storage: 'warehouse',
                 subsidiary: 'subsidiary',
                 template: 'template',
-                udn: 'udn'
+                udn: 'agency'
             },
             control: {
                 base: 'control',

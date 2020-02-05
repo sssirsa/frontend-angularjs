@@ -110,35 +110,6 @@
                 .catch(function (error) {
                     deferred.reject(error);
                 });
-            // getCabinetInSubsidiary(id)
-            //     .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
-            //         //Cabinet can't enter
-            //         response.can_enter = false;
-            //         response.cabinet = apiResponse.cabinet;
-            //         deferred.resolve(response);
-            //     })
-            //     .catch(function cabinetsInSubsiadiaryErrorCallback() {
-            //         //Cabinet can enter
-            //         response.can_enter = true;
-            //         inventoryUrl.all(inventory.cabinet).all(id).customGET()
-            //             .then(function cabinetSuccessCallback(apiCabinet) {
-            //                 //Cabinet exists
-            //                 response.cabinet = apiCabinet;
-            //                 deferred.resolve(response);
-            //             })
-            //             .catch(function cabinetErrorCallback(errorResponse) {
-            //                 if (errorResponse.status === 404) {
-            //                     //Cabinet doesn't exists
-            //                     response.cabinet = null;
-            //                     deferred.resolve(response);
-            //                 }
-            //                 else {
-            //                     //Any other error from backend
-            //                     response.error = errorResponse;
-            //                     deferred.reject(response);
-            //                 }
-            //             });
-            //     });
 
             return deferred.promise;
         }
@@ -352,12 +323,6 @@
         }
 
         //Internal functions
-        function getCabinetInSubsidiary(id) {
-            return managementUrl
-                .all(control.base)
-                .all(control.cabinet_in_subsidiary)
-                .all(id).customGET();
-        }
 
         function getEntriesByCabinet(id) {
             //TODO:Make real logic
@@ -625,7 +590,6 @@
             template: function () {
                 return {
                     cabinets_id: [],
-                    ife_chofer: null,
                     linea_transporte_id: null,
                     nombre_chofer: '',
                     tipo_transporte_id: null,
@@ -639,22 +603,11 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'nombre',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -664,23 +617,12 @@
                         binding: 'proveedor_origen_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.supplier,
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'razon_social',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.SUPPLIER'),
                         icon: 'fas fas-box',
@@ -697,16 +639,7 @@
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'razon_social',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
@@ -721,18 +654,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'descripcion',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
@@ -743,22 +666,11 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
-                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'agencia',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            option: 'agencia'
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.AGENCY'),
                         icon: 'fa fa-building',

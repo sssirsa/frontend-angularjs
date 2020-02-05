@@ -1,8 +1,8 @@
 /*
     Fields for "New" entries:
     entry:{
-        nombre_chofer: string, (Required)
-        ife_chofer: base64string, (Required) Image file
+        nombre_chofer: string, (Optional)
+        operador_transporte_id: string, (Optional)
         descripcion: string, (Optional)
         linea_transporte_id: int(id), (Required)
         tipo_transporte_id: int(id), (Required)
