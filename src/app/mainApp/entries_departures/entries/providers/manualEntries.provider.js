@@ -588,11 +588,11 @@
         var newEntry = {
             template: function () {
                 return {
-                    cabinets_id: [],
-                    linea_transporte_id: null,
+                    cabinets: [],
+                    linea_transporte: null,
                     nombre_chofer: '',
-                    tipo_transporte_id: null,
-                    proveedor_origen_id: null
+                    tipo_transporte: null,
+                    proveedor_origen: null
                 };
             },
             catalogues: function catalogues() {

@@ -10,7 +10,7 @@
         sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
         udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
         proveedor_origen_id: int(id), (Required)
-        cabinets_id: array[id] (Required, not empty, validated)
+        cabinets: array[id] (Required, not empty, validated)
     }
 */
 (function () {
@@ -391,7 +391,7 @@
 
         //Internal functions
 
-         var saveEntry = function saveEntry(entry) {
+        var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
             if (vm.userAgency) {
@@ -422,8 +422,8 @@
 
         var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (entry.cabinets.length) {
+                entry.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -434,7 +434,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                entry['cabinets'].push(existingCabinets[i].id);
             }
             return entry;
         };
