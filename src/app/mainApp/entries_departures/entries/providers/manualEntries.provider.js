@@ -339,45 +339,33 @@
         var warrantyEntry = {
             template: function () {
                 return {
-                    cabinets_id: [],
+                    cabinets: [],
                     ife_chofer: null,
-                    linea_transporte_id: null,
+                    linea_transporte: null,
                     nombre_chofer: '',
-                    tipo_transporte_id: null
+                    tipo_transporte: null
                 };
             },
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_destino_id',
+                        binding: 'sucursal_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -386,24 +374,15 @@
 
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            model: '_id',
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -412,43 +391,23 @@
 
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            model: '_id',
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
                         required: true
                     },
                     udn: {
-                        binding: 'udn_origen_id',
+                        binding: 'udn_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
-
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
-                            },
-                            elements: PAGINATION.elements,
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.AGENCY'),
                         icon: 'fa fa-building',
