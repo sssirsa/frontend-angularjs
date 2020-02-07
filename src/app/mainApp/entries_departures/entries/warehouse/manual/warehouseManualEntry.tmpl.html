@@ -221,23 +221,6 @@
                                type="text">
                         <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DRIVER_NAME</div>
                     </md-input-container>
-                    <md-input-container layout="column"
-                                        layout-align="start center"
-                                        class="md-icon-float md-block full-width">
-                        <div layout="row"
-                             layout-align="start center">
-                            <div>
-                                <md-icon class="far fa-id-card"></md-icon>
-                            </div>
-                            <div translate>ENTRIES.WAREHOUSE.LABELS.DRIVER_ID</div>
-                        </div>
-                        <file-uploader files-selected="vm.selectDriverID(files)"
-                                       file-formats="'image/*'"
-                                       validations="vm.imageConstraints.validations"
-                                       resize-if="vm.imageConstraints.resizeIf"
-                                       resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DRIVER_ID</div>
-                    </md-input-container>
                 </div>
             </form>
             <md-actions layout="row"
@@ -257,7 +240,7 @@
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid ||!vm.entry['ife_chofer']">
+                           ng-disabled="entryForm.$invalid">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'ENTRIES.WAREHOUSE.BUTTONS.SAVE'|translate}}</div>

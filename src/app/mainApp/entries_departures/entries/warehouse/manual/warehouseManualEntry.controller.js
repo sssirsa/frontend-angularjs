@@ -8,7 +8,7 @@
         tipo_transporte_id: int(id), (Required)
         sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
         udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
-        cabinets_id: array[id] (Required, not empty, validated)
+        cabinets: array[id] (Required, not empty, validated)
     }
 */
 (function () {
@@ -38,6 +38,8 @@
         vm.showSelector;
         vm.catalogues;
         vm.cabinetList;
+        vm.userAgency;
+        vm.userSubsidiary;
 
         //Validations
         vm.imageConstraints = {
@@ -394,6 +396,12 @@
         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
+            if (vm.userAgency) {
+                entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
+            }
+            if (vm.userSubsidiary) {
+                entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
+            }
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createWarehouse(entry)
@@ -416,8 +424,8 @@
 
         var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (entry.cabinets.length) {
+                entry.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -428,7 +436,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                entry['cabinets'].push(existingCabinets[i].id);
             }
             return entry;
         };
