@@ -169,7 +169,7 @@
             }
         },
         "REPAIR": {
-            "TITLE": "Entrada de reparación",
+            "TITLE": "Entrada de Punto de venta",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
