@@ -1,8 +1,8 @@
 /*
     Fields for "New" entries:
     entry:{
-        nombre_chofer: string, (Required)
-        ife_chofer: base64string, (Required) Image file
+        nombre_chofer: string, (Optional)
+        operador_transporte_id: string, (Optional)
         descripcion: string, (Optional)
         linea_transporte_id: int(id), (Required)
         tipo_transporte_id: int(id), (Required)
@@ -10,7 +10,7 @@
         sucursal_destino_id: int(id), (Required if !udn_destino_id && !User.sucursal && !User.udn)
         udn_destino_id: int(id), (Required if !sucursal_destino_id && !User.sucursal && !User.udn)
         proveedor_origen_id: int(id), (Required)
-        cabinets_id: array[id] (Required, not empty, validated)
+        cabinets: array[id] (Required, not empty, validated)
     }
 */
 (function () {
@@ -259,24 +259,6 @@
             vm.entry[field] = element;
         };
 
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.entry['ife_chofer'] = base64Image;
-                };
-
-            }
-            else {
-                delete (vm.entry['ife_chofer']);
-            }
-        };
-
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList.map(function (element) {
@@ -355,7 +337,7 @@
                 }
             }
         };
-        
+
         vm.clickSaveEntry = function clickSaveEntry(entry) {
             //Show warning message if the entry has unregistered cabinets
             if (entryHasPendingCabinets()) {
@@ -412,6 +394,12 @@
         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
+            if (vm.userAgency) {
+                entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
+            }
+            if (vm.userSubsidiary) {
+                entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
+            }
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createNew(entry)
@@ -434,8 +422,8 @@
 
         var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (entry.cabinets.length) {
+                entry.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -446,7 +434,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                entry['cabinets'].push(existingCabinets[i].id);
             }
             return entry;
         };

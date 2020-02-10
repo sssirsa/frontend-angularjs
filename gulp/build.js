@@ -54,7 +54,6 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.csso())
     .pipe(cssFilter.restore)
     .pipe($.replace('../bower_components/material-design-iconic-font/dist/fonts', '../fonts'))
-    .pipe($.replace('../font/weathericons-regular', '../fonts/weathericons-regular'))
     .pipe($.revReplace())
     .pipe(htmlFilter)
     .pipe($.minifyHtml({
@@ -121,4 +120,4 @@ gulp.task('other', function () {
 
 
 gulp.task('buildapp', ['html', 'images', 'fonts', 'translations', 'misc', 'data'
-  , 'examplejs', 'other']);
+  , 'other']);

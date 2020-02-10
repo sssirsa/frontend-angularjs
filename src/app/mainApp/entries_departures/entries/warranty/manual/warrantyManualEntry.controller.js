@@ -8,7 +8,7 @@
         tipo_transporte_id: int(id), (Required)
         sucursal_destino_id: int(id), (Required if !User.sucursal && !User.udn)
         udn_origen_id: int(id), (Required if manual entry)
-        cabinets_id: array[id] (Required, not empty, validated)
+        cabinets: array[id] (Required, not empty, validated)
     }
 */
 (function () {
@@ -37,6 +37,8 @@
         vm.entry;
         vm.catalogues;
         vm.cabinetList;
+        vm.userAgency;
+        vm.userSubsidiary;
 
         vm.user = User.getUser();
 
@@ -233,9 +235,14 @@
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
+            
+            var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
-            vm.showSelector = !vm.user['sucursal']
-                && !vm.user['udn'];
+            vm.showSelector = !user['sucursal']
+                && !user['udn'];
+                 
+            vm.userAgency = user.udn;
+            vm.userSubsidiary = user.sucursal;
         };
 
         //Just load if user is not from an Agency
@@ -376,6 +383,12 @@
         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
+            if (vm.userAgency) {
+                entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
+            }
+            if (vm.userSubsidiary) {
+                entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
+            }
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createWarranty(entry)
@@ -408,8 +421,8 @@
 
         var addCabinetsToEntry = function addCabinetsToEntry(cabinets, entry) {
             //In case the cabinets array exist, restart it
-            if (entry.cabinets_id.length) {
-                entry.cabinets_id = [];
+            if (entry.cabinets.length) {
+                entry.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -420,7 +433,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                entry['cabinets_id'].push(existingCabinets[i].id);
+                entry['cabinets'].push(existingCabinets[i].id);
             }
             return entry;
         };

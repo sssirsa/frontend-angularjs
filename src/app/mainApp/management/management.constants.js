@@ -15,7 +15,7 @@
             catalogues: {
                 base: 'catalogues',
                 app: 'app',
-                cabinet_brand: 'marca_cabinet',
+                cabinet_brand: 'fridgebrand',
                 cabinet_model: 'modelo_cabinet',
                 category: 'category',
                 condition: 'condition',
@@ -30,7 +30,7 @@
                 storage: 'warehouse',
                 subsidiary: 'subsidiary',
                 template: 'template',
-                udn: 'udn'
+                udn: 'agency'
             },
             control: {
                 base: 'control',
@@ -39,7 +39,7 @@
             },
             inventory: {
                 base: 'inventory',
-                cabinet: 'cabinet_unilever',
+                cabinet: 'fridge',
                 unrecognizable_cabinet: 'cabinet_no_labeled_unilever',
                 asset_location: 'asset_location',
                 impediment: 'impedimento',

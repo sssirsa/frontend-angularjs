@@ -43,6 +43,7 @@
                 "DESTINATION_SUBSIDIARY": "Sucursal destino:",
                 "DRIVER": "Operador:",
                 "KIND": "Tipo:",
+                "MODEL":"Modelo",
                 "NO_RESULTS": "Sin resultados",
                 "NOT_CONFIRMED_ENTRY": "Entrada no confirmada",
                 "OPEN": "Entrada abierta",
@@ -71,7 +72,7 @@
             "FILTERS": {
                 "ALL": "Todas",
                 "NEW": "Nuevos",
-                "REPAIR": "Reparación",
+                "REPAIR": "Punto de venta",
                 "UNRECOGNIZABLE": "No capitalizados",
                 "WAREHOUSE": "Buen estado",
                 "WARRANTY": "Garantías"
@@ -103,7 +104,7 @@
             "MASSIVE": "Masiva",
             "NEW": "Nuevos",
             "WARRANTIES": "Garantías",
-            "REPAIR": "Reparación",
+            "REPAIR": "Punto de venta",
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
             "WAREHOUSE": "Buen estado",
@@ -168,7 +169,7 @@
             }
         },
         "REPAIR": {
-            "TITLE": "Entrada de reparación",
+            "TITLE": "Entrada de Punto de venta",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
