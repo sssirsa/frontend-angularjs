@@ -54,10 +54,10 @@
                 {{entry._id}}
             </span>
             <div ng-if="entry.tipo_entrada==='Nuevos'" class="new-entries selectable-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Reparacion'" class="repair-entries selectable-filter"></div>
-            <div ng-if="entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries selectable-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Almacen'" class="warehouse-entries selectable-filter"></div>
-            <div ng-if="entry.tipo_entrada==='Garantias'" class="warranty-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Punto de venta'" class="repair-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='No capitalizados'" class="unrecognizable-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Buen estado'" class="warehouse-entries selectable-filter"></div>
+            <div ng-if="entry.tipo_entrada==='Garantías'" class="warranty-entries selectable-filter"></div>
             <span>
                 <strong translate="">ENTRIES.LIST.LABELS.KIND</strong>
                 {{entry.tipo_entrada}}

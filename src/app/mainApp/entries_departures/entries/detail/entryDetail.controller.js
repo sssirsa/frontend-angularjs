@@ -107,7 +107,7 @@
                     .detail(vm.entryId)
                     .then(function (entry) {
                         vm.entry = entry;
-                        loadAssetStatus();
+                        //loadAssetStatus();
                     })
                     .catch(function (entryError) {
                         ErrorHandler.errorTranslate(entryError);
@@ -115,7 +115,7 @@
             }
             else {
                 vm.entry = $stateParams.entry;
-                loadAssetStatus();
+                //loadAssetStatus();
             }
         }
 

@@ -6,19 +6,17 @@
     </md-card>
     <md-card ng-if="vm.entry">
         <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
-            layout-align="center center" layout-padding ng-class="(!vm.entry.confirmada )? 'not-confirmed-entry' : ''">
+            layout-align="center center" layout-padding>
 
-            <strong class="not_confirmed_entry" ng-if="!vm.entry.confirmada"
-                translate>ENTRIES.DETAIL.LABELS.NOT_CONFIRMED_ENTRY</strong>
             <span>
                 <strong translate="">ENTRIES.DETAIL.LABELS.ID</strong>
-                {{vm.entry.id}}
+                {{vm.entry._id}}
             </span>
             <div ng-if="vm.entry.tipo_entrada==='Nuevos'" class="new-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Reparacion'" class="repair-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='No_Capitalizados'" class="unrecognizable-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Almacen'" class="warehouse-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Garantias'" class="warranty-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Punto de venta'" class="repair-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='No Capitalizados'" class="unrecognizable-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Buen estado'" class="warehouse-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Garantías'" class="warranty-entries entries-filter"></div>
             <span>
                 <strong translate="">ENTRIES.DETAIL.LABELS.KIND</strong>
                 {{vm.entry.tipo_entrada}}
@@ -131,22 +129,17 @@
         <md-virtual-repeat-container class="cabinet-container">
             <md-list>
                 <!--Pending and confirmed assets-->
-                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.assets">
+                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.entry.cabinets">
                     <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
-                        layout-align="center stretch" ng-if="element.estado!=='Faltante'" class="full-width">
+                        layout-align="center stretch" class="full-width">
                         <!--Normal asset-->
-                        <div layout="column" ng-if="element.cabinet" layout-align="center center">
+                        <div layout="column" ng-if="element.economico" layout-align="center center">
                             <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
-                            {{element.cabinet}}
+                            {{element.economico}}
                         </div>
-                        <!--Unrecognizable asset-->
-                        <div layout="column" ng-if="element.no_capitalizado" layout-align="center center">
-                            <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
-                            {{element.no_capitalizado}}
-                        </div>
-                        <div layout="column" layout-align="center center">
-                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
-                            {{element.estado}}
+                        <div layout="column" ng-if="element.modelo" layout-align="center center">
+                            <b>{{'ENTRIES.DETAIL.LABELS.MODEL'|translate}}</b>
+                            {{element.modelo.nombre}}
                         </div>
                         <md-actions layout="row" layout-align="end center"
                             ng-if="!vm.entry.cerrada && element.estado==='Pendiente'">
@@ -155,33 +148,6 @@
                                 aria-label="remove cabinet" class="md-warn md-raised">
                                 <md-icon md-font-icon="fa fa-times"></md-icon>
                                 <span translate>ENTRIES.DETAIL.BUTTONS.MISSING</span>
-                            </md-button>
-                        </md-actions>
-                    </section>
-                    <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
-                        layout-align="center stretch" ng-if="element.estado==='Faltante'"
-                        class="full-width not-found-cabinet">
-                        <!--Normal asset-->
-                        <div layout="column" ng-if="element.cabinet" layout-align="center center">
-                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET'|translate}}</b>
-                            {{element.cabinet}}
-                        </div>
-                        <!--Unrecognizable asset-->
-                        <div layout="column" ng-if="element.no_capitalizado" layout-align="center center">
-                            <b>{{'ENTRIES.DETAIL.LABELS.UNRECOGNIZABLE'|translate}}</b>
-                            {{element.no_capitalizado}}
-                        </div>
-                        <div layout="column" layout-align="center center">
-                            <b>{{'ENTRIES.DETAIL.LABELS.ASSET_STATUS'|translate}}</b>
-                            {{element.estado}}
-                        </div>
-                        <md-actions layout="row" layout-align="end center"
-                            ng-if="!vm.entry.cerrada && element.estado==='Faltante'">
-                            <md-button
-                                ng-click="$event.stopPropagation(); vm.unsetAssetAsMissing(element.cabinet, $index)"
-                                aria-label="remove cabinet" class="md-warn md-raised">
-                                <md-icon md-font-icon="fa fa-check"></md-icon>
-                                <span translate>ENTRIES.DETAIL.BUTTONS.UNMISSING</span>
                             </md-button>
                         </md-actions>
                     </section>
