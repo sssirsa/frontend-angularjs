@@ -74,9 +74,9 @@
                 <span translate>ENTRIES.LIST.LABELS.CLOSED</span>
             </span>
 
-            <span ng-if="entry.fecha">
+            <span ng-if="entry.fecha_hora">
                 <strong translate>ENTRIES.LIST.LABELS.DATE</strong>
-                <span>{{entry.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                <span>{{entry.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <span ng-if="entry.pedimento" layout-margin>
                 <strong translate>ENTRIES.LIST.LABELS.ORDER</strong>
@@ -91,15 +91,23 @@
             </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="entry.operador_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
+                    <span>{{entry.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="entry.nombre_chofer" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
                     <span>{{entry.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="entry.linea_transporte.razon_social" layout-padding>
+                <span flex="33" ng-if="entry.tipo_transporte" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{entry.linea_transporte.razon_social}}</span>
+                    <span>{{entry.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="entry.tipo_transporte.descripcion" layout-padding>
+                <span flex="33" ng-if="entry.operador_transporte&&!entry.tipo_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{entry.operador_transporte.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="entry.tipo_transporte" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{entry.tipo_transporte.descripcion}}</span>
                 </span>

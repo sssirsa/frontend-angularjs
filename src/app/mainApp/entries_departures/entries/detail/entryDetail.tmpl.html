@@ -26,33 +26,48 @@
             <!--Open or closed entry-->
             <span ng-if="!vm.entry.cerrada">
                 <md-icon md-font-icon="fa fa-lock-open"></md-icon>
-                <span translate>ENTRIES.DETAIL.LABELS.OPEN</span>
+                <span translate>ENTRIES.LIST.LABELS.OPEN</span>
             </span>
             <span ng-if="vm.entry.cerrada">
                 <md-icon md-font-icon="fa fa-lock"></md-icon>
-                <span translate>ENTRIES.DETAIL.LABELS.CLOSED</span>
+                <span translate>ENTRIES.LIST.LABELS.CLOSED</span>
             </span>
 
-            <span ng-if="vm.entry.fecha">
-                <strong translate>ENTRIES.DETAIL.LABELS.DATE</strong>
-                <span>{{vm.entry.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            <span ng-if="vm.entry.fecha_hora">
+                <strong translate>ENTRIES.LIST.LABELS.DATE</strong>
+                <span>{{vm.entry.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <span ng-if="vm.entry.pedimento" layout-margin>
-                <strong translate>ENTRIES.DETAIL.LABELS.ORDER</strong>
+                <strong translate>ENTRIES.LIST.LABELS.ORDER</strong>
                 <span>{{vm.entry.pedimento}}</span>
             </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="vm.entry.cabinets" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{vm.entry.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="vm.entry.operador_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
+                    <span>{{vm.entry.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="vm.entry.nombre_chofer" layout-padding>
-                    <strong translate>ENTRIES.DETAIL.LABELS.DRIVER</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
                     <span>{{vm.entry.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="vm.entry.linea_transporte.razon_social" layout-padding>
-                    <strong translate>ENTRIES.DETAIL.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{vm.entry.linea_transporte.razon_social}}</span>
+                <span flex="33" ng-if="vm.entry.tipo_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.entry.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="vm.entry.tipo_transporte.descripcion" layout-padding>
-                    <strong translate>ENTRIES.DETAIL.LABELS.TRANSPORT_KIND</strong>
+                <span flex="33" ng-if="vm.entry.operador_transporte&&!entry.tipo_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.entry.operador_transporte.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="vm.entry.tipo_transporte" layout-padding>
+                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{vm.entry.tipo_transporte.descripcion}}</span>
                 </span>
             </section>
@@ -61,44 +76,44 @@
             <div>
                 <!--Origin section-->
                 <span ng-if="vm.entry.establecimiento_origen" layout-margin>
-                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_STORE</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_STORE</strong>
                     <span>{{vm.entry.establecimiento_origen.nombre_establecimiento}}</span>
                 </span>
                 <span ng-if="vm.entry.proveedor_origen" layout-margin>
-                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_PROVIDER</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_PROVIDER</strong>
                     <span>{{vm.entry.proveedor_origen.razon_social}}</span>
                 </span>
                 <span ng-if="vm.entry.udn_origen" layout-margin>
-                    <strong translate>ENTRIES.DETAIL.LABELS.ORIGIN_AGENCY</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.ORIGIN_AGENCY</strong>
                     <span>{{vm.entry.udn_origen.agencia}}</span>
                 </span>
             </div>
             <div>
                 <!--Destination section-->
                 <span ng-if="vm.entry.sucursal_destino" layout-margin>
-                    <strong translate>ENTRIES.DETAIL.LABELS.DESTINATION_SUBSIDIARY</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
                     <span>{{vm.entry.sucursal_destino.nombre}}</span>
                 </span>
                 <span ng-if="vm.entry.udn_destino" layout-margin>
-                    <strong translate>ENTRIES.DETAIL.LABELS.DESTINATION_AGENCY</strong>
+                    <strong translate>ENTRIES.LIST.LABELS.DESTINATION_AGENCY</strong>
                     <span>{{vm.entry.udn_destino.agencia}}</span>
                 </span>
             </div>
         </section>
         <span ng-if="vm.entry.descripcion" layout-margin>
-            <strong translate>ENTRIES.DETAIL.LABELS.DESCRIPTION</strong>
+            <strong translate>ENTRIES.LIST.LABELS.DESCRIPTION</strong>
             <span>{{vm.entry.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
             <!--Allow adding cabinets just if the entry is still open-->
-            <md-button aria-label="Add asset button"
+            <md-button aria-label="Add asset button" disabled="true"
                 permission-only="['entries_departures__entries__add_cabinet_entries']"
                 ng-click="vm.addAssetClicked();$event.stopPropagation() " ng-if="!vm.entry.cerrada" class="md-raised">
                 <md-icon md-font-icon="fa fa-plus"></md-icon>
                 <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.ADD_ASSET"|translate}}</span>
             </md-button>
             <!--Allow closing just if the entry is still open-->
-            <md-button aria-label="close vm.entry button"
+            <md-button aria-label="close vm.entry button" disabled="true"
                 permission-only="['entries_departures__entries__close_entries']"
                 cg-busy="{promise:vm.closingEntry, message:' '}"
                 ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()" ng-if="!vm.entry.cerrada"
