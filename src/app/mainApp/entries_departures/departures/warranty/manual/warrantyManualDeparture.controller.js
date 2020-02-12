@@ -23,6 +23,7 @@
         vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
+        vm.user;
 
         //Validations
         vm.imageConstraints = {
@@ -46,16 +47,16 @@
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.warrantyDeparture.catalogues();
 
-            var user = User.getUser();
+            vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
-            vm.showSelector = !user['sucursal'] && !user['udn'];
+            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal']._id : null;
-            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn']._id : null;
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal']._id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn']._id : null;
         };
-
-        vm.init();
+        
+        vm.user['sucursal'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 

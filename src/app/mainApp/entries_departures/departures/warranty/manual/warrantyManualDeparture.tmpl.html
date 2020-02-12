@@ -1,5 +1,10 @@
 
-<md-card layout-padding>
+<md-card ng-if="!vm.canView">
+    <h3 translate>DEPARTURES.WARRANTY.ERRORS.SUBSIDIARY_USER</h3>
+</md-card>
+<md-card layout-padding
+ng-if="vm.canView"
+>
     <div layout="column"
          layout-align="center center">
         <h1 translate>DEPARTURES.WARRANTY.TITLE</h1>

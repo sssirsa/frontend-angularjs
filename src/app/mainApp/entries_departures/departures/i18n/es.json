@@ -179,7 +179,8 @@
                 "STATUS_IS": "su estado es",
                 "STAGE_ERROR": "El cabinet no puede salir de esta etapa",
                 "AT_STAGE": "se encuentra en la etapa",
-                "IS_AT": "se encuentra en"
+                "IS_AT": "se encuentra en",
+                "SUBSIDIARY_USER":"Un usuario de sucursal no puede realizar salida de garantías, para movimientos internos utilice cambios"
             }
         },
         "OBSOLETE": {

@@ -95,6 +95,7 @@
                         response.can_leave = true;
                         response.subsidiary = fridge.sucursal;
                         response.agency = fridge.udn;
+                        response.status= fridge.estatus_unilever;
                     }
                     response.can_enter = false;
                     deferred.resolve(response);
