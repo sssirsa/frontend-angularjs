@@ -51,8 +51,8 @@
             vm.showSelector = !user['sucursal'] && !user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal'].id : null;
-            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn'].id : null;
+            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal']._id : null;
+            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn']._id : null;
         };
 
         vm.init();
@@ -101,10 +101,7 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID,
-                                vm.departure[vm.catalogues['subsidiary'].binding],
-                                vm.departure[vm.catalogues['udn'].binding]
-                            ),
+                            .getCabinet(cabinetID),
                         cabinet: null,
                         id: null,
                         can_leave: null,
