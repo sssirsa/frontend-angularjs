@@ -142,35 +142,35 @@
                                         : false)
                                 ) {
                                     //The subsidiary or agency of the asset is the same as departure's
-                                    if (cabinetSuccessCallback['entrance_kind'] === vm.departure['tipo_salida']) {
-                                        //The departure matches the entrance kind
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
-                                            // if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
-                                            //Cabinet entry has been confirmed
+                                    //if (cabinetSuccessCallback['entrance_kind'] === vm.departure['tipo_salida']) {
+                                    //The departure matches the entrance kind
+                                    if (cabinetSuccessCallback['can_leave']) {
+                                        //The cabinet doesn't have internal restrictions to leave
+                                        // if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                        //Cabinet entry has been confirmed
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-                                            // }
-                                            // else {
-                                            //     toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
-                                            //     vm.removeCabinet(cabinetID);
-                                            // }
-                                        }
-                                        else {
-                                            toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                        //Finally add the cabinet to the list
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                        cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                        cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        // }
+                                        // else {
+                                        //     toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
                                     }
                                     else {
-                                        toastr.error(
-                                            Translate.translate('DEPARTURES.NEW.ERRORS.WRONG_DEPARTURE_KIND')
-                                            , cabinetSuccessCallback.cabinet.economico
-                                        );
+                                        toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
                                         vm.removeCabinet(cabinetID);
                                     }
+                                    //}
+                                    // else {
+                                    //     toastr.error(
+                                    //         Translate.translate('DEPARTURES.NEW.ERRORS.WRONG_DEPARTURE_KIND')
+                                    //         , cabinetSuccessCallback.cabinet.economico
+                                    //     );
+                                    //     vm.removeCabinet(cabinetID);
+                                    // }
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector. 
