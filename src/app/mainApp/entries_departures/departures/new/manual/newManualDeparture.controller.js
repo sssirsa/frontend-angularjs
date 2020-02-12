@@ -108,8 +108,8 @@
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
                             .getCabinet(cabinetID,
-                            vm.departure[vm.catalogues['subsidiary'].binding],
-                            vm.departure[vm.catalogues['udn'].binding]
+                                vm.departure[vm.catalogues['subsidiary'].binding],
+                                vm.departure[vm.catalogues['udn'].binding]
                             ),
                         cabinet: null,
                         id: null,
@@ -147,12 +147,12 @@
                                         if (cabinetSuccessCallback['can_leave']) {
                                             //The cabinet doesn't have internal restrictions to leave
                                             // if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
-                                                //Cabinet entry has been confirmed
+                                            //Cabinet entry has been confirmed
 
-                                                //Finally add the cabinet to the list
-                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            //Finally add the cabinet to the list
+                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                             // }
                                             // else {
                                             //     toastr.error(Translate.translate('DEPARTURES.NEW.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);

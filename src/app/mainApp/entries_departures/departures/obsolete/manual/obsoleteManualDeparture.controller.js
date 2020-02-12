@@ -143,7 +143,7 @@
                                         if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : true) {
                                             //Just depart from this departure if the asset if obsolete
                                             //Also validate stage existence, or no stage
-                                            if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' || cabinetSuccessCallback['status'].code === '0008' : false) {
+                                            if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
                                                 //Obsolete or pending obsolete status
 
                                                 //Finally add the cabinet to the list
