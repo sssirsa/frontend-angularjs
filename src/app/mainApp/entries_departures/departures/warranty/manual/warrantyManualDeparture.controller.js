@@ -138,50 +138,50 @@
                                     //The subsidiary or agency of the asset is the same as departure's
                                     if (cabinetSuccessCallback['can_leave']) {
                                         //The cabinet doesn't have internal restrictions to leave
-                                        if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
-                                            //Cabinet entry has been confirmed
-                                            if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa !== 'Obsoleto' : true) {
-                                                //Just avoid depart from this departure if the asset if obsolete
-                                                //Also validate stage existence
-                                                //No stage just applies to Agency
-                                                if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0003' : false) {
-                                                    //Finally add the cabinet to the list
-                                                    cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                                    cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                                    cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-                                                }
-                                                else {
-                                                    //Building error message
-                                                    var statusMessage =
-                                                        Translate.translate('DEPARTURES.WARRANTY.ERRORS.WRONG_STATUS');
-                                                    //Just add status info if available
-                                                    cabinetSuccessCallback['status'] ? statusMessage = statusMessage
-                                                        + ', ' + Translate.translate('DEPARTURES.WARRANTY.ERRORS.STATUS_IS')
-                                                        + ': ' + cabinetSuccessCallback['status'].code
-                                                        + '-' + cabinetSuccessCallback['status'].descripcion
-                                                        : null;
+                                        //if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                        //Cabinet entry has been confirmed
+                                        // if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa !== 'Obsoleto' : true) {
+                                        //Just avoid depart from this departure if the asset if obsolete
+                                        //Also validate stage existence
+                                        //No stage just applies to Agency
+                                        //if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0003' : false) {
+                                        //Finally add the cabinet to the list
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                        cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                        cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        //}
+                                        // else {
+                                        //     //Building error message
+                                        //     var statusMessage =
+                                        //         Translate.translate('DEPARTURES.WARRANTY.ERRORS.WRONG_STATUS');
+                                        //     //Just add status info if available
+                                        //     cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                        //         + ', ' + Translate.translate('DEPARTURES.WARRANTY.ERRORS.STATUS_IS')
+                                        //         + ': ' + cabinetSuccessCallback['status'].code
+                                        //         + '-' + cabinetSuccessCallback['status'].descripcion
+                                        //         : null;
 
-                                                    toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
-                                                    vm.removeCabinet(cabinetID);
-                                                }
-                                            }
-                                            else {
-                                                var message = Translate.translate('DEPARTURES.WARRANTY.ERRORS.STAGE_ERROR');
-                                                if (cabinetSuccessCallback['stage']) {
-                                                    message = message
-                                                        + ', '
-                                                        + Translate.translate('DEPARTURES.WARRANTY.ERRORS.AT_STAGE')
-                                                        + ' '
-                                                        + cabinetSuccessCallback['stage'].nombre;
-                                                }
-                                                toastr.error(message, cabinetSuccessCallback.cabinet.economico);
-                                                vm.removeCabinet(cabinetID);
-                                            }
-                                        }
-                                        else {
-                                            toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                        //     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
+                                        //    }
+                                        // else {
+                                        //     var message = Translate.translate('DEPARTURES.WARRANTY.ERRORS.STAGE_ERROR');
+                                        //     if (cabinetSuccessCallback['stage']) {
+                                        //         message = message
+                                        //             + ', '
+                                        //             + Translate.translate('DEPARTURES.WARRANTY.ERRORS.AT_STAGE')
+                                        //             + ' '
+                                        //             + cabinetSuccessCallback['stage'].nombre;
+                                        //     }
+                                        //     toastr.error(message, cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
+                                        // }
+                                        // else {
+                                        //     toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
                                     }
                                     else {
                                         toastr.error(Translate.translate('DEPARTURES.WARRANTY.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
@@ -336,7 +336,7 @@
             }
             return departure;
         };
-        
+
         //Tab functions
 
         vm.previousTab = function () {
