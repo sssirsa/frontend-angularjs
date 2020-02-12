@@ -27,6 +27,7 @@
 
         var entries = URLS.entries_departures.entries;
         var inventory = URLS.management.inventory;
+        var management = URLS.management;
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -95,6 +96,7 @@
                 cabinet: null
             };
             managementUrl
+                .all(management.catalogues.base)
                 .all(inventory.cabinet)
                 .customGET(id)
                 .then(function (fridge) {
@@ -538,6 +540,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.management.catalogues.cabinet_brand,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
