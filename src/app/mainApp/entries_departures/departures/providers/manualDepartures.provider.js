@@ -482,13 +482,13 @@
                         binding: 'proveedor_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.supplier,
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUPPLIER'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: '_id',
-                            option: 'razon_social'
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.SUPPLIER'),
                         icon: 'fas fas-box',
