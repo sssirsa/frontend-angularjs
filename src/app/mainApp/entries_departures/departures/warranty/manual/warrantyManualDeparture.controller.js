@@ -23,6 +23,7 @@
         vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
+        vm.user;
 
         //Validations
         vm.imageConstraints = {
@@ -46,16 +47,16 @@
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.warrantyDeparture.catalogues();
 
-            var user = User.getUser();
+            vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
-            vm.showSelector = !user['sucursal'] && !user['udn'];
+            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal'].id : null;
-            user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn'].id : null;
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal']._id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn']._id : null;
         };
-
-        vm.init();
+        
+        vm.user['sucursal'] ? vm.canView = false : vm.init();
 
         //Controller global functions
 
@@ -101,10 +102,7 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID,
-                                vm.departure[vm.catalogues['subsidiary'].binding],
-                                vm.departure[vm.catalogues['udn'].binding]
-                            ),
+                            .getCabinet(cabinetID),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -127,11 +125,11 @@
                                 //a.k.a. The cabinet exists in the selected subsidiary or agency
                                 if (
                                     (cabinetSuccessCallback['subsidiary']
-                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        ? cabinetSuccessCallback['subsidiary']._id
                                         === vm.departure[vm.catalogues['subsidiary'].binding]
                                         : false)
                                     || (cabinetSuccessCallback['agency']
-                                        ? cabinetSuccessCallback['agency'].id
+                                        ? cabinetSuccessCallback['agency']._id
                                         === vm.departure[vm.catalogues['udn'].binding]
                                         : false)
                                 ) {

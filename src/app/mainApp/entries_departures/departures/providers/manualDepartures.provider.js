@@ -22,13 +22,10 @@
             .all(URLS.management.inventory.base);
         var managementUrl = API
             .all(URLS.management.base);
-        var technicalUrl = API
-            .all(URLS.technical_service.base);
 
         var departures = URLS.entries_departures.departures;
         var inventory = URLS.management.inventory;
         var management = URLS.management;
-        var service = URLS.technical_service.services;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -61,7 +58,7 @@
             return departuresUrl.all(departures.close).all(id).customPUT(element);
         }
 
-        function getCabinet(id, subsidiary, agency) {
+        function getCabinet(id) {
             /*
              * RETURNS
              *   -Cabinet exists in database and can leave (Restriction, subsidiary and agency validation)
@@ -96,6 +93,9 @@
                     if (fridge.sucursal || fridge.udn) {
                         //Located in any place
                         response.can_leave = true;
+                        response.subsidiary = fridge.sucursal;
+                        response.agency = fridge.udn;
+                        response.status= fridge.estatus_unilever;
                     }
                     response.can_enter = false;
                     deferred.resolve(response);
@@ -343,19 +343,8 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
                             name: Translate.translate('DEPARTURES.NEW.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.NEW.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -370,19 +359,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
                             name: Translate.translate('DEPARTURES.NEW.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('DEPARTURES.NEW.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
@@ -397,19 +375,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
                             name: Translate.translate('DEPARTURES.NEW.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('DEPARTURES.NEW.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
@@ -424,19 +391,8 @@
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('DEPARTURES.NEW.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('DEPARTURES.NEW.HINTS.AGENCY'),
                         icon: 'fa fa-building',
@@ -467,19 +423,8 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -494,19 +439,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
@@ -521,19 +455,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
@@ -548,19 +471,8 @@
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
@@ -570,24 +482,13 @@
                         binding: 'proveedor_destino_id',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.inventory.base
-                                + '/' + URLS.inventory.catalogues.base
-                                + '/' + URLS.inventory.catalogues.supplier,
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
                             name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUPPLIER'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            },
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.SUPPLIER'),
                         icon: 'fas fas-box',
@@ -618,19 +519,8 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -645,19 +535,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
@@ -672,19 +551,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
@@ -699,19 +567,8 @@
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.AGENCY'),
                         icon: 'fa fa-building',
@@ -726,19 +583,8 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
                             name: Translate.translate('DEPARTURES.WARRANTY.LABELS.DESTINATION_SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.DESTINATION_SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -769,19 +615,8 @@
                                 + '/' + URLS.management.catalogues.subsidiary,
                             name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.SUBSIDIARY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'nombre',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'nombre'
                         },
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
@@ -796,19 +631,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_line,
                             name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.TRANSPORT_LINE'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'razon_social',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'razon_social'
                         },
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.TRANSPORT_LINE'),
                         icon: 'fa fa-pallet',
@@ -823,19 +647,8 @@
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
                             name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'descripcion',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'descripcion'
                         },
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
@@ -850,19 +663,8 @@
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.AGENCY'),
                         icon: 'fa fa-building',
@@ -877,19 +679,8 @@
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('DEPARTURES.WAREHOUSE.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
-                            model: 'id',
-                            option: 'agencia',
-                            elements: 'results',
-                            softDelete: {
-                                hide: 'deleted',
-                                reverse: false
-                            },
-                            pagination: {
-                                total: PAGINATION.total,
-                                limit: PAGINATION.limit,
-                                offset: PAGINATION.offset,
-                                pageSize: PAGINATION.pageSize
-                            }
+                            model: '_id',
+                            option: 'agencia'
                         },
                         hint: Translate.translate('DEPARTURES.WAREHOUSE.HINTS.AGENCY'),
                         icon: 'fa fa-building',

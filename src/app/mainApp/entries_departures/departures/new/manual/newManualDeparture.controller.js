@@ -50,8 +50,8 @@
             vm.catalogues = MANUAL_DEPARTURES.newDeparture.catalogues();
             //Determining whether or not to show the Subsidiary selector.
             vm.showSubsidiarySelector = !vm.user['sucursal'];
-            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal'].id : null;
-            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn'].id : null;
+            vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal']._id : null;
+            vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn']._id : null;
 
         };
 
@@ -107,10 +107,7 @@
                 else {
                     var cabinetToAdd = {
                         promise: MANUAL_DEPARTURES
-                            .getCabinet(cabinetID,
-                                vm.departure[vm.catalogues['subsidiary'].binding],
-                                vm.departure[vm.catalogues['udn'].binding]
-                            ),
+                            .getCabinet(cabinetID),
                         cabinet: null,
                         id: null,
                         can_leave: null,
@@ -133,11 +130,11 @@
                                 //a.k.a. The cabinet exists in any subsidiary or agency
                                 if (
                                     (cabinetSuccessCallback['subsidiary']
-                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        ? cabinetSuccessCallback['subsidiary']._id
                                         === vm.departure[vm.catalogues['subsidiary'].binding]
                                         : false)
                                     || (cabinetSuccessCallback['agency']
-                                        ? cabinetSuccessCallback['agency'].id
+                                        ? cabinetSuccessCallback['agency']._id
                                         === vm.departure[vm.catalogues['udn'].binding]
                                         : false)
                                 ) {

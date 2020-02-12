@@ -179,7 +179,8 @@
                 "STATUS_IS": "su estado es",
                 "STAGE_ERROR": "El cabinet no puede salir de esta etapa",
                 "AT_STAGE": "se encuentra en la etapa",
-                "IS_AT": "se encuentra en"
+                "IS_AT": "se encuentra en",
+                "SUBSIDIARY_USER":"Un usuario de sucursal no puede realizar salida de garantías, para movimientos internos utilice cambios"
             }
         },
         "OBSOLETE": {
@@ -207,7 +208,8 @@
                     "TRUE": "Salida desde una UDN-Agencia",
                     "FALSE": "Salida desde una sucursal"
                 },
-                "DESTINATION_SUBSIDIARY": "Sucursal destino"
+                "DESTINATION_SUBSIDIARY": "Sucursal destino",
+                "SUPPLIER":"Proveedor destino"
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
@@ -217,7 +219,8 @@
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
-                "DESTINATION_SUBSIDIARY": "Seleccione la sucursal destino"
+                "DESTINATION_SUBSIDIARY": "Seleccione la sucursal destino",
+                "SUPPLIER":"Selecciona el proveedor destino"
             },
             "BUTTONS": {
                 "NEXT": "Siguiente",

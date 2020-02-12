@@ -1,5 +1,10 @@
 
-<md-card layout-padding>
+<md-card ng-if="!vm.canView">
+    <h3 translate>DEPARTURES.WARRANTY.ERRORS.SUBSIDIARY_USER</h3>
+</md-card>
+<md-card layout-padding
+ng-if="vm.canView"
+>
     <div layout="column"
          layout-align="center center">
         <h1 translate>DEPARTURES.WARRANTY.TITLE</h1>
@@ -231,23 +236,6 @@
                                type="text">
                         <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DRIVER_NAME</div>
                     </md-input-container>
-                    <md-input-container layout="column"
-                                        layout-align="start center"
-                                        class="md-icon-float md-block full-width">
-                        <div layout="row"
-                             layout-align="start center">
-                            <div>
-                                <md-icon class="far fa-id-card"></md-icon>
-                            </div>
-                            <div translate>DEPARTURES.WARRANTY.LABELS.DRIVER_ID</div>
-                        </div>
-                        <file-uploader files-selected="vm.selectDriverID(files)"
-                                       file-formats="'image/*'"
-                                       validations="vm.imageConstraints.validations"
-                                       resize-if="vm.imageConstraints.resizeIf"
-                                       resize="vm.imageConstraints.resize"></file-uploader>
-                        <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DRIVER_ID</div>
-                    </md-input-container>
                 </div>
             </form>
             <md-actions layout="row"
@@ -267,7 +255,7 @@
                                      }"
                            aria-label="previous tab"
                            class="md-primary md-raised"
-                           ng-disabled="departureForm.$invalid ||!vm.departure['ife_chofer']">
+                           ng-disabled="departureForm.$invalid">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'DEPARTURES.WARRANTY.BUTTONS.SAVE'|translate}}</div>

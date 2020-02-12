@@ -355,6 +355,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.SUBSIDIARY'),
@@ -405,6 +406,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.AGENCY'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
@@ -437,6 +439,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.SUBSIDIARY'),
@@ -487,6 +490,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.AGENCY'),
@@ -525,6 +529,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUBSIDIARY'),
@@ -540,7 +545,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.cabinet_brand,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.SUPPLIER'),
@@ -589,6 +594,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.AGENCY'),
@@ -768,6 +774,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.SUBSIDIARY'),
@@ -818,6 +825,7 @@
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.AGENCY'),
