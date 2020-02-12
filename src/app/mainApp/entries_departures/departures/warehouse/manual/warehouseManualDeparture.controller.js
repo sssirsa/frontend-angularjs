@@ -141,7 +141,7 @@
                                     //The subsidiary or agency of the asset is the same as departure's
                                     if (cabinetSuccessCallback['can_leave']) {
                                         //The cabinet doesn't have internal restrictions to leave
-                                        if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                        //if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                             //Cabinet entry has been confirmed
                                             if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
                                                 //Finally add the cabinet to the list
@@ -163,11 +163,11 @@
                                                 toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
                                                 vm.removeCabinet(cabinetID);
                                             }
-                                        }
-                                        else {
-                                            toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                        //}
+                                        // else {
+                                        //     toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
                                     }
                                     else {
                                         toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
