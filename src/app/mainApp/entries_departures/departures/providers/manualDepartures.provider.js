@@ -22,13 +22,10 @@
             .all(URLS.management.inventory.base);
         var managementUrl = API
             .all(URLS.management.base);
-        var technicalUrl = API
-            .all(URLS.technical_service.base);
 
         var departures = URLS.entries_departures.departures;
         var inventory = URLS.management.inventory;
         var management = URLS.management;
-        var service = URLS.technical_service.services;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -96,6 +93,8 @@
                     if (fridge.sucursal || fridge.udn) {
                         //Located in any place
                         response.can_leave = true;
+                        response.subsidiary = fridge.sucursal;
+                        response.agency = fridge.udn;
                     }
                     response.can_enter = false;
                     deferred.resolve(response);

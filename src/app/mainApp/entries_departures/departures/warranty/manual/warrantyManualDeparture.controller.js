@@ -127,11 +127,11 @@
                                 //a.k.a. The cabinet exists in the selected subsidiary or agency
                                 if (
                                     (cabinetSuccessCallback['subsidiary']
-                                        ? cabinetSuccessCallback['subsidiary'].id
+                                        ? cabinetSuccessCallback['subsidiary']._id
                                         === vm.departure[vm.catalogues['subsidiary'].binding]
                                         : false)
                                     || (cabinetSuccessCallback['agency']
-                                        ? cabinetSuccessCallback['agency'].id
+                                        ? cabinetSuccessCallback['agency']._id
                                         === vm.departure[vm.catalogues['udn'].binding]
                                         : false)
                                 ) {
