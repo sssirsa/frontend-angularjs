@@ -25,9 +25,9 @@
         var technicalUrl = API
             .all(URLS.technical_service.base);
 
-        var control = URLS.management.control;
         var departures = URLS.entries_departures.departures;
         var inventory = URLS.management.inventory;
+        var management = URLS.management;
         var service = URLS.technical_service.services;
 
         function createNew(element) {
@@ -87,108 +87,21 @@
                 stage: null,
                 subsidiary: null
             };
-            getCabinetInSubsidiary(id)
-                .then(function cabinetsInSubsiadiarySuccessCallback(apiResponse) {
-                    //Cabinet exists in subsidiary
-                    var cabinetCanLeave = true;
-                    //Response filling
-                    response['subsidiary'] = apiResponse['sucursal'];
-                    response['agency'] = apiResponse['udn'];
-                    response['inspection'] = apiResponse['inspeccionado'];
-                    response['status'] = apiResponse['estatus_cabinet'];
-                    response.entrance_kind = apiResponse['tipo_entrada'];
-                    response['status'] = apiResponse['estatus_cabinet'];
-
-                    //If subsidiary or agency are sent, then further validations are done to the cabinet
-                    //Validating subsidiary of the cabinet
-                    if (subsidiary) {
-                        if (apiResponse['sucursal'] ? apiResponse['sucursal'].id !== subsidiary : false) {
-                            cabinetCanLeave = false;
-                        }
+            managementUrl
+                .all(management.catalogues.base)
+                .all(inventory.cabinet)
+                .customGET(id)
+                .then(function (fridge) {
+                    response.cabinet = fridge;
+                    if (fridge.sucursal || fridge.udn) {
+                        //Located in any place
+                        response.can_leave = true;
                     }
-                    //Validating agency of the cabinet
-                    if (agency) {
-                        if (apiResponse['udn'] ? apiResponse['udn'].id !== agency : null) {
-                            cabinetCanLeave = false;
-                        }
-                    }
-
-                    //Validating cabinet restriction
-                    if (apiResponse['impedimento']) {
-                        cabinetCanLeave = false;
-                        response['restricion'] = apiResponse['impedimento'];
-                    }
-
-                    if (cabinetCanLeave) {
-                        //Getting cabinet full information
-                        inventoryUrl.all(inventory.cabinet).all(id).customGET()
-                            .then(function cabinetSuccessCallback(apiCabinet) {
-                                //Full cabinet information
-                                response.cabinet = apiCabinet;
-
-                                //Cabinet can leave
-                                if (cabinetCanLeave) {
-                                    response.can_leave = true;
-                                }
-
-                                //Cabinet can't leave
-                                else {
-                                    response.can_leave = false;
-                                }
-
-                                //Getting cabinet stage
-                                getCabinetStage(id)
-                                    .then(function stageSuccessCallback(stageResponse) {
-                                        if (stageResponse[PAGINATION.elements].length > 0) {
-                                            //There is a result, we just care abput the first one
-                                            //bacause there should only be one
-                                            var results = stageResponse[PAGINATION.elements];
-                                            var service = results[0];
-                                            response['stage'] = service.etapa_actual.etapa;
-                                        }
-                                    })
-                                    .catch(function stageErrorCallback() {
-                                        //Error getting the stage
-                                        response['stage'] = null;
-                                    })
-                                    .finally(function cabinetStageResolver() {
-                                        //Resolve the promise whether or not a current stage was found
-                                        deferred.resolve(response);
-                                    });
-
-                            })
-                            .catch(function cabinetErrorCallback(errorResponse) {
-                                //Cabinet in ohter subsidiary or agency, so it can't leave
-                                if (errorResponse.status === 404) {
-                                    //Cabinet doesn't exists
-                                    response.cabinet = { economico: id };
-                                    deferred.resolve(response);
-                                }
-                                else {
-                                    //Any other error from backend
-                                    deferred.reject(errorResponse);
-                                }
-                                deferred.reject(errorResponse);
-                            });
-                    }
-                    else {
-                        response.can_leave = false;
-                        response['cabinet'] = { economico: id };
-                        deferred.resolve(response);
-                    }
+                    response.can_enter = false;
+                    deferred.resolve(response);
                 })
-                .catch(function cabinetsInSubsiadiaryErrorCallback(apiResponseError) {
-                    //Cabinet doesn't exists in any subsidiary or agency, so it can't leave
-                    if (apiResponseError.status === 404) {
-                        //Cabinet doesn't exists
-                        response.cabinet = { economico: id };
-                        deferred.resolve(response);
-                    }
-                    else {
-                        //Any other error from backend
-                        deferred.reject(response);
-                    }
-                    deferred.reject(apiResponseError);
+                .catch(function (error) {
+                    deferred.reject(error);
                 });
 
             return deferred.promise;
@@ -396,26 +309,9 @@
 
         //Internal functions
 
-        function getCabinetInSubsidiary(id) {
-            return managementUrl
-                .all(control.base)
-                .all(control.cabinet_in_subsidiary)
-                .all(id).customGET();
-        }
-
         function getDeparturesByCabinet(id) {
             //TODO: Add behaviour when the URLs are provided
             return id;
-        }
-
-        function getCabinetStage(id) {
-            var query = service.service
-                + '?' + QUERIES.service.by_cabinet
-                + '=' + id;
-            return technicalUrl
-                .all(service.base)
-                .all(query)
-                .customGET();
         }
 
         function getCabinetInfo(id) {

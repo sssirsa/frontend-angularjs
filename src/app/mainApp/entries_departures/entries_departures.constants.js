@@ -23,6 +23,7 @@
                 all: 'all-departures',
                 new: 'new-departures',
                 obsolete: 'obsolete-departures',
+                salepoint:'salepoint-departures',
                 unrecognizable: 'no_labeled',
                 warehouse: 'warehouse-departures',
                 warranty: 'warranty-departures',
