@@ -125,8 +125,6 @@
                     cabinetToAdd
                         .promise
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
-                            console.log(cabinetSuccessCallback);
-                            console.log(vm.departure);
                             if (cabinetSuccessCallback['subsidiary']
                                 || cabinetSuccessCallback['agency']) {
                                 //a.k.a. The cabinet exists in any subsidiary or agency

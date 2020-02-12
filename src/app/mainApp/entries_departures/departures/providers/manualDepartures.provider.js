@@ -58,7 +58,7 @@
             return departuresUrl.all(departures.close).all(id).customPUT(element);
         }
 
-        function getCabinet(id, subsidiary, agency) {
+        function getCabinet(id) {
             /*
              * RETURNS
              *   -Cabinet exists in database and can leave (Restriction, subsidiary and agency validation)
