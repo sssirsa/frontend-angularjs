@@ -140,24 +140,33 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         //if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                         //Cabinet entry has been confirmed
-                                        if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        if (!cabinetSuccessCallback['cabinet'].nuevo) {
+                                            if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
+                                                //Finally add the cabinet to the list
+                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            }
+                                            else {
+                                                //Building error message
+                                                var statusMessage =
+                                                    Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_STATUS');
+                                                //Just add status info if available
+                                                cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                                    + ', ' + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STATUS_IS')
+                                                    + ': ' + cabinetSuccessCallback['status'].code
+                                                    + '-' + cabinetSuccessCallback['status'].descripcion
+                                                    : null;
+
+                                                toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                                vm.removeCabinet(cabinetID);
+                                            }
                                         }
                                         else {
-                                            //Building error message
-                                            var statusMessage =
-                                                Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_STATUS');
-                                            //Just add status info if available
-                                            cabinetSuccessCallback['status'] ? statusMessage = statusMessage
-                                                + ', ' + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STATUS_IS')
-                                                + ': ' + cabinetSuccessCallback['status'].code
-                                                + '-' + cabinetSuccessCallback['status'].descripcion
-                                                : null;
-
-                                            toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                            toastr.error(
+                                                Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_NEW')
+                                                , cabinetSuccessCallback.cabinet.economico
+                                            );
                                             vm.removeCabinet(cabinetID);
                                         }
                                         //}

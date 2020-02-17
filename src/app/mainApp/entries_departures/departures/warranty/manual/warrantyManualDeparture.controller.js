@@ -23,7 +23,8 @@
         vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
-        vm.user;
+
+        vm.user = User.getUser();
 
         //Validations
         vm.imageConstraints = {
@@ -46,8 +47,6 @@
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
             vm.catalogues = MANUAL_DEPARTURES.warrantyDeparture.catalogues();
-
-            vm.user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
             vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
 
