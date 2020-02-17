@@ -54,7 +54,7 @@
         }
 
         function detail(id) {
-            return entriesUrl.all(entries.all).all(id).customGET();
+            return entriesUrl.all(entries.all + '?id=' + id).customGET();
         }
 
         function getAssetStatus(entryId, page, pageSize) {
@@ -150,7 +150,7 @@
                         url = url.all(entries.warehouse);
                         break;
                     case 'repair':
-                        url = url.all(entries.repair);
+                        url = url.all(entries.salepoint);
                         break;
                     case 'unrecognizable':
                         url = url.all(entries.unrecognizable);
@@ -174,7 +174,6 @@
 
             detail(entryId)
                 .then(function (entryDetail) {
-
                     var entryData = [
                         {
                             A: "Folio",
@@ -188,22 +187,36 @@
                             A: "Tipo de entrada",
                             B: entryDetail.tipo_entrada
                         },
-                        {
-                            A: "Linea de transporte",
-                            B: entryDetail.linea_transporte.razon_social
-                        },
+                        // {
+                        //     A: "Linea de transporte",
+                        //     B: entryDetail.tipo_transporte ? entryDetail.tipo_transporte.linea_transporte.razon_social
+                        //         : operador_transporte ? entryDetail.operador_transporte.linea_transporte.razon_social : 'Sin información'
+                        // },
                         {
                             A: "Tipo de transporte",
-                            B: entryDetail.tipo_transporte.descripcion
+                            B: entryDetail.tipo_transporte ? entryDetail.tipo_transporte.descripcion : 'Sin información'
                         },
                         {
                             A: "Nombre del operador",
-                            B: entryDetail.nombre_chofer
+                            B: entryDetail.nombre_chofer ? entryDetail.nombre_chofer : entryDetail.operador_transporte.nombre
                         },
                         {
                             A: ""
                         }
                     ];
+                    //Adding transport line
+                    if (entryDetail.tipo_transporte) {
+                        entryData.push({
+                            A: "Linea de transporte",
+                            B: entryDetail.tipo_transporte.linea_transporte.razon_social
+                        });
+                    }
+                    if (entryDetail.operador_transporte) {
+                        entryData.push({
+                            A: "Linea de transporte",
+                            B: entryDetail.tipo_transporte.linea_transporte.razon_social
+                        });
+                    }
                     //Adding origin   
                     if (entryDetail.pedimento) {
                         entryData.push({
@@ -275,44 +288,44 @@
                         E: "Tipo"
                     }];
 
-                    var assetPromises = [];
+                    //var assetPromises = [];
 
                     angular.forEach(entryDetail.cabinets, function (value) {
-                        var assetPromise = getCabinetInfo(value);
-                        assetPromises.push(assetPromise);
-                        assetPromise
-                            .then(function (cabinetInfo) {
-                                assetData.push({
-                                    A: cabinetInfo.economico,
-                                    B: cabinetInfo.id_unilever,
-                                    C: cabinetInfo.no_serie,
-                                    D: cabinetInfo.modelo.descripcion,
-                                    E: cabinetInfo.modelo.tipo.nombre
-                                });
-                            })
-                            .catch(function (getCabinetInfoError) {
-                                defer.reject(getCabinetInfoError);
-                            });
+                        // var assetPromise = getCabinetInfo(value);
+                        // assetPromises.push(assetPromise);
+                        // assetPromise
+                        //     .then(function (cabinetInfo) {
+                        assetData.push({
+                            A: value.economico,
+                            B: value.id_unilever,
+                            C: value.no_serie,
+                            D: value.modelo.nombre,
+                            E: value.modelo.tipo.nombre
+                        });
+                        // })
+                        // .catch(function (getCabinetInfoError) {
+                        //     defer.reject(getCabinetInfoError);
+                        // });
 
                     });
 
-                    $q.all(assetPromises)
-                        .then(function () {
-                            XLSX.utils.sheet_add_json(ws,
-                                assetData,
-                                { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
+                    // $q.all(assetPromises)
+                    //     .then(function () {
+                    XLSX.utils.sheet_add_json(ws,
+                        assetData,
+                        { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
 
-                            /* add to workbook */
-                            var wb = XLSX.utils.book_new();
-                            XLSX.utils.book_append_sheet(wb, ws, "Entrada");
+                    /* add to workbook */
+                    var wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Entrada");
 
-                            /* write workbook and force a download */
-                            XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
-                            defer.resolve();
-                        })
-                        .catch(function (errorResponse) {
-                            defer.reject(errorResponse);
-                        });
+                    /* write workbook and force a download */
+                    XLSX.writeFile(wb, name ? name : "reporte_entrada " + moment(entryDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                    defer.resolve();
+                    // })
+                    // .catch(function (errorResponse) {
+                    //     defer.reject(errorResponse);
+                    // });
                 })
                 .catch(function (entryError) {
                     defer.reject(entryError);
