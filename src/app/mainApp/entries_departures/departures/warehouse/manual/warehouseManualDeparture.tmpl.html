@@ -179,19 +179,7 @@
                   layout-align="center stretch">
                 <div layout="column"
                      layout-align="center stretch">
-                    <div layout="row"
-                         layout-align="center center"
-                         ng-if="vm.departure[vm.catalogues['subsidiary'].binding]">
-                        <p>{{'DEPARTURES.WAREHOUSE.LABELS.DESTINATION_SWITCH.LABEL'|translate}}</p>
-                        <md-switch ng-model="vm.departureToStore"
-                                   ng-change="vm.changeDestinationSwitch()">
-                            <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.WAREHOUSE.LABELS.DESTINATION_SWITCH.TRUE'|translate}}</p>
-                            <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.WAREHOUSE.LABELS.DESTINATION_SWITCH.FALSE'|translate}}</p>-->
-                        </md-switch>
-                    </div>
                     <catalog-select class="full-width"
-                                    ng-if="vm.departure[vm.catalogues['subsidiary'].binding]
-                                    && !vm.departureToStore"
                                     catalog="vm.catalogues['destination_udn'].catalog"
                                     hint="vm.catalogues['destination_udn'].hint"
                                     icon="vm.catalogues['destination_udn'].icon"
@@ -201,35 +189,6 @@
                                     soft-delete="vm.catalogues['destination_udn'].softDelete"
                                     on-select="vm.onElementSelect(element,vm.catalogues['destination_udn'].binding)">
                     </catalog-select>
-                    <div layout="column"
-                         layout-gt-sm="row"
-                         layout-align-gt-sm="space-around center"
-                         layout-align="center stretch"
-                         ng-if="vm.departure[vm.catalogues['udn'].binding]
-                         ||(vm.departure[vm.catalogues['subsidiary'].binding] && vm.departureToStore)">
-                        <md-input-container layout="column"
-                                            class="md-icon-float md-block full-width">
-                            <label translate>DEPARTURES.WAREHOUSE.LABELS.STORE</label>
-                            <md-icon class="fa fa-user"></md-icon>
-                            <input ng-model="vm.store[vm.catalogues['store'].option]"
-                                   name="store_name"
-                                   disabled
-                                   type="text">
-                            <div class="hint" translate>DEPARTURES.WAREHOUSE.HINTS.STORE</div>
-                        </md-input-container>
-                        <div layout="column"
-                             layout-align-gt-sm="center stretch"
-                             layout-align="center center">
-                            <md-button ng-click="vm.searchStore()"
-                                       aria-label="search store"
-                                       class="md-primary md-raised">
-                                <div layout="row" layout-align="center center">
-                                    <md-icon md-font-icon="fa fa-search"></md-icon>
-                                    <div>{{'DEPARTURES.WAREHOUSE.BUTTONS.SEARCH_STORE'|translate}}</div>
-                                </div>
-                            </md-button>
-                        </div>
-                    </div>
                 </div>
                 <md-input-container layout="column"
                                     class="md-icon-float md-block">
