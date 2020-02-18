@@ -8,8 +8,7 @@
         'app.mainApp.salepoint',
         'app.mainApp.splash',
         'app.mainApp.technical_service',
-        'app.mainApp.welcome',
-        'app.mainApp.massiveCharge'
+        'app.mainApp.welcome'
     ]);
 
 })();
