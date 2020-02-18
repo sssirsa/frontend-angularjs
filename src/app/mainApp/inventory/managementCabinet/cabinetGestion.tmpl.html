@@ -1,34 +1,58 @@
-<md-card>
-    <div>
-        <create-cabinet to-refresh="vm.aRefresh()"></create-cabinet>
-    </div>
+<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
+    <header layout="column" layout-align="center center">
+        <h1 translate>WAREHOUSE.LABELS.TITLE</h1>
+    </header>
+    
+    <!-- <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
+        <catalog-select class="full-width" ng-if="!vm.showFromAgency && vm.showSelector"
+            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
+            icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
+            on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+        </catalog-select>
+        <catalog-select class="full-width" ng-if="vm.showFromAgency && vm.showSelector"
+            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
+            required="vm.catalogues['udn'].required"
+            on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+        </catalog-select>
+    </div> -->
 </md-card>
-
-<md-card ng-if="!vm.todosprev">
-    <div>
-        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-    </div>
+<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
+    <md-tabs  md-no-select-click="false" md-dynamic-height="true" md-selected="vm.selectedTab">
+        <md-tab md-on-select="vm.searchWarehouse('brand')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_BRAND'|translate}}>
+            <!--Fridges by model-->
+            <section layout="row" layout-align="space-around center">
+                <span flex layout-padding>
+                    <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
+                    <span>{{vm.warehouse.total[0].cantidad}}</span>
+                </span>
+            </section>
+        </md-tab>
+        <md-tab md-on-select="vm.searchWarehouse('model')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_MODEL'|translate}}>
+            <!--Fridges by model-->
+            <section layout="row" layout-align="space-around center">
+                <span flex layout-padding>
+                    <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
+                    <span>{{vm.warehouse.total[0].cantidad}}</span>
+                </span>
+            </section>
+        </md-tab>
+        <md-tab md-on-select="vm.searchWarehouse('kind')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_KIND'|translate}}>
+            <!--Fridges by model-->
+            <section layout="row" layout-align="space-around center">
+                <span flex layout-padding>
+                    <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
+                    <span>{{vm.warehouse.total[0].cantidad}}</span>
+                </span>
+            </section>
+        </md-tab>   
+        <md-tab md-on-select="vm.searchWarehouse('unilever_status')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_STATUS'|translate}}>
+            <!--Fridges by model-->
+            <section layout="row" layout-align="space-around center">
+                <span flex layout-padding>
+                    <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
+                    <span>{{vm.warehouse.total[0].cantidad}}</span>
+                </span>
+            </section>
+        </md-tab>        
+    </md-tabs>
 </md-card>
-
-<md-card ng-if="vm.todosprev">
-    <div id="list">
-        <list-cabinet todosex="vm.todos"
-                      up="vm.aRefresh()"
-                      todosprev2="vm.todosprev"
-                      text-search-filter="vm.setPagination()"></list-cabinet>
-    </div>
-</md-card>
-
-<div ng-if="!vm.search">
-    <div ng-if="vm.refreshPaginationButtonsComponent">
-        <pagination-manager-buttons go-sig="vm.sig()"
-                                    go-prev="vm.prev()"
-                                    go-number="vm.goToNumberPage(number)"
-                                    limit-objects="vm.limit"
-                                    count-object="vm.objectPaginado.count"
-                                    offset-object="vm.offset"
-                                    nex-object="vm.objectPaginado.next"
-                                    prev-object="vm.objectPaginado.previous">
-        </pagination-manager-buttons>
-    </div>
-</div>

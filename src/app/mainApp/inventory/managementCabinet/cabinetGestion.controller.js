@@ -1,124 +1,105 @@
-/**
- * Created by Alex on 19/10/2016.
- */
-
 (function () {
     angular
         .module('app.mainApp.inventory')
         .controller('cabinetGestionController', cabinetGestionController);
 
-    function cabinetGestionController(URLS, cabinetUC, $mdEditDialog, $mdDialog, Helper, ErrorHandler)
-    {
+    function cabinetGestionController(
+        EnvironmentConfig,
+        URLS,
+        Translate,
+        User,
+        WAREHOUSE
+    ) {
         var vm = this;
-        vm.todosprev = null;
-        vm.todos = [];
-        vm.loadingPromise = null;
-        vm.textToSearch = '';
-        vm.search = false;
 
-        vm.aRefresh = aRefresh;
-        vm.listcabinets = listcabinets;
-        vm.setPagination = setPagination;
-        vm.sig = sigPage;
-        vm.prev = prevPage;
-        vm.goToNumberPage = goToNumberPage;
+        //Variables
+        vm.user = User.getUser();
+        vm.showSelector = false;
+        vm.filter;
+        vm.showFromAgency;
+        vm.selectedTab;
 
-        //datos para paginado
-        vm.objectPaginado = null;
-        vm.offset = 0;
-        vm.limit = 20;
-        vm.refreshPaginationButtonsComponent = false;
+        vm.warehouse;
 
-        function aRefresh() {
-            vm.todosprev = null;
-            vm.todos = [];
-            vm.objectPaginado = null;
-            vm.offset = 0;
-            listcabinets();
-        }
+        //Constants
+        vm.catalogues = {
+            subsidiary: {
+                binding: 'sucursal',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
 
-        function paginadoRefresh() {
-            vm.todosprev = null;
-            vm.todos = [];
-            listcabinets();
-        }
-
-        function setPagination(){
-            if(vm.search == false){
-                vm.search = true;
-            }else{
-                vm.search = false;
+                    name: Translate.translate('WAREHOUSE.LABELS.SUBSIDIARY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: '_id',
+                    option: 'nombre'
+                },
+                hint: Translate.translate('WAREHOUSE.HINTS.SUBSIDIARY'),
+                icon: 'fa fa-warehouse',
+                required: true
+            },
+            udn: {
+                binding: 'udn',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.udn,
+                    name: Translate.translate('WAREHOUSE.LABELS.AGENCY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: '_id',
+                    option: 'agencia'
+                },
+                hint: Translate.translate('WAREHOUSE.HINTS.AGENCY'),
+                icon: 'fa fa-building',
+                required: true
             }
-        }
+        };
 
-        listcabinets();
+        //Functions
+        vm.searchWarehouse=searchWarehouse;
 
-        function listcabinets(){
-            vm.refreshPaginationButtonsComponent = false;
-            vm.loadingPromise = cabinetUC.list(vm.limit, vm.offset)
-                .then(function (res) {
-                    vm.objectPaginado = res;
-                    prepareDataFunction();
-                    vm.refreshPaginationButtonsComponent = true;
-                })
-                .catch(function (err) {
-                    ErrorHandler.errorTranslate(err);
-                });
-
-        }
-
-        function prepareFinalObjects() {
-            angular.forEach(vm.todosprev, function (cabinet) {
-                cabinet.marca = cabinet.modelo.marca.nombre;
-                cabinet.id_modelo = cabinet.modelo.id;
-                cabinet.modelo = cabinet.modelo.nombre;
-
-                if(cabinet.deleted === false){
-                    cabinet.estado = "Activo";
-                }else{
-                    cabinet.estado = "Inactivo";
+        vm.init = function init() {
+            vm.filter = {};
+            vm.selectedTab = 0;
+            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+            if (!vm.showSelector) {
+                if (vm.user['sucursal']) {
+                    vm.filter[vm.catalogues.subsidiary.binding] = vm.user['sucursal'];
                 }
+                if (vm.user['udn']) {
+                    vm.filter[vm.catalogues.udn.binding] = vm.user['udn'];
+                }
+                vm.searchWarehouse('brand');
+            }
+        };
 
-                cabinetUC.getCabinetInSubsidiary(cabinet.economico)
-                    .then(function Subsidiary(control) {
-                        if(control.impedimento){
-                            cabinet.control = true;
-                            cabinet.impedido = true;
-                            cabinet.impedimento_id = control.impedimento;
-                        }else{
-                            cabinet.control = true;
-                            cabinet.impedido = false;
-                        }
+        vm.init();
 
-                        vm.todos.push(cabinet);
-                    })
-                    .catch(function SubsidiaryError() {
-                        cabinet.control = false;
-                        cabinet.impedido = false;
-                        vm.todos.push(cabinet);
-                    });
-            });
+        vm.onElementSelect = function onElementSelect(element, field) {
+            vm.filter[field] = element;
+            vm.selectedTab=0;
+            vm.searchWarehouse('brand');
+        };
 
-        }
-
-        function prepareDataFunction() {
-            vm.todosprev = Helper.filterDeleted(vm.objectPaginado.results, true);
-            prepareFinalObjects();
-        }
-
-        function sigPage() {
-            vm.offset += vm.limit;
-            paginadoRefresh();
-        }
-
-        function prevPage() {
-            vm.offset -= vm.limit;
-            paginadoRefresh();
-        }
-
-        function goToNumberPage(number) {
-            vm.offset = number * vm.limit;
-            paginadoRefresh();
+        function searchWarehouse(parameter) {
+            vm.warehouse=null;
+            switch (parameter) {
+                case 'brand':
+                    vm.warehouse = WAREHOUSE.listByBrand();
+                    break;
+                case 'model':
+                    vm.warehouse = WAREHOUSE.listByModel();
+                    break;
+                case 'kind':
+                    vm.warehouse = WAREHOUSE.listByKind();
+                    break;
+                case 'unilever_status':
+                    vm.warehouse = WAREHOUSE.listByUnileverStatus();
+                    break;
+            }
         }
     }
 
