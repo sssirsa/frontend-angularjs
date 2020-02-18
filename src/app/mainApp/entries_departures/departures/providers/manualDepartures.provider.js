@@ -542,7 +542,7 @@
         var warrantyDeparture = {
             template: function () {
                 return {
-                    tipo_salida: 'Garantias',
+                    tipo_salida: 'Garantías',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
@@ -658,7 +658,7 @@
         var warehouseDeparture = {
             template: function () {
                 return {
-                    tipo_salida: 'Almacen',
+                    tipo_salida: 'Buen estado',
                     cabinets_id: [],
                     descripcion: '',
                     nombre_chofer: ''
