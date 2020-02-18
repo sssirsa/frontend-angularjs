@@ -9,7 +9,8 @@
         toastr,
         ErrorHandler,
         $mdDialog,
-        Helper
+        Helper,
+        QUERIES
     ) {
         var vm = this;
 
@@ -23,6 +24,7 @@
         vm.departureFromAgency;
         vm.catalogues;
         vm.cabinetList;
+        vm.canView = true;
 
         vm.user = User.getUser();
 
@@ -53,8 +55,17 @@
             //Bindging user subsidiary or agency to entry if user happens to have one.
             vm.user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = vm.user['sucursal']._id : null;
             vm.user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = vm.user['udn']._id : null;
+
+            if (vm.departure[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
+            }
+            if (vm.departure[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['udn'].binding];
+            }
         };
-        
+
         vm.user['sucursal'] ? vm.canView = false : vm.init();
 
         //Controller global functions
@@ -68,6 +79,20 @@
             vm.cabinetList = [];
             vm.departure = MANUAL_DEPARTURES.warrantyDeparture.template();
 
+            vm.onElementSelect(element, field);
+            if (vm.departure[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
+            }
+            if (vm.departure[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['udn'].binding];
+            }
+        };
+
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
             vm.onElementSelect(element, field);
         };
 
@@ -289,6 +314,11 @@
             vm.cabinetList = [];
         };
 
+        vm.changeDriverSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['transport_driver'].binding]);
+            delete (vm.departure['nombre_chofer'].binding);
+        };
         //Internal functions
 
         var saveDeparture = function saveDeparture(departure) {

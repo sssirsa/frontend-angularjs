@@ -129,8 +129,9 @@
                 by_state: 'estado__id'
             },
             entries_departures: {
-                by_agency: 'udn_destino__id',
-                by_subsidiary: 'sucursal_destino__id'
+                by_agency: 'udn',
+                by_subsidiary: 'sucursal',
+                by_transport_line:'linea_transporte'
             },
             locality: {
                 by_state: 'municipio__estado__id',

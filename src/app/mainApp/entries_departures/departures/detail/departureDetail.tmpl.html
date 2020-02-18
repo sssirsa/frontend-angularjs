@@ -1,52 +1,59 @@
 <div cg-busy="{promise:vm.loadingDeparture, message:' '}">
-    <md-card layout-padding
-             layout="column"
-             laoyut-align="center-stretch">
+    <md-card layout-padding layout="column" laoyut-align="center-stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>DEPARTURES.DETAIL.TITLE</h1>
         </header>
     </md-card>
     <md-card ng-if="vm.departure">
-        <md-toolbar layout-gt-xs="row"
-                    layout-align-gt-xs="space-between center"
-                    layout="column"
-                    layout-align="center center"
-                    layout-padding>            
+        <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
+            layout-align="center center" layout-padding>
             <span>
                 <strong translate="">DEPARTURES.DETAIL.LABELS.ID</strong>
-                {{vm.departure.id}}
+                {{vm.departure._id}}
             </span>
             <div ng-if="vm.departure.tipo_salida==='Nuevos'" class="new-departures departures-filter"></div>
             <div ng-if="vm.departure.tipo_salida==='Obsoletos'" class="obsolete-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='Almacen'" class="warehouse-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='Garantias'" class="warranty-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='No Capitalizados'"
+                class="unrecognizable-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Buen estado'" class="warehouse-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Garantías'" class="warranty-departures departures-filter"></div>
             <span>
                 <strong translate="">DEPARTURES.DETAIL.LABELS.KIND</strong>
                 {{vm.departure.tipo_salida}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
-            <span ng-if="vm.departure.fecha">
+            <span ng-if="vm.departure.fecha_hora">
                 <strong translate>DEPARTURES.DETAIL.LABELS.DATE</strong>
-                <span>{{vm.departure.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                <span>{{vm.departure.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
-            <span ng-if="vm.departure.pedimento" layout-margin>
-                <strong translate>DEPARTURES.DETAIL.LABELS.ORDER</strong>
-                <span>{{vm.departure.pedimento}}</span>
-            </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="vm.departure.cabinets" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{vm.departure.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="vm.departure.operador_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.DRIVER</strong>
+                    <span>{{vm.departure.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="vm.departure.nombre_chofer" layout-padding>
-                    <strong translate>DEPARTURES.DETAIL.LABELS.DRIVER</strong>
+                    <strong translate>DEPARTURES.LIST.LABELS.DRIVER</strong>
                     <span>{{vm.departure.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="vm.departure.linea_transporte.razon_social" layout-padding>
-                    <strong translate>DEPARTURES.DETAIL.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{vm.departure.linea_transporte.razon_social}}</span>
+                <span flex="33" ng-if="vm.departure.tipo_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.departure.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="vm.departure.tipo_transporte.descripcion" layout-padding>
-                    <strong translate>DEPARTURES.DETAIL.LABELS.TRANSPORT_KIND</strong>
+                <span flex="33" ng-if="vm.departure.operador_transporte&&!departure.tipo_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.departure.operador_transporte.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="vm.departure.tipo_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{vm.departure.tipo_transporte.descripcion}}</span>
                 </span>
             </section>
@@ -88,12 +95,16 @@
             <span>{{vm.departure.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
-            <md-button aria-label="download document button"
-                       ng-click="$event.stopPropagation(); vm.generatePDF()"
-                       disabled
-                       class="md-primary md-raised">
+            <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
+                disabled class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
                 <span hide-xs>{{"DEPARTURES.DETAIL.BUTTONS.PDF"|translate}}</span>
+            </md-button>
+            <!--Allow to generate the excel document at anytime-->
+            <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                ng-click="$event.stopPropagation(); vm.generateXLSX()" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"DEPARTURES.DETAIL.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>
@@ -105,17 +116,17 @@
         <!--Departure assets-->
         <md-virtual-repeat-container class="cabinet-container">
             <md-list>
-                <md-list-item layout-align="center stretch"
-                              md-virtual-repeat="element in vm.assets">
-                    <section layout-gt-xs="row"
-                             layout="column"
-                             layout-align-gt-xs="space-between center"
-                             layout-align="center stretch"
-                             class="full-width">
-                        <div layout="column"
-                             layout-align="center center">
+                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.departure.cabinets">
+                    <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
+                        layout-align="center stretch" class="full-width">
+                        <!--Normal asset-->
+                        <div layout="column" ng-if="element.economico" layout-align="center center">
                             <b>{{'DEPARTURES.DETAIL.LABELS.ASSET'|translate}}</b>
-                            {{element}}
+                            {{element.economico}}
+                        </div>
+                        <div layout="column" ng-if="element.modelo" layout-align="center center">
+                            <b>{{'DEPARTURES.DETAIL.LABELS.MODEL'|translate}}</b>
+                            {{element.modelo.nombre}}
                         </div>
                     </section>
                     <md-divider></md-divider>
