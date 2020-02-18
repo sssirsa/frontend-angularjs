@@ -57,7 +57,7 @@
             //Bindging user subsidiary or agency to entry if user happens to have one.
             user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal']._id : null;
             user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn']._id : null;
-            
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -83,6 +83,14 @@
             vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
 
             vm.onElementSelect(element, field);
+            if (vm.departure[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
+            }
+            if (vm.departure[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['udn'].binding];
+            }
         };
 
         vm.onTransportLineSelect = function (element, field) {
