@@ -74,6 +74,12 @@
             vm.onElementSelect(element, field);
         };
 
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
+            vm.onElementSelect(element, field);
+        };
+
         vm.selectDriverID = function selectDriverID(files) {
             if (files.length > 0) {
                 var file = files[0];
@@ -283,6 +289,12 @@
             vm.departure['cabinets_id'] = [];
             vm.cabinetList = [];
             vm.changeDestinationSwitch();
+        };
+
+        vm.changeDriverSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['transport_driver'].binding]);
+            delete (vm.departure['nombre_chofer'].binding);
         };
 
         vm.changeDestinationSwitch = function changeDestinationSwitch() {

@@ -19,9 +19,6 @@
         var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
-        var inventoryUrl = API
-            .all(URLS.management.base)
-            .all(URLS.management.inventory.base);
         var managementUrl = API
             .all(URLS.management.base);
 
@@ -341,13 +338,6 @@
         function getEntriesByCabinet(id) {
             //TODO:Make real logic
             return id;
-        }
-
-        function getCabinetInfo(id) {
-            return inventoryUrl
-                .all(inventory.cabinet)
-                .all(id)
-                .customGET();
         }
 
         //Constants
