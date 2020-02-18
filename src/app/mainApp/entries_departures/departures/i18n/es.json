@@ -81,6 +81,7 @@
                 "ASSET_LOADING": "Carga de cabinets",
                 "AGENCY": "UDN-Agencia",
                 "DESCRIPTION": "Descripción",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -93,13 +94,19 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
+                },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
                 }
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
                 "AGENCY": "Selecciona la agencia de arrivo",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega"
@@ -131,6 +138,7 @@
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -144,6 +152,11 @@
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
+                },
                 "SWITCH": {
                     "LABEL": "Activa si la salida es desde una UDN-Agencia",
                     "TRUE": "Salida desde una UDN-Agencia",
@@ -155,7 +168,8 @@
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
                 "AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet de la salida",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
@@ -192,6 +206,7 @@
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -205,6 +220,11 @@
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
+                },
                 "SWITCH": {
                     "LABEL": "Activa si la salida es desde una UDN-Agencia",
                     "TRUE": "Salida desde una UDN-Agencia",
@@ -217,7 +237,8 @@
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
                 "AGENCY": "Selecciona la UDN-Agencia de arrivo",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
@@ -246,13 +267,14 @@
                 "STATUS_IS": "su estado es"
             }
         },
-        "WAREHOUSE": {
-            "TITLE": "Salida de buen estado",
+        "SALEPOINT": {
+            "TITLE": "Salida de punto de venta",
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -265,6 +287,84 @@
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
+                },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
+                },
+                "SWITCH": {
+                    "LABEL": "Activa si la salida es desde una UDN-Agencia",
+                    "TRUE": "Salida desde una UDN-Agencia",
+                    "FALSE": "Salida desde una sucursal"
+                },
+                "DESTINATION_SWITCH": {
+                    "LABEL": "Activa si la salida es a un Establecimiento",
+                    "TRUE": "Salida hacia un Establecimiento",
+                    "FALSE": "Salida hacia una Agencia-UDN"
+                },
+                "STORE": "Establecimiento"
+            },
+            "HINTS": {
+                "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
+                "AGENCY": "Selecciona la UDN-Agencia",
+                "DESTINATION_AGENCY": "Selecciona la UDN-Agencia destino",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
+                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
+                "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
+                "DRIVER_NAME": "Operador del transporte de entrega",
+                "STORE": "Selecciona el establecimiento destino"
+            },
+            "BUTTONS": {
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Anterior",
+                "SAVE": "Guardar salida",
+                "REMOVE": "Quitar",
+                "SEARCH_STORE": "Buscar establecimiento"
+            },
+            "MESSAGES": {
+                "SUCCESS_CREATE": "Salida registrada correctamente"
+            },
+            "ERRORS": {
+                "REPEATED_ID": "Ya se encuentra en la lista",
+                "CANT_LEAVE": "El cabinet aún no puede salir",
+                "NOT_IN_SUBSIDIARY": "El cabinet no está registrado en ninguna sucursal o udn",
+                "NOT_YOUR_SUBSIDIARY": "El cabinet no es de tu sucursal o udn",
+                "IS_AT": "se encuentra en",
+                "NOT_CONFIRMED": "El cabinet no tiene una confirmación de entrada",
+                "STAGE_ERROR": "El cabinet no está listo para mercado",
+                "AT_STAGE": "se encuentra en la etapa",
+                "WRONG_STATUS": "El cabinet no tiene estatus 0001-Buen estado",
+                "STATUS_IS": "su estado es"
+            }
+        },
+        "WAREHOUSE": {
+            "TITLE": "Salida de buen estado",
+            "LABELS": {
+                "DEPARTURE_DATA": "Información de salida",
+                "ASSET_LOADING": "Carga de cabinets",
+                "DESCRIPTION": "Descripción",
+                "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
+                "TRANSPORT_LINE": "Linea de transporte",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "SUBSIDIARY": "Sucursal",
+                "DRIVER_ID": "Identificación del operador",
+                "DRIVER_NAME": "Nombre del operador",
+                "CABINET_SEARCH": "Registro de cabinets",
+                "CABINET_ID": "Económico del cabinet",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
                 },
                 "SWITCH": {
                     "LABEL": "Activa si la salida es desde una UDN-Agencia",
@@ -283,7 +383,8 @@
                 "AGENCY": "Selecciona la UDN-Agencia",
                 "DESTINATION_AGENCY": "Selecciona la UDN-Agencia destino",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
@@ -333,13 +434,19 @@
                     "STATUS": "Estatus",
                     "REASON": "Motivo"
                 },
-                "UNKNOWN": "Desconocido"
+                "UNKNOWN": "Desconocido",
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado",
+                    "TRUE": "Operador registrado",
+                    "FALSE": "Operador no registrado"
+                }
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la salida",
                 "AGENCY": "Selecciona la agencia de arrivo",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
+                "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
+                "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para eleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
