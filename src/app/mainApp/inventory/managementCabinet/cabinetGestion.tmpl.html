@@ -25,7 +25,8 @@
                     <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
                     <span>{{vm.warehouse.total[0].cantidad}}</span>
                 </span>
-            </section>
+            </section>            
+            <span>{{vm.warehouse}}</div>
         </md-tab>
         <md-tab md-on-select="vm.searchWarehouse('model')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_MODEL'|translate}}>
             <!--Fridges by model-->
@@ -35,6 +36,7 @@
                     <span>{{vm.warehouse.total[0].cantidad}}</span>
                 </span>
             </section>
+            <div>{{vm.warehouse}}</div>
         </md-tab>
         <md-tab md-on-select="vm.searchWarehouse('kind')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_KIND'|translate}}>
             <!--Fridges by model-->
@@ -43,7 +45,8 @@
                     <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
                     <span>{{vm.warehouse.total[0].cantidad}}</span>
                 </span>
-            </section>
+            </section>            
+            <div>{{vm.warehouse}}</div>
         </md-tab>   
         <md-tab md-on-select="vm.searchWarehouse('unilever_status')" layout="column" layout-align="center stretch" label={{'WAREHOUSE.LABELS.BY_STATUS'|translate}}>
             <!--Fridges by model-->
@@ -52,7 +55,8 @@
                     <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
                     <span>{{vm.warehouse.total[0].cantidad}}</span>
                 </span>
-            </section>
+            </section>            
+            <div>{{vm.warehouse}}</div>
         </md-tab>        
     </md-tabs>
 </md-card>
