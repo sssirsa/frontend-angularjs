@@ -307,7 +307,8 @@
                 "STAGE_ERROR": "El cabinet no está listo para mercado",
                 "AT_STAGE": "se encuentra en la etapa",
                 "WRONG_STATUS": "El cabinet no tiene estatus 0001-Buen estado",
-                "STATUS_IS": "su estado es"
+                "STATUS_IS": "su estado es",
+                "IS_NEW":"Un cabinet nuevo no puede salir por entrada de buen estado"
             }
         },
         "UNRECOGNIZABLE": {
