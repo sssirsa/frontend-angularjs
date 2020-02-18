@@ -178,13 +178,13 @@
     "WAREHOUSE":{
         "LABELS":{
             "TITLE":"Inventario de cabinets",            
-            "AGENCY":"Sucursal",
+            "AGENCY":"Agencia-UDN",
             "BY_BRAND":"Por marca",
             "BY_KIND":"Por tipo",
             "BY_MODEL":"Por modelo",
             "BY_STATUS":"Por estatus unilever",
-            "SUBSIDIARY":"Agencia-UDN",
-            "TOTAL":"Total de equipos"
+            "TOTAL":"Total de equipos",
+            "SUBSIDIARY":"Sucursal"
         },
         "SWITCH":{
             "LABEL":"Activa para buscar inventario de agencias"

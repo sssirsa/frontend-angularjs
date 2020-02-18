@@ -5,6 +5,7 @@
 
     function cabinetGestionController(
         EnvironmentConfig,
+        ErrorHandler,
         URLS,
         Translate,
         User,
@@ -18,6 +19,7 @@
         vm.filter;
         vm.showFromAgency;
         vm.selectedTab;
+        vm.loadingWarehouse;
 
         vm.warehouse;
 
@@ -59,7 +61,7 @@
         };
 
         //Functions
-        vm.searchWarehouse=searchWarehouse;
+        vm.searchWarehouse = searchWarehouse;
 
         vm.init = function init() {
             vm.filter = {};
@@ -67,10 +69,10 @@
             vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
             if (!vm.showSelector) {
                 if (vm.user['sucursal']) {
-                    vm.filter[vm.catalogues.subsidiary.binding] = vm.user['sucursal'];
+                    vm.filter['sucursal'] = vm.user['sucursal']._id;
                 }
                 if (vm.user['udn']) {
-                    vm.filter[vm.catalogues.udn.binding] = vm.user['udn'];
+                    vm.filter['udn'] = vm.user['udn']._id;
                 }
                 vm.searchWarehouse('brand');
             }
@@ -79,27 +81,57 @@
         vm.init();
 
         vm.onElementSelect = function onElementSelect(element, field) {
+            vm.filter = {};
             vm.filter[field] = element;
-            vm.selectedTab=0;
+            vm.selectedTab = 0;
             vm.searchWarehouse('brand');
         };
 
+        vm.changeSwitch=function(){
+            vm.filter={};
+        };
+
         function searchWarehouse(parameter) {
-            vm.warehouse=null;
+            vm.warehouse = null;
             switch (parameter) {
                 case 'brand':
-                    vm.warehouse = WAREHOUSE.listByBrand();
+                    vm.loadingWarehouse = WAREHOUSE.listByBrand(vm.filter)
+                        .then(function (response) {
+                            vm.warehouse = response;
+                        })
+                        .catch(function (error) {
+                            ErrorHandler.errorTranslate(error);
+                        });
                     break;
                 case 'model':
-                    vm.warehouse = WAREHOUSE.listByModel();
+                    vm.loadingWarehouse = WAREHOUSE.listByModel(vm.filter)
+                        .then(function (response) {
+                            vm.warehouse = response;
+                        })
+                        .catch(function (error) {
+                            ErrorHandler.errorTranslate(error);
+                        });
                     break;
                 case 'kind':
-                    vm.warehouse = WAREHOUSE.listByKind();
+                    vm.loadingWarehouse = WAREHOUSE.listByKind(vm.filter)
+                        .then(function (response) {
+                            vm.warehouse = response;
+                        })
+                        .catch(function (error) {
+                            ErrorHandler.errorTranslate(error);
+                        });
                     break;
                 case 'unilever_status':
-                    vm.warehouse = WAREHOUSE.listByUnileverStatus();
+                    vm.loadingWarehouse = WAREHOUSE.listByUnileverStatus(vm.filter)
+                        .then(function (response) {
+                            vm.warehouse = response;
+                        })
+                        .catch(function (error) {
+                            ErrorHandler.errorTranslate(error);
+                        });
                     break;
             }
+
         }
     }
 
