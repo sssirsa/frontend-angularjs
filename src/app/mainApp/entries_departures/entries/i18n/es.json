@@ -135,8 +135,12 @@
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
                 },
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
-                "TRANSPORT_KIND": "Tipo de transporte"
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "DRIVER_SWITCH":{
+                    "LABEL":"Activa si el operador está registrado"
+                }
             },
             "HINTS": {
                 "AGENCY": "Tu usuario no tiene una UDN-Agencia, selecciona una para generar la entrada",
@@ -146,6 +150,7 @@
                 "ENTRY": "Entrada de cabinets nuevos desde un proveedor",
                 "PETITION": "Ingresa el pedimento",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",

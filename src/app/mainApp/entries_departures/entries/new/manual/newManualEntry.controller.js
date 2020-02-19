@@ -27,7 +27,8 @@
         Helper,
         EnvironmentConfig,
         URLS,
-        PAGINATION
+        PAGINATION,
+        QUERIES
     ) {
         var vm = this;
 
@@ -43,6 +44,7 @@
         vm.entryToAgency; //Determines which catalog to show (subsidiary or udn-agency)
         vm.userAgency;
         vm.userSubsidiary;
+        vm.knownDriver;
 
         //Validations and constraints
         vm.imageConstraints = {
@@ -249,6 +251,17 @@
 
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
+
+            if (vm.userSubsidiary) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userSubsidiary._id;
+                vm.entry[vm.catalogues['subsidiary'].binding]=vm.userSubsidiary._id;
+            }
+            if (vm.userAgency) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userAgency._id;
+                vm.entry[vm.catalogues['udn'].binding]=vm.userAgency._id;
+            }
         };
 
         vm.init();
@@ -257,6 +270,26 @@
 
         vm.onElementSelect = function onElementSelect(element, field) {
             vm.entry[field] = element;
+        };
+
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
+            vm.onElementSelect(element, field);
+        };
+
+        vm.onDestinationSelect = function onSubsidiarySelect(element, field) {
+
+            vm.onElementSelect(element, field);
+
+            if (vm.entry[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['subsidiary'].binding];
+            }
+            if (vm.entry[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['udn'].binding];
+            }
         };
 
         vm.searchCabinet = function searchCabinet(cabinetID) {
@@ -387,6 +420,13 @@
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
             delete (vm.entry[vm.catalogues['subsidiary'].binding]);
+            delete (vm.entry[vm.catalogues['transport_line'].binding]);
+        };
+        
+        vm.changeDriverSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['transport_driver'].binding]);
+            delete (vm.entry['nombre_chofer'].binding);
         };
 
         //Internal functions
@@ -394,12 +434,12 @@
         var saveEntry = function saveEntry(entry) {
             entry = addCabinetsToEntry(vm.cabinetList, entry);
             entry = Helper.removeBlankStrings(entry);
-            if (vm.userAgency) {
-                entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
-            }
-            if (vm.userSubsidiary) {
-                entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
-            }
+            // if (vm.userAgency) {
+            //     entry[vm.catalogues['udn'].binding] = vm.userAgency['_id'];
+            // }
+            // if (vm.userSubsidiary) {
+            //     entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary['_id'];
+            // }
             //API callback
             vm.createEntryPromise = MANUAL_ENTRIES
                 .createNew(entry)

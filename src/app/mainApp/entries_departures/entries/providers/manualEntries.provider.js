@@ -398,10 +398,30 @@
                             name: Translate.translate('ENTRIES.WARRANTY.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: '_id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
                         },
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
                         required: true
                     },
                     udn: {
@@ -482,10 +502,30 @@
                             name: Translate.translate('ENTRIES.REPAIR.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
                         },
                         hint: Translate.translate('ENTRIES.REPAIR.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
                         required: true
                     },
                     udn: {
@@ -586,10 +626,30 @@
 
                             name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_KIND'),
                             model: '_id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
                         },
                         hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
                         required: true
                     },
                     udn: {
@@ -689,6 +749,8 @@
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: 'id',
                             option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line,
                             pagination: {
                                 total: PAGINATION.total,
                                 limit: PAGINATION.limit, offset: PAGINATION.offset, pageSize: PAGINATION.pageSize
@@ -701,6 +763,24 @@
                         },
                         hint: Translate.translate('ENTRIES.UNRECOGNIZABLE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
                         required: true
                     },
                     udn: {
@@ -817,10 +897,30 @@
                             name: Translate.translate('ENTRIES.WAREHOUSE.LABELS.TRANSPORT_KIND'),
                             loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: '_id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
                         },
                         hint: Translate.translate('ENTRIES.WAREHOUSE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('ENTRIES.NEW.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('ENTRIES.NEW.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
                         required: true
                     },
                     udn: {

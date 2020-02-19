@@ -162,7 +162,7 @@
                                     hint="vm.catalogues['subsidiary'].hint"
                                     icon="vm.catalogues['subsidiary'].icon"
                                     required="vm.catalogues['subsidiary'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+                                    on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
                                     ng-if="vm.entryToAgency && vm.showSelector"
@@ -170,7 +170,7 @@
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
                                     required="vm.catalogues['udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                                    on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
                 </div>
                 <md-input-container layout="column"
@@ -190,7 +190,7 @@
                                         class="md-icon-float md-block full-width">
                         <label translate>ENTRIES.NEW.LABELS.PETITION</label>
                         <md-icon class="fa fa-edit"></md-icon>
-                        <input ng-model="vm.entry['pedimento_id']"
+                        <input ng-model="vm.entry['pedimento']"
                                name="description"
                                type="text">
                         <div class="hint" translate>ENTRIES.NEW.HINTS.PETITION</div>
@@ -206,36 +206,49 @@
                 <div layout="column"
                      layout-gt-xs="row"
                      layout-align-gt-xs="space-around center"
-                     layout-align="center stretch">
+                     layout-align="center stretch"
+                     ng-if="vm.entry[vm.catalogues['subsidiary'].binding] || vm.entry[vm.catalogues['udn'].binding]">
                     <catalog-select class="full-width"
                                     catalog="vm.catalogues['transport_line'].catalog"
                                     hint="vm.catalogues['transport_line'].hint"
                                     icon="vm.catalogues['transport_line'].icon"
+                                    lazy="true"
                                     required="vm.catalogues['transport_line'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_line'].binding)">
-                    </catalog-select>
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['transport_kind'].catalog"
-                                    hint="vm.catalogues['transport_kind'].hint"
-                                    icon="vm.catalogues['transport_kind'].icon"
-                                    required="vm.catalogues['transport_kind'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
+                                    on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
                     </catalog-select>
                 </div>
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around start"
-                     layout-align="center stretch">
-                    <md-input-container layout="column"
-                                        class="md-icon-float md-block full-width">
+                <div ng-if="vm.entry[vm.catalogues['transport_line'].binding]" layout="column" layout-align="center stretch">
+
+                    <!--Transport driver switch-->
+                    <div layout="row" layout-align="center center">
+                        <p>{{'ENTRIES.NEW.LABELS.DRIVER_SWITCH.LABEL'|translate}}</p>
+                        <md-switch ng-model="vm.knownDriver" ng-change="vm.changeDriverSwitch()">
+                            <!--<p ng-if="vm.knownDriver">{{'ENTRIES.NEW.LABELS.DRIVER_SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.knownDriver">{{'ENTRIES.NEW.LABELS.DRIVER_SWITCH.FALSE'|translate}}</p>-->
+                        </md-switch>
+                    </div>
+                    <catalog-select class="full-width" ng-if="vm.knownDriver"
+                        catalog="vm.catalogues['transport_driver'].catalog" lazy="true"
+                        hint="vm.catalogues['transport_driver'].hint" icon="vm.catalogues['transport_driver'].icon"
+                        required="vm.catalogues['transport_driver'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_driver'].binding)">
+                    </catalog-select>
+                    <md-input-container layout="column" class="md-icon-float md-block full-width"
+                        ng-if="!vm.knownDriver">
                         <label translate>ENTRIES.NEW.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']"
-                               name="driver_name"
-                               ng-required="false"
-                               type="text">
+                        <input ng-model="vm.entry['nombre_chofer']" name="driver_name" ng-required="true"
+                            type="text">
                         <div class="hint" translate>ENTRIES.NEW.HINTS.DRIVER_NAME</div>
                     </md-input-container>
+                    <catalog-select class="full-width" catalog="vm.catalogues['transport_kind'].catalog" lazy="true"
+                        hint="vm.catalogues['transport_kind'].hint" icon="vm.catalogues['transport_kind'].icon"
+                        required="vm.catalogues['transport_kind'].required"
+                        pagination="vm.catalogues['transport_kind'].pagination"
+                        elements="vm.catalogues['transport_kind'].elements"
+                        soft-delete="vm.catalogues['transport_kind'].softDelete"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
+                    </catalog-select>
                 </div>
             </form>
             <md-actions layout="row"
