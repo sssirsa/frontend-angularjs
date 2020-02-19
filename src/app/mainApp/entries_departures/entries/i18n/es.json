@@ -9,7 +9,7 @@
                 "MISSING": "Cabinet faltante",
                 "PDF": "Generar remisión",
                 "UNMISSING": "Cabinet no faltante",
-                "XLSX":"Generar reporte"
+                "XLSX": "Generar reporte"
             },
             "DIALOGS": {
                 "CONFIRM": {
@@ -43,7 +43,7 @@
                 "DESTINATION_SUBSIDIARY": "Sucursal destino:",
                 "DRIVER": "Operador:",
                 "KIND": "Tipo:",
-                "MODEL":"Modelo",
+                "MODEL": "Modelo",
                 "NO_RESULTS": "Sin resultados",
                 "NOT_CONFIRMED_ENTRY": "Entrada no confirmada",
                 "OPEN": "Entrada abierta",
@@ -67,7 +67,7 @@
                 "CLOSE": "Cerrar entrada",
                 "LOAD_MORE": "Cargar mas entradas...",
                 "PDF": "Generar remisión",
-                "XLSX":"Generar reporte"
+                "XLSX": "Generar reporte"
             },
             "FILTERS": {
                 "ALL": "Todas",
@@ -95,7 +95,7 @@
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:",
-                "ASSET_QUANTITY":"Equipos recibidos:"
+                "ASSET_QUANTITY": "Equipos recibidos:"
             }
         },
         "MENU": {
@@ -138,8 +138,8 @@
                 "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
-                "DRIVER_SWITCH":{
-                    "LABEL":"Activa si el operador está registrado"
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado"
                 }
             },
             "HINTS": {
@@ -149,7 +149,6 @@
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "ENTRY": "Entrada de cabinets nuevos desde un proveedor",
                 "PETITION": "Ingresa el pedimento",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
                 "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
@@ -181,6 +180,7 @@
                 "DESCRIPTION": "Descripción",
                 "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -199,7 +199,10 @@
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
                 },
-                "STORE": "Establecimiento"
+                "STORE": "Establecimiento",
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado"
+                }
             },
             "HINTS": {
                 "AGENCY": "Selecciona la agencia de procedencia",
@@ -207,7 +210,7 @@
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "ENTRY": "Entrada de cabinets provenientes de establecimientos",
-                "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
@@ -237,6 +240,7 @@
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -254,6 +258,9 @@
                     "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
+                },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado"
                 }
             },
             "HINTS": {
@@ -262,6 +269,7 @@
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, para movimientos internos utilize cambio de Sucursal",
+                "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
@@ -291,6 +299,7 @@
                 "DESCRIPTION": "Descripción",
                 "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal",
@@ -308,6 +317,9 @@
                     "LABEL": "Activa si la entrada es a una UDN-Agencia",
                     "TRUE": "La entrada es a una UDN-Agencia",
                     "FALSE": "La entrada es a una sucursal"
+                },
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado"
                 }
             },
             "HINTS": {
@@ -317,6 +329,7 @@
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "PROJECT": "Selecciona uno de los proyectos actualmente disponibles",
+                "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada"
@@ -345,6 +358,7 @@
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia de arribo",
                 "ORIGIN_AGENCY": "UDN-Agencia de procedencia",
+                "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "SUBSIDIARY": "Sucursal de arribo",
@@ -364,13 +378,17 @@
                     "TRUE": "La entrada proviene de una UDN-Agencia",
                     "FALSE": "La entrada no proviene de una UDN-Agencia"
                 },
-                "UNKNOWN": "Desconocido"
+                "UNKNOWN": "Desconocido",
+                "DRIVER_SWITCH": {
+                    "LABEL": "Activa si el operador está registrado"
+                }
             },
             "HINTS": {
                 "DESCRIPTION": "(Opcional) Ingresa información adicional de la entrada",
                 "AGENCY": "Tu usuario no tiene UDN-Agencia, selecciona una para generar la entrada",
                 "ORIGIN_AGENCY": "Selecciona la UDN-Agencia de procedencia",
                 "ENTRY": "Entrada de cabinets no capitalizados desde UDN-Agencia o establecimiento",
+                "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para generar la entrada",
