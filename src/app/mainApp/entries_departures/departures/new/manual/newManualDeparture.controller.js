@@ -100,25 +100,7 @@
             vm.catalogues['transport_kind'].catalog['query_value'] = element;
             vm.onElementSelect(element, field);
         };
-
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.departure['ife_chofer'] = base64Image;
-                };
-
-            }
-            else {
-                delete (vm.departure['ife_chofer']);
-            }
-        };
-
+        
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList.map(function (element) {

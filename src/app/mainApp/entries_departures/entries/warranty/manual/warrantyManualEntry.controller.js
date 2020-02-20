@@ -25,7 +25,8 @@
         Helper,
         EnvironmentConfig,
         URLS,
-        PAGINATION
+        PAGINATION,
+        QUERIES
     ) {
         var vm = this;
 
@@ -39,24 +40,13 @@
         vm.cabinetList;
         vm.userAgency;
         vm.userSubsidiary;
+        vm.knownDriver;
 
         vm.user = User.getUser();
 
         vm.canView = true;
 
         //Validations
-        vm.imageConstraints = {
-            validations: {
-                size: {
-                    max: '5MB',
-                    min: '10B',
-                    height: { max: 4096, min: 100 },
-                    width: { max: 4096, min: 100 }
-                }
-            },
-            resize: { width: 4096 },
-            resizeIf: '$width > 4096 || $height > 4096'
-        };
 
         vm.createCabinetDialog = {
             fields: [
@@ -243,6 +233,17 @@
                  
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
+
+            if (vm.userSubsidiary) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userSubsidiary._id;
+                vm.entry[vm.catalogues['subsidiary'].binding]=vm.userSubsidiary._id;
+            }
+            if (vm.userAgency) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userAgency._id;
+                vm.entry[vm.catalogues['udn'].binding]=vm.userAgency._id;
+            }
         };
 
         //Just load if user is not from an Agency
@@ -254,21 +255,23 @@
             vm.entry[field] = element;
         };
 
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.entry['ife_chofer'] = base64Image;
-                };
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
+            vm.onElementSelect(element, field);
+        };
 
+        vm.onDestinationSelect = function onSubsidiarySelect(element, field) {
+
+            vm.onElementSelect(element, field);
+
+            if (vm.entry[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['subsidiary'].binding];
             }
-            else {
-                delete (vm.entry['ife_chofer']);
+            if (vm.entry[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['udn'].binding];
             }
         };
 
