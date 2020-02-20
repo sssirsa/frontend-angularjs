@@ -47,18 +47,6 @@
         vm.knownDriver;
 
         //Validations and constraints
-        vm.imageConstraints = {
-            validations: {
-                size: {
-                    max: '5MB',
-                    min: '10B',
-                    height: { max: 4096, min: 100 },
-                    width: { max: 4096, min: 100 }
-                }
-            },
-            resize: { width: 4096 },
-            resizeIf: '$width > 4096 || $height > 4096'
-        };
 
         vm.createCabinetDialog = {
             fields: [
