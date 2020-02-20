@@ -25,22 +25,22 @@
                     udn: {
                         zone: [
                             {
-                                value: "Centro"
+                                value: 'Centro'
                             },
                             {
-                                value: "Sur"
+                                value: 'Sur'
                             },
                             {
-                                value: "Norte"
+                                value: 'Norte'
                             },
                             {
-                                value: "Occidente (Oeste)"
+                                value: 'Occidente (Oeste)'
                             },
                             {
-                                value: "Oriente (Este)"
+                                value: 'Oriente (Este)'
                             },
                             {
-                                value: "Metropolitana"
+                                value: 'Metropolitana'
                             }
                         ]
                     }
@@ -72,20 +72,20 @@
                 presurize_options: [
 
                     {
-                        name: "Corregida la fuga",
-                        value: "Diagnostico"
+                        name: 'Corregida la fuga',
+                        value: 'Diagnostico'
                     },
                     {
-                        name: "Necesario Obsoletizar",
-                        value: "Obsoleto"
+                        name: 'Necesario Obsoletizar',
+                        value: 'Obsoleto'
                     },
                     {
-                        name: "Requiere una nueva Carga de Gas y reparación",
-                        value: "Presurizado"
+                        name: 'Requiere una nueva Carga de Gas y reparación',
+                        value: 'Presurizado'
                     },
                     {
-                        name: "Requiere una Revisión Posterior",
-                        value: "Continuar"
+                        name: 'Requiere una Revisión Posterior',
+                        value: 'Continuar'
                     }
                 ]
             }
@@ -131,7 +131,21 @@
             entries_departures: {
                 by_agency: 'udn',
                 by_subsidiary: 'sucursal',
-                by_transport_line:'linea_transporte'
+                by_transport_line: 'linea_transporte'
+            },
+            inventory: {
+                by_agency: 'by_agency',
+                by_attribute: 'attribute',
+                by_subsidiary: 'by_subsidiary',
+                attributes: {
+                    brand: 'marca',
+                    condition: 'condition',
+                    model: 'modelo',
+                    new: 'nuevo',
+                    kind: 'tipo',
+                    unilever_status: 'unilever',
+                    year: 'year'
+                }
             },
             locality: {
                 by_state: 'municipio__estado__id',
@@ -149,7 +163,7 @@
                     open: 'Abierta',
                     unproductive: 'Improductiva'
                 },
-                by_user:'persona__id'
+                by_user: 'persona__id'
             },
             service: {
                 by_cabinet: 'cabinet__economico'
