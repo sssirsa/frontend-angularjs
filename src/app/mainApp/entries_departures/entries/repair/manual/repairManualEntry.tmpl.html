@@ -130,14 +130,12 @@
                     layout-align="center stretch">
                     <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
                         hint="vm.catalogues['transport_line'].hint" icon="vm.catalogues['transport_line'].icon"
-                        required="vm.catalogues['transport_line'].required"
-                        pagination="vm.catalogues['transport_line'].pagination"
-                        elements="vm.catalogues['transport_line'].elements"
-                        soft-delete="vm.catalogues['transport_line'].softDelete"
+                        lazy="true" required="vm.catalogues['transport_line'].required"
                         on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
                     </catalog-select>
                 </div>
-                <div ng-if="vm.entry[vm.catalogues['transport_line'].binding]" layout="column" layout-align="center stretch">
+                <div ng-if="vm.entry[vm.catalogues['transport_line'].binding]" layout="column"
+                    layout-align="center stretch">
 
                     <!--Transport driver switch-->
                     <div layout="row" layout-align="center center">
@@ -157,8 +155,7 @@
                         ng-if="!vm.knownDriver">
                         <label translate>ENTRIES.REPAIR.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']" name="driver_name" ng-required="true"
-                            type="text">
+                        <input ng-model="vm.entry['nombre_chofer']" name="driver_name" ng-required="true" type="text">
                         <div class="hint" translate>ENTRIES.REPAIR.HINTS.DRIVER_NAME</div>
                     </md-input-container>
                     <catalog-select class="full-width" catalog="vm.catalogues['transport_kind'].catalog" lazy="true"
@@ -181,10 +178,11 @@
                 <md-button ng-click="vm.clickSaveEntry(vm.entry)" cg-busy="{
                                      promise:vm.createEntryPromise,
                                      message:' '
-                                     }" aria-label="previous tab" class="md-primary md-raised" ng-disabled="entryForm.$invalid">
+                                     }" aria-label="previous tab" class="md-primary md-raised"
+                    ng-disabled="entryForm.$invalid">
                     <div layout=" row" layout-align="center center">
-                    <md-icon md-font-icon="fa fa-save"></md-icon>
-                    <div>{{'ENTRIES.REPAIR.BUTTONS.SAVE'|translate}}</div>
+                        <md-icon md-font-icon="fa fa-save"></md-icon>
+                        <div>{{'ENTRIES.REPAIR.BUTTONS.SAVE'|translate}}</div>
                     </div>
                 </md-button>
             </md-actions>
