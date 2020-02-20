@@ -114,7 +114,7 @@
                     <catalog-select class="full-width" catalog="vm.catalogues['udn'].catalog"
                         hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
                         required="vm.catalogues['udn'].required"
-                        on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
+                        on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
                 </div>
                 <md-input-container layout="column" class="md-icon-float md-block">
@@ -124,7 +124,8 @@
                     <div class="hint" translate>ENTRIES.WARRANTY.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
-                    layout-align="center stretch">
+                    layout-align="center stretch" 
+                    ng-if="vm.entry[vm.catalogues['subsidiary'].binding]">
                     <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
                         hint="vm.catalogues['transport_line'].hint" lazy="true"
                         icon="vm.catalogues['transport_line'].icon" required="vm.catalogues['transport_line'].required"

@@ -128,7 +128,8 @@
                     <div class="hint" translate>ENTRIES.WAREHOUSE.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
-                    layout-align="center stretch">
+                    layout-align="center stretch" 
+                    ng-if="vm.entry[vm.catalogues['subsidiary'].binding] || vm.entry[vm.catalogues['udn'].binding]">
                     <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
                         hint="vm.catalogues['transport_line'].hint" lazy="true"
                         icon="vm.catalogues['transport_line'].icon" required="vm.catalogues['transport_line'].required"
