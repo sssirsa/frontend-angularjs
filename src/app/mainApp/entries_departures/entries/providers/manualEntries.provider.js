@@ -102,7 +102,9 @@
                         //Located in any place
                         response.can_enter = false;
                     }
-                    response.can_enter = true;
+                    else {
+                        response.can_enter = true;
+                    }
                     deferred.resolve(response);
                 })
                 .catch(function (error) {
