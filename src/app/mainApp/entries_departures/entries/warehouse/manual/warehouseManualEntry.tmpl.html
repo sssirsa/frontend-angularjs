@@ -162,7 +162,7 @@
                                     hint="vm.catalogues['subsidiary'].hint"
                                     icon="vm.catalogues['subsidiary'].icon"
                                     required="vm.catalogues['subsidiary'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+                                    on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
                     </catalog-select>
                     <catalog-select class="full-width"
                                     ng-if="vm.entryToAgency && vm.showSelector"
@@ -170,7 +170,7 @@
                                     hint="vm.catalogues['udn'].hint"
                                     icon="vm.catalogues['udn'].icon"
                                     required="vm.catalogues['udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                                    on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
                 </div>
                 <md-input-container layout="column"
