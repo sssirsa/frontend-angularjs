@@ -26,7 +26,8 @@
         Helper,
         EnvironmentConfig,
         URLS,
-        PAGINATION
+        PAGINATION,
+        QUERIES
     ) {
         var vm = this;
 
@@ -242,6 +243,17 @@
 
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
+
+            if (vm.userSubsidiary) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userSubsidiary._id;
+                vm.entry[vm.catalogues['subsidiary'].binding]=vm.userSubsidiary._id;
+            }
+            if (vm.userAgency) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency._id;
+                vm.catalogues['transport_line'].catalog.query_value = vm.userAgency._id;
+                vm.entry[vm.catalogues['udn'].binding]=vm.userAgency._id;
+            }
         };
 
         vm.init();
@@ -252,21 +264,23 @@
             vm.entry[field] = element;
         };
 
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.entry['ife_chofer'] = base64Image;
-                };
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
+            vm.onElementSelect(element, field);
+        };
 
+        vm.onDestinationSelect = function onSubsidiarySelect(element, field) {
+
+            vm.onElementSelect(element, field);
+
+            if (vm.entry[vm.catalogues['subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['subsidiary'].binding];
             }
-            else {
-                delete (vm.entry['ife_chofer']);
+            if (vm.entry[vm.catalogues['udn'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.entry[vm.catalogues['udn'].binding];
             }
         };
 
@@ -403,6 +417,13 @@
             //Removing mutual excluding variables when the switch is changed
             delete (vm.entry[vm.catalogues['udn'].binding]);
             delete (vm.entry[vm.catalogues['subsidiary'].binding]);
+            delete (vm.entry[vm.catalogues['transport_line'].binding]);
+        };
+        
+        vm.changeDriverSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.entry[vm.catalogues['transport_driver'].binding]);
+            delete (vm.entry['nombre_chofer'].binding);
         };
 
         //Internal functions

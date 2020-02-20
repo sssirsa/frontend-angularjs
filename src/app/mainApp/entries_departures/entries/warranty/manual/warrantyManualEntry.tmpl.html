@@ -1,118 +1,84 @@
 <md-card ng-if="!vm.canView">
     <h3 translate>ENTRIES.WARRANTY.ERRORS.AGENCY_USER</h3>
 </md-card>
-<md-card layout-padding
-         ng-if="vm.canView">
-    <div layout="column"
-         layout-align="center center">
+<md-card layout-padding ng-if="vm.canView">
+    <div layout="column" layout-align="center center">
         <h1 translate>ENTRIES.WARRANTY.TITLE</h1>
         <span translate>ENTRIES.WARRANTY.HINTS.ENTRY</span>
     </div>
-    <md-tabs md-dynamic-height="true"
-             md-selected="vm.selectedTab">
-        <md-tab layout="column"
-                layout-align="center stretch"
-                label={{'ENTRIES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
+    <md-tabs md-dynamic-height="true" md-selected="vm.selectedTab">
+        <md-tab layout="column" layout-align="center stretch"
+            label={{'ENTRIES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
             <!--Cabinet search bar-->
-            <md-actions layout-gt-xs="row"
-                        layout="column"
-                        layout-align-gt-xs="space-around center"
-                        layout-align="center stretch">
+            <md-actions layout-gt-xs="row" layout="column" layout-align-gt-xs="space-around center"
+                layout-align="center stretch">
                 <h3>{{'ENTRIES.WARRANTY.LABELS.CABINET_SEARCH'|translate}}</h3>
-                <form name="cabinetSearch"
-                      ng-submit="vm.searchCabinet(vm.cabinetID)">
+                <form name="cabinetSearch" ng-submit="vm.searchCabinet(vm.cabinetID)">
                     <div layout="row">
                         <md-input-container class="md-block">
                             <label>{{'ENTRIES.WARRANTY.LABELS.CABINET_ID'|translate}}</label>
-                            <input name="cabinetID"
-                                   type="text"
-                                   digits-only
-                                   md-max-length="10"
-                                   ng-model="vm.cabinetID" />
+                            <input name="cabinetID" type="text" digits-only md-max-length="10"
+                                ng-model="vm.cabinetID" />
                         </md-input-container>
-                        <md-button ng-click="vm.searchCabinet(vm.cabinetID)"
-                                   class="md-fab md-mini md-primary"
-                                   aria-label="Add Cabinet">
+                        <md-button ng-click="vm.searchCabinet(vm.cabinetID)" class="md-fab md-mini md-primary"
+                            aria-label="Add Cabinet">
                             <md-icon md-font-icon="fa fa-plus"></md-icon>
                         </md-button>
                     </div>
                 </form>
             </md-actions>
-            <div layout="row"
-                 layout-align="space-between center">
+            <div layout="row" layout-align="space-between center">
                 <!--Cabinets list-->
-                <section ng-if="vm.cabinetList.length>0"
-                         layout-padding
-                         class="full-width">
+                <section ng-if="vm.cabinetList.length>0" layout-padding class="full-width">
                     <p>Cabinets</p>
                     <md-virtual-repeat-container class="cabinet-container">
                         <md-list>
-                            <md-list-item layout-align="center stretch"
-                                          md-virtual-repeat="element in vm.cabinetList">
-                                <div layout="column"
-                                     layout-align="center stretch"
-                                     class="full-width"
-                                     cg-busy="{
+                            <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.cabinetList">
+                                <div layout="column" layout-align="center stretch" class="full-width" cg-busy="{
                                      promise:element.promise,
                                      message:'Buscando cabinet '+element.id
                                      }">
                                     <!--Existing cabinets-->
-                                    <section layout-gt-xs="row"
-                                             layout="column"
-                                             layout-align-gt-xs="space-between center"
-                                             layout-align="center stretch"
-                                             class="full-width found-cabinet"
-                                             ng-if="element.cabinet">
-                                        <div layout="column"
-                                             layout-align="center center">
+                                    <section layout-gt-xs="row" layout="column"
+                                        layout-align-gt-xs="space-between center" layout-align="center stretch"
+                                        class="full-width found-cabinet" ng-if="element.cabinet">
+                                        <div layout="column" layout-align="center center">
                                             <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.ID'|translate}}</b>
                                             {{element.cabinet.economico}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
                                             {{element.cabinet.no_serie}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.BRAND'|translate}}</b>
                                             {{element.cabinet.modelo.marca.descripcion}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             <b>{{'ENTRIES.WARRANTY.LABELS.CABINET.MODEL'|translate}}</b>
                                             {{element.cabinet.modelo.nombre}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             <md-button ng-click="vm.removeCabinet(element.id)"
-                                                       aria-label="remove cabinet"
-                                                       class="md-icon-button">
+                                                aria-label="remove cabinet" class="md-icon-button">
                                                 <md-icon md-font-icon="fa fa-times"></md-icon>
                                             </md-button>
                                         </div>
                                     </section>
                                     <!--Non existing cabinet-->
-                                    <section layout-gt-xs="row"
-                                             layout="column"
-                                             layout-align-gt-xs="space-between center"
-                                             layout-align="center stretch"
-                                             class="full-width not-found-cabinet"
-                                             ng-if="!element.cabinet"
-                                             ng-click="vm.createCabinet(element.id)">
-                                        <div layout="column"
-                                             layout-align="center center">
+                                    <section layout-gt-xs="row" layout="column"
+                                        layout-align-gt-xs="space-between center" layout-align="center stretch"
+                                        class="full-width not-found-cabinet" ng-if="!element.cabinet"
+                                        ng-click="vm.createCabinet(element.id)">
+                                        <div layout="column" layout-align="center center">
                                             {{element.id}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             {{'ENTRIES.WARRANTY.ERRORS.NOT_FOUND_ID'|translate}}
                                         </div>
-                                        <div layout="column"
-                                             layout-align="center center">
+                                        <div layout="column" layout-align="center center">
                                             <md-button ng-click="$event.stopPropagation(); vm.removeCabinet(element.id)"
-                                                       aria-label="remove cabinet"
-                                                       class="md-icon-button">
+                                                aria-label="remove cabinet" class="md-icon-button">
                                                 <md-icon md-font-icon="fa fa-times"></md-icon>
                                             </md-button>
                                         </div>
@@ -125,12 +91,9 @@
                 </section>
             </div>
 
-            <md-actions layout="row"
-                        layout-align="end center">
-                <md-button ng-click="vm.nextTab()"
-                           ng-disabled="!vm.cabinetList.length>0"
-                           aria-label="next tab"
-                           class="md-primary md-raised">
+            <md-actions layout="row" layout-align="end center">
+                <md-button ng-click="vm.nextTab()" ng-disabled="!vm.cabinetList.length>0" aria-label="next tab"
+                    class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-right"></md-icon>
                         <div>{{'ENTRIES.WARRANTY.BUTTONS.NEXT'|translate}}</div>
@@ -138,96 +101,83 @@
                 </md-button>
             </md-actions>
         </md-tab>
-        <md-tab layout="column"
-                layout-align="center stretch"
-                ng-disabled="!vm.cabinetList.length>0"
-                label={{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}>
-            <form name="entryForm"
-                  layout="column"
-                  ng-if="vm.cabinetList.length>0"
-                  layout-align="center stretch">
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
-                     layout-align="center stretch">
-                    <catalog-select class="full-width"
-                                    ng-if="!vm.entryToAgency && vm.showSelector"
-                                    catalog="vm.catalogues['subsidiary'].catalog"
-                                    hint="vm.catalogues['subsidiary'].hint"
-                                    icon="vm.catalogues['subsidiary'].icon"
-                                    required="vm.catalogues['subsidiary'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+        <md-tab layout="column" layout-align="center stretch" ng-disabled="!vm.cabinetList.length>0"
+            label={{'ENTRIES.WARRANTY.LABELS.ENTRY_DATA'|translate}}>
+            <form name="entryForm" layout="column" ng-if="vm.cabinetList.length>0" layout-align="center stretch">
+                <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
+                    layout-align="center stretch">
+                    <catalog-select class="full-width" ng-if="!vm.entryToAgency && vm.showSelector"
+                        catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
+                        icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
+                        on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
                     </catalog-select>
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['udn'].catalog"
-                                    hint="vm.catalogues['udn'].hint"
-                                    icon="vm.catalogues['udn'].icon"
-                                    required="vm.catalogues['udn'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+                    <catalog-select class="full-width" catalog="vm.catalogues['udn'].catalog"
+                        hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
+                        required="vm.catalogues['udn'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
                     </catalog-select>
                 </div>
-                <md-input-container layout="column"
-                                    class="md-icon-float md-block">
+                <md-input-container layout="column" class="md-icon-float md-block">
                     <label translate>ENTRIES.WARRANTY.LABELS.DESCRIPTION</label>
                     <md-icon class="fa fa-edit"></md-icon>
-                    <input ng-model="vm.entry['descripcion']"
-                           name="description"
-                           type="text">
+                    <input ng-model="vm.entry['descripcion']" name="description" type="text">
                     <div class="hint" translate>ENTRIES.WARRANTY.HINTS.DESCRIPTION</div>
                 </md-input-container>
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around center"
-                     layout-align="center stretch">
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['transport_line'].catalog"
-                                    hint="vm.catalogues['transport_line'].hint"
-                                    icon="vm.catalogues['transport_line'].icon"
-                                    required="vm.catalogues['transport_line'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_line'].binding)">
-                    </catalog-select>
-                    <catalog-select class="full-width"
-                                    catalog="vm.catalogues['transport_kind'].catalog"
-                                    hint="vm.catalogues['transport_kind'].hint"
-                                    icon="vm.catalogues['transport_kind'].icon"
-                                    required="vm.catalogues['transport_kind'].required"
-                                    on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
+                <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
+                    layout-align="center stretch" 
+                    ng-if="vm.entry[vm.catalogues['subsidiary'].binding]">
+                    <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
+                        hint="vm.catalogues['transport_line'].hint" lazy="true"
+                        icon="vm.catalogues['transport_line'].icon" required="vm.catalogues['transport_line'].required"
+                        on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
                     </catalog-select>
                 </div>
-                <div layout="column"
-                     layout-gt-xs="row"
-                     layout-align-gt-xs="space-around start"
-                     layout-align="center stretch">
-                    <md-input-container layout="column"
-                                        class="md-icon-float md-block full-width">
+                <div ng-if="vm.entry[vm.catalogues['transport_line'].binding]" layout="column"
+                    layout-align="center stretch">
+
+                    <!--Transport driver switch-->
+                    <div layout="row" layout-align="center center">
+                        <p>{{'ENTRIES.WARRANTY.LABELS.DRIVER_SWITCH.LABEL'|translate}}</p>
+                        <md-switch ng-model="vm.knownDriver" ng-change="vm.changeDriverSwitch()">
+                            <!--<p ng-if="vm.knownDriver">{{'ENTRIES.WARRANTY.LABELS.DRIVER_SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.knownDriver">{{'ENTRIES.WARRANTY.LABELS.DRIVER_SWITCH.FALSE'|translate}}</p>-->
+                        </md-switch>
+                    </div>
+                    <catalog-select class="full-width" ng-if="vm.knownDriver"
+                        catalog="vm.catalogues['transport_driver'].catalog" lazy="true"
+                        hint="vm.catalogues['transport_driver'].hint" icon="vm.catalogues['transport_driver'].icon"
+                        required="vm.catalogues['transport_driver'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_driver'].binding)">
+                    </catalog-select>
+                    <md-input-container layout="column" class="md-icon-float md-block full-width"
+                        ng-if="!vm.knownDriver">
                         <label translate>ENTRIES.WARRANTY.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.entry['nombre_chofer']"
-                               name="driver_name"
-                               ng-required="true"
-                               type="text">
+                        <input ng-model="vm.entry['nombre_chofer']" name="driver_name" ng-required="true" type="text">
                         <div class="hint" translate>ENTRIES.WARRANTY.HINTS.DRIVER_NAME</div>
                     </md-input-container>
+                    <catalog-select class="full-width" catalog="vm.catalogues['transport_kind'].catalog" lazy="true"
+                        hint="vm.catalogues['transport_kind'].hint" icon="vm.catalogues['transport_kind'].icon"
+                        required="vm.catalogues['transport_kind'].required"
+                        pagination="vm.catalogues['transport_kind'].pagination"
+                        elements="vm.catalogues['transport_kind'].elements"
+                        soft-delete="vm.catalogues['transport_kind'].softDelete"
+                        on-select="vm.onElementSelect(element,vm.catalogues['transport_kind'].binding)">
+                    </catalog-select>
                 </div>
             </form>
-            <md-actions layout="row"
-                        layout-align="space-between center">
-                <md-button ng-click="vm.previousTab()"
-                           aria-label="previous tab"
-                           class="md-primary md-raised">
+            <md-actions layout="row" layout-align="space-between center">
+                <md-button ng-click="vm.previousTab()" aria-label="previous tab" class="md-primary md-raised">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-chevron-left"></md-icon>
                         <div>{{'ENTRIES.WARRANTY.BUTTONS.PREVIOUS'|translate}}</div>
                     </div>
                 </md-button>
-                <md-button ng-click="vm.clickSaveEntry(vm.entry)"
-                           cg-busy="{
+                <md-button ng-click="vm.clickSaveEntry(vm.entry)" cg-busy="{
                                      promise:vm.createEntryPromise,
                                      message:' '
-                                     }"
-                           aria-label="previous tab"
-                           class="md-primary md-raised"
-                           ng-disabled="entryForm.$invalid">
+                                     }" aria-label="previous tab" class="md-primary md-raised"
+                    ng-disabled="entryForm.$invalid">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'ENTRIES.WARRANTY.BUTTONS.SAVE'|translate}}</div>
