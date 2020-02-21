@@ -3,10 +3,14 @@
         <h1 translate>WAREHOUSE.LABELS.TITLE</h1>
     </header>
     <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+        <p ng-id="vm.user.sucursal">{{'WAREHOUSE.SWITCH_ALL.SUBSIDIARIES'|translate}}</p>
+        <p ng-id="vm.user.udn">{{'WAREHOUSE.SWITCH_ALL.AGENCIES'|translate}}</p>
+        <md-switch ng-model="vm.showAll" ng-change="vm.changeSwitchAll()">
+        </md-switch>
+    </div>
+    <div layout="row" layout-align="center center" ng-if="vm.showSwitch">
         <p>{{'WAREHOUSE.SWITCH.LABEL'|translate}}</p>
         <md-switch ng-model="vm.showFromAgency" ng-change="vm.changeSwitch()">
-            <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.TRUE'|translate}}</p>
-            <p ng-if="!vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.FALSE'|translate}}</p>-->
         </md-switch>
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">

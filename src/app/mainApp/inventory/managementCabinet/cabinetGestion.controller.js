@@ -16,6 +16,7 @@
         //Variables
         vm.user = User.getUser();
         vm.showSelector = false;
+        vm.showSwitch = false;
         vm.filter;
         vm.showFromAgency;
         vm.selectedTab;
@@ -66,13 +67,26 @@
         vm.init = function init() {
             vm.filter = {};
             vm.selectedTab = 0;
-            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+            if (!vm.user['sucursal'] && !vm.user['udn']) {
+                vm.showSwitch=true;
+                vm.showSelector = true;
+            }
+            if (vm.user['sucursal']) {
+                if (!vm.user['sucursal']._id) {
+                    vm.showSelector = true;
+                }
+            }
+            if (vm.user['udn']) {
+                if (!vm.user['udn']._id) {
+                    vm.showSelector = true;
+                }
+            }
             if (!vm.showSelector) {
                 if (vm.user['sucursal']) {
-                    vm.filter['sucursal'] = vm.user['sucursal']._id;
+                    vm.filter['sucursal'] = vm.user['sucursal'];
                 }
                 if (vm.user['udn']) {
-                    vm.filter['udn'] = vm.user['udn']._id;
+                    vm.filter['udn'] = vm.user['udn'];
                 }
                 vm.searchWarehouse('brand');
             }
@@ -87,8 +101,12 @@
             vm.searchWarehouse('brand');
         };
 
-        vm.changeSwitch=function(){
-            vm.filter={};
+        vm.changeSwitch = function () {
+            vm.filter = {};
+        };
+
+        vm.changeSwitchAll = function () {
+            
         };
 
         function searchWarehouse(parameter) {

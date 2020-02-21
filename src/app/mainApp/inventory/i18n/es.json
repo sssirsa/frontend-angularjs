@@ -95,7 +95,6 @@
         "SAVE": "Guardar Posicionamiento",
         "EDIT": "Editar Posicionamiento",
         "CHANGE_STORAGE": "Cambiar Bodega"
-
     },
     "BULK_ASSET_INVENTORY": {
         "LABELS": {
@@ -175,23 +174,27 @@
             "TITLE": "Insumos Únicos por Etapa"
         }
     },
-    "WAREHOUSE":{
-        "LABELS":{
-            "TITLE":"Inventario de cabinets",            
-            "AGENCY":"Agencia-UDN",
-            "BY_BRAND":"Por marca",
-            "BY_KIND":"Por tipo",
-            "BY_MODEL":"Por modelo",
-            "BY_STATUS":"Por estatus unilever",
-            "TOTAL":"Total de equipos",
-            "SUBSIDIARY":"Sucursal"
+    "WAREHOUSE": {
+        "LABELS": {
+            "TITLE": "Inventario de cabinets",
+            "AGENCY": "Agencia-UDN",
+            "BY_BRAND": "Por marca",
+            "BY_KIND": "Por tipo",
+            "BY_MODEL": "Por modelo",
+            "BY_STATUS": "Por estatus unilever",
+            "TOTAL": "Total de equipos",
+            "SUBSIDIARY": "Sucursal"
         },
-        "SWITCH":{
-            "LABEL":"Activa para buscar inventario de agencias"
+        "SWITCH": {
+            "LABEL": "Activa para buscar inventario de agencias"
         },
-        "HINTS":{
-            "AGENCY":"Selecciona la agencia para mostrar el inventario",
-            "SUBSIDIARY":"Selecciona la sucursal para mostrar el inventario"
+        "SWITCH_ALL": {
+            "AGENCIES": "Activa para mostrar todas las UDN-Agencia",
+            "SUBSIDIARIES": "Activa para mostrar todas las sucursales"
+        },
+        "HINTS": {
+            "AGENCY": "Selecciona la agencia para mostrar el inventario",
+            "SUBSIDIARY": "Selecciona la sucursal para mostrar el inventario"
         }
     }
 }

@@ -1,8 +1,11 @@
 {
     "WELCOME": {
         "AGENCY": "UDN-Agencia",
+        "AGENCY_ADMIN": "Administrador de UDN-Agencias",
         "NO_LOCATION": "Sin sucursal o UDN-Agencia",
         "STORE": "Estabecimiento",
-        "SUBSIDIARY": "Sucursal"
+        "STORE_ADMIN": "Administrador de Estabecimientos",
+        "SUBSIDIARY": "Sucursal",
+        "SUBSIDIARY_ADMIN": "Administrador de Sucursales"
     }
 }

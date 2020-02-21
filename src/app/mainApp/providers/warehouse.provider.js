@@ -21,20 +21,38 @@
 
         function listByBrand(filter) {
             if (filter['sucursal']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_subsidiary)
-                    .all(filter['sucursal']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['brand'])
+                if (filter['sucursal']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .all(filter['sucursal']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['brand'])
                         .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['brand'])
+                        .customGET();
+                }
             }
             if (filter['udn']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_agency)
-                    .all(filter['udn']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['brand'])
+                if (filter['udn']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .all(filter['udn']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['brand'])
                         .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['brand'])
+                        .customGET();
+                }
             }
         }
 
@@ -45,7 +63,7 @@
                     .all(filter['sucursal']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['model'])
-                        .customGET();
+                    .customGET();
             }
             if (filter['udn']) {
                 return urlbase
@@ -53,7 +71,7 @@
                     .all(filter['udn']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['model'])
-                        .customGET();
+                    .customGET();
             }
         }
 
@@ -64,7 +82,7 @@
                     .all(filter['sucursal']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['kind'])
-                        .customGET();
+                    .customGET();
             }
             if (filter['udn']) {
                 return urlbase
@@ -72,7 +90,7 @@
                     .all(filter['udn']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['kind'])
-                        .customGET();
+                    .customGET();
             }
         }
 
@@ -83,7 +101,7 @@
                     .all(filter['sucursal']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['unilever_status'])
-                        .customGET();
+                    .customGET();
             }
             if (filter['udn']) {
                 return urlbase
@@ -91,7 +109,7 @@
                     .all(filter['udn']
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['unilever_status'])
-                        .customGET();
+                    .customGET();
             }
         }
     }
