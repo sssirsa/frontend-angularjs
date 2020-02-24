@@ -107,6 +107,10 @@
             "MASSIVE_CHARGE": {
                 "HISTORICAL": "Historial",
                 "TITLE": "Cargas Massivas"
+            },
+            "WAREHOUSE":{
+                "TITLE":"Activos",
+                "CABINET_MANAGEMENT":"Stock de cabinets"
             }
         },
         "COMPONENTS": {

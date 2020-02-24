@@ -9,7 +9,7 @@
         URLS,
         Translate,
         User,
-        WAREHOUSE
+        WAREHOUSEProvider
     ) {
         var vm = this;
 
@@ -95,9 +95,9 @@
 
         vm.init();
 
-        vm.onElementSelect = function onElementSelect(element, field) {
+        vm.onElementSelect = function onElementSelect(element, value, field) {
             vm.filter = {};
-            vm.filter[field] = element;
+            vm.filter[field] = value;
             vm.selectedTab = 0;
             vm.searchWarehouse('brand');
         };
@@ -127,7 +127,7 @@
             vm.warehouse = null;
             switch (parameter) {
                 case 'brand':
-                    vm.loadingWarehouse = WAREHOUSE.listByBrand(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByBrand(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -136,7 +136,7 @@
                         });
                     break;
                 case 'model':
-                    vm.loadingWarehouse = WAREHOUSE.listByModel(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByModel(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -145,7 +145,7 @@
                         });
                     break;
                 case 'kind':
-                    vm.loadingWarehouse = WAREHOUSE.listByKind(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByKind(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -154,7 +154,7 @@
                         });
                     break;
                 case 'unilever_status':
-                    vm.loadingWarehouse = WAREHOUSE.listByUnileverStatus(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByUnileverStatus(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })

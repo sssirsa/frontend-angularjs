@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app.mainApp.warehouse')
-        .factory('WAREHOUSE', warehouseProvider);
+        .factory('WAREHOUSEProvider', warehouseProvider);
 
     function warehouseProvider(
         API,
@@ -57,58 +57,112 @@
 
         function listByModel(filter) {
             if (filter['sucursal']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_subsidiary)
-                    .all(filter['sucursal']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['model'])
-                    .customGET();
+                if (filter['sucursal']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .all(filter['sucursal']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['model'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['model'])
+                        .customGET();
+                }
             }
             if (filter['udn']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_agency)
-                    .all(filter['udn']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['model'])
-                    .customGET();
+                if (filter['udn']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .all(filter['udn']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['model'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['model'])
+                        .customGET();
+                }
             }
         }
 
         function listByKind(filter) {
             if (filter['sucursal']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_subsidiary)
-                    .all(filter['sucursal']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['kind'])
-                    .customGET();
+                if (filter['sucursal']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .all(filter['sucursal']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['kind'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['kind'])
+                        .customGET();
+                }
             }
             if (filter['udn']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_agency)
-                    .all(filter['udn']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['kind'])
-                    .customGET();
+                if (filter['udn']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .all(filter['udn']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['kind'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['kind'])
+                        .customGET();
+                }
             }
         }
 
         function listByUnileverStatus(filter) {
             if (filter['sucursal']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_subsidiary)
-                    .all(filter['sucursal']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['unilever_status'])
-                    .customGET();
+                if (filter['sucursal']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .all(filter['sucursal']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['unilever_status'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['unilever_status'])
+                        .customGET();
+                }
             }
             if (filter['udn']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_agency)
-                    .all(filter['udn']
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['unilever_status'])
-                    .customGET();
+                if (filter['udn']) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .all(filter['udn']._id
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['unilever_status'])
+                        .customGET();
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency
+                            + '?' + QUERIES.inventory.by_attribute
+                            + '=' + QUERIES.inventory.attributes['unilever_status'])
+                        .customGET();
+                }
             }
         }
     }
