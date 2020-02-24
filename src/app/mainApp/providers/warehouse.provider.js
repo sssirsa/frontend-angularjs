@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp')
+        .module('app.mainApp.warehouse')
         .factory('WAREHOUSE', warehouseProvider);
 
     function warehouseProvider(
@@ -8,9 +8,8 @@
         QUERIES,
         URLS
     ) {
-        var urlbase = API.all(URLS.management.base)
-            .all(URLS.inventory.catalogues.base)
-            .all(URLS.management.inventory.cabinet);
+        var urlbase = API.all(URLS.warehouse.base)
+            .all(URLS.warehouse.fridge);
 
         return {
             listByBrand: listByBrand,

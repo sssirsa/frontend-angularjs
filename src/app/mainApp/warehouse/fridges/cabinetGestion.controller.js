@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.inventory')
+        .module('app.mainApp.warehouse')
         .controller('cabinetGestionController', cabinetGestionController);
 
     function cabinetGestionController(
@@ -19,6 +19,7 @@
         vm.showSwitch = false;
         vm.filter;
         vm.showFromAgency;
+        vm.showAll;
         vm.selectedTab;
         vm.loadingWarehouse;
 
@@ -68,7 +69,7 @@
             vm.filter = {};
             vm.selectedTab = 0;
             if (!vm.user['sucursal'] && !vm.user['udn']) {
-                vm.showSwitch=true;
+                vm.showSwitch = true;
                 vm.showSelector = true;
             }
             if (vm.user['sucursal']) {
@@ -106,7 +107,20 @@
         };
 
         vm.changeSwitchAll = function () {
-            
+            if (vm.showAll) {
+                if (vm.user.sucursal) {
+                    vm.filter = {
+                        sucursal: {}
+                    };
+                }
+                if (vm.user.udn) {
+                    vm.filter = {
+                        udn: {}
+                    };
+                }
+                searchWarehouse('brand');
+            }
+            vm.filter = {};
         };
 
         function searchWarehouse(parameter) {
