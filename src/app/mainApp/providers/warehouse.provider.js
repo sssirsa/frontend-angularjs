@@ -11,12 +11,6 @@
         var urlbase = API.all(URLS.warehouse.base)
             .all(URLS.warehouse.fridge);
 
-        return {
-            listByBrand: listByBrand,
-            listByModel: listByModel,
-            listByKind: listByKind,
-            listByUnileverStatus: listByUnileverStatus
-        };
 
         function listByBrand(filter) {
             if (filter['sucursal']) {
@@ -165,5 +159,13 @@
                 }
             }
         }
+
+        
+        return {
+            listByBrand: listByBrand,
+            listByModel: listByModel,
+            listByKind: listByKind,
+            listByUnileverStatus: listByUnileverStatus
+        };
     }
 })();

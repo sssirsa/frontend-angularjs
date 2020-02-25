@@ -89,7 +89,7 @@
                 if (vm.user['udn']) {
                     vm.filter['udn'] = vm.user['udn'];
                 }
-                vm.searchWarehouse('brand');
+                //vm.searchWarehouse('brand');
             }
         };
 
@@ -99,28 +99,32 @@
             vm.filter = {};
             vm.filter[field] = value;
             vm.selectedTab = 0;
-            vm.searchWarehouse('brand');
+            //vm.searchWarehouse('brand');
         };
 
         vm.changeSwitch = function () {
             vm.filter = {};
+            vm.selectedTab = 0;
         };
 
         vm.changeSwitchAll = function () {
+            vm.selectedTab = 0;
             if (vm.showAll) {
-                if (vm.user.sucursal) {
+                if (vm.user.sucursal || !vm.showFromAgency) {
                     vm.filter = {
                         sucursal: {}
                     };
                 }
-                if (vm.user.udn) {
+                if (vm.user.udn || vm.showFromAgency) {
                     vm.filter = {
                         udn: {}
                     };
                 }
-                searchWarehouse('brand');
+                //searchWarehouse('brand');
             }
-            vm.filter = {};
+            else {
+                vm.filter = {};
+            }
         };
 
         function searchWarehouse(parameter) {

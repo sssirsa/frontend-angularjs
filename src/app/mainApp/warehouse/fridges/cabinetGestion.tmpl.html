@@ -2,15 +2,15 @@
     <header layout="column" layout-align="center center">
         <h1 translate>WAREHOUSE.LABELS.TITLE</h1>
     </header>
-    <div layout="row" layout-align="center center" ng-if="vm.showSelector">
-        <p ng-if="vm.user.sucursal">{{'WAREHOUSE.SWITCH_ALL.SUBSIDIARIES'|translate}}</p>
-        <p ng-if="vm.user.udn">{{'WAREHOUSE.SWITCH_ALL.AGENCIES'|translate}}</p>
-        <md-switch ng-model="vm.showAll" ng-change="vm.changeSwitchAll()">
-        </md-switch>
-    </div>
     <div layout="row" layout-align="center center" ng-if="vm.showSwitch && !vm.showAll">
         <p>{{'WAREHOUSE.SWITCH.LABEL'|translate}}</p>
         <md-switch ng-model="vm.showFromAgency" ng-change="vm.changeSwitch()">
+        </md-switch>
+    </div>
+    <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+        <p ng-if="vm.user.sucursal || !vm.showFromAgency">{{'WAREHOUSE.SWITCH_ALL.SUBSIDIARIES'|translate}}</p>
+        <p ng-if="vm.user.udn || vm.showFromAgency">{{'WAREHOUSE.SWITCH_ALL.AGENCIES'|translate}}</p>
+        <md-switch ng-model="vm.showAll" ng-change="vm.changeSwitchAll()">
         </md-switch>
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
