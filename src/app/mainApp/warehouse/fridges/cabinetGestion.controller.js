@@ -114,17 +114,22 @@
                     vm.filter = {
                         sucursal: {}
                     };
+                    searchWarehouse('brand');
                 }
                 if (vm.user.udn || vm.showFromAgency) {
                     vm.filter = {
                         udn: {}
                     };
+                    searchWarehouse('brand');
                 }
                 //searchWarehouse('brand');
             }
             else {
                 vm.filter = {};
             }
+            // if(vm.filter['sucursal']||vm.filter['udn']){
+            //     searchWarehouse('brand');
+            // }
         };
 
         function searchWarehouse(parameter) {
