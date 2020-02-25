@@ -26,13 +26,12 @@
             name: 'MAIN.MENU.WAREHOUSE.TITLE',
             icon: 'fa fa-pallet',
             type: 'dropdown',
-            permission: ['management__inventory__cabinet', 
-            'warehouse__fridge__stock'],
+            permission: ['warehouse__fridge__stock'],
             priority: 8,
             children: [{
                 name: 'MAIN.MENU.WAREHOUSE.CABINET_MANAGEMENT',
                 state: 'triangular.admin-default.gestion_cabinets',
-                permission:['management__inventory__cabinet'],
+                permission:['warehouse__fridge__stock'],
                 type: 'link'
             }
             ]

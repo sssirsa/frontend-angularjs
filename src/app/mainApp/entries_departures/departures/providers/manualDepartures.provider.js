@@ -18,12 +18,11 @@
         var departuresUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.departures.base);
-        var managementUrl = API
-            .all(URLS.management.base);
+        var warehouseUrl =API
+        .all(URLS.warehouse.base);
 
-        var departures = URLS.entries_departures.departures;
-        var inventory = URLS.management.inventory;
-        var management = URLS.management;
+        var departures = URLS.entries_departures.departures;        
+        var warehouse = URLS.warehouse;
 
         function createNew(element) {
             return departuresUrl.all(departures.new).customPOST(element);
@@ -79,9 +78,8 @@
                 stage: null,
                 subsidiary: null
             };
-            managementUrl
-                .all(management.catalogues.base)
-                .all(inventory.cabinet)
+            warehouseUrl
+                .all(warehouse.fridge)
                 .customGET(id)
                 .then(function (fridge) {
                     response.cabinet = fridge;
