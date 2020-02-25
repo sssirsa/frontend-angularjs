@@ -101,6 +101,7 @@
             management: {}, //Added at config file
             salepoint: {},//Added at config file
             technical_service: {}, //Added at config file
+            warehouse: {}, //Added at config file
 
             //TODO: Re group under the proper category
             //When done, delete all below this line

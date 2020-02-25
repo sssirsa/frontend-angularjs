@@ -5,7 +5,6 @@
     function permissionsProvider(
         API,
         PermRoleStore,
-        PermPermissionStore,
         $log,
         OAuth
     ) {
@@ -55,7 +54,8 @@
                 else {
                     $log.error('@definePermissions function, @permissionProvider function, @PERMISSION provider: No permissions array');
                 }
-                localStorage['permissions'] = angular.toJson(vm.permissions);
+                //localStorage['permissions'] = angular.toJson(vm.permissions);
+                localStorage.setItem('permissions', angular.toJson(vm.permissions));
                 setPermissions(vm.permissions);
             }
             else {
@@ -67,7 +67,7 @@
         function getPermissions() {
             if (OAuth.isValidToken()) {
                 if (vm.permissions.length === 0) {
-                    vm.permissions = angular.fromJson(localStorage['permissions']);
+                    vm.permissions = angular.fromJson(localStorage.getItem('permissions'));
                     //Base role
                     vm.permissions.push('AUTHENTICATED');
                 }
@@ -92,6 +92,8 @@
                 angular.forEach(permissions, function permissionIterator(permissionName) {
                     PermRoleStore.defineRole(permissionName, []);
                 });
+                
+                localStorage.setItem('permissions', angular.toJson(permissions));
             }
             else {
                 $log.error('@setPermissions function, @permissionProvider function, @PERMISSION provider: Empty permissions array');

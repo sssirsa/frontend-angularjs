@@ -44,17 +44,6 @@
                 controller: 'noCapitalizadoController',
                 controllerAs: 'vm'
             })
-            .state('triangular.admin-default.gestion_cabinets', {
-                url: '/cabinet',
-                data: {
-                    permissions: {
-                        only: ['management__inventory__cabinet']
-                    }
-                },
-                templateUrl: 'app/mainApp/inventory/managementCabinet/cabinetGestion.tmpl.html',
-                controller: 'cabinetGestionController',
-                controllerAs: 'vm'
-            })
             .state('triangular.admin-default.storage', {
                 url: '/inventario/posicionamiento',
                 data: {
@@ -104,48 +93,43 @@
                     'inventory__asset__unique_asset_process'
                 ],
                 priority: 8,
-                children: [{
-                    name: 'MAIN.MENU.INVENTORY.CABINET_MANAGEMENT',
-                    state: 'triangular.admin-default.gestion_cabinets',
-                    permission:['management__inventory__cabinet'],
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.NO_CAPITALIZADO',
-                    state: 'triangular.admin-default.no_capitalizado',
-                    permission: ['management__inventory__no_labeled'],
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.STORAGE',
-                    state: 'triangular.admin-default.storage',
-                    permission: ['management__inventory__asset_location'],
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.BULK_ASSET',
-                    state: 'triangular.admin-default.bulk-asset-inventory',
-                    permission:'inventory__management__bulk_asset_branch',
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET',
-                    state: 'triangular.admin-default.unique-asset-inventory',
-                    permission: 'inventory__management__unique_asset_branch',
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.BULK_ASSET_STAGE',
-                    state: 'triangular.admin-default.bulk-asset-stage',
-                    permission: ['inventory__asset__bulk_asset_process'],
-                    type: 'link'
-                },
-                {
-                    name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET_STAGE',
-                    state: 'triangular.admin-default.unique-asset-stage',
-                    permission: ['inventory__asset__unique_asset_process'],
-                    type: 'link'
-                }
+                children: [
+                    {
+                        name: 'MAIN.MENU.INVENTORY.NO_CAPITALIZADO',
+                        state: 'triangular.admin-default.no_capitalizado',
+                        permission: ['management__inventory__no_labeled'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.INVENTORY.STORAGE',
+                        state: 'triangular.admin-default.storage',
+                        permission: ['management__inventory__asset_location'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.INVENTORY.BULK_ASSET',
+                        state: 'triangular.admin-default.bulk-asset-inventory',
+                        permission: 'inventory__management__bulk_asset_branch',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET',
+                        state: 'triangular.admin-default.unique-asset-inventory',
+                        permission: 'inventory__management__unique_asset_branch',
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.INVENTORY.BULK_ASSET_STAGE',
+                        state: 'triangular.admin-default.bulk-asset-stage',
+                        permission: ['inventory__asset__bulk_asset_process'],
+                        type: 'link'
+                    },
+                    {
+                        name: 'MAIN.MENU.INVENTORY.UNIQUE_ASSET_STAGE',
+                        state: 'triangular.admin-default.unique-asset-stage',
+                        permission: ['inventory__asset__unique_asset_process'],
+                        type: 'link'
+                    }
                 ]
             }
         );

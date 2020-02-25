@@ -19,12 +19,11 @@
         var entriesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.entries.base);
-        var managementUrl = API
-            .all(URLS.management.base);
+        var warehouseUrl = API
+            .all(URLS.warehouse.base);
 
         var entries = URLS.entries_departures.entries;
-        var inventory = URLS.management.inventory;
-        var management = URLS.management;
+        var warehouse = URLS.warehouse;
 
         function createNew(element) {
             return entriesUrl.all(entries.new).customPOST(element);
@@ -92,9 +91,9 @@
                 can_enter: false,
                 cabinet: null
             };
-            managementUrl
-                .all(management.catalogues.base)
-                .all(inventory.cabinet)
+
+            warehouseUrl
+                .all(warehouse.fridge)
                 .customGET(id)
                 .then(function (fridge) {
                     response.cabinet = fridge;

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app.mainApp.inventory')
+        .module('app.mainApp.warehouse')
         .controller('cabinetGestionController', cabinetGestionController);
 
     function cabinetGestionController(
@@ -9,15 +9,17 @@
         URLS,
         Translate,
         User,
-        WAREHOUSE
+        WAREHOUSEProvider
     ) {
         var vm = this;
 
         //Variables
         vm.user = User.getUser();
         vm.showSelector = false;
+        vm.showSwitch = false;
         vm.filter;
         vm.showFromAgency;
+        vm.showAll;
         vm.selectedTab;
         vm.loadingWarehouse;
 
@@ -66,36 +68,70 @@
         vm.init = function init() {
             vm.filter = {};
             vm.selectedTab = 0;
-            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+            if (!vm.user['sucursal'] && !vm.user['udn']) {
+                vm.showSwitch = true;
+                vm.showSelector = true;
+            }
+            if (vm.user['sucursal']) {
+                if (!vm.user['sucursal']._id) {
+                    vm.showSelector = true;
+                }
+            }
+            if (vm.user['udn']) {
+                if (!vm.user['udn']._id) {
+                    vm.showSelector = true;
+                }
+            }
             if (!vm.showSelector) {
                 if (vm.user['sucursal']) {
-                    vm.filter['sucursal'] = vm.user['sucursal']._id;
+                    vm.filter['sucursal'] = vm.user['sucursal'];
                 }
                 if (vm.user['udn']) {
-                    vm.filter['udn'] = vm.user['udn']._id;
+                    vm.filter['udn'] = vm.user['udn'];
                 }
-                vm.searchWarehouse('brand');
+                //vm.searchWarehouse('brand');
             }
         };
 
         vm.init();
 
-        vm.onElementSelect = function onElementSelect(element, field) {
+        vm.onElementSelect = function onElementSelect(element, value, field) {
             vm.filter = {};
-            vm.filter[field] = element;
+            vm.filter[field] = value;
             vm.selectedTab = 0;
-            vm.searchWarehouse('brand');
+            //vm.searchWarehouse('brand');
         };
 
-        vm.changeSwitch=function(){
-            vm.filter={};
+        vm.changeSwitch = function () {
+            vm.filter = {};
+            vm.selectedTab = 0;
+        };
+
+        vm.changeSwitchAll = function () {
+            vm.selectedTab = 0;
+            if (vm.showAll) {
+                if (vm.user.sucursal || !vm.showFromAgency) {
+                    vm.filter = {
+                        sucursal: {}
+                    };
+                }
+                if (vm.user.udn || vm.showFromAgency) {
+                    vm.filter = {
+                        udn: {}
+                    };
+                }
+                //searchWarehouse('brand');
+            }
+            else {
+                vm.filter = {};
+            }
         };
 
         function searchWarehouse(parameter) {
             vm.warehouse = null;
             switch (parameter) {
                 case 'brand':
-                    vm.loadingWarehouse = WAREHOUSE.listByBrand(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByBrand(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -104,7 +140,7 @@
                         });
                     break;
                 case 'model':
-                    vm.loadingWarehouse = WAREHOUSE.listByModel(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByModel(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -113,7 +149,7 @@
                         });
                     break;
                 case 'kind':
-                    vm.loadingWarehouse = WAREHOUSE.listByKind(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByKind(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
@@ -122,7 +158,7 @@
                         });
                     break;
                 case 'unilever_status':
-                    vm.loadingWarehouse = WAREHOUSE.listByUnileverStatus(vm.filter)
+                    vm.loadingWarehouse = WAREHOUSEProvider.listByUnileverStatus(vm.filter)
                         .then(function (response) {
                             vm.warehouse = response;
                         })
