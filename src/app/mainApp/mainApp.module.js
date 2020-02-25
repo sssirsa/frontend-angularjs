@@ -8,6 +8,7 @@
         'app.mainApp.salepoint',
         'app.mainApp.splash',
         'app.mainApp.technical_service',
+        'app.mainApp.warehouse',
         'app.mainApp.welcome'
     ]);
 

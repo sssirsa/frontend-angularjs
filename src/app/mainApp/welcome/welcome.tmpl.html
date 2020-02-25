@@ -1,9 +1,7 @@
 <md-card layout-padding>
-    <div layout="column"
-         layout-align="center center">
-        <img class="make-round avatar"
-             src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}"
-             width="100" height="100" />
+    <div layout="column" layout-align="center center">
+        <img class="make-round avatar" src="{{vm.user.foto!=null?vm.user.foto:'assets/images/user.png'}}" width="100"
+            height="100" />
         <h3>
             {{vm.user.nombre}}
             {{vm.user.apellido_paterno}}
@@ -12,16 +10,31 @@
         <div layout="row">
             <md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon>
             <div ng-if="vm.user.sucursal">
-                {{'WELCOME.SUBSIDIARY'|translate}}:
-                {{vm.user.sucursal.nombre}}
+                <div ng-if="vm.user.sucursal._id">
+                    {{'WELCOME.SUBSIDIARY'|translate}}:
+                    {{vm.user.sucursal.nombre}}
+                </div>
+                <div ng-if="!vm.user.sucursal._id">
+                    {{'WELCOME.SUBSIDIARY_ADMIN'|translate}}
+                </div>
             </div>
             <div ng-if="vm.user.udn">
-                {{'WELCOME.AGENCY'|translate}}:
-                {{vm.user.udn.agencia}}
+                <div ng-if="vm.user.udn._id">
+                    {{'WELCOME.AGENCY'|translate}}:
+                    {{vm.user.udn.agencia}}
+                </div>
+                <div ng-if="!vm.user.udn._id">
+                    {{'WELCOME.AGENCY_ADMIN'|translate}}
+                </div>
             </div>
             <div ng-if="vm.user.establecimiento">
-                {{'WELCOME.STORE'|translate}}:
-                {{vm.user.establecimiento.nombre}}
+                <div ng-if="vm.user.establecimiento._id">
+                    {{'WELCOME.STORE'|translate}}:
+                    {{vm.user.establecimiento.nombre}}
+                </div>
+                <div ng-if="!vm.user.establecimiento._id">
+                    {{'WELCOME.STORE_ADMIN'|translate}}
+                </div>
             </div>
             <div ng-if="!vm.user.sucursal && !vm.user.udn">
                 {{'WELCOME.NO_LOCATION'|translate}}

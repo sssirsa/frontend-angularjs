@@ -2,34 +2,40 @@
     <header layout="column" layout-align="center center">
         <h1 translate>WAREHOUSE.LABELS.TITLE</h1>
     </header>
-    <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+    <div layout="row" layout-align="center center" ng-if="vm.showSwitch && !vm.showAll">
         <p>{{'WAREHOUSE.SWITCH.LABEL'|translate}}</p>
         <md-switch ng-model="vm.showFromAgency" ng-change="vm.changeSwitch()">
-            <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.TRUE'|translate}}</p>
-            <p ng-if="!vm.entryFromAgency">{{'ENTRIES.WAREHOUSE.LABELS.SWITCH.FALSE'|translate}}</p>-->
+        </md-switch>
+    </div>
+    <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+        <p ng-if="vm.user.sucursal || !vm.showFromAgency">{{'WAREHOUSE.SWITCH_ALL.SUBSIDIARIES'|translate}}</p>
+        <p ng-if="vm.user.udn || vm.showFromAgency">{{'WAREHOUSE.SWITCH_ALL.AGENCIES'|translate}}</p>
+        <md-switch ng-model="vm.showAll" ng-change="vm.changeSwitchAll()">
         </md-switch>
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
-        <catalog-select class="full-width" ng-if="!vm.showFromAgency && vm.showSelector"
+        <catalog-select class="full-width" ng-if="!vm.showFromAgency && vm.showSelector && !vm.showAll"
             catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
             icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
-            on-select="vm.onElementSelect(element,vm.catalogues['subsidiary'].binding)">
+            on-select="vm.onElementSelect(element, value, vm.catalogues['subsidiary'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="vm.showFromAgency && vm.showSelector"
+        <catalog-select class="full-width" ng-if="vm.showFromAgency && vm.showSelector && !vm.showAll"
             catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
             required="vm.catalogues['udn'].required"
-            on-select="vm.onElementSelect(element,vm.catalogues['udn'].binding)">
+            on-select="vm.onElementSelect(element, value, vm.catalogues['udn'].binding)">
         </catalog-select>
     </div>
 </md-card>
-<md-card ng-if="vm.filter.sucursal || vm.filter.udn" class="full-width" layout-padding layout="column"
+<md-card ng-if="vm.filter.sucursal || vm.filter.udn || vm.showAll" class="full-width" layout-padding layout="column"
     laoyut-align="center-stretch">
-    <section layout="row" layout-align="space-around center">
-        <span flex layout-padding>
-            <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
-            <span>{{vm.warehouse.total[0].cantidad}}</span>
-        </span>
-    </section>
+    <span flex layout-padding>
+        <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
+        <span>{{vm.warehouse.total[0].cantidad}}</span>
+    </span>
+</md-card>
+<md-card ng-if="vm.filter.sucursal || vm.filter.udn || vm.showAll" class="full-width" layout-padding layout="column"
+    laoyut-align="center-stretch">
+
     <md-tabs cg-busy="{
         promise:vm.loadingWarehouse,
         message:'Cargando inventario'}" md-no-select-click="false" md-dynamic-height="true"
@@ -50,7 +56,8 @@
                         <v-pane-content id="v-accordion-content">
                             <md-virtual-repeat-container class="cabinet-container">
                                 <md-list>
-                                    <md-list-item layout-align="center stretch" md-virtual-repeat="element in value[0].economico">
+                                    <md-list-item layout-align="center stretch"
+                                        md-virtual-repeat="element in value[0].economico">
                                         <div layout="column" layout-align="center stretch" class="full-width">
                                             <!--Existing cabinets-->
                                             <section layout-gt-xs="row" layout="column"
@@ -86,7 +93,8 @@
                         <v-pane-content id="v-accordion-content">
                             <md-virtual-repeat-container class="cabinet-container">
                                 <md-list>
-                                    <md-list-item layout-align="center stretch" md-virtual-repeat="element in value[0].economico">
+                                    <md-list-item layout-align="center stretch"
+                                        md-virtual-repeat="element in value[0].economico">
                                         <div layout="column" layout-align="center stretch" class="full-width">
                                             <!--Existing cabinets-->
                                             <section layout-gt-xs="row" layout="column"
@@ -122,7 +130,8 @@
                         <v-pane-content id="v-accordion-content">
                             <md-virtual-repeat-container class="cabinet-container">
                                 <md-list>
-                                    <md-list-item layout-align="center stretch" md-virtual-repeat="element in value[0].economico">
+                                    <md-list-item layout-align="center stretch"
+                                        md-virtual-repeat="element in value[0].economico">
                                         <div layout="column" layout-align="center stretch" class="full-width">
                                             <!--Existing cabinets-->
                                             <section layout-gt-xs="row" layout="column"
@@ -158,7 +167,8 @@
                         <v-pane-content id="v-accordion-content">
                             <md-virtual-repeat-container class="cabinet-container">
                                 <md-list>
-                                    <md-list-item layout-align="center stretch" md-virtual-repeat="element in value[0].economico">
+                                    <md-list-item layout-align="center stretch"
+                                        md-virtual-repeat="element in value[0].economico">
                                         <div layout="column" layout-align="center stretch" class="full-width">
                                             <!--Existing cabinets-->
                                             <section layout-gt-xs="row" layout="column"

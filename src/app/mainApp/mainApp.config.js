@@ -13,6 +13,7 @@
         SALEPOINT,
         TECHNICAL_SERVICE,
         REPORTS,
+        WAREHOUSE,
         URLS,
         $provide,
         moment,
@@ -24,6 +25,7 @@
         URLS.salepoint = SALEPOINT;
         URLS.technical_service = TECHNICAL_SERVICE;
         URLS.reports = REPORTS;
+        URLS.warehouse = WAREHOUSE;
 
         $provide.constant('URLS', URLS);
         moment.locale('es', CONFIGS.moment);
