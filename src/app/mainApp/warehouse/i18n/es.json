@@ -8,7 +8,8 @@
             "BY_MODEL": "Por modelo",
             "BY_STATUS": "Por estatus unilever",
             "TOTAL": "Total de equipos",
-            "SUBSIDIARY": "Sucursal"
+            "SUBSIDIARY": "Sucursal",
+            "REPORT":"Generar reporte"
         },
         "SWITCH": {
             "LABEL": "Activa para buscar inventario de agencias"

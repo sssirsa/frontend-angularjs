@@ -132,6 +132,10 @@
             // }
         };
 
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = WAREHOUSEProvider.generateReport(vm.filter);
+        };
+
         function searchWarehouse(parameter) {
             vm.warehouse = null;
             switch (parameter) {
