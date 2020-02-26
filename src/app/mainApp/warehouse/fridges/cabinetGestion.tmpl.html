@@ -26,12 +26,21 @@
         </catalog-select>
     </div>
 </md-card>
-<md-card ng-if="vm.filter.sucursal || vm.filter.udn || vm.showAll" class="full-width" layout-padding layout="column"
+<md-card ng-if="vm.filter.sucursal || vm.filter.udn || vm.showAll" class="full-width" l ayout-padding layout="row"
     laoyut-align="center-stretch">
     <span flex layout-padding>
         <strong translate>WAREHOUSE.LABELS.TOTAL</strong>
         <span>{{vm.warehouse.total[0].cantidad}}</span>
     </span>
+    <div layout-margin>
+        <md-button ng-click="vm.generateXLSX()" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+            ng-disabled="!vm.warehouse" aria-label="generate report" class="md-primary md-raised">
+            <div layout="row" layout-align="center center">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <div>{{'WAREHOUSE.LABELS.REPORT'|translate}}</div>
+            </div>
+        </md-button>
+    </div>
 </md-card>
 <md-card ng-if="vm.filter.sucursal || vm.filter.udn || vm.showAll" class="full-width" layout-padding layout="column"
     laoyut-align="center-stretch">
