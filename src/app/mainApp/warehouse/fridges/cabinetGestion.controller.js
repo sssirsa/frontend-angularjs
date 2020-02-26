@@ -133,7 +133,9 @@
         };
 
         vm.generateXLSX = function () {
-            vm.generateReportPromise = WAREHOUSEProvider.generateReport(vm.filter);
+            vm.generateReportPromise = WAREHOUSEProvider.generateReport(vm.filter).catch(function (errorResponse) {
+                ErrorHandler.errorTranslate(errorResponse);
+            });
         };
 
         function searchWarehouse(parameter) {
