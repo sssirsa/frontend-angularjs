@@ -1,4 +1,4 @@
-<div cg-busy="{promise:vm.loadingEntry, message:' '}">
+8<div cg-busy="{promise:vm.loadingEntry, message:' '}">
     <md-card layout-padding layout="column" laoyut-align="center-stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>ENTRIES.DETAIL.TITLE</h1>
@@ -62,7 +62,7 @@
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.entry.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="vm.entry.operador_transporte&&!entry.tipo_transporte" layout-padding>
+                <span flex="33" ng-if="vm.entry.operador_transporte&&!vm.entry.tipo_transporte" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.entry.operador_transporte.linea_transporte.razon_social}}</span>
                 </span>

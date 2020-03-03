@@ -5,26 +5,28 @@
         </header>
     </md-card>
     <md-card ng-if="vm.departure">
-        <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
-            layout-align="center center" layout-padding>
+        <md-toolbar layout-gt-xs="row"
+                    layout-align-gt-xs="space-between center"
+                    layout="column"
+                    layout-align="center center"
+                    layout-padding>
             <span>
-                <strong translate="">DEPARTURES.DETAIL.LABELS.ID</strong>
+                <strong translate="">DEPARTURES.LIST.LABELS.ID</strong>
                 {{vm.departure._id}}
             </span>
-            <div ng-if="vm.departure.tipo_salida==='Nuevos'" class="new-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='Obsoletos'" class="obsolete-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='No Capitalizados'"
-                class="unrecognizable-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='Buen estado'" class="warehouse-departures departures-filter"></div>
-            <div ng-if="vm.departure.tipo_salida==='Garantías'" class="warranty-departures departures-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Buen estado'" class="warehouse-departures selectable-filter"></div>
+            <div ng-if="vm.departure.tipo_salida==='Garantías'" class="warranty-departures selectable-filter"></div>
             <span>
-                <strong translate="">DEPARTURES.DETAIL.LABELS.KIND</strong>
+                <strong translate="">DEPARTURES.LIST.LABELS.KIND</strong>
                 {{vm.departure.tipo_salida}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
             <span ng-if="vm.departure.fecha_hora">
-                <strong translate>DEPARTURES.DETAIL.LABELS.DATE</strong>
+                <strong translate>DEPARTURES.LIST.LABELS.DATE</strong>
                 <span>{{vm.departure.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <!--Asset quantity section-->
@@ -47,7 +49,7 @@
                 <span flex="33" ng-if="vm.departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.departure.tipo_transporte.linea_transporte.razon_social}}</span>
-                </span>
+                </span>                
                 <span flex="33" ng-if="vm.departure.operador_transporte&&!departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.departure.operador_transporte.linea_transporte.razon_social}}</span>
@@ -61,50 +63,53 @@
         <section layout="row" layout-align="space-around center">
             <div>
                 <!--Origin section-->
-                <span ng-if="departure.udn_origen" layout-margin>
+                <span ng-if="vm.departure.udn_origen" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.ORIGIN_AGENCY</strong>
-                    <span>{{departure.udn_origen.agencia}}</span>
+                    <span>{{vm.departure.udn_origen.agencia}}</span>
                 </span>
-                <span ng-if="departure.sucursal_origen" layout-margin>
+                <span ng-if="vm.departure.sucursal_origen" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.ORIGIN_SUBSIDIARY</strong>
-                    <span>{{departure.sucursal_origen.nombre}}</span>
+                    <span>{{vm.departure.sucursal_origen.nombre}}</span>
                 </span>
             </div>
             <div>
                 <!--Destination section-->
-                <span ng-if="departure.sucursal_destino" layout-margin>
+                <span ng-if="vm.departure.sucursal_destino" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
-                    <span>{{departure.sucursal_destino.nombre}}</span>
+                    <span>{{vm.departure.sucursal_destino.nombre}}</span>
                 </span>
-                <span ng-if="departure.udn_destino" layout-margin>
+                <span ng-if="vm.departure.udn_destino" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_AGENCY</strong>
-                    <span>{{departure.udn_destino.agencia}}</span>
+                    <span>{{vm.departure.udn_destino.agencia}}</span>
                 </span>
-                <span ng-if="departure.proveedor_destino" layout-margin>
+                <span ng-if="vm.departure.proveedor_destino" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_PROVIDER</strong>
-                    <span>{{departure.proveedor_destino.razon_social}}</span>
+                    <span>{{vm.departure.proveedor_destino.razon_social}}</span>
                 </span>
-                <span ng-if="departure.establecimiento_destino" layout-margin>
+                <span ng-if="vm.departure.establecimiento_destino" layout-margin>
                     <strong translate>DEPARTURES.LIST.LABELS.DESTINATION_STORE</strong>
-                    <span>{{departure.establecimiento_destino.nombre_establecimiento}}</span>
+                    <span>{{vm.departure.establecimiento_destino.nombre_establecimiento}}</span>
                 </span>
             </div>
         </section>
         <span ng-if="vm.departure.descripcion" layout-margin>
-            <strong translate>DEPARTURES.DETAIL.LABELS.DESCRIPTION</strong>
+            <strong translate>DEPARTURES.LIST.LABELS.DESCRIPTION</strong>
             <span>{{vm.departure.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
-            <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
-                disabled class="md-primary md-raised">
+            <!--Allow to generate the document just if the entry is closed-->
+            <md-button aria-label="download document button"
+                       ng-click="$event.stopPropagation(); vm.generatePDF()"
+                       disabled
+                       class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
-                <span hide-xs>{{"DEPARTURES.DETAIL.BUTTONS.PDF"|translate}}</span>
+                <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.PDF"|translate}}</span>
             </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
-                ng-click="$event.stopPropagation(); vm.generateXLSX()" class="md-primary md-raised">
+                ng-click="$event.stopPropagation(); vm.generateXLSX(departure._id)" class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-excel"></md-icon>
-                <span hide-xs>{{"DEPARTURES.DETAIL.BUTTONS.XLSX"|translate}}</span>
+                <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>
