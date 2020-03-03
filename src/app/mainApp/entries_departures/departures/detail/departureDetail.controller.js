@@ -48,5 +48,12 @@
             vm.assets = vm.departure.cabinets;
         }
 
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = MANUAL_DEPARTURES.generateReport(vm.departureId)
+                .catch(function (errorResponse) {
+                    ErrorHandler.errorTranslate(errorResponse);
+                });
+        };
+
     }
 })();

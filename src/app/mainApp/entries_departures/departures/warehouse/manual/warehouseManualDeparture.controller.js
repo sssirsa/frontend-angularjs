@@ -167,10 +167,10 @@
                                         //Cabinet entry has been confirmed
                                         if (!cabinetSuccessCallback['cabinet'].nuevo) {
                                             // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
-                                                //Finally add the cabinet to the list
-                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            //Finally add the cabinet to the list
+                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                             // }
                                             // else {
                                             //     //Building error message

@@ -76,18 +76,18 @@
             </span>
             <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='No_Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='Almacen'" class="warehouse-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='Garantias'" class="warranty-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='Buen estado'" class="warehouse-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='Garantías'" class="warranty-departures selectable-filter"></div>
             <span>
                 <strong translate="">DEPARTURES.LIST.LABELS.KIND</strong>
                 {{departure.tipo_salida}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
-            <span ng-if="departure.fecha">
+            <span ng-if="departure.fecha_hora">
                 <strong translate>DEPARTURES.LIST.LABELS.DATE</strong>
-                <span>{{departure.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+                <span>{{departure.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <!--Asset quantity section-->
             <section layout="row" layout-align="space-around center">
@@ -98,15 +98,23 @@
             </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="departure.operador_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.DRIVER</strong>
+                    <span>{{departure.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="departure.nombre_chofer" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.DRIVER</strong>
                     <span>{{departure.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="departure.linea_transporte.razon_social" layout-padding>
+                <span flex="33" ng-if="departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{departure.linea_transporte.razon_social}}</span>
+                    <span>{{departure.tipo_transporte.linea_transporte.razon_social}}</span>
+                </span>                
+                <span flex="33" ng-if="departure.operador_transporte&&!departure.tipo_transporte" layout-padding>
+                    <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{departure.operador_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="departure.tipo_transporte.descripcion" layout-padding>
+                <span flex="33" ng-if="departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{departure.tipo_transporte.descripcion}}</span>
                 </span>
