@@ -95,7 +95,7 @@
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:",
-                "ASSET_QUANTITY": "Equipos recibidos:"
+                "ASSET_QUANTITY": "Equipos agregados:"
             }
         },
         "MENU": {
@@ -115,6 +115,7 @@
             "LABELS": {
                 "AGENCY": "UDN-Agencia",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos agregados:",
                 "CABINET_ID": "Económico del cabinet",
                 "CABINET_SEARCH": "Registro de cabinets",
                 "CABINET": {
@@ -177,6 +178,7 @@
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos agregados:",
                 "DESCRIPTION": "Descripción",
                 "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
@@ -238,6 +240,7 @@
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos agregados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -296,6 +299,7 @@
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos agregados:",
                 "DESCRIPTION": "Descripción",
                 "PROJECT": "Proyecto",
                 "AGENCY": "UDN-Agencia",
@@ -354,6 +358,7 @@
             "TITLE": "Entrada de no capitalizados",
             "LABELS": {
                 "ENTRY_DATA": "Información de entrada",
+                "ASSET_QUANTITY": "Equipos agregados:",
                 "ASSET_LOADING": "Carga de cabinets",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia de arribo",
