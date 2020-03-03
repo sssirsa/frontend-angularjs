@@ -40,6 +40,7 @@
                 <!--Cabinets list-->
                 <section ng-if="vm.cabinetList.length>0" layout-padding class="full-width">
                     <p>Cabinets</p>
+                    <p>{{'DEPARTURES.WAREHOUSE.LABELS.ASSET_QUANTITY'|translate}} {{vm.cabinetList.length}}</p>
                     <md-virtual-repeat-container class="departures-cabinet-container">
                         <md-list>
                             <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.cabinetList">
