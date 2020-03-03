@@ -25,7 +25,8 @@
                 "ORIGIN_AGENCY": "UDN-Agencia de origen:",
                 "ORIGIN_SUBSIDIARY": "Sucursal origen",
                 "TRANSPORT_KIND": "Tipo de transporte:",
-                "TRANSPORT_LINE": "Linea de Transporte:"
+                "TRANSPORT_LINE": "Linea de Transporte:",
+                "ASSET_QUANTITY": "Equipos enviados:"
             }
         },
         "LIST": {
@@ -79,6 +80,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "AGENCY": "UDN-Agencia",
                 "DESCRIPTION": "Descripción",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -136,6 +138,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -204,6 +207,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -272,6 +276,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -311,7 +316,6 @@
                 "DESTINATION_AGENCY": "Selecciona la UDN-Agencia destino",
                 "TRANSPORT_KIND": "Selecciona uno de los tipos asociados a la linea de transporte",
                 "TRANSPORT_DRIVER":"Selecciona uno de los operadores asociados a la linea de transporte",
-                "TRANSPORT_KIND": "Selecciona el tipo de transporte",
                 "SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet de la salida",
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
@@ -345,6 +349,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
                 "TRANSPORT_DRIVER": "Operador de transporte",
@@ -419,6 +424,7 @@
             "LABELS": {
                 "DEPARTURE_DATA": "Información de salida",
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY": "Equipos enviados:",
                 "DESCRIPTION": "Descripción",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
