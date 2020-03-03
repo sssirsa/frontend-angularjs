@@ -92,8 +92,11 @@
 
         };
 
-        vm.generateXLSX = function () {
-            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(vm.entryId);
+        vm.generateXLSX = function (entryId) {
+            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(entryId)
+                .catch(function (errorResponse) {
+                    ErrorHandler.errorTranslate(errorResponse);
+                });
         };
 
         //Private functions
