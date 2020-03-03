@@ -1,30 +1,30 @@
-8<div cg-busy="{promise:vm.loadingEntry, message:' '}">
+<div cg-busy="{promise:vm.loadingEntry, message:' '}">
     <md-card layout-padding layout="column" laoyut-align="center-stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>ENTRIES.DETAIL.TITLE</h1>
         </header>
     </md-card>
+    
     <md-card ng-if="vm.entry">
         <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
             layout-align="center center" layout-padding>
-
             <span>
-                <strong translate="">ENTRIES.DETAIL.LABELS.ID</strong>
+                <strong translate="">ENTRIES.LIST.LABELS.ID</strong>
                 {{vm.entry._id}}
             </span>
-            <div ng-if="vm.entry.tipo_entrada==='Nuevos'" class="new-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Punto de venta'" class="repair-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='No Capitalizados'" class="unrecognizable-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Buen estado'" class="warehouse-entries entries-filter"></div>
-            <div ng-if="vm.entry.tipo_entrada==='Garantías'" class="warranty-entries entries-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Nuevos'" class="new-entries selectable-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Punto de venta'" class="repair-entries selectable-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='No capitalizados'" class="unrecognizable-entries selectable-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Buen estado'" class="warehouse-entries selectable-filter"></div>
+            <div ng-if="vm.entry.tipo_entrada==='Garantías'" class="warranty-entries selectable-filter"></div>
             <span>
-                <strong translate="">ENTRIES.DETAIL.LABELS.KIND</strong>
+                <strong translate="">ENTRIES.LIST.LABELS.KIND</strong>
                 {{vm.entry.tipo_entrada}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
             <!--Open or closed entry-->
-            <span ng-if="!vm.entry.cerrada">
+            <span ng-if="!entry.cerrada">
                 <md-icon md-font-icon="fa fa-lock-open"></md-icon>
                 <span translate>ENTRIES.LIST.LABELS.OPEN</span>
             </span>
@@ -62,7 +62,7 @@
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.entry.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="vm.entry.operador_transporte&&!vm.entry.tipo_transporte" layout-padding>
+                <span flex="33" ng-if="vm.entry.operador_transporte&&!entry.tipo_transporte" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{vm.entry.operador_transporte.linea_transporte.razon_social}}</span>
                 </span>
@@ -105,33 +105,17 @@
             <span>{{vm.entry.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
-            <!--Allow adding cabinets just if the entry is still open-->
-            <md-button aria-label="Add asset button" disabled="true"
-                permission-only="['entries_departures__entries__add_cabinet_entries']"
-                ng-click="vm.addAssetClicked();$event.stopPropagation() " ng-if="!vm.entry.cerrada" class="md-raised">
-                <md-icon md-font-icon="fa fa-plus"></md-icon>
-                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.ADD_ASSET"|translate}}</span>
-            </md-button>
-            <!--Allow closing just if the entry is still open-->
-            <md-button aria-label="close vm.entry button" disabled="true"
-                permission-only="['entries_departures__entries__close_entries']"
-                cg-busy="{promise:vm.closingEntry, message:' '}"
-                ng-click="$event.stopPropagation(); vm.showConfirmCloseDialog()" ng-if="!vm.entry.cerrada"
-                class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-lock"></md-icon>
-                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.CLOSE"|translate}}</span>
-            </md-button>
-            <!--Allow to generate the PDF document just if the entry is closed-->
+            <!--Allow to generate the document just if the entry is closed-->
             <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
                 ng-if="vm.entry.cerrada" disabled class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
-                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.PDF"|translate}}</span>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.PDF"|translate}}</span>
             </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
-                ng-click="$event.stopPropagation(); vm.generateXLSX()" class="md-primary md-raised">
+                ng-click="$event.stopPropagation(); vm.generateXLSX(entry._id)" class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-excel"></md-icon>
-                <span hide-xs>{{"ENTRIES.DETAIL.BUTTONS.XLSX"|translate}}</span>
+                <span hide-xs>{{"ENTRIES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>

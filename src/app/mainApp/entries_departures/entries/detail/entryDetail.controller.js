@@ -92,8 +92,8 @@
 
         };
 
-        vm.generateXLSX = function (entryId) {
-            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(entryId)
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = MANUAL_ENTRIES.generateReport(vm.entryId)
                 .catch(function (errorResponse) {
                     ErrorHandler.errorTranslate(errorResponse);
                 });
