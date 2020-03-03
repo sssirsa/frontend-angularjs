@@ -165,7 +165,7 @@
                         },
                         {
                             A: "Fecha",
-                            B: moment(departureDetail.fecha).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                            B: moment(departureDetail.fecha_hora).format("dddd, Do MMMM YYYY, h:mm:ss a")
                         },
                         {
                             A: "Tipo de salida",
@@ -298,7 +298,7 @@
                     XLSX.utils.book_append_sheet(wb, ws, "Salida");
 
                     /* write workbook and force a download */
-                    XLSX.writeFile(wb, name ? name : "reporte_salida " + moment(departureDetail.fecha).format("YYYY-MM-DD HH:mm") + ".xlsx");
+                    XLSX.writeFile(wb, name ? name : "reporte_salida " + moment(departureDetail.fecha_hora).format("YYYY-MM-DD HH:mm:ss") + ".xlsx");
                     defer.resolve();
                     // })
                     // .catch(function (errorResponse) {

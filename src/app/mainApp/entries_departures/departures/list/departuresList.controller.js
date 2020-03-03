@@ -51,7 +51,7 @@
 
         vm.navigateToDetail = function (departure) {
             $state.go('triangular.admin-default.departure-detail', {
-                departureId: departure.id,
+                departureId: departure._id,
                 departure:departure
             });
         };

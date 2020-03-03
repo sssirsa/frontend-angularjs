@@ -55,7 +55,7 @@
 
         vm.navigateToDetail = function (entry) {
             $state.go('triangular.admin-default.entry-detail', {
-                entryId: entry.id,
+                entryId: entry._id,
                 entry: entry
             });
         };
