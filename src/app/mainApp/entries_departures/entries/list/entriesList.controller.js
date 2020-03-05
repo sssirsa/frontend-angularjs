@@ -8,8 +8,7 @@
         PAGINATION,
         ErrorHandler,
         $state,
-        QUERIES,
-        moment
+        QUERIES
     ) {
         var vm = this;
 
@@ -28,13 +27,13 @@
         vm.entries = [];
 
         function init() {
-            vm.entryKindFilter='all-entries';
+            vm.entryKindFilter = 'all-entries';
             vm.entriesFilter = {};
-            var today=moment();
-            vm.startDate=today;
-            vm.endDate=today;
-            vm.entriesFilter[QUERIES.entries_departures.start_date]=vm.startDate;
-            vm.entriesFilter[QUERIES.entries_departures.end_date]=vm.endDate;
+            var today = new Date();
+            vm.startDate = today.toISOString();
+            vm.endDate = today.toISOString();
+            vm.entriesFilter[QUERIES.entries_departures.start_date] = vm.startDate;
+            vm.entriesFilter[QUERIES.entries_departures.end_date] = vm.endDate;
             loadEntries(vm.entryKindFilter);
         }
         init();
@@ -75,14 +74,22 @@
                 });
         };
 
-        vm.dateChange=function(){
-            vm.entries=[];
-            vm.entryKindFilter=null;
-            vm.entriesFilter[QUERIES.entries_departures.start_date]=vm.startDate;
-            vm.entriesFilter[QUERIES.entries_departures.end_date]=vm.endDate;
+        vm.startDateChange = function () {
+            vm.entriesFilter[QUERIES.entries_departures.start_date] = vm.startDate;
+            dateChange();
         };
 
+        vm.endDateChange = function () {
+            vm.entriesFilter[QUERIES.entries_departures.end_date] = vm.endDate;
+            dateChange();
+        };
         //Internal functions
+
+        function dateChange() {
+            vm.entries = [];
+            vm.entryKindFilter = null;
+        }
+
         function loadEntries(filter) {
             vm.entries = [];
             //page ? null : page = 1;
@@ -117,7 +124,7 @@
                 .listEntries(vm.entriesFilter)
                 .then(function (entriesList) {
                     vm.entries = entriesList;
-                    vm.assetsQuantity=calculateAssetQuantity();
+                    vm.assetsQuantity = calculateAssetQuantity();
                     // vm.paginationHelper.page = page;
                     // vm.paginationHelper.totalPages = Math.ceil(
                     //     entriesList[PAGINATION.total] / PAGINATION.pageSize
@@ -128,10 +135,10 @@
                 });
         }
 
-        function calculateAssetQuantity(){
-            var quantity=0;
-            angular.forEach(vm.entries, function(value){
-                quantity+=value.cabinets.length;
+        function calculateAssetQuantity() {
+            var quantity = 0;
+            angular.forEach(vm.entries, function (value) {
+                quantity += value.cabinets.length;
             });
             return quantity;
         }

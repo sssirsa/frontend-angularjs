@@ -7,13 +7,13 @@
             <label>{{'ENTRIES.LIST.LABELS.START_DATE'|translate}}</label>
             <input type="text"
                 ng-model="vm.startDate" mdc-datetime-picker="" time="false" date="true" min-date="minDate"
-                max-date="maxDate" lang="es" ng-change="vm.dateChange()" class=" md-input">
+                max-date="maxDate" lang="es" ng-change="vm.startDateChange()" class=" md-input">
         </md-input-containter>
         <md-input-containter layout-padding class="md-block">
             <label>{{'ENTRIES.LIST.LABELS.END_DATE'|translate}}</label>
             <input type="text"
                 ng-model="vm.endDate" mdc-datetime-picker="" time="false" date="true" min-date="vm.startDate"
-                max-date="maxDate" lang="es" ng-change="vm.dateChange()" class=" md-input">
+                max-date="maxDate" lang="es" ng-change="vm.endDateChange()" class=" md-input">
         </md-input-containter>
     </div>
     <div ng-if="vm.startDate" layout="row" layout-align="space-around center" layout-wrap="">
