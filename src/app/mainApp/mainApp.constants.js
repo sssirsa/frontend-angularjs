@@ -132,7 +132,13 @@
             entries_departures: {
                 by_agency: 'udn',
                 by_subsidiary: 'sucursal',
-                by_transport_line: 'linea_transporte'
+                by_transport_line: 'linea_transporte',
+                entry_kind:'tipo_entrada',
+                new:'Nuevos',
+                repair:'Punto de venta',
+                unrecognizable:'No capitalizados',
+                warehouse:'Buen estado',
+                warranty:'Garantías'
             },
             inventory: {
                 by_agency: 'by_agency',

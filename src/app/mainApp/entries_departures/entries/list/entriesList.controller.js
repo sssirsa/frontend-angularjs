@@ -7,13 +7,15 @@
         MANUAL_ENTRIES,
         PAGINATION,
         ErrorHandler,
-        $state
+        $state,
+        QUERIES
     ) {
         var vm = this;
 
         //Variables
         vm.entryKindFilter;
         vm.entryKindList;
+        vm.entriesFilter;
         vm.paginationHelper = {
             page: 0,
             totalPages: 0
@@ -23,6 +25,7 @@
 
         function init() {
             vm.entryKindFilter = 'all-entries';
+            vm.entriesFilter = {};
             loadEntries(vm.entryKindFilter);
         }
         init();
@@ -43,10 +46,6 @@
                 .catch(function (entriesListError) {
                     ErrorHandler.errorTranslate(entriesListError);
                 });
-        };
-
-        vm.addAssetClicked = function () {
-            //TODO:Add asset dialog
         };
 
         vm.generatePDF = function () {
@@ -70,36 +69,41 @@
         //Internal functions
         function loadEntries(filter, page) {
             vm.entries = [];
-            page ? null : page = 1;
+            //page ? null : page = 1;
             switch (filter) {
                 case 'all-entries':
                     vm.entryKindList = null;
                     break;
                 case 'new-entries':
                     vm.entryKindList = 'new';
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.new;
                     break;
                 case 'repair-entries':
                     vm.entryKindList = 'repair';
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.repair;
                     break;
                 case 'unrecognizable-entries':
                     vm.entryKindList = 'unrecognizable';
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.unrecognizable;
                     break;
                 case 'warehouse-entries':
                     vm.entryKindList = 'warehouse';
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.warehouse;
                     break;
                 case 'warranty-entries':
                     vm.entryKindList = 'warranty';
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.warranty;
                     break;
             }
 
             vm.loadingEntries = MANUAL_ENTRIES
-                .listEntries(vm.entryKindList, 1)
+                .listEntries(vm.entriesFilter)
                 .then(function (entriesList) {
                     vm.entries = entriesList;
-                    vm.paginationHelper.page = page;
-                    vm.paginationHelper.totalPages = Math.ceil(
-                        entriesList[PAGINATION.total] / PAGINATION.pageSize
-                    );
+                    // vm.paginationHelper.page = page;
+                    // vm.paginationHelper.totalPages = Math.ceil(
+                    //     entriesList[PAGINATION.total] / PAGINATION.pageSize
+                    // );
                 })
                 .catch(function (entriesListError) {
                     ErrorHandler.errorTranslate(entriesListError);
