@@ -8,7 +8,8 @@
         PAGINATION,
         ErrorHandler,
         $state,
-        QUERIES
+        QUERIES,
+        moment
     ) {
         var vm = this;
 
@@ -20,12 +21,20 @@
             page: 0,
             totalPages: 0
         };
+        vm.startDate;
+        vm.endDate;
+        vm.assetsQuantity;
 
         vm.entries = [];
 
         function init() {
-            vm.entryKindFilter = 'all-entries';
+            vm.entryKindFilter='all-entries';
             vm.entriesFilter = {};
+            var today=moment();
+            vm.startDate=today;
+            vm.endDate=today;
+            vm.entriesFilter[QUERIES.entries_departures.start_date]=vm.startDate;
+            vm.entriesFilter[QUERIES.entries_departures.end_date]=vm.endDate;
             loadEntries(vm.entryKindFilter);
         }
         init();
@@ -66,13 +75,21 @@
                 });
         };
 
+        vm.dateChange=function(){
+            vm.entries=[];
+            vm.entryKindFilter=null;
+            vm.entriesFilter[QUERIES.entries_departures.start_date]=vm.startDate;
+            vm.entriesFilter[QUERIES.entries_departures.end_date]=vm.endDate;
+        };
+
         //Internal functions
-        function loadEntries(filter, page) {
+        function loadEntries(filter) {
             vm.entries = [];
             //page ? null : page = 1;
             switch (filter) {
                 case 'all-entries':
                     vm.entryKindList = null;
+                    vm.entriesFilter[QUERIES.entries_departures.entry_kind] = null;
                     break;
                 case 'new-entries':
                     vm.entryKindList = 'new';
@@ -100,6 +117,7 @@
                 .listEntries(vm.entriesFilter)
                 .then(function (entriesList) {
                     vm.entries = entriesList;
+                    vm.assetsQuantity=calculateAssetQuantity();
                     // vm.paginationHelper.page = page;
                     // vm.paginationHelper.totalPages = Math.ceil(
                     //     entriesList[PAGINATION.total] / PAGINATION.pageSize
@@ -108,6 +126,14 @@
                 .catch(function (entriesListError) {
                     ErrorHandler.errorTranslate(entriesListError);
                 });
+        }
+
+        function calculateAssetQuantity(){
+            var quantity=0;
+            angular.forEach(vm.entries, function(value){
+                quantity+=value.cabinets.length;
+            });
+            return quantity;
         }
 
     }

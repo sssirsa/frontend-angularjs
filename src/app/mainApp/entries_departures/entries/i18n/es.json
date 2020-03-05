@@ -95,7 +95,11 @@
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:",
-                "ASSET_QUANTITY": "Equipos agregados:"
+                "ASSET_QUANTITY": "Equipos recibidos:",
+                "START_DATE":"Fecha de inicio",
+                "END_DATE":"Fecha de fin",
+                "TOTAL_ASSET_QUANTITY": "Equipos recibidos:",
+                "ENTRIES_QUANTITY":"Cantidad de entradas:"
             }
         },
         "MENU": {

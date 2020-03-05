@@ -2,7 +2,21 @@
     <header layout="column" layout-align="center center">
         <h1 translate>ENTRIES.LIST.TITLE</h1>
     </header>
-    <div layout="row" layout-align="space-around center" layout-wrap="">
+    <div class="full-width" layout="column" layout-gt-xs="row" layout-align="center center" layout-align-gt-xs="space-around center">
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'ENTRIES.LIST.LABELS.START_DATE'|translate}}</label>
+            <input type="text"
+                ng-model="vm.startDate" mdc-datetime-picker="" time="false" date="true" min-date="minDate"
+                max-date="maxDate" lang="es" ng-change="vm.dateChange()" class=" md-input">
+        </md-input-containter>
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'ENTRIES.LIST.LABELS.END_DATE'|translate}}</label>
+            <input type="text"
+                ng-model="vm.endDate" mdc-datetime-picker="" time="false" date="true" min-date="vm.startDate"
+                max-date="maxDate" lang="es" ng-change="vm.dateChange()" class=" md-input">
+        </md-input-containter>
+    </div>
+    <div ng-if="vm.startDate" layout="row" layout-align="space-around center" layout-wrap="">
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'new-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('new-entries')">
@@ -40,10 +54,14 @@
             <div class="all-entries selectable-filter"></div>
         </div>
     </div>
+    <div ng-if="vm.entries.length">
+        <p>{{'ENTRIES.LIST.LABELS.ENTRIES_QUANTITY'|translate}} {{vm.entries.length}}</p>
+        <p>{{'ENTRIES.LIST.LABELS.TOTAL_ASSET_QUANTITY'|translate}} {{vm.assetsQuantity}}</p>
+    </div>
 </md-card>
 <section
     cg-busy="{promise:vm.loadingEntries, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-    <md-card ng-if="!vm.entries.length">
+    <md-card ng-if="!vm.entries.length && vm.startDate && vm.entryKindFilter">
         <strong translate>ENTRIES.LIST.LABELS.NO_RESULTS</strong>
     </md-card>
     <md-card ng-if="vm.entries.length" ng-click="vm.navigateToDetail(entry)" ng-repeat="entry in vm.entries">

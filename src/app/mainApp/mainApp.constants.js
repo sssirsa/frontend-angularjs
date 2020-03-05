@@ -133,9 +133,11 @@
                 by_agency: 'udn',
                 by_subsidiary: 'sucursal',
                 by_transport_line: 'linea_transporte',
+                end_date:'fecha_fin',
                 entry_kind:'tipo_entrada',
                 new:'Nuevos',
                 repair:'Punto de venta',
+                start_date:'fecha_inicio',
                 unrecognizable:'No capitalizados',
                 warehouse:'Buen estado',
                 warranty:'Garantías'
