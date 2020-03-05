@@ -8,14 +8,18 @@
         PAGINATION,
         ErrorHandler,
         $state,
-        QUERIES
+        QUERIES,
+        User,
+        EnvironmentConfig,
+        URLS,
+        Translate
     ) {
         var vm = this;
 
         //Variables
         vm.entryKindFilter;
         vm.entryKindList;
-        vm.entriesFilter;
+        vm.entriesFilter; //URL params
         vm.paginationHelper = {
             page: 0,
             totalPages: 0
@@ -23,11 +27,69 @@
         vm.startDate;
         vm.endDate;
         vm.assetsQuantity;
+        vm.showSelector;
+        vm.user;
+        vm.entriesToAgency;
+        vm.subsidiaryAdmin;
+        vm.agencyAdmin;
 
         vm.entries = [];
 
+        vm.catalogues = {
+            subsidiary: {
+                binding: 'sucursal_destino',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.subsidiary,
+
+                    name: Translate.translate('ENTRIES.LIST.LABELS.SUBSIDIARY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: '_id',
+                    option: 'nombre'
+                },
+                hint: Translate.translate('ENTRIES.LIST.HINTS.SUBSIDIARY'),
+                icon: 'fa fa-warehouse',
+                required: true
+            },
+            udn: {
+                binding: 'udn_origen',
+                catalog: {
+                    url: EnvironmentConfig.site.rest.api
+                        + '/' + URLS.management.base
+                        + '/' + URLS.management.catalogues.base
+                        + '/' + URLS.management.catalogues.udn,
+                    name: Translate.translate('ENTRIES.LIST.LABELS.AGENCY'),
+                    loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                    model: '_id',
+                    option: 'agencia'
+                },
+                hint: Translate.translate('ENTRIES.LIST.HINTS.AGENCY'),
+                icon: 'fa fa-building',
+                required: true
+            }
+        };
+
         function init() {
             vm.entryKindFilter = 'all-entries';
+            vm.showSelector = false;
+            vm.entryToAgency = false; //Determines what catalog to show (Petition or udn)
+            vm.user = User.getUser();
+            //Determining whether or not to show the Subsidiary or the Udn selector.
+            vm.showSelector = !vm.user['sucursal']
+                && !vm.user['udn'];
+            if (vm.user.sucursal) {
+                if (!vm.user.sucursal._id) {
+                    vm.subsidiaryAdmin = true;
+                }
+            }
+            if (vm.user.sucursal) {
+                if (!vm.user.sucursal._id) {
+                    vm.agencyAdmin = true;
+                }
+            }
+
             vm.entriesFilter = {};
             var today = new Date();
             vm.startDate = today.toISOString();
@@ -83,6 +145,17 @@
             vm.entriesFilter[QUERIES.entries_departures.end_date] = vm.endDate;
             dateChange();
         };
+
+        vm.onDestinationSelect = function (element) {
+            if ((vm.showSelector && vm.entriesToAgency) || vm.agencyAdmin) {
+                vm.entriesFilter[QUERIES.entries_departures.agency] = element;
+            }
+            if ((vm.showSelector && !vm.entriesToAgency) || vm.subsidiaryAdmin) {
+                vm.entriesFilter[QUERIES.entries_departures.subsidiary] = element;
+            }
+            vm.entries=[];
+        };
+
         //Internal functions
 
         function dateChange() {
