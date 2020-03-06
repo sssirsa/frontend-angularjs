@@ -245,7 +245,8 @@
                         B: "Activo",
                         C: "Serie",
                         D: "Modelo",
-                        E: "Tipo"
+                        E: "Año",
+                        F: "Tipo"
                     }];
 
                     //var assetPromises = [];
@@ -260,7 +261,8 @@
                             B: value.id_unilever,
                             C: value.no_serie,
                             D: value.modelo.nombre,
-                            E: value.modelo.tipo.nombre
+                            E: value.year,
+                            F: value.modelo.tipo.nombre
                         });
                         // })
                         // .catch(function (getCabinetInfoError) {

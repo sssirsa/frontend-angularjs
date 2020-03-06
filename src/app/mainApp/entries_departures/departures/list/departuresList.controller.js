@@ -147,7 +147,7 @@
             if ((vm.showSelector && vm.departuresToAgency) || vm.agencyAdmin) {
                 vm.departuresFilter[QUERIES.entries_departures.agency] = element;
             }
-            if ((vm.showSelector && !vm.departuresToAgency) || vm.subsidiaryAdmin) {
+            if ((vm.showSelector && !vm.departuresToAgencyºº) || vm.subsidiaryAdmin) {
                 vm.departuresFilter[QUERIES.entries_departures.subsidiary] = element;
             }
             vm.departures=[];
