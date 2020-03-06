@@ -136,6 +136,7 @@
                 end_date:'fecha_fin',
                 entry_kind:'tipo_entrada',
                 new:'Nuevos',
+                obsolete:'Obsoletos',
                 repair:'Punto de venta',
                 start_date:'fecha_inicio',
                 unrecognizable:'No capitalizados',
