@@ -20,18 +20,18 @@
     </div>
     <div layout="row" layout-align="center center" ng-if="vm.showSelector">
         <p>{{'DEPARTURES.LIST.LABELS.SWITCH.LABEL'|translate}}</p>
-        <md-switch ng-model="vm.entryToAgency" ng-change="vm.changeSwitch()">
+        <md-switch ng-model="vm.departuresFromAgency" ng-change="vm.changeSwitch()">
             <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.TRUE'|translate}}</p>
                     <p ng-if="!vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.FALSE'|translate}}</p>-->
         </md-switch>
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
-        <catalog-select class="full-width" ng-if="(!vm.entriesToAgency && vm.showSelector)||vm.subsidiaryAdmin"
+        <catalog-select class="full-width" ng-if="(!vm.departuresFromAgency && vm.showSelector)||vm.subsidiaryAdmin"
             catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
             icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="(vm.entriesToAgency && vm.showSelector)||vm.agencyAdmin"
+        <catalog-select class="full-width" ng-if="(vm.departuresFromAgency && vm.showSelector)||vm.agencyAdmin"
             catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
             required="vm.catalogues['udn'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">

@@ -108,7 +108,6 @@
             vm.loadingMoreDepartures = MANUAL_DEPARTURES
                 .listDepartures(vm.departureKindList, vm.paginationHelper.page + 1)
                 .then(function (departuresList) {
-                    vm.paginationHelper.page++;
                     vm.departures = vm.departures.concat(departuresList[PAGINATION.elements]);
                 })
                 .catch(function (departuresListError) {
@@ -145,13 +144,13 @@
         };
 
         vm.onDestinationSelect = function (element) {
-            if ((vm.showSelector && vm.entriesToAgency) || vm.agencyAdmin) {
+            if ((vm.showSelector && vm.departuresToAgency) || vm.agencyAdmin) {
                 vm.departuresFilter[QUERIES.entries_departures.agency] = element;
             }
-            if ((vm.showSelector && !vm.entriesToAgency) || vm.subsidiaryAdmin) {
+            if ((vm.showSelector && !vm.departuresToAgency) || vm.subsidiaryAdmin) {
                 vm.departuresFilter[QUERIES.entries_departures.subsidiary] = element;
             }
-            vm.entries=[];
+            vm.departures=[];
         };
 
         //Internal functions        
