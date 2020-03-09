@@ -95,7 +95,20 @@
                 "ORIGIN_STORE": "Establecimiento de origen:",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:",
-                "ASSET_QUANTITY": "Equipos agregados:"
+                "ASSET_QUANTITY": "Equipos recibidos:",
+                "START_DATE": "Fecha de inicio",
+                "END_DATE": "Fecha de fin",
+                "TOTAL_ASSET_QUANTITY": "Equipos recibidos:",
+                "ENTRIES_QUANTITY": "Cantidad de entradas:",
+                "SWITCH": {
+                    "LABEL": "Activa para buscar entradas a UDN-Agencia"
+                },
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "UDN-Agencia"
+            },
+            "HINTS": {
+                "SUBSIDIARY": "Selecciona una sucursal para buscar sus entradas",
+                "AGENCY": "Selecciona una UDN para buscar sus entradas"
             }
         },
         "MENU": {

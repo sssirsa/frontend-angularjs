@@ -100,56 +100,18 @@
             return deferred.promise;
         }
 
-        //Departure Kind must be one pf the following
-        //new, warehouse, obsolete, unrecognizable, warranty
-        //Otherwise, all departures are returned
-        //Page parameter is used for pagination,
-        //without it just first page is provided
-        function listDepartures(departureKind, page) {
+        //Valid params are sucursal, udn, fecha_inicio, fecha_fin, tipo_entrada, economico
+        //Params must be sent in an object with the param name as key
+        //Ex: { param1:param1Value }
+        function listDepartures(params) {
             var user = User.getUser();
-            var url = departuresUrl;
-            var params;
-            //Pagination params building
-            if (page) {
-                params = {
-                    limit: PAGINATION.pageSize,
-                    offset: PAGINATION.pageSize * (page - 1)
-                };
-                //Adding ordering parameter
-                params[QUERIES.ordering] = '-id';
-            }
+            var url = departuresUrl.all(departures.all);
             //Subsidiary or Agency query
             if (user.sucursal) {
-                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
+                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal']._id;
             }
             if (user.udn) {
-                params[QUERIES.entries_departures.by_agency] = user['udn'].id;
-            }
-            if (departureKind) {
-                //An departure kind has been provided
-                switch (departureKind) {
-                    case 'new':
-                        url = url.all(departures.new);
-                        break;
-                    case 'warehouse':
-                        url = url.all(departures.warehouse);
-                        break;
-                    case 'obsolete':
-                        url = url.all(departures.obsolete);
-                        break;
-                    case 'unrecognizable':
-                        url = url.all(departures.unrecognizable);
-                        break;
-                    case 'warranty':
-                        url = url.all(departures.warranty);
-                        break;
-                    default:
-                        url = url.all(departures.all);
-                }
-            }
-            else {
-                //Entry kind not provided, so return all
-                url = url.all(departures.all);
+                params[QUERIES.entries_departures.by_agency] = user['udn']._id;
             }
             return url.customGET(null, params);
         }
@@ -265,7 +227,8 @@
                         B: "Activo",
                         C: "Serie",
                         D: "Modelo",
-                        E: "Tipo"
+                        E: "Modelo",
+                        F: "Tipo"
                     }];
 
                     angular.forEach(departureDetail.cabinets, function (value) {
@@ -278,7 +241,8 @@
                             B: value.id_unilever,
                             C: value.no_serie,
                             D: value.modelo.descripcion,
-                            E: value.modelo.tipo.nombre
+                            E: value.year,
+                            F: value.modelo.tipo.nombre
                         });
                         // })
                         // .catch(function (getCabinetInfoError) {
