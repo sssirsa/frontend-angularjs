@@ -30,6 +30,18 @@
                 controller: 'obsoleteManualDepartureController',
                 controllerAs: 'vm'
             })
+            /* Salepoint asset departures */
+            .state('triangular.admin-default.departure-salepoint-manual', {
+                url: '/salida/punto_de_venta/manual',
+                data: {
+                    permissions: {
+                        only: ['entries_departures__departures__salepoint_departures']
+                    }
+                },
+                templateUrl: 'app/mainApp/entries_departures/departures/salepoint/manual/salepointManualDeparture.tmpl.html',
+                controller: 'salepointManualDepartureController',
+                controllerAs: 'vm'
+            })
             /* Warehouse asset departures */
             .state('triangular.admin-default.departure-warehouse-manual', {
                 url: '/salida/buen_estado/manual',
@@ -74,6 +86,7 @@
                         only: ['entries_departures__departures__new_departures',
                             'entries_departures__departures__warranties_departures',
                             'entries_departures__departures__no_labeled_departures',
+                            'entries_departures__departures__salepoint_departures',
                             'entries_departures__departures__warehouse_departures',
                             'entries_departures__departures__repair_departures']
                     }
@@ -96,7 +109,8 @@
                     'entries_departures__departures__news_departures',
                     'entries_departures__departures__no_labeled_departures',
                     'entries_departures__departures__scrapped_departures',
-                    'entries_departures__departures__warehouse_departures'
+                    'entries_departures__departures__warehouse_departures',
+                    'entries_departures__departures__salepoint_departures'
                 ],
                 priority: 5,
                 children: [
@@ -108,7 +122,8 @@
                             'entries_departures__departures__news_departures',
                             'entries_departures__departures__no_labeled_departures',
                             'entries_departures__departures__scrapped_departures',
-                            'entries_departures__departures__warehouse_departures'
+                            'entries_departures__departures__warehouse_departures',
+                            'entries_departures__departures__salepoint_departures'
                         ],
                         children: [
                             {
@@ -122,6 +137,12 @@
                                 type: 'link',
                                 permission: ['entries_departures__departures__scrapped_departures'],
                                 state: 'triangular.admin-default.departure-obsolete-manual'
+                            },
+                            {
+                                name: 'DEPARTURES.MENU.SALEPOINT',
+                                type: 'link',
+                                permission: ['entries_departures__departures__salepoint_departures'],
+                                state: 'triangular.admin-default.departure-salepoint-manual'
                             },
                             {
                                 name: 'DEPARTURES.MENU.WAREHOUSE',

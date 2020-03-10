@@ -44,7 +44,7 @@
             })
             /* Warehouse asset entries */
             .state('triangular.admin-default.entry-warehouse-manual', {
-                url: '/entrada/almacen/manual',
+                url: '/entrada/buen_estado/manual',
                 data: {
                     permissions: {
                         only: ['entries_departures__entries__warehouse_entries']
@@ -54,12 +54,13 @@
                 controller: 'warehouseManualEntryController',
                 controllerAs: 'vm'
             })
-            /* Repair asset entries */
+            /* Salepoint asset entries */
             .state('triangular.admin-default.entry-repair-manual', {
-                url: '/entrada/reparacion/manual',
+                url: '/entrada/punto_de_venta/manual',
                 data: {
                     permissions: {
-                        only: ['entries_departures__entries__repair_entries']
+                        only: ['entries_departures__entries__repair_entries',
+                            'entries_departures__entries__salepoint_entries']
                     }
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/repair/manual/repairManualEntry.tmpl.html',
@@ -87,12 +88,13 @@
                             'entries_departures__entries__warranties_entries',
                             'entries_departures__entries__no_labeled_entries',
                             'entries_departures__entries__warehouse_entries',
-                            'entries_departures__entries__repair_entries']
+                            'entries_departures__entries__repair_entries',
+                            'entries_departures__entries__salepoint_entries']
                     }
                 },
                 params: {
                     entryId: null,
-                    entry:null
+                    entry: null
                 },
                 templateUrl: 'app/mainApp/entries_departures/entries/detail/entryDetail.tmpl.html',
                 controller: 'entryDetailController',
@@ -108,7 +110,8 @@
                     'entries_departures__entries__warranties_entries',
                     'entries_departures__entries__no_labeled_entries',
                     'entries_departures__entries__warehouse_entries',
-                    'entries_departures__entries__repair_entries'],
+                    'entries_departures__entries__repair_entries',
+                    'entries_departures__entries__salepoint_entries'],
                 priority: 4,
                 children: [
                     {
@@ -119,7 +122,8 @@
                             'entries_departures__entries__warranties_entries',
                             'entries_departures__entries__no_labeled_entries',
                             'entries_departures__entries__warehouse_entries',
-                            'entries_departures__entries__repair_entries'],
+                            'entries_departures__entries__repair_entries',
+                            'entries_departures__entries__salepoint_entries'],
                         children: [
 
                             {
@@ -149,7 +153,7 @@
                             {
                                 name: 'ENTRIES.MENU.REPAIR',
                                 type: 'link',
-                                permission: ['entries_departures__entries__repair_entries'],
+                                permission: ['entries_departures__entries__repair_entries', 'entries_departures__entries__salepoint_entries'],
                                 state: 'triangular.admin-default.entry-repair-manual'
                             }
                         ]

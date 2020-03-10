@@ -18,10 +18,10 @@
         var departuresUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.departures.base);
-        var warehouseUrl =API
-        .all(URLS.warehouse.base);
+        var warehouseUrl = API
+            .all(URLS.warehouse.base);
 
-        var departures = URLS.entries_departures.departures;        
+        var departures = URLS.entries_departures.departures;
         var warehouse = URLS.warehouse;
 
         function createNew(element) {
@@ -501,6 +501,122 @@
             }
         };
 
+        var salepointDeparture = {
+            template: function () {
+                return {
+                    tipo_salida: 'Punto de venta',
+                    cabinets_id: [],
+                    descripcion: '',
+                    nombre_chofer: ''
+                };
+            },
+            catalogues: function catalogues() {
+                var catalogues = {
+                    subsidiary: {
+                        binding: 'sucursal_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.subsidiary,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUBSIDIARY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.SUBSIDIARY'),
+                        icon: 'fa fa-warehouse',
+                        required: true
+                    },
+                    transport_driver: {
+                        binding: 'operador_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
+                        required: true
+                    },
+                    transport_line: {
+                        binding: 'linea_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_line,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_LINE'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'razon_social'
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.TRANSPORT_LINE'),
+                        icon: 'fa fa-pallet',
+                        required: true
+                    },
+                    transport_kind: {
+                        binding: 'tipo_transporte_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_type,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.TRANSPORT_KIND'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.TRANSPORT_KIND'),
+                        icon: 'fa fa-truck',
+                        required: true
+                    },
+                    udn: {
+                        binding: 'udn_origen_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.udn,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.AGENCY'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'agencia'
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.AGENCY'),
+                        icon: 'fa fa-building',
+                        required: true
+                    },
+                    supplier: {
+                        binding: 'proveedor_destino_id',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
+                            name: Translate.translate('DEPARTURES.OBSOLETE.LABELS.SUPPLIER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('DEPARTURES.OBSOLETE.HINTS.SUPPLIER'),
+                        icon: 'fas fas-box',
+                        required: true
+                    }
+                };
+                return catalogues;
+            }
+        };
+
         var warrantyDeparture = {
             template: function () {
                 return {
@@ -754,7 +870,8 @@
             newDeparture: newDeparture,
             obsoleteDeparture: obsoleteDeparture,
             warrantyDeparture: warrantyDeparture,
-            warehouseDeparture: warehouseDeparture
+            warehouseDeparture: warehouseDeparture,
+            salepointDeparture: salepointDeparture
         };
 
     }
