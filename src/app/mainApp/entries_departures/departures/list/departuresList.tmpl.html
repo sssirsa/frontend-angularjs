@@ -42,6 +42,12 @@
             <div class="new-departures selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'salepoint-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('salepoint-departures')">
+            <span translate>DEPARTURES.LIST.FILTERS.SALEPOINT</span>
+            <div class="salepoint-departures selectable-filter"></div>
+        </div>
+        <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.departureKindFilter === 'obsolete-departures') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('obsolete-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.OBSOLETE</span>
