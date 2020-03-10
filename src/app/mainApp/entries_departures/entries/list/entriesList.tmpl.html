@@ -2,7 +2,39 @@
     <header layout="column" layout-align="center center">
         <h1 translate>ENTRIES.LIST.TITLE</h1>
     </header>
-    <div layout="row" layout-align="space-around center" layout-wrap="">
+    <div class="full-width" layout="column" layout-gt-xs="row" layout-align="center center"
+        layout-align-gt-xs="space-around center">
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'ENTRIES.LIST.LABELS.START_DATE'|translate}}</label>
+            <input type="text" ng-model="vm.startDate" mdc-datetime-picker="" time="false" date="true"
+                min-date="minDate" max-date="maxDate" lang="es" ng-change="vm.startDateChange()" class=" md-input">
+        </md-input-containter>
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'ENTRIES.LIST.LABELS.END_DATE'|translate}}</label>
+            <input type="text" ng-model="vm.endDate" mdc-datetime-picker="" time="false" date="true"
+                min-date="vm.startDate" max-date="maxDate" lang="es" ng-change="vm.endDateChange()" class=" md-input">
+        </md-input-containter>
+    </div>
+    <div layout="row" layout-align="center center" ng-if="vm.showSelector">
+        <p>{{'ENTRIES.LIST.LABELS.SWITCH.LABEL'|translate}}</p>
+        <md-switch ng-model="vm.entriesToAgency" ng-change="vm.changeSwitch()">
+            <!--<p ng-if="vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.entryFromAgency">{{'ENTRIES.NEW.LABELS.SWITCH.FALSE'|translate}}</p>-->
+        </md-switch>
+    </div>
+    <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
+        <catalog-select class="full-width" ng-if="(!vm.entriesToAgency && vm.showSelector)||vm.subsidiaryAdmin"
+            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint" lazy="true"
+            icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
+            on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
+        </catalog-select>
+        <catalog-select class="full-width" ng-if="(vm.entriesToAgency && vm.showSelector)||vm.agencyAdmin"
+            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" lazy="true"
+            icon="vm.catalogues['udn'].icon" required="vm.catalogues['udn'].required"
+            on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
+        </catalog-select>
+    </div>
+    <div ng-if="vm.startDate" layout="row" layout-align="space-around center" layout-wrap="">
         <div layout="column" layout-align="center center" layout-margin
             ng-class="(vm.entryKindFilter === 'new-entries') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('new-entries')">
@@ -40,10 +72,14 @@
             <div class="all-entries selectable-filter"></div>
         </div>
     </div>
+    <div ng-if="vm.entries.length">
+        <p>{{'ENTRIES.LIST.LABELS.ENTRIES_QUANTITY'|translate}} {{vm.entries.length}}</p>
+        <p>{{'ENTRIES.LIST.LABELS.TOTAL_ASSET_QUANTITY'|translate}} {{vm.assetsQuantity}}</p>
+    </div>
 </md-card>
 <section
     cg-busy="{promise:vm.loadingEntries, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
-    <md-card ng-if="!vm.entries.length">
+    <md-card ng-if="!vm.entries.length && vm.startDate && vm.entryKindFilter">
         <strong translate>ENTRIES.LIST.LABELS.NO_RESULTS</strong>
     </md-card>
     <md-card ng-if="vm.entries.length" ng-click="vm.navigateToDetail(entry)" ng-repeat="entry in vm.entries">

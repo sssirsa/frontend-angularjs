@@ -1,3 +1,4 @@
+
 {
     "DEPARTURES": {
         "DETAIL": {
@@ -60,7 +61,20 @@
                 "ORIGIN_SUBSIDIARY": "Sucursal origen",
                 "TRANSPORT_KIND": "Tipo de transporte:",
                 "TRANSPORT_LINE": "Linea de Transporte:",
-                "ASSET_QUANTITY": "Equipos enviados:"
+                "ASSET_QUANTITY": "Equipos enviados:",
+                "START_DATE": "Fecha de inicio",
+                "END_DATE": "Fecha de fin",
+                "TOTAL_ASSET_QUANTITY": "Equipos enviados:",
+                "DEPARTURES_QUANTITY": "Cantidad de salidas:",
+                "SWITCH": {
+                    "LABEL": "Activa para buscar salidas a UDN-Agencia"
+                },
+                "SUBSIDIARY": "Sucursal",
+                "AGENCY": "UDN-Agencia"
+            },
+            "HINTS": {
+                "SUBSIDIARY": "Selecciona una sucursal para buscar sus salñidas",
+                "AGENCY": "Selecciona una UDN para buscar sus salidas"
             }
         },
         "MENU": {

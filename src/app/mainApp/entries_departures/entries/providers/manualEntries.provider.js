@@ -113,56 +113,18 @@
             return deferred.promise;
         }
 
-        //Entry Kind must be one pf the following
-        //new, warehouse, repair, unrecognizable, warranty
-        //Otherwise, all entries are returned
-        //Page parameter is used for pagination,
-        //without it just first page is provided
-        function listEntries(entryKind, page) {
+        //Valid params are sucursal, udn, fecha_inicio, fecha_fin, tipo_entrada, economico
+        //Params must be sent in an object with the param name as key
+        //Ex: { param1:param1Value }
+        function listEntries(params) {
             var user = User.getUser();
-            var url = entriesUrl;
-            var params;
-            //Pagination params building
-            if (page) {
-                params = {
-                    limit: PAGINATION.pageSize,
-                    offset: PAGINATION.pageSize * (page - 1)
-                };
-                //Adding ordering parameter
-                params[QUERIES.ordering] = '-fecha';
-            }
+            var url = entriesUrl.all(entries.all);
             //Subsidiary or Agency query
             if (user.sucursal) {
-                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal'].id;
+                params[QUERIES.entries_departures.by_subsidiary] = user['sucursal']._id;
             }
             if (user.udn) {
-                params[QUERIES.entries_departures.by_agency] = user['udn'].id;
-            }
-            if (entryKind) {
-                //An entry kind has been provided
-                switch (entryKind) {
-                    case 'new':
-                        url = url.all(entries.new);
-                        break;
-                    case 'warehouse':
-                        url = url.all(entries.warehouse);
-                        break;
-                    case 'repair':
-                        url = url.all(entries.salepoint);
-                        break;
-                    case 'unrecognizable':
-                        url = url.all(entries.unrecognizable);
-                        break;
-                    case 'warranty':
-                        url = url.all(entries.warranty);
-                        break;
-                    default:
-                        url = url.all(entries.all);
-                }
-            }
-            else {
-                //Entry kind not provided, so return all
-                url = url.all(entries.all);
+                params[QUERIES.entries_departures.by_agency] = user['udn']._id;
             }
             return url.customGET(null, params);
         }
@@ -283,7 +245,8 @@
                         B: "Activo",
                         C: "Serie",
                         D: "Modelo",
-                        E: "Tipo"
+                        E: "Año",
+                        F: "Tipo"
                     }];
 
                     //var assetPromises = [];
@@ -298,7 +261,8 @@
                             B: value.id_unilever,
                             C: value.no_serie,
                             D: value.modelo.nombre,
-                            E: value.modelo.tipo.nombre
+                            E: value.year,
+                            F: value.modelo.tipo.nombre
                         });
                         // })
                         // .catch(function (getCabinetInfoError) {

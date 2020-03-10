@@ -99,7 +99,7 @@
             vm.filter = {};
             vm.filter[field] = value;
             vm.selectedTab = 0;
-            //vm.searchWarehouse('brand');
+            vm.searchWarehouse('brand');
         };
 
         vm.changeSwitch = function () {

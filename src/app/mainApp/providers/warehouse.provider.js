@@ -202,19 +202,19 @@
                         if (filter['udn']) {
                             origin = value.udn.nombre;
                         }
-                        var unileverStatusString="Sin estatus unilever";
+                        var unileverStatusString = "Sin estatus unilever";
                         if (value['estatus_unilever']) {
                             unileverStatusString = value.estatus_unilever.code + ' - ' + value.estatus_unilever.description;
                         }
                         assetData.push({
-                            A: value.id_unilever?value.id_unilever:"Sin activo",
-                            B: value.economico?value.economico:"Sin inventario",
-                            C: value.no_serie?value.no_serie:"Sin número de serie",
-                            D: value.modelo?value.modelo.nombre:"Sin denominación",
-                            E: value.modelo && value.modelo.tipo?value.modelo.tipo.nombre:"Sin tipo de equipos",
+                            A: value.id_unilever ? value.id_unilever : "Sin activo",
+                            B: value.economico ? value.economico : "Sin inventario",
+                            C: value.no_serie ? value.no_serie : "Sin número de serie",
+                            D: value.modelo ? value.modelo.nombre : "Sin denominación",
+                            E: value.modelo && value.modelo.tipo ? value.modelo.tipo.nombre : "Sin tipo de equipos",
                             F: unileverStatusString,
                             G: origin,
-                            H: value.fecha_ingreso?value.fecha_ingreso:"Sin información"
+                            H: value.fecha_ingreso ? value.fecha_ingreso : "Sin información"
                         });
                     });
 
@@ -246,14 +246,16 @@
         function list(filter) {
             if (filter['sucursal']) {
                 return urlbase
-                    .all(QUERIES.inventory.by_subsidiary
+                    .all(QUERIES.inventory.by_subsidiary)
+                    .all(filter['sucursal']._id
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['all'])
                     .customGET();
             }
             if (filter['udn']) {
                 return urlbase
-                    .all(QUERIES.inventory.by_agency
+                    .all(QUERIES.inventory.by_agency)
+                    .all(filter['udn']._id
                         + '?' + QUERIES.inventory.by_attribute
                         + '=' + QUERIES.inventory.attributes['all'])
                     .customGET();
