@@ -24,13 +24,13 @@
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
         <catalog-select class="full-width" ng-if="(!vm.entriesToAgency && vm.showSelector)||vm.subsidiaryAdmin"
-            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
+            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint" lazy="true"
             icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
         </catalog-select>
         <catalog-select class="full-width" ng-if="(vm.entriesToAgency && vm.showSelector)||vm.agencyAdmin"
-            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
-            required="vm.catalogues['udn'].required"
+            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" lazy="true"
+            icon="vm.catalogues['udn'].icon" required="vm.catalogues['udn'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
         </catalog-select>
     </div>

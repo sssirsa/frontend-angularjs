@@ -1,7 +1,4 @@
-<md-card class="full-width"
-         layout-padding
-         layout="column"
-         laoyut-align="center-stretch">
+<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
     <header layout="column" layout-align="center center">
         <h1 translate>DEPARTURES.LIST.TITLE</h1>
     </header>
@@ -27,32 +24,26 @@
     </div>
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
         <catalog-select class="full-width" ng-if="(!vm.departuresFromAgency && vm.showSelector)||vm.subsidiaryAdmin"
-            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint"
+            catalog="vm.catalogues['subsidiary'].catalog" hint="vm.catalogues['subsidiary'].hint" lazy="true"
             icon="vm.catalogues['subsidiary'].icon" required="vm.catalogues['subsidiary'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['subsidiary'].binding)">
         </catalog-select>
         <catalog-select class="full-width" ng-if="(vm.departuresFromAgency && vm.showSelector)||vm.agencyAdmin"
-            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" icon="vm.catalogues['udn'].icon"
-            required="vm.catalogues['udn'].required"
+            catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint" lazy="true"
+            icon="vm.catalogues['udn'].icon" required="vm.catalogues['udn'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['udn'].binding)">
         </catalog-select>
     </div>
-    <div layout="row"
-         layout-align="space-around center"
-         layout-wrap="">
-        <div layout="column"
-             layout-align="center center"
-             layout-margin
-             ng-class="(vm.departureKindFilter === 'new-departures') ? 'SelectedList' : ''"
-             ng-click="vm.filterChange('new-departures')">
+    <div layout="row" layout-align="space-around center" layout-wrap="">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'new-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('new-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.NEW</span>
             <div class="new-departures selectable-filter"></div>
         </div>
-        <div layout="column"
-             layout-align="center center"
-             layout-margin
-             ng-class="(vm.departureKindFilter === 'obsolete-departures') ? 'SelectedList' : ''"
-             ng-click="vm.filterChange('obsolete-departures')">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'obsolete-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('obsolete-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.OBSOLETE</span>
             <div class="obsolete-departures selectable-filter"></div>
         </div>
@@ -64,55 +55,47 @@
             <span translate>DEPARTURES.LIST.FILTERS.UNRECOGNIZABLE</span>
             <div class="unrecognizable-departures selectable-filter"></div>
         </div>-->
-        <div layout="column"
-             layout-align="center center"
-             layout-margin
-             ng-class="(vm.departureKindFilter === 'warehouse-departures') ? 'SelectedList' : ''"
-             ng-click="vm.filterChange('warehouse-departures')">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'warehouse-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('warehouse-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.WAREHOUSE</span>
             <div class="warehouse-departures selectable-filter"></div>
         </div>
-        <div layout="column"
-             layout-align="center center"
-             layout-margin
-             ng-class="(vm.departureKindFilter === 'warranty-departures') ? 'SelectedList' : ''"
-             ng-click="vm.filterChange('warranty-departures')">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'warranty-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('warranty-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.WARRANTY</span>
             <div class="warranty-departures selectable-filter"></div>
         </div>
-        <div layout="column"
-             layout-align="center center"
-             layout-margin
-             ng-class="(vm.departureKindFilter === 'all-departures') ? 'SelectedList' : ''"
-             ng-click="vm.filterChange('all-departures')">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.departureKindFilter === 'all-departures') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('all-departures')">
             <span translate>DEPARTURES.LIST.FILTERS.ALL</span>
             <div class="all-departures selectable-filter"></div>
         </div>
-    </div>    
+    </div>
     <div ng-if="vm.departures.length">
         <p>{{'DEPARTURES.LIST.LABELS.DEPARTURES_QUANTITY'|translate}} {{vm.departures.length}}</p>
         <p>{{'DEPARTURES.LIST.LABELS.TOTAL_ASSET_QUANTITY'|translate}} {{vm.assetsQuantity}}</p>
     </div>
 </md-card>
-<section cg-busy="{promise:vm.loadingDepartures, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
+<section
+    cg-busy="{promise:vm.loadingDepartures, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
     <md-card ng-if="!vm.departures.length && vm.startDate && vm.departureKindFilter">
         <strong translate>DEPARTURES.LIST.LABELS.NO_RESULTS</strong>
     </md-card>
-    <md-card ng-if="vm.departures.length"
-             ng-click="vm.navigateToDetail(departure)"
-             ng-repeat="departure in vm.departures">
-        <md-toolbar layout-gt-xs="row"
-                    layout-align-gt-xs="space-between center"
-                    layout="column"
-                    layout-align="center center"
-                    layout-padding>
+    <md-card ng-if="vm.departures.length" ng-click="vm.navigateToDetail(departure)"
+        ng-repeat="departure in vm.departures">
+        <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
+            layout-align="center center" layout-padding>
             <span>
                 <strong translate="">DEPARTURES.LIST.LABELS.ID</strong>
                 {{departure._id}}
             </span>
             <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter">
+            </div>
             <div ng-if="departure.tipo_salida==='Buen estado'" class="warehouse-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Garantías'" class="warranty-departures selectable-filter"></div>
             <span>
@@ -145,7 +128,7 @@
                 <span flex="33" ng-if="departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{departure.tipo_transporte.linea_transporte.razon_social}}</span>
-                </span>                
+                </span>
                 <span flex="33" ng-if="departure.operador_transporte&&!departure.tipo_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{departure.operador_transporte.linea_transporte.razon_social}}</span>
@@ -194,10 +177,8 @@
         </span>
         <md-actions layout="row" layout-align="end center">
             <!--Allow to generate the document just if the entry is closed-->
-            <md-button aria-label="download document button"
-                       ng-click="$event.stopPropagation(); vm.generatePDF()"
-                       disabled
-                       class="md-primary md-raised">
+            <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
+                disabled class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
                 <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.PDF"|translate}}</span>
             </md-button>
@@ -210,13 +191,9 @@
         </md-actions>
     </md-card>
 </section>
-<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page"
-         layout="column"
-         layout-align="center center">
-    <md-button aria-label="Load more elements button"
-               cg-busy="{promise:vm.loadingMoreDepartures, message:' '}"
-               ng-click="$event.stopPropagation(); vm.loadMore()"
-               class="md-primary md-raised">
+<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
+    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreDepartures, message:' '}"
+        ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
         <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
         <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
     </md-button>
