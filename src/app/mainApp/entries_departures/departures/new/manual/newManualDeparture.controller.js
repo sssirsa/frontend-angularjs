@@ -314,8 +314,8 @@
 
         var addCabinetsToDeparture = function addCabinetsToDeparture(cabinets, departure) {
             //In case the cabinets array exist, restart it
-            if (departure.cabinets_id.length) {
-                departure.cabinets_id = [];
+            if (departure.cabinets.length) {
+                departure.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -326,7 +326,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                departure['cabinets_id'].push(existingCabinets[i].id);
+                departure['cabinets'].push(existingCabinets[i].id);
             }
             return departure;
         };

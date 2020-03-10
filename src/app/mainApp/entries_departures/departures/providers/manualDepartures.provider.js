@@ -289,7 +289,7 @@
             template: function () {
                 return {
                     tipo_salida: 'Nuevos',
-                    cabinets_id: [],
+                    cabinets: [],
                     descripcion: '',
                     nombre_chofer: ''
                 };
@@ -297,7 +297,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_origen_id',
+                        binding: 'sucursal_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -313,7 +313,7 @@
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -329,7 +329,7 @@
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -347,7 +347,7 @@
                         required: true
                     },
                     transport_driver: {
-                        binding: 'operador_transporte_id',
+                        binding: 'operador_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -365,7 +365,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_destino_id',
+                        binding: 'udn_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -389,7 +389,7 @@
             template: function () {
                 return {
                     tipo_salida: 'Obsoletos',
-                    cabinets_id: [],
+                    cabinets: [],
                     descripcion: '',
                     nombre_chofer: ''
                 };
@@ -397,7 +397,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_origen_id',
+                        binding: 'sucursal_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -413,7 +413,7 @@
                         required: true
                     },
                     transport_driver: {
-                        binding: 'operador_transporte_id',
+                        binding: 'operador_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -431,7 +431,7 @@
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -447,7 +447,7 @@
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -465,7 +465,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_origen_id',
+                        binding: 'udn_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -481,7 +481,7 @@
                         required: true
                     },
                     supplier: {
-                        binding: 'proveedor_destino_id',
+                        binding: 'proveedor_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -505,7 +505,7 @@
             template: function () {
                 return {
                     tipo_salida: 'Garantías',
-                    cabinets_id: [],
+                    cabinets: [],
                     descripcion: '',
                     nombre_chofer: ''
                 };
@@ -513,7 +513,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_origen_id',
+                        binding: 'sucursal_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -529,7 +529,7 @@
                         required: true
                     },
                     transport_driver: {
-                        binding: 'operador_transporte_id',
+                        binding: 'operador_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -547,7 +547,7 @@
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -563,7 +563,7 @@
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -581,7 +581,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_origen_id',
+                        binding: 'udn_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -597,7 +597,7 @@
                         required: true
                     },
                     destination_subsidiary: {
-                        binding: 'sucursal_destino_id',
+                        binding: 'sucursal_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -621,7 +621,7 @@
             template: function () {
                 return {
                     tipo_salida: 'Buen estado',
-                    cabinets_id: [],
+                    cabinets: [],
                     descripcion: '',
                     nombre_chofer: ''
                 };
@@ -629,7 +629,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     subsidiary: {
-                        binding: 'sucursal_origen_id',
+                        binding: 'sucursal_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -645,7 +645,7 @@
                         required: true
                     },
                     transport_driver: {
-                        binding: 'operador_transporte_id',
+                        binding: 'operador_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -663,7 +663,7 @@
                         required: true
                     },
                     transport_line: {
-                        binding: 'linea_transporte_id',
+                        binding: 'linea_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -679,7 +679,7 @@
                         required: true
                     },
                     transport_kind: {
-                        binding: 'tipo_transporte_id',
+                        binding: 'tipo_transporte',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.entries_departures.base
@@ -697,7 +697,7 @@
                         required: true
                     },
                     udn: {
-                        binding: 'udn_origen_id',
+                        binding: 'udn_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -713,7 +713,7 @@
                         required: true
                     },
                     destination_udn: {
-                        binding: 'udn_destino_id',
+                        binding: 'udn_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -729,7 +729,7 @@
                         required: true
                     },
                     store: {
-                        binding: 'establecimiento_destino_id',
+                        binding: 'establecimiento_destino',
                         model: 'no_cliente',
                         option: 'nombre_establecimiento'
                     }
