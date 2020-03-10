@@ -148,10 +148,10 @@
 
         vm.onDestinationSelect = function (element) {
             if ((vm.showSelector && vm.entriesToAgency) || vm.agencyAdmin) {
-                vm.entriesFilter[QUERIES.entries_departures.agency] = element;
+                vm.entriesFilter[QUERIES.entries_departures.by_agency] = element;
             }
             if ((vm.showSelector && !vm.entriesToAgency) || vm.subsidiaryAdmin) {
-                vm.entriesFilter[QUERIES.entries_departures.subsidiary] = element;
+                vm.entriesFilter[QUERIES.entries_departures.by_subsidiary] = element;
             }
             vm.entries=[];
         };
