@@ -64,7 +64,7 @@
                 "ASSET_QUANTITY": "Equipos enviados:",
                 "START_DATE": "Fecha de inicio",
                 "END_DATE": "Fecha de fin",
-                "TOTAL_ASSET_QUANTITY": "Equipos recibidos:",
+                "TOTAL_ASSET_QUANTITY": "Equipos enviados:",
                 "DEPARTURES_QUANTITY": "Cantidad de salidas:",
                 "SWITCH": {
                     "LABEL": "Activa para buscar salidas a UDN-Agencia"
