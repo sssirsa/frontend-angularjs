@@ -31,7 +31,7 @@
         vm.subsidiaryAdmin;
         vm.agencyAdmin;
 
-        vm.departures=[];
+        vm.departures = [];
 
         vm.catalogues = {
             subsidiary: {
@@ -70,7 +70,7 @@
         };
 
         function init() {
-            vm.departureKindFilter = 'all-departures'; 
+            vm.departureKindFilter = 'all-departures';
             vm.showSelector = false;
             vm.departureToAgency = false; //Determines what catalog to show (Petition or udn)
             vm.user = User.getUser();
@@ -116,13 +116,13 @@
         };
 
         vm.generatePDF = function () {
-        //TODO:Create functionality for PDF
+            //TODO:Create functionality for PDF
         };
 
         vm.navigateToDetail = function (departure) {
             $state.go('triangular.admin-default.departure-detail', {
                 departureId: departure._id,
-                departure:departure
+                departure: departure
             });
         };
 
@@ -150,7 +150,7 @@
             if ((vm.showSelector && !vm.departuresToAgencyºº) || vm.subsidiaryAdmin) {
                 vm.departuresFilter[QUERIES.entries_departures.by_subsidiary] = element;
             }
-            vm.departures=[];
+            vm.departures = [];
         };
 
         //Internal functions        
@@ -164,27 +164,31 @@
             switch (filter) {
                 case 'all-departures':
                     vm.departureKindList = null;
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = null;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = null;
                     break;
                 case 'new-departures':
                     vm.departureKindList = 'new';
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.new;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.new;
                     break;
                 case 'obsolete-departures':
                     vm.departureKindList = 'obsolete';
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.obsolete;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.obsolete;
+                    break;
+                case 'salepoint-departures':
+                    vm.departureKindList = 'salepoint';
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.salepoint;
                     break;
                 case 'unrecognizable-departures':
                     vm.departureKindList = 'unrecognizable';
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.unrecognizable;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.unrecognizable;
                     break;
                 case 'warehouse-departures':
                     vm.departureKindList = 'warehouse';
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.warehouse;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.warehouse;
                     break;
                 case 'warranty-departures':
                     vm.departureKindList = 'warranty';
-                    vm.departuresFilter[QUERIES.entries_departures.entry_kind] = QUERIES.entries_departures.warranty;
+                    vm.departuresFilter[QUERIES.entries_departures.departure_kind] = QUERIES.entries_departures.warranty;
                     break;
             }
 
