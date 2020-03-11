@@ -40,7 +40,7 @@
             //Bindging user subsidiary or agency to entry if user happens to have one.
             user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal']._id : null;
             user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn']._id : null;
-            
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -65,7 +65,7 @@
             vm.departure = MANUAL_DEPARTURES.salepointDeparture.template();
 
             vm.onElementSelect(element, field);
-            
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -133,28 +133,28 @@
                                         //if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : true) {
                                         //Just depart from this departure if the asset if salepoint
                                         //Also validate stage existence, or no stage
-                                        if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
-                                            //Salepoint or pending salepoint status
+                                        // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
+                                        //Salepoint or pending salepoint status
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-                                        }
-                                        else {
-                                            //Building error message
-                                            var statusMessage =
-                                                Translate.translate('DEPARTURES.SALEPOINT.ERRORS.WRONG_STATUS');
-                                            //Just add status info if available
-                                            cabinetSuccessCallback['status'] ? statusMessage = statusMessage
-                                                + ', ' + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.STATUS_IS')
-                                                + ': ' + cabinetSuccessCallback['status'].code
-                                                + '-' + cabinetSuccessCallback['status'].descripcion
-                                                : null;
+                                        //Finally add the cabinet to the list
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                        cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                        cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        // }
+                                        // else {
+                                        //     //Building error message
+                                        //     var statusMessage =
+                                        //         Translate.translate('DEPARTURES.SALEPOINT.ERRORS.WRONG_STATUS');
+                                        //     //Just add status info if available
+                                        //     cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                        //         + ', ' + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.STATUS_IS')
+                                        //         + ': ' + cabinetSuccessCallback['status'].code
+                                        //         + '-' + cabinetSuccessCallback['status'].descripcion
+                                        //         : null;
 
-                                            toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                        //     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
                                         //}
                                         // else {
                                         //     var message = Translate.translate('DEPARTURES.SALEPOINT.ERRORS.STAGE_ERROR');

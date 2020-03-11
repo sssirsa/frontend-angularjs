@@ -32,6 +32,10 @@
             return departuresUrl.all(departures.obsolete).customPOST(element);
         }
 
+        function createSalepoint(element) {
+            return departuresUrl.all(departures.salepoint).customPOST(element);
+        }
+
         function createWarranty(element) {
             return departuresUrl.all(departures.warranty).customPOST(element);
         }
@@ -505,7 +509,7 @@
             template: function () {
                 return {
                     tipo_salida: 'Punto de venta',
-                    cabinets_id: [],
+                    cabinets: [],
                     descripcion: '',
                     nombre_chofer: ''
                 };
@@ -857,6 +861,7 @@
         return {
             createNew: createNew,
             createObsolete: createObsolete,
+            createSalepoint: createSalepoint,
             createWarehouse: createWarehouse,
             createWarranty: createWarranty,
             addCabinet: addCabinet,
