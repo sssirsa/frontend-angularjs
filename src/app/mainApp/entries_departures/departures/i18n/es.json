@@ -41,6 +41,7 @@
                 "ALL": "Todas",
                 "NEW": "Nuevos",
                 "OBSOLETE": "Obsoletos",
+                "SALEPOINT":"Punto de venta",
                 "UNRECOGNIZABLE": "No capitalizados",
                 "WAREHOUSE": "Buen estado",
                 "WARRANTY": "Garantías"
@@ -87,7 +88,8 @@
             "UNRECOGNIZABLE": "No capitalizados",
             "RECOGNIZABLE": "Capitalizados",
             "OBSOLETE": "Obsoletos",
-            "WAREHOUSE": "Buen estado"
+            "WAREHOUSE": "Buen estado",
+            "SALEPOINT":"Punto de venta"
         },
         "NEW": {
             "TITLE": "Salida de nuevos",

@@ -1,8 +1,8 @@
 (function () {
     angular
-        .module('app.mainApp.entries_departures.departures.warehouse')
-        .controller('warehouseManualDepartureController', WarehouseManualDepartureController);
-    function WarehouseManualDepartureController(
+        .module('app.mainApp.entries_departures.departures.salepoint')
+        .controller('salepointManualDepartureController', SalepointManualDepartureController);
+    function SalepointManualDepartureController(
         MANUAL_DEPARTURES,
         User,
         Translate,
@@ -22,33 +22,16 @@
         vm.departure;
         vm.showSelector;
         vm.departureFromAgency;
-        vm.departureToStore;
         vm.catalogues;
         vm.cabinetList;
-        vm.store;
-
-        //Validations
-        vm.imageConstraints = {
-            validations: {
-                size: {
-                    max: '5MB',
-                    min: '10B',
-                    height: { max: 4096, min: 100 },
-                    width: { max: 4096, min: 100 }
-                }
-            },
-            resize: { width: 4096 },
-            resizeIf: '$width > 4096 || $height > 4096'
-        };
 
         // Auto invoked init function
         vm.init = function init() {
             vm.selectedTab = 0;
             vm.showSelector = false;
             vm.cabinetList = [];
-            vm.store = null;
-            vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
-            vm.catalogues = MANUAL_DEPARTURES.warehouseDeparture.catalogues();
+            vm.departure = MANUAL_DEPARTURES.salepointDeparture.template();
+            vm.catalogues = MANUAL_DEPARTURES.salepointDeparture.catalogues();
 
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
@@ -66,7 +49,6 @@
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['udn'].binding];
             }
-
         };
 
         vm.init();
@@ -80,9 +62,10 @@
         vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
-            vm.departure = MANUAL_DEPARTURES.warehouseDeparture.template();
+            vm.departure = MANUAL_DEPARTURES.salepointDeparture.template();
 
             vm.onElementSelect(element, field);
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -99,24 +82,6 @@
             vm.onElementSelect(element, field);
         };
 
-        vm.selectDriverID = function selectDriverID(files) {
-            if (files.length > 0) {
-                var file = files[0];
-                //Image processing as a base64 string
-                var base64Image = null;
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = function () {
-                    base64Image = fileReader.result;
-                    vm.departure['ife_chofer'] = base64Image;
-                };
-
-            }
-            else {
-                delete (vm.departure['ife_chofer']);
-            }
-        };
-
         vm.searchCabinet = function searchCabinet(cabinetID) {
             if (cabinetID.length > 0) {
                 var index = vm.cabinetList.map(function (element) {
@@ -124,7 +89,7 @@
                 }).indexOf(cabinetID);
                 if (index !== -1) {
                     //Cabinet already in list
-                    toastr.warning(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.REPEATED_ID'), cabinetID);
+                    toastr.warning(Translate.translate('DEPARTURES.SALEPOINT.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
                     var cabinetToAdd = {
@@ -149,7 +114,7 @@
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
                             if (cabinetSuccessCallback['subsidiary']
                                 || cabinetSuccessCallback['agency']) {
-                                //a.k.a. The cabinet exists in any subsidiary or agency
+                                //a.k.a. The cabinet exists in the selected subsidiary or agency
                                 if (
                                     (cabinetSuccessCallback['subsidiary']
                                         ? cabinetSuccessCallback['subsidiary']._id
@@ -165,8 +130,12 @@
                                         //The cabinet doesn't have internal restrictions to leave
                                         //if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
                                         //Cabinet entry has been confirmed
-                                        // if (!cabinetSuccessCallback['cabinet'].nuevo) {
-                                        // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
+                                        //if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : true) {
+                                        //Just depart from this departure if the asset if salepoint
+                                        //Also validate stage existence, or no stage
+                                        // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
+                                        //Salepoint or pending salepoint status
+
                                         //Finally add the cabinet to the list
                                         cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                                         cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
@@ -175,10 +144,10 @@
                                         // else {
                                         //     //Building error message
                                         //     var statusMessage =
-                                        //         Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.WRONG_STATUS');
+                                        //         Translate.translate('DEPARTURES.SALEPOINT.ERRORS.WRONG_STATUS');
                                         //     //Just add status info if available
                                         //     cabinetSuccessCallback['status'] ? statusMessage = statusMessage
-                                        //         + ', ' + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.STATUS_IS')
+                                        //         + ', ' + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.STATUS_IS')
                                         //         + ': ' + cabinetSuccessCallback['status'].code
                                         //         + '-' + cabinetSuccessCallback['status'].descripcion
                                         //         : null;
@@ -186,22 +155,27 @@
                                         //     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
                                         //     vm.removeCabinet(cabinetID);
                                         // }
-                                        // }
+                                        //}
                                         // else {
-                                        //     toastr.error(
-                                        //         Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_NEW')
-                                        //         , cabinetSuccessCallback.cabinet.economico
-                                        //     );
+                                        //     var message = Translate.translate('DEPARTURES.SALEPOINT.ERRORS.STAGE_ERROR');
+                                        //     if (cabinetSuccessCallback['stage']) {
+                                        //         message = message
+                                        //             + ', '
+                                        //             + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.AT_STAGE')
+                                        //             + ' '
+                                        //             + cabinetSuccessCallback['stage'].nombre;
+                                        //     }
+                                        //     toastr.error(message, cabinetSuccessCallback.cabinet.economico);
                                         //     vm.removeCabinet(cabinetID);
                                         // }
                                         //}
                                         // else {
-                                        //     toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                        //     toastr.error(Translate.translate('DEPARTURES.SALEPOINT.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
                                         //     vm.removeCabinet(cabinetID);
                                         // }
                                     }
                                     else {
-                                        toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                        toastr.error(Translate.translate('DEPARTURES.SALEPOINT.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
                                         //TODO: Add them and show the restriction
                                         vm.removeCabinet(cabinetID);
                                     }
@@ -209,18 +183,18 @@
                                 }
                                 else {
                                     //Just reachable when the user had seleced a subsidiary through the selector.
-                                    var locationMessage = Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_YOUR_SUBSIDIARY');
+                                    var locationMessage = Translate.translate('DEPARTURES.SALEPOINT.ERRORS.NOT_YOUR_SUBSIDIARY');
                                     if (cabinetSuccessCallback['subsidiary']) {
                                         locationMessage = locationMessage
                                             + ', '
-                                            + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_AT')
+                                            + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['subsidiary'].nombre;
                                     }
                                     if (cabinetSuccessCallback['agency']) {
                                         locationMessage = locationMessage
                                             + ', '
-                                            + Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.IS_AT')
+                                            + Translate.translate('DEPARTURES.SALEPOINT.ERRORS.IS_AT')
                                             + ' '
                                             + cabinetSuccessCallback['agency'].agencia;
                                     }
@@ -229,7 +203,7 @@
                                 }
                             }
                             else {
-                                toastr.error(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
+                                toastr.error(Translate.translate('DEPARTURES.SALEPOINT.ERRORS.NOT_IN_SUBSIDIARY'), cabinetSuccessCallback.cabinet.economico);
                                 vm.removeCabinet(cabinetID);
                             }
                         })
@@ -249,7 +223,7 @@
                     }).indexOf(cabinetID);
                 if (index === -1) {
                     //Cabinet not found in list (unreachable unless code modification is made)
-                    toastr.warning(Translate.translate('DEPARTURES.WAREHOUSE.ERRORS.NOT_FOUND_ID'), cabinetID);
+                    toastr.warning(Translate.translate('DEPARTURES.SALEPOINT.ERRORS.NOT_FOUND_ID'), cabinetID);
                 }
                 else {
                     vm.cabinetList.splice(index, 1);
@@ -262,8 +236,8 @@
             if (departureHasPendingCabinets()) {
                 var confirm = $mdDialog.confirm()
                     .title(Translate.translate('MAIN.MSG.WARNING_TITLE'))
-                    .textContent(Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
-                    .ariaLabel(Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.PENDING_CABINETS'))
+                    .textContent(Translate.translate('DEPARTURES.SALEPOINT.MESSAGES.PENDING_CABINETS'))
+                    .ariaLabel(Translate.translate('DEPARTURES.SALEPOINT.MESSAGES.PENDING_CABINETS'))
                     .ok(Translate.translate('MAIN.BUTTONS.ACCEPT'))
                     .cancel(Translate.translate('MAIN.BUTTONS.CANCEL'));
 
@@ -307,44 +281,16 @@
             delete (vm.departure[vm.catalogues['subsidiary'].binding]);
             vm.departure['cabinets'] = [];
             vm.cabinetList = [];
-            vm.changeDestinationSwitch();
         };
 
         vm.changeDriverSwitch = function () {
             //Removing excluding variables when the switch is changed
             delete (vm.departure[vm.catalogues['transport_driver'].binding]);
-            delete (vm.departure['nombre_chofer'].binding);
+            if (vm.departure['nombre_chofer'].binding) {
+                delete (vm.departure['nombre_chofer'].binding);
+            }
         };
 
-        vm.changeDestinationSwitch = function changeDestinationSwitch() {
-            //Removing mutual excluding variables when the switch is changed
-            delete (vm.departure[vm.catalogues['destination_udn'].binding]);
-            delete (vm.departure[vm.catalogues['store'].binding]);
-            vm.store = null;
-        };
-
-        vm.searchStore = function searchStore() {
-            $mdDialog.show({
-                controller: 'searchStoreController',
-                controllerAs: 'vm',
-                templateUrl: 'app/mainApp/components/storeManager/modals/searchStore.modal.tmpl.html',
-                fullscreen: true,
-                clickOutsideToClose: true,
-                focusOnOpen: true
-            })
-                .then(function (store) {
-                    //Select the store
-                    vm.store = store;
-                    if (vm.store) {
-                        vm.departure[vm.catalogues['store'].binding] = store[vm.catalogues['store'].model];
-                    }
-                })
-                .catch(function (storeError) {
-                    if (storeError) {
-                        ErrorHandler.errorTranslate(storeError);
-                    }
-                });
-        };
         //Internal functions
 
         var saveDeparture = function saveDeparture(departure) {
@@ -352,11 +298,11 @@
             departure = Helper.removeBlankStrings(departure);
             //API callback
             vm.createDeparturePromise = MANUAL_DEPARTURES
-                .createWarehouse(departure)
+                .createSalepoint(departure)
                 .then(function () {
                     vm.init();
                     toastr.success(
-                        Translate.translate('DEPARTURES.WAREHOUSE.MESSAGES.SUCCESS_CREATE')
+                        Translate.translate('DEPARTURES.SALEPOINT.MESSAGES.SUCCESS_CREATE')
                     );
                 })
                 .catch(function (errorCallback) {
