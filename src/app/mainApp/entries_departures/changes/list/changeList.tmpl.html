@@ -1,37 +1,79 @@
-<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
+<md-card class="full-width" layout-padding layout="column" layout-align="center-stretch">
     <header layout="column" layout-align="center center">
         <h1 translate>CHANGES.LIST.TITLE</h1>
     </header>
+    <div class="full-width" layout="column" layout-gt-xs="row" layout-align="center center"
+        layout-align-gt-xs="space-around center">
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'CHANGES.LIST.LABELS.START_DATE'|translate}}</label>
+            <input type="text" ng-model="vm.startDate" mdc-datetime-picker="" time="false" date="true"
+                min-date="minDate" max-date="maxDate" lang="es" ng-change="vm.startDateChange()" class=" md-input">
+        </md-input-containter>
+        <md-input-containter layout-padding class="md-block">
+            <label>{{'CHANGES.LIST.LABELS.END_DATE'|translate}}</label>
+            <input type="text" ng-model="vm.endDate" mdc-datetime-picker="" time="false" date="true"
+                min-date="vm.startDate" max-date="maxDate" lang="es" ng-change="vm.endDateChange()" class=" md-input">
+        </md-input-containter>
+    </div>
     <div layout="row" layout-align="center center" ng-if="vm.showSelector">
         <p>{{'CHANGES.LIST.LABELS.SWITCH.LABEL'|translate}}</p>
         <md-switch ng-model="vm.agencyChange" ng-change="vm.changeSwitch()">
-            <!--<p ng-if="vm.entryFromAgency">{{'CHANGES.LIST.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'CHANGES.LIST.LABELS.SWITCH.FALSE'|translate}}</p>-->
+            <!--<p ng-if="vm.agencyChange">{{'CHANGESLABELS.SWITCH.TRUE'|translate}}</p>
+                    <p ng-if="!vm.agencyChange">{{'CHANGES.LABELS.SWITCH.FALSE'|translate}}</p>-->
         </md-switch>
     </div>
-    <!--Agency section-->
-    <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
-        catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint"
-        required="vm.catalogues['origin_udn'].required"
-        on-select="vm.onOriginSelect(element,vm.catalogues['origin_udn'].binding)">
-    </catalog-select>
-    <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
-        catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
-        required="vm.catalogues['destination_udn'].required"
-        on-select="vm.onOriginSelect(element,vm.catalogues['destination_udn'].binding)">
-    </catalog-select>
-    <!--Subsidiary section-->
-    <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
-        catalog="vm.catalogues['origin_subsidiary'].catalog" hint="vm.catalogues['origin_subsidiary'].hint"
-        required="vm.catalogues['origin_subsidiary'].required"
-        on-select="vm.onOriginSelect(element,vm.catalogues['origin_subsidiary'].binding)">
-    </catalog-select>
-    <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
-        catalog="vm.catalogues['destination_subsidiary'].catalog" hint="vm.catalogues['destination_subsidiary'].hint"
-        required="vm.catalogues['destination_subsidiary'].required"
-        on-select="vm.onOriginSelect(element,vm.catalogues['destination_subsidiary'].binding)">
-    </catalog-select>
+    <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
+        <!--Agency section-->
+        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
+            catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint"
+            required="vm.catalogues['origin_udn'].required"
+            on-select="vm.onOriginSelect(element,vm.catalogues['origin_udn'].binding)">
+        </catalog-select>
+        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
+            catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
+            required="vm.catalogues['destination_udn'].required"
+            on-select="vm.onOriginSelect(element,vm.catalogues['destination_udn'].binding)">
+        </catalog-select>
+        <!--Subsidiary section-->
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+            catalog="vm.catalogues['origin_subsidiary'].catalog" hint="vm.catalogues['origin_subsidiary'].hint"
+            required="vm.catalogues['origin_subsidiary'].required"
+            on-select="vm.onOriginSelect(element,vm.catalogues['origin_subsidiary'].binding)">
+        </catalog-select>
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+            catalog="vm.catalogues['destination_subsidiary'].catalog"
+            hint="vm.catalogues['destination_subsidiary'].hint"
+            required="vm.catalogues['destination_subsidiary'].required"
+            on-select="vm.onOriginSelect(element,vm.catalogues['destination_subsidiary'].binding)">
+        </catalog-select>
+    </div>
+
+    <div layout="row" layout-align="space-around center" layout-wrap="">
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.changesFilter === 'non-confirmed-changes') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('non-confirmed-changes')">
+            <span translate>CHANGES.LIST.FILTERS.NON_CONFIRMED</span>
+            <div class="non-confirmed-changes selectable-filter"></div>
+        </div>
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.changesFilter === 'confirmed-changes') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('confirmed-changes')">
+            <span translate>CHANGES.LIST.FILTERS.CONFIRMED</span>
+            <div class="confirmed-changes selectable-filter"></div>
+        </div>
+        <div layout="column" layout-align="center center" layout-margin
+            ng-class="(vm.changesFilter === 'all-changes') ? 'SelectedList' : ''"
+            ng-click="vm.filterChange('all-changes')">
+            <span translate>CHANGES.LIST.FILTERS.ALL</span>
+            <div class="all-changes selectable-filter"></div>
+        </div>
+    </div>
+    <div ng-if="vm.changes.length">
+        <p>{{'CHANGES.LIST.LABELS.CHANGES_QUANTITY'|translate}} {{vm.changes.length}}</p>
+        <p>{{'CHANGES.LIST.LABELS.TOTAL_ASSET_QUANTITY'|translate}} {{vm.changesQuantity}}</p>
+    </div>
 </md-card>
+
 <section
     cg-busy="{promise:vm.loadingChanges, message:' ',  templateUrl:'app/mainApp/directives/loading.tmpl.html',wrapperClass:'cg-busy cg-busy-animation'}">
     <md-card ng-if="!vm.changes.length">
@@ -42,25 +84,46 @@
             layout-align="center center" layout-padding>
             <span>
                 <strong translate="">CHANGES.LIST.LABELS.ID</strong>
-                : {{change.id}}
+                {{change._id}}
+            </span>
+            <div ng-if="change.tipo_salida==='Nuevos'" class="new-changes selectable-filter"></div>
+            <div ng-if="change.tipo_salida==='Obsoletos'" class="obsolete-changes selectable-filter"></div>
+            <span>
+                <strong translate="">CHANGES.LIST.LABELS.KIND</strong>
+                {{change.tipo_salida}}
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
-            <span ng-if="change.fecha">
-                <strong translate="">CHANGES.LIST.LABELS.DATE</strong>
-                <span>{{change.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            <span ng-if="change.fecha_hora">
+                <strong translate>CHANGES.LIST.LABELS.DATE</strong>
+                <span>{{change.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="change.cabinets" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{change.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="change.operador_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.DRIVER</strong>
+                    <span>{{change.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="change.nombre_chofer" layout-padding>
-                    <strong translate>CHANGES.LIST.LABELS.DRIVER_NAME</strong>
+                    <strong translate>CHANGES.LIST.LABELS.DRIVER</strong>
                     <span>{{change.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="change.linea_transporte.razon_social" layout-padding>
+                <span flex="33" ng-if="change.tipo_transporte" layout-padding>
                     <strong translate>CHANGES.LIST.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{change.linea_transporte.razon_social}}</span>
+                    <span>{{change.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="change.tipo_transporte.descripcion" layout-padding>
+                <span flex="33" ng-if="change.operador_transporte&&!change.tipo_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{change.operador_transporte.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="change.tipo_transporte" layout-padding>
                     <strong translate>CHANGES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{change.tipo_transporte.descripcion}}</span>
                 </span>
@@ -70,11 +133,11 @@
             <div>
                 <!--Origin section-->
                 <span ng-if="change.udn_origen" layout-margin>
-                    <strong translate>CHANGES.LIST.LABELS.AGENCY</strong>
+                    <strong translate>CHANGES.LIST.LABELS.ORIGIN_AGENCY</strong>
                     <span>{{change.udn_origen.agencia}}</span>
                 </span>
                 <span ng-if="change.sucursal_origen" layout-margin>
-                    <strong translate>CHANGES.LIST.LABELS.SUBSIDIARY</strong>
+                    <strong translate>CHANGES.LIST.LABELS.ORIGIN_SUBSIDIARY</strong>
                     <span>{{change.sucursal_origen.nombre}}</span>
                 </span>
             </div>
@@ -88,6 +151,14 @@
                     <strong translate>CHANGES.LIST.LABELS.DESTINATION_AGENCY</strong>
                     <span>{{change.udn_destino.agencia}}</span>
                 </span>
+                <span ng-if="change.proveedor_destino" layout-margin>
+                    <strong translate>CHANGES.LIST.LABELS.DESTINATION_PROVIDER</strong>
+                    <span>{{change.proveedor_destino.razon_social}}</span>
+                </span>
+                <span ng-if="change.establecimiento_destino" layout-margin>
+                    <strong translate>CHANGES.LIST.LABELS.DESTINATION_STORE</strong>
+                    <span>{{change.establecimiento_destino.nombre_establecimiento}}</span>
+                </span>
             </div>
         </section>
         <span ng-if="change.descripcion" layout-margin>
@@ -95,18 +166,18 @@
             <span>{{change.descripcion}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
+            <!--Allow to generate the document just if the entry is closed-->
             <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
                 disabled class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
                 <span hide-xs>{{"CHANGES.LIST.BUTTONS.PDF"|translate}}</span>
             </md-button>
+            <!--Allow to generate the excel document at anytime-->
+            <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"CHANGES.LIST.BUTTONS.XLSX"|translate}}</span>
+            </md-button>
         </md-actions>
     </md-card>
-</section>
-<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
-    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreChanges, message:' '}"
-        ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
-        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-        <span hide-xs>{{"CHANGES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
-    </md-button>
 </section>

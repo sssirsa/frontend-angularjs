@@ -1,4 +1,4 @@
-<md-card class="full-width" layout-padding layout="column" laoyut-align="center-stretch">
+<md-card class="full-width" layout-padding layout="column" layout-align="center-stretch">
     <header layout="column" layout-align="center center">
         <h1 translate>DEPARTURES.LIST.TITLE</h1>
     </header>
@@ -100,8 +100,7 @@
             </span>
             <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter">
-            </div>
+            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Buen estado'" class="warehouse-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Garantías'" class="warranty-departures selectable-filter"></div>
             <span>
@@ -196,11 +195,4 @@
             </md-button>
         </md-actions>
     </md-card>
-</section>
-<section ng-if="vm.paginationHelper.totalPages>vm.paginationHelper.page" layout="column" layout-align="center center">
-    <md-button aria-label="Load more elements button" cg-busy="{promise:vm.loadingMoreDepartures, message:' '}"
-        ng-click="$event.stopPropagation(); vm.loadMore()" class="md-primary md-raised">
-        <md-icon md-font-icon="fa fa-chevron-down"></md-icon>
-        <span hide-xs>{{"DEPARTURES.LIST.BUTTONS.LOAD_MORE"|translate}}</span>
-    </md-button>
 </section>
