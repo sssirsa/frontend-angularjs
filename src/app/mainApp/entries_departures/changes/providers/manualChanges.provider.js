@@ -24,12 +24,8 @@
         var control = URLS.management.control;
         var inventory = URLS.management.inventory;
 
-        function createAgency(element) {
-            return changesUrl.all(changes.agency).customPOST(element);
-        }
-
-        function createSubsidiary(element) {
-            return changesUrl.all(changes.subsidiary).customPOST(element);
+        function createChange(element) {
+            return changesUrl.all(changes.change).customPOST(element);
         }
 
         function getCabinet(id, subsidiary, agency) {
@@ -64,10 +60,8 @@
                     //Response filling
                     response['subsidiary'] = apiResponse['sucursal'];
                     response['agency'] = apiResponse['udn'];
-                    response['inspection'] = apiResponse['inspeccionado'];
                     response['status'] = apiResponse['estatus_cabinet'];
                     response.entrance_kind = apiResponse['tipo_entrada'];
-                    response['status'] = apiResponse['estatus_cabinet'];
 
                     //If subsidiary or agency are sent, then further validations are done to the cabinet
                     //Validating subsidiary of the cabinet
@@ -144,40 +138,22 @@
             return deferred.promise;
         }
 
-        function getAgency(page, destinationAgencyId, originAgencyId) {
+        function getChanges(destinationAgencyId, originAgencyId, destinationSubsidiaryId, originSubsidiaryId) {
             var params = {};
-            //Pagination params building
-            if (page) {
-                params.limit = PAGINATION.pageSize;
-                params.offset = PAGINATION.pageSize * (page - 1);
-                //Adding ordering parameter
-                params[QUERIES.ordering] = '-id';
-            }
+
             destinationAgencyId ? params[QUERIES.changes.by_destination_agency] = destinationAgencyId : null;
             originAgencyId ? params[QUERIES.changes.by_origin_agency] = originAgencyId : null;
+            destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
+            originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
+
             return changesUrl.customGET(changes.agency, params);
         }
 
-        function getSubsidiary(page, destinationSubsidiaryId, originSubsidiaryId) {
-            var params = {};
-            //Pagination params building
-            if (page) {
-                params.limit = PAGINATION.pageSize;
-                params.offset = PAGINATION.pageSize * (page - 1);
-                //Adding ordering parameter
-                params[QUERIES.ordering] = '-id';
-            }
-            destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
-            originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
-            return changesUrl.customGET(changes.subsidiary, params);
-        }
-
-        function agencyDetail(id) {
-            return changesUrl.all(changes.agency).customGET(id);
-        }
-
-        function subsidiaryDetail(id) {
-            return changesUrl.all(changes.subsidiary).customGET(id);
+        function changeDetail(id) {
+            var params={
+                id:id
+            };
+            return changesUrl.all(changes.change).customGET(null, params);
         }
 
         //Internal functions
@@ -417,13 +393,10 @@
         };
 
         return {
-            createAgency: createAgency,
-            createSubsidiary: createSubsidiary,
-            getAgency: getAgency,
-            getSubsidiary: getSubsidiary,
+            createChange: createChange,
+            getChanges: getChanges,
             getCabinet: getCabinet,
-            agencyDetail: agencyDetail,
-            subsidiaryDetail: subsidiaryDetail,
+            changeDetail: changeDetail,
             //Constants
             subsidiaryChange: subsidiaryChange,
             agencyChange: agencyChange,
