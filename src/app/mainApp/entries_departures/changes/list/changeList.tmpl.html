@@ -86,17 +86,21 @@
                 <strong translate="">CHANGES.LIST.LABELS.ID</strong>
                 {{change._id}}
             </span>
-            <div ng-if="change.tipo_salida==='Nuevos'" class="new-changes selectable-filter"></div>
-            <div ng-if="change.tipo_salida==='Obsoletos'" class="obsolete-changes selectable-filter"></div>
+            <div ng-if="change.confirmado" class="confirmed-changes selectable-filter"></div>
+            <div ng-if="!change.confirmado'" class="non-confirmed-changes selectable-filter"></div>
             <span>
-                <strong translate="">CHANGES.LIST.LABELS.KIND</strong>
-                {{change.tipo_salida}}
+                <strong ng-if="change.confirmado" translate="">CHANGES.LIST.FILTERS.CONFIRMED</strong>
+                <strong ng-if="!change.confirmado" translate="">CHANGES.LIST.FILTERS.NON_CONFIRMED</strong>
             </span>
         </md-toolbar>
-        <section layout="column" layout-align="center center">
-            <span ng-if="change.fecha_hora">
-                <strong translate>CHANGES.LIST.LABELS.DATE</strong>
-                <span>{{change.fecha_hora | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+        <section layout="column" layout-align="center center">            
+            <span ng-if="change.fecha_hora_salida">
+                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
+                <span>{{change.fecha_hora_salida | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            </span>
+            <span ng-if="change.fecha_hora_entrada">
+                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
+                <span>{{change.fecha_hora_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <!--Asset quantity section-->
             <section layout="row" layout-align="space-around center">
@@ -161,17 +165,15 @@
                 </span>
             </div>
         </section>
-        <span ng-if="change.descripcion" layout-margin>
-            <strong translate>CHANGES.LIST.LABELS.DESCRIPTION</strong>
-            <span>{{change.descripcion}}</span>
+        <span ng-if="change.descripcion_entrada" layout-margin>
+            <strong translate>CHANGES.LIST.LABELS.RECEPTION_DESCRIPTION</strong>
+            <span>{{change.descripcion_entrada}}</span>
+        </span>
+        <span ng-if="change.descripcion_salida" layout-margin>
+            <strong translate>CHANGES.LIST.LABELS.SENT_DESCRIPTION</strong>
+            <span>{{change.descripcion_salida}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
-            <!--Allow to generate the document just if the entry is closed-->
-            <md-button aria-label="download document button" ng-click="$event.stopPropagation(); vm.generatePDF()"
-                disabled class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
-                <span hide-xs>{{"CHANGES.LIST.BUTTONS.PDF"|translate}}</span>
-            </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
                 ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">

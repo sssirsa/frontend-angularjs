@@ -94,22 +94,28 @@
         "LIST": {
             "TITLE": "Listado de Cambios",
             "LABELS": {
-                "AGENCY": "UDN-Agencia origen",
-                "DATE": "Fecha",
+                "ASSET_QUANTITY":"Cabinets trasladados:",
+                "CHANGES_QUANTITY":"Cambios encontrados:",
                 "DESCRIPTION": "Descripción",
                 "DESTINATION_AGENCY": "Agencia destino",
                 "DESTINATION_SUBSIDIARY": "Sucursal destino",
-                "DRIVER_NAME": "Nombre del operador",
+                "DRIVER": "Nombre del operador",
+                "END_DATE":"Fecha de fin",
                 "ID": "Folio",
                 "NO_RESULTS": "Sin resultados",
-                "TRANSPORT_LINE": "Linea de transporte",
-                "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal origen",
+                "ORIGIN_AGENCY": "UDN-Agencia origen",
+                "ORIGIN_SUBSIDIARY": "Sucursal origen",
+                "RECEPTION_DATE": "Fecha de recepción",
+                "SENT_DATE": "Fecha de envío",
+                "START_DATE":"Fecha de inicio",
                 "SWITCH": {
                     "LABEL": "Activa si quieres listar los cambios de UDN-Agencia",
                     "TRUE": "Cambios de UDN-Agencia",
                     "FALSE": "Cambios de Sucursal"
-                }
+                },
+                "TOTAL_ASSET_QUANTITY":"Cabinets:",
+                "TRANSPORT_KIND": "Tipo de transporte",
+                "TRANSPORT_LINE": "Linea de transporte"
             },
             "HINTS": {
                 "AGENCY": "Agencia-UDN de la cual salieron los equipos",
@@ -122,9 +128,15 @@
                     "FALSE": "Cambio desde una Sucursal"
                 }
             },
+            "FILTERS":{
+                "NON_CONFIRMED":"No confirmados",
+                "CONFIRMED":"Confirmados",
+                "ALL":"Todos"
+            },
             "BUTTONS": {
                 "LOAD_MORE": "Cargar mas...",
-                "PDF": "Generar remisión"
+                "PDF": "Generar remisión",
+                "XLSX": "Generar reporte"
             }
         }
     }

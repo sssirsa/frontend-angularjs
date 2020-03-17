@@ -146,7 +146,7 @@
             destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
             originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
 
-            return changesUrl.customGET(changes.agency, params);
+            return changesUrl.customGET(changes.change, params);
         }
 
         function changeDetail(id) {

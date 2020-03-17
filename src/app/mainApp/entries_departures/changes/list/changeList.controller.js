@@ -5,7 +5,6 @@
 
     function ChangesListController(
         MANUAL_CHANGES,
-        PAGINATION,
         ErrorHandler,
         $state,
         User
@@ -16,10 +15,6 @@
         vm.changeKindFilter;
         vm.changeKindList;
         vm.loadingChanges;
-        vm.paginationHelper = {
-            page: 0,
-            totalPages: 0
-        };
         vm.filters;
         vm.user = User.getUser();
         vm.showSelector;
@@ -46,18 +41,6 @@
             loadChanges(filter);
         };
 
-        vm.loadMore = function () {
-            vm.loadingMoreChanges = MANUAL_CHANGES
-                .listChanges(vm.changeKindList, vm.paginationHelper.page + 1)
-                .then(function (changesList) {
-                    vm.paginationHelper.page++;
-                    vm.changes = vm.changes.concat(changesList[PAGINATION.elements]);
-                })
-                .catch(function (changesListError) {
-                    ErrorHandler.errorTranslate(changesListError);
-                });
-        };
-
         vm.generatePDF = function () {
             //TODO:Create functionality for PDF
         };
@@ -71,7 +54,7 @@
                 changeKind = 'sucursal';
             }
             $state.go('triangular.admin-default.change-detail', {
-                changeId: change.id,
+                changeId: change._id,
                 changeKind: changeKind,
                 change: change
             });
@@ -88,19 +71,20 @@
         };
 
         //Internal functions
-        function loadChanges(page) {
+        function loadChanges() {
             vm.changes = [];
-            page ? null : page = 1;
             if (vm.showSelector) {
                 //User has no location
                 if (vm.agencyChange) {
-                    vm.loadingChanges = MANUAL_CHANGES.getAgency(page,
+                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
                         vm.filters[vm.catalogues['destination_udn'].binding],
                         vm.filters[vm.catalogues['origin_udn'].binding]
                     );
                 }
                 else {
-                    vm.loadingChanges = MANUAL_CHANGES.getSubsidiary(page,
+                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
+                        null,
+                        null,
                         vm.filters[vm.catalogues['destination_subsidiary'].binding],
                         vm.filters[vm.catalogues['origin_subsidiary'].binding]
                     );
@@ -110,7 +94,9 @@
                 //User has a location
                 if (vm.user['sucursal']) {
                     //Subsidiary user
-                    vm.loadingChanges = MANUAL_CHANGES.getSubsidiary(page,
+                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
+                        null,
+                        null,
                         vm.filters[vm.catalogues['destination_subsidiary'].binding],
                         vm.filters[vm.catalogues['origin_subsidiary'].binding]
                     );
@@ -118,7 +104,7 @@
                 if (vm.user['udn']) {
                     //Agency user
                     vm.agencyChange = true;
-                    vm.loadingChanges = MANUAL_CHANGES.getAgency(page,
+                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
                         vm.filters[vm.catalogues['destination_udn'].binding],
                         vm.filters[vm.catalogues['origin_udn'].binding]
                     );
@@ -127,11 +113,7 @@
 
             vm.loadingChanges
                 .then(function (changesList) {
-                    vm.changes = changesList[PAGINATION.elements];
-                    vm.paginationHelper.page = page;
-                    vm.paginationHelper.totalPages = Math.ceil(
-                        changesList[PAGINATION.total] / PAGINATION.pageSize
-                    );
+                    vm.changes = changesList;
                 })
                 .catch(function (changesListError) {
                     ErrorHandler.errorTranslate(changesListError);

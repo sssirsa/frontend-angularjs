@@ -1,0 +1,21 @@
+.changes-cabinet-container {
+  min-height: 50vh;
+  width: 100%;
+  font-size: 14px;
+}
+
+.cant-leave-cabinet {
+  background-color: #FFCCAA;
+}
+
+div.non-confirmed-changes {
+  background-color: #A00;
+}
+
+div.confirmed-changes {
+  background-color: #0A0;
+}
+
+div.all-changes {
+  background-color: #FFF;
+}
