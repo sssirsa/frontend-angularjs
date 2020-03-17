@@ -158,7 +158,7 @@
                         },
                         {
                             A: "Nombre del operador",
-                            B: entryDetail.nombre_chofer ? entryDetail.nombre_chofer : entryDetail.operador_transporte.nombre
+                            B: entryDetail.nombre_chofer ? entryDetail.nombre_chofer : entryDetail.operador_transporte ? entryDetail.operador_transporte.nombre : 'Sin información'
                         },
                         {
                             A: ""
