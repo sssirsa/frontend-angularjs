@@ -179,28 +179,29 @@
                         B: "Inventario",
                         C: "Serie",
                         D: "Denominación",
-                        E: "Tipo",
-                        F: "Status",
-                        G: "",
-                        H: "Fecha de ingreso"
+                        E: "Año",
+                        F: "Tipo",
+                        G: "Status",
+                        H: "Localización",//Changed below
+                        I: "Fecha de ingreso"
                     }];
 
                     if (filter['sucursal']) {
-                        assetData[0].G = "Sucursal";
+                        assetData[0].H = "Sucursal";
                     }
 
                     if (filter['udn']) {
-                        assetData[0].G = "Udn";
+                        assetData[0].H = "Udn";
                     }
 
                     angular.forEach(assetList, function (value) {
-                        var origin;
+                        var location;
                         if (filter['sucursal']) {
-                            origin = value.sucursal.nombre;
+                            location = value.sucursal.nombre;
                         }
 
                         if (filter['udn']) {
-                            origin = value.udn.nombre;
+                            location = value.udn.nombre;
                         }
                         var unileverStatusString = "Sin estatus unilever";
                         if (value['estatus_unilever']) {
@@ -212,20 +213,21 @@
                             C: value.no_serie ? value.no_serie : "Sin número de serie",
                             D: value.modelo ? value.modelo.nombre : "Sin denominación",
                             E: value.modelo && value.modelo.tipo ? value.modelo.tipo.nombre : "Sin tipo de equipos",
-                            F: unileverStatusString,
-                            G: origin,
-                            H: value.fecha_ingreso ? value.fecha_ingreso : "Sin información"
+                            F: value.year ? value.year : "Sin año",
+                            G: unileverStatusString,
+                            H: location ? location : "Sin localización",
+                            I: value.fecha_ingreso ? value.fecha_ingreso : "Sin información"
                         });
                     });
 
                     var ws = XLSX.utils.json_to_sheet(assetData, {
-                        header: ["A", "B", "C", "D", "E", "F", "G", "H"],
+                        header: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
                         skipHeader: true
                     });
 
                     XLSX.utils.sheet_add_json(ws,
                         assetData,
-                        { header: ["A", "B", "C", "D", "E", "F", "G", "H"], skipHeader: true, origin: { c: 0, r: 0 } });
+                        { header: ["A", "B", "C", "D", "E", "F", "G", "H", "I"], skipHeader: true, location: { c: 0, r: 0 } });
 
                     /* add to workbook */
                     var wb = XLSX.utils.book_new();
@@ -244,21 +246,33 @@
 
         //Internal functions
         function list(filter) {
+            var params = {};
+            params[QUERIES.inventory.by_attribute] = QUERIES.inventory.attributes['all'];
             if (filter['sucursal']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_subsidiary)
-                    .all(filter['sucursal']._id
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['all'])
-                    .customGET();
+                if (filter['sucursal']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .all(filter['sucursal']._id)
+                        .customGET(null, params);
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_subsidiary)
+                        .customGET(null, params);
+                }
             }
             if (filter['udn']) {
-                return urlbase
-                    .all(QUERIES.inventory.by_agency)
-                    .all(filter['udn']._id
-                        + '?' + QUERIES.inventory.by_attribute
-                        + '=' + QUERIES.inventory.attributes['all'])
-                    .customGET();
+                if (filter['udn']._id) {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .all(filter['udn']._id)
+                        .customGET(null, params);
+                }
+                else {
+                    return urlbase
+                        .all(QUERIES.inventory.by_agency)
+                        .customGET(null, params);
+                }
             }
         }
 
