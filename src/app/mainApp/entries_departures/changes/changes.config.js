@@ -27,7 +27,7 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__change'
+                            'entries_departures__changes__list'
                         ]
                     }
                 },
@@ -40,7 +40,7 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__change'
+                            'entries_departures__changes__list'
                         ]
                     }
                 },
@@ -61,6 +61,7 @@
                 type: 'dropdown',
                 priority: 6,
                 permission: [
+                    'entries_departures__changes__list',
                     'entries_departures__changes__change'
                 ],
                 children: [
@@ -94,7 +95,7 @@
                         icon: 'fa fa-archive',
                         type: 'link',
                         permission: [
-                            'entries_departures__changes__change'
+                            'entries_departures__changes__list'
                         ],
                         state: 'triangular.admin-default.changes-list'
                     }
