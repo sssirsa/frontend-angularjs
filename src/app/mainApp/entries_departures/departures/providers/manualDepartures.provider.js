@@ -143,7 +143,7 @@
                         },
                         {
                             A: "Nombre del operador",
-                            B: departureDetail.nombre_chofer ? departureDetail.nombre_chofer : departureDetail.operador_transporte.nombre
+                            B: departureDetail.nombre_chofer ? departureDetail.nombre_chofer : departureDetail.operador_transporte ? departureDetail.operador_transporte.nombre : 'Sin información'
                         },
                         {
                             A: ""
@@ -244,7 +244,7 @@
                             A: value.economico,
                             B: value.id_unilever,
                             C: value.no_serie,
-                            D: value.modelo.descripcion,
+                            D: value.modelo.nombre,
                             E: value.year,
                             F: value.modelo.tipo.nombre
                         });
