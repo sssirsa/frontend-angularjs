@@ -165,18 +165,13 @@
                         }
                     ];
                     //Adding transport line
-                    if (entryDetail.tipo_transporte) {
-                        entryData.push({
-                            A: "Linea de transporte",
-                            B: entryDetail.tipo_transporte.linea_transporte.razon_social
-                        });
-                    }
                     if (entryDetail.operador_transporte) {
                         entryData.push({
                             A: "Linea de transporte",
                             B: entryDetail.tipo_transporte.linea_transporte.razon_social
                         });
                     }
+                    
                     //Adding origin   
                     if (entryDetail.pedimento) {
                         entryData.push({

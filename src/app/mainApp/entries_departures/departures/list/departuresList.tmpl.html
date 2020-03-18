@@ -100,8 +100,8 @@
             </span>
             <div ng-if="departure.tipo_salida==='Nuevos'" class="new-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Obsoletos'" class="obsolete-departures selectable-filter"></div>
-            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter">
-            </div>
+            <div ng-if="departure.tipo_salida==='Punto de venta'" class="salepoint-departures selectable-filter"></div>
+            <div ng-if="departure.tipo_salida==='No Capitalizados'" class="unrecognizable-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Buen estado'" class="warehouse-departures selectable-filter"></div>
             <div ng-if="departure.tipo_salida==='Garantías'" class="warranty-departures selectable-filter"></div>
             <span>
@@ -131,11 +131,7 @@
                     <strong translate>DEPARTURES.LIST.LABELS.DRIVER</strong>
                     <span>{{departure.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="departure.tipo_transporte" layout-padding>
-                    <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{departure.tipo_transporte.linea_transporte.razon_social}}</span>
-                </span>
-                <span flex="33" ng-if="departure.operador_transporte&&!departure.tipo_transporte" layout-padding>
+                <span flex="33" ng-if="departure.operador_transporte" layout-padding>
                     <strong translate>DEPARTURES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{departure.operador_transporte.linea_transporte.razon_social}}</span>
                 </span>
