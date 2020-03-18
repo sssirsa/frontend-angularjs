@@ -150,20 +150,14 @@
                         }
                     ];
                     //Adding transport line
-                    if (departureDetail.tipo_transporte) {
-                        departureData.push({
-                            A: "Linea de transporte",
-                            B: departureDetail.tipo_transporte.linea_transporte.razon_social
-                        });
-                    }
                     if (departureDetail.operador_transporte) {
                         departureData.push({
                             A: "Linea de transporte",
                             B: departureDetail.tipo_transporte.linea_transporte.razon_social
                         });
                     }
-                    //Adding origin
 
+                    //Adding origin
                     if (departureDetail.udn_origen) {
                         departureData.push({
                             A: "UDN-Agencia origen",
@@ -206,7 +200,7 @@
                     if (departureDetail.proveedor_destino) {
                         departureData.push({
                             A: "Proveedor destino",
-                            B: departureDetail.proveedor_destino.razon_social
+                            B: departureDetail.proveedor_destino.nombre
                         });
                     }
 
