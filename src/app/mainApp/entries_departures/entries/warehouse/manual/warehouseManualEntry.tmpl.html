@@ -145,17 +145,15 @@
                         <!--<p ng-if="vm.knownDriver">{{'ENTRIES.WAREHOUSE.LABELS.DRIVER_SWITCH.TRUE'|translate}}</p>
                     <p ng-if="!vm.knownDriver">{{'ENTRIES.WAREHOUSE.LABELS.DRIVER_SWITCH.FALSE'|translate}}</p>-->
                     </md-switch>
+                </div>
+                <div layout="column" layout-align="center stretch">
 
-                    <div layout="column" layout-align="center stretch">
-
-                        <catalog-select class="full-width" ng-if="vm.knownDriver"
-                            catalog="vm.catalogues['transport_line'].catalog"
-                            hint="vm.catalogues['transport_line'].hint" lazy="true"
-                            icon="vm.catalogues['transport_line'].icon"
-                            required="vm.catalogues['transport_line'].required"
-                            on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
-                        </catalog-select>
-                    </div>
+                    <catalog-select class="full-width" ng-if="vm.knownDriver"
+                        catalog="vm.catalogues['transport_line'].catalog" hint="vm.catalogues['transport_line'].hint"
+                        lazy="true" icon="vm.catalogues['transport_line'].icon"
+                        required="vm.catalogues['transport_line'].required"
+                        on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
+                    </catalog-select>
                     <catalog-select class="full-width"
                         ng-if="vm.knownDriver && vm.entry[vm.catalogues['transport_line'].binding]"
                         catalog="vm.catalogues['transport_driver'].catalog" lazy="true"
