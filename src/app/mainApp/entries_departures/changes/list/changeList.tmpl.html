@@ -32,7 +32,7 @@
         <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
             catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
             required="vm.catalogues['destination_udn'].required"
-            on-select="vm.onOriginSelect(element,vm.catalogues['destination_udn'].binding)">
+            on-select="vm.onDestinationSelect(element,vm.catalogues['destination_udn'].binding)">
         </catalog-select>
         <!--Subsidiary section-->
         <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
@@ -44,7 +44,7 @@
             catalog="vm.catalogues['destination_subsidiary'].catalog"
             hint="vm.catalogues['destination_subsidiary'].hint"
             required="vm.catalogues['destination_subsidiary'].required"
-            on-select="vm.onOriginSelect(element,vm.catalogues['destination_subsidiary'].binding)">
+            on-select="vm.onDestinationSelect(element,vm.catalogues['destination_subsidiary'].binding)">
         </catalog-select>
     </div>
 
@@ -87,7 +87,7 @@
                 {{change._id}}
             </span>
             <div ng-if="change.confirmado" class="confirmed-changes selectable-filter"></div>
-            <div ng-if="!change.confirmado'" class="non-confirmed-changes selectable-filter"></div>
+            <div ng-if="!change.confirmado" class="non-confirmed-changes selectable-filter"></div>
             <span>
                 <strong ng-if="change.confirmado" translate="">CHANGES.LIST.FILTERS.CONFIRMED</strong>
                 <strong ng-if="!change.confirmado" translate="">CHANGES.LIST.FILTERS.NON_CONFIRMED</strong>

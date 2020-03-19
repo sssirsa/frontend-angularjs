@@ -5,7 +5,6 @@
 
     function EntriesListController(
         MANUAL_ENTRIES,
-        PAGINATION,
         ErrorHandler,
         $state,
         QUERIES,
@@ -104,18 +103,6 @@
         vm.filterChange = function (filter) {
             vm.entryKindFilter = filter;
             loadEntries(filter);
-        };
-
-        vm.loadMore = function () {
-            vm.loadingMoreEntries = MANUAL_ENTRIES
-                .listEntries(vm.entryKindList, vm.paginationHelper.page + 1)
-                .then(function (entriesList) {
-                    vm.paginationHelper.page++;
-                    vm.entries = vm.entries.concat(entriesList[PAGINATION.elements]);
-                })
-                .catch(function (entriesListError) {
-                    ErrorHandler.errorTranslate(entriesListError);
-                });
         };
 
         vm.generatePDF = function () {

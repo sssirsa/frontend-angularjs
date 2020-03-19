@@ -350,11 +350,11 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.udn,
 
-                            name: Translate.translate('CHANGES.LIST.LABELS.AGENCY'),
+                            name: Translate.translate('CHANGES.LIST.LABELS.ORIGIN_AGENCY'),
                             model: '_id',
                             option: 'agencia'
                         },
-                        hint: Translate.translate('CHANGES.LIST.HINTS.AGENCY'),
+                        hint: Translate.translate('CHANGES.LIST.HINTS.ORIGIN_AGENCY'),
                         required: true
                     },
                     destination_subsidiary: {
@@ -380,11 +380,11 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
-                            name: Translate.translate('CHANGES.LIST.LABELS.SUBSIDIARY'),
+                            name: Translate.translate('CHANGES.LIST.LABELS.ORIGIN_SUBSIDIARY'),
                             model: '_id',
                             option: 'nombre'
                         },
-                        hint: Translate.translate('CHANGES.LIST.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('CHANGES.LIST.HINTS.ORIGIN_SUBSIDIARY'),
                         required: true
                     }
                 };

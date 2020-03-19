@@ -133,6 +133,7 @@
                 by_agency: 'udn',
                 by_subsidiary: 'sucursal',
                 by_transport_line: 'linea_transporte',
+                confirmed_change:'confirmado',
                 end_date:'fecha_fin',
                 departure_kind:'tipo_salida',
                 entry_kind:'tipo_entrada',
