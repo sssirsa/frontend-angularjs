@@ -313,7 +313,8 @@
         vm.changeDriverSwitch = function () {
             //Removing excluding variables when the switch is changed
             delete (vm.departure[vm.catalogues['transport_driver'].binding]);
-            delete (vm.departure['nombre_chofer'].binding);
+            delete (vm.departure[vm.catalogues['transport_line'].binding]);
+            delete (vm.departure['nombre_chofer']);
         };
 
         vm.changeDestinationSwitch = function changeDestinationSwitch() {

@@ -135,11 +135,7 @@
                     <strong translate>ENTRIES.LIST.LABELS.DRIVER</strong>
                     <span>{{entry.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="entry.tipo_transporte" layout-padding>
-                    <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{entry.tipo_transporte.linea_transporte.razon_social}}</span>
-                </span>
-                <span flex="33" ng-if="entry.operador_transporte&&!entry.tipo_transporte" layout-padding>
+                <span flex="33" ng-if="entry.operador_transporte" layout-padding>
                     <strong translate>ENTRIES.LIST.LABELS.TRANSPORT_LINE</strong>
                     <span>{{entry.operador_transporte.linea_transporte.razon_social}}</span>
                 </span>
