@@ -121,10 +121,10 @@
                 by_brand: '?marca__id='
             },
             changes: {
-                by_destination_agency: 'udn_destino__id',
-                by_destination_subsidiary: 'sucursal_origen__id',
-                by_origin_agency: 'udn_origen__id',
-                by_origin_subsidiary: 'sucursal_origen__id'
+                by_destination_agency: 'udn_destino',
+                by_destination_subsidiary: 'sucursal_origen',
+                by_origin_agency: 'udn_origen',
+                by_origin_subsidiary: 'sucursal_origen'
             },
             city: {
                 by_state: 'estado__id'
@@ -134,14 +134,16 @@
                 by_subsidiary: 'sucursal',
                 by_transport_line: 'linea_transporte',
                 confirmed_change:'confirmado',
-                end_date:'fecha_fin',
+                end_date_entry:'fecha_fin_entrada',
+                end_date_departure:'fecha_fin_salida',
                 departure_kind:'tipo_salida',
                 entry_kind:'tipo_entrada',
                 new:'Nuevos',
                 obsolete:'Obsoletos',
                 repair:'Punto de venta',
                 salepoint:'Punto de venta',
-                start_date:'fecha_inicio',
+                start_date_entry:'fecha_inicio_entrada',
+                start_date_departure:'fecha_inicio_salida',
                 unrecognizable:'No capitalizados',
                 warehouse:'Buen estado',
                 warranty:'Garantías'

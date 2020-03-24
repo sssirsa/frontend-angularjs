@@ -7,9 +7,7 @@
         $q,
         URLS,
         Translate,
-        EnvironmentConfig,
-        PAGINATION,
-        QUERIES
+        EnvironmentConfig
     ) {
         var changesUrl = API
             .all(URLS.entries_departures.base)
@@ -138,14 +136,7 @@
             return deferred.promise;
         }
 
-        function getChanges(destinationAgencyId, originAgencyId, destinationSubsidiaryId, originSubsidiaryId) {
-            var params = {};
-
-            destinationAgencyId ? params[QUERIES.changes.by_destination_agency] = destinationAgencyId : null;
-            originAgencyId ? params[QUERIES.changes.by_origin_agency] = originAgencyId : null;
-            destinationSubsidiaryId ? params[QUERIES.changes.by_destination_subsidiary] = destinationSubsidiaryId : null;
-            originSubsidiaryId ? params[QUERIES.changes.by_origin_subsidiary] = originSubsidiaryId : null;
-
+        function getChanges(params) {
             return changesUrl.customGET(changes.change, params);
         }
 

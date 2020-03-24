@@ -16,7 +16,6 @@
         vm.changeKindFilter;
         vm.changesFilter; //URL params
         vm.loadingChanges;
-        vm.changesFilter;
         vm.user = User.getUser();
 
         vm.agencyChange;
@@ -55,8 +54,8 @@
             var today = new Date();
             vm.startDate = today.toISOString();
             vm.endDate = today.toISOString();
-            vm.changesFilter[QUERIES.entries_departures.start_date] = vm.startDate;
-            vm.changesFilter[QUERIES.entries_departures.end_date] = vm.endDate;
+            vm.changesFilter[QUERIES.entries_departures.start_date_departure] = vm.startDate;
+            vm.changesFilter[QUERIES.entries_departures.end_date_entry] = vm.endDate;
             loadChanges(vm.entryKindFilter);
         }
         init();
@@ -79,12 +78,12 @@
         };
 
         vm.startDateChange = function () {
-            vm.changesFilter[QUERIES.entries_departures.start_date] = vm.startDate;
+            vm.changesFilter[QUERIES.entries_departures.start_date_departure] = vm.startDate;
             dateChange();
         };
 
         vm.endDateChange = function () {
-            vm.changesFilter[QUERIES.entries_departures.end_date] = vm.endDate;
+            vm.changesFilter[QUERIES.entries_departures.end_date_entry] = vm.endDate;
             dateChange();
         };
 
@@ -125,54 +124,18 @@
 
             switch (filter) {
                 case 'confirmed-changes':
-                    vm.changesFilter[QUERIES.entries_departures.confirmado] = true;
+                    vm.changesFilter[QUERIES.entries_departures.confirmed_change] = true;
                     break;
                 case 'non-confirmed-changes':
-                    vm.changesFilter[QUERIES.entries_departures.confirmado] = false;
+                    vm.changesFilter[QUERIES.entries_departures.confirmed_change] = false;
                     break;
-                case 'all':
-                    delete (vm.changesFilter[QUERIES.entries_departures.confirmado]);
+                case 'all-changes':
+                    delete vm.changesFilter[QUERIES.entries_departures.confirmed_change];
                     break;
             }
 
-            if (vm.showSelector) {
-                //User has no location
-                if (vm.agencyChange) {
-                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
-                        vm.changesFilter[vm.catalogues['destination_udn'].binding],
-                        vm.changesFilter[vm.catalogues['origin_udn'].binding]
-                    );
-                }
-                else {
-                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
-                        null,
-                        null,
-                        vm.changesFilter[vm.catalogues['destination_subsidiary'].binding],
-                        vm.changesFilter[vm.catalogues['origin_subsidiary'].binding]
-                    );
-                }
-            }
-            else {
-                //User has a location
-                if (vm.user['sucursal']) {
-                    //Subsidiary user
-                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
-                        null,
-                        null,
-                        vm.changesFilter[vm.catalogues['destination_subsidiary'].binding],
-                        vm.changesFilter[vm.catalogues['origin_subsidiary'].binding]
-                    );
-                }
-                if (vm.user['udn']) {
-                    //Agency user
-                    vm.agencyChange = true;
-                    vm.loadingChanges = MANUAL_CHANGES.getChanges(
-                        vm.changesFilter[vm.catalogues['destination_udn'].binding],
-                        vm.changesFilter[vm.catalogues['origin_udn'].binding]
-                    );
-                }
-            }
-
+            vm.loadingChanges = MANUAL_CHANGES.getChanges(vm.changesFilter);
+            
             vm.loadingChanges
                 .then(function (changesList) {
                     vm.changes = changesList;

@@ -118,10 +118,10 @@
                 "TRANSPORT_LINE": "Linea de transporte"
             },
             "HINTS": {
-                "AGENCY": "Agencia-UDN de la cual salieron los equipos",
                 "DESTINATION_AGENCY": "Agencia-UDN destino",
                 "DESTINATION_SUBSIDIARY": "Sucursal destino",
-                "SUBSIDIARY": "Sucursal origen",
+                "ORIGIN_AGENCY": "Agencia-UDN de la cual salieron los equipos",
+                "ORIGIN_SUBSIDIARY": "Sucursal de la cual salieron los equipos",
                 "SWITCH": {
                     "LABEL": "Activa si el cambio es desde una UDN-Agencia",
                     "TRUE": "Cambio desde una UDN-Agencia",
