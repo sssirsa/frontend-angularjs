@@ -103,7 +103,10 @@
         };
 
         vm.changeSwitch = function () {
-            vm.changesFilter = {};
+            delete vm.changesFilter[vm.catalogues['origin_udn'].binding];
+            delete vm.changesFilter[vm.catalogues['destination_udn'].binding];
+            delete vm.changesFilter[vm.catalogues['origin_subsidiary'].binding];
+            delete vm.changesFilter[vm.catalogues['destination_subsidiary'].binding];
             loadChanges();
         };
 

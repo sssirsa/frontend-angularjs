@@ -50,19 +50,19 @@
 
     <div layout="row" layout-align="space-around center" layout-wrap="">
         <div layout="column" layout-align="center center" layout-margin
-            ng-class="(vm.changesFilter === 'non-confirmed-changes') ? 'SelectedList' : ''"
+            ng-class="(vm.changeKindFilter === 'non-confirmed-changes') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('non-confirmed-changes')">
             <span translate>CHANGES.LIST.FILTERS.NON_CONFIRMED</span>
             <div class="non-confirmed-changes selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
-            ng-class="(vm.changesFilter === 'confirmed-changes') ? 'SelectedList' : ''"
+            ng-class="(vm.changeKindFilter === 'confirmed-changes') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('confirmed-changes')">
             <span translate>CHANGES.LIST.FILTERS.CONFIRMED</span>
             <div class="confirmed-changes selectable-filter"></div>
         </div>
         <div layout="column" layout-align="center center" layout-margin
-            ng-class="(vm.changesFilter === 'all-changes') ? 'SelectedList' : ''"
+            ng-class="(vm.changeKindFilter === 'all-changes') ? 'SelectedList' : ''"
             ng-click="vm.filterChange('all-changes')">
             <span translate>CHANGES.LIST.FILTERS.ALL</span>
             <div class="all-changes selectable-filter"></div>
