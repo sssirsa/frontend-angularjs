@@ -14,7 +14,7 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__subsidiary'
+                            'entries_departures__changes__change'
                         ]
                     }
                 },
@@ -27,7 +27,7 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__subsidiary'
+                            'entries_departures__changes__list'
                         ]
                     }
                 },
@@ -40,7 +40,7 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__subsidiary'
+                            'entries_departures__changes__list'
                         ]
                     }
                 },
@@ -61,7 +61,8 @@
                 type: 'dropdown',
                 priority: 6,
                 permission: [
-                    'entries_departures__changes__subsidiary'
+                    'entries_departures__changes__list',
+                    'entries_departures__changes__change'
                 ],
                 children: [
                     {
@@ -69,14 +70,14 @@
                         icon: 'fa fa-hand-paper',
                         type: 'dropdown',
                         permission: [
-                            'entries_departures__changes__subsidiary'
+                            'entries_departures__changes__change'
                         ],
                         children: [
                             {
                                 name: 'CHANGES.MENU.CREATE',
                                 type: 'link',
                                 permission: [
-                                    'entries_departures__changes__subsidiary'
+                                    'entries_departures__changes__change'
                                 ],
                                 state: 'triangular.admin-default.changes'
                             }
@@ -86,7 +87,7 @@
                     //     name:'DEPARTURES.MENU.MASSIVE',
                     //     type:'dropdown',
                     //     icon:'fa fa-file-csv',
-                    //     permission:['entries_departures__changes__subsidiary'],
+                    //     permission:['entries_departures__changes__change'],
                     //     children:[]
                     // },
                     {
@@ -94,7 +95,7 @@
                         icon: 'fa fa-archive',
                         type: 'link',
                         permission: [
-                            'entries_departures__changes__subsidiary'
+                            'entries_departures__changes__list'
                         ],
                         state: 'triangular.admin-default.changes-list'
                     }

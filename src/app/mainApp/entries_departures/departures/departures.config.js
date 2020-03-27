@@ -83,7 +83,9 @@
                 url: '/salida/detalle/:departureId',
                 data: {
                     permissions: {
-                        only: ['entries_departures__departures__new_departures',
+                        only: [
+                            'entries_departures__departures__list_all_departures',
+                            'entries_departures__departures__new_departures',
                             'entries_departures__departures__warranties_departures',
                             'entries_departures__departures__no_labeled_departures',
                             'entries_departures__departures__salepoint_departures',
@@ -106,6 +108,7 @@
                 icon: 'fa fa-sign-out-alt',
                 type: 'dropdown',
                 permission: [
+                    'entries_departures__departures__list_all_departures',
                     'entries_departures__departures__news_departures',
                     'entries_departures__departures__no_labeled_departures',
                     'entries_departures__departures__scrapped_departures',
