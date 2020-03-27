@@ -153,7 +153,7 @@
                     if (departureDetail.operador_transporte) {
                         departureData.push({
                             A: "Linea de transporte",
-                            B: departureDetail.tipo_transporte.linea_transporte.razon_social
+                            B: departureDetail.operador_transporte.linea_transporte.razon_social
                         });
                     }
 

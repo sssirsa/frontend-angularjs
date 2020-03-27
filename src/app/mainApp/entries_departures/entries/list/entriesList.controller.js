@@ -83,8 +83,8 @@
                     vm.subsidiaryAdmin = true;
                 }
             }
-            if (vm.user.sucursal) {
-                if (!vm.user.sucursal._id) {
+            if (vm.user.udn) {
+                if (!vm.user.udn._id) {
                     vm.agencyAdmin = true;
                 }
             }
