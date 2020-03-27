@@ -84,7 +84,8 @@
                 url: '/entrada/detalle/:entryId',
                 data: {
                     permissions: {
-                        only: ['entries_departures__entries__new_entries',
+                        only: ['entries_departures__entries__list_all_entries',
+                            'entries_departures__entries__new_entries',
                             'entries_departures__entries__warranties_entries',
                             'entries_departures__entries__no_labeled_entries',
                             'entries_departures__entries__warehouse_entries',
@@ -106,7 +107,8 @@
                 name: 'ENTRIES.MENU.TITLE',
                 icon: 'fa fa-sign-in-alt',
                 type: 'dropdown',
-                permission: ['entries_departures__entries__new_entries',
+                permission: ['entries_departures__entries__list_all_entries',
+                    'entries_departures__entries__new_entries',
                     'entries_departures__entries__warranties_entries',
                     'entries_departures__entries__no_labeled_entries',
                     'entries_departures__entries__warehouse_entries',

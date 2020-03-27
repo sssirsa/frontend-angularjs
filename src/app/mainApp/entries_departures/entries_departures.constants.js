@@ -13,10 +13,7 @@
             },
             changes: {
                 base: 'changes',
-                agency: 'udn',
-                agency_confirm: 'confirm_udn',
-                subsidiary: 'subsidiary',
-                subsidiary_confirm: 'confirm_subsidiary'
+                change:'change'
             },
             departures: {
                 base: 'departures',
