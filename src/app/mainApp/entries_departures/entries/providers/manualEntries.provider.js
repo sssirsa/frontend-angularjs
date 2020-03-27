@@ -168,7 +168,7 @@
                     if (entryDetail.operador_transporte) {
                         entryData.push({
                             A: "Linea de transporte",
-                            B: entryDetail.tipo_transporte.operador_transporte.razon_social
+                            B: entryDetail.operador_transporte.linea_transporte.razon_social
                         });
                     }
                     
