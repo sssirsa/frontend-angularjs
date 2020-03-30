@@ -116,7 +116,8 @@
 
         function dateChange() {
             vm.changes = [];
-            vm.changeKindFilter = null;
+            vm.changeKindFilter = 'all-changes';
+            loadChanges();
         }
 
         function loadChanges(filter) {
@@ -132,10 +133,13 @@
                 case 'all-changes':
                     delete vm.changesFilter[QUERIES.entries_departures.confirmed_change];
                     break;
+                default:
+                    delete vm.changesFilter[QUERIES.entries_departures.confirmed_change];
+                    break;
             }
 
             vm.loadingChanges = MANUAL_CHANGES.getChanges(vm.changesFilter);
-            
+
             vm.loadingChanges
                 .then(function (changesList) {
                     vm.changes = changesList;

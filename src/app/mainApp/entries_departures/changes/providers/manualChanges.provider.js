@@ -7,130 +7,63 @@
         $q,
         URLS,
         Translate,
-        EnvironmentConfig
+        EnvironmentConfig,
+        XLSX,
+        moment
     ) {
         var changesUrl = API
             .all(URLS.entries_departures.base)
             .all(URLS.entries_departures.changes.base);
-        var inventoryUrl = API
-            .all(URLS.management.base)
-            .all(URLS.management.inventory.base);
-        var managementUrl = API
-            .all(URLS.management.base);
+        var warehouseUrl = API
+            .all(URLS.warehouse.base);
 
         var changes = URLS.entries_departures.changes;
-        var control = URLS.management.control;
-        var inventory = URLS.management.inventory;
+        var warehouse = URLS.warehouse;
 
         function createChange(element) {
             return changesUrl.all(changes.change).customPOST(element);
         }
 
-        function getCabinet(id, subsidiary, agency) {
+        function getCabinet(id) {
             /*
              * RETURNS
-             *   -Cabinet exists in database and can leave (Restriction, subsidiary and agency validation)
-             *       +Cabinet full object and can_leave in true
-             *   -Cabinet exist in database and can't leave (Because of restriction or inproper inventory location)
-             *       +Cabinet partial object and can_leave in false, restriction id or object(when applies)
-             *       and inventory location (agency or subsidiary)
-             *   -Cabinet doesn't exists, so it can't leave (wrong ID)
-             *       +Cabinet in partial object {id:id}, can leave in false, all fields in null.
+             *   -Cabinet exists in database and can enter
+             *      (a WARRANTY entry, a REPAIR
+             *      or a JUST Created a.k.a: NEW)
+             *       +Cabinet full object and can_enter in true
+             *   -Cabinet exist in database and can't enter
+             *   (Cabinet in any warehouse)
+             *       +Cabinet simplified object and can_enter in false
+             *   -Cabinet doesn't exists, so it can enter
+             *      (commonly WARRANTY entry or NEW entry)
+             *       +Cabinet in null and can_enter in true
              *   -Backend error
-             *       +Just returns the error response.
+             *       +Cabinet in null, cant_enter in false,
+             *       error property added to return the error response
              */
 
             var deferred = $q.defer();
             var response = {
-                agency: null,
-                can_leave: false,
-                cabinet: null,
-                entrance_kind: null,
-                inspection: null,
-                restriction: null,
-                status: null,
-                subsidiary: null
+                can_enter: false,
+                cabinet: null
             };
-            getCabinetInLocation(id)
-                .then(function cabinetsInLocationSuccessCallback(apiResponse) {
-                    //Cabinet exists in subsidiary
-                    var cabinetCanLeave = true;
-                    //Response filling
-                    response['subsidiary'] = apiResponse['sucursal'];
-                    response['agency'] = apiResponse['udn'];
-                    response['status'] = apiResponse['estatus_cabinet'];
-                    response.entrance_kind = apiResponse['tipo_entrada'];
 
-                    //If subsidiary or agency are sent, then further validations are done to the cabinet
-                    //Validating subsidiary of the cabinet
-                    if (subsidiary) {
-                        if (apiResponse['sucursal'] ? apiResponse['sucursal'].id !== subsidiary : false) {
-                            cabinetCanLeave = false;
-                        }
-                    }
-                    //Validating agency of the cabinet
-                    if (agency) {
-                        if (apiResponse['udn'] ? apiResponse['udn'].id !== agency : null) {
-                            cabinetCanLeave = false;
-                        }
-                    }
-
-                    //Validating cabinet restriction
-                    if (apiResponse['impedimento']) {
-                        cabinetCanLeave = false;
-                        response['restricion'] = apiResponse['impedimento'];
-                    }
-
-                    if (cabinetCanLeave) {
-                        //Getting cabinet full information
-                        inventoryUrl.all(inventory.cabinet).all(id).customGET()
-                            .then(function cabinetSuccessCallback(apiCabinet) {
-                                //Full cabinet information
-                                response.cabinet = apiCabinet;
-
-                                //Cabinet can leave
-                                if (cabinetCanLeave) {
-                                    response.can_leave = true;
-                                }
-
-                                //Cabinet can't leave
-                                else {
-                                    response.can_leave = false;
-                                }
-                                deferred.resolve(response);
-                            })
-                            .catch(function cabinetErrorCallback(errorResponse) {
-                                //Cabinet in ohter subsidiary or agency, so it can't leave
-                                if (errorResponse.status === 404) {
-                                    //Cabinet doesn't exists
-                                    response.cabinet = { economico: id };
-                                    deferred.resolve(response);
-                                }
-                                else {
-                                    //Any other error from backend
-                                    deferred.reject(errorResponse);
-                                }
-                                deferred.reject(errorResponse);
-                            });
+            warehouseUrl
+                .all(warehouse.fridge)
+                .customGET(id)
+                .then(function (fridge) {
+                    response.cabinet = fridge;
+                    if (fridge.sucursal || fridge.udn) {
+                        //Located in any place
+                        response.can_enter = false;
                     }
                     else {
-                        response.can_leave = false;
-                        response['cabinet'] = { economico: id };
-                        deferred.resolve(response);
+                        response.can_enter = true;
                     }
+                    deferred.resolve(response);
                 })
-                .catch(function cabinetsInLocationErrorCallback(apiResponseError) {
-                    //Cabinet doesn't exists in any subsidiary or agency, so it can't leave
-                    if (apiResponseError.status === 404) {
-                        //Cabinet doesn't exists
-                        response.cabinet = { economico: id };
-                        deferred.resolve(response);
-                    }
-                    else {
-                        //Any other error from backend
-                        deferred.reject(response);
-                    }
-                    deferred.reject(apiResponseError);
+                .catch(function (error) {
+                    deferred.reject(error);
                 });
 
             return deferred.promise;
@@ -141,19 +74,167 @@
         }
 
         function changeDetail(id) {
-            var params={
-                id:id
+            var params = {
+                id: id
             };
             return changesUrl.all(changes.change).customGET(null, params);
         }
 
-        //Internal functions
+        function generateReport(changeId) {
+            var defer = $q.defer();
 
-        function getCabinetInLocation(id) {
-            return managementUrl
-                .all(control.base)
-                .all(control.cabinet_in_subsidiary)
-                .all(id).customGET();
+            changeDetail(changeId)
+                .then(function (changeDetail) {
+                    var changeData = [
+                        {
+                            A: "Folio",
+                            B: changeDetail._id
+                        },
+                        {
+                            A: " "
+                        },
+                        {
+                            A: "Nombre del operador",
+                            B: changeDetail.nombre_chofer ? changeDetail.nombre_chofer : changeDetail.operador_transporte ? changeDetail.operador_transporte.nombre : 'Sin información'
+                        },
+                        {
+                            A: "Tipo de transporte",
+                            B: changeDetail.tipo_transporte ? changeDetail.tipo_transporte.descripcion : 'Sin información'
+                        }
+                    ];
+                    //Adding transport line
+                    if (changeDetail.operador_transporte) {
+                        changeData.push({
+                            A: "Linea de transporte",
+                            B: changeDetail.operador_transporte.linea_transporte.razon_social
+                        });
+                    }
+                    
+                    changeData.push({
+                        A: " "
+                    });
+
+                    //Adding origin
+
+                    if (changeDetail.sucursal_origen) {
+                        changeData.push({
+                            A: "Sucursal origen",
+                            B: changeDetail.sucursal_origen.nombre
+                        });
+                    }
+
+                    if (changeDetail.udn_origen) {
+                        changeData.push({
+                            A: "UDN-Agencia origen",
+                            B: changeDetail.udn_origen.agencia
+                        });
+                    }
+                    //Add spacing
+                    changeData.push({
+                        A: " "
+                    });
+                    //Adding destination
+                    if (changeDetail.sucursal_destino) {
+                        changeData.push({
+                            A: "Sucursal destino",
+                            B: changeDetail.sucursal_destino.nombre
+                        });
+                    }
+
+                    if (changeDetail.udn_destino) {
+                        changeData.push({
+                            A: "UDN-Agencia Destino",
+                            B: changeDetail.udn_destino.agencia
+                        });
+                    }
+
+                    //Dates
+                    if (changeDetail.fecha_hora_salida) {
+                        changeData.push({
+                            A: "Fecha de envío",
+                            B: moment(changeDetail.fecha_hora_salida).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                        });
+                    }
+
+                    if (changeDetail.fecha_hora_entrada) {
+                        changeData.push({
+                            A: "Fecha de recepción",
+                            B: moment(changeDetail.fecha_hora_entrada).format("dddd, Do MMMM YYYY, h:mm:ss a")
+                        });
+                    }
+
+                    //Add spacing
+                    changeData.push({
+                        A: " "
+                    });
+
+                    //Add asset count
+                    changeData.push({
+                        A: "Total de equipos",
+                        B: changeDetail.cabinets.length
+                    });
+
+                    var ws = XLSX.utils.json_to_sheet(changeData, {
+                        header: ["A", "B", "C", "D"],
+                        skipHeader: true
+                    });
+                    //Initialize variable with table headers
+                    var assetData = [{
+                        A: "Económico",
+                        B: "Activo",
+                        C: "Serie",
+                        D: "Modelo",
+                        E: "Año",
+                        F: "Tipo"
+                    }];
+
+                    //var assetPromises = [];
+
+                    angular.forEach(changeDetail.cabinets, function (value) {
+                        // var assetPromise = getCabinetInfo(value);
+                        // assetPromises.push(assetPromise);
+                        // assetPromise
+                        //     .then(function (cabinetInfo) {
+                        assetData.push({
+                            A: value.economico,
+                            B: value.id_unilever,
+                            C: value.no_serie,
+                            D: value.modelo.nombre,
+                            E: value.year,
+                            F: value.modelo.tipo.nombre
+                        });
+                        // })
+                        // .catch(function (getCabinetInfoError) {
+                        //     defer.reject(getCabinetInfoError);
+                        // });
+
+                    });
+
+                    // $q.all(assetPromises)
+                    //     .then(function () {
+                    XLSX.utils.sheet_add_json(ws,
+                        assetData,
+                        { header: ["A", "B", "C", "D", "E"], skipHeader: true, origin: { c: 0, r: 14 } });
+
+                    /* add to workbook */
+                    var wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Cambio");
+
+                    /* write workbook and force a download */
+                    XLSX.writeFile(wb, name ? name : "reporte_cambio " + moment(changeDetail.fecha_hora).format("YYYY-MM-DD HH:mm:ss") + ".xlsx");
+                    defer.resolve();
+                    // })
+                    // .catch(function (errorResponse) {
+                    //     defer.reject(errorResponse);
+                    // });
+                })
+                .catch(function (entryError) {
+                    defer.reject(entryError);
+                });
+
+
+
+            return defer.promise;
         }
 
         //Templates
@@ -309,6 +390,7 @@
             getChanges: getChanges,
             getCabinet: getCabinet,
             changeDetail: changeDetail,
+            generateReport: generateReport,
             //Constants
             internalChange: internalChange,
             listChanges: listChanges
