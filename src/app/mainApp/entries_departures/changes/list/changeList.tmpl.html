@@ -25,22 +25,22 @@
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
         <!--Agency section-->
         <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
-            catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint"
+            catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint" lazy="true"
             required="vm.catalogues['origin_udn'].required"
             on-select="vm.onOriginSelect(element,vm.catalogues['origin_udn'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
             required="vm.catalogues['destination_udn'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['destination_udn'].binding)">
         </catalog-select>
         <!--Subsidiary section-->
-        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['origin_subsidiary'].catalog" hint="vm.catalogues['origin_subsidiary'].hint"
             required="vm.catalogues['origin_subsidiary'].required"
             on-select="vm.onOriginSelect(element,vm.catalogues['origin_subsidiary'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['destination_subsidiary'].catalog"
             hint="vm.catalogues['destination_subsidiary'].hint"
             required="vm.catalogues['destination_subsidiary'].required"
@@ -93,7 +93,7 @@
                 <strong ng-if="!change.confirmado" translate="">CHANGES.LIST.FILTERS.NON_CONFIRMED</strong>
             </span>
         </md-toolbar>
-        <section layout="column" layout-align="center center">            
+        <section layout="column" layout-align="center center">
             <span ng-if="change.fecha_hora_salida">
                 <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
                 <span>{{change.fecha_hora_salida | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
