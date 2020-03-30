@@ -69,7 +69,13 @@
             "LABELS": {
                 "AGENCY": "UDN-Agencia origen",
                 "ASSET":"Económico",
-                "ASSET_LIST":"Listado de cábinets",
+                "ASSET_LIST":"Listado de cábinets",                
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
                 "DATE": "Fecha",
                 "DESCRIPTION": "Descripción",
                 "DESTINATION_AGENCY": "Agencia destino",

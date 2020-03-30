@@ -1,43 +1,59 @@
 <div cg-busy="{promise:vm.loadingChange, message:' '}">
-    <md-card layout-padding
-             layout="column"
-             laoyut-align="center-stretch">
+    <md-card layout-padding layout="column" laoyut-align="center-stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>CHANGES.DETAIL.TITLE</h1>
         </header>
     </md-card>
     <md-card ng-if="vm.change">
-        <md-toolbar layout-gt-xs="row"
-                    layout-align-gt-xs="space-between center"
-                    layout="column"
-                    layout-align="center center"
-                    layout-padding>            
+        <md-toolbar layout-gt-xs="row" layout-align-gt-xs="space-between center" layout="column"
+            layout-align="center center" layout-padding>
             <span>
-                <strong translate="">CHANGES.DETAIL.LABELS.ID</strong>
-                {{vm.change.id}}
+                <strong translate="">CHANGES.LIST.LABELS.ID</strong>
+                {{vm.change._id}}
+            </span>
+            <div ng-if="vm.change.confirmado" class="confirmed-changes selectable-filter"></div>
+            <div ng-if="!vm.change.confirmado" class="non-confirmed-changes selectable-filter"></div>
+            <span>
+                <strong ng-if="vm.change.confirmado" translate="">CHANGES.LIST.FILTERS.CONFIRMED</strong>
+                <strong ng-if="!vm.change.confirmado" translate="">CHANGES.LIST.FILTERS.NON_CONFIRMED</strong>
             </span>
         </md-toolbar>
         <section layout="column" layout-align="center center">
-            <span ng-if="vm.change.fecha">
-                <strong translate>CHANGES.DETAIL.LABELS.DATE</strong>
-                <span>{{vm.change.fecha | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
+            <span ng-if="vm.change.fecha_hora_salida">
+                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
+                <span>{{vm.change.fecha_hora_salida | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
-            <span ng-if="vm.change.pedimento" layout-margin>
-                <strong translate>CHANGES.DETAIL.LABELS.ORDER</strong>
-                <span>{{vm.change.pedimento}}</span>
+            <span ng-if="vm.change.fecha_hora_entrada">
+                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
+                <span>{{vm.change.fecha_hora_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
+            <!--Asset quantity section-->
+            <section layout="row" layout-align="space-around center">
+                <span flex ng-if="vm.change.cabinets" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.ASSET_QUANTITY</strong>
+                    <span>{{vm.change.cabinets.length}}</span>
+                </span>
+            </section>
             <!--Transport section-->
             <section layout="row" layout-align="space-around center">
+                <span flex="33" ng-if="vm.change.operador_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.DRIVER</strong>
+                    <span>{{vm.change.operador_transporte.nombre}}</span>
+                </span>
                 <span flex="33" ng-if="vm.change.nombre_chofer" layout-padding>
-                    <strong translate>CHANGES.DETAIL.LABELS.DRIVER_NAME</strong>
+                    <strong translate>CHANGES.LIST.LABELS.DRIVER</strong>
                     <span>{{vm.change.nombre_chofer}}</span>
                 </span>
-                <span flex="33" ng-if="vm.change.linea_transporte.razon_social" layout-padding>
-                    <strong translate>CHANGES.DETAIL.LABELS.TRANSPORT_LINE</strong>
-                    <span>{{vm.change.linea_transporte.razon_social}}</span>
+                <span flex="33" ng-if="vm.change.tipo_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.change.tipo_transporte.linea_transporte.razon_social}}</span>
                 </span>
-                <span flex="33" ng-if="vm.change.tipo_transporte.descripcion" layout-padding>
-                    <strong translate>CHANGES.DETAIL.LABELS.TRANSPORT_KIND</strong>
+                <span flex="33" ng-if="vm.change.operador_transporte&&!vm.change.tipo_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.TRANSPORT_LINE</strong>
+                    <span>{{vm.change.operador_transporte.linea_transporte.razon_social}}</span>
+                </span>
+                <span flex="33" ng-if="vm.change.tipo_transporte" layout-padding>
+                    <strong translate>CHANGES.LIST.LABELS.TRANSPORT_KIND</strong>
                     <span>{{vm.change.tipo_transporte.descripcion}}</span>
                 </span>
             </section>
@@ -45,46 +61,49 @@
         <section layout="row" layout-align="space-around center">
             <div>
                 <!--Origin section-->
-                <span ng-if="change.udn_origen" layout-margin>
+                <span ng-if="vm.change.udn_origen" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.ORIGIN_AGENCY</strong>
-                    <span>{{change.udn_origen.agencia}}</span>
+                    <span>{{vm.change.udn_origen.agencia}}</span>
                 </span>
-                <span ng-if="change.sucursal_origen" layout-margin>
+                <span ng-if="vm.change.sucursal_origen" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.ORIGIN_SUBSIDIARY</strong>
-                    <span>{{change.sucursal_origen.nombre}}</span>
+                    <span>{{vm.change.sucursal_origen.nombre}}</span>
                 </span>
             </div>
             <div>
                 <!--Destination section-->
-                <span ng-if="change.sucursal_destino" layout-margin>
+                <span ng-if="vm.change.sucursal_destino" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.DESTINATION_SUBSIDIARY</strong>
-                    <span>{{change.sucursal_destino.nombre}}</span>
+                    <span>{{vm.change.sucursal_destino.nombre}}</span>
                 </span>
-                <span ng-if="change.udn_destino" layout-margin>
+                <span ng-if="vm.change.udn_destino" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.DESTINATION_AGENCY</strong>
-                    <span>{{change.udn_destino.agencia}}</span>
+                    <span>{{vm.change.udn_destino.agencia}}</span>
                 </span>
-                <span ng-if="change.proveedor_destino" layout-margin>
+                <span ng-if="vm.change.proveedor_destino" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.DESTINATION_PROVIDER</strong>
-                    <span>{{change.proveedor_destino.razon_social}}</span>
+                    <span>{{vm.change.proveedor_destino.razon_social}}</span>
                 </span>
-                <span ng-if="change.establecimiento_destino" layout-margin>
+                <span ng-if="vm.change.establecimiento_destino" layout-margin>
                     <strong translate>CHANGES.LIST.LABELS.DESTINATION_STORE</strong>
-                    <span>{{change.establecimiento_destino.nombre_establecimiento}}</span>
+                    <span>{{vm.change.establecimiento_destino.nombre_establecimiento}}</span>
                 </span>
             </div>
         </section>
-        <span ng-if="vm.change.descripcion" layout-margin>
-            <strong translate>CHANGES.DETAIL.LABELS.DESCRIPTION</strong>
-            <span>{{vm.change.descripcion}}</span>
+        <span ng-if="vm.change.descripcion_entrada" layout-margin>
+            <strong translate>CHANGES.LIST.LABELS.RECEPTION_DESCRIPTION</strong>
+            <span>{{vm.change.descripcion_entrada}}</span>
+        </span>
+        <span ng-if="vm.change.descripcion_salida" layout-margin>
+            <strong translate>CHANGES.LIST.LABELS.SENT_DESCRIPTION</strong>
+            <span>{{vm.change.descripcion_salida}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
-            <md-button aria-label="download document button"
-                       ng-click="$event.stopPropagation(); vm.generatePDF()"
-                       disabled
-                       class="md-primary md-raised">
-                <md-icon md-font-icon="fa fa-file-pdf"></md-icon>
-                <span hide-xs>{{"CHANGES.DETAIL.BUTTONS.PDF"|translate}}</span>
+            <!--Allow to generate the excel document at anytime-->
+            <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
+                ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-file-excel"></md-icon>
+                <span hide-xs>{{"CHANGES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>
         </md-actions>
     </md-card>
@@ -96,19 +115,30 @@
         <!--Change assets-->
         <md-virtual-repeat-container class="cabinet-container">
             <md-list>
-                <md-list-item layout-align="center stretch"
-                              md-virtual-repeat="element in vm.assets">
-                    <section layout-gt-xs="row"
-                             layout="column"
-                             layout-align-gt-xs="space-between center"
-                             layout-align="center stretch"
-                             class="full-width">
-                        <div layout="column"
-                             layout-align="center center">
-                            <b>{{'CHANGES.DETAIL.LABELS.ASSET'|translate}}</b>
-                            {{element}}
+                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.assets">                    
+                        <div layout="column" layout-align="center stretch" class="full-width">
+                            <!--Cabinets that can leave-->
+                            <section  layout-gt-xs="row" layout="column"
+                            layout-align-gt-xs="space-between center" layout-align="center stretch" class="full-width">
+                                <div layout="column" layout-align="center center">
+                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.ID'|translate}}</b>
+                                    {{element.economico}}
+                                </div>
+                                <div layout="column" layout-align="center center">
+                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                    {{element.no_serie}}
+                                </div>
+                                <div layout="column" layout-align="center center">
+                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.BRAND'|translate}}</b>
+                                    {{element.modelo.marca.descripcion}}
+                                </div>
+                                <div layout="column" layout-align="center center">
+                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.MODEL'|translate}}</b>
+                                    {{element.modelo.nombre}}
+                                </div>
+                            </section>
                         </div>
-                    </section>
+                    
                     <md-divider></md-divider>
                 </md-list-item>
             </md-list>
