@@ -157,7 +157,7 @@
         }
 
         //Templates
-        var subsidiaryChange = {
+        var internalChange = {
             template: function () {
                 return {
                     cabinets: [],
@@ -229,85 +229,6 @@
                         },
                         hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
-                        required: true
-                    }
-                };
-                return catalogues;
-            }
-        };
-
-        var agencyChange = {
-            template: function () {
-                return {
-                    cabinets: [],
-                    nombre_chofer: '',
-                    tipo_transporte: null
-                };
-            },
-            catalogues: function catalogues() {
-                var catalogues = {
-                    transport_line: {
-                        binding: 'linea_transporte',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.transport_line,
-
-                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_LINE'),
-                            model: '_id',
-                            option: 'razon_social'
-                        },
-                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_LINE'),
-                        icon: 'fa fa-pallet',
-                        required: true
-                    },
-                    transport_kind: {
-                        binding: 'tipo_transporte',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.entries_departures.base
-                                + '/' + URLS.entries_departures.catalogues.base
-                                + '/' + URLS.entries_departures.catalogues.transport_type,
-
-                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_KIND'),
-                            model: '_id',
-                            option:'descripcion'
-                        },
-                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_KIND'),
-                        icon: 'fa fa-truck',
-                        required: true
-                    },
-                    destination_udn: {
-                        binding: 'udn_destino',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
-                                + '/' + URLS.management.catalogues.udn,
-
-                            name: Translate.translate('CHANGES.CREATE.LABELS.DESTINATION_AGENCY'),
-                            model: '_id',
-                            option: 'agencia'
-                        },
-                        hint: Translate.translate('CHANGES.CREATE.HINTS.DESTINATION_AGENCY'),
-                        icon: 'fa fa-building',
-                        required: true
-                    },
-                    origin_udn: {
-                        binding: 'udn_origen',
-                        catalog: {
-                            url: EnvironmentConfig.site.rest.api
-                                + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.base
-                                + '/' + URLS.management.catalogues.udn,
-
-                            name: Translate.translate('CHANGES.CREATE.LABELS.AGENCY'),
-                            model: '_id',
-                            option: 'agencia'
-                        },
-                        hint: Translate.translate('CHANGES.CREATE.HINTS.AGENCY'),
-                        icon: 'fa fa-building',
                         required: true
                     }
                 };
@@ -389,8 +310,7 @@
             getCabinet: getCabinet,
             changeDetail: changeDetail,
             //Constants
-            subsidiaryChange: subsidiaryChange,
-            agencyChange: agencyChange,
+            internalChange: internalChange,
             listChanges: listChanges
         };
     }

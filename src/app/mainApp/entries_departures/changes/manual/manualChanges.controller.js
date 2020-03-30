@@ -1,21 +1,19 @@
 /*
     Fields for Changes:
     change:{
-        nombre_chofer: string, (Required)
-        ife_chofer: base64string, (Required) Image file
         descripcion: string, (Optional)
-        linea_transporte_id: int(id), (Required)
-        tipo_transporte_id: int(id), (Required)
+        tipo_transporte: string(id), 
+        operador_transporte: string(id)
 
         //Next 2 fields required if change is from subsidiary to subsidiary
-        sucursal_destino_id: int(id), (Required if !User.sucursal && !User.udn)
-        sucursal_origen_id: int(id), (Required if manual change)
+        sucursal_destino: string(id), (Required if !User.sucursal && !User.udn)
+        sucursal_origen: string(id), (Required if manual change)
 
         //Next 2 fields required if change is from agency to agency
-        udn_destino_id: int(id),
-        udn_origen_id: int(id),
+        udn_destino: string(id),
+        udn_origen: string(id),
 
-        cabinets_id: array[id] (Required, not empty, validated)
+        cabinets: array[id] (Required, not empty, validated)
     }
 */
 (function () {
@@ -42,6 +40,7 @@
         vm.catalogues;
         vm.cabinetList;
         vm.changeFromAgency;
+        vm.showSelector;
 
         vm.user = User.getUser();
 
@@ -64,7 +63,8 @@
         // Auto invoked init function
         function init() {
             vm.selectedTab = 0;
-            vm.catalogues = {};
+            vm.showSelector=false;
+            vm.catalogues = MANUAL_CHANGES.internalChange;
 
             vm.cabinetList = [];
             //Determining whether or not to show the Subsidiary or Agency selector.

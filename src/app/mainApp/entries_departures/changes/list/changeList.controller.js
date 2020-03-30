@@ -115,6 +115,11 @@
             loadChanges();
         };
 
+        vm.onDestinationSelect = function (element, binding) {
+            vm.changesFilter[binding] = element;
+            loadChanges();
+        };
+
         //Internal functions
 
         function dateChange() {
