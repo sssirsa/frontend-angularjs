@@ -9,7 +9,8 @@
         Translate,
         EnvironmentConfig,
         XLSX,
-        moment
+        moment,
+        QUERIES
     ) {
         var changesUrl = API
             .all(URLS.entries_departures.base)
@@ -44,8 +45,10 @@
 
             var deferred = $q.defer();
             var response = {
-                can_enter: false,
-                cabinet: null
+                can_leave: false,
+                cabinet: null,
+                subsidiary: null,
+                agency: null
             };
 
             warehouseUrl
@@ -55,10 +58,16 @@
                     response.cabinet = fridge;
                     if (fridge.sucursal || fridge.udn) {
                         //Located in any place
-                        response.can_enter = false;
+                        response.can_leave = true;
+                        if (fridge.sucursal) {
+                            response['subsidiary'] = fridge.sucursal;
+                        }
+                        if (fridge.udn) {
+                            response['agency'] = fridge.udn;
+                        }
                     }
                     else {
-                        response.can_enter = true;
+                        response.can_leave = false;
                     }
                     deferred.resolve(response);
                 })
@@ -109,7 +118,7 @@
                             B: changeDetail.operador_transporte.linea_transporte.razon_social
                         });
                     }
-                    
+
                     changeData.push({
                         A: " "
                     });
@@ -248,6 +257,38 @@
             },
             catalogues: function catalogues() {
                 var catalogues = {
+                    destination_agency: {
+                        binding: 'sucursal_destino',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.agency,
+
+                            name: Translate.translate('CHANGES.CREATE.LABELS.DESTINATION_AGENCY'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.DESTINATION_AGENCY'),
+                        icon: 'fa fa-warehouse',
+                        required: true
+                    },
+                    origin_agency: {
+                        binding: 'sucursal_origen',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.baseinternal
+                                + '/' + URLS.management.catalogues.agency,
+
+                            name: Translate.translate('CHANGES.CREATE.LABELS.ORIGIN_AGENCY'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.ORIGIN_AGENCY'),
+                        icon: 'fa fa-warehouse',
+                        required: true
+                    },
                     destination_subsidiary: {
                         binding: 'sucursal_destino',
                         catalog: {
@@ -272,11 +313,11 @@
                                 + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.subsidiary,
 
-                            name: Translate.translate('CHANGES.CREATE.LABELS.SUBSIDIARY'),
+                            name: Translate.translate('CHANGES.CREATE.LABELS.ORIGIN_SUBSIDIARY'),
                             model: '_id',
                             option: 'nombre'
                         },
-                        hint: Translate.translate('CHANGES.CREATE.HINTS.SUBSIDIARY'),
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.ORIGIN_SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
                     },
@@ -296,6 +337,24 @@
                         icon: 'fa fa-pallet',
                         required: true
                     },
+                    transport_driver: {
+                        binding: 'operador_transporte',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.entries_departures.base
+                                + '/' + URLS.entries_departures.catalogues.base
+                                + '/' + URLS.entries_departures.catalogues.transport_driver,
+                            name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_DRIVER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
+                        },
+                        hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_DRIVER'),
+                        icon: 'fa fa-id-card',
+                        required: true
+                    },
                     transport_kind: {
                         binding: 'tipo_transporte',
                         catalog: {
@@ -303,10 +362,12 @@
                                 + '/' + URLS.entries_departures.base
                                 + '/' + URLS.entries_departures.catalogues.base
                                 + '/' + URLS.entries_departures.catalogues.transport_type,
-
                             name: Translate.translate('CHANGES.CREATE.LABELS.TRANSPORT_KIND'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
                             model: '_id',
-                            option: 'descripcion'
+                            option: 'descripcion',
+                            lazy: true,
+                            query: QUERIES.entries_departures.by_transport_line
                         },
                         hint: Translate.translate('CHANGES.CREATE.HINTS.TRANSPORT_KIND'),
                         icon: 'fa fa-truck',
