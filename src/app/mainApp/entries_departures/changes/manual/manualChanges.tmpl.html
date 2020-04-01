@@ -185,7 +185,7 @@
                         ng-if="!vm.knownDriver">
                         <label translate>DEPARTURES.WAREHOUSE.LABELS.DRIVER_NAME</label>
                         <md-icon class="fa fa-user"></md-icon>
-                        <input ng-model="vm.departure['nombre_chofer']" name="driver_name" ng-required="true"
+                        <input ng-model="vm.change['nombre_chofer']" name="driver_name" ng-required="true"
                             type="text">
                         <div class="hint" translate>DEPARTURES.WAREHOUSE.HINTS.DRIVER_NAME</div>
                     </md-input-container>
@@ -203,7 +203,7 @@
                                      promise:vm.createChangePromise,
                                      message:' '
                                      }" aria-label="previous tab" class="md-primary md-raised"
-                    ng-disabled="changeForm.$invalid ||!vm.change['ife_chofer']">
+                    ng-disabled="changeForm.$invalid">
                     <div layout="row" layout-align="center center">
                         <md-icon md-font-icon="fa fa-save"></md-icon>
                         <div>{{'CHANGES.CREATE.BUTTONS.SAVE'|translate}}</div>
