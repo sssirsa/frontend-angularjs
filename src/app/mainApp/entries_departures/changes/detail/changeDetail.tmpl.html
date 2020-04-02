@@ -20,11 +20,11 @@
         </md-toolbar>
         <section layout="column" layout-align="center center">
             <span ng-if="vm.change.fecha_hora_salida">
-                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
+                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
                 <span>{{vm.change.fecha_hora_salida | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <span ng-if="vm.change.fecha_hora_entrada">
-                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
+                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
                 <span>{{vm.change.fecha_hora_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <!--Asset quantity section-->

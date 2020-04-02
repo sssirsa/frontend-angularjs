@@ -121,9 +121,14 @@
                 "SENT_DATE": "Fecha de envío",
                 "START_DATE":"Fecha de inicio",
                 "SWITCH": {
-                    "LABEL": "Activa si quieres listar los cambios de UDN-Agencia",
+                    "LABEL": "Activa para listar los cambios de UDN-Agencia",
                     "TRUE": "Cambios de UDN-Agencia",
                     "FALSE": "Cambios de Sucursal"
+                },
+                "SWITCH_DATE": {
+                    "LABEL": "Activa para buscar por fecha de recepción",
+                    "TRUE": "Búsqueda por fecha de recepción",
+                    "FALSE": "Búsqueda por fecha de salida"
                 },
                 "TOTAL_ASSET_QUANTITY":"Cabinets:",
                 "TRANSPORT_KIND": "Tipo de transporte",
