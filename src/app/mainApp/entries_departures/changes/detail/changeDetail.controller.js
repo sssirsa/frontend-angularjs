@@ -52,5 +52,12 @@
             vm.assets = vm.change.cabinets;
         }
 
+        vm.generateXLSX = function () {
+            vm.generateReportPromise = MANUAL_CHANGES.generateReport(vm.changeId)
+                .catch(function (errorResponse) {
+                    ErrorHandler.errorTranslate(errorResponse);
+                });
+        };
+
     }
 })();
