@@ -215,7 +215,7 @@
                     if (entryDetail.udn_destino) {
                         entryData.push({
                             A: "UDN-Agencia Destino",
-                            B: entryDetail.udn_destino.razon_social
+                            B: entryDetail.udn_destino.nombre
                         });
                     }
 

@@ -101,19 +101,7 @@
             management: {}, //Added at config file
             salepoint: {},//Added at config file
             technical_service: {}, //Added at config file
-            warehouse: {}, //Added at config file
-
-            //TODO: Re group under the proper category
-            //When done, delete all below this line
-            solicitud_pv: 'solicitud',
-            atencion_pv: 'atencion_pv',
-            preRequest: 'pre_solicitud',
-            establecimiento_template: 'https://goo.gl/kAQrxt',
-            massive: {
-                store: 'massive/store'
-            },
-            credentials: 'credenciales',
-            map: 'https://maps.googleapis.com/maps/api/staticmap'
+            warehouse: {} //Added at config file
 
         })
         .constant('QUERIES', {

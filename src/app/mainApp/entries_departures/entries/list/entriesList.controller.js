@@ -146,8 +146,9 @@
         //Internal functions
 
         function dateChange() {
-            vm.entries = [];
-            vm.entryKindFilter = null;
+            vm.entries = [];            
+            vm.entryKindFilter = 'all-entries';
+            loadEntries(vm.entryKindFilter);
         }
 
         function loadEntries(filter) {
