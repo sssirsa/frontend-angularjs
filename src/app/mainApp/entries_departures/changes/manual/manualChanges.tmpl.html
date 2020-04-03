@@ -123,14 +123,14 @@
             <form name="changeForm" layout="column" ng-if="vm.cabinetList.length>0" layout-align="center stretch">
                 <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
                     layout-align="center stretch">
-                    <catalog-select class="full-width" ng-if="!vm.changeFromAgency && vm.showSelector"
+                    <catalog-select class="full-width" ng-if="!vm.changeFromAgency"
                         catalog="vm.catalogues['destination_subsidiary'].catalog"
                         hint="vm.catalogues['destination_subsidiary'].hint"
                         icon="vm.catalogues['destination_subsidiary'].icon"
                         required="vm.catalogues['destination_subsidiary'].required"
                         on-select="vm.onElementSelect(element,vm.catalogues['destination_subsidiary'].binding)">
                     </catalog-select>
-                    <catalog-select class="full-width" ng-if="vm.changeFromAgency && vm.showSelector"
+                    <catalog-select class="full-width" ng-if="vm.changeFromAgency"
                         catalog="vm.catalogues['destination_agency'].catalog" hint="vm.catalogues['destination_agency'].hint"
                         icon="vm.catalogues['destination_agency'].icon"
                         required="vm.catalogues['destination_agency'].required"

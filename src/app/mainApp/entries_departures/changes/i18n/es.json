@@ -51,6 +51,7 @@
                 "ORIGIN_AGENCY": "Tu usuario no tiene una agencia-udn, selecciona una para seleccionar los cabinet del cambio",
                 "ORIGIN_SUBSIDIARY": "Tu usuario no tiene una sucursal, selecciona una para seleccionar los cabinet del cambio",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
+                "TRANSPORT_DRIVER": "Selecciona el operador de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte"
             },
             "BUTTONS": {

@@ -1,7 +1,7 @@
 (function () {
     angular
-    .module('app.mainApp.entries_departures.changes')
-    .controller('manualChangesController', ManualChangesController);
+        .module('app.mainApp.entries_departures.changes')
+        .controller('manualChangesController', ManualChangesController);
     function ManualChangesController(
         MANUAL_CHANGES,
         User,
@@ -45,7 +45,7 @@
             vm.selectedTab = 0;
             vm.showSelector = false;
             vm.cabinetList = [];
-            vm.change= MANUAL_CHANGES.internalChange.template();
+            vm.change = MANUAL_CHANGES.internalChange.template();
             vm.catalogues = MANUAL_CHANGES.internalChange.catalogues();
 
             var user = User.getUser();
@@ -53,8 +53,14 @@
             vm.showSelector = !user['sucursal'] && !user['udn'];
 
             //Bindging user subsidiary or agency to entry if user happens to have one.
-            user['sucursal'] ? vm.change[vm.catalogues['origin_subsidiary'].binding] = user['sucursal']._id : null;
-            user['udn'] ? vm.change[vm.catalogues['origin_agency'].binding] = user['udn']._id : null;
+            if(user['sucursal']){
+                vm.changeFromAgency = false;
+                user['sucursal']._id ? vm.change[vm.catalogues['origin_subsidiary'].binding] = user['sucursal']._id : null;
+            }
+            if(user['udn']){
+                vm.changeFromAgency = true;
+                user['udn']._id ? vm.change[vm.catalogues['origin_agency'].binding] = user['udn']._id : null;
+            }
 
             if (vm.change[vm.catalogues['origin_subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
@@ -78,7 +84,7 @@
         vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
-            vm.change= MANUAL_CHANGES.internalChange.template();
+            vm.change = MANUAL_CHANGES.internalChange.template();
 
             vm.onElementSelect(element, field);
             if (vm.change[vm.catalogues['origin_subsidiary'].binding]) {

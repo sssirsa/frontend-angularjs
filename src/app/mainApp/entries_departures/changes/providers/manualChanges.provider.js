@@ -258,7 +258,7 @@
             catalogues: function catalogues() {
                 var catalogues = {
                     destination_agency: {
-                        binding: 'sucursal_destino',
+                        binding: 'udn_destino',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
@@ -274,11 +274,11 @@
                         required: true
                     },
                     origin_agency: {
-                        binding: 'sucursal_origen',
+                        binding: 'udn_origen',
                         catalog: {
                             url: EnvironmentConfig.site.rest.api
                                 + '/' + URLS.management.base
-                                + '/' + URLS.management.catalogues.baseinternal
+                                + '/' + URLS.management.catalogues.base
                                 + '/' + URLS.management.catalogues.agency,
 
                             name: Translate.translate('CHANGES.CREATE.LABELS.ORIGIN_AGENCY'),
