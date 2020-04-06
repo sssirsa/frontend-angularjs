@@ -101,7 +101,8 @@
             },
             "BUTTONS": {
                 "LOAD_MORE": "Cargar mas...",
-                "PDF": "Generar remisión"
+                "PDF": "Generar remisión",
+                "CONFIRM":"Confirmar"
             }
         },
         "LIST": {
@@ -154,7 +155,8 @@
             "BUTTONS": {
                 "LOAD_MORE": "Cargar mas...",
                 "PDF": "Generar remisión",
-                "XLSX": "Generar reporte"
+                "XLSX": "Generar reporte",
+                "CONFIRM":"Confirmar"
             }
         }
     }

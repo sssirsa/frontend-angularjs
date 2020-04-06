@@ -183,6 +183,12 @@
             <span>{{change.descripcion_salida}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
+            <!--Confirm change just when permission is given-->
+            <md-button ng-if="!change.confirmado" permission permission-only="['entries_departures__changes__confirm']" aria-label="confirm change button"
+                ng-click="$event.stopPropagation(); vm.navigateToConfirm(change)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-tasks"></md-icon>
+                <span hide-xs>{{"CHANGES.LIST.BUTTONS.CONFIRM"|translate}}</span>
+            </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
                 ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">

@@ -5,7 +5,8 @@
     function ChangesDetailController(
         $stateParams,
         ErrorHandler,
-        MANUAL_CHANGES
+        MANUAL_CHANGES,
+        $state
     ) {
         var vm = this;
         vm.changeId;
@@ -17,7 +18,14 @@
             vm.changeId = $stateParams.changeId;
             loadChange();
         }
-        init();
+        init();        
+
+        vm.navigateToConfirm = function (change) {
+            $state.go('triangular.admin-default.change-confirm', {
+                changeId: change._id,
+                change: change
+            });
+        };
 
         //Private functions
         function loadChange(forceReload) {

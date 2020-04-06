@@ -98,8 +98,16 @@
             }
             dateChange();
         };
+
         vm.navigateToDetail = function (change) {
             $state.go('triangular.admin-default.change-detail', {
+                changeId: change._id,
+                change: change
+            });
+        };
+
+        vm.navigateToConfirm = function (change) {
+            $state.go('triangular.admin-default.change-confirm', {
                 changeId: change._id,
                 change: change
             });
