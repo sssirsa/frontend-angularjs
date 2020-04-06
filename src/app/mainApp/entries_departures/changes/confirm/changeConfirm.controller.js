@@ -7,7 +7,8 @@
         ErrorHandler,
         MANUAL_CHANGES,
         toastr,
-        Translate
+        Translate,
+        $state
     ) {
         var vm = this;
         vm.changeId;
@@ -18,10 +19,13 @@
         vm.nonConfirmedAssets;
         vm.nonExpectedAssets;
 
+        vm.receivedAssetsIds;
+
         function init() {
             vm.changeId = $stateParams.changeId;
             vm.confirmedAssets = [];
             vm.nonExpectedAssets = [];
+            vm.receivedAssetsIds = [];
             loadChange();
         }
         init();
@@ -76,6 +80,7 @@
                         //Also not found in expected list
                         //Is a non expected asset
                         vm.nonExpectedAssets.push(fridgeInventoryNumber);
+                        vm.receivedAssetsIds.push(fridgeInventoryNumber);
                     }
                     else {
                         toastr.warning(Translate.translate('CHANGES.CONFIRM.ERRORS.REPEATED_ID'), fridgeInventoryNumber);
@@ -83,12 +88,13 @@
                 }
                 else {
                     vm.confirmedAssets.push(vm.nonConfirmedAssets[index]);
+                    vm.receivedAssetsIds.push(fridgeInventoryNumber);
                     vm.nonConfirmedAssets.splice(index, 1);
                 }
             }
         };
 
-        vm.unConfirmFridge = function (fridgeInventoryNumber) {
+        vm.unConfirmExpectedFridge = function (fridgeInventoryNumber) {
             if (fridgeInventoryNumber.length > 0) {
                 var index = vm.confirmedAssets
                     .map(function (element) {
@@ -100,13 +106,39 @@
                 }
                 else {
                     vm.nonConfirmedAssets.push(vm.confirmedAssets[index]);
+                    vm.receivedAssetsIds.splice(index, 1);
                     vm.confirmedAssets.splice(index, 1);
                 }
             }
         };
 
-        vm.generateXLSX = function () {
-            vm.generateReportPromise = MANUAL_CHANGES.generateReport(vm.changeId)
+        vm.unConfirmUnexpectedFridge = function (fridgeInventoryNumber) {
+            if (fridgeInventoryNumber.length > 0) {
+                var index = vm.nonExpectedAssets
+                    .map(function (element) {
+                        return element;
+                    }).indexOf(fridgeInventoryNumber);
+                if (index === -1) {
+                    //Cabinet not found in list (unreachable unless code modification is made)
+                    toastr.warning(Translate.translate('CHANGES.CONFIRM.ERRORS.NOT_FOUND_ID'), fridgeInventoryNumber);
+                }
+                else {
+                    vm.receivedAssetsIds.splice(index, 1);
+                    vm.nonExpectedAssets.splice(index, 1);
+                }
+            }
+        };
+
+        vm.clickButtonSave = function () {
+            var request = {
+                cabinets:vm.receivedAssetsIds,
+                sucursal:vm.change['sucursal_destino']
+            };
+            vm.savePromise = MANUAL_CHANGES.confirmChange(vm.changeId, request)
+                .then(function () {
+                    toastr.success(Translate.translate('CHANGES.CONFIRM.MESSAGES.SUCCESS_CONFIRM'));
+                    $state.go('triangular.admin-default.changes-list');
+                })
                 .catch(function (errorResponse) {
                     ErrorHandler.errorTranslate(errorResponse);
                 });

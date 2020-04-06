@@ -533,7 +533,7 @@
         "ES-043":"La sucursal enviada no existe",
         "ES-044":"La linea de transporte enviada no existe",
         "ES-045":"La agencia enviada no existe",
-        "ES-046":"Uno o mas de los econ{omicos enviados no se encontraron en la base de datos",
+        "ES-046":"Uno o mas de los económicos enviados no se encontraron en la base de datos",
         "ES-047":"Los campos nombre_chofer y operador_transporte son mutuamente exluyentes",
         "ES-048":"Se requiere el campo nombre_chofer o el campo operador_transporte",
         "ES-049":"No se encontró ningún operador de transporte con el id proporcionado",

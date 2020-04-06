@@ -52,12 +52,16 @@
             },
             "ERRORS": {
                 "REPEATED_ID": "Ya se encuentra en la lista de confirmados"
+            },
+            "MESSAGES":{
+                "SUCCESS_CONFIRM":"Cambio confirmado correctamente"
             }
         },
         "CREATE": {
             "TITLE": "Cambios",
             "LABELS": {
                 "ASSET_LOADING": "Carga de cabinets",
+                "ASSET_QUANTITY":"Equipos agregados:",
                 "CABINET_SEARCH": "Registro de cabinets",
                 "CABINET_ID": "Económico del cabinet",
                 "CABINET": {
