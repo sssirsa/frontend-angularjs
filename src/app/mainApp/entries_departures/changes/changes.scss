@@ -4,8 +4,16 @@
   font-size: 14px;
 }
 
-.cant-leave-cabinet {
-  background-color: #FFCCAA;
+.non-confirmed-cabinet {
+  background-color: #FAA;
+}
+
+.confirmed-cabinet {
+  background-color: #AFA;
+}
+
+.non-expected-cabinet {
+  background-color: #FFA;
 }
 
 div.non-confirmed-changes {
