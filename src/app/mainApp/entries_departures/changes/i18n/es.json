@@ -21,7 +21,6 @@
                 "CABINET_SEARCH":"Económico a confirmar",
                 "CHANGES_QUANTITY":"Cambios encontrados:",
                 "CONFIRMED":"Confirmados",
-                "DESCRIPTION": "Descripción",
                 "DESTINATION_AGENCY": "Agencia destino",
                 "DESTINATION_SUBSIDIARY": "Sucursal destino",
                 "DRIVER": "Nombre del operador",
@@ -33,18 +32,10 @@
                 "ORIGIN_AGENCY": "UDN-Agencia origen",
                 "ORIGIN_SUBSIDIARY": "Sucursal origen",
                 "RECEPTION_DATE": "Fecha de recepción",
+                "RECEPTION_DESCRIPTION": "Descripción de entrada",
                 "SENT_DATE": "Fecha de envío",
+                "SENT_DESCRIPTION": "Descripción de salida",
                 "START_DATE":"Fecha de inicio",
-                "SWITCH": {
-                    "LABEL": "Activa para listar los cambios de UDN-Agencia",
-                    "TRUE": "Cambios de UDN-Agencia",
-                    "FALSE": "Cambios de Sucursal"
-                },
-                "SWITCH_DATE": {
-                    "LABEL": "Activa para buscar por fecha de recepción",
-                    "TRUE": "Búsqueda por fecha de recepción",
-                    "FALSE": "Búsqueda por fecha de salida"
-                },
                 "TOTAL_ASSET_QUANTITY":"Cabinets:",
                 "TRANSPORT_KIND": "Tipo de transporte",
                 "TRANSPORT_LINE": "Linea de transporte"
@@ -86,6 +77,8 @@
                 "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
+                "RECEPTION_DESCRIPTION": "Descripción de entrada",
+                "SENT_DESCRIPTION": "Descripción de salida",
                 "SWITCH": {
                     "LABEL": "Activa si el cambio es desde una UDN-Agencia",
                     "TRUE": "Cambio desde una UDN-Agencia",
@@ -130,25 +123,35 @@
         "DETAIL": {
             "TITLE": "Detalle de Cambio",
             "LABELS": {
-                "AGENCY": "UDN-Agencia origen",
-                "ASSET":"Económico",
-                "ASSET_LIST":"Listado de cábinets",                
+                "ASSET_LIST":"Cabinets",
+                "ASSET_QUANTITY":"Cabinets trasladados:",
                 "CABINET": {
                     "ID": "Económico",
                     "SERIAL_NUMBER": "Número de serie",
                     "BRAND": "Marca",
                     "MODEL": "Modelo"
                 },
-                "DATE": "Fecha",
-                "DESCRIPTION": "Descripción",
+                "CABINET_ID":"Económico",
+                "CHANGES_QUANTITY":"Cambios encontrados:",
+                "CONFIRMED":"Confirmados",
                 "DESTINATION_AGENCY": "Agencia destino",
                 "DESTINATION_SUBSIDIARY": "Sucursal destino",
-                "DRIVER_NAME": "Nombre del operador",
+                "DRIVER": "Nombre del operador",
+                "END_DATE":"Fecha de fin",
                 "ID": "Folio",
                 "NO_RESULTS": "Sin resultados",
-                "TRANSPORT_LINE": "Linea de transporte",
+                "NON_CONFIRMED":"No confirmados",
+                "NON_EXPECTED":"No esperados",
+                "ORIGIN_AGENCY": "UDN-Agencia origen",
+                "ORIGIN_SUBSIDIARY": "Sucursal origen",
+                "RECEPTION_DATE": "Fecha de recepción",
+                "RECEPTION_DESCRIPTION": "Descripción de entrada",
+                "SENT_DATE": "Fecha de envío",
+                "SENT_DESCRIPTION": "Descripción de salida",
+                "START_DATE":"Fecha de inicio",
+                "TOTAL_ASSET_QUANTITY":"Cabinets:",
                 "TRANSPORT_KIND": "Tipo de transporte",
-                "SUBSIDIARY": "Sucursal origen"
+                "TRANSPORT_LINE": "Linea de transporte"
             },
             "BUTTONS": {
                 "PDF": "Generar remisión",
@@ -160,18 +163,29 @@
             "TITLE": "Listado de Cambios",
             "LABELS": {
                 "ASSET_QUANTITY":"Cabinets trasladados:",
+                "CABINET": {
+                    "ID": "Económico",
+                    "SERIAL_NUMBER": "Número de serie",
+                    "BRAND": "Marca",
+                    "MODEL": "Modelo"
+                },
+                "CABINET_ID":"Económico",
                 "CHANGES_QUANTITY":"Cambios encontrados:",
-                "DESCRIPTION": "Descripción",
+                "CONFIRMED":"Confirmados",
                 "DESTINATION_AGENCY": "Agencia destino",
                 "DESTINATION_SUBSIDIARY": "Sucursal destino",
                 "DRIVER": "Nombre del operador",
                 "END_DATE":"Fecha de fin",
                 "ID": "Folio",
                 "NO_RESULTS": "Sin resultados",
+                "NON_CONFIRMED":"No confirmados",
+                "NON_EXPECTED":"No esperados",
                 "ORIGIN_AGENCY": "UDN-Agencia origen",
                 "ORIGIN_SUBSIDIARY": "Sucursal origen",
                 "RECEPTION_DATE": "Fecha de recepción",
+                "RECEPTION_DESCRIPTION": "Descripción de entrada",
                 "SENT_DATE": "Fecha de envío",
+                "SENT_DESCRIPTION": "Descripción de salida",
                 "START_DATE":"Fecha de inicio",
                 "SWITCH": {
                     "LABEL": "Activa para listar los cambios de UDN-Agencia",
