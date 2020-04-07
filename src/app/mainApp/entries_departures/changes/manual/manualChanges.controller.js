@@ -1,23 +1,3 @@
-/*
-    Fields for Changes:
-    change:{
-        nombre_chofer: string, (Required)
-        ife_chofer: base64string, (Required) Image file
-        descripcion: string, (Optional)
-        linea_transporte_id: int(id), (Required)
-        tipo_transporte_id: int(id), (Required)
-
-        //Next 2 fields required if change is from subsidiary to subsidiary
-        sucursal_destino_id: int(id), (Required if !User.sucursal && !User.udn)
-        sucursal_origen_id: int(id), (Required if manual change)
-
-        //Next 2 fields required if change is from agency to agency
-        udn_destino_id: int(id),
-        udn_origen_id: int(id),
-
-        cabinets_id: array[id] (Required, not empty, validated)
-    }
-*/
 (function () {
     angular
         .module('app.mainApp.entries_departures.changes')
@@ -29,7 +9,8 @@
         toastr,
         ErrorHandler,
         $mdDialog,
-        Helper
+        Helper,
+        QUERIES
     ) {
         var vm = this;
 
@@ -39,13 +20,11 @@
         //Variables
         vm.selectedTab;
         vm.change;
+        vm.showSelector;
+        vm.changeFromAgency;
+        vm.changeToStore;
         vm.catalogues;
         vm.cabinetList;
-        vm.changeFromAgency;
-
-        vm.user = User.getUser();
-
-        vm.canView = true;
 
         //Validations
         vm.imageConstraints = {
@@ -62,40 +41,42 @@
         };
 
         // Auto invoked init function
-        function init() {
+        vm.init = function init() {
             vm.selectedTab = 0;
-            vm.catalogues = {};
-
+            vm.showSelector = false;
             vm.cabinetList = [];
+            vm.change = MANUAL_CHANGES.internalChange.template();
+            vm.catalogues = MANUAL_CHANGES.internalChange.catalogues();
+
+            var user = User.getUser();
             //Determining whether or not to show the Subsidiary or Agency selector.
-            vm.showSelector = !vm.user['sucursal'] && !vm.user['udn'];
+            vm.showSelector = !user['sucursal'] && !user['udn'];
 
-            //Bindging user subsidiary or agency to change if user happens to have one.
-            vm.user['sucursal'] ? vm.change[vm.catalogues['origin_subsidiary'].binding] = vm.user['sucursal'].id : null;
-            vm.user['udn'] ? vm.change[vm.catalogues['origin_udn'].binding] = vm.user['udn'].id : null;
-
-            if (vm.showSelector) {
-                //Initializing as Subsidiary change when the user has no origin                
-                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
-                vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
+            //Bindging user subsidiary or agency to entry if user happens to have one.
+            if(user['sucursal']){
+                vm.changeFromAgency = false;
+                user['sucursal']._id ? vm.change[vm.catalogues['origin_subsidiary'].binding] = user['sucursal']._id : null;
             }
-            else {
-                if (vm.user.udn) {
-                    //The user is from an agency
-                    vm.change = MANUAL_CHANGES.agencyChange.template();
-                    vm.catalogues = MANUAL_CHANGES.agencyChange.catalogues();
-                }
-                if (vm.user.sucursal) {
-                    //The user is from a subsidiary
-                    vm.change = MANUAL_CHANGES.subsidiaryChange.template();
-                    vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
-                }
+            if(user['udn']){
+                vm.changeFromAgency = true;
+                user['udn']._id ? vm.change[vm.catalogues['origin_agency'].binding] = user['udn']._id : null;
             }
-        }
-        init();
 
+            if (vm.change[vm.catalogues['origin_subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.change[vm.catalogues['origin_subsidiary'].binding];
+            }
+            if (vm.change[vm.catalogues['origin_agency'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.change[vm.catalogues['origin_agency'].binding];
+            }
+
+        };
+
+        vm.init();
 
         //Controller global functions
+
         vm.onElementSelect = function onElementSelect(element, field) {
             vm.change[field] = element;
         };
@@ -103,29 +84,23 @@
         vm.onOriginSelect = function onOriginSelect(element, field) {
             vm.selectedTab = 0;
             vm.cabinetList = [];
+            vm.change = MANUAL_CHANGES.internalChange.template();
 
             vm.onElementSelect(element, field);
+            if (vm.change[vm.catalogues['origin_subsidiary'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
+                vm.catalogues['transport_line'].catalog.query_value = vm.change[vm.catalogues['origin_subsidiary'].binding];
+            }
+            if (vm.change[vm.catalogues['origin_agency'].binding]) {
+                vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency;
+                vm.catalogues['transport_line'].catalog.query_value = vm.change[vm.catalogues['origin_agency'].binding];
+            }
         };
 
-        vm.changeSwitch = function changeSwitch() {
-            //Removing mutual excluding variables when the switch is changed
-            //delete (vm.change[vm.catalogues['origin_udn'].binding]);
-            //delete (vm.change[vm.catalogues['origin_subsidiary'].binding]);
-
-            vm.change['cabinets_id'] = [];
-            vm.cabinetList = [];
-            if (vm.changeFromAgency) {
-                //The user selected the change is from an agency
-                vm.change = MANUAL_CHANGES.agencyChange.template();
-                vm.change = MANUAL_CHANGES.agencyChange.template();
-                vm.catalogues = MANUAL_CHANGES.agencyChange.catalogues();
-            }
-            else {
-                //The user selected the change is from a subsidiary
-                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
-                vm.change = MANUAL_CHANGES.subsidiaryChange.template();
-                vm.catalogues = MANUAL_CHANGES.subsidiaryChange.catalogues();
-            }
+        vm.onTransportLineSelect = function (element, field) {
+            vm.catalogues['transport_driver'].catalog['query_value'] = element;
+            vm.catalogues['transport_kind'].catalog['query_value'] = element;
+            vm.onElementSelect(element, field);
         };
 
         vm.selectDriverID = function selectDriverID(files) {
@@ -156,17 +131,13 @@
                     toastr.warning(Translate.translate('CHANGES.CREATE.ERRORS.REPEATED_ID'), cabinetID);
                 }
                 else {
-                    var subsidiary, agency;
-                    vm.catalogues['origin_subsidiary'] ? subsidiary = vm.catalogues['origin_subsidiary'] : subsidiary = null;
-                    vm.catalogues['origin_udn'] ? agency = vm.catalogues['origin_udn'] : agency = null;
                     var cabinetToAdd = {
                         promise: MANUAL_CHANGES
-                            .getCabinet(cabinetID,
-                                vm.change[subsidiary],
-                                vm.change[agency]
-                            ),
+                            .getCabinet(cabinetID),
                         cabinet: null,
-                        id: null
+                        id: null,
+                        can_leave: null,
+                        restriction: null
                     };
 
                     //Adding element to the list
@@ -182,37 +153,61 @@
                         .then(function setCabinetToAddSuccess(cabinetSuccessCallback) {
                             if (cabinetSuccessCallback['subsidiary']
                                 || cabinetSuccessCallback['agency']) {
-                                if (cabinetSuccessCallback['can_leave']) {
-                                    //The cabinet doesn't have internal restrictions to leave
-                                    //a.k.a. The cabinet exists in the selected subsidiary or agency
-                                    if (
-                                        (cabinetSuccessCallback['subsidiary']
-                                            ? cabinetSuccessCallback['subsidiary'].id
-                                            === vm.change[vm.catalogues['origin_subsidiary'].binding]
-                                            : false)
-                                        || (cabinetSuccessCallback['agency']
-                                            ? cabinetSuccessCallback['agency'].id
-                                            === vm.change[vm.catalogues['origin_udn'].binding]
-                                            : false)
-                                    ) {
-                                        //The subsidiary or agency of the asset is the same as change's
-                                        if (cabinetSuccessCallback['can_leave']) {
-                                            //The cabinet doesn't have internal restrictions to leave
-                                            if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
-                                                //Cabinet change has been confirmed
-                                                cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                                cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                                cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-                                            }
-                                            else {
-                                                toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
-                                                vm.removeCabinet(cabinetID);
-                                            }
-                                        }
-                                        else {
-                                            toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                //a.k.a. The cabinet exists in any subsidiary or agency
+                                if (
+                                    (cabinetSuccessCallback['subsidiary']
+                                        ? cabinetSuccessCallback['subsidiary']._id
+                                        === vm.change[vm.catalogues['origin_subsidiary'].binding]
+                                        : false)
+                                    || (cabinetSuccessCallback['agency']
+                                        ? cabinetSuccessCallback['agency']._id
+                                        === vm.change[vm.catalogues['origin_agency'].binding]
+                                        : false)
+                                ) {
+                                    //The subsidiary or agency of the asset is the same as change's
+                                    if (cabinetSuccessCallback['can_leave']) {
+                                        //The cabinet doesn't have internal restrictions to leave
+                                        //if (cabinetSuccessCallback['inspection'].estado === 'Confirmado') {
+                                        //Cabinet entry has been confirmed
+                                        // if (!cabinetSuccessCallback['cabinet'].nuevo) {
+                                        // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0001' : false) {
+                                        //Finally add the cabinet to the list
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                        cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                        cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        // }
+                                        // else {
+                                        //     //Building error message
+                                        //     var statusMessage =
+                                        //         Translate.translate('CHANGES.CREATE.ERRORS.WRONG_STATUS');
+                                        //     //Just add status info if available
+                                        //     cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                        //         + ', ' + Translate.translate('CHANGES.CREATE.ERRORS.STATUS_IS')
+                                        //         + ': ' + cabinetSuccessCallback['status'].code
+                                        //         + '-' + cabinetSuccessCallback['status'].descripcion
+                                        //         : null;
+
+                                        //     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
+                                        // }
+                                        // else {
+                                        //     toastr.error(
+                                        //         Translate.translate('CHANGES.CREATE.ERRORS.IS_NEW')
+                                        //         , cabinetSuccessCallback.cabinet.economico
+                                        //     );
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
+                                        //}
+                                        // else {
+                                        //     toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.NOT_CONFIRMED'), cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
+                                    }
+                                    else {
+                                        toastr.error(Translate.translate('CHANGES.CREATE.ERRORS.CANT_LEAVE'), cabinetSuccessCallback.cabinet.economico);
+                                        //TODO: Add them and show the restriction
+                                        vm.removeCabinet(cabinetID);
                                     }
 
                                 }
@@ -242,8 +237,8 @@
                                 vm.removeCabinet(cabinetID);
                             }
                         })
-                        .catch(function setCabinetToAddError(error) {
-                            ErrorHandler.errorTranslate(error);
+                        .catch(function setCabinetToAddError(cabinetErrorCallback) {
+                            ErrorHandler.errorTranslate(cabinetErrorCallback);
                             vm.removeCabinet(cabinetID);
                         });
                 }
@@ -265,6 +260,7 @@
                 }
             }
         };
+
         vm.clickSaveChange = function clickSaveChange(change) {
             //Show warning message if the change has unregistered cabinets
             if (changeHasPendingCabinets()) {
@@ -285,38 +281,68 @@
             }
         };
 
+        vm.showCabinetRestriction = function showCabinetRestriction(cabinetID) {
+            //$mdDialog.show({
+            //    controller: 'CabinetDialogController',
+            //    controllerAs: 'vm',
+            //    templateUrl: 'app/mainApp/inventory/managementCabinet/dialogs/create/cabinetCreateDialog.tmpl.html',
+            //    fullscreen: true,
+            //    clickOutsideToClose: true,
+            //    focusOnOpen: true,
+            //    locals: {
+            //        cabinetID: cabinetID
+            //    }
+            //}).then(function (successCallback) {
+            //    var cabinetID = successCallback.economico;
+            //    vm.removeCabinet(cabinetID);
+            //    addCabinetToList(successCallback);
+            //}).catch(function (err) {
+            //    if (err) {
+            //        ErrorHandler.errorTranslate(err);
+            //    }
+            //});
+            return cabinetID;
+            //TODO: Cabinet restriction dialog
+        };
+
+        vm.changeSwitch = function changeSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.change[vm.catalogues['origin_agency'].binding]);
+            delete (vm.change[vm.catalogues['origin_subsidiary'].binding]);
+            vm.change['cabinets'] = [];
+            vm.cabinetList = [];
+            vm.changeDestinationSwitch();
+        };
+
+        vm.changeDriverSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.change[vm.catalogues['transport_driver'].binding]);
+            delete (vm.change[vm.catalogues['transport_line'].binding]);
+            delete (vm.change['nombre_chofer']);
+        };
+
+        vm.changeDestinationSwitch = function changeDestinationSwitch() {
+            //Removing mutual excluding variables when the switch is changed
+            delete (vm.change[vm.catalogues['destination_udn'].binding]);
+            delete (vm.change[vm.catalogues['destination_subsidiary'].binding]);
+        };
         //Internal functions
 
         var saveChange = function saveChange(change) {
             change = addCabinetsToChange(vm.cabinetList, change);
             change = Helper.removeBlankStrings(change);
             //API callback
-            if (vm.changeFromAgency || vm.user['udn']) {
-                vm.createChangePromise = MANUAL_CHANGES
-                    .createAgency(change)
-                    .then(function () {
-                        init();
-                        toastr.success(
-                            Translate.translate('CHANGES.CREATE.MESSAGES.SUCCESS_CREATE')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
-            else{
-                vm.createChangePromise = MANUAL_CHANGES
-                    .createSubsidiary(change)
-                    .then(function () {
-                        init();
-                        toastr.success(
-                            Translate.translate('CHANGES.CREATE.MESSAGES.SUCCESS_CREATE')
-                        );
-                    })
-                    .catch(function (errorCallback) {
-                        ErrorHandler.errorTranslate(errorCallback);
-                    });
-            }
+            vm.createChangePromise = MANUAL_CHANGES
+                .createChange(change)
+                .then(function () {
+                    vm.init();
+                    toastr.success(
+                        Translate.translate('CHANGES.CREATE.MESSAGES.SUCCESS_CREATE')
+                    );
+                })
+                .catch(function (errorCallback) {
+                    ErrorHandler.errorTranslate(errorCallback);
+                });
         };
 
         var changeHasPendingCabinets = function changeHasPendingCabinets() {
@@ -327,8 +353,8 @@
 
         var addCabinetsToChange = function addCabinetsToChange(cabinets, change) {
             //In case the cabinets array exist, restart it
-            if (change.cabinets_id.length) {
-                change.cabinets_id = [];
+            if (change.cabinets.length) {
+                change.cabinets = [];
             }
             var existingCabinets = cabinets
                 .filter(function (element) {
@@ -339,7 +365,7 @@
                 var i = 0;
                 i < existingCabinets.length;
                 i++) {
-                change['cabinets_id'].push(existingCabinets[i].id);
+                change['cabinets'].push(existingCabinets[i].id);
             }
             return change;
         };

@@ -2,6 +2,15 @@
     <header layout="column" layout-align="center center">
         <h1 translate>CHANGES.LIST.TITLE</h1>
     </header>
+    <div layout="row" layout-align="center center">
+        <md-input-container class="md-block">
+            <md-switch ng-model="vm.entryDates" ng-change="vm.changeSwitchDate()">
+                <p ng-if="vm.entryDates">{{'CHANGES.LIST.LABELS.SWITCH_DATE.TRUE'|translate}}</p>
+                <p ng-if="!vm.entryDates">{{'CHANGES.LIST.LABELS.SWITCH_DATE.FALSE'|translate}}</p>
+            </md-switch>
+            <div class="hint">{{'CHANGES.LIST.LABELS.SWITCH_DATE.LABEL'|translate}}</div>
+        </md-input-container>
+    </div>
     <div class="full-width" layout="column" layout-gt-xs="row" layout-align="center center"
         layout-align-gt-xs="space-around center">
         <md-input-containter layout-padding class="md-block">
@@ -25,22 +34,22 @@
     <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center" layout-align="center stretch">
         <!--Agency section-->
         <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
-            catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint"
+            catalog="vm.catalogues['origin_udn'].catalog" hint="vm.catalogues['origin_udn'].hint" lazy="true"
             required="vm.catalogues['origin_udn'].required"
             on-select="vm.onOriginSelect(element,vm.catalogues['origin_udn'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['destination_udn'].catalog" hint="vm.catalogues['destination_udn'].hint"
             required="vm.catalogues['destination_udn'].required"
             on-select="vm.onDestinationSelect(element,vm.catalogues['destination_udn'].binding)">
         </catalog-select>
         <!--Subsidiary section-->
-        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['origin_subsidiary'].catalog" hint="vm.catalogues['origin_subsidiary'].hint"
             required="vm.catalogues['origin_subsidiary'].required"
             on-select="vm.onOriginSelect(element,vm.catalogues['origin_subsidiary'].binding)">
         </catalog-select>
-        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector"
+        <catalog-select class="full-width" ng-if="!vm.agencyChange && vm.showSelector" lazy="true"
             catalog="vm.catalogues['destination_subsidiary'].catalog"
             hint="vm.catalogues['destination_subsidiary'].hint"
             required="vm.catalogues['destination_subsidiary'].required"
@@ -93,13 +102,13 @@
                 <strong ng-if="!change.confirmado" translate="">CHANGES.LIST.FILTERS.NON_CONFIRMED</strong>
             </span>
         </md-toolbar>
-        <section layout="column" layout-align="center center">            
+        <section layout="column" layout-align="center center">
             <span ng-if="change.fecha_hora_salida">
-                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
+                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
                 <span>{{change.fecha_hora_salida | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <span ng-if="change.fecha_hora_entrada">
-                <strong translate>CHANGES.LIST.LABELS.SENT_DATE</strong>
+                <strong translate>CHANGES.LIST.LABELS.RECEPTION_DATE</strong>
                 <span>{{change.fecha_hora_entrada | amDateFormat:'DD/MM/YYYY hh:mm:ss a'}}</span>
             </span>
             <!--Asset quantity section-->
@@ -174,6 +183,12 @@
             <span>{{change.descripcion_salida}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
+            <!--Confirm change just when permission is given-->
+            <md-button ng-if="!change.confirmado" permission permission-only="['entries_departures__changes__confirm']" aria-label="confirm change button"
+                ng-click="$event.stopPropagation(); vm.navigateToConfirm(change)" class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-tasks"></md-icon>
+                <span hide-xs>{{"CHANGES.LIST.BUTTONS.CONFIRM"|translate}}</span>
+            </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
                 ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">

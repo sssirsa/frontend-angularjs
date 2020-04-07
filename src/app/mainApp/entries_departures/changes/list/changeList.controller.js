@@ -26,6 +26,8 @@
         vm.user;
         vm.subsidiaryAdmin;
         vm.agencyAdmin;
+        vm.entryDates;
+        vm.today;
 
         vm.changes = [];
 
@@ -51,12 +53,13 @@
                 }
             }
             vm.changesFilter = {};
-            var today = new Date();
-            vm.startDate = today.toISOString();
-            vm.endDate = today.toISOString();
+            vm.today = new Date();
+            vm.startDate = vm.today.toISOString();
+            vm.endDate = vm.today.toISOString();
+            vm.entryDates = false;
             vm.changesFilter[QUERIES.entries_departures.start_date_departure] = vm.startDate;
-            vm.changesFilter[QUERIES.entries_departures.end_date_entry] = vm.endDate;
-            loadChanges(vm.entryKindFilter);
+            vm.changesFilter[QUERIES.entries_departures.end_date_departure] = vm.endDate;
+            loadChanges(vm.changeKindFilter);
         }
         init();
 
@@ -78,26 +81,34 @@
         };
 
         vm.startDateChange = function () {
-            vm.changesFilter[QUERIES.entries_departures.start_date_departure] = vm.startDate;
+            if (vm.entryDates) {
+                vm.changesFilter[QUERIES.entries_departures.start_date_entry] = vm.startDate;
+            }
+            else {
+                vm.changesFilter[QUERIES.entries_departures.start_date_departure] = vm.startDate;
+            }
             dateChange();
         };
-
         vm.endDateChange = function () {
-            vm.changesFilter[QUERIES.entries_departures.end_date_entry] = vm.endDate;
+            if (vm.entryDates) {
+                vm.changesFilter[QUERIES.entries_departures.end_date_entry] = vm.endDate;
+            }
+            else {
+                vm.changesFilter[QUERIES.entries_departures.end_date_departure] = vm.endDate;
+            }
             dateChange();
         };
 
         vm.navigateToDetail = function (change) {
-            var changeKind;
-            if (vm.agencyChange) {
-                changeKind = 'agencia';
-            }
-            else {
-                changeKind = 'sucursal';
-            }
             $state.go('triangular.admin-default.change-detail', {
                 changeId: change._id,
-                changeKind: changeKind,
+                change: change
+            });
+        };
+
+        vm.navigateToConfirm = function (change) {
+            $state.go('triangular.admin-default.change-confirm', {
+                changeId: change._id,
                 change: change
             });
         };
@@ -107,19 +118,44 @@
             delete vm.changesFilter[vm.catalogues['destination_udn'].binding];
             delete vm.changesFilter[vm.catalogues['origin_subsidiary'].binding];
             delete vm.changesFilter[vm.catalogues['destination_subsidiary'].binding];
-            loadChanges();
+            loadChanges(vm.changeKindFilter);
+        };
+
+        vm.changeSwitchDate = function () {
+            delete vm.changesFilter[QUERIES.entries_departures.start_date_departure];
+            delete vm.changesFilter[QUERIES.entries_departures.end_date_departure];
+            delete vm.changesFilter[QUERIES.entries_departures.start_date_entry];
+            delete vm.changesFilter[QUERIES.entries_departures.end_date_entry];
+            //Re setting date to today
+            vm.startDate = vm.today.toISOString();
+            vm.endDate = vm.today.toISOString();
+            if(vm.entryDates){
+                vm.changesFilter[QUERIES.entries_departures.start_date_entry] = vm.startDate;
+                vm.changesFilter[QUERIES.entries_departures.end_date_entry]= vm.endDate;
+            }
+            else{
+                vm.changesFilter[QUERIES.entries_departures.start_date_departure]=vm.startDate;
+                vm.changesFilter[QUERIES.entries_departures.end_date_departure]=vm.endDate;
+            }
+            loadChanges(vm.changeKindFilter);
         };
 
         vm.onOriginSelect = function (element, binding) {
             vm.changesFilter[binding] = element;
-            loadChanges();
+            loadChanges(vm.changeKindFilter);
+        };
+
+        vm.onDestinationSelect = function (element, binding) {
+            vm.changesFilter[binding] = element;
+            loadChanges(vm.changeKindFilter);
         };
 
         //Internal functions
 
         function dateChange() {
             vm.changes = [];
-            vm.changeKindFilter = null;
+            vm.changeKindFilter = 'all-changes';
+            loadChanges(vm.changeKindFilter);
         }
 
         function loadChanges(filter) {
@@ -135,10 +171,13 @@
                 case 'all-changes':
                     delete vm.changesFilter[QUERIES.entries_departures.confirmed_change];
                     break;
+                default:
+                    delete vm.changesFilter[QUERIES.entries_departures.confirmed_change];
+                    break;
             }
 
             vm.loadingChanges = MANUAL_CHANGES.getChanges(vm.changesFilter);
-            
+
             vm.loadingChanges
                 .then(function (changesList) {
                     vm.changes = changesList;

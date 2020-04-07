@@ -27,7 +27,8 @@
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__list'
+                            'entries_departures__changes__list',
+                            'entries_departures__changes__confirm'
                         ]
                     }
                 },
@@ -36,21 +37,38 @@
                 controllerAs: 'vm'
             })
             .state('triangular.admin-default.change-detail', {
-                url: '/cambios/:changeKind/detalle/:changeId',
+                url: '/cambios/detalle/:changeId',
                 data: {
                     permissions: {
                         only: [
-                            'entries_departures__changes__list'
+                            'entries_departures__changes__list',
+                            'entries_departures__changes__confirm'
                         ]
                     }
                 },
                 params: {
                     changeId: null,
-                    changeKind: null,
                     change: null
                 },
                 templateUrl: 'app/mainApp/entries_departures/changes/detail/changeDetail.tmpl.html',
                 controller: 'changesDetailController',
+                controllerAs: 'vm'
+            })
+            .state('triangular.admin-default.change-confirm', {
+                url: '/cambios/confirmar/:changeId',
+                data: {
+                    permissions: {
+                        only: [
+                            'entries_departures__changes__confirm'
+                        ]
+                    }
+                },
+                params: {
+                    changeId: null,
+                    change: null
+                },
+                templateUrl: 'app/mainApp/entries_departures/changes/confirm/changeConfirm.tmpl.html',
+                controller: 'changesConfirmController',
                 controllerAs: 'vm'
             });
 
@@ -62,7 +80,8 @@
                 priority: 6,
                 permission: [
                     'entries_departures__changes__list',
-                    'entries_departures__changes__change'
+                    'entries_departures__changes__change',
+                    'entries_departures__changes__confirm'
                 ],
                 children: [
                     {
@@ -95,7 +114,8 @@
                         icon: 'fa fa-archive',
                         type: 'link',
                         permission: [
-                            'entries_departures__changes__list'
+                            'entries_departures__changes__list',
+                            'entries_departures__changes__confirm'
                         ],
                         state: 'triangular.admin-default.changes-list'
                     }

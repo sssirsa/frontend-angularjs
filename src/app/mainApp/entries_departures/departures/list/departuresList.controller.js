@@ -156,7 +156,8 @@
         //Internal functions        
         function dateChange() {
             vm.departures = [];
-            vm.departureKindFilter = null;
+            vm.departureKindFilter = 'all-departures';
+            loadDepartures(vm.departureKindFilter);
         }
 
         function loadDepartures(filter) {
