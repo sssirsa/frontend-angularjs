@@ -8,9 +8,11 @@
         MANUAL_CHANGES,
         toastr,
         Translate,
-        $state
+        $state,
+        User
     ) {
         var vm = this;
+        vm.locationRestricted;
         vm.changeId;
         vm.changeKind;
         vm.change;
@@ -21,7 +23,7 @@
 
         vm.receivedAssetsIds;
 
-        function init() {
+        function init() {            
             vm.changeId = $stateParams.changeId;
             vm.confirmedAssets = [];
             vm.nonExpectedAssets = [];
@@ -31,6 +33,29 @@
         init();
 
         //Private functions
+        function verifyLocation(){
+            var user = User.getUSer();
+            if(user.sucursal){
+                if(user.sucursal._id){
+                    if(user.sucursal._id!==vm.change.sucursal_destino._id){
+                        vm.locationRestricted=true;
+                    }
+                    if(vm.change.udn_destino){
+                        vm.locationRestricted=true;
+                    }
+                }
+            }
+            if(user.udn){
+                if(user.udn._id){
+                    if(user.udn._id!==vm.change.udn_destino._id){
+                        vm.locationRestricted=true;
+                    }
+                    if(vm.change.sucursal_destino){
+                        vm.locationRestricted=true;
+                    }
+                }
+            }
+        }
         function loadChange(forceReload) {
             if (vm.assets) {
                 //Re-setting assets variable
@@ -43,6 +68,7 @@
                     vm.loadingChange
                         .then(function (change) {
                             vm.change = change;
+                            verifyLocation();
                             loadAssets();
                         })
                         .catch(function (changeError) {
@@ -52,6 +78,7 @@
             }
             else {
                 vm.change = $stateParams.change;
+                verifyLocation();
                 loadAssets();
             }
         }

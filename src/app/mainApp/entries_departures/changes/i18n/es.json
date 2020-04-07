@@ -51,7 +51,8 @@
                 "CONFIRM":"Confirmar"
             },
             "ERRORS": {
-                "REPEATED_ID": "Ya se encuentra en la lista de confirmados"
+                "REPEATED_ID": "Ya se encuentra en la lista de confirmados",
+                "LOCATION":"No puedes confirmar un cambio que no tenga como destino tu sucursal o udn"
             },
             "MESSAGES":{
                 "SUCCESS_CONFIRM":"Cambio confirmado correctamente"

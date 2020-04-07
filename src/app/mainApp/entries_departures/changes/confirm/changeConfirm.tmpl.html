@@ -1,4 +1,8 @@
-<div cg-busy="{promise:vm.loadingChange, message:' '}">
+<md-card ng-if="vm.locationRestricted" class="full-width" layout-padding layout="column" layout-align="center-stretch">
+    <h3>{{'CHANGES.CONFIRM.ERRORS.LOCATION'|translate}}</h3>
+    </md-card>
+<div ng-if="!vm.locationRestricted" cg-busy="{promise:vm.loadingChange, message:' '}">
+
     <md-card layout-padding layout="column" laoyut-align="center stretch">
         <header layout="column" layout-align="center center">
             <h1 translate>CHANGES.CONFIRM.TITLE</h1>
