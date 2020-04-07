@@ -34,7 +34,7 @@
 
         //Private functions
         function verifyLocation(){
-            var user = User.getUSer();
+            var user = User.getUser();
             if(user.sucursal){
                 if(user.sucursal._id){
                     if(user.sucursal._id!==vm.change.sucursal_destino._id){

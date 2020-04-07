@@ -162,6 +162,12 @@
                                         <b>{{'CHANGES.CONFIRM.LABELS.CABINET.MODEL'|translate}}</b>
                                         {{element.modelo.nombre}}
                                     </div>
+                                    <div layout="column" layout-align="center center">
+                                        <md-button ng-click="vm.confirmFridge(element.economico)"
+                                            aria-label="remove cabinet" class="md-icon-button">
+                                            <md-icon md-font-icon="fa fa-check"></md-icon>
+                                        </md-button>
+                                    </div>
                                 </section>
                             </div>
                             <md-divider></md-divider>
