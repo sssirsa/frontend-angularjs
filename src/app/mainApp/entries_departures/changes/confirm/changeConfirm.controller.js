@@ -193,8 +193,8 @@
 
             var request = {
                 cabinets: vm.receivedAssetsIds,
-                sucursal: subsidiary,
-                udn: agency
+                sucursal_destino: subsidiary,
+                udn_destino: agency
             };
             vm.savePromise = MANUAL_CHANGES.confirmChange(vm.changeId, request)
                 .then(function () {
