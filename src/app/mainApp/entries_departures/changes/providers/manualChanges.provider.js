@@ -25,6 +25,13 @@
             return changesUrl.all(changes.change).customPOST(element);
         }
 
+        function confirmChange(id, element) {
+            var params = {
+                id: id
+            };
+            return changesUrl.all(changes.change).customPUT(element, null, params);
+        }
+
         function getCabinet(id) {
             /*
              * RETURNS
@@ -448,6 +455,7 @@
 
         return {
             createChange: createChange,
+            confirmChange: confirmChange,
             getChanges: getChanges,
             getCabinet: getCabinet,
             changeDetail: changeDetail,

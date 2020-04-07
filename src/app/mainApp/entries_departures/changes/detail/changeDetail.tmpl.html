@@ -99,9 +99,16 @@
             <span>{{vm.change.descripcion_salida}}</span>
         </span>
         <md-actions layout="row" layout-align="end center">
+            <!--Confirm change just when permission is given-->
+            <md-button ng-if="!vm.change.confirmado" permission permission-only="['entries_departures__changes__confirm']"
+                aria-label="confirm change button" ng-click="$event.stopPropagation(); vm.navigateToConfirm(vm.change)"
+                class="md-primary md-raised">
+                <md-icon md-font-icon="fa fa-tasks"></md-icon>
+                <span hide-xs>{{"CHANGES.LIST.BUTTONS.CONFIRM"|translate}}</span>
+            </md-button>
             <!--Allow to generate the excel document at anytime-->
             <md-button aria-label="download document button" cg-busy="{promise:vm.generateReportPromise, message:' '}"
-                ng-click="$event.stopPropagation(); vm.generateXLSX(change._id)" class="md-primary md-raised">
+                ng-click="$event.stopPropagation(); vm.generateXLSX(vm.change._id)" class="md-primary md-raised">
                 <md-icon md-font-icon="fa fa-file-excel"></md-icon>
                 <span hide-xs>{{"CHANGES.LIST.BUTTONS.XLSX"|translate}}</span>
             </md-button>
@@ -115,30 +122,30 @@
         <!--Change assets-->
         <md-virtual-repeat-container class="cabinet-container">
             <md-list>
-                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.assets">                    
-                        <div layout="column" layout-align="center stretch" class="full-width">
-                            <!--Cabinets that can leave-->
-                            <section  layout-gt-xs="row" layout="column"
-                            layout-align-gt-xs="space-between center" layout-align="center stretch" class="full-width">
-                                <div layout="column" layout-align="center center">
-                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.ID'|translate}}</b>
-                                    {{element.economico}}
-                                </div>
-                                <div layout="column" layout-align="center center">
-                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
-                                    {{element.no_serie}}
-                                </div>
-                                <div layout="column" layout-align="center center">
-                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.BRAND'|translate}}</b>
-                                    {{element.modelo.marca.descripcion}}
-                                </div>
-                                <div layout="column" layout-align="center center">
-                                    <b>{{'CHANGES.DETAIL.LABELS.CABINET.MODEL'|translate}}</b>
-                                    {{element.modelo.nombre}}
-                                </div>
-                            </section>
-                        </div>
-                    
+                <md-list-item layout-align="center stretch" md-virtual-repeat="element in vm.assets">
+                    <div layout="column" layout-align="center stretch" class="full-width">
+                        <!--Cabinets that can leave-->
+                        <section layout-gt-xs="row" layout="column" layout-align-gt-xs="space-between center"
+                            layout-align="center stretch" class="full-width">
+                            <div layout="column" layout-align="center center">
+                                <b>{{'CHANGES.DETAIL.LABELS.CABINET.ID'|translate}}</b>
+                                {{element.economico}}
+                            </div>
+                            <div layout="column" layout-align="center center">
+                                <b>{{'CHANGES.DETAIL.LABELS.CABINET.SERIAL_NUMBER'|translate}}</b>
+                                {{element.no_serie}}
+                            </div>
+                            <div layout="column" layout-align="center center">
+                                <b>{{'CHANGES.DETAIL.LABELS.CABINET.BRAND'|translate}}</b>
+                                {{element.modelo.marca.descripcion}}
+                            </div>
+                            <div layout="column" layout-align="center center">
+                                <b>{{'CHANGES.DETAIL.LABELS.CABINET.MODEL'|translate}}</b>
+                                {{element.modelo.nombre}}
+                            </div>
+                        </section>
+                    </div>
+
                     <md-divider></md-divider>
                 </md-list-item>
             </md-list>
