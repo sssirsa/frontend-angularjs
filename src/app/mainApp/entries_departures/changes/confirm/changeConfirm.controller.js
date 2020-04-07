@@ -79,16 +79,16 @@
                     if (confirmedIndex === -1) {
                         //Also not found in expected list
                         //Is a non expected asset
-                        vm.nonExpectedAssets.push(fridgeInventoryNumber);
-                        vm.receivedAssetsIds.push(fridgeInventoryNumber);
+                        vm.nonExpectedAssets.unshift(fridgeInventoryNumber);
+                        vm.receivedAssetsIds.unshift(fridgeInventoryNumber);
                     }
                     else {
                         toastr.warning(Translate.translate('CHANGES.CONFIRM.ERRORS.REPEATED_ID'), fridgeInventoryNumber);
                     }
                 }
                 else {
-                    vm.confirmedAssets.push(vm.nonConfirmedAssets[index]);
-                    vm.receivedAssetsIds.push(fridgeInventoryNumber);
+                    vm.confirmedAssets.unshift(vm.nonConfirmedAssets[index]);
+                    vm.receivedAssetsIds.unshift(fridgeInventoryNumber);
                     vm.nonConfirmedAssets.splice(index, 1);
                 }
             }
@@ -105,7 +105,7 @@
                     toastr.warning(Translate.translate('CHANGES.CONFIRM.ERRORS.NOT_FOUND_ID'), fridgeInventoryNumber);
                 }
                 else {
-                    vm.nonConfirmedAssets.push(vm.confirmedAssets[index]);
+                    vm.nonConfirmedAssets.unshift(vm.confirmedAssets[index]);
                     vm.receivedAssetsIds.splice(index, 1);
                     vm.confirmedAssets.splice(index, 1);
                 }
