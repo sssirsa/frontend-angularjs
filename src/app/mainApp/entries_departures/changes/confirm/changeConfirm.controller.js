@@ -23,7 +23,9 @@
 
         vm.receivedAssetsIds;
 
-        function init() {            
+        vm.user;
+
+        function init() {
             vm.changeId = $stateParams.changeId;
             vm.confirmedAssets = [];
             vm.nonExpectedAssets = [];
@@ -33,25 +35,25 @@
         init();
 
         //Private functions
-        function verifyLocation(){
-            var user = User.getUser();
-            if(user.sucursal){
-                if(user.sucursal._id){
-                    if(user.sucursal._id!==vm.change.sucursal_destino._id){
-                        vm.locationRestricted=true;
+        function verifyLocation() {
+            vm.user = User.getUser();
+            if (vm.user.sucursal) {
+                if (vm.user.sucursal._id) {
+                    if (vm.user.sucursal._id !== vm.change.sucursal_destino._id) {
+                        vm.locationRestricted = true;
                     }
-                    if(vm.change.udn_destino){
-                        vm.locationRestricted=true;
+                    if (vm.change.udn_destino) {
+                        vm.locationRestricted = true;
                     }
                 }
             }
-            if(user.udn){
-                if(user.udn._id){
-                    if(user.udn._id!==vm.change.udn_destino._id){
-                        vm.locationRestricted=true;
+            if (vm.user.udn) {
+                if (vm.user.udn._id) {
+                    if (vm.user.udn._id !== vm.change.udn_destino._id) {
+                        vm.locationRestricted = true;
                     }
-                    if(vm.change.sucursal_destino){
-                        vm.locationRestricted=true;
+                    if (vm.change.sucursal_destino) {
+                        vm.locationRestricted = true;
                     }
                 }
             }
@@ -157,9 +159,42 @@
         };
 
         vm.clickButtonSave = function () {
+            var subsidiary, agency;
+            if (vm.user.sucursal || vm.user.udn) {
+                if (vm.user.sucursal) {
+                    if (vm.user.sucursal._id) {
+                        subsidiary = vm.user.sucursal._id;
+                    }
+                    else {
+                        if (vm.change.sucursal_destino) {
+                            subsidiary = vm.change.sucursal_destino._id;
+                        }
+                    }
+                }
+                if (vm.user.udn) {
+                    if (vm.user.udn._id) {
+                        agency = vm.user.udn._id;
+                    }
+                    else {
+                        if (vm.change.udn_destino._id) {
+                            agency = vm.change.udn_destino._id;
+                        }
+                    }
+                }
+            }
+            else {
+                if (vm.change.sucursal_destino) {
+                    subsidiary = vm.change.sucursal_destino._id;
+                }
+                if (vm.change.udn_destino) {
+                    agency = vm.change.udn_destino._id;
+                }
+            }
+
             var request = {
-                cabinets:vm.receivedAssetsIds,
-                sucursal:vm.change['sucursal_destino']
+                cabinets: vm.receivedAssetsIds,
+                sucursal: subsidiary,
+                udn: agency
             };
             vm.savePromise = MANUAL_CHANGES.confirmChange(vm.changeId, request)
                 .then(function () {
