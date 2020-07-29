@@ -166,12 +166,12 @@
                                         //Just depart from this departure if the asset if obsolete
                                         //Also validate stage existence, or no stage
                                         // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
-                                        //     //Obsolete or pending obsolete status
+                                            //Obsolete or pending obsolete status
 
-                                        //     //Finally add the cabinet to the list
-                                        //     cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                        //     cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                        //     cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                            //Finally add the cabinet to the list
+                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                            // cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                         // }
                                         // else {
                                         //     //Building error message
