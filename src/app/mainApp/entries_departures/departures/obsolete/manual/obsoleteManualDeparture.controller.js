@@ -165,28 +165,28 @@
                                         //if (cabinetSuccessCallback['stage'] ? cabinetSuccessCallback['stage'].tipo_etapa === 'Obsoleto' : true) {
                                         //Just depart from this departure if the asset if obsolete
                                         //Also validate stage existence, or no stage
-                                        if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
+                                        // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
                                             //Obsolete or pending obsolete status
 
                                             //Finally add the cabinet to the list
                                             cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
                                             cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
-                                        }
-                                        else {
-                                            //Building error message
-                                            var statusMessage =
-                                                Translate.translate('DEPARTURES.OBSOLETE.ERRORS.WRONG_STATUS');
-                                            //Just add status info if available
-                                            cabinetSuccessCallback['status'] ? statusMessage = statusMessage
-                                                + ', ' + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.STATUS_IS')
-                                                + ': ' + cabinetSuccessCallback['status'].code
-                                                + '-' + cabinetSuccessCallback['status'].descripcion
-                                                : null;
+                                            // cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        // }
+                                        // else {
+                                        //     //Building error message
+                                        //     var statusMessage =
+                                        //         Translate.translate('DEPARTURES.OBSOLETE.ERRORS.WRONG_STATUS');
+                                        //     //Just add status info if available
+                                        //     cabinetSuccessCallback['status'] ? statusMessage = statusMessage
+                                        //         + ', ' + Translate.translate('DEPARTURES.OBSOLETE.ERRORS.STATUS_IS')
+                                        //         + ': ' + cabinetSuccessCallback['status'].code
+                                        //         + '-' + cabinetSuccessCallback['status'].descripcion
+                                        //         : null;
 
-                                            toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
-                                            vm.removeCabinet(cabinetID);
-                                        }
+                                        //     toastr.error(statusMessage, cabinetSuccessCallback.cabinet.economico);
+                                        //     vm.removeCabinet(cabinetID);
+                                        // }
                                         //}
                                         // else {
                                         //     var message = Translate.translate('DEPARTURES.OBSOLETE.ERRORS.STAGE_ERROR');
