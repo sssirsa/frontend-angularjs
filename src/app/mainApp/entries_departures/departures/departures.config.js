@@ -110,7 +110,7 @@
                 permission: [
                     'entries_departures__departures__list_all_departures',
                     'entries_departures__departures__news_departures',
-                    'entries_departures__departures__no_labeled_departures',
+                    'entries_departures__departures__warranties_departures',
                     'entries_departures__departures__scrapped_departures',
                     'entries_departures__departures__warehouse_departures',
                     'entries_departures__departures__salepoint_departures'
@@ -123,7 +123,7 @@
                         icon: 'fa fa-hand-paper',
                         permission: [
                             'entries_departures__departures__news_departures',
-                            'entries_departures__departures__no_labeled_departures',
+                            'entries_departures__departures__warranties_departures',
                             'entries_departures__departures__scrapped_departures',
                             'entries_departures__departures__warehouse_departures',
                             'entries_departures__departures__salepoint_departures'
