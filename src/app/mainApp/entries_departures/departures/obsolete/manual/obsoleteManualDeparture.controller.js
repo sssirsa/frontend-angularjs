@@ -54,7 +54,7 @@
             //Bindging user subsidiary or agency to entry if user happens to have one.
             user['sucursal'] ? vm.departure[vm.catalogues['subsidiary'].binding] = user['sucursal']._id : null;
             user['udn'] ? vm.departure[vm.catalogues['udn'].binding] = user['udn']._id : null;
-            
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -79,7 +79,7 @@
             vm.departure = MANUAL_DEPARTURES.obsoleteDeparture.template();
 
             vm.onElementSelect(element, field);
-            
+
             if (vm.departure[vm.catalogues['subsidiary'].binding]) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary;
                 vm.catalogues['transport_line'].catalog.query_value = vm.departure[vm.catalogues['subsidiary'].binding];
@@ -166,12 +166,12 @@
                                         //Just depart from this departure if the asset if obsolete
                                         //Also validate stage existence, or no stage
                                         // if (cabinetSuccessCallback['status'] ? cabinetSuccessCallback['status'].code === '0004' : false) {
-                                            //Obsolete or pending obsolete status
+                                        //Obsolete or pending obsolete status
 
-                                            //Finally add the cabinet to the list
-                                            cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
-                                            cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
-                                            // cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
+                                        //Finally add the cabinet to the list
+                                        cabinetToAdd.cabinet = cabinetSuccessCallback.cabinet;
+                                        cabinetToAdd.can_leave = cabinetSuccessCallback.can_leave;
+                                        // cabinetToAdd.restriction = cabinetSuccessCallback.restriction;
                                         // }
                                         // else {
                                         //     //Building error message

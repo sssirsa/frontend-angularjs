@@ -399,6 +399,22 @@
                         hint: Translate.translate('ENTRIES.WARRANTY.HINTS.AGENCY'),
                         icon: 'fa fa-building',
                         required: true
+                    },
+                    origin_provider: {
+                        binding: 'proveedor_origen',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
+                            name: Translate.translate('ENTRIES.WARRANTY.LABELS.ORIGIN_PROVIDER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('ENTRIES.WARRANTY.HINTS.ORIGIN_PROVIDER'),
+                        icon: 'fa fa-building',
+                        required: true
                     }
                 };
                 return catalogues;

@@ -40,17 +40,11 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function (response) {
-                    Person.getMyProfile(response.person)
-                        .then(function requestGetMyProfile(user) {
-                            //PERMISSION.definePermissions(user['permissions']);
-                            user['permissions'].push('AUTHENTICATED');
-                            PERMISSION.setPermissions(user['permissions']);
-                            User.setUser(user);
-                            request.resolve();
-                        })
-                        .catch(function (errorUser) {
-                            request.reject(errorUser);
-                        });
+                    //PERMISSION.definePermissions(user['permissions']);
+                    response.person['permissions'].push('AUTHENTICATED');
+                    PERMISSION.setPermissions(response.person['permissions']);
+                    User.setUser(response.person);
+                    request.resolve();
                 })
                 .catch(function (error) {
                     request.reject(error);
