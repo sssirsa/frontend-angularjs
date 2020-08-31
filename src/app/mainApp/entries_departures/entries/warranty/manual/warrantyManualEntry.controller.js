@@ -225,24 +225,24 @@
             vm.cabinetList = [];
             vm.entry = MANUAL_ENTRIES.warrantyEntry.template();
             vm.catalogues = MANUAL_ENTRIES.warrantyEntry.catalogues();
-            
+
             var user = User.getUser();
             //Determining whether or not to show the Subsidiary or the Udn selector.
             vm.showSelector = !user['sucursal']
                 && !user['udn'];
-                 
+
             vm.userAgency = user.udn;
             vm.userSubsidiary = user.sucursal;
 
             if (vm.userSubsidiary) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_subsidiary._id;
                 vm.catalogues['transport_line'].catalog.query_value = vm.userSubsidiary._id;
-                vm.entry[vm.catalogues['subsidiary'].binding]=vm.userSubsidiary._id;
+                vm.entry[vm.catalogues['subsidiary'].binding] = vm.userSubsidiary._id;
             }
             if (vm.userAgency) {
                 vm.catalogues['transport_line'].catalog.query = QUERIES.entries_departures.by_agency._id;
                 vm.catalogues['transport_line'].catalog.query_value = vm.userAgency._id;
-                vm.entry[vm.catalogues['udn'].binding]=vm.userAgency._id;
+                vm.entry[vm.catalogues['udn'].binding] = vm.userAgency._id;
             }
         };
 
@@ -379,6 +379,12 @@
                     ErrorHandler.errorTranslate(errorCallback);
                 }
             });
+        };
+
+        vm.changeProviderSwitch = function () {
+            //Removing excluding variables when the switch is changed
+            delete (vm.departure[vm.catalogues['udn'].binding]);
+            delete (vm.departure[vm.catalogues['origin_provider'].binding]);
         };
 
         //Internal functions
