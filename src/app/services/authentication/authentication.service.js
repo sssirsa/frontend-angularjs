@@ -40,11 +40,11 @@
             OAuth
                 .getToken(credentials.username, credentials.password)
                 .then(function (response) {
-                            //PERMISSION.definePermissions(user['permissions']);
-                            response.person['permissions'].push('AUTHENTICATED');
-                            PERMISSION.setPermissions(response.person['permissions']);
-                            User.setUser(response.person);
-                            request.resolve();
+                    //PERMISSION.definePermissions(user['permissions']);
+                    response.person['permissions'].push('AUTHENTICATED');
+                    PERMISSION.setPermissions(response.person['permissions']);
+                    User.setUser(response.person);
+                    request.resolve();
                 })
                 .catch(function (error) {
                     request.reject(error);
