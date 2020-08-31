@@ -61,6 +61,8 @@
             }
         };
 
+        vm.init();
+
         //Controller global functions
 
         vm.onElementSelect = function onElementSelect(element, field) {

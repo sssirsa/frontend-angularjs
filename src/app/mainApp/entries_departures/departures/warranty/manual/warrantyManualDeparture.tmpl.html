@@ -155,7 +155,8 @@
                             on-select="vm.onTransportLineSelect(element,vm.catalogues['transport_line'].binding)">
                         </catalog-select>
                     </div>
-                    <catalog-select class="full-width" ng-if="vm.knownDriver"
+                    <catalog-select class="full-width"
+                        ng-if="vm.knownDriver && vm.departure[vm.catalogues['transport_line'].binding]"
                         catalog="vm.catalogues['transport_driver'].catalog" lazy="true"
                         hint="vm.catalogues['transport_driver'].hint" icon="vm.catalogues['transport_driver'].icon"
                         required="vm.catalogues['transport_driver'].required"
