@@ -725,6 +725,22 @@
                         hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.DESTINATION_SUBSIDIARY'),
                         icon: 'fa fa-warehouse',
                         required: true
+                    },
+                    destination_provider: {
+                        binding: 'proveedor_destino',
+                        catalog: {
+                            url: EnvironmentConfig.site.rest.api
+                                + '/' + URLS.management.base
+                                + '/' + URLS.management.catalogues.base
+                                + '/' + URLS.management.catalogues.cabinet_brand,
+                            name: Translate.translate('DEPARTURES.WARRANTY.LABELS.DESTINATION_PROVIDER'),
+                            loadMoreButtonText: Translate.translate('MAIN.BUTTONS.LOAD_MORE'),
+                            model: '_id',
+                            option: 'nombre'
+                        },
+                        hint: Translate.translate('DEPARTURES.WARRANTY.HINTS.DESTINATION_PROVIDER'),
+                        icon: 'fa fa-warehouse',
+                        required: true
                     }
                 };
                 return catalogues;

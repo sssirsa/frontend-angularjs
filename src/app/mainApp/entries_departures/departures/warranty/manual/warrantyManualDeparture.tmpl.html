@@ -1,37 +1,21 @@
-<md-card ng-if="!vm.canView">
-    <h3 translate>DEPARTURES.WARRANTY.ERRORS.SUBSIDIARY_USER</h3>
-</md-card>
-<md-card layout-padding ng-if="vm.canView">
+<md-card layout-padding>
     <div layout="column" layout-align="center center">
         <h1 translate>DEPARTURES.WARRANTY.TITLE</h1>
     </div>
     <md-tabs md-dynamic-height="true" md-selected="vm.selectedTab">
         <md-tab layout="column" layout-align="center stretch"
             label={{'DEPARTURES.WARRANTY.LABELS.ASSET_LOADING'|translate}}>
-            <div layout="row" layout-align="center center" ng-if="vm.showSelector">
-                <p>{{'DEPARTURES.WARRANTY.LABELS.SWITCH.LABEL'|translate}}</p>
-                <md-switch ng-model="vm.departureFromAgency" ng-change="vm.changeSwitch()">
-                    <!--<p ng-if="vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.TRUE'|translate}}</p>
-                    <p ng-if="!vm.entryFromAgency">{{'DEPARTURES.WARRANTY.LABELS.SWITCH.FALSE'|translate}}</p>-->
-                </md-switch>
-            </div>
             <catalog-select class="full-width" ng-if="!vm.departureFromAgency && vm.showSelector"
                 lock="vm.cabinetList.length>0" catalog="vm.catalogues['subsidiary'].catalog"
                 hint="vm.catalogues['subsidiary'].hint" icon="vm.catalogues['subsidiary'].icon"
                 required="vm.catalogues['subsidiary'].required"
                 on-select="vm.onOriginSelect(element,vm.catalogues['subsidiary'].binding)">
             </catalog-select>
-            <catalog-select class="full-width" ng-if="vm.departureFromAgency && vm.showSelector"
-                lock="vm.cabinetList.length>0" catalog="vm.catalogues['udn'].catalog" hint="vm.catalogues['udn'].hint"
-                icon="vm.catalogues['udn'].icon" required="vm.catalogues['udn'].required"
-                on-select="vm.onOriginSelect(element,vm.catalogues['udn'].binding)">
-            </catalog-select>
 
             <!--Cabinet search bar-->
             <md-actions layout-gt-xs="row" layout="column" layout-align-gt-xs="space-around center"
                 layout-align="center stretch" ng-if="!vm.showSelector
-                        || vm.departure[vm.catalogues['subsidiary'].binding]
-                        || vm.departure[vm.catalogues['udn'].binding]">
+                        || vm.departure[vm.catalogues['subsidiary'].binding]">
                 <h3>{{'DEPARTURES.WARRANTY.LABELS.CABINET_SEARCH'|translate}}</h3>
                 <form name="cabinetSearch" ng-submit="vm.searchCabinet(vm.cabinetID)">
                     <md-input-container class="md-block">
@@ -135,11 +119,11 @@
                     <div class="hint" translate>DEPARTURES.WARRANTY.HINTS.DESCRIPTION</div>
                 </md-input-container>
                 <div layout="column" layout-align="center stretch">
-                    <catalog-select class="full-width" catalog="vm.catalogues['destination_subsidiary'].catalog"
-                        hint="vm.catalogues['destination_subsidiary'].hint"
-                        icon="vm.catalogues['destination_subsidiary'].icon"
-                        required="vm.catalogues['destination_subsidiary'].required"
-                        on-select="vm.onElementSelect(element,vm.catalogues['destination_subsidiary'].binding)">
+                    <catalog-select class="full-width" catalog="vm.catalogues['destination_provider'].catalog"
+                        hint="vm.catalogues['destination_provider'].hint"
+                        icon="vm.catalogues['destination_provider'].icon"
+                        required="vm.catalogues['destination_provider'].required"
+                        on-select="vm.onElementSelect(element,vm.catalogues['destination_provider'].binding)">
                     </catalog-select>
                 </div>
 
@@ -163,8 +147,8 @@
 
                 <div layout="column" layout-align="center stretch">
 
-                    <div ng-if="vm.knownDriver" layout="column" layout-gt-xs="row" layout-align-gt-xs="space-around center"
-                        layout-align="center stretch">
+                    <div ng-if="vm.knownDriver" layout="column" layout-gt-xs="row"
+                        layout-align-gt-xs="space-around center" layout-align="center stretch">
                         <catalog-select class="full-width" catalog="vm.catalogues['transport_line'].catalog"
                             hint="vm.catalogues['transport_line'].hint" icon="vm.catalogues['transport_line'].icon"
                             required="vm.catalogues['transport_line'].required"
