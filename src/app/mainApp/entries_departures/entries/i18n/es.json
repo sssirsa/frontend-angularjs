@@ -256,6 +256,7 @@
                 "ASSET_QUANTITY": "Equipos agregados:",
                 "DESCRIPTION": "Descripción",
                 "AGENCY": "UDN-Agencia",
+                "ORIGIN_PROVIDER": "Proveedor origen",
                 "TRANSPORT_DRIVER": "Operador de transporte",
                 "TRANSPORT_LINE": "Linea de transporte",
                 "TRANSPORT_KIND": "Tipo de transporte",
@@ -277,6 +278,9 @@
                 },
                 "DRIVER_SWITCH": {
                     "LABEL": "Activa si el operador está registrado"
+                },
+                "ORIGIN_SWITCH": {
+                    "LABEL": "Activa si la entrada es desde un proveedor"
                 }
             },
             "HINTS": {
@@ -285,6 +289,7 @@
                 "DRIVER_ID": "Tamaño máximo 5MB y 4096px x 4096px",
                 "DRIVER_NAME": "Operador del transporte de entrega",
                 "ENTRY": "Entrada desde una UDN-Agencia a una Sucursal, para movimientos internos utilize cambio de Sucursal",
+                "ORIGIN_PROVIDER": "Selecciona el proveedor de origen",
                 "TRANSPORT_DRIVER": "Selecciona un operador de transporte",
                 "TRANSPORT_LINE": "Selecciona la linea de transporte",
                 "TRANSPORT_KIND": "Selecciona el tipo de transporte",
